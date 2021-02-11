@@ -1,1 +1,726 @@
-hello
+<!-- React로 구현하기 전 레이아웃 설정 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="SAVE-CAR"
+    />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- 추후 수정 필요(저번에 말씀하신 구글, 네이버 검색 상단에 띄우기 위함. 지금은 임의로 작성함.) -->
+    <meta name="description" content="다양한 차량 제공 및 고객의 안전을 최우선으로 한 정비 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다">
+    <meta name="keywords" content="SAVECAR, 세이브카, 렌트카, 캠핑카, 실시간 견적, 렌트카 상담, 12개월 렌트, 외제차, 수입차, 국산차">
+    <title>SAVE-CAR</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Style -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js "></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js "></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../static/css/iconfont.css">
+    <link rel="stylesheet" href="../static/css/slick/slick.css">
+    <link rel="stylesheet" href="../static/css/slick/slick-theme.css">
+    <link rel="stylesheet" href="../static/css/stylesheet.css">
+    <link rel="stylesheet" href="../static/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="../static/css/responsive.css" />
+    
+    <!--For Plugins external css-->
+    <link rel="stylesheet" href="../static/css/plugins.css" />
+
+    <!-- 수정 예정 -->
+    <!--Theme custom css -->
+    <!-- <link rel="stylesheet" href="../static/assets/css/style.css"> -->
+
+    <!-- table Style -->
+    <link href="../static/css/table.css" rel="stylesheet">
+
+    <script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+
+    <!-- Title -->
+    <title>SAVE-CAR</title>
+</head>
+<body data-spy="scroll" data-target=".navbar-collapse">
+  <div class='preloader'><div class='loaded'>&nbsp;</div></div>
+    <div class="culmn">
+
+      <!----------------------------------------->
+      <!----------------- header ---------------->
+      <!----------------------------------------->
+
+      <header id="main_menu" class="header navbar-fixed-top">            
+          <div class="main_menu_bg">
+              <div class="container">
+                  <div class="row">
+                      <div class="main_menu">
+                          <nav class="navbar navbar-default">
+                              <div class="container-fluid">
+                                  <!-- Brand and toggle get grouped for better mobile display -->
+                                  <div class="navbar-header">
+                                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                          <span class="sr-only">Toggle navigation</span>
+                                          <span class="icon-bar"></span>
+                                          <span class="icon-bar"></span>
+                                          <span class="icon-bar"></span>
+                                      </button>
+                                      <a class="navbar-brand" href="#home">
+                                          <!-- 여기에 로고 사진 넣기 -->
+                                          <img src="../static/img/savecar-logo.png" width="200" height="50" />
+                                      </a>
+                                  </div>
+
+                                  <!-- Collect the nav links, forms, and other content for toggling -->
+
+                                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                                      <ul class="nav navbar-nav navbar-right">
+                                          <li><a href="#home">HOME</a></li>
+                                          <li><a href="rent_month.html">월렌트+12개월렌트</a></li>
+                                          <li><a href="rent_long_term.html">저신용장기렌트</a></li>
+                                          <li><a href="camping_travel.html">캠핑카렌트</a></li>
+                                          <li><a href="price.html">렌트가격표</a></li>
+                                          <li><a href="#home">1661-3331</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </nav>
+                      </div>	
+                  </div>
+              </div>
+          </div>
+      </header> 
+      <!--End of header -->
+
+
+      <!----------------------------------------->
+      <!-------------- home section ------------->
+      <!----------------------------------------->
+
+
+      <!--home Section -->
+      <section id="home" class="home">
+          <div class="overlay">
+              <div class="home_skew_border">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-sm-12 ">
+                              <div class="main_home_slider text-center">
+                                  <div class="single_home_slider">
+                                      <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+                                          <h3>WELCOME TO SAVE-CAR</h3>
+                                          <h1><b>세이브카 최저가 프로모션</b></h1>
+                                          <div class="separator"></div>
+                                          <p>다양한 차량 제공 및 고객의 안전을 최우선으로 한 정비
+                                            <br> 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다.</p>
+                                          <div class="home_btn">
+                                              <a href="" class="btn btn-lg m_t_10">1661-3331</a>
+                                          </div>
+
+                                      </div>
+                                  </div>
+                                  <div class="single_home_slider">
+                                      <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+                                          <h3>WELCOME TO SAVE-CAR</h3>
+                                          <h1><b>세이브카 최저가 프로모션</b></h1>
+                                          <div class="separator"></div>
+                                          <p>다양한 차량 제공 및 고객의 안전을 최우선으로 한 정비
+                                            <br> 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다.</p>
+                                          <div class="home_btn">
+                                              <a href="" class="btn btn-lg m_t_10">1661-3331</a>
+                                          </div>
+
+                                      </div>
+                                  </div>
+                                  <div class="single_home_slider">
+                                      <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+                                          <h3>WELCOME TO SAVE-CAR</h3>
+                                          <h1><b>세이브카 최저가 프로모션</b></h1>
+                                          <div class="separator"></div>
+                                          <p>다양한 차량 제공 및 고객의 안전을 최우선으로 한 정비
+                                            <br> 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다.</p>
+                                          <div class="home_btn">
+                                              <a href="" class="btn btn-lg m_t_10">1661-3331</a>
+                                          </div>
+
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="scrooldown">
+                      <a href="#trial"><i class="fa fa-arrow-down"></i></a>
+                  </div>
+              </div>
+              <div>
+              </div>
+          </div>
+      </section>
+      <!--End of home section -->
+
+      <br><br><br>
+
+      <!----------------------------------------->
+      <!--------- Trial section (Intro) --------->
+      <!----------------------------------------->
+      
+
+      <section id="trial" class="trial text-center wow fadeIn"  data-wow-duration="2s" data-wow-dealy="1.5s">
+        <div class="main_trial_area">
+            <div class="video_overlay sections">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_trial">
+                            <div class="col-sm-12">
+                                <h2>세상에 없던 특별한 렌터카 여행</h2>
+                                <br>
+                                <h4>세이브카는 다양하고 많은 차량을 보유하고 있으며 렌트료 원가절감을 위한 노력으로 <b>전국 최저가 렌트업체</b>로 손색이 없는 가격과 <b>주행거리별 마일리지 제도</b>를 적용하여 고객의 불필요한 비용을 절감하게 하는 <b>윈윈시스템</b>을 구축하고 있습니다.
+                                    최저가에 대한 도전을 계속 노력하고 있으며, 서울경기권 뿐만 아니라 전국에 세이브카 서비스를 제공하기 위해 <b>전국 네트워크</b>를 구성중에 있습니다.
+                                    여러 어려운 비즈니스 환경 속에도 고객의 안전과 편의를 최우선으로 전직원이 제공하는 차량에 대한 <b>최고의 정비상태</b>를 유지하고 있으며 좀 더 섬새한 편리와 배려로 <b>고객의 렌트여행에 만족</b>을 느낄 수 있도록 최선을 다하는 세이브카가 되겠습니다.
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+      <!-- End of Trial section -->
+
+    
+      <!----------------------------------------->
+      <!------------ service section ------------>
+      <!----------------------------------------->
+
+
+      <!-- service Section -->
+      <section id="service" class="service">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="main_service">
+                    <div class="col-md-6 col-sm-12 no-padding">
+
+                        <div class="single_service single_service_text text-right">
+                            <div class="head_title">
+                                <h2>OUR SERVICES</h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-10 col-xs-10 margin-bottom-60">
+                                    <div class="row">
+                                       <div class="col-sm-10 col-sm-offset-1 col-xs-9 col-xs-offset-1">
+                                           <article class="single_service_right_text">
+                                               <h3>월렌트 + 12개월 렌트</h3>
+                                               <h5>주행거리별 마일리지 제도 ! 전국 최저가 렌트료 !</h5>
+                                           </article>
+                                       </div>
+                                       <div class="col-sm-1 col-xs-1">
+                                           <figure class="single_service_icon">
+                                               <i class="fa fa-heart"></i>
+                                           </figure>
+                                           <!-- End of figure -->
+                                       </div>
+                                   </div>
+                               </div>
+                               <!-- End of col-sm-12 -->
+                                <div class="col-md-12 col-sm-10 col-xs-10 margin-bottom-60">
+                                    <div class="row">
+                                     <div class="col-sm-10 col-sm-offset-1 col-xs-9 col-xs-offset-1">
+                                         <article class="single_service_right_text">
+                                             <h3>저신용장기렌트</h3>
+                                             <h5>선수금 30% 상품 [최저가 저신용 상품] / 선수금 10% 상품 [소득 증빙]</h5>
+                                         </article>
+                                     </div>
+                                     <div class="col-sm-1 col-xs-1">
+                                         <figure class="single_service_icon">
+                                             <i class="fa fa-heart"></i>
+                                         </figure>
+                                         <!-- End of figure -->
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- End of col-sm-12 -->
+                              <div class="col-md-12 col-sm-10 col-xs-10 margin-bottom-60">
+                                  <div class="row">
+                                      <div class="col-sm-10 col-sm-offset-1 col-xs-9 col-xs-offset-1 margin-bottom-20">
+                                          <article class="single_service_right_text">
+                                              <h3>캠핑카 렌트</h3>
+                                              <h5>CAMPERSAVE Motorhome</h5>
+                                          </article>
+                                      </div>
+                                      <div class="col-sm-1 col-xs-1">
+                                          <figure class="single_service_icon">
+                                              <i class="fa fa-heart"></i>
+                                          </figure>
+                                          <!-- End of figure -->
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- End of col-sm-12 -->
+                            </div>
+                          </div>
+                       </div><!-- End of col-sm-6 -->
+                       <div class="col-md-6 col-sm-12 no-padding">
+                          <figure class="single_service single_service_img">
+                              <div class="overlay-img"></div>
+                              <img src="../static/img/car-travelling-by-sunny-road.jpg" alt="" />
+                          </figure><!-- End of figure -->
+                      </div><!-- End of col-sm-6 -->
+                  </div>
+              </div><!-- End of row -->
+          </div><!-- End of Container-fluid -->
+      </section>
+      <!-- End of service Section -->      
+
+
+      <!----------------------------------------->
+      <!------------ service section ------------>
+      <!----------------------------------------->
+      <br><br><br><br>
+
+
+      <!-- Rent Section -->
+      <section id="rent" class="rent">      
+        <div class="space-medium bg-light">
+          <div class="container">
+              <div class="head_title text-center">
+                <h2>월렌트 + 12개월 렌트</h2>
+                <div class="subtitle">
+                    주행거리별 마일리지 제도 ! <br>
+                    전국 최저가 렌트료 !
+                </div>
+                <div class="separator"></div>
+              </div>
+              <!-- row css 속성 바꾸기 (마진 추가)-->
+              <!--
+              <div class="row">
+                  <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8
+                col-sm-12 col-xs-12">
+                      <div class="mb60 text-center section-title">
+                          <h2><font color="black">월렌트 + 12개월 렌트</font></h2>
+                      </div>
+                  </div>
+              </div>
+              -->
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="project-img mb30" align="center">
+                        <a href="service-detail.html" class="imghover"><img src="../static/img/경차.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                        <h4>경차</h4>
+                        <p>렌트 실시간 공개</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="project-img mb30" align="center">
+                        <a href="service-detail.html" class="imghover"><img src="../static/img/준중형.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                        <h4>준중형</h4>
+                        <p>렌트 실시간 공개</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="project-img mb30" align="center">
+                        <a href="service-detail.html" class="imghover"><img src="../static/img/중형승용.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                        <h4>중형 승용</h4>
+                        <p>렌트 실시간 공개</p>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+              <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <div class="project-img mb30" align="center">
+                          <a href="service-detail.html" class="imghover"><img src="../static/img/대형승용.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>대형 승용</h4>
+                          <p>렌트 실시간 공개</p>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <div class="project-img mb30" align="center">
+                          <a href="service-detail.html" class="imghover"><img src="../static/img/중형rv.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>중형 RV</h4>
+                          <p>렌트 실시간 공개</p>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <div class="project-img mb30" align="center">
+                          <a href="service-detail.html" class="imghover"><img src="../static/img/대형rv.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>대형 RV</h4>
+                          <p>렌트 실시간 공개</p>
+                      </div>
+                  </div>
+              </div>
+              <br><br>
+              <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <div class="project-img mb30" align="center">
+                          <a href="service-detail.html" class="imghover"><img src="../static/img/소중형rv.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>소중형 RV</h4>
+                          <p>렌트 실시간 공개</p>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <div class="project-img mb30" align="center">
+                          <a href="service-detail.html" class="imghover"><img src="../static/img/승합차.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>승합차</h4>
+                          <p>렌트 실시간 공개</p>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                      <div class="project-img mb30" align="center">
+                          <a href="service-detail.html" class="imghover"><img src="../static/img/수입차.PNG" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>수입차</h4>
+                          <p>렌트 실시간 공개</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  "> <a href="service-detail.html" class="btn btn-default">view all projects</a> </div>
+              </div>
+          </div>
+        </div>
+      </section>
+      <!-- End of Rent Section -->  
+
+      <br><br><br><br>
+
+      <!----------------------------------------->
+      <!------------ feature section ------------>
+      <!----------------------------------------->
+
+
+      <!-- Client Logo Section -->
+      <section id="clogo" class="clogo">
+          <div class="container">
+              <div class="row">
+                  <div class="main_clogo sections">
+                      <div class="head_title text-center">
+                          <h2>저신용 장기 렌트</h2>
+                          <div class="subtitle">
+                              선수금 30% 상품 [최저가 저신용 상품] <br>
+                              선수금 10% 상품 [소득 증빙]
+                          </div>
+                          <div class="separator"></div>
+                      </div>
+                      <!-- End off Head_title -->
+
+                      <div class="col-sm-4 col-xs-6">
+                            <h3><font color="#760C0C" style="font-weight: bold;">원하는 차종 선택</font></h3>
+                            <h5>국산차+수입차+직수입차+중고차+캠핑카</h5>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                            <h3><font color="#760C0C" style="font-weight: bold;">선수금 30% 상품</font></h3>
+                            <h5>최저가 저신용상품 이용</h5>
+                      </div>
+                      <div class="col-sm-4 col-xs-6"> 
+                            <h3><font color="#760C0C" style="font-weight: bold;">선수금 10% 상품</font></h3>
+                            <h5>소득증빙 3개월 이상</h5>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                            <h3><font color="#760C0C" style="font-weight: bold;">순회정비</font></h3>
+                            <h5>총 10회 순회정비로 방문 없이 시간 SAVE!</h5>
+                      </div>
+                      <div class="col-sm-4 col-xs-6"> 
+                            <h3><font color="#760C0C" style="font-weight: bold;">만26세 + 자차포함</font></h3>
+                            <h5>만 21세 별도 문의</h5>
+                      </div>
+                      <div class="col-sm-4 col-xs-6" style="margin-top: 10px; margin-bottom: 10px;">
+                            <h3><font color="#760C0C" style="font-weight: bold;">상담 신청</font></h3>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="divider"></div>
+      </section>
+      <!-- End off clogo Section -->      
+      
+      <!-- service block -->     
+      <section id="feature" class="feature sections">
+        <div class="container space-medium">
+            <div class="head_title text-center">
+              <h2>캠핑카 렌트</h2>
+              <div class="subtitle">
+                  <h5>CAMPERSAVE Motorhome</h5>
+              </div>
+              <div class="separator"></div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <div class="service-block text-center">
+                      <!-- service block -->
+                      <div class="service-content">
+                        <!-- service content -->
+                        <h3><a href="service-detail.html" class="title">Travel VIP CAMPER</a></h3>
+                        <a href="" class="btn btn-md">디럭스 Motorhome</a><br>
+                        <a href="" class="btn btn-md">스위트 Motorhome</a>
+                     </div>
+                     <br>
+                     <!-- service content -->
+                      <div class="service-img ">
+                          <!-- service img -->
+                          <a href="service-detail.html" class="imghover"><img src="../static/img/camping-car.jpg" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
+                      </div>
+                      <!-- service img -->
+                  </div>
+                  <!-- /.service block -->
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="service-block text-center">
+                    <!-- service block -->
+                    <div class="service-content">
+                      <!-- service content -->
+                      <h3><a href="service-detail.html" class="title">Liomousine VIP CAMPER</a></h3>
+                      <a href="" class="btn btn-md">디럭스 Motorhome</a><br>
+                      <a href="" class="btn btn-md">스위트 Motorhome</a>
+                   </div>
+                   <br>
+                   <!-- service content -->
+                    <div class="service-img ">
+                        <!-- service img -->
+                        <a href="service-detail.html" class="imghover"><img src="../static/img/camping-car.jpg" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
+                    </div>
+                    <!-- service img -->
+                </div>
+                <!-- /.service block -->
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="service-block text-center">
+                    <!-- service block -->
+                    <div class="service-content">
+                      <!-- service content -->
+                      <h3><a href="service-detail.html" class="title">Europe VIP CAMPER</a></h3>
+                      <a href="" class="btn btn-md">디럭스 Motorhome</a><br>
+                      <a href="" class="btn btn-md">스위트 Motorhome</a>
+                   </div>
+                   <br>
+                   <!-- service content -->
+                    <div class="service-img ">
+                        <!-- service img -->
+                        <a href="service-detail.html" class="imghover"><img src="../static/img/camping-car.jpg" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
+                    </div>
+                    <!-- service img -->
+                </div>
+                <!-- /.service block -->
+            </div>
+          </div>
+        </div>
+      </section>
+     <!-- end of service block -->     
+
+
+  <!----------------------------------------->
+  <!------------ Pricing section ------------>
+  <!----------------------------------------->
+  
+  
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+        <div class="row">
+            <div class="main_pricing_area sections">
+                <div class="head_title text-center">
+                    <h2>한눈에 보는</h2>
+                    <h2>세이브카 가격표</h2>
+                    <div class="separator"></div>
+                </div>
+                <!-- End off Head_title -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="single_pricing">
+                        <div class="pricing_head">
+                          <br>
+                          <h3>한눈에 보는</h3>
+                          <h3>월렌트 가격표</h3>
+                        </div>
+                        <div class="pricing_body">
+                          <a href="" class="btn btn-md">가격 보기</a>
+                        </div>
+                    </div>
+                </div> 
+                <!-- End off col-md-4 -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="single_pricing pricing_business">
+                        <div class="pricing_head ">
+                          <br>
+                          <h3>한눈에 보는</h3>
+                          <h3>12개월 렌트 가격표</h3>
+                        </div>
+                        <div class="pricing_body">
+                          <a href="" class="btn btn-md">가격 보기</a>
+                        </div>
+                    </div>
+                </div> 
+                <!-- End off col-md-4 -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="single_pricing">
+                        <div class="pricing_head">
+                          <br>
+                          <h3>한눈에 보는</h3>
+                          <h3>단기 렌트 가격표</h3>
+                        </div>
+                        <div class="pricing_body">
+                          <a href="" class="btn btn-md">가격 보기</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End off col-md-4 -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="single_pricing pricing_business">
+                        <div class="pricing_head">
+                          <br>
+                          <h3>한눈에 보는</h3>
+                          <h3>캠핑카 가격표</h3>
+                        </div>
+                        <div class="pricing_body">
+                          <a href="" class="btn btn-md">가격 보기</a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div><!-- End off row -->
+    </div><!-- End off container -->
+  </section>
+  <!-- End off Pricing Section -->
+
+
+  <!----------------------------------------->
+  <!----------- introduce section ----------->
+  <!----------------------------------------->
+
+
+  <!--introduce section-->
+  <section class="introduce">
+    <div class="footer">
+      <!-- footer-->
+      <div class="container">
+          <div class="row text-center">
+              <br><br>
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <div class="footer-widget">
+                      <!-- social block -->
+                      <img src="../static/img/map.png" width="50" height="50" style="margin: 20px;"/>
+                      <br>
+                      <h2 class="widget-title" style="color: #ffffff;">Address</h2>
+                      <br>
+                      <h4>서울시 송파구 충민로 66 가든파이브라이프
+                          <br> F-8026 [장지역, 복정역]</h4>
+                  </div>
+                  <!-- /.social block -->
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <div class="footer-widget">
+                      <!-- newsletter block -->
+                      <img src="../static/img/phone-call.png" width="50" height="50" style="margin: 20px;"/>
+                      <br>
+                      <h2 class="widget-title" style="color: #ffffff;">CALL US</h2>
+                      <br>
+                      <h4>1661-3331</h4>
+                  </div>
+                  <!-- newsletter block -->
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <div class="footer-widget">
+                      <!-- newsletter block -->
+                      <img src="../static/img/email.png" width="50" height="50" style="margin: 20px;"/>
+                      <br>
+                      <h2 class="widget-title" style="color: #ffffff;">E-mail</h2>
+                      <br>
+                      <h4>itscar@naver.com</h4>
+                  </div>
+                  <!-- newsletter block -->
+              </div>
+          </div>
+      </div>
+    </div>
+  </section>
+  <!-- End of introduce Section -->
+  
+  <!----------------------------------------->
+  <!------------- Footer section ------------>
+  <!----------------------------------------->
+
+  <!--Footer section-->
+  <section class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="main_footer">
+                    <div class="row">
+                          <div class="col-sm-12 col-xs-12">
+                              <div class="footer-widget text-center">
+                                <p>(주)세이브카<br>
+                                사업자등록번호: 113-86-62612 통신판매: 제2020-서울송파-2913호<br>
+                                Copyright SAVECAR. All Rights Reserved.</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+</div>
+  <!-- End off footer Section-->
+  
+    <!-- START SCROLL TO TOP  -->
+    <div class="scrollup">
+        <a href="#"><i class="fa fa-chevron-up"></i></a>
+    </div>
+
+    <script src="../static/js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="../static/js/vendor/bootstrap.min.js"></script>
+
+    <script src="../static/js/jquery.magnific-popup.js"></script>
+    <script src="../static/js/jquery.mixitup.min.js"></script>
+    <script src="../static/js/jquery.easing.1.3.js"></script>
+    <script src="../static/js/jquery.masonry.min.js"></script>
+
+    <!--slick slide js -->
+    <script src="../static/css/slick/slick.js"></script>
+    <script src="../static/css/slick/slick.min.js"></script>
+
+
+    <script src="../static/js/plugins.js"></script>
+    <script src="../static/js/main.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../static/js/jquery.min.../static/js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../static/js/bootstrap.min.../static/js"></script>
+    <script src="../static/js/menumaker.../static/js"></script>
+    <script src="../static/js/navigation.../static/js" type="text/javascript"></script>
+</body>
+</html>
