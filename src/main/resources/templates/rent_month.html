@@ -11,13 +11,13 @@
     <meta name="keywords" content="SAVECAR, 세이브카, 렌트카, 캠핑카, 실시간 견적, 렌트카 상담, 12개월 렌트, 외제차, 수입차, 국산차">
     <title>SAVECAR - 월 12개월 렌트</title>
     <!-- Bootstrap -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
     <!-- Style -->
-    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-caption">
-                        <h2 class="page-title">실시간 견적내기 및 상담 요청</h3>
+                        <h2 class="page-title">실시간 견적내기 및 상담 요청</h2>
                         <p><button id="singlebutton" name="singlebutton" class="btn btn-default">한눈에 보는 가격표</button></p>
                     </div>
                 </div>
@@ -130,23 +130,21 @@
                                                 <label class="control-label" for="name">렌트 상품</label>
                                             </span>
                                             <span class="span-input">
-                                                <label style="margin-right: 20px;"><input type="radio" id="rent-product" name="rent-product" value="rentMonth">&nbsp; 월렌트</label>
-                                                <label><input type="radio" id="rent-product" name="rent-product" value="rentYear">&nbsp; 12개월 렌트</label>
+                                                <label style="margin-right: 20px;"><input type="radio" id="MonthlyRent" name="rentProduct"  onchange="changes(rentProduct.value, selectCategory1)" value="rentMonth">&nbsp; 월렌트</label>
+                                                <label><input type="radio" id="YearlyRent" name="rentProduct" onchange="changes(rentProduct.value, selectCategory1)" value="rentYear">&nbsp; 12개월 렌트</label>
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row" name="selectDetail">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                                             <span class="span-control">
                                                 <label class="control-label" for="name">차종 선택</label>
                                             </span>
                                             <span class="span-input">
-                                                <select name="car-type" class="form-control-select">
-                                                    <option value="kor-s" selected>국산 승용</option>
-                                                    <option value="kor-m">국산승합•RV</option>
-                                                    <option value="foreign">수입차</option>
+                                                <select name="selectCategory1" class="form-control-select" onchange="changes(selectCategory1.value, selectCategory2)" value="차종선택">
+                                                    <option value="차종1">--차종을 선택해주세요.--</option>
                                                 </select>
-                                                <select name="car-size" class="form-control-select">
+                                                <select name="selectCategory2" class="form-control-select" onchange="changes(selectCategory2.value, selectName)">
                                                     <option value="small" selected>소형</option>
                                                     <option value="middle">중형</option>
                                                     <option value="large">대형</option>
@@ -159,7 +157,7 @@
                                             <span class="span-control">
                                                 <label class="control-label" for="name">차명</label>
                                             </span>
-                                            <select name="car-name" class="form-control-select2">
+                                            <select name="selectName" class="form-control-select2" onchange="changes(selectName.value, selectMileage)">
                                                 <option value="name" selected>모닝 15년이하</option>
                                                 <option value="name">엑센트 15년이하</option>
                                                 <option value="name">소나타 20~21년</option>
@@ -172,7 +170,7 @@
                                                 <label class="control-label" for="kliometer">주행 거리</label>
                                             </span>
                                             <span class="span-input">
-                                                <select name="car-kilo" class="form-control-select">
+                                                <select name="selectMileage" class="form-control-select">
                                                     <option value="2000" selected>2000</option>
                                                     <option value="2500">2500</option>
                                                     <option value="3000">3000</option>
@@ -318,6 +316,30 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/menumaker.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function changes(fr, detailedSelect) {
+            console.log(fr)
+            $.ajax({
+                type: 'POST',
+                url: '/monthly/' + fr,
+                contentType: "application/json; charset=UTF-8",
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result)
+                    for (i = 0; i < detailedSelect.length; i++) {
+                        detailedSelect.options[0] = null;
+                    }
+                    //포문을 이용하여 두번째(test2)셀렉트 박스에 값을 뿌려줍니당)
+                    for (i = 0; i < result.length; i++) {
+                        detailedSelect.options[i] = new Option(result[i], i);
+                    }
+                }
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
+        }
+    </script>
     <script src="../static/js/navigation.js" type="text/javascript"></script>
 </body>
 
