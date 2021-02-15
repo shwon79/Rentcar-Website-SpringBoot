@@ -1,9 +1,8 @@
 <!-- React로 구현하기 전 레이아웃 설정 -->
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -22,11 +21,11 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">
     <!-- Bootstrap -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
     <!-- Style -->
-    <link href="../static/css/style.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,30 +33,29 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js "></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="../static/css/iconfont.css">
-    <link rel="stylesheet" href="../static/css/slick/slick.css">
-    <link rel="stylesheet" href="../static/css/slick/slick-theme.css">
-    <link rel="stylesheet" href="../static/css/stylesheet.css">
-    <link rel="stylesheet" href="../static/css/jquery.fancybox.css">
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+    <link th:href="@{/css/iconfont.css}" rel="stylesheet">
+    <link th:href="@{/css/slick/slick.css}" rel="stylesheet">
+    <link th:href="@{/css/slick/slick-theme.css}" rel="stylesheet">
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet">
+    <link th:href="@{/css/magnific-popup.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 
     <!--Theme Responsive css-->
-    <link rel="stylesheet" href="../static/css/responsive.css" />
+    <link rel="stylesheet" th:href="@{/css/responsive.css}" >
     
     <!--For Plugins external css-->
-    <link rel="stylesheet" href="../static/css/plugins.css" />
+    <link rel="stylesheet" th:href="@{/css/plugins.css}" />
 
     <!-- 수정 예정 -->
     <!--Theme custom css -->
-    <!-- <link rel="stylesheet" href="../static/assets/css/style.css"> -->
+    <!-- <link rel="stylesheet" th:href="@{/assets/css/style.css}"> -->
 
     <!-- table Style -->
-    <link href="../static/css/table.css" rel="stylesheet">
+    <link th:href="@{/css/table.css}" rel="stylesheet">
 
-    <script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script th:src="@{/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js}"></script>
     
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png}" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -77,7 +75,7 @@
     <title>SAVE-CAR</title>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
-  <div class='preloader'><div class='loaded'>&nbsp;</div></div>
+<!--  <div class='preloader'><div class='loaded'>&nbsp;</div></div>-->
     <div class="culmn">
 
       <!----------------------------------------->
@@ -101,7 +99,7 @@
                                       </button>
                                       <a class="navbar-brand" href="#home">
                                           <!-- 여기에 로고 사진 넣기 -->
-                                          <img src="../static/img/savecar-logo.png" width="200" height="50" />
+                                          <img th:src="@{/img/savecar-logo.png}" width="200" height="50" />
                                       </a>
                                   </div>
 
@@ -111,10 +109,10 @@
 
                                       <ul class="nav navbar-nav navbar-right">
                                           <li><a href="#home">HOME</a></li>
-                                          <li><a href="rent_month.html">월렌트+12개월렌트</a></li>
-                                          <li><a href="rent_long_term.html">저신용장기렌트</a></li>
-                                          <li><a href="camping_travel.html">캠핑카렌트</a></li>
-                                          <li><a href="price.html">렌트가격표</a></li>
+                                          <li><a href="/rent/month">월렌트+12개월렌트</a></li>
+                                          <li><a href="/rent/long_term">저신용장기렌트</a></li>
+                                          <li><a href="/travel">캠핑카렌트</a></li>
+                                          <li><a href="/price">렌트가격표</a></li>
                                           <li><a href="#home">1661-3331</a></li>
                                       </ul>
                                   </div>
@@ -298,7 +296,7 @@
                        <div class="col-md-6 col-sm-12 no-padding">
                           <figure class="single_service single_service_img">
                               <div class="overlay-img"></div>
-                              <img src="../static/img/car-travelling-by-sunny-road.jpg" alt="" />
+                              <img th:src="@{/img/car-travelling-by-sunny-road.jpg}" alt="" />
                           </figure><!-- End of figure -->
                       </div><!-- End of col-sm-6 -->
                   </div>
@@ -340,21 +338,21 @@
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="project-img mb30" align="center">
-                        <a href="service-detail.html" class="imghover"><img src="../static/img/경차.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                        <a href="service-detail.html" class="imghover"><img th:src="@{/img/경차.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                         <h4>경차</h4>
                         <p>렌트 실시간 공개</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="project-img mb30" align="center">
-                        <a href="service-detail.html" class="imghover"><img src="../static/img/준중형.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                        <a href="service-detail.html" class="imghover"><img th:src="@{/img/준중형.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                         <h4>준중형</h4>
                         <p>렌트 실시간 공개</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="project-img mb30" align="center">
-                        <a href="service-detail.html" class="imghover"><img src="../static/img/중형승용.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                        <a href="service-detail.html" class="imghover"><img th:src="@{/img/중형승용.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                         <h4>중형 승용</h4>
                         <p>렌트 실시간 공개</p>
                     </div>
@@ -364,21 +362,21 @@
               <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img src="../static/img/대형승용.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/대형승용.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                           <h4>대형 승용</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img src="../static/img/중형rv.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/중형rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                           <h4>중형 RV</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img src="../static/img/대형rv.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/대형rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                           <h4>대형 RV</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
@@ -388,21 +386,21 @@
               <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img src="../static/img/소중형rv.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/소중형rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                           <h4>소중형 RV</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img src="../static/img/승합차.png" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/승합차.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                           <h4>승합차</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img src="../static/img/수입차.PNG" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/수입차.PNG}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                           <h4>수입차</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
@@ -492,7 +490,7 @@
                      <!-- service content -->
                       <div class="service-img ">
                           <!-- service img -->
-                          <a href="service-detail.html" class="imghover"><img src="../static/img/camping-car.jpg" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/camping-car.jpg}" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
                       </div>
                       <!-- service img -->
                   </div>
@@ -511,7 +509,7 @@
                    <!-- service content -->
                     <div class="service-img ">
                         <!-- service img -->
-                        <a href="service-detail.html" class="imghover"><img src="../static/img/camping-car.jpg" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
+                        <a href="service-detail.html" class="imghover"><img th:src="@{/img/camping-car.jpg}" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
                     </div>
                     <!-- service img -->
                 </div>
@@ -530,7 +528,7 @@
                    <!-- service content -->
                     <div class="service-img ">
                         <!-- service img -->
-                        <a href="service-detail.html" class="imghover"><img src="../static/img/camping-car.jpg" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
+                        <a href="service-detail.html" class="imghover"><img th:src="@{/img/camping-car.jpg}" width="360" height="360" class="img-responsive" alt="Interior Design Website Templates Free Download"> </a>
                     </div>
                     <!-- service img -->
                 </div>
@@ -631,7 +629,7 @@
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                   <div class="footer-widget">
                       <!-- social block -->
-                      <img src="../static/img/map.png" width="50" height="50" style="margin: 20px;"/>
+                      <img th:src="@{/img/map.png}" width="50" height="50" style="margin: 20px;"/>
                       <br>
                       <h2 class="widget-title" style="color: #ffffff;">Address</h2>
                       <br>
@@ -643,7 +641,7 @@
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                   <div class="footer-widget">
                       <!-- newsletter block -->
-                      <img src="../static/img/phone-call.png" width="50" height="50" style="margin: 20px;"/>
+                      <img th:src="@{/img/phone-call.png}" width="50" height="50" style="margin: 20px;"/>
                       <br>
                       <h2 class="widget-title" style="color: #ffffff;">CALL US</h2>
                       <br>
@@ -654,7 +652,7 @@
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                   <div class="footer-widget">
                       <!-- newsletter block -->
-                      <img src="../static/img/email.png" width="50" height="50" style="margin: 20px;"/>
+                      <img th:src="@{/img/email.png}" width="50" height="50" style="margin: 20px;"/>
                       <br>
                       <h2 class="widget-title" style="color: #ffffff;">E-mail</h2>
                       <br>
@@ -700,27 +698,27 @@
         <a href="#"><i class="fa fa-chevron-up"></i></a>
     </div>
 
-    <script src="../static/js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="../static/js/vendor/bootstrap.min.js"></script>
+    <script th:src="@{/js/vendor/jquery-1.11.2.min.js}"></script>
+    <script th:src="@{/js/vendor/bootstrap.min.js}"></script>
 
-    <script src="../static/js/jquery.magnific-popup.js"></script>
-    <script src="../static/js/jquery.mixitup.min.js"></script>
-    <script src="../static/js/jquery.easing.1.3.js"></script>
-    <script src="../static/js/jquery.masonry.min.js"></script>
+    <script th:src="@{/js/jquery.magnific-popup.js}"></script>
+    <script th:src="@{/js/jquery.mixitup.min.js}"></script>
+    <script th:src="@{/js/jquery.easing.1.3.js}"></script>
+    <script th:src="@{/js/jquery.masonry.min.js}"></script>
 
     <!--slick slide js -->
-    <script src="../static/css/slick/slick.js"></script>
-    <script src="../static/css/slick/slick.min.js"></script>
+    <script th:src="@{/css/slick/slick.js}"></script>
+    <script th:src="@{/css/slick/slick.min.js}"></script>
 
 
-    <script src="../static/js/plugins.js"></script>
-    <script src="../static/js/main.js"></script>
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../static/js/jquery.min.../static/js"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../static/js/bootstrap.min.../static/js"></script>
-    <script src="../static/js/menumaker.../static/js"></script>
-    <script src="../static/js/navigation.../static/js" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/menumaker.js}"></script>
+    <script th:src="@{/js/navigation.js}" type="text/javascript"></script>
 </body>
 </html>
