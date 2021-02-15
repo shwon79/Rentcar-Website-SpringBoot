@@ -1,8 +1,7 @@
 function changes(fr, detailedSelect) {
-    console.log(fr)
     $.ajax({
-        type: 'POST',
-        url: '/monthly/' + fr,
+        type: 'GET',
+        url: '/rent/month/' + fr,
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function (result) {
@@ -15,8 +14,6 @@ function changes(fr, detailedSelect) {
                 detailedSelect.options[i] = new Option(result[i], i);
             }
         }
-    }).done(function () {
-        alert('찾기 완료');
     }).fail(function (error) {
         alert(JSON.stringify(error));
     })

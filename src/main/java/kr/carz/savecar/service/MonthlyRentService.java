@@ -2,7 +2,6 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.repository.MonthlyRentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

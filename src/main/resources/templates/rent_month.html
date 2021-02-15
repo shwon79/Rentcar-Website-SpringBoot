@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-caption">
-                        <h2 class="page-title">실시간 견적내기 및 상담 요청</h3>
+                        <h2 class="page-title">실시간 견적내기 및 상담 요청</h2>
                         <p><button id="singlebutton" name="singlebutton" class="btn btn-default">한눈에 보는 가격표</button></p>
                     </div>
                 </div>
@@ -316,29 +316,7 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/menumaker.js}"></script>
     <script th:src="@{/js/navigation.js}" type="text/javascript"></script>
-    <script>
-        function changes(fr, detailedSelect) {
-            $.ajax({
-                type: 'GET',
-                url: '/monthly/' + fr,
-                contentType: "application/json; charset=UTF-8",
-                dataType: 'json',
-                success: function (result) {
-                    console.log(result)
-                    for (i = 0; i < detailedSelect.length; i++) {
-                        detailedSelect.options[0] = null;
-                    }
-                    //포문을 이용하여 두번째(test2)셀렉트 박스에 값을 뿌려줍니당)
-                    for (i = 0; i < result.length; i++) {
-                        detailedSelect.options[i] = new Option(result[i], i);
-                    }
-                }
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            })
-        }
-    </script>
-    <script src="../static/js/navigation.js" type="text/javascript"></script>
+    <script th:src="@{/js/monthly_rent.js}"></script>
 </body>
 
 </html>
