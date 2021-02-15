@@ -1,6 +1,5 @@
 package kr.carz.savecar.controller;
 
-import com.mysql.cj.xdevapi.JsonArray;
 import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.service.MonthlyRentService;
 import org.json.JSONArray;
@@ -28,12 +27,11 @@ public class MonthlyController {
         return "rent_month";
     }
 
-    @RequestMapping(value = "/monthly/rentMonth", produces = "application/json; charset=UTF-8", method= RequestMethod.POST)
+    @RequestMapping(value = "/monthly/rentMonth", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void get_monthly_rent(HttpServletResponse res) throws IOException {
+    public void get_monthly_rent(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
         List<MonthlyRent> monthlyRents = monthlyRentService.findMonthlyRents();
-        System.out.println(monthlyRents);
 
         List<String> categoryList = new ArrayList();
 
@@ -46,7 +44,7 @@ public class MonthlyController {
             jsonArray.put(categoryList.get(i));
         }
 
-        System.out.println(jsonArray.toString());
+        //System.out.println(jsonArray.toString());
         PrintWriter pw = res.getWriter();
         pw.print(jsonArray.toString());
         pw.flush();
