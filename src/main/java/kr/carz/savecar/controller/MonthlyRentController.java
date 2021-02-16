@@ -7,10 +7,7 @@ import kr.carz.savecar.service.YearlyRentService;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +36,7 @@ public class MonthlyRentController {
 
     @RequestMapping(value = "/rent/month/rentMonth", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void get_monthly_rent(HttpServletResponse res, HttpServletRequest req) throws IOException {
+    public void get_monthly_rent_category1(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
         List<MonthlyRent> monthlyRents = monthlyRentService.findMonthlyRents();
 
@@ -54,7 +51,75 @@ public class MonthlyRentController {
             jsonArray.put(categoryList.get(i));
         }
 
-        //System.out.println(jsonArray.toString());
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray.toString());
+        pw.flush();
+        pw.close();
+    }
+    @RequestMapping(value = "/rent/month/rentMonth/{category1}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable String category1) throws IOException {
+
+        List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
+
+        List<String> categoryList = new ArrayList();
+
+        for (int i = 0; i < monthlyRents.size(); i++) {
+            categoryList.add(monthlyRents.get(i).getCategory2());
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < categoryList.size(); i++) {
+            jsonArray.put(categoryList.get(i));
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray.toString());
+        pw.flush();
+        pw.close();
+    }
+    @RequestMapping(value = "/rent/month/rentMonth/{category1}/{category2}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_monthly_rent_name(HttpServletResponse res, @PathVariable String category1, @PathVariable String category2) throws IOException {
+
+        List<MonthlyRent> monthlyRents = monthlyRentService.findNameOfMonthlyRents(category1, category2);
+
+        List<String> categoryList = new ArrayList();
+
+        for (int i = 0; i < monthlyRents.size(); i++) {
+            categoryList.add(monthlyRents.get(i).getName());
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < categoryList.size(); i++) {
+            jsonArray.put(categoryList.get(i));
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray.toString());
+        pw.flush();
+        pw.close();
+    }
+    @RequestMapping(value = "/rent/month/rentMonth/mileage", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_monthly_rent_mileage(HttpServletResponse res) throws IOException {
+
+        Integer[] monthlyRents = {2000, 2500, 3000, 4000};
+        List<String> categoryList = new ArrayList();
+
+        for (int i = 0; i < 4; i++) {
+            categoryList.add(monthlyRents[i].toString());
+        }
+
+        for (int i = 0; i < 3; i++) {
+            categoryList.add(monthlyRents[i].toString());
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < categoryList.size(); i++) {
+            jsonArray.put(categoryList.get(i));
+        }
+
         PrintWriter pw = res.getWriter();
         pw.print(jsonArray.toString());
         pw.flush();
@@ -64,7 +129,7 @@ public class MonthlyRentController {
 
     @RequestMapping(value = "/rent/month/rentYear", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void get_yearly_rent(HttpServletResponse res, HttpServletRequest req) throws IOException {
+    public void get_yearly_rent_category1(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
         List<YearlyRent> yearlyRents = yearlyRentService.findYearlyRents();
 
@@ -84,4 +149,71 @@ public class MonthlyRentController {
         pw.flush();
         pw.close();
     }
+
+    @RequestMapping(value = "/rent/month/rentYear/{category1}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_yearly_rent_category2(HttpServletResponse res, @PathVariable String category1) throws IOException {
+
+        List<YearlyRent> yearlyRents = yearlyRentService.findCategory2OfMonthlyRents(category1);
+        List<String> categoryList = new ArrayList();
+
+        for (int i = 0; i < yearlyRents.size(); i++) {
+            categoryList.add(yearlyRents.get(i).getCategory2());
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < categoryList.size(); i++) {
+            jsonArray.put(categoryList.get(i));
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray.toString());
+        pw.flush();
+        pw.close();
+    }
+
+    @RequestMapping(value = "/rent/month/rentYear/{category1}/{category2}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_yearly_rent_name(HttpServletResponse res, @PathVariable String category1, @PathVariable String category2) throws IOException {
+
+        List<YearlyRent> yearlyRents = yearlyRentService.findNameOfYearlyRents(category1, category2);
+        List<String> categoryList = new ArrayList();
+
+        for (int i = 0; i < yearlyRents.size(); i++) {
+            categoryList.add(yearlyRents.get(i).getName());
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < categoryList.size(); i++) {
+            jsonArray.put(categoryList.get(i));
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray.toString());
+        pw.flush();
+        pw.close();
+    }
+
+    @RequestMapping(value = "/rent/month/rentYear/mileage", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_yearly_rent_mileage(HttpServletResponse res) throws IOException {
+
+        Integer[] yearlyRents = {2000, 3000, 4000};
+        List<String> categoryList = new ArrayList();
+
+        for (int i = 0; i < 3; i++) {
+            categoryList.add(yearlyRents[i].toString());
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < categoryList.size(); i++) {
+            jsonArray.put(categoryList.get(i));
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray.toString());
+        pw.flush();
+        pw.close();
+    }
+
 }

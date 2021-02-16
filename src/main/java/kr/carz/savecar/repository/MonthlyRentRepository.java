@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface MonthlyRentRepository extends JpaRepository<MonthlyRent, Long> {
     List<MonthlyRent> findAll();
+
+    List<MonthlyRent> findByCategory1(String category1);
+    List<MonthlyRent> findByCategory1AndCategory2(String category1, String category2);
+    List<MonthlyRent> findByCategory1AndCategory2AndName(String category1, String category2, String name);
 }

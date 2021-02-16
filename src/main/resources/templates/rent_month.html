@@ -129,8 +129,8 @@
                                                 <label class="control-label" for="name">렌트 상품</label>
                                             </span>
                                             <span class="span-input">
-                                                <label style="margin-right: 20px;"><input type="radio" id="MonthlyRent" name="rentProduct"  onchange="changes(rentProduct.value, selectCategory1)" value="rentMonth">&nbsp; 월렌트</label>
-                                                <label><input type="radio" id="YearlyRent" name="rentProduct" onchange="changes(rentProduct.value, selectCategory1)" value="rentYear">&nbsp; 12개월 렌트</label>
+                                                <label style="margin-right: 20px;"><input type="radio" id="MonthlyRent" name="rentProduct"  onchange="get_category1(rentProduct.value, selectCategory1)" value="rentMonth">&nbsp; 월렌트</label>
+                                                <label><input type="radio" id="YearlyRent" name="rentProduct" onchange="get_category1(rentProduct.value, selectCategory1)" value="rentYear">&nbsp; 12개월 렌트</label>
                                             </span>
                                         </div>
                                     </div>
@@ -140,13 +140,11 @@
                                                 <label class="control-label" for="name">차종 선택</label>
                                             </span>
                                             <span class="span-input">
-                                                <select name="selectCategory1" class="form-control-select" onchange="changes(selectCategory1.value, selectCategory2)" value="차종선택">
-                                                    <option value="차종1">--차종을 선택해주세요.--</option>
+                                                <select name="selectCategory1" class="form-control-select" onchange="get_category2(rentProduct.value, selectCategory1.value, selectCategory2)" value="차종선택">
+                                                    <option value="차종">--차종을 선택해주세요.--</option>
                                                 </select>
-                                                <select name="selectCategory2" class="form-control-select" onchange="changes(selectCategory2.value, selectName)">
-                                                    <option value="small" selected>소형</option>
-                                                    <option value="middle">중형</option>
-                                                    <option value="large">대형</option>
+                                                <select name="selectCategory2" class="form-control-select" onchange="get_car_name(rentProduct.value, selectCategory1.value, selectCategory2.value, selectName)">
+                                                    <option value="차분류">--차 분류를 선택해주세요.--</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -156,7 +154,7 @@
                                             <span class="span-control">
                                                 <label class="control-label" for="name">차명</label>
                                             </span>
-                                            <select name="selectName" class="form-control-select2" onchange="changes(selectName.value, selectMileage)">
+                                            <select name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">
                                                 <option value="name" selected>모닝 15년이하</option>
                                                 <option value="name">엑센트 15년이하</option>
                                                 <option value="name">소나타 20~21년</option>
