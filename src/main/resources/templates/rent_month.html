@@ -80,7 +80,7 @@
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="name">이름</label>
                                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="name" placeholder="예약자의 성함을 입력해주세요.">
+                                                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="예약자의 성함을 입력해주세요.">
                                                 </div>
                                             </div>
                                         </div>
@@ -88,14 +88,14 @@
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="phone">연락처</label>
                                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input type="text" class="form-control" id="phone" placeholder="예약자 연락처 ex) 010-0000-0000">
+                                                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="예약자 연락처 ex) 010-0000-0000">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="textarea">요청 사항</label>
-                                                <textarea class="form-control" id="textarea" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>
+                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -106,7 +106,7 @@
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group text-center">
-                                                <button id="singlebutton" name="singlebutton" class="btn btn-default">예약하기</button>
+                                                <a class="btn btn-default" onclick="make_reservation()" href="#">제출하기 </a>
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                                                 <label class="control-label" for="name">렌트 상품</label>
                                             </span>
                                             <span class="span-input">
-                                                <label style="margin-right: 20px;"><input type="radio" id="MonthlyRent" name="rentProduct"  onchange="get_category1(rentProduct.value, selectCategory1)" value="rentMonth">&nbsp; 월렌트</label>
+                                                <label style="margin-right: 20px;"><input type="radio" id="MonthlyRent" name="rentProduct" onchange="get_category1(rentProduct.value, selectCategory1)" value="rentMonth">&nbsp; 월렌트</label>
                                                 <label><input type="radio" id="YearlyRent" name="rentProduct" onchange="get_category1(rentProduct.value, selectCategory1)" value="rentYear">&nbsp; 12개월 렌트</label>
                                             </span>
                                         </div>
@@ -140,11 +140,11 @@
                                                 <label class="control-label" for="name">차종 선택</label>
                                             </span>
                                             <span class="span-input">
-                                                <select name="selectCategory1" class="form-control-select" onchange="get_category2(rentProduct.value, selectCategory1.value, selectCategory2)" value="차종선택">
-                                                    <option value="차종">--차종을 선택해주세요.--</option>
+                                                <select id="select-category1" name="selectCategory1" class="form-control-select" onchange="get_category2(rentProduct.value, selectCategory1.value, selectCategory2)" value="차종선택">
+                                                    <option value="">--차종을 선택해주세요.--</option>
                                                 </select>
-                                                <select name="selectCategory2" class="form-control-select" onchange="get_car_name(rentProduct.value, selectCategory1.value, selectCategory2.value, selectName)">
-                                                    <option value="차분류">--차 분류를 선택해주세요.--</option>
+                                                <select id="select-category2" name="selectCategory2" class="form-control-select" onchange="get_car_name(rentProduct.value, selectCategory1.value, selectCategory2.value, selectName)">
+                                                    <option value="">--차 분류를 선택해주세요.--</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -154,8 +154,8 @@
                                             <span class="span-control">
                                                 <label class="control-label" for="name">차명</label>
                                             </span>
-                                            <select name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">
-                                                <option value="name">-- 차명을 선택해주세요. --</option>
+                                            <select id="select-car-name" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">
+                                                <option value="">-- 차명을 선택해주세요. --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -165,8 +165,8 @@
                                                 <label class="control-label" for="kliometer">주행 거리</label>
                                             </span>
                                             <span class="span-input">
-                                                <select name="selectMileage" class="form-control-select"  onchange="get_price(rentProduct.value, selectName.value, selectMileage.value, document.reservation.totalPrice)">
-                                                    <option value="mileage">-- 주행 거리를 선택해주세요. --</option>
+                                                <select id="select-mileage" name="selectMileage" class="form-control-select"  onchange="get_price(rentProduct.value, selectName.value, selectMileage.value, document.reservation.totalPrice)">
+                                                    <option value="">-- 주행 거리를 선택해주세요. --</option>
                                                 </select>
                                                 <label> &nbsp; km </label>
                                             </span>

@@ -1,3 +1,34 @@
+function make_reservation () {
+    var product =  $("#MonthlyRent").val()
+    if (product == undefined) {
+        product =  $("#YearlyRent").val()
+    }
+
+    var data = {
+        name : $("#reservation-detail-name").val(),
+        phoneNo : $("#reservation-detail-phone").val(),
+        detail : $("#reservation-detail-details").val(),
+        product : product,
+        category1 : $("#select-category1").val(),
+        category2 : $("#select-category2").val(),
+        car_name : $("#select-car-name").val(),
+        mileage : $("#select-mileage").val(),
+    };
+    console.log(data)
+
+    $.ajax({
+        type : 'POST',
+        url : '/reservation/apply',
+        dataType : 'json',
+        contentType : 'application/json; charset=utf-8',
+        data : JSON.stringify(data)
+    }).done(function () {
+        alert('예약이 완료되었습니다.');
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    })
+}
+
 function get_category1(fr, detailedSelect) {
     $.ajax({
         type: 'GET',
@@ -73,18 +104,11 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
             var vat = price * 0.1;
             var deposit = result[1];
             var total = parseInt(price) + vat;
-            console.log(price, vat, deposit, total);
-            console.log(document.getElementById("carPrice"))
-            console.log(document.getElementById("carPrice").innerText)
-
 
             document.getElementById("carPrice").innerText = price +"원";
             document.getElementById("carVat").innerText = vat +"원";
             document.getElementById("carDeposit").innerText = deposit +"원";
             document.getElementById("carTotal").innerText = total +"원";
-
-            console.log(document.getElementById("carPrice"))
-            console.log(document.getElementById("carPrice").innerText)
 
         }
     }).fail(function (error) {
