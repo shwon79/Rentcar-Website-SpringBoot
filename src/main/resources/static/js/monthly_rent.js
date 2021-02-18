@@ -1,7 +1,11 @@
 function make_reservation () {
-    var product =  $("#MonthlyRent").val()
+    var product =  $("#rent-product1").val()
     if (product == undefined) {
-        product =  $("#YearlyRent").val()
+        product =  $("#rent-product2").val()
+    }
+    var deposit =  $("#rentMonth").val()
+    if (deposit == undefined) {
+        product =  $("#rentYear").val()
     }
 
     var data = {
@@ -13,6 +17,8 @@ function make_reservation () {
         category2 : $("#select-category2").val(),
         car_name : $("#select-car-name").val(),
         mileage : $("#select-mileage").val(),
+        deposit : deposit,
+        option : $("#select-car-option").val()
     };
     console.log(data)
 
