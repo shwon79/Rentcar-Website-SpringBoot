@@ -1,11 +1,21 @@
 function make_reservation () {
-    var product =  $("#rent-product1").val()
-    if (product == undefined) {
-        product =  $("#rent-product2").val()
+    var product;
+    if (document.getElementById("rentProduct") != null) {
+        product = document.getElementById("rentProduct").value
+    } else if (document.getElementById("rent-product1") != null) {
+        if (document.getElementById("rent-product1").checked) {
+            product = $("#rent-product1").val();
+        } else {
+            product = $("#rent-product2").val();
+        }
     }
-    var deposit =  $("#rentMonth").val()
-    if (deposit == undefined) {
-        product =  $("#rentYear").val()
+    var deposit;
+    if (document.getElementById("rentMonth") != null) {
+        if (document.getElementById("rentMonth").checked){
+            deposit = $("#rentMonth").val();
+        } else {
+            deposit = $("#rentYear").val();
+        }
     }
 
     var data = {
