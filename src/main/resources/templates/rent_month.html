@@ -155,9 +155,7 @@
                                                 <label class="control-label" for="name">차명</label>
                                             </span>
                                             <select name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">
-                                                <option value="name" selected>모닝 15년이하</option>
-                                                <option value="name">엑센트 15년이하</option>
-                                                <option value="name">소나타 20~21년</option>
+                                                <option value="name">-- 차명을 선택해주세요. --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -167,54 +165,55 @@
                                                 <label class="control-label" for="kliometer">주행 거리</label>
                                             </span>
                                             <span class="span-input">
-                                                <select name="selectMileage" class="form-control-select">
-                                                    <option value="2000" selected>2000</option>
-                                                    <option value="2500">2500</option>
-                                                    <option value="3000">3000</option>
+                                                <select name="selectMileage" class="form-control-select"  onchange="get_price(rentProduct.value, selectName.value, selectMileage.value, document.reservation.totalPrice)">
+                                                    <option value="mileage">-- 주행 거리를 선택해주세요. --</option>
                                                 </select>
                                                 <label> &nbsp; km </label>
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="row top-text">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-text">
-                                            <span class="span-control">
-                                                <label class="control-label" for="kliometer">렌트료</label>
-                                            </span>
-                                            <span class="span-input">
-                                                <font class="form-control-text top-text" id="car-name">00,000원</font>
-                                            </span>
+                                    <div name="totalPrice">
+                                        <div class="row top-text">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-text">
+                                                <span class="span-control">
+                                                    <label class="control-label" for="kliometer">렌트료</label>
+                                                </span>
+                                                <span class="span-input">
+                                                    <font class="form-control-text top-text" id="carPrice" name="carPrice">00,000원</font>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row top-text">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="row top-text">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <span class="span-control">
-                                                <label class="control-label" for="kliometer">VAT</label>
+                                                <label class="control-label" for="kliometer" >VAT</label>
                                             </span>
-                                            <span class="span-input">
-                                                <font class="form-control-text top-text" id="car-name">00,000원</font>
+                                                <span class="span-input">
+                                                <font class="form-control-text top-text" id="carVat" name="carVat">00,000원</font>
                                             </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row top-text">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="row top-text">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <span class="span-control">
                                                 <label class="control-label" for="kliometer">보증금</label>
                                             </span>
-                                            <span class="span-input">
-                                                <font class="form-control-text top-text" id="car-name">00,000원</font>
+                                                <span class="span-input">
+                                                <font class="form-control-text top-text" id="carDeposit" name="carDeposit">00,000원</font>
                                             </span>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <span class="span-control">
                                                 <label class="control-label" for="kliometer">총 렌트료</label>
                                             </span>
-                                            <span class="span-input">
-                                                <font class="form-control-text top-text" id="car-name">00,000원</font>
+                                                <span class="span-input">
+                                                <font class="form-control-text top-text" id="carTotal" name="carTotal">00,000원</font>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

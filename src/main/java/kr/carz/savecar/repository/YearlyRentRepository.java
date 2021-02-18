@@ -13,5 +13,5 @@ public interface YearlyRentRepository extends JpaRepository<YearlyRent, Long> {
 
     List<YearlyRent> findByCategory1(String category1);
     List<YearlyRent> findByCategory1AndCategory2(String category1, String category2);
-    List<YearlyRent> findByCategory1AndCategory2AndName(String category1, String category2, String name);
+    YearlyRent findByName(String name);
 }

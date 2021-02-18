@@ -24,7 +24,7 @@ public class YearlyRentService {
     public List<YearlyRent> findNameOfYearlyRents(String category1, String category2){
         return yearlyRentRepository.findByCategory1AndCategory2(category1, category2);
     }
-    public List<YearlyRent> findMileageOfYearlyRents(String category1, String category2, String name){
-        return yearlyRentRepository.findByCategory1AndCategory2AndName(category1, category2, name);
+    public YearlyRent findPrice(String name){
+        return yearlyRentRepository.findByName(name);
     }
 }
