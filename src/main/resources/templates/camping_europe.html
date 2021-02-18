@@ -249,12 +249,13 @@
                             <h1>예약자 정보 입력</h1>
                             <hr>
                             <form name="reservation-info">
+                                <span id = "rent-product1" value = "캠핑카 유럽"></span>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group has-feedback">
                                             <label class="control-label" for="name">이름</label>
                                             <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                <input type="text" class="form-control" id="name" placeholder="예약자의 성함을 입력해주세요.">
+                                                <input type="text" class="form-control" id="reservation-detail-name" placeholder="예약자의 성함을 입력해주세요.">
                                             </div>
                                         </div>
                                     </div>
@@ -262,14 +263,14 @@
                                         <div class="form-group has-feedback">
                                             <label class="control-label" for="phone">연락처</label>
                                             <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                <input type="text" class="form-control" id="phone" placeholder="예약자 연락처 ex) 010-0000-0000">
+                                                <input type="text" class="form-control" id="reservation-detail-phone" placeholder="예약자 연락처 ex) 010-0000-0000">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group has-feedback">
                                             <label class="control-label" for="textarea">요청 사항</label>
-                                            <textarea class="form-control" id="textarea" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>
+                                            <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -280,7 +281,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group text-center">
-                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">예약하기</button>
+                                            <a class="btn btn-default" onclick="make_reservation()" href="#">예약하기 </a>
                                         </div>
                                     </div>
                                 </div>
