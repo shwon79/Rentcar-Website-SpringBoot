@@ -10,11 +10,6 @@ public class HelloController {
         return "index";
     }
 
-    @GetMapping("/rent/month")
-    public String rent_month() {
-        return "rent_month";
-    }
-
     @GetMapping("/rent/long_term")
     public String rent_long_term() {
         return "rent_long_term";
