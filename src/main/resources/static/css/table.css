@@ -60,13 +60,11 @@ td {
 
 /* 옮긴 것들 */
 
-*/
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 html,
 body {
-  background-color: #fff;
   width: 100%;
   padding: 0;
   margin-left: 0;
@@ -93,7 +91,6 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-image: url(../images/loading.gif);
   background-repeat: no-repeat;
   background-position: center;
   -moz-background-size: cover;
@@ -315,10 +312,10 @@ p:last-child {
   transition: all 0.3s;
   height: 75px;
 }
-.main_menu_bg {
-  margin-top: 0px;
-  background-color: transparent;
-}
+/*.main_menu_bg {*/
+/*  margin-top: 0px;*/
+/*  background-color: transparent;*/
+/*}*/
 .main_menu_bg .navbar-default {
   background-color: transparent;
   border-color: transparent;

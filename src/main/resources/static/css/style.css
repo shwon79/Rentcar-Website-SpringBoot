@@ -285,8 +285,7 @@ label { }
 .cta-text { text-transform: uppercase; font-size: 32px; margin-bottom: 0; margin-top: 10px; }
 .cta-content { }
 .cta-call, .cta-mail { text-align: right; }
-.cta-section { padding-top: 115px; padding-bottom: 115px; background: /* linear-gradient(rgba(202, 182, 178, 0.8), rgba(202, 182, 178, 0.8)), rgba(202, 182, 178, 0.8)*/
-url(../images/cta-section-img.jpg) no-repeat center; background-size: cover; }
+.cta-section { padding-top: 115px; padding-bottom: 115px; }/* background:  linear-gradient(rgba(202, 182, 178, 0.8), rgba(202, 182, 178, 0.8)), rgba(202, 182, 178, 0.8)*/
 .cta-caption { }
 .cta-title { font-size: 36px; color: #fff; line-height: 58px; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
 .cta-text { }
@@ -343,7 +342,6 @@ url(../images/cta-section-img.jpg) no-repeat center; background-size: cover; }
 /*--------------------------
     5.2 Navigations Regular
    ----------------------------*/
-.hero-section { padding-top: 250px; padding-bottom: 215px; background: linear-gradient(rgba(34, 27, 25, 0.5), rgba(34, 27, 25, 0.5)), rgba(34, 27, 25, 0.5) url(../images/hero-img.jpg) no-repeat center; background-size: cover; position: relative; top: 0px; }
 .hero-caption { padding-top: 100px; padding-bottom: 100px; }
 .hero-title { font-size: 46px; color: #fff; line-height: 58px; margin-bottom: 30px; letter-spacing: -1px; }
 .hero-text { }
@@ -473,7 +471,7 @@ url(../images/cta-section-img.jpg) no-repeat center; background-size: cover; }
 
 /*-------------- tiny footer ------------*/
 .tiny-footer { padding-top: 19px; padding-bottom: 9px; font-size: 12px; background-color: #0e0c0b; color: #858585; text-transform: uppercase; }
-.copyright-content { padding-top: 7px; padding-bottom: 5px color:#747474; }
+.copyright-content { padding-top: 7px; padding-bottom: 5px; color:#747474; }
 
 /*-----------------------------------
 9. Pages 
@@ -599,7 +597,6 @@ address { margin-bottom: 20px; font-style: normal; line-height: 1.42857143; }
 .meta-tags { }
 
 /*-------- Post Type --------*/
-.post-sticky { background: url(../images/sticky.png) no-repeat; position: absolute; right: 35px; bottom: 35px; width: 30px; height: 30px; color: #fff; }
 .post-gallery { }
 .post-video { }
 .post-video .video-sign { }
@@ -745,7 +742,6 @@ ul.widget-recent-post { }
 /*--------------------------------
  Extra Plugin CSS - Back to top  
 ---------------------------------*/
-.cd-top { display: inline-block; height: 40px; width: 40px; position: fixed; bottom: 40px; right: 10px; overflow: hidden; text-indent: 100%; white-space: nowrap; background: rgba(212, 27, 44, 100) url(../images/cd-top-arrow.svg) no-repeat center 50%; visibility: hidden; opacity: 0; -webkit-transition: opacity .3s 0s, visibility 0s .3s; -moz-transition: opacity .3s 0s, visibility 0s .3s; transition: opacity .3s 0s, visibility 0s .3s; }
 .cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover { -webkit-transition: opacity .3s 0s, visibility 0s 0s; -moz-transition: opacity .3s 0s, visibility 0s 0s; transition: opacity .3s 0s, visibility 0s 0s; }
 .cd-top.cd-is-visible {    /* the button becomes visible */
 visibility: visible; opacity: 1; }
@@ -856,3 +852,4 @@ opacity: .5; }
     .childern { padding-left: 0px; list-style: none; }
     .error-title { font-size: 42px; margin-bottom: 10px; font-weight: 800; }
     .testimonial-content { font-weight: 400; padding-left: 0px; }
+}

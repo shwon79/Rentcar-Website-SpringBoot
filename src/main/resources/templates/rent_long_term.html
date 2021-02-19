@@ -1,55 +1,16 @@
 <!-- 저신용장기렌트(rent_long_term.html) -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="저신용장기렌트 실시간 견적내기 및 상담 요청">
-    <meta name="keywords" content="SAVECAR, 세이브카, 렌트카, 캠핑카, 실시간 견적, 렌트카 상담, 12개월 렌트, 외제차, 수입차, 국산차">
     <title>SAVECAR - 저신용장기렌트</title>
-    <!-- Bootstrap -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">
     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
-    <!-- Style -->
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
-    <![endif]-->
 </head>
-
-<body>
-    <!-- header-top -->
-    <div class="header navbar-fixed-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <img th:src="@{/img/savecar-logo.png}" width="200" height="50" alt="savecar-logo"></a>
-                </div>
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                    <div class="navigation">
-                        <div id="navigation">
-                            <ul>
-                                <li class="active"><a href="/index" title="Home">Home</a></li>
-                                <li class="has-sub"><a href="/rent/month" title="Service List">월렌트+12개월렌트</a></li>
-                                <li class="has-sub"><a href="/rent/long_term" title="Portfolio">저신용장기렌트</a></li>
-                                <li class="has-sub"><a href="/travel" title="Blog">캠핑카렌트</a></li>
-                                <li><a href="/price" title="Contact Us">렌트가격표</a></li>
-                                <li><a href="/index" title="phone">1661-3331</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body layout:fragment="content">
     <!-- end of Header-top -->
 
     <div class="page-header">
@@ -177,78 +138,6 @@
             </div>
         </div>
     </div>
-  <!----------------------------------------->
-  <!----------- introduce section ----------->
-  <!----------------------------------------->
-
-
-  <!--introduce section-->
-  <section class="introduce">
-    <div class="footer">
-      <!-- footer-->
-      <div class="container">
-          <div class="row text-center">
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                  <div class="footer-widget">
-                      <!-- social block -->
-                      <img th:src="@{/img/map.png}" width="50" height="50" style="margin: 20px;"/>
-                      <h2 class="widget-title" style="color: #ffffff;">Address</h2>
-                      <h4>서울시 송파구 충민로 66 가든파이브라이프
-                          <br> F-8026 [장지역, 복정역]</h4>
-                  </div>
-                  <!-- /.social block -->
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                  <div class="footer-widget">
-                      <!-- newsletter block -->
-                      <img th:src="@{/img/phone-call.png}" width="50" height="50" style="margin: 20px;"/>
-                      <h2 class="widget-title" style="color: #ffffff;">CALL US</h2>
-                      <h4>1661-3331</h4>
-                  </div>
-                  <!-- newsletter block -->
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                  <div class="footer-widget">
-                      <!-- newsletter block -->
-                      <img th:src="@{/img/email.png}" width="50" height="50" style="margin: 20px;"/>
-                      <h2 class="widget-title" style="color: #ffffff;">E-mail</h2>
-                      <h4>itscar@naver.com</h4>
-                  </div>
-                  <!-- newsletter block -->
-              </div>
-          </div>
-      </div>
-    </div>
-  </section>
-  <!-- End of introduce Section -->
-
-  <!----------------------------------------->
-  <!------------- Footer section ------------>
-  <!----------------------------------------->
-
-
-  <!--Footer section-->
-
-  <section class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="main_footer">
-                    <div class="row">
-                          <div class="col-sm-12 col-xs-12">
-                              <div class="footer-widget text-center">
-                                <p>(주)세이브카<br>
-                                사업자등록번호: 113-86-62612 통신판매: 제2020-서울송파-2913호<br>
-                                Copyright SAVECAR. All Rights Reserved.</p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-  <!-- End off footer Section-->
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script th:src="@{/js/jquery.min.js}"></script>
