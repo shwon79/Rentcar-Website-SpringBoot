@@ -1,34 +1,24 @@
 <!DOCTYPE html>
-<html lagn="ko"
+<html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="저신용장기렌트 실시간 견적내기 및 상담 요청">
-    <meta name="keywords" content="SAVECAR, 세이브카, 렌트카, 캠핑카, 실시간 견적, 렌트카 상담, 12개월 렌트, 외제차, 수입차, 국산차">
-    <title>SAVECAR - 저신용장기렌트</title>
-    <!-- Bootstrap -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
-    <!-- Style -->
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
-    <![endif]-->
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="저신용장기렌트 실시간 견적내기 및 상담 요청">
+        <meta name="keywords" content="SAVECAR, 세이브카, 렌트카, 캠핑카, 실시간 견적, 렌트카 상담, 12개월 렌트, 외제차, 수입차, 국산차">
 
-<header th:replace="fragments/header :: headerFragment"></header>
+        <!-- config.html -->
+        <th:block th:replace="fragments/config::configFragment" ></th:block>
+    </head>
 
-<body layout:fragment="content"></body>
+    <!-- header.html -->
+    <header th:replace="fragments/header::headerFragment"></header>
 
-<footer th:replace="fragments/footer :: footerFragment"></footer>
+    <body layout:fragment="content"></body>
+
+    <!-- footer.html -->
+    <footer th:replace="fragments/footer::footerFragment"></footer>
 </html>
