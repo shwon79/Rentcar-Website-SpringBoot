@@ -8,11 +8,13 @@ import kr.carz.savecar.service.CampingCarService;
 import kr.carz.savecar.service.MonthlyRentService;
 import kr.carz.savecar.service.ShortRentService;
 import kr.carz.savecar.service.YearlyRentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HelloController {
@@ -20,6 +22,16 @@ public class HelloController {
     YearlyRentService yearlyRentService;
     ShortRentService shortRentService;
     CampingCarService campingCarService;
+
+    @Autowired
+    public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
+                           ShortRentService shortRentService, CampingCarService campingCarService) {
+        this.monthlyRentService = monthlyRentService;
+        this.yearlyRentService = yearlyRentService;
+        this.shortRentService = shortRentService;
+        this.campingCarService = campingCarService;
+
+    }
 
     @GetMapping("/index")
     public String home() {
