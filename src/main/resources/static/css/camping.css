@@ -95,7 +95,6 @@ button.btn-md {
   background-color: transparent;
   transition: 0.5s;
   border: 0px solid #e74c3c;
-  font-family: "montserratregular";
 }
 button.btn-md:hover {
   background-color: transparent;

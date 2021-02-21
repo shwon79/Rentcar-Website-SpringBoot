@@ -1,4 +1,13 @@
 @charset "UTF-8";
+
+/* Web Fonts */
+@font-face {
+  font-family: 'HangeulNuri-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .price-table h1 {
   font-size: 30px;
   color: #000;
@@ -71,6 +80,7 @@ body {
   margin-right: 0;
   font-weight: 300;
   width: 100%;
+  font-family: 'HangeulNuri-Bold';
 }
 .preloader {
   position: fixed;
@@ -206,30 +216,24 @@ h5 {
   line-height: 2rem;
 }
 h1 {
-  font-family: "open_sansbold";
   font-size: 5.143rem;
   line-height: 5.5rem;
   color: #fff;
   letter-spacing: 0.4rem;
 }
 h2 {
-  font-family: "source_sans_probold";
   font-size: 2.571rem;
   line-height: 3rem;
-  text-transform: uppercase;
 }
 h3 {
-  font-family: "source_sans_proregular";
   font-size: 1.714rem;
   line-height: 2.5rem;
   color: #fff;
 }
 h4 {
-  font-family: "open_sanssemibold";
   font-size: 1.286rem;
   line-height: 2rem;
   margin-bottom: 1rem;
-  text-transform: uppercase;
 }
 /*h5 {
     font-size: 1.125rem;
@@ -248,15 +252,7 @@ p {
 p:last-child {
   margin-bottom: 0px;
 }
-/*.home-wrap h1,*/
-.home-wrap h2,
-.home-wrap h3,
-.home-wrap h4,
-.home-wrap h5,
-.home-wrap p {
-  color: #ffffff;
-  /*font-family: 'roboto', sans-serif;*/
-}
+
 .textwhite {
   color: #fff;
 }
@@ -297,12 +293,9 @@ p:last-child {
 
 /* navbar section */
 .menu-scroll {
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   z-index: 300;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -312,10 +305,10 @@ p:last-child {
   transition: all 0.3s;
   height: 75px;
 }
-/*.main_menu_bg {*/
-/*  margin-top: 0px;*/
-/*  background-color: transparent;*/
-/*}*/
+.main_menu_bg {
+  margin-top: 0px;
+  background-color: transparent;
+}
 .main_menu_bg .navbar-default {
   background-color: transparent;
   border-color: transparent;
@@ -326,8 +319,6 @@ p:last-child {
 .navbar-default .navbar-nav > li > a:focus {
   color: #e74c3c;
   background: transparent;
-}
-.main_menu_bg .navbar {
 }
 
 .main_menu_bg .navbar-default .navbar-nav > .active > a,
@@ -533,7 +524,6 @@ Button
   margin-top: 20px;
   transition: 0.5s;
   border: 1px solid #e74c3c;
-  font-family: "open_sansbold";
   padding: 0.8rem 3rem;
   transition: all 0.6s;
   border-radius: 2px;
@@ -806,15 +796,12 @@ Separator
 }
 .main_trial h2 {
   text-transform: none;
-  font-family: "open_sansregular";
   font-weight: bold;
 }
 .main_trial h2 span {
-  font-family: "open_sansbold";
   font-weight: bold;
 }
 .main_trial h4 {
-  font-family: "open_sansregular";
   text-transform: none;
 }
 .main_trial h4 b {
@@ -877,7 +864,6 @@ Separator
 }
 .main_service .single_service.single_service_text .single_service_right_text p {
   color: #999999;
-  font-family: "source_sans_proregular";
 }
 
 /*====================================================================
@@ -977,7 +963,6 @@ button.btn-md {
   background-color: transparent;
   transition: 0.5s;
   border: 0px solid #e74c3c;
-  font-family: "montserratregular";
 }
 button.btn-md:hover {
   background-color: transparent;
@@ -1136,10 +1121,9 @@ button.btn-md:hover {
 }
 
 .pricing_head {
-  padding: 30px 0px;
+  padding: 30px 10px;
   background: #999999;
   position: relative;
-  height: 200px;
 }
 .pricing_head h3 {
   text-transform: uppercase;
@@ -1151,24 +1135,22 @@ button.btn-md:hover {
   position: absolute;
   left: 30%;
   bottom: -30%;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 100px;
   margin: 0 auto;
   padding: 30px 0px;
   border-radius: 50%;
   box-shadow: 0px 0px 0px 10px rgba(244, 245, 249, 0.3);
 }
 .pricing_head .pricing_price .p_r {
-  font-family: "source_sans_probold";
   font-size: 2.822rem;
 }
 .pricing_head .pricing_price .m_t {
-  font-family: "source_sans_proregular";
   font-size: 0.941rem;
 }
 .pricing_body {
   background: #f4f5f9;
-  padding: 80px 0px 30px 0px;
+  padding: 30px 0px 30px 0px;
 }
 .single_pricing ul {
 }
@@ -1176,7 +1158,6 @@ button.btn-md:hover {
   line-height: 45px;
   height: 45px;
   font-size: 18px;
-  font-family: "open_sanssemibold";
 }
 
 .single_pricing a {

@@ -56,12 +56,20 @@ Author:             Jitu Chauhan
 
 ------------------------------------------------------------------*/
 
+/* Web Fonts */
+@font-face {
+    font-family: 'HangeulNuri-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*-----------------------------------
     1. Body / Typography 
 -----------------------------------*/
 
-body { font-size: 16px; background-color: #fff; color: #464241; font-family: 'Raleway', sans-serif; line-height: 28px; font-weight: 300; }
-h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; margin-bottom: 10px; color: #383433; font-weight: 400; text-transform: uppercase; font-family: 'Raleway', sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { font-size: 20px; background-color: #fff; color: #000000; font-family: 'HangeulNuri-Bold'; line-height: 28px; font-weight: 300; }
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; margin-bottom: 10px; color: #000000; font-weight: 400; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 h1 { font-size: 32px; line-height: 42px; }
 h2 { font-size: 24px; line-height: 32px; }
 h3 { font-size: 18px; line-height: 28px; }
@@ -131,7 +139,8 @@ label { }
 /*-----------------------------------
     3. Buttons 
 -----------------------------------*/
-.btn { display: inline-block; padding: 14px 30px; margin-bottom: 0; font-size: 13px; font-weight: 800; letter-spacing: 1px; line-height: 1.42857143; text-align: center; border: none; text-transform: uppercase; border-radius: 40px; font-family: 'Raleway', sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+.btn { display: inline-block; padding: 14px 30px; margin-bottom: 0; font-size: 13px; font-weight: 800; letter-spacing: 1px; line-height: 1.42857143; text-align: center; border: none; text-transform: uppercase; border-radius: 40px; font-family: 'HangeulNuri-Bold';
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 .btn-default { color: #fff; background-color: #372d2b; }
 .btn-default:hover { color: #fff; background-color: #e7a625; border-color: #e7a625; }
 .btn-default.focus, .btn-default:focus { color: #fff; background-color: #e7a625; border-color: #e7a625; }
@@ -326,7 +335,7 @@ label { }
     5.1 Header Regular 
    ----------------------*/
 
-.header-collapse { background-color: #000; }
+.header-collapse { background-color: rgba(0, 0, 0, 0.64); }
 .logo { }
 .header { padding-top: 30px; padding-bottom: 20px; }
 .top-text { text-align: right; }
@@ -350,7 +359,7 @@ label { }
 #navigation, #navigation ul, #navigation ul li, #navigation ul li a, #navigation #menu-button { margin: 0; padding: 0; border: 0; list-style: none; line-height: 1; display: block; position: relative; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 #navigation:after, #navigation > ul:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 #navigation #menu-button { display: none; }
-#navigation { font-family: 'Raleway', sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+#navigation { font-family: 'HangeulNuri-Bold'; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 #navigation > ul > li { float: left; }
 #navigation.align-center > ul { font-size: 0; text-align: center; }
 #navigation.align-center > ul > li { display: inline-block; float: none; }
@@ -445,7 +454,7 @@ label { }
 /*-----------------------------------
 8. Footer 
 -------------------------------------*/
-.footer { background-color: #0e0c0b; padding-top: 60px; padding-bottom: 60px; border-bottom: 1px solid #372d2b; }
+.footer { background-color: #0e0c0b; padding-top: 60px; padding-bottom: 60px; }
 .footer-block { }
 .footer-widget p { color: #FFFFFF;}
 .footer-widget h2, h4 { color: #FFFFFF; }
@@ -470,8 +479,7 @@ label { }
 .footer .contact li i { }
 
 /*-------------- tiny footer ------------*/
-.tiny-footer { padding-top: 19px; padding-bottom: 9px; font-size: 12px; background-color: #0e0c0b; color: #858585; text-transform: uppercase; }
-.copyright-content { padding-top: 7px; padding-bottom: 5px; color:#747474; }
+.tiny-footer { padding-top: 19px; padding-bottom: 9px; font-size: 12px; background-color: #000000; color: #FFFFFF; }
 
 /*-----------------------------------
 9. Pages 
@@ -509,7 +517,7 @@ label { }
 .service-single-block { }
 .service-single-img { }
 .service-single-content { }
-.price { font-size: 24px; color: #aa9144; font-weight: 600; font-family: 'Montserrat', sans-serif; }
+.price { font-size: 24px; color: #aa9144; font-weight: 600; font-family: 'HangeulNuri-Bold'; }
 
 /*-----------------------------------------
     service side-nav
@@ -517,7 +525,7 @@ label { }
 .sidenav { background-color: #fff; margin-bottom: 30px; }
 .sidenav li { position: relative; }
 .sidenav li:last-child { margin-bottom: 0px; }
-.sidenav li a { display: block; line-height: 14px; color: #2b2d2c; font-weight: 600; font-size: 13px; background-color: #f3f0eb; padding: 20px; margin-bottom: 1px; text-transform: uppercase; font-family: 'Raleway', sans-serif; letter-spacing: 1px; }
+.sidenav li a { display: block; line-height: 14px; color: #2b2d2c; font-weight: 600; font-size: 13px; background-color: #f3f0eb; padding: 20px; margin-bottom: 1px; text-transform: uppercase; font-family: 'HangeulNuri-Bold'; letter-spacing: 1px; }
 .sidenav li a:hover { color: #fff; background-color: #cec8c1; }
 .sidenav li a.active, .sidenav ul li a.active .sidenav ul li i { color: #fff; background-color: #cec8c1; }
 .sidenav li a:focus { color: #cec8c1; }
@@ -585,7 +593,7 @@ address { margin-bottom: 20px; font-style: normal; line-height: 1.42857143; }
 .post-header { }
 
 /*-------- Post meta --------*/
-.meta { font-weight: 600; font-size: 14px; text-transform: capitalize; margin-bottom: 20px; font-family: 'Raleway', sans-serif; color: #beb6b4; }
+.meta { font-weight: 600; font-size: 14px; text-transform: capitalize; margin-bottom: 20px; font-family: 'HangeulNuri-Bold'; color: #beb6b4; }
 .meta-link { color: #383433; }
 .meta-date { }
 .meta-user { }
@@ -671,7 +679,7 @@ address { margin-bottom: 20px; font-style: normal; line-height: 1.42857143; }
 .widget { margin-bottom: 30px; background-color: #f3f0eb; padding: 30px; }
 .widget-title { margin-bottom: 20px; }
 .widget ul { }
-.widget ul li { margin-bottom: 16px; line-height: 18px; text-transform: uppercase; }
+.widget ul li { margin-bottom: 16px; line-height: 18px; }
 .widget ul li:last-child { margin-bottom: 0px; }
 .widget ul li a { color: #474747; }
 .widget ul li a.active { color: #e7a625; }
@@ -696,7 +704,7 @@ ul.widget-recent-post { }
 .recent-post-content { }
 .recent-title { font-size: 15px; line-height: 22px; color: #655f5d; }
 .widget-tags { }
-.widget-tags a { border: 1px solid #cac5c1; padding: 3px 23px; display: inline-block; background-color: #cac5c1; font-weight: 700; font-size: 12px; text-transform: uppercase; margin-bottom: 5px; margin-right: 3px; border-radius: 50px; color: #464241; }
+.widget-tags a { border: 1px solid #cac5c1; padding: 3px 23px; display: inline-block; background-color: #cac5c1; font-weight: 700; font-size: 12px; margin-bottom: 5px; margin-right: 3px; border-radius: 50px; color: #464241; }
 .widget-tags a:hover { background-color: #372d2b; color: #fff; border: 1px solid #372d2b; }
 .widget-text { }
 .widget-contact { }
