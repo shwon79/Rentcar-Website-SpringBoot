@@ -6,7 +6,7 @@ table.type11 {
   margin: 20px 10px;
 }
 table.type11 th {
-  width: 155px;
+  width: 1.5em; /* 155px */
   padding: 10px;
   font-weight: bold;
   vertical-align: top;
@@ -19,6 +19,7 @@ table.type11 td {
   padding: 10px;
   vertical-align: top;
   border-bottom: 1px solid #ccc;
+  text-align: center;
   background: #fff;
 }
 
@@ -201,7 +202,7 @@ button.btn-md:hover {
   float: left;
 }
 #campingnav > ul > li > a {
-  padding: 25px;
+  padding: 20px;
   margin-right: 30px;
   margin-left: 30px;
   font-size: 20px;
@@ -209,7 +210,6 @@ button.btn-md:hover {
   text-decoration: none;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 #campingnav > ul > li:hover > a {
   color: #e74c3c;
