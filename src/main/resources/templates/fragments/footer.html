@@ -2,8 +2,9 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="footerFragment">
+
     <!----------------------------------------->
-    <!----------- introduce section ----------->
+    <!----------------- footer ---------------->
     <!----------------------------------------->
 
     <!--introduce section-->
@@ -16,9 +17,9 @@
                         <div class="footer-widget">
                             <!-- social block -->
                             <img th:src="@{/img/map.png}" width="50" height="50" style="margin: 20px;"/>
-                            <h2 class="widget-title" style="color: #ffffff;">Address</h2>
-                            <h4>서울시 송파구 충민로 66 가든파이브라이프
-                                <br> F-8026 [장지역, 복정역]</h4>
+                            <h2 class="widget-title" style="color: #ffffff;">ADDRESS</h2>
+                            <h3>서울시 송파구 충민로 66 가든파이브라이프
+                                <br> F-8026 [장지역, 복정역]</h3>
                         </div>
                         <!-- /.social block -->
                     </div>
@@ -27,7 +28,7 @@
                             <!-- newsletter block -->
                             <img th:src="@{/img/phone-call.png}" width="50" height="50" style="margin: 20px;"/>
                             <h2 class="widget-title" style="color: #ffffff;">CALL US</h2>
-                            <h4>1661-3331</h4>
+                            <h3>1661-3331</h3>
                         </div>
                         <!-- newsletter block -->
                     </div>
@@ -35,8 +36,8 @@
                         <div class="footer-widget">
                             <!-- newsletter block -->
                             <img th:src="@{/img/email.png}" width="50" height="50" style="margin: 20px;"/>
-                            <h2 class="widget-title" style="color: #ffffff;">E-mail</h2>
-                            <h4>itscar@naver.com</h4>
+                            <h2 class="widget-title" style="color: #ffffff;">E-MAIL</h2>
+                            <h3>itscar@naver.com</h3>
                         </div>
                         <!-- newsletter block -->
                     </div>
@@ -45,11 +46,6 @@
         </div>
     </section>
     <!-- End of introduce Section -->
-
-    <!----------------------------------------->
-    <!------------- Footer section ------------>
-    <!----------------------------------------->
-
 
     <!--Footer section-->
 
@@ -61,9 +57,9 @@
                         <div class="row">
                             <div class="col-sm-12 col-xs-12">
                                 <div class="footer-widget text-center">
-                                    <p>(주)세이브카<br>
+                                    <h4>(주)세이브카<br>
                                         사업자등록번호: 113-86-62612 통신판매: 제2020-서울송파-2913호<br>
-                                        Copyright SAVECAR. All Rights Reserved.</p>
+                                        Copyright SAVECAR. All Rights Reserved.</h4>
                                 </div>
                             </div>
                         </div>
@@ -72,5 +68,6 @@
             </div>
         </div>
     </section>
+    <!-- End of footer Section -->
 </div>
 </html>
