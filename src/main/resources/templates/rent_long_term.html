@@ -7,8 +7,9 @@
 <head>
     <title>SAVECAR - 저신용장기렌트</title>
 </head>
+<body layout:fragment="content">
+    <!-- end of Header-top -->
 
-<div layout:fragment="content">
     <div class="page-header">
         <div class="container">
             <div class="row">
@@ -41,7 +42,7 @@
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="name">이름</label>
                                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="name" placeholder="예약자의 성함을 입력해주세요.">
+                                                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="예약자의 성함을 입력해주세요.">
                                                 </div>
                                             </div>
                                         </div>
@@ -49,14 +50,14 @@
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="phone">연락처</label>
                                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input type="text" class="form-control" id="phone" placeholder="예약자 연락처 ex) 010-0000-0000">
+                                                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="예약자 연락처 ex) 010-0000-0000">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="textarea">요청 사항</label>
-                                                <textarea class="form-control" id="textarea" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>
+                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -77,10 +78,10 @@
                                                 <label class="control-label" for="name">차종 선택</label>
                                             </span>
                                             <span class="span-input">
-                                                <input type="text" class="form-control-span3" id="car-company" placeholder="제조사를 입력하세요.">
+                                                <input type="text" class="form-control-span3" id="select-category2" placeholder="제조사를 입력하세요.">
                                             </span>
                                             <span class="span-input">
-                                                <input type="text" class="form-control-span3" id="car-name" placeholder="차명을 입력하세요.">
+                                                <input type="text" class="form-control-span3" id="select-car-name" placeholder="차명을 입력하세요.">
                                             </span>
                                         </div>
                                     </div>
@@ -90,7 +91,7 @@
                                                 <label class="control-label" for="name">옵션</label>
                                             </span>
                                             <span class="span-input">
-                                                <input type="text" class="form-control-span2" id="car-option" placeholder="옵션을 입력하세요.">
+                                                <input type="text" class="form-control-span2" id="select-car-option" placeholder="옵션을 입력하세요.">
                                             </span>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -98,7 +99,7 @@
                                                 <label class="control-label" for="kliometer">약정주행거리</label>
                                             </span>
                                             <span class="span-input">
-                                                <input type="text" class="form-control-span2" id="car-kilo">
+                                                <input type="text" class="form-control-span2" id="select-mileage">
                                                 <label> &nbsp; km </label>
                                             </span>
                                         </div>
@@ -110,9 +111,9 @@
                                             </span>
                                             <span class="span-input">
                                                 <label style="margin-right: 20px;">
-                                                    <input type="radio" id="deposit_10" name="rent-deposit" value="10">&nbsp; 10%
+                                                    <input type="radio" id="rentMonth" name="rent-product" value="10%">&nbsp; 10%
                                                 </label>
-                                                <label><input type="radio" id="deposit_30" name="rent-deposit" value="30">&nbsp; 30%</label>
+                                                <label><input type="radio" id="rentYear" name="rent-product" value="30%">&nbsp; 30%</label>
                                             </span>
                                         </div>
                                     </div>
@@ -121,12 +122,12 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group has-feedback">
                                                 <p><font color="red" style="font-weight: bold;"> * 21세 이상은 별도 문의</font></p>
-                                                <p class="text-center"><input type="checkbox" name="agree" id="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
+                                                <p class="text-center"><input id="agree" type="checkbox"> 개인정보 수집 및 이용에 동의합니다.</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group text-center">
-                                                <button id="singlebutton" name="singlebutton" class="btn btn-default">상담신청</button>
+                                                <a class="btn btn-default" onclick="make_reservation()" href="#">상담신청 </a>
                                             </div>
                                         </div>            
                                     </div>
