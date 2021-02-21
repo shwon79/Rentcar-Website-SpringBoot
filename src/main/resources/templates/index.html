@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" th:href="@{/img/carIcon.ico}" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
@@ -96,7 +96,7 @@
                                           <span class="icon-bar"></span>
                                           <span class="icon-bar"></span>
                                       </button>
-                                      <a class="navbar-brand" href="#home">
+                                      <a class="navbar-brand" href="/index">
                                           <!-- 여기에 로고 사진 넣기 -->
                                           <img th:src="@{/img/savecar-logo.png}" width="200" height="50" />
                                       </a>
@@ -209,7 +209,7 @@
                                 <br>
                                 <h4>세이브카는 다양하고 많은 차량을 보유하고 있으며 렌트료 원가절감을 위한 노력으로 <b>전국 최저가 렌트업체</b>로 손색이 없는 가격과 <b>주행거리별 마일리지 제도</b>를 적용하여 고객의 불필요한 비용을 절감하게 하는 <b>윈윈시스템</b>을 구축하고 있습니다.
                                     최저가에 대한 도전을 계속 노력하고 있으며, 서울경기권 뿐만 아니라 전국에 세이브카 서비스를 제공하기 위해 <b>전국 네트워크</b>를 구성중에 있습니다.
-                                    여러 어려운 비즈니스 환경 속에도 고객의 안전과 편의를 최우선으로 전직원이 제공하는 차량에 대한 <b>최고의 정비상태</b>를 유지하고 있으며 좀 더 섬새한 편리와 배려로 <b>고객의 렌트여행에 만족</b>을 느낄 수 있도록 최선을 다하는 세이브카가 되겠습니다.
+                                    여러 어려운 비즈니스 환경 속에도 고객의 안전과 편의를 최우선으로 전직원이 제공하는 차량에 대한 <b>최고의 정비상태</b>를 유지하고 있으며 좀 더 섬세한 관리와 배려로 <b>고객의 렌트여행에 만족</b>을 느낄 수 있도록 최선을 다하는 세이브카가 되겠습니다.
                                 </h4>
                             </div>
                         </div>
@@ -368,15 +368,15 @@
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                          <h4>중형 RV</h4>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/van.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>승합차</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/large_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                          <h4>대형 RV</h4>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/foreign_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>수입차</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
                   </div>
@@ -392,15 +392,15 @@
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/van.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                          <h4>승합차</h4>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>중형 RV</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="project-img mb30" align="center">
-                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/foreign_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                          <h4>수입차</h4>
+                          <a href="service-detail.html" class="imghover"><img th:src="@{/img/large_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                          <h4>대형 RV</h4>
                           <p>렌트 실시간 공개</p>
                       </div>
                   </div>
@@ -481,9 +481,7 @@
                       <!-- service block -->
                       <div class="service-content">
                         <!-- service content -->
-                        <h3><a href="service-detail.html" class="title">Travel VIP CAMPER</a></h3>
-                        <a href="" class="btn btn-md">디럭스 Motorhome</a><br>
-                        <a href="" class="btn btn-md">스위트 Motorhome</a>
+                        <h3><a href="service-detail.html" class="title">Europe VIP CAMPER</a></h3>
                      </div>
                      <br>
                      <!-- service content -->
@@ -501,8 +499,6 @@
                     <div class="service-content">
                       <!-- service content -->
                       <h3><a href="service-detail.html" class="title">Liomousine VIP CAMPER</a></h3>
-                      <a href="" class="btn btn-md">디럭스 Motorhome</a><br>
-                      <a href="" class="btn btn-md">스위트 Motorhome</a>
                    </div>
                    <br>
                    <!-- service content -->
@@ -519,9 +515,7 @@
                     <!-- service block -->
                     <div class="service-content">
                       <!-- service content -->
-                      <h3><a href="service-detail.html" class="title">Europe VIP CAMPER</a></h3>
-                      <a href="" class="btn btn-md">디럭스 Motorhome</a><br>
-                      <a href="" class="btn btn-md">스위트 Motorhome</a>
+                      <h3><a href="service-detail.html" class="title">Travel VIP CAMPER</a></h3>
                    </div>
                    <br>
                    <!-- service content -->
@@ -563,7 +557,9 @@
                           <h3>월렌트 가격표</h3>
                         </div>
                         <div class="pricing_body">
-                          <a href="" class="btn btn-md">가격 보기</a>
+                          <a class="btn btn-md" href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">
+                              가격 보기
+                          </a>
                         </div>
                     </div>
                 </div> 
@@ -576,7 +572,9 @@
                           <h3>12개월 렌트 가격표</h3>
                         </div>
                         <div class="pricing_body">
-                          <a href="" class="btn btn-md">가격 보기</a>
+                            <a class="btn btn-md" href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">
+                                가격 보기
+                            </a>
                         </div>
                     </div>
                 </div> 
@@ -589,7 +587,9 @@
                           <h3>단기 렌트 가격표</h3>
                         </div>
                         <div class="pricing_body">
-                          <a href="" class="btn btn-md">가격 보기</a>
+                            <a class="btn btn-md" href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">
+                                가격 보기
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -602,7 +602,9 @@
                           <h3>캠핑카 가격표</h3>
                         </div>
                         <div class="pricing_body">
-                          <a href="" class="btn btn-md">가격 보기</a>
+                            <a class="btn btn-md" href="https://blog.naver.com/itscar/222220233824">
+                                가격 보기
+                            </a>
                         </div>
                     </div>
                 </div> 
@@ -655,6 +657,7 @@
                       <br>
                       <h2 class="widget-title" style="color: #ffffff;">E-mail</h2>
                       <br>
+                      <!-- 얘 왜 대문자로 쓰여지지? 확인해봐야할듯 -->
                       <h4>itscar@naver.com</h4>
                   </div>
                   <!-- newsletter block -->
