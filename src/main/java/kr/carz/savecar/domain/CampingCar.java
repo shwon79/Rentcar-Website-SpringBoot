@@ -16,7 +16,8 @@ public class CampingCar {
     private String category1; // 트래벌, 리무진, 유럽의 분류
     private String category2; // 디럭스, 스위트의 분류
     private String season; // 성수기, 비수기
-    private String lending_period;
+    private String rent_period;
+    private String price;
     private String deposit;
     private String rent_for_month;
 }
