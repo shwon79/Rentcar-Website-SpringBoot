@@ -52,7 +52,7 @@ public class ReservationController {
         params.put("from", "01058283328");
         params.put("type", "SMS");
         params.put("text", dto.getName() + "님이 " + dto.getCategory1() + " 예약을 완료하였습니다." +
-                "\n" + "예약확인 바로가기 : http://itscar.cafe24.com//reservation/list"); //메시지 내용
+                "\n" + "예약확인 바로가기 : http://itscar.cafe24.com/reservation/list"); //메시지 내용
         params.put("app_version", "test app 1.2");
 
         try {
