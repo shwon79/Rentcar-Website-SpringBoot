@@ -99,7 +99,7 @@
     <!--End of feature Section -->
     
       <!---------------->
-      <!--- 월 렌트료 --->
+      <!--- 단기 렌트료 --->
       <!---------------->
     <section class="price-table" id="month">
       <div class="month text-center" id="month">
@@ -127,105 +127,15 @@
         <div class="tbl-content text-center">
           <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
+              <tr th:each="monthlyRent : ${monthlyRentList}">
+                <td th:text="${monthlyRent.category2}"></td>
+                <td th:text="${monthlyRent.name}"></td>
+                <td th:text="${monthlyRent.deposit}"></td>
+                <td th:text="${monthlyRent.cost_for_2k}"></td>
+                <td th:text="${monthlyRent.cost_for_2_5k}"></td>
+                <td th:text="${monthlyRent.cost_for_3k}"></td>
+                <td th:text="${monthlyRent.cost_for_4k}"></td>
+                <td th:text="${monthlyRent.age_limit}"></td>
               </tr>
             </tbody>
           </table>
@@ -260,69 +170,19 @@
             </thead>
           </table>
         </div>
-        <div class="tbl-content text-center">
+        <div class="tbl-content">
           <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
-            <tr>
-              <td>경차</td>
-              <td>모닝 15년이하</td>
-              <td>30만</td>
-              <td>340,000</td>
-              <td>364,000</td>
-              <td>388,000</td>
-              <td>45,000</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>경차</td>
-              <td>모닝 15년이하</td>
-              <td>30만</td>
-              <td>340,000</td>
-              <td>364,000</td>
-              <td>388,000</td>
-              <td>45,000</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>경차</td>
-              <td>모닝 15년이하</td>
-              <td>30만</td>
-              <td>340,000</td>
-              <td>364,000</td>
-              <td>388,000</td>
-              <td>45,000</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>경차</td>
-              <td>모닝 15년이하</td>
-              <td>30만</td>
-              <td>340,000</td>
-              <td>364,000</td>
-              <td>388,000</td>
-              <td>45,000</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>경차</td>
-              <td>모닝 15년이하</td>
-              <td>30만</td>
-              <td>340,000</td>
-              <td>364,000</td>
-              <td>388,000</td>
-              <td>45,000</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>경차</td>
-              <td>모닝 15년이하</td>
-              <td>30만</td>
-              <td>340,000</td>
-              <td>364,000</td>
-              <td>388,000</td>
-              <td>45,000</td>
-              <td>70</td>
-            </tr>
+              <tr th:each="yearlyRent : ${yearlyRentList}">
+                <td th:text="${yearlyRent.category2}"></td>
+                <td th:text="${yearlyRent.name}"></td>
+                <td th:text="${yearlyRent.deposit}"></td>
+                <td th:text="${yearlyRent.cost_for_20k}"></td>
+                <td th:text="${yearlyRent.cost_for_30k}"></td>
+                <td th:text="${yearlyRent.cost_for_40k}"></td>
+                <td th:text="${yearlyRent.age_limit}"></td>
+                <td th:text="${yearlyRent.cost_per_km}"></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -361,76 +221,21 @@
         <div class="tbl-content">
           <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
-              <tr>
-                <td>경차</td>
-                <td>모닝 15년이하</td>
-                <td>30만</td>
-                <td>340,000</td>
-                <td>364,000</td>
-                <td>388,000</td>
-                <td>435,000</td>
-                <td>50,000</td>
-              </tr>
+            <tr th:each="shortRent : ${shortRentList}">
+              <td th:text="${shortRent.category1}"></td>
+              <td th:text="${shortRent.name}"></td>
+              <td th:text="${shortRent.cost_for_three_days_600}"></td>
+              <td th:text="${shortRent.cost_for_three_days_900}"></td>
+              <td th:text="${shortRent.cost_for_three_days_1200}"></td>
+              <td th:text="${shortRent.cost_for_three_days_insurance}"></td>
+              <td th:text="${shortRent.cost_for_three_days_age}"></td>
+              <td th:text="${shortRent.extra_cost_per_day_200}"></td>
+              <td th:text="${shortRent.extra_cost_per_day_300}"></td>
+              <td th:text="${shortRent.extra_cost_per_day_400}"></td>
+              <td th:text="${shortRent.extra_cost_per_day_insurance}"></td>
+              <td th:text="${shortRent.extra_cost_per_day_age}"></td>
+              <td th:text="${shortRent.cost_per_km}"></td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -443,255 +248,37 @@
       <div class="camping-car text-center">
         <h1>캠핑카 렌트료</h1>
         <div class="separator"></div>
-        Europe
-        <table class="type11 text-center">
-          <thead>
-          <tr>
-            <th scope="cols">디럭스</th>
-            <th scope="cols" colspan="2">비수기</th>
-            <th scope="cols" colspan="2">성수기</th>
-            <th scope="cols">Deposit</th>
-            <th scope="cols">월렌트</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td rowspan="4">요금</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td rowspan="2">30만원</td>
-            <td rowspan="4">4,680,000</td>
-          </tr>
-          <tr>
-            <td>390,000</td>
-            <td>390,000</td>
-            <td>570,000</td>
-            <td>570,000</td>
-          </tr>
-          <tr>
-            <td>5일</td>
-            <td>7일</td>
-            <td>10일</td>
-            <td>15일</td>
-            <td rowspan="2">상담</td>
-          </tr>
-          <tr>
-            <td>1,560,000</td>
-            <td>1,950,000</td>
-            <td>2,340,000</td>
-            <td>2,730,000</td>
-          </tr>
-          </tbody>
-        </table>
-        <table class="type11 text-center">
-          <thead>
-          <tr>
-            <th scope="cols">스위트</th>
-            <th scope="cols" colspan="2">비수기</th>
-            <th scope="cols" colspan="2">성수기</th>
-            <th scope="cols">Deposit</th>
-            <th scope="cols">월렌트</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td rowspan="4">요금</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td rowspan="2">30만원</td>
-            <td rowspan="4">4,680,000</td>
-          </tr>
-          <tr>
-            <td>390,000</td>
-            <td>390,000</td>
-            <td>420,000</td>
-            <td>570,000</td>
-          </tr>
-          <tr>
-            <td>5일</td>
-            <td>7일</td>
-            <td>10일</td>
-            <td>15일</td>
-            <td rowspan="2">상담</td>
-          </tr>
-          <tr>
-            <td>1,560,000</td>
-            <td>1,950,000</td>
-            <td>2,340,000</td>
-            <td>2,730,000</td>
-          </tr>
-          </tbody>
-        </table>
-        Liomousine
-        <table class="type11 text-center">
-          <thead>
-          <tr>
-            <th scope="cols">디럭스</th>
-            <th scope="cols" colspan="2">비수기</th>
-            <th scope="cols" colspan="2">성수기</th>
-            <th scope="cols">Deposit</th>
-            <th scope="cols">월렌트</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td rowspan="4">요금</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td rowspan="2">30만원</td>
-            <td rowspan="4">4,200,000</td>
-          </tr>
-          <tr>
-            <td>350,000</td>
-            <td>350,000</td>
-            <td>390,000</td>
-            <td>490,000</td>
-          </tr>
-          <tr>
-            <td>5일</td>
-            <td>7일</td>
-            <td>10일</td>
-            <td>15일</td>
-            <td rowspan="2">상담</td>
-          </tr>
-          <tr>
-            <td>1,400,000</td>
-            <td>1,750,000</td>
-            <td>2,100,000</td>
-            <td>2,450,000</td>
-          </tr>
-          </tbody>
-        </table>
-        <table class="type11 text-center">
-          <thead>
-          <tr>
-            <th scope="cols">스위트</th>
-            <th scope="cols" colspan="2">비수기</th>
-            <th scope="cols" colspan="2">성수기</th>
-            <th scope="cols">Deposit</th>
-            <th scope="cols">월렌트</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td rowspan="4">요금</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td rowspan="2">30만원</td>
-            <td rowspan="4">4,560,000</td>
-          </tr>
-          <tr>
-            <td>380,000</td>
-            <td>380,000</td>
-            <td>390,000</td>
-            <td>490,000</td>
-          </tr>
-          <tr>
-            <td>5일</td>
-            <td>7일</td>
-            <td>10일</td>
-            <td>15일</td>
-            <td rowspan="2">상담</td>
-          </tr>
-          <tr>
-            <td>1,520,000</td>
-            <td>1,900,000</td>
-            <td>2,280,000</td>
-            <td>2,660,000</td>
-          </tr>
-          </tbody>
-        </table>
-        Travel
-        <table class="type11 text-center">
-          <thead>
-          <tr>
-            <th scope="cols">디럭스</th>
-            <th scope="cols" colspan="2">비수기</th>
-            <th scope="cols" colspan="2">성수기</th>
-            <th scope="cols">Deposit</th>
-            <th scope="cols">월렌트</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td rowspan="4">요금</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td rowspan="2">30만원</td>
-            <td rowspan="4">3,600,000</td>
-          </tr>
-          <tr>
-            <td>300,000</td>
-            <td>350,000</td>
-            <td>350,000</td>
-            <td>400,000</td>
-          </tr>
-          <tr>
-            <td>5일</td>
-            <td>7일</td>
-            <td>10일</td>
-            <td>15일</td>
-            <td rowspan="2">상담</td>
-          </tr>
-          <tr>
-            <td>1,200,000</td>
-            <td>1,500,000</td>
-            <td>1,800,000</td>
-            <td>2,100,000</td>
-          </tr>
-          </tbody>
-        </table>
-        <table class="type11 text-center">
-          <thead>
-          <tr>
-            <th scope="cols">스위트</th>
-            <th scope="cols" colspan="2">비수기</th>
-            <th scope="cols" colspan="2">성수기</th>
-            <th scope="cols">Deposit</th>
-            <th scope="cols">월렌트</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td rowspan="4">요금</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td>주중</td>
-            <td>주말</td>
-            <td rowspan="2">30만원</td>
-            <td rowspan="4">3,960,000</td>
-          </tr>
-          <tr>
-            <td>330,000</td>
-            <td>350,000</td>
-            <td>350,000</td>
-            <td>400,000</td>
-          </tr>
-          <tr>
-            <td>5일</td>
-            <td>7일</td>
-            <td>10일</td>
-            <td>15일</td>
-            <td rowspan="2">상담</td>
-          </tr>
-          <tr>
-            <td>1,320,000</td>
-            <td>1,650,000</td>
-            <td>1,980,000</td>
-            <td>2,310,000</td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="tbl-header">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th>차종</th>
+                <th>차명</th>
+                <th>보증금</th>
+                <th>2000km</th>
+                <th>2500km</th>
+                <th>3000km</th>
+                <th>4000km</th>
+                <th>21세</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr th:each="campingCar : ${campingCarList}">
+              <td th:text="${campingCar.category1}"></td>
+              <td th:text="${campingCar.category2}"></td>
+              <td th:text="${campingCar.season}"></td>
+              <td th:text="${campingCar.rent_period}"></td>
+              <td th:text="${campingCar.deposit}"></td>
+                <td th:text="${campingCar.price}"></td>
+              <td th:text="${campingCar.rent_for_month}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
   </section>
 </div>

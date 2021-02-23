@@ -2,12 +2,14 @@ package kr.carz.savecar.domain;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 import javax.persistence.*;
 
 @Entity
 @Data
 @Table(name = "Reservation")
-public class Reservation extends BaseTimeEntity{
+public class Reservation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;

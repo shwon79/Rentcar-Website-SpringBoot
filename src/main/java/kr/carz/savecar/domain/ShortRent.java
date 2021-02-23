@@ -13,7 +13,6 @@ public class ShortRent {
     private  Long id;
 
     private String category1; // 국산, 외제차의 분류
-    private String category2; // 중형차, 경차 등 큰 분류
     private String name;
     private String cost_for_three_days_600;
     private String cost_for_three_days_900;

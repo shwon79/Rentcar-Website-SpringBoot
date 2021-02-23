@@ -115,6 +115,22 @@ function get_mileage(fr1, detailedSelect) {
     }
 }
 
+function int_to_price(price) {
+    var len = price.length;
+    var result = "";
+
+    for (var i=len ; i>0 ; i-=3) {
+        if (result == ""){
+            result = price.slice(i-3, i)
+        } else {
+            result = price.slice(i-3, i) + ',' + result
+        }
+        console.log(result)
+    }
+    result = price.slice(0, len%3) + result;
+    return result;
+}
+
 function get_price(fr1, fr2, fr3, detailedSelect) {
     $.ajax({
         type: 'GET',
@@ -123,14 +139,18 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
         dataType: 'json',
         success: function set_p(result) {
             var price = result[0];
-            var vat = price * 0.1;
+            var vat = price.replace(/,/gi, "");
+            vat = parseInt(vat) * 0.1;
             var deposit = result[1];
-            var total = parseInt(price) + vat;
+            var total = parseInt(price.replace(/,/gi, "")) + vat;
+
+            vat = int_to_price(vat.toString());
+            total = int_to_price(total.toString());
 
             document.getElementById("carPrice").innerText = price +"원";
             document.getElementById("carVat").innerText = vat +"원";
             document.getElementById("carDeposit").innerText = deposit +"원";
-            document.getElementById("carTotal").innerText = total +"원";
+            document.getElementById("carTotal").innerText =  total +"원";
 
         }
     }).fail(function (error) {
