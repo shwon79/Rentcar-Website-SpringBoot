@@ -656,7 +656,7 @@ Separator
                         Home Section 
 ======================================================================*/
 .home {
-  background: url(../img/shot-highway-road-surrounded-by-dried-grass-fields-sky-during-sunset.jpg)
+  background: url(../img/header1.jpg)
     no-repeat center center;
   background-size: cover;
 }
@@ -761,7 +761,7 @@ Separator
                         Trial Section 
 ======================================================================*/
 .main_trial_area {
-  background: url(../img/close-up-sales-manager-black-suit-selling-car-customer.jpg) no-repeat top center;
+  background: url(../img/salesmanager.jpg) no-repeat top center;
   overflow: hidden;
   opacity: 0.5;
   background-size: cover;

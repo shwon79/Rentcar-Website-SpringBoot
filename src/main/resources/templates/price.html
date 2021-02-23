@@ -105,12 +105,15 @@
       <div class="month text-center" id="month">
         <h1>월렌트료</h1>
         <div class="separator"></div>
-        <div class="tbl-header">
+        <div class="tbl-header text-center">
           <table cellpadding="0" cellspacing="0" border="0">
             <thead>
               <tr>
-                <th>차종</th>
-                <th>차명</th>
+                <th rowspan="2">차종</th>
+                <th rowspan="2">차명</th>
+                <th colspan="5">월차 월렌트료</th>
+              </tr>
+              <tr>
                 <th>보증금</th>
                 <th>2000km</th>
                 <th>2500km</th>
@@ -121,7 +124,7 @@
             </thead>
           </table>
         </div>
-        <div class="tbl-content">
+        <div class="tbl-content text-center">
           <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
               <tr th:each="monthlyRent : ${monthlyRentList}">
@@ -148,19 +151,22 @@
       <div class="year text-center">
         <h1>12개월 렌트료</h1>
         <div class="separator"></div>
-        <div class="tbl-header">
+        <div class="tbl-header text-center">
           <table cellpadding="0" cellspacing="0" border="0">
             <thead>
-              <tr>
-                <th>차종</th>
-                <th>차명</th>
-                <th>보증금</th>
-                <th>2000km</th>
-                <th>2500km</th>
-                <th>3000km</th>
-                <th>4000km</th>
-                <th>21세</th>
-              </tr>
+            <tr>
+              <th rowspan="2">차종</th>
+              <th rowspan="2">차명</th>
+              <th colspan="5">12개월 월렌트료</th>
+              <th rowspan="2">km당 추가요금</th>
+            </tr>
+            <tr>
+              <th>보증금</th>
+              <th>2만km</th>
+              <th>3만km</th>
+              <th>4만km</th>
+              <th>21세</th>
+            </tr>
             </thead>
           </table>
         </div>
@@ -195,13 +201,18 @@
           <table cellpadding="0" cellspacing="0" border="0">
             <thead>
               <tr>
-                <th>차종</th>
-                <th>차명</th>
-                <th>보증금</th>
-                <th>2000km</th>
-                <th>2500km</th>
+                <th rowspan="2">차종</th>
+                <th colspan="5">3일 요금</th>
+                <th rowspan="2">km당 추가 요금</th>
+                <th colspan="5">이후 1일당 추가 요금</th>
+                <th rowspan="2">km당 추가 요금</th>
+              </tr>
+              <tr>
+                <th>600km</th>
+                <th>900km</th>
                 <th>3000km</th>
-                <th>4000km</th>
+                <th>1200km</th>
+                <th>자차</th>
                 <th>21세</th>
               </tr>
             </thead>

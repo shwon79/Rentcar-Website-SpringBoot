@@ -57,6 +57,8 @@
     <!-- table Style -->
     <link th:href="@{/css/table.css}" rel="stylesheet">
 
+    <script th:src="@{/js/popup.js}"></script>
+
     <script th:src="@{/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js}"></script>
     
     <link rel="apple-touch-icon" th:href="@{/img/carIcon.ico}" />
@@ -79,9 +81,12 @@
     <title>SAVE-CAR</title>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
+
     <div layout:fragment="content">
 
-      <!----------------------------------------->
+        <!-- popup.html -->
+        <th:block th:replace="fragments/popup::popupFragment" ></th:block>
+        <!----------------------------------------->
       <!-------------- home section ------------->
       <!----------------------------------------->
 
@@ -251,7 +256,7 @@
                        <div class="col-md-6 col-sm-12 no-padding">
                           <figure class="single_service single_service_img">
                               <div class="overlay-img"></div>
-                              <img th:src="@{/img/car-travelling-by-sunny-road.jpg}" alt="" />
+                              <img th:src="@{/img/road.jpg}" alt="">
                           </figure><!-- End of figure -->
                       </div><!-- End of col-sm-6 -->
                   </div>
