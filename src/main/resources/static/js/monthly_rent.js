@@ -6,7 +6,13 @@ function make_reservation () {
         if (document.getElementById("rent-product1").checked) {
             product = $("#rent-product1").val();
         } else {
-            product = $("#rent-product2").val();
+            if ($("#rent-product2").val() == "rentMonth") {
+                product = "월렌트"
+            } else if ($("#rent-product2").val() == "rentYear") {
+                product = "12개월 렌트";
+            } else {
+                product = "";
+            }
         }
     }
     var deposit;
@@ -18,10 +24,22 @@ function make_reservation () {
         }
     }
 
+    console.log(product);
+
+    // var title;
+    // if (product == "신차" || product == "중고차") {
+    //     title = "저신용 장기렌트";
+    // } else if (product == "월렌트" || product == "12개월 렌트" || product == "") {
+    //     title = "월렌트, 12개월렌트";
+    // } else {
+    //     title = "캠핑카";
+    // }
+
     var data = {
         name : $("#reservation-detail-name").val(),
         phoneNo : $("#reservation-detail-phone").val(),
         detail : $("#reservation-detail-details").val(),
+        title : $("#rent-title").val(),
         product : product,
         category1 : $("#select-category1").val(),
         category2 : $("#select-category2").val(),
