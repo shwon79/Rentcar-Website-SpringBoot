@@ -57,6 +57,8 @@
     <!-- table Style -->
     <link th:href="@{/css/table.css}" rel="stylesheet">
 
+    <script th:src="@{/js/popup.js}"></script>
+
     <script th:src="@{/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js}"></script>
     
     <link rel="apple-touch-icon" th:href="@{/img/carIcon.ico}" />
@@ -79,9 +81,12 @@
     <title>SAVE-CAR</title>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
+
     <div layout:fragment="content">
 
-      <!----------------------------------------->
+        <!-- popup.html -->
+        <th:block th:replace="fragments/popup::popupFragment" ></th:block>
+        <!----------------------------------------->
       <!-------------- home section ------------->
       <!----------------------------------------->
 
