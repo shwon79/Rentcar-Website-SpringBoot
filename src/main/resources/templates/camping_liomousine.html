@@ -9,6 +9,15 @@
 
     <!-- Style -->
     <link th:href="@{/css/camping.css}" rel="stylesheet">
+
+    <script>
+        function toggleImg(id) {
+            let before = document.getElementById("headerImg").src;
+            let tmp = document.getElementById(id).src;
+            document.getElementById("headerImg").src = tmp;
+            document.getElementById(id).src = before;
+        }
+    </script>
 </head>
 
 <div layout:fragment="content">
@@ -99,20 +108,20 @@
                         <img th:src="@{/img/camping-car1.jpg}" width="70%" height="70%">
                     </div>
                     <div class="row">
-                        <img th:src="@{/img/IMG_0360.JPG}" width="10%" height="10%">
-                        <img th:src="@{/img/IMG_0361.JPG}" width="10%" height="10%">
-                        <img th:src="@{/img/IMG_0362.JPG}" width="10%" height="10%">
-                        <img th:src="@{/img/IMG_0363.JPG}" width="10%" height="10%">
-                        <img th:src="@{/img/IMG_0364.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0367.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0368.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0370.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0371.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0372.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0374.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0375.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0376.JPG}" width="10%" height="100%">
-                        <img th:src="@{/img/IMG_0377.JPG}" width="10%" height="100%">
+                        <img th:src="@{/img/IMG_0360.JPG}" id="carImg1" width="10%" height="10%" onclick="toggleImg('carImg1')">
+                        <img th:src="@{/img/IMG_0361.JPG}" id="carImg2" width="10%" height="10%" onclick="toggleImg('carImg2')">
+                        <img th:src="@{/img/IMG_0362.JPG}" id="carImg3" width="10%" height="10%" onclick="toggleImg('carImg3')">
+                        <img th:src="@{/img/IMG_0363.JPG}" id="carImg4" width="10%" height="10%" onclick="toggleImg('carImg4')">
+                        <img th:src="@{/img/IMG_0364.JPG}" id="carImg5" width="10%" height="100%" onclick="toggleImg('carImg5')">
+                        <img th:src="@{/img/IMG_0367.JPG}" id="carImg6" width="10%" height="100%" onclick="toggleImg('carImg6')">
+                        <img th:src="@{/img/IMG_0368.JPG}" id="carImg7" width="10%" height="100%" onclick="toggleImg('carImg7')">
+                        <img th:src="@{/img/IMG_0370.JPG}" id="carImg8" width="10%" height="100%" onclick="toggleImg('carImg8')">
+                        <img th:src="@{/img/IMG_0371.JPG}" id="carImg9" width="10%" height="100%" onclick="toggleImg('carImg9')">
+                        <img th:src="@{/img/IMG_0372.JPG}" id="carImg10" width="10%" height="100%" onclick="toggleImg('carImg10')">
+                        <img th:src="@{/img/IMG_0374.JPG}" id="carImg11" width="10%" height="100%" onclick="toggleImg('carImg11')">
+                        <img th:src="@{/img/IMG_0375.JPG}" id="carImg12" width="10%" height="100%" onclick="toggleImg('carImg12')">
+                        <img th:src="@{/img/IMG_0376.JPG}" id="carImg13" width="10%" height="100%" onclick="toggleImg('carImg13')">
+                        <img th:src="@{/img/IMG_0377.JPG}" id="carImg14" width="10%" height="100%" onclick="toggleImg('carImg14')">
                     </div>
                 </div>
             </div>
