@@ -106,7 +106,6 @@ public class MonthlyRentController {
     public void get_monthly_price(HttpServletResponse res, @PathVariable String carName, @PathVariable String mileage) throws IOException {
 
         MonthlyRent rentCar = monthlyRentService.findPrice(carName);
-
         JSONArray jsonArray = new JSONArray();
         if(mileage.equals("2500")) {
             jsonArray.put(rentCar.getCost_for_2_5k());

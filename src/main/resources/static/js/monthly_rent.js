@@ -5,16 +5,19 @@ function make_reservation () {
     } else if (document.getElementById("rent-product1") != null) {
         if (document.getElementById("rent-product1").checked) {
             product = $("#rent-product1").val();
-        } else {
-            if ($("#rent-product2").val() == "rentMonth") {
-                product = "월렌트"
-            } else if ($("#rent-product2").val() == "rentYear") {
-                product = "12개월 렌트";
-            } else {
-                product = "";
-            }
+        } else if (document.getElementById("rent-product2").checked) {
+            product = $("#rent-product2").val();
         }
+
+        if (product == "rentMonth") {
+            product = "월렌트"
+        } else if (product == "rentYear") {
+            product = "12개월 렌트";
+        }
+    } else {
+        product = "";
     }
+
     var deposit;
     if (document.getElementById("rentMonth") != null) {
         if (document.getElementById("rentMonth").checked){
@@ -24,29 +27,19 @@ function make_reservation () {
         }
     }
 
-    console.log(product);
-
-    // var title;
-    // if (product == "신차" || product == "중고차") {
-    //     title = "저신용 장기렌트";
-    // } else if (product == "월렌트" || product == "12개월 렌트" || product == "") {
-    //     title = "월렌트, 12개월렌트";
-    // } else {
-    //     title = "캠핑카";
-    // }
-
     var data = {
         name : $("#reservation-detail-name").val(),
         phoneNo : $("#reservation-detail-phone").val(),
         detail : $("#reservation-detail-details").val(),
-        title : $("#rent-title").val(),
+        title : document.getElementById("rent-title").getAttribute("value"),
         product : product,
         category1 : $("#select-category1").val(),
         category2 : $("#select-category2").val(),
         car_name : $("#select-car-name").val(),
         mileage : $("#select-mileage").val(),
         deposit : deposit,
-        option : $("#select-car-option").val()
+        option : $("#select-car-option").val(),
+        price : $("#carTotal").val()
     };
     console.log(data)
 
@@ -66,7 +59,6 @@ function make_reservation () {
     } else{
         alert("개인정보 수집 및 이용에 동의해주세요.");
     }
-
 }
 
 function get_category1(fr, detailedSelect) {

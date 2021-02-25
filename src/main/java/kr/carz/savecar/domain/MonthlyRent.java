@@ -13,7 +13,10 @@ public class MonthlyRent {
 
     private String category1; // 국산, 외제차의 분류
     private String category2; // 중형차, 경차 등 큰 분류
+
+    @Column(unique = true)
     private String name;
+
     private String deposit;
     private String cost_for_2k;
     private String cost_for_2_5k;

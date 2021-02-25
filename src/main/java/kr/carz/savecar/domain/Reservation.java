@@ -16,6 +16,7 @@ public class Reservation extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String phoneNo;
 
@@ -46,11 +47,14 @@ public class Reservation extends BaseTimeEntity {
     @Column(nullable = true)
     private String option;
 
+    @Column(nullable = true)
+    private String price;
+
 
     @Builder
     public Reservation(String name, String phoneNo, String detail, String title, String product,
                        String category1, String category2, String car_name, String mileage,
-                       String deposit, String option) {
+                       String deposit, String option, String price) {
         this.name = name;
         this.phoneNo = phoneNo;
         this.detail = detail;
@@ -62,5 +66,6 @@ public class Reservation extends BaseTimeEntity {
         this.mileage = mileage;
         this.deposit = deposit;
         this.option = option;
+        this.price = price;
     }
 }
