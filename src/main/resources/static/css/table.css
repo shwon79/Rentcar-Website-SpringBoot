@@ -18,7 +18,6 @@
 }
 table {
   width: 100%;
-  table-layout: fixed;
   background: -webkit-linear-gradient(left, #f8f6f2, #f8f6f2);
   background: linear-gradient(to right, #f8f6f2, #f8f6f2);
 }
@@ -35,7 +34,7 @@ th {
   padding: 20px 15px;
   text-align: center;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 1.5rem;
   color: #000;
   text-transform: uppercase;
 }
@@ -44,7 +43,7 @@ td {
   text-align: center;
   vertical-align: middle;
   font-weight: 300;
-  font-size: 15px;
+  font-size: 1.5rem;
   color: #000;
   border-bottom: solid 1px rgba(0, 0, 0, 0.3);
 }
@@ -785,7 +784,7 @@ Separator
             service section Style
 ====================================================================*/
 .main_service .head_title {
-  padding: 100px 0px 40px 0px;
+  padding: 70px 0px 40px 0px;
   margin-bottom: 0px;
 }
 .main_service .head_title h2 {
@@ -808,6 +807,13 @@ Separator
   background: #202020;
   height: 585px;
 }
+
+.main_service.small-screen .single_service.single_service_text.small-screen  {
+  margin-right: 0px;
+  background: #202020;
+  height: 700px;
+}
+
 .main_service .single_service.single_service_text .single_service_icon i {
   background: #f4f5f9;
   width: 70px;
@@ -833,10 +839,10 @@ Separator
   .single_service.single_service_text
   .single_service_right_text
   h5 {
-  color: #999999;
+  color: #FFFFFF;
 }
 .main_service .single_service.single_service_text .single_service_right_text p {
-  color: #999999;
+  color: #FFFFFF;
 }
 
 /*====================================================================
@@ -1087,7 +1093,7 @@ button.btn-md:hover {
 }
 
 .pricing_head p {
-  font-size: 22px;
+  font-size: 1.375rem;
   color: #FFFFFF;
 }
 
@@ -1112,7 +1118,7 @@ button.btn-md:hover {
 .pricing_head h3 {
   text-transform: uppercase;
   color: #fff;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 .pricing_head .pricing_price {
   background: #fff;
@@ -1141,7 +1147,7 @@ button.btn-md:hover {
 .single_pricing ul li {
   line-height: 45px;
   height: 45px;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .single_pricing a {
