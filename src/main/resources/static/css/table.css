@@ -914,9 +914,9 @@ Separator
                         price-table Section 
 ======================================================================*/
 .price-table {
-  padding-top: 100px;
-  padding-right: 100px;
-  padding-left: 100px;
+  /*padding-top: 7rem;*/
+  /*padding-right: 7rem;*/
+  /*padding-left: 7rem;*/
 }
 /*======================================================================
                     portfolio section css
