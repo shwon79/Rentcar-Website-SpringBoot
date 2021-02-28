@@ -1,5 +1,5 @@
 table.type11 {
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 1px;
   text-align: center;
   line-height: 1.5;
@@ -15,7 +15,7 @@ table.type11 th {
   background: #fff;
 }
 table.type11 td {
-  width: 155px;
+  width: 1.5em;
   padding: 10px;
   vertical-align: top;
   border-bottom: 1px solid #ccc;

@@ -34,11 +34,11 @@
                     <div class="bg-light pinside30">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h1>예약자 정보 입력</h1>
+                                <h2>예약자 정보 입력</h2>
                                 <hr>
                                 <form name="reservation-info" action="">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="name">이름</label>
                                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -46,7 +46,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="phone">연락처</label>
                                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
@@ -54,7 +54,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="textarea">요청 사항</label>
                                                 <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요."></textarea>
@@ -66,7 +66,7 @@
                                                 <p class="text-center"><input type="checkbox" id="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
                                             <div class="form-group text-center">
                                                 <a class="btn1 btn1-default" onclick="make_reservation()" href="#">예약하기 </a>
                                             </div>
@@ -82,15 +82,17 @@
                     <div class="bg-light pinside30">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h1>실시간 견적 내기</h1>
+                                <h2>실시간 견적 내기</h2>
                                 <h5 align="right">* 배차가능 차종은 상담시 배정해 드립니다.</h5>
                                 <hr>
                                 <form name="reservation">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                             <span class="span-control">
                                                 <label id="rent-title" value="월렌트, 12개월렌트" class="control-label" for="name">렌트 상품</label>
                                             </span>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                                             <span class="span-input">
                                                 <label style="margin-right: 20px;"><input type="radio" id="rent-product1" name="rentProduct" onchange="get_category1(rentProduct.value, selectCategory1)" value="rentMonth">&nbsp; 월렌트</label>
                                                 <label><input type="radio" id="rent-product2" name="rentProduct" onchange="get_category1(rentProduct.value, selectCategory1)" value="rentYear">&nbsp; 12개월 렌트</label>
@@ -98,10 +100,12 @@
                                         </div>
                                     </div>
                                     <div class="row" name="selectDetail">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" >
                                             <span class="span-control">
                                                 <label class="control-label" for="name">차종 선택</label>
                                             </span>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
                                             <span class="span-input">
                                                 <select id="select-category1" name="selectCategory1" class="form-control-select" onchange="get_category2(rentProduct.value, selectCategory1.value, selectCategory2)" value="차종선택">
                                                     <option value="">--차종을 선택해주세요.--</option>
@@ -113,20 +117,24 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                             <span class="span-control">
                                                 <label class="control-label" for="name">차명</label>
                                             </span>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
                                             <select id="select-car-name" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">
                                                 <option value="">-- 차명을 선택해주세요. --</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                             <span class="span-control">
                                                 <label class="control-label" for="kliometer">주행 거리</label>
                                             </span>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
                                             <span class="span-input">
                                                 <select id="select-mileage" name="selectMileage" class="form-control-select"  onchange="get_price(rentProduct.value, selectName.value, selectMileage.value, document.reservation.totalPrice)">
                                                     <option value="">-- 주행 거리를 선택해주세요. --</option>
@@ -147,42 +155,43 @@
                                             </div>
                                         </div>
                                         <div class="row top-text">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <span class="span-control">
-                                                <label class="control-label" for="kliometer" >VAT</label>
-                                            </span>
-                                                <span class="span-input">
-                                                <font class="form-control-text top-text" id="carVat" name="carVat">00,000원</font>
-                                            </span>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-text">
+                                                <span class="span-control">
+                                                    <label class="control-label" for="kliometer" >VAT</label>
+                                                </span>
+                                                    <span class="span-input">
+                                                    <font class="form-control-text top-text" id="carVat" name="carVat">00,000원</font>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="row top-text">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <span class="span-control">
-                                                <label class="control-label" for="kliometer">보증금</label>
-                                            </span>
-                                                <span class="span-input">
-                                                <font class="form-control-text top-text" id="carDeposit" name="carDeposit">00,000원</font>
-                                            </span>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <span class="span-control">
+                                                    <label class="control-label" for="kliometer">보증금</label>
+                                                </span>
+                                                    <span class="span-input">
+                                                    <font class="form-control-text top-text" id="carDeposit" name="carDeposit">00,000원</font>
+                                                </span>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <span class="span-control">
-                                                <label class="control-label" for="kliometer">총 렌트료</label>
-                                            </span>
-                                                <span class="span-input">
-                                                <font class="form-control-text top-text" id="carTotal" name="carTotal">00,000원</font>
-                                            </span>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <span class="span-control">
+                                                    <label class="control-label" for="kliometer">총 렌트료</label>
+                                                </span>
+                                                    <span class="span-input">
+                                                    <font class="form-control-text top-text" id="carTotal" name="carTotal">00,000원</font>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <hr>
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                             <span class="span-control">
                                                 <label class="control-label" for="kliometer">대여 조건</label>
                                             </span>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
                                             <span class="span-input">
                                                 <font class="form-control-text top-text" id="car-name">방문 기준, 자차 포함, 정비 포함, 26세 이상 기준</font>
                                             </span>

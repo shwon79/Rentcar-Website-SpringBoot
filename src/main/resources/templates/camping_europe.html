@@ -36,34 +36,16 @@
 
     <!--feature section -->
     <section id="feature" class="feature sections">
-        <div class="container">
-            <div class="row pinside50">
-                <div class="main_portfolio pinside30">
-                    <div class="work_menu text-center campingnav">
-                        <div id="campingnav" class="toolbar mb2 mt2">
-                            <!-- 여기 어떤식으로 할껀지...? -->
-                            <ul>
-                                <li class="has-sub"><a href="/europe">Europe VIP CAMPER</a>
-                                    <ul>
-                                        <li><a href="/europe" title="deluxe">디럭스 Motorhome</a></li>
-                                        <li><a href="/europe" title="sweet">스위트 Motorhome</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-sub"><a href="/liomousine">Liomousine VIP CAMPER</a>
-                                    <ul>
-                                        <li><a href="/liomousine" title="deluxe">디럭스 Motorhome</a></li>
-                                        <li><a href="/liomousine" title="sweet">스위트 Motorhome</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-sub"><a href="/travel">Travel VIP CAMPER</a>
-                                    <ul>
-                                        <li><a href="/travel" title="deluxe">디럭스 Motorhome</a></li>
-                                        <li><a href="/travel" title="sweet">스위트 Motorhome</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+        <div class="container text-center">
+            <div class="row padding-bottom-60">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
+                    <h3><a href="/europe">Europe VIP CAMPER</a></h3>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
+                    <h3><a href="/liomousine">Liomousine VIP CAMPER</a></h3>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
+                    <h3><a href="/travel">Travel VIP CAMPER</a></h3>
                 </div>
             </div>
         </div>
@@ -72,28 +54,28 @@
     <div class="content">
         <div class="container">
             <div class="row text-center">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-60">
                     <h1>Europe VIP CAMPER</h1>
                     <h3>모터홈의 디럭스풍 디자인</h3>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
-                    <div class="bg-light">
-                        <div class="row pinside30">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-light pinside30">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                                 <h3>CAPMER 명</h3>
                                 <h3>디럭스 Motorhome</h3>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                                 <h3>디젤/Auto</h3>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                                 <h3>면허 종류</h3>
-                                <input type="radio" id="type1" name="car-type" checked="checked" readonly> 1종보통
-                                <input type="radio" id="type2" name="car-type" readonly> 2종보통
+                                <h3><input type="radio" id="type1" name="car-type" checked="checked" readonly> 1종 보통
+                                <input type="radio" id="type2" name="car-type" readonly> 2종 보통</h3>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                                 <h3>인원 (승차/취침)</h3>
                                 <h3>4/4 (취침 최대 5명)</h3>
                             </div>
@@ -108,10 +90,10 @@
                         <img th:src="@{/img/camping-car1.jpg}" id="headerImg" width="70%" height="70%">
                     </div>
                     <div class="row">
-                        <img th:src="@{/img/IMG_0360.JPG}" id="carImg1" width="10%" height="10%" onclick="toggleImg('carImg1')">
-                        <img th:src="@{/img/IMG_0361.JPG}" id="carImg2" width="10%" height="10%" onclick="toggleImg('carImg2')">
-                        <img th:src="@{/img/IMG_0362.JPG}" id="carImg3" width="10%" height="10%" onclick="toggleImg('carImg3')">
-                        <img th:src="@{/img/IMG_0363.JPG}" id="carImg4" width="10%" height="10%" onclick="toggleImg('carImg4')">
+                        <img th:src="@{/img/IMG_0360.JPG}" id="carImg1" width="10%" height="100%" onclick="toggleImg('carImg1')">
+                        <img th:src="@{/img/IMG_0361.JPG}" id="carImg2" width="10%" height="100%" onclick="toggleImg('carImg2')">
+                        <img th:src="@{/img/IMG_0362.JPG}" id="carImg3" width="10%" height="100%" onclick="toggleImg('carImg3')">
+                        <img th:src="@{/img/IMG_0363.JPG}" id="carImg4" width="10%" height="100%" onclick="toggleImg('carImg4')">
                         <img th:src="@{/img/IMG_0364.JPG}" id="carImg5" width="10%" height="100%" onclick="toggleImg('carImg5')">
                         <img th:src="@{/img/IMG_0367.JPG}" id="carImg6" width="10%" height="100%" onclick="toggleImg('carImg6')">
                         <img th:src="@{/img/IMG_0368.JPG}" id="carImg7" width="10%" height="100%" onclick="toggleImg('carImg7')">
@@ -127,13 +109,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
-                    <div class="bg-light">
+                    <div class="bg-light pinside30" style="margin-top: 20px;">
                         <div class="row pinside30">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h2>CAPMER 요금</h2>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                <table class="type11 text-center">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="overflow-x: auto;">
+                                <table class="col-lg-12 col-md-12 col-sm-12 col-xs-12 type11 text-center">
                                     <thead>
                                     <tr>
                                         <th scope="cols" colspan="2">비수기</th>
@@ -174,13 +156,11 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <div class="bg-light">
                         <div class="row pinside30">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h2>CAPMER 시설</h2>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                 <p>캠핑의자 4ea, 캠핑테이블 1ea, 휴대용버너, 커피포트</p>
                                 <p>객실샤워실, 화장실, 욕실용품, 세면도구[샴푸 린스 바디워시], </p>
                                 <p>전자레인지, 드라이기, 냉장고, TV, 에어컨</p>
@@ -192,10 +172,10 @@
                             </div>
                         </div>
                         <div class="row pinside30">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h2>CAPMER 추가서비스</h2>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                 <p>장작 & 숯불세트[장작, 숯, 숯판, 그릴, 점화기토치] 3만원</p>
                                 <p>빔프로젝트+블루투스 스피커+유압식거치대 3만원</p>
                                 <p>전동킥보드[최대80km, 제품명] 3만원</p>
@@ -211,7 +191,7 @@
                     <div class="bg-light pinside30" style="margin-top: 20px;">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h1>예약자 정보 입력</h1>
+                                <h2>예약자 정보 입력</h2>
                                 <hr>
                                 <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
                                 <form name="reservation_info" id="rentProduct" value="유럽">
@@ -256,10 +236,10 @@
                     </div>
                     <div class="bg-light pinside30" style="margin-top: 20px;">
                         <div class="row pinside30">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h2>CAPMER 렌트정책</h2>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                 <p><i class="fas fa-star"></i>인수 및 반납</p>
                                 <p>평일 및 토요일 :  09 : 00 ~ 18 : 00</p>
                                 <p>일요일 & 국경일 : 배차불가, 회차는 무인 또는 다음날 오전 9시 반납</p>
@@ -275,10 +255,10 @@
                             </div>
                         </div>
                         <div class="row pinside30">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h2>CAPMER 보험사항</h2>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                 <p><i class="fas fa-star"></i>보험 안내</p>
                                 <p>대인 무한 대물 2천 자손 1.5천 자차 2천만원까지</p>
                                 <p>자차포함 : 차대차사고, 캠핑카 내부 가구 제외, 자기부담금 50~200만원[과실30%이내]</p>
@@ -289,10 +269,10 @@
                             </div>
                         </div>
                         <div class="row pinside30">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h2>CAPMER 이용규칙</h2>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                 <p>1) 금연차량을 원칙으로 운영중입니다.</p>
                                 <p>2) 차량청소 : 오물통과 각종 쓰레기는 비우시고 반납[패널티 3만원]</p>
                                 <p>3) 사고, 정비로 대여가 불가능 할 수 있으며 이에 대한 손해배상을 청구 할 수 없습니다.</p>
@@ -303,10 +283,10 @@
                             </div>
                         </div>
                         <div class="row pinside30">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h2>CAPMER 환불정책</h2>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                 <p>1) 31일전 취소 : 100%환불</p>
                                 <p>2) 30일전 취소 : 30% 수수료 부과</p>
                                 <p>3) 15일전 취소 : 40% 수수료 부과</p>
