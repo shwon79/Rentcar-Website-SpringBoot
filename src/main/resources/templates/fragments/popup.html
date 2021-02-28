@@ -3,10 +3,10 @@
     <!--popup Fragment 선언-->
     <th:block th:fragment="popupFragment">
         <!-- POPUP -->
-        <div id="divpop1" class="popStyle1" style="position:absolute; left:200px; top:150px; border:2px #A6A6A6 solid; padding:0px 6px; background-color:#FAFAFA; z-index: 9999; width: 500px; height:400px;">
+        <div id="divpop1" class="popStyle1">
             <table>
                 <tr>
-                    <td style="" height=360 align=center>
+                    <td style="" height="360" align="center">
                         <div class="popContentStyle1">
                             <img th:src="@{/img/popupimg1.png}">
                         </div>
@@ -14,9 +14,8 @@
                 </tr>
                 <!-- <tr><td style="border-top:1px dashed #A6A6A6;"></td></tr> -->
                 <tr>
-                    <td align=right>
+                    <td align="right">
                         <form name="notice_form1">
-                            <input type="checkbox" name="chkbox1" value="checkbox">오늘 하루 이 창을 열지 않음
                             <a href="javascript:closeWin1();"><B>[닫기]</B></a>
                         </form>
                     </td>
@@ -25,10 +24,10 @@
         </div>
 
         <!-- POPUP -->
-        <div id="divpop2" class="popStyle2" style="position:absolute; left:800px; top:150px; border:2px #A6A6A6 solid; padding:0px 6px; background-color:#FAFAFA; z-index: 9999; width: 500px; height:400px;">
+        <div id="divpop2" class="popStyle2">
             <table>
                 <tr>
-                    <td style="" height=360 align=center>
+                    <td height="360" align="center">
                         <div class="popContentStyle1">
                             <img th:src="@{/img/popupimg2.png}">
                         </div>
@@ -36,9 +35,8 @@
                 </tr>
                 <!-- <tr><td style="border-top:1px dashed #A6A6A6;"></td></tr> -->
                 <tr>
-                    <td align=right>
+                    <td align="right">
                         <form name="notice_form2">
-                            <input type="checkbox" name="chkbox2" value="checkbox">오늘 하루 이 창을 열지 않음
                             <a href="javascript:closeWin2();"><B>[닫기]</B></a>
                         </form>
                     </td>

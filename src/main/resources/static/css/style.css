@@ -898,3 +898,29 @@ opacity: .5; }
     .error-title { font-size: 42px; margin-bottom: 10px; font-weight: 800; }
     .testimonial-content { font-weight: 400; padding-left: 0px; }
 }
+
+
+/* Popup */
+div.popStyle1 {
+    position: absolute;
+    left: 200px;
+    top: 150px;
+    border: 2px #A6A6A6 solid;
+    padding: 0px 6px;
+    background-color: #FAFAFA;
+    z-index: 9999;
+    width: 500px;
+    height: 400px;
+}
+
+div.popStyle2 {
+    position: absolute;
+    left: 800px;
+    top: 150px;
+    border: 2px #A6A6A6 solid;
+    padding: 0px 6px;
+    background-color: #FAFAFA;
+    z-index: 9999;
+    width: 500px;
+    height: 400px;
+}
