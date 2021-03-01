@@ -51,27 +51,39 @@ public class ReservationController {
         params.put("to", "01083375463");
         params.put("from", "01083375463");
         params.put("type", "SMS");
-        params.put("text", "[" + dto.getTitle() + "]\n"
-                + "예약자 이름: " + dto.getName() + "\n"
-                + "연락처: " + dto.getPhoneNo() + "\n"
-                + "요청사항: " + dto.getDetail() + "\n\n"
-                + "렌트상품: " + dto.getProduct() + "\n"
-                + "차종: " + dto.getCategory1() + "\n");
 
         if (dto.getTitle().equals("월렌트, 12개월렌트")){
-            params.put("text", "차분류: " + dto.getCategory2() + "\n"
+            params.put("text", "[" + dto.getTitle() + "]\n"
+                    + "예약자 이름: " + dto.getName() + "\n"
+                    + "연락처: " + dto.getPhoneNo() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n"
+                    + "렌트상품: " + dto.getProduct() + "\n"
+                    + "차종: " + dto.getCategory1() + "\n"
+                    + "차분류: " + dto.getCategory2() + "\n"
                     + "차명: " + dto.getName() + "\n"
                     + "주행거리: " + dto.getMileage() + "\n"
                     + "차명: " + dto.getName() + "\n"
                     + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
         }
         else if (dto.getTitle().equals("저신용장기렌트")){
-            params.put("text", "차명: " + dto.getName() + "\n"
+            params.put("text", "[" + dto.getTitle() + "]\n"
+                    + "예약자 이름: " + dto.getName() + "\n"
+                    + "연락처: " + dto.getPhoneNo() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n"
+                    + "렌트상품: " + dto.getProduct() + "\n"
+                    + "차종: " + dto.getCategory2() + "\n"
+                    + "차명: " + dto.getName() + "\n"
                     + "옵션: " + dto.getOption() + "\n"
                     + "약정주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n");
         }
-        params.put("text", "예약확인 바로가기 : http://itscar.cafe24.com/reservation/list"); //메시지 내용
+        else {
+            params.put("text", "[" + dto.getTitle() + "]\n"
+                    + "예약자 이름: " + dto.getName() + "\n"
+                    + "연락처: " + dto.getPhoneNo() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n"
+                    + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
+        }
         params.put("app_version", "test app 1.2");
 
         try {
