@@ -97,196 +97,295 @@
       <!--End of container -->
     </section>
     <!--End of feature Section -->
-    
+
+    <div class="pinside50"></div>
+
       <!---------------->
       <!--- 월 렌트료 --->
       <!---------------->
     <section class="price-table" id="month">
-      <div class="month text-center" id="month" style="overflow-x: auto;">
-          <h1>월 렌트료</h1>
-          <div class="separator"></div>
-          <div class="pinside20"></div>
-        <div class="tbl-header">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-              <tr>
-                <th rowspan="2">차종</th>
-                <th rowspan="2">차명</th>
-                <th colspan="5">월차 월렌트료</th>
-              </tr>
-              <tr>
-                <th>보증금</th>
-                <th>2000km</th>
-                <th>2500km</th>
-                <th>3000km</th>
-                <th>4000km</th>
-                <th>21세</th>
-              </tr>
-            </thead>
-          </table>
+        <div class="month text-center" id="month">
+            <h1>월 렌트료</h1>
+            <div class="separator"></div>
+            <div class="pinside20"></div>
+
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="20%"/>
+                        <col width="10%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col" rowspan="2">차종</th>
+                            <th scope="col" rowspan="2">차명</th>
+                            <th scope="col" colspan="5">월차 월렌트료</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">보증금</th>
+                            <th scope="col">2000km</th>
+                            <th scope="col">2500km</th>
+                            <th scope="col">3000km</th>
+                            <th scope="col">4000km</th>
+                            <th scope="col">21세</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content" style="overflow-x: auto;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="20%"/>
+                        <col width="10%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                    </colgroup>
+                    <tbody>
+                        <tr th:each="monthlyRent : ${monthlyRentList}">
+                            <td scope="col" th:text="${monthlyRent.category2}"></td>
+                            <td scope="col" th:text="${monthlyRent.name}"></td>
+                            <td scope="col" th:text="${monthlyRent.deposit}"></td>
+                            <td scope="col" th:text="${monthlyRent.cost_for_2k}"></td>
+                            <td scope="col" th:text="${monthlyRent.cost_for_2_5k}"></td>
+                            <td scope="col" th:text="${monthlyRent.cost_for_3k}"></td>
+                            <td scope="col" th:text="${monthlyRent.cost_for_4k}"></td>
+                            <td scope="col" th:text="${monthlyRent.age_limit}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-              <tr th:each="monthlyRent : ${monthlyRentList}">
-                <td th:text="${monthlyRent.category2}"></td>
-                <td th:text="${monthlyRent.name}"></td>
-                <td th:text="${monthlyRent.deposit}"></td>
-                <td th:text="${monthlyRent.cost_for_2k}"></td>
-                <td th:text="${monthlyRent.cost_for_2_5k}"></td>
-                <td th:text="${monthlyRent.cost_for_3k}"></td>
-                <td th:text="${monthlyRent.cost_for_4k}"></td>
-                <td th:text="${monthlyRent.age_limit}"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </section>
+
+    <div class="pinside50"></div>
 
       <!------------------>
       <!--- 12개월 렌트료 --->
       <!------------------>
 
     <section class="price-table" id="year">
-      <div class="year text-center" style="overflow-x: auto;">
-          <h1>12개월 렌트료</h1>
-          <div class="separator"></div>
-          <div class="pinside20"></div>
-        <div class="tbl-header">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-            <tr>
-              <th rowspan="2">차종</th>
-              <th rowspan="2">차명</th>
-              <th colspan="5">12개월 월렌트료</th>
-              <th rowspan="2">km당 추가요금</th>
-            </tr>
-            <tr>
-              <th>보증금</th>
-              <th>2만km</th>
-              <th>3만km</th>
-              <th>4만km</th>
-              <th>21세</th>
-            </tr>
-            </thead>
-          </table>
+        <div class="year text-center">
+            <h1>12개월 렌트료</h1>
+            <div class="separator"></div>
+            <div class="pinside20"></div>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="20%"/>
+                        <col width="10%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col" rowspan="2">차종</th>
+                            <th scope="col" rowspan="2">차명</th>
+                            <th scope="col" colspan="5">12개월 월렌트료</th>
+                            <th scope="col" rowspan="2">km당 추가요금</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">보증금</th>
+                            <th scope="col">2만km</th>
+                            <th scope="col">3만km</th>
+                            <th scope="col">4만km</th>
+                            <th scope="col">21세</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content" style="overflow-x: auto;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="20%"/>
+                        <col width="10%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                        <col width="12%"/>
+                    </colgroup>
+                    <tbody>
+                        <tr th:each="yearlyRent : ${yearlyRentList}">
+                            <td scope="col" th:text="${yearlyRent.category2}"></td>
+                            <td scope="col" th:text="${yearlyRent.name}"></td>
+                            <td scope="col" th:text="${yearlyRent.deposit}"></td>
+                            <td scope="col" th:text="${yearlyRent.cost_for_20k}"></td>
+                            <td scope="col" th:text="${yearlyRent.cost_for_30k}"></td>
+                            <td scope="col" th:text="${yearlyRent.cost_for_40k}"></td>
+                            <td scope="col" th:text="${yearlyRent.age_limit}"></td>
+                            <td scope="col" th:text="${yearlyRent.cost_per_km}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-              <tr th:each="yearlyRent : ${yearlyRentList}">
-                <td th:text="${yearlyRent.category2}"></td>
-                <td th:text="${yearlyRent.name}"></td>
-                <td th:text="${yearlyRent.deposit}"></td>
-                <td th:text="${yearlyRent.cost_for_20k}"></td>
-                <td th:text="${yearlyRent.cost_for_30k}"></td>
-                <td th:text="${yearlyRent.cost_for_40k}"></td>
-                <td th:text="${yearlyRent.age_limit}"></td>
-                <td th:text="${yearlyRent.cost_per_km}"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </section>
+
+    <div class="pinside50"></div>
 
       <!---------------->
       <!--- 단기 렌트료 --->
       <!---------------->
 
     <section class="price-table" id="short-term">
-
-      <div class="short-term text-center" style="overflow-x: auto;">
-          <h1>단기 렌트료</h1>
-          <div class="separator"></div>
-          <div class="pinside20"></div>
-        <div class="tbl-header">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-              <tr>
-                <th rowspan="2">차종</th>
-                <th colspan="5">3일 요금</th>
-                <th rowspan="2">km당 추가 요금</th>
-                <th colspan="5">이후 1일당 추가 요금</th>
-                <th rowspan="2">km당 추가 요금</th>
-              </tr>
-              <tr>
-                  <th>600km</th>
-                  <th>900km</th>
-                  <th>1200km</th>
-                  <th>자차</th>
-                  <th>21세 추가</th>
-                  <th>200km</th>
-                  <th>300km</th>
-                  <th>400km</th>
-                  <th>자차</th>
-                  <th>21세 추가</th>
-              </tr>
-            </thead>
-          </table>
+        <div class="short-term text-center">
+            <h1>단기 렌트료</h1>
+            <div class="separator"></div>
+            <div class="pinside20"></div>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col width="8%"/>
+                        <col width="15%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="6%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="6%"/>
+                        <col width="10%"/>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col" rowspan="2">차종</th>
+                            <th scope="col" rowspan="2">차명</th>
+                            <th scope="col" colspan="5">3일 요금</th>
+                            <th scope="col" colspan="5">이후 1일당 추가 요금</th>
+                            <th scope="col" rowspan="2">km당 추가 요금</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">600km</th>
+                            <th scope="col">900km</th>
+                            <th scope="col">1200km</th>
+                            <th scope="col">자차</th>
+                            <th scope="col">21세 추가</th>
+                            <th scope="col">200km</th>
+                            <th scope="col">300km</th>
+                            <th scope="col">400km</th>
+                            <th scope="col">자차</th>
+                            <th scope="col">21세 추가</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content" style="overflow-x: auto;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col width="8%"/>
+                        <col width="15%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="6%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="6%"/>
+                        <col width="10%"/>
+                    </colgroup>
+                    <tbody>
+                        <tr th:each="shortRent : ${shortRentList}">
+                            <td scope="col" th:text="${shortRent.category1}"></td>
+                            <td scope="col" th:text="${shortRent.name}"></td>
+                            <td scope="col" th:text="${shortRent.cost_for_three_days_600}"></td>
+                            <td scope="col" th:text="${shortRent.cost_for_three_days_900}"></td>
+                            <td scope="col" th:text="${shortRent.cost_for_three_days_1200}"></td>
+                            <td scope="col" th:text="${shortRent.cost_for_three_days_insurance}"></td>
+                            <td scope="col" th:text="${shortRent.cost_for_three_days_age}"></td>
+                            <td scope="col" th:text="${shortRent.extra_cost_per_day_200}"></td>
+                            <td scope="col" th:text="${shortRent.extra_cost_per_day_300}"></td>
+                            <td scope="col" th:text="${shortRent.extra_cost_per_day_400}"></td>
+                            <td scope="col" th:text="${shortRent.extra_cost_per_day_insurance}"></td>
+                            <td scope="col" th:text="${shortRent.extra_cost_per_day_age}"></td>
+                            <td scope="col" th:text="${shortRent.cost_per_km}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-            <tr th:each="shortRent : ${shortRentList}">
-              <td th:text="${shortRent.category1}"></td>
-              <td th:text="${shortRent.name}"></td>
-              <td th:text="${shortRent.cost_for_three_days_600}"></td>
-              <td th:text="${shortRent.cost_for_three_days_900}"></td>
-              <td th:text="${shortRent.cost_for_three_days_1200}"></td>
-              <td th:text="${shortRent.cost_for_three_days_insurance}"></td>
-              <td th:text="${shortRent.cost_for_three_days_age}"></td>
-              <td th:text="${shortRent.extra_cost_per_day_200}"></td>
-              <td th:text="${shortRent.extra_cost_per_day_300}"></td>
-              <td th:text="${shortRent.extra_cost_per_day_400}"></td>
-              <td th:text="${shortRent.extra_cost_per_day_insurance}"></td>
-              <td th:text="${shortRent.extra_cost_per_day_age}"></td>
-              <td th:text="${shortRent.cost_per_km}"></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </section>
+
+    <div class="pinside50"></div>
+
       <!---------------->
       <!-- 캠핑카 렌트료 -->
       <!---------------->
     <section class="price-table" id="camping-car">
-      <div class="camping-car text-center" style="overflow-x: auto;">
-          <h1>캠핑카 렌트료</h1>
-          <div class="separator"></div>
-          <div class="pinside20"></div>
-        <div class="tbl-header">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-              <tr>
-                  <th scope="cols" colspan="2">캠핑카 종류</th>
-                  <th scope="cols">시즌</th>
-                  <th scope="cols">기간</th>
-                  <th scope="cols">Deposit</th>
-                  <th scope="cols">가격</th>
-                  <th scope="cols">월렌트</th>
-              </tr>
-            </thead>
-          </table>
+        <div class="camping-car text-center">
+            <h1>캠핑카 렌트료</h1>
+            <div class="separator"></div>
+            <div class="pinside20"></div>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col width="20%"/>
+                        <col width="15%"/>
+                        <col width="15%"/>
+                        <col width="15%"/>
+                        <col width="15%"/>
+                        <col width="20%"/>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="cols" colspan="2">캠핑카 종류</th>
+                            <th scope="cols">시즌</th>
+                            <th scope="cols">기간</th>
+                            <th scope="cols">Deposit</th>
+                            <th scope="cols">가격</th>
+                            <th scope="cols">월렌트</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content" style="overflow-x: auto;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="10%"/>
+                        <col width="15%"/>
+                        <col width="15%"/>
+                        <col width="15%"/>
+                        <col width="15%"/>
+                        <col width="20%"/>
+                    </colgroup>
+                    <tbody>
+                    <tr th:each="campingCar : ${campingCarList}">
+                        <td scope="col" th:text="${campingCar.category1}"></td>
+                        <td scope="col" th:text="${campingCar.category2}"></td>
+                        <td scope="col" th:text="${campingCar.season}"></td>
+                        <td scope="col" th:text="${campingCar.rent_period}"></td>
+                        <td scope="col" th:text="${campingCar.deposit}"></td>
+                        <td scope="col" th:text="${campingCar.price}"></td>
+                        <td scope="col" th:text="${campingCar.rent_for_month}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-            <tr th:each="campingCar : ${campingCarList}">
-              <td th:text="${campingCar.category1}"></td>
-              <td th:text="${campingCar.category2}"></td>
-              <td th:text="${campingCar.season}"></td>
-              <td th:text="${campingCar.rent_period}"></td>
-              <td th:text="${campingCar.deposit}"></td>
-                <td th:text="${campingCar.price}"></td>
-              <td th:text="${campingCar.rent_for_month}"></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-  </section>
+    </section>
+
+    <div class="pinside50"></div>
+
 </div>
 </html>
