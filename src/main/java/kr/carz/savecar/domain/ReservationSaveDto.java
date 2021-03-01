@@ -11,19 +11,22 @@ public class ReservationSaveDto {
     private String phoneNo;
     private String detail;
     private String product;
+    private String title;
     private String category1;
     private String category2;
     private String car_name;
     private String mileage;
     private String deposit;
     private String option;
+    private String price;
 
-    public ReservationSaveDto(String name, String phoneNo, String detail, String product,
+    public ReservationSaveDto(String name, String phoneNo, String detail, String product, String title,
                               String category1, String category2, String car_name, String mileage,
-                              String deposit, String option) {
+                              String deposit, String option, String price) {
         this.name = name;
         this.phoneNo = phoneNo;
         this.detail = detail;
+        this.title = title;
         this.product = product;
         this.category1 = category1;
         this.category2 = category2;
@@ -31,6 +34,7 @@ public class ReservationSaveDto {
         this.mileage = mileage;
         this.deposit = deposit;
         this.option = option;
+        this.price = price;
     }
 
     public Reservation toEntity() {
@@ -38,6 +42,7 @@ public class ReservationSaveDto {
                 .name(name)
                 .phoneNo(phoneNo)
                 .detail(detail)
+                .title(title)
                 .product(product)
                 .category1(category1)
                 .category2(category2)
@@ -45,6 +50,7 @@ public class ReservationSaveDto {
                 .mileage(mileage)
                 .deposit(deposit)
                 .option(option)
+                .price(price)
                 .build();
 
     }
