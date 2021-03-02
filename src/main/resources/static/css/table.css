@@ -805,7 +805,7 @@ Separator
 }
 .main_service .single_service_img {
   position: relative;
-  height: 585px;
+  height: 650px;
 }
 .main_service .single_service_img img {
   width: 100%;
@@ -815,7 +815,7 @@ Separator
 .main_service .single_service.single_service_text {
   margin-right: 0px;
   background: #202020;
-  height: 585px;
+  height: 650px;
 }
 
 .main_service.small-screen .single_service.single_service_text.small-screen  {
