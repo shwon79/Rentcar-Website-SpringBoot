@@ -50,7 +50,7 @@ public class ReservationController {
 
         params.put("to", "01058283328"); //01058283328
         params.put("from", "01058283328");
-        params.put("type", "SMS");
+        params.put("type", "LMS");
 
         if (dto.getTitle().equals("월렌트, 12개월렌트")){
             params.put("text", "[" + dto.getTitle() + "]\n"
