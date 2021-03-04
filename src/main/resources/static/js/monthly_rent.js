@@ -39,7 +39,7 @@ function make_reservation () {
         mileage : $("#select-mileage").val(),
         deposit : deposit,
         option : $("#select-car-option").val(),
-        price : $("#carTotal").val()
+        price : document.getElementById("carTotal").innerText
     };
     console.log(data)
 

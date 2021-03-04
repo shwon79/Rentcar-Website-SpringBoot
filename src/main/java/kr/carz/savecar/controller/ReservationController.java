@@ -48,9 +48,9 @@ public class ReservationController {
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<String, String>();
 
-        params.put("to", "01058283328");
+        params.put("to", "01058283328"); //01058283328
         params.put("from", "01058283328");
-        params.put("type", "SMS");
+        params.put("type", "LMS");
 
         if (dto.getTitle().equals("월렌트, 12개월렌트")){
             params.put("text", "[" + dto.getTitle() + "]\n"
@@ -60,9 +60,8 @@ public class ReservationController {
                     + "렌트상품: " + dto.getProduct() + "\n"
                     + "차종: " + dto.getCategory1() + "\n"
                     + "차분류: " + dto.getCategory2() + "\n"
-                    + "차명: " + dto.getName() + "\n"
+                    + "차명: " + dto.getCar_name() + "\n"
                     + "주행거리: " + dto.getMileage() + "\n"
-                    + "차명: " + dto.getName() + "\n"
                     + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
         }
         else if (dto.getTitle().equals("저신용장기렌트")){
@@ -72,7 +71,7 @@ public class ReservationController {
                     + "요청사항: " + dto.getDetail() + "\n\n"
                     + "렌트상품: " + dto.getProduct() + "\n"
                     + "차종: " + dto.getCategory2() + "\n"
-                    + "차명: " + dto.getName() + "\n"
+                    + "차명: " + dto.getCar_name() + "\n"
                     + "옵션: " + dto.getOption() + "\n"
                     + "약정주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n");
