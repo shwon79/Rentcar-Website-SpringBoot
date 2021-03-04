@@ -1,5 +1,4 @@
  # 수정시 재배포하기
- ---
  
  ## war 추출
  
@@ -47,3 +46,15 @@ startup.sh를 실행시키면 서버가 올라간다.
 서버를 올리고 도메인에 접속하면 
 ![](https://images.velog.io/images/woo0_hooo/post/178db4b2-c6dc-40af-bafa-bdc7b7e01089/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-02-04%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.02.22.png)
 수정된 버전이 반영되었음을 알 수 있다.
+
+# db 내용 수정하기
+## MySQL 외부 IP 접근설정
+[카페 24 호스팅센터](https://hosting.cafe24.com/?controller=myservice_hosting_main)에서 내 현재 ip를 추가한다.
+<img width="420" alt="스크린샷 2021-03-04 오후 9 32 52" src="https://user-images.githubusercontent.com/49271553/109964568-2efaf400-7d31-11eb-922f-986500cae2d6.png">
+
+## db 접근 툴 이용
+mysql workbench와 같은 시각화가 가능한 db 접근 툴을 이용해서 접근한다. 
+<img width="698" alt="스크린샷 2021-03-04 오후 9 34 20" src="https://user-images.githubusercontent.com/49271553/109964729-636eb000-7d31-11eb-8df4-0beea625d37b.png">
+위와 같이 설정, 패스워드는 db 패스워드 입력하면 연결됨을 확인할 수 있다.
+
+원하는 데이터를 수정/삽입/삭제하면 된다.
