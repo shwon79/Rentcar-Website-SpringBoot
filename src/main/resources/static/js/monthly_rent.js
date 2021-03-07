@@ -27,6 +27,11 @@ function make_reservation () {
         }
     }
 
+    var price;
+    if (document.getElementById("carTotal") != null) {
+        price = document.getElementById("carTotal").innerText;
+    }
+
     var data = {
         name : $("#reservation-detail-name").val(),
         phoneNo : $("#reservation-detail-phone").val(),
@@ -39,7 +44,7 @@ function make_reservation () {
         mileage : $("#select-mileage").val(),
         deposit : deposit,
         option : $("#select-car-option").val(),
-        price : document.getElementById("carTotal").innerText
+        price : price
     };
     console.log(data)
 
