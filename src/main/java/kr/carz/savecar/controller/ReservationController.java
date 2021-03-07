@@ -64,7 +64,7 @@ public class ReservationController {
                     + "주행거리: " + dto.getMileage() + "\n"
                     + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
         }
-        else if (dto.getTitle().equals("저신용장기렌트")){
+        else if (dto.getTitle().equals("누구나장기렌트")){
             params.put("text", "[" + dto.getTitle() + "]\n"
                     + "예약자 이름: " + dto.getName() + "\n"
                     + "연락처: " + dto.getPhoneNo() + "\n"
