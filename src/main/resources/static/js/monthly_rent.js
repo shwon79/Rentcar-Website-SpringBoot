@@ -46,7 +46,7 @@ function make_reservation () {
         option : $("#select-car-option").val(),
         price : price
     };
-    console.log(data)
+    // console.log(data)
 
     var checkbox = document.getElementById("agree")
     if(checkbox.checked) {
@@ -73,7 +73,7 @@ function get_category1(fr, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c1(result) {
-            console.log(result)
+            // console.log(result)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
@@ -91,7 +91,7 @@ function get_category2(fr1, fr2, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c2(result) {
-            console.log(result)
+            // console.log(result)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
@@ -108,13 +108,13 @@ function get_car_name(fr1, fr2, fr3, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_n(result) {
-            console.log(result)
+            // console.log(result)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
         }
     }).fail(function (error) {
-        console.log('/rent/month/' + fr1 + '/name/' + fr2 + '/' + fr3);
+        // console.log('/rent/month/' + fr1 + '/name/' + fr2 + '/' + fr3);
         alert(JSON.stringify(error));
     })
 }
@@ -140,7 +140,7 @@ function int_to_price(price) {
         } else {
             result = price.slice(i-3, i) + ',' + result
         }
-        console.log(result)
+        // console.log(result)
     }
     result = price.slice(0, len%3) + result;
     return result;
