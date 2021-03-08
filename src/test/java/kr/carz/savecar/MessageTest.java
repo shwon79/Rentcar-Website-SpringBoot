@@ -20,8 +20,8 @@ public class MessageTest {
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<String, String>();
 
-        params.put("to", "01083375463");
-        params.put("from", "01083375463");
+        params.put("to", "01058283328");
+        params.put("from", "01058283328");
         params.put("type", "SMS");
         params.put("text", "@@님이 예약을 완료하였습니다."); //메시지 내용
         params.put("app_version", "test app 1.2");

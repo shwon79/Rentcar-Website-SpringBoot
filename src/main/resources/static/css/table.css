@@ -208,9 +208,9 @@ input[type="color"],
   border-color: #bcefeb;
   outline: 0;
   -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075),
-    0 0 0px rgba(102, 175, 233, 0.6);
+  0 0 0px rgba(102, 175, 233, 0.6);
   box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075),
-    0 0 0px rgba(102, 175, 233, 0.6);
+  0 0 0px rgba(102, 175, 233, 0.6);
 }
 /*h5 {
     font-size: 1.125rem;
@@ -496,12 +496,12 @@ Button
 }
 .btn {
   display: inline-block;
-  min-width: 150px;
+  min-width: 200px;
   text-align: center;
   color: #fff;
   letter-spacing: 1px;
   margin: 0;
-  font-size: 0.8125rem;
+  font-size: 2rem;
   border-radius: 0px;
   margin-top: 20px;
   transition: 0.5s;
@@ -662,11 +662,11 @@ Separator
 }
 
 /*====================================================================
-                        Home Section 
+                        Home Section
 ======================================================================*/
 .home {
   background: url(../img/header1.jpg)
-    no-repeat center center;
+  no-repeat center center;
   background-size: cover;
 }
 .home_skew_border {
@@ -767,7 +767,7 @@ Separator
 }
 
 /*====================================================================
-                        Trial Section 
+                        Trial Section
 ======================================================================*/
 .main_trial_area {
   background: url(../img/salesmanager.jpg) no-repeat top center;
@@ -839,16 +839,16 @@ Separator
 }
 
 .main_service
-  .single_service.single_service_text
-  .single_service_right_text
-  h3 {
+.single_service.single_service_text
+.single_service_right_text
+h3 {
   width: 100%;
   color: #e74c3c;
 }
 .main_service
-  .single_service.single_service_text
-  .single_service_right_text
-  h5 {
+.single_service.single_service_text
+.single_service_right_text
+h5 {
   color: #FFFFFF;
 }
 .main_service .single_service.single_service_text .single_service_right_text p {
@@ -916,7 +916,7 @@ Separator
 }
 
 /*====================================================================
-                        price-table Section 
+                        price-table Section
 ======================================================================*/
 .price-table {
   /*padding-top: 7rem;*/
@@ -1145,7 +1145,7 @@ button.btn-md:hover {
 }
 .pricing_body {
   background: #f4f5f9;
-  padding: 30px 0px 30px 0px;
+  padding: 10px 0px 10px 0px;
 }
 .single_pricing ul {
 }
@@ -1156,5 +1156,5 @@ button.btn-md:hover {
 }
 
 .single_pricing a {
-  margin-top: 30px;
+  margin: 20px;
 }
