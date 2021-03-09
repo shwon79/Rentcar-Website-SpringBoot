@@ -2,12 +2,14 @@ package kr.carz.savecar.domain;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "Reservation")
 public class Reservation extends BaseTimeEntity {
     @Id

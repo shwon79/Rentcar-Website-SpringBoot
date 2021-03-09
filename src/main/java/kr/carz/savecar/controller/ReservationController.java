@@ -30,7 +30,6 @@ public class ReservationController {
 
 
     @GetMapping("/reservation/list")
-    @ResponseBody
     public String reservation_list(Model model) {
         List<Reservation> reservationList = reservationService.findAllReservations();
         model.addAttribute("reservationList", reservationList);
