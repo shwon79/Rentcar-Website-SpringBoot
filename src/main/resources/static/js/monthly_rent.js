@@ -25,6 +25,12 @@ function make_reservation () {
         } else {
             deposit = $("#rentYear").val();
         }
+    } else if (document.getElementsByName("carDeposit") != null) {
+        if (document.getElementById("deposit-10").checked){
+            deposit = $("#deposit-10").val();
+        } else {
+            deposit = $("#deposit-30").val();
+        }
     }
 
     var price;
