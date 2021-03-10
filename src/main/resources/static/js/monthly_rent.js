@@ -1,3 +1,4 @@
+// 에약 요청
 function make_reservation () {
     var product;
     if (document.getElementById("rentProduct") != null) {
@@ -72,6 +73,7 @@ function make_reservation () {
     }
 }
 
+//차종 구하기
 function get_category1(fr, detailedSelect) {
     $.ajax({
         type: 'GET',
@@ -88,7 +90,7 @@ function get_category1(fr, detailedSelect) {
         alert(JSON.stringify(error));
     })
 }
-
+//차 분류 구하기
 function get_category2(fr1, fr2, detailedSelect) {
 
     $.ajax({
@@ -106,7 +108,7 @@ function get_category2(fr1, fr2, detailedSelect) {
         alert(JSON.stringify(error));
     })
 }
-
+// 차명 구하기
 function get_car_name(fr1, fr2, fr3, detailedSelect) {
     $.ajax({
         type: 'GET',
@@ -124,7 +126,7 @@ function get_car_name(fr1, fr2, fr3, detailedSelect) {
         alert(JSON.stringify(error));
     })
 }
-
+//주행거리 구하기
 function get_mileage(fr1, detailedSelect) {
     if (fr1 == "rentMonth") {
         mileage_options = [2000, 2500, 3000, 4000];
@@ -135,7 +137,7 @@ function get_mileage(fr1, detailedSelect) {
         detailedSelect.options[i+1] = new Option(mileage_options[i], mileage_options[i]);
     }
 }
-
+// 가격 파싱해서 천단위마다 , 로 끊기
 function int_to_price(price) {
     var len = price.length;
     var result = "";
@@ -151,7 +153,7 @@ function int_to_price(price) {
     result = price.slice(0, len%3) + result;
     return result;
 }
-
+// 요청한 값들에 따라 가격 구하기
 function get_price(fr1, fr2, fr3, detailedSelect) {
     $.ajax({
         type: 'GET',
