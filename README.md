@@ -32,8 +32,11 @@
 이렇게 연결에 성공하면, ![](https://images.velog.io/images/woo0_hooo/post/65c9b3e7-92b0-441c-8910-bf5d931594f7/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-02-04%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%204.58.46.png)
 /tomcat/webapps 아래에 빌드한 war 파일을 업로드한다. 
 
+
+
 # tomcat 구동
 terminal에서 서버에 접속한다. Host와 비밀번호는 ftp접속했을때와 같음
+ssh [계정id]@[호스팅서버주소]
 
 /tomcat/bin의 
 ![](https://images.velog.io/images/woo0_hooo/post/f78fd45e-e686-4970-8428-ed60e2064a6a/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-02-04%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.00.56.png)
@@ -46,6 +49,45 @@ startup.sh를 실행시키면 서버가 올라간다.
 서버를 올리고 도메인에 접속하면 
 ![](https://images.velog.io/images/woo0_hooo/post/178db4b2-c6dc-40af-bafa-bdc7b7e01089/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-02-04%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.02.22.png)
 수정된 버전이 반영되었음을 알 수 있다.
+
+
+
+
+
+# 로그 정리하는 법
+tomcat의 로그 위치는 tomcat/logs 에 위치하며 기본적으로 catalina.out 전체로그와 catalina.YYYY-MM-DD.log 형식의 로그 파일로 구분 됩니다.
+
+
+[root@umj7 techcs1651]$ cd tomcat/logs/
+[root@umj7 logs]$ ls -l
+-rw-r--r-- 1 techcs1651 techcs1651  1114 Jan  4  2019 catalina.2019-01-04.log
+-rw-r--r-- 1 techcs1651 techcs1651  3686 Jan 12 02:36 catalina.2019-01-12.log
+-rw-r--r-- 1 techcs1651 techcs1651  4194 Feb  2 02:18 catalina.2019-02-02.log
+-rw-r--r-- 1 techcs1651 techcs1651  1114 Feb 28 03:41 catalina.2019-02-28.log
+-rw-r--r-- 1 techcs1651 techcs1651  1114 Mar  5 23:38 catalina.2019-03-05.log
+-rw-r--r-- 1 techcs1651 techcs1651  1114 Mar 15 07:53 catalina.2019-03-15.log
+-rw-r--r-- 1 techcs1651 techcs1651  1114 Mar 19 10:14 catalina.2019-03-19.log
+-rw-r--r-- 1 techcs1651 techcs1651  1114 Mar 21 15:33 catalina.2019-03-21.log
+-rw-r--r-- 1 techcs1651 techcs1651 50232 Mar 21 15:33 catalina.out
+
+tomcat을 운영중에 로그파일이 자동으로 정리되지 않기 때문에 일정 주기에 맞추어 로그를 삭제해야 불필요한 용량을 차지하는 것을 방지 할 수 있으며 용량부족으로 인한 오류를 미연에 방지 할 수 있습니다.
+
+먼저 로그 정리를 위해서는 먼저 tomcat을 중지 이후에 정리(삭제)를 하셔야 정상적으로 동작 할 수 있습니다.
+[root@umj7 techcs1651]$ ./tomcat/bin/shutdown.sh
+
+
+tomcat 정지 이후에 로그파일을 따로 ftp로 백업 하시거나 서버에서 직접 삭제 할 수 있습니다.
+[root@umj7 techcs1651]$ cd tomcat/logs/
+[root@umj7 logs]$ rm ./catalina.out
+
+
+catalina.out 을 정리(삭제) 하셨다면 tomcat을 다시 시작합니다.
+[root@umj7 techcs1651]$ ./tomcat/bin/startup.sh
+
+
+
+
+
 
 # db 내용 수정하기
 ## MySQL 외부 IP 접근설정
