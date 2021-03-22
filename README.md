@@ -19,7 +19,8 @@
  ![](https://images.velog.io/images/woo0_hooo/post/58effdae-b829-4455-92ef-61d6dc969c8f/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-02-04%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%204.54.02.png)
  
  그럼 out 폴더에 위와 같이 war 파일이 추출됐음을 알 수 있다. 
- 
+    
+      
  ## 카페24 tomcat 서버에 올리기 
  ### ftp를 이용해서 추출한 war 파일 업로드
  File zila를 사용했는데, 아무거나 사용해도 상관없다.
@@ -35,7 +36,7 @@
 
 
 # tomcat 구동
-terminal에서 서버에 접속한다. Host와 비밀번호는 ftp접속했을때와 같음
+terminal에서 서버에 접속한다. Host와 비밀번호는 ftp접속했을때와 같음    
 ssh [계정id]@[호스팅서버주소]
 
 /tomcat/bin의 
@@ -48,7 +49,6 @@ startup.sh를 실행시키면 서버가 올라간다.
 
 서버를 올리고 도메인에 접속하면 
 ![](https://images.velog.io/images/woo0_hooo/post/178db4b2-c6dc-40af-bafa-bdc7b7e01089/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-02-04%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.02.22.png)
-수정된 버전이 반영되었음을 알 수 있다.
 
 
 
