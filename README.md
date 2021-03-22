@@ -58,17 +58,8 @@ startup.sh를 실행시키면 서버가 올라간다.
 tomcat의 로그 위치는 tomcat/logs 에 위치하며 기본적으로 catalina.out 전체로그와 catalina.YYYY-MM-DD.log 형식의 로그 파일로 구분 됩니다.
 
 
-[root@umj7 techcs1651]$ cd tomcat/logs/
-[root@umj7 logs]$ ls -l
--rw-r--r-- 1 techcs1651 techcs1651  1114 Jan  4  2019 catalina.2019-01-04.log
--rw-r--r-- 1 techcs1651 techcs1651  3686 Jan 12 02:36 catalina.2019-01-12.log
--rw-r--r-- 1 techcs1651 techcs1651  4194 Feb  2 02:18 catalina.2019-02-02.log
--rw-r--r-- 1 techcs1651 techcs1651  1114 Feb 28 03:41 catalina.2019-02-28.log
--rw-r--r-- 1 techcs1651 techcs1651  1114 Mar  5 23:38 catalina.2019-03-05.log
--rw-r--r-- 1 techcs1651 techcs1651  1114 Mar 15 07:53 catalina.2019-03-15.log
--rw-r--r-- 1 techcs1651 techcs1651  1114 Mar 19 10:14 catalina.2019-03-19.log
--rw-r--r-- 1 techcs1651 techcs1651  1114 Mar 21 15:33 catalina.2019-03-21.log
--rw-r--r-- 1 techcs1651 techcs1651 50232 Mar 21 15:33 catalina.out
+[root@umj7 techcs1651]$ cd tomcat/logs/    
+[root@umj7 logs]$ ls -l     
 
 tomcat을 운영중에 로그파일이 자동으로 정리되지 않기 때문에 일정 주기에 맞추어 로그를 삭제해야 불필요한 용량을 차지하는 것을 방지 할 수 있으며 용량부족으로 인한 오류를 미연에 방지 할 수 있습니다.    
 
