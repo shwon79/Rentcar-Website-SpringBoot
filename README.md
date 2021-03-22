@@ -70,19 +70,19 @@ tomcat의 로그 위치는 tomcat/logs 에 위치하며 기본적으로 catalina
 -rw-r--r-- 1 techcs1651 techcs1651  1114 Mar 21 15:33 catalina.2019-03-21.log
 -rw-r--r-- 1 techcs1651 techcs1651 50232 Mar 21 15:33 catalina.out
 
-tomcat을 운영중에 로그파일이 자동으로 정리되지 않기 때문에 일정 주기에 맞추어 로그를 삭제해야 불필요한 용량을 차지하는 것을 방지 할 수 있으며 용량부족으로 인한 오류를 미연에 방지 할 수 있습니다.
+tomcat을 운영중에 로그파일이 자동으로 정리되지 않기 때문에 일정 주기에 맞추어 로그를 삭제해야 불필요한 용량을 차지하는 것을 방지 할 수 있으며 용량부족으로 인한 오류를 미연에 방지 할 수 있습니다.    
 
-먼저 로그 정리를 위해서는 먼저 tomcat을 중지 이후에 정리(삭제)를 하셔야 정상적으로 동작 할 수 있습니다.
+먼저 로그 정리를 위해서는 먼저 tomcat을 중지 이후에 정리(삭제)를 하셔야 정상적으로 동작 할 수 있습니다.     
 [root@umj7 techcs1651]$ ./tomcat/bin/shutdown.sh
 
 
-tomcat 정지 이후에 로그파일을 따로 ftp로 백업 하시거나 서버에서 직접 삭제 할 수 있습니다.
-[root@umj7 techcs1651]$ cd tomcat/logs/
-[root@umj7 logs]$ rm ./catalina.out
+tomcat 정지 이후에 로그파일을 따로 ftp로 백업 하시거나 서버에서 직접 삭제 할 수 있습니다.    
+[root@umj7 techcs1651]$ cd tomcat/logs/    
+[root@umj7 logs]$ rm ./catalina.out   
 
 
-catalina.out 을 정리(삭제) 하셨다면 tomcat을 다시 시작합니다.
-[root@umj7 techcs1651]$ ./tomcat/bin/startup.sh
+catalina.out 을 정리(삭제) 하셨다면 tomcat을 다시 시작합니다.   
+[root@umj7 techcs1651]$ ./tomcat/bin/startup.sh    
 
 
 
