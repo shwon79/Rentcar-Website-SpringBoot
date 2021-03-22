@@ -48,9 +48,16 @@ public class ReservationController {
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<String, String>();
 
-        params.put("to", "01033453328"); //01033453328
+        params.put("to", "01058283328"); //01033453328
         params.put("from", "01058283328");
         params.put("type", "LMS");
+
+
+        if(dto.getTitle() == null){
+            System.out.println("empty");
+        } else {
+            System.out.println(dto.getTitle());
+        }
 
         if (dto.getTitle().equals("월렌트, 12개월렌트")){
             params.put("text", "[" + dto.getTitle() + "]\n"

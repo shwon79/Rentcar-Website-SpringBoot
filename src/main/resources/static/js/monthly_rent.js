@@ -1,13 +1,31 @@
 // 에약 요청
 function make_reservation () {
+
+    var tmp = document.getElementById("rent-product1")
+    var tmp1= document.getElementsByName("rent-product")
+
+    console.log(document.getElementById("rentProduct"))
+    // console.log(tmp1)
+
     var product;
-    if (document.getElementById("rentProduct") != null) {
-        product = document.getElementById("rentProduct").getAttribute("value")
+    if (document.getElementById("long-rent-product1") != null) {
+
+        if (document.getElementById("long-rent-product1").checked) {
+            product = document.getElementById("long-rent-product1").getAttribute("value")
+        } else {
+            product = document.getElementById("long-rent-product2").getAttribute("value")
+        }
+
     } else if (document.getElementById("rent-product1") != null) {
-        if (document.getElementById("rent-product1").checked) {
-            product = $("#rent-product1").val();
-        } else if (document.getElementById("rent-product2").checked) {
-            product = $("#rent-product2").val();
+        console.log("통과 1")
+        var month1 = document.getElementById("rent-product1")
+
+        if (month1 && month1.checked) {
+            console.log("통과 2")
+            product = document.getElementById("rent-product1").getAttribute("value")
+        } else {
+            console.log("통과 3")
+            product = document.getElementById("rent-product2").getAttribute("value")
         }
 
         if (product == "rentMonth") {
@@ -15,18 +33,25 @@ function make_reservation () {
         } else if (product == "rentYear") {
             product = "12개월 렌트";
         }
+    } else if (document.getElementById("rentProduct") != null){
+        product = document.getElementById("rentProduct").getAttribute("value")
     } else {
         product = "";
     }
 
+    console.log(document.getElementById("carDeposit"))
+    console.log(document.getElementsByName("carDeposit"))
+
     var deposit;
-    if (document.getElementById("rentMonth") != null) {
-        if (document.getElementById("rentMonth").checked){
-            deposit = $("#rentMonth").val();
-        } else {
-            deposit = $("#rentYear").val();
-        }
-    } else if (document.getElementsByName("carDeposit") != null) {
+    if (document.getElementById("carDeposit") != null) {
+
+        deposit = $("#carDeposit").val();
+        // if (document.getElementById("rent-product1") && document.getElementById("rent-product1").checked){
+        //     deposit = $("#rentMonth").val();
+        // } else {
+        //     deposit = $("#rentYear").val();
+        // }
+    } else if (document.getElementById("deposit-10") != null) {
         if (document.getElementById("deposit-10").checked){
             deposit = $("#deposit-10").val();
         } else {
@@ -34,10 +59,14 @@ function make_reservation () {
         }
     }
 
+
+
     var price;
     if (document.getElementById("carTotal") != null) {
         price = document.getElementById("carTotal").innerText;
     }
+
+
 
     var data = {
         name : $("#reservation-detail-name").val(),
@@ -53,7 +82,9 @@ function make_reservation () {
         option : $("#select-car-option").val(),
         price : price
     };
-    // console.log(data)
+    console.log(data)
+
+
 
     var checkbox = document.getElementById("agree")
     if(checkbox.checked) {
