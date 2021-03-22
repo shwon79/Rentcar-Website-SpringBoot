@@ -1162,3 +1162,18 @@ button.btn-md:hover {
 .single_pricing a {
   margin: 20px;
 }
+
+.width-height-box {
+  position:relative;
+  height:500px;
+  text-align: center;
+  vertical-align:middle;
+}
+
+.width-height-box img {
+  position:absolute;
+  top:40%;
+  margin-top:-150px;
+  margin-left: -35%;
+  height:400px;
+}
