@@ -68,7 +68,7 @@ Author:             Jitu Chauhan
     1. Body / Typography 
 -----------------------------------*/
 
-body { font-size: 1.25rem; background-color: #fff; color: #000000; font-family: 'HangeulNuri-Bold'; line-height: 1.75rem; font-weight: 300; }
+body { font-size: 1.5rem; background-color: #fff; color: #000000; font-family: 'HangeulNuri-Bold'; line-height: 1.75rem; font-weight: 300; }
 h1, h2, h3, h4, h5, h6 {
     padding: 0;
     margin: 0 0 0.625rem;
