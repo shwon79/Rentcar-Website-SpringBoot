@@ -20,6 +20,7 @@ public class YearlyRent {
     private String cost_for_20k;
     private String cost_for_30k;
     private String cost_for_40k;
+    private String cost_for_others;
     private String age_limit;
     private String cost_per_km;
 }

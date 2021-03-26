@@ -118,6 +118,8 @@ public class MonthlyRentController {
             jsonArray.put(rentCar.getCost_for_3k());
         } else if(mileage.equals("4000")) {
             jsonArray.put(rentCar.getCost_for_4k());
+        } else if(mileage.equals("기타주행거리")) {
+            jsonArray.put(rentCar.getCost_for_others());
         }
 
         jsonArray.put(rentCar.getDeposit());
@@ -215,6 +217,8 @@ public class MonthlyRentController {
             jsonArray.put(rentCar.getCost_for_30k());
         } else if(mileage.equals("40000")) {
             jsonArray.put(rentCar.getCost_for_40k());
+        } else if(mileage.equals("기타주행거리")) {
+            jsonArray.put(rentCar.getCost_for_others());
         }
 
         jsonArray.put(rentCar.getDeposit());

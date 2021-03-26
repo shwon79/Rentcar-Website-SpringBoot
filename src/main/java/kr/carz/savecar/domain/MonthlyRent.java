@@ -22,6 +22,7 @@ public class MonthlyRent {
     private String cost_for_2_5k;
     private String cost_for_3k;
     private String cost_for_4k;
+    private String cost_for_others;
     private String age_limit;
 
 }

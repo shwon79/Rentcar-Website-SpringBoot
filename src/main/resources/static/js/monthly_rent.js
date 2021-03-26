@@ -160,9 +160,9 @@ function get_car_name(fr1, fr2, fr3, detailedSelect) {
 //주행거리 구하기
 function get_mileage(fr1, detailedSelect) {
     if (fr1 == "rentMonth") {
-        mileage_options = [2000, 2500, 3000, 4000];
+        mileage_options = [2000, 2500, 3000, 4000, "기타주행거리"];
     } else {
-        mileage_options = [20000, 30000, 40000];
+        mileage_options = [20000, 30000, 40000, "기타주행거리"];
     }
     for (i = 0; i < mileage_options.length; i++) {
         detailedSelect.options[i+1] = new Option(mileage_options[i], mileage_options[i]);
@@ -192,20 +192,33 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
         contentType: "application/json; charset=euc-kr",
         dataType: 'json',
         success: function set_p(result) {
+            console.log(result)
             var price = result[0];
-            var vat = price.replace(/,/gi, "");
-            vat = parseInt(vat) * 0.1;
-            var deposit = result[1];
-            var total = parseInt(price.replace(/,/gi, "")) + vat;
 
-            vat = int_to_price(vat.toString());
-            total = int_to_price(total.toString());
+            if(price == '상담') {
+                var vat = price
+                var deposit = result[1];
+                var total = vat;
 
-            document.getElementById("carPrice").innerText = price +"원";
-            document.getElementById("carVat").innerText = vat +"원";
-            document.getElementById("carDeposit").innerText = deposit +"원";
-            document.getElementById("carTotal").innerText =  total +"원";
+                document.getElementById("carPrice").innerText = price;
+                document.getElementById("carVat").innerText = vat;
+                document.getElementById("carDeposit").innerText = deposit +"원";
+                document.getElementById("carTotal").innerText =  total;
 
+            } else {
+                var vat = price.replace(/,/gi, "");
+                vat = parseInt(vat) * 0.1;
+                var deposit = result[1];
+                var total = parseInt(price.replace(/,/gi, "")) + vat;
+
+                vat = int_to_price(vat.toString());
+                total = int_to_price(total.toString());
+
+                document.getElementById("carPrice").innerText = price +"원";
+                document.getElementById("carVat").innerText = vat +"원";
+                document.getElementById("carDeposit").innerText = deposit +"원";
+                document.getElementById("carTotal").innerText =  total +"원";
+            }
         }
     }).fail(function (error) {
         alert(JSON.stringify(error));
