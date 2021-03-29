@@ -68,7 +68,7 @@ Author:             Jitu Chauhan
     1. Body / Typography 
 -----------------------------------*/
 
-body { font-size: 1.5rem; background-color: #fff; color: #000000; font-family: 'HangeulNuri-Bold'; line-height: 1.75rem; font-weight: 300; }
+body { font-size: 1.2rem; background-color: #fff; color: #000000; font-family: 'HangeulNuri-Bold'; line-height: 1.75rem; font-weight: 300; }
 h1, h2, h3, h4, h5, h6 {
     padding: 0;
     margin: 0 0 0.625rem;
@@ -162,7 +162,7 @@ label { }
 .span-input { /* 추후 뭘 설정할지 고민하면 좋을듯 */ }
 .form-control { width: 100%; height: 50px; padding: 6px 12px; font-size: 1.3rem; line-height: 1.42857143; color: #000; background-color: #fff; border: 1px solid #e2dcdb; background-image: none; border-radius: 0px; -webkit-box-shadow: inset 0 0px 0px rgba(255, 255, 255, .075); box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .075); margin-bottom: 15px; }
 .form-control-span { width: 100%; height: 50px; padding: 6px 12px; font-size: 1.3rem; line-height: 1.42857143; color:#000; background-color: #fff; border: 1px solid #e2dcdb; background-image: none; border-radius: 0px; -webkit-box-shadow: inset 0 0px 0px rgba(255, 255, 255, .075); box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .075); margin-bottom: 15px; }
-.form-control-span2 { width: 70%; height: 50px; padding: 6px 12px; font-size: 1.3rem; line-height: 1.42857143; color:#000; background-color: #fff; border: 1px solid #e2dcdb; background-image: none; border-radius: 0px; -webkit-box-shadow: inset 0 0px 0px rgba(255, 255, 255, .075); box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .075); margin-bottom: 15px; }
+.form-control-span2 { width: 60%; height: 50px; padding: 6px 12px; font-size: 1.25rem; line-height: 1.42857143; color:#000; background-color: #fff; border: 1px solid #e2dcdb; background-image: none; border-radius: 0px; -webkit-box-shadow: inset 0 0px 0px rgba(255, 255, 255, .075); box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .075); margin-bottom: 15px; }
 .form-control-span3 { width: 40%; height: 50px; padding: 6px 12px; font-size: 1.3rem; line-height: 1.42857143; color:#000; background-color: #fff; border: 1px solid #e2dcdb; background-image: none; border-radius: 0px; -webkit-box-shadow: inset 0 0px 0px rgba(255, 255, 255, .075); box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .075); margin-bottom: 15px; }
 .form-control-select { margin-right: 10px; width: 35%; height: 50px; padding: 6px 12px; font-size: 1.3rem; line-height: 1.42857143; color: #000; background-color: #fff; border: 1px solid #e2dcdb; background-image: none; border-radius: 0px; -webkit-box-shadow: inset 0 0px 0px rgba(255, 255, 255, .075); box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .075); margin-bottom: 15px; }
 .form-control-select2 { margin-right: 10px; width: 70%; height: 50px; padding: 6px 12px; font-size: 1.3rem; line-height: 1.42857143; color: #000; background-color: #fff; border: 1px solid #e2dcdb; background-image: none; border-radius: 0px; -webkit-box-shadow: inset 0 0px 0px rgba(255, 255, 255, .075); box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .075); margin-bottom: 15px; }

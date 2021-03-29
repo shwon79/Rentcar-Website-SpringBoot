@@ -57,7 +57,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="textarea">요청 사항</label>
-                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요."></textarea>
+                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요.(약정 주행거리 등)"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -124,9 +124,14 @@
                                             </span>
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
-                                            <select id="select-car-name" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">
-                                                <option value="">차명을 선택해주세요</option>
-                                            </select>
+                                            <span class="span-input">
+                                                <select id="select-car-name" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">
+                                                    <option value="">차명을 선택해주세요</option>
+                                                </select>
+<!--                                                <select id="select-car-year" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">-->
+<!--                                                    <option value="">년식을 선택해주세요</option>-->
+<!--                                                </select>-->
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="row">
