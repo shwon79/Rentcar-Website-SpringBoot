@@ -19,7 +19,7 @@
                         <br>
                         <p>
                             <a href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">
-                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">전체 한눈에 보는 가격표</button>
+                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">누구나 장기렌트 블로그 연결</button>
                             </a>
                         </p>
                     </div>
@@ -78,11 +78,11 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <span class="span-control">
-                                                <label class="control-label" for="name">누구나장기렌트</label>
+                                                <label style="font-size: 15px" id="rent-title" value="누구나장기렌트">누구나장기렌트</label>
                                             </span>
                                             <span class="span-input">
-                                                <label style="margin-right: 20px;"><input type="radio" id="long-rent-product1" name="rent-product" value="신차">&nbsp; 신차</label>
-                                                <label><input type="radio" id="long-rent-product2" name="rent-product" value="중고차">&nbsp; 중고차</label>
+                                                <label style="margin-right: 20px;"><input type="radio" id="long-rent-product1" name="rentProduct" value="신차">&nbsp; 신차</label>
+                                                <label><input type="radio" id="long-rent-product2" name="rentProduct" value="중고차">&nbsp; 중고차</label>
                                             </span>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -112,17 +112,33 @@
                                                 <label class="control-label" for="name">옵션</label>
                                             </span>
                                             <span class="span-input">
-                                                <input type="text" class="form-control-span2" id="select-car-option" placeholder="옵션을 입력하세요.">
+                                                <input type="text" class="form-control-span2" id="select-car-option" placeholder="옵션을 입력하거나 필요한 옵션사항 등을 입력하세요..">
                                             </span>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <span class="span-control">
                                                 <label class="control-label" for="kliometer">약정주행거리[연간]</label>
                                             </span>
-                                            <span class="span-input">
-                                                <input type="text" placeholder="주행거리를 입력하세요." class="form-control-span2" id="select-mileage">
-<!--                                                <label> &nbsp; km </label>-->
-                                            </span>
+<!--                                            <span class="span-input">-->
+<!--                                                <input type="text" placeholder="주행거리를 입력하세요." class="form-control-span2" id="select-mileage">-->
+<!--&lt;!&ndash;                                                <label> &nbsp; km </label>&ndash;&gt;-->
+<!--                                            </span>-->
+                                            <select name="selectMileage" id="select-mileage" class="form-control-select2">
+                                                <option value="미선택">--주행거리를 선택해주세요--</option>
+                                                <option value="20000km">20000km</option>
+                                                <option value="25000km">25000km</option>
+                                                <option value="30000km">30000km</option>
+                                                <option value="40000km">40000km</option>
+                                                <option value="기타">기타</option>
+                                            </select>
+<!--                                            <span class="span-input">-->
+<!--                                                <select id="select-mileage" name="selectMileage" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">-->
+<!--                                                    <option value="">주행거리를 선택해주세요.</option>-->
+<!--                                                </select>-->
+<!--                                                &lt;!&ndash;                                                <select id="select-car-year" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">&ndash;&gt;-->
+<!--                                                &lt;!&ndash;                                                    <option value="">년식을 선택해주세요</option>&ndash;&gt;-->
+<!--                                                &lt;!&ndash;                                                </select>&ndash;&gt;-->
+<!--                                            </span>-->
                                         </div>
                                     </div>
                                     <div class="row">
@@ -137,7 +153,7 @@
                                                 <label style="margin-right: 20px;">
                                                     <input type="radio" id="deposit-30" name="carDeposit" value="30%">&nbsp; 30%
                                                 </label>
-<!--                                                <label><input type="radio" id="deposit-0" name="carDeposit" value="기타">&nbsp; 기타</label>-->
+                                                <label><input type="radio" id="deposit-0" name="carDeposit" value="기타">&nbsp; 기타</label>
 
                                             </span>
                                         </div>
@@ -153,7 +169,7 @@
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group text-center">
-                                                <a class="btn1 btn1-default" onclick="make_reservation()" href="/rent/long_term">상담신청 </a>
+                                                <a class="btn1 btn1-default" onclick="make_reservation()" href="#">상담신청 </a>
                                             </div>
                                         </div>            
                                     </div>

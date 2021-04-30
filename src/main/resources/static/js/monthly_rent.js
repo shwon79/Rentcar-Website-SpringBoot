@@ -4,8 +4,8 @@ function make_reservation () {
     var tmp = document.getElementById("rent-product1")
     var tmp1= document.getElementsByName("rent-product")
 
-    console.log(document.getElementById("rentProduct"))
 
+    console.log('통과 1 ')
     var product;
     if (document.getElementById("long-rent-product1") != null) {
 
@@ -16,7 +16,7 @@ function make_reservation () {
         }
 
     } else if (document.getElementById("rent-product1") != null) {
-        console.log("통과 1")
+
         var month1 = document.getElementById("rent-product1")
 
         if (month1 && month1.checked) {
@@ -53,8 +53,10 @@ function make_reservation () {
     } else if (document.getElementById("deposit-10") != null) {
         if (document.getElementById("deposit-10").checked){
             deposit = $("#deposit-10").val();
-        } else {
+        } else if (document.getElementById("deposit-30").checked){
             deposit = $("#deposit-30").val();
+        } else {
+            deposit = $("#deposit-0").val();
         }
     }
 
