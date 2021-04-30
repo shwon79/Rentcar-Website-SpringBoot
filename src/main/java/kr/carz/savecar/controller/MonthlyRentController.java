@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -46,8 +47,11 @@ public class MonthlyRentController {
             categoryList.add(monthlyRents.get(i).getCategory1());
         }
 
+        List <String> categoryHashToList = new ArrayList(categoryList);
+        Collections.sort(categoryHashToList);
+
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryList) {
+        for (String c : categoryHashToList) {
             jsonArray.put(c);
         }
 
@@ -69,8 +73,11 @@ public class MonthlyRentController {
             categoryList.add(monthlyRents.get(i).getCategory2());
         }
 
+        List <String> categoryHashToList = new ArrayList(categoryList);
+        Collections.sort(categoryHashToList);
+
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryList) {
+        for (String c : categoryHashToList) {
             jsonArray.put(c);
         }
 
@@ -92,8 +99,12 @@ public class MonthlyRentController {
             categoryList.add(monthlyRents.get(i).getName());
         }
 
+        List <String> categoryHashToList = new ArrayList(categoryList);
+        Collections.sort(categoryHashToList);
+
+
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryList) {
+        for (String c : categoryHashToList) {
             jsonArray.put(c);
         }
 
@@ -144,8 +155,12 @@ public class MonthlyRentController {
             categoryList.add(yearlyRents.get(i).getCategory1());
         }
 
+        List <String> categoryHashToList = new ArrayList(categoryList);
+        Collections.sort(categoryHashToList);
+
+
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryList) {
+        for (String c : categoryHashToList) {
             jsonArray.put(c);
         }
 
@@ -168,8 +183,12 @@ public class MonthlyRentController {
             categoryList.add(yearlyRents.get(i).getCategory2());
         }
 
+        List <String> categoryHashToList = new ArrayList(categoryList);
+        Collections.sort(categoryHashToList);
+
+
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryList) {
+        for (String c : categoryHashToList) {
             jsonArray.put(c);
         }
 
@@ -192,8 +211,12 @@ public class MonthlyRentController {
             categoryList.add(yearlyRents.get(i).getName());
         }
 
+        List <String> categoryHashToList = new ArrayList(categoryList);
+        Collections.sort(categoryHashToList);
+
+
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryList) {
+        for (String c : categoryHashToList) {
             jsonArray.put(c);
         }
 

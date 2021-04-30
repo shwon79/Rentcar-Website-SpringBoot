@@ -1,12 +1,21 @@
 @charset "UTF-8";
 
 /* Web Fonts */
+/*@font-face {*/
+/*  font-family: 'HangeulNuri-Bold';*/
+/*  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');*/
+/*  font-weight: normal;*/
+/*  font-style: normal;*/
+/*}*/
+
 @font-face {
-  font-family: 'HangeulNuri-Bold';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');
-  font-weight: normal;
+  font-family: 'NanumBarunGothic';
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+  font-weight: 600;
   font-style: normal;
 }
+
 
 .price-table h1 {
   font-size: 30px;
@@ -89,7 +98,7 @@ body {
   margin-right: 0;
   font-weight: 300;
   width: 100%;
-  font-family: 'HangeulNuri-Bold';
+  font-family: 'NanumBarunGothic';
 }
 .preloader {
   position: fixed;

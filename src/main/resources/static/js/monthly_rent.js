@@ -5,7 +5,6 @@ function make_reservation () {
     var tmp1= document.getElementsByName("rent-product")
 
     console.log(document.getElementById("rentProduct"))
-    // console.log(tmp1)
 
     var product;
     if (document.getElementById("long-rent-product1") != null) {
@@ -130,9 +129,10 @@ function get_category2(fr1, fr2, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c2(result) {
-            // console.log(result)
+
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
+                console.log(detailedSelect.options[i+1])
             }
         }
     }).fail(function (error) {
