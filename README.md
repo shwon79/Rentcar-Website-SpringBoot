@@ -61,9 +61,9 @@ startup.sh를 실행시키면 서버가 올라간다.
 
 
 
-# 로그 정리하는 
+# 로그 정리하는 법
 tomcat의 로그 위치는 tomcat/logs 에 위치하며 기본적으로 catalina.out 전체로그와 catalina.YYYY-MM-DD.log 형식의 로그 파일로 구분 됩니다.
-터미널에서 ssh 카페24id@카페24주소 
+터미널에서 ssh 카페24id@카페24주소     
 mysql 비밀번호 입력
 
 [root@umj7 techcs1651]$ cd tomcat/logs/    
