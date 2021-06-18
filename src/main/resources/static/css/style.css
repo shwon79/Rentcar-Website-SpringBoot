@@ -75,7 +75,7 @@ Author:             Jitu Chauhan
     1. Body / Typography 
 -----------------------------------*/
 
-body { font-size: 1.2rem; background-color: #fff; color: #000000; font-family: 'NanumBarunGothic'; line-height: 1.75rem; font-weight: 300; }
+body { font-size: 1.4rem; background-color: #fff; color: #000000; font-family: 'NanumBarunGothic'; line-height: 1.75rem; font-weight: 300; }
 h1, h2, h3, h4, h5, h6 {
     padding: 0;
     margin: 0 0 0.625rem;
@@ -188,8 +188,8 @@ label { }
 -----------------------------------*/
 .btn1 { display: inline-block; padding: 14px 30px; margin-bottom: 0; font-size: 13px; font-weight: 800; letter-spacing: 1px; line-height: 1.42857143; text-align: center; border: none; text-transform: uppercase; border-radius: 40px; font-family: 'NanumBarunGothic';
     -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-.btn1-default { color: #fff; background-color: #372d2b; }
-.btn1-default:hover { color: #fff; background-color: #e7a625; border-color: #e7a625; }
+.btn1-default { color: #fff; background-color: #e7a625; }
+.btn1-default:hover { color: #fff; background-color: #13a0b2; border-color: #e7a625; }
 .btn1-default.focus, .btn1-default:focus { color: #fff; background-color: #e7a625; border-color: #e7a625; }
 .btn1-primary { background-color: #13a0b2; color: #fff; }
 .btn1-primary:hover { background-color: #1392a2; color: #fff; }

@@ -47,6 +47,7 @@ public class ReservationController {
         String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<String, String>();
+        HashMap<String, String> params2 = new HashMap<String, String>();
 
         params.put("to", "01058283328, 01033453328"); // 01033453328 추가
         params.put("from", "01058283328");
@@ -57,6 +58,7 @@ public class ReservationController {
             System.out.println("empty");
         } else {
             System.out.println(dto.getTitle());
+            System.out.println(dto.getProduct());
         }
 
         if (dto.getTitle().equals("월렌트, 12개월렌트")){
@@ -92,9 +94,33 @@ public class ReservationController {
         }
         params.put("app_version", "test app 1.2");
 
+
+        /* 예약확인 문자 전송 */
+
+        params2.put("to", dto.getPhoneNo());
+        params2.put("from", "01058283328");
+        params2.put("type", "LMS");
+
+        params2.put("text", "예약이 완료되었습니다." + "\n"
+                + "예약자 이름: " + dto.getName() + "\n"
+                + "연락처: " + dto.getPhoneNo() + "\n");
+        params2.put("app_version", "test app 1.2");
+
+
+        /* coolsms로 전송 */
+
         try {
             JSONObject obj = (JSONObject) coolsms.send(params);
             System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+
+        try {
+            JSONObject obj2 = (JSONObject) coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
         } catch (CoolsmsException e) {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());

@@ -6,6 +6,7 @@
       layout:decorate="~{fragments/layout}">
 <head>
     <title>SAVECAR - 캠핑카 렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Style -->
     <link th:href="@{/css/camping.css}" rel="stylesheet">
@@ -29,9 +30,13 @@
                         <h2 class="page-title">Campersave Motorhome</h2>
                         <br>
                         <p>
-                            <a href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222276016511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=1">
-                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">캠핑카 렌트 가격표</button>
+                            <a target='_blank' href="https://cafe.naver.com/savecarz">
+                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">캠핑카 렌트 카페 연결</button>
                             </a>
+                            <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222276016511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=1">
+                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">한눈에 보는 캠핑카 렌트 가격표</button>
+                            </a>
+
                         </p>
                     </div>
                 </div>
@@ -92,6 +97,7 @@
             <div class="row text-center pinside30">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="row padding-bottom-20 width-height-box">
+                        <p style="color: red">* 장기 대여중인 상품입니다. 예약 불가</p>
                         <img th:src="@{/img/travelimg2.png}" id="headerImg" width="70%" height="70%">
                     </div>
                     <div class="row">
@@ -110,7 +116,7 @@
                                 <br />
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="overflow-x: auto;">
-                                <img th:src="@{/img/travel-price.png}" id="priceImg" width="100%" height="70%">
+                                <img th:src="@{/img/travel-price.JPG}" id="priceImg" width="100%" height="70%">
                                 <br /><br />
                                 <p>* 단위: 원 / VAT 미포함 / 1일 24시간</p>
                                 <p>* 성수기 기간: 7월 15일 ~ 8월 22일, 당사 지정일</p>

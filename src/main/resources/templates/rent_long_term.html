@@ -6,6 +6,8 @@
       layout:decorate="~{fragments/layout}">
 <head>
     <title>SAVECAR - 누구나장기렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 </head>
 <div layout:fragment="content">
     <!-- end of Header-top -->
@@ -18,8 +20,8 @@
                         <h2 class="page-title">실시간 견적내기 및 상담 요청</h2>
                         <br>
                         <p>
-                            <a href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">
-                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">누구나 장기렌트 블로그 연결</button>
+                            <a target='_blank' href="https://cafe.naver.com/savecar0">
+                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">누구나 장기렌트 카페 연결</button>
                             </a>
                         </p>
                     </div>
@@ -41,7 +43,7 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group has-feedback">
-                                                <label class="control-label" for="name">이름</label>
+                                                <label class="control-label" for="name">* 이름</label>
                                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                                     <input type="text" class="form-control" id="reservation-detail-name" placeholder="예약자의 성함을 입력해주세요.">
                                                 </div>
@@ -49,7 +51,7 @@
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group has-feedback">
-                                                <label class="control-label" for="phone">연락처</label>
+                                                <label class="control-label" for="phone">* 연락처</label>
                                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                                     <input type="text" class="form-control" id="reservation-detail-phone" placeholder="예약자 연락처 ex) 010-0000-0000">
                                                 </div>
@@ -64,25 +66,16 @@
                                     </div>
                                     <br />
                                     <br />
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
-<!--                                            <span class="span-control">-->
-<!--                                                <label id="rent-title" value="누구나장기렌트">누구나장기렌트</label>-->
-<!--                                            </span>-->
-<!--                                            <span class="span-input">-->
-<!--                                                <label style="margin-right: 20px;"><input type="radio" id="long-rent-product1" name="rent-product" value="신차">&nbsp; 신차</label>-->
-<!--                                                <label><input type="radio" id="long-rent-product2" name="rent-product" value="중고차">&nbsp; 중고차</label>-->
-<!--                                            </span>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <p style="color: red; font-weight: bold;">* 필요한 부분까지만 선택하고 상담신청 하셔도 정보가 전달됩니다.</p>
                                             <span class="span-control">
                                                 <label style="font-size: 15px" id="rent-title" value="누구나장기렌트">누구나장기렌트</label>
                                             </span>
                                             <span class="span-input">
                                                 <label style="margin-right: 20px;"><input type="radio" id="long-rent-product1" name="rentProduct" value="신차">&nbsp; 신차</label>
-                                                <label><input type="radio" id="long-rent-product2" name="rentProduct" value="중고차">&nbsp; 중고차</label>
+                                                <label style="margin-right: 20px;"><input type="radio" id="long-rent-product2" name="rentProduct" value="중고차">&nbsp; 중고차</label>
+                                                <label><input type="radio" id="long-rent-product3" name="rentProduct" value="캠핑카">&nbsp; 캠핑카</label>
                                             </span>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -97,7 +90,7 @@
                                                 <input type="text" class="form-control-span2" id="select-category2" placeholder="제조사를 입력하세요.">
                                             </span>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="c-ol-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <span class="span-control">
                                                 <label class="control-label" for="name">차명</label>
                                             </span>
@@ -131,14 +124,6 @@
                                                 <option value="40000km">40000km</option>
                                                 <option value="기타">기타</option>
                                             </select>
-<!--                                            <span class="span-input">-->
-<!--                                                <select id="select-mileage" name="selectMileage" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">-->
-<!--                                                    <option value="">주행거리를 선택해주세요.</option>-->
-<!--                                                </select>-->
-<!--                                                &lt;!&ndash;                                                <select id="select-car-year" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage)">&ndash;&gt;-->
-<!--                                                &lt;!&ndash;                                                    <option value="">년식을 선택해주세요</option>&ndash;&gt;-->
-<!--                                                &lt;!&ndash;                                                </select>&ndash;&gt;-->
-<!--                                            </span>-->
                                         </div>
                                     </div>
                                     <div class="row">
@@ -162,7 +147,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group has-feedback">
-                                                <p><font color="red" style="font-weight: bold;"> * 21세 이상은 요청 사항에 입력해주세요 </font></p>
+                                                <p style="color: red; font-weight: bold;">* 21세 이상은 요청 사항에 입력해주세요. </p>
                                                 <br />
                                                 <p class="text-center"><input id="agree" type="checkbox"> 개인정보 수집 및 이용에 동의합니다.</p>
                                             </div>

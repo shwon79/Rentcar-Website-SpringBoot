@@ -4,15 +4,28 @@ function make_reservation () {
     var tmp = document.getElementById("rent-product1")
     var tmp1= document.getElementsByName("rent-product")
 
+    if (document.getElementById("reservation-detail-name").value == ""){
+        alert('성함을 입력해주세요.')
+        return
+    }
 
-    console.log('통과 1 ')
+    if (document.getElementById("reservation-detail-phone").value == ""){
+        alert('전화번호를 입력해주세요.')
+        return
+    }
+
     var product;
     if (document.getElementById("long-rent-product1") != null) {
 
         if (document.getElementById("long-rent-product1").checked) {
+            console.log('통 1')
             product = document.getElementById("long-rent-product1").getAttribute("value")
-        } else {
+        } else if ((document.getElementById("long-rent-product2").checked)){
+            console.log('통 2')
             product = document.getElementById("long-rent-product2").getAttribute("value")
+        } else {
+            console.log('통 3')
+            product = document.getElementById("long-rent-product3").getAttribute("value")
         }
 
     } else if (document.getElementById("rent-product1") != null) {
@@ -68,6 +81,8 @@ function make_reservation () {
     }
 
 
+
+    console.log(product)
 
     var data = {
         name : $("#reservation-detail-name").val(),
