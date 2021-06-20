@@ -202,7 +202,9 @@ label { }
 .btn1-lg { font-size: 14px; padding: 20px 30px; }
 .btn1-sm { font-size: 12px; padding: 5px 10px; }
 .btn1-xs { font-size: 12px; padding: 5px 7px; }
-
+.btn2-default { color: #fff; background-color:#e74c3c; }
+.btn2-default:hover { color: #fff; background-color: #13a0b2; border-color: #e7a625; }
+.btn2-default.focus, .btn2-default:focus { color: #fff; background-color: #e7a625; border-color: #e7a625; }
 /*-----------------------------------
     4. General / Elements 
 -----------------------------------*/
@@ -503,7 +505,7 @@ label { }
 -------------------------------------*/
 .footer { background-color: #0e0c0b; padding-top: 60px; padding-bottom: 60px; }
 .footer-widget > p { color: #FFFFFF;}
-.footer-widget > h2, .footer-widget > h4 { color: #FFFFFF; }
+.footer-widget > h2, .footer-widget > h4, .footer-widget > h5 { color: #FFFFFF; }
 .footer-widget .widget-title {
     color: #fff;
     font-weight: 600; 

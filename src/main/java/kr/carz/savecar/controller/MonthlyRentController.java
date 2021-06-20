@@ -7,6 +7,7 @@ import kr.carz.savecar.service.YearlyRentService;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,17 @@ public class MonthlyRentController {
     public String rent_month() {
         return "rent_month";
     }
+
+    @RequestMapping("/rent/month/{category1}/{category2}")
+    public String handleRequest(ModelMap model, @PathVariable("category1") String category1,@PathVariable("category2") String category2) throws Exception {
+        model.put("category1", category1);
+        model.put("category2", category2);
+
+        return "rent_month";
+    }
+
+
+
 //월렌트 차종 api
     @RequestMapping(value = "/rent/month/rentMonth", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
@@ -60,6 +72,7 @@ public class MonthlyRentController {
         pw.flush();
         pw.close();
     }
+
     //차 분류api
     @RequestMapping(value = "/rent/month/rentMonth/{category1}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody

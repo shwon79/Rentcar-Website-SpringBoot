@@ -44,6 +44,24 @@
         </div>
     </div>
 
+    <!--    feature section -->
+    <section id="feature1" class="feature sections">
+        <div class="container text-center">
+            <div class="row padding-bottom-60">
+                <!--                <h3><a href="/liomousine">캠핑카쉐어링 & 장기렌트</a></h3>-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
+                    <h3><a href="/liomousine">캠핑카쉐어링 & 장기렌트</a></h3>
+                    <div class="separator"></div>
+                    <a href="/liomousine" class="imghover"><img th:src="@{/img/campingcar1.jpg}" width="400" height="300"> </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!--feature section -->
     <section id="feature" class="feature sections">
         <div class="container text-center">
@@ -99,7 +117,7 @@
                     <div class="row padding-bottom-20 width-height-box">
                         <p style="color: red">* 해당 상품은 월렌트 이상만 예약가능합니다.</p>
                         <img th:src="@{/img/limimg1.jpeg}" id="headerImg" width="70%" height="70%" style="max-height: 500px;">
-                    </div>
+                    </div><br/><br/><br/><br/>
                     <div class="row">
                         <img th:src="@{/img/limimg2.jpeg}" id="carImg2" width="15%" height="100px" onclick="toggleImg('carImg2')" style="max-height: 100px;">
                         <img th:src="@{/img/limimg3.jpeg}" id="carImg3" width="15%" height="100px" onclick="toggleImg('carImg3')" style="max-height: 100px;">
@@ -132,131 +150,75 @@
                                     <p>* 21세 이상자는 추가요금이 있습니다.</p>
                                 </div>
                             </div>
-<!--                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">-->
-<!--                                <h2>CAPMER 요금</h2>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="overflow-x: auto;">-->
-<!--                                <table class="type11 text-center">-->
-<!--                                    <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th scope="cols" colspan="2">비수기</th>-->
-<!--                                        <th scope="cols" colspan="2">성수기</th>-->
-<!--                                        <th scope="cols">Deposit</th>-->
-<!--                                        <th scope="cols">월렌트</th>-->
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                    <tbody>-->
-<!--                                    <tr>-->
-<!--                                        <td>주중</td>-->
-<!--                                        <td>주말</td>-->
-<!--                                        <td>주중</td>-->
-<!--                                        <td>주말</td>-->
-<!--                                        <td rowspan="2">20만원</td>-->
-<!--                                        <td rowspan="4">4,900,000</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>350,000</td>-->
-<!--                                        <td>350,000</td>-->
-<!--                                        <td>470,000</td>-->
-<!--                                        <td>470,000</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>5일</td>-->
-<!--                                        <td>7일</td>-->
-<!--                                        <td>10일</td>-->
-<!--                                        <td>15일</td>-->
-<!--                                        <td rowspan="2">상담</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>1,400,000</td>-->
-<!--                                        <td>1,750,000</td>-->
-<!--                                        <td>2,275,000</td>-->
-<!--                                        <td>3,150,000</td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                </table>-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <div class="row pinside30">
-                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <h2>CAPMER 시설</h2>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                                <p>캠핑의자 4ea, 캠핑테이블 1ea, 휴대용버너, 커피포트</p>
-                                <p>객실샤워실, 화장실, 욕실용품, 세면도구[샴푸 린스 바디워시], </p>
-                                <p>전자레인지, 드라이기, 냉장고, 스마트 TV, 에어컨</p>
-                                <p>침대, 식탁, 이불세트[4인용], 코펠세트, 취사도구</p>
-                                <p>노래방 무선마이크 2개, 노래방 탬버린LED, 핸드폰 충전기</p>
-                                <p>무선와이파이, 블루투스, 블랙박스, 후방카메라</p>
-                                <p>3m 어닝, 물충전호수</p>
-                                <p>무시동히터, 온수 바닥난방, 인버터, 인산철배터리, 한전충전기</p>
-                                <p>와이파이, 블루투스 스피커</p>
+                            <div class="row pinside30">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <h2>CAPMER 시설</h2>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                    <p>캠핑의자 4ea, 캠핑테이블 1ea, 휴대용버너, 커피포트</p>
+                                    <p>객실샤워실, 화장실, 욕실용품, 세면도구[샴푸 린스 바디워시], </p>
+                                    <p>전자레인지, 드라이기, 냉장고, 스마트 TV, 에어컨</p>
+                                    <p>침대, 식탁, 이불세트[4인용], 코펠세트, 취사도구</p>
+                                    <p>노래방 무선마이크 2개, 노래방 탬버린LED, 핸드폰 충전기</p>
+                                    <p>무선와이파이, 블루투스, 블랙박스, 후방카메라</p>
+                                    <p>3m 어닝, 물충전호수</p>
+                                    <p>무시동히터, 온수 바닥난방, 인버터, 인산철배터리, 한전충전기</p>
+                                    <p>와이파이, 블루투스 스피커</p>
+                                </div>
                             </div>
                         </div>
-<!--                        <div class="row pinside30">-->
-<!--                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">-->
-<!--                                <h2>CAPMER 추가서비스</h2>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">-->
-<!--                                <p>장작 & 숯불세트[장작, 숯, 숯판, 그릴, 점화기토치] 3만원</p>-->
-<!--                                <p>빔프로젝트+블루투스 스피커+유압식거치대 3만원</p>-->
-<!--                                <p>전동킥보드[최대80km, 제품명] 3만원</p>-->
-<!--                                <p>원터치 텐트[제품명] 1만원</p>-->
-<!--                                <p>침대의자[사이즈] 1만원</p>-->
-<!--                                <p>필립스 led 조명랜턴 1만원</p>-->
-<!--                                <p>전기매트[캠핑카용] 1만원</p>-->
-<!--                                <p>이불세트추가 1만원</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
-
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
                     <div class="bg-light pinside30" style="margin-top: 20px;">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h2>예약자 정보 입력</h2>
-                                <hr>
-                                <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
-                                <form name="reservation_info" id="rentProduct" value="리무진">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label" for="name">이름</label>
-                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="예약자의 성함을 입력해주세요.">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <h2>예약자 정보 입력</h2>
+                                    <hr>
+                                    <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
+                                    <form name="reservation_info" id="rentProduct" value="리무진">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label" for="name">이름</label>
+                                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                        <input type="text" class="form-control" id="reservation-detail-name" placeholder="예약자의 성함을 입력해주세요.">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label" for="phone">연락처</label>
+                                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                        <input type="text" class="form-control" id="reservation-detail-phone" placeholder="예약자 연락처 ex) 010-0000-0000">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label" for="textarea">요청 사항</label>
+                                                    <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="21세 이상 및 렌트기간, 문의사항 등을 입력하세요."></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group has-feedback">
+                                                    <p><font color="red" style="font-weight: bold;"> * 21세 이상은 요청 사항에 입력해주세요 </font></p>
+                                                    <br />
+                                                    <p class="text-center"><input type="checkbox" id="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group text-center">
+                                                    <a class="btn1 btn1-default" onclick="make_reservation()" href="#">예약하기 </a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label" for="phone">연락처</label>
-                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="예약자 연락처 ex) 010-0000-0000">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label" for="textarea">요청 사항</label>
-                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="21세 이상 및 렌트기간, 문의사항 등을 입력하세요."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group has-feedback">
-                                                <p><font color="red" style="font-weight: bold;"> * 21세 이상은 요청 사항에 입력해주세요 </font></p>
-                                                <br />
-                                                <p class="text-center"><input type="checkbox" id="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group text-center">
-                                                <a class="btn1 btn1-default" onclick="make_reservation()" href="#">예약하기 </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
                     </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
                     <div class="bg-light pinside30" style="margin-top: 20px;">
                         <div class="row pinside30">
                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -322,7 +284,6 @@
                                 <p>6) 2일전 취소 : 환불불가</p>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

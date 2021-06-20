@@ -534,8 +534,8 @@ Button
 }
 .btn-lg {
   background: #e74c3c;
-  font-size: 25px;
-  padding: 1.125rem 3rem;
+  padding: 1rem 2rem;
+  border: 1px solid transparent;
 }
 .btn-md {
   background: #999999;
@@ -1180,9 +1180,11 @@ button.btn-md:hover {
 }
 
 .width-height-box img {
-  position:absolute;
-  top:40%;
-  margin-top:-150px;
-  margin-left: -35%;
-  height:400px;
+  width: 90%;
+  height: 90%;
+  /*position:absolute;*/
+  /*top:40%;*/
+  /*margin-top:-150px;*/
+  /*margin-left: -35%;*/
+  /*height:400px;*/
 }

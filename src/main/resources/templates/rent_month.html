@@ -7,6 +7,7 @@
 <head>
     <title>SAVECAR - 월 12개월 렌트</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 </head>
 
@@ -98,8 +99,9 @@
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                                             <span class="span-input">
-                                                <label style="margin-right: 20px;"><input type="radio" id="rent-product1" name="rentProduct" onchange="get_category1(rentProduct.value, selectCategory1)" value="rentMonth">&nbsp; 월렌트</label>
-                                                <label><input type="radio" id="rent-product2" name="rentProduct" onchange="get_category1(rentProduct.value, selectCategory1)" value="rentYear">&nbsp; 12개월 렌트</label>
+                                                <label style="margin-right: 20px;"><input type="radio" id="rent-product1" name="rentProduct"  checked="checked" onclick="get_category1(rentProduct.value, selectCategory1)" value="rentMonth">&nbsp; 월렌트</label>
+                                                <label><input type="radio" id="rent-product2" name="rentProduct" onclick="get_category1(rentProduct.value, selectCategory1)" value="rentYear">&nbsp; 12개월 렌트</label>
+
                                             </span>
                                         </div>
                                     </div>
@@ -117,6 +119,15 @@
                                                 <select id="select-category2" name="selectCategory2" class="form-control-select" onchange="get_car_name(rentProduct.value, selectCategory1.value, selectCategory2.value, selectName)">
                                                     <option value="">차 분류를 선택해주세요</option>
                                                 </select>
+                                                <script th:inline="javascript">
+                                                        console.log('통과 1')
+                                                        get_category1("rentMonth", document.getElementById('select-category1'));
+                                                        get_category2("rentMonth", /*[[${category1}]]*/, document.getElementById('select-category2'));
+                                                        get_car_name("rentMonth", /*[[${category1}]]*/,/*[[${category2}]]*/, document.getElementById('select-car-name'))
+
+                                                        console.log(/*[[${category1}]]*/)
+                                                        console.log(/*[[${category2}]]*/)
+                                                </script>
                                             </span>
                                         </div>
                                     </div>
@@ -221,4 +232,6 @@
         </div>
     </div>
 </div>
+
+
 </html>

@@ -1,3 +1,5 @@
+
+
 // 에약 요청
 function make_reservation () {
 
@@ -128,10 +130,11 @@ function get_category1(fr, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c1(result) {
-            // console.log(result)
+            console.log('result'+result)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
+            console.log('detail'+detailedSelect)
         }
     }).fail(function (error) {
         alert(JSON.stringify(error));
