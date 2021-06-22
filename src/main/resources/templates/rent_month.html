@@ -20,11 +20,11 @@
                         <h2 class="page-title">실시간 견적내기 및 상담 요청</h2>
                         <br>
                         <p>
-                            <a target='_blank' href="https://cafe.naver.com/savecar0" style="margin: 2.5px">
-                                <button id="singlebutton2" name="singlebutton" class="btn1 btn1-default">월렌트+12개월 렌트 카페</button>
+                            <a href="/price/month" style="margin: 2.5px">
+                                <button id="singlebutton2" name="singlebutton" class="btn1 btn1-default" style="width: 220px">사이트 한눈에 보는 가격표</button>
                             </a>
                             <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=3&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=3"  style="margin: 2.5px">
-                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">한눈에 보는 월렌트+12개월 가격표</button>
+                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default" style="width: 220px">블로그 한눈에 보는 가격표</button>
                             </a>
 
                         </p>
@@ -91,7 +91,8 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <h2>실시간 견적 내기</h2><br/>
-                                <h5 align="right">* 배차가능 차종은 상담시 배정해 드립니다.</h5>
+                                <h5 align="right" style="color: red">* 배차가능 차종은 상담시 배정해 드립니다.</h5>
+                                <h5 align="right" style="color: red">* 옵션이나 차상태에 따라 가격이 달라질 수 있습니다.</h5>
                                 <h5 align="right" style="color: red">* 필요한 부분까지만 선택하고 예약하기를 하셔도 정보가 전달됩니다.</h5>
                                 <hr>
                                 <form name="reservation">
@@ -119,7 +120,6 @@
                                             <span class="span-input">
                                                 <select id="select-category1" name="selectCategory1" class="form-control-select" onchange="get_category2(rentProduct.value, selectCategory1.value, selectCategory2)" value="차종선택">
                                                     <option value="">차종을 선택해주세요</option>
-                                                    <option value="">차종을 선택해주세요</option>
                                                 </select>
                                                 <select id="select-category2" name="selectCategory2" class="form-control-select" onchange="get_car_name(rentProduct.value, selectCategory1.value, selectCategory2.value, selectName)">
                                                     <option value="">차 분류를 선택해주세요</option>
@@ -141,30 +141,11 @@
                                                 </select>
                                             </span>
                                         </div>
-
-                                        <script th:inline="javascript">
-
-
-                                            console.log('통과 1')
-                                            get_category1("rentMonth", document.getElementById('select-category1'));
-                                            get_category2("rentMonth", /*[[${category1}]]*/, document.getElementById('select-category2'));
-                                            get_car_name("rentMonth", /*[[${category1}]]*/,/*[[${category2}]]*/, document.getElementById('select-car-name'))
-
-                                            $('document').ready(function(){
-                                                setSelectBoxByText('select-category1', /*[[${category1}]]*/)
-                                                setSelectBoxByText('select-category2', /*[[${category2}]]*/)
-                                            });
-
-                                            console.log(/*[[${category1}]]*/)
-                                            console.log(/*[[${category2}]]*/)
-                                        </script>
-
-
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                             <span class="span-control">
-                                                <label class="control-label" for="kliometer">주행 거리</label>
+                                                <label class="control-label" for="kliometer">약정 주행거리</label>
                                             </span>
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
@@ -175,12 +156,47 @@
                                                 <label> &nbsp; km </label>
                                             </span>
                                         </div>
+
+                                        <script th:inline="javascript">
+
+                                            /* main에서 차량 선택 시 */
+                                            if(/*[[${category1}]]*/ != null){
+                                                console.log('통과 1')
+                                                get_category1("rentMonth", document.getElementById('select-category1'));
+                                                get_category2("rentMonth", /*[[${category1}]]*/, document.getElementById('select-category2'));
+                                                get_car_name("rentMonth", /*[[${category1}]]*/,/*[[${category2}]]*/, document.getElementById('select-car-name'))
+                                            } else {
+                                                /* 디폴트 */
+                                                get_category1("rentMonth", document.getElementById('select-category1'));
+                                                get_category2("rentMonth", "국산승용", document.getElementById('select-category2'));
+                                                get_car_name("rentMonth", "국산승용","중형", document.getElementById('select-car-name'));
+                                                get_mileage("rentMonth",  document.getElementById('select-mileage'));
+                                                // get_price("rentMonth", "중형", "2000", document.reservation.totalPrice);
+                                            }
+
+                                            $('document').ready(function(){
+                                                if(/*[[${category1}]]*/ != null){
+                                                    console.log('null 아님')
+                                                    setSelectBoxByText('select-category1', /*[[${category1}]]*/)
+                                                    setSelectBoxByText('select-category2', /*[[${category2}]]*/)
+                                                } else {
+                                                    console.log('null 맞음')
+                                                    setSelectBoxByText('select-category1', "국산승용")
+                                                    setSelectBoxByText('select-category2', "중형")
+                                                    setSelectBoxByText('select-car-name', "K5 15년이하")
+                                                    // setSelectBoxByText('select-mileage', "2000")
+                                                }
+                                            });
+
+                                            console.log(/*[[${category1}]]*/)
+                                            console.log(/*[[${category2}]]*/)
+                                        </script>
                                     </div>
                                     <div name="totalPrice">
                                         <div class="row top-text">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-text">
                                                 <span class="span-control">
-                                                    <label class="control-label" for="kliometer">렌트료</label>
+                                                    <label class="control-label" for="kliometer">월렌트료</label>
                                                 </span>
                                                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                                 <span class="span-input">
@@ -211,7 +227,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                 <span class="span-control">
-                                                    <label class="control-label" for="kliometer">총 렌트료</label>
+                                                    <label class="control-label" for="kliometer">총 월렌트료</label>
                                                 </span>
                                                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                                 <span class="span-input">

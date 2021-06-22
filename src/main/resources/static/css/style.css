@@ -202,8 +202,8 @@ label { }
 .btn1-lg { font-size: 14px; padding: 20px 30px; }
 .btn1-sm { font-size: 12px; padding: 5px 10px; }
 .btn1-xs { font-size: 12px; padding: 5px 7px; }
-.btn2-default { color: #fff; background-color:#e74c3c; }
-.btn2-default:hover { color: #fff; background-color: #13a0b2; border-color: #e7a625; }
+.btn2-default { color: #fff; background-color:#13a0b2; }
+.btn2-default:hover { color: #fff; background-color: #e7a625; border-color: #e7a625; }
 .btn2-default.focus, .btn2-default:focus { color: #fff; background-color: #e7a625; border-color: #e7a625; }
 
 .btn3-default { color: #fff; background-color:#999999; }
@@ -379,6 +379,15 @@ label { }
 .icon-primary { color: #474954; }
 .icon-secondary { color: #fff; }
 .icon-white { color: #fff; }
+
+
+/*--------------------------------
+4.10 table
+----------------------------------*/
+/*tr>td {*/
+/*    width: 100%;*/
+/*    float: left;*/
+/*}*/
 
 /*--------------------------------
 5 Header / Navigations 

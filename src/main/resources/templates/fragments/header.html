@@ -6,27 +6,29 @@
     <!----------------------------------------->
 
     <div th:fragment="headerFragment" class="header navbar-fixed-top" style="overflow: hidden;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-                    <a class="navbar-brand" href="/index">
-                        <img th:src="@{/img/savecar-logo.png}" width="200" height="50" alt="savecar-logo"></a>
-                    </a>
-                </div>
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                    <div id="navigation" class="navigation">
-                        <ul>
-                            <li class="active"><a href="/index" title="Home">Home</a></li>
-                            <li class="active"><a href="/rent/month" title="Service List">월렌트+12개월렌트</a></li>
-                            <li class="active"><a href="/rent/long_term" title="Portfolio">누구나장기렌트</a></li>
-                            <li class="active"><a href="/europe" title="Blog">캠핑카렌트</a></li>
-                            <li class="active"><a href="/price" title="Contact Us">한눈에 보는 세이브카 가격표</a></li>
-                            <li class="active"><a href="/index" title="phone">1661-3331</a> </li>
-                        </ul>
+        <nav class="header navbar-fixed-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                        <a class="navbar-brand" href="/index">
+                            <img th:src="@{/img/savecar-logo.png}" width="200" height="50" alt="savecar-logo"></a>
+                        </a>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <div id="navigation" class="navigation">
+                            <ul>
+                                <li class="active"><a href="/index" title="Home">Home</a></li>
+                                <li class="active"><a href="/rent/month" title="월렌트+12개월렌트">월렌트+12개월렌트</a></li>
+                                <li class="active"><a href="/rent/long_term" title="누구나장기렌트">누구나장기렌트</a></li>
+                                <li class="active"><a href="/europe" title="캠핑카렌트">캠핑카렌트</a></li>
+                                <li class="active"><a href="/price/month" title="한눈에 보는 세이브카 가격표">한눈에 보는 세이브카 가격표</a></li>
+                                <li class="active"><a href="tel:1661-3331" title="1661-3331">1661-3331</a> </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </nav>
     </div>
     <!-- end of Header-top -->
 </html>

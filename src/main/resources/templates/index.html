@@ -11,10 +11,9 @@
     <script th:src="@{/js/popup.js}"></script>
 </head>
 
-<body data-spy="scroll" data-target=".navbar-collapse">
+<body data-spy="scroll" data-target=".navbar-collapse"  data-offset="50">
 
 <div layout:fragment="content" style="overflow: hidden;">
-
 
     <!-- popup.html -->
     <th:block th:replace="fragments/popup::popupFragment" ></th:block>
@@ -37,16 +36,14 @@
                                 <div class="single_home_slider">
                                     <div class="main_home wow fadeInUp" data-wow-duration="700ms">
                                         <h3 class="index-text">WELCOME TO SAVE-CAR</h3>
-                                        <h1 class="index-text"><b>세이브카 최저가 프로모션</b></h1>
+                                        <h1 class="index-text"><b>세이브카 전국 최저가 렌트료</b></h1>
                                         <div class="separator"></div>
                                         <h3 class="index-text">다양한 차량 제공 및 고객의 안전을 최우선으로 한 정비
                                             <br> 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다.</h3>
                                         <br>
                                         <div class="home_btn">
-                                            <a class="btn1 btn2-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold; margin: 2.5px;">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
-                                            <a class="btn1 btn3-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;">문자 보내기  </a>
-<!--                                            <a href="tel:1661-3331" class="btn btn-lg m_t_10">1661-3331</a>&nbsp-->
-<!--                                            <a href="sms:010-5277-4113" class="btn btn-md m_t_10" >문자 보내기</a>-->
+                                            <a class="btn1 btn2-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+                                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
                                         </div>
                                     </div>
                                 </div>
@@ -79,14 +76,15 @@
             <div class="container">
                 <div class="row">
                     <div class="head_title sections text-center">
-                        <h1>월렌트 + 12개월 렌트</h1>
+                        <h1><a href="/rent/month">월렌트 + 12개월 렌트</a></h1>
                         <div class="subtitle">
-                            주행거리별 마일리지 제도 ! <br>
-                            전국 최저가 렌트료 !
-                        </div>
+                        전국 최저가 렌트료 ! <br>
+                        주행거리별 마일리지 제도 !
+                    </div>
                         <div class="separator"></div>
                         <div class="home_btn">
-                            <a href="/rent/month" class="btn btn-lg m_t_10">상담 신청</a>
+                            <a class="btn1 btn2-default" href="/rent/month" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">온라인 예약신청 &nbsp; <img th:src="@{/img/calendar.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
@@ -171,8 +169,8 @@
             <div class="row">
                 <div class="main_clogo sections">
                     <div class="head_title text-center">
-                        <h1>누구나 장기 렌트</h1>
                         <div class="subtitle">
+                            <h1><a href="/rent/long_term" style="box-shadow: none">누구나 장기 렌트</a></h1>
                             누구나 신차 장기렌트 <br>
                             누구나 중고차 장기렌트
                         </div>
@@ -205,8 +203,10 @@
 
                             <h2>세이브카 누구나장기렌트</h2>
                             <h3><b style="color:rgb(255,0,0)">다이렉트상품</b> 신청하기</h3>
-                            <a class="btn1 btn1-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" width="25" height="25" > </a>
-                            <a class="btn1 btn2-default" href="/rent/month" style="font-size: medium; font-weight: bold; ">상담신청  </a>
+<!--                            <div class="home_btn">-->
+                                <a class="btn1 btn2-default" href="/rent/long_term" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">온라인 예약신청 &nbsp; <img th:src="@{/img/calendar.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+                                <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+<!--                            </div>-->
                         </div>
                     </div>
 
@@ -222,7 +222,7 @@
         <div class="container space-medium">
             <div class="row">
                 <div class="head_title sections text-center">
-                    <h1>캠핑카 렌트</h1>
+                    <h1><a href="/europe">캠핑카 렌트</a></h1>
                     <div class="subtitle">
                         <h5>CAMPERSAVE Motorhome</h5>
                     </div>
@@ -245,7 +245,7 @@
                     </div>
                     <!-- /.service block -->
                     <div class="form-group text-center">
-                        <a class="btn1 btn1-default" href="/europe">이용 안내 & 예약 </a>
+                        <a class="btn1 btn1-default" href="/europe">예약 신청 </a>
                     </div>
                     <br/>
                 </div>
@@ -266,7 +266,7 @@
                     </div>
                     <!-- /.service block -->
                     <div class="form-group text-center">
-                        <a class="btn1 btn1-default" href="/liomousine">이용 안내 및 예약</a>
+                        <a class="btn1 btn1-default" href="/liomousine">1개월 & 장기렌트</a>
                     </div>
                     <br/>
                 </div>
@@ -281,7 +281,7 @@
                         <!-- service content -->
                         <div class="service-img ">
                             <!-- service img -->
-                            <a href="/travel" class="imghover"><img th:src="@{/img/travelimg2.png}" width="360" height="360"> </a>
+                            <a href="/travel" class="imghover"><img th:src="@{/img/travel1.jpg}" width="360" height="360"> </a>
                         </div>
                         <!-- service img -->
                     </div>
@@ -295,6 +295,26 @@
         </div>
     </section>
     <!-- end of service block -->
+
+
+
+    <!--    feature section -->
+    <section id="feature1" class="feature sections">
+        <div class="container text-center">
+            <div class="row padding-bottom-60">
+                <!--                <h3><a href="/liomousine">캠핑카쉐어링 & 장기렌트</a></h3>-->
+<!--                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pinside30">-->
+<!--                </div>-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside30">
+                    <h3><a href="/europe">캠핑카쉐어링 & 장기렌트</a></h3>
+                    <div class="separator"></div>
+                    <a href="/europe" class="imghover"><img th:src="@{/img/camp_sharing.png}" width="100%" height="400"> </a>
+                </div>
+<!--                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pinside30">-->
+<!--                </div>-->
+            </div>
+        </div>
+    </section>
 
 
     <!----------------------------------------->
@@ -379,6 +399,7 @@
         <div class="pinside30"></div>
     </section><br><br>
     <!-- End off Pricing Section -->
+
 
     <!-- START SCROLL TO TOP  -->
     <div class="scrollup">

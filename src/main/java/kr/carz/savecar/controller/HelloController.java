@@ -42,20 +42,45 @@ public class HelloController {
         return "rent_long_term";
     }
 
-    @GetMapping("/price")
-    public String price(Model model) {
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
-        List<YearlyRent> yearlyRentList = yearlyRentService.findYearlyRents();
-        List<ShortRent> shortRentList = shortRentService.findShortRents();
-        List<CampingCar> campingCarList = campingCarService.findCampingCarRents();
+    @GetMapping("/price/month")
+    public String price_month(Model model) {
 
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
         model.addAttribute("monthlyRentList", monthlyRentList);
+
+        return "price_month";
+    }
+
+
+    @GetMapping("/price/long")
+    public String price_long(Model model) {
+
+        List<YearlyRent> yearlyRentList = yearlyRentService.findYearlyRents();
         model.addAttribute("yearlyRentList", yearlyRentList);
+
+        return "price_long";
+    }
+
+
+    @GetMapping("/price/short")
+    public String price_short(Model model) {
+
+        List<ShortRent> shortRentList = shortRentService.findShortRents();
         model.addAttribute("shortRentList", shortRentList);
+
+        return "price_short";
+    }
+
+
+    @GetMapping("/price/camp")
+    public String price_camp(Model model) {
+
+        List<CampingCar> campingCarList = campingCarService.findCampingCarRents();
         model.addAttribute("campingCarList", campingCarList);
 
-        return "price";
+        return "price_camp";
     }
+
 
     @GetMapping("/travel")
     public String camping_travel() {
@@ -71,6 +96,7 @@ public class HelloController {
     public String camping_europe() {
         return "camping_europe";
     }
+
 
 
 }

@@ -22,65 +22,7 @@
 </head>
 
 <div layout:fragment="content">
-    <div class="page-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="page-caption">
-                        <h2 class="page-title">Campersave Motorhome</h2>
-                        <br>
-                        <p>
-                            <a target='_blank' href="https://cafe.naver.com/savecarz">
-                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default" style="margin: 2.5px">캠핑카 렌트 카페 연결</button>
-                            </a>
-                            <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222276016511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=1">
-                                <button id="singlebutton2" name="singlebutton" class="btn1 btn1-default" style="margin: 2.5px">한눈에 보는 캠핑카 렌트 가격표</button>
-                            </a>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--    feature section -->
-    <section id="feature1" class="feature sections">
-        <div class="container text-center">
-            <div class="row padding-bottom-60">
-                <!--                <h3><a href="/liomousine">캠핑카쉐어링 & 장기렌트</a></h3>-->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/liomousine">캠핑카쉐어링 & 장기렌트</a></h3>
-                    <div class="separator"></div>
-                    <a href="/liomousine" class="imghover"><img th:src="@{/img/campingcar1.jpg}" width="400" height="300"> </a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--feature section -->
-    <section id="feature" class="feature sections"  style="padding: 80px 0px 0px 0px">
-        <div class="container text-center">
-            <div class="row padding-bottom-60">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/europe">Europe VIP CAMPER</a></h3>
-                    <div class="separator"></div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/liomousine">Limousine VIP CAMPER</a></h3>
-                    <div class="separator"></div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/travel">Travel VIP CAMPER</a></h3>
-                    <div class="separator"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div th:replace="fragments/header_camp::headerFragment"></div>
 
     <div class="content">
         <div class="container">
@@ -108,7 +50,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                                 <h3>인원 (승차/취침)</h3>
-                                <h3>2/5 (취침 최대 5명)</h3>
+                                <h3>2/4 (취침 최대 4명)</h3>
                             </div>
                         </div>
                     </div>
@@ -119,19 +61,43 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="row padding-bottom-20 width-height-box">
                         <p style="color: red">* 해당 상품은 월렌트 이상만 예약가능합니다.</p>
-                        <img th:src="@{/img/limimg1.jpeg}" id="headerImg" width="70%" height="70%" style="max-height: 500px;">
+                        <img th:src="@{/img/limo2.jpg}" id="headerImg" width="70%" height="70%" style="max-height: 500px;">
                     </div><br/><br/><br/><br/>
                     <div class="row">
-                        <img th:src="@{/img/limimg2.jpeg}" id="carImg2" width="15%" height="100px" onclick="toggleImg('carImg2')" style="max-height: 100px;">
-                        <img th:src="@{/img/limimg3.jpeg}" id="carImg3" width="15%" height="100px" onclick="toggleImg('carImg3')" style="max-height: 100px;">
-                        <img th:src="@{/img/limimg6.jpeg}" id="carImg6" width="15%" height="100px" onclick="toggleImg('carImg6')" style="max-height: 100px;">
-                        <img th:src="@{/img/limimg7.jpeg}" id="carImg7" width="15%" height="100px" onclick="toggleImg('carImg7')" style="max-height: 100px;">
-                        <img th:src="@{/img/limimg10.jpeg}" id="carImg10" width="15%" height="100px" onclick="toggleImg('carImg10')" style="max-height: 100px; min-height: 100px;">
-                        <img th:src="@{/img/limimg8.jpeg}" id="carImg8" width="15%" height="100px" onclick="toggleImg('carImg8')" style="max-height: 100px; min-height: 100px;">
-                        <img th:src="@{/img/limimg4.jpeg}" id="carImg4" width="15%" height="100px" onclick="toggleImg('carImg4')" style="max-height: 100px;">
-                        <img th:src="@{/img/limimg5.jpeg}" id="carImg5" width="15%" height="100px" onclick="toggleImg('carImg5')" style="max-height: 100px;">
-                        <img th:src="@{/img/limimg9.jpeg}" id="carImg9" width="15%" height="100px" onclick="toggleImg('carImg9')" style="max-height: 100px;">
-                   </div>
+
+                        <img th:src="@{/img/limimg3.JPG}" id="carImg2" width="10%" height="100px" onclick="toggleImg('carImg2')">
+                        <img th:src="@{/img/limimg4.JPG}" id="carImg3" width="10%" height="100px" onclick="toggleImg('carImg3')">
+                        <img th:src="@{/img/limimg5.JPG}" id="carImg4" width="10%" height="100px" onclick="toggleImg('carImg4')">
+                        <img th:src="@{/img/limimg6.JPG}" id="carImg5" width="10%" height="100px" onclick="toggleImg('carImg5')">
+                        <img th:src="@{/img/limimg7.JPG}" id="carImg6" width="10%" height="100px" onclick="toggleImg('carImg6')">
+                        <img th:src="@{/img/limimg8.JPG}" id="carImg7" width="10%" height="100px" onclick="toggleImg('carImg7')">
+                        <img th:src="@{/img/limimg9.JPG}" id="carImg8" width="10%" height="100px" onclick="toggleImg('carImg8')">
+                        <img th:src="@{/img/limimg10.JPG}" id="carImg9" width="10%" height="100px" onclick="toggleImg('carImg9')">
+                        <img th:src="@{/img/limimg11.JPG}" id="carImg10" width="10%" height="100px" onclick="toggleImg('carImg10')">
+                        <img th:src="@{/img/limimg12.JPG}" id="carImg11" width="10%" height="100px" onclick="toggleImg('carImg11')">
+                        <img th:src="@{/img/limimg13.JPG}" id="carImg12" width="10%" height="100px" onclick="toggleImg('carImg12')">
+                        <img th:src="@{/img/limimg14.JPG}" id="carImg14" width="10%" height="100px" onclick="toggleImg('carImg14')">
+                        <img th:src="@{/img/limimg15.JPG}" id="carImg15" width="10%" height="100px" onclick="toggleImg('carImg15')">
+                        <img th:src="@{/img/limimg16.JPG}" id="carImg16" width="10%" height="100px" onclick="toggleImg('carImg16')">
+                        <img th:src="@{/img/limimg17.JPG}" id="carImg17" width="10%" height="100px" onclick="toggleImg('carImg17')">
+                        <img th:src="@{/img/limimg18.JPG}" id="carImg18" width="10%" height="100px" onclick="toggleImg('carImg18')">
+                        <img th:src="@{/img/limimg19.JPG}" id="carImg19" width="10%" height="100px" onclick="toggleImg('carImg19')">
+                        <img th:src="@{/img/limimg20.JPG}" id="carImg20" width="10%" height="100px" onclick="toggleImg('carImg20')">
+<!--                        <img th:src="@{/img/limimg2.jpg}" id="carImg2" width="15%" height="100px" onclick="toggleImg('carImg2')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg3.jpg}" id="carImg3" width="15%" height="100px" onclick="toggleImg('carImg3')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg5.jpg}" id="carImg5" width="15%" height="100px" onclick="toggleImg('carImg5')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg6.jpg}" id="carImg6" width="15%" height="100px" onclick="toggleImg('carImg6')" style="max-height: 100px; min-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg7.jpg}" id="carImg7" width="15%" height="100px" onclick="toggleImg('carImg7')" style="max-height: 100px; min-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg8.jpg}" id="carImg8" width="15%" height="100px" onclick="toggleImg('carImg8')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg9.jpg}" id="carImg9" width="15%" height="100px" onclick="toggleImg('carImg9')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg10.jpg}" id="carImg10" width="15%" height="100px" onclick="toggleImg('carImg10')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg11.jpg}" id="carImg11" width="15%" height="100px" onclick="toggleImg('carImg11')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg12.jpg}" id="carImg12" width="15%" height="100px" onclick="toggleImg('carImg12')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg13.jpg}" id="carImg13" width="15%" height="100px" onclick="toggleImg('carImg13')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg14.jpg}" id="carImg14" width="15%" height="100px" onclick="toggleImg('carImg14')" style="max-height: 100px;">-->
+<!--                        <img th:src="@{/img/limimg15.jpg}" id="carImg15" width="15%" height="100px" onclick="toggleImg('carImg15')" style="max-height: 100px;">-->
+
+                    </div>
                 </div>
             </div>
             <div class="row">

@@ -22,65 +22,7 @@
 </head>
 
 <div layout:fragment="content">
-    <div class="page-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="page-caption">
-                        <h2 class="page-title">Campersave Motorhome</h2>
-                        <br>
-                        <p>
-                            <a target='_blank' href="https://cafe.naver.com/savecarz">
-                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default" style="margin: 2.5px">캠핑카 렌트 카페 연결</button>
-                            </a>
-                            <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222276016511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=1">
-                                <button id="singlebutton2" name="singlebutton" class="btn1 btn1-default" style="margin: 2.5px">한눈에 보는 캠핑카 렌트 가격표</button>
-                            </a>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--    feature section -->
-    <section id="feature1" class="feature sections">
-        <div class="container text-center">
-            <div class="row padding-bottom-60">
-                <!--                <h3><a href="/liomousine">캠핑카쉐어링 & 장기렌트</a></h3>-->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/liomousine">캠핑카쉐어링 & 장기렌트</a></h3>
-                    <div class="separator"></div>
-                    <a href="/liomousine" class="imghover"><img th:src="@{/img/campingcar1.jpg}" width="400" height="300"> </a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--feature section -->
-    <section id="feature" class="feature sections" style="padding: 80px 0px 0px 0px">
-        <div class="container text-center">
-            <div class="row padding-bottom-60">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/europe">Europe VIP CAMPER</a></h3>
-                    <div class="separator"></div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/liomousine">Limousine VIP CAMPER</a></h3>
-                    <div class="separator"></div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/travel">Travel VIP CAMPER</a></h3>
-                    <div class="separator"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div th:replace="fragments/header_camp::headerFragment"></div>
 
     <div class="content">
         <div class="container">
@@ -100,7 +42,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                                 <h3>연료 / 미션</h3>
-                                <h3>휘발유 / Auto</h3>
+                                <h3>디젤 / Auto</h3>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                                 <h3>면허 종류</h3>
@@ -118,14 +60,17 @@
             <div class="row text-center pinside30">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="row padding-bottom-20 width-height-box">
-                        <p style="color: red">* 장기 대여중인 상품입니다. 예약 불가</p>
-                        <img th:src="@{/img/travelimg2.png}" id="headerImg" width="70%" height="70%">
+                        <p style="color: red">* 현재 장기 대여중인 상품입니다. 예약 불가</p>
+                        <img th:src="@{/img/travel2.jpg}" id="headerImg" width="70%" height="70%">
                     </div><br/><br/><br/><br/>
                     <div class="row">
-                        <img th:src="@{/img/travelimg1.png}" id="carImg1" width="20%" height="100px" onclick="toggleImg('carImg1')" style="height: 100px;">
-                        <img th:src="@{/img/travelimg3.png}" id="carImg3" width="20%" height="100px" onclick="toggleImg('carImg3')" style="height: 100px;">
-                        <img th:src="@{/img/travelimg4.png}" id="carImg4" width="20%" height="100px" onclick="toggleImg('carImg4')" style="height: 100px;">
-                      </div>
+                        <img th:src="@{/img/travel1.jpg}" id="carImg1" width="15%" height="100px" onclick="toggleImg('carImg1')" style="height: 100px;">
+                        <img th:src="@{/img/travel2.jpg}" id="carImg2" width="15%" height="100px" onclick="toggleImg('carImg2')" style="height: 100px;">
+                        <img th:src="@{/img/travel3.jpg}" id="carImg3" width="15%" height="100px" onclick="toggleImg('carImg3')" style="height: 100px;">
+                        <img th:src="@{/img/travel4.jpg}" id="carImg4" width="15%" height="100px" onclick="toggleImg('carImg4')" style="height: 100px;">
+                        <img th:src="@{/img/travel5.jpg}" id="carImg5" width="15%" height="100px" onclick="toggleImg('carImg5')" style="height: 100px;">
+
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -146,53 +91,6 @@
                                 <p>* 21세 이상자는 추가요금이 있습니다.</p>
                             </div>
                         </div>
-<!--                        <div class="row pinside30">-->
-<!--                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">-->
-<!--                                <h2>CAPMER 요금</h2>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="overflow-x: auto;">-->
-<!--                                <table class="type11 text-center">-->
-<!--                                    <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th scope="cols" colspan="2">비수기</th>-->
-<!--                                        <th scope="cols" colspan="2">성수기</th>-->
-<!--                                        <th scope="cols">Deposit</th>-->
-<!--                                        <th scope="cols">월렌트</th>-->
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                    <tbody>-->
-<!--                                    <tr>-->
-<!--                                        <td>주중</td>-->
-<!--                                        <td>주말</td>-->
-<!--                                        <td>주중</td>-->
-<!--                                        <td>주말</td>-->
-<!--                                        <td rowspan="2">20만원</td>-->
-<!--                                        <td rowspan="4">4,060,000</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>290,000</td>-->
-<!--                                        <td>290,000</td>-->
-<!--                                        <td>390,000</td>-->
-<!--                                        <td>390,000</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>5일</td>-->
-<!--                                        <td>7일</td>-->
-<!--                                        <td>10일</td>-->
-<!--                                        <td>15일</td>-->
-<!--                                        <td rowspan="2">상담</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>1,160,000</td>-->
-<!--                                        <td>1,450,000</td>-->
-<!--                                        <td>1,885,000</td>-->
-<!--                                        <td>2,610,000</td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                </table>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
                         <div class="row pinside30">
                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h2>CAPMER 기본 옵션</h2>

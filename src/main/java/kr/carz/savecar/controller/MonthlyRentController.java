@@ -47,7 +47,7 @@ public class MonthlyRentController {
 
 
 
-//월렌트 차종 api
+    //월렌트 차종 api
     @RequestMapping(value = "/rent/month/rentMonth", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void get_monthly_rent_category1(HttpServletResponse res, HttpServletRequest req) throws IOException {
@@ -82,6 +82,10 @@ public class MonthlyRentController {
 
         HashSet<String> categoryList = new HashSet<String>();
 
+//        System.out.println(category1);
+//        System.out.println(monthlyRents);
+
+
         for (int i = 0; i < monthlyRents.size(); i++) {
             categoryList.add(monthlyRents.get(i).getCategory2());
         }
@@ -107,6 +111,7 @@ public class MonthlyRentController {
         List<MonthlyRent> monthlyRents = monthlyRentService.findNameOfMonthlyRents(category1, category2);
 
         HashSet<String> categoryList = new HashSet<String>();
+
 
         for (int i = 0; i < monthlyRents.size(); i++) {
             categoryList.add(monthlyRents.get(i).getName());

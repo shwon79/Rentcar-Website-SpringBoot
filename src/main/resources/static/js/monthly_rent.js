@@ -130,11 +130,11 @@ function get_category1(fr, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c1(result) {
-            console.log('result'+result)
+            // console.log('result'+result)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
-            console.log('detail'+detailedSelect)
+            // console.log('detail'+detailedSelect)
         }
     }).fail(function (error) {
         alert(JSON.stringify(error));
@@ -149,10 +149,10 @@ function get_category2(fr1, fr2, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c2(result) {
+            detailedSelect.length = 1;
 
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
-                console.log(detailedSelect.options[i+1])
             }
         }
     }).fail(function (error) {
@@ -212,7 +212,7 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
         contentType: "application/json; charset=euc-kr",
         dataType: 'json',
         success: function set_p(result) {
-            console.log(result)
+            // console.log(result)
             var price = result[0];
 
             if(price == '상담') {
@@ -231,6 +231,7 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
                 var deposit = result[1];
                 var total = parseInt(price.replace(/,/gi, "")) + vat;
 
+                price = int_to_price(price.toString());
                 vat = int_to_price(vat.toString());
                 total = int_to_price(total.toString());
 
@@ -249,7 +250,7 @@ function setSelectBoxByText(eid, etxt) {
     var eid = document.getElementById(eid);
 
     for (var i = 0; i < (eid.options.length); ++i) {
-        console.log(eid.options[i].innerText, etxt)
+        // console.log(eid.options[i].innerText, etxt)
         if (eid.options[i].innerText === etxt) {
             console.log('통과 7')
             eid.options[i].selected = true;

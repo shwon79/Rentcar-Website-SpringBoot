@@ -16,6 +16,11 @@
   font-style: normal;
 }
 
+/*tr>td {*/
+/*  width: 100%;*/
+/*  float: left;*/
+/*}*/
+
 
 .price-table h1 {
   font-size: 30px;
