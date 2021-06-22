@@ -7,9 +7,8 @@
 <head>
     <!-- Title -->
     <title>SAVE-CAR</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <script th:src="@{/js/popup.js}"></script>
-
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -33,7 +32,7 @@
             <div class="home_skew_border">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
+                        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 main_clogo">
                             <div class="main_home_slider text-center">
                                 <div class="single_home_slider">
                                     <div class="main_home wow fadeInUp" data-wow-duration="700ms">
@@ -44,11 +43,10 @@
                                             <br> 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다.</h3>
                                         <br>
                                         <div class="home_btn">
-                                            <a class="btn1 btn1-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" width="25" height="25" > </a>
-                                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; ">문자 보내기  </a>
+                                            <a class="btn1 btn2-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold; margin: 2.5px;">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+                                            <a class="btn1 btn3-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;">문자 보내기  </a>
 <!--                                            <a href="tel:1661-3331" class="btn btn-lg m_t_10">1661-3331</a>&nbsp-->
 <!--                                            <a href="sms:010-5277-4113" class="btn btn-md m_t_10" >문자 보내기</a>-->
-
                                         </div>
                                     </div>
                                 </div>
@@ -100,56 +98,56 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                         <div class="project-img mb30" align="center">
-                            <a href="/rent/month" class="imghover"><img th:src="@{/img/segment_medium.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                            <a href="/rent/month/국산승용/준중형" class="imghover"><img th:src="@{/img/segment_medium.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                             <h3>준중형</h3>
                             <p>렌트 실시간 공개</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                         <div class="project-img mb30" align="center">
-                            <a href="/rent/month" class="imghover"><img th:src="@{/img/medium_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                            <a href="/rent/month/국산승용/중형" class="imghover"><img th:src="@{/img/medium_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                             <h3>중형 승용</h3>
                             <p>렌트 실시간 공개</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                         <div class="project-img mb30" align="center">
-                            <a href="/rent/month" class="imghover"><img th:src="@{/img/large_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                            <a href="/rent/month/국산승용/대형" class="imghover"><img th:src="@{/img/large_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                             <h3>대형 승용</h3>
                             <p>렌트 실시간 공개</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                         <div class="project-img mb30" align="center">
-                            <a href="/rent/month" class="imghover"><img th:src="@{/img/van.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                            <a href="/rent/month/국산승합•RV/승합" class="imghover"><img th:src="@{/img/van.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                             <h3>승합차</h3>
                             <p>렌트 실시간 공개</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                         <div class="project-img mb30" align="center">
-                            <a href="/rent/month" class="imghover"><img th:src="@{/img/foreign_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                            <a href="/rent/month/수입차/수입차" class="imghover"><img th:src="@{/img/foreign_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                             <h3>수입차</h3>
                             <p>렌트 실시간 공개</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                         <div class="project-img mb30" align="center">
-                            <a href="/rent/month" class="imghover"><img th:src="@{/img/small_medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                            <a href="/rent/month/국산승합•RV/소중형SUV" class="imghover"><img th:src="@{/img/small_medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                             <h3>소중형 RV</h3>
                             <p>렌트 실시간 공개</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                         <div class="project-img mb30" align="center">
-                            <a href="/rent/month" class="imghover"><img th:src="@{/img/medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                            <a href="/rent/month/국산승합•RV/중형SUV" class="imghover"><img th:src="@{/img/medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                             <h3>중형 RV</h3>
                             <p>렌트 실시간 공개</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                         <div class="project-img mb30" align="center">
-                            <a href="/rent/month" class="imghover"><img th:src="@{/img/large_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
+                            <a href="/rent/month/국산승합•RV/대형SUV" class="imghover"><img th:src="@{/img/large_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
                             <h3>대형 RV</h3>
                             <p>렌트 실시간 공개</p>
                         </div>

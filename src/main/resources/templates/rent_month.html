@@ -20,9 +20,13 @@
                         <h2 class="page-title">실시간 견적내기 및 상담 요청</h2>
                         <br>
                         <p>
-                            <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=3&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=3">
+                            <a target='_blank' href="https://cafe.naver.com/savecar0" style="margin: 2.5px">
+                                <button id="singlebutton2" name="singlebutton" class="btn1 btn1-default">월렌트+12개월 렌트 카페</button>
+                            </a>
+                            <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=3&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=3"  style="margin: 2.5px">
                                 <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">한눈에 보는 월렌트+12개월 가격표</button>
                             </a>
+
                         </p>
                     </div>
                 </div>
@@ -115,19 +119,12 @@
                                             <span class="span-input">
                                                 <select id="select-category1" name="selectCategory1" class="form-control-select" onchange="get_category2(rentProduct.value, selectCategory1.value, selectCategory2)" value="차종선택">
                                                     <option value="">차종을 선택해주세요</option>
+                                                    <option value="">차종을 선택해주세요</option>
                                                 </select>
                                                 <select id="select-category2" name="selectCategory2" class="form-control-select" onchange="get_car_name(rentProduct.value, selectCategory1.value, selectCategory2.value, selectName)">
                                                     <option value="">차 분류를 선택해주세요</option>
                                                 </select>
-                                                <script th:inline="javascript">
-                                                        console.log('통과 1')
-                                                        get_category1("rentMonth", document.getElementById('select-category1'));
-                                                        get_category2("rentMonth", /*[[${category1}]]*/, document.getElementById('select-category2'));
-                                                        get_car_name("rentMonth", /*[[${category1}]]*/,/*[[${category2}]]*/, document.getElementById('select-car-name'))
 
-                                                        console.log(/*[[${category1}]]*/)
-                                                        console.log(/*[[${category2}]]*/)
-                                                </script>
                                             </span>
                                         </div>
                                     </div>
@@ -144,6 +141,25 @@
                                                 </select>
                                             </span>
                                         </div>
+
+                                        <script th:inline="javascript">
+
+
+                                            console.log('통과 1')
+                                            get_category1("rentMonth", document.getElementById('select-category1'));
+                                            get_category2("rentMonth", /*[[${category1}]]*/, document.getElementById('select-category2'));
+                                            get_car_name("rentMonth", /*[[${category1}]]*/,/*[[${category2}]]*/, document.getElementById('select-car-name'))
+
+                                            $('document').ready(function(){
+                                                setSelectBoxByText('select-category1', /*[[${category1}]]*/)
+                                                setSelectBoxByText('select-category2', /*[[${category2}]]*/)
+                                            });
+
+                                            console.log(/*[[${category1}]]*/)
+                                            console.log(/*[[${category2}]]*/)
+                                        </script>
+
+
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
@@ -232,6 +248,5 @@
         </div>
     </div>
 </div>
-
 
 </html>

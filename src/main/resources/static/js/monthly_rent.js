@@ -173,7 +173,7 @@ function get_car_name(fr1, fr2, fr3, detailedSelect) {
             }
         }
     }).fail(function (error) {
-        // console.log('/rent/month/' + fr1 + '/name/' + fr2 + '/' + fr3);
+        console.log('/rent/month/' + fr1 + '/name/' + fr2 + '/' + fr3);
         alert(JSON.stringify(error));
     })
 }
@@ -243,4 +243,17 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
     }).fail(function (error) {
         alert(JSON.stringify(error));
     })
+}
+
+function setSelectBoxByText(eid, etxt) {
+    var eid = document.getElementById(eid);
+
+    for (var i = 0; i < (eid.options.length); ++i) {
+        console.log(eid.options[i].innerText, etxt)
+        if (eid.options[i].innerText === etxt) {
+            console.log('통과 7')
+            eid.options[i].selected = true;
+            break
+        }
+    }
 }

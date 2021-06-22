@@ -186,7 +186,7 @@ label { }
 /*-----------------------------------
     3. Buttons 
 -----------------------------------*/
-.btn1 { display: inline-block; padding: 14px 30px; margin-bottom: 0; font-size: 13px; font-weight: 800; letter-spacing: 1px; line-height: 1.42857143; text-align: center; border: none; text-transform: uppercase; border-radius: 40px; font-family: 'NanumBarunGothic';
+.btn1 { display: inline-block; padding: 14px 30px; margin: 2.5px; font-size: 13px; font-weight: 800; letter-spacing: 1px; line-height: 1.42857143; text-align: center; border: none; text-transform: uppercase; border-radius: 40px; font-family: 'NanumBarunGothic';
     -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 .btn1-default { color: #fff; background-color: #e7a625; }
 .btn1-default:hover { color: #fff; background-color: #13a0b2; border-color: #e7a625; }
@@ -205,6 +205,10 @@ label { }
 .btn2-default { color: #fff; background-color:#e74c3c; }
 .btn2-default:hover { color: #fff; background-color: #13a0b2; border-color: #e7a625; }
 .btn2-default.focus, .btn2-default:focus { color: #fff; background-color: #e7a625; border-color: #e7a625; }
+
+.btn3-default { color: #fff; background-color:#999999; }
+.btn3-default:hover { color: #fff; background-color: #13a0b2; border-color: #e7a625; }
+.btn3-default.focus, .btn2-default:focus { color: #fff; background-color: #e7a625; border-color: #e7a625; }
 /*-----------------------------------
     4. General / Elements 
 -----------------------------------*/
