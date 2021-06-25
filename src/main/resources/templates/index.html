@@ -42,8 +42,8 @@
                                             <br> 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다.</h3>
                                         <br>
                                         <div class="home_btn">
-                                            <a class="btn1 btn2-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
-                                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+                                            <a class="btn1 btn2-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 240px; height: 50px;">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+                                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 240px; height: 50px;">간단 문자예약  &nbsp; <img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +61,83 @@
     </section>
     <!--End of home section -->
 
-    <br><br><br>
+    <!----------------------------------------->
+    <!------------ 간편 상담신청 section ------------>
+    <!----------------------------------------->
+    <br><br>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
+                    <div class="bg-light pinside30">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h3>간편 상담신청</h3>
+                                <hr>
+                                <form name="reservation-info">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="name"><span style="color:red">*</span> 이름</label>
+                                                <textarea class="form-control" id="reservation-detail-name" name="textarea" rows="1" placeholder="이름을 입력해주세요."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="phone"><span style="color:red">*</span> 연락처</label>
+                                                <textarea class="form-control" id="reservation-detail-phone" name="textarea" rows="1" placeholder="연락처를 입력해주세요."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="carname">차량명</label>
+                                                <textarea class="form-control" id="reservation-detail-carname" name="textarea" rows="1" placeholder="차량명을 입력해주세요."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                    <label class="control-label" for="region">지역</label>
+                                                    <textarea class="form-control" id="reservation-detail-region" name="textarea" rows="1" placeholder="지역을 입력해주세요."></textarea>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="resdate">대여 일자</label>
+                                                <textarea class="form-control" id="reservation-detail-resdate" name="textarea" rows="1" placeholder="예상 대여일자를 입력해주세요."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="textarea">요청 사항</label>
+                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="1" placeholder="요청사항을 입력해주세요."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <p class="text-center"><input id="agree" type="checkbox"> 개인정보 수집 및 이용에 동의합니다.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group text-center" style="margin:0px">
+                                                <a class="btn1 btn1-default" onclick="make_easy_reservation()" href="#">상담신청 </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!----------------------------------------->
@@ -84,7 +160,7 @@
                         <div class="separator"></div>
                         <div class="home_btn">
                             <a class="btn1 btn2-default" href="/rent/month" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">온라인 예약신청 &nbsp; <img th:src="@{/img/calendar.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
-                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+<!--                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>-->
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
@@ -205,7 +281,7 @@
                             <h3><b style="color:rgb(255,0,0)">다이렉트상품</b> 신청하기</h3>
 <!--                            <div class="home_btn">-->
                                 <a class="btn1 btn2-default" href="/rent/long_term" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">온라인 예약신청 &nbsp; <img th:src="@{/img/calendar.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
-                                <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+<!--                                <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>-->
 <!--                            </div>-->
                         </div>
                     </div>
@@ -306,9 +382,14 @@
 <!--                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pinside30">-->
 <!--                </div>-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside30">
-                    <h3><a href="/europe">캠핑카쉐어링 & 장기렌트</a></h3>
+                    <h3><a href="https://cafe.naver.com/savecarz/5">캠핑카쉐어링 & 장기렌트</a></h3>
                     <div class="separator"></div>
-                    <a href="/europe" class="imghover"><img th:src="@{/img/camp_sharing.png}" width="100%" height="400"> </a>
+                    <h3 class="index-text" style="color: black">캠핑카를 렌터카회사의 장기렌트 상품으로 구매하고
+                        <br/>고가의 캠핑카의 경제적 가치를 높일 수 있는
+                        <br/>세이브카 캠핑카 장기렌트 & 쉐어링 상품을 소개합니다.</h3>
+                    <br/>
+                    <div class="separator"></div>
+                    <a target='_blank' href="https://cafe.naver.com/savecarz/5" class="imghover"><img th:src="@{/img/camp_sharing.png}" width="100%" height="400"> </a>
                 </div>
 <!--                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pinside30">-->
 <!--                </div>-->

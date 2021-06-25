@@ -1,5 +1,6 @@
 package kr.carz.savecar.service;
 
+import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.ShortRent;
 import kr.carz.savecar.repository.ShortRentRepository;
 
@@ -13,5 +14,12 @@ public class ShortRentService {
     }
     public List<ShortRent> findShortRents(){
         return shortRentRepository.findAll();
+    }
+
+    public List<ShortRent> findShortRentsByCategory1(String category1){
+        return shortRentRepository.findByCategory1Equals(category1);
+    }
+    public List<ShortRent> findShortRentsByNotCategory1(String category1){
+        return shortRentRepository.findByCategory1Not(category1);
     }
 }

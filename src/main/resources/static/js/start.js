@@ -23,4 +23,12 @@ else {
 }
 
 
+if ( cookiedata.indexOf("maindiv4=done") < 0 ){
+    document.getElementById('divpop4').style.visibility = "visible";
+}
+else {
+    document.getElementById('divpop4').style.visibility = "hidden";
+}
+
+
 

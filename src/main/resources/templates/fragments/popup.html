@@ -3,12 +3,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <!--popup Fragment 선언-->
-<th:block th:fragment="popupFragment">
+<th:block th:fragment="popupFragment" style="width:100%; margin:0 auto;" align="center">
     <!-- POPUP -->
     <div id="divpop1" class="hidden-xs hidden-sm col-lg-12 col-md-12 popStyle1" style="visibility: visible;">
-        <a href="https://blog.naver.com/itscar/222272287511">
+        <a target='_blank' href="https://blog.naver.com/itscar/222272287511">
         <table>
-
                 <tr>
                     <td style="" height="360" align="center">
                         <div class="popContentStyle1">
@@ -31,7 +30,7 @@
 
     <!-- POPUP -->
     <div id="divpop2" class="hidden-sm hidden-xs col-lg-12 col-md-12 popStyle2">
-        <a href="https://blog.naver.com/itscar/222276016511">
+        <a target='_blank' href="https://blog.naver.com/itscar/222276016511">
         <table>
             <tr>
                 <td height="360" align="center">
@@ -52,8 +51,9 @@
         </a>
     </div>
 
-    <div id="divpop3" class="col-sm-8 col-xs-8 hidden-lg hidden-md popStyle3">
-        <a href="https://blog.naver.com/itscar/222272287511">
+<!--    <div id="mobile_pop" align="center">-->
+    <div id="divpop3" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle3">
+        <a target='_blank' href="https://blog.naver.com/itscar/222272287511">
         <table>
             <tr>
                 <td align="center">
@@ -62,13 +62,13 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td align="center">
-                    <div class="popContentStyle2">
-                        <img th:src="@{/img/popupimg2.png}">
-                    </div>
-                </td>
-            </tr>
+<!--            <tr>-->
+<!--                <td align="center">-->
+<!--                    <div class="popContentStyle2">-->
+<!--                        <img th:src="@{/img/popup-camp2.png}">-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
             <tr>
                 <td align="right">
                     <form name="pop_form3">
@@ -80,6 +80,29 @@
         </table>
         </a>
     </div>
+
+    <div id="divpop4" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle4">
+        <a target='_blank' href="https://blog.naver.com/itscar/222272287511">
+            <table>
+                <tr>
+                    <td align="center">
+                        <div class="popContentStyle2">
+                            <img th:src="@{/img/popup-camp2.png}">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <form name="pop_form4">
+                            <input type="checkbox" name="chkbox" value="checkbox" style="margin-right:5px;">오늘 하루동안 보지 않기
+                            <a href="javascript:closeWinFour();"><B>[닫기]</B></a>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </a>
+    </div>
+<!--    </div>-->
 </th:block>
 
 </html>

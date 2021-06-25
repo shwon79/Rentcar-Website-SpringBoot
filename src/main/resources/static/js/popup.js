@@ -38,3 +38,14 @@ function closeWinThree() {
 }
 
 
+function closeWinFour() {
+
+    if ( document.pop_form4.chkbox.checked ) {
+        setCookie( "maindiv4", "done" , 1 );
+        console.log('if pass')
+    }
+
+    document.getElementById('divpop4').style.visibility = "hidden";
+}
+
+

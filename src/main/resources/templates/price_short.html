@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-caption">
-                        <h3 class="page-title">가격표 한눈에 보기</h3>
+                        <h3 class="page-title">단기 렌트</h3>
                         <br>
                     </div>
                 </div>
@@ -41,6 +41,7 @@
           <div class="row">
               <div class="main_portfolio pinside30">
                   <div class="work_menu text-center">
+                      <div class="separator"></div>
                       <div id="filters" class="toolbar mb2 mt2">
                           <h2><a href="/price/month"><button class="btn-md fil-cat filter">월 렌트</button></a> /
                               <a href="/price/long"><button class="btn-md fil-cat filter">12개월 렌트</button></a> /
@@ -103,6 +104,9 @@
           <div class="pinside50"></div>
 
           <section class="col-lg-12">
+              <div class="pinside20" align="center">
+                <h1 style="font-weight: bold">3일 요금</h1>
+              </div>
               <table id="example" class="table table-bordered table-responsive">
                   <thead>
                   <tr>
@@ -113,16 +117,11 @@
                       <th>1200km</th>
                       <th>자차</th>
                       <th>21세 추가</th>
-                      <th>21세</th>
-                      <th>200km</th>
-                      <th>300km</th>
-                      <th>400km</th>
-                      <th>자차</th>
-                      <th>21세 추가</th>
+                      <th>KM당 추가요금</th>
                   </tr>
                   </thead>
                   <tbody>
-                      <tr th:each="shortRent : ${shortRentList}">
+                      <tr th:each="shortRent : ${shortRentListNotForeign}">
                           <td scope="col" th:text="${shortRent.category1}"></td>
                           <td scope="col" th:text="${shortRent.name}"></td>
                           <td scope="col" th:text="${shortRent.cost_for_three_days_600}"></td>
@@ -130,13 +129,75 @@
                           <td scope="col" th:text="${shortRent.cost_for_three_days_1200}"></td>
                           <td scope="col" th:text="${shortRent.cost_for_three_days_insurance}"></td>
                           <td scope="col" th:text="${shortRent.cost_for_three_days_age}"></td>
-                          <td scope="col" th:text="${shortRent.extra_cost_per_day_200}"></td>
-                          <td scope="col" th:text="${shortRent.extra_cost_per_day_300}"></td>
-                          <td scope="col" th:text="${shortRent.extra_cost_per_day_400}"></td>
-                          <td scope="col" th:text="${shortRent.extra_cost_per_day_insurance}"></td>
-                          <td scope="col" th:text="${shortRent.extra_cost_per_day_age}"></td>
                           <td scope="col" th:text="${shortRent.cost_per_km}"></td>
                       </tr>
+                  </tbody>
+              </table>
+          </section>
+
+
+          <section class="col-lg-12">
+              <div class="pinside20" align="center">
+                  <h1 style="font-weight: bold">수입차 1일 요금</h1>
+              </div>
+              <table id="example1" class="table table-bordered table-responsive">
+                  <thead>
+                  <tr>
+                      <th>차종</th>
+                      <th>차명</th>
+                      <th>600km</th>
+                      <th>900km</th>
+                      <th>1200km</th>
+                      <th>자차</th>
+                      <th>21세 추가</th>
+                      <th>KM당 추가요금</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="shortRent : ${shortRentListForeign}">
+                      <td scope="col" th:text="${shortRent.category1}"></td>
+                      <td scope="col" th:text="${shortRent.name}"></td>
+                      <td scope="col" th:text="${shortRent.cost_for_three_days_600}"></td>
+                      <td scope="col" th:text="${shortRent.cost_for_three_days_900}"></td>
+                      <td scope="col" th:text="${shortRent.cost_for_three_days_1200}"></td>
+                      <td scope="col" th:text="${shortRent.cost_for_three_days_insurance}"></td>
+                      <td scope="col" th:text="${shortRent.cost_for_three_days_age}"></td>
+                      <td scope="col" th:text="${shortRent.cost_per_km}"></td>
+                  </tr>
+                  </tbody>
+              </table>
+          </section>
+
+          <div class="pinside30"></div>
+
+          <section class="col-lg-12">
+              <div class="pinside20"  align="center">
+                  <h1 style="font-weight: bold">이후 1일당 추가요금</h1>
+              </div>
+              <table id="example2" class="table table-bordered table-responsive">
+                  <thead>
+                  <tr>
+                      <th>차종</th>
+                      <th>차명</th>
+                      <th>200km</th>
+                      <th>300km</th>
+                      <th>400km</th>
+                      <th>자차</th>
+                      <th>21세 추가</th>
+                      <th>KM당 추가요금</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="shortRent : ${shortRentList}">
+                      <td scope="col" th:text="${shortRent.category1}"></td>
+                      <td scope="col" th:text="${shortRent.name}"></td>
+                      <td scope="col" th:text="${shortRent.extra_cost_per_day_200}"></td>
+                      <td scope="col" th:text="${shortRent.extra_cost_per_day_300}"></td>
+                      <td scope="col" th:text="${shortRent.extra_cost_per_day_400}"></td>
+                      <td scope="col" th:text="${shortRent.extra_cost_per_day_insurance}"></td>
+                      <td scope="col" th:text="${shortRent.extra_cost_per_day_age}"></td>
+                      <td scope="col" th:text="${shortRent.cost_per_km}"></td>
+                  </tr>
                   </tbody>
               </table>
           </section><br><br>

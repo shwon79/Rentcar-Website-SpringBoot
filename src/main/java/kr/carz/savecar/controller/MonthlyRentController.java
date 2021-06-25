@@ -80,21 +80,18 @@ public class MonthlyRentController {
 
         List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
 
-        HashSet<String> categoryList = new HashSet<String>();
-
-//        System.out.println(category1);
-//        System.out.println(monthlyRents);
+        List <String> categoryList2 = new ArrayList();
 
 
         for (int i = 0; i < monthlyRents.size(); i++) {
-            categoryList.add(monthlyRents.get(i).getCategory2());
+            if (!categoryList2.contains(monthlyRents.get(i).getCategory2() )){
+                categoryList2.add(monthlyRents.get(i).getCategory2());
+            }
         }
 
-        List <String> categoryHashToList = new ArrayList(categoryList);
-        Collections.sort(categoryHashToList);
-
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryHashToList) {
+
+        for (String c : categoryList2) {
             jsonArray.put(c);
         }
 
@@ -195,18 +192,17 @@ public class MonthlyRentController {
 
         List<YearlyRent> yearlyRents = yearlyRentService.findCategory2OfMonthlyRents(category1);
 
-        HashSet<String> categoryList = new HashSet<String>();
+        List <String> categoryList2 = new ArrayList();
 
         for (int i = 0; i < yearlyRents.size(); i++) {
-            categoryList.add(yearlyRents.get(i).getCategory2());
+            if (!categoryList2.contains(yearlyRents.get(i).getCategory2() )){
+                categoryList2.add(yearlyRents.get(i).getCategory2());
+            }
         }
 
-        List <String> categoryHashToList = new ArrayList(categoryList);
-        Collections.sort(categoryHashToList);
-
-
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryHashToList) {
+
+        for (String c : categoryList2) {
             jsonArray.put(c);
         }
 

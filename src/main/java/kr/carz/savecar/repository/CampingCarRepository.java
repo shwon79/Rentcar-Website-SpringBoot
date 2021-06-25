@@ -10,4 +10,5 @@ import java.util.List;
 public interface CampingCarRepository extends JpaRepository<CampingCar, Long> {
 
     List<CampingCar> findAll();
+
 }

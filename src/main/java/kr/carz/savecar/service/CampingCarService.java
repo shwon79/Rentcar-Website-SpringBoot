@@ -18,4 +18,5 @@ public class CampingCarService {
     public List<CampingCar> findCampingCarRents(){
         return campingCarRepository.findAll();
     }
+
 }

@@ -66,7 +66,12 @@ public class HelloController {
     public String price_short(Model model) {
 
         List<ShortRent> shortRentList = shortRentService.findShortRents();
+        List<ShortRent> shortRentListForeign = shortRentService.findShortRentsByCategory1("수입차");
+        List<ShortRent> shortRentListNotForeign = shortRentService.findShortRentsByNotCategory1("수입차");
+
         model.addAttribute("shortRentList", shortRentList);
+        model.addAttribute("shortRentListForeign", shortRentListForeign);
+        model.addAttribute("shortRentListNotForeign", shortRentListNotForeign);
 
         return "price_short";
     }
@@ -76,7 +81,9 @@ public class HelloController {
     public String price_camp(Model model) {
 
         List<CampingCar> campingCarList = campingCarService.findCampingCarRents();
+
         model.addAttribute("campingCarList", campingCarList);
+
 
         return "price_camp";
     }

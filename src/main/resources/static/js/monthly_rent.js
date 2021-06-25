@@ -1,5 +1,95 @@
 
+function erase_after_catergory1(){
 
+    document.getElementById('select-category1').value = "";
+    document.getElementById('select-category2').value = "";
+    document.getElementById('select-car-name').value = "";
+    document.getElementById('select-mileage').value = "";
+    document.getElementById("carPrice").innerText = "원";
+    document.getElementById("carVat").innerText = "원";
+    document.getElementById("carDeposit").innerText = "원";
+    document.getElementById("carTotal").innerText = "원";
+    setSelectBoxByText('select-category2', "차 분류를 선택해주세요");
+    setSelectBoxByText('select-car-name', "차명을 선택해주세요");
+    setSelectBoxByText('select-mileage', "주행거리 선택해주세요");
+
+}
+
+function erase_after_catergory2(){
+
+    document.getElementById('select-category2').value = "";
+    document.getElementById('select-car-name').value = "";
+    document.getElementById('select-mileage').value = "";
+    document.getElementById("carPrice").innerText = "원";
+    document.getElementById("carVat").innerText = "원";
+    document.getElementById("carDeposit").innerText = "원";
+    document.getElementById("carTotal").innerText = "원";
+    setSelectBoxByText('select-car-name', "차명을 선택해주세요");
+    setSelectBoxByText('select-mileage', "주행거리 선택해주세요");
+}
+
+function erase_after_carname(){
+
+    document.getElementById('select-car-name').value = "";
+    document.getElementById('select-mileage').value = "";
+    document.getElementById("carPrice").innerText = "원";
+    document.getElementById("carVat").innerText = "원";
+    document.getElementById("carDeposit").innerText = "원";
+    document.getElementById("carTotal").innerText = "원";
+    setSelectBoxByText('select-mileage', "주행거리 선택해주세요");
+}
+
+function erase_after_milege(){
+
+    document.getElementById('select-mileage').value = "";
+    document.getElementById("carPrice").innerText = "원";
+    document.getElementById("carVat").innerText = "원";
+    document.getElementById("carDeposit").innerText = "원";
+    document.getElementById("carTotal").innerText = "원";
+}
+
+// 간편상담 요청
+function make_easy_reservation () {
+
+    if (document.getElementById("reservation-detail-name").value == ""){
+        alert('성함을 입력해주세요.')
+        return
+    }
+
+    if (document.getElementById("reservation-detail-phone").value == ""){
+        alert('전화번호를 입력해주세요.')
+        return
+    }
+
+
+    var data = {
+        name : $("#reservation-detail-name").val(),
+        phoneNo : $("#reservation-detail-phone").val(),
+        detail : $("#reservation-detail-details").val(),
+        title : "간편상담신청",
+        car_name : $("#reservation-detail-carname").val(),
+        mileage : $("#reservation-detail-region").val(),
+        option : $("#reservation-detail-resdate").val()
+    };
+    console.log(data)
+
+    var checkbox = document.getElementById("agree")
+    if(checkbox.checked) {
+        $.ajax({
+            type : 'POST',
+            url : '/reservation/apply',
+            dataType : 'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function () {
+            alert('예약이 완료되었습니다.');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    } else{
+        alert("개인정보 수집 및 이용에 동의해주세요.");
+    }
+}
 // 에약 요청
 function make_reservation () {
 
@@ -130,11 +220,9 @@ function get_category1(fr, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c1(result) {
-            // console.log('result'+result)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
-            // console.log('detail'+detailedSelect)
         }
     }).fail(function (error) {
         alert(JSON.stringify(error));
