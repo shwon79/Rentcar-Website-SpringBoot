@@ -120,7 +120,7 @@ h5.index-text  {
     line-height: 2rem;
 }
 h1.index-text {
-    font-size: 4rem;
+    font-size: 5vh;
     line-height: 6rem;
     color: #fff;
 }
@@ -186,6 +186,24 @@ label { }
 .get-in-touch { }
 .get-in-touch .form-control { margin-bottom: 10px; }
 .input-group-addon { padding: 6px 12px; font-size: 0.9375rem; font-weight: 400; line-height: 1; color: #bdb6b5; text-align: center; background-color: #fff; border: 1px solid #d7cfce; border-radius: 4px; }
+
+.contain-word-middle-div:after {
+    content: "";
+    display: inline-block;
+    height: 60%;
+    vertical-align: auto;
+}
+.contain-word-div:after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+.control-label {
+    display: inline-block;
+    vertical-align: bottom;
+}
 
 /*-----------------------------------
     3. Buttons 

@@ -99,22 +99,24 @@
                                 <form name="reservation">
                                     <div class="row">
                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                                            <span class="span-control">
+                                            <span class="span-control contain-word-middle-div">
                                                 <label id="rent-title" value="월렌트, 12개월렌트" class="control-label" for="name">렌트 상품</label>
                                             </span>
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                                            <span class="span-input">
-                                                <label style="margin-right: 20px;"><input type="radio" id="rent-product1" name="rentProduct"  checked="checked" onclick="get_category1(rentProduct.value, selectCategory1); erase_after_catergory1();" value="rentMonth">&nbsp; 월렌트</label>
-                                                <label><input type="radio" id="rent-product2" name="rentProduct" onclick="get_category1(rentProduct.value, selectCategory1); erase_after_catergory1();" value="rentYear">&nbsp; 12개월 렌트</label>
+                                            <span class="span-input contain-word-middle-div">
+                                                <label class="control-label" style="margin-right: 20px;"><input type="radio" id="rent-product1" name="rentProduct"  checked="checked" onclick="get_category1(rentProduct.value, selectCategory1); erase_after_catergory1();" value="rentMonth">&nbsp; 월렌트</label>
+                                                <label class="control-label"><input type="radio" id="rent-product2" name="rentProduct" onclick="get_category1(rentProduct.value, selectCategory1); erase_after_catergory1();" value="rentYear">&nbsp; 12개월 렌트</label>
 
                                             </span>
                                         </div>
+                                        <br /><br />
                                     </div>
                                     <div class="row" name="selectDetail">
                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" >
-                                            <span class="span-control">
-                                                <label class="control-label" for="name" >차종 선택</label>
+
+                                            <span class="span-control contain-word-div">
+                                                <label class="control-label" for="name">차종 선택</label>
                                             </span>
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
@@ -131,7 +133,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                                            <span class="span-control">
+                                            <span class="span-control contain-word-div">
                                                 <label class="control-label" for="name">차명</label>
                                             </span>
                                         </div>
@@ -145,7 +147,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                                            <span class="span-control">
+                                            <span class="span-control contain-word-div">
                                                 <label class="control-label" for="kliometer">약정 주행거리</label>
                                             </span>
                                         </div>
