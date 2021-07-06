@@ -52,14 +52,14 @@ public class ReservationController {
 
         /* 세이브카에 예약확인 문자 전송 */
         params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-        params.put("from", "01058283328");
+        params.put("from", "01052774113");
         params.put("type", "LMS");
 
 
         /* 고객에게 예약확인 문자 전송 */
 
         params2.put("to", dto.getPhoneNo());
-        params2.put("from", "01058283328");  // 16613331 테스트하기
+        params2.put("from", "01052774113");  // 16613331 테스트하기
         params2.put("type", "LMS");
 
 
@@ -72,7 +72,7 @@ public class ReservationController {
                     + "예상대여일자: " + dto.getOption() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
 
-            params2.put("text", "예약이 완료되었습니다." + "\n"
+            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "문의자 이름: " + dto.getName() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
                     + "지역: " + dto.getMileage() + "\n"
@@ -91,7 +91,7 @@ public class ReservationController {
                     + "주행거리: " + dto.getMileage() + "\n"
                     + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
 
-            params2.put("text", "예약이 완료되었습니다." + "\n"
+            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "예약자 이름: " + dto.getName() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n"
                     + "렌트상품: " + dto.getProduct() + "\n"
@@ -113,7 +113,7 @@ public class ReservationController {
                     + "약정주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n");
 
-            params2.put("text", "예약이 완료되었습니다." + "\n"
+            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "예약자 이름: " + dto.getName() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n"
                     + "렌트상품: " + dto.getProduct() + "\n"
@@ -130,7 +130,7 @@ public class ReservationController {
                     + "요청사항: " + dto.getDetail() + "\n\n"
                     + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
 
-            params2.put("text", "예약이 완료되었습니다." + "\n"
+            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "예약자 이름: " + dto.getName() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n"
                     + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
