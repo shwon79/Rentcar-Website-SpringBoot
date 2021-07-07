@@ -220,6 +220,7 @@ function get_category1(fr, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c1(result) {
+            console.log(detailedSelect)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
@@ -238,7 +239,7 @@ function get_category2(fr1, fr2, detailedSelect) {
         dataType: 'json',
         success: function set_c2(result) {
             detailedSelect.length = 1;
-
+            console.log(result)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
@@ -255,7 +256,7 @@ function get_car_name(fr1, fr2, fr3, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_n(result) {
-            // console.log(result)
+            detailedSelect.options.length = 1;
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
@@ -267,6 +268,7 @@ function get_car_name(fr1, fr2, fr3, detailedSelect) {
 }
 //주행거리 구하기
 function get_mileage(fr1, detailedSelect) {
+    detailedSelect.length = 1;
     if (fr1 == "rentMonth") {
         mileage_options = [2000, 2500, 3000, 4000, "기타주행거리"];
     } else {
