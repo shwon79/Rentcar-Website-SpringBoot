@@ -125,18 +125,18 @@ jQuery(document).ready(function ($) {
 
 
 // Portfoliowork init
-    jQuery('#portfoliowork').mixItUp({
-        selectors: {
-            target: '.tile',
-            filter: '.filter'
-                    //           sort: '.sort-btn'
-        },
-        animation: {
-            animateResizeContainer: false,
-            effects: 'fade scale'
-        }
-
-    });
+//     jQuery('#portfoliowork').mixItUp({
+//         selectors: {
+//             target: '.tile',
+//             filter: '.filter'
+//                     //           sort: '.sort-btn'
+//         },
+//         animation: {
+//             animateResizeContainer: false,
+//             effects: 'fade scale'
+//         }
+//
+//     });
 
 // dropdown menu
     $('.dropdown-menu').click(function (e) {
