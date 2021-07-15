@@ -13,7 +13,9 @@ public class Calendar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long calId;
 
-    private Long campId; // 캠핑카 id
+    @ManyToOne
+    @JoinColumn(name = "camp_id")
+    private CampingCarPrice campId; // 캠핑카 id
     private String reserve_date;
     private String reserve_time;
     private String reserve_per_time;

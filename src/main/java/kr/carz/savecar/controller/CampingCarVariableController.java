@@ -20,22 +20,24 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-public class CalendarController {
+public class CampingCarVariableController {
     private final CampingCarVariableService campingCarVariableService;
 
     @Autowired
-    public CalendarController(CampingCarVariableService campingCarVariableService) {
+    public CampingCarVariableController(CampingCarVariableService campingCarVariableService) {
         this.campingCarVariableService = campingCarVariableService;
     }
 
 
     //예약 목록 조회 api
-    @GetMapping("/reservation/list")
-    public String reservation_list(Model model) {
-        List<CampingCarVariable> campingCarVariableList = campingCarVariableService.findCampingCarVariables();
-        model.addAttribute("campingCarVariableList", campingCarVariableList);
-
-        return "reservation_list";
-    }
+//    @GetMapping("/reservation/list")
+//    public String reservation_list(Model model) {
+//        List<CampingCarVariable> campingCarVariableList = campingCarVariableService.findCampingCarVariables();
+//        model.addAttribute("campingCarVariableList", campingCarVariableList);
+//
+//        System.out.println(campingCarVariableList.get(0));
+//
+//        return "reservation_list";
+//    }
 
 }

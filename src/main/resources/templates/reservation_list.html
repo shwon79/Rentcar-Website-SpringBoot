@@ -106,19 +106,19 @@
                         <col width="8%"/>
                     </colgroup>
                     <tbody>
-                        <tr th:each="variable : ${campingCarVariableList}">
-                            <td scope="col" th:text="${variable.campVarId}"></td>
-                            <td scope="col" th:text="${variable.campVarName}"></td>
-<!--                            <td scope="col" th:text="${reservation.detail}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.title}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.product}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.category1}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.category2}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.car_name}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.mileage}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.deposit}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.option}"></td>-->
-<!--                            <td scope="col" th:text="${reservation.price}"></td>-->
+                        <tr th:each="reservation : ${reservationList}">
+                            <td scope="col" th:text="${reservation.name}"></td>
+                            <td scope="col" th:text="${reservation.phone_no}"></td>
+                            <td scope="col" th:text="${reservation.detail}"></td>
+                            <td scope="col" th:text="${reservation.title}"></td>
+                            <td scope="col" th:text="${reservation.product}"></td>
+                            <td scope="col" th:text="${reservation.category1}"></td>
+                            <td scope="col" th:text="${reservation.category2}"></td>
+                            <td scope="col" th:text="${reservation.car_name}"></td>
+                            <td scope="col" th:text="${reservation.mileage}"></td>
+                            <td scope="col" th:text="${reservation.deposit}"></td>
+                            <td scope="col" th:text="${reservation.option}"></td>
+                            <td scope="col" th:text="${reservation.price}"></td>
                         </tr>
                     </tbody>
                 </table>

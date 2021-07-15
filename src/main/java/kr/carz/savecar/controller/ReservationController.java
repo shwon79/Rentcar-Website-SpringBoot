@@ -30,13 +30,13 @@ public class ReservationController {
 
 
     //예약 목록 조회 api
-//    @GetMapping("/reservation/list")
-//    public String reservation_list(Model model) {
-//        List<Reservation> reservationList = reservationService.findAllReservations();
-//        model.addAttribute("reservationList", reservationList);
-//
-//        return "reservation_list";
-//    }
+    @GetMapping("/reservation/list")
+    public String reservation_list(Model model) {
+        List<Reservation> reservationList = reservationService.findAllReservations();
+        model.addAttribute("reservationList", reservationList);
+
+        return "reservation_list";
+    }
 
     // 예약 저장 api
     @PostMapping("/reservation/apply")

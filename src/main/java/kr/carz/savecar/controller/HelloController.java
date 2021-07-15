@@ -4,10 +4,7 @@ import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.domain.ShortRent;
 import kr.carz.savecar.domain.YearlyRent;
-import kr.carz.savecar.service.CampingCarService;
-import kr.carz.savecar.service.MonthlyRentService;
-import kr.carz.savecar.service.ShortRentService;
-import kr.carz.savecar.service.YearlyRentService;
+import kr.carz.savecar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +18,16 @@ public class HelloController {
     YearlyRentService yearlyRentService;
     ShortRentService shortRentService;
     CampingCarService campingCarService;
+    CampingCarVariableService campingCarVariableService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                           ShortRentService shortRentService, CampingCarService campingCarService) {
+                           ShortRentService shortRentService, CampingCarService campingCarService, CampingCarVariableService campingCarVariableService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarService = campingCarService;
+        this.campingCarVariableService = campingCarVariableService;
 
     }
 
@@ -100,7 +99,12 @@ public class HelloController {
     }
 
     @GetMapping("/europe")
-    public String camping_europe() {
+    public String camping_europe(Model model) {
+
+
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
+        model.addAttribute("monthlyRentList", monthlyRentList);
+
         return "camping_europe";
     }
 

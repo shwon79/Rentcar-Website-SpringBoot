@@ -81,13 +81,6 @@ const renderCalendar = () => {
     // Dates 합치기
     const dates = prevDates.concat(thisDates, nextDates);
 
-    // Dates 정리
-    dates.forEach((date, i) => {
-        dates[i] = `<div class="date">${date}</div>`;
-    })
-
-    // Dates 그리기
-    document.querySelector('.dates').innerHTML = dates.join('');
 
     // 이전달, 다음달 날짜 연하게
     // Dates 정리
@@ -100,9 +93,26 @@ const renderCalendar = () => {
 
         dates[i] = `<div class="date"><span class="${condition}">${date}</span></div>`;
     })
+
+
+    // Dates 그리기
+    document.querySelector('.dates').innerHTML = dates.join('');
+
+    // 오늘 날짜 그리기
+    const today = new Date();
+    if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
+        for (let date of document.querySelectorAll('.this')) {
+            if (+date.innerText === today.getDate()) {
+                date.classList.add('today');
+                break;
+            }
+        }
+    }
 }
 
 renderCalendar();
+
+console.log("${monthlyRentList[0].name}")
 
 // let date = new Date();
 
