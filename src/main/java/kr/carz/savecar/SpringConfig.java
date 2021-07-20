@@ -13,18 +13,25 @@ public class SpringConfig {
     private final ShortRentRepository shortRentRepository;
     private final CampingCarRepository campingCarRepository;
     private final ReservationRepository reservationRepository;
-    private final CampingCarVariableRepository campingCarVariableRepository;
+    private final CampingCarPriceRepository campingCarPriceRepository;
+    private final CalendarDateRepository calendarDateRepository;
+    private final CalendarTimeRepository calendarTimeRepository;
+
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
                         ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
-                        ReservationRepository reservationRepository, CampingCarVariableRepository campingCarVariableRepository) {
+                        ReservationRepository reservationRepository, CampingCarPriceRepository campingCarPriceRepository,
+                        CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
         this.campingCarRepository = campingCarRepository;
         this.reservationRepository = reservationRepository;
-        this.campingCarVariableRepository = campingCarVariableRepository;
+        this.campingCarPriceRepository = campingCarPriceRepository;
+        this.calendarDateRepository = calendarDateRepository;
+        this.calendarTimeRepository = calendarTimeRepository;
+
     }
 
     @Bean
@@ -47,5 +54,12 @@ public class SpringConfig {
     public CampingCarService campingCarService() { return new CampingCarService(campingCarRepository); }
 
     @Bean
-    public CampingCarVariableService campingCarVariableService() { return new CampingCarVariableService(campingCarVariableRepository); }
+    public CampingCarPriceService campingCarVariableService() { return new CampingCarPriceService(campingCarPriceRepository); }
+
+    @Bean
+    public CalendarDateService calendarDateService() { return new CalendarDateService(calendarDateRepository); }
+
+    @Bean
+    public CalendarTimeService calendarTimeService() { return new CalendarTimeService(calendarTimeRepository); }
+
 }

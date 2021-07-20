@@ -1,15 +1,13 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.domain.CampingCar;
-import kr.carz.savecar.domain.MonthlyRent;
-import kr.carz.savecar.domain.ShortRent;
-import kr.carz.savecar.domain.YearlyRent;
+import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,17 +16,16 @@ public class HelloController {
     YearlyRentService yearlyRentService;
     ShortRentService shortRentService;
     CampingCarService campingCarService;
-    CampingCarVariableService campingCarVariableService;
+    CalendarDateService calendarDateService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                           ShortRentService shortRentService, CampingCarService campingCarService, CampingCarVariableService campingCarVariableService) {
+                           ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarService = campingCarService;
-        this.campingCarVariableService = campingCarVariableService;
-
+        this.calendarDateService = calendarDateService;
     }
 
     @GetMapping("/index")
@@ -100,14 +97,11 @@ public class HelloController {
 
     @GetMapping("/europe")
     public String camping_europe(Model model) {
+        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDate();
+        model.addAttribute("calendarDateList", calendarDateList);
 
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
-        model.addAttribute("monthlyRentList", monthlyRentList);
 
         return "camping_europe";
     }
-
-
-
 }

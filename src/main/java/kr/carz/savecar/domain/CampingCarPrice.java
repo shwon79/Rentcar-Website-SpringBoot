@@ -10,13 +10,9 @@ import javax.persistence.*;
 @Table(name = "CampingCarPrice")
 public class CampingCarPrice {
     @Id
-    @Column(name = "camp_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long campId;
+    @Column(name = "car_name")
+    private String carName;
 
-    @ManyToOne
-    @JoinColumn(name = "camp_var_id")
-    private CampingCarVariable campVarId; // 캠핑카 id
     private String onedays;
     private String fourdays;
     private String fivedays;

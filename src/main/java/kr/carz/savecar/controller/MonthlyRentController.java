@@ -100,6 +100,7 @@ public class MonthlyRentController {
         pw.flush();
         pw.close();
     }
+
     // 차명 api
     @RequestMapping(value = "/rent/month/rentMonth/name/{category1}/{category2}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
