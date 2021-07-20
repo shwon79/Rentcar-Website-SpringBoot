@@ -100,7 +100,11 @@ public class HelloController {
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDate();
         model.addAttribute("calendarDateList", calendarDateList);
 
+        for (int i=0; i<4; i++){
+            System.out.println(calendarDateList.get(i).getDay());
+            System.out.println(calendarDateList.get(i).getDateId());
 
+        }
 
         return "camping_europe";
     }
