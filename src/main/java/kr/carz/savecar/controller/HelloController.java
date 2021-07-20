@@ -17,15 +17,18 @@ public class HelloController {
     ShortRentService shortRentService;
     CampingCarService campingCarService;
     CalendarDateService calendarDateService;
+    DateCampingService dateCampingService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                           ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService) {
+                           ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
+                           DateCampingService dateCampingService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarService = campingCarService;
         this.calendarDateService = calendarDateService;
+        this.dateCampingService = dateCampingService;
     }
 
     @GetMapping("/index")
@@ -80,7 +83,6 @@ public class HelloController {
 
         model.addAttribute("campingCarList", campingCarList);
 
-
         return "price_camp";
     }
 
@@ -100,12 +102,30 @@ public class HelloController {
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDate();
         model.addAttribute("calendarDateList", calendarDateList);
 
-        for (int i=0; i<4; i++){
-            System.out.println(calendarDateList.get(i).getDay());
-            System.out.println(calendarDateList.get(i).getDateId());
+        List<List<DateCamping>> dateCampingList = new ArrayList();
 
+        System.out.println("여기여기");
+        System.out.println(dateCampingService.findByDateId(calendarDateList.get(0)).get(0));
+
+//        dateCampingListTest.add(dateCampingService.findByDateId("1").get(0));
+
+        for (int i=0; i<30; i++){
+            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
         }
+
+        System.out.println(dateCampingList.get(0).get(0).getCarName().getCarName());
+        System.out.println(dateCampingList.get(0).get(0).getReserved());
+
+        model.addAttribute("dateCampingList", dateCampingList);
 
         return "camping_europe";
     }
+
+    @GetMapping("/europe_reserve")
+    public String camping_europe_reserve() {
+        return "camping_calendar";
+    }
+
+
+
 }

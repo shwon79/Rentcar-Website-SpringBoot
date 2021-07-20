@@ -399,9 +399,16 @@
                 </div>
                 <div class="dates">
                     <div class="date" th:each="date, iterStat: ${calendarDateList}">
-                        <span class="this" th:text="${date.day}"></span>
-                        <span class="this" th:text="${date.season}"></span>
-<!--                        <span class="this" th:text="${calendarDateList[iterStat.index].day}"></span>-->
+                        <div class="upside">
+                            <span class="this" th:text="${date.day}"></span>
+                            <span class="this" th:text="${date.season}"></span>
+                        </div>
+                        <div class="downside">
+                            <a href="/europe_reserve"><span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
+                            (<span class="this" th:text="${dateCampingList[iterStat.index][0].reserved}"></span>/1)</a> <br/>
+                            <a href="/europe_reserve"><span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
+                            (<span class="this" th:text="${dateCampingList[iterStat.index][1].reserved}"></span>/1)</a>
+                        </div>
                     </div>
                 </div>
             </div>

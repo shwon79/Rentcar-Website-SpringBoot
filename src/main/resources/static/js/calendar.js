@@ -4,23 +4,6 @@
 const date = new Date();
 
 
-//차종 구하기
-function get_calendar() {
-    $.ajax({
-        type: 'GET',
-        url: '/calendar',
-        contentType: "application/json; charset=UTF-8",
-        dataType: 'json',
-        success: function set_c1(result) {
-            console.log(result)
-            // for (i = 0; i < result.length; i++) {
-            //     detailedSelect.options[i+1] = new Option(result[i], result[i]);
-            // }
-        }
-    }).fail(function (error) {
-        alert(JSON.stringify(error));
-    })
-}
 
 const renderCalendar = () => {
     const viewYear = date.getFullYear();
@@ -61,7 +44,6 @@ const renderCalendar = () => {
     const dates = prevDates.concat(thisDates, nextDates);
 
     console.log(prevDates,thisDates,nextDates);
-    get_calendar();
 
     // 이전달, 다음달 날짜 연하게
     // Dates 정리
