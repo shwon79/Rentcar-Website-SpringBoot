@@ -104,8 +104,6 @@ public class HelloController {
             System.out.println(calendarDateList.get(i).getDay());
             System.out.println(calendarDateList.get(i).getDateId());
 
-            System.out.println(calendarDateList.get(i).getYear());
-
         }
 
         return "camping_europe";
