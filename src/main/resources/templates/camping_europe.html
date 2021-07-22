@@ -11,108 +11,6 @@
     <!-- Style -->
     <link th:href="@{/css/calendar.css}" rel="stylesheet">
 
-<!--    <style>-->
-<!--        /*body {*/-->
-<!--        /*    font-family: Tahoma;*/-->
-<!--        /*}*/-->
-<!--        header {-->
-<!--            text-align: center;-->
-<!--        }-->
-<!--        #calendar {-->
-<!--            width: 100%;-->
-<!--        }-->
-<!--        #calendar a {-->
-<!--            color: #13a0b2;-->
-<!--            text-decoration: none;-->
-<!--        }-->
-<!--        #calendar ul {-->
-<!--            list-style: none;-->
-<!--            padding: 0;-->
-<!--            margin: 0;-->
-<!--            width: 100%;-->
-<!--        }-->
-<!--        #calendar li {-->
-<!--            display: block;-->
-<!--            float: left;-->
-<!--            width: 14.342%;-->
-<!--            padding: 5px;-->
-<!--            box-sizing: border-box;-->
-<!--            border: 1px solid #ccc;-->
-<!--            margin-right: -1px;-->
-<!--            margin-bottom: -1px;-->
-<!--        }-->
-<!--        #calendar ul.weekdays {-->
-<!--            height: 40px;-->
-<!--            background: #13a0b2;-->
-<!--        }-->
-<!--        #calendar ul.weekdays li {-->
-<!--            text-align: center;-->
-<!--            text-transform: uppercase;-->
-<!--            line-height: 20px;-->
-<!--            border: none !important;-->
-<!--            padding: 10px 6px;-->
-<!--            color: #fff;-->
-<!--            font-size: 13px;-->
-<!--        }-->
-<!--        #calendar .days li {-->
-<!--            height: 180px;-->
-<!--        }-->
-<!--        #calendar .days li:hover {-->
-<!--            background: #d3d3d3;-->
-<!--        }-->
-<!--        #calendar .date {-->
-<!--            text-align: center;-->
-<!--            margin-bottom: 5px;-->
-<!--            padding: 4px;-->
-<!--            background: #d3d3d3;-->
-<!--            color: #333;-->
-<!--            width: 20px;-->
-<!--            border-radius: 50%;-->
-<!--            float: right;-->
-<!--        }-->
-<!--        #calendar .event {-->
-<!--            clear: both;-->
-<!--            display: block;-->
-<!--            font-size: 13px;-->
-<!--            border-radius: 4px;-->
-<!--            padding: 5px;-->
-<!--            margin-top: 40px;-->
-<!--            margin-bottom: 5px;-->
-<!--            line-height: 14px;-->
-<!--            background: #e4f2f2;-->
-<!--            border: 1px solid #b5dbdc;-->
-<!--            color: #009aaf;-->
-<!--            text-decoration: none;-->
-<!--        }-->
-<!--        #calendar .event-desc {-->
-<!--            color: #666;-->
-<!--            margin: 3px 0 7px 0;-->
-<!--            text-decoration: none;-->
-<!--        }-->
-<!--        #calendar .other-month {-->
-<!--            background: #f5f5f5;-->
-<!--            color: #666;-->
-<!--        }-->
-<!--        /* ============================-->
-<!--                        Mobile Responsiveness-->
-<!--           ============================*/-->
-<!--        @media (max-width: 768px) {-->
-<!--            #calendar .weekdays, #calendar .other-month {-->
-<!--                display: none;-->
-<!--            }-->
-<!--            #calendar li {-->
-<!--                height: auto !important;-->
-<!--                border: 1px solid #ededed;-->
-<!--                width: 100%;-->
-<!--                padding: 10px;-->
-<!--                margin-bottom: -1px;-->
-<!--            }-->
-<!--            #calendar .date {-->
-<!--                float: none;-->
-<!--            }-->
-<!--        }-->
-<!--    </style>-->
-
     <script>
         function toggleImg(id) {
             let before = document.getElementById("headerImg").src;
@@ -121,7 +19,6 @@
             document.getElementById(id).src = before;
         }
     </script>
-<!--    <script type = "text/JavaScript" th:src="@{/js/jquery.min.js}"></script>-->
 
     <script th:src="@{/js/calendar.js}" defer></script>
 </head>
@@ -381,9 +278,9 @@
             <div class="header">
 
 <!--                <div class="nav">-->
-                    <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>&nbsp;
+                    <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>&nbsp;&nbsp;
 <!--                    <button class="nav-btn go-today">Today</button>-->
-                    <div class="year-month"></div>&nbsp;
+                    <div class="year-month"></div>&nbsp;&nbsp;
                     <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
 <!--                </div>-->
             </div>
@@ -400,14 +297,23 @@
                 <div class="dates">
                     <div class="date" th:each="date, iterStat: ${calendarDateList}">
                         <div class="upside">
-                            <span class="this" th:text="${date.day}"></span>
-                            <span class="this" th:text="${date.season}"></span>
+                            <span class="this date_day " th:text="${date.day}"></span>&nbsp;
+                            <span class="this date_season season" th:text="${date.season}"></span>
                         </div>
                         <div class="downside">
-                            <a href="/europe_reserve"><span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
+                            <a th:href="'/europe_reserve/'+${date.dateId}"><span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
                             (<span class="this" th:text="${dateCampingList[iterStat.index][0].reserved}"></span>/1)</a> <br/>
-                            <a href="/europe_reserve"><span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
-                            (<span class="this" th:text="${dateCampingList[iterStat.index][1].reserved}"></span>/1)</a>
+                            <a th:href="'/europe_reserve/'+${date.dateId}"><span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
+                            (<span class="this" th:text="${dateCampingList[iterStat.index][1].reserved}"></span>/1)</a> <br/>
+
+                            <div th:if="${dateCampingList[iterStat.index][2].reserved} != 1" >
+                                <a href="/europe_reserve"><span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
+                                    (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)</a>
+                            </div>
+                            <div th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" >
+                                <span th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
+                                (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)
+                            </div>
                         </div>
                     </div>
                 </div>

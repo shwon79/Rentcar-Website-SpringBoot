@@ -11,5 +11,5 @@ import java.util.List;
 public interface CampingCarPriceRepository extends JpaRepository<CampingCarPrice, Long> {
 
     List<CampingCarPrice> findAll();
-
+    CampingCarPrice findByCarName(String carName);
 }

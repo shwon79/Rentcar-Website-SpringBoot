@@ -18,5 +18,8 @@ public class CampingCarPriceService {
     public List<CampingCarPrice> findCampingCarPrice(){
         return campingCarPriceRepository.findAll();
     }
+    public CampingCarPrice findCampingCarPriceByCarName(String carName){
+        return campingCarPriceRepository.findByCarName(carName);
+    }
 
 }

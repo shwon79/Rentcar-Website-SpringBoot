@@ -10,7 +10,8 @@ import javax.persistence.*;
 @Table(name = "CalendarDate")
 public class CalendarDate {
     @Id
-    private String dateId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long dateId;
 
     private String year;
     private String month;

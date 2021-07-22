@@ -18,6 +18,15 @@ public class CalendarDateService {
     public List<CalendarDate> findCalendarDate(){
         return calendarDateRepository.findAll();
     }
+    public CalendarDate findCalendarDateByDateId(Long dateId){
+        return calendarDateRepository.findByDateId(dateId);
+    }
 
+    public List<CalendarDate> findCalendarDateByMonth(String month){
+        return calendarDateRepository.findByMonth(month);
+    }
+    public List<CalendarDate> findCalendarDateByMonthAndDay(String month, String day){
+        return calendarDateRepository.findByMonthAndDay(month, day);
+    }
 
 }

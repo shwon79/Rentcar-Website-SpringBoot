@@ -1,7 +1,9 @@
 package kr.carz.savecar.service;
 
+import kr.carz.savecar.domain.CalendarDate;
 import kr.carz.savecar.domain.CalendarTime;
 import kr.carz.savecar.domain.CampingCar;
+import kr.carz.savecar.domain.CampingCarPrice;
 import kr.carz.savecar.repository.CalendarTimeRepository;
 import kr.carz.savecar.repository.CampingCarRepository;
 
@@ -18,5 +20,9 @@ public class CalendarTimeService {
     public List<CalendarTime> findCalendarTime(){
         return calendarTimeRepository.findAll();
     }
+    public List<CalendarTime> findCalendarTimeByDateIdAndCarName(CalendarDate dateId, CampingCarPrice carName){
+        return calendarTimeRepository.findByDateIdAndCarName(dateId, carName);
+    }
+
 
 }
