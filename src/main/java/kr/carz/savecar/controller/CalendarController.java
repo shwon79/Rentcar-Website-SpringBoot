@@ -57,18 +57,36 @@ public class CalendarController {
         // 날짜
         Calendar cal = Calendar.getInstance();
 
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(cal.get(Calendar.MONTH) + 1));
-        model.addAttribute("calendarDateList", calendarDateList);
+        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(cal.get(Calendar.MONTH)));
+
 
         // 전달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH));
-        System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),1);
+
+        Long firstDateId = calendarDateList.get(0).getDateId();
+        Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+        for(int i=1; i<before; i++){
+            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+        }
+
+        // 다음달 날짜 구하기
+//        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
+
+//        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+//        Integer after = cal.get(Calendar.DAY_OF_WEEK);
+
+//        for(int i=1; i<after; i++){
+//            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+//        }
+
+        model.addAttribute("calendarDateList", calendarDateList);
 
 
         // 날짜별 캠핑카
         List<List<DateCamping>> dateCampingList = new ArrayList();
 
-        for (int i=0; i<30; i++){
+        for (int i=0; i<calendarDateList.size(); i++){
             dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
         }
 
