@@ -106,8 +106,8 @@ public class CalendarController {
     }
 
 
-    @RequestMapping("/calendar/{year}/{month}")
-    public String handleRequest1(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("year") Long year, @PathVariable("month") Long month) throws Exception {
+    @RequestMapping("/calendar/{month}")
+    public String handleRequest1(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
         // 날짜
         Calendar cal = Calendar.getInstance();
 
@@ -159,7 +159,7 @@ public class CalendarController {
             System.out.println(dateCampingList.get(0).get(0).getCarName());
             model.addAttribute("dateCampingList", dateCampingList);
             model.addAttribute("thisMonth", now_month);
-            model.addAttribute("thisYear", now_month);
+            model.addAttribute("thisYear", 2021);
         }
 
 
