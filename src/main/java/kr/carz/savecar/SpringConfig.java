@@ -17,6 +17,7 @@ public class SpringConfig {
     private final CalendarDateRepository calendarDateRepository;
     private final CalendarTimeRepository calendarTimeRepository;
     private final DateCampingRepository dateCampingRepository;
+    private final CampingcarDateTimeRepository campingcarDateTimeRepository;
 
 
 
@@ -25,7 +26,7 @@ public class SpringConfig {
                         ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
                         ReservationRepository reservationRepository, CampingCarPriceRepository campingCarPriceRepository,
                         CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository,
-                        DateCampingRepository dateCampingRepository) {
+                        DateCampingRepository dateCampingRepository, CampingcarDateTimeRepository campingcarDateTimeRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -35,6 +36,7 @@ public class SpringConfig {
         this.calendarDateRepository = calendarDateRepository;
         this.calendarTimeRepository = calendarTimeRepository;
         this.dateCampingRepository = dateCampingRepository;
+        this.campingcarDateTimeRepository = campingcarDateTimeRepository;
     }
 
     @Bean
@@ -67,5 +69,10 @@ public class SpringConfig {
 
     @Bean
     public DateCampingService dateCampingService() { return new DateCampingService(dateCampingRepository); }
+
+    @Bean
+    public CampingcarDateTimeService campingcarDateTimeService() { return new CampingcarDateTimeService(campingcarDateTimeRepository); }
+
+
 
 }

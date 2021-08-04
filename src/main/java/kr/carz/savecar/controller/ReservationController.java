@@ -4,6 +4,7 @@ import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.CampingcarDateTimeDto;
 import kr.carz.savecar.domain.Reservation;
 import kr.carz.savecar.domain.ReservationSaveDto;
+import kr.carz.savecar.service.CampingcarDateTimeService;
 import kr.carz.savecar.service.MonthlyRentService;
 import kr.carz.savecar.service.ReservationService;
 import kr.carz.savecar.service.YearlyRentService;
@@ -24,9 +25,12 @@ import java.util.List;
 @Controller
 public class ReservationController {
     private final ReservationService reservationService;
+    private final CampingcarDateTimeService campingcarDateTimeService;
+
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, CampingcarDateTimeService campingcarDateTimeService) {
         this.reservationService = reservationService;
+        this.campingcarDateTimeService = campingcarDateTimeService;
     }
 
 
@@ -165,19 +169,18 @@ public class ReservationController {
 
 
     // 예약 저장 api
-//    @PostMapping("/campingcar/reserve")
-//    @ResponseBody
-//    public Long save(@RequestBody CampingcarDateTimeDto dto){
-//
-//        HashMap<String, String> params = new HashMap<String, String>();
-//        HashMap<String, String> params2 = new HashMap<String, String>();
-//
-//        System.out.println(dto.getRentDate());
-//        System.out.println(dto.getRentTime());
-//        System.out.println(dto.getReturnDate());
-//        System.out.println(dto.getReturnTime());
-//
-////        return reservationService.save(dto);
-//        return 11.1;
-//    }
+    @PostMapping("/campingcar/reserve")
+    @ResponseBody
+    public Long save(@RequestBody CampingcarDateTimeDto dto){
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        HashMap<String, String> params2 = new HashMap<String, String>();
+
+        System.out.println(dto.getRentDate());
+        System.out.println(dto.getRentTime());
+        System.out.println(dto.getReturnDate());
+        System.out.println(dto.getReturnTime());
+
+        return campingcarDateTimeService.save(dto);
+    }
 }
