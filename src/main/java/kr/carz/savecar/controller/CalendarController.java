@@ -58,6 +58,11 @@ public class CalendarController {
         // 날짜
         Calendar cal = Calendar.getInstance();
 
+        int today = cal.get(Calendar.DATE);
+
+        model.addAttribute("today", today);
+
+
         int now_month = cal.get(Calendar.MONTH)+1;
         int now_year = cal.get(Calendar.YEAR);
 
