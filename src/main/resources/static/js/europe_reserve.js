@@ -116,23 +116,20 @@ const rentTimeSel = (id) => {
     rentTime = id;
 }
 
-let prom1 = '';
-let prom2 = '';
-let prom3 = '';
-const getData = async () => {
-    prom1 = await rentDateNum;
-    prom2 = await rentTime;
-    prom3 = await returnDateNum;
-}
 
-let finalDate = {
-    'rentDate': prom1,
-    'rentTime':  prom2,
-    'returnDate': prom3,
-}
+
+
 
 const postDate = () => {
-    console.log(JSON.stringify(finalDate));
+
+    let finalDate = {
+        'rentDate': rentDateNum,
+        'rentTime':  rentTime,
+        'returnDate': returnDateNum,
+    }
+
+    console.log(rentDateNum);
+    console.log(finalDate);
 
     let url = '/campingcar/reserve';
     fetch(url, {
