@@ -447,3 +447,15 @@ hr {
 a:hover {
   color: black;
 }
+
+#rent_cal button:focus {
+  background-color: #3e8f3e;
+}
+
+#rent_time button:focus {
+  background-color: #3e8f3e;
+}
+
+#return_cal button:focus {
+  background-color: #3e8f3e;
+}

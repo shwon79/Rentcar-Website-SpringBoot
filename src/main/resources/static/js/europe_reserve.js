@@ -78,8 +78,10 @@ const returnDaySelected = () => {
 let rentDateNum='';
 const rentDate = (id) => {
     rentDateNum = id;
+    // document.getElementById(id).id = 'selected-btn';
     console.log(id);
 }
+
 
 let returnDateNum='';
 const returnDate = (id) => {
