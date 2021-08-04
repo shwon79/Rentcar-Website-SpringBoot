@@ -58,10 +58,10 @@ public class CalendarController {
         // 날짜
         Calendar cal = Calendar.getInstance();
 
-        int today = cal.get(Calendar.DATE);
+        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
 
         model.addAttribute("today", today);
-
+        System.out.println(today);
 
         int now_month = cal.get(Calendar.MONTH)+1;
         int now_year = cal.get(Calendar.YEAR);
@@ -75,7 +75,7 @@ public class CalendarController {
         Long firstDateId = calendarDateList.get(0).getDateId();
         Integer before = cal.get(Calendar.DAY_OF_WEEK);
 
-        System.out.println(before);
+//        System.out.println(before);
 
         for(int i=1; i<before; i++){
             calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
