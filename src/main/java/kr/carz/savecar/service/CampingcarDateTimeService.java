@@ -19,11 +19,11 @@ public class CampingcarDateTimeService {
         this.campingcarDateTimeRepository = campingcarDateTimeRepository;
     }
 
-//    public Long save(CampingcarDateTimeDto dto) {
-//       return campingcarDateTimeRepository.save(dto.toEntity()).getId();
-//    }
+    public Long save(CampingcarDateTimeDto dto) {
+       return campingcarDateTimeRepository.save(dto.toEntity()).getId();
+    }
 
-//    public List<CampingcarDateTime> findAllReservations(){
-//        return campingcarDateTimeRepository.findAll();
-//    }
+    public List<CampingcarDateTime> findAllReservations(){
+        return campingcarDateTimeRepository.findAll();
+    }
 }

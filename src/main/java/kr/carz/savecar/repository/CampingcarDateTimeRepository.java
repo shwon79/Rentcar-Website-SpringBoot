@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CampingcarDateTimeRepository extends JpaRepository<Reservation, Long> {
+public interface CampingcarDateTimeRepository extends JpaRepository<CampingcarDateTime, Long> {
 
-//    List<CampingcarDateTime> findAll();
+    List<CampingcarDateTime> findAll();
 }
