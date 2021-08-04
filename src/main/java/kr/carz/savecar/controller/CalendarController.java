@@ -75,7 +75,6 @@ public class CalendarController {
         Long firstDateId = calendarDateList.get(0).getDateId();
         Integer before = cal.get(Calendar.DAY_OF_WEEK);
 
-//        System.out.println(before);
 
         for(int i=1; i<before; i++){
             calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
@@ -117,6 +116,17 @@ public class CalendarController {
         Calendar cal = Calendar.getInstance();
 
         int now_month = month.intValue()+1; // 9
+        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
+        int this_month = cal.get(Calendar.MONTH) + 1;
+
+
+        if(month == this_month-1){
+            model.addAttribute("today", today);
+            System.out.println(this_month);
+        } else {
+            model.addAttribute("today", 0);
+            System.out.println(0);
+        }
 
         if(now_month > 11){
             response.setContentType("text/html; charset=UTF-8");
@@ -180,6 +190,17 @@ public class CalendarController {
         Calendar cal = Calendar.getInstance();
 
         int now_month = month.intValue(); // 9
+        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
+        int this_month = cal.get(Calendar.MONTH) + 1;
+
+
+        if(month == this_month){
+            model.addAttribute("today", today);
+            System.out.println(this_month);
+        } else {
+            model.addAttribute("today", 0);
+            System.out.println(0);
+        }
 
         if(now_month < 8){
             response.setContentType("text/html; charset=UTF-8");

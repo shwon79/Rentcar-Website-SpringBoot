@@ -133,8 +133,8 @@ let finalDate = {
 
 const postDate = () => {
     console.log(JSON.stringify(finalDate));
-    /*
-    let url = '';
+
+    let url = '/campingcar/reserve';
     fetch(url, {
         method: 'POST',
         body: JSON.stringify(finalDate),
@@ -145,6 +145,5 @@ const postDate = () => {
         .then(response => console.log('Success: ', JSON.stringify(response)))
         .catch(err => console.error('Error: ', err))
 
-     */
 }
 
