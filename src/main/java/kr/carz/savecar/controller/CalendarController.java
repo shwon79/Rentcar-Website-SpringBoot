@@ -81,14 +81,14 @@ public class CalendarController {
         }
 
         // 다음달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-        Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-        for(int i=1; i<=7-after; i++){
-            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-        }
+//        cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
+//
+//        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+//        Integer after = cal.get(Calendar.DAY_OF_WEEK);
+//
+//        for(int i=1; i<=7-after; i++){
+//            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+//        }
 
         model.addAttribute("calendarDateList", calendarDateList);
 
@@ -152,14 +152,14 @@ public class CalendarController {
             }
 
             // 다음달 날짜 구하기
-            cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-            Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-            for (int i = 1; i <= 7 - after; i++) {
-                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-            }
+//            cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
+//
+//            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+//            Integer after = cal.get(Calendar.DAY_OF_WEEK);
+//
+//            for (int i = 1; i <= 7 - after; i++) {
+//                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+//            }
 
             model.addAttribute("calendarDateList", calendarDateList);
 
@@ -226,14 +226,14 @@ public class CalendarController {
             }
 
             // 다음달 날짜 구하기
-            cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-            Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-            for (int i = 1; i <= 7 - after; i++) {
-                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-            }
+//            cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
+//
+//            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+//            Integer after = cal.get(Calendar.DAY_OF_WEEK);
+//
+//            for (int i = 1; i <= 7 - after; i++) {
+//                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+//            }
 
             model.addAttribute("calendarDateList", calendarDateList);
 

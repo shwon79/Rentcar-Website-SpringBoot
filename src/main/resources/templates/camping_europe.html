@@ -170,10 +170,10 @@
                 <div id="calendar_return" class="row">
                     <div class="header">
                         <!--                <div class="nav">-->
-                        <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>&nbsp;&nbsp;
+                        <button class="nav-btn go-prev">&lt;</button>&nbsp;&nbsp;
                         <!--                    <button class="nav-btn go-today">Today</button>-->
                         <div class="year-month-return"></div>&nbsp;&nbsp;
-                        <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+                        <button class="nav-btn go-next">&gt;</button>
                         <!--                </div>-->
                     </div>
                     <div class="main padding-bottom-0">
@@ -211,6 +211,18 @@
                         <img th:src="@{/img/down-arrow.png}" class="img-responsive">
                     </div>
                 </div><hr style="background: dimgray;" />
+
+                <!-- 대여 시간 선택창 -->
+                <div id="calendar_return_time">
+                    <div id="return_time" class="row" data-toggle="buttons">
+                        <div class="times text-center">
+                            <div class="time col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding" th:each="date, iterStat: ${calendarTimeList}" style="border: dimgray">
+                                <button style="height: 35px; width: 90%; margin: 5px 0" type="button" th:id="${date.reserve_time}"
+                                        class="this time_day" th:text="${date.reserve_time}" onclick="rentTimeSel(id)"></button>
+                            </div>
+                        </div>
+                    </div><hr style="background: dimgray;" />
+                </div>
 
                 <!-- 계산 부분 -->
                 <div class="row">
