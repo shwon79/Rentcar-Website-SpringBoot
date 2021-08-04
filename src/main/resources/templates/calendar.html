@@ -18,9 +18,12 @@
             document.getElementById("headerImg").src = tmp;
             document.getElementById(id).src = before;
         }
+
     </script>
 
     <script th:src="@{/js/calendar.js}" defer></script>
+
+
 </head>
 
 <div layout:fragment="content">
@@ -31,7 +34,7 @@
             <div class="header">
 
 <!--                <div class="nav">-->
-                    <button class="nav-btn go-prev" >&lt;</button>&nbsp;&nbsp;
+                    <button class="nav-btn go-prev" onclick="logBtn()">&lt;</button>&nbsp;&nbsp;
 <!--                    <button class="nav-btn go-today">Today</button>-->
                     <div class="year-month">
 
@@ -44,27 +47,29 @@
 <!--                </div>-->
             </div>
             <div class="main">
-                <div class="days">
-                    <div class="day">일</div>
-                    <div class="day">월</div>
-                    <div class="day">화</div>
-                    <div class="day">수</div>
-                    <div class="day">목</div>
-                    <div class="day">금</div>
-                    <div class="day">토</div>
+                <div style="margin-bottom: 0" class="days">
+                    <div style="border-bottom: 3px solid red" class="day">일</div>
+                    <div style="border-bottom: 3px solid gray" class="day">월</div>
+                    <div style="border-bottom: 3px solid gray" class="day">화</div>
+                    <div style="border-bottom: 3px solid gray" class="day">수</div>
+                    <div style="border-bottom: 3px solid gray" class="day">목</div>
+                    <div style="border-bottom: 3px solid gray" class="day">금</div>
+                    <div style="border-bottom: 3px solid blue" class="day">토</div>
                 </div>
                 <div class="dates">
-                    <div class="date" th:each="date, iterStat: ${calendarDateList}">
-                        <div class="upside">
-                            <span class="this date_day " th:text="${date.day}"></span>&nbsp;
+                    <div class="date" th:each="date, iterStat: ${calendarDateList}" th:style="${date.day} < 5 ? 'pointer-events: none; background-color: #8c9292; color: #8c9292;':'' ">
+                        <div class="upside" th:style="${date.day} < 5 ? 'display: none':'' ">
+                            <span class="this date_day" th:text="${date.day}"></span>&nbsp;
                             <span class="this date_season season" th:text="${date.season}"></span>
                         </div>
-                        <div class="downside">
-                            <a th:href="'/europe_reserve/'+${date.dateId}"><span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
+                        <div th:id="${date.day}" class="downside">
+                            <a th:href="'/europe_reserve/'+${date.dateId}" th:style="${date.day} < 5 ? 'display: none':'' ">
+                                <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
                             (<span class="this" th:text="${dateCampingList[iterStat.index][0].reserved}"></span>/1)</a> <br/>
-                            <a th:href="'/europe_reserve/'+${date.dateId}"><span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
-                            (<span class="this" th:text="${dateCampingList[iterStat.index][1].reserved}"></span>/1)</a> <br/>
-
+                            <a th:href="'/europe_reserve/'+${date.dateId}" th:style="${date.day} < 5 ? 'pointer-events: none; background-color: #8c9292; color: #8c9292;':'' ">
+                                <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
+                            (<span class="this" th:text="${dateCampingList[iterStat.index][1].reserved}" ></span>/1)</a> <br/>
+                            <p th:style="${date.day} < 5 ? 'text-align: center; color: ghostwhite; margin:0':'display:none;' ">예약 불가</p>
                             <div th:if="${dateCampingList[iterStat.index][2].reserved} != 1" >
                                 <a href="/europe_reserve"><span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
                                     (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)</a>
