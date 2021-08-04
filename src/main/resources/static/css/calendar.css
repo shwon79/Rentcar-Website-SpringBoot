@@ -100,3 +100,8 @@ a:hover {
 }
 
 
+@media (max-width: 990px) {
+  .downside {
+    font-size: 10px;
+  }
+}
