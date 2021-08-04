@@ -84,7 +84,7 @@
             <!-- right column -->
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 margin-bottom-60 text-center">
                 <!-- 대여날짜 -->
-                <div class="row" onclick="doDisplay()">
+                <div class="select_wrapper row" onclick="doDisplay()">
                     <<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
                         <div class="date_menu">대여날짜</div>
                     </div>
@@ -129,7 +129,7 @@
                 </div>
 
                 <!-- 대여 시간 -->
-                <div class="row" onclick="doDisplay_rent_time()">
+                <div class="select_wrapper row" onclick="doDisplay_rent_time()">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
                         <div class="date_menu">대여시간</div>
                     </div>
@@ -154,7 +154,7 @@
                 </div>
 
                 <!-- 반납날짜 -->
-                <div class="row" onclick="doDisplay_return()">
+                <div class="select_wrapper row" onclick="doDisplay_return()">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
                         <div class="date_menu">반납날짜</div>
                     </div>
@@ -200,7 +200,7 @@
                 </div>
 
                 <!-- 반납 시간 -->
-                <div class="row" onclick="doDisplay_return_time()">
+                <div class="select_wrapper row" onclick="doDisplay_return_time()">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
                         <div class="date_menu">반납시간</div>
                     </div>
@@ -212,31 +212,41 @@
                     </div>
                 </div><hr style="background: dimgray;" />
 
-                <!-- 대여 시간 선택창 -->
+                <!-- 반납 시간 선택창 -->
                 <div id="calendar_return_time">
                     <div id="return_time" class="row" data-toggle="buttons">
                         <div class="times text-center">
                             <div class="time col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding" th:each="date, iterStat: ${calendarTimeList}" style="border: dimgray">
                                 <button style="height: 35px; width: 90%; margin: 5px 0" type="button" th:id="${date.reserve_time}"
-                                        class="this time_day" th:text="${date.reserve_time}" onclick="rentTimeSel(id)"></button>
+                                        class="this time_day" th:text="${date.reserve_time}" onclick="returnTimeSel(id)"></button>
                             </div>
                         </div>
                     </div><hr style="background: dimgray;" />
                 </div>
 
+                <div>
+                    <button onclick="calculateDate()">달 계산하기</button>
+                    <p id="calResult"></p>
+                </div><hr style="background: dimgray;" />
+                <!-- 개인정보 입력 칸 -->
+                <div class="personal_data">
+                    <div>
+                        <h2>개인정보 입력</h2>
+                        <input id="input_name" type="text" placeholder="성명" />
+                        <input id="input_number" type="number" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                               oninput="handleOnInput(this, 11)" placeholder="휴대전화" />
+                    </div>
+                </div><hr style="background: dimgray;" />
+
                 <!-- 계산 부분 -->
                 <div class="row">
                     <div>
-                        <ul>
-                            <li>1박 </li>
-                        </ul>
-                        <button onclick="calculateDate()">달 계산하기</button>
+                        <div>
+                            <p id="total_result"></p>
+                        </div>
                         <button onclick="postDate()">데이터 전송</button>
                     </div>
                 </div><hr style="background: dimgray;" />
-                <div>
-                    <p id="calResult"></p>
-                </div>
             </div>
 
             <!-- 사진 -->

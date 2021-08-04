@@ -48,6 +48,8 @@ function doDisplay_return_time(){
 document.querySelector('.year-month-return').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
 
+
+// show rent date
 let today = new Date();
 let todayFull = today.toLocaleDateString();
 let todayDay = '';
@@ -60,21 +62,10 @@ switch (today.getDay()) {
         case 5 : todayDay = '금';
         case 6 : todayDay = '토';
 }
-
 document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 
-/*
-let rentDay = 0;
-let returnDay = 0;
-const rentDaySelected = () => {
-    rentDay = 1;
-}
 
-const returnDaySelected = () => {
-    returnDay = 1;
-}
- */
-
+// rent Date
 let rentDateNum='';
 const rentDate = (id) => {
     rentDateNum = id;
@@ -82,14 +73,14 @@ const rentDate = (id) => {
     console.log(id);
 }
 
-
+// return date
 let returnDateNum='';
 const returnDate = (id) => {
     returnDateNum = id;
     console.log(id)
 }
 
-
+// price calculator
 const calculateDate = () => {
     let date1 = rentDateNum.split('/');
     let date2 = returnDateNum.split('/');
@@ -107,6 +98,7 @@ const calculateDate = () => {
 
     console.log(dateDiffer);
     document.getElementById('calResult').innerText = `${dateDiffer}달`;
+    return dateDiffer;
 }
 
 // time select onclick
@@ -116,31 +108,77 @@ const rentTimeSel = (id) => {
     rentTime = id;
 }
 
+// return time select onclick
+let returnTime = '';
+const returnTimeSel = (id) => {
+    console.log(id);
+    returnTime = id;
+}
+
+// show total selection
+if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
+    const target = document.getElementById('total_result');
+    let differ = calculateDate();
+    target.innerText = `${differ}달`;
+}
 
 
 
+// phone number length limit
+function handleOnInput(el, maxlength) {
+    if(el.value.length > maxlength) el.value = el.value.substr(0, maxlength);
+}
 
+// check onchange of inputs
+let customName = '';
+let phoneNum = '';
+const inputName = document.getElementById('input_name');
+const inputPhoneNum = document.getElementById('input_number');
+inputName.addEventListener('change',
+    function () {
+        customName = inputName.value;
+        console.log(inputName.value);
+    })
+inputPhoneNum.addEventListener('change',
+    function () {
+        phoneNum = inputPhoneNum.value;
+        console.log(inputPhoneNum.value);
+    })
+
+
+// Sending Data;
 const postDate = () => {
 
-    let finalDate = {
-        'rentDate': rentDateNum,
-        'rentTime':  rentTime,
-        'returnDate': returnDateNum,
+    let currentTime = today.toLocaleString();
+
+    if (customName != '' && phoneNum!='' && rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
+        let finalDate = {
+            'reserveTime': currentTime,
+            'name': customName,
+            'phoneNum': phoneNum,
+            'rentDate': rentDateNum,
+            'rentTime':  rentTime,
+            'returnDate': returnDateNum,
+            'returnTime' : returnTime,
+        }
+
+        console.log(JSON.stringify(finalDate));
+
+        let url = '/campingcar/reserve';
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(finalDate),
+            headers:{
+                'Content-Type' : 'application/json'
+            }
+        }).then(res => res.json())
+            .then(response => console.log('Success: ', JSON.stringify(response)))
+            .then(()=>alert('예약이 완료되었습니다!'))
+            .catch(err => console.error('Error: ', err))
+    } else {
+        alert('입력을 완료해주세요!')
     }
 
-    console.log(rentDateNum);
-    console.log(finalDate);
-
-    let url = '/campingcar/reserve';
-    fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(finalDate),
-        headers:{
-            'Content-Type' : 'application/json'
-        }
-    }).then(res => res.json())
-        .then(response => console.log('Success: ', JSON.stringify(response)))
-        .catch(err => console.error('Error: ', err))
 
 }
 

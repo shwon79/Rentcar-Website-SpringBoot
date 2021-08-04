@@ -48,16 +48,15 @@
   display: flex;
   flex-flow: row wrap;
   height: 600px;
-  border-top: 1px solid #6f6c6c;
-  border-right: 1px solid #6f6c6c;
+  /*border-top: 1px solid #6f6c6c;*/
+  /*border-right: 1px solid #6f6c6c;*/
 }
 
 .date, .time {
   width: calc(100% / 7);
   padding: 15px;
   text-align: left;
-  border-bottom: 1px solid #6f6c6c;
-  border-left: 1px solid #6f6c6c;
+  border: 1px solid #6f6c6c;
 }
 
 .upside {

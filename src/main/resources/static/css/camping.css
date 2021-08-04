@@ -448,6 +448,16 @@ a:hover {
   color: black;
 }
 
+.personal_data input {
+  height: 30px;
+  font-size: 20px;
+  margin: 5px;
+}
+
+.select_wrapper:hover {
+  cursor: pointer;
+}
+
 #rent_cal button:focus {
   background-color: #3e8f3e;
 }
