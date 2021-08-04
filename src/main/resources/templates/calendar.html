@@ -33,18 +33,17 @@
         <div class="container">
             <div class="header">
 
-<!--                <div class="nav">-->
-                    <button class="nav-btn go-prev" onclick="logBtn()">&lt;</button>&nbsp;&nbsp;
+                    <a th:href="'/calendar/before/' + ${prevMonth}">
+                        <button class="nav-btn go-prev" >&lt;</button>&nbsp;&nbsp;
+                    </a>
 <!--                    <button class="nav-btn go-today">Today</button>-->
                     <div class="year-month">
-
                         <span name="thisYear" th:text="${thisYear}"></span>년
                         <span name="thisMonth" th:text="${thisMonth}"></span>월
                     </div>&nbsp;&nbsp;
                     <a th:href="'/calendar/' + ${thisMonth}">
                         <button class="nav-btn go-next"  >&gt;</button>
                     </a>
-<!--                </div>-->
             </div>
             <div class="main">
                 <div style="margin-bottom: 0" class="days">
