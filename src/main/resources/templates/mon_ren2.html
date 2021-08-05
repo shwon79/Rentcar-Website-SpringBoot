@@ -1,0 +1,106 @@
+<!--  월렌트 진행중 (paying.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 월렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/mon_rent2.css}" rel="stylesheet">
+
+    <script>
+        function toggleImg(id) {
+            let before = document.getElementById("headerImg").src;
+            let tmp = document.getElementById(id).src;
+            document.getElementById("headerImg").src = tmp;
+            document.getElementById(id).src = before;
+        }
+    </script>
+
+    <script th:src="@{/js/mon_rent2.js}" defer></script>
+
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <div th:replace="fragments/header_camp::headerFragment"></div>
+
+        <div class="monthly_content">
+
+            <!-- title row -->
+            <div class="row">
+                <!-- title -->
+                <div class="row">
+                    <!-- left col -->
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                        <!-- 월렌트 title -->
+                        <div class="row">
+
+                        </div>
+                        <!-- descriptions -->
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <!-- right col -->
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                        <img src="" alt="car_img" />
+                    </div>
+                </div>
+                <!-- selections -->
+                <div class="row">
+                    <div class="row">
+                        <!-- 차종 -->
+                        <div class="row">
+                            <!-- left title -->
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <p>차종</p>
+                            </div>
+                            <!-- selections -->
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+
+                            </div>
+                        </div>
+                        <!-- 지역 -->
+                        <div class="row">
+                            <!-- left title -->
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <p>지역</p>
+                            </div>
+                            <!-- selections -->
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+
+                            </div>
+                        </div>
+                        <!-- 대기 상황 -->
+                        <div class="row">
+                            <!-- left title -->
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <p>대기상황</p>
+                            </div>
+                            <!-- selections -->
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- content row -->
+            <div class="row">
+                <!-- car table -->
+                <div class="row">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+
+</html>
