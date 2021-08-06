@@ -332,6 +332,8 @@ public class CalendarController {
         model.addAttribute("dateCampingList", dateCampingList);
 
 
+        // 캠핑카 가격
+        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
 
         return "camping_europe";
     }
@@ -357,12 +359,12 @@ public class CalendarController {
     public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time) throws Exception {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
+        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
 
         model.put("rent_date", rent_date);
         model.put("rent_time", rent_time);
         model.put("return_date", return_date);
         model.put("return_time", return_time);
-        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
 
 
         System.out.println(campingCarPrice.getFifteendays());
