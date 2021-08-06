@@ -78,6 +78,36 @@ switch (today.getDay()) {
 document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 
 
+// 가격표
+let obj;
+
+let deposits;
+let oneDay;
+let fourDay;
+let fiveDay;
+let sevenDay;
+let tenDay;
+let fifteenDay;
+let monthly;
+
+function runIt() {
+    fetch('/campingcar/getprice')
+        .then(res => res.json())
+        .then(result => {
+            obj = result;
+            deposits = obj['deposit'];
+            monthly = obj['monthly'];
+            oneDay = obj['onedays'];
+            fourDay = obj['fourdays'];
+            fiveDay = obj['fivedays'];
+            sevenDay = obj['sevendays'];
+            tenDay = obj['tendays'];
+            fifteenDay = obj['fifteendays'];
+        })
+}
+runIt();
+
+
 // rent Date
 let rentDateNum='';
 const rentDate = (id) => {
@@ -93,27 +123,6 @@ const returnDate = (id) => {
     console.log(id)
 }
 
-// price calculator
-const calculateDate = () => {
-    let date1 = rentDateNum.split('-');
-    let date2 = returnDateNum.split('-');
-    let month1 = date1[0];
-    let day1 = date1[1];
-    let month2 = date2[0];
-    let day2 = date2[1];
-    let monthDiffer = month2-month1;
-    let dayDiffer = day2 - day1;
-    let dateDiffer = 0;
-    if(monthDiffer > 0) {
-        if (dayDiffer > 0) dateDiffer = monthDiffer+1;
-        else if (dateDiffer <= 0) dateDiffer = monthDiffer;
-    } else if(monthDiffer == 0) dateDiffer = 1;
-
-    console.log(dateDiffer);
-    document.getElementById('calResult').innerText = `${dateDiffer}달`;
-    return dateDiffer;
-}
-
 // time select onclick
 let rentTime = '';
 const rentTimeSel = (id) => {
@@ -126,6 +135,53 @@ let returnTime = '';
 const returnTimeSel = (id) => {
     console.log(id);
     returnTime = id;
+}
+
+
+// calendar calculate
+const calendarCal = (month1, day1, month2, day2) => {
+    console.log(month1);
+    /*
+    switch (month1) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+    }
+    */
+}
+
+// price calculator
+const calculateDate = () => {
+    let date1 = rentDateNum.split('월');
+    let date2 = returnDateNum.split('월');
+    let month1 = date1[0];
+    let day1 = date1[1][0];
+    let month2 = date2[0];
+    let day2 = date2[1][0];
+    if ((month2 - month1) < 2) calendarCal(month1, day1, month2, day2);
+    let monthDiffer = month2-month1;
+    let dayDiffer = day2 - day1;
+    let dateDiffer = 0;
+    if(monthDiffer > 0) {
+        if (dayDiffer > 0) dateDiffer = monthDiffer+1;
+        else if (dateDiffer <= 0) dateDiffer = monthDiffer;
+    } else if(monthDiffer == 0) dateDiffer = 1;
+
+    // console.log(dateDiffer);
+    console.log(obj);
+    console.log(monthly);
+    console.log(fifteenDay);
+    document.getElementById('calResult').innerText = `${dateDiffer}달`;
+    return dateDiffer;
 }
 
 // show total selection

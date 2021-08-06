@@ -61,7 +61,7 @@
                         <img th:src="@{/img/camping-car1.jpg}" id="headerImg" width="90%" height="100%" style="object-fit:contain">
                     </div>
                     <!-- left content4   -->
-                    <div class="row">
+                    <div class="row margin-bottom-40">
                         <img th:src="@{/img/IMG_0360.JPG}" id="carImg1" width="15%" height="100px" onclick="toggleImg('carImg1')">
                         <img th:src="@{/img/IMG_0361.JPG}" id="carImg2" width="15%" height="100px" onclick="toggleImg('carImg2')">
                         <img th:src="@{/img/IMG_0363.JPG}" id="carImg4" width="15%" height="100px" onclick="toggleImg('carImg4')">
@@ -76,8 +76,12 @@
                         <img th:src="@{/img/IMG_0377.JPG}" id="carImg14" width="15%" height="100px" onclick="toggleImg('carImg14')">
                     </div>
                     <!-- price table -->
-                    <div class="row">
+                    <div class="row pinside20">
                         <div id="table_wrapper">
+                            <div>
+                                <h3>가격표</h3>
+                            </div>
+
                             <!-- header -->
                             <div id="table_header">
                                 <div>연식</div>
@@ -92,18 +96,17 @@
                             </div>
                             <!-- body -->
                             <div id="table_body">
-                                <div th:text="${campingCarPrice.yearmodel}"></div>
-                                <div th:text="${campingCarPrice.deposit}"></div>
-                                <div th:text="${campingCarPrice.onedays}"></div>
-                                <div th:text="${campingCarPrice.fourdays}"></div>
-                                <div th:text="${campingCarPrice.fivedays}"></div>
-                                <div th:text="${campingCarPrice.sevendays}"></div>
-                                <div th:text="${campingCarPrice.tendays}"></div>
-                                <div th:text="${campingCarPrice.fifteendays}"></div>
-                                <div th:text="${campingCarPrice.monthly}"></div>
+                                <div class="yearmodel" th:id="${campingCarPrice.yearmodel}" th:text="${campingCarPrice.yearmodel}"></div>
+                                <div class="deposit" th:id="${campingCarPrice.deposit}" th:text="${campingCarPrice.deposit}"></div>
+                                <div class="onedays" th:id="${campingCarPrice.onedays}" th:text="${campingCarPrice.onedays}"></div>
+                                <div class="fourdays" th:id="${campingCarPrice.fourdays}" th:text="${campingCarPrice.fourdays}"></div>
+                                <div class="fivedays" th:id="${campingCarPrice.fivedays}" th:text="${campingCarPrice.fivedays}"></div>
+                                <div class="sevendays" th:id="${campingCarPrice.sevendays}" th:text="${campingCarPrice.sevendays}"></div>
+                                <div class="tendays" th:id="${campingCarPrice.tendays}" th:text="${campingCarPrice.tendays}"></div>
+                                <div class="fifteendays" th:id="${campingCarPrice.fifteendays}" th:text="${campingCarPrice.fifteendays}"></div>
+                                <div class="monthly" th:id="${campingCarPrice.monthly}" th:text="${campingCarPrice.monthly}"></div>
                             </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -214,9 +217,15 @@
                                 <div class="day">토</div>
                             </div>
                             <div id="return_cal" class="dates">
-                                <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
-                                    <button style="width: 100%; height: 100%; border:none;" th:id="${date.month+'월 '+date.day+'일'}"
-                                            class="this date_day" th:text="${date.day}" onclick="returnDate(id)"></button>&nbsp;
+
+                                <div class="date no-padding"th:each="date, iterStat: ${calendarDateList}">
+                                    <label th:for="${'to'+date.month+'월 '+date.day+'일'}">
+                                        <input class="this date_day" type="radio"
+                                               th:id="${'to'+date.month+'월 '+date.day+'일'}" th:text="${date.day}" name="calendar2" onclick="returnDate(id)"/>
+                                    </label>
+
+<!--                                    <button style="width: 100%; height: 100%; border:none;" th:id="${date.month+'월 '+date.day+'일'}"-->
+<!--                                            class="this date_day" th:text="${date.day}" onclick="returnDate(id)"></button>&nbsp;-->
                                 </div>
                             </div>
                             <div class="select_possible text-right padding-top-20">
