@@ -44,10 +44,6 @@ public class CalendarController {
     }
 
 
-    @GetMapping("/paying")
-    public String camping_paying() {
-        return "paying";
-    }
 
     @GetMapping("/travel")
     public String camping_travel() {
@@ -276,69 +272,6 @@ public class CalendarController {
 
 
 
-
-    @GetMapping("/europe_reserve")
-    public String camping_europe_reserve(Model model) {
-//        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDate();
-//        model.addAttribute("calendarDateList", calendarDateList);
-//
-//
-//        List<List<DateCamping>> dateCampingList = new ArrayList();
-//
-//        for (int i=0; i<30; i++){
-//            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
-//        }
-//
-//        model.addAttribute("dateCampingList", dateCampingList);
-
-        // 날짜
-        Calendar cal = Calendar.getInstance();
-
-        int now_month = cal.get(Calendar.MONTH)+1;
-
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
-
-
-        // 전달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,1);
-
-        Long firstDateId = calendarDateList.get(0).getDateId();
-        Integer before = cal.get(Calendar.DAY_OF_WEEK);
-
-        System.out.println(before);
-
-        for(int i=1; i<before; i++){
-            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-        }
-
-        // 다음달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-        Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-        for(int i=1; i<=7-after; i++){
-            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-        }
-
-        model.addAttribute("calendarDateList", calendarDateList);
-
-
-        // 날짜별 캠핑카
-        List<List<DateCamping>> dateCampingList = new ArrayList();
-
-        for (int i=0; i<calendarDateList.size(); i++){
-            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
-        }
-
-        System.out.println(dateCampingList.get(0).get(0).getCarName());
-        model.addAttribute("dateCampingList", dateCampingList);
-
-
-        return "camping_europe";
-    }
-
-
     @RequestMapping("/europe_reserve/{date_id}")
     public String handleRequest(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
 
@@ -404,4 +337,14 @@ public class CalendarController {
     }
 
 
+    @RequestMapping("/paying/{rent_date}/{rent_time}/{return_date}/{return_time}")
+    public String handleRequest1(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time)  throws Exception{
+
+        model.addAttribute("rent_date", rent_date);
+        model.addAttribute("rent_time", rent_time);
+        model.addAttribute("return_date", return_date);
+        model.addAttribute("return_time", return_time);
+
+        return "paying";
+    }
 }
