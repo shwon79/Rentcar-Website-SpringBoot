@@ -4,10 +4,7 @@ import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.CampingcarDateTimeDto;
 import kr.carz.savecar.domain.Reservation;
 import kr.carz.savecar.domain.ReservationSaveDto;
-import kr.carz.savecar.service.CampingcarDateTimeService;
-import kr.carz.savecar.service.MonthlyRentService;
-import kr.carz.savecar.service.ReservationService;
-import kr.carz.savecar.service.YearlyRentService;
+import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.simple.JSONObject;
@@ -24,11 +21,14 @@ import java.util.List;
 public class ReservationController {
     private final ReservationService reservationService;
     private final CampingcarDateTimeService campingcarDateTimeService;
+    private final CampingCarPriceService campingCarPriceService;
+
 
     @Autowired
-    public ReservationController(ReservationService reservationService, CampingcarDateTimeService campingcarDateTimeService) {
+    public ReservationController(ReservationService reservationService, CampingcarDateTimeService campingcarDateTimeService, CampingCarPriceService campingCarPriceService) {
         this.reservationService = reservationService;
         this.campingcarDateTimeService = campingcarDateTimeService;
+        this.campingCarPriceService = campingCarPriceService;
     }
 
 
@@ -165,32 +165,4 @@ public class ReservationController {
         return reservationService.save(dto);
     }
 
-
-    // 예약 저장 api
-    @PostMapping("/campingcar/reserve")
-    @ResponseBody
-    public String save(@RequestBody CampingcarDateTimeDto dto){
-
-        System.out.println(dto.getRentDate());
-        System.out.println(dto.getRentTime());
-        System.out.println(dto.getReturnDate());
-        System.out.println(dto.getReturnTime());
-
-        campingcarDateTimeService.save(dto);
-
-        return "paying";
-    }
-
-
-    @RequestMapping("/campingcar/reserve/{rent_date}/{rent_time}/{return_date}/{return_time}")
-    public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time) throws Exception {
-        model.put("rent_date", rent_date);
-        model.put("rent_time", rent_time);
-        model.put("return_date", return_date);
-        model.put("return_time", return_time);
-
-        System.out.println(rent_date);
-
-        return "paying";
-    }
 }
