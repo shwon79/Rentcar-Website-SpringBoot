@@ -2,6 +2,8 @@ package kr.carz.savecar.controller;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class CalendarController {
@@ -376,5 +377,35 @@ public class CalendarController {
 
         return "paying";
     }
+
+
+    // 가격 구하는 api
+    @RequestMapping(value = "/campingcar/getprice", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_yearly_price(HttpServletResponse res) throws IOException {
+
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
+
+
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("deposit",campingCarPrice.getDeposit());
+        jsonObject.put("fifteendays",campingCarPrice.getFifteendays());
+        jsonObject.put("fivedays",campingCarPrice.getFivedays());
+        jsonObject.put("fourdays",campingCarPrice.getFourdays());
+        jsonObject.put("monthly",campingCarPrice.getMonthly());
+        jsonObject.put("onedays",campingCarPrice.getOnedays());
+        jsonObject.put("sevendays",campingCarPrice.getSevendays());
+        jsonObject.put("tendays",campingCarPrice.getTendays());
+        jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
+        jsonObject.put("carName",campingCarPrice.getCarName());
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
 
 }
