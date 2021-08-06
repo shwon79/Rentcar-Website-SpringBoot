@@ -45,14 +45,14 @@
                                 <div class="reserve_detail">
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                                         <p>대여 일자</p>
-                                        <p>8/11/수 10:00</p>
+                                        <p th:text="${rent_date+' '+rent_time}"></p>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                        <button id="rent_length" class="" disabled>15일</button>
+                                        <button id="rent_length" class="" disabled>--></button>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                                         <p>반납 일자</p>
-                                        <p>8/25/수 17:00</p>
+                                        <p th:text="${return_date+' '+return_time}"></p>
                                     </div>
                                 </div>
                             </div>

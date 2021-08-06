@@ -75,6 +75,37 @@
                         <img th:src="@{/img/IMG_0376.JPG}" id="carImg13" width="15%" height="100px" onclick="toggleImg('carImg13')">
                         <img th:src="@{/img/IMG_0377.JPG}" id="carImg14" width="15%" height="100px" onclick="toggleImg('carImg14')">
                     </div>
+                    <!-- price table -->
+                    <div class="row">
+                        <div id="table_wrapper">
+                            <!-- header -->
+                            <div id="table_header">
+                                <div>연식</div>
+                                <div>보증금</div>
+                                <div>1일</div>
+                                <div>4일</div>
+                                <div>5일</div>
+                                <div>1주</div>
+                                <div>10일</div>
+                                <div>15일</div>
+                                <div>1달</div>
+                            </div>
+                            <!-- body -->
+                            <div id="table_body">
+                                <div th:text="${campingCarPrice.yearmodel}"></div>
+                                <div th:text="${campingCarPrice.deposit}"></div>
+                                <div th:text="${campingCarPrice.onedays}"></div>
+                                <div th:text="${campingCarPrice.fourdays}"></div>
+                                <div th:text="${campingCarPrice.fivedays}"></div>
+                                <div th:text="${campingCarPrice.sevendays}"></div>
+                                <div th:text="${campingCarPrice.tendays}"></div>
+                                <div th:text="${campingCarPrice.fifteendays}"></div>
+                                <div th:text="${campingCarPrice.monthly}"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
 
                 <!-- right column -->
@@ -113,7 +144,7 @@
                             </div>
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
-                                    <button style="width: 100%; height: 100%; border:none;" th:id="${date.month+'-'+date.day}"
+                                    <button style="width: 100%; height: 100%; border:none;" th:id="${date.month+'월 '+date.day+'일'}"
                                         class="this date_day" th:text="${date.day}" onclick="rentDate(id)"></button>
                                 </div>
                             </div>
@@ -184,7 +215,7 @@
                             </div>
                             <div id="return_cal" class="dates">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
-                                    <button style="width: 100%; height: 100%; border:none;" th:id="${date.month+'-'+date.day}"
+                                    <button style="width: 100%; height: 100%; border:none;" th:id="${date.month+'월 '+date.day+'일'}"
                                             class="this date_day" th:text="${date.day}" onclick="returnDate(id)"></button>&nbsp;
                                 </div>
                             </div>
@@ -240,9 +271,9 @@
                             <div>
                                 <p id="total_result"></p>
                             </div>
-<!--                            <a href="/paying">-->
+
                                 <button onclick="postDate()">데이터 전송</button>
-<!--                            </a>-->
+
                         </div>
                     </div><hr style="background: dimgray;" />
                 </div>
