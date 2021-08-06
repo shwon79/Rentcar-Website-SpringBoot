@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,12 +25,13 @@ public class CalendarController {
     CalendarTimeService calendarTimeService;
     DateCampingService dateCampingService;
     CampingCarPriceService campingCarPriceService;
+    CampingcarDateTimeService campingcarDateTimeService;
 
     @Autowired
     public CalendarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                               ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
-                              CampingCarPriceService campingCarPriceService) {
+                              CampingCarPriceService campingCarPriceService, CampingcarDateTimeService campingcarDateTimeService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -41,6 +40,7 @@ public class CalendarController {
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
+        this.campingcarDateTimeService = campingcarDateTimeService;
     }
 
 
@@ -336,10 +336,43 @@ public class CalendarController {
         return "camping_europe";
     }
 
-    @GetMapping("/paying")
-    public String camping_paying() {
+
+    // 예약 저장 api
+    @PostMapping("/campingcar/reserve")
+    @ResponseBody
+    public String save(@RequestBody CampingcarDateTimeDto dto){
+
+        System.out.println(dto.getRentDate());
+        System.out.println(dto.getRentTime());
+        System.out.println(dto.getReturnDate());
+        System.out.println(dto.getReturnTime());
+
+        campingcarDateTimeService.save(dto);
+
         return "paying";
     }
 
+
+    @RequestMapping("/campingcar/reserve/{rent_date}/{rent_time}/{return_date}/{return_time}")
+    public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time) throws Exception {
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
+
+        model.put("rent_date", rent_date);
+        model.put("rent_time", rent_time);
+        model.put("return_date", return_date);
+        model.put("return_time", return_time);
+        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
+
+
+        System.out.println(campingCarPrice.getFifteendays());
+        System.out.println(rent_date);
+        System.out.println(rent_time);
+        System.out.println(return_date);
+        System.out.println(return_time);
+
+
+        return "paying";
+    }
 
 }
