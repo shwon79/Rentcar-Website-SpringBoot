@@ -14,10 +14,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -171,17 +169,28 @@ public class ReservationController {
     // 예약 저장 api
     @PostMapping("/campingcar/reserve")
     @ResponseBody
-    public Long save(@RequestBody CampingcarDateTimeDto dto){
-
-        HashMap<String, String> params = new HashMap<String, String>();
-        HashMap<String, String> params2 = new HashMap<String, String>();
+    public String save(@RequestBody CampingcarDateTimeDto dto){
 
         System.out.println(dto.getRentDate());
         System.out.println(dto.getRentTime());
         System.out.println(dto.getReturnDate());
         System.out.println(dto.getReturnTime());
 
+        campingcarDateTimeService.save(dto);
 
-        return campingcarDateTimeService.save(dto);
+        return "paying";
+    }
+
+
+    @RequestMapping("/campingcar/reserve/{rent_date}/{rent_time}/{return_date}/{return_time}")
+    public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time) throws Exception {
+        model.put("rent_date", rent_date);
+        model.put("rent_time", rent_time);
+        model.put("return_date", return_date);
+        model.put("return_time", return_time);
+
+        System.out.println(rent_date);
+
+        return "paying";
     }
 }

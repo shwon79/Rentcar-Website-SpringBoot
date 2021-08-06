@@ -336,15 +336,10 @@ public class CalendarController {
         return "camping_europe";
     }
 
-
-    @RequestMapping("/paying/{rent_date}/{rent_time}/{return_date}/{return_time}")
-    public String handleRequest1(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time)  throws Exception{
-
-        model.addAttribute("rent_date", rent_date);
-        model.addAttribute("rent_time", rent_time);
-        model.addAttribute("return_date", return_date);
-        model.addAttribute("return_time", return_time);
-
+    @GetMapping("/paying")
+    public String camping_paying() {
         return "paying";
     }
+
+
 }
