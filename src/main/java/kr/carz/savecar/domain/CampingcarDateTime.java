@@ -28,6 +28,30 @@ public class CampingcarDateTime extends BaseTimeEntity {
     private String returnTime;
 
 
+//    @Column(nullable = false)
+//    private String name;
+//
+//    @Column(nullable = false)
+//    private String phone;
+//
+//    @Column(columnDefinition = "LONGTEXT", nullable = true)
+//    private String detail;
+//
+//    @Column(nullable = true)
+//    private String desitor;
+//
+//
+//    @Column(nullable = false)
+//    private Integer total;
+//
+//    @Column(nullable = false)
+//    private Integer deposit;
+//
+//    @Column(nullable = true)
+//    private String agree;
+
+
+
     @Builder
     public CampingcarDateTime(String rentDate, String rentTime, String returnDate, String returnTime) {
         this.rentDate = rentDate;
