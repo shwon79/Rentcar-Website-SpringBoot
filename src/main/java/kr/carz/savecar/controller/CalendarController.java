@@ -386,8 +386,6 @@ public class CalendarController {
 
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
-
-
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("deposit",campingCarPrice.getDeposit());
