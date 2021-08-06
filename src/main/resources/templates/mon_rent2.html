@@ -1,0 +1,123 @@
+<!--  월렌트 진행중 (mon_rent2.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 월렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/mon_rent2.css}" rel="stylesheet">
+
+    <script th:src="@{/js/mon_rent2.js}" defer></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:replace="fragments/header_camp::headerFragment"></div>
+
+    <div class="monthly_content">
+
+        <!-- title row -->
+        <div class="row">
+            <!-- title -->
+            <div class="row">
+                <!-- left col -->
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                    <!-- 월렌트 title -->
+                    <div class="row">
+                        <h1>월렌트</h1>
+                    </div>
+                    <!-- descriptions -->
+                    <div class="row">
+                        <h3>세이브카의 월렌트는?</h3>
+                        <div class="row">
+                            <p>1개월 단위로 이용할 수 있는 렌트 상품입니다.
+                                <button class="btn" data-toggle="popover" data-placement="right" title="tooltip on right">상세 보기</button></p>
+                            <p>세이브카의 수도권 및 지역별 월렌트 차량수령 방문위치 안내드립니다
+                                <button class="btn" data-toggle="popover" data-placement="right" title="tooltip on right">월렌트 차량수령 방문위치 안내</button></p>
+                            <p>계약 준비 시 필요한 서류와 계약서 작성시 필요한 준비물 입니다.
+                                <button class="btn" data-toggle="popover" data-placement="right" title="tooltip on right">필요서류 안내</button></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- right col -->
+                <div class="col-lg-5 col-md-5 col-sm-0 col-xs-0">
+                    <img src="" alt="car_img" />
+                </div>
+            </div>
+            <!-- selections -->
+            <div class="row">
+                <div class="row">
+                    <!-- 차종 -->
+                    <div class="row">
+                        <!-- left title -->
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                            <p>차종</p>
+                        </div>
+                        <!-- selections -->
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 btn-group" id="sel_car" data-toggle="buttons">
+                            <input type="checkbox" autocomplete="off" checked id="car_all"><label for="car_all"></label> 전체
+                            <input type="checkbox" autocomplete="off" id="car_lpg_sm"><label for="car_lpg_sm"></label> 중형/소형승용(LPG)
+                            <input type="checkbox" autocomplete="off" id="car_lpg_bg"><label for="car_lpg_bg"></label> 대형승용(LPG)
+                            <input type="checkbox" autocomplete="off" id="car_gas_sm"><label for="car_gas_sm"></label> 소형/경승용(가솔린,디젤)
+                            <input type="checkbox" autocomplete="off" id="car_gas_md"><label for="car_gas_md"></label> 중형승용(가솔린,디젤)
+                            <input type="checkbox" autocomplete="off" id="car_gas_bg"><label for="car_gas_bg"></label> 대형승용(가솔린,디젤)
+                            <input type="checkbox" autocomplete="off" id="car_rv"><label for="car_rv"></label> RV
+                            <input type="checkbox" autocomplete="off" id="car_env"><label for="car_env"></label> 친환경차
+                        </div>
+                    </div>
+
+                    <!-- 지역 -->
+                    <div class="row">
+                        <!-- left title -->
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                            <p>지역</p>
+                        </div>
+                        <!-- selections -->
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 btn-group" data-toggle="buttons">
+                            <input type="checkbox" autocomplete="off" checked id="reg_all"><label for="reg_all">전체</label>
+                            <input type="checkbox" autocomplete="off" id="reg_cap"><label for="reg_cap">수도권</label>
+                            <input type="checkbox" autocomplete="off" id="reg_daj"><label for="reg_daj">대전</label>
+                            <input type="checkbox" autocomplete="off" id="reg_dag"><label for="reg_dag">대구</label>
+                            <input type="checkbox" autocomplete="off" id="reg_gwa"><label for="reg_gwa">광주</label>
+                            <input type="checkbox" autocomplete="off" id="reg_bus"><label for="reg_bus">부산</label>
+                        </div>
+                    </div>
+
+                    <!-- 대기 상황 -->
+                    <div class="row">
+                        <!-- left title -->
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                            <p>대기상황</p>
+                        </div>
+                        <!-- selections -->
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 btn-group" data-toggle="buttons">
+                            <input type="checkbox" autocomplete="off" checked id="reserve_able"><label for="reserve_able">예약가능차량</label>
+                            <input type="checkbox" autocomplete="off" id="reserve_soon"><label for="reserve_soon">입고예정차량</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- content row -->
+        <div class="row">
+            <!-- content description -->
+            <div class="row">
+                <p>※ 상세페이지에서 차량예약이 가능합니다.</p>
+            </div>
+            <!-- car table -->
+            <div class="row">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+
+</html>

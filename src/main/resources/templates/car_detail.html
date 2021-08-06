@@ -1,0 +1,39 @@
+<!--  차량 상세 페이지 진행중 (car_detail.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 월렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/car_detail.css}" rel="stylesheet">
+
+    <script th:src="@{/js/car_detail.js}" defer></script>
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <div th:replace="fragments/header_camp::headerFragment"></div>
+
+        <div class="car_detail_content">
+
+            <!-- title row -->
+            <div class="row">
+
+            </div>
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+
+</html>
