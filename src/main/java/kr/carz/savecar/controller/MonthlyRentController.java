@@ -34,7 +34,12 @@ public class MonthlyRentController {
 
     @GetMapping("/rent/month")
     public String rent_month() {
-        return "rent_month";
+        return "mon_rent2";
+    }
+
+    @GetMapping("/rent/month/detail")
+    public String rent_month_detail() {
+        return "car_detail";
     }
 
     @RequestMapping("/rent/month/{category1}/{category2}")
