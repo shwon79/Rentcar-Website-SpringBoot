@@ -1,0 +1,147 @@
+<!--  결제창 (paying.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 결제</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/paying.css}" rel="stylesheet">
+
+    <script>
+        function toggleImg(id) {
+            let before = document.getElementById("headerImg").src;
+            let tmp = document.getElementById(id).src;
+            document.getElementById("headerImg").src = tmp;
+            document.getElementById(id).src = before;
+        }
+    </script>
+
+    <script th:src="@{/js/paying.js}" defer></script>
+
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <div th:replace="fragments/header_camp::headerFragment"></div>
+
+        <div class="paying_content">
+            <!-- title -->
+            <div class="row">
+
+            </div>
+            <!-- main content -->
+            <div class="row">
+
+                <!-- left content -->
+                <div id="left_col" class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                    <!-- 예약 상품 정보 -->
+                    <div class="row">
+                        <div class="row">
+                            <h3>예약 상품 정보</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <img src="" alt="car_pic" />
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <div class="row">
+                                    <p>상품 이름</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        시작 정보
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        중간
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        반납 정보
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- 예약자 정보 -->
+                    <div class="row">
+                        <div class="row">
+                            <h3>예약자 정보</h3>
+                        </div>
+                        <div class="row">
+                            <!-- 성명 연락처 -->
+                            <div class="row">
+                                <input id="input_name" type="text" placeholder="성명" />
+                                <input id="input_number" type="number" placeholder="연락처" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="handleOnInput(this, 11)" />
+                            </div>
+                            <!-- 요청사항 -->
+                            <div class="row">
+                                <input id="input_demand" type="text" placeholder="요청사항" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 취소 환불 규정에 대한 동의 -->
+                    <div class="row">
+                        <div class="row">
+                            <h3>취소/환불 규정에 대한 동의</h3>
+                        </div>
+                        <div class="row">
+                            <img src="" alt="refund" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- right content -->
+                <div id="right_col" class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <!-- 최종 금액 -->
+                    <div class="row">
+                        <div class="row">
+                            <h3>최종 결제 금액</h3>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <span>상품 가격</span>
+                                <span>100000원</span>
+                            </div>
+                            <div class="row">
+                                <span>총 결제금액</span>
+                                <span>100000원</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 결제 수단 -->
+                    <div class="row">
+                        <div class="row">
+                            <h3>최종 결제 금액</h3>
+                        </div>
+                        <div class="row">
+                            <h3>계좌 번호</h3>
+                            <h3>국민 : 123-456-789-01</h3>
+                        </div>
+                    </div>
+
+                    <!-- 동의 및 예약완료 -->
+                    <div class="row">
+                        <div class="row">
+                            <input type="checkbox" /><span>전체 동의</span>
+                        </div>
+                        <div class="row">
+                            <input type="checkbox" /><span>개인정보 수집 및 이용 동의</span><button id="contract_info" type="button">약관보기</button>
+                        </div>
+                        <div class="row">
+                            <input type="checkbox" /><span>구매조건 확인 및 결제진행에 동의</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>

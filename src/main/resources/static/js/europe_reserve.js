@@ -48,19 +48,32 @@ function doDisplay_return_time(){
 document.querySelector('.year-month-return').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
 
-
-// show rent date
+// show current date
 let today = new Date();
 let todayFull = today.toLocaleDateString();
 let todayDay = '';
 switch (today.getDay()) {
-        case 0 : todayDay = '일';
-        case 1 : todayDay = '월';
-        case 2 : todayDay = '화';
-        case 3 : todayDay = '수';
-        case 4 : todayDay = '목';
-        case 5 : todayDay = '금';
-        case 6 : todayDay = '토';
+        case 0 :
+            todayDay = '일';
+            break;
+        case 1 :
+            todayDay = '월';
+            break;
+        case 2 :
+            todayDay = '화';
+            break;
+        case 3 :
+            todayDay = '수';
+            break;
+        case 4 :
+            todayDay = '목';
+            break;
+        case 5 :
+            todayDay = '금';
+            break;
+        case 6 :
+            todayDay = '토';
+            break;
 }
 document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 
@@ -116,9 +129,10 @@ const returnTimeSel = (id) => {
 }
 
 // show total selection
+let differ = '';
 if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
     const target = document.getElementById('total_result');
-    let differ = calculateDate();
+    differ = calculateDate();
     target.innerText = `${differ}달`;
 }
 
@@ -149,13 +163,12 @@ inputPhoneNum.addEventListener('change',
 // Sending Data;
 const postDate = () => {
 
-    let currentTime = today.toLocaleString();
-
-    if (customName != '' && phoneNum!='' && rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
+    // customName != '' && phoneNum!='' &&
+    if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
         let finalDate = {
-            'reserveTime': currentTime,
-            'name': customName,
-            'phoneNum': phoneNum,
+            // 'name': customName,
+            // 'phoneNum': phoneNum,
+            'monthDiffer' : differ,
             'rentDate': rentDateNum,
             'rentTime':  rentTime,
             'returnDate': returnDateNum,
@@ -178,7 +191,5 @@ const postDate = () => {
     } else {
         alert('입력을 완료해주세요!')
     }
-
-
 }
 
