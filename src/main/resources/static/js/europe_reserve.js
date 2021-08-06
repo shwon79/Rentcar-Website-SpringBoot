@@ -169,7 +169,6 @@ const postDate = () => {
         alert('예약 창으로 넘어갑니다.')
         window.location.href = `/campingcar/reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}`
 
-
         /*
          let finalDate = {
              // 'name': customName,
