@@ -1,7 +1,84 @@
+.paying_content {
+    padding: 60px;
+}
+
 .paying_content h3 {
-    font-weight: bolder;
+    font-weight: 900;
+    margin-bottom: 20px;
 }
 
 #contract_info {
     color: tomato;
+}
+
+#info_reserve {
+    height: 200px;
+}
+
+#info_custom {
+    height: 200px;
+}
+
+#hr_reserve {
+    margin: 10px 0;
+}
+
+.reserve_detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input_person input {
+    width: 30%;
+    height: 35px;
+    font-size: 20px;
+    margin: 3px;
+}
+
+.input_demand {
+    width: 100%;
+    font-size: 20px;
+}
+
+#info_refund {
+    height: 450px;
+}
+
+#info_price {
+    height: 350px;
+}
+
+.price_between {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price_between p {
+    margin-bottom: 0;
+}
+
+#info_deposit {
+    height: 200px;
+}
+
+#info_done {
+    height: 200px;
+}
+
+#info_done p {
+    font-size: 16px;
+}
+
+#price_desc p{
+    margin: 2px;
+}
+
+
+@media (max-width: 650px) {
+    .paying_content {
+        padding: 20px;
+    }
 }

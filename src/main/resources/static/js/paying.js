@@ -27,6 +27,9 @@ inputDemand.addEventListener('change',
     })
 
 
+$('#rent_info').popover()
+
+
 
 
 

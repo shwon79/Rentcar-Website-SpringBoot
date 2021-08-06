@@ -95,8 +95,8 @@ const returnDate = (id) => {
 
 // price calculator
 const calculateDate = () => {
-    let date1 = rentDateNum.split('/');
-    let date2 = returnDateNum.split('/');
+    let date1 = rentDateNum.split('-');
+    let date2 = returnDateNum.split('-');
     let month1 = date1[0];
     let day1 = date1[1];
     let month2 = date2[0];
@@ -165,16 +165,24 @@ const postDate = () => {
 
     // customName != '' && phoneNum!='' &&
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
-        let finalDate = {
-            // 'name': customName,
-            // 'phoneNum': phoneNum,
-            'monthDiffer' : differ,
-            'rentDate': rentDateNum,
-            'rentTime':  rentTime,
-            'returnDate': returnDateNum,
-            'returnTime' : returnTime,
-        }
 
+        alert('예약 창으로 넘어갑니다.')
+        window.location.href = `/campingcar/reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}`
+
+
+        /*
+         let finalDate = {
+             // 'name': customName,
+             // 'phoneNum': phoneNum,
+             'monthDiffer' : differ,
+             'rentDate': rentDateNum,
+             'rentTime':  rentTime,
+             'returnDate': returnDateNum,
+             'returnTime' : returnTime,
+         }
+         */
+
+        /*
         console.log(JSON.stringify(finalDate));
 
         let url = '/campingcar/reserve';
@@ -188,6 +196,7 @@ const postDate = () => {
             .then(response => console.log('Success: ', JSON.stringify(response)))
             .then(()=>alert('예약이 완료되었습니다!'))
             .catch(err => console.error('Error: ', err))
+         */
     } else {
         alert('입력을 완료해주세요!')
     }

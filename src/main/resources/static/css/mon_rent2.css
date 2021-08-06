@@ -1,5 +1,10 @@
+#wrapper {
+    margin: 0;
+}
+
 #sel_car {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
+
