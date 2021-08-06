@@ -43,6 +43,12 @@ public class CalendarController {
         this.campingCarPriceService = campingCarPriceService;
     }
 
+
+    @GetMapping("/paying")
+    public String camping_paying() {
+        return "paying";
+    }
+
     @GetMapping("/travel")
     public String camping_travel() {
         return "camping_travel";
