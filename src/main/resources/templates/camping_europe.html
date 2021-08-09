@@ -11,6 +11,7 @@
     <!-- Style -->
     <link th:href="@{/css/camping.css}" rel="stylesheet">
 
+
     <script>
         function toggleImg(id) {
             let before = document.getElementById("headerImg").src;
@@ -19,7 +20,7 @@
             document.getElementById(id).src = before;
         }
     </script>
-    <script th:src="@{/js/europe_reserve.js}" defer></script>
+    <script th:src="@{/js/europe_reserve.js}" defer ></script>
 </head>
 
 <body>
@@ -75,40 +76,7 @@
                         <img th:src="@{/img/IMG_0376.JPG}" id="carImg13" width="15%" height="100px" onclick="toggleImg('carImg13')">
                         <img th:src="@{/img/IMG_0377.JPG}" id="carImg14" width="15%" height="100px" onclick="toggleImg('carImg14')">
                     </div>
-                    <!-- price table -->
-                    <div class="row pinside20">
-                        <div id="table_wrapper">
-                            <div>
-                                <h3>가격표</h3>
-                            </div>
 
-                            <!-- header -->
-                            <div id="table_header">
-                                <div>연식</div>
-                                <div>보증금</div>
-                                <div>1일</div>
-                                <div>4일</div>
-                                <div>5일</div>
-                                <div>1주</div>
-                                <div>10일</div>
-                                <div>15일</div>
-                                <div>1달</div>
-                            </div>
-                            <!-- body -->
-                            <div id="table_body">
-                                <div class="yearmodel" th:id="${campingCarPrice.yearmodel}" th:text="${campingCarPrice.yearmodel}"></div>
-                                <div class="deposit" th:id="${campingCarPrice.deposit}" th:text="${campingCarPrice.deposit}"></div>
-                                <div class="onedays" th:id="${campingCarPrice.onedays}" th:text="${campingCarPrice.onedays}"></div>
-                                <div class="fourdays" th:id="${campingCarPrice.fourdays}" th:text="${campingCarPrice.fourdays}"></div>
-                                <div class="fivedays" th:id="${campingCarPrice.fivedays}" th:text="${campingCarPrice.fivedays}"></div>
-                                <div class="sevendays" th:id="${campingCarPrice.sevendays}" th:text="${campingCarPrice.sevendays}"></div>
-                                <div class="tendays" th:id="${campingCarPrice.tendays}" th:text="${campingCarPrice.tendays}"></div>
-                                <div class="fifteendays" th:id="${campingCarPrice.fifteendays}" th:text="${campingCarPrice.fifteendays}"></div>
-                                <div class="monthly" th:id="${campingCarPrice.monthly}" th:text="${campingCarPrice.monthly}"></div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
 
                 <!-- right column -->
@@ -187,82 +155,135 @@
                         </div><hr style="background: dimgray;" />
                     </div>
 
-                    <!-- 반납날짜 -->
-                    <div class="select_wrapper row" onclick="doDisplay_return()">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
-                            <div class="date_menu">반납날짜</div>
-                        </div>
-                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                <div id="return_day" class="date_time">2021.7.14.(수)</div>
-                            </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                                <img th:src="@{/img/down-arrow.png}" class="img-responsive">
-                            </div>
-                    </div><hr />
+                    <div id="rent_days">
+                        <div>
+                            <label for="days_select">렌트 일자</label>
+                            <select name="days" id="days_select" onchange="daysSelect()">
+                                <option value="">--렌트 일자 선택--</option>
+                                <option value="1">1일권</option>
+                                <option value="2">2일권</option>
+                                <option value="3">3일권</option>
+                                <option value="4">4일권</option>
+                                <option value="5">5일권</option>
+                                <option value="6">6일권</option>
+                                <option value="7">7일권</option>
+                                <option value="8">8일권</option>
+                                <option value="9">9일권</option>
+                                <option value="10">10일권</option>
+                                <option value="11">11일권</option>
+                                <option value="12">12일권</option>
+                                <option value="13">13일권</option>
+                                <option value="14">14일권</option>
+                                <option value="15">15일권</option>
+                                <option value="16">16일권</option>
+                                <option value="17">17일권</option>
+                                <option value="18">18일권</option>
+                                <option value="19">19일권</option>
+                                <option value="20">20일권</option>
+                                <option value="21">21일권</option>
+                                <option value="22">22일권</option>
+                                <option value="23">23일권</option>
+                                <option value="24">24일권</option>
+                                <option value="25">25일권</option>
+                                <option value="26">26일권</option>
+                                <option value="27">27일권</option>
+                                <option value="28">28일권</option>
+                                <option value="29">29일권</option>
+                                <option value="30">30일권</option>
 
-                    <!-- 반납날짜 달력 -->
-                    <div id="calendar_return" class="row">
-                        <div class="header">
-                            <!--                <div class="nav">-->
-                            <button class="nav-btn go-prev">&lt;</button>&nbsp;&nbsp;
-                            <!--                    <button class="nav-btn go-today">Today</button>-->
-                            <div class="year-month-return"></div>&nbsp;&nbsp;
-                            <button class="nav-btn go-next">&gt;</button>
-                            <!--                </div>-->
+                            </select>
                         </div>
-                        <div class="main padding-bottom-0">
-                            <div class="days">
-                                <div class="day">일</div>
-                                <div class="day">월</div>
-                                <div class="day">화</div>
-                                <div class="day">수</div>
-                                <div class="day">목</div>
-                                <div class="day">금</div>
-                                <div class="day">토</div>
-                            </div>
-                            <div id="return_cal" class="dates">
-                                <div class="date no-padding"th:each="date, iterStat: ${calendarDateList}">
-                                    <!-- 라벨 감싸야해서 id를 다르게 해야함 -->
-                                    <label style="width: 100%; height: 100%" th:for="${'to'+date.month+'월 '+date.day+'일'}">
-                                        <input class="this date_day" type="radio"
-                                               th:id="${'to'+date.month+'월 '+date.day+'일'}" th:text="${date.day}" name="calendar2" onclick="returnDate(id)"/>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="select_possible text-right padding-top-20">
-                                <span style="padding-right: 30px"> <span style="color: #3e8f3e">■</span> 선택 </span>
-                                <span style="padding-right: 30px"> <span style="color: #9d9d9d">■</span> 불가 </span>
-                            </div>
-                        </div><hr />
+                        <div>
+                            <label for="extratime_select">추가 시간</label>
+                            <select name="extratime" id="extratime_select" onchange="timeSelect()">
+                                <option value="">--추가 시간 선택--</option>
+                                <option value="1">+1시간</option>
+                                <option value="2">+2시간</option>
+                                <option value="3">+3시간</option>
+                                <option value="4">+4시간</option>
+                                <option value="5">+5시간</option>
+                                <option value="6">+6시간</option>
+                                <option value="7">+7시간</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- 반납 시간 -->
-                    <div class="select_wrapper row" onclick="doDisplay_return_time()">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
-                            <div class="date_menu">반납시간</div>
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <div class="date_time">시간을 선택해주세요.</div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">
-                        </div>
-                    </div><hr style="background: dimgray;" />
+<!--                    &lt;!&ndash; 반납날짜 &ndash;&gt;-->
+<!--                    <div class="select_wrapper row" onclick="doDisplay_return()">-->
+<!--                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">-->
+<!--                            <div class="date_menu">반납날짜</div>-->
+<!--                        </div>-->
+<!--                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">-->
+<!--                                <div id="return_day" class="date_time">2021.7.14.(수)</div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+<!--                                <img th:src="@{/img/down-arrow.png}" class="img-responsive">-->
+<!--                            </div>-->
+<!--                    </div><hr />-->
 
-                    <!-- 반납 시간 선택창 -->
-                    <div id="calendar_return_time">
-                        <div id="return_time" class="row">
-                            <div class="times text-center">
-                                <div class="time col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding" th:each="date, iterStat: ${calendarTimeList}" style="border: dimgray">
-                                    <!-- 라벨 감싸야해서 id를 다르게 해야함 -->
-                                    <label style="height: 35px; width: 90%; margin: 5px 0" th:for="${'to'+date.reserve_time}">
-                                        <input class="this time_day" type="radio"
-                                               th:id="${'to'+date.reserve_time}" th:text="${date.reserve_time}" name="time2" onclick="returnTimeSel(id)"/>
-                                    </label>
-                                </div>
-                            </div>
-                        </div><hr style="background: dimgray;" />
-                    </div>
+<!--                    &lt;!&ndash; 반납날짜 달력 &ndash;&gt;-->
+<!--                    <div id="calendar_return" class="row">-->
+<!--                        <div class="header">-->
+<!--                            &lt;!&ndash;                <div class="nav">&ndash;&gt;-->
+<!--                            <button class="nav-btn go-prev">&lt;</button>&nbsp;&nbsp;-->
+<!--                            &lt;!&ndash;                    <button class="nav-btn go-today">Today</button>&ndash;&gt;-->
+<!--                            <div class="year-month-return"></div>&nbsp;&nbsp;-->
+<!--                            <button class="nav-btn go-next">&gt;</button>-->
+<!--                            &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <div class="main padding-bottom-0">-->
+<!--                            <div class="days">-->
+<!--                                <div class="day">일</div>-->
+<!--                                <div class="day">월</div>-->
+<!--                                <div class="day">화</div>-->
+<!--                                <div class="day">수</div>-->
+<!--                                <div class="day">목</div>-->
+<!--                                <div class="day">금</div>-->
+<!--                                <div class="day">토</div>-->
+<!--                            </div>-->
+<!--                            <div id="return_cal" class="dates">-->
+<!--                                <div class="date no-padding"th:each="date, iterStat: ${calendarDateList}">-->
+<!--                                    &lt;!&ndash; 라벨 감싸야해서 id를 다르게 해야함 &ndash;&gt;-->
+<!--                                    <label style="width: 100%; height: 100%" th:for="${'to'+date.month+'월 '+date.day+'일'}">-->
+<!--                                        <input class="this date_day" type="radio"-->
+<!--                                               th:id="${'to'+date.month+'월 '+date.day+'일'}" th:text="${date.day}" name="calendar2" onclick="returnDate(id)"/>-->
+<!--                                    </label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="select_possible text-right padding-top-20">-->
+<!--                                <span style="padding-right: 30px"> <span style="color: #3e8f3e">■</span> 선택 </span>-->
+<!--                                <span style="padding-right: 30px"> <span style="color: #9d9d9d">■</span> 불가 </span>-->
+<!--                            </div>-->
+<!--                        </div><hr />-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; 반납 시간 &ndash;&gt;-->
+<!--                    <div class="select_wrapper row" onclick="doDisplay_return_time()">-->
+<!--                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">-->
+<!--                            <div class="date_menu">반납시간</div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">-->
+<!--                            <div class="date_time">시간을 선택해주세요.</div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+<!--                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">-->
+<!--                        </div>-->
+<!--                    </div><hr style="background: dimgray;" />-->
+
+<!--                    &lt;!&ndash; 반납 시간 선택창 &ndash;&gt;-->
+<!--                    <div id="calendar_return_time">-->
+<!--                        <div id="return_time" class="row">-->
+<!--                            <div class="times text-center">-->
+<!--                                <div class="time col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding" th:each="date, iterStat: ${calendarTimeList}" style="border: dimgray">-->
+<!--                                    &lt;!&ndash; 라벨 감싸야해서 id를 다르게 해야함 &ndash;&gt;-->
+<!--                                    <label style="height: 35px; width: 90%; margin: 5px 0" th:for="${'to'+date.reserve_time}">-->
+<!--                                        <input class="this time_day" type="radio"-->
+<!--                                               th:id="${'to'+date.reserve_time}" th:text="${date.reserve_time}" name="time2" onclick="returnTimeSel(id)"/>-->
+<!--                                    </label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div><hr style="background: dimgray;" />-->
+<!--                    </div>-->
 
                     <div>
                         <button onclick="calculateDate()">달 계산하기</button>
