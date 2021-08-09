@@ -502,7 +502,7 @@ a:hover {
   we will use just the label to create pushbutton effect
 */
 input[type=radio] {
-  display:none;
+  /*display:none;*/
 }
 
 /*
@@ -513,7 +513,15 @@ input[type=radio] + label {
   display:inline-block;
   background-color: #e7e7e7;
   border-color: #ddd;
+  width: 100%;
+  height: 100%;
+
 }
+
+#return_cal label {
+
+}
+
 /*
  Change background color for label next to checked radio button
  to make it look like highlighted button
@@ -523,11 +531,6 @@ input[type=radio] + label {
   background-color:#d0d0d0;
 }
 */
-
-#return_cal label {
-  width: 100%;
-  height: 100%;
-}
 
 input[type=radio]:checked + label {
   background: #2b542c;

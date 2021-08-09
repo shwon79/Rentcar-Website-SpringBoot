@@ -113,28 +113,32 @@ let rentDateNum='';
 const rentDate = (id) => {
     rentDateNum = id;
     // document.getElementById(id).id = 'selected-btn';
-    console.log(id);
+    console.log(rentDateNum);
 }
 
 // return date
 let returnDateNum='';
 const returnDate = (id) => {
     returnDateNum = id;
-    console.log(id)
+    let temp = returnDateNum.split('o');
+    returnDateNum = temp[1];
+    console.log(returnDateNum)
 }
 
 // time select onclick
 let rentTime = '';
 const rentTimeSel = (id) => {
-    console.log(id);
     rentTime = id;
+    console.log(rentTime);
 }
 
 // return time select onclick
 let returnTime = '';
 const returnTimeSel = (id) => {
-    console.log(id);
     returnTime = id;
+    let temp = returnTime.split('o');
+    returnTime = temp[1];
+    console.log(temp);
 }
 
 

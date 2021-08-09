@@ -41,6 +41,10 @@
     font-size: 20px;
 }
 
+#input_demand {
+    width: 100%;
+}
+
 #info_refund {
     height: 450px;
 }
