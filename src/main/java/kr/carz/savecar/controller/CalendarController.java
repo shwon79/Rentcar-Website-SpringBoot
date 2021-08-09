@@ -349,6 +349,14 @@ public class CalendarController {
         System.out.println(dto.getRentTime());
         System.out.println(dto.getReturnDate());
         System.out.println(dto.getReturnTime());
+        System.out.println(dto.getAgree());
+        System.out.println(dto.getDeposit());
+        System.out.println(dto.getDepositor());
+        System.out.println(dto.getDetail());
+        System.out.println(dto.getName());
+        System.out.println(dto.getPhone());
+        System.out.println(dto.getReservation());
+        System.out.println(dto.getTotal());
 
         campingcarDateTimeService.save(dto);
 
@@ -389,15 +397,43 @@ public class CalendarController {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("deposit",campingCarPrice.getDeposit());
-        jsonObject.put("fifteendays",campingCarPrice.getFifteendays());
-        jsonObject.put("fivedays",campingCarPrice.getFivedays());
-        jsonObject.put("fourdays",campingCarPrice.getFourdays());
-        jsonObject.put("monthly",campingCarPrice.getMonthly());
-        jsonObject.put("onedays",campingCarPrice.getOnedays());
-        jsonObject.put("sevendays",campingCarPrice.getSevendays());
-        jsonObject.put("tendays",campingCarPrice.getTendays());
         jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
         jsonObject.put("carName",campingCarPrice.getCarName());
+
+//        jsonObject.put("campingCarPrice",campingCarPrice);
+
+
+        jsonObject.put("oneday",campingCarPrice.getOneday());
+        jsonObject.put("twodays",campingCarPrice.getTwodays());
+        jsonObject.put("threedays",campingCarPrice.getThreedays());
+        jsonObject.put("fourdays",campingCarPrice.getFourdays());
+        jsonObject.put("fivedays",campingCarPrice.getFivedays());
+        jsonObject.put("sixdays",campingCarPrice.getSixdays());
+        jsonObject.put("sevendays",campingCarPrice.getSevendays());
+        jsonObject.put("eightdays",campingCarPrice.getEightdays());
+        jsonObject.put("ninedays",campingCarPrice.getNinedays());
+        jsonObject.put("tendays",campingCarPrice.getTendays());
+        jsonObject.put("elevendays",campingCarPrice.getElevendays());
+        jsonObject.put("twelvedays",campingCarPrice.getTwelvedays());
+        jsonObject.put("thirteendays",campingCarPrice.getThirteendays());
+        jsonObject.put("fourteendays",campingCarPrice.getFourteendays());
+        jsonObject.put("fifteendays",campingCarPrice.getFifteendays());
+        jsonObject.put("sixteendays",campingCarPrice.getSixteendays());
+        jsonObject.put("seventeendays",campingCarPrice.getSeventeendays());
+        jsonObject.put("eighteendays",campingCarPrice.getEighteendays());
+        jsonObject.put("ninetinedays",campingCarPrice.getNinetinedays());
+        jsonObject.put("twentydays",campingCarPrice.getTwentydays());
+        jsonObject.put("twentyonedays",campingCarPrice.getTwentyonedays());
+        jsonObject.put("twentytwodays",campingCarPrice.getTwentytwodays());
+        jsonObject.put("twentythreedays",campingCarPrice.getTwentythreedays());
+        jsonObject.put("twentyfourdays",campingCarPrice.getTwentyfourdays());
+        jsonObject.put("twentyfivedays",campingCarPrice.getTwentyfivedays());
+        jsonObject.put("twentysixdays",campingCarPrice.getTwentysixdays());
+        jsonObject.put("twentysevendays",campingCarPrice.getTwentysevendays());
+        jsonObject.put("twentyeightdays",campingCarPrice.getTwentyeightdays());
+        jsonObject.put("twentyninedays",campingCarPrice.getTwentyninedays());
+        jsonObject.put("thirtydays",campingCarPrice.getThirtydays());
+
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);
