@@ -21,10 +21,10 @@ public class CampingcarDateTime extends BaseTimeEntity {
     @Column(nullable = false)
     private String rentTime;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String returnDate;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String returnTime;
 
 
@@ -37,7 +37,7 @@ public class CampingcarDateTime extends BaseTimeEntity {
     @Column(columnDefinition = "LONGTEXT", nullable = true)
     private String detail;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String depositor;
 
 
@@ -47,11 +47,13 @@ public class CampingcarDateTime extends BaseTimeEntity {
     @Column(nullable = false)
     private Integer deposit;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String agree;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String reservation;
+
+
 
 
     @Builder
