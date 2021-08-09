@@ -340,7 +340,7 @@ public class CalendarController {
     }
 
 
-    // 예약 저장 api
+    // 캠핑카 예약 저장 api
     @PostMapping("/campingcar/reserve")
     @ResponseBody
     public String save(@RequestBody CampingcarDateTimeDto dto){
@@ -379,7 +379,7 @@ public class CalendarController {
     }
 
 
-    // 가격 구하는 api
+    // europe 캠핑카 가격 구하는 api
     @RequestMapping(value = "/campingcar/getprice", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void get_yearly_price(HttpServletResponse res) throws IOException {
@@ -404,6 +404,9 @@ public class CalendarController {
         pw.flush();
         pw.close();
     }
+
+
+
 
 
 }

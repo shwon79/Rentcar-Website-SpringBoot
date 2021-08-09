@@ -28,35 +28,45 @@ public class CampingcarDateTime extends BaseTimeEntity {
     private String returnTime;
 
 
-//    @Column(nullable = false)
-//    private String name;
-//
-//    @Column(nullable = false)
-//    private String phone;
-//
-//    @Column(columnDefinition = "LONGTEXT", nullable = true)
-//    private String detail;
-//
-//    @Column(nullable = true)
-//    private String desitor;
-//
-//
-//    @Column(nullable = false)
-//    private Integer total;
-//
-//    @Column(nullable = false)
-//    private Integer deposit;
-//
-//    @Column(nullable = true)
-//    private String agree;
+    @Column(nullable = false)
+    private String name;
 
+    @Column(nullable = false)
+    private String phone;
+
+    @Column(columnDefinition = "LONGTEXT", nullable = true)
+    private String detail;
+
+    @Column(nullable = true)
+    private String depositor;
+
+
+    @Column(nullable = false)
+    private Integer total;
+
+    @Column(nullable = false)
+    private Integer deposit;
+
+    @Column(nullable = true)
+    private String agree;
+
+    @Column(nullable = true)
+    private String reservation;
 
 
     @Builder
-    public CampingcarDateTime(String rentDate, String rentTime, String returnDate, String returnTime) {
+    public CampingcarDateTime(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total,Integer deposit,String agree,String reservation) {
         this.rentDate = rentDate;
         this.rentTime = rentTime;
         this.returnDate = returnDate;
         this.returnTime = returnTime;
+        this.name = name;
+        this.phone = phone;
+        this.depositor = depositor;
+        this.detail = detail;
+        this.total = total;
+        this.deposit = deposit;
+        this.agree = agree;
+        this.reservation = reservation;
     }
 }
