@@ -13,7 +13,7 @@ public class CampingCarPrice {
     @Column(name = "car_name")
     private String carName;
 
-    private String oneday;
+    private String onedays;
     private String twodays;
     private String threedays;
     private String fourdays;
