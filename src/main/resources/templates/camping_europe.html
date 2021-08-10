@@ -124,7 +124,7 @@
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}">
                                         <input class="this date_day" type="radio"
-                                               th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}" name="calendar1" onclick="sendRentDate(id, name); getAvailable();" />
+                                               th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}" name="calendar1" onclick="sendRentDate(id, name);" />
                                     </label>
                                 </div>
                             </div>
@@ -152,12 +152,38 @@
                     <div id="calendar_rental_time">
                         <div id="rent_time" class="row">
                             <div class="times text-center">
+                                <label style="height: 35px; width: 22%; margin: 5px 0" for="10시">
+                                    <input type="radio" id="10시" class="rent_time_radio" onclick="rentTimeSel(id)" /> 10시
+                                </label>
+                                <label style="height: 35px; width: 22%; margin: 5px 0" for="11시">
+                                    <input type="radio" id="11시" class="rent_time_radio" onclick="rentTimeSel(id)" /> 11시
+                                </label>
+                                <label style="height: 35px; width: 22%; margin: 5px 0" for="12시">
+                                    <input type="radio" id="12시" class="rent_time_radio" onclick="rentTimeSel(id)" /> 12시
+                                </label>
+                                <label style="height: 35px; width: 22%; margin: 5px 0" for="13시">
+                                    <input type="radio" id="13시" class="rent_time_radio" onclick="rentTimeSel(id)" /> 13시
+                                </label>
+                                <label style="height: 35px; width: 22%; margin: 5px 0" for="14시">
+                                    <input type="radio" id="14시" class="rent_time_radio" onclick="rentTimeSel(id)" /> 14시
+                                </label>
+                                <label style="height: 35px; width: 22%; margin: 5px 0" for="15시">
+                                    <input type="radio" id="15시" class="rent_time_radio" onclick="rentTimeSel(id)" /> 15시
+                                </label>
+                                <label style="height: 35px; width: 22%; margin: 5px 0" for="16시">
+                                    <input type="radio" id="16시" class="rent_time_radio" onclick="rentTimeSel(id)" /> 16시
+                                </label>
+                                <label style="height: 35px; width: 22%; margin: 5px 0" for="17시">
+                                    <input type="radio" id="17시" class="rent_time_radio" onclick="rentTimeSel(id)" /> 17시
+                                </label>
+                                <!--
                                 <div class="time col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding" th:each="date, iterStat: ${calendarTimeList}" style="border: dimgray">
                                     <label style="height: 35px; width: 90%; margin: 5px 0" th:for="${date.reserve_time}">
                                         <input class="this time_day" type="radio"
                                                th:id="${date.reserve_time}" th:text="${date.reserve_time}" name="time1" onclick="rentTimeSel(id)"/>
                                     </label>
                                 </div>
+                                -->
                             </div>
                         </div><hr style="background: dimgray;" />
                     </div>

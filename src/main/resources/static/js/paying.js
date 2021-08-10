@@ -61,8 +61,11 @@ const autoGrow = (texts) => {
 
 // Sending Data;
 const reserveDone = () => {
+    let check1 = document.getElementById('check_info').checked;
+    let check2 = document.getElementById('check_rent').checked;
+    let check3 = document.getElementById('check_last').checked;
 
-    if (customName != '' && phoneNum!='' && depositName!='') {
+    if (customName != '' && phoneNum!='' && depositName!='' && check1 == true && check2 == true && check3 == true) {
         let finalDate = {
             'rentDate': rentDateNum,
             'rentTime':  rentTime,
@@ -96,6 +99,7 @@ const reserveDone = () => {
             }).catch(err => console.error('Error: ', err))
     } else {
         alert('입력을 완료해주세요!')
+        console.log(check1);
     }
 }
 

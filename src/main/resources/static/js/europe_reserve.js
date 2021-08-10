@@ -124,18 +124,13 @@ const sendRentDate = (id, year) => {
         .then(res => res.json())
         .then(result => {
             console.log(result)
-            for (const availableTime of result) {
-                let btnTimeLabel = document.createElement("label");
-                btnTimeLabel.setAttribute('for', availableTime);
-                document.getElementById('rent_time').appendChild(btnTimeLabel);
-                let btnTime = document.createElement("input");
-                btnTime.setAttribute('type', 'radio')
-                btnTime.setAttribute('name', 'rent-time')
-                btnTime.setAttribute('id', availableTime);
-                btnTime.setAttribute('onclick', 'rentTimeSel(id)')
-                btnTime.textContent = availableTime;
-                document.getElementById('rent_time').appendChild(btnTime);
-
+            let theWrapper = document.getElementById('rent_time');
+            theWrapper.style.display = 'block';
+            let allTime = ["10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시"];
+            for (const eachTime of allTime) {
+                let timeId = document.getElementById(eachTime);
+                if (result.includes(eachTime)) timeId.disabled = false;
+                else timeId.disabled = true;
             }
         })
 }
