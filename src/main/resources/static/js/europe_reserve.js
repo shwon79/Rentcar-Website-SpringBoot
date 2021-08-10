@@ -232,73 +232,73 @@ const daysSelect = () => {
             case 1:
                 if (returnDateDay > 31) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 31;
+                    returnDateDay -= 31;
                 }
                 break;
             case 2:
                 if (returnDateDay > 29) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 28;
+                    returnDateDay -= 28;
                 }
                 break;
             case 3:
                 if (returnDateDay > 31) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 31;
+                    returnDateDay -= 31;
                 }
                 break;
             case 4:
                 if (returnDateDay > 30) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 30;
+                    returnDateDay -= 30;
                 }
                 break;
             case 5:
                 if (returnDateDay > 31) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 31;
+                    returnDateDay -= 31;
                 }
                 break;
             case 6:
                 if (returnDateDay > 30) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 30;
+                    returnDateDay -= 30;
                 }
                 break;
             case 7:
                 if (returnDateDay > 31) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 31;
+                    returnDateDay -= 31;
                 }
                 break;
             case 8:
                 if (returnDateDay > 31) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 31;
+                    returnDateDay -= 31;
                 }
                 break;
             case 9:
                 if (returnDateDay > 30) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 30;
+                    returnDateDay -= 30;
                 }
                 break;
             case 10:
                 if (returnDateDay > 31) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 31;
+                    returnDateDay -= 31;
                 }
                 break;
             case 11:
                 if (returnDateDay > 30) {
                     returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 30;
+                    returnDateDay -= 30;
                 }
                 break;
             case 12:
                 if (returnDateDay > 31) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay = rentDateDay - 31;
+                    returnDateMon =  1;
+                    returnDateDay -= 31;
                 }
                 break;
         }
