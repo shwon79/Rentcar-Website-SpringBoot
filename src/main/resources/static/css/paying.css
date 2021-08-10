@@ -69,7 +69,7 @@
 }
 
 #info_done {
-    height: 200px;
+    overflow: auto;
 }
 
 #info_done p {
