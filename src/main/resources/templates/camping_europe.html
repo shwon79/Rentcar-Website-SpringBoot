@@ -59,7 +59,7 @@
                     </div>
                     <!-- left content3 -->
                     <div class="row padding-bottom-0 width-height-box" style="padding: 0px">
-                        <img th:src="@{/img/camping-car1.jpg}" id="headerImg" width="90%" height="100%" style="object-fit:contain">
+                        <img th:src="@{/img/IMG_0374.JPG}" id="headerImg" width="90%" height="100%" style="object-fit:contain">
                     </div>
                     <!-- left content4   -->
                     <div class="row margin-bottom-40">
@@ -83,7 +83,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 margin-bottom-60 text-center">
                     <!-- 대여날짜 -->
                     <div class="select_wrapper row" onclick="doDisplay()">
-                        <<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
                             <div class="date_menu">대여날짜</div>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
@@ -97,10 +97,15 @@
                     <div id="calendar_rental" class="row">
                         <div class="header">
                             <!-- <div class="nav"> -->
-                            <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>&nbsp;&nbsp;
+                            <button class="nav-btn go-prev">&lt;</button>&nbsp;&nbsp;
                             <!-- <button class="nav-btn go-today">Today</button> -->
-                            <div class="year-month"></div>&nbsp;&nbsp;
-                            <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+                            <div class="year-month">
+                                <span name="thisYear" th:text="${thisYear}"></span>년
+                                <span name="thisMonth" th:text="${thisMonth}"></span>월
+                            </div>&nbsp;&nbsp;
+                            <a th:href="'/europe_reserve/after/' + ${thisMonth}">
+                                <button class="nav-btn go-next" >&gt;</button>
+                            </a>
                             <!--  </div> -->
                         </div>
                         <div class="main">

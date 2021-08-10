@@ -86,12 +86,12 @@ public class CalendarController {
         // 다음달 날짜 구하기
         cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
 
-//        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
         Integer after = cal.get(Calendar.DAY_OF_WEEK);
 
-//        for(int i=1; i<=7-after; i++){
-//            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-//        }
+        for(int i=1; i<=7-after; i++){
+            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+        }
 
         Integer daylast = 7-after;
         System.out.println(daylast);
@@ -162,12 +162,12 @@ public class CalendarController {
             // 다음달 날짜 구하기
             cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
 
-//            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
             Integer after = cal.get(Calendar.DAY_OF_WEEK);
 
-//            for (int i = 1; i <= 7 - after; i++) {
-//                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-//            }
+            for (int i = 1; i <= 7 - after; i++) {
+                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+            }
 
             Integer daylast = 7-after;
             System.out.println(daylast);
@@ -240,12 +240,12 @@ public class CalendarController {
             // 다음달 날짜 구하기
             cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
 
-//            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
             Integer after = cal.get(Calendar.DAY_OF_WEEK);
 
-//            for (int i = 1; i <= 7 - after; i++) {
-//                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-//            }
+            for (int i = 1; i <= 7 - after; i++) {
+                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+            }
             Integer daylast = 7-after;
             System.out.println(daylast);
 
@@ -335,10 +335,92 @@ public class CalendarController {
 
         // 캠핑카 가격
         model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
+        model.addAttribute("thisMonth", now_month);
+        model.addAttribute("thisYear", 2021);
 
         return "camping_europe";
     }
 
+
+    @RequestMapping("/europe_reserve/after/{month}")
+    public String handleRequest3(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
+        // 날짜
+        Calendar cal = Calendar.getInstance();
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
+
+
+        int now_month = month.intValue()+1; // 9
+        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
+        int this_month = cal.get(Calendar.MONTH) + 1;
+
+
+        if(month == this_month-1){
+            model.addAttribute("today", today);
+            System.out.println(this_month);
+        } else {
+            model.addAttribute("today", 0);
+            System.out.println(0);
+        }
+
+        if(now_month > 11){
+            response.setContentType("text/html; charset=UTF-8");
+
+            PrintWriter out = response.getWriter();
+
+            out.println("<script>alert('이용할 수 없는 예약일자입니다.'); location.href='/europe_reserve/after/10';</script>");
+
+            out.flush();
+        } else {
+
+            List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(now_month));
+
+
+            // 전달 날짜 구하기
+            cal.set(cal.get(Calendar.YEAR), now_month - 1, 1); // 8
+
+            Long firstDateId = calendarDateList.get(0).getDateId();
+            Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+            for (int i = 1; i < before; i++) {
+                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+            }
+
+            // 다음달 날짜 구하기
+            cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
+
+            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+            Integer after = cal.get(Calendar.DAY_OF_WEEK);
+
+            for (int i = 1; i <= 7 - after; i++) {
+                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+            }
+
+            Integer daylast = 7-after;
+            System.out.println(daylast);
+
+            model.addAttribute("daylast", calendarDateList);
+            model.addAttribute("calendarDateList", calendarDateList);
+
+
+            // 날짜별 캠핑카
+            List<List<DateCamping>> dateCampingList = new ArrayList();
+
+            for (int i = 0; i < calendarDateList.size(); i++) {
+                dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
+            }
+
+            model.addAttribute("dateCampingList", dateCampingList);
+
+            // 캠핑카 가격
+            model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
+            model.addAttribute("thisMonth", now_month);
+            model.addAttribute("thisYear", 2021);
+            System.out.println(now_month);
+
+        }
+
+        return "camping_europe";
+    }
 
     // 캠핑카 예약 저장 api
     @PostMapping("/campingcar/reserve")
@@ -405,7 +487,8 @@ public class CalendarController {
 //        jsonObject.put("campingCarPrice",campingCarPrice);
 
 
-        jsonObject.put("oneday",campingCarPrice.getOneday());
+        jsonObject.put("oneday",campingCarPrice.getOnedays());
+        System.out.println("oneoneoneone - "+campingCarPrice.getOnedays());
         jsonObject.put("twodays",campingCarPrice.getTwodays());
         jsonObject.put("threedays",campingCarPrice.getThreedays());
         jsonObject.put("fourdays",campingCarPrice.getFourdays());
