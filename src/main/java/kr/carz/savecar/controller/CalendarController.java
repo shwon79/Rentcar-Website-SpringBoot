@@ -532,31 +532,38 @@ public class CalendarController {
 
 
     // 캠핑카 예약 저장 api
-    @RequestMapping(value = "/campingcar/sendrentdate", produces = "application/json; charset=UTF-8", method= {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/campingcar/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void send_rent_date(@RequestBody CalendarDate dto, HttpServletResponse res) throws IOException {
+    public void send_rent_date(HttpServletResponse res, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
 
-        System.out.println(dto.getMonth());
-        System.out.println(dto.getDay());
-        System.out.println(dto.getYear());
+        System.out.println(year+ month+ day);
 
-        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(dto.getMonth(), dto.getDay(), dto.getYear());
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
+
+
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
 
         List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
 
 
-        JSONObject jsonObject = new JSONObject();
+        // list
+        List <String> categoryList2 = new ArrayList();
 
-        for(int i=0; i<calendarTimeList.size(); i++){
-            jsonObject.put(calendarTimeList.get(i).getReserve_time(),calendarTimeList.get(i).getReserve_complete());
+        for (int i = 0; i < calendarTimeList.size(); i++) {
+            if (calendarTimeList.get(i).getReserve_complete().equals("0")){
 
-            System.out.println(calendarTimeList.get(i).getReserve_time()+','+calendarTimeList.get(i).getReserve_complete());
+                categoryList2.add(calendarTimeList.get(i).getReserve_time());
+            }
+        }
+        JSONArray jsonArray = new JSONArray();
+
+        for (String c : categoryList2) {
+            jsonArray.put(c);
+            System.out.println(c);
         }
 
-
         PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
+        pw.print(jsonArray.toString());
         pw.flush();
         pw.close();
     }
