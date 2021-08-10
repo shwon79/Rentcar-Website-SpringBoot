@@ -532,7 +532,7 @@ public class CalendarController {
 
 
     // 캠핑카 예약 저장 api
-    @PostMapping("/campingcar/sendrentdate")
+    @RequestMapping(value = "/campingcar/sendrentdate", produces = "application/json; charset=UTF-8", method= {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public void send_rent_date(@RequestBody CalendarDate dto, HttpServletResponse res) throws IOException {
 
