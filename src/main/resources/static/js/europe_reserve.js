@@ -114,9 +114,25 @@ runIt();
 
 // rent Date
 let rentDateNum='';
-const rentDate = (id) => {
+const rentDate = (id, year) => {
     rentDateNum = id;
+    let rentDateYear = year;
+    let rentDateMonth = rentDateNum.split('월 ')[0];
+    let rentDateDay = rentDateNum.split('일')[0];
     // document.getElementById(id).id = 'selected-btn';
+    let url = '/campingcar/sendrentdate';
+    let rentDateObj = {
+        'rentYear': rentDateYear,
+        'rentMonth': rentDateMonth,
+        'rentDay': rentDateDay,
+    }
+    fetch(url, {
+        method: 'POST',
+        headers:{
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(rentDateObj),
+    }).then(console.log)
     console.log(rentDateNum);
 }
 
@@ -211,116 +227,6 @@ const rentTimeSel = (id) => {
     console.log(rentTime);
 }
 
-// 몇 일권 select
-var returnDateNum = '';
-let useDay = ''
-let useDayNum = 0;
-const daysSelect = () => {
-    let daySelector = document.getElementById('days_select');
-    let theVal = parseInt(daySelector.options[daySelector.selectedIndex].value);
-    let temp = rentDateNum.split('월 ');
-    let rentDateMon = parseInt(temp[0]);
-    let returnDateMon = rentDateMon;
-    let rentDateDay = parseInt(temp[1].split('일')[0]);
-    let returnDateDay = rentDateDay + theVal;
-    console.log(returnDateDay);
-    useDay = daySelector.options[daySelector.selectedIndex].innerText;
-    useDayNum = parseInt(daySelector.options[daySelector.selectedIndex].value);
-    if (returnDateDay < 29) ;
-    else {
-        switch (rentDateMon) {
-            case 1:
-                if (returnDateDay > 31) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 31;
-                }
-                break;
-            case 2:
-                if (returnDateDay > 29) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 28;
-                }
-                break;
-            case 3:
-                if (returnDateDay > 31) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 31;
-                }
-                break;
-            case 4:
-                if (returnDateDay > 30) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 30;
-                }
-                break;
-            case 5:
-                if (returnDateDay > 31) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 31;
-                }
-                break;
-            case 6:
-                if (returnDateDay > 30) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 30;
-                }
-                break;
-            case 7:
-                if (returnDateDay > 31) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 31;
-                }
-                break;
-            case 8:
-                if (returnDateDay > 31) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 31;
-                }
-                break;
-            case 9:
-                if (returnDateDay > 30) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 30;
-                }
-                break;
-            case 10:
-                if (returnDateDay > 31) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 31;
-                }
-                break;
-            case 11:
-                if (returnDateDay > 30) {
-                    returnDateMon = rentDateMon + 1;
-                    returnDateDay -= 30;
-                }
-                break;
-            case 12:
-                if (returnDateDay > 31) {
-                    returnDateMon =  1;
-                    returnDateDay -= 31;
-                }
-                break;
-        }
-    }
-    returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
-    console.log(returnDateNum);
-}
-
-
-// extra time select
-let extraTimeNum = 0;
-function timeSelect()  {
-    let timeSelector = document.getElementById('extratime_select');
-    let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
-    extraTimeNum = theVal
-    console.log(theVal);
-    let temp = parseInt(rentTime.split('시')[0]) + theVal;
-    returnTime = `${temp}시`;
-
-}
-
-
 // price calculator
 const calculateDate = () => {
     console.log(priceList);
@@ -330,6 +236,124 @@ const calculateDate = () => {
     showData.innerText = `${price}원`
 }
 
+
+// 몇 일권 select
+var returnDateNum = '';
+let useDay = ''
+let useDayNum = 0;
+const daysSelect = () => {
+    let daySelector = document.getElementById('days_select');
+    let theVal = parseInt(daySelector.options[daySelector.selectedIndex].value);
+
+    if (rentDateNum != '' && rentTime != '') {
+        let temp = rentDateNum.split('월 ');
+        let rentDateMon = parseInt(temp[0]);
+        let returnDateMon = rentDateMon;
+        let rentDateDay = parseInt(temp[1].split('일')[0]);
+        let returnDateDay = rentDateDay + theVal;
+        console.log(returnDateDay);
+        useDay = daySelector.options[daySelector.selectedIndex].innerText;
+        useDayNum = parseInt(daySelector.options[daySelector.selectedIndex].value);
+
+        if (returnDateDay < 29) ;
+        else {
+            switch (rentDateMon) {
+                case 1:
+                    if (returnDateDay > 31) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 31;
+                    }
+                    break;
+                case 2:
+                    if (returnDateDay > 29) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 28;
+                    }
+                    break;
+                case 3:
+                    if (returnDateDay > 31) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 31;
+                    }
+                    break;
+                case 4:
+                    if (returnDateDay > 30) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 30;
+                    }
+                    break;
+                case 5:
+                    if (returnDateDay > 31) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 31;
+                    }
+                    break;
+                case 6:
+                    if (returnDateDay > 30) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 30;
+                    }
+                    break;
+                case 7:
+                    if (returnDateDay > 31) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 31;
+                    }
+                    break;
+                case 8:
+                    if (returnDateDay > 31) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 31;
+                    }
+                    break;
+                case 9:
+                    if (returnDateDay > 30) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 30;
+                    }
+                    break;
+                case 10:
+                    if (returnDateDay > 31) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 31;
+                    }
+                    break;
+                case 11:
+                    if (returnDateDay > 30) {
+                        returnDateMon = rentDateMon + 1;
+                        returnDateDay -= 30;
+                    }
+                    break;
+                case 12:
+                    if (returnDateDay > 31) {
+                        returnDateMon =  1;
+                        returnDateDay -= 31;
+                    }
+                    break;
+            }
+        }
+
+        calculateDate();
+        returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
+        console.log(returnDateNum);
+    }
+
+}
+
+
+// extra time select
+let extraTimeNum = 0;
+const timeSelect = () => {
+    let timeSelector = document.getElementById('extratime_select');
+    let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
+    extraTimeNum = theVal
+    console.log(theVal);
+    let temp = parseInt(rentTime.split('시')[0]) + theVal;
+    returnTime = `${temp}시`;
+    if (returnDateNum != '') {
+        calculateDate();
+    }
+}
 
 
 // phone number length limit
@@ -345,7 +369,7 @@ const postDate = () => {
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/campingcar/reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}`
+        window.location.href = `/campingcar/reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}`
 
     } else {
         alert('입력을 완료해주세요!')

@@ -124,7 +124,7 @@
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}">
                                         <input class="this date_day" type="radio"
-                                               th:id="${date.month+'월 '+date.day+'일'}" th:text="${date.day}" name="calendar1" onclick="rentDate(id)"/>
+                                               th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}" name="calendar1" onclick="rentDate(id, name)"/>
                                     </label>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                         <div>
                             <label for="extratime_select">추가 시간</label>
                             <select name="extratime" id="extratime_select" onchange="timeSelect()">
-                                <option value="">--추가 시간 선택--</option>
+                                <option value="0">--추가 시간 선택--</option>
                                 <option id="1h" value="1">+1시간</option>
                                 <option id="2h" value="2">+2시간</option>
                                 <option id="3h" value="3">+3시간</option>
@@ -213,10 +213,9 @@
                                 <option id="7h" value="7">+7시간</option>
                             </select>
                         </div>
-                    </div>
+                    </div><hr style="background: dimgray;" />
 
                     <div>
-                        <button onclick="calculateDate()">금액 계산하기</button>
                         <div id="calResultWrapper">
                             <h2>예상가격</h2><p id="calResult"></p>
                         </div>
