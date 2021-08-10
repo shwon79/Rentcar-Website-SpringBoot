@@ -50,6 +50,11 @@ inputDemand.addEventListener('change',
         console.log(inputDemand.value);
     })
 
+// 요청사항 높이 자동 조절
+const autoGrow = (texts) => {
+    texts.style.height = "1px";
+    texts.style.height = (12 + texts.scrollHeight) + "px";
+}
 
 
 

@@ -124,86 +124,22 @@ const sendRentDate = (id, year) => {
         .then(res => res.json())
         .then(result => {
             console.log(result)
+            for (const availableTime of result) {
+                let btnTimeLabel = document.createElement("label");
+                btnTimeLabel.setAttribute('for', availableTime);
+                document.getElementById('rent_time').appendChild(btnTimeLabel);
+                let btnTime = document.createElement("input");
+                btnTime.setAttribute('type', 'radio')
+                btnTime.setAttribute('name', 'rent-time')
+                btnTime.setAttribute('id', availableTime);
+                btnTime.setAttribute('onclick', 'rentTimeSel(id)')
+                btnTime.textContent = availableTime;
+                document.getElementById('rent_time').appendChild(btnTime);
+
+            }
         })
 }
 
-// rent Date
-// let rentDateNum='';
-// const sendRentDate = (id, year) => {
-//     rentDateNum = id;
-//     let rentDateYear = year;
-//     let rentDateMonth = rentDateNum.split('월 ')[0];
-//     let rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
-//
-//     // 날짜 골라서 안되는 시간 확인
-//     let url = '/campingcar/sendrentdate';
-//     let rentDateObj = {
-//         'year': rentDateYear,
-//         'month': rentDateMonth,
-//         'day': rentDateDay,
-//     }
-//     fetch(url, {
-//         method: 'POST',
-//         headers:{
-//             'Content-Type' : 'application/json'
-//         },
-//         body: JSON.stringify(rentDateObj),
-//     }).then(console.log)
-//         .then(()=> {
-//             fetch(url+'/'+rentDateYear+'/'+rentDateMonth+'/'+rentDateDay)
-//                 .then(result => {
-//
-//                     console.log(result.json())
-//
-//                     // for (i = 0; i < result.length; i++) {
-//                     //     console.log(result[i]);
-//                     // }
-//                     /*
-//                     for (i = 0; i < result.length; i++) {
-//                         detailedSelect.options[i+1] = new Option(result[i], result[i]);
-//                     }
-//                      */
-//                 })
-//                 /*
-//                 .then(res => res.json())
-//                 .then(result => {
-//                     console.log(result);
-//
-//                     // if ()
-//
-//
-//
-//                 })
-//                 .catch(console.log)
-//                 */
-//             console.log(rentDateNum);
-//         })
-// }
-
-// rent Date
-// let rentDateNum='';
-// const sendRentDate = (id, year) => {
-//     rentDateNum = id;
-//     let rentDateYear = year;
-//     let rentDateMonth = rentDateNum.split('월 ')[0];
-//     let rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
-//
-//     // 날짜 골라서 안되는 시간 확인
-//     let url = '/campingcar/sendrentdate';
-//     fetch(url+'/'+rentDateYear+'/'+rentDateMonth+'/'+rentDateDay)
-//         .then(result => {
-//             console.log(1);
-//             console.log(result);
-//
-//             // for (i = 0; i < result.length; i++) {
-//             //     console.log(result[i]);
-//             // }
-//         })
-// }
-
-const getAvailable = () => {
-
-}
 
 // time select onclick
 let rentTime = '';

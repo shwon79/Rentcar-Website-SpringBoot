@@ -29,6 +29,14 @@
     align-items: center;
 }
 
+.input_person {
+    margin-bottom: 5px;
+}
+
+.input_person div {
+    margin: 5px 0;
+}
+
 .input_person input {
     width: 30%;
     height: 35px;
@@ -43,13 +51,12 @@
 
 #input_demand {
     width: 100%;
-    min-height: 100px;
 }
 
 textarea.noscrollbars {
     overflow: hidden;
-    width: 300px;
-    height: 100px;
+    min-height: 100px;
+    resize: none;
 }
 
 #info_refund {
