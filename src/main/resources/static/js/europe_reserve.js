@@ -71,7 +71,7 @@ document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 // 가격표
 let obj, deposits;
 let priceList = [];
-function runIt() {
+const runIt = () => {
     fetch('/campingcar/getprice')
         .then(res => res.json())
         .then(result => {
@@ -118,7 +118,7 @@ const sendRentDate = (id, year) => {
     rentDateNum = id;
     let rentDateYear = year;
     let rentDateMonth = rentDateNum.split('월 ')[0];
-    let rentDateDay = rentDateNum.split('일')[0];
+    let rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
     // document.getElementById(id).id = 'selected-btn';
     let url = '/campingcar/sendrentdate';
     let rentDateObj = {
@@ -132,7 +132,8 @@ const sendRentDate = (id, year) => {
             'Content-Type' : 'application/json'
         },
         body: JSON.stringify(rentDateObj),
-    }).then(console.log)
+    }).then(res => JSON.stringify(res))
+        .then(console.log)
     console.log(rentDateNum);
 }
 
@@ -337,7 +338,6 @@ const daysSelect = () => {
         returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
         console.log(returnDateNum);
     }
-
 }
 
 

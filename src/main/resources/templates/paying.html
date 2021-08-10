@@ -116,7 +116,7 @@
                         <div>
                             <div class="price_between">
                                 <p>선결제 금액</p>
-                                <p>1,000,000원</p>
+                                <p>500,000원</p>
                             </div><hr/>
                             <div class="price_between">
                                 <p>총 결제 금액</p>
@@ -146,17 +146,53 @@
                             <h3 class="text-left">약관 동의</h3>
                         </div>
                         <div>
-                            <label for="check_collect" style="cursor: pointer;"><input id="check_collect" type="checkbox" />개인정보 수집 및 이용 동의</label>
-                            <!--         -->
-                            <button id="contract_info" type="button">약관보기</button>
-                        </div>
-                        <div>
-                            <label for="check_rent" style="cursor: pointer;"><input id="check_rent" type="checkbox" value="rent"/>차량 렌트 동의</label>
-                            <button id="rent_info" type="button">약관보기</button>
-                        </div>
-                        <div>
-                            <label for="check_last" style="cursor: pointer;"><input id="check_last" type="checkbox" />구매조건 확인 및 결제진행에 동의</label>
-                            <button id="condition_info" type="button">약관보기</button>
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Collapsible Group Item #1
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <p><input id="check_info" type="checkbox" value="rent"/>개인정보 이용 동의</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Collapsible Group Item #2
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <p><input id="check_rent" type="checkbox" value="rent"/>차량 렌트 동의</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingThree">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Collapsible Group Item #3
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <p><input id="check_last" type="checkbox" value="rent"/>구매조건 확인 및 결제진행에 동의</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <button class="btn btn-danger" id="btn_final" type="button" onclick="reserveDone()">예약 신청 완료</button>

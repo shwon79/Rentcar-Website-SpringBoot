@@ -84,15 +84,11 @@ const reserveDone = () => {
             },
             body: JSON.stringify(finalDate),
 
-        }).then(console.log)
-            /*
-            .then(response => console.log('Success: ', JSON.stringify(response)))
+        }).then(response => console.log('Success: ', JSON.stringify(response)))
             .then(()=> {
                 alert('예약이 완료되었습니다!');
                 window.location.href = '/europe';
-            })
-            .catch(err => console.error('Error: ', err))
-             */
+            }).catch(err => console.error('Error: ', err))
     } else {
         alert('입력을 완료해주세요!')
     }
