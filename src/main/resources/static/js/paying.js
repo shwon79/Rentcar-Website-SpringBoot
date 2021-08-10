@@ -6,13 +6,18 @@ function handleOnInput(el, maxlength) {
     if(el.value.length > maxlength) el.value = el.value.substr(0, maxlength);
 }
 
+
+let rentDate = document.getElementById('rent_date').innerText.split(' ');
+let returnDate = document.getElementById('return_date').innerText.split(' ');
+
+
 // must items
-const rentDateNum = '';
-const rentTime = '';
-const returnDateNum = '';
-const returnTime = '';
-const depositPrice = '';
-const totalPrice = '';
+const rentDateNum = rentDate[0];
+const rentTime = rentDate[1];
+const returnDateNum = returnDate[0];
+const returnTime = returnDate[1];
+const depositPrice = 1;
+const totalPrice = 41564;
 
 
 // check onchange of inputs
@@ -54,10 +59,10 @@ const reserveDone = () => {
 
     if (customName != '' && phoneNum!='' && depositName!='') {
         let finalDate = {
-            'rent_date': rentDateNum,
-            'rent_time':  rentTime,
-            'return_date': returnDateNum,
-            'return_time' : returnTime,
+            'rentDate': rentDateNum,
+            'rentTime':  rentTime,
+            'returnDate': returnDateNum,
+            'returnTime' : returnTime,
             'agree': 1,
             'deposit':depositPrice,
             'depositor': depositName,
@@ -66,6 +71,7 @@ const reserveDone = () => {
             'phone': phoneNum,
             'total': totalPrice,
             'reservation': 1,
+            'day': '1일권',
         }
 
         console.log(JSON.stringify(finalDate));
@@ -73,15 +79,20 @@ const reserveDone = () => {
         let url = '/campingcar/reserve';
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify(finalDate),
             headers:{
                 'Content-Type' : 'application/json'
-            }
-        }).then(res => res.json())
-            .then(response => console.log('Success: ', JSON.stringify(response)))
-            .then(()=>alert('예약이 완료되었습니다!'))
-            .catch(err => console.error('Error: ', err))
+            },
+            body: JSON.stringify(finalDate),
 
+        }).then(console.log)
+            /*
+            .then(response => console.log('Success: ', JSON.stringify(response)))
+            .then(()=> {
+                alert('예약이 완료되었습니다!');
+                window.location.href = '/europe';
+            })
+            .catch(err => console.error('Error: ', err))
+             */
     } else {
         alert('입력을 완료해주세요!')
     }

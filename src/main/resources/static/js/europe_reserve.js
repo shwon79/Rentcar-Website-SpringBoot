@@ -135,8 +135,10 @@ const rentDate = (id) => {
 
 // time select onclick
 let rentTime = '';
+let returnTime = '';
 const rentTimeSel = (id) => {
     rentTime = id;
+    returnTime = rentTime;
     console.log(rentTime);
 }
 
@@ -149,7 +151,6 @@ let daysSelect = () => {
     let rentDateMon = parseInt(temp[0]);
     let returnDateMon = rentDateMon;
     let rentDateDay = parseInt(temp[1].split('일')[0]);
-    console.log(rentDateDay);
     let returnDateDay = rentDateDay + theVal;
     if (returnDateDay < 29) ;
     else {
@@ -228,12 +229,12 @@ let daysSelect = () => {
                 break;
         }
     }
-    returnDateNum = `${returnDateMon}월 ${returnDateDay}일`
+    returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
+    console.log(returnDateNum);
 }
 
 
 // extra time select
-let returnTime = '';
 function timeSelect()  {
     let timeSelector = document.getElementById('extratime_select');
     let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
@@ -246,6 +247,7 @@ function timeSelect()  {
 
 // price calculator
 const calculateDate = () => {
+    /*
     let date1 = rentDateNum.split('월');
     let date2 = returnDateNum.split('월');
     let month1 = date1[0];
@@ -260,15 +262,13 @@ const calculateDate = () => {
         if (dayDiffer > 0) dateDiffer = monthDiffer+1;
         else if (dateDiffer <= 0) dateDiffer = monthDiffer;
     } else if(monthDiffer == 0) dateDiffer = 1;
+     */
 
-    // console.log(dateDiffer);
     console.log(obj);
-    // console.log(monthly);
-    // console.log(fifteenDay);
-    document.getElementById('calResult').innerText = `${dateDiffer}달`;
-    return dateDiffer;
+    // document.getElementById('calResult').innerText = `${dateDiffer}달`;
+    // return dateDiffer;
 }
-
+/*
 // show total selection
 let differ = '';
 if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
@@ -276,29 +276,13 @@ if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
     differ = calculateDate();
     target.innerText = `${differ}달`;
 }
+ */
 
 
 // phone number length limit
 function handleOnInput(el, maxlength) {
     if(el.value.length > maxlength) el.value = el.value.substr(0, maxlength);
 }
-
-
-// check onchange of inputs
-let customName = '';
-let phoneNum = '';
-const inputName = document.getElementById('input_name');
-const inputPhoneNum = document.getElementById('input_number');
-inputName.addEventListener('change',
-    function () {
-        customName = inputName.value;
-        console.log(inputName.value);
-    })
-inputPhoneNum.addEventListener('change',
-    function () {
-        phoneNum = inputPhoneNum.value;
-        console.log(inputPhoneNum.value);
-    })
 
 
 // Sending Data;

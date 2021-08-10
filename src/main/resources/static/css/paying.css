@@ -16,7 +16,7 @@
 }
 
 #info_custom {
-    height: 200px;
+    overflow: auto;
 }
 
 #hr_reserve {

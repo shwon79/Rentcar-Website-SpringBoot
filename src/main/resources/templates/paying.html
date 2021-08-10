@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                                         <p>반납 일자</p>
-                                        <p th:text="${return_date+' '+return_time}"></p>
+                                        <p id="return_date" th:text="${return_date+' '+return_time}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -61,15 +61,25 @@
 
                     <!-- 예약자 정보 -->
                     <div class="bg-white pinside20 margin-bottom-20" id="info_custom">
-                        <div>
-                            <h3 class="text-left">예약자 정보</h3>
+                        <div class="text-left">
+                            <h3>예약자 정보</h3>
+                            <p style="font-size: 10px"><span style="color: red">*</span>필수 입력 항목</p>
                         </div>
                         <div>
                             <!-- 성명 연락처 -->
-                            <div class="input_person">
-                                <input id="input_name" type="text" placeholder="성명" />
-                                <input id="input_number" type="number" placeholder="연락처" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="handleOnInput(this, 11)" />
-                                <input id="input_deposit" type="text" placeholder="입금자명" />
+                            <div class="input_person text-left">
+                                <div>
+                                    <label><span style="color: red">*</span>성명</label>
+                                    <input id="input_name" type="text" placeholder="성명" />
+                                </div>
+                                <div>
+                                    <label><span style="color: red">*</span>연락처</label>
+                                    <input id="input_number" type="number" placeholder="연락처" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="handleOnInput(this, 11)" />
+                                </div>
+                                <div>
+                                    <label><span style="color: red">*</span>입금자명</label>
+                                    <input id="input_deposit" type="text" placeholder="입금자명" />
+                                </div>
                             </div>
                             <!-- 요청사항 -->
                             <div class="input_demand">
@@ -93,9 +103,6 @@
                                 <p>6) 2일전 취소 : 환불불가</p>
                             </div>
                         </div>
-<!--                        <div>-->
-<!--                            <img src="" alt="refund" />-->
-<!--                        </div>-->
                     </div>
                 </div>
 
@@ -140,17 +147,28 @@
                         </div>
                         <div>
                             <label for="check_collect" style="cursor: pointer;"><input id="check_collect" type="checkbox" />개인정보 수집 및 이용 동의</label>
-<!--                            <button class="btn btn-sm" data-toggle="popover" title="popover" id="contract_info" type="button">약관보기</button>-->
-                            <button id="top1" type="button" class="btn btn-default btn-md" data-toggle="tooltip" data-placement="left" title="tooltip on top">Tooltip on top</button>
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                Dropdown
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                            </ul>
+                            <button id="contract_info" type="button">약관보기</button>
                         </div>
                         <div>
-                            <label for="check_rent" style="cursor: pointer;"><input id="check_rent" type="checkbox" value="rent"/>차량 렌트 동의</label><button id="rent_info" data-toggle="tooltip" type="button">약관보기</button>
+                            <label for="check_rent" style="cursor: pointer;"><input id="check_rent" type="checkbox" value="rent"/>차량 렌트 동의</label>
+                            <button id="rent_info" type="button">약관보기</button>
                         </div>
                         <div>
-                            <label for="check_last" style="cursor: pointer;"><input id="check_last" type="checkbox" />구매조건 확인 및 결제진행에 동의</label><button id="condition_info" type="button">약관보기</button>
+                            <label for="check_last" style="cursor: pointer;"><input id="check_last" type="checkbox" />구매조건 확인 및 결제진행에 동의</label>
+                            <button id="condition_info" type="button">약관보기</button>
                         </div>
                         <div>
-                            <button onclick="reserveDone()" class="btn btn-danger" id="btn_final" type="button" >예약 신청 완료</button>
+                            <button class="btn btn-danger" id="btn_final" type="button" onclick="reserveDone()">예약 신청 완료</button>
                         </div>
                     </div>
 
