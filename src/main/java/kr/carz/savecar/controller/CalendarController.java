@@ -536,13 +536,14 @@ public class CalendarController {
     @ResponseBody
     public void send_rent_date(@RequestBody CalendarDate dto, HttpServletResponse res) throws IOException {
 
+        System.out.println(dto.getMonth());
+        System.out.println(dto.getDay());
+        System.out.println(dto.getYear());
 
         CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(dto.getMonth(), dto.getDay(), dto.getYear());
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
 
         List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
-
-        System.out.println("1");
 
 
         JSONObject jsonObject = new JSONObject();
