@@ -24,5 +24,4 @@ public class CalendarTimeService {
         return calendarTimeRepository.findByDateIdAndCarName(dateId, carName);
     }
 
-
 }

@@ -534,14 +534,30 @@ public class CalendarController {
     // 캠핑카 예약 저장 api
     @PostMapping("/campingcar/sendrentdate")
     @ResponseBody
-    public String send_rent_date(@RequestBody CalendarDate dto){
+    public void send_rent_date(@RequestBody CalendarDate dto, HttpServletResponse res) throws IOException {
 
 
-        System.out.println(dto.getMonth());
-        System.out.println(dto.getDay());
-        System.out.println(dto.getYear());
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(dto.getMonth(), dto.getDay(), dto.getYear());
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
 
-        return "paying";
+        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
+
+        System.out.println("1");
+
+
+        JSONObject jsonObject = new JSONObject();
+
+        for(int i=0; i<calendarTimeList.size(); i++){
+            jsonObject.put(calendarTimeList.get(i).getReserve_time(),calendarTimeList.get(i).getReserve_complete());
+
+            System.out.println(calendarTimeList.get(i).getReserve_time()+','+calendarTimeList.get(i).getReserve_complete());
+        }
+
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 

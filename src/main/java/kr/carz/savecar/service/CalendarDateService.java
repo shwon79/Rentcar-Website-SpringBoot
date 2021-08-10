@@ -25,8 +25,8 @@ public class CalendarDateService {
     public List<CalendarDate> findCalendarDateByMonth(String month){
         return calendarDateRepository.findByMonth(month);
     }
-    public List<CalendarDate> findCalendarDateByMonthAndDay(String month, String day){
-        return calendarDateRepository.findByMonthAndDay(month, day);
+    public CalendarDate findCalendarDateByMonthAndDayAndYear(String month, String day, String year){
+        return calendarDateRepository.findByMonthAndDayAndYear(month, day, year);
     }
 
 }
