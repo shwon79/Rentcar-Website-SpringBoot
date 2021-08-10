@@ -15,49 +15,52 @@ public class CampingcarDateTime extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String rentDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String rentTime;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String returnDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String returnTime;
 
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String phone;
 
     @Column(columnDefinition = "LONGTEXT", nullable = true)
     private String detail;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String depositor;
 
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer total;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer deposit;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String agree;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String reservation;
+
+    @Column(nullable = true)
+    private String day;
 
 
 
 
     @Builder
-    public CampingcarDateTime(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total,Integer deposit,String agree,String reservation) {
+    public CampingcarDateTime(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total,Integer deposit,String agree,String reservation,String day) {
         this.rentDate = rentDate;
         this.rentTime = rentTime;
         this.returnDate = returnDate;
@@ -70,5 +73,6 @@ public class CampingcarDateTime extends BaseTimeEntity {
         this.deposit = deposit;
         this.agree = agree;
         this.reservation = reservation;
+        this.day = day;
     }
 }

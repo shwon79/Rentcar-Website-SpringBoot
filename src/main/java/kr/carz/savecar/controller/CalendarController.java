@@ -345,18 +345,20 @@ public class CalendarController {
     @ResponseBody
     public String save(@RequestBody CampingcarDateTimeDto dto){
 
-        System.out.println(dto.getRentDate());
-        System.out.println(dto.getRentTime());
-        System.out.println(dto.getReturnDate());
-        System.out.println(dto.getReturnTime());
-        System.out.println(dto.getAgree());
-        System.out.println(dto.getDeposit());
+
+        System.out.println(dto.getRentTime()); // null
+        System.out.println(dto.getReturnDate()); // null
+        System.out.println(dto.getReturnTime()); // null
+        System.out.println(dto.getAgree()); // 1
+        System.out.println(dto.getDeposit()); // null
         System.out.println(dto.getDepositor());
         System.out.println(dto.getDetail());
         System.out.println(dto.getName());
         System.out.println(dto.getPhone());
-        System.out.println(dto.getReservation());
-        System.out.println(dto.getTotal());
+        System.out.println(dto.getReservation()); // 1
+        System.out.println(dto.getTotal()); // null
+        System.out.println(dto.getDay()); // null
+
 
         campingcarDateTimeService.save(dto);
 
