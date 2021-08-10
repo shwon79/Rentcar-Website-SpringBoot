@@ -50,14 +50,22 @@ inputDemand.addEventListener('change',
         console.log(inputDemand.value);
     })
 
+// 요청사항 높이 자동 조절
+const autoGrow = (texts) => {
+    texts.style.height = "1px";
+    texts.style.height = (12 + texts.scrollHeight) + "px";
+}
 
 
 
 
 // Sending Data;
 const reserveDone = () => {
+    let check1 = document.getElementById('check_info').checked;
+    let check2 = document.getElementById('check_rent').checked;
+    let check3 = document.getElementById('check_last').checked;
 
-    if (customName != '' && phoneNum!='' && depositName!='') {
+    if (customName != '' && phoneNum!='' && depositName!='' && check1 == true && check2 == true && check3 == true) {
         let finalDate = {
             'rentDate': rentDateNum,
             'rentTime':  rentTime,
@@ -91,6 +99,7 @@ const reserveDone = () => {
             }).catch(err => console.error('Error: ', err))
     } else {
         alert('입력을 완료해주세요!')
+        console.log(check1);
     }
 }
 
