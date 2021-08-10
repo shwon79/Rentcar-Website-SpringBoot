@@ -7,6 +7,7 @@ function doDisplay(){
         con.style.display = 'none';
     }
 }
+
 function doDisplay_rent_time(){
     var con = document.getElementById("calendar_rental_time")
     if(con.style.display==='none'){
@@ -119,7 +120,8 @@ const sendRentDate = (id, year) => {
     let rentDateYear = year;
     let rentDateMonth = rentDateNum.split('월 ')[0];
     let rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
-    // document.getElementById(id).id = 'selected-btn';
+    
+    // 날짜 골라서 안되는 시간 확인
     let url = '/campingcar/sendrentdate';
     let rentDateObj = {
         'year': rentDateYear,
@@ -134,10 +136,32 @@ const sendRentDate = (id, year) => {
         body: JSON.stringify(rentDateObj),
     }).then(console.log)
         .then(()=> {
-            fetch(url).then(res => res.json()).then(console.log)
+            fetch(url+'/'+rentDateYear+'/'+rentDateMonth+'/'+rentDateDay)
+                .then(result => {
+                    console.log(result);
+                    /*
+                    for (i = 0; i < result.length; i++) {
+                        detailedSelect.options[i+1] = new Option(result[i], result[i]);
+                    }
+                     */
+                })
+                /*
+                .then(res => res.json())
+                .then(result => {
+                    console.log(result);
+
+                    // if ()
+
+
+
+                })
+                .catch(console.log)
+                */
             console.log(rentDateNum);
         })
+}
 
+const getAvailable = () => {
 
 }
 
@@ -233,11 +257,12 @@ const rentTimeSel = (id) => {
 }
 
 // price calculator
+let price = 0;
 const calculateDate = () => {
     console.log(priceList);
     console.log(useDayNum);
     let showData = document.getElementById('calResult');
-    let price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+    price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
     showData.innerText = `${price}원`
 }
 
@@ -250,6 +275,7 @@ const daysSelect = () => {
     let daySelector = document.getElementById('days_select');
     let theVal = parseInt(daySelector.options[daySelector.selectedIndex].value);
 
+    // 날짜 계산
     if (rentDateNum != '' && rentTime != '') {
         let temp = rentDateNum.split('월 ');
         let rentDateMon = parseInt(temp[0]);
@@ -360,12 +386,6 @@ const timeSelect = () => {
 }
 
 
-// phone number length limit
-function handleOnInput(el, maxlength) {
-    if(el.value.length > maxlength) el.value = el.value.substr(0, maxlength);
-}
-
-
 // Sending Data;
 const postDate = () => {
 
@@ -373,7 +393,7 @@ const postDate = () => {
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/campingcar/reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}`
+        window.location.href = `/campingcar/reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${price}`
 
     } else {
         alert('입력을 완료해주세요!')
