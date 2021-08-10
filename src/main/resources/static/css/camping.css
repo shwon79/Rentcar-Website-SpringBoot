@@ -515,3 +515,10 @@ input[type=radio]:checked + label {
   background: #2b542c;
   color: whitesmoke;
 }
+
+#calResult {
+  margin: 20px 0;
+  border: 1px solid dimgray;
+  font-size: 20px;
+  font-weight: bolder;
+}

@@ -79,47 +79,44 @@ document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 
 
 // 가격표
-let obj, deposits, price2, price3, price4, price5, price6, price7, price8, price9, price10,
-    price11, price12, price13, price14, price15, price16, price17, price18, price19, price20,
-    price21, price22, price23, price24, price25, price26, price27, price28, price29, price30;
-
-
+let obj, deposits;
+let priceList = [];
 function runIt() {
     fetch('/campingcar/getprice')
         .then(res => res.json())
         .then(result => {
             obj = result;
             deposits = obj['deposit'];
-            // oneDay = obj['onedays'];
-            price2 = obj['twodays'];
-            price3 = obj['threedays'];
-            price4 = obj['fourdays'];
-            price5 = obj['fivedays'];
-            price6 = obj['sixdays'];
-            price7 = obj['sevendays'];
-            price8 = obj['eightdays'];
-            price9 = obj['ninedays'];
-            price10 = obj['tendays'];
-            price11 = obj['elevendays'];
-            price12 = obj['twelvedays'];
-            price13 = obj['thirteendays'];
-            price14 = obj['fourteendays'];
-            price15 = obj['fifteendays'];
-            price16 = obj['sixteendays'];
-            price17 = obj['seventeendays'];
-            price18 = obj['eighteendays'];
-            price19 = obj['ninetinedays'];
-            price20 = obj['twentydays'];
-            price21 = obj['twentyonedays'];
-            price22 = obj['twentytwodays'];
-            price23 = obj['twentythreedays'];
-            price24 = obj['twentyfourdays'];
-            price25 = obj['twentyfivedays'];
-            price26 = obj['twentysixdays'];
-            price27 = obj['twentysevendays'];
-            price28 = obj['twentyeightdays'];
-            price29 = obj['twentyninedays'];
-            price30 = obj['thirtydays'];
+            priceList[1] = obj['onedays'];
+            priceList[2] = obj['twodays'];
+            priceList[3] = obj['threedays'];
+            priceList[4] = obj['fourdays'];
+            priceList[5] = obj['fivedays'];
+            priceList[6] = obj['sixdays'];
+            priceList[7] = obj['sevendays'];
+            priceList[8] = obj['eightdays'];
+            priceList[9] = obj['ninedays'];
+            priceList[10] = obj['tendays'];
+            priceList[11] = obj['elevendays'];
+            priceList[12] = obj['twelvedays'];
+            priceList[13] = obj['thirteendays'];
+            priceList[14] = obj['fourteendays'];
+            priceList[15] = obj['fifteendays'];
+            priceList[16] = obj['sixteendays'];
+            priceList[17] = obj['seventeendays'];
+            priceList[18] = obj['eighteendays'];
+            priceList[19] = obj['ninetinedays'];
+            priceList[20] = obj['twentydays'];
+            priceList[21] = obj['twentyonedays'];
+            priceList[22] = obj['twentytwodays'];
+            priceList[23] = obj['twentythreedays'];
+            priceList[24] = obj['twentyfourdays'];
+            priceList[25] = obj['twentyfivedays'];
+            priceList[26] = obj['twentysixdays'];
+            priceList[27] = obj['twentysevendays'];
+            priceList[28] = obj['twentyeightdays'];
+            priceList[29] = obj['twentyninedays'];
+            priceList[30] = obj['thirtydays'];
         })
 }
 runIt();
@@ -139,12 +136,96 @@ let returnTime = '';
 const rentTimeSel = (id) => {
     rentTime = id;
     returnTime = rentTime;
+    let option1 = document.getElementById('1h');
+    let option2 = document.getElementById('2h');
+    let option3 = document.getElementById('3h');
+    let option4 = document.getElementById('4h');
+    let option5 = document.getElementById('5h');
+    let option6 = document.getElementById('6h');
+    let option7 = document.getElementById('7h');
+
+    // disable 추가시간
+    if (rentTime == '10시') {
+        option1.disabled = false;
+        option2.disabled = false;
+        option3.disabled = false;
+        option4.disabled = false;
+        option5.disabled = false;
+        option6.disabled = false;
+        option7.disabled = false;
+    }
+    else if (rentTime == '11시') {
+        option1.disabled = false;
+        option2.disabled = false;
+        option3.disabled = false;
+        option4.disabled = false;
+        option5.disabled = false;
+        option6.disabled = false;
+        option7.disabled = true;
+    }
+    else if (rentTime == '12시') {
+        option1.disabled = false;
+        option2.disabled = false;
+        option3.disabled = false;
+        option4.disabled = false;
+        option5.disabled = false;
+        option6.disabled = true;
+        option7.disabled = true;
+    }
+    else if (rentTime == '13시') {
+        option1.disabled = false;
+        option2.disabled = false;
+        option3.disabled = false;
+        option4.disabled = false;
+        option5.disabled = true;
+        option6.disabled = true;
+        option7.disabled = true;
+    }
+    else if (rentTime == '14시') {
+        option1.disabled = false;
+        option2.disabled = false;
+        option3.disabled = false;
+        option4.disabled = true;
+        option5.disabled = true;
+        option6.disabled = true;
+        option7.disabled = true;
+    }
+    else if (rentTime == '15시') {
+        option1.disabled = false;
+        option2.disabled = false;
+        option3.disabled = true;
+        option4.disabled = true;
+        option5.disabled = true;
+        option6.disabled = true;
+        option7.disabled = true;
+    }
+    else if (rentTime == '16시') {
+        option1.disabled = false;
+        option2.disabled = true;
+        option3.disabled = true;
+        option4.disabled = true;
+        option5.disabled = true;
+        option6.disabled = true;
+        option7.disabled = true;
+    }
+    else if (rentTime == '17시') {
+        option1.disabled = true;
+        option2.disabled = true;
+        option3.disabled = true;
+        option4.disabled = true;
+        option5.disabled = true;
+        option6.disabled = true;
+        option7.disabled = true;
+    }
+
     console.log(rentTime);
 }
 
-// rent days select
+// 몇 일권 select
 var returnDateNum = '';
-let daysSelect = () => {
+let useDay = ''
+let useDayNum = 0;
+const daysSelect = () => {
     let daySelector = document.getElementById('days_select');
     let theVal = parseInt(daySelector.options[daySelector.selectedIndex].value);
     let temp = rentDateNum.split('월 ');
@@ -152,6 +233,9 @@ let daysSelect = () => {
     let returnDateMon = rentDateMon;
     let rentDateDay = parseInt(temp[1].split('일')[0]);
     let returnDateDay = rentDateDay + theVal;
+    console.log(returnDateDay);
+    useDay = daySelector.options[daySelector.selectedIndex].innerText;
+    useDayNum = parseInt(daySelector.options[daySelector.selectedIndex].value);
     if (returnDateDay < 29) ;
     else {
         switch (rentDateMon) {
@@ -235,9 +319,11 @@ let daysSelect = () => {
 
 
 // extra time select
+let extraTimeNum = 0;
 function timeSelect()  {
     let timeSelector = document.getElementById('extratime_select');
     let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
+    extraTimeNum = theVal
     console.log(theVal);
     let temp = parseInt(rentTime.split('시')[0]) + theVal;
     returnTime = `${temp}시`;
@@ -247,36 +333,13 @@ function timeSelect()  {
 
 // price calculator
 const calculateDate = () => {
-    /*
-    let date1 = rentDateNum.split('월');
-    let date2 = returnDateNum.split('월');
-    let month1 = date1[0];
-    let day1 = date1[1][0];
-    let month2 = date2[0];
-    let day2 = date2[1][0];
-    if ((month2 - month1) < 2) calendarCal(month1, day1, month2, day2);
-    let monthDiffer = month2-month1;
-    let dayDiffer = day2 - day1;
-    let dateDiffer = 0;
-    if(monthDiffer > 0) {
-        if (dayDiffer > 0) dateDiffer = monthDiffer+1;
-        else if (dateDiffer <= 0) dateDiffer = monthDiffer;
-    } else if(monthDiffer == 0) dateDiffer = 1;
-     */
+    console.log(priceList);
+    console.log(useDayNum);
+    let showData = document.getElementById('calResult');
+    let price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+    showData.innerText = `${price}원`
+}
 
-    console.log(obj);
-    // document.getElementById('calResult').innerText = `${dateDiffer}달`;
-    // return dateDiffer;
-}
-/*
-// show total selection
-let differ = '';
-if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
-    const target = document.getElementById('total_result');
-    differ = calculateDate();
-    target.innerText = `${differ}달`;
-}
- */
 
 
 // phone number length limit

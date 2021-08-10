@@ -197,19 +197,19 @@
                             <label for="extratime_select">추가 시간</label>
                             <select name="extratime" id="extratime_select" onchange="timeSelect()">
                                 <option value="">--추가 시간 선택--</option>
-                                <option value="1">+1시간</option>
-                                <option value="2">+2시간</option>
-                                <option value="3">+3시간</option>
-                                <option value="4">+4시간</option>
-                                <option value="5">+5시간</option>
-                                <option value="6">+6시간</option>
-                                <option value="7">+7시간</option>
+                                <option id="1h" value="1">+1시간</option>
+                                <option id="2h" value="2">+2시간</option>
+                                <option id="3h" value="3">+3시간</option>
+                                <option id="4h" value="4">+4시간</option>
+                                <option id="5h" value="5">+5시간</option>
+                                <option id="6h" value="6">+6시간</option>
+                                <option id="7h" value="7">+7시간</option>
                             </select>
                         </div>
                     </div>
 
                     <div>
-                        <button onclick="calculateDate()">달 계산하기</button>
+                        <button onclick="calculateDate()">금액 계산하기</button>
                         <p id="calResult"></p>
                     </div><hr style="background: dimgray;" />
 
