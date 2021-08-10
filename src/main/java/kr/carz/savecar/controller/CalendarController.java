@@ -562,8 +562,8 @@ public class CalendarController {
     }
 
 
-    @RequestMapping("/campingcar/reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{time}")
-    public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("time") String time) throws Exception {
+    @RequestMapping("/campingcar/reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{time}/{total}")
+    public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("time") String time, @PathVariable("total") String total) throws Exception {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
         model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
@@ -574,6 +574,8 @@ public class CalendarController {
         model.put("return_time", return_time);
         model.put("day", day);
         model.put("time", time);
+        model.put("total", total);
+
 
         System.out.println(rent_date);
         System.out.println(rent_time);
@@ -581,6 +583,7 @@ public class CalendarController {
         System.out.println(return_time);
         System.out.println(day);
         System.out.println(time);
+        System.out.println(total);
 
 
         return "paying";
