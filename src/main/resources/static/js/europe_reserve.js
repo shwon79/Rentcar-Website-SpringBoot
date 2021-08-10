@@ -132,9 +132,13 @@ const sendRentDate = (id, year) => {
             'Content-Type' : 'application/json'
         },
         body: JSON.stringify(rentDateObj),
-    }).then(res => JSON.stringify(res))
-        .then(console.log)
-    console.log(rentDateNum);
+    }).then(console.log)
+        .then(()=> {
+            fetch(url).then(res => res.json()).then(console.log)
+            console.log(rentDateNum);
+        })
+
+
 }
 
 // time select onclick
