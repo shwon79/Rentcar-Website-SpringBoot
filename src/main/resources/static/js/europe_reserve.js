@@ -114,7 +114,7 @@ runIt();
 
 // rent Date
 let rentDateNum='';
-const rentDate = (id, year) => {
+const sendRentDate = (id, year) => {
     rentDateNum = id;
     let rentDateYear = year;
     let rentDateMonth = rentDateNum.split('월 ')[0];
@@ -122,9 +122,9 @@ const rentDate = (id, year) => {
     // document.getElementById(id).id = 'selected-btn';
     let url = '/campingcar/sendrentdate';
     let rentDateObj = {
-        'rentYear': rentDateYear,
-        'rentMonth': rentDateMonth,
-        'rentDay': rentDateDay,
+        'year': rentDateYear,
+        'month': rentDateMonth,
+        'day': rentDateDay,
     }
     fetch(url, {
         method: 'POST',

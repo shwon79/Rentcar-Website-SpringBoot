@@ -510,21 +510,36 @@ public class CalendarController {
     public String save(@RequestBody CampingcarDateTimeDto dto){
 
 
-        System.out.println(dto.getRentTime()); // null
-        System.out.println(dto.getReturnDate()); // null
-        System.out.println(dto.getReturnTime()); // null
+        System.out.println(dto.getRentDate());
+        System.out.println(dto.getRentTime());
+        System.out.println(dto.getReturnDate());
+        System.out.println(dto.getReturnTime());
         System.out.println(dto.getAgree()); // 1
-        System.out.println(dto.getDeposit()); // null
+        System.out.println(dto.getDeposit());
         System.out.println(dto.getDepositor());
         System.out.println(dto.getDetail());
         System.out.println(dto.getName());
         System.out.println(dto.getPhone());
         System.out.println(dto.getReservation()); // 1
-        System.out.println(dto.getTotal()); // null
-        System.out.println(dto.getDay()); // null
+        System.out.println(dto.getTotal());
+        System.out.println(dto.getDay());
 
 
         campingcarDateTimeService.save(dto);
+
+        return "paying";
+    }
+
+
+    // 캠핑카 예약 저장 api
+    @PostMapping("/campingcar/sendrentdate")
+    @ResponseBody
+    public String send_rent_date(@RequestBody CalendarDate dto){
+
+
+        System.out.println(dto.getMonth());
+        System.out.println(dto.getDay());
+        System.out.println(dto.getYear());
 
         return "paying";
     }
@@ -609,9 +624,6 @@ public class CalendarController {
         pw.flush();
         pw.close();
     }
-
-
-
 
 
 }
