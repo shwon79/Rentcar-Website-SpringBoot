@@ -610,7 +610,7 @@ public class CalendarController {
         jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
         jsonObject.put("carName",campingCarPrice.getCarName());
 
-//        jsonObject.put("campingCarPrice",campingCarPrice);
+        jsonObject.put("campingCarPrice",campingCarPrice);
 
 
         jsonObject.put("oneday",campingCarPrice.getOnedays());
