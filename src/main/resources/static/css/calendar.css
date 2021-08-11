@@ -36,12 +36,21 @@
 
 .days {
   display: flex;
-  margin: 25px 0 10px;
+  margin: 25px 0 0 0;
 }
 
 .day {
   width: calc(100% / 7);
   text-align: center;
+  border-bottom: 3px solid gray
+}
+
+#day_sat {
+  border-bottom: 3px solid blue
+}
+
+#day_sun {
+  border-bottom: 3px solid red
 }
 
 .dates, .times {
@@ -98,12 +107,54 @@ a:hover {
   color: black;
 }
 
+#main_mobile {
+  display: none;
+}
+
 
 @media (max-width: 990px) {
-  .upside {
-    font-size: 13px;
+
+  .content {
+    padding: 0;
+    margin: 100px 0;
   }
-  .downside {
-    font-size: 12px;
+
+  #main_pc {
+    display: none;
+  }
+
+  #main_mobile {
+    display: block;
+  }
+
+  #main_mobile #days {
+    margin-bottom: 5px;
+  }
+
+  #main_mobile #days div {
+    border-bottom: none;
+  }
+
+  .dates {
+    display: flex;
+    flex-flow: row wrap;
+    height: auto;
+  }
+
+  .date {
+    width: calc(100% / 7);
+    height: 100%;
+    border: none;
+    padding: 0;
+  }
+
+
+  #dates {
+    font-size: 10px;
+  }
+
+  .upside {
+    padding: 33%;
+    background: #9acfea;
   }
 }

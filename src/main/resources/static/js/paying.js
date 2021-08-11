@@ -10,14 +10,25 @@ function handleOnInput(el, maxlength) {
 let rentDate = document.getElementById('rent_date').innerText.split(' ');
 let returnDate = document.getElementById('return_date').innerText.split(' ');
 
+let deposits = 0;
+const getData = () => {
+    fetch('/campingcar/getprice')
+        .then(res => res.json())
+        .then(result => {
+            deposits = result['deposit'];
+            console.log(result);
+        })
+}
+getData();
+
 
 // must items
 const rentDateNum = rentDate[0];
 const rentTime = rentDate[1];
 const returnDateNum = returnDate[0];
 const returnTime = returnDate[1];
-const depositPrice = 1;
-const totalPrice = 41564;
+const totalPrice = parseInt(document.getElementById('total_price').innerText.split('원')[0]);
+const useDay = document.getElementById('use_day').innerText;
 
 
 // check onchange of inputs
@@ -72,14 +83,14 @@ const reserveDone = () => {
             'returnDate': returnDateNum,
             'returnTime' : returnTime,
             'agree': 1,
-            'deposit':depositPrice,
+            'deposit':deposits,
             'depositor': depositName,
             'detail': customDemand,
             'name': customName,
             'phone': phoneNum,
             'total': totalPrice,
             'reservation': 1,
-            'day': '1일권',
+            'day': useDay,
         }
 
         console.log(JSON.stringify(finalDate));
@@ -94,12 +105,16 @@ const reserveDone = () => {
 
         }).then(response => console.log('Success: ', JSON.stringify(response)))
             .then(()=> {
-                alert('예약이 완료되었습니다!');
-                window.location.href = '/europe';
+                let reserveConfirm = confirm('예약을 완료하시겠습니까?');
+                if (reserveConfirm) {
+                    alert('예약이 완료되었습니다!');
+                    window.location.href = '/europe';
+                }
             }).catch(err => console.error('Error: ', err))
-    } else {
+    } else if (customName == '' || phoneNum=='' || depositName=='') {
         alert('입력을 완료해주세요!')
-        console.log(check1);
+    } else if (check1 != true || check2 != true || check3 != true) {
+        alert('동의를 완료해주세요!')
     }
 }
 

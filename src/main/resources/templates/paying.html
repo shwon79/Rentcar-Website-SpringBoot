@@ -48,6 +48,7 @@
                                         <p id="rent_date" th:text="${rent_date+' '+rent_time}"></p>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <p id="use_day" th:text="${day}" style="margin-bottom: 2px"></p>
                                         <button id="rent_length" class="" disabled>➔</button>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
@@ -83,7 +84,7 @@
                             </div>
                             <!-- 요청사항 -->
                             <div class="input_demand">
-                                <label>요청사항</label>
+                                <label class="text-left">요청사항</label>
                                 <textarea class="noscrollbars" onkeyup="autoGrow(this);" onkeydown="autoGrow(this)" id="input_demand" type="text" placeholder="요청사항"></textarea>
                             </div>
                         </div>
@@ -117,11 +118,11 @@
                         <div>
                             <div class="price_between">
                                 <p>선결제 금액</p>
-                                <p>500,000원</p>
+                                <p th:text="${total}/2 + '원'"></p>
                             </div><hr/>
                             <div class="price_between">
                                 <p>총 결제 금액</p>
-                                <p th:text="${total}"></p>
+                                <p id="total_price" th:name="${total}" th:text="${total}+'원'"></p>
                             </div><hr/>
                             <div id="price_desc">
                                 <p>※ 총 결제금액의 50% 선결제</p>
@@ -158,7 +159,12 @@
                                     </a>
                                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                             <p><input id="check_info" type="checkbox" value="rent"/>개인정보 이용 동의</p>
                                         </div>
                                     </div>
@@ -173,7 +179,12 @@
                                     </a>
                                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                             <p><input id="check_rent" type="checkbox" value="rent"/>차량 렌트 동의</p>
                                         </div>
                                     </div>
@@ -188,7 +199,12 @@
                                     </a>
                                     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                             <p><input id="check_last" type="checkbox" value="rent"/>구매조건 확인 및 결제진행에 동의</p>
                                         </div>
                                     </div>

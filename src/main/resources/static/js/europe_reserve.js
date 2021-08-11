@@ -77,7 +77,7 @@ const runIt = () => {
         .then(res => res.json())
         .then(result => {
             obj = result;
-            deposits = obj['deposit'];
+            deposits = parseInt(obj['deposit']);
             priceList[1] = obj['onedays'];
             priceList[2] = obj['twodays'];
             priceList[3] = obj['threedays'];
@@ -233,7 +233,7 @@ const calculateDate = () => {
     console.log(priceList);
     console.log(useDayNum);
     let showData = document.getElementById('calResult');
-    price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+    price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum) + deposits;
     showData.innerText = `${price}원`
 }
 

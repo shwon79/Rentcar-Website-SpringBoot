@@ -32,11 +32,10 @@
         <div class="calendar content">
             <div class="container">
                 <div class="header">
-
                         <a th:href="'/calendar/before/' + ${prevMonth}">
                             <button class="nav-btn go-prev" >&lt;</button>&nbsp;&nbsp;
                         </a>
-        <!--                    <button class="nav-btn go-today">Today</button>-->
+                        <!--   <button class="nav-btn go-today">Today</button>  -->
                         <div class="year-month">
                             <span name="thisYear" th:text="${thisYear}"></span>년
                             <span name="thisMonth" th:text="${thisMonth}"></span>월
@@ -45,7 +44,9 @@
                             <button class="nav-btn go-next"  >&gt;</button>
                         </a>
                 </div>
-                <div class="main">
+
+                <!-- pc version -->
+                <div class="main" id="main_pc">
                     <div style="margin-bottom: 0" class="days">
                         <div style="border-bottom: 3px solid red" class="day">일</div>
                         <div style="border-bottom: 3px solid gray" class="day">월</div>
@@ -55,7 +56,7 @@
                         <div style="border-bottom: 3px solid gray" class="day">금</div>
                         <div style="border-bottom: 3px solid blue" class="day">토</div>
                     </div>
-                    <div class="dates">
+                    <div id="dates" class="dates">
                         <div class="date" th:each="date, iterStat: ${calendarDateList}" >
                             <div>
                                 <!--  calendar upside part  -->
@@ -85,6 +86,27 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- mobile version -->
+                <div class="main" id="main_mobile">
+                    <div class="days" id="days">
+                        <div id="day_sun" class="day">일</div>
+                        <div class="day">월</div>
+                        <div class="day">화</div>
+                        <div class="day">수</div>
+                        <div class="day">목</div>
+                        <div class="day">금</div>
+                        <div id="day_sat" class="day">토</div>
+                    </div>
+                    <div class="dates">
+                        <div class="date" th:each="date, iterStat: ${calendarDateList}" >
+                                <!--  calendar upside part  -->
+                                <p class="upside text-center" th:text="${date.day}"
+                                   th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'disabled: true; background: gray; color: white;':''">
+                                </p>
                         </div>
                     </div>
                 </div>
