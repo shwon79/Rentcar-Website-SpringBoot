@@ -596,7 +596,7 @@ public class CalendarController {
         return "paying";
     }
 
-
+    // test
     // europe 캠핑카 가격 구하는 api
     @RequestMapping(value = "/campingcar/getprice", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
@@ -610,7 +610,7 @@ public class CalendarController {
         jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
         jsonObject.put("carName",campingCarPrice.getCarName());
 
-//        jsonObject.put("campingCarPrice",campingCarPrice);
+        jsonObject.put("campingCarPrice",campingCarPrice);
 
 
         jsonObject.put("oneday",campingCarPrice.getOnedays());
