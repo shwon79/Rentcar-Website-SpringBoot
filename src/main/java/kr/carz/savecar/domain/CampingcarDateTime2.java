@@ -56,11 +56,14 @@ public class CampingcarDateTime2 extends BaseTimeEntity {
     @Column(nullable = true)
     private String day;
 
+    @Column(nullable = true)
+    private String extraTime;
+
 
 
 
     @Builder
-    public CampingcarDateTime2(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, String agree, String reservation, String day) {
+    public CampingcarDateTime2(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, String agree, String reservation, String day, String extraTime) {
         this.rentDate = rentDate;
         this.rentTime = rentTime;
         this.returnDate = returnDate;
@@ -74,5 +77,6 @@ public class CampingcarDateTime2 extends BaseTimeEntity {
         this.agree = agree;
         this.reservation = reservation;
         this.day = day;
+        this.extraTime = extraTime;
     }
 }

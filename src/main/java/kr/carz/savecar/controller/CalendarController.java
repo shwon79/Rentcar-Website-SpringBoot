@@ -2,6 +2,8 @@ package kr.carz.savecar.controller;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -276,6 +278,16 @@ public class CalendarController {
     @RequestMapping("/europe_reserve/{date_id}")
     public String handleRequest(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
 
+        // 날짜
+        Calendar cal = Calendar.getInstance();
+
+        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
+        int this_month = cal.get(Calendar.MONTH) + 1;
+
+        model.addAttribute("today", today);
+        model.addAttribute("thisMonth", this_month);
+
+
         // 시간
         CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
@@ -290,8 +302,6 @@ public class CalendarController {
 
 
         // 날짜
-        Calendar cal = Calendar.getInstance();
-
         int now_month = cal.get(Calendar.MONTH)+1;
 
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
@@ -507,7 +517,7 @@ public class CalendarController {
     // 캠핑카 예약 저장 api
     @PostMapping("/campingcar/reserve")
     @ResponseBody
-    public String save(@RequestBody CampingcarDateTimeDto dto){
+    public String save(@RequestBody CampingcarDateTime2 dto){
 
 
         System.out.println(dto.getRentDate());
@@ -525,7 +535,144 @@ public class CalendarController {
         System.out.println(dto.getDay());
 
 
-        campingcarDateTimeService2.save(dto);
+        String api_key = "NCS0P5SFAXLOJMJI";
+        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<String, String>();
+        HashMap<String, String> params2 = new HashMap<String, String>();
+//
+//
+//        /* 세이브카에 예약확인 문자 전송 */
+//        params.put("to", "01058283328"); // 01033453328 추가
+//        params.put("from", "01052774113");
+//        params.put("type", "LMS");
+//
+//
+//        /* 고객에게 예약확인 문자 전송 */
+//
+//        params2.put("to", dto.getPhone());
+//        params2.put("from", "01052774113");  // 16613331 테스트하기
+//        params2.put("type", "LMS");
+//
+//        params.put("text", "[" + dto.getTitle() + "]\n"
+//                + "대여날짜: " + dto.getName() + "\n"
+//                + "대여시간: " + dto.getPhoneNo() + "\n"
+//                + "반납날짜: " + dto.getCar_name() + "\n"
+//                + "반납시간: " + dto.getMileage() + "\n"
+//                + "성함: " + dto.getOption() + "\n"
+//                + "입금자명: " + dto.getOption() + "\n"
+//                + "이용날짜: " + dto.getOption() + "\n"
+//                + "추가시간: " + dto.getOption() + "\n"
+//                + "요청사항: " + dto.getDetail() + "\n\n");
+//
+//        params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+//                + "문의자 이름: " + dto.getName() + "\n"
+//                + "차량명: " + dto.getCar_name() + "\n"
+//                + "지역: " + dto.getMileage() + "\n"
+//                + "예상대여일자: " + dto.getOption() + "\n"
+//                + "요청사항: " + dto.getDetail() + "\n\n");
+//
+//
+//        if (dto.getTitle().equals("간편상담신청")){
+//            params.put("text", "[" + dto.getTitle() + "]\n"
+//                    + "문의자 이름: " + dto.getName() + "\n"
+//                    + "연락처: " + dto.getPhoneNo() + "\n"
+//                    + "차량명: " + dto.getCar_name() + "\n"
+//                    + "지역: " + dto.getMileage() + "\n"
+//                    + "예상대여일자: " + dto.getOption() + "\n"
+//                    + "요청사항: " + dto.getDetail() + "\n\n");
+//
+//            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+//                    + "문의자 이름: " + dto.getName() + "\n"
+//                    + "차량명: " + dto.getCar_name() + "\n"
+//                    + "지역: " + dto.getMileage() + "\n"
+//                    + "예상대여일자: " + dto.getOption() + "\n"
+//                    + "요청사항: " + dto.getDetail() + "\n\n");
+//        }
+//        else if (dto.getTitle().equals("월렌트, 12개월렌트")){
+//            params.put("text", "[" + dto.getTitle() + "]\n"
+//                    + "예약자 이름: " + dto.getName() + "\n"
+//                    + "연락처: " + dto.getPhoneNo() + "\n"
+//                    + "요청사항: " + dto.getDetail() + "\n\n"
+//                    + "렌트상품: " + dto.getProduct() + "\n"
+//                    + "차종: " + dto.getCategory1() + "\n"
+//                    + "차분류: " + dto.getCategory2() + "\n"
+//                    + "차명: " + dto.getCar_name() + "\n"
+//                    + "주행거리: " + dto.getMileage() + "\n"
+//                    + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
+//
+//            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+//                    + "예약자 이름: " + dto.getName() + "\n"
+//                    + "요청사항: " + dto.getDetail() + "\n\n"
+//                    + "렌트상품: " + dto.getProduct() + "\n"
+//                    + "차종: " + dto.getCategory1() + "\n"
+//                    + "차분류: " + dto.getCategory2() + "\n"
+//                    + "차명: " + dto.getCar_name() + "\n"
+//                    + "주행거리: " + dto.getMileage() + "\n"
+//                    + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
+//        }
+//        else if (dto.getTitle().equals("누구나장기렌트")){
+//            params.put("text", "[" + dto.getTitle() + "]\n"
+//                    + "예약자 이름: " + dto.getName() + "\n"
+//                    + "연락처: " + dto.getPhoneNo() + "\n"
+//                    + "요청사항: " + dto.getDetail() + "\n\n"
+//                    + "렌트상품: " + dto.getProduct() + "\n"
+//                    + "차종: " + dto.getCategory2() + "\n"
+//                    + "차명: " + dto.getCar_name() + "\n"
+//                    + "옵션: " + dto.getOption() + "\n"
+//                    + "약정주행거리: " + dto.getMileage() + "\n"
+//                    + "보증금: " + dto.getDeposit() + "\n");
+//
+//            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+//                    + "예약자 이름: " + dto.getName() + "\n"
+//                    + "요청사항: " + dto.getDetail() + "\n\n"
+//                    + "렌트상품: " + dto.getProduct() + "\n"
+//                    + "차종: " + dto.getCategory2() + "\n"
+//                    + "차명: " + dto.getCar_name() + "\n"
+//                    + "옵션: " + dto.getOption() + "\n"
+//                    + "약정주행거리: " + dto.getMileage() + "\n"
+//                    + "보증금: " + dto.getDeposit() + "\n");
+//        }
+//        else {
+//            params.put("text", "[" + dto.getTitle() + "]\n"
+//                    + "예약자 이름: " + dto.getName() + "\n"
+//                    + "연락처: " + dto.getPhoneNo() + "\n"
+//                    + "요청사항: " + dto.getDetail() + "\n\n"
+//                    + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
+//
+//            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+//                    + "예약자 이름: " + dto.getName() + "\n"
+//                    + "요청사항: " + dto.getDetail() + "\n\n"
+//                    + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
+//        }
+//        params.put("app_version", "test app 1.2");
+//        params2.put("app_version", "test app 1.2");
+//
+//
+//        /* 세이브카에게 문자 전송 */
+//
+//        try {
+//            org.json.simple.JSONObject obj = (org.json.simple.JSONObject) coolsms.send(params);
+//            System.out.println(obj.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
+//
+//        /* 고객에게 예약확인 문자 전송 */
+//
+//        try {
+//            org.json.simple.JSONObject obj2 = (org.json.simple.JSONObject) coolsms.send(params2);
+//            System.out.println(obj2.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
+//
+//        return reservationService.save(dto);
+
+
+        campingcarDateTimeService2.save2(dto);
 
         return "paying";
     }

@@ -109,34 +109,16 @@ public class AdminController {
     @ResponseBody
     public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable Long reserveId) throws IOException {
 
-//        Optional<CampingcarDateTime> campingcarDateTime = campingcarDateTimeService.findById(reserveId);
-//
-//
-//        System.out.println(campingcarDateTime.get().getCreatedDate());
+        CampingcarDateTime2 campingcarDateTime = campingcarDateTimeService2.findByDateTimeId(reserveId);
 
+        System.out.println(campingcarDateTime.getReservation());
 
+        campingcarDateTime.setReservation("2");
+        System.out.println(reserveId);
+        System.out.println(campingcarDateTime.getReservation());
 
-//        List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
-//
-//        List <String> categoryList2 = new ArrayList();
-//
-//
-//        for (int i = 0; i < monthlyRents.size(); i++) {
-//            if (!categoryList2.contains(monthlyRents.get(i).getCategory2() )){
-//                categoryList2.add(monthlyRents.get(i).getCategory2());
-//            }
-//        }
-//
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for (String c : categoryList2) {
-//            jsonArray.put(c);
-//        }
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonArray.toString());
-//        pw.flush();
-//        pw.close();
+        campingcarDateTimeService2.save2(campingcarDateTime);
+
     }
 
 }

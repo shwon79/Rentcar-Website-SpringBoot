@@ -21,12 +21,17 @@ public class CampingcarDateTimeService2 {
        return campingcarDateTimeRepository2.save(dto.toEntity()).getDateTimeId();
     }
 
+
+    public Long save2(CampingcarDateTime2 campingcarDateTime) {
+        return campingcarDateTimeRepository2.save(campingcarDateTime).getDateTimeId();
+    }
+
     public List<CampingcarDateTime2> findAllReservations(){
         return campingcarDateTimeRepository2.findAll();
     }
 
-    public Optional<CampingcarDateTime2> findById(Long id){
-        return campingcarDateTimeRepository2.findById(id);
+    public CampingcarDateTime2 findByDateTimeId(Long id){
+        return campingcarDateTimeRepository2.findByDateTimeId(id);
     }
 
 }
