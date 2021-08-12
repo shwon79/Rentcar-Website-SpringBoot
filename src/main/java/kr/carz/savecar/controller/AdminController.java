@@ -64,16 +64,14 @@ public class AdminController {
 
 
     //로그인
-    @RequestMapping(value = "/admin/logininfo", produces = "application/json; charset=UTF-8", method= RequestMethod.POST)
+    @RequestMapping(value = "/admin/logininfo", method= RequestMethod.POST)
     @ResponseBody
-    public ModelAndView post_login_info(HttpServletResponse res, HttpServletRequest req, @RequestBody Login login) throws IOException {
+    public ModelAndView post_login_info(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
-        // 아이디 비밀번호 맞는지 확인
-        JSONArray jsonArray = new JSONArray();
         ModelAndView mav = new ModelAndView();
 
         try {
-            Login user = loginService.findLoginByIdAndPwd(login.getId(), login.getPassword());
+            Login user = loginService.findLoginByIdAndPwd(req.getParameter("id"), req.getParameter("pwd"));
             System.out.println(user.getId());  // exception 발생코드임, 건들지 말기
 
 
@@ -82,7 +80,6 @@ public class AdminController {
 
 
             System.out.println("true");
-            jsonArray.put("true");
 
 
             // admin view로 넘기기
@@ -94,16 +91,9 @@ public class AdminController {
         } catch (NullPointerException e){
 
             System.out.println("false");
-            jsonArray.put("false");
 
             // 다시 login page로 back
             mav.setViewName("login");
-        } finally {
-
-            PrintWriter pw = res.getWriter();
-            pw.print(jsonArray.toString());
-            pw.flush();
-            pw.close();
         }
 
         return mav;
