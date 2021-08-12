@@ -565,7 +565,7 @@ public class CalendarController {
                 + "이용날짜: " + dto.getDay() + "\n"
                 + "추가시간: " + dto.getExtraTime() + "\n"
                 + "총금액: " + dto.getTotal() + "\n"
-//                + "선결제금액: " + dto.get + "\n"
+                + "선결제금액: " + dto.getTotalHalf() + "\n"
                 + "요청사항: " + dto.getDetail() + "\n\n");
 
         params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
@@ -579,7 +579,7 @@ public class CalendarController {
                 + "이용날짜: " + dto.getDay() + "\n"
                 + "추가시간: " + dto.getExtraTime() + "\n"
                 + "총금액: " + dto.getTotal() + "\n"
-//                + "선결제금액: " + dto.get + "\n"
+                + "선결제금액: " + dto.getTotalHalf() + "\n"
                 + "요청사항: " + dto.getDetail() + "\n\n");
 
 
