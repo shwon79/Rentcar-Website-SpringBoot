@@ -29,6 +29,7 @@ const returnDateNum = returnDate[0]+' '+returnDate[1];
 const returnTime = returnDate[2];
 const totalPrice = parseInt(document.getElementById('total_price').innerText.split('원')[0]);
 const useDay = document.getElementById('use_day').innerText;
+const extraTime = document.getElementById('extra_time').name;
 
 
 // check onchange of inputs
@@ -82,6 +83,7 @@ const reserveDone = () => {
             'rentTime':  rentTime,
             'returnDate': returnDateNum,
             'returnTime' : returnTime,
+            'extraTime' : extraTime,
             'agree': 1,
             'deposit':deposits,
             'depositor': depositName,
