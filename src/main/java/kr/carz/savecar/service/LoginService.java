@@ -19,8 +19,8 @@ public class LoginService {
         return loginRepository.findAll();
     }
 
-    public Login findLoginById(String id){
-        return loginRepository.findById(id);
+    public Login findLoginByIdAndPwd(String id, String pwd){
+        return loginRepository.findByIdAndPassword(id, pwd);
     }
 
 

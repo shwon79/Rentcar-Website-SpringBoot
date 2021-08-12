@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,17 +46,14 @@ public class AdminController {
         this.loginService = loginService;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/admin/login")
     public String login(Model model) {
-
-        List<CampingcarDateTime> campingcarDateTimeList = campingcarDateTimeService.findAllReservations();
-        model.addAttribute("campingcarDateTimeList", campingcarDateTimeList);
 
         return "login";
     }
 
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/main")
     public String admin(Model model) {
 
         List<CampingcarDateTime> campingcarDateTimeList = campingcarDateTimeService.findAllReservations();
@@ -65,24 +64,40 @@ public class AdminController {
 
 
     //로그인
-    @RequestMapping(value = "/logininfo", produces = "application/json; charset=UTF-8", method= RequestMethod.POST)
+    @RequestMapping(value = "/admin/logininfo", produces = "application/json; charset=UTF-8", method= RequestMethod.POST)
     @ResponseBody
-    public void post_login_info(HttpServletResponse res,HttpServletRequest request, @RequestBody Login login) throws IOException {
+    public ModelAndView post_login_info(HttpServletResponse res, HttpServletRequest req, @RequestBody Login login) throws IOException {
 
+        // 아이디 비밀번호 맞는지 확인
         JSONArray jsonArray = new JSONArray();
+        ModelAndView mav = new ModelAndView();
 
         try {
-            Login test = loginService.findLoginById(login.getId());
-            System.out.println(test.getId());
+            Login user = loginService.findLoginByIdAndPwd(login.getId(), login.getPassword());
+            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기
+
+
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+
 
             System.out.println("true");
             jsonArray.put("true");
+
+
+            // admin view로 넘기기
+            List<CampingcarDateTime> campingcarDateTimeList = campingcarDateTimeService.findAllReservations();
+
+            mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
+            mav.setViewName("admin");
 
         } catch (NullPointerException e){
 
             System.out.println("false");
             jsonArray.put("false");
 
+            // 다시 login page로 back
+            mav.setViewName("login");
         } finally {
 
             PrintWriter pw = res.getWriter();
@@ -90,5 +105,7 @@ public class AdminController {
             pw.flush();
             pw.close();
         }
+
+        return mav;
     }
 }

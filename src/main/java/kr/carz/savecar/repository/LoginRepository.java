@@ -12,7 +12,7 @@ import java.util.List;
 public interface LoginRepository extends JpaRepository<Login, Long> {
 
     List<Login> findAll();
-    Login findById(String id);
+    Login findByIdAndPassword(String id, String pwd);
 
 
 }
