@@ -9,11 +9,11 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "CampingcarDateTime")
-public class CampingcarDateTime extends BaseTimeEntity {
+@Table(name = "CampingcarDateTime2")
+public class CampingcarDateTime2 extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long dateTimeId;
 
     @Column(nullable = true)
     private String rentDate;
@@ -60,7 +60,7 @@ public class CampingcarDateTime extends BaseTimeEntity {
 
 
     @Builder
-    public CampingcarDateTime(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total,Integer deposit,String agree,String reservation,String day) {
+    public CampingcarDateTime2(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, String agree, String reservation, String day) {
         this.rentDate = rentDate;
         this.rentTime = rentTime;
         this.returnDate = returnDate;

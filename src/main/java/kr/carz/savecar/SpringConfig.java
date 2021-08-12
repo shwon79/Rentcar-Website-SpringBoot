@@ -17,7 +17,7 @@ public class SpringConfig {
     private final CalendarDateRepository calendarDateRepository;
     private final CalendarTimeRepository calendarTimeRepository;
     private final DateCampingRepository dateCampingRepository;
-    private final CampingcarDateTimeRepository campingcarDateTimeRepository;
+    private final CampingcarDateTimeRepository2 campingcarDateTimeRepository2;
     private final LoginRepository loginRepository;
 
 
@@ -26,7 +26,7 @@ public class SpringConfig {
                         ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
                         ReservationRepository reservationRepository, CampingCarPriceRepository campingCarPriceRepository,
                         CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository,
-                        DateCampingRepository dateCampingRepository, CampingcarDateTimeRepository campingcarDateTimeRepository,
+                        DateCampingRepository dateCampingRepository, CampingcarDateTimeRepository2 campingcarDateTimeRepository2,
                         LoginRepository loginRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
@@ -37,7 +37,7 @@ public class SpringConfig {
         this.calendarDateRepository = calendarDateRepository;
         this.calendarTimeRepository = calendarTimeRepository;
         this.dateCampingRepository = dateCampingRepository;
-        this.campingcarDateTimeRepository = campingcarDateTimeRepository;
+        this.campingcarDateTimeRepository2 = campingcarDateTimeRepository2;
         this.loginRepository = loginRepository;
     }
 
@@ -73,7 +73,7 @@ public class SpringConfig {
     public DateCampingService dateCampingService() { return new DateCampingService(dateCampingRepository); }
 
     @Bean
-    public CampingcarDateTimeService campingcarDateTimeService() { return new CampingcarDateTimeService(campingcarDateTimeRepository); }
+    public CampingcarDateTimeService2 campingcarDateTimeService() { return new CampingcarDateTimeService2(campingcarDateTimeRepository2); }
 
     @Bean
     public LoginService loginService() { return new LoginService(loginRepository); }

@@ -20,14 +20,14 @@ import java.util.List;
 @Controller
 public class ReservationController {
     private final ReservationService reservationService;
-    private final CampingcarDateTimeService campingcarDateTimeService;
+    private final CampingcarDateTimeService2 campingcarDateTimeService2;
     private final CampingCarPriceService campingCarPriceService;
 
 
     @Autowired
-    public ReservationController(ReservationService reservationService, CampingcarDateTimeService campingcarDateTimeService, CampingCarPriceService campingCarPriceService) {
+    public ReservationController(ReservationService reservationService, CampingcarDateTimeService2 campingcarDateTimeService2, CampingCarPriceService campingCarPriceService) {
         this.reservationService = reservationService;
-        this.campingcarDateTimeService = campingcarDateTimeService;
+        this.campingcarDateTimeService2 = campingcarDateTimeService2;
         this.campingCarPriceService = campingCarPriceService;
     }
 

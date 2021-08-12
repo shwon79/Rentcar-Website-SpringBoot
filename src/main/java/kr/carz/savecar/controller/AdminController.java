@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class AdminController {
@@ -27,14 +24,14 @@ public class AdminController {
     CampingCarService campingCarService;
     CalendarDateService calendarDateService;
     DateCampingService dateCampingService;
-    CampingcarDateTimeService campingcarDateTimeService;
+    CampingcarDateTimeService2 campingcarDateTimeService2;
     LoginService loginService;
 
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
-                           DateCampingService dateCampingService, CampingcarDateTimeService campingcarDateTimeService,
+                           DateCampingService dateCampingService, CampingcarDateTimeService2 campingcarDateTimeService2,
                            LoginService loginService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
@@ -42,7 +39,7 @@ public class AdminController {
         this.campingCarService = campingCarService;
         this.calendarDateService = calendarDateService;
         this.dateCampingService = dateCampingService;
-        this.campingcarDateTimeService = campingcarDateTimeService;
+        this.campingcarDateTimeService2 = campingcarDateTimeService2;
         this.loginService = loginService;
     }
 
@@ -53,14 +50,22 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin/main")
-    public String admin(Model model) {
-
-        List<CampingcarDateTime> campingcarDateTimeList = campingcarDateTimeService.findAllReservations();
-        model.addAttribute("campingcarDateTimeList", campingcarDateTimeList);
-
-        return "admin";
-    }
+//    @GetMapping("/admin/main")
+//    public String admin(Model model, HttpServletRequest req) {
+//
+//        if(req.getSession() != null){
+//            List<CampingcarDateTime> campingcarDateTimeList = campingcarDateTimeService.findAllReservations();
+//            model.addAttribute("campingcarDateTimeList", campingcarDateTimeList);
+//
+//
+//            System.out.println(req.getSession().getAttribute("user"));
+//
+//
+//            return "admin";
+//        } else {
+//            return "login";
+//        }
+//    }
 
 
     //로그인
@@ -83,7 +88,7 @@ public class AdminController {
 
 
             // admin view로 넘기기
-            List<CampingcarDateTime> campingcarDateTimeList = campingcarDateTimeService.findAllReservations();
+            List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
 
             mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
             mav.setViewName("admin");
@@ -98,4 +103,40 @@ public class AdminController {
 
         return mav;
     }
+
+    //캠핑카 예약 확정
+    @RequestMapping(value = "/campingcar/reservation/update/{reserveId}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable Long reserveId) throws IOException {
+
+//        Optional<CampingcarDateTime> campingcarDateTime = campingcarDateTimeService.findById(reserveId);
+//
+//
+//        System.out.println(campingcarDateTime.get().getCreatedDate());
+
+
+
+//        List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
+//
+//        List <String> categoryList2 = new ArrayList();
+//
+//
+//        for (int i = 0; i < monthlyRents.size(); i++) {
+//            if (!categoryList2.contains(monthlyRents.get(i).getCategory2() )){
+//                categoryList2.add(monthlyRents.get(i).getCategory2());
+//            }
+//        }
+//
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for (String c : categoryList2) {
+//            jsonArray.put(c);
+//        }
+//
+//        PrintWriter pw = res.getWriter();
+//        pw.print(jsonArray.toString());
+//        pw.flush();
+//        pw.close();
+    }
+
 }

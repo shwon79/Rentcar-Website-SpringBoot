@@ -26,13 +26,13 @@ public class CalendarController {
     CalendarTimeService calendarTimeService;
     DateCampingService dateCampingService;
     CampingCarPriceService campingCarPriceService;
-    CampingcarDateTimeService campingcarDateTimeService;
+    CampingcarDateTimeService2 campingcarDateTimeService2;
 
     @Autowired
     public CalendarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                               ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
-                              CampingCarPriceService campingCarPriceService, CampingcarDateTimeService campingcarDateTimeService) {
+                              CampingCarPriceService campingCarPriceService, CampingcarDateTimeService2 campingcarDateTimeService2) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -41,7 +41,7 @@ public class CalendarController {
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
-        this.campingcarDateTimeService = campingcarDateTimeService;
+        this.campingcarDateTimeService2 = campingcarDateTimeService2;
     }
 
 
@@ -525,7 +525,7 @@ public class CalendarController {
         System.out.println(dto.getDay());
 
 
-        campingcarDateTimeService.save(dto);
+        campingcarDateTimeService2.save(dto);
 
         return "paying";
     }

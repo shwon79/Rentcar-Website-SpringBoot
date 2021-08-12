@@ -37,8 +37,8 @@ public class CampingcarDateTimeDto {
         this.day = day;
     }
 
-    public CampingcarDateTime toEntity() {
-        return CampingcarDateTime.builder()
+    public CampingcarDateTime2 toEntity() {
+        return CampingcarDateTime2.builder()
                 .rentDate(rentDate)
                 .rentTime(rentTime)
                 .returnDate(returnDate)
