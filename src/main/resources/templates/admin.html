@@ -32,6 +32,7 @@
         <div class="calendar content">
             <div class="container">
                 <div class="header">
+                    <p th:text="${campingcarDateTimeList[0].createdDate}"></p>
                         <a th:href="'/calendar/before/' + ${prevMonth}">
                             <button class="nav-btn go-prev" >&lt;</button>&nbsp;&nbsp;
                         </a>
