@@ -10,7 +10,9 @@ body {
 .menu_container {
     background-color: whitesmoke;
     width: 30vw;
-    margin: 0 10px
+    margin: 0 10px;
+    border: 1px solid gray
+
 }
 
 .menu_container li{
@@ -23,17 +25,53 @@ body {
     background-color: whitesmoke;
     width: 70vw;
     margin: 0 10px;
-}
-
-
-
-.list_container {
     border: 1px solid gray
+
 }
+
 
 .reserve_list {
-    margin: 5px 0;
+    margin: 5px;
+    padding: 0 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.id {
+    flex: 1;
+}
+
+.created_date {
+    flex: 2;
+}
+.modified_date {
+    flex: 2;
+}
+.rent_date {
+    flex: 2;
+}
+.rent_time {
+    flex: 1;
+}
+.return_date {
+    flex: 2;
+}
+.return_time {
+    flex: 1;
+}
+.day {
+    flex: 2;
+}
+.name {
+    flex: 2;
+}
+.deposit {
+    flex: 2;
+}
+.total {
+    flex: 2;
+}
+.reservation {
+    flex: 1;
 }
