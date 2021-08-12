@@ -29,7 +29,27 @@
             <input id="input_pwd" type="password" placeholder="비밀번호를 입력하세요" />
             <button type="submit" onclick="logIn()">로그인</button>
         </div>
+        <div>
+            <form id="testForm" method="POST" action="/admin/logininfo">
+                <input type="text" name="id" />
+                <input type="password" name="password"/>
+                <input type="submit" value="확인"/>
+            </form>
+        </div>
     </div>
+<!--
+<script>
+    var data = $('#testForm').serializeObject();
+    $.ajax({
+        url : '/admin/test',
+        type : 'POST',
+        data : data,
+        success : function(r){
+            console.log(r);
+        }
+    })
+</script>
+  -->
 </body>
 
 </html>

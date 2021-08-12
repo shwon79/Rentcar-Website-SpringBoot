@@ -32,8 +32,16 @@ const logIn = () => {
             },
             body: JSON.stringify(loginData),
 
-        }).then(response => console.log('Success: ', response.json()))
-            .then((data) => console.log(data));
+        }).then(response => response.json())
+            .then(result => {
+                let resultBool = result[0];
+                if (resultBool == 'false') {
+                    alert('잘못된 접근입니다.')
+                } else if (resultBool == 'true') {
+                    window.location.href = '/admin/main'
+                }
+            })
+            // .then((data) => console.log(data));
 
 /*
 .then(()=> {
