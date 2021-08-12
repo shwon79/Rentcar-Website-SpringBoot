@@ -103,13 +103,10 @@
                     </div>
                     <div class="dates">
                         <div class="date" th:each="date, iterStat: ${calendarDateList}" >
-                                <!--  calendar upside part  -->
-                                <div class="upside text-center" th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'disabled: true; background: gray; color: white;':''">
-                                    <p class="textarea"  th:text="${date.day}" ></p>
-                                    <a th:href="'/europe_reserve/'+${date.dateId}" th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'display: none':''">
-                                        <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
-                                        (<span class="this" th:text="${dateCampingList[iterStat.index][0].reserved}"></span>/1)</a> <br/>
-                                </div>
+                            <!--  calendar upside part  -->
+                            <div class="upside text-center" th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'disabled: true; background: gray; color: white;':''">
+                                <p class="textarea"  th:text="${date.day}" ></p>
+                            </div>
                         </div>
                     </div>
                 </div>
