@@ -23,10 +23,10 @@ getData();
 
 
 // must items
-const rentDateNum = rentDate[0];
-const rentTime = rentDate[1];
-const returnDateNum = returnDate[0];
-const returnTime = returnDate[1];
+const rentDateNum = rentDate[0]+' '+rentDate[1];
+const rentTime = rentDate[2];
+const returnDateNum = returnDate[0]+' '+returnDate[1];
+const returnTime = returnDate[2];
 const totalPrice = parseInt(document.getElementById('total_price').innerText.split('원')[0]);
 const useDay = document.getElementById('use_day').innerText;
 
