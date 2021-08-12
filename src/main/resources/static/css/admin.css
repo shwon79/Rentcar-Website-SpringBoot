@@ -2,6 +2,12 @@ body {
     background-color: #F8F6F2;
 }
 
+#logout_box {
+    margin: 10px;
+    margin-right: 20px;
+    text-align: right;
+}
+
 .content_wrapper {
     display: flex;
     flex-direction: row;
@@ -73,5 +79,8 @@ body {
     flex: 2;
 }
 .reservation {
+    flex: 1;
+}
+.set_reserve {
     flex: 1;
 }

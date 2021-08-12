@@ -57,11 +57,9 @@ body {
     border-radius: 0.5vh;
 }
 
-#login_box button {
+#input_button {
     width: 5rem;
-    margin: 10px;
     border-radius: 0.5vh;
-    padding: 5px;
     border: none;
     background-color: #1F1D19;
     color: aliceblue;

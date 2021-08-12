@@ -124,7 +124,9 @@
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}">
                                         <input class="this date_day" type="radio"
-                                               th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}" name="calendar1" onclick="sendRentDate(id, name);" />
+                                               th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}"
+                                               name="calendar1" onclick="sendRentDate(id, name);"
+                                               th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'disabled: true;'"/>
                                     </label>
                                 </div>
                             </div>
@@ -178,7 +180,7 @@
                                 </label>
 
                             </div>
-                        </div><hr style="background: dimgray;" />
+                        </div><hr id="hr_time" style="background: dimgray;" />
                     </div>
 
                     <div id="rent_days">

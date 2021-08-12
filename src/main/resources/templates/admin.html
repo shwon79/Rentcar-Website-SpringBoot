@@ -2,21 +2,21 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>SAVECAR - 관리자 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Style -->
-    <link th:src="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
 
-    <script th:src="@{/js/calendar.js}" defer></script>
+    <script th:src="@{/js/admin.js}" defer></script>
 
 
 </head>
 <body>
     <div class="page_wrapper">
+        <div id="logout_box"><button>로그아웃</button></div>
         <div class="content_wrapper">
             <div class="menu_container">
                 <div class="menu_list">
@@ -43,20 +43,22 @@
                     <p class="deposit">보증금</p>
                     <p class="total">총결제금액</p>
                     <p class="reservation">예약</p>
+                    <p class="set_reserve">확정</p>
                 </div>
-                <div class="reserve_list">
-                    <p class="id">1</p>
-                    <p class="created_date">2021.0.0</p>
-                    <p class="modified_date">2021.0.0</p>
-                    <p class="rent_date">8월 11일</p>
-                    <p class="rent_time">1시</p>
-                    <p class="return_date">8월 21일</p>
-                    <p class="return_time">1시</p>
-                    <p class="day">10일권</p>
-                    <p class="name">이름</p>
-                    <p class="deposit">보증금</p>
-                    <p class="total">총결제금액</p>
-                    <p class="reservation">1</p>
+                <div class="reserve_list" th:each="date : ${campingcarDateTimeList}">
+                    <p class="id" th:text="${date.dateTimeId}"></p>
+                    <p class="created_date" th:text="${date.createdDate}"></p>
+                    <p class="modified_date" th:text="${date.modifiedDate}"></p>
+                    <p class="rent_date" th:text="${date.rentDate}"></p>
+                    <p class="rent_time" th:text="${date.rentTime}"></p>
+                    <p class="return_date" th:text="${date.returnDate}"></p>
+                    <p class="return_time" th:text="${date.returnTime}"></p>
+                    <p class="day" th:text="${date.day}"></p>
+                    <p class="name" th:text="${date.name}"></p>
+                    <p class="deposit" th:text="${date.deposit}"></p>
+                    <p class="total" th:text="${date.total}"></p>
+                    <p class="reservation" th:text="${date.reservation}"></p>
+                    <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>
                 </div>
             </div>
         </div>

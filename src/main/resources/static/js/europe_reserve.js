@@ -125,7 +125,9 @@ const sendRentDate = (id, year) => {
         .then(result => {
             console.log(result)
             let theWrapper = document.getElementById('rent_time');
+            let hrTime = document.getElementById('hr_time');
             theWrapper.style.display = 'block';
+            hrTime.style.display = 'block'
             let allTime = ["10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시"];
             for (const eachTime of allTime) {
                 let timeId = document.getElementById(eachTime);
