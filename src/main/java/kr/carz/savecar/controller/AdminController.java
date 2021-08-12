@@ -67,7 +67,7 @@ public class AdminController {
     //로그인
     @RequestMapping(value = "/logininfo", produces = "application/json; charset=UTF-8", method= RequestMethod.POST)
     @ResponseBody
-    public void post_login_info(HttpServletResponse res, @RequestBody Login login) throws IOException {
+    public void post_login_info(HttpServletResponse res,HttpServletRequest request, @RequestBody Login login) throws IOException {
 
         JSONArray jsonArray = new JSONArray();
 
