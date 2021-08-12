@@ -11,8 +11,20 @@
     color: tomato;
 }
 
+#product_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#use_day {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+
 #info_reserve {
-    height: 200px;
+    overflow: auto;
 }
 
 #info_custom {

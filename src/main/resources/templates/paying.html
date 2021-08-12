@@ -38,9 +38,9 @@
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                 <img th:src="@{/img/camping-car1.jpg}" alt="car_pic" />
                             </div>
-                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                <div class="text-left">
-                                    <p>상품 이름</p>
+                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                                <div id="product_info" class="">
+                                    <p>상품 이름</p><p id="use_day" th:text="${day}"></p><p id="extra_time" th:text="${'+'+extra_time+' 시간'}"></p>
                                 </div><hr id="hr_reserve"/>
                                 <div class="reserve_detail">
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
@@ -48,7 +48,6 @@
                                         <p id="rent_date" th:text="${rent_date+' '+rent_time}"></p>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                        <p id="use_day" th:text="${day}" style="margin-bottom: 2px"></p>
                                         <button id="rent_length" class="" disabled>➔</button>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">

@@ -1,0 +1,39 @@
+body {
+    background-color: #F8F6F2;
+}
+
+.content_wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu_container {
+    background-color: whitesmoke;
+    width: 30vw;
+    margin: 0 10px
+}
+
+.menu_container li{
+    list-style: none;
+    margin: 20px;
+}
+
+
+.list_container {
+    background-color: whitesmoke;
+    width: 70vw;
+    margin: 0 10px;
+}
+
+
+
+.list_container {
+    border: 1px solid gray
+}
+
+.reserve_list {
+    margin: 5px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
