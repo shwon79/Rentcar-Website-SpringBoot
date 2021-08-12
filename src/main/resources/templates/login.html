@@ -1,0 +1,28 @@
+<!-- 캠핑카렌트(rent_camping.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/login.css}" href="login.css" rel="stylesheet">
+
+    <script th:src="@{/js/login.js}" src="login.js" defer></script>
+
+
+</head>
+<body>
+<div id="login_container" class="container">
+    <div id="login_box">
+        <input id="input_id" type="text" placeholder="id를 입력하세요" />
+        <input id="input_pwd" type="password" placeholder="비밀번호를 입력하세요" />
+        <button type="submit" onclick="logIn()">로그인</button>
+    </div>
+</div>
+</body>
+
+</html>
