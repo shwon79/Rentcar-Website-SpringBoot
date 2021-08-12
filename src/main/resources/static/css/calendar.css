@@ -94,6 +94,10 @@
   font-size: 15px;
 }
 
+.detail_wrapper {
+  display: none;
+}
+
 .date_day {
   font-size: 18px;
   font-weight: bold;
@@ -154,7 +158,24 @@ a:hover {
   }
 
   .upside {
-    padding: 33%;
-    background: #9acfea;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
+
+  .day_wrapper {
+    text-align: center;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: aliceblue;
+    border-radius: 50%;
+  }
+
+
 }

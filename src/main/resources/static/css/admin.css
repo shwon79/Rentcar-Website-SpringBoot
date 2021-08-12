@@ -1,11 +1,20 @@
 body {
     background-color: #F8F6F2;
+    font-size: 13px;
 }
 
 #logout_box {
-    margin: 10px;
-    margin-right: 20px;
+    margin: 10px 20px 10px 10px;
     text-align: right;
+}
+
+#logout_box button {
+    border: none;
+    background-color: #1F1D19;
+    border-radius: 0.5vh;
+    color: aliceblue;
+    margin: 5px;
+    padding: 5px;
 }
 
 .content_wrapper {
@@ -15,33 +24,43 @@ body {
 
 .menu_container {
     background-color: whitesmoke;
-    width: 30vw;
+    width: 20vw;
     margin: 0 10px;
-    border: 1px solid gray
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
 
 }
 
 .menu_container li{
     list-style: none;
     margin: 20px;
+
 }
 
 
 .list_container {
     background-color: whitesmoke;
-    width: 70vw;
+    width: 80vw;
     margin: 0 10px;
-    border: 1px solid gray
-
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
 }
 
 
 .reserve_list {
-    margin: 5px;
-    padding: 0 10px;
+    margin: 5px 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+}
+
+.reserve_list p {
+    text-align: center;
+    align-self: center;
+}
+
+#reserve_list_title {
+    border-bottom: 1px solid lightgray;
+    font-weight: bold;
 }
 
 .id {
@@ -83,4 +102,16 @@ body {
 }
 .set_reserve {
     flex: 1;
+    padding: 0;
+    margin: 5px 0;
+    background-color: #1F1D19;
+    border-radius: 0.5vh;
+    border: none;
+    color: aliceblue;
+}
+
+#reserve_list_title .set_reserve {
+    margin: 0;
+    background-color: transparent;
+    color: black;
 }

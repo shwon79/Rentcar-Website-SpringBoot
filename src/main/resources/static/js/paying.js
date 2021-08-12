@@ -28,8 +28,9 @@ const rentTime = rentDate[2];
 const returnDateNum = returnDate[0]+' '+returnDate[1];
 const returnTime = returnDate[2];
 const totalPrice = parseInt(document.getElementById('total_price').innerText.split('원')[0]);
+const totalHalf = totalPrice/2;
 const useDay = document.getElementById('use_day').innerText;
-const extraTime = document.getElementById('extra_time').name;
+const extraTime = document.getElementById('extra_time').innerText;
 
 
 // check onchange of inputs
@@ -69,8 +70,6 @@ const autoGrow = (texts) => {
 }
 
 
-
-
 // Sending Data;
 const reserveDone = () => {
     let check1 = document.getElementById('check_info').checked;
@@ -91,28 +90,33 @@ const reserveDone = () => {
             'name': customName,
             'phone': phoneNum,
             'total': totalPrice,
+            'totalHalf': totalHalf,
             'reservation': 1,
             'day': useDay,
         }
 
         console.log(JSON.stringify(finalDate));
 
-        let url = '/campingcar/reserve';
-        fetch(url, {
-            method: 'POST',
-            headers:{
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify(finalDate),
-
-        }).then(response => console.log('Success: ', JSON.stringify(response)))
-            .then(()=> {
-                let reserveConfirm = confirm('예약을 완료하시겠습니까?');
-                if (reserveConfirm) {
+        let reserveConfirm = confirm('예약을 완료하시겠습니까?');
+        if (reserveConfirm) {
+            let url = '/campingcar/reserve';
+            fetch(url, {
+                method: 'POST',
+                headers:{
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify(finalDate),
+            }).then(response => {
+                console.log(response);
+                return response
+            })
+                .then(result => {
+                    console.log(result);
                     alert('예약이 완료되었습니다!');
                     window.location.href = '/europe';
-                }
-            }).catch(err => console.error('Error: ', err))
+                })
+                // .catch(err => console.error('Error: ', err))
+        }
     } else if (customName == '' || phoneNum=='' || depositName=='') {
         alert('입력을 완료해주세요!')
     } else if (check1 != true || check2 != true || check3 != true) {

@@ -3,7 +3,16 @@ const setReserve = (id) => {
     const idData = {
         "id":id,
     }
-    fetch(url)
-        .then(response => console.log(response))
-        .catch(err => console.error('Error: ', err))
+    let reserveConfirm = confirm(`${id}의 예약을 확정하시겠습니까?`);
+    if(reserveConfirm) {
+        fetch(url)
+            .then(response => {
+                console.log(response)
+                alert(`${id}의 예약이 확정되었습니다.`)
+                let idBtn = document.getElementById(id)
+                idBtn.disabled = true
+            })
+            .catch(err => console.error('Error: ', err))
+    }
+
 }
