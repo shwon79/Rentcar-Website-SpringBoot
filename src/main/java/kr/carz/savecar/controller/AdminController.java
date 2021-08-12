@@ -69,24 +69,21 @@ public class AdminController {
     @ResponseBody
     public void post_login_info(HttpServletResponse res, @RequestBody Login login) throws IOException {
 
-        try {
-            loginService.findLoginById(login);
+        JSONArray jsonArray = new JSONArray();
 
-            JSONArray jsonArray = new JSONArray();
+        try {
+            Login test = loginService.findLoginById(login.getId());
+            System.out.println(test.getId());
 
             System.out.println("true");
             jsonArray.put("true");
 
-            PrintWriter pw = res.getWriter();
-            pw.print(jsonArray.toString());
-            pw.flush();
-            pw.close();
-        } catch (Exception e){
-
-            JSONArray jsonArray = new JSONArray();
+        } catch (NullPointerException e){
 
             System.out.println("false");
             jsonArray.put("false");
+
+        } finally {
 
             PrintWriter pw = res.getWriter();
             pw.print(jsonArray.toString());

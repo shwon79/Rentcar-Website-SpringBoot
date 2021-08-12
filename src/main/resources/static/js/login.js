@@ -22,7 +22,7 @@ const logIn = () => {
         const url = '/logininfo'
         const loginData = {
             "id": idData,
-            "pwd": pwdData,
+            "password": pwdData,
         }
 
         fetch(url, {
@@ -32,16 +32,18 @@ const logIn = () => {
             },
             body: JSON.stringify(loginData),
 
-        }).then(response => console.log('Success: ', JSON.stringify(response)))
-        /*
-        .then(()=> {
-            if () {
+        }).then(response => console.log('Success: ', response.json()))
+            .then((data) => console.log(data));
 
-            } else {
+/*
+.then(()=> {
+    if () {
 
-                }
-        })
-        */
+    } else {
+
+        }
+})
+*/
     } else alert('입력을 완료해주세요!')
 
 }

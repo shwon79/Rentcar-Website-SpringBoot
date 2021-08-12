@@ -19,7 +19,7 @@ public class LoginService {
         return loginRepository.findAll();
     }
 
-    public Login findLoginById(Login id){
+    public Login findLoginById(String id){
         return loginRepository.findById(id);
     }
 
