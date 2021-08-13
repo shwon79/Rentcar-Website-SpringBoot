@@ -274,6 +274,160 @@ public class CalendarController {
     }
 
 
+    @GetMapping("/travel_reserve/{date_id}")
+    public String handleRequest_travel(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
+
+        // 날짜
+        Calendar cal = Calendar.getInstance();
+
+        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
+        int this_month = cal.get(Calendar.MONTH) + 1;
+
+        model.addAttribute("today", today);
+        model.addAttribute("thisMonth", this_month);
+
+
+        // 시간
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("travel");
+
+        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
+
+        model.addAttribute("calendarTimeList", calendarTimeList);
+
+        for(int i=0; i<calendarTimeList.size(); i++){
+            System.out.println(calendarTimeList.get(i).getTimeId());
+        }
+
+
+        // 날짜
+        int now_month = cal.get(Calendar.MONTH)+1;
+
+        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
+
+
+        // 전달 날짜 구하기
+        cal.set(cal.get(Calendar.YEAR),now_month-1,1);
+
+        Long firstDateId = calendarDateList.get(0).getDateId();
+        Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+        System.out.println(before);
+
+        for(int i=1; i<before; i++){
+            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+        }
+
+        // 다음달 날짜 구하기
+        cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
+
+        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+        Integer after = cal.get(Calendar.DAY_OF_WEEK);
+
+        for(int i=1; i<=7-after; i++){
+            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+        }
+
+        model.addAttribute("calendarDateList", calendarDateList);
+
+
+        // 날짜별 캠핑카
+        List<List<DateCamping>> dateCampingList = new ArrayList();
+
+        for (int i=0; i<calendarDateList.size(); i++){
+            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
+        }
+
+        System.out.println(dateCampingList.get(0).get(0).getCarName());
+        model.addAttribute("dateCampingList", dateCampingList);
+
+
+        // 캠핑카 가격
+        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
+        model.addAttribute("thisMonth", now_month);
+        model.addAttribute("thisYear", 2021);
+
+        return "camping_travel";
+    }
+
+    @GetMapping("/liomousine_reserve/{date_id}")
+    public String handleRequest_liomousine(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
+
+        // 날짜
+        Calendar cal = Calendar.getInstance();
+
+        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
+        int this_month = cal.get(Calendar.MONTH) + 1;
+
+        model.addAttribute("today", today);
+        model.addAttribute("thisMonth", this_month);
+
+
+        // 시간
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
+
+        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
+
+        model.addAttribute("calendarTimeList", calendarTimeList);
+
+        for(int i=0; i<calendarTimeList.size(); i++){
+            System.out.println(calendarTimeList.get(i).getTimeId());
+        }
+
+
+        // 날짜
+        int now_month = cal.get(Calendar.MONTH)+1;
+
+        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
+
+
+        // 전달 날짜 구하기
+        cal.set(cal.get(Calendar.YEAR),now_month-1,1);
+
+        Long firstDateId = calendarDateList.get(0).getDateId();
+        Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+        System.out.println(before);
+
+        for(int i=1; i<before; i++){
+            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+        }
+
+        // 다음달 날짜 구하기
+        cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
+
+        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+        Integer after = cal.get(Calendar.DAY_OF_WEEK);
+
+        for(int i=1; i<=7-after; i++){
+            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+        }
+
+        model.addAttribute("calendarDateList", calendarDateList);
+
+
+        // 날짜별 캠핑카
+        List<List<DateCamping>> dateCampingList = new ArrayList();
+
+        for (int i=0; i<calendarDateList.size(); i++){
+            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
+        }
+
+        System.out.println(dateCampingList.get(0).get(0).getCarName());
+        model.addAttribute("dateCampingList", dateCampingList);
+
+
+        // 캠핑카 가격
+        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
+        model.addAttribute("thisMonth", now_month);
+        model.addAttribute("thisYear", 2021);
+
+        return "camping_liomousine";
+    }
+
+
+
 
     @RequestMapping("/europe_reserve/{date_id}")
     public String handleRequest(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
@@ -557,7 +711,7 @@ public class CalendarController {
         params.put("text", "[캠핑카 실시간 예약]\n"
                 + "대여날짜: " + dto.getRentDate() + "\n"
                 + "대여시간: " + dto.getRentTime() + "\n"
-                + "반납날짜: " + dto.getRentDate() + "\n"
+                + "반납날짜: " + dto.getReturnDate() + "\n"
                 + "반납시간: " + dto.getReturnTime() + "\n"
                 + "성함: " + dto.getName() + "\n"
                 + "전화번호: " + dto.getPhone() + "\n"
@@ -571,7 +725,7 @@ public class CalendarController {
         params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                 + "대여날짜: " + dto.getRentDate() + "\n"
                 + "대여시간: " + dto.getRentTime() + "\n"
-                + "반납날짜: " + dto.getRentDate() + "\n"
+                + "반납날짜: " + dto.getReturnDate() + "\n"
                 + "반납시간: " + dto.getReturnTime() + "\n"
                 + "성함: " + dto.getName() + "\n"
                 + "전화번호: " + dto.getPhone() + "\n"
