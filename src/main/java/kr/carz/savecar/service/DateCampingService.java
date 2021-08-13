@@ -24,4 +24,9 @@ public class DateCampingService {
         return dateCampingRepository.findByDateId(date_id);
     }
 
+
+    public DateCamping findByDateIdAndCarName(CalendarDate date_id, CampingCarPrice car_name){
+        return dateCampingRepository.findByDateIdAndCarName(date_id, car_name);
+    }
+
 }
