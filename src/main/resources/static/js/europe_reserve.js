@@ -39,12 +39,10 @@ function doDisplay_return_time(){
 // document.querySelector('.year-month-return').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
 
-// show current date
 
-
-let takeDate = document.getElementById('rent_date').name;
-
-document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
+// 클릭시 날짜 자동 생성
+// let takeDate = document.getElementById('rent_date').name;
+// document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 
 
 // 가격표
