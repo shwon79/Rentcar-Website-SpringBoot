@@ -522,6 +522,19 @@ input[type=radio]:checked + label {
 #calResultWrapper {
   margin: 20px 0;
   padding: 20px;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
+  border-radius: 0.5vh;
+}
+
+#btn_reserve {
+  padding: 20px 30px;
+  border: none;
+  border-radius: 30vh;
+  background-color: #E7A625;
+  color: whitesmoke;
+}
+
+#btn_reserve:hover {
+  background-color: #13A0B2;
 }
 

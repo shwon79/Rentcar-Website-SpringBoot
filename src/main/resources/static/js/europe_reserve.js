@@ -112,6 +112,7 @@ const runIt = () => {
 }
 runIt();
 
+// select rent date
 let rentDateNum='';
 const sendRentDate = (id, year) => {
     rentDateNum = id;
@@ -119,6 +120,9 @@ const sendRentDate = (id, year) => {
     let rentDateMonth = rentDateNum.split('월 ')[0];
     let rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
     let url = '/campingcar/sendrentdate';
+    let putTarget = document.getElementById('rent_date');
+    let putResult = year+'.'+id.split('월 ')[0]+'.'+id.split(' ')[1].split('일')[0]+'.('+')';
+    putTarget.innerText = putResult;
 
     fetch(url+'/'+rentDateYear+'/'+rentDateMonth+'/'+rentDateDay)
         .then(res => res.json())

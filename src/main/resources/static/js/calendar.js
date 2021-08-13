@@ -1,4 +1,4 @@
-const dayDetail = (id, name) => {
+const dayDetail = (id) => {
     const restBtn = document.getElementsByClassName('day_wrapper')
     const targetBtn = document.getElementById(id);
     for (const restBtnElement of restBtn) {
@@ -10,7 +10,7 @@ const dayDetail = (id, name) => {
     for (const restDetail of restDetails) {
         restDetail.style.display = 'none'
     }
-    const target = document.getElementById(name);
-    target.style.display = 'block'
+    const target = document.getElementById(id.split('day')[0]);
+    target.style.display = 'flex'
 
 }

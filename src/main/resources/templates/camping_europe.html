@@ -39,7 +39,7 @@
                         <h3>모터홈의 디럭스풍 디자인</h3>
                     </div>
                     <!-- left content2 -->
-                    <div class="row text-center pinside30 bg-light">
+                    <div class="row text-center pinside30 bg-light margin-bottom-40">
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                             <h3>CAPMER 명</h3>
                             <h3>Europe VIP</h3>
@@ -83,10 +83,10 @@
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 margin-bottom-60 text-center">
                     <!-- 대여날짜 -->
                     <div class="select_wrapper row" onclick="doDisplay()">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                             <div class="date_menu">시작날짜</div>
                         </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                             <div class="date_time"><span id='rent_date'></span></div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -108,7 +108,6 @@
                             <a th:href="'/europe_reserve/after/' + ${thisMonth}">
                                 <button class="nav-btn go-next" >&gt;</button>
                             </a>
-                            <!--  </div> -->
                         </div>
                         <div class="main">
                             <div class="days">
@@ -122,11 +121,11 @@
                             </div>
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
-                                    <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}">
+                                    <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}"
+                                           th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'pointer-events:none; color: gray;'">
                                         <input class="this date_day" type="radio"
                                                th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}"
-                                               name="calendar1" onclick="sendRentDate(id, name);"
-                                               th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'disabled: true;'"/>
+                                               name="calendar1" onclick="sendRentDate(id, name);"/>
                                     </label>
                                 </div>
                             </div>
@@ -139,10 +138,10 @@
 
                     <!-- 대여 시간 -->
                     <div class="select_wrapper row" onclick="doDisplay_rent_time()">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                             <div class="date_menu">시작시간</div>
                         </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                             <div class="date_time">시간을 선택해주세요.</div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -249,7 +248,7 @@
                                 <p id="total_result"></p>
                             </div>
 
-                                <button onclick="postDate()">데이터 전송</button>
+                                <button id="btn_reserve" onclick="postDate()">예약신청하기</button>
 
                         </div>
                     </div><hr style="background: dimgray;" />
@@ -323,7 +322,7 @@
                             <div class="bg-light pinside30" style="margin-top: 20px;">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <h2>상담 신청하기</h2>
+                                        <h2>간편 상담 신청하기</h2>
                                         <hr>
                                         <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
                                         <form name="reservation_info" id="rentProduct" value="유럽">
