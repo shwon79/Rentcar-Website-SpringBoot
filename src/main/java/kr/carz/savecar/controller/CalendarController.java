@@ -1292,11 +1292,122 @@ public class CalendarController {
         return "paying";
     }
 
-    // test
+
     // europe 캠핑카 가격 구하는 api
-    @RequestMapping(value = "/campingcar/getprice", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/travel/getprice", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void get_yearly_price(HttpServletResponse res) throws IOException {
+    public void get_travel_price(HttpServletResponse res) throws IOException {
+
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("travel");
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("deposit",campingCarPrice.getDeposit());
+        jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
+        jsonObject.put("carName",campingCarPrice.getCarName());
+
+        jsonObject.put("campingCarPrice",campingCarPrice);
+
+
+        jsonObject.put("oneday",campingCarPrice.getOnedays());
+        System.out.println("oneoneoneone - "+campingCarPrice.getOnedays());
+        jsonObject.put("twodays",campingCarPrice.getTwodays());
+        jsonObject.put("threedays",campingCarPrice.getThreedays());
+        jsonObject.put("fourdays",campingCarPrice.getFourdays());
+        jsonObject.put("fivedays",campingCarPrice.getFivedays());
+        jsonObject.put("sixdays",campingCarPrice.getSixdays());
+        jsonObject.put("sevendays",campingCarPrice.getSevendays());
+        jsonObject.put("eightdays",campingCarPrice.getEightdays());
+        jsonObject.put("ninedays",campingCarPrice.getNinedays());
+        jsonObject.put("tendays",campingCarPrice.getTendays());
+        jsonObject.put("elevendays",campingCarPrice.getElevendays());
+        jsonObject.put("twelvedays",campingCarPrice.getTwelvedays());
+        jsonObject.put("thirteendays",campingCarPrice.getThirteendays());
+        jsonObject.put("fourteendays",campingCarPrice.getFourteendays());
+        jsonObject.put("fifteendays",campingCarPrice.getFifteendays());
+        jsonObject.put("sixteendays",campingCarPrice.getSixteendays());
+        jsonObject.put("seventeendays",campingCarPrice.getSeventeendays());
+        jsonObject.put("eighteendays",campingCarPrice.getEighteendays());
+        jsonObject.put("ninetinedays",campingCarPrice.getNinetinedays());
+        jsonObject.put("twentydays",campingCarPrice.getTwentydays());
+        jsonObject.put("twentyonedays",campingCarPrice.getTwentyonedays());
+        jsonObject.put("twentytwodays",campingCarPrice.getTwentytwodays());
+        jsonObject.put("twentythreedays",campingCarPrice.getTwentythreedays());
+        jsonObject.put("twentyfourdays",campingCarPrice.getTwentyfourdays());
+        jsonObject.put("twentyfivedays",campingCarPrice.getTwentyfivedays());
+        jsonObject.put("twentysixdays",campingCarPrice.getTwentysixdays());
+        jsonObject.put("twentysevendays",campingCarPrice.getTwentysevendays());
+        jsonObject.put("twentyeightdays",campingCarPrice.getTwentyeightdays());
+        jsonObject.put("twentyninedays",campingCarPrice.getTwentyninedays());
+        jsonObject.put("thirtydays",campingCarPrice.getThirtydays());
+
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    // europe 캠핑카 가격 구하는 api
+    @RequestMapping(value = "/liomousine/getprice", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_liomousine_price(HttpServletResponse res) throws IOException {
+
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("deposit",campingCarPrice.getDeposit());
+        jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
+        jsonObject.put("carName",campingCarPrice.getCarName());
+
+        jsonObject.put("campingCarPrice",campingCarPrice);
+
+
+        jsonObject.put("oneday",campingCarPrice.getOnedays());
+        System.out.println("oneoneoneone - "+campingCarPrice.getOnedays());
+        jsonObject.put("twodays",campingCarPrice.getTwodays());
+        jsonObject.put("threedays",campingCarPrice.getThreedays());
+        jsonObject.put("fourdays",campingCarPrice.getFourdays());
+        jsonObject.put("fivedays",campingCarPrice.getFivedays());
+        jsonObject.put("sixdays",campingCarPrice.getSixdays());
+        jsonObject.put("sevendays",campingCarPrice.getSevendays());
+        jsonObject.put("eightdays",campingCarPrice.getEightdays());
+        jsonObject.put("ninedays",campingCarPrice.getNinedays());
+        jsonObject.put("tendays",campingCarPrice.getTendays());
+        jsonObject.put("elevendays",campingCarPrice.getElevendays());
+        jsonObject.put("twelvedays",campingCarPrice.getTwelvedays());
+        jsonObject.put("thirteendays",campingCarPrice.getThirteendays());
+        jsonObject.put("fourteendays",campingCarPrice.getFourteendays());
+        jsonObject.put("fifteendays",campingCarPrice.getFifteendays());
+        jsonObject.put("sixteendays",campingCarPrice.getSixteendays());
+        jsonObject.put("seventeendays",campingCarPrice.getSeventeendays());
+        jsonObject.put("eighteendays",campingCarPrice.getEighteendays());
+        jsonObject.put("ninetinedays",campingCarPrice.getNinetinedays());
+        jsonObject.put("twentydays",campingCarPrice.getTwentydays());
+        jsonObject.put("twentyonedays",campingCarPrice.getTwentyonedays());
+        jsonObject.put("twentytwodays",campingCarPrice.getTwentytwodays());
+        jsonObject.put("twentythreedays",campingCarPrice.getTwentythreedays());
+        jsonObject.put("twentyfourdays",campingCarPrice.getTwentyfourdays());
+        jsonObject.put("twentyfivedays",campingCarPrice.getTwentyfivedays());
+        jsonObject.put("twentysixdays",campingCarPrice.getTwentysixdays());
+        jsonObject.put("twentysevendays",campingCarPrice.getTwentysevendays());
+        jsonObject.put("twentyeightdays",campingCarPrice.getTwentyeightdays());
+        jsonObject.put("twentyninedays",campingCarPrice.getTwentyninedays());
+        jsonObject.put("thirtydays",campingCarPrice.getThirtydays());
+
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    // europe 캠핑카 가격 구하는 api
+    @RequestMapping(value = "/europe/getprice", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_europe_price(HttpServletResponse res) throws IOException {
 
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
