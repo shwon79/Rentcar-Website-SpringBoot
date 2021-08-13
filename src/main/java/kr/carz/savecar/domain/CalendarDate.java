@@ -16,5 +16,6 @@ public class CalendarDate {
     private String year;
     private String month;
     private String day;
+    private String wDay;                // 요일
     private String season;             // 성수기 비성수기
 }
