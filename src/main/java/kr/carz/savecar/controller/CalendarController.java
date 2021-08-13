@@ -1222,6 +1222,7 @@ public class CalendarController {
         model.put("extraTime", extraTime);
         model.put("total", total);
 
+        model.put("carType", "travel");
 
         System.out.println(rent_date);
         System.out.println(rent_time);
@@ -1252,6 +1253,8 @@ public class CalendarController {
         model.put("total", total);
 
 
+        model.put("carType", "liomousine");
+
         System.out.println(rent_date);
         System.out.println(rent_time);
         System.out.println(return_date);
@@ -1278,6 +1281,8 @@ public class CalendarController {
         model.put("day", day);
         model.put("extraTime", extraTime);
         model.put("total", total);
+
+        model.put("carType", "europe");
 
 
         System.out.println(rent_date);
