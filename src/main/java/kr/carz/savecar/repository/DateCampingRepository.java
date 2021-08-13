@@ -13,6 +13,8 @@ public interface DateCampingRepository extends JpaRepository<DateCamping, Long> 
 
     List<DateCamping> findAll();
     List<DateCamping> findByDateId(CalendarDate date_id);
+    DateCamping findByDateIdAndCarName(CalendarDate date_id, CampingCarPrice car_name);
+
 
 
 }

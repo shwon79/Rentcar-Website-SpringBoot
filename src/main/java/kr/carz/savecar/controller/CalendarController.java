@@ -1075,7 +1075,7 @@ public class CalendarController {
         System.out.println(dto.getTotal());
         System.out.println(dto.getDay());
 
-
+        // 문자전송
         String api_key = "NCS0P5SFAXLOJMJI";
         String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
         Message coolsms = new Message(api_key, api_secret);

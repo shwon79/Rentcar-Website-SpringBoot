@@ -377,3 +377,51 @@ const postDate = () => {
     }
 }
 
+//
+// // 에약 요청
+// function make_camping_reservation () {
+//
+//     var product = document.getElementById("rentProduct")
+//
+//     if (document.getElementById("reservation-detail-name").value == ""){
+//         alert('성함을 입력해주세요.')
+//         return
+//     }
+//
+//     if (document.getElementById("reservation-detail-phone").value == ""){
+//         alert('전화번호를 입력해주세요.')
+//         return
+//     }
+//
+//
+//     console.log(product)
+//
+//     var data = {
+//         name : $("#reservation-detail-name").val(),
+//         phoneNo : $("#reservation-detail-phone").val(),
+//         detail : $("#reservation-detail-details").val(),
+//         title : document.getElementById("rent-title").getAttribute("value"),
+//         product : product
+//     };
+//     console.log(data)
+//
+//
+//
+//     var checkbox = document.getElementById("agree")
+//     if(checkbox.checked) {
+//         $.ajax({
+//             type : 'POST',
+//             url : '/campingcar/reservation/apply',
+//             dataType : 'json',
+//             contentType : 'application/json; charset=utf-8',
+//             data : JSON.stringify(data)
+//         }).done(function () {
+//             alert('예약이 완료되었습니다.');
+//         }).fail(function (error) {
+//             alert(JSON.stringify(error));
+//         })
+//     } else{
+//         alert("개인정보 수집 및 이용에 동의해주세요.");
+//     }
+// }
+
