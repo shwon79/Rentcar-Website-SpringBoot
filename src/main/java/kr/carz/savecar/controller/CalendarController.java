@@ -1315,7 +1315,7 @@ public class CalendarController {
         model.put("total", total);
 
 
-        model.put("carType", "liomousine");
+        model.put("carType", "limousine");
 
         System.out.println(rent_date);
         System.out.println(rent_time);

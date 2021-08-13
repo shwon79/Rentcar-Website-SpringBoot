@@ -15,6 +15,10 @@ public class CampingcarDateTime2 extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dateTimeId;
 
+
+    @Column(nullable = true)
+    private String carType;
+
     @Column(nullable = true)
     private String rentDate;
 
@@ -65,7 +69,7 @@ public class CampingcarDateTime2 extends BaseTimeEntity {
 
 
     @Builder
-    public CampingcarDateTime2(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, String agree, String reservation, String day, String extraTime, String totalHalf) {
+    public CampingcarDateTime2(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, String agree, String reservation, String day, String extraTime, String totalHalf,String carType) {
         this.rentDate = rentDate;
         this.rentTime = rentTime;
         this.returnDate = returnDate;
@@ -81,5 +85,6 @@ public class CampingcarDateTime2 extends BaseTimeEntity {
         this.day = day;
         this.extraTime = extraTime;
         this.totalHalf = totalHalf;
+        this.carType = carType;
     }
 }
