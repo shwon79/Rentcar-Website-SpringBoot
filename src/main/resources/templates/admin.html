@@ -1,4 +1,4 @@
-<!-- 캠핑카렌트(rent_camping.html) -->
+<!-- 관리자페이지 -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -31,7 +31,7 @@
             </div>
             <div class="list_container">
                 <div class="reserve_list" id="reserve_list_title">
-                    <p class="id">id</p>
+                    <p class="car_type">차종</p>
                     <p class="created_date">생성일</p>
                     <p class="modified_date">수정일</p>
                     <p class="rent_date">시작일</p>
@@ -46,7 +46,7 @@
                     <p class="set_reserve">확정</p>
                 </div>
                 <div class="reserve_list" th:each="date : ${campingcarDateTimeList}">
-                    <p class="id" th:text="${date.dateTimeId}"></p>
+                    <p class="car_type" th:text="${date.carType}"></p>
                     <p class="created_date" th:text="${date.createdDate}"></p>
                     <p class="modified_date" th:text="${date.modifiedDate}"></p>
                     <p class="rent_date" th:text="${date.rentDate}"></p>
@@ -57,7 +57,7 @@
                     <p class="name" th:text="${date.name}"></p>
                     <p class="deposit" th:text="${date.deposit}"></p>
                     <p class="total" th:text="${date.total}"></p>
-                    <p class="reservation" th:text="${date.reservation}? 'O':'X'"></p>
+                    <p class="reservation" th:text="${date.reservation} == 0? 'X':'O'"></p>
                     <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>
                 </div>
             </div>

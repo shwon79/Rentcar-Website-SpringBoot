@@ -1,0 +1,106 @@
+<!-- 관리자 상세페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+
+    <script th:src="@{/js/admin.js}" defer></script>
+
+
+</head>
+<body>
+<div class="page_wrapper">
+    <div id="logout_box"><button>로그아웃</button></div>
+    <div class="content_wrapper">
+        <div class="menu_container">
+            <div class="menu_list">
+                <li>메뉴1</li>
+                <li>메뉴2</li>
+                <li>메뉴3</li>
+                <li>메뉴4</li>
+                <li>메뉴5</li>
+                <li>메뉴6</li>
+                <li>메뉴7</li>
+            </div>
+        </div>
+        <div class="detail_container">
+            <div class="detail_list">
+                <button>확정</button>
+            </div>
+            <div class="detail_list" id="detail_list_title">
+                <p>종류</p>
+                <p>값</p>
+            </div>
+            <div class="detail_list">
+                <p>차종</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>생성일</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>수정일</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>시작일</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>시작시간</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>반납일</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>반납시간</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>일권</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>성명</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>임금자명</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>보증금</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>총결제금액</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>선결제금액</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <p>예약</p>
+                <p></p>
+            </div>
+            <div class="detail_list">
+                <button>삭제</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
