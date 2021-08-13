@@ -122,7 +122,7 @@
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}"
-                                           th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'pointer-events:none; color: gray;'">
+                                           th:style="${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'pointer-events:none; color: gray;'">
                                         <input class="this date_day" type="radio"
                                                th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}"
                                                name="calendar1" onclick="sendRentDate(id, name);"/>

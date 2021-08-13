@@ -125,13 +125,13 @@
                                 </a>
                             </div>
                             <div>
-                                <a th:href="'/europe_reserve/'+${date.dateId}">
+                                <a th:href="'/liomousine_reserve/'+${date.dateId}">
                                     <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
                                     (<span class="this" th:text="${dateCampingList[iterStat.index][1].reserved}" ></span>/1)
                                 </a>
                             </div>
                             <div th:if="${dateCampingList[iterStat.index][2].reserved} != 1" >
-                                <a href="/europe_reserve">
+                                <a th:href="'/travel_reserve/'+${date.dateId}">
                                     <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
                                     (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)
                                 </a>
