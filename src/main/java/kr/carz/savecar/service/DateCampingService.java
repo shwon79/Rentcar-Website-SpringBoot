@@ -1,11 +1,10 @@
 package kr.carz.savecar.service;
 
-import kr.carz.savecar.domain.CalendarDate;
-import kr.carz.savecar.domain.CampingCarPrice;
-import kr.carz.savecar.domain.DateCamping;
+import kr.carz.savecar.domain.*;
 import kr.carz.savecar.repository.CampingCarPriceRepository;
 import kr.carz.savecar.repository.DateCampingRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public class DateCampingService {
@@ -14,6 +13,11 @@ public class DateCampingService {
 
     public DateCampingService(DateCampingRepository dateCampingRepository) {
         this.dateCampingRepository = dateCampingRepository;
+    }
+
+
+    public CalendarDate save(DateCamping dateCamping) {
+        return dateCampingRepository.save(dateCamping).getDateId();
     }
 
     public List<DateCamping> findDateCampingPrice(){

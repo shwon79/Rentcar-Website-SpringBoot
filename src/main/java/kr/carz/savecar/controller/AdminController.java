@@ -26,13 +26,14 @@ public class AdminController {
     DateCampingService dateCampingService;
     CampingcarDateTimeService2 campingcarDateTimeService2;
     LoginService loginService;
+    CampingCarPriceService campingCarPriceService;
 
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
                            DateCampingService dateCampingService, CampingcarDateTimeService2 campingcarDateTimeService2,
-                           LoginService loginService) {
+                           LoginService loginService, CampingCarPriceService campingCarPriceService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -41,6 +42,7 @@ public class AdminController {
         this.dateCampingService = dateCampingService;
         this.campingcarDateTimeService2 = campingcarDateTimeService2;
         this.loginService = loginService;
+        this.campingCarPriceService = campingCarPriceService;
     }
 
     @GetMapping("/admin/login")
@@ -113,11 +115,25 @@ public class AdminController {
 
         System.out.println(campingcarDateTime.getReservation());
 
-        campingcarDateTime.setReservation("2");
-        System.out.println(reserveId);
-        System.out.println(campingcarDateTime.getReservation());
+        String [] rent_date = campingcarDateTime.getRentDate().split("월 ");
+        String rent_month = rent_date[0];
+        System.out.println(rent_month);
 
-        campingcarDateTimeService2.save2(campingcarDateTime);
+        String [] rent_day_list = rent_date[1].split("일");
+        String rent_day = rent_day_list[0];
+        System.out.println(rent_day);
+
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(rent_month, rent_day, "2021");
+        System.out.println(campingcarDateTime.getCarType());
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingcarDateTime.getCarType());
+
+
+        // 수정필요 :
+        DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDate,campingCarPrice);
+        dateCamping.setReserved("1");
+        campingcarDateTime.setReservation("1");
+
+        dateCampingService.save(dateCamping);
 
     }
 
