@@ -31,7 +31,10 @@
         </div>
         <div class="detail_container">
             <div class="detail_list">
-                <button>확정</button>
+                <button id="go_back" onclick="history.back()">🠔 뒤로가기</button>
+            </div>
+            <div class="detail_list">
+                <button th:id="${dateId}" class="set_reserve" onclick="setReserve(id)">확정</button>
             </div>
             <div class="detail_list" id="detail_list_title">
                 <p>종류</p>
@@ -39,62 +42,70 @@
             </div>
             <div class="detail_list">
                 <p>차종</p>
-                <p></p>
+                <p th:text="${carType}"></p>
             </div>
             <div class="detail_list">
                 <p>생성일</p>
-                <p></p>
+                <p th:text="${createdDate}></p>
             </div>
             <div class="detail_list">
                 <p>수정일</p>
-                <p></p>
+                <p th:text="${modifiedDate}></p>
             </div>
             <div class="detail_list">
                 <p>시작일</p>
-                <p></p>
+                <p th:text="${rentDate}></p>
             </div>
             <div class="detail_list">
                 <p>시작시간</p>
-                <p></p>
+                <p th:text="${rentTime}></p>
             </div>
             <div class="detail_list">
                 <p>반납일</p>
-                <p></p>
+                <p th:text="${returnDate}></p>
             </div>
             <div class="detail_list">
                 <p>반납시간</p>
-                <p></p>
+                <p th:text="${returnTime}></p>
             </div>
             <div class="detail_list">
                 <p>일권</p>
-                <p></p>
+                <p th:text="${day}></p>
             </div>
             <div class="detail_list">
                 <p>성명</p>
-                <p></p>
+                <p th:text="${name}></p>
+            </div>
+            <div class="detail_list">
+                <p>연락처</p>
+                <p th:text="${phone}></p>
             </div>
             <div class="detail_list">
                 <p>임금자명</p>
-                <p></p>
+                <p th:text="${depositor}></p>
             </div>
             <div class="detail_list">
                 <p>보증금</p>
-                <p></p>
+                <p th:text="${deposit}></p>
             </div>
             <div class="detail_list">
                 <p>총결제금액</p>
-                <p></p>
+                <p th:text="${total}></p>
             </div>
             <div class="detail_list">
                 <p>선결제금액</p>
-                <p></p>
+                <p th:text="${totalHalf}></p>
+            </div>
+            <div class="detail_list">
+                <p>요구사항</p>
+                <p th:text="${detail}></p>
             </div>
             <div class="detail_list">
                 <p>예약</p>
-                <p></p>
+                <p th:text="${reservation}></p>
             </div>
             <div class="detail_list">
-                <button>삭제</button>
+                <button th:name="${dateId}" onclick="deleteReserve(name)">삭제</button>
             </div>
 
         </div>
