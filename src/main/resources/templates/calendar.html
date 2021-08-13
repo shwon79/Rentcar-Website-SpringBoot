@@ -91,10 +91,9 @@
                                         </a>
                                     </div>
                                     <div th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" >
-                                        <a th:href="'/travel_reserve/'+${date.dateId}">
-                                            <span th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
+                                            <span th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" class="this"
+                                                  th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
                                             (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -149,11 +148,9 @@
                                 </a>
                             </div>
                             <div class="detail_selections" th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" >
-                                <a th:href="'/travel_reserve/'+${date.dateId}">
                                     <span th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" class="this"
                                           th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
                                     (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)
-                                </a>
                             </div>
                         </div>
                     </div>

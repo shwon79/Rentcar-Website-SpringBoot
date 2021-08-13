@@ -40,32 +40,10 @@ function doDisplay_return_time(){
 
 
 // show current date
-let today = new Date();
-let todayFull = today.toLocaleDateString();
-let todayDay = '';
-switch (today.getDay()) {
-        case 0 :
-            todayDay = '일';
-            break;
-        case 1 :
-            todayDay = '월';
-            break;
-        case 2 :
-            todayDay = '화';
-            break;
-        case 3 :
-            todayDay = '수';
-            break;
-        case 4 :
-            todayDay = '목';
-            break;
-        case 5 :
-            todayDay = '금';
-            break;
-        case 6 :
-            todayDay = '토';
-            break;
-}
+
+
+let takeDate = document.getElementById('rent_date').name;
+
 document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 
 

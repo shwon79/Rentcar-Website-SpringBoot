@@ -11,7 +11,7 @@ const setReserve = (id) => {
                 alert(`${id}의 예약이 확정되었습니다.`)
                 let idBtn = document.getElementById(id)
                 idBtn.disabled = true
-            }).then(() => window.location.href = '/')
+            }).then(() => window.location.href = '/admin/logininfo')
             .catch(err => console.error('Error: ', err))
     }
 

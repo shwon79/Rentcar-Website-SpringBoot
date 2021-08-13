@@ -87,7 +87,7 @@
                             <div class="date_menu">시작날짜</div>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                            <div class="date_time"><span id='rent_date'></span></div>
+                            <div class="date_time"><span id='rent_date' th:name="${dateId}" th:value="${thisYear}"></span></div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
