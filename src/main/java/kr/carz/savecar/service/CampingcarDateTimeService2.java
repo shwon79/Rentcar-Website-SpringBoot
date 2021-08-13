@@ -1,12 +1,10 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.CampingcarDateTime2;
-import kr.carz.savecar.domain.CampingcarDateTimeDto;
 import kr.carz.savecar.repository.CampingcarDateTimeRepository2;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Transactional
 public class CampingcarDateTimeService2 {

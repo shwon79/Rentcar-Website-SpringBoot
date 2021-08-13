@@ -1,9 +1,6 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.domain.CampingCar;
-import kr.carz.savecar.domain.CampingcarDateTimeDto;
-import kr.carz.savecar.domain.Reservation;
-import kr.carz.savecar.domain.ReservationSaveDto;
+import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -11,24 +8,45 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 @Controller
 public class ReservationController {
-    private final ReservationService reservationService;
-    private final CampingcarDateTimeService2 campingcarDateTimeService2;
-    private final CampingCarPriceService campingCarPriceService;
+    MonthlyRentService monthlyRentService;
+    YearlyRentService yearlyRentService;
+    ShortRentService shortRentService;
+    CampingCarService campingCarService;
+    CalendarDateService calendarDateService;
+    DateCampingService dateCampingService;
+    CampingcarDateTimeService2 campingcarDateTimeService2;
+    LoginService loginService;
+    CampingCarPriceService campingCarPriceService;
+    ReservationService reservationService;
 
 
     @Autowired
-    public ReservationController(ReservationService reservationService, CampingcarDateTimeService2 campingcarDateTimeService2, CampingCarPriceService campingCarPriceService) {
-        this.reservationService = reservationService;
+    public ReservationController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
+                                 ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
+                                 DateCampingService dateCampingService, CampingcarDateTimeService2 campingcarDateTimeService2,
+                                 LoginService loginService, CampingCarPriceService campingCarPriceService, ReservationService reservationService) {
+        this.monthlyRentService = monthlyRentService;
+        this.yearlyRentService = yearlyRentService;
+        this.shortRentService = shortRentService;
+        this.campingCarService = campingCarService;
+        this.calendarDateService = calendarDateService;
+        this.dateCampingService = dateCampingService;
         this.campingcarDateTimeService2 = campingcarDateTimeService2;
+        this.loginService = loginService;
         this.campingCarPriceService = campingCarPriceService;
+        this.reservationService = reservationService;
     }
 
 
@@ -163,6 +181,53 @@ public class ReservationController {
         }
 
         return reservationService.save(dto);
+    }
+
+
+
+    //캠핑카 예약 확정
+    @RequestMapping(value = "/campingcar/reservation/update/{reserveId}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable Long reserveId) throws IOException {
+
+
+        CampingcarDateTime2 campingcarDateTime = campingcarDateTimeService2.findByDateTimeId(reserveId);
+
+
+        String [] rent_date = campingcarDateTime.getRentDate().split("월 ");
+        String rent_month = rent_date[0];
+        System.out.println(rent_month);
+
+        String [] rent_day_list = rent_date[1].split("일");
+        String rent_day = rent_day_list[0];
+        System.out.println(rent_day);
+
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(rent_month, rent_day, "2021");
+        System.out.println(campingcarDateTime.getCarType());
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingcarDateTime.getCarType());
+
+
+        // 수정필요 :
+        DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDate,campingCarPrice);
+        System.out.println(dateCamping.getDateId());
+
+
+        dateCamping.setReserved("1");
+        campingcarDateTime.setReservation("1");
+        System.out.println(dateCamping.getReserved());
+        System.out.println(campingcarDateTime.getReservation());
+
+
+        Long testLong = campingcarDateTimeService2.save2(campingcarDateTime);
+        System.out.println(testLong);
+
+
+
+        CalendarDate calendarDate1 = dateCampingService.save(dateCamping);
+//        Long testCalendar = calendarDateService.save(dateCampingService.save(dateCamping));
+        System.out.println(calendarDate1);
+        System.out.println("testest");
+
     }
 
 }
