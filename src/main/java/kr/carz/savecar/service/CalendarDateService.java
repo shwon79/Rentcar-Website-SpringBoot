@@ -2,6 +2,7 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.CalendarDate;
 import kr.carz.savecar.domain.CalendarTime;
+import kr.carz.savecar.domain.CampingcarDateTime2;
 import kr.carz.savecar.repository.CalendarDateRepository;
 import kr.carz.savecar.repository.CalendarTimeRepository;
 
@@ -13,6 +14,10 @@ public class CalendarDateService {
 
     public CalendarDateService(CalendarDateRepository calendarDateRepository) {
         this.calendarDateRepository = calendarDateRepository;
+    }
+
+    public Long save(CalendarDate calendarDate) {
+        return calendarDateRepository.save(calendarDate).getDateId();
     }
 
     public List<CalendarDate> findCalendarDate(){

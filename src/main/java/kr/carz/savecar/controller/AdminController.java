@@ -106,35 +106,5 @@ public class AdminController {
         return mav;
     }
 
-    //캠핑카 예약 확정
-    @RequestMapping(value = "/campingcar/reservation/update/{reserveId}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-    @ResponseBody
-    public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable Long reserveId) throws IOException {
-
-        CampingcarDateTime2 campingcarDateTime = campingcarDateTimeService2.findByDateTimeId(reserveId);
-
-        System.out.println(campingcarDateTime.getReservation());
-
-        String [] rent_date = campingcarDateTime.getRentDate().split("월 ");
-        String rent_month = rent_date[0];
-        System.out.println(rent_month);
-
-        String [] rent_day_list = rent_date[1].split("일");
-        String rent_day = rent_day_list[0];
-        System.out.println(rent_day);
-
-        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(rent_month, rent_day, "2021");
-        System.out.println(campingcarDateTime.getCarType());
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingcarDateTime.getCarType());
-
-
-        // 수정필요 :
-        DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDate,campingCarPrice);
-        dateCamping.setReserved("1");
-        campingcarDateTime.setReservation("1");
-
-        dateCampingService.save(dateCamping);
-        campingcarDateTimeService2.save2(campingcarDateTime);
-    }
 
 }
