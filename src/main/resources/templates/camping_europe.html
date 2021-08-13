@@ -39,7 +39,7 @@
                         <h3>모터홈의 디럭스풍 디자인</h3>
                     </div>
                     <!-- left content2 -->
-                    <div class="row text-center pinside30 bg-light margin-bottom-40">
+                    <div id="europe" class="car_type row text-center pinside30 bg-light margin-bottom-40">
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                             <h3>CAPMER 명</h3>
                             <h3>Europe VIP</h3>
@@ -122,10 +122,10 @@
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}"
-                                           th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'pointer-events:none; color: gray;'">
+                                           th:style="${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'pointer-events:none; color: gray;'">
                                         <input class="this date_day" type="radio"
-                                               th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}"
-                                               name="calendar1" onclick="sendRentDate(id, name);"/>
+                                               th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:name="${thisYear}" th:text="${date.day}"
+                                               name="calendar1" onclick="sendRentDate(id, name, value);"/>
                                     </label>
                                 </div>
                             </div>
@@ -237,7 +237,15 @@
 
                     <div>
                         <div id="calResultWrapper">
-                            <h2>예상가격</h2><p id="calResult"></p>
+                            <div class="sel_options" id="sel_option">
+                                <h2>선택 사항</h2>
+                                <p id="selOption"></p>
+                                <hr style="margin: 10px 0"/>
+                            </div>
+                            <div class="sel_options" id="sel_price">
+                                <h2>예상 가격</h2>
+                                <p id="calResult"></p>
+                            </div>
                         </div>
                     </div><hr style="background: dimgray;" />
 
@@ -248,7 +256,7 @@
                                 <p id="total_result"></p>
                             </div>
 
-                                <button id="btn_reserve" onclick="postDate()">예약신청하기</button>
+                                <button id="btn_reserve" onclick="postDateEurope()">예약신청하기</button>
 
                         </div>
                     </div><hr style="background: dimgray;" />

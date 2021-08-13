@@ -89,7 +89,7 @@ body {
     flex: 2;
 }
 .name {
-    flex: 2;
+    flex: 1;
 }
 .deposit {
     flex: 2;
@@ -114,4 +114,52 @@ body {
     margin: 0;
     background-color: transparent;
     color: black;
+}
+
+@media (max-width: 990px) {
+    .content_wrapper {
+        flex-direction: column;
+    }
+
+    .menu_container {
+        width: 100%;
+        margin: 10px 0;
+        font-size: 11px
+    }
+
+    .menu_list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .menu_list li {
+        margin: 7px 0;
+        padding: 0 5px;
+    }
+
+    .list_container {
+        width: 100%;
+        margin: 0;
+        font-size: 10px
+    }
+
+    .reserve_list {
+        margin: 5px 0;
+    }
+
+    .created_date {
+        display: none;
+    }
+    .modified_date {
+        display: none;
+    }
+
+    .deposit {
+        display: none;
+    }
+
+    .set_reserve {
+        display: none;
+    }
 }

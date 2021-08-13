@@ -17,6 +17,10 @@
     justify-content: start;
 }
 
+/*.car_type {*/
+/*    font-weight: bold;*/
+/*}*/
+
 #use_day {
     margin-left: 15px;
     margin-right: 10px;
@@ -94,6 +98,10 @@ textarea.noscrollbars {
     height: 200px;
 }
 
+#info_deposit h5 {
+    text-align: center;
+}
+
 #info_done {
     overflow: auto;
 }
@@ -105,6 +113,20 @@ textarea.noscrollbars {
 #price_desc p{
     margin: 2px;
 }
+
+#btn_final {
+    padding: 20px 30px;
+    color: aliceblue;
+    background-color: #E7A625;
+    border: none;
+    border-radius: 30vh;
+}
+
+#btn_final:hover {
+    background-color: #13A0B2;
+}
+
+
 
 
 

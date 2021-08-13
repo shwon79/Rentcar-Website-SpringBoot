@@ -39,7 +39,7 @@
                         <h3>모터홈의 디럭스풍 디자인</h3>
                     </div>
                     <!-- left content2 -->
-                    <div class="row text-center pinside30 bg-light margin-bottom-40">
+                    <div id="travel" class="car_type row text-center pinside30 bg-light margin-bottom-40">
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                             <h3>CAPMER 명</h3>
                             <h3>Travel VIP</h3>
@@ -90,7 +90,7 @@
                     <div id="calendar_rental" class="row">
                         <div class="header">
                             <!-- <div class="nav"> -->
-                            <a th:href="'/europe_reserve/before/' + ${prevMonth}">
+                            <a th:href="'/travel_reserve/before/' + ${prevMonth}">
                                 <button class="nav-btn go-prev">&lt;</button>&nbsp;
                             </a>&nbsp;
                             <!-- <button class="nav-btn go-today">Today</button> -->
@@ -98,7 +98,7 @@
                                 <span name="thisYear" th:text="${thisYear}"></span>년
                                 <span name="thisMonth" th:text="${thisMonth}"></span>월
                             </div>&nbsp;&nbsp;
-                            <a th:href="'/europe_reserve/after/' + ${thisMonth}">
+                            <a th:href="'/travel_reserve/after/' + ${thisMonth}">
                                 <button class="nav-btn go-next" >&gt;</button>
                             </a>
                         </div>
@@ -115,7 +115,7 @@
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}"
-                                           th:style="${date.day} < ${today} and ${date.month} <= ${thisMonth} ? 'pointer-events:none; color: gray;'">
+                                           th:style="${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'pointer-events:none; color: gray;'">
                                         <input class="this date_day" type="radio"
                                                th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:text="${date.day}"
                                                name="calendar1" onclick="sendRentDate(id, name);"/>
@@ -241,7 +241,7 @@
                                 <p id="total_result"></p>
                             </div>
 
-                            <button id="btn_reserve" onclick="postDate()">예약신청하기</button>
+                            <button id="btn_reserve" onclick="postDateTravel()">예약신청하기</button>
 
                         </div>
                     </div><hr style="background: dimgray;" />

@@ -71,9 +71,10 @@ document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 
 // 가격표
 let obj, deposits;
+let carType = document.getElementsByClassName('car_type')[0].id;
 let priceList = [];
 const runIt = () => {
-    fetch('/campingcar/getprice')
+    fetch(`/${carType}/getprice`)
         .then(res => res.json())
         .then(result => {
             obj = result;
@@ -114,20 +115,43 @@ runIt();
 
 // select rent date
 let rentDateNum='';
-const sendRentDate = (id, year) => {
+const sendRentDate = (id, year, wDay) => {
     rentDateNum = id;
     let rentDateYear = year;
     let rentDateMonth = rentDateNum.split('월 ')[0];
     let rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
-    let url = '/campingcar/sendrentdate';
+    let url = `/${carType}/sendrentdate`;
+    let whichDay = '';
+    switch (wDay) {
+        case '0':
+            whichDay = '일';
+            break;
+        case '1':
+            whichDay = '월';
+            break;
+        case '2':
+            whichDay = '화';
+            break;
+        case '3':
+            whichDay = '수';
+            break;
+        case '4':
+            whichDay = '목';
+            break;
+        case '5':
+            whichDay = '금';
+            break;
+        case '6':
+            whichDay = '토';
+            break;
+    }
     let putTarget = document.getElementById('rent_date');
-    let putResult = year+'.'+id.split('월 ')[0]+'.'+id.split(' ')[1].split('일')[0]+'.('+')';
+    let putResult = year+'.'+id.split('월 ')[0]+'.'+id.split(' ')[1].split('일')[0]+'.('+whichDay+')';
     putTarget.innerText = putResult;
 
     fetch(url+'/'+rentDateYear+'/'+rentDateMonth+'/'+rentDateDay)
         .then(res => res.json())
         .then(result => {
-            console.log(result)
             let theWrapper = document.getElementById('rent_time');
             let hrTime = document.getElementById('hr_time');
             theWrapper.style.display = 'block';
@@ -138,6 +162,7 @@ const sendRentDate = (id, year) => {
                 if (result.includes(eachTime)) timeId.disabled = false;
                 else timeId.disabled = true;
             }
+            calculateDate();
         })
 }
 
@@ -229,18 +254,24 @@ const rentTimeSel = (id) => {
         option6.disabled = true;
         option7.disabled = true;
     }
+    calculateDate();
 
-    console.log(rentTime);
 }
 
 // price calculator
 let price = 0;
 const calculateDate = () => {
-    console.log(priceList);
-    console.log(useDayNum);
-    let showData = document.getElementById('calResult');
-    price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum) + deposits;
-    showData.innerText = `${price}원`
+    if (returnDateNum != '' && rentDateNum != '' && rentTime != '' && returnTime != '') {
+        const optionWrapper = document.getElementById('calResultWrapper')
+        optionWrapper.style.display = 'block'
+        let showSelections = document.getElementById('selOption');
+        showSelections.innerText = `${rentDateNum} ${rentTime} -- ${returnDateNum} ${returnTime}`
+        let showData = document.getElementById('calResult');
+        price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum) + deposits;
+        showData.innerText = `${price}원`
+    }
+
+
 }
 
 
@@ -259,7 +290,6 @@ const daysSelect = () => {
         let returnDateMon = rentDateMon;
         let rentDateDay = parseInt(temp[1].split('일')[0]);
         let returnDateDay = rentDateDay + theVal;
-        console.log(returnDateDay);
         useDay = daySelector.options[daySelector.selectedIndex].innerText;
         useDayNum = parseInt(daySelector.options[daySelector.selectedIndex].value);
 
@@ -341,10 +371,10 @@ const daysSelect = () => {
             }
         }
 
-        calculateDate();
+
         returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
-        console.log(returnDateNum);
     }
+    calculateDate();
 }
 
 
@@ -354,26 +384,50 @@ const timeSelect = () => {
     let timeSelector = document.getElementById('extratime_select');
     let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
     extraTimeNum = theVal
-    console.log(theVal);
     let temp = parseInt(rentTime.split('시')[0]) + theVal;
     returnTime = `${temp}시`;
-    if (returnDateNum != '') {
-        calculateDate();
-    }
+    calculateDate();
 }
 
 
 // Sending Data;
-const postDate = () => {
+const postDateEurope = () => {
 
     // customName != '' && phoneNum!='' &&
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/campingcar/reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${price}`
+        window.location.href = `/europe_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${price}`
 
     } else {
         alert('입력을 완료해주세요!')
     }
 }
+
+const postDateLimousine = () => {
+
+    // customName != '' && phoneNum!='' &&
+    if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
+
+        alert('예약 창으로 넘어갑니다.')
+        window.location.href = `/liomousine_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${price}`
+
+    } else {
+        alert('입력을 완료해주세요!')
+    }
+}
+
+const postDateTravel = () => {
+
+    // customName != '' && phoneNum!='' &&
+    if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
+
+        alert('예약 창으로 넘어갑니다.')
+        window.location.href = `/${carType}_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${price}`
+
+    } else {
+        alert('입력을 완료해주세요!')
+    }
+}
+
 

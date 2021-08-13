@@ -79,6 +79,20 @@
   font-size: 100%;
 }
 
+.downside div {
+  margin-bottom: 10px;
+}
+
+.downside a {
+  padding: 5px;
+  border-radius: 2vh;
+}
+
+.downside a:hover {
+  color: indianred;
+  background-color: lightgray;
+}
+
 .day:nth-child(7n + 1),
 .date:nth-child(7n + 1) {
   color: #D13E3E;
@@ -185,14 +199,15 @@ a:hover {
     margin: 10px 0;
     padding: 10px 0;
     width: 65%;
-    background-color: #1F1D19;
-    color: aliceblue;
     border-radius: 1vh;
   }
 
-  .detail_header {
-    background-color: transparent;
-    color: black;
+  .detail_wrapper a {
+    color: aliceblue;
+  }
+
+  .detail_selections {
+    background-color: #1F1D19;
   }
 
 

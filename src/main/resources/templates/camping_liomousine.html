@@ -39,7 +39,7 @@
                         <h3>모터홈의 디럭스풍 디자인</h3>
                     </div>
                     <!-- left content2 -->
-                    <div class="row text-center pinside30 bg-light margin-bottom-40">
+                    <div id="liomousine" class="car_type row text-center pinside30 bg-light margin-bottom-40">
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                             <h3>CAPMER 명</h3>
                             <h3>Limousine VIP</h3>
@@ -97,7 +97,7 @@
                     <div id="calendar_rental" class="row">
                         <div class="header">
                             <!-- <div class="nav"> -->
-                            <a th:href="'/europe_reserve/before/' + ${prevMonth}">
+                            <a th:href="'/liomousine_reserve/before/' + ${prevMonth}">
                                 <button class="nav-btn go-prev">&lt;</button>&nbsp;
                             </a>&nbsp;
                             <!-- <button class="nav-btn go-today">Today</button> -->
@@ -105,7 +105,7 @@
                                 <span name="thisYear" th:text="${thisYear}"></span>년
                                 <span name="thisMonth" th:text="${thisMonth}"></span>월
                             </div>&nbsp;&nbsp;
-                            <a th:href="'/europe_reserve/after/' + ${thisMonth}">
+                            <a th:href="'/liomousine_reserve/after/' + ${thisMonth}">
                                 <button class="nav-btn go-next" >&gt;</button>
                             </a>
                         </div>
@@ -248,7 +248,7 @@
                                 <p id="total_result"></p>
                             </div>
 
-                            <button id="btn_reserve" onclick="postDate()">예약신청하기</button>
+                            <button id="btn_reserve" onclick="postDateLimousine()">예약신청하기</button>
 
                         </div>
                     </div><hr style="background: dimgray;" />
