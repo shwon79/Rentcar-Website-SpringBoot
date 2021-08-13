@@ -564,6 +564,9 @@ public class CalendarController {
         model.addAttribute("thisMonth", now_month);
         model.addAttribute("thisYear", 2021);
 
+
+        model.addAttribute("dateId", date_id);
+
         return "camping_europe";
     }
 

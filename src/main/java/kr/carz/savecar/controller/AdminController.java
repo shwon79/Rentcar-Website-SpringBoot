@@ -134,7 +134,7 @@ public class AdminController {
         campingcarDateTime.setReservation("1");
 
         dateCampingService.save(dateCamping);
-
+        campingcarDateTimeService2.save2(campingcarDateTime);
     }
 
 }
