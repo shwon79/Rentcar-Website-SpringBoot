@@ -104,4 +104,35 @@ public class AdminController {
     }
 
 
+    //로그인
+    @GetMapping(value = "/admin/main")
+    @ResponseBody
+    public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+
+        HttpSession session = req.getSession();
+        if((Login)session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("login");
+        } else {
+
+            // admin view로 넘기기
+            List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
+
+            mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
+            mav.setViewName("admin");
+
+        }
+
+        return mav;
+    }
+
+
 }

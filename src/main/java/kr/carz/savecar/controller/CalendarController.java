@@ -1177,9 +1177,9 @@ public class CalendarController {
         List <String> categoryList2 = new ArrayList();
 
         for (int i = 0; i < calendarTimeList.size(); i++) {
-            if (calendarTimeList.get(i).getReserve_complete().equals("0")){
+            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
 
-                categoryList2.add(calendarTimeList.get(i).getReserve_time());
+                categoryList2.add(calendarTimeList.get(i).getReserveTime());
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -1215,9 +1215,9 @@ public class CalendarController {
         List <String> categoryList2 = new ArrayList();
 
         for (int i = 0; i < calendarTimeList.size(); i++) {
-            if (calendarTimeList.get(i).getReserve_complete().equals("0")){
+            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
 
-                categoryList2.add(calendarTimeList.get(i).getReserve_time());
+                categoryList2.add(calendarTimeList.get(i).getReserveTime());
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -1253,9 +1253,9 @@ public class CalendarController {
         List <String> categoryList2 = new ArrayList();
 
         for (int i = 0; i < calendarTimeList.size(); i++) {
-            if (calendarTimeList.get(i).getReserve_complete().equals("0")){
+            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
 
-                categoryList2.add(calendarTimeList.get(i).getReserve_time());
+                categoryList2.add(calendarTimeList.get(i).getReserveTime());
             }
         }
         JSONArray jsonArray = new JSONArray();
