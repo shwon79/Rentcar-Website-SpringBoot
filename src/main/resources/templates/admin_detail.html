@@ -31,7 +31,7 @@
         </div>
         <div class="detail_container" >
             <div class="detail_list" >
-                <a href="/admin.main"><button id="go_back">🠔 뒤로가기</button></a>
+                <a href="/admin/main"><button id="go_back">🠔 뒤로가기</button></a>
             </div>
             <div class="detail_list" id="detail_set_reserve">
                 <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+campingcarDateTime2.dateTimeId}">
