@@ -111,7 +111,6 @@ public class CalendarController {
             dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
         }
 
-        System.out.println(dateCampingList.get(0).get(0).getCarName());
         model.addAttribute("dateCampingList", dateCampingList);
         model.addAttribute("thisMonth", now_month);
         model.addAttribute("thisYear", now_year);
@@ -243,7 +242,6 @@ public class CalendarController {
                 dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
             }
 
-            System.out.println(dateCampingList.get(0).get(0).getCarName());
             model.addAttribute("dateCampingList", dateCampingList);
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
@@ -320,7 +318,6 @@ public class CalendarController {
                 dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
             }
 
-            System.out.println(dateCampingList.get(0).get(0).getCarName());
             model.addAttribute("dateCampingList", dateCampingList);
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
@@ -396,7 +393,6 @@ public class CalendarController {
             dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
         }
 
-        System.out.println(dateCampingList.get(0).get(0).getCarName());
         model.addAttribute("dateCampingList", dateCampingList);
 
 
@@ -472,7 +468,6 @@ public class CalendarController {
             dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
         }
 
-        System.out.println(dateCampingList.get(0).get(0).getCarName());
         model.addAttribute("dateCampingList", dateCampingList);
 
 
@@ -606,26 +601,22 @@ public class CalendarController {
             List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(now_month));
 
 
-            System.out.println("통과 1");
 
             // 전달 날짜 구하기
             cal.set(cal.get(Calendar.YEAR), now_month - 1, 1); // 8
 
             Long firstDateId = calendarDateList.get(0).getDateId();
             Integer before = cal.get(Calendar.DAY_OF_WEEK);
-            System.out.println("통과 2");
 
             for (int i = 1; i < before; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
-            System.out.println("통과 3");
 
             // 다음달 날짜 구하기
             cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
 
             Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
             Integer after = cal.get(Calendar.DAY_OF_WEEK);
-            System.out.println("통과 4");
 
             for (int i = 1; i <= 7 - after; i++) {
                 calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
@@ -633,7 +624,6 @@ public class CalendarController {
 
             Integer daylast = 7-after;
 
-            System.out.println("통과 5");
 
             model.addAttribute("daylast", calendarDateList);
             model.addAttribute("calendarDateList", calendarDateList);
@@ -645,7 +635,6 @@ public class CalendarController {
             for (int i = 0; i < calendarDateList.size(); i++) {
                 dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
             }
-            System.out.println("통과 6");
 
 
             model.addAttribute("dateCampingList", dateCampingList);
@@ -898,7 +887,6 @@ public class CalendarController {
                 dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
             }
 
-            System.out.println(dateCampingList.get(0).get(0).getCarName());
             model.addAttribute("dateCampingList", dateCampingList);
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
@@ -975,7 +963,6 @@ public class CalendarController {
                 dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
             }
 
-            System.out.println(dateCampingList.get(0).get(0).getCarName());
             model.addAttribute("dateCampingList", dateCampingList);
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
@@ -1054,7 +1041,6 @@ public class CalendarController {
                 dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
             }
 
-            System.out.println(dateCampingList.get(0).get(0).getCarName());
             model.addAttribute("dateCampingList", dateCampingList);
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
@@ -1385,10 +1371,10 @@ public class CalendarController {
         jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
         jsonObject.put("carName",campingCarPrice.getCarName());
 
-        jsonObject.put("campingCarPrice",campingCarPrice);
+//        jsonObject.put("campingCarPrice",campingCarPrice);
 
 
-        jsonObject.put("oneday",campingCarPrice.getOnedays());
+        jsonObject.put("onedays",campingCarPrice.getOnedays());
         System.out.println("oneoneoneone - "+campingCarPrice.getOnedays());
         jsonObject.put("twodays",campingCarPrice.getTwodays());
         jsonObject.put("threedays",campingCarPrice.getThreedays());
@@ -1441,10 +1427,10 @@ public class CalendarController {
         jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
         jsonObject.put("carName",campingCarPrice.getCarName());
 
-        jsonObject.put("campingCarPrice",campingCarPrice);
+//        jsonObject.put("campingCarPrice",campingCarPrice);
 
 
-        jsonObject.put("oneday",campingCarPrice.getOnedays());
+        jsonObject.put("onedays",campingCarPrice.getOnedays());
         System.out.println("oneoneoneone - "+campingCarPrice.getOnedays());
         jsonObject.put("twodays",campingCarPrice.getTwodays());
         jsonObject.put("threedays",campingCarPrice.getThreedays());
@@ -1496,10 +1482,10 @@ public class CalendarController {
         jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
         jsonObject.put("carName",campingCarPrice.getCarName());
 
-        jsonObject.put("campingCarPrice",campingCarPrice);
+//        jsonObject.put("campingCarPrice",campingCarPrice);
 
 
-        jsonObject.put("oneday",campingCarPrice.getOnedays());
+        jsonObject.put("onedays",campingCarPrice.getOnedays());
         System.out.println("oneoneoneone - "+campingCarPrice.getOnedays());
         jsonObject.put("twodays",campingCarPrice.getTwodays());
         jsonObject.put("threedays",campingCarPrice.getThreedays());

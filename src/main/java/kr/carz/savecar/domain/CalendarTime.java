@@ -2,11 +2,13 @@ package kr.carz.savecar.domain;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"dateId", "carName"})
 @Table(name = "CalendarTime")
 public class CalendarTime {
     @Id

@@ -2,12 +2,14 @@ package kr.carz.savecar.domain;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"dateId", "carName"})
 @Table(name = "DateCamping")
 @IdClass(MultiId.class)
 public class DateCamping implements Serializable {
