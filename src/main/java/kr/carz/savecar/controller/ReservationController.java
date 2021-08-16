@@ -194,6 +194,7 @@ public class ReservationController {
         CampingcarDateTime2 campingcarDateTime = campingcarDateTimeService2.findByDateTimeId(reserveId);
 
 
+        // 대여일자, 대여시간
         String [] rent_date = campingcarDateTime.getRentDate().split("월 ");
         String rent_month = rent_date[0];
         System.out.println(rent_month);
@@ -202,32 +203,46 @@ public class ReservationController {
         String rent_day = rent_day_list[0];
         System.out.println(rent_day);
 
+
+        // 반납일자, 반납시간
+        String [] return_date = campingcarDateTime.getReturnDate().split("월 ");
+        String return_month = return_date[0];
+        System.out.println(return_month);
+
+        String [] return_day_list = return_date[1].split("일");
+        String return_day = return_day_list[0];
+        System.out.println(return_day);
+
+        // CalendarDate 날짜랑 CampingCarPrice 차정보 찾아서
         CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(rent_month, rent_day, "2021");
         System.out.println(campingcarDateTime.getCarType());
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingcarDateTime.getCarType());
 
 
-        // 수정필요 :
+        // DateCamping 에서 날짜랑 차정보로 하루 예약 정보 찾기
         DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDate,campingCarPrice);
         System.out.println(dateCamping.getDateId());
 
 
+        // DateCamping 하루 예약 정보 수정, campingcarDateTime 예약리스트 예약 정보 수정
         dateCamping.setReserved("1");
         campingcarDateTime.setReservation("1");
         System.out.println(dateCamping.getReserved());
         System.out.println(campingcarDateTime.getReservation());
 
 
+        // campingcarDateTime 저장
         Long testLong = campingcarDateTimeService2.save2(campingcarDateTime);
         System.out.println(testLong);
 
 
 
-        CalendarDate calendarDate1 = dateCampingService.save(dateCamping);
-//        Long testCalendar = calendarDateService.save(dateCampingService.save(dateCamping));
-        System.out.println(calendarDate1);
-        System.out.println("testest");
+        // 여기가 안됨 => 되네?
+        // dateCamping 저장
+        dateCampingService.save(dateCamping);
 
+        // 이거 왜 안찍혀;;;
+        System.out.println("testest");
     }
 
 }
