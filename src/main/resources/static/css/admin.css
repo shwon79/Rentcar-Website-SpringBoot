@@ -67,6 +67,12 @@ body {
     margin: 5px 10px;
     display: flex;
     flex-direction: row;
+    border-radius: 0.5vh;
+}
+
+.reserve_list:hover {
+    cursor: pointer;
+    background-color: rgba(108, 108, 108, 0.45);
 }
 
 .reserve_list p {
@@ -77,6 +83,11 @@ body {
 #reserve_list_title {
     border-bottom: 1px solid lightgray;
     font-weight: bold;
+}
+
+#reserve_list_title:hover {
+    pointer-events: none;
+    background-color: transparent;
 }
 
 .detail_list {

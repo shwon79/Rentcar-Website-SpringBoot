@@ -20,7 +20,7 @@
         <div class="content_wrapper">
             <div class="menu_container">
                 <div class="menu_list">
-                    <li>메뉴1</li>
+                    <a href="/admin/logininfo"><li>캠핑카 예약</li></a>
                     <li>메뉴2</li>
                     <li>메뉴3</li>
                     <li>메뉴4</li>
@@ -45,7 +45,7 @@
                     <p class="reservation">예약</p>
                     <p id="set_reserve_header" class="set_reserve">확정</p>
                 </div>
-                <div style="cursor:pointer" th:onclick="'location.href = \'/'+${date.dateTimeId}+'\''" class="reserve_list" th:each="date : ${campingcarDateTimeList}">
+                <div th:onclick="'location.href = \'/'+${date.dateTimeId}+'\''" class="reserve_list" th:each="date : ${campingcarDateTimeList}">
                     <p class="car_type" th:text="${date.carType}"></p>
                     <p class="created_date" th:text="${date.createdDate}"></p>
                     <p class="modified_date" th:text="${date.modifiedDate}"></p>
@@ -58,9 +58,10 @@
                     <p class="deposit" th:text="${date.deposit}"></p>
                     <p class="total" th:text="${date.total}"></p>
                     <p class="reservation" th:text="${date.reservation} == '0'? 'X':'O'"></p>
-                    <form method="GET" th:action="${'/campingcar/reservation/update/'+date.dateTimeId}">
-                        <input class="set_reserve" type="submit" value="확정"/>
-                    </form>
+                    <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>
+<!--                    <form method="GET" th:action="${'/campingcar/reservation/update/'+date.dateTimeId}">-->
+<!--                        <input class="set_reserve" type="submit" value="확정"/>-->
+<!--                    </form>-->
                 </div>
             </div>
         </div>
