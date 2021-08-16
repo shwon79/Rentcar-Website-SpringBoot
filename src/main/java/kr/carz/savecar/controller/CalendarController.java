@@ -332,6 +332,13 @@ public class CalendarController {
     @GetMapping("/travel_reserve/{date_id}")
     public String handleRequest_travel(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
 
+        // 클릭한 날짜 데이터
+        CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
+
+        model.addAttribute("clickedDay", clickedDate.getDay());
+        model.addAttribute("clickedMonth", clickedDate.getMonth());
+        model.addAttribute("clickedYear", clickedDate.getYear());
+
         // 날짜
         Calendar cal = Calendar.getInstance();
 
@@ -406,6 +413,13 @@ public class CalendarController {
 
     @GetMapping("/liomousine_reserve/{date_id}")
     public String handleRequest_liomousine(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
+
+        // 클릭한 날짜 데이터
+        CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
+
+        model.addAttribute("clickedDay", clickedDate.getDay());
+        model.addAttribute("clickedMonth", clickedDate.getMonth());
+        model.addAttribute("clickedYear", clickedDate.getYear());
 
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -484,6 +498,13 @@ public class CalendarController {
 
     @RequestMapping("/europe_reserve/{date_id}")
     public String handleRequest(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
+
+        // 클릭한 날짜 데이터
+        CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
+
+        model.addAttribute("clickedDay", clickedDate.getDay());
+        model.addAttribute("clickedMonth", clickedDate.getMonth());
+        model.addAttribute("clickedYear", clickedDate.getYear());
 
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -566,7 +587,6 @@ public class CalendarController {
     public String handleRequest_travel_after(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
 
 
-        System.out.println("통과 -2");
         // 날짜
         Calendar cal = Calendar.getInstance();
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("travel");
@@ -576,7 +596,6 @@ public class CalendarController {
         int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
         int this_month = cal.get(Calendar.MONTH) + 1;
 
-        System.out.println("통과 -1");
 
         if(month == this_month-1){
             model.addAttribute("today", today);
