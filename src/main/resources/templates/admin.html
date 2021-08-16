@@ -45,7 +45,8 @@
                     <p class="reservation">예약</p>
                     <p id="set_reserve_header" class="set_reserve">확정</p>
                 </div>
-                <div th:onclick="'location.href = \'/'+${date.dateTimeId}+'\''" class="reserve_list" th:each="date : ${campingcarDateTimeList}">
+<!--                th:onclick="'location.href = \'/'+${date.dateTimeId}+'\''"-->
+                <div class="reserve_list" th:each="date : ${campingcarDateTimeList}">
                     <p class="car_type" th:text="${date.carType}"></p>
                     <p class="created_date" th:text="${date.createdDate}"></p>
                     <p class="modified_date" th:text="${date.modifiedDate}"></p>
