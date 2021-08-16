@@ -167,6 +167,22 @@ form {
     align-items: center;
 }
 
+#mainTable_tbody tr {
+
+}
+
+#mainTable_tbody td {
+    padding: 10px;
+}
+
+#mainTable_tbody {
+    border-spacing: 10px;
+
+}
+
+.set_reserve:hover {
+    background-color: indianred;
+}
 
 #reserve_list_title .set_reserve {
     margin: 0;

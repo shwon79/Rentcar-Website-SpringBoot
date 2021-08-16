@@ -4,6 +4,8 @@ package kr.carz.savecar.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -12,6 +14,26 @@ public class CampingCarPrice {
     @Id
     @Column(name = "car_name")
     private String carName;
+
+
+    @OneToMany(mappedBy = "carName", targetEntity=CalendarTime.class)
+    private List<CalendarTime> calendarTimeList = new ArrayList<CalendarTime>();
+
+    public void addCalendarTime(CalendarTime calendarTime)
+    {
+        calendarTime.setCarName(this);
+        this.calendarTimeList.add(calendarTime);
+    }
+
+
+    @OneToMany(mappedBy = "carName", targetEntity=DateCamping.class)
+    private List<DateCamping> dateCampingList = new ArrayList<DateCamping>();
+
+    public void addDateCamping(DateCamping dateCamping)
+    {
+        dateCamping.setCarName(this);
+        this.dateCampingList.add(dateCamping);
+    }
 
     private String onedays;
     private String twodays;

@@ -13,12 +13,12 @@ import java.io.Serializable;
 public class DateCamping implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(name = "dateId", insertable=true ,updatable=true)
+    @JoinColumn(name = "dateId")
     private CalendarDate dateId; // 날짜 id
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "car_name", insertable=true ,updatable=true)
+    @JoinColumn(name = "car_name")
     private CampingCarPrice carName; // 캠핑카 이름(key)
 
     private String reserved;    // 예약완료여부

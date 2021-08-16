@@ -1,6 +1,7 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.CalendarDate;
+import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.CampingCarPrice;
 import kr.carz.savecar.repository.CalendarDateRepository;
 import kr.carz.savecar.repository.CampingCarPriceRepository;
@@ -13,6 +14,10 @@ public class CampingCarPriceService {
 
     public CampingCarPriceService(CampingCarPriceRepository campingCarPriceRepository) {
         this.campingCarPriceRepository = campingCarPriceRepository;
+    }
+
+    public String save(CampingCarPrice campingCarPrice) {
+        return campingCarPriceRepository.save(campingCarPrice).getCarName();
     }
 
     public List<CampingCarPrice> findCampingCarPrice(){
