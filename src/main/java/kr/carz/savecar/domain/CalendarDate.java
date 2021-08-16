@@ -2,6 +2,7 @@ package kr.carz.savecar.domain;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"calendarTimeList", "dateCampingList"})
 @Table(name = "CalendarDate")
 public class CalendarDate {
     @Id
