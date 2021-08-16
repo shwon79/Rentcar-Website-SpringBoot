@@ -135,6 +135,7 @@ body {
     border-radius: 0.5vh;
     border: none;
     color: aliceblue;
+    cursor: pointer;
 }
 
 .set_reserve:hover {

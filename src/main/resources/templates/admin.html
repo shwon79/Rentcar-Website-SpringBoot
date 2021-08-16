@@ -50,11 +50,8 @@
                         </tr>
                         </thead>
                         <tbody id="mainTable_tbody">
-                        <tr th:each="date : ${campingcarDateTimeList}">
-                            <a th:href="${'/'+date.dateTimeId}">
+                        <tr th:name="${date.dateTimeId}" onclick="location.href = `/${name}`" th:each="date : ${campingcarDateTimeList}">
                             <td class="car_type" th:text="${date.carType}"></td>
-                            </a>
-
                             <td class="created_date" th:text="${date.createdDate}"></td>
                             <td class="modified_date" th:text="${date.modifiedDate}"></td>
                             <td class="rent_date" th:text="${date.rentDate}"></td>
