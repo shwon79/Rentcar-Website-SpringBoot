@@ -28,6 +28,12 @@
   cursor: pointer;
 }
 
+.calendar_content {
+  margin-bottom: 100px;
+  padding-top: 100px;
+  padding-bottom: 250px;
+}
+
 .go-today {
   width: 75px;
   border-left: 1px solid #6f6c6c;
@@ -113,6 +119,10 @@
   font-weight: bold;
 }
 
+.reserved_selections {
+  padding: 5px;
+}
+
 .other {
   opacity: .3;
 }
@@ -128,7 +138,7 @@ a:hover {
 
 @media (max-width: 990px) {
 
-  .content {
+  .calendar_content {
     padding: 0;
     margin: 100px 0;
   }
