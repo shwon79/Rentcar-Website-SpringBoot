@@ -46,7 +46,7 @@
                     <p class="set_reserve">확정</p>
                 </div>
                 <div class="reserve_list" th:each="date : ${campingcarDateTimeList}">
-                    <a th:href="${'/'+date.id}">
+                    <a th:href="${'/'+date.dateTimeId}">
                         <p class="car_type" th:text="${date.carType}"></p>
                         <p class="created_date" th:text="${date.createdDate}"></p>
                         <p class="modified_date" th:text="${date.modifiedDate}"></p>
