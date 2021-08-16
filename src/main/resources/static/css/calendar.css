@@ -78,6 +78,12 @@
   width: 100%;
 }
 
+.no_reserve {
+  text-align: center;
+  color: gray;
+  margin: 30% 0;
+}
+
 .downside {
   width: 100%;
   padding-top: 10px;
