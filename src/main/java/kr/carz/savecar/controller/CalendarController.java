@@ -551,7 +551,6 @@ public class CalendarController {
             dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
         }
 
-        System.out.println(dateCampingList.get(0).get(0).getCarName());
         model.addAttribute("dateCampingList", dateCampingList);
 
 
@@ -570,6 +569,9 @@ public class CalendarController {
 
     @RequestMapping("/travel_reserve/after/{month}")
     public String handleRequest_travel_after(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
+
+
+        System.out.println("통과 -2");
         // 날짜
         Calendar cal = Calendar.getInstance();
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("travel");
@@ -579,6 +581,7 @@ public class CalendarController {
         int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
         int this_month = cal.get(Calendar.MONTH) + 1;
 
+        System.out.println("통과 -1");
 
         if(month == this_month-1){
             model.addAttribute("today", today);
@@ -587,6 +590,8 @@ public class CalendarController {
             model.addAttribute("today", 0);
             System.out.println(0);
         }
+
+        System.out.println("통과 0");
 
         if(now_month > 11){
             response.setContentType("text/html; charset=UTF-8");
@@ -601,28 +606,34 @@ public class CalendarController {
             List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(now_month));
 
 
+            System.out.println("통과 1");
+
             // 전달 날짜 구하기
             cal.set(cal.get(Calendar.YEAR), now_month - 1, 1); // 8
 
             Long firstDateId = calendarDateList.get(0).getDateId();
             Integer before = cal.get(Calendar.DAY_OF_WEEK);
+            System.out.println("통과 2");
 
             for (int i = 1; i < before; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
+            System.out.println("통과 3");
 
             // 다음달 날짜 구하기
             cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
 
             Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
             Integer after = cal.get(Calendar.DAY_OF_WEEK);
+            System.out.println("통과 4");
 
             for (int i = 1; i <= 7 - after; i++) {
                 calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
             }
 
             Integer daylast = 7-after;
-            System.out.println(daylast);
+
+            System.out.println("통과 5");
 
             model.addAttribute("daylast", calendarDateList);
             model.addAttribute("calendarDateList", calendarDateList);
@@ -634,6 +645,8 @@ public class CalendarController {
             for (int i = 0; i < calendarDateList.size(); i++) {
                 dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
             }
+            System.out.println("통과 6");
+
 
             model.addAttribute("dateCampingList", dateCampingList);
 
