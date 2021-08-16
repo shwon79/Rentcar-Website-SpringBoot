@@ -30,85 +30,38 @@
                 </div>
             </div>
             <div class="list_container">
-                <div id="mainTable">
-                    <table>
-                        <thead id="table_header">
-                        <tr>
-                            <th>차종</th>
-                            <th>생성일</th>
-                            <th>수정일</th>
-                            <th>시작일</th>
-                            <th>시작</th>
-                            <th>반납일</th>
-                            <th>반납</th>
-                            <th>일권</th>
-                            <th>성명</th>
-                            <th>보증금</th>
-                            <th>총결제금액</th>
-                            <th>예약</th>
-                            <th>확정</th>
-                        </tr>
-                        </thead>
-                        <tbody id="mainTable_tbody">
-                        <tr th:name="${date.dateTimeId}" onclick="location.href = `/${name}`" th:each="date : ${campingcarDateTimeList}">
-                            <td class="car_type" th:text="${date.carType}"></td>
-                            <td class="created_date" th:text="${date.createdDate}"></td>
-                            <td class="modified_date" th:text="${date.modifiedDate}"></td>
-                            <td class="rent_date" th:text="${date.rentDate}"></td>
-                            <td class="rent_time" th:text="${date.rentTime}"></td>
-                            <td class="return_date" th:text="${date.returnDate}"></td>
-                            <td class="return_time" th:text="${date.returnTime}"></td>
-                            <td class="day" th:text="${date.day}"></td>
-                            <td class="name" th:text="${date.name}"></td>
-                            <td class="deposit" th:text="${date.deposit}"></td>
-                            <td class="total" th:text="${date.total}"></td>
-                            <td class="reservation" th:text="${date.reservation} == '0'? 'X':'O'"></td>
-                            <td>
-                                <form method="GET" th:action="${'/campingcar/reservation/update/'+date.dateTimeId}">
-                                    <input class="set_reserve" type="submit" value="확정"/>
-                                </form>
-<!--                                <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>-->
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="reserve_list" id="reserve_list_title">
+                    <p class="car_type">차종</p>
+                    <p class="created_date">생성일</p>
+                    <p class="modified_date">수정일</p>
+                    <p class="rent_date">시작일</p>
+                    <p class="rent_time">시작</p>
+                    <p class="return_date">반납일</p>
+                    <p class="return_time">반납</p>
+                    <p class="day">일권</p>
+                    <p class="name">성명</p>
+                    <p class="deposit">보증금</p>
+                    <p class="total">총결제금액</p>
+                    <p class="reservation">예약</p>
+                    <p id="set_reserve_header" class="set_reserve">확정</p>
                 </div>
-
-                <!--
-                 <div class="reserve_list" id="reserve_list_title">
-                     <p class="car_type">차종</p>
-                     <p class="created_date">생성일</p>
-                     <p class="modified_date">수정일</p>
-                     <p class="rent_date">시작일</p>
-                     <p class="rent_time">시작</p>
-                     <p class="return_date">반납일</p>
-                     <p class="return_time">반납</p>
-                     <p class="day">일권</p>
-                     <p class="name">성명</p>
-                     <p class="deposit">보증금</p>
-                     <p class="total">총결제금액</p>
-                     <p class="reservation">예약</p>
-                     <p class="set_reserve">확정</p>
-                 </div>
-                 <div class="reserve_list" th:each="date : ${campingcarDateTimeList}">
-                     <a th:href="${'/'+date.dateTimeId}">
-                         <p class="car_type" th:text="${date.carType}"></p>
-                     </a>
-                         <p class="created_date" th:text="${date.createdDate}"></p>
-                         <p class="modified_date" th:text="${date.modifiedDate}"></p>
-                         <p class="rent_date" th:text="${date.rentDate}"></p>
-                         <p class="rent_time" th:text="${date.rentTime}"></p>
-                         <p class="return_date" th:text="${date.returnDate}"></p>
-                         <p class="return_time" th:text="${date.returnTime}"></p>
-                         <p class="day" th:text="${date.day}"></p>
-                         <p class="name" th:text="${date.name}"></p>
-                         <p class="deposit" th:text="${date.deposit}"></p>
-                         <p class="total" th:text="${date.total}"></p>
-                         <p class="reservation" th:text="${date.reservation} == '0'? 'X':'O'"></p>
-                         <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>
-
-                 </div>
-                    -->
+                <div style="cursor:pointer" th:onclick="'location.href = \'/'+${date.dateTimeId}+'\''" class="reserve_list" th:each="date : ${campingcarDateTimeList}">
+                    <p class="car_type" th:text="${date.carType}"></p>
+                    <p class="created_date" th:text="${date.createdDate}"></p>
+                    <p class="modified_date" th:text="${date.modifiedDate}"></p>
+                    <p class="rent_date" th:text="${date.rentDate}"></p>
+                    <p class="rent_time" th:text="${date.rentTime}"></p>
+                    <p class="return_date" th:text="${date.returnDate}"></p>
+                    <p class="return_time" th:text="${date.returnTime}"></p>
+                    <p class="day" th:text="${date.day}"></p>
+                    <p class="name" th:text="${date.name}"></p>
+                    <p class="deposit" th:text="${date.deposit}"></p>
+                    <p class="total" th:text="${date.total}"></p>
+                    <p class="reservation" th:text="${date.reservation} == '0'? 'X':'O'"></p>
+                    <form method="GET" th:action="${'/campingcar/reservation/update/'+date.dateTimeId}">
+                        <input class="set_reserve" type="submit" value="확정"/>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

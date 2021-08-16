@@ -17,6 +17,11 @@ body {
     padding: 5px;
 }
 
+#logout_box button:hover {
+    background-color: indianred;
+    cursor: pointer;
+}
+
 .content_wrapper {
     display: flex;
     flex-direction: row;
@@ -46,17 +51,16 @@ body {
     border-radius: 0.5vh;
 }
 
-#mainTable_tbody tr {
+#mainTable tr {
 
 }
 
-#mainTable_tbody td {
+#mainTable td {
     padding: 10px;
 }
 
-#mainTable_tbody {
-    border-spacing: 10px;
-
+#mainTable th{
+    padding: 10px;
 }
 
 .reserve_list {
@@ -141,6 +145,17 @@ body {
 .set_reserve:hover {
     background-color: indianred;
 }
+
+#set_reserve_header {
+    padding: 0;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 #reserve_list_title .set_reserve {
     margin: 0;
