@@ -20,6 +20,10 @@ public class CalendarTime {
     @ManyToOne
     @JoinColumn(name = "car_name")
     private CampingCarPrice carName; // 캠핑카 id
-    private String reserve_time;    // 예약시작시간
-    private String reserve_complete;   // 시간당 예약여부
+
+    @Column(name = "reserve_time")
+    private String reserveTime;    // 예약시작시간
+
+    @Column(name = "reserve_complete")
+    private String reserveComplete;   // 시간당 예약여부
 }

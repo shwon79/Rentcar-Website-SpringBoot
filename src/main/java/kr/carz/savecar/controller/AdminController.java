@@ -104,4 +104,57 @@ public class AdminController {
     }
 
 
+    // 메인페이지
+    @GetMapping(value = "/admin/main")
+    @ResponseBody
+    public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+
+        HttpSession session = req.getSession();
+        if((Login)session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("login");
+        } else {
+
+            // admin view로 넘기기
+            List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
+
+            mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
+            mav.setViewName("admin");
+
+        }
+
+        return mav;
+    }
+
+
+    // 메인페이지
+    @GetMapping(value = "/admin/logout")
+    @ResponseBody
+    public ModelAndView get_admin_logout(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+        HttpSession session = req.getSession();
+        session.removeAttribute("user");
+        session.invalidate();
+
+        res.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = res.getWriter();
+        out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
+        out.flush();
+
+        mav.setViewName("login");
+
+
+        return mav;
+    }
+
 }

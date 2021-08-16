@@ -24,8 +24,11 @@ public class CalendarTimeService {
         return calendarTimeRepository.findByDateIdAndCarName(dateId, carName);
     }
 
-//    public CalendarTime findCalendarTimeByDateIdAndCarNameAndReserveTime(CalendarDate dateId, CampingCarPrice carName, String reserve_time){
-//        return calendarTimeRepository.findByDateIdAndCarNameAndReserve_time(dateId, carName, reserve_time);
-//    }
+    public CalendarTime findCalendarTimeByDateIdAndCarNameAndReserveTime(CalendarDate dateId, CampingCarPrice carName, String reserve_time){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTime(dateId, carName, reserve_time);
+    }
+    public CalendarTime findCalendarTimeByTimeId(Long timeId){
+        return calendarTimeRepository.findByTimeId(timeId);
+    }
 
 }

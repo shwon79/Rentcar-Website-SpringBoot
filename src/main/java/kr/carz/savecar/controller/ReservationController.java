@@ -232,39 +232,33 @@ public class ReservationController {
             // CampingCarPrice 객체 가져오기
             CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingcarDateTime.getCarType());
 
-//            CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, campingcarDateTime.getRentTime());
-//            Integer return_total_time = Integer.parseInt(campingcarDateTime.getReturnTime()) + Integer.parseInt(campingcarDateTime.getExtraTime());
-//            CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, Integer.toString(return_total_time));
+            CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, campingcarDateTime.getRentTime());
+            CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, campingcarDateTime.getReturnTime());
 
 
-//            if (calendarReturnTime.getTimeId().equals("17시")){
-//                for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId(); i++){
-//
-//
-//                }
-//            }
+            if (calendarReturnTime.getTimeId().equals("17시")){
+                for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId(); i++){
+                    CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
+                    timeIndiv.setReserveComplete("1");
+                }
+            } else {
+                for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId() + 1; i++){
+                    CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
+                    timeIndiv.setReserveComplete("1");
+                }
+            }
 
 
 
-//            for (Long i = calendarDate.getDateId(); i <= returnCalendarDate.getDateId(); i++) {
-//                // CalendarDate 날짜 객체 가져오기
-//                CalendarDate calendarDateIndiv = calendarDateService.findCalendarDateByDateId(i);
-//
-//                if(i == returnCalendarDate.getDateId()) {
-//
-//                } else {
-//                    // CalendarTime에서 날짜로 시간 정보 찾기
-//                    List<CalendarTime> calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDateIndiv, campingCarPrice);
-//
-//                    for (int j = 0; j < calendarTime.size(); j++) {
-//                        calendarTime.get(j).setReserve_complete("1");
-//                    }
-//                }
-//                // DateCamping 에서 날짜랑 차정보로 하루 예약 정보 찾기
-//                DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDateIndiv, campingCarPrice);
-//                // DateCamping 하루 예약 정보 수정, campingcarDateTime 예약리스트 예약 정보 수정
-//                dateCamping.setReserved("1");
-//            }
+            for (Long i = calendarDate.getDateId(); i <= returnCalendarDate.getDateId(); i++) {
+                // CalendarDate 날짜 객체 가져오기
+                CalendarDate calendarDateIndiv = calendarDateService.findCalendarDateByDateId(i);
+
+                // DateCamping 에서 날짜랑 차정보로 하루 예약 정보 찾기
+                DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDateIndiv, campingCarPrice);
+                // DateCamping 하루 예약 정보 수정, campingcarDateTime 예약리스트 예약 정보 수정
+                dateCamping.setReserved("1");
+            }
 
 
             // campingcarDateTime 저장

@@ -142,7 +142,6 @@ public class CalendarController {
         Long firstDateId = calendarDateList.get(0).getDateId();
         Integer before = cal.get(Calendar.DAY_OF_WEEK);
 
-
         for(int i=1; i<before; i++){
             calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
         }
@@ -164,7 +163,6 @@ public class CalendarController {
         model.addAttribute("calendarDateList", calendarDateList);
 
 
-
         // 날짜별 캠핑카
         List<List<DateCamping>> dateCampingList = new ArrayList();
 
@@ -172,11 +170,9 @@ public class CalendarController {
             dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
         }
 
-        System.out.println(dateCampingList.get(0).get(0).getCarName());
         model.addAttribute("dateCampingList", dateCampingList);
         model.addAttribute("thisMonth", now_month);
         model.addAttribute("thisYear", now_year);
-
 
         return "calendar";
     }
@@ -1177,9 +1173,9 @@ public class CalendarController {
         List <String> categoryList2 = new ArrayList();
 
         for (int i = 0; i < calendarTimeList.size(); i++) {
-            if (calendarTimeList.get(i).getReserve_complete().equals("0")){
+            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
 
-                categoryList2.add(calendarTimeList.get(i).getReserve_time());
+                categoryList2.add(calendarTimeList.get(i).getReserveTime());
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -1215,9 +1211,9 @@ public class CalendarController {
         List <String> categoryList2 = new ArrayList();
 
         for (int i = 0; i < calendarTimeList.size(); i++) {
-            if (calendarTimeList.get(i).getReserve_complete().equals("0")){
+            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
 
-                categoryList2.add(calendarTimeList.get(i).getReserve_time());
+                categoryList2.add(calendarTimeList.get(i).getReserveTime());
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -1253,9 +1249,9 @@ public class CalendarController {
         List <String> categoryList2 = new ArrayList();
 
         for (int i = 0; i < calendarTimeList.size(); i++) {
-            if (calendarTimeList.get(i).getReserve_complete().equals("0")){
+            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
 
-                categoryList2.add(calendarTimeList.get(i).getReserve_time());
+                categoryList2.add(calendarTimeList.get(i).getReserveTime());
             }
         }
         JSONArray jsonArray = new JSONArray();
