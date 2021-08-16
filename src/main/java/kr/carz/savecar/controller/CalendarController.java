@@ -338,6 +338,7 @@ public class CalendarController {
         model.addAttribute("clickedDay", clickedDate.getDay());
         model.addAttribute("clickedMonth", clickedDate.getMonth());
         model.addAttribute("clickedYear", clickedDate.getYear());
+        model.addAttribute("clickedWDay", clickedDate.getWDay());
 
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -420,6 +421,7 @@ public class CalendarController {
         model.addAttribute("clickedDay", clickedDate.getDay());
         model.addAttribute("clickedMonth", clickedDate.getMonth());
         model.addAttribute("clickedYear", clickedDate.getYear());
+        model.addAttribute("clickedWDay", clickedDate.getWDay());
 
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -505,6 +507,7 @@ public class CalendarController {
         model.addAttribute("clickedDay", clickedDate.getDay());
         model.addAttribute("clickedMonth", clickedDate.getMonth());
         model.addAttribute("clickedYear", clickedDate.getYear());
+        model.addAttribute("clickedWDay", clickedDate.getWDay());
 
         // 날짜
         Calendar cal = Calendar.getInstance();
