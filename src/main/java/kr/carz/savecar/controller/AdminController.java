@@ -104,7 +104,7 @@ public class AdminController {
     }
 
 
-    //로그인
+    // 메인페이지
     @GetMapping(value = "/admin/main")
     @ResponseBody
     public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
