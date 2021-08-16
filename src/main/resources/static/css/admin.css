@@ -46,6 +46,18 @@ body {
     border-radius: 0.5vh;
 }
 
+#mainTable_tbody tr {
+
+}
+
+#mainTable_tbody td {
+    padding: 10px;
+}
+
+#mainTable_tbody {
+    border-spacing: 10px;
+
+}
 
 .reserve_list {
     margin: 5px 10px;
@@ -117,12 +129,16 @@ body {
 }
 .set_reserve {
     flex: 1;
-    padding: 0;
+    padding: 10px;
     margin: 5px 0;
     background-color: #1F1D19;
     border-radius: 0.5vh;
     border: none;
     color: aliceblue;
+}
+
+.set_reserve:hover {
+    background-color: indianred;
 }
 
 #reserve_list_title .set_reserve {
