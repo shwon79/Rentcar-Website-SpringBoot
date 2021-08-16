@@ -117,7 +117,7 @@ const reserveDone = () => {
                 return response
             })
                 .then(result => {
-                    alert('예약이 완료되었습니다!');
+                    alert('예약 대기신청이 완료되었습니다.');
                     window.location.href = '/europe';
                 })
                 // .catch(err => console.error('Error: ', err))

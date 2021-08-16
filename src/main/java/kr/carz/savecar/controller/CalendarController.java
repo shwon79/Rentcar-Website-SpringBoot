@@ -1129,7 +1129,8 @@ public class CalendarController {
                 + "선결제금액: " + dto.getTotalHalf() + "\n"
                 + "요청사항: " + dto.getDetail() + "\n\n");
 
-        params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+        params2.put("text", "[캠핑카 예약 대기 신청이 완료되었습니다.]" + "\n"
+                + "예약 확정 시 담당자가 따로 안내연락드립니다." + "\n\n"
                 + "대여날짜: " + dto.getRentDate() + "\n"
                 + "대여시간: " + dto.getRentTime() + "\n"
                 + "반납날짜: " + dto.getReturnDate() + "\n"
@@ -1138,7 +1139,7 @@ public class CalendarController {
                 + "전화번호: " + dto.getPhone() + "\n"
                 + "입금자명: " + dto.getDepositor() + "\n"
                 + "이용날짜: " + dto.getDay() + "\n"
-                + "추가시간: " + dto.getExtraTime() + "\n"
+                + "추가시간: " + dto.getExtraTime() + "시간\n"
                 + "총금액: " + dto.getTotal() + "\n"
                 + "선결제금액: " + dto.getTotalHalf() + "\n"
                 + "요청사항: " + dto.getDetail() + "\n\n");
