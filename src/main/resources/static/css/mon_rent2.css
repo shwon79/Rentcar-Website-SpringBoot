@@ -4,7 +4,8 @@
 
 #select_wrapper {
     margin: 20px;
-    border: 1px solid gray;
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
 }
 
 #select_wrapper div {
@@ -43,4 +44,8 @@
 
 #sel_able label {
     width: 240px;
+}
+
+#table_header {
+    background-color: #b3b0ac;
 }

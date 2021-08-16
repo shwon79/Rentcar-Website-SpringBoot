@@ -29,7 +29,7 @@
     <div layout:fragment="content">
         <div th:replace="fragments/header_camp::headerFragment"></div>
 
-        <div class="calendar content">
+        <div class="calendar_content">
             <div class="container">
                 <div class="header">
                         <a th:href="'/calendar/before/' + ${prevMonth}">
@@ -70,30 +70,37 @@
                                 </div>
                                 <!--  calendar downside part  -->
                                 <div th:id="${date.day}" class="downside" th:style="${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'display: none':''">
-                                    <div>
+                                    <div th:if="${dateCampingList[iterStat.index][0].reserved} == 1">
                                         <a th:href="'/europe_reserve/'+${date.dateId}" th:style="${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'display: none':''">
                                             <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
                                             (<span class="this" th:text="${dateCampingList[iterStat.index][0].reserved}"></span>/1)
                                         </a>
                                     </div>
+                                    <div class="reserved_selections" th:unless="${dateCampingList[iterStat.index][0].reserved} == 1">
+                                        <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
+                                        <span>(0/1)</span>
+                                    </div>
 
-                                    <div>
+                                    <div th:if="${dateCampingList[iterStat.index][1].reserved} == 1">
                                         <a th:href="'/liomousine_reserve/'+${date.dateId}" th:style="${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'display: none':''">
                                             <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
                                             (<span class="this" th:text="${dateCampingList[iterStat.index][1].reserved}" ></span>/1)
                                         </a>
                                     </div>
+                                    <div class="reserved_selections" th:unless="${dateCampingList[iterStat.index][1].reserved} == 1">
+                                        <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
+                                        <span>(0/1)</span>
+                                    </div>
 
-                                    <div th:if="${dateCampingList[iterStat.index][2].reserved} != 1" >
+                                    <div th:if="${dateCampingList[iterStat.index][2].reserved} == 1" >
                                         <a th:href="'/travel_reserve/'+${date.dateId}">
                                             <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
                                             (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)
                                         </a>
                                     </div>
-                                    <div th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" >
-                                            <span th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" class="this"
-                                                  th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
-                                            (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)
+                                    <div class="reserved_selections" th:unless="${dateCampingList[iterStat.index][2].reserved} == 1" >
+                                        <span th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
+                                        <span>(0/1)</span>
                                     </div>
                                 </div>
                             </div>
@@ -129,28 +136,35 @@
                                 <p th:text="${thisYear+'-'+date.month+'-'+date.day+' [ '+date.season+' ]'}"></p>
                                 <p>선택한 날짜의 객실 목록</p>
                             </div>
-                            <div class="detail_selections">
+                            <div class="detail_selections" th:if="${dateCampingList[iterStat.index][0].reserved} == 1">
                                 <a th:href="'/europe_reserve/'+${date.dateId}">
                                     <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
                                     (<span class="this" th:text="${dateCampingList[iterStat.index][0].reserved}"></span>/1)
                                 </a>
                             </div>
-                            <div class="detail_selections">
+                            <div class="detail_selections" th:unless="${dateCampingList[iterStat.index][0].reserved} == 1">
+                                <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
+                                <span>(0/1)</span>
+                            </div>
+                            <div class="detail_selections" th:if="${dateCampingList[iterStat.index][1].reserved} == 1">
                                 <a th:href="'/liomousine_reserve/'+${date.dateId}">
                                     <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
                                     (<span class="this" th:text="${dateCampingList[iterStat.index][1].reserved}" ></span>/1)
                                 </a>
                             </div>
-                            <div class="detail_selections" th:if="${dateCampingList[iterStat.index][2].reserved} != 1"  >
+                            <div class="detail_selections" th:unless="${dateCampingList[iterStat.index][1].reserved} == 1">
+                                <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
+                                <span>(0/1)</span>
+                            </div>
+                            <div class="detail_selections" th:if="${dateCampingList[iterStat.index][2].reserved} == 1"  >
                                 <a th:href="'/travel_reserve/'+${date.dateId}">
                                     <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
                                     (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)
                                 </a>
                             </div>
-                            <div class="detail_selections" th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" >
-                                    <span th:unless="${dateCampingList[iterStat.index][2].reserved} != 1" class="this"
-                                          th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
-                                    (<span class="this" th:text="${dateCampingList[iterStat.index][2].reserved}"></span>/1)
+                            <div class="detail_selections" th:unless="${dateCampingList[iterStat.index][2].reserved} == 1" >
+                                <span th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
+                                <span>(0/1)</span>
                             </div>
                         </div>
                     </div>

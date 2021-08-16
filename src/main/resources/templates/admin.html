@@ -46,18 +46,20 @@
                     <p class="set_reserve">확정</p>
                 </div>
                 <div class="reserve_list" th:each="date : ${campingcarDateTimeList}">
-                    <p class="car_type" th:text="${date.carType}"></p>
-                    <p class="created_date" th:text="${date.createdDate}"></p>
-                    <p class="modified_date" th:text="${date.modifiedDate}"></p>
-                    <p class="rent_date" th:text="${date.rentDate}"></p>
-                    <p class="rent_time" th:text="${date.rentTime}"></p>
-                    <p class="return_date" th:text="${date.returnDate}"></p>
-                    <p class="return_time" th:text="${date.returnTime}"></p>
-                    <p class="day" th:text="${date.day}"></p>
-                    <p class="name" th:text="${date.name}"></p>
-                    <p class="deposit" th:text="${date.deposit}"></p>
-                    <p class="total" th:text="${date.total}"></p>
-                    <p class="reservation" th:text="${date.reservation} == '0'? 'X':'O'"></p>
+                    <a th:href="${'/'+date.id}">
+                        <p class="car_type" th:text="${date.carType}"></p>
+                        <p class="created_date" th:text="${date.createdDate}"></p>
+                        <p class="modified_date" th:text="${date.modifiedDate}"></p>
+                        <p class="rent_date" th:text="${date.rentDate}"></p>
+                        <p class="rent_time" th:text="${date.rentTime}"></p>
+                        <p class="return_date" th:text="${date.returnDate}"></p>
+                        <p class="return_time" th:text="${date.returnTime}"></p>
+                        <p class="day" th:text="${date.day}"></p>
+                        <p class="name" th:text="${date.name}"></p>
+                        <p class="deposit" th:text="${date.deposit}"></p>
+                        <p class="total" th:text="${date.total}"></p>
+                        <p class="reservation" th:text="${date.reservation} == '0'? 'X':'O'"></p>
+                    </a>
                     <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>
                 </div>
             </div>
