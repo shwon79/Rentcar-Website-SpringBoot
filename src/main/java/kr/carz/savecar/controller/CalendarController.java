@@ -672,7 +672,10 @@ public class CalendarController {
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
             model.addAttribute("thisYear", 2021);
-            System.out.println(now_month);
+
+            model.addAttribute("clickedYear", "2021");
+            model.addAttribute("clickedMonth", now_month);
+            model.addAttribute("clickedPrevMonth",now_month-1);
 
         }
 
@@ -736,7 +739,6 @@ public class CalendarController {
             }
 
             Integer daylast = 7-after;
-            System.out.println(daylast);
 
             model.addAttribute("daylast", calendarDateList);
             model.addAttribute("calendarDateList", calendarDateList);
@@ -749,6 +751,17 @@ public class CalendarController {
                 dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
             }
 
+            System.out.println("calendarDateList 사이즈 : "+calendarDateList.size());
+
+            System.out.println("dateCampingList 사이즈 : "+dateCampingList.size());
+
+
+            for (int i = 0; i < dateCampingList.size(); i++) {
+
+                System.out.println(dateCampingList.get(i).get(0).getReserved());
+                System.out.println(dateCampingList.get(i).get(1).getReserved());
+            }
+
             model.addAttribute("dateCampingList", dateCampingList);
 
             // 캠핑카 가격
@@ -757,7 +770,10 @@ public class CalendarController {
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
             model.addAttribute("thisYear", 2021);
-            System.out.println(now_month);
+
+            model.addAttribute("clickedYear", "2021");
+            model.addAttribute("clickedMonth", now_month);
+            model.addAttribute("clickedPrevMonth",now_month-1);
 
         }
 
@@ -841,7 +857,11 @@ public class CalendarController {
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
             model.addAttribute("thisYear", 2021);
-            System.out.println(now_month);
+
+
+            model.addAttribute("clickedYear", "2021");
+            model.addAttribute("clickedMonth", now_month);
+            model.addAttribute("clickedPrevMonth",now_month-1);
 
         }
 
@@ -918,6 +938,11 @@ public class CalendarController {
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
             model.addAttribute("thisYear", 2021);
+
+
+            model.addAttribute("clickedYear", "2021");
+            model.addAttribute("clickedMonth", now_month);
+            model.addAttribute("clickedPrevMonth",now_month-1);
         }
 
 
@@ -994,6 +1019,11 @@ public class CalendarController {
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
             model.addAttribute("thisYear", 2021);
+
+
+            model.addAttribute("clickedYear", "2021");
+            model.addAttribute("clickedMonth", now_month);
+            model.addAttribute("clickedPrevMonth",now_month-1);
         }
 
 
@@ -1072,6 +1102,11 @@ public class CalendarController {
             model.addAttribute("prevMonth", now_month-1);
             model.addAttribute("thisMonth", now_month);
             model.addAttribute("thisYear", 2021);
+
+
+            model.addAttribute("clickedYear", "2021");
+            model.addAttribute("clickedMonth", now_month);
+            model.addAttribute("clickedPrevMonth",now_month-1);
         }
 
 
