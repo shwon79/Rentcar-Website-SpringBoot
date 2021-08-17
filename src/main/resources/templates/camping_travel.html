@@ -175,6 +175,18 @@
                         </div><hr id="hr_time" style="background: dimgray;" />
                     </div>
 
+                    <div class="select_wrapper row" onclick="doDisplay_return()">
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-center">
+                            <div class="date_menu">대여 기간 선택</div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="date_time">기간을 선택해주세요.</div>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">
+                        </div>
+                    </div><hr style="background: dimgray;" />
+
                     <div id="rent_days">
                         <div>
                             <label for="days_select">렌트 일자</label>
@@ -212,21 +224,24 @@
                                 <option value="30">30일권</option>
 
                             </select>
+                            <hr style="background: dimgray;" />
                         </div>
-                        <div>
-                            <label for="extratime_select">추가 시간</label>
-                            <select name="extratime" id="extratime_select" onchange="timeSelect()">
-                                <option value="0">--추가 시간 선택--</option>
-                                <option id="1h" value="1">+1시간(+40,000원)</option>
-                                <option id="2h" value="2">+2시간(+80,000원)</option>
-                                <option id="3h" value="3">+3시간(+120,000원)</option>
-                                <option id="4h" value="4">+4시간(+160,000원)</option>
-                                <option id="5h" value="5">+5시간(+200,000원)</option>
-                                <option id="6h" value="6">+6시간(+240,000원)</option>
-                                <option id="7h" value="7">+7시간(+280,000원)</option>
-                            </select>
-                        </div>
-                    </div><hr style="background: dimgray;" />
+
+<!--                        <div>-->
+<!--                            <label for="extratime_select">추가 시간</label>-->
+<!--                            <select name="extratime" id="extratime_select" onchange="timeSelect()">-->
+<!--                                <option value="0">&#45;&#45;추가 시간 선택&#45;&#45;</option>-->
+<!--                                <option id="1h" value="1">+1시간(+40,000원)</option>-->
+<!--                                <option id="2h" value="2">+2시간(+80,000원)</option>-->
+<!--                                <option id="3h" value="3">+3시간(+120,000원)</option>-->
+<!--                                <option id="4h" value="4">+4시간(+160,000원)</option>-->
+<!--                                <option id="5h" value="5">+5시간(+200,000원)</option>-->
+<!--                                <option id="6h" value="6">+6시간(+240,000원)</option>-->
+<!--                                <option id="7h" value="7">+7시간(+280,000원)</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+
+                    </div>
 
                     <div>
                         <div id="calResultWrapper">
@@ -243,8 +258,9 @@
                                 <h2>총 결제금액</h2>
                                 <p id="calResult"></p>
                             </div>
+                            <hr style="background: dimgray;" />
                         </div>
-                    </div><hr style="background: dimgray;" />
+                    </div>
 
                     <!-- 계산 부분 -->
                     <div class="row">

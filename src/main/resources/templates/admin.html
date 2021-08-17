@@ -49,8 +49,8 @@
                 <div class="reserve_list_wrapper" th:each="date : ${campingcarDateTimeList}">
                     <div class="reserve_list" th:onclick="'location.href = \'/admin/detail/'+${date.dateTimeId}+'\''" >
                         <p class="car_type" th:text="${date.carType}"></p>
-                        <p class="created_date" th:text="${date.createdDate}"></p>
-                        <p class="modified_date" th:text="${date.modifiedDate}"></p>
+                        <p class="created_date" th:text="${#strings.arraySplit(date.createdDate, 'T')[0]}"></p>
+                        <p class="modified_date" th:text="${#strings.arraySplit(date.modifiedDate, 'T')[0]}"></p>
                         <p class="rent_date" th:text="${date.rentDate}"></p>
                         <p class="rent_time" th:text="${date.rentTime}"></p>
                         <p class="return_date" th:text="${date.returnDate}"></p>

@@ -114,9 +114,9 @@ textarea.noscrollbars {
     margin: 2px;
 }
 
-p .checkboxes {
+.checkboxes {
     display: flex;
-    font-size: 18px;
+    align-items: center;
     padding: 10px;
     border-radius: 0.5vh;
     background: lightgoldenrodyellow;
@@ -139,9 +139,6 @@ p .checkboxes {
 #btn_final:hover {
     background-color: #13A0B2;
 }
-
-
-
 
 
 @media (max-width: 650px) {

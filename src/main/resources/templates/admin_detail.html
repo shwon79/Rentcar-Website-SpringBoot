@@ -48,11 +48,11 @@
             </div>
             <div class="detail_list">
                 <p>생성일</p>
-                <p th:text="${campingcarDateTime2.createdDate}"></p>
+                <p th:text="${#strings.arraySplit(campingcarDateTime2.createdDate, 'T')[0]}"></p>
             </div>
             <div class="detail_list">
                 <p>수정일</p>
-                <p th:text="${campingcarDateTime2.modifiedDate}"></p>
+                <p th:text="${#strings.arraySplit(campingcarDateTime2.modifiedDate, 'T')[0]}"></p>
             </div>
             <div class="detail_list">
                 <p>시작일</p>
@@ -103,7 +103,7 @@
                 <p th:text="${campingcarDateTime2.reservation}"></p>
             </div>
             <div class="detail_list">
-                <p>요구사항</p>
+                <p id="custom_demand">요구사항</p>
                 <p th:text="${campingcarDateTime2.detail}"></p>
             </div>
             <div class="detail_list" id="detail_set_delete">

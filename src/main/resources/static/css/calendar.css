@@ -221,10 +221,16 @@ a:hover {
 
   .detail_wrapper a {
     color: aliceblue;
+    width: 65%;
+  }
+
+  a .detail_selections {
+    width: 100%;
+    background-color: #1F1D19;
   }
 
   .detail_selections {
-    background-color: #1F1D19;
+    background-color: #6b6a6a;
   }
 
 

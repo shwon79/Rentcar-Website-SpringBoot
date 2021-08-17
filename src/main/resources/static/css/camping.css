@@ -499,6 +499,14 @@ a:hover {
   display: none;
 }
 
+#calendar_return {
+  display: none;
+}
+
+#hr_day {
+  display: none;
+}
+
 
 input[type=radio] {
   /*display:none;*/

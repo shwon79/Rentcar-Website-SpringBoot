@@ -53,7 +53,7 @@ const runIt = () => {
         .then(res => res.json())
         .then(result => {
             obj = result;
-            deposits = parseInt(obj['deposit']);
+            // deposits = parseInt(obj['deposit']);
             priceList[1] = obj['onedays'];
             priceList[2] = obj['twodays'];
             priceList[3] = obj['threedays'];
@@ -128,9 +128,15 @@ const sendRentDate = (id, year, wDay) => {
         .then(res => res.json())
         .then(result => {
             let theWrapper = document.getElementById('rent_time');
+            let dayWrapper = document.getElementById('calendar_return')
             let hrTime = document.getElementById('hr_time');
+            let hrDay = document.getElementById('hr_day');
+
             theWrapper.style.display = 'block';
-            hrTime.style.display = 'block'
+            hrTime.style.display = 'block';
+            dayWrapper.style.display = 'block';
+            hrDay.style.display = 'block';
+
             let allTime = ["10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시"];
             for (const eachTime of allTime) {
                 let timeId = document.getElementById(eachTime);
@@ -149,93 +155,96 @@ let returnTime = '';
 const rentTimeSel = (id) => {
     rentTime = id;
     returnTime = rentTime;
-    let option1 = document.getElementById('1h');
-    let option2 = document.getElementById('2h');
-    let option3 = document.getElementById('3h');
-    let option4 = document.getElementById('4h');
-    let option5 = document.getElementById('5h');
-    let option6 = document.getElementById('6h');
-    let option7 = document.getElementById('7h');
+
+    // let option1 = document.getElementById('1h');
+    // let option2 = document.getElementById('2h');
+    // let option3 = document.getElementById('3h');
+    // let option4 = document.getElementById('4h');
+    // let option5 = document.getElementById('5h');
+    // let option6 = document.getElementById('6h');
+    // let option7 = document.getElementById('7h');
 
     // disable 추가시간
-    if (rentTime == '10시') {
-        option1.disabled = false;
-        option2.disabled = false;
-        option3.disabled = false;
-        option4.disabled = false;
-        option5.disabled = false;
-        option6.disabled = false;
-        option7.disabled = false;
-    }
-    else if (rentTime == '11시') {
-        option1.disabled = false;
-        option2.disabled = false;
-        option3.disabled = false;
-        option4.disabled = false;
-        option5.disabled = false;
-        option6.disabled = false;
-        option7.disabled = true;
-    }
-    else if (rentTime == '12시') {
-        option1.disabled = false;
-        option2.disabled = false;
-        option3.disabled = false;
-        option4.disabled = false;
-        option5.disabled = false;
-        option6.disabled = true;
-        option7.disabled = true;
-    }
-    else if (rentTime == '13시') {
-        option1.disabled = false;
-        option2.disabled = false;
-        option3.disabled = false;
-        option4.disabled = false;
-        option5.disabled = true;
-        option6.disabled = true;
-        option7.disabled = true;
-    }
-    else if (rentTime == '14시') {
-        option1.disabled = false;
-        option2.disabled = false;
-        option3.disabled = false;
-        option4.disabled = true;
-        option5.disabled = true;
-        option6.disabled = true;
-        option7.disabled = true;
-    }
-    else if (rentTime == '15시') {
-        option1.disabled = false;
-        option2.disabled = false;
-        option3.disabled = true;
-        option4.disabled = true;
-        option5.disabled = true;
-        option6.disabled = true;
-        option7.disabled = true;
-    }
-    else if (rentTime == '16시') {
-        option1.disabled = false;
-        option2.disabled = true;
-        option3.disabled = true;
-        option4.disabled = true;
-        option5.disabled = true;
-        option6.disabled = true;
-        option7.disabled = true;
-    }
-    else if (rentTime == '17시') {
-        option1.disabled = true;
-        option2.disabled = true;
-        option3.disabled = true;
-        option4.disabled = true;
-        option5.disabled = true;
-        option6.disabled = true;
-        option7.disabled = true;
-    }
+    // if (rentTime == '10시') {
+    //     option1.disabled = false;
+    //     option2.disabled = false;
+    //     option3.disabled = false;
+    //     option4.disabled = false;
+    //     option5.disabled = false;
+    //     option6.disabled = false;
+    //     option7.disabled = false;
+    // }
+    // else if (rentTime == '11시') {
+    //     option1.disabled = false;
+    //     option2.disabled = false;
+    //     option3.disabled = false;
+    //     option4.disabled = false;
+    //     option5.disabled = false;
+    //     option6.disabled = false;
+    //     option7.disabled = true;
+    // }
+    // else if (rentTime == '12시') {
+    //     option1.disabled = false;
+    //     option2.disabled = false;
+    //     option3.disabled = false;
+    //     option4.disabled = false;
+    //     option5.disabled = false;
+    //     option6.disabled = true;
+    //     option7.disabled = true;
+    // }
+    // else if (rentTime == '13시') {
+    //     option1.disabled = false;
+    //     option2.disabled = false;
+    //     option3.disabled = false;
+    //     option4.disabled = false;
+    //     option5.disabled = true;
+    //     option6.disabled = true;
+    //     option7.disabled = true;
+    // }
+    // else if (rentTime == '14시') {
+    //     option1.disabled = false;
+    //     option2.disabled = false;
+    //     option3.disabled = false;
+    //     option4.disabled = true;
+    //     option5.disabled = true;
+    //     option6.disabled = true;
+    //     option7.disabled = true;
+    // }
+    // else if (rentTime == '15시') {
+    //     option1.disabled = false;
+    //     option2.disabled = false;
+    //     option3.disabled = true;
+    //     option4.disabled = true;
+    //     option5.disabled = true;
+    //     option6.disabled = true;
+    //     option7.disabled = true;
+    // }
+    // else if (rentTime == '16시') {
+    //     option1.disabled = false;
+    //     option2.disabled = true;
+    //     option3.disabled = true;
+    //     option4.disabled = true;
+    //     option5.disabled = true;
+    //     option6.disabled = true;
+    //     option7.disabled = true;
+    // }
+    // else if (rentTime == '17시') {
+    //     option1.disabled = true;
+    //     option2.disabled = true;
+    //     option3.disabled = true;
+    //     option4.disabled = true;
+    //     option5.disabled = true;
+    //     option6.disabled = true;
+    //     option7.disabled = true;
+    // }
+
     calculateDate();
 
 }
 
 // price calculator
 let price = 0;
+let totalPrice = 0;
 const calculateDate = () => {
     if (returnDateNum != '' && rentDateNum != '' && rentTime != '' && returnTime != '') {
         const optionWrapper = document.getElementById('calResultWrapper')
@@ -248,7 +257,7 @@ const calculateDate = () => {
         // 추가시간 포함 총 렌트료
         price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
         // 총 결제금액(VAT포함)
-        let totalPrice = parseInt(price*1.1);
+        totalPrice = parseInt(price*1.1);
         // 가격 넣어주기
         targetDeposit.innerText = `${parseInt(totalPrice/2)}원`   // 보증금 = 선결제금액
         targetFee.innerText = `${price}원`
@@ -369,14 +378,14 @@ const daysSelect = () => {
 
 // extra time select
 let extraTimeNum = 0;
-const timeSelect = () => {
-    let timeSelector = document.getElementById('extratime_select');
-    let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
-    extraTimeNum = theVal
-    let temp = parseInt(rentTime.split('시')[0]) + theVal;
-    returnTime = `${temp}시`;
-    calculateDate();
-}
+// const timeSelect = () => {
+//     let timeSelector = document.getElementById('extratime_select');
+//     let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
+//     extraTimeNum = theVal
+//     let temp = parseInt(rentTime.split('시')[0]) + theVal;
+//     returnTime = `${temp}시`;
+//     calculateDate();
+// }
 
 let clickedDate = ''
 
@@ -392,6 +401,7 @@ const doIt = () => {
     target.checked = true;
 }
 
+// if ()
 doIt();
 
 

@@ -236,6 +236,10 @@ form {
     justify-content: flex-end;
 }
 
+#custom_demand {
+    width: 100%;
+}
+
 @media (max-width: 990px) {
     .content_wrapper {
         flex-direction: column;
@@ -261,7 +265,13 @@ form {
     .list_container {
         width: 100%;
         margin: 0;
-        font-size: 10px
+        font-size: 12px
+    }
+
+    .detail_container {
+        width: 100%;
+        margin: 0;
+        font-size: 12px
     }
 
 
@@ -280,7 +290,11 @@ form {
         display: none;
     }
 
-    .reserve_list .set_reserve {
+    .set_reserve {
         display: none;
+    }
+
+    #custom_demand {
+        width: 200%;
     }
 }
