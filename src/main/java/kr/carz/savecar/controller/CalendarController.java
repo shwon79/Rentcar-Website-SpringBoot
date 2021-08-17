@@ -364,7 +364,7 @@ public class CalendarController {
 
 
         // 날짜
-        int now_month = cal.get(Calendar.MONTH)+1;
+        int now_month = Integer.parseInt(clickedDate.getMonth()); // 클릭한 데이터
 
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
 
@@ -447,7 +447,7 @@ public class CalendarController {
 
 
         // 날짜
-        int now_month = cal.get(Calendar.MONTH)+1;
+        int now_month = Integer.parseInt(clickedDate.getMonth()); // 클릭한 데이터
 
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
 
@@ -533,7 +533,7 @@ public class CalendarController {
 
 
         // 날짜
-        int now_month = cal.get(Calendar.MONTH)+1;
+        int now_month = Integer.parseInt(clickedDate.getMonth()); // 클릭한 데이터
 
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
 
