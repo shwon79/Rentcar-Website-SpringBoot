@@ -409,6 +409,8 @@ public class CalendarController {
         model.addAttribute("thisMonth", now_month);
         model.addAttribute("thisYear", 2021);
 
+        model.addAttribute("dateId", date_id);
+
         return "camping_travel";
     }
 
@@ -491,6 +493,8 @@ public class CalendarController {
         model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
         model.addAttribute("thisMonth", now_month);
         model.addAttribute("thisYear", 2021);
+
+        model.addAttribute("dateId", date_id);
 
         return "camping_liomousine";
     }

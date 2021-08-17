@@ -90,7 +90,7 @@ const runIt = () => {
             priceList[28] = obj['twentyeightdays'];
             priceList[29] = obj['twentyninedays'];
             priceList[30] = obj['thirtydays'];
-            console.log(obj)
+            // console.log(obj)
         })
 }
 
@@ -150,7 +150,7 @@ const sendRentDate = (id, year, wDay) => {
                 else timeId.disabled = true;
             }
             calculateDate();
-            console.log(clickedDate);
+            // console.log(clickedDate);
         })
     runIt();
 }
@@ -257,7 +257,7 @@ const calculateDate = () => {
         const optionWrapper = document.getElementById('calResultWrapper')
         optionWrapper.style.display = 'block'
         let showSelections = document.getElementById('selOption');
-        showSelections.innerText = `${rentDateNum} ${rentTime} ➔ ${returnDateNum} ${returnTime}`
+        showSelections.innerText = `${rentDateNum} ${rentTime}  ➔  ${returnDateNum} ${returnTime}`
         let targetWhole = document.getElementById('calResult');
         let targetFee = document.getElementById('calRentFee');
         let targetDeposit = document.getElementById('calDeposit');
@@ -266,9 +266,9 @@ const calculateDate = () => {
         // 총 결제금액(VAT포함)
         totalPrice = parseInt(price*1.1);
         // 가격 넣어주기
-        targetDeposit.innerText = `${parseInt(totalPrice/2)}원`   // 보증금 = 선결제금액
-        targetFee.innerText = `${price}원`
-        targetWhole.innerText = `${totalPrice}원`
+        targetDeposit.innerText = parseInt(totalPrice/2).toLocaleString()+'원'  // 보증금 = 선결제금액
+        targetFee.innerText = price.toLocaleString()+'원'
+        targetWhole.innerText = totalPrice.toLocaleString()+'원'
     }
 }
 
@@ -290,8 +290,8 @@ const daysSelect = () => {
         let returnDateDay = rentDateDay + theVal;
         useDay = daySelector.options[daySelector.selectedIndex].innerText;
         useDayNum = parseInt(daySelector.options[daySelector.selectedIndex].value);
-        console.log(rentDateMon, rentDateDay)
-        console.log(useDay, useDayNum)
+        // console.log(rentDateMon, rentDateDay)
+        // console.log(useDay, useDayNum)
 
         if (returnDateDay < 29) ;
         else if (useDayNum == 30) {  // 한달권 선택시
@@ -376,7 +376,7 @@ const daysSelect = () => {
         }
 
         returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
-        console.log(returnDateNum)
+        // console.log(returnDateNum)
 
     }
     calculateDate();
