@@ -65,15 +65,13 @@ body {
 
 .detail_container {
     background-color: whitesmoke;
-    width: 80vw;
+    width: 50vw;
     margin: 0 10px;
     border: 1px solid lightgray;
     border-radius: 0.5vh;
+    font-size: 15px
 }
 
-#mainTable tr {
-
-}
 
 #mainTable td {
     padding: 10px;
@@ -265,13 +263,6 @@ form {
         margin: 0;
         font-size: 10px
     }
-
-    .detail_container {
-        width: 100%;
-        margin: 0;
-        font-size: 10px
-    }
-
 
 
     .reserve_list {

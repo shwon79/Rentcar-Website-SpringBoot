@@ -9,7 +9,7 @@ function handleOnInput(el, maxlength) {
     if(el.value.length > maxlength) el.value = el.value.substr(0, maxlength);
 }
 
-
+/*
 // 보증금 값 가져오기
 let deposits = 0;
 const getData = () => {
@@ -20,6 +20,7 @@ const getData = () => {
         })
 }
 getData();
+ */
 
 
 // must items
@@ -31,7 +32,8 @@ const rentTime = rentDate[2];
 const returnDateNum = returnDate[0]+' '+returnDate[1];
 const returnTime = returnDate[2];
 const totalPrice = parseInt(document.getElementById('total_price').className);
-const totalHalf = totalPrice/2;
+
+let totalHalf = totalPrice/2;
 const useDay = document.getElementById('use_day').innerText;
 const extraTime = document.getElementById('extra_time').innerText;
 
@@ -74,6 +76,10 @@ let totalTarget = document.getElementById('total_price');
 totalTarget.innerText = totalPrice.toLocaleString()+'원'; // 콤마 넣어주기
 let halfTarget = document.getElementById('half_price');
 halfTarget.innerText = totalHalf.toLocaleString()+'원'; // 콤마 넣어주기
+let totalFeeTarget = document.getElementById('total_fee');
+totalFeeTarget.innerText = (parseInt(totalPrice/1.1)).toLocaleString()+'원';
+let depositsTarget = document.getElementById('deposits');
+depositsTarget.innerText = parseInt(totalPrice/2).toLocaleString()+'원';
 
 
 // Sending Data;
@@ -92,7 +98,7 @@ const reserveDone = () => {
             'returnTime' : returnTime,
             'extraTime' : extraTime,
             'agree': 1,
-            'deposit':deposits,
+            'deposit':totalHalf,
             'depositor': depositName,
             'detail': customDemand,
             'name': customName,

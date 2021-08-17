@@ -87,7 +87,7 @@
                             <div class="date_menu">시작날짜</div>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                            <div class="date_time"><span id='rent_date' th:name="${dateId}" th:value="${thisYear}"></span></div>
+                            <div class="date_time"><span id='rent_date' th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
@@ -122,10 +122,11 @@
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}"
-                                           th:style="${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'pointer-events:none; color: gray;'">
+                                           th:style="${dateCampingList[iterStat.index][0].reserved} == '1' or (${date.day} < ${today}-1 and ${date.month} <= ${thisMonth}) ? 'pointer-events:none; color: gray;'">
                                         <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}"
                                                th:name="${thisYear}" th:text="${date.day}" onclick="sendRentDate(id, name, value);"/>
                                     </label>
+
                                 </div>
                             </div>
                             <div class="select_possible text-right padding-top-20">
@@ -186,7 +187,7 @@
                             <label for="days_select">렌트 일자</label>
                             <select name="days" id="days_select" onchange="daysSelect()">
                                 <option value="">--렌트 일자 선택--</option>
-                                <option value="1">1일권</option>
+<!--                                <option value="1">1일권</option>-->
                                 <option value="2">2일권</option>
                                 <option value="3">3일권</option>
                                 <option value="4">4일권</option>
@@ -215,7 +216,7 @@
                                 <option value="27">27일권</option>
                                 <option value="28">28일권</option>
                                 <option value="29">29일권</option>
-                                <option value="30">30일권</option>
+                                <option value="30">한달권</option>
 
                             </select>
                         </div>
@@ -223,13 +224,13 @@
                             <label for="extratime_select">추가 시간</label>
                             <select name="extratime" id="extratime_select" onchange="timeSelect()">
                                 <option value="0">--추가 시간 선택--</option>
-                                <option id="1h" value="1">+1시간</option>
-                                <option id="2h" value="2">+2시간</option>
-                                <option id="3h" value="3">+3시간</option>
-                                <option id="4h" value="4">+4시간</option>
-                                <option id="5h" value="5">+5시간</option>
-                                <option id="6h" value="6">+6시간</option>
-                                <option id="7h" value="7">+7시간</option>
+                                <option id="1h" value="1">+1시간(+40,000원)</option>
+                                <option id="2h" value="2">+2시간(+80,000원)</option>
+                                <option id="3h" value="3">+3시간(+120,000원)</option>
+                                <option id="4h" value="4">+4시간(+160,000원)</option>
+                                <option id="5h" value="5">+5시간(+200,000원)</option>
+                                <option id="6h" value="6">+6시간(+240,000원)</option>
+                                <option id="7h" value="7">+7시간(+280,000원)</option>
                             </select>
                         </div>
                     </div><hr style="background: dimgray;" />
@@ -242,7 +243,11 @@
                                 <hr style="margin: 10px 0"/>
                             </div>
                             <div class="sel_options" id="sel_price">
-                                <h2>예상 가격</h2>
+                                <h2>보증금</h2>
+                                <p id="calDeposit"></p>
+                                <h2>총 렌트료</h2>
+                                <p id="calRentFee"></p>
+                                <h2>총 결제금액</h2>
                                 <p id="calResult"></p>
                             </div>
                         </div>
