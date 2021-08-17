@@ -2,6 +2,7 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.CampingcarDateTime2;
 import kr.carz.savecar.repository.CampingcarDateTimeRepository2;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class CampingcarDateTimeService2 {
     }
 
     public List<CampingcarDateTime2> findAllReservations(){
-        return campingcarDateTimeRepository2.findAll();
+        return campingcarDateTimeRepository2.findAll(Sort.by(Sort.Direction.DESC, "dateTimeId"));
     }
 
     public CampingcarDateTime2 findByDateTimeId(Long id){

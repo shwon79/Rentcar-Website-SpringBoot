@@ -1124,7 +1124,7 @@ public class CalendarController {
                 + "전화번호: " + dto.getPhone() + "\n"
                 + "입금자명: " + dto.getDepositor() + "\n"
                 + "이용날짜: " + dto.getDay() + "\n"
-                + "추가시간: " + dto.getExtraTime() + "\n"
+                + "추가시간: " + dto.getExtraTime() + "시간\n"
                 + "총금액: " + dto.getTotal() + "\n"
                 + "선결제금액: " + dto.getTotalHalf() + "\n"
                 + "요청사항: " + dto.getDetail() + "\n\n");
