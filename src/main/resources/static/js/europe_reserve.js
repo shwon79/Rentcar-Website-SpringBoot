@@ -401,8 +401,7 @@ const doIt = () => {
     target.checked = true;
 }
 
-// if ()
-doIt();
+if (document.getElementById('rent_date').name != null) doIt();
 
 
 

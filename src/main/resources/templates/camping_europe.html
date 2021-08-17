@@ -87,7 +87,7 @@
                             <div class="date_menu">대여시작일</div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                            <div class="date_time"><span id='rent_date' th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>
+                            <div class="date_time"><span id='rent_date' th:name="${dateId}" th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
