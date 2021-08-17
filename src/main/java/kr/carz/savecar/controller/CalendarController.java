@@ -1538,5 +1538,50 @@ public class CalendarController {
     }
 
 
+    // europe 캠핑카 가격 구하는 api
+    @RequestMapping(value = "/{carType}/getrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_rent_date(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
+
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
+        CampingCarPrice campingCarPrice;
+
+        if(carType.equals("liomousine")){
+            campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
+
+        } else {
+            campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        }
+
+        DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDate, campingCarPrice);
+
+
+        Long date_start_id = calendarDate.getDateId();
+
+        int possible_rent_date = 1;
+
+        for(int i=1; i<=31; i++){
+            if(date_start_id+i > 167){  // 12월 4일
+                break;
+            }
+            CalendarDate calendarDate_continue = calendarDateService.findCalendarDateByDateId(date_start_id+i);
+            DateCamping dateCamping_continue = dateCampingService.findByDateIdAndCarName(calendarDate_continue, campingCarPrice);
+            if(dateCamping_continue.getReserved().equals("1")){
+                break;
+            }
+            possible_rent_date += 1;
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(possible_rent_date);
+
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray);
+        pw.flush();
+        pw.close();
+    }
+
+
 
 }
