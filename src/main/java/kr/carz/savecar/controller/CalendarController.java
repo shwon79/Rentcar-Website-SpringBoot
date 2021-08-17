@@ -1442,7 +1442,15 @@ public class CalendarController {
             pw.close();
         } else if(season.equals("1")) {
 
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType+"_peak");
+            CampingCarPrice campingCarPrice;
+
+            if(carType.equals("liomousine")){
+
+                campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine_peak");
+
+            } else {
+                campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType+"_peak");
+            }
 
             JSONObject jsonObject = new JSONObject();
 

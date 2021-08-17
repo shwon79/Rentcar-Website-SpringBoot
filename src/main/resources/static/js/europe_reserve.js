@@ -47,9 +47,15 @@ function doDisplay_return_time(){
 // 가격표
 let obj, deposits;
 let carType = document.getElementsByClassName('car_type')[0].id;
+let season;
 let priceList = [];
 const runIt = () => {
-    fetch(`/${carType}/getprice`)
+    let target = document.getElementById(rentDateNum);
+    season = target.title;
+    if (season == '성수기') season = 1;
+    else if (season == '비성수기') season = 0;
+
+    fetch(`/${carType}/getprice/${season}`)
         .then(res => res.json())
         .then(result => {
             obj = result;
@@ -84,9 +90,10 @@ const runIt = () => {
             priceList[28] = obj['twentyeightdays'];
             priceList[29] = obj['twentyninedays'];
             priceList[30] = obj['thirtydays'];
+            console.log(obj)
         })
 }
-runIt();
+
 
 // select rent date
 let rentDateNum='';
@@ -124,18 +131,17 @@ const sendRentDate = (id, year, wDay) => {
     let putResult = year+'.'+id.split('월 ')[0]+'.'+id.split(' ')[1].split('일')[0]+'.('+whichDay+')';
     putTarget.innerText = putResult;
 
+    // 그 날짜에 맞는 선택 가능 시간 데이터 받아오기
     fetch(url+'/'+rentDateYear+'/'+rentDateMonth+'/'+rentDateDay)
         .then(res => res.json())
         .then(result => {
             let theWrapper = document.getElementById('rent_time');
             let dayWrapper = document.getElementById('calendar_return')
             let hrTime = document.getElementById('hr_time');
-            let hrDay = document.getElementById('hr_day');
 
             theWrapper.style.display = 'block';
             hrTime.style.display = 'block';
             dayWrapper.style.display = 'block';
-            hrDay.style.display = 'block';
 
             let allTime = ["10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시"];
             for (const eachTime of allTime) {
@@ -146,6 +152,7 @@ const sendRentDate = (id, year, wDay) => {
             calculateDate();
             console.log(clickedDate);
         })
+    runIt();
 }
 
 
@@ -390,18 +397,32 @@ let extraTimeNum = 0;
 let clickedDate = ''
 
 const doIt = () => {
+    // 미리 넣어둔 값 가져오기
     let clickedOne = document.getElementById('rent_date');
     let clickedWhole = clickedOne.className;
-    console.log(clickedWhole);
+    // 필요한 값들 할당
     let clickedYear = clickedWhole.split('년')[0];
     clickedDate = clickedWhole.split('년')[1].split('요일')[0];
     let clickedWDay = clickedWhole.split('요일')[1];
+    // sendRentDate 실행해서 시작 날짜 기입해주기
     sendRentDate(clickedDate, clickedYear, clickedWDay);
+    // 라디오 버튼 클릭 만들기
     let target = document.getElementById(clickedDate);
     target.checked = true;
+
 }
 
-if (document.getElementById('rent_date').name != null) doIt();
+
+
+// 만약 클릭한 곳이 아니라 달력으로 넘어갈시 날짜 표시 X
+const seasonTarget = document.getElementById('rent_date');
+let condition1 = parseInt(seasonTarget.title);
+if (condition1 > 0) doIt();
+
+
+// // df
+// runIt();
+
 
 
 
