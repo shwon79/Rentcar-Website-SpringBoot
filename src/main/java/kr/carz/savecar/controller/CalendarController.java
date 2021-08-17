@@ -406,7 +406,7 @@ public class CalendarController {
 
         // 캠핑카 가격
         model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-        model.addAttribute("thisMonth", now_month);
+        model.addAttribute("thisMonth", this_month);
         model.addAttribute("thisYear", 2021);
 
         model.addAttribute("dateId", date_id);
@@ -491,7 +491,7 @@ public class CalendarController {
 
         // 캠핑카 가격
         model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-        model.addAttribute("thisMonth", now_month);
+        model.addAttribute("thisMonth", this_month);
         model.addAttribute("thisYear", 2021);
 
         model.addAttribute("dateId", date_id);
@@ -579,7 +579,7 @@ public class CalendarController {
 
         // 캠핑카 가격
         model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-        model.addAttribute("thisMonth", now_month);
+        model.addAttribute("thisMonth", this_month);
         model.addAttribute("thisYear", 2021);
 
 

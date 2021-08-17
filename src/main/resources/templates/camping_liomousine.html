@@ -103,9 +103,9 @@
                             <!-- <button class="nav-btn go-today">Today</button> -->
                             <div class="year-month">
                                 <span name="thisYear" th:text="${thisYear}"></span>년
-                                <span name="thisMonth" th:text="${thisMonth}"></span>월
+                                <span name="thisMonth" th:text="${clickedMonth}"></span>월
                             </div>&nbsp;&nbsp;
-                            <a th:href="'/liomousine_reserve/after/' + ${thisMonth}">
+                            <a th:href="'/liomousine_reserve/after/' + ${clickedMonth}">
                                 <button class="nav-btn go-next" >&gt;</button>
                             </a>
                         </div>
