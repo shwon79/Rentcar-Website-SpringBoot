@@ -33,7 +33,7 @@ const returnDateNum = returnDate[0]+' '+returnDate[1];
 const returnTime = returnDate[2];
 const totalPrice = parseInt(document.getElementById('total_price').className);
 
-let totalHalf = totalPrice/2;
+let totalHalf = parseInt(totalPrice/2);
 const useDay = document.getElementById('use_day').innerText;
 const extraTime = document.getElementById('extra_time').innerText;
 
@@ -62,6 +62,9 @@ inputDeposit.addEventListener('change',
 inputDemand.addEventListener('change',
     function () {
         customDemand = inputDemand.value;
+        // console.log(totalPrice)
+        // console.log(totalHalf)
+
     })
 
 // 요청사항 높이 자동 조절
@@ -77,9 +80,9 @@ totalTarget.innerText = totalPrice.toLocaleString()+'원'; // 콤마 넣어주�
 let halfTarget = document.getElementById('half_price');
 halfTarget.innerText = totalHalf.toLocaleString()+'원'; // 콤마 넣어주기
 let totalFeeTarget = document.getElementById('total_fee');
-totalFeeTarget.innerText = (parseInt(totalPrice/1.1)).toLocaleString()+'원';
-let depositsTarget = document.getElementById('deposits');
-depositsTarget.innerText = parseInt(totalPrice/2).toLocaleString()+'원';
+totalFeeTarget.innerText = (parseInt((totalPrice/11)*10)).toLocaleString()+'원';
+// let depositsTarget = document.getElementById('deposits');
+// depositsTarget.innerText = totalHalf.toLocaleString()+'원';
 
 
 // Sending Data;
@@ -109,7 +112,7 @@ const reserveDone = () => {
             'day': useDay,
         }
 
-        console.log(finalDate);
+        // console.log(finalDate);
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
         if (reserveConfirm) {
             let url = '/campingcar/reserve';
