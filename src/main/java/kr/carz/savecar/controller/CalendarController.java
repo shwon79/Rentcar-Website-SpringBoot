@@ -1105,7 +1105,7 @@ public class CalendarController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328"); // 01033453328 추가
+        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
         params.put("from", "01052774113");
         params.put("type", "LMS");
 
