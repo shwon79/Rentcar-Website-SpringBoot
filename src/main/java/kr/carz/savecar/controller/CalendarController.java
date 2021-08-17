@@ -1388,8 +1388,15 @@ public class CalendarController {
     public void get_travel_price(HttpServletResponse res, @PathVariable String carType, @PathVariable String season) throws IOException {
 
         if(season.equals("0")){
+            CampingCarPrice campingCarPrice;
 
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+            if(carType.equals("liomousine")){
+
+                campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
+
+            } else {
+                campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+            }
 
             JSONObject jsonObject = new JSONObject();
 
