@@ -13,6 +13,7 @@ const setReserve = () => {
         //         let idBtn = document.getElementById(id)
         //         idBtn.disabled = true
         //     }).then(() => window.location.href = '/admin/logininfo')
+
         //     .catch(err => console.error('Error: ', err))
         alert('예약이 확정되었습니다')
     }

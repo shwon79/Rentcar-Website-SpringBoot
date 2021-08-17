@@ -103,6 +103,8 @@ const sendRentDate = (id, year, wDay) => {
     let rentDateMonth = rentDateNum.split('월 ')[0];
     let rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
     let url = `/${carType}/sendrentdate`;
+
+    // 요일 한글화 swtich
     let whichDay = '';
     switch (wDay) {
         case '0':
@@ -127,6 +129,8 @@ const sendRentDate = (id, year, wDay) => {
             whichDay = '토';
             break;
     }
+
+    // 선택된 날짜 글자 넣기
     let putTarget = document.getElementById('rent_date');
     let putResult = year+'.'+id.split('월 ')[0]+'.'+id.split(' ')[1].split('일')[0]+'.('+whichDay+')';
     putTarget.innerText = putResult;
@@ -149,9 +153,28 @@ const sendRentDate = (id, year, wDay) => {
                 if (result.includes(eachTime)) timeId.disabled = false;
                 else timeId.disabled = true;
             }
+
+            // let targetClasses = document.getElementsByClassName('each_rent_day');
+            // let takeClass = [];
+            // for (const targetClass of targetClasses) {
+            //     if (targetClass.style.color == 'gray') takeClass.push(targetClass);
+            // }
+            //
+            // console.log(takeClass);
+
             calculateDate();
             // console.log(clickedDate);
         })
+
+    // 선택 불가능한 가까운 날짜 받아오기
+    // fetch(`/${carType}/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
+    //     .then(res => res.json())
+    //     .then(result => {
+    //       console.log(result);
+    //
+    //
+    //     })
+
     runIt();
 }
 

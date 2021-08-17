@@ -97,15 +97,15 @@
                     <div id="calendar_rental" class="row">
                         <div class="header">
                             <!-- <div class="nav"> -->
-                            <a th:href="'/europe_reserve/before/' + ${prevMonth}">
+                            <a th:href="'/europe_reserve/before/' + ${clickedPrevMonth}">
                                 <button class="nav-btn go-prev">&lt;</button>&nbsp;
                             </a>&nbsp;
                             <!-- <button class="nav-btn go-today">Today</button> -->
                             <div class="year-month">
-                                <span name="thisYear" th:text="${thisYear}"></span>년
-                                <span name="thisMonth" th:text="${thisMonth}"></span>월
+                                <span name="thisYear" th:text="${clickedYear}"></span>년
+                                <span name="thisMonth" th:text="${clickedMonth}"></span>월
                             </div>&nbsp;&nbsp;
-                            <a th:href="'/europe_reserve/after/' + ${thisMonth}">
+                            <a th:href="'/europe_reserve/after/' + ${clickedMonth}">
                                 <button class="nav-btn go-next" >&gt;</button>
                             </a>
                         </div>
@@ -121,10 +121,10 @@
                             </div>
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
-                                    <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}"
+                                    <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}" class="each_rent_day" th:id="${date.dateId}"
                                            th:style="${dateCampingList[iterStat.index][0].reserved} == '1' or (${date.day} < ${today}-1 and ${date.month} <= ${thisMonth}) ? 'pointer-events:none; color: gray;'">
                                         <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:title="${date.season}"
-                                               th:name="${thisYear}" th:text="${date.day}" onclick="sendRentDate(id, name, value);"/>
+                                               th:name="${thisYear}" th:text="${date.day}" th onclick="sendRentDate(id, name, value);"/>
                                     </label>
 
                                 </div>
@@ -200,35 +200,35 @@
                             <select name="days" id="days_select" onchange="daysSelect()">
                                 <option value="">--렌트 일자 선택--</option>
 <!--                                <option value="1">1일권</option>-->
-                                <option value="2">2일권</option>
-                                <option value="3">3일권</option>
-                                <option value="4">4일권</option>
-                                <option value="5">5일권</option>
-                                <option value="6">6일권</option>
-                                <option value="7">7일권</option>
-                                <option value="8">8일권</option>
-                                <option value="9">9일권</option>
-                                <option value="10">10일권</option>
-                                <option value="11">11일권</option>
-                                <option value="12">12일권</option>
-                                <option value="13">13일권</option>
-                                <option value="14">14일권</option>
-                                <option value="15">15일권</option>
-                                <option value="16">16일권</option>
-                                <option value="17">17일권</option>
-                                <option value="18">18일권</option>
-                                <option value="19">19일권</option>
-                                <option value="20">20일권</option>
-                                <option value="21">21일권</option>
-                                <option value="22">22일권</option>
-                                <option value="23">23일권</option>
-                                <option value="24">24일권</option>
-                                <option value="25">25일권</option>
-                                <option value="26">26일권</option>
-                                <option value="27">27일권</option>
-                                <option value="28">28일권</option>
-                                <option value="29">29일권</option>
-                                <option value="30">한달권</option>
+                                <option id="d2" value="2">2일권</option>
+                                <option id="d3" value="3">3일권</option>
+                                <option id="d4" value="4">4일권</option>
+                                <option id="d5" value="5">5일권</option>
+                                <option id="d6" value="6">6일권</option>
+                                <option id="d7" value="7">7일권</option>
+                                <option id="d8" value="8">8일권</option>
+                                <option id="d9" value="9">9일권</option>
+                                <option id="d10" value="10">10일권</option>
+                                <option id="d11" value="11">11일권</option>
+                                <option id="d12" value="12">12일권</option>
+                                <option id="d13" value="13">13일권</option>
+                                <option id="d14" value="14">14일권</option>
+                                <option id="d15" value="15">15일권</option>
+                                <option id="d16" value="16">16일권</option>
+                                <option id="d17" value="17">17일권</option>
+                                <option id="d18" value="18">18일권</option>
+                                <option id="d19" value="19">19일권</option>
+                                <option id="d20" value="20">20일권</option>
+                                <option id="d21" value="21">21일권</option>
+                                <option id="d22" value="22">22일권</option>
+                                <option id="d23" value="23">23일권</option>
+                                <option id="d24" value="24">24일권</option>
+                                <option id="d25" value="25">25일권</option>
+                                <option id="d26" value="26">26일권</option>
+                                <option id="d27" value="27">27일권</option>
+                                <option id="d28" value="28">28일권</option>
+                                <option id="d29" value="29">29일권</option>
+                                <option id="d30" value="30">한달권</option>
 
                             </select>
                             <hr id="hr_day" style="background: dimgray;" />
