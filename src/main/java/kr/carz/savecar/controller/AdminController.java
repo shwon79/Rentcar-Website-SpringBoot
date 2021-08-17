@@ -379,10 +379,8 @@ public class AdminController {
             }
 
 
-
-
             try {
-                URL url = new URL("https://webhook.site/9e375c3c-2d6f-452b-b135-e665d46b596c");
+                URL url = new URL("http://savecar.kr");
                 HttpURLConnection http = (HttpURLConnection) url.openConnection();
 
                 AdminController admin = new AdminController(http);
