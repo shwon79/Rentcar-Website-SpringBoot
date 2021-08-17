@@ -503,11 +503,6 @@ a:hover {
   display: none;
 }
 
-#hr_day {
-  display: none;
-}
-
-
 input[type=radio] {
   /*display:none;*/
 }
@@ -535,6 +530,15 @@ input[type=radio]:checked + label {
   border-radius: 0.5vh;
 }
 
+.result_details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sel_options hr {
+  margin: 15px 0;
+}
+
 #btn_reserve {
   padding: 20px 30px;
   border: none;
@@ -546,4 +550,5 @@ input[type=radio]:checked + label {
 #btn_reserve:hover {
   background-color: #13A0B2;
 }
+
 

@@ -77,8 +77,8 @@ const autoGrow = (texts) => {
 // 결제금액 넣기
 let totalTarget = document.getElementById('total_price');
 totalTarget.innerText = totalPrice.toLocaleString()+'원'; // 콤마 넣어주기
-let halfTarget = document.getElementById('half_price');
-halfTarget.innerText = totalHalf.toLocaleString()+'원'; // 콤마 넣어주기
+let vatTarget = document.getElementById('vat_fee');
+vatTarget.innerText = parseInt(totalPrice/11).toLocaleString()+'원'; // 콤마 넣어주기
 let totalFeeTarget = document.getElementById('total_fee');
 totalFeeTarget.innerText = (parseInt((totalPrice/11)*10)).toLocaleString()+'원';
 // let depositsTarget = document.getElementById('deposits');

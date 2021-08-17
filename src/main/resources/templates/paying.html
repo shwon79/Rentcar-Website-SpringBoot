@@ -117,25 +117,21 @@
                         </div>
                         <div>
                             <div class="price_between">
-                                <p>총 결제 금액</p>
-                                <p id="total_price" th:class="${total}"></p>
-                            </div><hr/>
-                            <div class="price_between">
-                                <p>선결제 금액(50%)</p>
-                                <p id="half_price"></p>
-                            </div><hr/>
-                            <div class="price_between">
-                                <p>총 렌트료</p>
+                                <p>총 렌트료(VAT미포함)</p>
                                 <p id="total_fee"></p>
-                            </div><hr/>
+                            </div>
+                            <div class="price_between">
+                                <p>VAT</p>
+                                <p id="vat_fee"></p>
+                            </div><hr style="color: dimgray" />
+                            <div class="price_between">
+                                <p>총 결제 금액(VAT포함)</p>
+                                <p id="total_price" th:class="${total}"></p>
+                            </div>
 <!--                            <div class="price_between">-->
 <!--                                <p>보증금</p>-->
 <!--                                <p id="deposits"></p>-->
 <!--                            </div><hr/>-->
-                            <div id="price_desc">
-                                <p>※ 총 결제금액의 50% 선결제</p>
-                                <p>* 잔금은 추후 결제하시면 됩니다.</p>
-                            </div>
                         </div>
                     </div>
 

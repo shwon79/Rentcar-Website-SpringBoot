@@ -258,14 +258,21 @@
                                 <hr style="margin: 10px 0"/>
                             </div>
                             <div class="sel_options" id="sel_price">
-                                <h2>보증금</h2>
-                                <p id="calDeposit"></p>
-                                <h2>총 렌트료</h2>
-                                <p id="calRentFee"></p>
-                                <h2>총 결제금액</h2>
-                                <p id="calResult"></p>
+                                <div class="result_details">
+                                    <h4>총 렌트료(VAT 미포함)</h4>
+                                    <p id="calRentFee"></p>
+                                </div>
+                                <div class="result_details">
+                                    <h4>VAT</h4>
+                                    <p id="calDeposit"></p>
+                                </div><hr style="color: dimgray" />
+                                <div class="result_details">
+                                    <h4>총 결제금액(VAT 포함)</h4>
+                                    <p id="calResult"></p>
+                                </div>
+
                             </div>
-                            <hr style="background: dimgray;" />
+                            <hr style="background: dimgray; margin: 15px 0;" />
                         </div>
                     </div>
 

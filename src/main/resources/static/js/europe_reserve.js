@@ -289,7 +289,7 @@ const calculateDate = () => {
         // 총 결제금액(VAT포함)
         totalPrice = parseInt(price*1.1);
         // 가격 넣어주기
-        targetDeposit.innerText = parseInt(totalPrice/2).toLocaleString()+'원'  // 보증금 = 선결제금액
+        targetDeposit.innerText = parseInt(totalPrice/11).toLocaleString()+'원'  // 보증금 = 선결제금액
         targetFee.innerText = price.toLocaleString()+'원'
         targetWhole.innerText = totalPrice.toLocaleString()+'원'
     }
