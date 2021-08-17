@@ -39,7 +39,6 @@ function doDisplay_return_time(){
 // document.querySelector('.year-month-return').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
 
-
 // 클릭시 날짜 자동 생성
 // let takeDate = document.getElementById('rent_date').name;
 // document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
@@ -139,6 +138,7 @@ const sendRentDate = (id, year, wDay) => {
                 else timeId.disabled = true;
             }
             calculateDate();
+            console.log(clickedDate);
         })
 }
 
@@ -241,13 +241,19 @@ const calculateDate = () => {
         const optionWrapper = document.getElementById('calResultWrapper')
         optionWrapper.style.display = 'block'
         let showSelections = document.getElementById('selOption');
-        showSelections.innerText = `${rentDateNum} ${rentTime} -- ${returnDateNum} ${returnTime}`
-        let showData = document.getElementById('calResult');
-        price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum) + deposits;
-        showData.innerText = `${price}원`
+        showSelections.innerText = `${rentDateNum} ${rentTime} ➔ ${returnDateNum} ${returnTime}`
+        let targetWhole = document.getElementById('calResult');
+        let targetFee = document.getElementById('calRentFee');
+        let targetDeposit = document.getElementById('calDeposit');
+        // 추가시간 포함 총 렌트료
+        price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+        // 총 결제금액(VAT포함)
+        let totalPrice = parseInt(price*1.1);
+        // 가격 넣어주기
+        targetDeposit.innerText = `${parseInt(totalPrice/2)}원`   // 보증금 = 선결제금액
+        targetFee.innerText = `${price}원`
+        targetWhole.innerText = `${totalPrice}원`
     }
-
-
 }
 
 
@@ -259,8 +265,8 @@ const daysSelect = () => {
     let daySelector = document.getElementById('days_select');
     let theVal = parseInt(daySelector.options[daySelector.selectedIndex].value);
 
-    // 날짜 계산
-    if (rentDateNum != '' && rentTime != '') {
+    // 날짜 계산  && rentTime != ''
+    if (rentDateNum != '') {
         let temp = rentDateNum.split('월 ');
         let rentDateMon = parseInt(temp[0]);
         let returnDateMon = rentDateMon;
@@ -268,8 +274,14 @@ const daysSelect = () => {
         let returnDateDay = rentDateDay + theVal;
         useDay = daySelector.options[daySelector.selectedIndex].innerText;
         useDayNum = parseInt(daySelector.options[daySelector.selectedIndex].value);
+        console.log(rentDateMon, rentDateDay)
+        console.log(useDay, useDayNum)
 
         if (returnDateDay < 29) ;
+        else if (useDayNum == 30) {  // 한달권 선택시
+            returnDateMon = rentDateMon + 1;
+            returnDateDay = rentDateDay;
+        }
         else {
             switch (rentDateMon) {
                 case 1:
@@ -347,8 +359,9 @@ const daysSelect = () => {
             }
         }
 
-
         returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
+        console.log(returnDateNum)
+
     }
     calculateDate();
 }
@@ -365,6 +378,23 @@ const timeSelect = () => {
     calculateDate();
 }
 
+let clickedDate = ''
+
+const doIt = () => {
+    let clickedOne = document.getElementById('rent_date');
+    let clickedWhole = clickedOne.className;
+    console.log(clickedWhole);
+    let clickedYear = clickedWhole.split('년')[0];
+    clickedDate = clickedWhole.split('년')[1].split('요일')[0];
+    let clickedWDay = clickedWhole.split('요일')[1];
+    sendRentDate(clickedDate, clickedYear, clickedWDay);
+    let target = document.getElementById(clickedDate);
+    target.checked = true;
+}
+
+doIt();
+
+
 
 // Sending Data;
 const postDateEurope = () => {
@@ -373,7 +403,7 @@ const postDateEurope = () => {
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/europe_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${price}`
+        window.location.href = `/europe_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}`
 
     } else {
         alert('입력을 완료해주세요!')
@@ -386,7 +416,7 @@ const postDateLimousine = () => {
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/liomousine_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${price}`
+        window.location.href = `/liomousine_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}`
 
     } else {
         alert('입력을 완료해주세요!')
@@ -399,7 +429,7 @@ const postDateTravel = () => {
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/${carType}_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${price}`
+        window.location.href = `/${carType}_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}`
 
     } else {
         alert('입력을 완료해주세요!')

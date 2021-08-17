@@ -80,7 +80,7 @@ textarea.noscrollbars {
 }
 
 #info_price {
-    height: 350px;
+    overflow: auto;
 }
 
 .price_between {
@@ -112,6 +112,20 @@ textarea.noscrollbars {
 
 #price_desc p{
     margin: 2px;
+}
+
+p .checkboxes {
+    display: flex;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 0.5vh;
+    background: lightgoldenrodyellow;
+}
+
+.checkboxes input {
+    margin-top: 0;
+    margin-right: 10px;
+    zoom: 1.5;
 }
 
 #btn_final {
