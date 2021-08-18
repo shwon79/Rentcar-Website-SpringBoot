@@ -226,11 +226,12 @@ a:hover {
 
   a .detail_selections {
     width: 100%;
-    background-color: #1F1D19;
+    background-color: #f3d79b;
   }
 
   .detail_selections {
-    background-color: #6b6a6a;
+    background-color: #8c8c8c;
+    color: #6f6f6f;
   }
 
 
