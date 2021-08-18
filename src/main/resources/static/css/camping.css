@@ -456,6 +456,10 @@ a:hover {
 
 }
 
+.down_arrow {
+  padding: 0 10px;
+}
+
 #rent_cal div {
   display: flex;
   justify-content: center;
@@ -548,6 +552,22 @@ input[type=radio] {
 
 .sel_options hr {
   margin: 15px 0;
+}
+
+#sel_option_length {
+  padding: 0 35px;
+}
+
+#sel_options_output {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sel_options_outputs {
+  display: flex;
+  flex-direction: column;
 }
 
 #btn_reserve {

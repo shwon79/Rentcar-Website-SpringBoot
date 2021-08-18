@@ -89,7 +89,7 @@
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="date_time"><span id='rent_date'  th:title="${dateId}" th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
                         </div>
                     </div><hr />
@@ -97,15 +97,15 @@
                     <div id="calendar_rental" class="row">
                         <div class="header">
                             <!-- <div class="nav"> -->
-                            <a th:href="'/liomousine_reserve/before/' + ${prevMonth}">
+                            <a th:href="'/liomousine_reserve/before/' + ${clickedPrevMonth}">
                                 <button class="nav-btn go-prev">&lt;</button>&nbsp;
                             </a>&nbsp;
                             <!-- <button class="nav-btn go-today">Today</button> -->
                             <div class="year-month">
-                                <span name="thisYear" th:text="${thisYear}"></span>년
-                                <span name="thisMonth" th:text="${thisMonth}"></span>월
+                                <span name="thisYear" th:text="${clickedYear}"></span>년
+                                <span name="thisMonth" th:text="${clickedMonth}"></span>월
                             </div>&nbsp;&nbsp;
-                            <a th:href="'/liomousine_reserve/after/' + ${thisMonth}">
+                            <a th:href="'/liomousine_reserve/after/' + ${clickedMonth}">
                                 <button class="nav-btn go-next" >&gt;</button>
                             </a>
                         </div>
@@ -122,7 +122,7 @@
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label th:for="${date.month+'월 '+date.day+'일'}"
-                                           th:class="${dateCampingList[iterStat.index][2].reserved} == '1' or (${date.day} < ${today}-1 and ${date.month} <= ${thisMonth}) ? 'disabled_radio' : 'able_radio'">
+                                           th:class="${dateCampingList[iterStat.index][1].reserved} == '1' or (${date.day} < ${today}-1 and ${date.month} <= ${thisMonth}) ? 'disabled_radio' : 'able_radio'">
                                         <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:name="${thisYear}" th:title="${date.season}"
                                                th:value="${date.wDay}" th:text="${date.day}" onclick="sendRentDate(id, name, value);"/>
                                     </label>
@@ -143,7 +143,7 @@
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="date_time">시간을 선택해주세요</div>
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
                         </div>
                     </div><hr style="background: dimgray;" />
@@ -188,7 +188,7 @@
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="date_time">기간을 선택해주세요</div>
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
                         </div>
                     </div><hr style="background: dimgray;" />
@@ -254,7 +254,19 @@
                             <div class="sel_options" id="sel_option">
                                 <h2>선택 사항</h2>
                                 <hr style="color: dimgray;"/>
-                                <p id="selOption"></p>
+
+                                <div id="sel_options_output">
+                                    <div class="sel_options_outputs">
+                                        <p id="sel_option_output1_1"></p>
+                                        <p id="sel_option_output1_2"></p>
+                                    </div>
+                                    <p id="sel_option_length">➔</p>
+                                    <div class="sel_options_outputs">
+                                        <p id="sel_option_output2_1"></p>
+                                        <p id="sel_option_output2_2"></p>
+                                    </div>
+                                </div>
+
                                 <hr style="margin: 10px 0"/>
                             </div>
                             <div class="sel_options" id="sel_price">

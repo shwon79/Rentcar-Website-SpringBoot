@@ -139,19 +139,30 @@ const sendRentDate = (id, year, wDay) => {
     fetch(url+'/'+rentDateYear+'/'+rentDateMonth+'/'+rentDateDay)
         .then(res => res.json())
         .then(result => {
+
+            // 대여 시간 선택 띄우기
             let theWrapper = document.getElementById('rent_time');
-            let dayWrapper = document.getElementById('calendar_return')
             let hrTime = document.getElementById('hr_time');
 
             theWrapper.style.display = 'block';
             hrTime.style.display = 'block';
-            dayWrapper.style.display = 'block';
+
+            // 대여 시작 날짜 & 시간 선택되면 일권 고르기
+            if (rentDateNum != '' && rentTime != '') {
+                let targetDays = document.getElementById('calendar_return');
+                targetDays.style.display = 'block';
+            }
 
             let allTime = ["10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시"];
             for (const eachTime of allTime) {
                 let timeId = document.getElementById(eachTime);
-                if (result.includes(eachTime)) timeId.disabled = false;
-                else timeId.disabled = true;
+                if (result.includes(eachTime)) {
+                    timeId.disabled = false;
+
+                }
+                else {
+                    timeId.disabled = true;
+                }
             }
 
             // let targetClasses = document.getElementsByClassName('each_rent_day');
@@ -193,87 +204,10 @@ const rentTimeSel = (id) => {
     rentTime = id;
     returnTime = rentTime;
 
-    // let option1 = document.getElementById('1h');
-    // let option2 = document.getElementById('2h');
-    // let option3 = document.getElementById('3h');
-    // let option4 = document.getElementById('4h');
-    // let option5 = document.getElementById('5h');
-    // let option6 = document.getElementById('6h');
-    // let option7 = document.getElementById('7h');
-
-    // disable 추가시간
-    // if (rentTime == '10시') {
-    //     option1.disabled = false;
-    //     option2.disabled = false;
-    //     option3.disabled = false;
-    //     option4.disabled = false;
-    //     option5.disabled = false;
-    //     option6.disabled = false;
-    //     option7.disabled = false;
-    // }
-    // else if (rentTime == '11시') {
-    //     option1.disabled = false;
-    //     option2.disabled = false;
-    //     option3.disabled = false;
-    //     option4.disabled = false;
-    //     option5.disabled = false;
-    //     option6.disabled = false;
-    //     option7.disabled = true;
-    // }
-    // else if (rentTime == '12시') {
-    //     option1.disabled = false;
-    //     option2.disabled = false;
-    //     option3.disabled = false;
-    //     option4.disabled = false;
-    //     option5.disabled = false;
-    //     option6.disabled = true;
-    //     option7.disabled = true;
-    // }
-    // else if (rentTime == '13시') {
-    //     option1.disabled = false;
-    //     option2.disabled = false;
-    //     option3.disabled = false;
-    //     option4.disabled = false;
-    //     option5.disabled = true;
-    //     option6.disabled = true;
-    //     option7.disabled = true;
-    // }
-    // else if (rentTime == '14시') {
-    //     option1.disabled = false;
-    //     option2.disabled = false;
-    //     option3.disabled = false;
-    //     option4.disabled = true;
-    //     option5.disabled = true;
-    //     option6.disabled = true;
-    //     option7.disabled = true;
-    // }
-    // else if (rentTime == '15시') {
-    //     option1.disabled = false;
-    //     option2.disabled = false;
-    //     option3.disabled = true;
-    //     option4.disabled = true;
-    //     option5.disabled = true;
-    //     option6.disabled = true;
-    //     option7.disabled = true;
-    // }
-    // else if (rentTime == '16시') {
-    //     option1.disabled = false;
-    //     option2.disabled = true;
-    //     option3.disabled = true;
-    //     option4.disabled = true;
-    //     option5.disabled = true;
-    //     option6.disabled = true;
-    //     option7.disabled = true;
-    // }
-    // else if (rentTime == '17시') {
-    //     option1.disabled = true;
-    //     option2.disabled = true;
-    //     option3.disabled = true;
-    //     option4.disabled = true;
-    //     option5.disabled = true;
-    //     option6.disabled = true;
-    //     option7.disabled = true;
-    // }
+    if (rentTime != '' && rentDateNum != '') {
+        let targetDays = document.getElementById('calendar_return')
+        targetDays.style.display = 'block'
+    }
 
     calculateDate();
 
@@ -286,8 +220,18 @@ const calculateDate = () => {
     if (returnDateNum != '' && rentDateNum != '' && rentTime != '' && returnTime != '') {
         const optionWrapper = document.getElementById('calResultWrapper')
         optionWrapper.style.display = 'block'
-        let showSelections = document.getElementById('selOption');
-        showSelections.innerText = `${rentDateNum} ${rentTime}  ➔  ${returnDateNum} ${returnTime}`
+        let showSelections1 = document.getElementById('sel_option_output1_1');
+        let showSelections2 = document.getElementById('sel_option_output1_2');
+        let showSelections3 = document.getElementById('sel_option_output2_1');
+        let showSelections4 = document.getElementById('sel_option_output2_2');
+
+        showSelections1.innerText = rentDateNum
+        showSelections2.innerText = rentTime
+        showSelections3.innerText = returnDateNum
+        showSelections4.innerText = returnTime
+
+
+
         let targetWhole = document.getElementById('calResult');
         let targetFee = document.getElementById('calRentFee');
         let targetDeposit = document.getElementById('calDeposit');

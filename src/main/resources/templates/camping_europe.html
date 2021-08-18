@@ -89,7 +89,7 @@
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="date_time"><span id='rent_date' th:title="${dateId}" th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
                         </div>
                     </div><hr />
@@ -144,7 +144,7 @@
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="date_time">시간을 선택해주세요</div>
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
                         </div>
                     </div><hr style="background: dimgray;" />
@@ -189,7 +189,7 @@
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="date_time">기간을 선택해주세요</div>
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
                         </div>
                     </div><hr style="background: dimgray;" />
@@ -255,8 +255,20 @@
                             <div class="sel_options" id="sel_option">
                                 <h2>선택 사항</h2>
                                 <hr style="color: dimgray;"/>
-                                <p id="selOption"></p>
-                                <hr style="margin: 10px 0"/>
+
+                                <div id="sel_options_output">
+                                    <div class="sel_options_outputs">
+                                        <p id="sel_option_output1_1"></p>
+                                        <p id="sel_option_output1_2"></p>
+                                    </div>
+                                    <p id="sel_option_length">➔</p>
+                                    <div class="sel_options_outputs">
+                                        <p id="sel_option_output2_1"></p>
+                                        <p id="sel_option_output2_2"></p>
+                                    </div>
+                                </div>
+
+                                <hr style="margin: 10px 0;"/>
                             </div>
                             <div class="sel_options" id="sel_price">
                                 <div class="result_details">
