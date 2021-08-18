@@ -1,3 +1,7 @@
+p {
+    margin: 0 0 10px 0;
+}
+
 .paying_content {
     padding: 60px;
 }
@@ -15,6 +19,13 @@
     display: flex;
     flex-direction: row;
     justify-content: start;
+}
+
+#rent_length {
+    border: none;
+    background: beige;
+    padding: 5px 10px;
+    border-radius: 0.5vh;
 }
 
 /*.car_type {*/
@@ -45,12 +56,22 @@
     align-items: center;
 }
 
+#must_desc {
+    font-size: 13px;
+}
+
 .input_person {
     margin-bottom: 5px;
 }
 
+.input_person label {
+    font-size: 16px;
+}
+
 .input_person div {
-    margin: 5px 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .input_person input {
@@ -58,21 +79,32 @@
     height: 35px;
     font-size: 20px;
     margin: 3px;
+    border: #a7a7a7 1px solid;
+    border-radius: 0.5vh;
 }
 
 .input_demand {
     width: 100%;
     font-size: 20px;
+    margin-top: 20px;
+}
+
+.input_demand label {
+    display: flex;
+    font-size: 16px;
 }
 
 #input_demand {
     width: 100%;
+    padding: 10px;
 }
 
 textarea.noscrollbars {
     overflow: hidden;
     min-height: 100px;
     resize: none;
+    border: #a7a7a7 1px solid;
+    border-radius: 0.5vh;
 }
 
 #info_refund {
@@ -88,6 +120,7 @@ textarea.noscrollbars {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin: 10px 0;
 }
 
 .price_between p {

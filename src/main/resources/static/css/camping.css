@@ -285,7 +285,7 @@ hr {
 .dates {
   display: flex;
   flex-flow: row wrap;
-  height: 300px;
+  height: 100%;
   /*border-top: 1px solid #6f6c6c;*/
   /*border-right: 1px solid #6f6c6c;*/
 }
@@ -448,43 +448,36 @@ a:hover {
   color: black;
 }
 
-.personal_data input {
-  height: 30px;
-  font-size: 20px;
+.car_type {
+  overflow: auto;
+}
+
+#left_column {
+
+}
+
+#rent_cal div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#rent_cal label {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#rent_time label {
+  height: 35px;
+  width: 22%;
   margin: 5px;
-
-}
-
-#table_wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#table_header {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-#table_header div {
-  width: 100%;
-  border: 1px solid gray;
-}
-
-#table_body {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-#table_body div {
-  width: 100%;
-  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 1vh;
+  background: lightblue;
 }
 
 .select_wrapper:hover {
@@ -503,21 +496,34 @@ a:hover {
   display: none;
 }
 
+#calendar_return label {
+  margin: 0 10px 0 0;
+  font-size: 17px;
+}
+
+#calendar_return select {
+  font-size: 17px;
+}
+
+.disabled_radio {
+  pointer-events: none;
+  color: dimgray;
+  background: lightgray;
+}
+
+.disabled_radio input[type=radio]{
+  display: none;
+}
+
+#rent_time input[type=radio] {
+  margin: 0 5px 0 0;
+}
+
 input[type=radio] {
   /*display:none;*/
 }
 
-input[type=radio] + label {
-  display:inline-block;
-  background-color: #e7e7e7;
-  border-color: #ddd;
-  width: 100%;
-  height: 100%;
-
-}
-
-
-input[type=radio]:checked + label {
+#rent_cal input[type=radio] + label{
   background: #2b542c;
   color: whitesmoke;
 }
@@ -533,6 +539,11 @@ input[type=radio]:checked + label {
 .result_details {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.result_details h4 {
+  margin: 0;
 }
 
 .sel_options hr {
@@ -551,4 +562,9 @@ input[type=radio]:checked + label {
   background-color: #13A0B2;
 }
 
+@media (max-width: 990px) {
+  #wrapper {
+    padding: 20px;
+  }
+}
 

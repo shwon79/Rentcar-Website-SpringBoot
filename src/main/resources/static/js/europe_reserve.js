@@ -175,8 +175,15 @@ const sendRentDate = (id, year, wDay) => {
     //
     //     })
 
+    // let availableBtns = document.getElementsByClassName('able_radio')
+    // for (const availableBtn of availableBtns) {
+    //     if (availableBtn.checked) availableBtn.style = 'background: blue';
+    //     else availableBtn.style = 'background: transparent'
+    // }
+
     runIt();
 }
+
 
 
 // time select onclick

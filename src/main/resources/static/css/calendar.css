@@ -71,7 +71,7 @@
   width: calc(100% / 7);
   padding: 15px;
   text-align: left;
-  border: 1px solid #6f6c6c;
+  border: 1px solid #e8e8e8;
 }
 
 .upside {
@@ -99,6 +99,7 @@
 .downside a {
   padding: 5px;
   border-radius: 2vh;
+  background: #fff1d3;
 }
 
 .downside a:hover {
@@ -219,20 +220,27 @@ a:hover {
     border-radius: 1vh;
   }
 
-  .detail_wrapper a {
-    color: aliceblue;
-    width: 65%;
-  }
+
 
   a .detail_selections {
     width: 100%;
     background-color: #f3d79b;
   }
 
-  .detail_selections {
-    background-color: #8c8c8c;
+  .detail_selections span {
     color: #6f6f6f;
   }
 
+  a .detail_selections span {
+    color: aliceblue;
+  }
+
+  .detail_selections {
+    background-color: #8c8c8c;
+  }
+
+  .detail_wrapper a {
+    width: 65%;
+  }
 
 }

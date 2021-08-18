@@ -33,6 +33,7 @@
                     <div class="bg-white pinside20 margin-bottom-20" id="info_reserve">
                         <div>
                             <h3 class="text-left">예약 상품 정보</h3>
+                            <hr style="margin: 0 0 20px 0" />
                         </div>
                         <div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -46,14 +47,16 @@
                                 <div class="reserve_detail">
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                                         <p>대여 일자</p>
-                                        <p id="rent_date" th:text="${rent_date+' '+rent_time}"></p>
+                                        <p id="rent_date" th:text="${rent_date}"></p>
+                                        <p th:text="${rent_time}"></p>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                        <button id="rent_length" class="" disabled>➔</button>
+                                        <button id="rent_length" disabled>➔</button>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                                         <p>반납 일자</p>
-                                        <p id="return_date" th:text="${return_date+' '+return_time}"></p>
+                                        <p id="return_date" th:text="${return_date}"></p>
+                                        <p th:text="${return_time}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +67,8 @@
                     <div class="bg-white pinside20 margin-bottom-20" id="info_custom">
                         <div class="text-left">
                             <h3>예약자 정보</h3>
-                            <p style="font-size: 10px"><span style="color: red">*</span>필수 입력 항목</p>
+                            <hr style="margin: 0 0 20px 0" />
+                            <p id="must_desc"><span style="color: red">*</span>필수 입력 항목</p>
                         </div>
                         <div>
                             <!-- 성명 연락처 -->
@@ -94,6 +98,7 @@
                     <div class="bg-white pinside20" id="info_refund">
                         <div>
                             <h3 class="text-left">취소/환불 규정에 대한 동의</h3>
+                            <hr style="margin: 0 0 20px 0" />
                         </div>
                         <div class="row pinside30 ">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
@@ -114,6 +119,7 @@
                     <div class="bg-white pinside20 margin-bottom-20" id="info_price">
                         <div>
                             <h3 class="text-left">최종 결제 금액</h3>
+                            <hr style="margin: 0 0 20px 0" />
                         </div>
                         <div>
                             <div class="price_between">
@@ -139,6 +145,7 @@
                     <div class="text-left bg-white pinside20 margin-bottom-20" id="info_deposit">
                         <div>
                             <h3 class="text-left">입금 계좌</h3>
+                            <hr style="margin: 0 0 20px 0" />
                         </div>
                         <div>
                             <h4 class="text-left">계좌 번호</h4>
@@ -151,6 +158,7 @@
                     <div class="text-left bg-white pinside20" id="info_done">
                         <div>
                             <h3 class="text-left">약관 동의</h3>
+                            <hr style="margin: 0 0 20px 0" />
                         </div>
                         <div>
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -167,10 +175,10 @@
                                         <div class="panel-body">
                                             <p>본인은 귀사에 차량렌트를 신청함으로써 [개인정보 보호법] 제15조 및 제17조에 따라</p>
                                             <p>아래의 내용으로 개인정보를 수집, 이용 및 제공하는데 동의합니다.</p>
-                                            <p>* 개인정보의 수집 및 이용에 관한 사항</p>
+                                            <p><i class="fas fa-star"></i> 개인정보의 수집 및 이용에 관한 사항</p>
                                             <p>- 수집하는 개인정보 항목 : 성명, 입금자명, 전화번호</p>
                                             <p>- 개인정보의 이용 목적 : 수집된 개인정보를 렌트 계약서 작성서류로 활용하며, 목적 외의 용도로는 사용하지 않습니다.</p>
-                                            <p>* 개인정보의 보관 및 이용 기간</p>
+                                            <p><i class="fas fa-star"></i> 개인정보의 보관 및 이용 기간</p>
                                             <p>- 귀하의 개인정보를 다음과 같이 보관하며, 수집, 이용 및 제공목적이 달성된 경우</p>
                                             <p>[개인정보 보호법] 제21조에 따라 처리합니다.</p>
                                             <p class="checkboxes"><input id="check_info" type="checkbox" value="rent"/>개인정보 이용 동의</p>

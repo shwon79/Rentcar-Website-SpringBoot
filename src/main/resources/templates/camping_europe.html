@@ -28,18 +28,18 @@
         <div th:replace="fragments/header_camp::headerFragment"></div>
 
         <!-- content whole wrapper-->
-        <div class="content pinside60">
+        <div id="wrapper" class="content pinside60">
             <!--  content body-->
             <div class="row">
                 <!-- left column -->
-                <div class="col lg-8 col-md-8 col-sm-12 col-xs-12 margin-bottom-60 text-center ">
+                <div id="left_column" class="col lg-8 col-md-8 col-sm-12 col-xs-12 margin-bottom-60 text-center ">
                     <!-- left content1 -->
                     <div class="row padding-bottom-60 text-center">
                         <h1>Europe VIP CAMPER</h1>
                         <h3>모터홈의 디럭스풍 디자인</h3>
                     </div>
                     <!-- left content2 -->
-                    <div id="europe" class="car_type row text-center pinside30 bg-light margin-bottom-40">
+                    <div id="europe" class="car_type text-center pinside30 bg-light margin-bottom-40">
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
                             <h3>CAPMER 명</h3>
                             <h3>Europe VIP</h3>
@@ -121,10 +121,10 @@
                             </div>
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
-                                    <label style="width: 100%; height: 100%" th:for="${date.month+'월 '+date.day+'일'}" class="each_rent_day" th:id="${date.dateId}"
-                                           th:style="${dateCampingList[iterStat.index][0].reserved} == '1' or (${date.day} < ${today}-1 and ${date.month} <= ${thisMonth}) ? 'pointer-events:none; color: gray;'">
+                                    <label th:for="${date.month+'월 '+date.day+'일'}" th:id="${date.dateId}"
+                                           th:class="${dateCampingList[iterStat.index][0].reserved} == '1' or (${date.day} < ${today}-1 and ${date.month} <= ${thisMonth}) ? 'disabled_radio' : 'able_radio'">
                                         <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:title="${date.season}"
-                                               th:name="${thisYear}" th:text="${date.day}" th onclick="sendRentDate(id, name, value);"/>
+                                               th:name="${thisYear}" th:text="${date.day}" onclick="sendRentDate(id, name, value);"/>
                                     </label>
 
                                 </div>
@@ -138,11 +138,11 @@
 
                     <!-- 대여 시간 -->
                     <div class="select_wrapper row" onclick="doDisplay_rent_time()">
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-center">
-                            <div class="date_menu">대여시작시간</div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                            <div class="date_menu">시작 시간</div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <div class="date_time">시간을 선택해주세요.</div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                            <div class="date_time">시간을 선택해주세요</div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
@@ -153,28 +153,28 @@
                     <div id="calendar_rental_time">
                         <div id="rent_time" class="row">
                             <div class="times text-center">
-                                <label style="height: 35px; width: 22%; margin: 5px 0" for="10시">
+                                <label for="10시">
                                     <input type="radio" id="10시" class="rent_time_radio" name="time1" onclick="rentTimeSel(id)" /> 10시
                                 </label>
-                                <label style="height: 35px; width: 22%; margin: 5px 0" for="11시">
+                                <label for="11시">
                                     <input type="radio" id="11시" class="rent_time_radio" name="time1" onclick="rentTimeSel(id)" /> 11시
                                 </label>
-                                <label style="height: 35px; width: 22%; margin: 5px 0" for="12시">
+                                <label for="12시">
                                     <input type="radio" id="12시" class="rent_time_radio" name="time1" onclick="rentTimeSel(id)" /> 12시
                                 </label>
-                                <label style="height: 35px; width: 22%; margin: 5px 0" for="13시">
+                                <label for="13시">
                                     <input type="radio" id="13시" class="rent_time_radio" name="time1" onclick="rentTimeSel(id)" /> 13시
                                 </label>
-                                <label style="height: 35px; width: 22%; margin: 5px 0" for="14시">
+                                <label for="14시">
                                     <input type="radio" id="14시" class="rent_time_radio" name="time1" onclick="rentTimeSel(id)" /> 14시
                                 </label>
-                                <label style="height: 35px; width: 22%; margin: 5px 0" for="15시">
+                                <label for="15시">
                                     <input type="radio" id="15시" class="rent_time_radio" name="time1" onclick="rentTimeSel(id)" /> 15시
                                 </label>
-                                <label style="height: 35px; width: 22%; margin: 5px 0" for="16시">
+                                <label for="16시">
                                     <input type="radio" id="16시" class="rent_time_radio" name="time1" onclick="rentTimeSel(id)" /> 16시
                                 </label>
-                                <label style="height: 35px; width: 22%; margin: 5px 0" for="17시">
+                                <label for="17시">
                                     <input type="radio" id="17시" class="rent_time_radio" name="time1" onclick="rentTimeSel(id)" /> 17시
                                 </label>
 
@@ -183,11 +183,11 @@
                     </div>
 
                     <div class="select_wrapper row" onclick="doDisplay_return()">
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-center">
-                            <div class="date_menu">대여 기간 선택</div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                            <div class="date_menu">대여 기간</div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <div class="date_time">기간을 선택해주세요.</div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                            <div class="date_time">기간을 선택해주세요</div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <img th:src="@{/img/down-arrow.png}" class="img-responsive">
@@ -254,6 +254,7 @@
                         <div id="calResultWrapper">
                             <div class="sel_options" id="sel_option">
                                 <h2>선택 사항</h2>
+                                <hr style="color: dimgray;"/>
                                 <p id="selOption"></p>
                                 <hr style="margin: 10px 0"/>
                             </div>
@@ -270,7 +271,6 @@
                                     <h4>총 결제금액(VAT 포함)</h4>
                                     <p id="calResult"></p>
                                 </div>
-
                             </div>
                             <hr style="background: dimgray; margin: 15px 0;" />
                         </div>
