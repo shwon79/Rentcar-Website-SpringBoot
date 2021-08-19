@@ -556,6 +556,8 @@ input[type=radio] {
   display: flex;
 }
 
+.disabled_time {}
+
 #calResultWrapper {
   display: none;
   margin: 20px 0;

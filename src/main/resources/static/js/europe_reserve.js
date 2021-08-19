@@ -162,6 +162,7 @@ const sendRentDate = (id, year, wDay) => {
                 }
                 else {
                     timeId.disabled = true;
+                    timeId.className = 'disabled_time';
                 }
             }
 
@@ -177,14 +178,19 @@ const sendRentDate = (id, year, wDay) => {
             // console.log(clickedDate);
         })
 
+    let availableDays = 0;
+
     // 선택 불가능한 가까운 날짜 받아오기
-    // fetch(`/${carType}/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
-    //     .then(res => res.json())
-    //     .then(result => {
-    //       console.log(result);
-    //
-    //
-    //     })
+    fetch(`/${carType}/getrentdate/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
+        .then(res => res.json())
+        .then(result => {
+            let targetSelect = document.getElementById('days_select');
+          for (let i = 3; i<targetSelect.length; i++ ) {
+              targetSelect.options[i] = null;
+          }
+          availableDays = result[0];
+          makeOptions(availableDays)
+        })
 
     // let availableBtns = document.getElementsByClassName('able_radio')
     // for (const availableBtn of availableBtns) {
@@ -195,6 +201,24 @@ const sendRentDate = (id, year, wDay) => {
     runIt();
 }
 
+// make 일권 options on selection
+
+const makeOptions = (days) => {
+    for (let i = 2; i<days; i++) {
+        let targetSelect = document.getElementById('days_select');
+        let createdOpt = document.createElement("option");
+        if (i>30) break;
+        if (i == 30) {
+            createdOpt.text = '한달권';
+            createdOpt.value = i;
+        } else {
+            createdOpt.text = i+'일권';
+            createdOpt.value = i;
+        }
+        targetSelect.add(createdOpt);
+
+    }
+}
 
 
 // time select onclick
