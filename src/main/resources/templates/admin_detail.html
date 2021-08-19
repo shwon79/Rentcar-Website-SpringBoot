@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="page_wrapper">
-    <div id="logout_box"><a href="/admin/logout"><button>로그아웃</button></a></div>
+    <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
     <div class="content_wrapper">
         <div class="menu_container">
             <div class="menu_list">
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="detail_container" >
-            <div class="detail_list" >
+            <div class="detail_list" id="go_back_wrapper">
                 <a href="/admin/main"><button id="go_back">🠔 뒤로가기</button></a>
             </div>
             <div class="detail_list" id="detail_set_reserve">
@@ -104,7 +104,7 @@
             </div>
             <div class="detail_list">
                 <p id="custom_demand">요구사항</p>
-                <p th:text="${campingcarDateTime2.detail}"></p>
+                <p id="custom_demand_detail" th:text="${campingcarDateTime2.detail}"></p>
             </div>
             <div class="detail_list" id="detail_set_delete">
                 <form method="GET" onsubmit="return confirm('예약을 \'삭제\'하시겠습니까?')" th:action="${'/admin/detail/delete/'+campingcarDateTime2.dateTimeId}">

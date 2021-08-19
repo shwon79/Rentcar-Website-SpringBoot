@@ -15,6 +15,14 @@ p {
     color: tomato;
 }
 
+#car_img_wrapper {
+    height: 150px;
+}
+
+#car_img {
+    height: 100%;
+}
+
 #product_info {
     display: flex;
     flex-direction: row;
@@ -75,7 +83,7 @@ p {
 }
 
 .input_person input {
-    width: 30%;
+    width: 60%;
     height: 35px;
     font-size: 20px;
     margin: 3px;
@@ -111,6 +119,11 @@ textarea.noscrollbars {
     overflow: auto;
 }
 
+#info_refund2 {
+    overflow: auto;
+    display: none;
+}
+
 #info_price {
     overflow: auto;
 }
@@ -127,8 +140,13 @@ textarea.noscrollbars {
     margin-bottom: 0;
 }
 
+.final_price {
+    border-radius: 0.5vh;
+    background: lightyellow;
+}
+
 #info_deposit {
-    height: 200px;
+    overflow: auto;
 }
 
 #info_deposit h5 {
@@ -161,6 +179,12 @@ textarea.noscrollbars {
     zoom: 1.5;
 }
 
+#btn_final_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #btn_final {
     padding: 20px 30px;
     color: aliceblue;
@@ -179,3 +203,20 @@ textarea.noscrollbars {
         padding: 20px;
     }
 }
+
+@media (min-width: 900px) {
+    .input_person input {
+        width: 300px;
+    }
+}
+
+@media (min-width: 991px) {
+    #info_refund{
+        display: none;
+    }
+
+    #info_refund2 {
+        display: block;
+    }
+}
+

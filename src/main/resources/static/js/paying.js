@@ -81,6 +81,8 @@ let vatTarget = document.getElementById('vat_fee');
 vatTarget.innerText = parseInt(totalPrice/11).toLocaleString()+'원'; // 콤마 넣어주기
 let totalFeeTarget = document.getElementById('total_fee');
 totalFeeTarget.innerText = (parseInt((totalPrice/11)*10)).toLocaleString()+'원';
+let HalfTarget = document.getElementById('half_price');
+HalfTarget.innerText = parseInt(totalPrice/2).toLocaleString()+'원'; // 콤마 넣어주기
 // let depositsTarget = document.getElementById('deposits');
 // depositsTarget.innerText = totalHalf.toLocaleString()+'원';
 

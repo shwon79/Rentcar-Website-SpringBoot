@@ -11,21 +11,20 @@
     <!-- Style -->
     <link th:href="@{/css/calendar.css}" rel="stylesheet">
 
-    <script>
-        function toggleImg(id) {
-            let before = document.getElementById("headerImg").src;
-            let tmp = document.getElementById(id).src;
-            document.getElementById("headerImg").src = tmp;
-            document.getElementById(id).src = before;
-        }
+<!--    <script>-->
+<!--        function toggleImg(id) {-->
+<!--            let before = document.getElementById("headerImg").src;-->
+<!--            let tmp = document.getElementById(id).src;-->
+<!--            document.getElementById("headerImg").src = tmp;-->
+<!--            document.getElementById(id).src = before;-->
+<!--        }-->
 
-    </script>
+<!--    </script>-->
 
     <script th:src="@{/js/calendar.js}" defer></script>
 
 
 </head>
-<body>
     <div layout:fragment="content">
         <div th:replace="fragments/header_camp::headerFragment"></div>
 
@@ -160,6 +159,6 @@
             </div>
         </div>
     </div>
-</body>
+
 
 </html>
