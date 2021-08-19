@@ -224,7 +224,7 @@ a:hover {
 
   a .detail_selections {
     width: 100%;
-    background-color: #f3d79b;
+    background-color: #ffe6b0;
   }
 
   .detail_selections span {
@@ -232,7 +232,7 @@ a:hover {
   }
 
   a .detail_selections span {
-    color: aliceblue;
+    color: black;
   }
 
   .detail_selections {

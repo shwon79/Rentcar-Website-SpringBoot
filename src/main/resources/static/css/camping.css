@@ -475,13 +475,21 @@ a:hover {
   align-items: center;
 }
 
+.times {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 #rent_time label {
-  height: 35px;
+  height: 45px;
   width: 22%;
   margin: 5px;
-  padding: 10px;
   border-radius: 1vh;
-  background: lightblue;
+  background: #fff8c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .select_wrapper:hover {
@@ -524,12 +532,28 @@ a:hover {
 }
 
 input[type=radio] {
-  /*display:none;*/
+  appearance: none;
 }
 
-#rent_cal input[type=radio] + label{
-  background: #2b542c;
-  color: whitesmoke;
+#rent_cal input[type=radio]:checked {
+  appearance: none;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #4d7cff70;
+  border-radius: 50%;
+  margin: 0;
+
+}
+
+#rent_time input[type=radio]:checked{
+  appearance: none;
+  position: absolute;
+  height: 45px;
+  width: 22%;
+  background: #2623ec6b;
+  border-radius: 1vh;
+  display: flex;
 }
 
 #calResultWrapper {
