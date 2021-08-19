@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -511,12 +512,78 @@ public class ReservationController {
             mav.setViewName("admin");
         }
 
-
-
-
-
-
         return mav;
     }
+
+
+    // 상담신청 예약 저장 및 문자발송 api
+    @GetMapping("/reservation/cancel/{date_time_id}")
+    @ResponseBody
+    public void cancel(@PathVariable Long date_time_id){
+
+        String api_key = "NCS0P5SFAXLOJMJI";
+        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<String, String>();
+        HashMap<String, String> params2 = new HashMap<String, String>();
+
+        CampingcarDateTime2 campingcarDateTime = campingcarDateTimeService2.findByDateTimeId(date_time_id);
+
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", phone_to); // 01033453328 추가
+        params.put("from", "01052774113");
+        params.put("type", "LMS");
+
+
+        /* 고객에게 예약확인 문자 전송 */
+        params2.put("to", campingcarDateTime.getPhone());
+        params2.put("from", phone_from);  // 16613331 테스트하기
+        params2.put("type", "LMS");
+
+
+        params.put("text", "[" + campingcarDateTime.getName() + "님의 캠핑카 예약이 취소되었습니다]" + "\n"
+                + "문의자 이름: " + campingcarDateTime.getName() + "\n"
+                + "예약 신청일: " + campingcarDateTime.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n"
+                + "대여 시작일: " + campingcarDateTime.getRentDate() + "\n"
+                + "대여권: " + campingcarDateTime.getDay() + "\n"
+                + "차량명: " + campingcarDateTime.getCarType() + "\n"
+                + "전화번호: " + campingcarDateTime.getPhone() + "\n\n");
+
+        params2.put("text", "[" + campingcarDateTime.getName() + "님의 캠핑카 예약이 취소되었습니다]" + "\n"
+                + "예약 신청일: " + campingcarDateTime.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n"
+                + "차량명: " + campingcarDateTime.getCarType() + "\n"
+                + "대여 시작일: " + campingcarDateTime.getRentDate() + "\n"
+                + "대여권: " + campingcarDateTime.getDay() + "\n"
+//                + "전화번호: " + campingcarDateTime.getPhone() + "\n\n"
+        );
+
+        params.put("app_version", "test app 1.2");
+        params2.put("app_version", "test app 1.2");
+
+
+        /* 세이브카에게 문자 전송 */
+
+        try {
+            JSONObject obj = (JSONObject) coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        /* 고객에게 예약확인 문자 전송 */
+
+        try {
+            JSONObject obj2 = (JSONObject) coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+    }
+
+
 
 }
