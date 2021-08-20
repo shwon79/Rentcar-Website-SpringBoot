@@ -81,7 +81,6 @@ public class CalendarController {
         Long firstDateId = calendarDateList.get(0).getDateId();
         Integer before = cal.get(Calendar.DAY_OF_WEEK);
 
-
         for(int i=1; i<before; i++){
             calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
         }
@@ -103,7 +102,6 @@ public class CalendarController {
         model.addAttribute("calendarDateList", calendarDateList);
 
 
-
         // 날짜별 캠핑카
         List<List<DateCamping>> dateCampingList = new ArrayList();
 
@@ -114,7 +112,6 @@ public class CalendarController {
         model.addAttribute("dateCampingList", dateCampingList);
         model.addAttribute("thisMonth", now_month);
         model.addAttribute("thisYear", now_year);
-
 
         return "calendar";
     }
@@ -1113,107 +1110,6 @@ public class CalendarController {
         return "camping_europe";
     }
 
-
-
-    // 캠핑카 예약 저장 api
-    @PostMapping("/campingcar/reserve")
-    @ResponseBody
-    public String save(@RequestBody CampingcarDateTime2 dto){
-
-
-        System.out.println(dto.getRentDate());
-        System.out.println(dto.getRentTime());
-        System.out.println(dto.getReturnDate());
-        System.out.println(dto.getReturnTime());
-        System.out.println(dto.getAgree()); // 1
-        System.out.println(dto.getDeposit());
-        System.out.println(dto.getDepositor());
-        System.out.println(dto.getDetail());
-        System.out.println(dto.getName());
-        System.out.println(dto.getPhone());
-        System.out.println(dto.getReservation()); // 1
-        System.out.println(dto.getTotal());
-        System.out.println(dto.getDay());
-
-        // 문자전송
-        String api_key = "NCS0P5SFAXLOJMJI";
-        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
-        Message coolsms = new Message(api_key, api_secret);
-        HashMap<String, String> params = new HashMap<String, String>();
-        HashMap<String, String> params2 = new HashMap<String, String>();
-
-
-        /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-        params.put("from", "01052774113");
-        params.put("type", "LMS");
-
-
-        /* 고객에게 예약확인 문자 전송 */
-
-        params2.put("to", dto.getPhone());
-        params2.put("from", "01052774113");  // 16613331 테스트하기
-        params2.put("type", "LMS");
-
-        params.put("text", "[캠핑카 실시간 예약]\n"
-                + "성함: " + dto.getName() + "\n"
-                + "전화번호: " + dto.getPhone() + "\n"
-                + "차량명: " + dto.getCarType() + "\n"
-                + "입금자명: " + dto.getDepositor() + "\n"
-                + "대여날짜: " + dto.getRentDate() + "\n"
-                + "대여시간: " + dto.getRentTime() + "\n"
-                + "반납날짜: " + dto.getReturnDate() + "\n"
-                + "반납시간: " + dto.getReturnTime() + "\n"
-                + "이용날짜: " + dto.getDay() + "\n"
-                + "총금액: " + dto.getTotal() + "\n"
-                + "선결제금액: " + dto.getTotalHalf() + "\n"
-                + "요청사항: " + dto.getDetail() + "\n\n");
-
-        params2.put("text", "[캠핑카 예약 대기 신청이 완료되었습니다.]" + "\n"
-                + "성함: " + dto.getName() + "\n"
-                + "전화번호: " + dto.getPhone() + "\n"
-                + "차량명: " + dto.getCarType() + "\n"
-                + "대여날짜: " + dto.getRentDate() + "\n"
-                + "대여시간: " + dto.getRentTime() + "\n"
-                + "반납날짜: " + dto.getReturnDate() + "\n"
-                + "반납시간: " + dto.getReturnTime() + "\n"
-                + "입금자명: " + dto.getDepositor() + "\n"
-                + "이용날짜: " + dto.getDay() + "\n"
-                + "총금액: " + dto.getTotal() + "\n"
-                + "선결제금액: " + dto.getTotalHalf() + "\n"
-                + "요청사항: " + dto.getDetail() + "\n\n"
-                + "* 예약 확정 시 담당자가 따로 안내연락드립니다." + "\n\n");
-
-
-        params.put("app_version", "test app 1.2");
-        params2.put("app_version", "test app 1.2");
-
-
-        /* 세이브카에게 문자 전송 */
-
-        try {
-            org.json.simple.JSONObject obj = (org.json.simple.JSONObject) coolsms.send(params);
-            System.out.println(obj.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
-
-        /* 고객에게 예약확인 문자 전송 */
-
-        try {
-            org.json.simple.JSONObject obj2 = (org.json.simple.JSONObject) coolsms.send(params2);
-            System.out.println(obj2.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
-
-
-        campingcarDateTimeService2.save2(dto);
-
-        return "paying";
-    }
 
 
     // 캠핑카 예약 저장 api
