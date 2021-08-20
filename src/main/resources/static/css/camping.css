@@ -620,6 +620,36 @@ input[type=radio] {
   background-color: #13A0B2;
 }
 
+
+/* 캠핑카 페이지 버튼 css */
+.camping_page {
+  border-bottom: 1px solid lightgray;
+}
+
+.camping_page button {
+  padding: 15px 25px;
+  font-size: 17px;
+  width: 170px;
+  background: white;
+  border: none;
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  border-top-left-radius: 0.5vh;
+  border-top-right-radius: 0.5vh;
+
+}
+
+#reserve_page_btn {
+  background: lightyellow;
+}
+
+.camping_page button:hover {
+  background: lightyellow;
+}
+
+/*  */
+
 @media (max-width: 990px) {
   #wrapper {
     padding: 20px;

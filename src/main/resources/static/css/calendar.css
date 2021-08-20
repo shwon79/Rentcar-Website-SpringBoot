@@ -28,6 +28,35 @@
   cursor: pointer;
 }
 
+/* 캠핑카 페이지 버튼 css */
+.camping_page {
+  border-bottom: 1px solid lightgray;
+}
+
+.camping_page button {
+  padding: 15px 25px;
+  font-size: 17px;
+  width: 170px;
+  background: white;
+  border: none;
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  border-top-left-radius: 0.5vh;
+  border-top-right-radius: 0.5vh;
+
+}
+
+#reserve_page_btn {
+  background: lightyellow;
+}
+
+.camping_page button:hover {
+  background: lightyellow;
+}
+
+/*  */
+
 .calendar_content {
   margin-bottom: 100px;
   padding-top: 100px;
@@ -214,6 +243,8 @@ a:hover {
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
+    font-family: FontAwesome;
+    font-weight: bold;
   }
 
   .detail_wrapper div {
@@ -227,12 +258,13 @@ a:hover {
 
   a .detail_selections {
     width: 100%;
-    background-color: #ffe6b0;
+    background-color: lightyellow;
+    border: 1px solid lightblue;
   }
 
   .detail_selections span {
     color: #6f6f6f;
-    font-family: 'FontAwesome';
+    /*font-family: 'FontAwesome';*/
 
   }
 

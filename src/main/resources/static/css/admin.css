@@ -11,7 +11,7 @@ body {
 
 #logout_box button {
     border: none;
-    background-color: #2a52ee;
+    background-color: #5e7fff;
     border-radius: 0.5vh;
     color: white;
     margin: 5px;
@@ -30,7 +30,7 @@ body {
 }
 
 .menu_container {
-    background-color: #2a52ee;
+    background-color: #5e7fff;
     width: 20vw;
     margin: 0 10px;
     border: 1px solid lightgray;
@@ -67,7 +67,7 @@ body {
 }
 
 .detail_container {
-    background-color: #2a52ee;
+    background-color: #5e7fff;
     width: 50vw;
     margin: 0 10px;
     border: 1px solid lightgray;
@@ -110,13 +110,13 @@ body {
 #reserve_list_title {
     border-bottom: 1px solid lightgray;
     font-weight: bold;
-    background: #2a52ee;
+    background: #5e7fff;
     color: white;
 }
 
 #reserve_list_title:hover {
     pointer-events: none;
-    background-color: transparent;
+    /*background-color: transparent;*/
 }
 
 .detail_list {
@@ -137,7 +137,7 @@ body {
 #detail_list_title {
     border-bottom: 1px solid lightgray;
     font-weight: bold;
-    background: #2a52ee;
+    background: #5e7fff;
     color: white;
 }
 
@@ -186,7 +186,7 @@ body {
     flex: 1;
     padding: 10px;
     margin: 5px 10px 5px 0;
-    background-color: #2a52ee;
+    background-color: #5e7fff;
     border-radius: 0.5vh;
     border: none;
     color: white;
@@ -227,12 +227,12 @@ form {
 }
 
 #reserve_list_title .set_reserve {
-    background-color: #2a52ee;
+    background-color: #5e7fff;
     color: white;
 }
 
 #go_back_wrapper {
-    background: #2a52ee;
+    background: #5e7fff;
 }
 
 #go_back {
@@ -252,7 +252,7 @@ form {
 
 #detail_set_reserve, #detail_set_delete {
     justify-content: flex-end;
-    background: #2a52ee;
+    background: #5e7fff;
 }
 
 #custom_demand {

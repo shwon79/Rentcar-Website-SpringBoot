@@ -167,16 +167,8 @@ const sendRentDate = (id, year, wDay) => {
                 }
             }
 
-            // let targetClasses = document.getElementsByClassName('each_rent_day');
-            // let takeClass = [];
-            // for (const targetClass of targetClasses) {
-            //     if (targetClass.style.color == 'gray') takeClass.push(targetClass);
-            // }
-            //
-            // console.log(takeClass);
-
             calculateDate();
-            // console.log(clickedDate);
+
         })
 
     let availableDays = 0;
@@ -185,38 +177,39 @@ const sendRentDate = (id, year, wDay) => {
     fetch(`/${carType}/getrentdate/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
         .then(res => res.json())
         .then(result => {
+            // 현재 남아있는 options 없애기
             let targetSelect = document.getElementById('days_select');
-          for (let i = 3; i<targetSelect.options.length; i++ ) {
-              targetSelect.options[i] = null;
-          }
-          availableDays = result[0];
-          makeOptions(availableDays)
+            targetSelect.options.length = 0;
+            availableDays = result[0];
+            makeOptions(availableDays)
         })
-
-    // let availableBtns = document.getElementsByClassName('able_radio')
-    // for (const availableBtn of availableBtns) {
-    //     if (availableBtn.checked) availableBtn.style = 'background: blue';
-    //     else availableBtn.style = 'background: transparent'
-    // }
 
     runIt();
 }
 
+
 // make 일권 options on selection
 
 const makeOptions = (days) => {
-    for (let i = 2; i<days; i++) {
+    for (let i = 0; i<=days; i++) {
         let targetSelect = document.getElementById('days_select');
         let createdOpt = document.createElement("option");
         if (i>30) break;
         if (i == 30) {
             createdOpt.text = '한달권';
             createdOpt.value = i;
+        } else if(i == 0) {
+            createdOpt.text = '--렌트 일자 선택--';
+        }
+        else if (i == 1){
+            createdOpt.text = i +'일권(선택 불가)';
+            createdOpt.disabled = true;
         } else {
-            createdOpt.text = i+'일권';
+            createdOpt.text = i +'일권';
             createdOpt.value = i;
         }
-        targetSelect.add(createdOpt);
+
+    targetSelect.appendChild(createdOpt);
 
     }
 }
@@ -258,8 +251,12 @@ const calculateDate = () => {
         let targetWhole = document.getElementById('calResult');
         let targetFee = document.getElementById('calRentFee');
         let targetDeposit = document.getElementById('calDeposit');
+
         // 추가시간 포함 총 렌트료
-        price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+        if (season == 1) price = parseInt(priceList[useDayNum]) + (65000*extraTimeNum);
+        else if (season == 0) price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+
+
         // 총 결제금액(VAT포함)
         totalPrice = parseInt(price*1.1);
         // 가격 넣어주기
@@ -269,9 +266,13 @@ const calculateDate = () => {
     }
 }
 
+const extraTimeFee = () => {
+
+}
+
 
 // 몇 일권 select
-var returnDateNum = '';
+let returnDateNum = '';
 let useDay = ''
 let useDayNum = 0;
 const daysSelect = () => {
