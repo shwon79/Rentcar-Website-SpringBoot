@@ -117,14 +117,16 @@
                             <!--  calendar upside part  -->
                             <div class="upside text-center">
                                 <div class="day_wrapper" th:id="${date.dateId+'day'}"
-                                     th:style="${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'pointer-events: none; color: gray;'" onclick="dayDetail(id)">
+                                     th:style="(${dateCampingList[iterStat.index][0].reserved} == '1' and ${dateCampingList[iterStat.index][1].reserved} == '1' and ${dateCampingList[iterStat.index][2].reserved} == '1')
+                                     or ${date.day} < ${today}-1 and ${date.month} <= ${thisMonth} ? 'pointer-events: none; color: gray;'" onclick="dayDetail(id)">
                                     <p th:text="${date.day}" ></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="day_detail" style="background-color: aliceblue">
-                        <div th:id="${date.dateId}" class="detail_wrapper" th:each="date, iterStat: ${calendarDateList}">
+                    <div id="day_detail" style="background-color: aliceblue; font-weight: bold">
+                        <div th:id="${date.dateId}" class="detail_wrapper" th:each="date, iterStat: ${calendarDateList}"
+                                th:style="${date.day} == ${today} and ${date.month} == ${thisMonth}? 'display:flex'">
                             <div>
                                 <p th:text="${thisYear+'-'+date.month+'-'+date.day+' [ '+date.season+' ]'}"></p>
                                 <p>선택한 날짜의 객실 목록</p>

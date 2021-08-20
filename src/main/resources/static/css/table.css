@@ -295,11 +295,10 @@ p:last-child {
   z-index: 300;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  background-color: rgba(0, 0, 0, 0.64);
+  background-color: rgba(0, 0, 0, 0.76);
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
-  height: 75px;
 }
 .main_menu_bg {
   margin-top: 0px;

@@ -158,6 +158,7 @@ const sendRentDate = (id, year, wDay) => {
                 let timeId = document.getElementById(eachTime);
                 if (result.includes(eachTime)) {
                     timeId.disabled = false;
+                    timeId.className = 'able_time'
 
                 }
                 else {
@@ -185,7 +186,7 @@ const sendRentDate = (id, year, wDay) => {
         .then(res => res.json())
         .then(result => {
             let targetSelect = document.getElementById('days_select');
-          for (let i = 3; i<targetSelect.length; i++ ) {
+          for (let i = 3; i<targetSelect.options.length; i++ ) {
               targetSelect.options[i] = null;
           }
           availableDays = result[0];
@@ -253,8 +254,6 @@ const calculateDate = () => {
         showSelections2.innerText = rentTime
         showSelections3.innerText = returnDateNum
         showSelections4.innerText = returnTime
-
-
 
         let targetWhole = document.getElementById('calResult');
         let targetFee = document.getElementById('calRentFee');

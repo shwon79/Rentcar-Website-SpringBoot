@@ -528,7 +528,7 @@ a:hover {
 }
 
 #rent_time input[type=radio] {
-  margin: 0 5px 0 0;
+  margin: 0;
 }
 
 input[type=radio] {
@@ -564,6 +564,10 @@ input[type=radio] {
   margin: 0;
   background: rgba(70, 70, 70, 0.38);
   border-radius: 1vh;
+}
+
+.able_time {
+  appearance: none;
 }
 
 #calResultWrapper {

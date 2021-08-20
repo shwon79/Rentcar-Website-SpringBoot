@@ -107,8 +107,8 @@
                 <p id="custom_demand_detail" th:text="${campingcarDateTime2.detail}"></p>
             </div>
             <div class="detail_list" id="detail_set_delete">
-                <form method="GET" onsubmit="return confirm('예약을 \'삭제\'하시겠습니까?')" th:action="${'/admin/detail/delete/'+campingcarDateTime2.dateTimeId}">
-                    <input class="set_reserve" type="submit" value="삭제"/>
+                <form method="GET" onsubmit="return confirm('예약을 \'취소\'하시겠습니까?')" th:action="${'/admin/detail/delete/'+campingcarDateTime2.dateTimeId}">
+                    <input class="set_reserve" type="submit" value="예약취소"/>
                 </form>
             </div>
 

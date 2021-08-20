@@ -144,6 +144,7 @@ a:hover {
 }
 
 
+/* 모바일 화면 */
 @media (max-width: 990px) {
 
   .calendar_content {
@@ -171,6 +172,8 @@ a:hover {
     display: flex;
     flex-flow: row wrap;
     height: auto;
+    font-family: FontAwesome;
+    font-weight: bold;
   }
 
   .date {
@@ -229,6 +232,8 @@ a:hover {
 
   .detail_selections span {
     color: #6f6f6f;
+    font-family: 'FontAwesome';
+
   }
 
   a .detail_selections span {
