@@ -640,7 +640,7 @@ input[type=radio] {
 
 }
 
-#reserve_page_btn {
+#price_page_btn {
   background: lightyellow;
 }
 
@@ -649,6 +649,41 @@ input[type=radio] {
 }
 
 /*  */
+
+#feature {
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 100px;
+}
+
+.tab_buttons {
+  background: lightgray;
+  margin: 0 10px;
+  padding: 10px 15px;
+  border: 1px solid lightgray;
+  border-bottom: 0;
+  font-size: 20px;
+  border-top-left-radius: 1vh;
+  border-top-right-radius: 1vh;
+
+}
+
+.tab_buttons:hover {
+  background: lightyellow;
+}
+
+.tab_buttons.current {
+  background: lightyellow;
+}
+
+.tab_content {
+  display: none;
+}
+
+.tab_content.current {
+  display: block;
+}
+
+
 
 @media (max-width: 990px) {
   #wrapper {

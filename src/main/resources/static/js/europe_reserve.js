@@ -35,6 +35,13 @@ function doDisplay_return_time(){
     }
 }
 
+function toggleImg(id) {
+    let before = document.getElementById("headerImg").src;
+    let tmp = document.getElementById(id).src;
+    document.getElementById("headerImg").src = tmp;
+    document.getElementById(id).src = before;
+}
+
 // year-month 채우기
 // document.querySelector('.year-month-return').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
