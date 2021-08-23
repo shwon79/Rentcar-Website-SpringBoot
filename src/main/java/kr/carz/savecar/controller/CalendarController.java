@@ -48,16 +48,10 @@ public class CalendarController {
 
 
 
-    @GetMapping("/travel")
-    public String camping_travel() {
-        return "camping_travel";
+    @GetMapping("/camping/price")
+    public String camping_price() {
+        return "camping_price";
     }
-
-    @GetMapping("/liomousine")
-    public String camping_liomousine() {
-        return "camping_liomousine";
-    }
-
 
     @GetMapping("/test")
     public String camping_europe_test(Model model) {
