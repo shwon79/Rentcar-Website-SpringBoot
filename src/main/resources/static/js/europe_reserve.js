@@ -250,17 +250,20 @@ const calculateDate = () => {
 
         let targetWhole = document.getElementById('calResult');
         let targetFee = document.getElementById('calRentFee');
-        let targetDeposit = document.getElementById('calDeposit');
+        let targetVat = document.getElementById('calVat');
 
         // 추가시간 포함 총 렌트료
         if (season == 1) price = parseInt(priceList[useDayNum]) + (65000*extraTimeNum);
-        else if (season == 0) price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+        else if (season == 0) {
+            if (carType == 'liomousine') price = parseInt(priceList[useDayNum]) + (50000*extraTimeNum);
+            else price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+        }
 
 
         // 총 결제금액(VAT포함)
         totalPrice = parseInt(price*1.1);
         // 가격 넣어주기
-        targetDeposit.innerText = parseInt(totalPrice/11).toLocaleString()+'원'  // 보증금 = 선결제금액
+        targetVat.innerText = parseInt(totalPrice/11).toLocaleString()+'원'  // vat 부가가치세
         targetFee.innerText = price.toLocaleString()+'원'
         targetWhole.innerText = totalPrice.toLocaleString()+'원'
     }
