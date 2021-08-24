@@ -252,9 +252,6 @@ public class ReservationController {
 
             // CampingCarPrice 객체 가져오기
 
-            System.out.println("오류찾기 : "+dto.getCarType());
-            System.out.println("오류찾기 : "+returnCalendarDate.getDateId()+','+dto.getReturnTime());
-
             CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarType());
 
             CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, dto.getRentTime());
@@ -382,15 +379,7 @@ public class ReservationController {
         } catch (Exception e) {
             e.printStackTrace();
 
-            // 예약 실패. alert
-//            res.setContentType("text/html; charset=UTF-8");
-//            PrintWriter out = res.getWriter();
-//            out.println("<script>alert('이용할 수 없는 날짜입니다.'); </script>");
-//            out.flush();
-
             jsonArray.put(0);
-
-            return "paying";
 
         } finally {
 
@@ -399,12 +388,6 @@ public class ReservationController {
             pw.flush();
             pw.close();
         }
-
-        // 예약 확정되었습니다. alert
-//        res.setContentType("text/html; charset=UTF-8");
-//        PrintWriter out = res.getWriter();
-//        out.println("<script>alert('예약이 확정되었습니다.'); </script>");
-//        out.flush();
 
 
         return "calendar";
