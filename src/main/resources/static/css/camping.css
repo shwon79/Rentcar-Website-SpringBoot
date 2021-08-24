@@ -669,6 +669,16 @@ input[type=radio] {
   margin-bottom: 100px;
 }
 
+#reserve_btn {
+  position: absolute;
+  background: indianred;
+  color: white;
+  padding: 10px 15px;
+  top: 30;
+  bottom: 70;
+  right: 10;
+}
+
 .tab_buttons {
   background: lightgray;
   margin: 0 10px;

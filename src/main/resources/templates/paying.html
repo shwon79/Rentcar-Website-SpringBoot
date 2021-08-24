@@ -48,7 +48,7 @@
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                                         <p>대여 일자</p>
                                         <p id="rent_date" th:text="${rent_date}"></p>
-                                        <p th:text="${rent_time}"></p>
+                                        <p id="rent_time" th:text="${rent_time}"></p>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                         <button id="rent_length" disabled>➔</button>
@@ -56,7 +56,7 @@
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                                         <p>반납 일자</p>
                                         <p id="return_date" th:text="${return_date}"></p>
-                                        <p th:text="${return_time}"></p>
+                                        <p id="return_time" th:text="${return_time}"></p>
                                     </div>
                                 </div>
                                 <p style="margin-top: 15px; font-size: 13px"><span style="color: red">*</span>6시 이후 반납은 전화문의 해주시기 바랍니다.</p>

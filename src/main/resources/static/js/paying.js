@@ -24,13 +24,16 @@ getData();
 
 
 // must items
-let rentDate = document.getElementById('rent_date').innerText.split(' ');
-let returnDate = document.getElementById('return_date').innerText.split(' ');
+// let rentDate = document.getElementById('rent_date');
+// let returnDate = document.getElementById('return_date');
+// let rentTimeTarget = document.getElementById('rent_time');
+// let returnTimeTarget = document.getElementById('return_time');
 
-const rentDateNum = rentDate[0]+' '+rentDate[1];
-const rentTime = rentDate[2];
-const returnDateNum = returnDate[0]+' '+returnDate[1];
-const returnTime = returnDate[2];
+
+const rentDateNum = document.getElementById('rent_date').innerText;
+const rentTime = document.getElementById('rent_time').innerText;
+const returnDateNum = document.getElementById('return_date').innerText;
+const returnTime = document.getElementById('return_time').innerText;
 const totalPrice = parseInt(document.getElementById('total_price').className);
 
 let totalHalf = parseInt(totalPrice/2);
@@ -113,6 +116,8 @@ const reserveDone = () => {
             'reservation': 0,
             'day': useDay,
         }
+
+        console.log(finalDate);
 
         // console.log(finalDate);
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
