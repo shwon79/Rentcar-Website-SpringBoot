@@ -90,7 +90,7 @@ body {
 
 .reserve_list {
     color: #3e65ff;
-    padding: 5px 0 5px 10px;
+    padding: 5px 5px 5px 10px;
     display: flex;
     flex-direction: row;
     border-radius: 0.5vh;
@@ -177,7 +177,30 @@ body {
 .reservation {
     flex: 1;
 }
-
+.rent_type {
+    flex: 3;
+}
+.product_name {
+    flex: 1;
+}
+.cars_type {
+    flex: 2;
+}
+.car_size {
+    flex: 2;
+}
+.car_name {
+    flex: 2;
+}
+.mileage {
+    flex: 1;
+}
+.options {
+    flex: 1;
+}
+.phone {
+    flex: 2;
+}
 .reserve_list {
     flex: 19;
 }
