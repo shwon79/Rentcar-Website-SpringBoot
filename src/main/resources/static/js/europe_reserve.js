@@ -51,7 +51,7 @@ function toggleImg(id) {
 // document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
 
 
-// 가격표
+// 성수기 or 비성수기 가격표 확인
 let obj, deposits;
 let carType = document.getElementsByClassName('car_type')[0].id;
 let season;
@@ -62,6 +62,7 @@ const runIt = () => {
     if (season == '성수기') season = 1;
     else if (season == '비성수기') season = 0;
 
+    // 가격표 받아오기
     fetch(`/${carType}/getprice/${season}`)
         .then(res => res.json())
         .then(result => {
@@ -104,11 +105,15 @@ const runIt = () => {
 
 // select rent date
 let rentDateNum='';
+let rentDateYear='';
+let rentDateMonth='';
+let rentDateDay='';
+
 const sendRentDate = (id, year, wDay) => {
     rentDateNum = id;
-    let rentDateYear = year;
-    let rentDateMonth = rentDateNum.split('월 ')[0];
-    let rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
+    rentDateYear = year;
+    rentDateMonth = rentDateNum.split('월 ')[0];
+    rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
     let url = `/${carType}/sendrentdate`;
 
     // 요일 한글화 swtich
@@ -496,7 +501,20 @@ const daysSelect = () => {
         returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
 
         let extraTimeTarget = document.getElementById('extra_time_sel')
-        extraTimeTarget.style.display = 'block'
+
+        fetch(`/${carType}/getextratime/${rentDateYear}/${rentDateMonth}/${rentDateDay}/${useDayNum}/${rentTime}`)
+            .then(res => res.json())
+            .then(result => {
+                // 현재 남아있는 options 없애기
+                // let targetSelect = document.getElementById('days_select');
+                // targetSelect.options.length = 0;
+                // availableDays = result[0];
+                // makeOptions(availableDays)
+                console.log(result)
+                extraTimeTarget.style.display = 'block'
+            })
+
+
         // console.log(returnDateNum)
 
     }
@@ -515,8 +533,9 @@ const timeSelect = () => {
     calculateDate();
 }
 
-let clickedDate = ''
 
+// 선택한 날짜 자동 선택
+let clickedDate = ''
 const doIt = () => {
     // 미리 넣어둔 값 가져오기
     let clickedOne = document.getElementById('rent_date');
