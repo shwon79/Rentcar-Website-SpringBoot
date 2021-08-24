@@ -32,6 +32,7 @@ public class AdminController {
     LoginService loginService;
     CampingCarPriceService campingCarPriceService;
     CalendarTimeService calendarTimeService;
+    ReservationService reservationService;
     private HttpURLConnection http;
 
     @Autowired
@@ -39,7 +40,7 @@ public class AdminController {
                            ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
                            DateCampingService dateCampingService, CampingcarDateTimeService2 campingcarDateTimeService2,
                            LoginService loginService, CampingCarPriceService campingCarPriceService,
-                           CalendarTimeService calendarTimeService) {
+                           CalendarTimeService calendarTimeService, ReservationService reservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -50,6 +51,7 @@ public class AdminController {
         this.loginService = loginService;
         this.campingCarPriceService = campingCarPriceService;
         this.calendarTimeService = calendarTimeService;
+        this.reservationService = reservationService;
     }
 
     public AdminController(HttpURLConnection http){
@@ -115,6 +117,17 @@ public class AdminController {
 
         return "admin_detail";
     }
+
+
+    //예약 목록 조회 api
+    @GetMapping("/admin/counsel")
+    public String reservation_list(Model model) {
+        List<Reservation> reservationList = reservationService.findAllReservations();
+        model.addAttribute("reservationList", reservationList);
+
+        return "admin_counsel";
+    }
+
 
 
     //로그인

@@ -247,12 +247,13 @@ public class ReservationController {
 
             // CampingCarPrice 객체 가져오기
             CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarType());
+            System.out.println("오류찾기 : "+returnCalendarDate+','+ campingCarPrice+','+ dto.getReturnTime());
 
             CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, dto.getRentTime());
             CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, dto.getReturnTime());
 
 
-            if (calendarReturnTime.getReserveTime().equals("17시")){
+            if (calendarReturnTime.getReserveTime().equals("18시")){
 
                 for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId(); i++){
                     CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
@@ -373,6 +374,7 @@ public class ReservationController {
             }
 
 
+            // db에 저장
             campingcarDateTimeService2.save2(dto);
 
 
@@ -439,7 +441,7 @@ public class ReservationController {
             CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, campingcarDateTime.getReturnTime());
 
 
-            if (calendarReturnTime.getReserveTime().equals("17시")){
+            if (calendarReturnTime.getReserveTime().equals("18시")){
 
                 for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId(); i++){
                     CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
