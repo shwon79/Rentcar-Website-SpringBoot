@@ -252,9 +252,6 @@ public class ReservationController {
 
             // CampingCarPrice 객체 가져오기
 
-            System.out.println("오류찾기 : "+dto.getCarType());
-            System.out.println("오류찾기 : "+returnCalendarDate.getDateId()+','+dto.getReturnTime());
-
             CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarType());
 
             CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, dto.getRentTime());

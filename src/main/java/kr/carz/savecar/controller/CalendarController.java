@@ -1428,7 +1428,7 @@ public class CalendarController {
     }
 
 
-    // europe 캠핑카 가격 구하는 api
+    // 캠핑카 대여가능일자 구하는 api
     @RequestMapping(value = "/{carType}/getrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void get_rent_date(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
@@ -1442,8 +1442,6 @@ public class CalendarController {
         } else {
             campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
         }
-
-        DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDate, campingCarPrice);
 
 
         Long date_start_id = calendarDate.getDateId();
@@ -1464,6 +1462,54 @@ public class CalendarController {
 
         JSONArray jsonArray = new JSONArray();
         jsonArray.put(possible_rent_date);
+
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray);
+        pw.flush();
+        pw.close();
+    }
+
+
+
+    // 캠핑카 가능한 추가시간 구하는 api
+    @RequestMapping(value = "/{carType}/getextratime/{year}/{month}/{day}/{rentDays}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @ResponseBody
+    public void get_extra_time(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day, @PathVariable Integer rentDays) throws IOException {
+
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
+        CampingCarPrice campingCarPrice;
+
+        if(carType.equals("liomousine")){
+            campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
+
+        } else {
+            campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        }
+
+
+
+        Long date_start_id = calendarDate.getDateId();
+        Long date_last_id = date_start_id + rentDays;
+
+        CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(date_last_id);
+
+
+        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarLastDate, campingCarPrice);
+
+        Integer extraTime = 0;
+
+        for (int i=0; i<calendarTimeList.size(); i++){
+            if (calendarTimeList.get(i).getReserveComplete().equals("1")){
+                break;
+            } else {
+                extraTime += 1;
+            }
+        }
+
+
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(extraTime);
 
 
         PrintWriter pw = res.getWriter();
