@@ -129,11 +129,12 @@ const reserveDone = () => {
                     'Content-Type' : 'application/json'
                 },
                 body: JSON.stringify(finalDate),
-            }).then(response => {
-                return response
-            })
+            }).then(response => response.json())
                 .then(result => {
-                    window.location.href = '/europe';
+                    if (result[0] == "1") {
+                        alert('캠핑카 예약 대기 신청이 완료되었습니다.')
+                        window.location.href = '/europe';
+                    } else if (result[0] == "0") alert('캠핑카 예약 대기 신청이 완료되었습니다.\n' + '이용할 수 없는 날짜입니다.')
                 })
                 // .catch(err => console.error('Error: ', err))
         }
