@@ -1473,9 +1473,9 @@ public class CalendarController {
 
 
     // 캠핑카 가능한 추가시간 구하는 api
-    @RequestMapping(value = "/{carType}/getextratime/{year}/{month}/{day}/{rentDays}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/{carType}/getextratime/{year}/{month}/{day}/{rentDays}/{rentStartTime}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void get_extra_time(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day, @PathVariable Integer rentDays) throws IOException {
+    public void get_extra_time(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day, @PathVariable Integer rentDays, @PathVariable String rentStartTime) throws IOException {
 
         CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
         CampingCarPrice campingCarPrice;
@@ -1499,7 +1499,7 @@ public class CalendarController {
 
         Integer extraTime = 0;
 
-        for (int i=0; i<calendarTimeList.size(); i++){
+        for (int i=1; i<calendarTimeList.size(); i++){
             if (calendarTimeList.get(i).getReserveComplete().equals("1")){
                 break;
             } else {
