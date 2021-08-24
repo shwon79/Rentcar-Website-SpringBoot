@@ -4,6 +4,7 @@ import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -198,7 +199,7 @@ public class ReservationController {
 
 
     // 캠핑카 예약 대기 데이터 저장 및 문자발송 api
-    @PostMapping("/campingcar/reserve")
+    @RequestMapping(value = "/campingcar/reserve", produces = "application/json; charset=UTF-8", method= RequestMethod.POST)
     @ResponseBody
     public String save(HttpServletResponse res, @RequestBody CampingcarDateTime2 dto)  throws IOException {
 
@@ -216,6 +217,10 @@ public class ReservationController {
         System.out.println(dto.getReservation()); // 1
         System.out.println(dto.getTotal());
         System.out.println(dto.getDay());
+
+
+        JSONArray jsonArray = new JSONArray();
+
 
         try {
             // 대여일자, 대여시간
@@ -246,8 +251,11 @@ public class ReservationController {
 
 
             // CampingCarPrice 객체 가져오기
+
+            System.out.println("오류찾기 : "+dto.getCarType());
+            System.out.println("오류찾기 : "+returnCalendarDate.getDateId()+','+dto.getReturnTime());
+
             CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarType());
-            System.out.println("오류찾기 : "+returnCalendarDate+','+ campingCarPrice+','+ dto.getReturnTime());
 
             CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, dto.getRentTime());
             CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, dto.getReturnTime());
@@ -257,10 +265,8 @@ public class ReservationController {
 
                 for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId(); i++){
                     CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
-                    if (timeIndiv.getReserveComplete().equals("1")){
+                    if (timeIndiv.getReserveComplete().equals("1")) {
                         throw new Exception();
-                    } else {
-                        timeIndiv.setReserveComplete("1");
                     }
                 }
             } else {
@@ -268,8 +274,6 @@ public class ReservationController {
                     CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
                     if (timeIndiv.getReserveComplete().equals("1")){
                         throw new Exception();
-                    } else {
-                        timeIndiv.setReserveComplete("1");
                     }
                 }
             }
@@ -285,17 +289,9 @@ public class ReservationController {
                 // DateCamping 하루 예약 정보 수정, campingcarDateTime 예약리스트 예약 정보 수정
                 if (dateCamping.getReserved().equals("1")){
                     throw new Exception();
-                } else {
-                    dateCamping.setReserved("1");
                 }
             }
 
-
-            // 예약 확정되었습니다. alert
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('예약이 확정되었습니다.');  location.href='/admin/main';</script>");
-            out.flush();
 
 
 
@@ -377,6 +373,9 @@ public class ReservationController {
             // db에 저장
             campingcarDateTimeService2.save2(dto);
 
+            // 프론트로 성공했다는 데이터 보내기
+            jsonArray.put(1);
+
 
 
 
@@ -384,13 +383,31 @@ public class ReservationController {
             e.printStackTrace();
 
             // 예약 실패. alert
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('이용할 수 없는 날짜입니다.'); location.href='/admin/main'; </script>");
-            out.flush();
+//            res.setContentType("text/html; charset=UTF-8");
+//            PrintWriter out = res.getWriter();
+//            out.println("<script>alert('이용할 수 없는 날짜입니다.'); </script>");
+//            out.flush();
+
+            jsonArray.put(0);
+
+            return "paying";
+
+        } finally {
+
+            PrintWriter pw = res.getWriter();
+            pw.print(jsonArray.toString());
+            pw.flush();
+            pw.close();
         }
 
-        return "paying";
+        // 예약 확정되었습니다. alert
+//        res.setContentType("text/html; charset=UTF-8");
+//        PrintWriter out = res.getWriter();
+//        out.println("<script>alert('예약이 확정되었습니다.'); </script>");
+//        out.flush();
+
+
+        return "calendar";
     }
 
 
