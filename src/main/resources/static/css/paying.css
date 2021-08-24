@@ -140,6 +140,11 @@ textarea.noscrollbars {
     margin-bottom: 0;
 }
 
+#pre_paying {
+    background: lightyellow;
+    border-radius: 1vh;
+}
+
 .final_price {
     border-radius: 0.5vh;
 }

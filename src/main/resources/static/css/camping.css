@@ -517,6 +517,20 @@ a:hover {
   font-size: 17px;
 }
 
+#extra_time_sel {
+  display: none;
+  font-size: 17px;
+}
+
+#extra_time_sel label {
+  margin-right: 10px;
+}
+
+#extratime_select option:disabled {
+  background: lightgray;
+  color: dimgray;
+}
+
 .disabled_radio {
   pointer-events: none;
   color: dimgray;

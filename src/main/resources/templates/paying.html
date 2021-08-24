@@ -42,7 +42,7 @@
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                 <div id="product_info" class="">
                                     <p class="car_type" th:id="${carType}"></p><p id="use_day" th:text="${day}"></p>
-                                    <span id="extra_time" th:text="${extraTime}" style="display: none"></span>
+                                    <p id="extra_time" th:text="${'+ '+extraTime+'시간'}" ></p>
                                 </div><hr id="hr_reserve"/>
                                 <div class="reserve_detail">
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
@@ -135,7 +135,7 @@
                                 <p>총 결제 금액(VAT포함)</p>
                                 <p id="total_price" th:class="${total}"></p>
                             </div>
-                            <div class="price_between final_price">
+                            <div id="pre_paying" class="price_between final_price">
                                 <p>선결제 금액(50%)</p>
                                 <p id="half_price"></p>
                             </div>

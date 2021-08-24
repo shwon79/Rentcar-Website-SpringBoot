@@ -232,6 +232,89 @@ const rentTimeSel = (id) => {
     if (rentTime != '' && rentDateNum != '') {
         let targetDays = document.getElementById('calendar_return')
         targetDays.style.display = 'block'
+
+        let option1 = document.getElementById('1h');
+        let option2 = document.getElementById('2h');
+        let option3 = document.getElementById('3h');
+        let option4 = document.getElementById('4h');
+        let option5 = document.getElementById('5h');
+        let option6 = document.getElementById('6h');
+        let option7 = document.getElementById('7h');
+
+        // disable 추가시간
+        if (rentTime == '10시') {
+            option1.disabled = false;
+            option2.disabled = false;
+            option3.disabled = false;
+            option4.disabled = false;
+            option5.disabled = false;
+            option6.disabled = false;
+            option7.disabled = false;
+        }
+        else if (rentTime == '11시') {
+            option1.disabled = false;
+            option2.disabled = false;
+            option3.disabled = false;
+            option4.disabled = false;
+            option5.disabled = false;
+            option6.disabled = false;
+            option7.disabled = true;
+        }
+        else if (rentTime == '12시') {
+            option1.disabled = false;
+            option2.disabled = false;
+            option3.disabled = false;
+            option4.disabled = false;
+            option5.disabled = false;
+            option6.disabled = true;
+            option7.disabled = true;
+        }
+        else if (rentTime == '13시') {
+            option1.disabled = false;
+            option2.disabled = false;
+            option3.disabled = false;
+            option4.disabled = false;
+            option5.disabled = true;
+            option6.disabled = true;
+            option7.disabled = true;
+        }
+        else if (rentTime == '14시') {
+            option1.disabled = false;
+            option2.disabled = false;
+            option3.disabled = false;
+            option4.disabled = true;
+            option5.disabled = true;
+            option6.disabled = true;
+            option7.disabled = true;
+        }
+        else if (rentTime == '15시') {
+            option1.disabled = false;
+            option2.disabled = false;
+            option3.disabled = true;
+            option4.disabled = true;
+            option5.disabled = true;
+            option6.disabled = true;
+            option7.disabled = true;
+        }
+        else if (rentTime == '16시') {
+            option1.disabled = false;
+            option2.disabled = true;
+            option3.disabled = true;
+            option4.disabled = true;
+            option5.disabled = true;
+            option6.disabled = true;
+            option7.disabled = true;
+        }
+        else if (rentTime == '17시') {
+            option1.disabled = true;
+            option2.disabled = true;
+            option3.disabled = true;
+            option4.disabled = true;
+            option5.disabled = true;
+            option6.disabled = true;
+            option7.disabled = true;
+        }
+
     }
 
     calculateDate();
@@ -262,8 +345,8 @@ const calculateDate = () => {
         // 추가시간 포함 총 렌트료
         if (season == 1) price = parseInt(priceList[useDayNum]) + (65000*extraTimeNum);
         else if (season == 0) {
-            if (carType == 'liomousine') price = parseInt(priceList[useDayNum]) + (50000*extraTimeNum);
-            else price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+            if (carType == 'liomousine') price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
+            else price = parseInt(priceList[useDayNum]) + (50000*extraTimeNum);
         }
 
 
@@ -383,7 +466,11 @@ const daysSelect = () => {
             }
         }
 
+
         returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
+
+        let extraTimeTarget = document.getElementById('extra_time_sel')
+        extraTimeTarget.style.display = 'block'
         // console.log(returnDateNum)
 
     }
@@ -393,14 +480,14 @@ const daysSelect = () => {
 
 // extra time select
 let extraTimeNum = 0;
-// const timeSelect = () => {
-//     let timeSelector = document.getElementById('extratime_select');
-//     let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
-//     extraTimeNum = theVal
-//     let temp = parseInt(rentTime.split('시')[0]) + theVal;
-//     returnTime = `${temp}시`;
-//     calculateDate();
-// }
+const timeSelect = () => {
+    let timeSelector = document.getElementById('extratime_select');
+    let theVal = parseInt(timeSelector.options[timeSelector.selectedIndex].value);
+    extraTimeNum = theVal
+    let temp = parseInt(rentTime.split('시')[0]) + theVal;
+    returnTime = `${temp}시`;
+    calculateDate();
+}
 
 let clickedDate = ''
 
