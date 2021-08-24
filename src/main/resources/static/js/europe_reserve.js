@@ -240,6 +240,8 @@ const rentTimeSel = (id) => {
         let option5 = document.getElementById('5h');
         let option6 = document.getElementById('6h');
         let option7 = document.getElementById('7h');
+        let option8 = document.getElementById('8h');
+
 
         // disable 추가시간
         if (rentTime == '10시') {
@@ -250,6 +252,7 @@ const rentTimeSel = (id) => {
             option5.disabled = false;
             option6.disabled = false;
             option7.disabled = false;
+            option8.disabled = false;
         }
         else if (rentTime == '11시') {
             option1.disabled = false;
@@ -258,7 +261,9 @@ const rentTimeSel = (id) => {
             option4.disabled = false;
             option5.disabled = false;
             option6.disabled = false;
-            option7.disabled = true;
+            option7.disabled = false;
+            option8.disabled = true;
+
         }
         else if (rentTime == '12시') {
             option1.disabled = false;
@@ -266,10 +271,23 @@ const rentTimeSel = (id) => {
             option3.disabled = false;
             option4.disabled = false;
             option5.disabled = false;
-            option6.disabled = true;
+            option6.disabled = false;
             option7.disabled = true;
+            option8.disabled = true;
+
         }
         else if (rentTime == '13시') {
+            option1.disabled = false;
+            option2.disabled = false;
+            option3.disabled = false;
+            option4.disabled = false;
+            option5.disabled = false;
+            option6.disabled = true;
+            option7.disabled = true;
+            option8.disabled = true;
+
+        }
+        else if (rentTime == '14시') {
             option1.disabled = false;
             option2.disabled = false;
             option3.disabled = false;
@@ -277,8 +295,10 @@ const rentTimeSel = (id) => {
             option5.disabled = true;
             option6.disabled = true;
             option7.disabled = true;
+            option8.disabled = true;
+
         }
-        else if (rentTime == '14시') {
+        else if (rentTime == '15시') {
             option1.disabled = false;
             option2.disabled = false;
             option3.disabled = false;
@@ -286,8 +306,10 @@ const rentTimeSel = (id) => {
             option5.disabled = true;
             option6.disabled = true;
             option7.disabled = true;
+            option8.disabled = true;
+
         }
-        else if (rentTime == '15시') {
+        else if (rentTime == '16시') {
             option1.disabled = false;
             option2.disabled = false;
             option3.disabled = true;
@@ -295,8 +317,10 @@ const rentTimeSel = (id) => {
             option5.disabled = true;
             option6.disabled = true;
             option7.disabled = true;
+            option8.disabled = true;
+
         }
-        else if (rentTime == '16시') {
+        else if (rentTime == '17시') {
             option1.disabled = false;
             option2.disabled = true;
             option3.disabled = true;
@@ -304,8 +328,8 @@ const rentTimeSel = (id) => {
             option5.disabled = true;
             option6.disabled = true;
             option7.disabled = true;
-        }
-        else if (rentTime == '17시') {
+            option8.disabled = true;
+        } else if (rentTime == '18시') {
             option1.disabled = true;
             option2.disabled = true;
             option3.disabled = true;
@@ -313,6 +337,8 @@ const rentTimeSel = (id) => {
             option5.disabled = true;
             option6.disabled = true;
             option7.disabled = true;
+            option8.disabled = true;
+
         }
 
     }

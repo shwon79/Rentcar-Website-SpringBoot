@@ -281,3 +281,10 @@ a:hover {
   }
 
 }
+
+@media (max-width: 600px) {
+  .camping_page button {
+    width: 40%;
+    font-size: 1em;
+  }
+}
