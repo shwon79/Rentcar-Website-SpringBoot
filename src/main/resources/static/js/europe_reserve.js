@@ -212,6 +212,8 @@ const makeOptions = (days) => {
             createdOpt.value = i;
         } else if(i == 0) {
             createdOpt.text = '--렌트 일자 선택--';
+            createdOpt.value = 0;
+
         }
         else if (i == 1){
             createdOpt.text = i +'일권(선택 불가)';
@@ -251,6 +253,7 @@ const rentTimeSel = (id) => {
 // price calculator
 let price = 0;
 let totalPrice = 0;
+let extraFee = 0;
 const calculateDate = () => {
     if (returnDateNum != '' && rentDateNum != '' && rentTime != '' && returnTime != '') {
         const optionWrapper = document.getElementById('calResultWrapper')
@@ -267,21 +270,27 @@ const calculateDate = () => {
 
         let targetWhole = document.getElementById('calResult');
         let targetFee = document.getElementById('calRentFee');
+        let targetExtra = document.getElementById('calExtraFee');
         let targetVat = document.getElementById('calVat');
 
+
         // 추가시간 포함 총 렌트료
-        if (season == 1) price = parseInt(priceList[useDayNum]) + (65000*extraTimeNum);
+
+        price = parseInt(priceList[useDayNum]);
+
+
+        if (season == 1) extraFee = (65000*extraTimeNum);
         else if (season == 0) {
-            if (carType == 'liomousine') price = parseInt(priceList[useDayNum]) + (40000*extraTimeNum);
-            else price = parseInt(priceList[useDayNum]) + (50000*extraTimeNum);
+            if (carType == 'liomousine') extraFee = 40000*extraTimeNum;
+            else extraFee = 50000*extraTimeNum;
         }
 
-
         // 총 결제금액(VAT포함)
-        totalPrice = parseInt(price*1.1);
+        totalPrice = parseInt((price+extraFee)*1.1);
         // 가격 넣어주기
-        targetVat.innerText = parseInt(totalPrice/11).toLocaleString()+'원'  // vat 부가가치세
+        targetVat.innerText = ((totalPrice)/10).toLocaleString()+'원'  // vat 부가가치세
         targetFee.innerText = price.toLocaleString()+'원'
+        targetExtra.innerText = extraFee.toLocaleString()+'원'
         targetWhole.innerText = totalPrice.toLocaleString()+'원'
     }
 }
@@ -453,6 +462,7 @@ const makeExtraOptions = (times) => {
 
         if(i == 0) {
             createdOpt.text = '--추가 시간 선택--';
+            createdOpt.value = 0;
         }
         else {
             createdOpt.text = '+'+ i +'시간';
@@ -508,39 +518,14 @@ if (condition1 > 0) doIt();
 
 
 // Sending Data;
-const postDateEurope = () => {
+
+const postDate = () => {
 
     // customName != '' && phoneNum!='' &&
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/europe_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}`
-
-    } else {
-        alert('입력을 완료해주세요!')
-    }
-}
-
-const postDateLimousine = () => {
-
-    // customName != '' && phoneNum!='' &&
-    if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
-
-        alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/liomousine_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}`
-
-    } else {
-        alert('입력을 완료해주세요!')
-    }
-}
-
-const postDateTravel = () => {
-
-    // customName != '' && phoneNum!='' &&
-    if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
-
-        alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/${carType}_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}`
+        window.location.href = `/${carType}_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}/${extraFee}`
 
     } else {
         alert('입력을 완료해주세요!')

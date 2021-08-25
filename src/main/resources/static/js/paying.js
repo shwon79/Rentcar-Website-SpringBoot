@@ -35,6 +35,7 @@ const rentTime = document.getElementById('rent_time').innerText;
 const returnDateNum = document.getElementById('return_date').innerText;
 const returnTime = document.getElementById('return_time').innerText;
 const totalPrice = parseInt(document.getElementById('total_price').className);
+const extraFee = parseInt(document.getElementById('extra_fee').className);
 
 let totalHalf = parseInt(totalPrice/2);
 const useDay = document.getElementById('use_day').innerText;
@@ -80,10 +81,17 @@ const autoGrow = (texts) => {
 // 결제금액 넣기
 let totalTarget = document.getElementById('total_price');
 totalTarget.innerText = totalPrice.toLocaleString()+'원'; // 콤마 넣어주기
+
+let ExtraTarget = document.getElementById('extra_fee');
+ExtraTarget.innerText = extraFee.toLocaleString()+'원'; // 콤마 넣어주기
+
 let vatTarget = document.getElementById('vat_fee');
 vatTarget.innerText = parseInt(totalPrice/11).toLocaleString()+'원'; // 콤마 넣어주기
+
+
 let totalFeeTarget = document.getElementById('total_fee');
-totalFeeTarget.innerText = (parseInt((totalPrice/11)*10)).toLocaleString()+'원';
+totalFeeTarget.innerText = ((totalPrice/1.1)-extraFee).toLocaleString()+'원';
+
 let HalfTarget = document.getElementById('half_price');
 HalfTarget.innerText = parseInt(totalPrice/2).toLocaleString()+'원'; // 콤마 넣어주기
 // let depositsTarget = document.getElementById('deposits');
