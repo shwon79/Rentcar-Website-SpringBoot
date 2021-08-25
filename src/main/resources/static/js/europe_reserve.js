@@ -288,7 +288,7 @@ const calculateDate = () => {
         // 총 결제금액(VAT포함)
         totalPrice = parseInt((price+extraFee)*1.1);
         // 가격 넣어주기
-        targetVat.innerText = ((totalPrice)/10).toLocaleString()+'원'  // vat 부가가치세
+        targetVat.innerText = ((totalPrice)/11).toLocaleString()+'원'  // vat 부가가치세
         targetFee.innerText = price.toLocaleString()+'원'
         targetExtra.innerText = extraFee.toLocaleString()+'원'
         targetWhole.innerText = totalPrice.toLocaleString()+'원'
