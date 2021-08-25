@@ -238,117 +238,13 @@ const rentTimeSel = (id) => {
         let targetDays = document.getElementById('calendar_return')
         targetDays.style.display = 'block'
 
-        let option1 = document.getElementById('1h');
-        let option2 = document.getElementById('2h');
-        let option3 = document.getElementById('3h');
-        let option4 = document.getElementById('4h');
-        let option5 = document.getElementById('5h');
-        let option6 = document.getElementById('6h');
-        let option7 = document.getElementById('7h');
-        let option8 = document.getElementById('8h');
-
-
-        // disable 추가시간
-        if (rentTime == '10시') {
-            option1.disabled = false;
-            option2.disabled = false;
-            option3.disabled = false;
-            option4.disabled = false;
-            option5.disabled = false;
-            option6.disabled = false;
-            option7.disabled = false;
-            option8.disabled = false;
-        }
-        else if (rentTime == '11시') {
-            option1.disabled = false;
-            option2.disabled = false;
-            option3.disabled = false;
-            option4.disabled = false;
-            option5.disabled = false;
-            option6.disabled = false;
-            option7.disabled = false;
-            option8.disabled = true;
-
-        }
-        else if (rentTime == '12시') {
-            option1.disabled = false;
-            option2.disabled = false;
-            option3.disabled = false;
-            option4.disabled = false;
-            option5.disabled = false;
-            option6.disabled = false;
-            option7.disabled = true;
-            option8.disabled = true;
-
-        }
-        else if (rentTime == '13시') {
-            option1.disabled = false;
-            option2.disabled = false;
-            option3.disabled = false;
-            option4.disabled = false;
-            option5.disabled = false;
-            option6.disabled = true;
-            option7.disabled = true;
-            option8.disabled = true;
-
-        }
-        else if (rentTime == '14시') {
-            option1.disabled = false;
-            option2.disabled = false;
-            option3.disabled = false;
-            option4.disabled = false;
-            option5.disabled = true;
-            option6.disabled = true;
-            option7.disabled = true;
-            option8.disabled = true;
-
-        }
-        else if (rentTime == '15시') {
-            option1.disabled = false;
-            option2.disabled = false;
-            option3.disabled = false;
-            option4.disabled = true;
-            option5.disabled = true;
-            option6.disabled = true;
-            option7.disabled = true;
-            option8.disabled = true;
-
-        }
-        else if (rentTime == '16시') {
-            option1.disabled = false;
-            option2.disabled = false;
-            option3.disabled = true;
-            option4.disabled = true;
-            option5.disabled = true;
-            option6.disabled = true;
-            option7.disabled = true;
-            option8.disabled = true;
-
-        }
-        else if (rentTime == '17시') {
-            option1.disabled = false;
-            option2.disabled = true;
-            option3.disabled = true;
-            option4.disabled = true;
-            option5.disabled = true;
-            option6.disabled = true;
-            option7.disabled = true;
-            option8.disabled = true;
-        } else if (rentTime == '18시') {
-            option1.disabled = true;
-            option2.disabled = true;
-            option3.disabled = true;
-            option4.disabled = true;
-            option5.disabled = true;
-            option6.disabled = true;
-            option7.disabled = true;
-            option8.disabled = true;
-
-        }
-
+        calculateDate();
     }
 
-    calculateDate();
+    if (rentTime !='' && rentDateNum != '' && returnDateNum != '') {
+        getAvailableExtra();
+        calculateDate();
+    }
 
 }
 
@@ -390,10 +286,6 @@ const calculateDate = () => {
     }
 }
 
-const extraTimeFee = () => {
-
-}
-
 
 // 몇 일권 select
 let returnDateNum = '';
@@ -406,119 +298,168 @@ const daysSelect = () => {
     // 날짜 계산  && rentTime != ''
     if (rentDateNum != '') {
         let temp = rentDateNum.split('월 ');
-        let rentDateMon = parseInt(temp[0]);
-        let returnDateMon = rentDateMon;
-        let rentDateDay = parseInt(temp[1].split('일')[0]);
+        rentDateMonth = parseInt(temp[0]);
+        let returnDateMon = rentDateMonth;
+        rentDateDay = parseInt(temp[1].split('일')[0]);
         let returnDateDay = rentDateDay + theVal;
         useDay = daySelector.options[daySelector.selectedIndex].innerText;
         useDayNum = parseInt(daySelector.options[daySelector.selectedIndex].value);
-        // console.log(rentDateMon, rentDateDay)
-        // console.log(useDay, useDayNum)
+
 
         if (returnDateDay < 29) ;
         else if (useDayNum == 30) {  // 한달권 선택시
-            returnDateMon = rentDateMon + 1;
+            returnDateMon = rentDateMonth + 1;
             returnDateDay = rentDateDay;
         }
-        else {
-            switch (rentDateMon) {
-                case 1:
-                    if (returnDateDay > 31) {
-                        returnDateMon = rentDateMon + 1;
-                        returnDateDay -= 31;
-                    }
-                    break;
-                case 2:
+        else { // 한달권 제외 다른 달로 넘어갈 시
+            if (rentDateMonth <= 7) {
+                if (rentDateMonth == 2) {
                     if (returnDateDay > 29) {
-                        returnDateMon = rentDateMon + 1;
+                        returnDateMon = rentDateMonth + 1;
                         returnDateDay -= 28;
                     }
-                    break;
-                case 3:
+                } else if (rentDateMonth%2 == 1) {
                     if (returnDateDay > 31) {
-                        returnDateMon = rentDateMon + 1;
+                        returnDateMon = rentDateMonth + 1;
                         returnDateDay -= 31;
                     }
-                    break;
-                case 4:
+                } else if (rentDateMonth%2 == 0) {
                     if (returnDateDay > 30) {
-                        returnDateMon = rentDateMon + 1;
+                        returnDateMon = rentDateMonth + 1;
                         returnDateDay -= 30;
                     }
-                    break;
-                case 5:
+                }
+            } else if (rentDateMonth > 7) {
+                if (rentDateMonth%2 == 0) {
                     if (returnDateDay > 31) {
-                        returnDateMon = rentDateMon + 1;
+                        returnDateMon = rentDateMonth + 1;
                         returnDateDay -= 31;
                     }
-                    break;
-                case 6:
+                } else if (rentDateMonth%2 == 1) {
                     if (returnDateDay > 30) {
-                        returnDateMon = rentDateMon + 1;
+                        returnDateMon = rentDateMonth + 1;
                         returnDateDay -= 30;
                     }
-                    break;
-                case 7:
-                    if (returnDateDay > 31) {
-                        returnDateMon = rentDateMon + 1;
-                        returnDateDay -= 31;
-                    }
-                    break;
-                case 8:
-                    if (returnDateDay > 31) {
-                        returnDateMon = rentDateMon + 1;
-                        returnDateDay -= 31;
-                    }
-                    break;
-                case 9:
-                    if (returnDateDay > 30) {
-                        returnDateMon = rentDateMon + 1;
-                        returnDateDay -= 30;
-                    }
-                    break;
-                case 10:
-                    if (returnDateDay > 31) {
-                        returnDateMon = rentDateMon + 1;
-                        returnDateDay -= 31;
-                    }
-                    break;
-                case 11:
-                    if (returnDateDay > 30) {
-                        returnDateMon = rentDateMon + 1;
-                        returnDateDay -= 30;
-                    }
-                    break;
-                case 12:
-                    if (returnDateDay > 31) {
-                        returnDateMon =  1;
-                        returnDateDay -= 31;
-                    }
-                    break;
+                }
             }
+            // switch (rentDateMonth) {
+            //     case 1:
+            //         if (returnDateDay > 31) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 31;
+            //         }
+            //         break;
+            //     case 2:
+            //         if (returnDateDay > 29) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 28;
+            //         }
+            //         break;
+            //     case 3:
+            //         if (returnDateDay > 31) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 31;
+            //         }
+            //         break;
+            //     case 4:
+            //         if (returnDateDay > 30) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 30;
+            //         }
+            //         break;
+            //     case 5:
+            //         if (returnDateDay > 31) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 31;
+            //         }
+            //         break;
+            //     case 6:
+            //         if (returnDateDay > 30) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 30;
+            //         }
+            //         break;
+            //     case 7:
+            //         if (returnDateDay > 31) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 31;
+            //         }
+            //         break;
+            //     case 8:
+            //         if (returnDateDay > 31) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 31;
+            //         }
+            //         break;
+            //     case 9:
+            //         if (returnDateDay > 30) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 30;
+            //         }
+            //         break;
+            //     case 10:
+            //         if (returnDateDay > 31) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 31;
+            //         }
+            //         break;
+            //     case 11:
+            //         if (returnDateDay > 30) {
+            //             returnDateMon = rentDateMonth + 1;
+            //             returnDateDay -= 30;
+            //         }
+            //         break;
+            //     case 12:
+            //         if (returnDateDay > 31) {
+            //             returnDateMon =  1;
+            //             returnDateDay -= 31;
+            //         }
+            //         break;
+            // }
         }
 
 
         returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
 
-        let extraTimeTarget = document.getElementById('extra_time_sel')
+        getAvailableExtra();
 
-        fetch(`/${carType}/getextratime/${rentDateYear}/${rentDateMonth}/${rentDateDay}/${useDayNum}/${rentTime}`)
-            .then(res => res.json())
-            .then(result => {
-                // 현재 남아있는 options 없애기
-                // let targetSelect = document.getElementById('days_select');
-                // targetSelect.options.length = 0;
-                // availableDays = result[0];
-                // makeOptions(availableDays)
-                console.log(result)
-                extraTimeTarget.style.display = 'block'
-            })
-
-
-        // console.log(returnDateNum)
 
     }
     calculateDate();
+}
+
+let extraTimeTarget = document.getElementById('extra_time_sel')
+const getAvailableExtra = () => {
+    fetch(`/${carType}/getextratime/${rentDateYear}/${rentDateMonth}/${rentDateDay}/${useDayNum}/${rentTime}`)
+        .then(res => res.json())
+        .then(result => {
+            // 현재 남아있는 options 없애기
+            let targetSelect = document.getElementById('extratime_select');
+            targetSelect.options.length = 0;
+            let availableExtra = result[0];
+            makeExtraOptions(availableExtra)
+            console.log(result[0])
+            extraTimeTarget.style.display = 'block'
+        })
+}
+
+
+
+// extra time option maker
+const makeExtraOptions = (times) => {
+    for (let i = 0; i<=times; i++) {
+        let targetSelect = document.getElementById('extratime_select');
+        let createdOpt = document.createElement("option");
+
+        if(i == 0) {
+            createdOpt.text = '--추가 시간 선택--';
+        }
+        else {
+            createdOpt.text = '+'+ i +'시간';
+            createdOpt.value = i;
+        }
+        targetSelect.appendChild(createdOpt);
+    }
 }
 
 
