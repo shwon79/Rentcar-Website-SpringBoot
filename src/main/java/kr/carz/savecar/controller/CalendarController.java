@@ -1220,39 +1220,33 @@ public class CalendarController {
     }
 
 
+    // 여기 코드 세개 하나로 묶기
 
-    @RequestMapping("/travel_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}")
-    public String handleRequest_travel_reserve(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total) throws Exception {
-
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("travel");
-        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-
-        model.put("rent_date", rent_date);
-        model.put("rent_time", rent_time);
-        model.put("return_date", return_date);
-        model.put("return_time", return_time);
-        model.put("day", day);
-        model.put("extraTime", extraTime);
-        model.put("total", total);
-
-        model.put("carType", "travel");
-
-        System.out.println(rent_date);
-        System.out.println(rent_time);
-        System.out.println(return_date);
-        System.out.println(return_time);
-        System.out.println(day);
-        System.out.println(extraTime);
-        System.out.println(total);
-
-
-        return "paying";
-    }
+//    @RequestMapping("/travel_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}")
+//    public String handleRequest_travel_reserve(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total) throws Exception {
+//
+//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("travel");
+//        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
+//
+//        model.put("rent_date", rent_date);
+//        model.put("rent_time", rent_time);
+//        model.put("return_date", return_date);
+//        model.put("return_time", return_time);
+//        model.put("day", day);
+//        model.put("extraTime", extraTime);
+//        model.put("total", total);
+//
+//        model.put("carType", "travel");
+//
+//
+//
+//        return "paying";
+//    }
 
 
 
-    @RequestMapping("/liomousine_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}")
-    public String handleRequest_liomousine_reserve(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total) throws Exception {
+    @RequestMapping("/{carType}_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}/{extraFee}")
+    public String handleRequest_reserve(ModelMap model, @PathVariable("carType") String carType,@PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total, @PathVariable("extraFee") Integer extraFee) throws Exception {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
         model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
@@ -1264,51 +1258,35 @@ public class CalendarController {
         model.put("day", day);
         model.put("extraTime", extraTime);
         model.put("total", total);
+        model.put("extraFee",extraFee);
 
-
-        model.put("carType", "limousine");
-
-        System.out.println(rent_date);
-        System.out.println(rent_time);
-        System.out.println(return_date);
-        System.out.println(return_time);
-        System.out.println(day);
-        System.out.println(extraTime);
-        System.out.println(total);
+        model.put("carType", carType);
 
 
         return "paying";
     }
 
 
-    @RequestMapping("/europe_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}")
-    public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total) throws Exception {
-
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
-        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-
-        model.put("rent_date", rent_date);
-        model.put("rent_time", rent_time);
-        model.put("return_date", return_date);
-        model.put("return_time", return_time);
-        model.put("day", day);
-        model.put("extraTime", extraTime);
-        model.put("total", total);
-
-        model.put("carType", "europe");
-
-
-        System.out.println(rent_date);
-        System.out.println(rent_time);
-        System.out.println(return_date);
-        System.out.println(return_time);
-        System.out.println(day);
-        System.out.println(extraTime);
-        System.out.println(total);
-
-
-        return "paying";
-    }
+//    @RequestMapping("/europe_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}/{extraFee}")
+//    public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total, @PathVariable("extraFee") Integer extraFee) throws Exception {
+//
+//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
+//        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
+//
+//        model.put("rent_date", rent_date);
+//        model.put("rent_time", rent_time);
+//        model.put("return_date", return_date);
+//        model.put("return_time", return_time);
+//        model.put("day", day);
+//        model.put("extraTime", extraTime);
+//        model.put("total", total);
+//        model.put("extraFee",extraFee);
+//
+//        model.put("carType", "europe");
+//
+//
+//        return "paying";
+//    }
 
 
     // europe 캠핑카 가격 구하는 api
