@@ -1498,13 +1498,25 @@ public class CalendarController {
         List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarLastDate, campingCarPrice);
 
         Integer extraTime = 0;
+        Integer flg = 0;
 
-        for (int i=1; i<calendarTimeList.size(); i++){
-            if (calendarTimeList.get(i).getReserveComplete().equals("1")){
-                break;
-            } else {
-                extraTime += 1;
+        int i;
+        for (i=0; i<calendarTimeList.size(); i++){
+            if (flg == 1){
+                if (calendarTimeList.get(i).getReserveComplete().equals("1")){
+                    break;
+                } else {
+                    extraTime += 1;
+                }
             }
+
+            if (calendarTimeList.get(i).getReserveTime().equals(rentStartTime)){
+                flg = 1;
+            }
+        }
+
+        if (!calendarTimeList.get(i).getReserveTime().equals("18시") && extraTime >= 2){
+            extraTime -= 2;
         }
 
 
