@@ -1446,7 +1446,7 @@ public class CalendarController {
 
         Long date_start_id = calendarDate.getDateId();
 
-        int possible_rent_date = 1;
+        int possible_rent_date = 0;
 
         for(int i=1; i<=31; i++){
             if(date_start_id+i > 167){  // 12월 4일
@@ -1500,8 +1500,10 @@ public class CalendarController {
         Integer extraTime = 0;
         Integer flg = 0;
 
+
         int i;
         for (i=0; i<calendarTimeList.size(); i++){
+
             if (flg == 1){
                 if (calendarTimeList.get(i).getReserveComplete().equals("1")){
                     break;
@@ -1515,10 +1517,13 @@ public class CalendarController {
             }
         }
 
-        if (!calendarTimeList.get(i).getReserveTime().equals("18시") && extraTime >= 2){
+
+        System.out.println("마지막 time:"+calendarTimeList.get(i-1).getReserveTime());
+        if (!calendarTimeList.get(i-1).getReserveTime().equals("18시") && extraTime >= 2){
             extraTime -= 2;
         }
 
+        System.out.println("extraTime: "+extraTime);
 
         JSONArray jsonArray = new JSONArray();
         jsonArray.put(extraTime);
