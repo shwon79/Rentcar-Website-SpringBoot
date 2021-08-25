@@ -2,7 +2,7 @@
 // 상품 이름 넣기
 let carType = document.getElementsByClassName('car_type')[0].id
 let target_car_name = document.getElementById(carType)
-target_car_name.innerText = `${carType.toUpperCase()} VIP CAMPER`
+target_car_name.innerText = `${carType.toUpperCase()} VIP`
 
 // phone number length limit
 function handleOnInput(el, maxlength) {

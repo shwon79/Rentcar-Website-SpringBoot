@@ -1,3 +1,7 @@
+p {
+  font-size: 1.7rem;
+}
+
 table.type11 {
   border-collapse: collapse;
   border-spacing: 1px;
@@ -680,11 +684,13 @@ input[type=radio] {
   display: block;
   background: #61eca6;
   color: #ffffff;
-  padding: 10px 15px;
-  top: 50%;
+  padding: 20px 25px;
+  font-size: 1.2em;
+  top: 20%;
   border: none;
   right: 5%;
   border-radius: 30vh;
+  box-shadow: 0 0 20px #2aff2e;
 }
 
 #fixed_reserve_btn:hover {
