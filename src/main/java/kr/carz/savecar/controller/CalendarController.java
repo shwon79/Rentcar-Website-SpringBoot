@@ -1220,28 +1220,6 @@ public class CalendarController {
     }
 
 
-    // 여기 코드 세개 하나로 묶기
-
-//    @RequestMapping("/travel_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}")
-//    public String handleRequest_travel_reserve(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total) throws Exception {
-//
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("travel");
-//        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-//
-//        model.put("rent_date", rent_date);
-//        model.put("rent_time", rent_time);
-//        model.put("return_date", return_date);
-//        model.put("return_time", return_time);
-//        model.put("day", day);
-//        model.put("extraTime", extraTime);
-//        model.put("total", total);
-//
-//        model.put("carType", "travel");
-//
-//
-//
-//        return "paying";
-//    }
 
 
 
@@ -1266,27 +1244,6 @@ public class CalendarController {
         return "paying";
     }
 
-
-//    @RequestMapping("/europe_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}/{extraFee}")
-//    public String handleRequest(ModelMap model, @PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total, @PathVariable("extraFee") Integer extraFee) throws Exception {
-//
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
-//        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-//
-//        model.put("rent_date", rent_date);
-//        model.put("rent_time", rent_time);
-//        model.put("return_date", return_date);
-//        model.put("return_time", return_time);
-//        model.put("day", day);
-//        model.put("extraTime", extraTime);
-//        model.put("total", total);
-//        model.put("extraFee",extraFee);
-//
-//        model.put("carType", "europe");
-//
-//
-//        return "paying";
-//    }
 
 
     // europe 캠핑카 가격 구하는 api
