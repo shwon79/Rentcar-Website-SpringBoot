@@ -779,11 +779,15 @@ input[type=radio] {
   .camping_page button {
     width: 40%;
     font-size: 1em;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .tab_buttons {
     width: 30%;
     font-size: 1em;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   #rent_cal input[type=radio]:checked {
