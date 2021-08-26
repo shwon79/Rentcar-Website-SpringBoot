@@ -211,7 +211,7 @@ const makeOptions = (days) => {
             createdOpt.text = '한달권';
             createdOpt.value = i;
         } else if(i == 0) {
-            createdOpt.text = '--렌트 일자 선택--';
+            createdOpt.text = '==렌트 일자 선택(2일이상)==';
             createdOpt.value = 0;
 
         }
@@ -461,7 +461,7 @@ const makeExtraOptions = (times) => {
         let createdOpt = document.createElement("option");
 
         if(i == 0) {
-            createdOpt.text = '--추가 시간 선택--';
+            createdOpt.text = '==추가 시간 선택==';
             createdOpt.value = 0;
         }
         else {

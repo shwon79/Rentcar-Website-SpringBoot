@@ -172,6 +172,7 @@ a:hover {
 
 #main_mobile {
   display: none;
+  font-size: 1.3em;
 }
 
 
@@ -239,6 +240,12 @@ a:hover {
     border-radius: 50%;
   }
 
+  .disabled_day {
+    pointer-events: none;
+    background:lightgray;
+    color: gray;
+  }
+
   .detail_wrapper {
     display: none;
     text-align: center;
@@ -260,8 +267,9 @@ a:hover {
 
   a .detail_selections {
     width: 100%;
-    background-color: lightyellow;
+    background-color: #61a7ff;
     border: 1px solid lightblue;
+    box-shadow: 0 0 10px #03c5ff;
   }
 
   .detail_selections span {

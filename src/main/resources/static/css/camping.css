@@ -251,6 +251,7 @@ hr {
 
 .main {
   padding-bottom: 20px;
+  font-weight: bold;
 }
 .nav {
   display: flex;
@@ -522,6 +523,11 @@ a:hover {
   font-size: 17px;
 }
 
+#calendar_return p {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
 #extra_time_sel {
   display: none;
   font-size: 17px;
@@ -531,9 +537,18 @@ a:hover {
   margin-right: 10px;
 }
 
+#extra_time_sel p {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
 #extratime_select option:disabled {
   background: lightgray;
   color: dimgray;
+}
+
+select {
+  height: 37px;
 }
 
 .disabled_radio {
@@ -550,11 +565,20 @@ a:hover {
   margin: 0;
 }
 
+label {
+  font-family: 'FontAwesome';
+  font-size: 1.2em;
+}
+
 input[type=radio] {
+  -webkit-border-radius: 0;
+  -webkit-appearance: none;
   appearance: none;
 }
 
 #rent_cal input[type=radio]:checked {
+  -webkit-border-radius: 0;
+  -webkit-appearance: none;
   appearance: none;
   position: absolute;
   width: 50px;
@@ -581,7 +605,7 @@ input[type=radio] {
   height: 45px;
   width: 30%;
   margin: 0;
-  background: rgba(70, 70, 70, 0.38);
+  background: rgba(37, 37, 37, 0.81);
   border-radius: 1vh;
 }
 
@@ -743,5 +767,15 @@ input[type=radio] {
   .tab_buttons {
     width: 30%;
     font-size: 1em;
+  }
+
+  #rent_cal input[type=radio]:checked {
+    width: 40px;
+    height: 40px;
+  }
+
+  #rent_cal label {
+    width: 40px;
+    height: 40px;
   }
 }
