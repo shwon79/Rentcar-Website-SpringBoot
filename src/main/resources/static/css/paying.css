@@ -65,6 +65,10 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
+}
+.reserve_detail p {
+    margin-bottom: 0;
 }
 
 #must_desc {
