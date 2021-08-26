@@ -570,12 +570,17 @@ select option {
   margin: 0;
 }
 
+h5 {
+  margin: 0;
+}
+
 label {
   font-family: 'FontAwesome';
   font-size: 1.2em;
 }
 
 #rent_days label {
+  font-size: 17px;
 }
 
 input[type=radio] {
@@ -642,6 +647,10 @@ input[type=radio] {
 
 .result_details h4 {
   margin: 0;
+}
+
+.result_details h4 span {
+  font-size: 13px;
 }
 
 .sel_options hr {
@@ -770,11 +779,15 @@ input[type=radio] {
   .camping_page button {
     width: 40%;
     font-size: 1em;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .tab_buttons {
     width: 30%;
     font-size: 1em;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   #rent_cal input[type=radio]:checked {
