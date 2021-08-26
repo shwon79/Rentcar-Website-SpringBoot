@@ -516,7 +516,6 @@ a:hover {
 
 #calendar_return label {
   margin: 0 10px 0 0;
-  font-size: 17px;
 }
 
 #calendar_return select {
@@ -549,6 +548,12 @@ a:hover {
 
 select {
   height: 37px;
+  background: lightyellow;
+  border: 1px solid gray;
+  border-radius: 1vh;
+}
+
+select option {
 }
 
 .disabled_radio {
@@ -568,6 +573,9 @@ select {
 label {
   font-family: 'FontAwesome';
   font-size: 1.2em;
+}
+
+#rent_days label {
 }
 
 input[type=radio] {
