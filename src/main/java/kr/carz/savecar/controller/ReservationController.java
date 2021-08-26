@@ -203,92 +203,67 @@ public class ReservationController {
     @ResponseBody
     public String save(HttpServletResponse res, @RequestBody CampingcarDateTime2 dto)  throws IOException {
 
-
-        System.out.println(dto.getRentDate());
-        System.out.println(dto.getRentTime());
-        System.out.println(dto.getReturnDate());
-        System.out.println(dto.getReturnTime());
-        System.out.println(dto.getAgree()); // 1
-        System.out.println(dto.getDeposit());
-        System.out.println(dto.getDepositor());
-        System.out.println(dto.getDetail());
-        System.out.println(dto.getName());
-        System.out.println(dto.getPhone());
-        System.out.println(dto.getReservation()); // 1
-        System.out.println(dto.getTotal());
-        System.out.println(dto.getDay());
-
-
         JSONArray jsonArray = new JSONArray();
 
 
         try {
             // 대여일자, 대여시간
-            String[] rent_date = dto.getRentDate().split("월 ");
-            String rent_month = rent_date[0];
-            System.out.println(rent_month);
-
-            String[] rent_day_list = rent_date[1].split("일");
-            String rent_day = rent_day_list[0];
-            System.out.println(rent_day);
-
-
-            // 반납일자, 반납시간
-            String[] return_date = dto.getReturnDate().split("월 ");
-            String return_month = return_date[0];
-            System.out.println(return_month);
-
-            String[] return_day_list = return_date[1].split("일");
-            String return_day = return_day_list[0];
-            System.out.println(return_day);
-
+//            String[] rent_date = dto.getRentDate().split("월 ");
+//            String rent_month = rent_date[0];
+//
+//            String[] rent_day_list = rent_date[1].split("일");
+//            String rent_day = rent_day_list[0];
+//
+//
+//            // 반납일자, 반납시간
+//            String[] return_date = dto.getReturnDate().split("월 ");
+//            String return_month = return_date[0];
+//
+//            String[] return_day_list = return_date[1].split("일");
+//            String return_day = return_day_list[0];
+//
 
             // CalendarDate 날짜 객체 가져오기
-            CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(rent_month, rent_day, "2021");
-            CalendarDate returnCalendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(return_month, return_day, "2021");
-            System.out.println(calendarDate.getDateId());
-            System.out.println(returnCalendarDate.getDateId());
-
-
-            // CampingCarPrice 객체 가져오기
-
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarType());
-
-            CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, dto.getRentTime());
-            CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, dto.getReturnTime());
-
-
-            //
-            if (calendarReturnTime.getReserveTime().equals("18시")){
-
-                for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId(); i++){
-                    CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
-                    if (timeIndiv.getReserveComplete().equals("1")) {
-                        throw new Exception();
-                    }
-                }
-            } else {
-                for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId() + 1; i++){
-                    CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
-                    if (timeIndiv.getReserveComplete().equals("1")){
-                        throw new Exception();
-                    }
-                }
-            }
+//            CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(rent_month, rent_day, "2021");
+//            CalendarDate returnCalendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(return_month, return_day, "2021");
+//
+//
+//
+//            // CampingCarPrice 객체 가져오기
+//            CampingCarPrice campingCarPrice;
+//
+//            if (dto.getCarType().equals("liomousine")){
+//                campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
+//            } else {
+//                campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarType());
+//            }
 
 
 
-            for (Long i = calendarDate.getDateId(); i <= returnCalendarDate.getDateId(); i++) {
-                // CalendarDate 날짜 객체 가져오기
-                CalendarDate calendarDateIndiv = calendarDateService.findCalendarDateByDateId(i);
+//            CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, dto.getRentTime());
+//            CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, dto.getReturnTime());
 
-                // DateCamping 에서 날짜랑 차정보로 하루 예약 정보 찾기
-                DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDateIndiv, campingCarPrice);
-                // DateCamping 하루 예약 정보 수정, campingcarDateTime 예약리스트 예약 정보 수정
-                if (dateCamping.getReserved().equals("1")){
-                    throw new Exception();
-                }
-            }
+            // 시간기준 예약되어 있는지 확인
+//            for (Long i = calendarRentTime.getTimeId(); i < calendarReturnTime.getTimeId(); i++){
+//                CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
+//                if (timeIndiv.getReserveComplete().equals("1")) {
+//                    throw new Exception();
+//                }
+//            }
+//
+//
+//            // 날짜기준 예약되어 있는지 확인
+//            for (Long i = calendarDate.getDateId()+1; i < returnCalendarDate.getDateId(); i++) {
+//                // CalendarDate 날짜 객체 가져오기
+//                CalendarDate calendarDateIndiv = calendarDateService.findCalendarDateByDateId(i);
+//
+//                // DateCamping 에서 날짜랑 차정보로 하루 예약 정보 찾기
+//                DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDateIndiv, campingCarPrice);
+//                // DateCamping 하루 예약 정보 수정, campingcarDateTime 예약리스트 예약 정보 수정
+//                if (dateCamping.getReserved().equals("1")){
+//                    throw new Exception();
+//                }
+//            }
 
 
 
@@ -411,54 +386,79 @@ public class ReservationController {
             // 대여일자, 대여시간
             String[] rent_date = campingcarDateTime.getRentDate().split("월 ");
             String rent_month = rent_date[0];
-            System.out.println(rent_month);
 
             String[] rent_day_list = rent_date[1].split("일");
             String rent_day = rent_day_list[0];
-            System.out.println(rent_day);
 
 
             // 반납일자, 반납시간
             String[] return_date = campingcarDateTime.getReturnDate().split("월 ");
             String return_month = return_date[0];
-            System.out.println(return_month);
 
             String[] return_day_list = return_date[1].split("일");
             String return_day = return_day_list[0];
-            System.out.println(return_day);
 
 
             // CalendarDate 날짜 객체 가져오기
             CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(rent_month, rent_day, "2021");
             CalendarDate returnCalendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(return_month, return_day, "2021");
-            System.out.println(calendarDate.getDateId());
-            System.out.println(returnCalendarDate.getDateId());
+
 
 
             // CampingCarPrice 객체 가져오기
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingcarDateTime.getCarType());
+            CampingCarPrice campingCarPrice;
+
+            if (campingcarDateTime.getCarType().equals("liomousine")){
+                campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
+            } else {
+                campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingcarDateTime.getCarType());
+            }
 
             CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, campingcarDateTime.getRentTime());
             CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, campingcarDateTime.getReturnTime());
 
 
-            if (calendarReturnTime.getReserveTime().equals("18시")){
+            for (Long i = calendarRentTime.getTimeId(); i < calendarReturnTime.getTimeId(); i++){
+                CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
+                timeIndiv.setReserveComplete("1");
 
-                for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId(); i++){
-                    CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
-                    timeIndiv.setReserveComplete("1");
+            }
 
+            // 첫날,마지막날 모든 시간이 다 예약되어 있는지 확인
+            List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
+            List<CalendarTime> calendarReturnTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(returnCalendarDate, campingCarPrice);
+
+            int rent_reserved_all = 1;
+            int return_reserved_all = 1;
+            for (int i=0; i<calendarTimeList.size(); i++){
+                if (calendarTimeList.get(i).getReserveComplete().equals("0")){
+                    rent_reserved_all = 0;
+                    break;
                 }
-            } else {
-                for (Long i = calendarRentTime.getTimeId(); i <= calendarReturnTime.getTimeId() + 1; i++){
-                    CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
-                    timeIndiv.setReserveComplete("1");
+            }
+            for (int i=0; i<calendarReturnTimeList.size(); i++){
+                if (calendarReturnTimeList.get(i).getReserveComplete().equals("0")){
+                    return_reserved_all = 0;
+                    break;
                 }
             }
 
+            Long rent_start_dateId;
+            Long rent_return_dateId;
+
+            if (rent_reserved_all == 1){
+                rent_start_dateId = calendarDate.getDateId();
+            } else {
+                rent_start_dateId = calendarDate.getDateId() + 1;
+            }
+            if (return_reserved_all == 1){
+                rent_return_dateId = returnCalendarDate.getDateId();
+            } else {
+                rent_return_dateId = returnCalendarDate.getDateId() - 1;
+            }
 
 
-            for (Long i = calendarDate.getDateId(); i <= returnCalendarDate.getDateId(); i++) {
+            for (Long i = rent_start_dateId; i <= rent_return_dateId; i++) {
                 // CalendarDate 날짜 객체 가져오기
                 CalendarDate calendarDateIndiv = calendarDateService.findCalendarDateByDateId(i);
 
@@ -471,13 +471,6 @@ public class ReservationController {
 
             // campingcarDateTime 저장
             Long testLong = campingcarDateTimeService2.save2(campingcarDateTime);
-            System.out.println(testLong);
-
-            // dateCamping 저장
-//        dateCampingService.save(dateCamping);
-
-            // 이거 왜 안찍혀;;;
-            System.out.println("testest");
 
 
             // 예약 확정되었습니다. alert
