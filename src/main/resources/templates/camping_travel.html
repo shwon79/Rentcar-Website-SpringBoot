@@ -77,14 +77,14 @@
                     <!-- 대여날짜 -->
                     <div class="select_wrapper row" onclick="doDisplay()">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                            <div class="date_menu">대여시작일</div>
+                            <div class="date_menu"><h5>시작날짜</h5></div>
                         </div>
-                        <div class="col-lg-7 col-md-8 col-sm-7 col-xs-7">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                             <div class="date_time"><span id='rent_date'  th:title="${dateId}" th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>
                         </div>
-                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">
-                        </div>
+<!--                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+<!--                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">-->
+<!--                        </div>-->
                     </div><hr />
                     <!-- 대여날짜 달력 -->
                     <div id="calendar_rental" class="row">
@@ -131,14 +131,14 @@
                     <!-- 대여 시간 -->
                     <div class="select_wrapper row" onclick="doDisplay_rent_time()">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                            <div class="date_menu">시작시간</div>
+                            <div class="date_menu"><h5>시작시간</h5></div>
                         </div>
-                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                            <div class="date_time">시간을 선택해주세요</div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="date_time"><h5>시간을 선택해주세요</h5></div>
                         </div>
-                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">
-                        </div>
+<!--                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+<!--                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">-->
+<!--                        </div>-->
                     </div><hr style="background: dimgray;" />
 
                     <!-- 대여 시간 선택창 -->
@@ -179,14 +179,14 @@
 
                     <div class="select_wrapper row" onclick="doDisplay_return()">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                            <div class="date_menu">렌트 기간</div>
+                            <div class="date_menu"><h5>렌트 기간</h5></div>
                         </div>
-                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                            <div class="date_time">렌트일자를 선택해주세요.</div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="date_time"><h5>렌트일자를 선택해주세요</h5></div>
                         </div>
-                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">
-                        </div>
+<!--                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+<!--                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">-->
+<!--                        </div>-->
                     </div><hr style="background: dimgray;" />
 
                     <div id="rent_days">
@@ -194,7 +194,6 @@
                             <div>
                                 <label for="days_select">렌트 일자</label>
                                 <select name="days" id="days_select" onchange="daysSelect()">
-
 
                                 </select>
                             </div>
@@ -242,11 +241,11 @@
                             </div>
                             <div class="sel_options" id="sel_price">
                                 <div class="result_details">
-                                    <h4>총 렌트료(VAT 미포함)</h4>
+                                    <h4>총 렌트료<span>(VAT미포함)</span></h4>
                                     <p id="calRentFee"></p>
                                 </div>
                                 <div class="result_details">
-                                    <h4>추가 시간 요금(VAT 미포함)</h4>
+                                    <h4>추가 시간 요금<span>(VAT미포함)</span></h4>
                                     <p id="calExtraFee"></p>
                                 </div>
                                 <div class="result_details">
@@ -254,7 +253,7 @@
                                     <p id="calVat"></p>
                                 </div><hr style="color: dimgray" />
                                 <div class="result_details">
-                                    <h4>총 결제금액(VAT 포함)</h4>
+                                    <h4>총 결제금액<span>(VAT포함)</span></h4>
                                     <p id="calResult"></p>
                                 </div>
                             </div>
@@ -394,7 +393,7 @@
                 <div class="">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" >
 
-                        <div class="bg-light pinside30" style="margin-top: 20px;">
+                        <div class="bg-light pinside30" style="margin-top: 20px; padding: 0px">
 
                             <div class="row pinside10">
                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">

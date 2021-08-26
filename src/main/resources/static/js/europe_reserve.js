@@ -447,7 +447,6 @@ const getAvailableExtra = () => {
             targetSelect.options.length = 0;
             let availableExtra = result[0];
             makeExtraOptions(availableExtra)
-            console.log(result[0])
             extraTimeTarget.style.display = 'block'
         })
 }
