@@ -523,7 +523,7 @@ a:hover {
 }
 
 #calendar_return p {
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 10px;
 }
 
@@ -572,6 +572,7 @@ select option {
 
 h5 {
   margin: 0;
+  font-size: 2rem;
 }
 
 label {
@@ -689,6 +690,7 @@ input[type=radio] {
 /* 캠핑카 페이지 버튼 css */
 .camping_page {
   border-bottom: 1px solid lightgray;
+  margin-top: 4rem;
 }
 
 .camping_page button {
@@ -716,7 +718,7 @@ input[type=radio] {
 /*  */
 
 #feature {
-  margin-bottom: 100px;
+  margin: 60px 0;
 }
 
 #fixed_reserve_btn {

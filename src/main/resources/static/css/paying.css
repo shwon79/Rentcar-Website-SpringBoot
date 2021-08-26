@@ -86,7 +86,7 @@ p {
 }
 
 .input_person input {
-    width: 60%;
+    width: 100%;
     height: 35px;
     font-size: 20px;
     margin: 3px;
@@ -173,13 +173,20 @@ textarea.noscrollbars {
 }
 
 #deposit_detail p {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .explanations {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.explanations p {
+    font-size: 15px;
+}
+#deposit_explain {
+    margin-left: 15px;
 }
 
 .checkboxes {
