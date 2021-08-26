@@ -570,12 +570,17 @@ select option {
   margin: 0;
 }
 
+h5 {
+  margin: 0;
+}
+
 label {
   font-family: 'FontAwesome';
   font-size: 1.2em;
 }
 
 #rent_days label {
+  font-size: 17px;
 }
 
 input[type=radio] {
@@ -642,6 +647,10 @@ input[type=radio] {
 
 .result_details h4 {
   margin: 0;
+}
+
+.result_details h4 span {
+  font-size: 13px;
 }
 
 .sel_options hr {
