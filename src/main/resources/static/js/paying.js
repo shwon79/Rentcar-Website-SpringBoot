@@ -101,11 +101,12 @@ HalfTarget.innerText = parseInt(totalPrice/2).toLocaleString()+'원'; // 콤마 
 // Sending Data;
 const reserveDone = () => {
     let check1 = document.getElementById('check_info').checked;
-    let check2 = document.getElementById('check_rent').checked;
-    let check3 = document.getElementById('check_last').checked;
-    let check4 = document.getElementById('check_insure').checked;
+    // let check2 = document.getElementById('check_rent').checked;
+    // let check3 = document.getElementById('check_last').checked;
+    // let check4 = document.getElementById('check_insure').checked;
+// && check2 == true && check3 == true && check4 == true
 
-    if (customName != '' && phoneNum!='' && depositName!='' && check1 == true && check2 == true && check3 == true && check4 == true) {
+    if (customName != '' && phoneNum!='' && depositName!='' && check1 == true ) {
         let finalDate = {
             'carType': carType,
             'rentDate': rentDateNum,

@@ -252,6 +252,7 @@ a:hover {
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
+    margin-top: 30px;
     font-family: FontAwesome;
     font-weight: bold;
   }
@@ -259,7 +260,7 @@ a:hover {
   .detail_wrapper div {
     margin: 10px 0;
     padding: 10px 0;
-    width: 65%;
+    width: 80%;
     border-radius: 1vh;
   }
 
@@ -267,7 +268,7 @@ a:hover {
 
   a .detail_selections {
     width: 100%;
-    background-color: #61a7ff;
+    background-color: white;
     border: 1px solid lightblue;
     box-shadow: 0 0 10px #03c5ff;
   }
@@ -283,11 +284,11 @@ a:hover {
   }
 
   .detail_selections {
-    background-color: #8c8c8c;
+    background-color: #bbbbbb;
   }
 
   .detail_wrapper a {
-    width: 65%;
+    width: 80%;
   }
 
 }
