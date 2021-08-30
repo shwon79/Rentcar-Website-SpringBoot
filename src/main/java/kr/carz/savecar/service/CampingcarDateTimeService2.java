@@ -16,9 +16,13 @@ public class CampingcarDateTimeService2 {
         this.campingcarDateTimeRepository2 = campingcarDateTimeRepository2;
     }
 
-//    public Long save(CampingcarDateTimeDto dto) {
-//       return campingcarDateTimeRepository2.save(dto.toEntity()).getDateTimeId();
-//    }
+    public void delete(CampingcarDateTime2 campingcarDateTime) {
+        campingcarDateTimeRepository2.delete(campingcarDateTime);
+    }
+
+    public void deleteByDateTimeId(Long dateTimeId) {
+       campingcarDateTimeRepository2.deleteById(dateTimeId);
+    }
 
 
     public Long save2(CampingcarDateTime2 campingcarDateTime) {

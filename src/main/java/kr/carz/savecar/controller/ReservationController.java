@@ -421,24 +421,15 @@ public class ReservationController {
             for (Long i = calendarRentTime.getTimeId(); i < calendarReturnTime.getTimeId(); i++){
                 CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
                 timeIndiv.setReserveComplete("1");
-
             }
 
-            // 첫날,마지막날 모든 시간이 다 예약되어 있는지 확인
+            // 첫날 모든 시간이 다 예약되어 있는지 확인
             List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
-            List<CalendarTime> calendarReturnTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(returnCalendarDate, campingCarPrice);
 
             int rent_reserved_all = 1;
-            int return_reserved_all = 1;
             for (int i=0; i<calendarTimeList.size(); i++){
                 if (calendarTimeList.get(i).getReserveComplete().equals("0")){
                     rent_reserved_all = 0;
-                    break;
-                }
-            }
-            for (int i=0; i<calendarReturnTimeList.size(); i++){
-                if (calendarReturnTimeList.get(i).getReserveComplete().equals("0")){
-                    return_reserved_all = 0;
                     break;
                 }
             }
@@ -446,16 +437,15 @@ public class ReservationController {
             Long rent_start_dateId;
             Long rent_return_dateId;
 
+            // 첫날은 모든 시간 예약되어 있는지 확인하고 날짜 예약하기
             if (rent_reserved_all == 1){
                 rent_start_dateId = calendarDate.getDateId();
             } else {
                 rent_start_dateId = calendarDate.getDateId() + 1;
             }
-            if (return_reserved_all == 1){
-                rent_return_dateId = returnCalendarDate.getDateId();
-            } else {
-                rent_return_dateId = returnCalendarDate.getDateId() - 1;
-            }
+
+            // 마지막날은 무조건 예약 빼놓기
+            rent_return_dateId = returnCalendarDate.getDateId() - 1;
 
 
             for (Long i = rent_start_dateId; i <= rent_return_dateId; i++) {
@@ -609,7 +599,9 @@ public class ReservationController {
     // 상담신청 예약 취소 및 문자발송 api
     @GetMapping("/reservation/cancel/{date_time_id}")
     @ResponseBody
-    public void cancel(@PathVariable Long date_time_id){
+    public ModelAndView cancel(@PathVariable Long date_time_id){
+
+        ModelAndView mav = new ModelAndView();
 
         String api_key = "NCS0P5SFAXLOJMJI";
         String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
@@ -617,8 +609,11 @@ public class ReservationController {
         HashMap<String, String> params = new HashMap<String, String>();
         HashMap<String, String> params2 = new HashMap<String, String>();
 
+        // CampingcarDateTime2 객체 조회
         CampingcarDateTime2 campingcarDateTime = campingcarDateTimeService2.findByDateTimeId(date_time_id);
 
+        // 데이터 삭제
+        campingcarDateTimeService2.delete(campingcarDateTime);
 
         /* 세이브카에 예약확인 문자 전송 */
         params.put("to", phone_to); // 01033453328 추가
@@ -671,6 +666,15 @@ public class ReservationController {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
+
+
+        // view
+        List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
+
+        mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
+        mav.setViewName("admin");
+
+        return mav;
 
     }
 

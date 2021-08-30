@@ -12,4 +12,5 @@ public interface CampingcarDateTimeRepository2 extends JpaRepository<CampingcarD
     List<CampingcarDateTime2> findAll();
     CampingcarDateTime2 findByDateTimeId(Long id);
 
+
 }
