@@ -124,7 +124,7 @@ const sendRentDate = (id, year, wDay) => {
     rentTime='';
     returnTime='';
     returnDateNum='';
-    extraTimeNum='';
+    extraTimeNum=0;
 
     // 요일 한글화 swtich
     let whichDay = '';

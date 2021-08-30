@@ -19,32 +19,22 @@
 <div layout:fragment="content">
     <div th:replace="fragments/header_camp::headerFragment"></div>
 
+    <div class="camping_page text-center">
+        <button id="price_page_btn" disabled>캠핑카 안내</button>
+        <a href="/europe"><button id="reserve_page_btn">실시간 예약</button></a>
+    </div>
+
+        <!--                            <div class="separator"></div>-->
+    <div id="car_type_tab" class="text-center">
+        <button onclick="tabClick(name)" name="tab_europe" class="tab_buttons current" >Europe</button>
+        <button onclick="tabClick(name)" name="tab_limou" class="tab_buttons" >Limousine</button>
+        <button onclick="tabClick(name)" name="tab_travel" class="tab_buttons" >Travel</button>
+        <a href="/europe"><button id="fixed_reserve_btn" >실시간 예약 <i class="far fa-hand-point-up"></i></button></a>
+    </div>
 
     <!-- content whole wrapper-->
     <div id="wrapper" class="container content pinside60">
 
-        <div class="camping_page text-center">
-            <button id="price_page_btn" disabled>캠핑카 안내</button>
-            <a href="/europe"><button id="reserve_page_btn">실시간 예약</button></a>
-        </div>
-
-        <section id="feature" class="feature">
-            <div class="text-center">
-                <div class="padding-bottom-0">
-                    <div class="main_portfolio">
-                        <div class="work_menu text-center">
-<!--                            <div class="separator"></div>-->
-                            <div id="filters" class="toolbar mb2 mt2">
-                                    <button onclick="tabClick(name)" name="tab_europe" class="tab_buttons current" >Europe</button>
-                                    <button onclick="tabClick(name)" name="tab_limou" class="tab_buttons" >Limousine</button>
-                                    <button onclick="tabClick(name)" name="tab_travel" class="tab_buttons" >Travel</button>
-                                    <a href="/europe"><button id="fixed_reserve_btn" >실시간 예약 <i class="far fa-hand-point-up"></i></button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!--  content body-->
 
         <!-- Europe -->

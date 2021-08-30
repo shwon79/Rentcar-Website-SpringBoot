@@ -538,7 +538,7 @@ a:hover {
 }
 
 #extratime_select option:disabled {
-  background: lightgray;
+  background: #8a8a8a;
   color: dimgray;
 }
 
@@ -559,7 +559,7 @@ select option {
 }
 
 .able_radio {
-  background: rgba(208, 204, 255, 0.57);
+  background: rgb(180 255 175 / 57%);
 
 }
 
@@ -598,7 +598,7 @@ input[type=radio] {
   position: absolute;
   width: 50px;
   height: 50px;
-  background: rgba(0, 68, 255, 0.56);
+  background:  rgb(5 162 46 / 56%);
   border-radius: 50%;
   margin: 0;
 
@@ -689,8 +689,12 @@ input[type=radio] {
 
 
 /* 캠핑카 페이지 버튼 css */
+
+#tab_wrapper {
+  margin: 0 40px;
+}
+
 .camping_page {
-  border-bottom: 1px solid lightgray;
   margin-top: 4rem;
 }
 
@@ -704,8 +708,13 @@ input[type=radio] {
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;
   border-top-left-radius: 0.5vh;
-  border-top-right-radius: 0.5vh;
+  border-top-right-radius: 10vh;
+  margin-right: 1em;
 
+}
+
+#car_type_tab {
+  margin-top: 10rem;
 }
 
 #price_page_btn {
@@ -743,13 +752,14 @@ input[type=radio] {
 }
 
 .tab_buttons {
-  background: lightgray;
-  padding: 10px 15px;
+  width: 13rem;
+  background: white;
   border: 1px solid lightgray;
   border-bottom: 0;
   font-size: 20px;
-  border-top-left-radius: 1vh;
-  border-top-right-radius: 1vh;
+  border-top-right-radius: 10vh;
+  margin: 0 0.25em;
+  padding: 10px 15px 10px 0;
 
 }
 
