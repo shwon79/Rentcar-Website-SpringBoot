@@ -122,13 +122,13 @@ textarea.noscrollbars {
     border-radius: 0.5vh;
 }
 
-#info_refund {
-    overflow: auto;
-}
+/*#info_refund {*/
+/*    overflow: auto;*/
+/*}*/
 
 #info_refund2 {
     overflow: auto;
-    display: none;
+    /*display: none;*/
 }
 
 #info_price {
@@ -189,9 +189,9 @@ textarea.noscrollbars {
 .explanations p {
     font-size: 15px;
 }
-#deposit_explain {
-    margin-left: 15px;
-}
+/*#deposit_explain {*/
+/*    margin-left: 15px;*/
+/*}*/
 
 .checkboxes {
     display: flex;
@@ -239,12 +239,12 @@ textarea.noscrollbars {
 }
 
 @media (min-width: 991px) {
-    #info_refund{
-        display: none;
-    }
+    /*#info_refund{*/
+    /*    display: none;*/
+    /*}*/
 
-    #info_refund2 {
-        display: block;
-    }
+    /*#info_refund2 {*/
+    /*    display: block;*/
+    /*}*/
 }
 

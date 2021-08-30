@@ -562,6 +562,11 @@ select option {
   background: lightgray;
 }
 
+.able_radio {
+  background: rgba(208, 204, 255, 0.57);
+
+}
+
 .disabled_radio input[type=radio]{
   display: none;
 }
@@ -597,7 +602,7 @@ input[type=radio] {
   position: absolute;
   width: 50px;
   height: 50px;
-  background: #4d7cff70;
+  background: rgba(0, 68, 255, 0.56);
   border-radius: 50%;
   margin: 0;
 
@@ -608,7 +613,7 @@ input[type=radio] {
   position: absolute;
   height: 45px;
   width: 30%;
-  background: #2623ec6b;
+  background: rgba(0, 68, 255, 0.56);
   border-radius: 1vh;
   display: flex;
 }
