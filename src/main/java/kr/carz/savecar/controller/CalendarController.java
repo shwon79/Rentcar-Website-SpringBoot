@@ -123,17 +123,22 @@ public class CalendarController {
         int now_month = cal.get(Calendar.MONTH)+1;
         int now_year = cal.get(Calendar.YEAR);
 
+
+
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
 
+        int now_day = cal.get(Calendar.DATE);
+        CalendarDate today_calendar_date = calendarDateService.findCalendarDateByMonthAndDayAndYear( Integer.toString(now_month), Integer.toString(now_day),  Integer.toString(cal.get(Calendar.YEAR)));
 
-        // 전달 날짜 구하기
+        Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+        // 이번주부터
         cal.set(cal.get(Calendar.YEAR),now_month-1,1);
 
         Long firstDateId = calendarDateList.get(0).getDateId();
-        Integer before = cal.get(Calendar.DAY_OF_WEEK);
 
-        for(int i=1; i<before; i++){
-            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+        for(Long i=firstDateId; i<=today_calendar_date.getDateId()-before; i++){
+            calendarDateList.remove(0);
         }
 
         // 다음달 날짜 구하기
@@ -360,16 +365,36 @@ public class CalendarController {
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
 
 
-        // 전달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,1);
+        if (Integer.parseInt(clickedDate.getMonth()) == this_month){
 
-        Long firstDateId = calendarDateList.get(0).getDateId();
-        Integer before = cal.get(Calendar.DAY_OF_WEEK);
 
-        System.out.println(before);
+            int now_day = cal.get(Calendar.DATE);
+            CalendarDate today_calendar_date = calendarDateService.findCalendarDateByMonthAndDayAndYear( Integer.toString(this_month), Integer.toString(now_day),  Integer.toString(cal.get(Calendar.YEAR)));
 
-        for(int i=1; i<before; i++){
-            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+            Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+            // 이번주부터
+            cal.set(cal.get(Calendar.YEAR),now_month-1,1);
+
+            Long firstDateId = calendarDateList.get(0).getDateId();
+
+            for(Long i=firstDateId; i<=today_calendar_date.getDateId()-before; i++){
+                calendarDateList.remove(0);
+            }
+
+        } else {
+
+            // 전달 날짜 구하기
+            cal.set(cal.get(Calendar.YEAR), now_month - 1, 1);
+
+            Long firstDateId = calendarDateList.get(0).getDateId();
+            Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+            System.out.println(before);
+
+            for (int i = 1; i < before; i++) {
+                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+            }
         }
 
         // 다음달 날짜 구하기
@@ -444,17 +469,36 @@ public class CalendarController {
 
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
 
+        if (Integer.parseInt(clickedDate.getMonth()) == this_month){
 
-        // 전달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,1);
 
-        Long firstDateId = calendarDateList.get(0).getDateId();
-        Integer before = cal.get(Calendar.DAY_OF_WEEK);
+            int now_day = cal.get(Calendar.DATE);
+            CalendarDate today_calendar_date = calendarDateService.findCalendarDateByMonthAndDayAndYear( Integer.toString(this_month), Integer.toString(now_day),  Integer.toString(cal.get(Calendar.YEAR)));
 
-        System.out.println(before);
+            Integer before = cal.get(Calendar.DAY_OF_WEEK);
 
-        for(int i=1; i<before; i++){
-            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+            // 이번주부터
+            cal.set(cal.get(Calendar.YEAR),now_month-1,1);
+
+            Long firstDateId = calendarDateList.get(0).getDateId();
+
+            for(Long i=firstDateId; i<=today_calendar_date.getDateId()-before; i++){
+                calendarDateList.remove(0);
+            }
+
+        } else {
+
+            // 전달 날짜 구하기
+            cal.set(cal.get(Calendar.YEAR), now_month - 1, 1);
+
+            Long firstDateId = calendarDateList.get(0).getDateId();
+            Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+            System.out.println(before);
+
+            for (int i = 1; i < before; i++) {
+                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+            }
         }
 
         // 다음달 날짜 구하기
@@ -522,9 +566,6 @@ public class CalendarController {
 
         model.addAttribute("calendarTimeList", calendarTimeList);
 
-        for(int i=0; i<calendarTimeList.size(); i++){
-            System.out.println(calendarTimeList.get(i).getTimeId());
-        }
 
 
         // 날짜
@@ -532,17 +573,36 @@ public class CalendarController {
 
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
 
+        if (Integer.parseInt(clickedDate.getMonth()) == this_month){
 
-        // 전달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,1);
 
-        Long firstDateId = calendarDateList.get(0).getDateId();
-        Integer before = cal.get(Calendar.DAY_OF_WEEK);
+            int now_day = cal.get(Calendar.DATE);
+            CalendarDate today_calendar_date = calendarDateService.findCalendarDateByMonthAndDayAndYear( Integer.toString(this_month), Integer.toString(now_day),  Integer.toString(cal.get(Calendar.YEAR)));
 
-        System.out.println(before);
+            Integer before = cal.get(Calendar.DAY_OF_WEEK);
 
-        for(int i=1; i<before; i++){
-            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+            // 이번주부터
+            cal.set(cal.get(Calendar.YEAR),now_month-1,1);
+
+            Long firstDateId = calendarDateList.get(0).getDateId();
+
+            for(Long i=firstDateId; i<=today_calendar_date.getDateId()-before; i++){
+                calendarDateList.remove(0);
+            }
+
+        } else {
+
+            // 전달 날짜 구하기
+            cal.set(cal.get(Calendar.YEAR), now_month - 1, 1);
+
+            Long firstDateId = calendarDateList.get(0).getDateId();
+            Integer before = cal.get(Calendar.DAY_OF_WEEK);
+
+            System.out.println(before);
+
+            for (int i = 1; i < before; i++) {
+                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+            }
         }
 
         // 다음달 날짜 구하기
