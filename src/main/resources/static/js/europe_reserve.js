@@ -116,6 +116,15 @@ const sendRentDate = (id, year, wDay) => {
     rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
     let url = `/${carType}/sendrentdate`;
 
+    let targetTimes = document.getElementsByClassName('rent_time_radio');
+    for (const targetTime of targetTimes) {
+        if (targetTime.checked) targetTime.checked = false;
+    }
+    rentTime='';
+    returnTime='';
+    returnDateNum='';
+    extraTimeNum='';
+
     // 요일 한글화 swtich
     let whichDay = '';
     switch (wDay) {
@@ -351,80 +360,7 @@ const daysSelect = () => {
                     }
                 }
             }
-            // switch (rentDateMonth) {
-            //     case 1:
-            //         if (returnDateDay > 31) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 31;
-            //         }
-            //         break;
-            //     case 2:
-            //         if (returnDateDay > 29) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 28;
-            //         }
-            //         break;
-            //     case 3:
-            //         if (returnDateDay > 31) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 31;
-            //         }
-            //         break;
-            //     case 4:
-            //         if (returnDateDay > 30) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 30;
-            //         }
-            //         break;
-            //     case 5:
-            //         if (returnDateDay > 31) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 31;
-            //         }
-            //         break;
-            //     case 6:
-            //         if (returnDateDay > 30) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 30;
-            //         }
-            //         break;
-            //     case 7:
-            //         if (returnDateDay > 31) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 31;
-            //         }
-            //         break;
-            //     case 8:
-            //         if (returnDateDay > 31) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 31;
-            //         }
-            //         break;
-            //     case 9:
-            //         if (returnDateDay > 30) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 30;
-            //         }
-            //         break;
-            //     case 10:
-            //         if (returnDateDay > 31) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 31;
-            //         }
-            //         break;
-            //     case 11:
-            //         if (returnDateDay > 30) {
-            //             returnDateMon = rentDateMonth + 1;
-            //             returnDateDay -= 30;
-            //         }
-            //         break;
-            //     case 12:
-            //         if (returnDateDay > 31) {
-            //             returnDateMon =  1;
-            //             returnDateDay -= 31;
-            //         }
-            //         break;
-            // }
+
         }
 
 

@@ -105,6 +105,10 @@ p {
   border: 1px solid #e8e8e8;
 }
 
+#main_pc .date {
+  height: 162px;
+}
+
 .upside {
   width: 100%;
 }

@@ -287,14 +287,6 @@ hr {
   text-align: center;
 }
 
-.dates {
-  display: flex;
-  flex-flow: row wrap;
-  height: 100%;
-  /*border-top: 1px solid #6f6c6c;*/
-  /*border-right: 1px solid #6f6c6c;*/
-}
-
 .date {
   width: calc(100% / 7);
   padding: 15px;
@@ -406,7 +398,7 @@ hr {
 .dates {
   display: flex;
   flex-flow: row wrap;
-  height: 300px;
+  height: auto
   /*border-top: 1px solid #6f6c6c;*/
   /*border-right: 1px solid #6f6c6c;*/
 }
@@ -443,6 +435,10 @@ hr {
 .date_day {
   font-size: 18px;
   font-weight: bold;
+}
+
+.date {
+  height: 55px;
 }
 
 .other {
