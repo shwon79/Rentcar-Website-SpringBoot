@@ -116,10 +116,11 @@ const sendRentDate = (id, year, wDay) => {
     rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
     let url = `/${carType}/sendrentdate`;
 
-    let targetTimes = document.getElementsByClassName('rent_time_radio');
-    for (const targetTime of targetTimes) {
-        if (targetTime.checked) targetTime.checked = false;
+    let targetTimes = document.getElementsByName('time1');
+    for (const eachTime of targetTimes) {
+        eachTime.checked = false;
     }
+
     rentTime='';
     returnTime='';
     returnDateNum='';
