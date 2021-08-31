@@ -88,15 +88,15 @@
             </div>
             <div class="detail_list">
                 <p>보증금</p>
-                <p th:text="${campingcarDateTime2.deposit}"></p>
+                <p th:text="${#numbers.formatInteger(campingcarDateTime2.deposit,0, 'COMMA')}"></p>
             </div>
             <div class="detail_list">
                 <p>총결제금액</p>
-                <p th:text="${campingcarDateTime2.total}"></p>
+                <p th:text="${#numbers.formatInteger(campingcarDateTime2.total,0, 'COMMA')}"></p>
             </div>
             <div class="detail_list">
                 <p>선결제금액</p>
-                <p th:text="${campingcarDateTime2.totalHalf}"></p>
+                <p th:text="${#numbers.formatInteger(campingcarDateTime2.totalHalf,0, 'COMMA')}"></p>
             </div>
             <div class="detail_list">
                 <p>예약</p>
