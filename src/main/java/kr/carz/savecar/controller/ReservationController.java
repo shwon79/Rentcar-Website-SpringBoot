@@ -609,8 +609,85 @@ public class ReservationController {
         HashMap<String, String> params = new HashMap<String, String>();
         HashMap<String, String> params2 = new HashMap<String, String>();
 
+
         // CampingcarDateTime2 객체 조회
         CampingcarDateTime2 campingcarDateTime = campingcarDateTimeService2.findByDateTimeId(date_time_id);
+        campingcarDateTime.setReservation("0");  // 굳이 할 필요는 없음
+
+
+        // 대여일자, 대여시간
+        String[] rent_date = campingcarDateTime.getRentDate().split("월 ");
+        String rent_month = rent_date[0];
+
+        String[] rent_day_list = rent_date[1].split("일");
+        String rent_day = rent_day_list[0];
+
+
+        // 반납일자, 반납시간
+        String[] return_date = campingcarDateTime.getReturnDate().split("월 ");
+        String return_month = return_date[0];
+
+        String[] return_day_list = return_date[1].split("일");
+        String return_day = return_day_list[0];
+
+
+        // CalendarDate 날짜 객체 가져오기
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(rent_month, rent_day, "2021");
+        CalendarDate returnCalendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(return_month, return_day, "2021");
+
+
+
+        // CampingCarPrice 객체 가져오기
+        CampingCarPrice campingCarPrice;
+
+        if (campingcarDateTime.getCarType().equals("liomousine")){
+            campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
+        } else {
+            campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingcarDateTime.getCarType());
+        }
+
+        CalendarTime calendarRentTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, campingcarDateTime.getRentTime());
+        CalendarTime calendarReturnTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(returnCalendarDate, campingCarPrice, campingcarDateTime.getReturnTime());
+
+
+        for (Long i = calendarRentTime.getTimeId(); i < calendarReturnTime.getTimeId(); i++){
+            CalendarTime timeIndiv = calendarTimeService.findCalendarTimeByTimeId(i);
+            timeIndiv.setReserveComplete("0");
+        }
+
+        // 첫날 모든 시간이 다 예약되어 있는지 확인
+        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
+
+        int rent_reserved_all = 1;
+        for (int i=0; i<calendarTimeList.size(); i++){
+            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
+                rent_reserved_all = 0;
+                break;
+            }
+        }
+
+        Long rent_start_dateId;
+        Long rent_return_dateId;
+
+        // 마지막날은 무조건 예약 빼놓기
+        rent_start_dateId = calendarDate.getDateId();
+        rent_return_dateId = returnCalendarDate.getDateId() - 1;
+
+
+        for (Long i = rent_start_dateId; i <= rent_return_dateId; i++) {
+            // CalendarDate 날짜 객체 가져오기
+            CalendarDate calendarDateIndiv = calendarDateService.findCalendarDateByDateId(i);
+
+            // DateCamping 에서 날짜랑 차정보로 하루 예약 정보 찾기
+            DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDateIndiv, campingCarPrice);
+            // DateCamping 하루 예약 정보 수정, campingcarDateTime 예약리스트 예약 정보 수정
+            dateCamping.setReserved("0");
+        }
+
+
+        // campingcarDateTime 저장
+        Long testLong = campingcarDateTimeService2.save2(campingcarDateTime);
+
 
         // 데이터 삭제
         campingcarDateTimeService2.delete(campingcarDateTime);
