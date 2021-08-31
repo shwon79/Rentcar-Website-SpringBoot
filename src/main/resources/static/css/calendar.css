@@ -61,9 +61,8 @@ p {
 /*  */
 
 .calendar_content {
-  margin-bottom: 100px;
   padding-top: 100px;
-  padding-bottom: 250px;
+  padding-bottom: 150px;
 }
 
 .go-today {
@@ -91,20 +90,21 @@ p {
   border-bottom: 3px solid red
 }
 
-.dates, .times {
+.dates {
   display: flex;
   flex-flow: row wrap;
-  height: 600px;
-  /*border-top: 1px solid #6f6c6c;*/
-  /*border-right: 1px solid #6f6c6c;*/
+  height: 100%;
+
 }
 
-.date, .time {
+.date {
   width: calc(100% / 7);
   padding: 15px;
   text-align: left;
   border: 1px solid #e8e8e8;
 }
+
+
 
 #main_pc .date {
   height: 162px;
