@@ -32,6 +32,11 @@ p {
     justify-content: start;
 }
 
+.car_type {
+    font-weight: bold;
+    font-family: 'FontAwesome';
+}
+
 #rent_length {
     border: none;
     background: beige;
@@ -39,9 +44,6 @@ p {
     border-radius: 0.5vh;
 }
 
-/*.car_type {*/
-/*    font-weight: bold;*/
-/*}*/
 
 #use_day {
     margin-left: 15px;
@@ -57,6 +59,16 @@ p {
     overflow: auto;
 }
 
+/*.reserve_detail p {*/
+/*    margin-bottom: 0;*/
+/*}*/
+
+.rent_date_title {
+    font-family: 'FontAwesome';
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
 #hr_reserve {
     margin: 10px 0;
 }
@@ -67,9 +79,7 @@ p {
     align-items: center;
     margin-top: 2rem;
 }
-.reserve_detail p {
-    margin-bottom: 0;
-}
+
 
 #must_desc {
     font-size: 13px;
