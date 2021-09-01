@@ -213,6 +213,18 @@ function make_reservation () {
 }
 
 //차종 구하기
+const get_category1 = (fr, detailedSelect) => {
+  fetch(`/rent/month/${fr}`)
+      .then(response => response.json())
+      .then(result => {
+          console.log(detailedSelect)
+          for (let i = 0; i < result.length; i++) {
+              detailedSelect.options[i+1] = new Option(result[i], result[i]);
+          }
+      }).catch(err => console.log(err))
+}
+
+/*
 function get_category1(fr, detailedSelect) {
     $.ajax({
         type: 'GET',
@@ -229,9 +241,22 @@ function get_category1(fr, detailedSelect) {
         alert(JSON.stringify(error));
     })
 }
-//차 분류 구하기
-function get_category2(fr1, fr2, detailedSelect) {
+ */
 
+//차 분류 구하기
+const get_category2 = (fr1, fr2, detailedSelect) => {
+
+    fetch(`/rent/month/${fr1}/${fr2}`)
+        .then(response => response.json())
+        .then(result => {
+            detailedSelect.length = 1;
+            console.log(result)
+            for (let i = 0; i < result.length; i++) {
+                detailedSelect.options[i+1] = new Option(result[i], result[i]);
+            }
+        }).catch(err => console.log(err))
+
+    /*
     $.ajax({
         type: 'GET',
         url: '/rent/month/' + fr1 + '/' + fr2,
@@ -247,9 +272,21 @@ function get_category2(fr1, fr2, detailedSelect) {
     }).fail(function (error) {
         alert(JSON.stringify(error));
     })
+     */
 }
 // 차명 구하기
-function get_car_name(fr1, fr2, fr3, detailedSelect) {
+const get_car_name = (fr1, fr2, fr3, detailedSelect) => {
+
+    fetch(`/rent/month/${fr1}/name/${fr2}/${fr3}`)
+        .then(response => response.json())
+        .then(result => {
+            detailedSelect.options.length = 1;
+            for (let i = 0; i < result.length; i++) {
+                detailedSelect.options[i+1] = new Option(result[i], result[i]);
+            }
+        }).catch(err=>console.log(err))
+
+    /*
     $.ajax({
         type: 'GET',
         url: '/rent/month/' + fr1 + "/name/" + fr2 + '/' + fr3,
@@ -265,25 +302,26 @@ function get_car_name(fr1, fr2, fr3, detailedSelect) {
         console.log('/rent/month/' + fr1 + '/name/' + fr2 + '/' + fr3);
         alert(JSON.stringify(error));
     })
+     */
 }
 //주행거리 구하기
-function get_mileage(fr1, detailedSelect) {
+const get_mileage = (fr1, detailedSelect) => {
     detailedSelect.length = 1;
     if (fr1 == "rentMonth") {
         mileage_options = [2000, 2500, 3000, 4000, "기타주행거리"];
     } else {
         mileage_options = [20000, 30000, 40000, "기타주행거리"];
     }
-    for (i = 0; i < mileage_options.length; i++) {
+    for (let i = 0; i < mileage_options.length; i++) {
         detailedSelect.options[i+1] = new Option(mileage_options[i], mileage_options[i]);
     }
 }
 // 가격 파싱해서 천단위마다 , 로 끊기
-function int_to_price(price) {
-    var len = price.length;
-    var result = "";
+const int_to_price = (price) => {
+    let len = price.length;
+    let result = "";
 
-    for (var i=len ; i>0 ; i-=3) {
+    for (let i=len ; i>0 ; i-=3) {
         if (result == ""){
             result = price.slice(i-3, i)
         } else {
@@ -295,7 +333,7 @@ function int_to_price(price) {
     return result;
 }
 // 요청한 값들에 따라 가격 구하기
-function get_price(fr1, fr2, fr3, detailedSelect) {
+const get_price = (fr1, fr2, fr3, detailedSelect) => {
 
     fetch(`/rent/month/${fr1}/price/${fr2}/${fr3}`)
         .then((response) => response.json())
