@@ -296,6 +296,40 @@ function int_to_price(price) {
 }
 // 요청한 값들에 따라 가격 구하기
 function get_price(fr1, fr2, fr3, detailedSelect) {
+
+    fetch(`/rent/month/${fr1}/price/${fr2}/${fr3}`)
+        .then((response) => response.json())
+        .then(result => {
+            let price = result[0];
+
+            if (price==='상담') {
+                let vat = price
+                let deposit = result[1];
+                let total = vat;
+
+                document.getElementById("carPrice").innerText = price;
+                document.getElementById("carVat").innerText = vat;
+                document.getElementById("carDeposit").innerText = deposit +"원";
+                document.getElementById("carTotal").innerText =  total;
+
+            } else {
+                let vat = price.replace(/,/gi, "");
+                vat = parseInt(vat) * 0.1;
+                let deposit = result[1];
+                let total = parseInt(price.replace(/,/gi, "")) + vat;
+
+                price = int_to_price(price.toString());
+                vat = int_to_price(vat.toString());
+                total = int_to_price(total.toString());
+
+                document.getElementById("carPrice").innerText = price +"원";
+                document.getElementById("carVat").innerText = vat +"원";
+                document.getElementById("carDeposit").innerText = deposit +"원";
+                document.getElementById("carTotal").innerText =  total +"원";
+            }
+        }).catch(err => {console.log(err)})
+
+    /*
     $.ajax({
         type: 'GET',
         url: '/rent/month/' + fr1 + '/price/' + fr2 + '/' + fr3,
@@ -330,10 +364,13 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
                 document.getElementById("carDeposit").innerText = deposit +"원";
                 document.getElementById("carTotal").innerText =  total +"원";
             }
+
+
         }
     }).fail(function (error) {
         alert(JSON.stringify(error));
     })
+    */
 }
 
 function setSelectBoxByText(eid, etxt) {
