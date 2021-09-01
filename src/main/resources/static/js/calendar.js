@@ -13,7 +13,6 @@ const dayDetail = (id) => {
         restDetail.style.display = 'none'
     }
 
-
     const target = document.getElementById(id.split('day')[0]);
     target.style.display = 'flex'
 

@@ -175,6 +175,20 @@ a:hover {
   color: black;
 }
 
+.date_available {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.date_available p {
+  margin-left: 2rem;
+}
+
+.date_available span {
+  margin-right: 1rem;
+}
+
 #main_mobile {
   display: none;
   font-size: 1.3em;
