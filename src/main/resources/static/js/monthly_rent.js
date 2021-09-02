@@ -93,9 +93,6 @@ function make_easy_reservation () {
 // 에약 요청
 function make_reservation () {
 
-    var tmp = document.getElementById("rent-product1")
-    var tmp1= document.getElementsByName("rent-product")
-
     if (document.getElementById("reservation-detail-name").value == ""){
         alert('성함을 입력해주세요.')
         return
@@ -110,32 +107,32 @@ function make_reservation () {
     if (document.getElementById("long-rent-product1") != null) {
 
         if (document.getElementById("long-rent-product1").checked) {
-            console.log('통 1')
             product = document.getElementById("long-rent-product1").getAttribute("value")
         } else if ((document.getElementById("long-rent-product2").checked)){
-            console.log('통 2')
             product = document.getElementById("long-rent-product2").getAttribute("value")
         } else {
-            console.log('통 3')
             product = document.getElementById("long-rent-product3").getAttribute("value")
         }
 
     } else if (document.getElementById("rent-product1") != null) {
 
         var month1 = document.getElementById("rent-product1")
+        var yearly = document.getElementById("rent-product2")
 
         if (month1 && month1.checked) {
-            console.log("통과 2")
             product = document.getElementById("rent-product1").getAttribute("value")
-        } else {
-            console.log("통과 3")
+        } else if(yearly && yearly.checked) {
             product = document.getElementById("rent-product2").getAttribute("value")
+        } else {
+            product = document.getElementById("rent-product3").getAttribute("value")
         }
 
         if (product == "rentMonth") {
             product = "월렌트"
         } else if (product == "rentYear") {
             product = "12개월 렌트";
+        } else if (product == "rent2Year") {
+            product = "24개월 렌트";
         }
     } else if (document.getElementById("rentProduct") != null){
         product = document.getElementById("rentProduct").getAttribute("value")
@@ -147,15 +144,8 @@ function make_reservation () {
     console.log(document.getElementsByName("carDeposit"))
 
     var deposit;
-    if (document.getElementById("carDeposit") != null) {
-
-        deposit = $("#carDeposit").val();
-        // if (document.getElementById("rent-product1") && document.getElementById("rent-product1").checked){
-        //     deposit = $("#rentMonth").val();
-        // } else {
-        //     deposit = $("#rentYear").val();
-        // }
-    } else if (document.getElementById("deposit-10") != null) {
+    // 누구나 장기렌트
+    if (document.getElementById("deposit-10") != null) {
         if (document.getElementById("deposit-10").checked){
             deposit = $("#deposit-10").val();
         } else if (document.getElementById("deposit-30").checked){
@@ -163,7 +153,13 @@ function make_reservation () {
         } else {
             deposit = $("#deposit-0").val();
         }
+    // 월렌트
+    } else {
+        deposit = document.getElementById("carDeposit").innerText;
     }
+    console.log(document.getElementById("carDeposit").innerText)
+
+    console.log("deposit:"+deposit)
 
 
 
@@ -173,6 +169,12 @@ function make_reservation () {
     }
 
 
+    var age_limit;
+    if (document.getElementById("age_limit").checked){
+        age_limit = "21세 이상 O"
+    } else {
+        age_limit = "21세 이상 X"
+    }
 
     console.log(product)
 
@@ -187,6 +189,7 @@ function make_reservation () {
         car_name : $("#select-car-name").val(),
         mileage : $("#select-mileage").val(),
         deposit : deposit,
+        age_limit : age_limit,
         option : $("#select-car-option").val(),
         price : price
     };
@@ -302,8 +305,9 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
         contentType: "application/json; charset=euc-kr",
         dataType: 'json',
         success: function set_p(result) {
-            // console.log(result)
+            console.log(result)
             var price = result[0];
+            var age_limit = result[2];
 
             if(price == '상담') {
                 var vat = price
@@ -316,10 +320,17 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
                 document.getElementById("carTotal").innerText =  total;
 
             } else {
-                var vat = price.replace(/,/gi, "");
-                vat = parseInt(vat) * 0.1;
+
+                if(document.getElementById("age_limit").checked) {
+                    price = parseInt(price) + parseInt(age_limit);
+                } else {
+                    price = parseInt(price)
+                }
+
+                // var price_no_comma = price.replace(/,/gi, "");
+                vat = price * 0.1;
+                var total = price + vat;
                 var deposit = result[1];
-                var total = parseInt(price.replace(/,/gi, "")) + vat;
 
                 price = int_to_price(price.toString());
                 vat = int_to_price(vat.toString());
@@ -332,7 +343,7 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
             }
         }
     }).fail(function (error) {
-        alert(JSON.stringify(error));
+        // alert(JSON.stringify(error));
     })
 }
 
@@ -342,7 +353,6 @@ function setSelectBoxByText(eid, etxt) {
     for (var i = 0; i < (eid.options.length); ++i) {
         // console.log(eid.options[i].innerText, etxt)
         if (eid.options[i].innerText === etxt) {
-            console.log('통과 7')
             eid.options[i].selected = true;
             break
         }

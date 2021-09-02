@@ -79,7 +79,7 @@ public class ReservationController {
                     + "예상대여일자: " + dto.getOption() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
-        else if (dto.getTitle().equals("월렌트, 12개월렌트")){
+        else if (dto.getTitle().equals("월렌트, 12개월렌트, 24개월렌트")){
             params.put("text", "[" + dto.getTitle() + "]\n"
                     + "예약자 이름: " + dto.getName() + "\n"
                     + "연락처: " + dto.getPhoneNo() + "\n"
@@ -89,6 +89,7 @@ public class ReservationController {
                     + "차분류: " + dto.getCategory2() + "\n"
                     + "차명: " + dto.getCar_name() + "\n"
                     + "주행거리: " + dto.getMileage() + "\n"
+                    + "21세 이상: " + dto.getAge_limit() + "\n"
                     + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
 
             params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
@@ -99,6 +100,7 @@ public class ReservationController {
                     + "차분류: " + dto.getCategory2() + "\n"
                     + "차명: " + dto.getCar_name() + "\n"
                     + "주행거리: " + dto.getMileage() + "\n"
+                    + "21세 이상: " + dto.getAge_limit() + "\n"
                     + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
         }
         else if (dto.getTitle().equals("누구나장기렌트")){
