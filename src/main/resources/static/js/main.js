@@ -91,11 +91,11 @@ jQuery(document).ready(function ($) {
         var height = 300;
         //alert(batas);
 
-        if (top > height) {
-            jQuery('.navbar-fixed-top').addClass('menu-scroll');
-        } else {
-            jQuery('.navbar-fixed-top').removeClass('menu-scroll');
-        }
+        // if (top > height) {
+        //     jQuery('.navbar-fixed-top').addClass('menu-scroll');
+        // } else {
+        //     jQuery('.navbar-fixed-top').removeClass('menu-scroll');
+        // }
     });
 
 // scroll Up
