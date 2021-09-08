@@ -230,7 +230,23 @@ label { }
 
 .btn3-default { color: #fff; background-color:#999999; }
 .btn3-default:hover { color: #fff; background-color: #13a0b2; border-color: #e7a625; }
-.btn3-default.focus, .btn2-default:focus { color: #fff; background-color: #e7a625; border-color: #e7a625; }
+.btn3-default.focus, .btn3-default:focus { color: #fff; background-color: #e7a625; border-color: #e7a625; }
+
+
+.btn4-default { color: black; background-color:#fff; border: 1px solid #13a0b2; }
+.btn4-default:hover { color: #fff; background-color: #13a0b2; border-color: #13a0b2; }
+.btn4-default.focus, .btn4-default:focus { color: #fff; background-color: #13a0b2; border-color: #13a0b2; }
+.btn4-default:active {
+    color: #fff; background-color: #13a0b2; border-color: #13a0b2;
+}
+
+.btn-clicked {
+    color: #fff; background-color: #13a0b2; border-color: #13a0b2;
+}
+/*a:visited { background-color: #13a0b2; }*/
+a:focus { background-color: #cc0; }
+
+
 /*-----------------------------------
     4. General / Elements 
 -----------------------------------*/
@@ -381,7 +397,7 @@ label { }
 .imghover { display: block; position: relative; max-width: 100%; }
 .imghover::before, .imghover::after { display: block; position: absolute; content: ""; text-align: center; opacity: 0; }
 .imghover::before { top: 0; right: 0; bottom: 0; left: 0; }
-.imghover::after { top: 50%; left: 50%; width: 50px; height: 50px; line-height: 50px; margin: -25px 0 0 -25px;content: "\f18e"; font-family: "FontAwesome"; font-size: 36px; }
+.imghover::after { top: 50%; left: 50%; width: 50%; height: 50%; line-height: 50px; margin: -25px 0 0 -25px;content: "\f18e"; font-family: "FontAwesome"; font-size: 36px; }
 .imghover:hover::before, .imghover:hover::after { opacity: 1; }
 .imghover:hover::before { background: rgba(213, 87, 69, .80); margin: 20px; }
 .imghover:hover::after { color: #FFFFFF; }
@@ -519,8 +535,8 @@ label { }
     5.4 Page Header
 ----------------------------------------------*/
 .page-header { background: linear-gradient(rgba(36, 39, 38, 0.5), rgba(36, 39, 38, 0.5)), rgba(36, 39, 38, 0.5)  no-repeat center; background-size: cover; margin: 0; border-bottom: none; padding-bottom: 0px; }
-.page-caption { padding: 180px 0px 120px 0; position: relative; z-index: 1; color: #fff; text-align: center; }
-.page-title { color: #fff; font-size: 40px; font-weight: 400; margin-bottom: 20px; }
+.page-caption { padding: 140px 0px 80px 0; position: relative; z-index: 1; color: #fff; text-align: center; }
+.page-title { color: #fff; font-size: 40px; font-weight: 400; }
 .breadcrumb { }
 .breadcrumb>.active { }
 .page-breadcrumb { }
@@ -534,7 +550,7 @@ label { }
 7. Content 
 -------------------------------------*/
 
-.content { padding-top: 40px; padding-bottom: 100px; }
+.content { padding-bottom: 100px; }
 
 /*-----------------------------------
 8. Footer 
@@ -592,6 +608,7 @@ label { }
 .service-block { margin-bottom: 30px; }
 .service-img { margin-bottom: 30px; }
 .service-img img { width: 100%; min-height: 300px;}
+.service-img-main img { width: 70%; height: 220px;}
 .service-img a:hover img { width: 100%; min-height: 360px;}
 .service-content { }
 .service-caption { }
@@ -854,6 +871,10 @@ opacity: .5; }
 .error-block { text-align: center; margin-top: 45px; }
 .error-title { font-size: 282px; margin-bottom: 140px; font-weight: 800; }
 
+/* ------------campingcar------------ */
+.width-height-box { height: 500px; }
+.work-menu { padding: 60px 0 40px 0; }
+#feature2 { display: block}
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */
@@ -868,10 +889,12 @@ opacity: .5; }
     .footer-widget { margin-bottom: 20px; }
     .footer-widget .widget-title { margin-bottom: 0px; }
     .page-title { font-size: 30px; font-weight: 800; }
-    .page-caption { padding: 120px 0px; }
+    .page-caption { padding: 160px 0px 40px; }
     .childern .comment-info { padding-left: 90px; }
     .childern { padding-left: 0px; list-style: none; }
     #navigation > ul > li > a { padding: 15px 5px; }
+    .width-height-box { height: 300px; }
+    .work-menu { padding: 40px 0 0 0; }
 }
 
 /* Medium Devices, Desktops */
@@ -889,6 +912,8 @@ opacity: .5; }
     .page-caption { padding: 80px 0px; }
     .childern .comment-info { padding-left: 90px; }
     .childern { padding-left: 0px; list-style: none; }
+    .width-height-box { height: 300px; }
+    .work-menu { padding: 40px 0 0 0; }
 }
 
 /* Small Devices, Tablets */
@@ -907,6 +932,8 @@ opacity: .5; }
     .childern .comment-info { padding-left: 90px; }
     .childern { padding-left: 0px; list-style: none; }
     .error-title { font-size: 62px; margin-bottom: 10px; font-weight: 800; }
+    .width-height-box { height: 300px; }
+    .work-menu { padding: 40px 0 0 0; }
 }
 
 /* Extra Small Devices, Phones */
@@ -920,11 +947,13 @@ opacity: .5; }
     .cta-section { padding-top: 50px; padding-bottom: 50px; }
     .footer-widget { margin-bottom: 20px; }
     .footer-widget .widget-title { margin-bottom: 0px; }
-    .page-title { font-size: 20px; }
-    .page-caption { padding: 80px 0px; }
+    .page-title { font-size: 25px; }
+    .page-caption { padding: 120px 0px 40px; }
     .childern .comment-info { padding-left: 90px; }
     .childern { padding-left: 0px; list-style: none; }
     .error-title { font-size: 62px; margin-bottom: 10px; font-weight: 800; }
+    .width-height-box { height: 300px; }
+    .work-menu { padding: 40px 0 0 0; }
 }
 
 /* Custom, iPhone Retina */
@@ -939,11 +968,13 @@ opacity: .5; }
     .footer-widget { margin-bottom: 20px; }
     .footer-widget .widget-title { margin-bottom: 0px; }
     .page-title { font-size: 20px; }
-    .page-caption { padding: 170px 0px 40px; }
+    .page-caption { padding: 150px 0px 40px; }
     .childern .comment-info { padding-left: 90px; }
     .childern { padding-left: 0px; list-style: none; }
     .error-title { font-size: 42px; margin-bottom: 10px; font-weight: 800; }
     .testimonial-content { font-weight: 400; padding-left: 0px; }
+    .width-height-box { height: 300px; }
+    .work-menu { padding: 40px 0 0 0; }
 }
 
 
@@ -1001,5 +1032,15 @@ div.popStyle4 {
 #mobile_pop {
     position: relative;
     width: 100%;
+}
+
+
+
+/*
+---------------------------------------
+ */
+
+.main-card:hover {
+    box-shadow: 5px 5px 30px #707070;
 }
 

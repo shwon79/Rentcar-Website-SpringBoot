@@ -159,3 +159,8 @@ $(document).on("scroll", function () {
 
 
 
+// 캠핑카 렌트 서브 메뉴
+$( ".btn4-default" ).click(function() {
+    document.getElementById('btn-sub1').className += ' btn-clicked';
+});
+
