@@ -295,7 +295,7 @@ p:last-child {
   z-index: 300;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  background-color: rgb(71,234,197,0.64);
+  background-color: #2b2929f0;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
@@ -714,7 +714,7 @@ Separator
   border-left: 680px solid transparent;
 }
 .main_home {
-  padding-top: 250px;
+  padding-top: 200px;
   padding-bottom: 250px;
   display: block;
 }
@@ -1005,7 +1005,7 @@ button.btn-bl {
   margin: 0;
   margin-top: 0px;
   transition: 0.5s;
-  background: rgb(0,255,197,0.64);
+  background: #d3d3d3;
   border-radius: 20px;
   border: 0px solid #e74c3c;
   padding: 10px;
