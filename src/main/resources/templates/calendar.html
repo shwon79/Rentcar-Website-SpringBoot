@@ -103,6 +103,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="date_available">
+                        <p><span style="color: #fff1d3;">●</span>선택가능</p><p><span>○</span>선택불가</p>
+                    </div>
                 </div>
 
                 <!-- mobile version -->
@@ -127,6 +130,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="date_available">
+                        <p><span style="color: aliceblue;">●</span>선택가능</p><p><span style="color: #bbbbbb; ">●</span>선택불가</p>
                     </div>
                     <div id="day_detail" style="background-color: aliceblue; font-weight: bold">
                         <div th:id="${date.dateId}" class="detail_wrapper" th:each="date, iterStat: ${calendarDateList}"

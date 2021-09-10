@@ -46,7 +46,7 @@
                 <p class="phone">연락처</p>
             </div>
             <!--                th:onclick="'location.href = \'/'+${date.dateTimeId}+'\''"-->
-            <div class="reserve_list_wrapper" th:each="reservation : ${reservationList}">
+            <div class="reserve_list_wrapper" th:each="i : ${#numbers.sequence(reservationList.size() - 1, 0, -1)}" th:with="reservation=${reservationList[i]}">
                 <div class="reserve_list" >
 <!--                    th:onclick="'location.href = \'/admin/detail/'+${date.dateTimeId}+'\''"-->
                     <p class="name" th:text="${reservation.name}"></p>

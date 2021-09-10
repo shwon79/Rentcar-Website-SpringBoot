@@ -89,13 +89,19 @@ body {
 }
 
 .reserve_list {
-    color: #3e65ff;
+    color: #424242;
     padding: 5px 5px 5px 10px;
     display: flex;
     flex-direction: row;
-    border-radius: 0.5vh;
+    border-radius: 0.5vh 0.5vh 0 0;
     font-size: 13px;
+    border-bottom: 1px #3952ff dotted;
 }
+
+/*form {*/
+/*    border-bottom: 1px #3952ff dotted;*/
+
+/*}*/
 
 .reserve_list:hover {
     cursor: pointer;
@@ -120,13 +126,15 @@ body {
 }
 
 .detail_list {
-    color: #3e65ff;
+    color: #424242;
     padding: 5px 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background: white;
+    border-bottom: 1px #3952ff dotted;
+
 }
 
 .detail_list p {
@@ -271,6 +279,7 @@ form {
 #go_back:hover {
     background-color: indianred;
     color: aliceblue;
+    cursor: pointer;
 }
 
 #detail_set_reserve, #detail_set_delete {
@@ -291,6 +300,11 @@ form {
 .detail_list .set_reserve {
     background: white;
     color: #2a52ee;
+}
+
+.detail_list .set_reserve:hover {
+    background: indianred;
+    color: white;
 }
 
 @media (max-width: 990px) {
