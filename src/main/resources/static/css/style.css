@@ -102,7 +102,7 @@ b, strong { font-weight: 600; }
 .italic { font-style: italic; }
 .small-text { color: #b4b1ac; font-size: 12px; }
 .text-caps { text-transform: uppercase; letter-spacing: 2px; font-size: 0.875rem; }
-::selection { background: #ffecb3; color: #333; }
+::selection { background: #e74c3c; color: #333; }
 h3 small { font-weight: 400; line-height: 1; color: #e74c3c; font-size: 0.875rem; }
 hr { margin-top: 30px; margin-bottom: 30px; border: 0; border-top: 1px solid #e2dcdb; }
 blockquote { padding: 50px; margin: 0px; font-size: 1.375rem; line-height: 32px; color: #3c3c3c; font-style: italic; border-left: 5px solid #372d2b; }
@@ -397,7 +397,7 @@ a:focus { background-color: #cc0; }
 .imghover { display: block; position: relative; max-width: 100%; }
 .imghover::before, .imghover::after { display: block; position: absolute; content: ""; text-align: center; opacity: 0; }
 .imghover::before { top: 0; right: 0; bottom: 0; left: 0; }
-.imghover::after { top: 50%; left: 50%; width: 50%; height: 50%; line-height: 50px; margin: -25px 0 0 -25px;content: "\f18e"; font-family: "FontAwesome"; font-size: 36px; }
+.imghover::after { top: 50%; left: 30%; width: 50%; height: 50%; line-height: 50px; margin: -25px 0 0 -25px;content: "\f18e"; font-family: "FontAwesome"; font-size: 36px; }
 .imghover:hover::before, .imghover:hover::after { opacity: 1; }
 .imghover:hover::before { background: rgba(213, 87, 69, .80); margin: 20px; }
 .imghover:hover::after { color: #FFFFFF; }
@@ -874,7 +874,8 @@ opacity: .5; }
 /* ------------campingcar------------ */
 .width-height-box { height: 500px; }
 .work-menu { padding: 60px 0 40px 0; }
-#feature2 { display: block}
+#home { display: none }
+#home_pc { display: block }
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */
@@ -895,6 +896,8 @@ opacity: .5; }
     #navigation > ul > li > a { padding: 15px 5px; }
     .width-height-box { height: 300px; }
     .work-menu { padding: 40px 0 0 0; }
+    #home_pc { display: none }
+    #home { display: block }
 }
 
 /* Medium Devices, Desktops */
@@ -914,6 +917,8 @@ opacity: .5; }
     .childern { padding-left: 0px; list-style: none; }
     .width-height-box { height: 300px; }
     .work-menu { padding: 40px 0 0 0; }
+    #home_pc { display: none }
+    #home { display: block }
 }
 
 /* Small Devices, Tablets */
@@ -934,6 +939,8 @@ opacity: .5; }
     .error-title { font-size: 62px; margin-bottom: 10px; font-weight: 800; }
     .width-height-box { height: 300px; }
     .work-menu { padding: 40px 0 0 0; }
+    #home_pc { display: none }
+    #home { display: block }
 }
 
 /* Extra Small Devices, Phones */
@@ -954,6 +961,8 @@ opacity: .5; }
     .error-title { font-size: 62px; margin-bottom: 10px; font-weight: 800; }
     .width-height-box { height: 300px; }
     .work-menu { padding: 40px 0 0 0; }
+    #home_pc { display: none }
+    #home { display: block }
 }
 
 /* Custom, iPhone Retina */
@@ -975,6 +984,8 @@ opacity: .5; }
     .testimonial-content { font-weight: 400; padding-left: 0px; }
     .width-height-box { height: 300px; }
     .work-menu { padding: 40px 0 0 0; }
+    #home_pc { display: none }
+    #home { display: block }
 }
 
 

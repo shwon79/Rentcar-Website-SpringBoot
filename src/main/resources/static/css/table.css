@@ -685,11 +685,11 @@ Separator
 /*====================================================================
                         Home Section
 ======================================================================*/
-.home {
-  background: url(../img/header1.jpg)
-  no-repeat center center;
-  background-size: cover;
-}
+/*.home {*/
+/*  background: url(../img/header1.jpg)*/
+/*  no-repeat center center;*/
+/*  background-size: cover;*/
+/*}*/
 .home_skew_border {
   position: relative;
 }
