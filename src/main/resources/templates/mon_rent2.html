@@ -1,0 +1,209 @@
+<!--  월렌트 진행중 (mon_rent2.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 월렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/mon_rent2.css}" rel="stylesheet">
+
+    <script th:src="@{/js/mon_rent2.js}" defer></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:replace="fragments/header_camp::headerFragment"></div>
+
+    <div class="monthly_content container-fluid pinside60 bg-light">
+
+        <!-- title row -->
+        <div class="row">
+            <!-- title -->
+            <div class="row" id="title_wrapper">
+                <!-- left col -->
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                    <!-- 월렌트 title -->
+                    <div>
+                        <h1>월렌트</h1>
+                    </div>
+                    <!-- descriptions (collapse panel) -->
+                    <div >
+                        <h3>세이브카의 월렌트는?</h3>
+                        <div >
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                            <h4 class="panel-title">
+                                                1개월 단위로 이용할 수 있는 렌트 상품입니다.
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                            <h4 class="panel-title">
+                                                세이브카의 수도권 및 지역별 월렌트 차량수령 방문위치 안내드립니다
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <div class="panel-heading" role="tab" id="headingThree">
+                                            <h4 class="panel-title">
+                                                계약 준비 시 필요한 서류와 계약서 작성시 필요한 준비물 입니다.
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- right col -->
+                <div class="col-lg-5 col-md-5 col-sm-0 col-xs-0 text-center">
+                    <img src="" alt="car_img" style="height: 80%; width: 80%" />
+                </div>
+            </div>
+
+            <!-- selections -->
+            <div class="row pinside20 bg-white" id="select_wrapper">
+                    <!-- 차종 -->
+                <div class="row">
+                    <!-- left title -->
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <p>차종</p>
+                    </div>
+                    <!-- selections -->
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="sel_car">
+                        <label for="car_all"><input type="radio" id="car_all" name="sel_car" checked>전체</label>
+                        <label for="car_lpg_sm"><input type="radio" id="car_lpg_sm" name="sel_car">중형/소형승용(LPG)</label>
+                        <label for="car_lpg_bg"><input type="radio" id="car_lpg_bg" name="sel_car">대형승용(LPG)</label>
+                        <label for="car_gas_sm"><input type="radio" id="car_gas_sm" name="sel_car">소형/경승용(가솔린,디젤)</label>
+                        <label for="car_gas_md"><input type="radio" id="car_gas_md" name="sel_car">중형승용(가솔린,디젤)</label>
+                        <label for="car_gas_bg"><input type="radio" id="car_gas_bg" name="sel_car">대형승용(가솔린,디젤)</label>
+                        <label for="car_rv"><input type="radio" id="car_rv" name="sel_car">RV</label>
+                        <label for="car_env"><input type="radio" id="car_env" name="sel_car">친환경차</label>
+                    </div>
+                </div><hr style="background: lightgrey; margin: 10px 0" />
+
+                    <!-- 지역 -->
+                        <!-- left title -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <p>지역</p>
+                    </div>
+                    <!-- selections -->
+                    <div id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <label for="reg_all"><input type="radio" checked id="reg_all" name="sel_reg">전체</label>
+                        <label for="reg_cap"><input type="radio" id="reg_cap" name="sel_reg">수도권</label>
+                        <label for="reg_daj"><input type="radio" id="reg_daj" name="sel_reg">대전</label>
+                        <label for="reg_dag"><input type="radio" id="reg_dag" name="sel_reg">대구</label>
+                        <label for="reg_gwa"><input type="radio" id="reg_gwa" name="sel_reg">광주</label>
+                        <label for="reg_bus"><input type="radio" id="reg_bus" name="sel_reg">부산</label>
+                    </div>
+                </div><hr style="background: lightgrey; margin: 10px 0" />
+
+
+                    <!-- 대기 상황 -->
+                <div class="row">
+                        <!-- left title -->
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <p>대기상황</p>
+                    </div>
+                    <!-- selections -->
+                    <div id="sel_able" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <label for="reserve_able"><input type="radio" checked id="reserve_able" name="sel_able">예약가능차량</label>
+                        <label for="reserve_soon"><input type="radio" id="reserve_soon" name="sel_able">입고예정차량</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- content row -->
+        <div>
+            <!-- content description -->
+            <div >
+                <p>※ 상세페이지에서 차량예약이 가능합니다.</p>
+            </div>
+        </div>
+
+        <!-- content row -->
+        <div>
+            <!-- car table -->
+            <div>
+                <div id="mainTable">
+                    <table>
+                        <thead id="table_header">
+                            <tr>
+                                <th></th>
+                                <th>차량 정보</th>
+                                <th>연료</th>
+                                <th>색상</th>
+                                <th onclick=sortContent(4)>신차등록일</th>
+                                <th onclick=sortContent(5)>주행거리</th>
+                                <th onclick=sortContent(6)>지역</th>
+                                <th onclick=sortContent(7)>월대여료</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="mainTable_tbody">
+                            <tr>
+                                <th>1</th>
+                                <th>제목1</th>
+                                <th>1234</th>
+                                <th>46541</th>
+                                <th>2</th>
+                                <th>제목2</th>
+                                <th>4567</th>
+                                <th>4567</th>
+                                <th><a href="/rent/month/detail"><button >상세 페이지</button></a></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+
+</html>
