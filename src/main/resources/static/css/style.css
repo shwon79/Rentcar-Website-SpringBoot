@@ -876,6 +876,68 @@ opacity: .5; }
 .work-menu { padding: 60px 0 40px 0; }
 #home { display: none }
 #home_pc { display: block }
+
+
+.fixed_phone_pc_btn {
+    position: fixed;
+    z-index: 100;
+    display: block;
+    background: #61eccc;
+    color: #ffffff;
+    padding: 20px 20px;
+    font-size: 1.2em;
+    top: 15%;
+    right: 3%;
+    border: none;
+    border-radius: 30vh;
+    box-shadow: 0 0 20px #2af1ff;
+}
+
+.fixed_message_pc_btn {
+    position: fixed;
+    z-index: 100;
+    display: block;
+    background: #61eccc;
+    color: #ffffff;
+    padding: 20px 20px;
+    font-size: 1.2em;
+    top: 22%;
+    right: 3%;
+    border: none;
+    border-radius: 30vh;
+    box-shadow: 0 0 20px #2af1ff;
+}
+
+.fixed_phone_btn {
+    position: fixed;
+    z-index: 100;
+    display: block;
+    background: #61eccc;
+    color: #ffffff;
+    padding: 15px 15px;
+    font-size: 1.2em;
+    top: 81%;
+    right: 3%;
+    border: none;
+    border-radius: 30vh;
+    box-shadow: 0 0 20px #2af1ff;
+}
+
+.fixed_message_btn {
+    position: fixed;
+    z-index: 100;
+    display: block;
+    background: #61eccc;
+    color: #ffffff;
+    padding: 15px 15px;
+    font-size: 1.2em;
+    top: 90%;
+    right: 3%;
+    border: none;
+    border-radius: 30vh;
+    box-shadow: 0 0 20px #2af1ff;
+}
+
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */
@@ -898,6 +960,7 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
+    .fixed_phone_btn { top: 85% }
 }
 
 /* Medium Devices, Desktops */
@@ -919,6 +982,7 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
+    .fixed_phone_btn { top: 85% }
 }
 
 /* Small Devices, Tablets */
@@ -941,6 +1005,7 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
+    .fixed_phone_btn { top: 83% }
 }
 
 /* Extra Small Devices, Phones */
@@ -963,7 +1028,9 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
+    .fixed_phone_btn { top: 81% }
 }
+
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width:320px) {
@@ -986,6 +1053,7 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
+    .fixed_phone_btn { top: 80% }
 }
 
 
