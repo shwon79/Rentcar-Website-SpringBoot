@@ -7,6 +7,7 @@ import kr.carz.savecar.service.MonthlyRentService;
 import kr.carz.savecar.service.TwoYearlyRentService;
 import kr.carz.savecar.service.YearlyRentService;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -63,6 +68,9 @@ public class MonthlyRentController {
     public void get_monthly_rent_category1(HttpServletResponse res, HttpServletRequest req, @PathVariable String period) throws IOException {
 
 
+
+
+
         HashSet<String> categoryList = new HashSet<String>();
 
         if (period.equals("rentMonth")) {
@@ -106,6 +114,48 @@ public class MonthlyRentController {
     @RequestMapping(value = "/rent/month/{period}/{category1}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable String period, @PathVariable String category1) throws IOException {
+
+        HttpURLConnection conn = null;
+        JSONObject responseJson = null;
+
+        // 모렌 데이터 가져오기
+        try {
+            URL url = new URL("https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=2021-09-01&END=2021-09-02");
+
+            conn = (HttpURLConnection)url.openConnection();
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            conn.setRequestMethod("GET");
+            //conn.setDoOutput(true);
+
+            JSONObject commands = new JSONObject();
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 400 || responseCode == 401 || responseCode == 500 ) {
+                System.out.println(responseCode + " Error!");
+            } else {
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                responseJson = new JSONObject(sb.toString());
+                System.out.println(responseJson.get("total"));
+                System.out.println(responseJson.get("start"));
+//                System.out.println(((JSONArray) responseJson.get("reserve")).get(0));
+
+
+
+
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        // 차 분류 api
 
         List<String> categoryList2 = new ArrayList();
 
