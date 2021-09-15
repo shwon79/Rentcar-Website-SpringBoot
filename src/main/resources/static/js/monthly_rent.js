@@ -71,7 +71,6 @@ function make_easy_reservation () {
         mileage : $("#reservation-detail-region").val(),
         option : $("#reservation-detail-resdate").val()
     };
-    console.log(data)
 
     var checkbox = document.getElementById("agree")
     if(checkbox.checked) {
@@ -94,7 +93,7 @@ function make_easy_reservation () {
 function make_reservation () {
 
     if (document.getElementById("reservation-detail-name").value == ""){
-        alert('성함을 입력해주세요.')
+        alert('(아래)상담 신청하기에서 성함을 입력해주세요.')
         return
     }
 
@@ -140,8 +139,6 @@ function make_reservation () {
         product = "";
     }
 
-    console.log(document.getElementById("carDeposit"))
-    console.log(document.getElementsByName("carDeposit"))
 
     var deposit;
     // 누구나 장기렌트
@@ -157,9 +154,6 @@ function make_reservation () {
     } else {
         deposit = document.getElementById("carDeposit").innerText;
     }
-    console.log(document.getElementById("carDeposit").innerText)
-
-    console.log("deposit:"+deposit)
 
 
 
@@ -176,8 +170,6 @@ function make_reservation () {
         age_limit = "21세 이상 X"
     }
 
-    console.log(product)
-
     var data = {
         name : $("#reservation-detail-name").val(),
         phoneNo : $("#reservation-detail-phone").val(),
@@ -193,7 +185,6 @@ function make_reservation () {
         option : $("#select-car-option").val(),
         price : price
     };
-    console.log(data)
 
 
 
@@ -223,7 +214,6 @@ function get_category1(fr, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c1(result) {
-            console.log(detailedSelect)
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
@@ -241,8 +231,8 @@ function get_category2(fr1, fr2, detailedSelect) {
         contentType: "application/json; charset=UTF-8",
         dataType: 'json',
         success: function set_c2(result) {
-            detailedSelect.length = 1;
-            console.log(result)
+
+            detailedSelect.options.length = 1;
             for (i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
@@ -265,7 +255,6 @@ function get_car_name(fr1, fr2, fr3, detailedSelect) {
             }
         }
     }).fail(function (error) {
-        console.log('/rent/month/' + fr1 + '/name/' + fr2 + '/' + fr3);
         alert(JSON.stringify(error));
     })
 }
@@ -292,7 +281,6 @@ function int_to_price(price) {
         } else {
             result = price.slice(i-3, i) + ',' + result
         }
-        // console.log(result)
     }
     result = price.slice(0, len%3) + result;
     return result;
@@ -305,7 +293,6 @@ function get_price(fr1, fr2, fr3, detailedSelect) {
         contentType: "application/json; charset=euc-kr",
         dataType: 'json',
         success: function set_p(result) {
-            console.log(result)
             var price = result[0];
             var age_limit = result[2];
 
@@ -351,8 +338,7 @@ function setSelectBoxByText(eid, etxt) {
     var eid = document.getElementById(eid);
 
     for (var i = 0; i < (eid.options.length); ++i) {
-        // console.log(eid.options[i].innerText, etxt)
-        if (eid.options[i].innerText === etxt) {
+        if (eid.options[i].innerText == etxt) {
             eid.options[i].selected = true;
             break
         }

@@ -119,41 +119,41 @@ public class MonthlyRentController {
         JSONObject responseJson = null;
 
         // 모렌 데이터 가져오기
-        try {
-            URL url = new URL("https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=2021-09-01&END=2021-09-02");
-
-            conn = (HttpURLConnection)url.openConnection();
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
-            conn.setRequestMethod("GET");
-            //conn.setDoOutput(true);
-
-            JSONObject commands = new JSONObject();
-
-            int responseCode = conn.getResponseCode();
-            if (responseCode == 400 || responseCode == 401 || responseCode == 500 ) {
-                System.out.println(responseCode + " Error!");
-            } else {
-                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder();
-                String line = "";
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
-                }
-
-                responseJson = new JSONObject(sb.toString());
-                System.out.println(responseJson.get("total"));
-                System.out.println(responseJson.get("start"));
-//                System.out.println(((JSONArray) responseJson.get("reserve")).get(0));
-
-
-
-
-            }
-
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+//        try {
+//            URL url = new URL("https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=2021-09-01&END=2021-09-02");
+//
+//            conn = (HttpURLConnection)url.openConnection();
+//            conn.setConnectTimeout(5000);
+//            conn.setReadTimeout(5000);
+//            conn.setRequestMethod("GET");
+//            //conn.setDoOutput(true);
+//
+//            JSONObject commands = new JSONObject();
+//
+//            int responseCode = conn.getResponseCode();
+//            if (responseCode == 400 || responseCode == 401 || responseCode == 500 ) {
+//                System.out.println(responseCode + " Error!");
+//            } else {
+//                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//                StringBuilder sb = new StringBuilder();
+//                String line = "";
+//                while ((line = br.readLine()) != null) {
+//                    sb.append(line);
+//                }
+//
+//                responseJson = new JSONObject(sb.toString());
+//                System.out.println(responseJson.get("total"));
+//                System.out.println(responseJson.get("start"));
+////                System.out.println(((JSONArray) responseJson.get("reserve")).get(0));
+//
+//
+//
+//
+//            }
+//
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
 
         // 차 분류 api
 
