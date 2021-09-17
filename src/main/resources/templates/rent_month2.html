@@ -1,4 +1,4 @@
-<!--  월렌트 진행중 (mon_rent2.html) -->
+<!--  월렌트 진행중 (rent_month2.html) -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -9,16 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Style -->
-    <link th:href="@{/css/mon_rent2.css}" rel="stylesheet">
+    <link th:href="@{/css/rent_month2.css}" rel="stylesheet">
 
-    <script th:src="@{/js/mon_rent2.js}" defer></script>
+    <script>
+
+        $(document).ready(function(){
+
+        });
+    </script>
+    <script th:src="@{/js/rent_month2.js}" defer></script>
 
 </head>
 <body>
 <div layout:fragment="content">
-    <div th:replace="fragments/header_camp::headerFragment"></div>
 
-    <div class="monthly_content container-fluid pinside60 bg-light">
+    <div class="monthly_content container-fluid pinside60 bg-light" style="padding: 100px;">
 
         <!-- title row -->
         <div class="row">
@@ -45,12 +50,6 @@
                                     </a>
                                     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                         </div>
                                     </div>
                                 </div>
@@ -64,12 +63,6 @@
                                     </a>
                                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                         </div>
                                     </div>
                                 </div>
@@ -83,12 +76,6 @@
                                     </a>
                                     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                                            Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                                            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                         </div>
                                     </div>
                                 </div>
@@ -98,13 +85,14 @@
                 </div>
                 <!-- right col -->
                 <div class="col-lg-5 col-md-5 col-sm-0 col-xs-0 text-center">
-                    <img src="" alt="car_img" style="height: 80%; width: 80%" />
+                    <img th:src="@{/img/medium_car.png}"  alt="car_img" style="height: 80%; width: 80%" />
                 </div>
             </div>
 
             <!-- selections -->
-            <div class="row pinside20 bg-white" id="select_wrapper">
-                    <!-- 차종 -->
+            <form target="_self" method="POST" class="row pinside20 bg-white" id="select_wrapper" action="/rent/month/realtime">
+
+                <!-- 차종 -->
                 <div class="row">
                     <!-- left title -->
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -112,31 +100,33 @@
                     </div>
                     <!-- selections -->
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="sel_car">
-                        <label for="car_all"><input type="radio" id="car_all" name="sel_car" checked>전체</label>
-                        <label for="car_lpg_sm"><input type="radio" id="car_lpg_sm" name="sel_car">중형/소형승용(LPG)</label>
-                        <label for="car_lpg_bg"><input type="radio" id="car_lpg_bg" name="sel_car">대형승용(LPG)</label>
-                        <label for="car_gas_sm"><input type="radio" id="car_gas_sm" name="sel_car">소형/경승용(가솔린,디젤)</label>
-                        <label for="car_gas_md"><input type="radio" id="car_gas_md" name="sel_car">중형승용(가솔린,디젤)</label>
-                        <label for="car_gas_bg"><input type="radio" id="car_gas_bg" name="sel_car">대형승용(가솔린,디젤)</label>
-                        <label for="car_rv"><input type="radio" id="car_rv" name="sel_car">RV</label>
-                        <label for="car_env"><input type="radio" id="car_env" name="sel_car">친환경차</label>
+                        <label for="car_all"><input type="radio" id="car_all" name="carType" value="전체" onclick="sendData()" th:checked="${carType} == '전체'">전체</label>
+                        <label for="car_s"><input type="radio" id="car_s" name="carType" value="경형" onclick="sendData()" th:checked="${carType} == '경형'">경형</label>
+                        <label for="car_sm"><input type="radio" id="car_sm" name="carType" value="준중형" onclick="sendData()" th:checked="${carType} == '준중형'">준중형</label>
+                        <label for="car_md"><input type="radio" id="car_md" name="carType" value="중형" onclick="sendData()" th:checked="${carType} == '중형'">중형</label>
+                        <label for="car_mb"><input type="radio" id="car_mb" name="carType" value="중대형" onclick="sendData()" th:checked="${carType} == '중대형'">중대형</label>
+                        <label for="car_bg"><input type="radio" id="car_bg" name="carType" value="대형" onclick="sendData()" th:checked="${carType} == '대형'">대형</label>
+                        <label for="car_srv"><input type="radio" id="car_srv" name="carType" value="소중형SUV" onclick="sendData()" th:checked="${carType} == '소중형SUV'">소중형SUV</label>
+                        <label for="car_mrv"><input type="radio" id="car_mrv" name="carType" value="중형SUV" onclick="sendData()" th:checked="${carType} == '중형SUV'">중형SUV</label>
+                        <label for="car_smrv"><input type="radio" id="car_smrv" name="carType" value="중대형SUV" onclick="sendData()" th:checked="${carType} == '중대형SUV'">중대형SUV</label>
+                        <label for="car_brv"><input type="radio" id="car_brv" name="carType" value="대형SUV" onclick="sendData()" th:checked="${carType} == '대형SUV'">대형SUV</label>
+                        <label for="car_van"><input type="radio" id="car_van" name="carType" value="승합" onclick="sendData()" th:checked="${carType} == '승합'">승합</label>
+                        <label for="car_frn"><input type="radio" id="car_frn" name="carType" value="수입차" onclick="sendData()" th:checked="${carType} == '수입차'">수입차</label>
                     </div>
                 </div><hr style="background: lightgrey; margin: 10px 0" />
 
-                    <!-- 지역 -->
-                        <!-- left title -->
+                <!-- 약정 주행거리 -->
+                <!-- left title -->
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <p>지역</p>
+                        <p>약정 주행거리</p>
                     </div>
                     <!-- selections -->
                     <div id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <label for="reg_all"><input type="radio" checked id="reg_all" name="sel_reg">전체</label>
-                        <label for="reg_cap"><input type="radio" id="reg_cap" name="sel_reg">수도권</label>
-                        <label for="reg_daj"><input type="radio" id="reg_daj" name="sel_reg">대전</label>
-                        <label for="reg_dag"><input type="radio" id="reg_dag" name="sel_reg">대구</label>
-                        <label for="reg_gwa"><input type="radio" id="reg_gwa" name="sel_reg">광주</label>
-                        <label for="reg_bus"><input type="radio" id="reg_bus" name="sel_reg">부산</label>
+                        <label for="reg_2000"><input type="radio" id="reg_2000" name="kilometer" value="2000km" onclick="sendData()" th:checked="${kilometer} == '2000km'">2000km</label>
+                        <label for="reg_2500"><input type="radio" id="reg_2500" name="kilometer" value="2500km" onclick="sendData()" th:checked="${kilometer} == '2500km'">2500km</label>
+                        <label for="reg_3000"><input type="radio" id="reg_3000" name="kilometer" value="3000km" onclick="sendData()" th:checked="${kilometer} == '3000km'">3000km</label>
+                        <label for="reg_4000"><input type="radio" id="reg_4000" name="kilometer" value="4000km" onclick="sendData()" th:checked="${kilometer} == '4000km'">4000km</label>
                     </div>
                 </div><hr style="background: lightgrey; margin: 10px 0" />
 
@@ -145,15 +135,15 @@
                 <div class="row">
                         <!-- left title -->
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <p>대기상황</p>
+                        <p>대여상태</p>
                     </div>
                     <!-- selections -->
                     <div id="sel_able" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <label for="reserve_able"><input type="radio" checked id="reserve_able" name="sel_able">예약가능차량</label>
-                        <label for="reserve_soon"><input type="radio" id="reserve_soon" name="sel_able">입고예정차량</label>
+                        <label for="reserve_able"><input type="radio" id="reserve_able" name="reserve_able" value="possible" onclick="sendData()" th:checked="${reservation} == 'possible'">예약가능차량</label>
+                        <label for="reserve_soon"><input type="radio" id="reserve_soon" name="reserve_able" value="expected" onclick="sendData()" th:checked="${reservation} == 'expected'">입고예정차량</label>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <!-- content row -->
@@ -178,21 +168,19 @@
                                 <th>색상</th>
                                 <th onclick=sortContent(4)>신차등록일</th>
                                 <th onclick=sortContent(5)>주행거리</th>
-                                <th onclick=sortContent(6)>지역</th>
-                                <th onclick=sortContent(7)>월대여료</th>
+                                <th onclick=sortContent(6)>월대여료</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody id="mainTable_tbody">
-                            <tr>
-                                <th>1</th>
-                                <th>제목1</th>
-                                <th>1234</th>
-                                <th>46541</th>
-                                <th>2</th>
-                                <th>제목2</th>
-                                <th>4567</th>
-                                <th>4567</th>
+                            <tr th:each="monthlyRent, iterStat : ${monthlyRentList}">
+                                <td scope="col" th:text="${monthlyRent.id}"></td>
+                                <td scope="col" th:text="${monthlyRent.name}"></td>
+                                <td scope="col" th:text="${monthlyRent.name}"></td>
+                                <td scope="col" th:text="${monthlyRent.name}"></td>
+                                <td scope="col" th:text="${monthlyRent.name}"></td>
+                                <td scope="col" th:text="${monthlyRent.name}"></td>
+                                <td scope="col" th:text="${priceList[iterStat.index]}"></td>
                                 <th><a href="/rent/month/detail"><button >상세 페이지</button></a></th>
                             </tr>
                         </tbody>

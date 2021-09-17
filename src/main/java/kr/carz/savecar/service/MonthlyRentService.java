@@ -24,6 +24,10 @@ public class MonthlyRentService {
     public List<MonthlyRent> findNameOfMonthlyRents(String category1, String category2){
         return monthlyRentRepository.findByCategory1AndCategory2(category1, category2);
     }
+
+    public List<MonthlyRent> findByCategory2(String category2){
+        return monthlyRentRepository.findByCategory2(category2);
+    }
     public MonthlyRent findPrice(String name){
         return monthlyRentRepository.findByName(name);
     }

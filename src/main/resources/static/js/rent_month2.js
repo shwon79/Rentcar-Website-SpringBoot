@@ -25,3 +25,7 @@ function sortContent(index) {
         }
     }
 }
+
+function sendData(){
+    document.getElementById('select_wrapper').submit();
+}
