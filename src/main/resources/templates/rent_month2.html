@@ -90,7 +90,7 @@
             </div>
 
             <!-- selections -->
-            <form target="_self" method="POST" class="row pinside20 bg-white" id="select_wrapper" action="/rent/month/realtime">
+            <form target="_self" method="POST" class="row pinside20 bg-white" id="select_wrapper" action="/rent/month/lookup">
 
                 <!-- 차종 -->
                 <div class="row">
@@ -101,17 +101,12 @@
                     <!-- selections -->
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="sel_car">
                         <label for="car_all"><input type="radio" id="car_all" name="carType" value="전체" onclick="sendData()" th:checked="${carType} == '전체'">전체</label>
-                        <label for="car_s"><input type="radio" id="car_s" name="carType" value="경형" onclick="sendData()" th:checked="${carType} == '경형'">경형</label>
-                        <label for="car_sm"><input type="radio" id="car_sm" name="carType" value="준중형" onclick="sendData()" th:checked="${carType} == '준중형'">준중형</label>
-                        <label for="car_md"><input type="radio" id="car_md" name="carType" value="중형" onclick="sendData()" th:checked="${carType} == '중형'">중형</label>
-                        <label for="car_mb"><input type="radio" id="car_mb" name="carType" value="중대형" onclick="sendData()" th:checked="${carType} == '중대형'">중대형</label>
-                        <label for="car_bg"><input type="radio" id="car_bg" name="carType" value="대형" onclick="sendData()" th:checked="${carType} == '대형'">대형</label>
-                        <label for="car_srv"><input type="radio" id="car_srv" name="carType" value="소중형SUV" onclick="sendData()" th:checked="${carType} == '소중형SUV'">소중형SUV</label>
-                        <label for="car_mrv"><input type="radio" id="car_mrv" name="carType" value="중형SUV" onclick="sendData()" th:checked="${carType} == '중형SUV'">중형SUV</label>
-                        <label for="car_smrv"><input type="radio" id="car_smrv" name="carType" value="중대형SUV" onclick="sendData()" th:checked="${carType} == '중대형SUV'">중대형SUV</label>
-                        <label for="car_brv"><input type="radio" id="car_brv" name="carType" value="대형SUV" onclick="sendData()" th:checked="${carType} == '대형SUV'">대형SUV</label>
+                        <label for="car_s"><input type="radio" id="car_s" name="carType" value="경차" onclick="sendData()" th:checked="${carType} == '경차'">경차</label>
+                        <label for="car_sm"><input type="radio" id="car_sm" name="carType" value="준중형차" onclick="sendData()" th:checked="${carType} == '준중형차'">준중형</label>
+                        <label for="car_md"><input type="radio" id="car_md" name="carType" value="중형차" onclick="sendData()" th:checked="${carType} == '중형차'">중형</label>
+                        <label for="car_bg"><input type="radio" id="car_bg" name="carType" value="대형차" onclick="sendData()" th:checked="${carType} == '대형차'">대형</label>
+                        <label for="car_srv"><input type="radio" id="car_srv" name="carType" value="SUV" onclick="sendData()" th:checked="${carType} == 'SUV'">SUV</label>
                         <label for="car_van"><input type="radio" id="car_van" name="carType" value="승합" onclick="sendData()" th:checked="${carType} == '승합'">승합</label>
-                        <label for="car_frn"><input type="radio" id="car_frn" name="carType" value="수입차" onclick="sendData()" th:checked="${carType} == '수입차'">수입차</label>
                     </div>
                 </div><hr style="background: lightgrey; margin: 10px 0" />
 
@@ -163,25 +158,29 @@
                         <thead id="table_header">
                             <tr>
                                 <th></th>
-                                <th>차량 정보</th>
-                                <th>연료</th>
-                                <th>색상</th>
-                                <th onclick=sortContent(4)>신차등록일</th>
-                                <th onclick=sortContent(5)>주행거리</th>
-                                <th onclick=sortContent(6)>월대여료</th>
+<!--                                <th>차종<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>-->
+                                <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>
+                                <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(2)></th>
+                                <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(3)></th>
+                                <th>신차등록일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(4)></th>
+                                <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
+                                <th>월대여료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
+                                <th>반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody id="mainTable_tbody">
-                            <tr th:each="monthlyRent, iterStat : ${monthlyRentList}">
-                                <td scope="col" th:text="${monthlyRent.id}"></td>
-                                <td scope="col" th:text="${monthlyRent.name}"></td>
-                                <td scope="col" th:text="${monthlyRent.name}"></td>
-                                <td scope="col" th:text="${monthlyRent.name}"></td>
-                                <td scope="col" th:text="${monthlyRent.name}"></td>
-                                <td scope="col" th:text="${monthlyRent.name}"></td>
-                                <td scope="col" th:text="${priceList[iterStat.index]}"></td>
-                                <th><a href="/rent/month/detail"><button >상세 페이지</button></a></th>
+                            <tr th:each="moren, iterStat : ${morenDtoList}">
+                                <td scope="col" th:text="${moren.carIdx}"></td>
+<!--                                <td scope="col" th:text="${moren.carGubun}"></td>-->
+                                <td scope="col" th:text="${moren.carName}"></td>
+                                <td scope="col" th:text="${moren.carEngine}"></td>
+                                <td scope="col" th:text="${moren.carExteriorColor}"></td>
+                                <td scope="col" th:text="${moren.carOld}"></td>
+                                <td scope="col" th:text="${moren.carMileaget}"></td>
+                                <td scope="col" th:text="${moren.carPrice}"></td>
+                                <td scope="col" th:text="${moren.orderEnd}"></td>
+                                <td><a href="/rent/month/detail"><button >상세 페이지</button></a></td>
                             </tr>
                         </tbody>
                     </table>
