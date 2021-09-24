@@ -11,34 +11,48 @@
   <!-- Style -->
   <link th:href="@{/css/car_detail.css}" rel="stylesheet">
 
-  <script th:src="@{/js/car_detail.js}" defer></script>
+  <script th:src="@{/js/rent_month2.js}" defer></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script>
+    window.onload = function(){
+      document.getElementById("address_button").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+          oncomplete: function(data) { //선택시 입력값 세팅
+            document.getElementById("address_kakao").value = data.address; // 주소 넣기
+            document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+          }
+        }).open();
+      });
+    }
+  </script>
 
 </head>
 <body>
 <div layout:fragment="content">
 
-  <div class="car_detail_content pinside60 bg-light" style="padding: 100px;">
+  <div class="car_detail_content pinside40" style="padding-top: 100px; margin: 20px;">
 
     <!-- title row -->
     <div class="row">
       <div>
-        <h1><a><-</a> 차량 이름</h1>
+        <a href="/rent/month/test"><-</a><h1 th:text="${morenDto.carName}"> 차량 이름</h1>
       </div>
     </div>
     <div class="row">
       <div class="row">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs margin-bottom-20">
+        <ul class="nav nav-tabs">
           <li><a href="#info_car" data-toggle="tab">차량 정보</a></li>
-          <li><a href="#info_detail" data-toggle="tab">사양 정보</a></li>
+          <li><a href="#info_detail" data-toggle="tab">예약하기</a></li>
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content" style="border: 2px solid #2aabd2; border-radius: 20px; padding: 20px;">
           <!-- info car -->
-          <div class="tab-pane active" id="info_car">
+          <div class="tab-pane active" id="info_car" >
             <div class="row">
               <!-- car picture carousel -->
-              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="height: 311px">
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 100%">
                   <!-- Indicators -->
                   <ol class="carousel-indicators">
@@ -86,24 +100,34 @@
               </div>
 
               <!-- infos -->
-              <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+              <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="padding-top: 20px;">
                 <!-- info table -->
                 <div class="row">
                   <!-- table left -->
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <div class="info_table"><p>제조사</p><p>기아자동차(주)</p></div>
-                    <div class="info_table"><p>연료</p><p th:text="${moren.carEngine}"></p></div>
-                    <div class="info_table"><p>신차등록년도</p><p th:text="${moren.carOld}"></p></div>
-                    <div class="info_table"><p>주행거리</p><p th:text="${moren.carMileaget}"></p></div>
-                    <div class="info_table"><p>차량번호</p><p th:text="${moren.carNo}"></p></div>
+                  <div class="col-lg-2 col-md-2 col-sm-5 col-xs-5">
+                    <p>연료</p>
+                    <p>신차등록년도</p>
+                    <p>주행거리</p>
+                    <p>차량번호</p>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-7 col-xs-7">
+                    <p th:text="${morenDto.carEngine}"></p>
+                    <p th:text="${morenDto.carOld}"></p>
+                    <p th:text="${morenDto.carMileaget}+'km'"></p>
+                    <p th:text="${morenDto.carNo}"></p>
                   </div>
                   <!-- table right -->
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <div class="info_table" style="color: transparent"><p>ㅡ</p><p>ㅡ</p></div>
-                    <div class="info_table"><p>배기량</p><p th:text="${moren.carDisplacement}"></p></div>
-                    <div class="info_table"><p>모델 연도</p><p th:text="${moren.carOld}"></p></div>
-                    <div class="info_table"><p>색상</p><p th:text="${moren.carColor}"></p></div>
-                    <div class="info_table"><p>소유자</p><p>(주)세이브카</p></div>
+                  <div class="col-lg-2 col-md-2 col-sm-5 col-xs-5">
+                    <p>배기량  </p>
+                    <p>모델 연도  </p>
+                    <p>색상  </p>
+                    <p>소유자  </p>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-7 col-xs-7">
+                    <p th:text="${morenDto.carDisplacement}"></p>
+                    <p th:text="${morenDto.carOld}"></p>
+                    <p th:text="${morenDto.carColor}"></p>
+                    <p>(주)세이브카</p>
                   </div>
                 </div><hr />
                 <div class="row">
@@ -113,18 +137,117 @@
                 </div>
               </div>
             </div>
+
+
+            <!-- 예약 버튼 -->
+            <div class="row text-center">
+              <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>
+            </div>
           </div>
 
           <!-- detail car -->
           <div class="tab-pane" id="info_detail">
             <div class="row">
-              <!-- car picture carousel -->
-              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="name">* 이름(입금자명)</label>
+                  <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="성함을 입력해주세요." required oninvalid="this.setCustomValidity('필수 입력 정보입니다.')">
+                  </div>
+                </div>
               </div>
-              <!-- infos -->
-              <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="phone">* 연락처</label>
+                  <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="연락처 ex) 010-0000-0000" required >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="date">* 대여날짜</label>
+                  <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <!-- 오늘 날짜로 변경하기 -->
+                    <p><input type="date" value="2021-09-24" min="2021-09-24" ></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="time">* 대여시간</label>
+                  <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <p><input type="time" value="13:10:20" min="9:00:00" max="18:00:00"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="driver-license">* 운전면허증 첨부</label>
+                  <input type="file" id="driver-license" name="license" accept="image/png, image/jpeg, image/jpg">
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="textarea">요청 사항</label>
+                  <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요."></textarea>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="address">* 배차 받을 주소</label>
+                  <div class="input-group">
+                    <input type="text" id="address_kakao" class="form-control" name="address" value="주소를 선택하세요" readonly /> <span id="address_button" class="input-group-addon">검색</span>
+                  </div>
 
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="address-detail">* 상세 주소</label><br/>
+                  <div class="input-group">
+                    <input type="text" id="address_kakao_detail" class="form-control" name="address_detail" value="상세주소를 입력하세요"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                <div class="info_table"><p>공급가  <span th:text="${morenDto.carOld}"></p></span></div>
+                <div class="info_table"><p>부가세  <span th:text="${morenDto.carMileaget}"></span></p></div>
+                <div class="info_table"><p>월대여료  <span th:text="${morenDto.carNo}"></span></p></div>
+                <div class="info_table"><p>보증금  <span>300,000원</span></p></div>
+                <div class="info_table"><p>예약금  <span>100,000원</span></p></div>
+                <div class="info_table"><p>총 입금하실 금액  <span th:text="${morenDto.carNo}"></span></p></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="name">계좌이체</label>
+                  <h2>하나은행 810-626121-01404</h2>
+                  <h2>(주)세이브카</h2>
+                </div>
+                <p>* 입금이 확인되면 예약이 확정되고 확인 문자가 전송됩니다.</p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pinside10">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="phone">전체동의</label>
+                  <h4>개인정보 수집 및 이용 동의</h4>
+                  <h4>고유식별정보 수집 및 이용 동의</h4>
+                  <h4>개인정보 수집 및 이용 동의</h4>
+                  <h4>고유식별정보 수집 및 이용 동의</h4>
+                  <h4>개인정보 수집 이용 제공 조회 동의서 전문 보기</h4>
+                </div>
+              </div>
+            </div>
+
+            <!-- 예약 버튼 -->
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pinside10">
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pinside10 text-center">
+                <button>예약하기</button>
               </div>
             </div>
           </div>
@@ -132,10 +255,6 @@
       </div>
     </div>
 
-    <!-- 예약 버튼 -->
-    <div class="row">
-      <button>예약하기</button>
-    </div>
 
   </div>
 </div>

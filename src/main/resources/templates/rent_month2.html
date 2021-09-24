@@ -23,7 +23,7 @@
 <body>
 <div layout:fragment="content">
 
-    <div class="monthly_content container-fluid pinside60 bg-light" style="padding: 100px;">
+    <div class="monthly_content container-fluid pinside60" style="padding: 100px;">
 
         <!-- title row -->
         <div class="row">
@@ -90,7 +90,7 @@
             </div>
 
             <!-- selections -->
-            <form target="_self" method="POST" class="row pinside20 bg-white" id="select_wrapper" action="/rent/month/lookup">
+            <form target="_self" method="POST" class="row pinside20 bg-white" id="select_wrapper" action="/rent/month/lookup" style="margin-top: 0px;">
 
                 <!-- 차종 -->
                 <div class="row">
@@ -145,7 +145,8 @@
         <div>
             <!-- content description -->
             <div >
-                <p>※ 상세페이지에서 차량예약이 가능합니다.</p>
+                <span>※ 상세페이지에서 차량예약이 가능합니다.</span>
+                <span align="right">총 <span th:text="${total_num}"></span> 대</span>
             </div>
         </div>
 
@@ -180,7 +181,7 @@
                                 <td scope="col" th:text="${moren.carMileaget}"></td>
                                 <td scope="col" th:text="${moren.carPrice}"></td>
                                 <td scope="col" th:text="${moren.orderEnd}"></td>
-                                <td><a href="/rent/month/detail"><button >상세 페이지</button></a></td>
+                                <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button >상세 페이지</button></a></td>
                             </tr>
                         </tbody>
                     </table>

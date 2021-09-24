@@ -21,13 +21,15 @@ public class MorenDto {
     private String carAttribute01;
     private String carPrice;
     private String orderEnd;
+    private Long monthlyrentIdx;
+
 
 
     public MorenDto(String carIdx, String carCategory, String carName,
                     String carNo, String carExteriorColor, String carGubun,
                     String carDisplacement, String carMileaget, String carColor,
                     String carOld, String carEngine, String carAttribute01,
-                    String carPrice, String orderEnd) {
+                    String carPrice, String orderEnd, Long monthlyrentIdx) {
         this.carIdx = carIdx;
         this.carCategory = carCategory;
         this.carName = carName;
@@ -42,6 +44,7 @@ public class MorenDto {
         this.carAttribute01 = carAttribute01;
         this.carPrice = carPrice;
         this.orderEnd = orderEnd;
+        this.monthlyrentIdx = monthlyrentIdx;
     }
 
 }

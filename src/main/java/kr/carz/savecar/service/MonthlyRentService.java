@@ -5,6 +5,7 @@ import kr.carz.savecar.repository.MonthlyRentRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public class MonthlyRentService {
@@ -33,6 +34,9 @@ public class MonthlyRentService {
     }
     public MonthlyRent findByMorenCar(Long start, Long end, String name){
         return monthlyRentRepository.findByEndGreaterThanEqualAndStartIsLessThanEqualAndNameMoren(end, start, name);
+    }
+    public Optional findById(Long id){
+        return monthlyRentRepository.findById(id);
     }
 
 }
