@@ -115,7 +115,7 @@ public class MonthlyRentController {
                             Long carOld = Long.parseLong((String)((JSONObject)list_json_array.get(i)).get("carOld"));
 
                             try {
-                                // 세이브카 db에서 가격 정보 가져오기
+                                // 자체 db에서 가격 정보 가져오기
                                 MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld,carOld, (String)((JSONObject)list_json_array.get(i)).get("carCategory"));
 
                                 MorenDto moren = new MorenDto((String)morenObject.get("carIdx"),(String)morenObject.get("carCategory"),(String)morenObject.get("carName"),
@@ -220,7 +220,7 @@ public class MonthlyRentController {
                                 Long carOld = Long.parseLong((String) ((JSONObject) list_json_array.get(i)).get("carOld"));
 
                                 try {
-                                    // 세이브카 db에서 가격 정보 가져오기
+                                    // 자체 db에서 가격 정보 가져오기
                                     MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, (String) ((JSONObject) list_json_array.get(i)).get("carCategory"));
                                     String kilometer_cost = monthlyRent2.getCost_for_2k();
 
@@ -259,11 +259,8 @@ public class MonthlyRentController {
             e.printStackTrace();
         }
 
-
-
         // 모렌 데이터 프론트로 전달
         model.put("morenDtoList", morenDtoList);
-
 
         // 라디오버튼 데이터 전달
         model.put("carType", realTimeDto.getCarType());
