@@ -168,8 +168,7 @@
                 <div class="form-group has-feedback">
                   <label class="control-label" for="date">* 대여날짜</label>
                   <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <!-- 오늘 날짜로 변경하기 -->
-                    <p><input type="date" value="2021-09-24" min="2021-09-24" ></p>
+                    <p><input type="date" th:value="${today_format}" th:min="${today_format}" ></p>
                   </div>
                 </div>
               </div>

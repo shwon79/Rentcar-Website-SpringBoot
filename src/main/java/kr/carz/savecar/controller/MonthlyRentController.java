@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -38,6 +39,9 @@ public class MonthlyRentController {
         this.twoYearlyRentService = twoYearlyRentService;
         this.reservationService = reservationService;
     }
+
+
+
 
 
 
@@ -70,12 +74,16 @@ public class MonthlyRentController {
         // 총 대수
         Integer total_num = 0;
 
-
         // 모렌 데이터 객체 생성
         List<MorenDto> morenDtoList = new ArrayList<MorenDto>();
 
+        // 오늘 날짜
+        Date time = new Date();
+        SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+        String today_format = format.format(time);
+
         try {
-            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + "2021-09-23&END=2021-09-23"; // 오늘 날짜로 바꿀 것 !
+            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format;
             URL url = new URL(today_url);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -100,7 +108,6 @@ public class MonthlyRentController {
                 // list 가져오기
                 responseJson = new JSONObject(sb.toString());
                 JSONArray list_json_array = (JSONArray) responseJson.get("list");
-
 
                 // list 안에 데이터
                 for(int i=0; i<list_json_array.length(); i++){
@@ -173,8 +180,13 @@ public class MonthlyRentController {
         // 모렌 데이터 객체 생성
         List<MorenDto> morenDtoList = new ArrayList<MorenDto>();
 
+        // 오늘 날짜
+        Date time = new Date();
+        SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+        String today_format = format.format(time);
+
         try {
-            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + "2021-09-23&END=2021-09-23"; // 오늘 날짜로 바꿀 것 !
+            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format;
             URL url = new URL(today_url);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -291,8 +303,14 @@ public class MonthlyRentController {
         // 모렌 데이터 객체 생성
         List<MorenDto> morenDtoList = new ArrayList<MorenDto>();
 
+
+        // 오늘 날짜
+        Date time = new Date();
+        SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+        String today_format = format.format(time);
+
         try {
-            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + "2021-09-23&END=2021-09-23"; // 오늘 날짜로 바꿀 것 !
+            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format;
             URL url = new URL(today_url);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -354,6 +372,9 @@ public class MonthlyRentController {
         } catch (IOException e){
             e.printStackTrace();
         }
+
+        // 오늘 날짜 데이터 전달
+        model.put("today_format", today_format);
 
         return "rent_month2_detail";
     }
