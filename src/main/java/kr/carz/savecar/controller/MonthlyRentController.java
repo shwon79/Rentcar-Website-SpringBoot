@@ -308,6 +308,7 @@ public class MonthlyRentController {
         Date time = new Date();
         SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
         String today_format = format.format(time);
+        model.put("today_format", today_format);
 
         try {
             String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format;
@@ -373,8 +374,6 @@ public class MonthlyRentController {
             e.printStackTrace();
         }
 
-        // 오늘 날짜 데이터 전달
-        model.put("today_format", today_format);
 
         return "rent_month2_detail";
     }
