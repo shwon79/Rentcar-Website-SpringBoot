@@ -363,6 +363,16 @@ public class MonthlyRentController {
                                 kilometer_cost, (String) morenObject.get("order_end"), monthlyrentIdx);
 
                         model.put("morenDto", morenDto);
+
+                        Integer tax = (int)(Integer.parseInt(kilometer_cost) * 0.1);
+                        Integer amount_total = (int)(Integer.parseInt(kilometer_cost) * 1.1);
+                        Integer amount_deposited = amount_total + 300000 + 100000;
+
+                        // 프론트로 금액 정보 전달
+                        model.put("tax", tax);
+                        model.put("amount_total", amount_total);
+                        model.put("amount_deposited", amount_deposited);
+
                         break;
 
                     }
@@ -373,6 +383,7 @@ public class MonthlyRentController {
         } catch (IOException e){
             e.printStackTrace();
         }
+
 
 
         return "rent_month2_detail";

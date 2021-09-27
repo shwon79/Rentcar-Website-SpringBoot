@@ -240,11 +240,14 @@ label { }
     color: #fff; background-color: #13a0b2; border-color: #13a0b2;
 }
 
+
+.btn5-default {  color: black; background-color:#b7e5d7; }
+.btn5-default:hover {  color: black; background-color: #fff; border:  1px solid #d82229; }
+.btn5-default.focus, .btn2-default:focus {  color: black; background-color: #fff; border: 1px solid #d82229; }
+
 .btn-clicked {
     color: #fff; background-color: #13a0b2; border-color: #13a0b2;
 }
-/*a:visited { background-color: #13a0b2; }*/
-a:focus { background-color: #cc0; }
 
 
 /*-----------------------------------
