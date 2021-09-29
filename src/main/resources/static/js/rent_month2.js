@@ -45,8 +45,7 @@ const reserveMonthlyRent = () => {
 
     const addressKakao = document.getElementById('address_kakao').value;
     const addressKakaoDetail = document.getElementById('address_kakao_detail').value;
-
-
+    // ftp://itscar@itscar.cafe24.com/tomcat/webapps/manager/images/add.gif
 
     console.log(reservationDetailName)
     console.log(reservationDetailPhone)

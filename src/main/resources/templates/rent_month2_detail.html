@@ -53,50 +53,45 @@
             <div class="row">
               <!-- car picture carousel -->
               <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 100%">
+                <div th:if="${#lists.size(morenDto.carImageList) == 0}" id="carousel-example-empty" class="carousel slide" data-ride="carousel" style="height: 100%">
                   <!-- Indicators -->
-                  <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                  <ol class="carousel-indicators" >
+                    <li data-target="#carousel-example-generic"  data-slide-to="0" class="active"></li>
                   </ol>
 
                   <!-- Wrapper for slides -->
                   <div class="carousel-inner" role="listbox" style="height: 100%">
-                    <!-- 메인 사진1 -->
+                    <!-- 사진 -->
                     <div class="item active">
-                      <img th:src="@{/img/medium_car.png}" alt="...">
-                      <div class="carousel-caption">
-                        ...
-                      </div>
-                    </div>
-                    <!-- 사진2 -->
-                    <div class="item">
-                      <img th:src="@{/img/medium_car.png}" alt="...">
-                      <div class="carousel-caption">
-                        ...
-                      </div>
-                    </div>
-                    <!-- 사진3 -->
-                    <div class="item">
-                      <img th:src="@{/img/medium_car.png}" alt="...">
-                      <div class="carousel-caption">
-                        ...
-                      </div>
+                      <img th:src="@{/img/medium_car.png}" alt="...">  <!-- 준비중 사진으로 변경 -->
                     </div>
                   </div>
-
-                  <!-- Controls -->
-                  <!-- 좌/우 버튼 -->
-                  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
                 </div>
+                <div th:unless="${#lists.size(morenDto.carImageList) == 0}" id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 100%">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators" >
+                    <li data-target="#carousel-example-generic"  th:each="image_url, iterStat: ${morenDto.carImageList}" th:data-slide-to="${iterStat.index}" th:class="${iterStat.index} == 0 ? 'active' : ''"></li>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox" style="height: 100%">
+                    <!-- 사진 -->
+                    <div th:each="image_url, iterStat: ${morenDto.carImageList}"  th:class="${iterStat.index} == 0 ? 'item active' : 'item'">
+                      <img th:src="${image_url}" alt="...">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Controls -->
+                <!-- 좌/우 버튼 -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
               </div>
 
               <!-- infos -->

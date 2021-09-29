@@ -121,6 +121,16 @@ public class MonthlyRentController {
                             JSONObject morenObject = (JSONObject)list_json_array.get(i);
                             Long carOld = Long.parseLong((String)((JSONObject)list_json_array.get(i)).get("carOld"));
 
+
+                            // 차량 이미지
+                            List<String> carList = new ArrayList<>();
+
+                            if (!morenObject.get("carThumbImages").equals(null)) {
+                                JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
+                                for (int j = 0; j < carJsonArray.length(); j++) {
+                                    carList.add((String) carJsonArray.get(j));
+                                }
+                            }
                             try {
                                 // 자체 db에서 가격 정보 가져오기
                                 MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld,carOld, (String)((JSONObject)list_json_array.get(i)).get("carCategory"));
@@ -129,7 +139,7 @@ public class MonthlyRentController {
                                                                 (String)morenObject.get("carNo"),(String)morenObject.get("carExteriorColor"),(String)morenObject.get("carGubun"),
                                                                 (String)morenObject.get("carDisplacement"),(String)morenObject.get("carMileaget"),(String)morenObject.get("carColor"),
                                                                 (String)morenObject.get("carOld"),(String)morenObject.get("carEngine"),(String)morenObject.get("carAttribute01"),
-                                                                monthlyRent2.getCost_for_2k(), (String)morenObject.get("order_end"), monthlyRent2.getId());
+                                                                monthlyRent2.getCost_for_2k(), (String)morenObject.get("order_end"), monthlyRent2.getId(), carList);
                                 morenDtoList.add(moren);
 
                             } catch (Exception e){
@@ -228,8 +238,17 @@ public class MonthlyRentController {
                             if(realTimeDto.getCarType().equals("전체") || realTimeDto.getCarType().equals((String)morenObject.get("carGubun"))) {
 
                                 total_num += 1;
-
                                 Long carOld = Long.parseLong((String) ((JSONObject) list_json_array.get(i)).get("carOld"));
+
+                                // 차량 이미지
+                                List<String> carList = new ArrayList<>();
+
+                                if (!morenObject.get("carThumbImages").equals(null)) {
+                                    JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
+                                    for (int j = 0; j < carJsonArray.length(); j++) {
+                                        carList.add((String) carJsonArray.get(j));
+                                    }
+                                }
 
                                 try {
                                     // 자체 db에서 가격 정보 가져오기
@@ -251,7 +270,7 @@ public class MonthlyRentController {
                                             (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                             (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                             (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                            kilometer_cost, (String) morenObject.get("order_end"), monthlyRent2.getId());
+                                            kilometer_cost, (String) morenObject.get("order_end"), monthlyRent2.getId(), carList);
                                     morenDtoList.add(moren);
 
                                 } catch (Exception e) {
@@ -356,11 +375,25 @@ public class MonthlyRentController {
 
                     if(morenObject.get("carIdx").equals(carIdx)){
 
+                        // 차량 이미지
+                        List<String> carList = new ArrayList<>();
+
+                        if (!morenObject.get("carThumbImages").equals(null)) {
+                            JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
+                            for (int j = 0; j < carJsonArray.length(); j++) {
+                                carList.add((String) carJsonArray.get(j));
+                            }
+
+                            model.put("lenOfPictures", carJsonArray.length());
+                        } else {
+                            model.put("lenOfPictures", 0);
+                        }
+
                         MorenDto morenDto = new MorenDto((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
                                 (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                 (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                kilometer_cost, (String) morenObject.get("order_end"), monthlyrentIdx);
+                                kilometer_cost, (String) morenObject.get("order_end"), monthlyrentIdx, carList);
 
                         model.put("morenDto", morenDto);
 
