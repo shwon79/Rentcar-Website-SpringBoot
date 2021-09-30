@@ -34,7 +34,26 @@
     </div>
 
     <div class="content" style="padding-top: 60px">
+
         <div class="container">
+            <div id="car_card_list" class="row">
+                <a href="https://cafe.naver.com/savecar0/7">
+                    <div class="car_cards">
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img th:src="@{/img/foreign_car.png}" />
+                        </div>
+                        <!-- text -->
+                        <div>
+                            <p class="car_card_type"><span>제네시스 G80</span></p>
+                            <p><span>보증금 </span> : 2,500,000원</p>
+                            <p><span>월렌트료 </span> : 962,000원</p>
+                            <p><span>주행거리 </span> : 104,118km</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
             <p align="center" style="color: red; font-weight: bold;">* 필요한 부분까지만 선택하고 상담신청 하셔도 정보가 전달됩니다.</p>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
@@ -115,10 +134,6 @@
                                             <span class="span-control">
                                                 <label class="control-label" for="kliometer">약정주행거리[연간]</label>
                                             </span>
-<!--                                            <span class="span-input">-->
-<!--                                                <input type="text" placeholder="주행거리를 입력하세요." class="form-control-span2" id="select-mileage">-->
-<!--&lt;!&ndash;                                                <label> &nbsp; km </label>&ndash;&gt;-->
-<!--                                            </span>-->
                                             <select name="selectMileage" id="select-mileage" class="form-control-select2">
                                                 <option value="미선택">--주행거리를 선택해주세요--</option>
                                                 <option value="20000km">20000km</option>

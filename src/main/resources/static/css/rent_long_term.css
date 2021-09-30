@@ -1,0 +1,96 @@
+#car_card_list {
+    margin: 40px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.car_cards {
+    background: lightyellow;
+    margin: 20px;
+    width: 250px;
+    padding: 5px;
+    border: 1px solid #e3e3e382;
+}
+
+.car_cards:hover {
+    box-shadow: 5px 5px 30px #707070;
+}
+
+.car_cards p {
+    font-size: 15px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+
+.car_card_type {
+    font-family: 'FontAwesome';
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e2e2e2;
+    color: #0c8686;
+}
+
+.car_card_img {
+    height: 130px;
+    margin: 5px;
+}
+
+.car_card_img img {
+    height: 100%;
+    width: 100%;
+}
+
+/* 페이지 이동 버튼 css */
+.long_term_page {
+    border-bottom: 1px solid lightgray;
+}
+
+.long_term_page button {
+    padding: 15px 25px;
+    font-size: 17px;
+    width: 170px;
+    background: white;
+    border: none;
+    border-top: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    border-top-left-radius: 0.5vh;
+    border-top-right-radius: 0.5vh;
+}
+
+#new_long_page_btn {
+    background: lightyellow;
+}
+
+.long_term_page button:hover {
+    background: lightyellow;
+}
+
+/*  */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 0;
+    }
+
+    .long_term_page button {
+        width: 40%;
+        font-size: 1em;
+    }
+
+    .car_cards {
+        width: 40vw;
+        font-size: 1em;
+        margin: 5px;
+    }
+
+    .car_cards div p {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
