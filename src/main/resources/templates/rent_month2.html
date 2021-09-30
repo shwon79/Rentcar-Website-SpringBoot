@@ -14,7 +14,8 @@
     <script>
 
         $(document).ready(function(){
-
+            sortContent(8)
+            sortContent(8)
         });
     </script>
     <script th:src="@{/js/rent_month2.js}" defer></script>
@@ -160,21 +161,21 @@
                         <thead id="table_header">
                             <tr>
                                 <th></th>
-<!--                                <th>차종<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>-->
+                                <th>차량번호<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>
                                 <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>
-                                <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(2)></th>
-                                <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(3)></th>
-                                <th>신차등록일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(4)></th>
-                                <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
-                                <th>월대여료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
-                                <th>반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
+                                <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(3)></th>
+                                <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(4)></th>
+                                <th>신차등록일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
+                                <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
+                                <th>월대여료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
+                                <th>반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(8)></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody id="mainTable_tbody">
                             <tr th:each="moren, iterStat : ${morenDtoList}">
                                 <td scope="col" th:text="${moren.carIdx}"></td>
-<!--                                <td scope="col" th:text="${moren.carGubun}"></td>-->
+                                <td scope="col" th:text="${moren.carNo}"></td>
                                 <td scope="col" th:text="${moren.carName}"></td>
                                 <td scope="col" th:text="${moren.carEngine}"></td>
                                 <td scope="col" th:text="${moren.carExteriorColor}"></td>
