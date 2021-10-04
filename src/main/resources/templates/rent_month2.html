@@ -24,7 +24,7 @@
 <body>
 <div layout:fragment="content">
 
-    <div class="monthly_content container-fluid pinside60" style="padding: 100px;">
+    <div class="monthly_content container-fluid pinside60">
 
         <!-- title row -->
         <div class="row">
@@ -38,7 +38,7 @@
                     </div>
                     <!-- descriptions (collapse panel) -->
                     <div >
-                        <h3>세이브카의 월렌트는?</h3>
+                        <h3>세이브카의 실시간 월렌트는?</h3>
                         <div >
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                 <div class="panel panel-default">
@@ -58,7 +58,7 @@
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                         <div class="panel-heading" role="tab" id="headingTwo">
                                             <h4 class="panel-title">
-                                                세이브카의 수도권 및 지역별 월렌트 차량수령 방문위치 안내드립니다
+                                                실시간으로 세이브카의 예약가능차량을 조회해보실 수 있습니다.
                                             </h4>
                                         </div>
                                     </a>
@@ -71,7 +71,7 @@
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                         <div class="panel-heading" role="tab" id="headingThree">
                                             <h4 class="panel-title">
-                                                계약 준비 시 필요한 서류와 계약서 작성시 필요한 준비물 입니다.
+                                                입고예정차량은 3일 이내 반납 예정인 차량입니다.
                                             </h4>
                                         </div>
                                     </a>
@@ -168,8 +168,8 @@
                                 <th>신차등록일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
                                 <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
                                 <th>월대여료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
-                                <th>반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(8)></th>
-                                <th></th>
+                                <th th:if="${reservation} == 'expected'">반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(8)></th>
+<!--                                <th></th>-->
                             </tr>
                         </thead>
                         <tbody id="mainTable_tbody">
@@ -182,8 +182,8 @@
                                 <td scope="col" th:text="${moren.carOld}"></td>
                                 <td scope="col" th:text="${moren.carMileaget}"></td>
                                 <td scope="col" th:text="${moren.carPrice}"></td>
-                                <td scope="col" th:text="${moren.orderEnd}"></td>
-                                <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button >상세 페이지</button></a></td>
+                                <td th:if="${reservation} == 'expected'" scope="col" th:text="${moren.orderEnd}"></td>
+<!--                                <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button >상세 페이지</button></a></td>-->
                             </tr>
                         </tbody>
                     </table>

@@ -49,3 +49,15 @@
 #table_header {
     background-color: #b3b0ac;
 }
+
+.monthly_content {
+    padding: 120px 60px 60px;
+}
+
+@media (max-width: 600px) {
+
+    .monthly_content {
+        padding: 120px 30px 30px;
+    }
+
+}
