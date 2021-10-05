@@ -59,7 +59,7 @@ const reserveMonthlyRent = () => {
 
 
 
-    if (customName != '' && phoneNum!='' && depositName!='' && check1 == true ) {
+    if (reservationDetailName != '' && reservationDetailPhone!='' && reservationDetailDate!='' && reservationDetailTime != '' &&  addressKakao != '' && addressKakaoDetail != '') {
         let finalDate = {
             'carType': carType,
             'rentDate': rentDateNum,
@@ -99,9 +99,68 @@ const reserveMonthlyRent = () => {
                 })
             // .catch(err => console.error('Error: ', err))
         }
-    } else if (customName == '' || phoneNum=='' || depositName=='') {
+    } else if (reservationDetailName == '' || reservationDetailPhone=='' || reservationDetailDate=='' || reservationDetailTime=='' || addressKakao == '' || addressKakaoDetail == '' ) {
         alert('입력을 완료해주세요!')
     } else if (check1 != true || check2 != true || check3 != true || check4 != true) {
         alert('동의를 완료해주세요!')
     }
+}
+
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+
+
+
+
+// 이미지 서버에 올리기
+function upload_image() {
+
+    var file = document.querySelector('#files > input[type="file"]').files[0];
+    getBase64(file).then(
+        data => console.log(data)
+    );
+
+    // if (document.getElementById("reservation-detail-name").value == ""){
+    //     alert('성함을 입력해주세요.')
+    //     return
+    // }
+    //
+    // if (document.getElementById("reservation-detail-phone").value == ""){
+    //     alert('전화번호를 입력해주세요.')
+    //     return
+    // }
+    //
+    //
+    // var data = {
+    //     name : $("#reservation-detail-name").val(),
+    //     phoneNo : $("#reservation-detail-phone").val(),
+    //     detail : $("#reservation-detail-details").val(),
+    //     title : "간편상담신청",
+    //     car_name : $("#reservation-detail-carname").val(),
+    //     mileage : $("#reservation-detail-region").val(),
+    //     option : $("#reservation-detail-resdate").val()
+    // };
+    //
+    // var checkbox = document.getElementById("agree")
+    // if(checkbox.checked) {
+    //     $.ajax({
+    //         type : 'POST',
+    //         url : '/reservation/apply',
+    //         dataType : 'json',
+    //         contentType : 'application/json; charset=utf-8',
+    //         data : JSON.stringify(data)
+    //     }).done(function () {
+    //         alert('예약이 완료되었습니다.');
+    //     }).fail(function (error) {
+    //         alert(JSON.stringify(error));
+    //     })
+    // } else{
+    //     alert("개인정보 수집 및 이용에 동의해주세요.");
+    // }
 }

@@ -27,4 +27,7 @@ public class YearlyRentService {
     public YearlyRent findPrice(String name){
         return yearlyRentRepository.findByName(name);
     }
+    public YearlyRent findByMorenCar(Long start, Long end, String name){
+        return yearlyRentRepository.findByEndGreaterThanEqualAndStartIsLessThanEqualAndNameMoren(end, start, name);
+    }
 }

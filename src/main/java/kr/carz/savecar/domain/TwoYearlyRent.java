@@ -23,4 +23,8 @@ public class TwoYearlyRent {
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;
+
+    private String nameMoren;
+    private Long start;
+    private Long end;
 }

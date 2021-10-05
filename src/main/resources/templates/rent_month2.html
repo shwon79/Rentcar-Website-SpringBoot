@@ -112,6 +112,21 @@
                     </div>
                 </div><hr style="background: lightgrey; margin: 10px 0" />
 
+                <!-- 렌트기간 -->
+                <div class="row">
+                    <!-- left title -->
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <p>렌트기간</p>
+                    </div>
+                    <!-- selections -->
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="sel_term">
+                        <label for="term_month"><input type="radio" id="term_month" name="rentTerm" value="한달" onclick="sendData()" th:checked="${rentTerm} == '한달'">한달</label>
+                        <label for="term_one_year"><input type="radio" id="term_one_year" name="rentTerm" value="12개월" onclick="sendData()" th:checked="${rentTerm} == '12개월'">12개월</label>
+<!--                        <label for="term_two_year"><input type="radio" id="term_two_year" name="rentTerm" value="24개월" onclick="sendData()" th:checked="${rentTerm} == '24개월'">24개월</label>-->
+                    </div>
+                </div><hr style="background: lightgrey; margin: 10px 0" />
+
+
                 <!-- 약정 주행거리 -->
                 <!-- left title -->
                 <div class="row">
@@ -119,11 +134,18 @@
                         <p>약정 주행거리</p>
                     </div>
                     <!-- selections -->
-                    <div id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div th:if="${rentTerm} == '한달'" id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                         <label for="reg_2000"><input type="radio" id="reg_2000" name="kilometer" value="2000km" onclick="sendData()" th:checked="${kilometer} == '2000km'">2000km</label>
                         <label for="reg_2500"><input type="radio" id="reg_2500" name="kilometer" value="2500km" onclick="sendData()" th:checked="${kilometer} == '2500km'">2500km</label>
                         <label for="reg_3000"><input type="radio" id="reg_3000" name="kilometer" value="3000km" onclick="sendData()" th:checked="${kilometer} == '3000km'">3000km</label>
                         <label for="reg_4000"><input type="radio" id="reg_4000" name="kilometer" value="4000km" onclick="sendData()" th:checked="${kilometer} == '4000km'">4000km</label>
+                    </div>
+
+                    <!-- selections -->
+                    <div th:if="${rentTerm} == '12개월'" id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <label for="reg_20000"><input type="radio" id="reg_20000" name="kilometer" value="20000km" onclick="sendData()" th:checked="${kilometer} == '20000km'">20000km</label>
+                        <label for="reg_30000"><input type="radio" id="reg_30000" name="kilometer" value="30000km" onclick="sendData()" th:checked="${kilometer} == '30000km'">30000km</label>
+                        <label for="reg_40000"><input type="radio" id="reg_40000" name="kilometer" value="40000km" onclick="sendData()" th:checked="${kilometer} == '40000km'">40000km</label>
                     </div>
                 </div><hr style="background: lightgrey; margin: 10px 0" />
 

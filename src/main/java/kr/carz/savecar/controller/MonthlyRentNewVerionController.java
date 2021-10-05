@@ -149,6 +149,7 @@ public class MonthlyRentNewVerionController {
         model.put("carType", "전체");
         model.put("kilometer", "2000km");
         model.put("reservation", "possible");
+        model.put("rentTerm", "한달");
 
         // 총 대수 전달
         model.put("total_num", total_num);
@@ -161,6 +162,8 @@ public class MonthlyRentNewVerionController {
     // 조건별로 차종 데이터 전달
     @PostMapping("/rent/month/lookup")
     public String rent_month_lookup(ModelMap model, @ModelAttribute RealTimeDto realTimeDto) {
+
+
 
         // 모두의 렌터카 데이터 가져오기
         HttpURLConnection conn;
@@ -181,6 +184,10 @@ public class MonthlyRentNewVerionController {
         cal.add(Calendar.DATE, +3);
         String after_expected_date_format = df.format(cal.getTime());
 
+
+        // 키로미터 전달 -> 디폴트
+        model.put("kilometer", realTimeDto.getKilometer());
+
         try {
             String expected_day = "3";
             String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format + "&EXPECTED_DAY=" + expected_day;
@@ -190,9 +197,6 @@ public class MonthlyRentNewVerionController {
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
             conn.setRequestMethod("GET");
-            //conn.setDoOutput(true);
-
-            JSONObject commands = new JSONObject();
 
             int responseCode = conn.getResponseCode();
             if (responseCode == 400 || responseCode == 401 || responseCode == 500 ) {
@@ -242,24 +246,53 @@ public class MonthlyRentNewVerionController {
                                 try {
                                     // 자체 db에서 가격 정보 가져오기
                                     MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, (String) ((JSONObject) list_json_array.get(i)).get("carCategory"));
-                                    String kilometer_cost = monthlyRent2.getCost_for_2k();
+                                    YearlyRent yearlyRent = yearlyRentService.findByMorenCar(carOld, carOld, (String) ((JSONObject) list_json_array.get(i)).get("carCategory"));
 
-                                    // 키로수별
-                                    if (realTimeDto.getKilometer().equals("2000km")){
-                                        kilometer_cost = monthlyRent2.getCost_for_2k();
-                                    } else if (realTimeDto.getKilometer().equals("2500km")){
-                                        kilometer_cost = monthlyRent2.getCost_for_2_5k();
-                                    } else if (realTimeDto.getKilometer().equals("3000km")){
-                                        kilometer_cost = monthlyRent2.getCost_for_3k();
-                                    } else if (realTimeDto.getKilometer().equals("4000km")){
-                                        kilometer_cost = monthlyRent2.getCost_for_4k();
+                                    // 초기화 방법 다시 생각
+                                    String kilometer_cost = "0";
+                                    Long dbid = Long.parseLong("0");
+
+
+
+                                    // 렌트기간별
+                                    if (realTimeDto.getRentTerm().equals("한달")){
+
+                                        // 키로수별
+                                        if (realTimeDto.getKilometer().equals("2000km")){
+                                            kilometer_cost = monthlyRent2.getCost_for_2k();
+                                        } else if (realTimeDto.getKilometer().equals("2500km")){
+                                            kilometer_cost = monthlyRent2.getCost_for_2_5k();
+                                        } else if (realTimeDto.getKilometer().equals("3000km")){
+                                            kilometer_cost = monthlyRent2.getCost_for_3k();
+                                        } else if (realTimeDto.getKilometer().equals("4000km")){
+                                            kilometer_cost = monthlyRent2.getCost_for_4k();
+                                        } else {
+                                            kilometer_cost = monthlyRent2.getCost_for_2k();
+                                        }
+                                        dbid = monthlyRent2.getId();
+
+                                    } else if (realTimeDto.getRentTerm().equals("12개월")) {
+
+                                        // 키로수별
+                                        if (realTimeDto.getKilometer().equals("20000km")) {
+                                            kilometer_cost = yearlyRent.getCost_for_20k();
+                                        } else if (realTimeDto.getKilometer().equals("30000km")){
+                                            kilometer_cost = yearlyRent.getCost_for_30k();
+                                        } else if (realTimeDto.getKilometer().equals("40000km")){
+                                            kilometer_cost = yearlyRent.getCost_for_40k();
+                                        } else {
+                                            kilometer_cost = yearlyRent.getCost_for_20k();
+                                        }
+
+                                        dbid = yearlyRent.getId();
                                     }
+
 
                                     MorenDto moren = new MorenDto((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
                                             (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                             (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                             (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                            kilometer_cost, (String) morenObject.get("order_end"), monthlyRent2.getId(), carList);
+                                            kilometer_cost, (String) morenObject.get("order_end"), dbid, carList);
                                     morenDtoList.add(moren);
 
                                 } catch (Exception e) {
@@ -284,11 +317,29 @@ public class MonthlyRentNewVerionController {
 
         // 라디오버튼 데이터 전달
         model.put("carType", realTimeDto.getCarType());
-        model.put("kilometer", realTimeDto.getKilometer());
+
+        if (realTimeDto.getRentTerm().equals("12개월") || realTimeDto.getRentTerm().equals("24개월") ){
+
+            if (!realTimeDto.getKilometer().equals("20000km") && !realTimeDto.getKilometer().equals("30000km")  && !realTimeDto.getKilometer().equals("40000km")){
+                model.put("kilometer", "20000km");
+            } else {
+                model.put("kilometer", realTimeDto.getKilometer());
+            }
+        } else if (realTimeDto.getRentTerm().equals("한달")) {
+
+            if (!realTimeDto.getKilometer().equals("2000km") && !realTimeDto.getKilometer().equals("2500km") && !realTimeDto.getKilometer().equals("3000km")  && !realTimeDto.getKilometer().equals("4000km")){
+                model.put("kilometer", "2000km");
+            } else {
+                model.put("kilometer", realTimeDto.getKilometer());
+            }
+        }
+
         model.put("reservation", realTimeDto.getReserve_able());
+        model.put("rentTerm", realTimeDto.getRentTerm());
 
         // 총 대수 전달
         model.put("total_num", total_num);
+
 
         return "rent_month2";
     }

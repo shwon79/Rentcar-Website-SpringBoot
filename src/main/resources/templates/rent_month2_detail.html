@@ -63,7 +63,7 @@
                   <div class="carousel-inner" role="listbox" style="height: 100%">
                     <!-- 사진 -->
                     <div class="item active">
-                      <img th:src="@{/img/medium_car.png}" alt="...">  <!-- 준비중 사진으로 변경 -->
+                      <img src="https://i.ibb.co/42YQg9X/211005.png" alt="211005" border="0"> <!-- 준비중 사진으로 변경 -->
                     </div>
                   </div>
                 </div>
@@ -88,14 +88,15 @@
                   <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                   <span class="sr-only">Previous</span>
                 </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
+
               </div>
 
               <!-- infos -->
               <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="padding-top: 20px;">
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
                 <!-- info table -->
                 <div class="row">
                   <!-- table left -->
@@ -176,9 +177,9 @@
                 </div>
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
-                <div class="form-group has-feedback">
+                <div id="files" class="form-group has-feedback">
                   <label class="control-label" for="driver-license">* 운전면허증 첨부</label>
-                  <input type="file" id="driver-license" name="license" accept="image/png, image/jpeg, image/jpg" onChange="onFileUpload()">
+                  <input type="file" id="driver-license" name="license" accept="image/png, image/jpeg, image/jpg" onchange="upload_image()">
                 </div>
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
