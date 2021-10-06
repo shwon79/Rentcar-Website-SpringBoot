@@ -97,11 +97,11 @@
                 <!-- 차종 -->
                 <div class="row">
                     <!-- left title -->
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-lg-2 col-md-9 col-sm-12 col-xs-12">
                         <p>차종</p>
                     </div>
                     <!-- selections -->
-                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="sel_car">
+                    <div class="col-lg-10 col-md-11 col-sm-12 col-xs-12" id="sel_car">
                         <label for="car_all"><input type="radio" id="car_all" name="carType" value="전체" onclick="sendData()" th:checked="${carType} == '전체'">전체</label>
                         <label for="car_s"><input type="radio" id="car_s" name="carType" value="경차" onclick="sendData()" th:checked="${carType} == '경차'">경차</label>
                         <label for="car_sm"><input type="radio" id="car_sm" name="carType" value="준중형차" onclick="sendData()" th:checked="${carType} == '준중형차'">준중형</label>
@@ -115,7 +115,7 @@
                 <!-- 렌트기간 -->
                 <div class="row">
                     <!-- left title -->
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                         <p>렌트기간</p>
                     </div>
                     <!-- selections -->
@@ -130,7 +130,7 @@
                 <!-- 약정 주행거리 -->
                 <!-- left title -->
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                         <p>약정 주행거리</p>
                     </div>
                     <!-- selections -->
@@ -153,7 +153,7 @@
                     <!-- 대기 상황 -->
                 <div class="row">
                         <!-- left title -->
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                         <p>대여상태</p>
                     </div>
                     <!-- selections -->
@@ -184,14 +184,14 @@
                             <tr>
                                 <th></th>
                                 <th>차량번호<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>
-                                <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>
+                                <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; width: 25px; height: 25px; display: block; margin: 0 auto" onclick=sortContent(1)></th>
                                 <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(3)></th>
                                 <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(4)></th>
                                 <th>신차등록일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
                                 <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
                                 <th>월대여료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
                                 <th th:if="${reservation} == 'expected'">반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(8)></th>
-<!--                                <th></th>-->
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="mainTable_tbody">
@@ -205,10 +205,19 @@
                                 <td scope="col" th:text="${moren.carMileaget}"></td>
                                 <td scope="col" th:text="${moren.carPrice}"></td>
                                 <td th:if="${reservation} == 'expected'" scope="col" th:text="${moren.orderEnd}"></td>
-<!--                                <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button >상세 페이지</button></a></td>-->
+                                <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button >상세 페이지</button></a></td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div id="mobileCard">
+                    <div class="card" th:each="moren, iterStat : ${morenDtoList}">
+                        <h4 th:text="${moren.carName}"></h4>
+                        <p>차량 번호: <span th:text="${moren.carNo}"></span> | 색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
+                        <p>신차 등록일: <span th:text="${moren.carOld}"></span> | 주행거리: <span th:text="${moren.carMileaget}"></span>km</p>
+                        <p>월 대여료: <span th:text="${moren.carPrice}"></span></p>
+                        <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button>상세 페이지</button></a>
+                    </div>
                 </div>
             </div>
         </div>

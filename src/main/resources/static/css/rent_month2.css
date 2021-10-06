@@ -8,12 +8,17 @@
     border-radius: 0.5vh;
 }
 
+#select_wrapper input[type="radio"] {
+    margin-right: 4px;
+}
+
 #select_wrapper div {
     margin-bottom: 0;
 }
 
 #select_wrapper label {
     margin-bottom: 0;
+    width: 140px;
 }
 
 #sel_car {
@@ -22,28 +27,16 @@
     flex-wrap: wrap;
 }
 
-#sel_car label {
-    width: 240px;
-}
-
 #sel_reg {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-#sel_reg label {
-    width: 100px;
-}
-
 #sel_able {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-#sel_able label {
-    width: 240px;
 }
 
 #table_header {
@@ -54,10 +47,45 @@
     padding: 120px 60px 60px;
 }
 
+#mobileCard {
+    height: auto;
+    display: none;
+}
+
+#mobileCard .card {
+    width: 98%;
+    margin: 10px auto;
+    height: auto;
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
+    padding: 20px;
+}
+
+#mobileCard .card p {
+    margin-bottom: 5px;
+}
+
+#mobileCard .card h4 {
+    line-height: inherit;
+}
+
+.card button {
+    padding: 5px 30px;
+}
+
 @media (max-width: 600px) {
 
     .monthly_content {
         padding: 120px 30px 30px;
+    }
+
+    #mainTable table {
+        display: none;
+    }
+
+    #mobileCard {
+        height: auto;
+        display: block;
     }
 
 }
