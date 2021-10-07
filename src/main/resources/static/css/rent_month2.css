@@ -1,5 +1,12 @@
+* {
+    font-family: 'Nanum Gothic', sans-serif;
+}
 #title_wrapper {
     margin: 0;
+}
+
+.panel-title {
+    line-height: 2;
 }
 
 #select_wrapper {
@@ -19,6 +26,7 @@
 #select_wrapper label {
     margin-bottom: 0;
     width: 140px;
+    font-weight: 400;
 }
 
 #sel_car {
@@ -68,11 +76,13 @@
 
 #mobileCard .card h4 {
     line-height: inherit;
+    font-weight: 700;
 }
 
 .card button {
     padding: 5px 30px;
     margin: 0 30%;
+    word-break: keep-all;
 }
 
 @media (max-width: 600px) {
@@ -89,5 +99,10 @@
         height: auto;
         display: block;
     }
-
+    #sel_car label {
+        width: 65px;
+    }
+    #sel_term label, #sel_reg label, #sel_able label {
+        width: 120px;
+    }
 }

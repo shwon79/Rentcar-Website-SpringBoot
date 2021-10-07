@@ -9,3 +9,80 @@
     border-radius: 8px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
+
+.carousel-inner > .item > img {
+    width:100%;
+    height:500px;
+    max-height: 500px;
+    border-radius: 20px;
+}
+
+.carousel-control {
+    border-radius: 20px;
+}
+.info-card {
+    background-color: black;
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.info-card h1 {
+    color: white;
+    font-size: 48px;
+    text-align: center;
+    text-shadow: 5px 2px 10px rgba(232,232,232,0.82);
+}
+.info-card-left {
+    text-align: right;
+}
+
+.tel_info {
+    background-color: #4f4f4f;
+    color: white;
+    text-shadow: 2px 3px 4px rgba(232,232,232,0.82);
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 16px;
+    transform: translate(0, -50%);
+}
+.tel_info p {
+    font-size: 20px;
+}
+#info_detail hr {
+    color: black;
+    margin: 10px 0px;
+}
+
+.reservation-form {
+    border-radius: 16px;
+    background-color: black;
+}
+.form-title h3{
+    color: white;
+    text-align: center;
+}
+.fa-star-of-life {
+    font-size: 5px;
+    color: #ff0000;
+    vertical-align: top;
+}
+.control-label {
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .info-card h1 {
+        font-size: 30px;
+    }
+    .info_card {
+        padding: 30px 14px;
+    }
+    .tel_info {
+        width: 70%
+    }
+}
+
+
