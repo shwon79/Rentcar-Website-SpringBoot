@@ -29,14 +29,14 @@
 
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" style="width: 90%; margin:0 auto">
 
-  <div class="car_detail_content pinside40" style="padding-top: 100px; margin: 20px;">
+  <div class="car_detail_content" style="padding-top: 100px;">
     <div class="row">
       <div class="row">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
-          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>
+<!--          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>-->
           <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>
         </ul>
         <!-- Tab panes -->
@@ -44,8 +44,46 @@
           <!-- info car -->
           <div class="tab-pane active" id="info_car" >
             <div class="row justify-content-between">
+              <!-- infos -->
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" >
+                <!-- info table -->
+                <div class="row info-card">
+                  <div class="col-lg-12">
+                    <h1 th:text="${morenDto.carName}"></h1>
+                  </div>
+                  <hr style="border-top: 2px solid white;">
+                  <!-- table left -->
+                  <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 info-card-left">
+                    <p>연료</p>
+                    <p>신차등록년도</p>
+                    <p>주행거리</p>
+                    <p>차량번호</p>
+                    <p>배기량</p>
+                    <p>모델 연도</p>
+                    <p>색상</p>
+                    <p>소유자</p>
+                  </div>
+                  <!-- table right -->
+                  <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 info-card-right">
+                    <p th:text="${morenDto.carEngine}"></p>
+                    <p th:text="${morenDto.carOld}"></p>
+                    <p th:text="${morenDto.carMileaget}+'km'"></p>
+                    <p th:text="${morenDto.carNo}"></p>
+                    <p th:text="${morenDto.carDisplacement}"></p>
+                    <p th:text="${morenDto.carOld}"></p>
+                    <p th:text="${morenDto.carColor}"></p>
+                    <p>(주)세이브카</p>
+                  </div>
+                </div>
+                <div class="row justify-content-md-center">
+                  <div class="col-auto">
+                    <div class="tel_info"><p>문의: 1661-3331</p></div>
+                  </div>
+                </div>
+              </div>
+
               <!-- car picture carousel -->
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0; margin-right: 20px">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0; margin-left: 20px">
                 <div th:if="${#lists.size(morenDto.carImageList) == 0}" id="carousel-example-empty" class="carousel slide" data-ride="carousel" style="height: 100%">
                   <!-- Indicators -->
                   <ol class="carousel-indicators" >
@@ -95,44 +133,6 @@
 <!--                </div>-->
 <!--              </div>-->
 
-              <!-- infos -->
-              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" >
-
-                <!-- info table -->
-                <div class="row info-card">
-                  <div class="col-lg-12">
-                    <h1 th:text="${morenDto.carName}"></h1>
-                  </div>
-                  <hr style="border-top: 2px solid white;">
-                  <!-- table left -->
-                  <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 info-card-left">
-                    <p>연료</p>
-                    <p>신차등록년도</p>
-                    <p>주행거리</p>
-                    <p>차량번호</p>
-                    <p>배기량</p>
-                    <p>모델 연도</p>
-                    <p>색상</p>
-                    <p>소유자</p>
-                  </div>
-                  <!-- table right -->
-                  <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 info-card-right">
-                    <p th:text="${morenDto.carEngine}"></p>
-                    <p th:text="${morenDto.carOld}"></p>
-                    <p th:text="${morenDto.carMileaget}+'km'"></p>
-                    <p th:text="${morenDto.carNo}"></p>
-                    <p th:text="${morenDto.carDisplacement}"></p>
-                    <p th:text="${morenDto.carOld}"></p>
-                    <p th:text="${morenDto.carColor}"></p>
-                    <p>(주)세이브카</p>
-                  </div>
-                </div>
-                <div class="row justify-content-md-center">
-                  <div class="col-auto">
-                    <div class="tel_info"><p>문의: 1661-3331</p></div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -140,20 +140,20 @@
           <div class="tab-pane" id="info_detail">
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <h1 th:text="${morenDto.carName}"></h1>
-                <hr style="color: #000000;">
+                <h1 th:text="${morenDto.carName}" class="car_name"></h1>
+                <hr style="border-top: 2px solid#000000;">
                 <div class="info_table"><p>공급가  <span th:text="${morenDto.carPrice}"></span><span>원</span></p></div>
                 <div class="info_table"><p>부가세  <span th:text="${tax}"></span><span>원</span></p></div>
                 <div class="info_table"><p>월대여료  <span th:text="${amount_total}"></span><span>원</span></p></div>
                 <div class="info_table"><p>보증금  <span>300,000원</span></p></div>
                 <div class="info_table"><p>예약금  <span>100,000원</span></p></div>
                 <div class="info_table"><p>총 입금하실 금액  <span th:text="${amount_deposited}"></span><span>원</span></p></div>
-                <hr style="color: #000000;">
+                <hr style="border-top: 2px solid#000000;">
                 <div class="form-group has-feedback">
                   <label class="control-label" for="name" style="color: black; font-size: 40px; text-align: center; display: block; margin: 30px;">계좌이체</label>
                   <h2 style="text-align: center">하나은행 810-626121-01404<br>(주)세이브카</h2>
                 </div>
-                <p>* 입금이 확인되면 예약이 확정되고 확인 문자가 전송됩니다.</p>
+                <p style="text-align: center;">* 입금이 확인되면<br>예약이 확정되고<br>확인 문자가 전송됩니다.</p>
               </div>
               <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pinside10 reservation-form">
                 <div class="form-title">
@@ -205,8 +205,7 @@
                   <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요."></textarea>
                 </div>
                 <div>
-                  <h3 class="text-left">약관 동의</h3>
-                  <hr style="margin: 0 0 20px 0" />
+                  <h3 class="text-left" style="color: white; font-size: 15px;">약관 동의</h3>
                 </div>
                 <div>
                   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -214,7 +213,7 @@
                     <div class="panel panel-default">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                         <div class="panel-heading" role="tab" id="headingOne">
-                          <h4 class="panel-title">
+                          <h4 class="panel-title" style="text-align: center;">
                             개인정보 및 렌트 이용규칙에 대한 동의
                           </h4>
                         </div>
@@ -270,7 +269,7 @@
                         </div>
                       </div>
                     </div>
-                    <p class="checkboxes"><input id="check_info" type="checkbox" value="rent"/>약관에 동의합니다</p>
+                    <p class="checkboxes" style="text-align: right; color: white; font-size: 16px; margin-top: 12px;">약관에 동의합니다 <input id="check_info" type="checkbox" value="rent" style="width: 20px; height: 20px; margin-left: 6px; vertical-align: sub;"/></p>
                     <!--                                &lt;!&ndash; 4번째 동의 &ndash;&gt;-->
                     <!--                                <div class="panel panel-default">-->
                     <!--                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">-->
@@ -292,18 +291,11 @@
                     <!--                            </div>-->
                   </div>
                 </div>
+                <!-- 예약 버튼 -->
+                <button id="btn_final" type="button" onclick="reserveMonthlyRent()" class="col align-self-center">예약하기</button>
               </div>
             </div>
 
-
-            <!-- 예약 버튼 -->
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pinside10">
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pinside10 text-center">
-                <button id="btn_final" type="button" onclick="reserveMonthlyRent()">예약하기</button>
-              </div>
-            </div>
           </div>
         </div>
       </div>

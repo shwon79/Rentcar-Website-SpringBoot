@@ -1,6 +1,7 @@
 * {
     font-family: 'Nanum Gothic', sans-serif;
 }
+
 #title_wrapper {
     margin: 0;
 }
@@ -99,9 +100,11 @@
         height: auto;
         display: block;
     }
+
     #sel_car label {
         width: 65px;
     }
+
     #sel_term label, #sel_reg label, #sel_able label {
         width: 120px;
     }

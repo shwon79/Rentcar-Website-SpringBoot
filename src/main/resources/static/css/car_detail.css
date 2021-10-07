@@ -1,13 +1,16 @@
 .nav-tabs {
     border: none;
+    text-align: right;
 }
 
 .nav-tabs button {
     background-color: black;
     color: white;
-    padding: 8px 24px;
+    border: none;
+    padding: 18px 30px;
     border-radius: 8px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
+    font-size: 20px;
 }
 
 .carousel-inner > .item > img {
@@ -20,6 +23,7 @@
 .carousel-control {
     border-radius: 20px;
 }
+
 .info-card {
     background-color: black;
     color: white;
@@ -33,6 +37,7 @@
     text-align: center;
     text-shadow: 5px 2px 10px rgba(232,232,232,0.82);
 }
+
 .info-card-left {
     text-align: right;
 }
@@ -48,27 +53,47 @@
     border-radius: 16px;
     transform: translate(0, -50%);
 }
+
 .tel_info p {
     font-size: 20px;
 }
+
 #info_detail hr {
     color: black;
     margin: 10px 0px;
 }
 
+#info_detail .car_name {
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    border-radius: 16px;
+    text-shadow: 5px 2px 10px rgb(232 232 232 / 82%);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
 .reservation-form {
     border-radius: 16px;
     background-color: black;
+    padding: 30px;
 }
+
 .form-title h3{
     color: white;
     text-align: center;
 }
+
+.form-group {
+    margin: 30px 0px;
+}
+
 .fa-star-of-life {
     font-size: 5px;
     color: #ff0000;
     vertical-align: top;
 }
+
 .control-label {
     color: white;
 }
@@ -77,9 +102,11 @@
     .info-card h1 {
         font-size: 30px;
     }
+
     .info_card {
         padding: 30px 14px;
     }
+
     .tel_info {
         width: 70%
     }
