@@ -32,7 +32,8 @@ public class MorenDto {
                     String carNo, String carExteriorColor, String carGubun,
                     String carDisplacement, String carMileaget, String carColor,
                     String carOld, String carEngine, String carAttribute01,
-                    String carPrice, String orderEnd, Long monthlyrentIdx, List<String> carImageList) {
+                    String carPrice, String orderEnd, Long monthlyrentIdx,
+                    List<String> carImageList) {
         this.carIdx = carIdx;
         this.carCategory = carCategory;
         this.carName = carName;
