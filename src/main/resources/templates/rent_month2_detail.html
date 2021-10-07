@@ -55,13 +55,13 @@
                   <!-- table left -->
                   <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 info-card-left">
                     <p>연료</p>
-                    <p>신차등록년도</p>
+                    <p>년식</p>
                     <p>주행거리</p>
                     <p>차량번호</p>
                     <p>배기량</p>
                     <p>모델 연도</p>
                     <p>색상</p>
-                    <p>소유자</p>
+                    <p>옵션</p>
                   </div>
                   <!-- table right -->
                   <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 info-card-right">
@@ -72,7 +72,7 @@
                     <p th:text="${morenDto.carDisplacement}"></p>
                     <p th:text="${morenDto.carOld}"></p>
                     <p th:text="${morenDto.carColor}"></p>
-                    <p>(주)세이브카</p>
+                    <p th:text="${morenDto.carAttribute01}"></p>
                   </div>
                 </div>
                 <div class="row justify-content-md-center">

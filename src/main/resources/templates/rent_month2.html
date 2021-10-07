@@ -17,8 +17,9 @@
     <script>
 
         $(document).ready(function(){
-            sortContent(8)
-            sortContent(8)
+            // 반납예정일로 정렬
+            sortContent(7)
+            sortContent(7)
         });
     </script>
     <script th:src="@{/js/rent_month2.js}" defer></script>
@@ -85,6 +86,8 @@
                                 </div>
                             </div>
                         </div>
+                        <div>* 아래 목록에 없는 차량은 [상시차량 실시간 예약]으로 필요한 차량을 예약하세요</div>
+                        <div><a href="/rent/month"><button>상시차량 실시간 예약</button></a></div>
                     </div>
                 </div>
                 <!-- right col -->
@@ -187,15 +190,15 @@
                             <tr>
                                 <th></th>
                                 <th>차량번호<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>
-                                <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; width: 25px; height: 25px; display: block; margin: 0 auto" onclick=sortContent(1)></th>
+                                <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; width: 25px; height: 25px; display: block; margin: 0 auto" onclick=sortContent(2)></th>
                                 <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(3)></th>
                                 <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(4)></th>
-                                <th>신차등록일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
+                                <th>년식<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
 <!--                                <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>-->
-                                <th>월대여료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
-                                <th th:if="${reservation} == 'expected'">반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(8)></th>
-                                <th></th>
-                            </tr>
+                                <th>월대여료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
+                                th th:if="${reservation} == 'expected'">반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
+                                <!--                                <th></th>-->
+                            </tr><
                         </thead>
                         <tbody id="mainTable_tbody">
                             <tr th:each="moren, iterStat : ${morenDtoList}">
