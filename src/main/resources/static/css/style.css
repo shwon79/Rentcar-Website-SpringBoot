@@ -961,7 +961,7 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
-    .fixed_phone_btn { top: 85% }
+    .fixed_phone_btn { top: 85%; display: none; }
 }
 
 /* Medium Devices, Desktops */
@@ -983,8 +983,9 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
-    .fixed_phone_btn { top: 85% }
-}
+    .fixed_phone_btn { top: 85%; }
+    .fixed_phone_pc_btn { display: none; }
+    }
 
 /* Small Devices, Tablets */
 @media only screen and (max-width:768px) {
@@ -1006,7 +1007,8 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
-    .fixed_phone_btn { top: 83% }
+    .fixed_phone_btn { top: 83%; }
+    .fixed_phone_pc_btn { display: none; }
 }
 
 /* Extra Small Devices, Phones */
@@ -1029,7 +1031,8 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
-    .fixed_phone_btn { top: 81% }
+    .fixed_phone_btn { top: 81%; }
+    .fixed_phone_pc_btn { display: none; }
 }
 
 
@@ -1054,7 +1057,8 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
-    .fixed_phone_btn { top: 80% }
+    .fixed_phone_btn { top: 80%; }
+    .fixed_phone_pc_btn { display: none; }
 }
 
 

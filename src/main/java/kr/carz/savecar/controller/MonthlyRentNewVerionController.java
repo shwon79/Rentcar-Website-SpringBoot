@@ -72,9 +72,6 @@ public class MonthlyRentNewVerionController {
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
             conn.setRequestMethod("GET");
-            //conn.setDoOutput(true);
-
-            JSONObject commands = new JSONObject();
 
             int responseCode = conn.getResponseCode();
             if (responseCode == 400 || responseCode == 401 || responseCode == 500 ) {
