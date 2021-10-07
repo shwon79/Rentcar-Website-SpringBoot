@@ -220,13 +220,25 @@ public class MonthlyRentNewVerionController {
                             }
                             try {
                                 // 자체 db에서 가격 정보 가져오기
+                                String default_price = new String();
+
                                 MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld,carOld, (String)((JSONObject)list_json_array.get(i)).get("carCategory"));
+                                YearlyRent yearlyRent = yearlyRentService.findByMorenCar(carOld, carOld, (String)((JSONObject)list_json_array.get(i)).get("carCategory"));
+                                TwoYearlyRent twoYearlyRent = twoYearlyRentService.findByMorenCar(carOld, carOld, (String)((JSONObject)list_json_array.get(i)).get("carCategory"));
+
+                                if (period.equals("한달")){
+                                    default_price = monthlyRent2.getCost_for_2k();
+                                } else if(period.equals("12개월")){
+                                    default_price = yearlyRent.getCost_for_20k();
+                                } else if(period.equals("24개월")){
+                                    default_price = twoYearlyRent.getCost_for_20Tk();
+                                }
 
                                 MorenDto moren = new MorenDto((String)morenObject.get("carIdx"),(String)morenObject.get("carCategory"),(String)morenObject.get("carName"),
                                         (String)morenObject.get("carNo"),(String)morenObject.get("carExteriorColor"),(String)morenObject.get("carGubun"),
                                         (String)morenObject.get("carDisplacement"),(String)morenObject.get("carMileaget"),(String)morenObject.get("carColor"),
                                         (String)morenObject.get("carOld"),(String)morenObject.get("carEngine"),(String)morenObject.get("carAttribute01"),
-                                        monthlyRent2.getCost_for_2k(), (String)morenObject.get("order_end"), monthlyRent2.getId(), carList);
+                                        default_price, (String)morenObject.get("order_end"), monthlyRent2.getId(), carList);
                                 morenDtoList.add(moren);
 
                             } catch (Exception e){
@@ -252,7 +264,11 @@ public class MonthlyRentNewVerionController {
 
         // 라디오버튼 디폴트 데이터 전달
         model.put("carType", "전체");
-        model.put("kilometer", "2000km");
+        if(period.equals("한달")){
+            model.put("kilometer", "2000km");
+        } else {
+            model.put("kilometer", "20000km");
+        }
         model.put("reservation", "possible");
         model.put("rentTerm", period);
 
