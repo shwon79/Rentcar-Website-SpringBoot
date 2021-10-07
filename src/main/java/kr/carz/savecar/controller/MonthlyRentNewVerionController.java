@@ -46,7 +46,7 @@ public class MonthlyRentNewVerionController {
     /*                               [New 버전] 실시간 견적내기                                    */
     /* ======================================================================================== */
 
-    @GetMapping("/rent/month/test")
+    @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
 
         // 모두의 렌터카 데이터 가져오기
@@ -154,6 +154,117 @@ public class MonthlyRentNewVerionController {
         return "rent_month2";
     }
 
+    @GetMapping("/rent/month/new/{period}")
+    public String rent_month(ModelMap model, @PathVariable String period) {
+
+        // 모두의 렌터카 데이터 가져오기
+        HttpURLConnection conn;
+        JSONObject responseJson;
+
+        // 총 대수
+        Integer total_num = 0;
+
+        // 모렌 데이터 객체 생성
+        List<MorenDto> morenDtoList = new ArrayList<MorenDto>();
+
+        // 오늘 날짜
+        Date time = new Date();
+        SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+        String today_format = format.format(time);
+
+        try {
+            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format;
+            URL url = new URL(today_url);
+
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            conn.setRequestMethod("GET");
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 400 || responseCode == 401 || responseCode == 500 ) {
+                System.out.println(responseCode + " Error!");
+            } else {
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                // list 가져오기
+                responseJson = new JSONObject(sb.toString());
+                JSONArray list_json_array = (JSONArray) responseJson.get("list");
+
+                // list 안에 데이터
+                for(int i=0; i<list_json_array.length(); i++){
+
+                    try {
+                        // 예약 안 잡히고, 서있는 차만
+                        if ((Integer) ((JSONObject)list_json_array.get(i)).get("order_status") == 0){
+
+                            total_num += 1;
+
+                            JSONObject morenObject = (JSONObject)list_json_array.get(i);
+                            Long carOld = Long.parseLong((String)((JSONObject)list_json_array.get(i)).get("carOld"));
+
+
+                            // 차량 이미지
+                            List<String> carList = new ArrayList<>();
+
+                            if (!morenObject.get("carThumbImages").equals(null)) {
+                                JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
+                                for (int j = 0; j < carJsonArray.length(); j++) {
+                                    carList.add((String) carJsonArray.get(j));
+                                }
+                            }
+                            try {
+                                // 자체 db에서 가격 정보 가져오기
+                                MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld,carOld, (String)((JSONObject)list_json_array.get(i)).get("carCategory"));
+
+                                MorenDto moren = new MorenDto((String)morenObject.get("carIdx"),(String)morenObject.get("carCategory"),(String)morenObject.get("carName"),
+                                        (String)morenObject.get("carNo"),(String)morenObject.get("carExteriorColor"),(String)morenObject.get("carGubun"),
+                                        (String)morenObject.get("carDisplacement"),(String)morenObject.get("carMileaget"),(String)morenObject.get("carColor"),
+                                        (String)morenObject.get("carOld"),(String)morenObject.get("carEngine"),(String)morenObject.get("carAttribute01"),
+                                        monthlyRent2.getCost_for_2k(), (String)morenObject.get("order_end"), monthlyRent2.getId(), carList);
+                                morenDtoList.add(moren);
+
+                            } catch (Exception e){
+                                System.out.println("Error ! 차량이름 모렌과 맞출 것 !");
+                                continue;
+                            }
+
+                        }
+                    } catch (ClassCastException e){
+                        continue;
+                    }
+                }
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+
+        // 모렌 데이터 프론트로 전달
+        model.put("morenDtoList", morenDtoList);
+
+        // 라디오버튼 디폴트 데이터 전달
+        model.put("carType", "전체");
+        model.put("kilometer", "2000km");
+        model.put("reservation", "possible");
+        model.put("rentTerm", period);
+
+        // 총 대수 전달
+        model.put("total_num", total_num);
+
+        return "rent_month2";
+    }
+
+
+
+
 
 
     // 조건별로 차종 데이터 전달
@@ -186,7 +297,7 @@ public class MonthlyRentNewVerionController {
         model.put("kilometer", realTimeDto.getKilometer());
 
         try {
-            String expected_day = "3";
+            String expected_day = "7";
             String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format + "&EXPECTED_DAY=" + expected_day;
             URL url = new URL(today_url);
 
@@ -367,7 +478,7 @@ public class MonthlyRentNewVerionController {
         model.put("today_format", today_format);
 
         try {
-            String expected_day = "3";
+            String expected_day = "7";
             String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format + "&EXPECTED_DAY=" + expected_day;
             URL url = new URL(today_url);
 
