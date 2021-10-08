@@ -109,6 +109,21 @@
     margin: 0 25%;
 }
 
+.to-prior-rent-month-text {
+    padding: 10px 0px;
+}
+.to-prior-rent-month-button-wrap {
+    margin-bottom: 20px;
+}
+.to-prior-rent-month-button {
+    background: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+
+
 @media (max-width: 600px) {
     .realtime-btn {
         margin-top: 10px;
@@ -134,5 +149,9 @@
 
     #sel_term label, #sel_reg label, #sel_able label {
         width: 120px;
+    }
+
+    .not-show-in-mobile {
+        display: none;
     }
 }

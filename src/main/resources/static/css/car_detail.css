@@ -136,6 +136,7 @@
     color: white;
 }
 
+
 @media (max-width: 600px) {
     .nav-tabs button {
         right: 7%;
