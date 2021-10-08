@@ -29,23 +29,24 @@
 
 </head>
 <body>
-<div layout:fragment="content" style="width: 90%; margin:0 auto">
+<div layout:fragment="content" style="width: 86%; margin:0 auto">
 
   <div class="car_detail_content" style="padding-top: 100px;">
     <div class="row">
       <div class="row">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="height: 50px;">
+          <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
 <!--          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>-->
-          <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>
+<!--          <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>-->
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content" style="padding: 20px;">
+        <div class="tab-content" style="width: 86%; margin: 0 auto">
           <!-- info car -->
-          <div class="tab-pane active" id="info_car" >
+          <div class="tab-pane active" id="info_car">
             <div class="row justify-content-between">
               <!-- infos -->
-              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" >
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                 <!-- info table -->
                 <div class="row info-card">
                   <div class="col-lg-12">
@@ -83,7 +84,7 @@
               </div>
 
               <!-- car picture carousel -->
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0; margin-left: 20px">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 car_img_carousel">
                 <div th:if="${#lists.size(morenDto.carImageList) == 0}" id="carousel-example-empty" class="carousel slide" data-ride="carousel" style="height: 100%">
                   <!-- Indicators -->
                   <ol class="carousel-indicators" >
@@ -94,7 +95,7 @@
                   <div class="carousel-inner" role="listbox" style="height: 100%">
                     <!-- 사진 -->
                     <div class="item active">
-                      <img src="https://i.ibb.co/42YQg9X/211005.png" alt="211005" border="0"> <!-- 준비중 사진으로 변경 -->
+                      <img src="https://i.ibb.co/crVgDSW/2021-10-08-3-21-07.png" alt="211005" border="0"> <!-- 준비중 사진으로 변경 -->
                     </div>
                   </div>
                 </div>

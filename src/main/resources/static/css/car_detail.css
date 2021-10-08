@@ -1,6 +1,6 @@
 .nav-tabs {
     border: none;
-    text-align: right;
+    /*text-align: right;*/
 }
 
 .nav-tabs button {
@@ -11,6 +11,14 @@
     border-radius: 8px;
     box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
     font-size: 20px;
+    right: 10%;
+    position: absolute;
+    margin-bottom: 10px;
+}
+
+.fa-arrow-left {
+    font-size: 40px;
+    vertical-align: middle;
 }
 
 .carousel-inner > .item > img {
@@ -57,7 +65,10 @@
 .tel_info p {
     font-size: 20px;
 }
-
+.car_img_carousel {
+    padding: 0;
+    margin-left: 20px;
+}
 #info_detail hr {
     color: black;
     margin: 10px 0px;
@@ -99,6 +110,18 @@
 }
 
 @media (max-width: 600px) {
+    .nav-tabs button {
+        right: 7%;
+        position: absolute;
+    }
+
+    .fa-arrow-left {
+        font-size: 30px;
+        position: absolute;
+        left: 7%;
+        vertical-align: -webkit-baseline-middle;
+    }
+
     .info-card h1 {
         font-size: 30px;
     }
@@ -109,6 +132,11 @@
 
     .tel_info {
         width: 70%
+    }
+
+    .car_img_carousel {
+        margin-left: 0;
+        margin-bottom: 30px;
     }
 }
 
