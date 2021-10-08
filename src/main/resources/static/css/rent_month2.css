@@ -6,10 +6,33 @@
     margin: 0;
 }
 
+.card {
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
+    padding: 12px;
+    margin: 10px 0px;
+}
 .panel-title {
     line-height: 2;
 }
-
+.realtime-info {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.realtime-btn {
+    border: none;
+    background-color: black;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    transition:all 0.5s;
+    word-break: keep-all;
+    margin: 20px 0;
+}
+.realtime-btn:hover {
+    transform: scale(1.05);
+}
 #select_wrapper {
     margin: 20px;
     border: 1px solid lightgray;
@@ -68,7 +91,7 @@
     border: 1px solid lightgray;
     border-radius: 0.5vh;
     padding: 20px;
-    background-color: #F9F9F9;
+    background-color: #fafafa;
 }
 
 #mobileCard .card p {
@@ -81,12 +104,16 @@
 }
 
 .card button {
-    padding: 5px 30px;
-    margin: 0 30%;
+    width: 50%;
     word-break: keep-all;
+    margin: 0 25%;
 }
 
 @media (max-width: 600px) {
+    .realtime-btn {
+        margin-top: 10px;
+        width: 100%
+    }
 
     .monthly_content {
         padding: 120px 30px 30px;

@@ -164,3 +164,15 @@ function upload_image() {
     //     alert("개인정보 수집 및 이용에 동의해주세요.");
     // }
 }
+
+//숫자 사이에 콤마 넣기
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// const numbers = document.querySelectorAll('.normNumber');
+// const numbersLength = numbers.length;
+//
+// for(let i=0; i < numbersLength; i++) {
+//     numberWithCommas(numbers[i].innerText);
+// }

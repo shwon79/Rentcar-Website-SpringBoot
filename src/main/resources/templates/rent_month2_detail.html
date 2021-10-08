@@ -35,7 +35,7 @@
     <div class="row">
       <div class="row">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" style="height: 50px;">
+        <ul class="nav nav-tabs">
           <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
 <!--          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>-->
 <!--          <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>-->
@@ -44,47 +44,9 @@
         <div class="tab-content" style="width: 86%; margin: 0 auto">
           <!-- info car -->
           <div class="tab-pane active" id="info_car">
-            <div class="row justify-content-between">
-              <!-- infos -->
-              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                <!-- info table -->
-                <div class="row info-card">
-                  <div class="col-lg-12">
-                    <h1 th:text="${morenDto.carName}"></h1>
-                  </div>
-                  <hr style="border-top: 2px solid white;">
-                  <!-- table left -->
-                  <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 info-card-left">
-                    <p>연료</p>
-                    <p>년식</p>
-                    <p>주행거리</p>
-                    <p>차량번호</p>
-                    <p>배기량</p>
-                    <p>모델 연도</p>
-                    <p>색상</p>
-                    <p>옵션</p>
-                  </div>
-                  <!-- table right -->
-                  <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 info-card-right">
-                    <p th:text="${morenDto.carEngine}"></p>
-                    <p th:text="${morenDto.carOld}"></p>
-                    <p th:text="${morenDto.carMileaget}+'km'"></p>
-                    <p th:text="${morenDto.carNo}"></p>
-                    <p th:text="${morenDto.carDisplacement}"></p>
-                    <p th:text="${morenDto.carOld}"></p>
-                    <p th:text="${morenDto.carColor}"></p>
-                    <p th:text="${morenDto.carAttribute01}"></p>
-                  </div>
-                </div>
-                <div class="row justify-content-md-center">
-                  <div class="col-auto">
-                    <div class="tel_info"><p>문의: 1661-3331</p></div>
-                  </div>
-                </div>
-              </div>
-
+            <div class="row">
               <!-- car picture carousel -->
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 car_img_carousel">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-md-push-6 car_img_carousel">
                 <div th:if="${#lists.size(morenDto.carImageList) == 0}" id="carousel-example-empty" class="carousel slide" data-ride="carousel" style="height: 100%">
                   <!-- Indicators -->
                   <ol class="carousel-indicators" >
@@ -124,8 +86,45 @@
                   <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                   <span class="sr-only">Next</span>
                 </a>
-
               </div>
+              <!-- infos -->
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-md-pull-6">
+                <!-- info table -->
+                <div class="row info-card">
+                  <div class="col-lg-12">
+                    <h1 th:text="${morenDto.carName}"></h1>
+                  </div>
+                  <hr style="border-top: 2px solid white;">
+                  <!-- table left -->
+                  <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 info-card-left">
+                    <p>연료</p>
+                    <p>년식</p>
+                    <p>주행거리</p>
+                    <p>차량번호</p>
+                    <p>배기량</p>
+                    <p>모델 연도</p>
+                    <p>색상</p>
+                    <p>옵션</p>
+                  </div>
+                  <!-- table right -->
+                  <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 info-card-right">
+                    <p th:text="${morenDto.carEngine}"></p>
+                    <p th:text="${morenDto.carOld}"></p>
+                    <p th:text="${morenDto.carMileaget}+'km'"></p>
+                    <p th:text="${morenDto.carNo}"></p>
+                    <p th:text="${morenDto.carDisplacement}"></p>
+                    <p th:text="${morenDto.carOld}"></p>
+                    <p th:text="${morenDto.carColor}"></p>
+                    <p th:text="${morenDto.carAttribute01}"></p>
+                  </div>
+                </div>
+                <div class="row justify-content-md-center">
+                  <div class="col-auto">
+                    <div class="tel_info"><p>문의: 1661-3331</p></div>
+                  </div>
+                </div>
+              </div>
+
 <!--              &lt;!&ndash; 예약 버튼 &ndash;&gt;-->
 <!--              <div class="row text-center">-->
 <!--                <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>-->
@@ -143,7 +142,7 @@
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <h1 th:text="${morenDto.carName}" class="car_name"></h1>
                 <hr style="border-top: 2px solid#000000;">
-                <div class="info_table"><p>공급가  <span th:text="${morenDto.carPrice}"></span><span>원</span></p></div>
+                <div class="info_table"><p>공급가  <span th:text="${morenDto.carPrice}" class="normNumber"></span><span>원</span></p></div>
                 <div class="info_table"><p>부가세  <span th:text="${tax}"></span><span>원</span></p></div>
                 <div class="info_table"><p>월대여료  <span th:text="${amount_total}"></span><span>원</span></p></div>
                 <div class="info_table"><p>보증금  <span>300,000원</span></p></div>
@@ -188,6 +187,13 @@
                 <div id="files" class="form-group has-feedback">
                   <label class="control-label" for="driver-license"><i class="fas fa-star-of-life"></i> 운전면허증 첨부</label>
                   <input type="file" id="driver-license" name="license" accept="image/png, image/jpeg, image/jpg" onchange="upload_image()">
+                </div>
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="">신용 보증</label>
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>신용카드 보유</option>
+                    <option>소득 증빙</option>
+                  </select>
                 </div>
                 <div class="form-group has-feedback">
                   <label class="control-label" for="address"><i class="fas fa-star-of-life"></i> 배차 받을 주소</label>
@@ -293,8 +299,9 @@
                   </div>
                 </div>
                 <!-- 예약 버튼 -->
-                <button id="btn_final" type="button" onclick="reserveMonthlyRent()" class="col align-self-center">예약하기</button>
+                <button id="btn_final" type="button" onclick="reserveMonthlyRent()" class="col">예약하기</button>
               </div>
+
             </div>
 
           </div>
