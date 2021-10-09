@@ -227,6 +227,7 @@
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
                         <p>신차 등록일: <span th:text="${moren.carOld}"></span></p>
                         <p>월 대여료: <span th:text="${moren.carPrice}"></span></p>
+                        <p th:if="${reservation} == 'expected'">반납예정일: <span th:text="${moren.orderEnd}"></span></p>
                         <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button>상세 페이지</button></a>
                     </div>
                 </div>

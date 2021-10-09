@@ -33,7 +33,7 @@
 
   <div class="car_detail_content" style="padding-top: 100px;">
     <div class="row">
-      <div class="row">
+      <div class="row" style="margin-bottom: 150px;">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
           <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
@@ -57,7 +57,7 @@
                   <div class="carousel-inner" role="listbox" style="height: 100%">
                     <!-- 사진 -->
                     <div class="item active">
-                      <img src="https://i.ibb.co/crVgDSW/2021-10-08-3-21-07.png" alt="211005" border="0"> <!-- 준비중 사진으로 변경 -->
+                      <img th:src="@{/img/picture_not_found.png}" alt="211005" border="0"> <!-- 준비중 사진으로 변경 -->
                     </div>
                   </div>
                 </div>
@@ -99,7 +99,7 @@
                   <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 info-card-left">
                     <p>연료</p>
                     <p>년식</p>
-                    <p>주행거리</p>
+<!--                    <p>주행거리</p>-->
                     <p>차량번호</p>
                     <p>배기량</p>
                     <p>모델 연도</p>
@@ -110,7 +110,7 @@
                   <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 info-card-right">
                     <p th:text="${morenDto.carEngine}"></p>
                     <p th:text="${morenDto.carOld}"></p>
-                    <p th:text="${morenDto.carMileaget}+'km'"></p>
+<!--                    <p th:text="${morenDto.carMileaget}+'km'"></p>-->
                     <p th:text="${morenDto.carNo}"></p>
                     <p th:text="${morenDto.carDisplacement}"></p>
                     <p th:text="${morenDto.carOld}"></p>
