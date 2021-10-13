@@ -163,7 +163,7 @@
                     <!-- selections -->
                     <div id="sel_able" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                         <label for="reserve_able"><input type="radio" id="reserve_able" name="reserve_able" value="possible" onclick="sendData()" th:checked="${reservation} == 'possible'">예약가능차량</label>
-                        <label for="reserve_soon"><input type="radio" id="reserve_soon" name="reserve_able" value="expected" onclick="sendData()" th:checked="${reservation} == 'expected'">입고예정차량</label>
+<!--                        <label for="reserve_soon"><input type="radio" id="reserve_soon" name="reserve_able" value="expected" onclick="sendData()" th:checked="${reservation} == 'expected'">입고예정차량</label>-->
                     </div>
                 </div>
             </form>
@@ -228,6 +228,60 @@
                         <p>신차 등록일: <span th:text="${moren.carOld}"></span></p>
                         <p>월 대여료: <span th:text="${moren.carPrice}"></span></p>
                         <p th:if="${reservation} == 'expected'">반납예정일: <span th:text="${moren.orderEnd}"></span></p>
+                        <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button>상세 페이지</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content row -->
+        <div>
+            <!-- car table -->
+            <div>
+                <div id="mainTable">
+                    <div class="head_title" style="margin-top: 50px;">
+                        <h2>3일 이내 반납예정차량</h2>
+                    </div>
+                    <table class="table_expected">
+                        <thead id="table_header">
+                        <tr>
+                            <th></th>
+                            <th>차량번호<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(1)></th>
+                            <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; width: 25px; height: 25px; display: block; margin: 0 auto" onclick=sortContent(2)></th>
+                            <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(3)></th>
+                            <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(4)></th>
+                            <th>년식<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
+                            <!--                                <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>-->
+                            <th>월대여료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
+                            <th>반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <!-- pc -->
+                        <tbody id="mainTable_tbody">
+                        <tr th:each="moren, iterStat : ${morenDtoListExpected}">
+                            <td scope="col" th:text="${moren.carIdx}"></td>
+                            <td scope="col" th:text="${moren.carNo}"></td>
+                            <td scope="col" th:text="${moren.carName}"></td>
+                            <td scope="col" th:text="${moren.carEngine}"></td>
+                            <td scope="col" th:text="${moren.carExteriorColor}"></td>
+                            <td scope="col" th:text="${moren.carOld}"></td>
+                            <!--                                <td scope="col" th:text="${moren.carMileaget}"></td>-->
+                            <td scope="col" th:text="${moren.carPrice}"></td>
+                            <td scope="col" th:text="${moren.orderEnd}"></td>
+                            <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button >상세 페이지</button></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 모바일 -->
+                <div id="mobileCard">
+                    <div class="card" th:each="moren, iterStat : ${morenDtoListExpected}">
+                        <h4 th:text="${moren.carName}"></h4>
+                        <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
+                        <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
+                        <p>신차 등록일: <span th:text="${moren.carOld}"></span></p>
+                        <p>월 대여료: <span th:text="${moren.carPrice}"></span></p>
+                        <p>반납예정일: <span th:text="${moren.orderEnd}"></span></p>
                         <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}"><button>상세 페이지</button></a>
                     </div>
                 </div>
