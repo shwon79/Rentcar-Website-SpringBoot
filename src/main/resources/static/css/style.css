@@ -962,7 +962,8 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
-    .fixed_phone_btn { top: 85%; display: none; }
+    .fixed_phone_btn { top: 85%;  }
+    .fixed_phone_pc_btn { display: none; }
 }
 
 /* Medium Devices, Desktops */

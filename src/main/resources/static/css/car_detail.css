@@ -115,6 +115,10 @@
     margin: 30px 0px;
 }
 
+#reservation-info .form-group {
+    margin: 0;
+}
+
 .fa-star-of-life {
     font-size: 5px;
     color: #ff0000;
@@ -123,6 +127,10 @@
 
 .control-label {
     color: white;
+}
+
+#reservation-info .control-label {
+    color: black;
 }
 
 #btn_final {

@@ -55,7 +55,6 @@ public class MonthlyRentNewVerionController {
 
         // 총 대수
         Integer total_num = 0;
-        Integer total_num_expected = 0;
 
         // 모렌 데이터 객체 생성
         List<MorenDto> morenDtoList = new ArrayList<MorenDto>();
@@ -67,7 +66,9 @@ public class MonthlyRentNewVerionController {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String today_format = df.format(cal.getTime());
+        DateFormat df_date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String today_date = df.format(cal.getTime());
+        String today_date_time = df_date_time.format(cal.getTime());
 
 
 
@@ -79,7 +80,7 @@ public class MonthlyRentNewVerionController {
 
 
         try {
-            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format + "&EXPECTED_DAY=" + expected_day;
+            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_date + "&END=" + today_date + "&EXPECTED_DAY=" + expected_day;
             URL url = new URL(today_url);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -110,14 +111,11 @@ public class MonthlyRentNewVerionController {
                         // json object 가져오기
                         String order_end = ((String)((JSONObject)list_json_array.get(i)).get("order_end"));
 
-                        if ( ((JSONObject)list_json_array.get(i)).get("order_status").equals("2")
-                                &&
-                                order_end.length() > 10 &&
-                                order_end.substring(0, 10).compareTo(today_format) >= 0 &&
-                                order_end.substring(0, 10).compareTo(after_expected_date_format) <= 0
+                        if ( ((JSONObject)list_json_array.get(i)).get("order_status").equals("2") &&
+                                order_end.length() >= 19 &&
+                                order_end.substring(0, 19).compareTo(today_date_time) >= 0 &&  // 시간 고려해서
+                                order_end.substring(0, 10).compareTo(after_expected_date_format) <= 0 // 날짜만 고려해서
                         ) {
-
-                            total_num_expected += 1;
 
                             JSONObject morenObject = (JSONObject)list_json_array.get(i);
                             Long carOld = Long.parseLong((String)((JSONObject)list_json_array.get(i)).get("carOld"));
@@ -146,14 +144,8 @@ public class MonthlyRentNewVerionController {
                             } catch (Exception e){
 
                                 System.out.println("Error ! 차량이름 모렌과 맞출 것 !");
-                                System.out.println(e);
-                                System.out.println((String)((JSONObject)list_json_array.get(i)).get("carCategory"));
-                                System.out.println(carOld);
                                 continue;
                             }
-
-
-
 
                         }
                     } catch (ClassCastException e){
@@ -250,11 +242,11 @@ public class MonthlyRentNewVerionController {
 
         // 오늘 날짜
         Date time = new Date();
-        SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
-        String today_format = format.format(time);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String today_date = df.format(time);
 
         try {
-            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format;
+            String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_date + "&END=" + today_date;
             URL url = new URL(today_url);
 
             conn = (HttpURLConnection) url.openConnection();

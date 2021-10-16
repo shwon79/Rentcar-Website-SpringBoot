@@ -79,6 +79,20 @@ public class ReservationController {
                     + "예상대여일자: " + dto.getOption() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
+        else if (dto.getTitle().equals("월렌트실시간")){
+            params.put("text", "[" + dto.getTitle() + "]\n"
+                    + "문의자 이름: " + dto.getName() + "\n"
+                    + "연락처: " + dto.getPhoneNo() + "\n"
+                    + "차량명: " + dto.getCar_name() + "\n"
+                    + "차량번호: " + dto.getMileage() + "\n"
+                    + "년식: " + dto.getOption() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n");
+
+            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                    + "문의자 이름: " + dto.getName() + "\n"
+                    + "차량명: " + dto.getCar_name() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n");
+        }
         else if (dto.getTitle().equals("월렌트, 12개월렌트, 24개월렌트")){
             params.put("text", "[" + dto.getTitle() + "]\n"
                     + "예약자 이름: " + dto.getName() + "\n"
