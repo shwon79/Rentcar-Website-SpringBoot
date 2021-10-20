@@ -71,7 +71,7 @@ public class MonthlyRentNewVerionController {
 
 
         // ㅁㅕ칠 이내로 할지 설정
-        String expected_day = "1";
+        String expected_day = "3";
 
         cal.add(Calendar.DATE, Integer.parseInt(expected_day));
         String after_expected_date_format = df.format(cal.getTime());
@@ -243,7 +243,7 @@ public class MonthlyRentNewVerionController {
         String today_format = df.format(cal.getTime());
 
         // ㅁㅕ칠 이내로 할지 설정
-        String expected_day = "1";
+        String expected_day = "3";
 
         cal.add(Calendar.DATE, Integer.parseInt(expected_day));
         String after_expected_date_format = df.format(cal.getTime());
@@ -428,8 +428,8 @@ public class MonthlyRentNewVerionController {
 
 
     // 차량 상세 페이지
-    @GetMapping(value = "/rent/month/detail/{carIdx}/{monthlyrentIdx}/{kilometer}")
-    public String rent_month_detail(ModelMap model, @PathVariable String carIdx, @PathVariable Long monthlyrentIdx, @PathVariable String kilometer) throws IOException {
+    @GetMapping(value = "/rent/month/detail/{carIdx}/{monthlyrentIdx}/{kilometer}/{rentStatus}")
+    public String rent_month_detail(ModelMap model, @PathVariable String carIdx, @PathVariable Long monthlyrentIdx, @PathVariable String kilometer, @PathVariable String rentStatus) throws IOException {
 
         // 세이브카 db에서 해당 차 객체 가져오기
         Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(monthlyrentIdx);
@@ -451,7 +451,7 @@ public class MonthlyRentNewVerionController {
         model.put("today_format", today_format);
 
         try {
-            String expected_day = "7";
+            String expected_day = "3";
             String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format + "&EXPECTED_DAY=" + expected_day;
             URL url = new URL(today_url);
 
@@ -536,7 +536,7 @@ public class MonthlyRentNewVerionController {
             e.printStackTrace();
         }
 
-
+        model.put("rentStatus", rentStatus);
 
         return "rent_month2_detail";
     }

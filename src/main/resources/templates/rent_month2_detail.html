@@ -137,7 +137,8 @@
                 <div class="pinside30">
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <h2>예약 신청하기</h2>
+                      <h2 th:if="${rentStatus}=='available'">예약 신청하기</h2>
+                      <h2 th:if="${rentStatus}=='expected'">상담 신청하기</h2>
                       <hr>
                       <form id="reservation-info" name="reservation-info" action="">
                         <div class="row">
