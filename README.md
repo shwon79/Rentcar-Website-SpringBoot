@@ -13,7 +13,6 @@ src/main/
 └── resources/ # 프론트엔드    
     ├─ static/    
     |  ├─ css/  
-    |  ├─ fonts/  
     |  ├─ img/  
     |  ├─ js/  
     |  └─ sql/    
