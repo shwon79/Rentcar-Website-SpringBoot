@@ -14,7 +14,12 @@ src/main/
 │   └─ SpringConfig.java   
 │    
 └── resources/ # 프론트엔드    
-    ├─ static/   
-    ├─ templates/   
+    ├─ static/    
+    |  ├─ css/  
+    |  ├─ fonts/  
+    |  ├─ img/  
+    |  ├─ js/  
+    |  └─ sql/    
+    ├─ templates/  
     └─ application.properties  
 ```
