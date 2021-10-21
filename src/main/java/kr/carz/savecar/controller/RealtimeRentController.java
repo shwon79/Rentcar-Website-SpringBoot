@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-public class MonthlyRentNewVerionController {
+public class RealtimeRentController {
 
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
@@ -33,8 +33,8 @@ public class MonthlyRentNewVerionController {
     private final ReservationService reservationService;
 
     @Autowired
-    public MonthlyRentNewVerionController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
-                                          ReservationService reservationService) {
+    public RealtimeRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
+                                  ReservationService reservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
@@ -43,7 +43,7 @@ public class MonthlyRentNewVerionController {
 
 
     /* ======================================================================================== */
-    /*                               [New 버전] 실시간 견적내기                                    */
+    /*                              [New 버전] 실시간 월렌트 예약하                                    */
     /* ======================================================================================== */
 
     @GetMapping("/rent/month/new")
@@ -59,7 +59,6 @@ public class MonthlyRentNewVerionController {
         List<MorenDto> morenDtoListExpected = new ArrayList<MorenDto>();
 
 
-
         // 오늘 날짜
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -70,7 +69,7 @@ public class MonthlyRentNewVerionController {
 
 
 
-        // ㅁㅕ칠 이내로 할지 설정
+        // 며칠 이내로 할지 설정
         String expected_day = "3";
 
         cal.add(Calendar.DATE, Integer.parseInt(expected_day));
@@ -204,8 +203,6 @@ public class MonthlyRentNewVerionController {
 
 
 
-        System.out.println(morenDtoListExpected.size());
-
         // 모렌 데이터 프론트로 전달
         model.put("morenDtoList", morenDtoList);
         model.put("morenDtoListExpected", morenDtoListExpected);
@@ -242,15 +239,12 @@ public class MonthlyRentNewVerionController {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String today_format = df.format(cal.getTime());
 
-        // ㅁㅕ칠 이내로 할지 설정
+        // 며칠 이내로 할지 설정
         String expected_day = "3";
 
         cal.add(Calendar.DATE, Integer.parseInt(expected_day));
         String after_expected_date_format = df.format(cal.getTime());
 
-
-        // 키로미터 전달 -> 디폴트
-        model.put("kilometer", realTimeDto.getKilometer());
 
         try {
 
@@ -378,7 +372,6 @@ public class MonthlyRentNewVerionController {
 
                                     } catch (Exception e) {
                                         System.out.println("Error ! 차량이름 모렌과 맞출 것 !");
-//                                    System.out.println();
                                         continue;
                                     }
                                 }
@@ -421,6 +414,8 @@ public class MonthlyRentNewVerionController {
 
         model.put("reservation", realTimeDto.getReserve_able());
         model.put("rentTerm", realTimeDto.getRentTerm());
+        model.put("kilometer", realTimeDto.getKilometer());
+
 
         return "rent_month2";
     }
@@ -540,6 +535,14 @@ public class MonthlyRentNewVerionController {
 
         return "rent_month2_detail";
     }
+
+
+
+
+
+
+
+
 
 
 //    @GetMapping("/rent/month/new/{period}")
