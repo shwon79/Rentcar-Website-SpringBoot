@@ -1,34 +1,24 @@
  ### 웹사이트 바로가기 주소 : https://savecar.kr
 
-|____gradlew.bat<br/> 
-|____settings.gradle 
-|____src
-| |____test
-| | |____java
-| | | |____kr
-| | | | |____carz
-| | | | | |____savecar
-| | | | | | |____SavecarApplicationTests.java
-| | | | | | |____MessageTest.java
-| |____main
-| | |____resources
-| | | |____static
-| | | | |____css
-| | | | | |____bootstrap.css.map
-| | | | | |____rent_month2.css
-| | | | | |____stylesheet.css
-| | | | | |____responsive.css
-| | | | | |____table.css
-| | | | | |____style.css
-| | | | | |____car_detail.css
-| | | | | |____slider-carousel.css
-| | | | |____js
-| | | | | |____rent_month2.js
-| | | | | |____start.js
-| | | | | |____popup.js
-| | | | | |____monthly_rent.js
-| | | | | |____main.js
-| | | | |____sql
+|____src<br/>
+| |____main<br/>
+| | |____resources<br/>
+| | | |____static<br/>
+| | | | |____css<br/>
+| | | | | |____rent_month2.css<br/>
+| | | | | |____stylesheet.css<br/>
+| | | | | |____responsive.css<br/>
+| | | | | |____table.css<br/>
+| | | | | |____style.css<br/>
+| | | | | |____car_detail.css<br/>
+| | | | | |____slider-carousel.css<br/>
+| | | | |____js<br/>
+| | | | | |____rent_month2.js<br/>
+| | | | | |____start.js<br/>
+| | | | | |____popup.js<br/>
+| | | | | |____monthly_rent.js<br/>
+| | | | | |____main.js<br/>
+| | | | |____sql<br/>
 | | | | | |____monthly_rent.sql
 | | | | | |____short_rent.sql
 | | | | | |____yearly_rent.sql
