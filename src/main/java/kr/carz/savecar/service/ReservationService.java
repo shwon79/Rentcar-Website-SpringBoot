@@ -1,7 +1,7 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.Reservation;
-import kr.carz.savecar.domain.ReservationSaveDto;
+import kr.carz.savecar.domain.ReservationSaveDTO;
 import kr.carz.savecar.repository.ReservationRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +16,7 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
-    public Long save(ReservationSaveDto dto) {
+    public Long save(ReservationSaveDTO dto) {
        return reservationRepository.save(dto.toEntity()).getId();
     }
 

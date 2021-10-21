@@ -207,7 +207,7 @@
                         </thead>
                         <!-- pc -->
                         <tbody id="mainTable_tbody">
-                        <tr th:each="moren, iterStat : ${morenDtoList}">
+                        <tr th:each="moren, iterStat : ${morenDTOList}">
                             <td scope="col" th:text="${moren.carIdx}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
                             <td scope="col" th:text="${moren.carName}"></td>
@@ -224,7 +224,7 @@
                 </div>
                 <!-- 모바일 -->
                 <div id="mobileCard">
-                    <div class="card" th:each="moren, iterStat : ${morenDtoList}">
+                    <div class="card" th:each="moren, iterStat : ${morenDTOList}">
                         <h4 th:text="${moren.carName}"></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
@@ -262,7 +262,7 @@
                         </thead>
                         <!-- pc -->
                         <tbody id="mainTable_tbody">
-                        <tr th:each="moren, iterStat : ${morenDtoListExpected}">
+                        <tr th:each="moren, iterStat : ${morenDTOListExpected}">
                             <td scope="col" th:text="${moren.carIdx}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
                             <td scope="col" th:text="${moren.carName}"></td>
@@ -279,7 +279,7 @@
                 </div>
                 <!-- 모바일 -->
                 <div id="mobileCard">
-                    <div class="card" th:each="moren, iterStat : ${morenDtoListExpected}">
+                    <div class="card" th:each="moren, iterStat : ${morenDTOListExpected}">
                         <h4 th:text="${moren.carName}"></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>

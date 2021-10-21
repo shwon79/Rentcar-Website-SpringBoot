@@ -1,11 +1,8 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.Reservation;
-import kr.carz.savecar.domain.ReservationSaveDto;
-import kr.carz.savecar.service.MonthlyRentService;
+import kr.carz.savecar.domain.ReservationSaveDTO;
 import kr.carz.savecar.service.ReservationService;
-import kr.carz.savecar.service.YearlyRentService;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.simple.JSONObject;
@@ -41,7 +38,7 @@ public class ReservationController {
     // 예약 저장 api
     @PostMapping("/reservation/apply")
     @ResponseBody
-    public Long save(@RequestBody ReservationSaveDto dto){
+    public Long save(@RequestBody ReservationSaveDTO dto){
 
         String api_key = "NCS0P5SFAXLOJMJI";
         String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";

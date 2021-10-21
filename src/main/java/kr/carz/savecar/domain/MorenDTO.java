@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class MorenDto {
+public class MorenDTO {
 
     private String carIdx;
     private String carCategory;
@@ -28,7 +28,7 @@ public class MorenDto {
 
 
 
-    public MorenDto(String carIdx, String carCategory, String carName,
+    public MorenDTO(String carIdx, String carCategory, String carName,
                     String carNo, String carExteriorColor, String carGubun,
                     String carDisplacement, String carMileaget, String carColor,
                     String carOld, String carEngine, String carAttribute01,

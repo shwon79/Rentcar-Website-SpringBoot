@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ReservationSaveDto {
+public class ReservationSaveDTO {
 
     private String name;
     private String phoneNo;
@@ -21,9 +21,9 @@ public class ReservationSaveDto {
     private String price;
     private String age_limit;
 
-    public ReservationSaveDto(String name, String phoneNo, String detail, String product, String title,
+    public ReservationSaveDTO(String name, String phoneNo, String detail, String product, String title,
                               String category1, String category2, String car_name, String mileage,
-                              String deposit, String option, String price,String age_limit) {
+                              String deposit, String option, String price, String age_limit) {
         this.name = name;
         this.phoneNo = phoneNo;
         this.detail = detail;
