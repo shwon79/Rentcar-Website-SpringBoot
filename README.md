@@ -1,7 +1,7 @@
  ### 웹사이트 바로가기 주소 : https://savecar.kr
 
 ```
-SAVE-CAR-Backend[master]/src/main/  
+src/main/  
 │   
 ├── java/kr/carz/savecar # 백엔드    
 │   ├─ config/   
