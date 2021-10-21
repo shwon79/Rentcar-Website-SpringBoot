@@ -8,10 +8,7 @@ src/main/
 │   ├─ controller/   
 │   ├─ domain/   
 │   ├─ repository/   
-│   ├─ service/   
-│   ├─ SavecarApplication.java   
-│   ├─ ServletInitializer.java    
-│   └─ SpringConfig.java   
+│   └─ service/    
 │    
 └── resources/ # 프론트엔드    
     ├─ static/    
