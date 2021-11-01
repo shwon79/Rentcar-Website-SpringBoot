@@ -10,7 +10,7 @@
     <!-- Style -->
     <link th:href="@{/css/admin.css}" rel="stylesheet">
 
-    <script th:src="@{/js/admin.js}" defer></script>
+<!--    <script th:src="@{/js/admin.js}" defer></script>-->
 
 
 </head>
@@ -31,10 +31,10 @@
         </div>
 
         <div class="form-part">
-            <form method="get" name="discountForm" action="">
+            <form method="post" name="discountForm" action="/admin/discount">
                 <div class="form-group">
                     <label for="carNo">차량번호</label>
-                   <input type="number" class="form-control" name="carNo" id="carNo" aria-describedby="emailHelp">
+                   <input type="text" class="form-control" name="carNo" id="carNo" aria-describedby="emailHelp">
                 </div>
                 <div class="form-group">
                     <label for="discount">할인가격</label>
