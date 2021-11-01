@@ -26,8 +26,6 @@ public class MorenDTO {
     private Long monthlyrentIdx;
     private List<String> carImageList;
 
-
-
     public MorenDTO(String carIdx, String carCategory, String carName,
                     String carNo, String carExteriorColor, String carGubun,
                     String carDisplacement, String carMileaget, String carColor,

@@ -24,18 +24,20 @@ public class AdminController {
     CampingCarService campingCarService;
     LoginService loginService;
     ReservationService reservationService;
-    private HttpURLConnection http;
+    DiscountService discountService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
-                           LoginService loginService, ReservationService reservationService) {
+                           LoginService loginService, ReservationService reservationService,
+                           DiscountService discountService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarService = campingCarService;
         this.loginService = loginService;
         this.reservationService = reservationService;
+        this.discountService = discountService;
     }
 
     @GetMapping("/admin/login")
@@ -154,13 +156,12 @@ public class AdminController {
 
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
-    public String post_discount(ModelMap model, @ModelAttribute DiscountDTO discountDTO) {
+    public String post_discount(ModelMap model, @ModelAttribute DiscountSaveDTO discount) {
 
+        System.out.println(discount.getCarNo());
+        System.out.println(discount.getDiscount());
 
-        System.out.println(discountDTO.getCarNo());
-        System.out.println(discountDTO.getDiscount());
-
-        return "admin_discount_menu";
+        return discountService.save(discount);
     }
 
 

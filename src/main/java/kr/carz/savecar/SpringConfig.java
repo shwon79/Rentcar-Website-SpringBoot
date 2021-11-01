@@ -15,13 +15,14 @@ public class SpringConfig {
     private final ReservationRepository reservationRepository;
     private final TwoYearlyRentRepository twoYearlyRentRepository;
     private final LoginRepository loginRepository;
+    private final DiscountRepository discountRepository;
 
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
                         ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
                         ReservationRepository reservationRepository, TwoYearlyRentRepository twoYearlyRentRepository,
-                        LoginRepository loginRepository) {
+                        LoginRepository loginRepository, DiscountRepository discountRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -29,6 +30,7 @@ public class SpringConfig {
         this.reservationRepository = reservationRepository;
         this.twoYearlyRentRepository = twoYearlyRentRepository;
         this.loginRepository = loginRepository;
+        this.discountRepository = discountRepository;
     }
 
     @Bean
@@ -55,4 +57,7 @@ public class SpringConfig {
 
     @Bean
     public LoginService loginService() { return new LoginService(loginRepository); }
+
+    @Bean
+    public DiscountService discountService() { return new DiscountService(discountRepository); }
 }
