@@ -65,7 +65,6 @@ public class RealtimeRentController {
         String today_date_time = df_date_time.format(cal.getTime());
 
 
-
         // 며칠 이내로 할지 설정
         String expected_day = "3";
 
@@ -197,7 +196,6 @@ public class RealtimeRentController {
         } catch (IOException e){
             e.printStackTrace();
         }
-
 
 
         // 모렌 데이터 프론트로 전달

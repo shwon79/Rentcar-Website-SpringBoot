@@ -84,7 +84,7 @@ const reserveMonthlyRent = () => {
 
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
         if (reserveConfirm) {
-            let url = '/campingcar/reserve';
+            let url = '/reserve/campingcar';
             fetch(url, {
                 method: 'POST',
                 headers:{
@@ -95,8 +95,8 @@ const reserveMonthlyRent = () => {
                 .then(result => {
                     if (result[0] == "1") {
                         alert('차량 예약 대기 신청이 완료되었습니다.')
-                        window.location.href = '/rent/month/test';
-                    } else if (result[0] == "0") alert('이용할 수 없는 날짜입니다.')
+                        window.location.href = '/rent/month/new';
+                    } else if (result[0] == "0") alert('차량 예약 대기 신청을 실패하였습니다.')
                 })
             // .catch(err => console.error('Error: ', err))
         }
@@ -106,6 +106,19 @@ const reserveMonthlyRent = () => {
         alert('동의를 완료해주세요!')
     }
 }
+
+
+// function getBase64(file) {
+//     var reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = function () {
+//         console.log(reader.result);
+//     };
+//     reader.onerror = function (error) {
+//         console.log('Error: ', error);
+//     };
+// }
+
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -118,52 +131,54 @@ function getBase64(file) {
 
 
 
-
 // 이미지 서버에 올리기
 function upload_image() {
 
     var file = document.querySelector('#files > input[type="file"]').files[0];
-    getBase64(file).then(
-        data => console.log(data)
-    );
 
-    // if (document.getElementById("reservation-detail-name").value == ""){
-    //     alert('성함을 입력해주세요.')
-    //     return
-    // }
-    //
-    // if (document.getElementById("reservation-detail-phone").value == ""){
-    //     alert('전화번호를 입력해주세요.')
-    //     return
-    // }
-    //
-    //
-    // var data = {
-    //     name : $("#reservation-detail-name").val(),
-    //     phoneNo : $("#reservation-detail-phone").val(),
-    //     detail : $("#reservation-detail-details").val(),
-    //     title : "간편상담신청",
-    //     car_name : $("#reservation-detail-carname").val(),
-    //     mileage : $("#reservation-detail-region").val(),
-    //     option : $("#reservation-detail-resdate").val()
-    // };
-    //
-    // var checkbox = document.getElementById("agree")
-    // if(checkbox.checked) {
-    //     $.ajax({
-    //         type : 'POST',
-    //         url : '/reservation/apply',
-    //         dataType : 'json',
-    //         contentType : 'application/json; charset=utf-8',
-    //         data : JSON.stringify(data)
-    //     }).done(function () {
-    //         alert('예약이 완료되었습니다.');
-    //     }).fail(function (error) {
-    //         alert(JSON.stringify(error));
-    //     })
-    // } else{
-    //     alert("개인정보 수집 및 이용에 동의해주세요.");
-    // }
+    console.log(atob(file));
+
+    getBase64(file)
+        .then(data => {
+            // var data_post = {
+            //     key: "03b260a78d187a2dd3086b7fe1e70e80",
+            //     image: data
+            // };
+            // console.log(JSON.stringify(data_post))
+
+            // $.ajax({
+            //     type: 'POST',
+            //     url: 'https://api.imgbb.com/1/upload',
+            //     dataType: 'json',
+            //     processData: false,
+            //     contentType: 'application/json; charset=utf-8',
+            //     data: JSON.stringify(data_post)
+            // }).done(function () {
+            //     alert('POST 성공.');
+            // }).fail(function (error) {
+            //     alert(JSON.stringify(error));
+            // })
+
+            // var url = "https://api.imgbb.com/1/upload";
+            var url = "https://api.imgbb.com/1/upload?expiration=600&key=03b260a78d187a2dd3086b7fe1e70e80&image=" + data;
+            console.log(url);
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url);
+
+            // xhr.setRequestHeader("Content-Length", "0");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                }};
+
+            xhr.send();
+
+        }
+    );
 }
 
 //숫자 사이에 콤마 넣기
