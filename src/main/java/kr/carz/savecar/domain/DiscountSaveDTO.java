@@ -12,11 +12,11 @@ import javax.persistence.Id;
 @Setter
 public class DiscountSaveDTO {
 
-    private String carNo;
+    private Long carNo;
 
     private String discount; // 할인금액
 
-    public DiscountSaveDTO(String carNo, String discount) {
+    public DiscountSaveDTO(Long carNo, String discount) {
         this.carNo = carNo;
         this.discount = discount;
     }

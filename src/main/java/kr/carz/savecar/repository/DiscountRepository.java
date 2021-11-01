@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DiscountRepository extends JpaRepository<Discount, String> {
+public interface DiscountRepository extends JpaRepository<Discount, Long> {
 
     List<Discount> findAll();
-    Discount findByCarNo(String carNo);
+    Discount findByCarNo(Long carNo);
 
 }
