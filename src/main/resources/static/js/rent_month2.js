@@ -196,11 +196,4 @@ number.addEventListener('load', numberWithCommas());
 
 //숫자 사이에 콤마 넣기 끝
 
-// 두 지점 사이 거리
-// const spot = document.getElementById("address_kakao");
-// console.log(spot);
-// console.log(spot.innerText);
-// console.log(spot.innerHTML);
-// spot.addEventListener('load', function() {
-//     console.log(spot);
-// })
+// 두 지점 사이 거리 시작
