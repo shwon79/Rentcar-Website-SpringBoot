@@ -181,14 +181,26 @@ function upload_image() {
     );
 }
 
-//숫자 사이에 콤마 넣기
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//숫자 사이에 콤마 넣기 시작
+const number = document.querySelectorAll(".number");
+
+function numberWithCommas() {
+    // console.log(number);
+    for (let i = 0; i < number.length; i++) {
+        const numberWithComma = parseInt(number[i].innerText).toLocaleString();
+        number[i].innerText = numberWithComma;
+    }
 }
 
-// const numbers = document.querySelectorAll('.normNumber');
-// const numbersLength = numbers.length;
-//
-// for(let i=0; i < numbersLength; i++) {
-//     numberWithCommas(numbers[i].innerText);
-// }
+number.addEventListener('load', numberWithCommas());
+
+//숫자 사이에 콤마 넣기 끝
+
+// 두 지점 사이 거리
+// const spot = document.getElementById("address_kakao");
+// console.log(spot);
+// console.log(spot.innerText);
+// console.log(spot.innerHTML);
+// spot.addEventListener('load', function() {
+//     console.log(spot);
+// })

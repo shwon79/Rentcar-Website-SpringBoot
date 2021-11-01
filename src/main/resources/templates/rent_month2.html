@@ -139,17 +139,17 @@
                     </div>
                     <!-- selections -->
                     <div th:if="${rentTerm} == '한달'" id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <label for="reg_2000"><input type="radio" id="reg_2000" name="kilometer" value="2000km" onclick="sendData()" th:checked="${kilometer} == '2000km'">2000km</label>
-                        <label for="reg_2500"><input type="radio" id="reg_2500" name="kilometer" value="2500km" onclick="sendData()" th:checked="${kilometer} == '2500km'">2500km</label>
-                        <label for="reg_3000"><input type="radio" id="reg_3000" name="kilometer" value="3000km" onclick="sendData()" th:checked="${kilometer} == '3000km'">3000km</label>
-                        <label for="reg_4000"><input type="radio" id="reg_4000" name="kilometer" value="4000km" onclick="sendData()" th:checked="${kilometer} == '4000km'">4000km</label>
+                        <label for="reg_2000"><input type="radio" id="reg_2000" name="kilometer" value="2000km" onclick="sendData()" th:checked="${kilometer} == '2000km'">2,000km</label>
+                        <label for="reg_2500"><input type="radio" id="reg_2500" name="kilometer" value="2500km" onclick="sendData()" th:checked="${kilometer} == '2500km'">2,500km</label>
+                        <label for="reg_3000"><input type="radio" id="reg_3000" name="kilometer" value="3000km" onclick="sendData()" th:checked="${kilometer} == '3000km'">3,000km</label>
+                        <label for="reg_4000"><input type="radio" id="reg_4000" name="kilometer" value="4000km" onclick="sendData()" th:checked="${kilometer} == '4000km'">4,000km</label>
                     </div>
 
                     <!-- selections -->
                     <div th:if="${rentTerm} == '12개월'" id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <label for="reg_20000"><input type="radio" id="reg_20000" name="kilometer" value="20000km" onclick="sendData()" th:checked="${kilometer} == '20000km'">20000km</label>
-                        <label for="reg_30000"><input type="radio" id="reg_30000" name="kilometer" value="30000km" onclick="sendData()" th:checked="${kilometer} == '30000km'">30000km</label>
-                        <label for="reg_40000"><input type="radio" id="reg_40000" name="kilometer" value="40000km" onclick="sendData()" th:checked="${kilometer} == '40000km'">40000km</label>
+                        <label for="reg_20000"><input type="radio" id="reg_20000" name="kilometer" value="20000km" onclick="sendData()" th:checked="${kilometer} == '20000km'">20,000km</label>
+                        <label for="reg_30000"><input type="radio" id="reg_30000" name="kilometer" value="30000km" onclick="sendData()" th:checked="${kilometer} == '30000km'">30,000km</label>
+                        <label for="reg_40000"><input type="radio" id="reg_40000" name="kilometer" value="40000km" onclick="sendData()" th:checked="${kilometer} == '40000km'">40,000km</label>
                     </div>
                 </div><hr style="background: lightgrey; margin: 10px 0" />
 
@@ -215,7 +215,7 @@
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
                             <!--                                <td scope="col" th:text="${moren.carMileaget}"></td>-->
-                            <td scope="col" th:text="${moren.carPrice}"></td>
+                            <td scope="col" th:text="${moren.carPrice}" class="number"></td>
                             <td th:if="${reservation} == 'expected'" scope="col" th:text="${moren.orderEnd}"></td>
                             <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}  + '/available'"><button >상세 페이지</button></a></td>
                         </tr>
@@ -229,7 +229,7 @@
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
                         <p>년식: <span th:text="${moren.carOld}"></span></p>
-                        <p>월 대여료[VAT별도]: <span th:text="${moren.carPrice}"></span></p>
+                        <p>월 대여료[VAT별도]: <span th:text="${moren.carPrice}" class="number"></span></p>
                         <p th:if="${reservation} == 'expected'">반납예정일: <span th:text="${moren.orderEnd}"></span></p>
                         <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer} + '/available'"><button>상세 페이지</button></a>
                     </div>
@@ -270,7 +270,7 @@
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
                             <!--                                <td scope="col" th:text="${moren.carMileaget}"></td>-->
-                            <td scope="col" th:text="${moren.carPrice}"></td>
+                            <td scope="col" th:text="${moren.carPrice}" class="number"></td>
                             <td scope="col" th:text="${moren.orderEnd}"></td>
                             <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}  + '/expected'"><button >상세 페이지</button></a></td>
                         </tr>
@@ -284,7 +284,7 @@
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
                         <p>년식: <span th:text="${moren.carOld}"></span></p>
-                        <p>월 대여료[VAT별도]: <span th:text="${moren.carPrice}"></span></p>
+                        <p>월 대여료[VAT별도]: <span th:text="${moren.carPrice}" class="number"></span></p>
                         <p>반납예정일: <span th:text="${moren.orderEnd}"></span></p>
                         <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer} + '/expected'"><button>상세 페이지</button></a>
                     </div>
