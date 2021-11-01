@@ -185,7 +185,7 @@ label { }
 .form-group { margin-bottom: 10px; }
 .get-in-touch { }
 .get-in-touch .form-control { margin-bottom: 10px; }
-.input-group-addon { padding: 6px 12px; font-size: 0.9375rem; font-weight: 400; line-height: 1; color: #bdb6b5; text-align: center; background-color: #fff; border: 1px solid #d7cfce; border-radius: 4px; }
+.input-group-addon { padding: 6px 12px; font-size: 1.5rem; font-weight: 400; line-height: 1; color: #bdb6b5; text-align: center; background-color: #fff; border: 1px solid #d7cfce; border-radius: 4px; }
 
 .contain-word-middle-div:after {
     content: "";
