@@ -5,6 +5,7 @@ import kr.carz.savecar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -104,7 +105,7 @@ public class AdminController {
 
 
 
-    // 메인페이지
+    // [관리자 메인페이지]캠핑카 예약내역 메뉴로 입장
     @GetMapping(value = "/admin/campingcar/menu")
     @ResponseBody
     public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
@@ -133,9 +134,9 @@ public class AdminController {
     }
 
 
-    //예약 목록 조회 api
+    //상담 메뉴로 입장
     @GetMapping("/admin/counsel/menu")
-    public String reservation_list(Model model) {
+    public String get_counsel_menu(Model model) {
         List<Reservation> reservationList = reservationService.findAllReservations();
         model.addAttribute("reservationList", reservationList);
 
@@ -146,10 +147,22 @@ public class AdminController {
 
     // 할인가 적용하기 메뉴로 입장
     @GetMapping("/admin/discount/menu")
-    public String discount_menu(Model model) {
+    public String get_discount_menu(Model model) {
 
         return "admin_discount_menu";
     }
+
+    // 할인가 적용하기 api
+    @PostMapping("/admin/discount")
+    public String post_discount(ModelMap model, @ModelAttribute DiscountDTO discountDTO) {
+
+
+        System.out.println(discountDTO.getCarNo());
+        System.out.println(discountDTO.getDiscount());
+
+        return "admin_discount_menu";
+    }
+
 
 
 //    @GetMapping("/admin/detail/{date_time_id}")

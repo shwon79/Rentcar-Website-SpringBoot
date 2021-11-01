@@ -136,7 +136,6 @@ public class RealtimeRentController {
                                     morenDTOListExpected.add(moren);
 
                                 } catch (Exception e) {
-
                                     System.out.println("Error ! 차량이름 모렌과 맞출 것 !");
                                     continue;
                                 }
