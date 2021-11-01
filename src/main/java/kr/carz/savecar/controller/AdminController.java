@@ -46,76 +46,12 @@ public class AdminController {
         this.http = http;
     }
 
-    public void request(String method, String headerName, String headerValue, JSONObject jsonData) throws IOException {
-        http.setRequestMethod(method);
-        http.setRequestProperty(headerName, headerValue);
-
-        http.setDoOutput(true);
-
-        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter((http.getOutputStream())));
-        printWriter.write(jsonData.toString());
-        printWriter.flush();
-    }
-
-    public String response() throws IOException{
-        BufferedReader bufferedReader = null;
-
-        int status = http.getResponseCode();
-
-        if(status == HttpURLConnection.HTTP_OK){
-            System.out.println("Http Connection OK");
-            bufferedReader = new BufferedReader(new InputStreamReader(http.getInputStream()));
-        } else {
-            System.out.println("Http Connection Bad");
-            bufferedReader = new BufferedReader(new InputStreamReader(http.getErrorStream()));
-        }
-
-        String line;
-        StringBuffer response = new StringBuffer();
-
-        while ((line = bufferedReader.readLine()) != null){
-            response.append(line);
-        }
-        bufferedReader.close();
-
-        System.out.println(response.toString());
-
-        JSONObject jsonObject = new JSONObject(response.toString());
-
-        System.out.println("응답값 : " + jsonObject);
-
-        return jsonObject.toString();
-
-    }
-
 
     @GetMapping("/admin/login")
     public String login(Model model) {
 
         return "login";
     }
-
-
-//    @GetMapping("/admin/detail/{date_time_id}")
-//    public String get_admin_detail(Model model,  @PathVariable String date_time_id) throws Exception {
-//
-//        CampingcarDateTime2 campingcarDateTime2 = campingcarDateTimeService2.findByDateTimeId(Long.parseLong(date_time_id));
-//        model.addAttribute("campingcarDateTime2",campingcarDateTime2);
-//        System.out.println(campingcarDateTime2.getDateTimeId());
-//
-//        return "admin_detail";
-//    }
-
-
-    //예약 목록 조회 api
-    @GetMapping("/admin/counsel")
-    public String reservation_list(Model model) {
-        List<Reservation> reservationList = reservationService.findAllReservations();
-        model.addAttribute("reservationList", reservationList);
-
-        return "admin_counsel";
-    }
-
 
 
     //로그인
@@ -207,6 +143,37 @@ public class AdminController {
 
 
         return mav;
+    }
+
+
+
+//    @GetMapping("/admin/detail/{date_time_id}")
+//    public String get_admin_detail(Model model,  @PathVariable String date_time_id) throws Exception {
+//
+//        CampingcarDateTime2 campingcarDateTime2 = campingcarDateTimeService2.findByDateTimeId(Long.parseLong(date_time_id));
+//        model.addAttribute("campingcarDateTime2",campingcarDateTime2);
+//        System.out.println(campingcarDateTime2.getDateTimeId());
+//
+//        return "admin_detail";
+//    }
+
+
+    //예약 목록 조회 api
+    @GetMapping("/admin/counsel")
+    public String reservation_list(Model model) {
+        List<Reservation> reservationList = reservationService.findAllReservations();
+        model.addAttribute("reservationList", reservationList);
+
+        return "admin_counsel";
+    }
+
+
+
+    // 할인가 적용하기 메뉴로 입장
+    @GetMapping("/admin/discount/menu")
+    public String discount_menu(Model model) {
+
+        return "admin_discount_menu";
     }
 
 }
