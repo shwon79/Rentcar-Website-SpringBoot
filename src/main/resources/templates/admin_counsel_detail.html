@@ -1,0 +1,121 @@
+<!-- 관리자 상세페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+
+    <script th:src="@{/js/admin.js}" defer></script>
+
+
+</head>
+<body>
+<div class="page_wrapper">
+    <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
+    <div class="content_wrapper">
+        <div class="menu_container">
+            <div class="menu_list">
+                <a href="/admin/main"><li>캠핑카 예약</li></a>
+                <a href="/admin/counsel"><li>상담 신청</li></a>
+                <li>메뉴3</li>
+                <li>메뉴4</li>
+                <li>메뉴5</li>
+                <li>메뉴6</li>
+                <li>메뉴7</li>
+            </div>
+        </div>
+        <div class="detail_container" >
+            <div class="detail_list" id="go_back_wrapper">
+                <a href="/admin/main"><button id="go_back">🠔 뒤로가기</button></a>
+            </div>
+            <div class="detail_list" id="detail_set_reserve">
+                <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+campingcarDateTime2.dateTimeId}">
+                    <input th:style="${campingcarDateTime2.reservation} == 1? 'pointer-events:none; background: gray'" class="set_reserve" type="submit" value="확정"/>
+                </form>
+            </div>
+            <div class="detail_list" id="detail_list_title">
+                <p>종류</p>
+                <p>값</p>
+            </div>
+            <div class="detail_list">
+                <p>차종</p>
+                <p th:text="${campingcarDateTime2.carType}"></p>
+            </div>
+            <div class="detail_list">
+                <p>생성일</p>
+                <p th:text="${#strings.arraySplit(campingcarDateTime2.createdDate, 'T')[0]}"></p>
+            </div>
+            <div class="detail_list">
+                <p>수정일</p>
+                <p th:text="${#strings.arraySplit(campingcarDateTime2.modifiedDate, 'T')[0]}"></p>
+            </div>
+            <div class="detail_list">
+                <p>시작일</p>
+                <p th:text="${campingcarDateTime2.rentDate}"></p>
+            </div>
+            <div class="detail_list">
+                <p>시작시간</p>
+                <p th:text="${campingcarDateTime2.rentTime}"></p>
+            </div>
+            <div class="detail_list">
+                <p>반납일</p>
+                <p th:text="${campingcarDateTime2.returnDate}"></p>
+            </div>
+            <div class="detail_list">
+                <p>반납시간</p>
+                <p th:text="${campingcarDateTime2.returnTime}"></p>
+            </div>
+            <div class="detail_list">
+                <p>일권</p>
+                <p th:text="${campingcarDateTime2.day}"></p>
+            </div>
+            <div class="detail_list">
+                <p>성명</p>
+                <p th:text="${campingcarDateTime2.name}"></p>
+            </div>
+            <div class="detail_list">
+                <p>연락처</p>
+                <p th:text="${campingcarDateTime2.phone}"></p>
+            </div>
+            <div class="detail_list">
+                <p>임금자명</p>
+                <p th:text="${campingcarDateTime2.depositor}"></p>
+            </div>
+            <div class="detail_list">
+                <p>보증금</p>
+                <p th:text="${campingcarDateTime2.deposit}"></p>
+            </div>
+            <div class="detail_list">
+                <p>총결제금액</p>
+                <p th:text="${campingcarDateTime2.total}"></p>
+            </div>
+            <div class="detail_list">
+                <p>선결제금액</p>
+                <p th:text="${campingcarDateTime2.totalHalf}"></p>
+            </div>
+            <div class="detail_list">
+                <p>예약</p>
+                <p th:text="${campingcarDateTime2.reservation}"></p>
+            </div>
+            <div class="detail_list">
+                <p id="custom_demand">요구사항</p>
+                <p id="custom_demand_detail" th:text="${campingcarDateTime2.detail}"></p>
+            </div>
+            <div class="detail_list" id="detail_set_delete">
+                <form method="GET" onsubmit="return confirm('예약을 \'취소\'하시겠습니까?')" th:action="${'/admin/detail/delete/'+campingcarDateTime2.dateTimeId}">
+                    <input class="set_reserve" type="submit" value="예약취소"/>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,366 @@
+body {
+    background-color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#logout_box {
+    margin: 10px 20px 10px 10px;
+    text-align: right;
+}
+
+#logout_box button {
+    border: none;
+    background-color: #5e7fff;
+    border-radius: 0.5vh;
+    color: white;
+    margin: 5px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+#logout_box button:hover {
+    background-color: indianred;
+    cursor: pointer;
+}
+
+.content_wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu_container {
+    background-color: #5e7fff;
+    width: 20vw;
+    margin: 0 10px;
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
+    color: white;
+
+}
+
+.menu_container li{
+    list-style: none;
+    margin: 20px;
+    padding: 5px 0 5px 15px;
+    border-radius: 0.5vh;
+}
+
+.menu_container a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu_container li:hover {
+    background-color: gray;
+    color: indianred;
+
+}
+
+
+.list_container {
+    background-color: white;
+    width: 80vw;
+    margin: 0 10px;
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
+}
+
+.detail_container {
+    background-color: #5e7fff;
+    width: 50vw;
+    margin: 0 10px;
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
+    font-size: 17px
+}
+
+
+#mainTable td {
+    padding: 10px;
+}
+
+#mainTable th{
+    padding: 10px;
+}
+
+.reserve_list_wrapper {
+    display: flex;
+}
+
+.reserve_list {
+    color: #424242;
+    padding: 5px 5px 5px 10px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 0.5vh 0.5vh 0 0;
+    font-size: 13px;
+    border-bottom: 1px #3952ff dotted;
+}
+
+/*form {*/
+/*    border-bottom: 1px #3952ff dotted;*/
+
+/*}*/
+
+.reserve_list:hover {
+    cursor: pointer;
+    background-color: rgba(108, 108, 108, 0.45);
+}
+
+.reserve_list p {
+    text-align: center;
+    align-self: center;
+}
+
+#reserve_list_title {
+    border-bottom: 1px solid lightgray;
+    font-weight: bold;
+    background: #5e7fff;
+    color: white;
+}
+
+#reserve_list_title:hover {
+    pointer-events: none;
+    /*background-color: transparent;*/
+}
+
+.detail_list {
+    color: #424242;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-bottom: 1px #3952ff dotted;
+
+}
+
+.detail_list p {
+    text-align: center;
+    align-self: center;
+}
+
+#detail_list_title {
+    border-bottom: 1px solid lightgray;
+    font-weight: bold;
+    background: #5e7fff;
+    color: white;
+}
+
+.car_type {
+    flex: 1;
+}
+.created_date {
+    flex: 2;
+}
+.modified_date {
+    flex: 2;
+}
+.rent_date {
+    flex: 2;
+}
+.rent_time {
+    flex: 1;
+}
+.return_date {
+    flex: 2;
+}
+.return_time {
+    flex: 1;
+}
+.day {
+    flex: 2;
+}
+.name {
+    flex: 1;
+}
+.deposit {
+    flex: 2;
+}
+.total {
+    flex: 2;
+}
+.reservation {
+    flex: 1;
+}
+.rent_type {
+    flex: 3;
+}
+.product_name {
+    flex: 1;
+}
+.cars_type {
+    flex: 2;
+}
+.car_size {
+    flex: 2;
+}
+.car_name {
+    flex: 2;
+}
+.mileage {
+    flex: 1;
+}
+.options {
+    flex: 1;
+}
+.phone {
+    flex: 2;
+}
+.reserve_list {
+    flex: 19;
+}
+
+.set_reserve {
+    flex: 1;
+    padding: 10px;
+    margin: 5px 10px 5px 0;
+    background-color: #5e7fff;
+    border-radius: 0.5vh;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.set_reserve:hover {
+    background-color: indianred;
+    color: aliceblue;
+}
+
+#set_reserve_header {
+    padding: 0;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mainTable_tbody tr {
+
+}
+
+#mainTable_tbody td {
+    padding: 10px;
+}
+
+#mainTable_tbody {
+    border-spacing: 10px;
+
+}
+
+.set_reserve:hover {
+    background-color: indianred;
+}
+
+#reserve_list_title .set_reserve {
+    background-color: #5e7fff;
+    color: white;
+}
+
+#go_back_wrapper {
+    background: #5e7fff;
+}
+
+#go_back {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 0.5vh;
+}
+
+#go_back:hover {
+    background-color: indianred;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+#detail_set_reserve, #detail_set_delete {
+    justify-content: flex-end;
+    background: #5e7fff;
+}
+
+#custom_demand {
+    flex: 3;
+    text-align: left;
+}
+
+#custom_demand_detail {
+    flex: 7;
+    text-align: right;
+}
+
+.detail_list .set_reserve {
+    background: white;
+    color: #2a52ee;
+}
+
+.detail_list .set_reserve:hover {
+    background: indianred;
+    color: white;
+}
+
+@media (max-width: 990px) {
+    .content_wrapper {
+        flex-direction: column;
+    }
+
+    .menu_container {
+        width: 100%;
+        margin: 10px 0;
+        font-size: 11px
+    }
+
+    .menu_list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .menu_list li {
+        margin: 7px 0;
+        padding: 0 5px;
+    }
+
+    .list_container {
+        width: 100%;
+        margin: 0;
+        font-size: 12px
+    }
+
+    .detail_container {
+        width: 100%;
+        margin: 0;
+    }
+
+
+    .reserve_list {
+        margin: 5px 0;
+    }
+
+    .created_date {
+        display: none;
+    }
+    .modified_date {
+        display: none;
+    }
+
+    .deposit {
+        display: none;
+    }
+
+    .set_reserve {
+        display: none;
+    }
+
+    /*#custom_demand {*/
+    /*    width: 200%;*/
+    /*}*/
+}

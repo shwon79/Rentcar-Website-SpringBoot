@@ -13,19 +13,22 @@ public class SpringConfig {
     private final ShortRentRepository shortRentRepository;
     private final CampingCarRepository campingCarRepository;
     private final ReservationRepository reservationRepository;
-
     private final TwoYearlyRentRepository twoYearlyRentRepository;
+    private final LoginRepository loginRepository;
+
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
                         ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
-                        ReservationRepository reservationRepository, TwoYearlyRentRepository twoYearlyRentRepository) {
+                        ReservationRepository reservationRepository, TwoYearlyRentRepository twoYearlyRentRepository,
+                        LoginRepository loginRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
         this.campingCarRepository = campingCarRepository;
         this.reservationRepository = reservationRepository;
         this.twoYearlyRentRepository = twoYearlyRentRepository;
+        this.loginRepository = loginRepository;
     }
 
     @Bean
@@ -49,4 +52,7 @@ public class SpringConfig {
 
     @Bean
     public TwoYearlyRentService twoYearlyRentService() { return new TwoYearlyRentService(twoYearlyRentRepository); }
+
+    @Bean
+    public LoginService loginService() { return new LoginService(loginRepository); }
 }
