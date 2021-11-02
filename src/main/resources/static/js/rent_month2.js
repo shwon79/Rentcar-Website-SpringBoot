@@ -1,4 +1,5 @@
 let sortType = 'asc';
+let image_url;
 
 function sortContent(index) {
     // let table = document.getElementsByTagName('table');
@@ -33,6 +34,45 @@ function sendData(){
 
 
 
+
+function ajaxFileUpload() {
+    var form = jQuery("ajaxFrom")[0];
+    var formData = new FormData(form);
+    formData.append("message", "ajax로 파일 전송하기");
+
+    var fileValue = $("#ajaxFile").val().split("\\");
+    var fileName = fileValue[fileValue.length-1].replace(/(.png|.jpg|.jpeg|.gif)$/, ''); // 파일명
+    console.log("fileName : "+fileName);
+
+    formData.append("key", "03b260a78d187a2dd3086b7fe1e70e80");
+    formData.append("image", jQuery("#ajaxFile")[0].files[0]);
+    formData.append("name", fileName);
+
+    console.log("파일 데이터");
+    console.dir(jQuery("#ajaxFile")[0].files[0]);
+    console.log("-------------");
+    console.log(jQuery("#ajaxFile")[0].files[0]);
+
+    jQuery.ajax({
+        url : "https://api.imgbb.com/1/upload"
+        , type : "POST"
+        , processData : false
+        ,contentType : false
+        , data : formData
+        , success:function(imgbbReturn) {
+
+            if(imgbbReturn.success==true){
+
+                var imgbb = imgbbReturn.data;
+                console.log("imgbb.image.url : " +imgbb.image.url);
+                image_url = imgbb.image.url;
+            }
+
+        }
+    });
+}
+
+
 // Sending Data;
 const reserveMonthlyRent = () => {
 
@@ -55,6 +95,7 @@ const reserveMonthlyRent = () => {
     console.log(reservationDetailDetails)
     console.log(addressKakao)
     console.log(addressKakaoDetail)
+    console.log(image_url)
 
     let check1 = document.getElementById('check_info').checked;
 
@@ -105,43 +146,6 @@ const reserveMonthlyRent = () => {
     } else if (check1 != true || check2 != true || check3 != true || check4 != true) {
         alert('동의를 완료해주세요!')
     }
-}
-
-
-function ajaxFileUpload() {
-    var form = jQuery("ajaxFrom")[0];
-    var formData = new FormData(form);
-    formData.append("message", "ajax로 파일 전송하기");
-
-    var fileValue = $("#ajaxFile").val().split("\\");
-    var fileName = fileValue[fileValue.length-1].replace(/(.png|.jpg|.jpeg|.gif)$/, ''); // 파일명
-    console.log("fileName : "+fileName);
-
-    formData.append("key", "03b260a78d187a2dd3086b7fe1e70e80");
-    formData.append("image", jQuery("#ajaxFile")[0].files[0]);
-    formData.append("name", fileName);
-
-    console.log("파일 데이터");
-    console.dir(jQuery("#ajaxFile")[0].files[0]);
-    console.log("-------------");
-    console.log(jQuery("#ajaxFile")[0].files[0]);
-
-    jQuery.ajax({
-        url : "https://api.imgbb.com/1/upload"
-        , type : "POST"
-        , processData : false
-        ,contentType : false
-        , data : formData
-        , success:function(imgbbReturn) {
-
-            if(imgbbReturn.success==true){
-
-                var imgbb = imgbbReturn.data;
-                console.log("imgbb.image.url : " +imgbb.image.url);
-            }
-
-        }
-    });
 }
 
 //할인가격 스타일 적용
