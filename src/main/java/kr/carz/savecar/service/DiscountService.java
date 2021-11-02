@@ -6,6 +6,7 @@ import kr.carz.savecar.repository.DiscountRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public class DiscountService {
@@ -18,7 +19,7 @@ public class DiscountService {
     public List<Discount> findAllDiscounts(){
         return discountRepository.findAll();
     }
-    public Discount findDiscountByCarNo(Long carNo){
+    public Optional<Discount> findDiscountByCarNo(String carNo){
         return discountRepository.findByCarNo(carNo);
     }
 
