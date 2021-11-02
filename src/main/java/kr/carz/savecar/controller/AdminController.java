@@ -173,7 +173,7 @@ public class AdminController {
             jsonObject.put("result", 0);
         } else {
 
-            jsonObject.put("reesult", 1);
+            jsonObject.put("result", 1);
 
             Discount discount = new Discount();
             discount.setCarNo(discountDTO.getCarNo());
