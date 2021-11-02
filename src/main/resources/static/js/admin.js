@@ -30,7 +30,6 @@ const make_discount = () => {
     })
 }
 
-// 오
 // function make_discount () {
 //
 //     if (document.getElementById("carNo").value == ""){
