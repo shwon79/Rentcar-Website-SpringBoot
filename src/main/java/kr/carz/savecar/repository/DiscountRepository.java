@@ -14,4 +14,5 @@ public interface DiscountRepository extends JpaRepository<Discount, Long> {
     List<Discount> findAll();
     Optional<Discount> findByCarNo(String carNo);
 
+
 }

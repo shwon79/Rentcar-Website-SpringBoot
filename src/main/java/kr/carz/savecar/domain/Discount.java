@@ -20,7 +20,8 @@ public class Discount {
     private String discount; // 할인금액
 
     @Builder
-    public Discount(String carNo, String discount) {
+    public Discount(Long discountId, String carNo, String discount) {
+        this.discountId = discountId;
         this.carNo = carNo;
         this.discount = discount;
     }

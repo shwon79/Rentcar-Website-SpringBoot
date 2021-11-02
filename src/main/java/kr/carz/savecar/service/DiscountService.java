@@ -23,8 +23,8 @@ public class DiscountService {
         return discountRepository.findByCarNo(carNo);
     }
 
-    public Long save(DiscountSaveDTO dto) {
-        return discountRepository.save(dto.toEntity()).getDiscountId();
+    public Long save(Discount save_dto) {
+        return discountRepository.save(save_dto).getDiscountId();
     }
 
 }

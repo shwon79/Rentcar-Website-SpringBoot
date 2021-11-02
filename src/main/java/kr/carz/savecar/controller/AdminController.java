@@ -149,7 +149,10 @@ public class AdminController {
 
     // 할인가 적용하기 메뉴로 입장
     @GetMapping("/admin/discount/menu")
-    public String get_discount_menu() {
+    public String get_discount_menu(Model model) {
+
+        List<Discount> discountList = discountService.findAllDiscounts();
+        model.addAttribute("discountList", discountList);
 
         return "admin_discount_menu";
     }
@@ -157,10 +160,20 @@ public class AdminController {
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
     @ResponseBody
-    public Long save_discount(@RequestBody DiscountSaveDTO discount) {
+    public Long save_discount(@RequestBody DiscountSaveDTO discountDTO) {
 
-        System.out.println(discount.getCarNo());
-        System.out.println(discount.getDiscount());
+
+        Discount discount = new Discount();
+
+        discount.setCarNo(discountDTO.getCarNo());
+        discount.setDiscount(discountDTO.getDiscount());
+
+
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(discountDTO.getCarNo());
+        if(original_discount.isPresent()){
+            original_discount.get().setDiscount(discountDTO.getDiscount());
+            return discountService.save(original_discount.get());
+        }
 
         return discountService.save(discount);
     }
