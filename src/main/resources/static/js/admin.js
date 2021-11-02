@@ -17,19 +17,17 @@ const make_discount = () => {
     };
     console.log(data);
 
-    $('#discountBtn').click(function(){
-        $.ajax({
-            type:'post',
-            url:'/admin/discount',
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
-        }).done(function () {
-            alert('할인 가격이 적용되었습니다.');
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    });
+    $.ajax({
+        type:'post',
+        url:'/admin/discount',
+        dataType:'json',
+        contentType : 'application/json; charset=utf-8',
+        data : JSON.stringify(data)
+    }).done(function () {
+        alert('할인 가격이 적용되었습니다.');
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    })
 }
 
 // 오
