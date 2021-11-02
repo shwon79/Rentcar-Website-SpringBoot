@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" defer></script>
     <script th:src="@{/js/admin.js}" defer></script>
 
 </head>
@@ -28,7 +29,7 @@
         </div>
 
         <div class="form-part">
-            <form method="post" name="discountForm" action="/admin/discount">
+            <div name="discountForm">
                 <div class="form-group">
                     <label for="carNo">차량번호</label>
                    <input type="text" class="form-control" name="carNo" id="carNo" aria-describedby="emailHelp">
@@ -37,8 +38,8 @@
                     <label for="discount">할인가격</label>
                     <input type="number" class="form-control" name="discount" id="discount">
                 </div>
-                <button type="submit" class="btn btn-primary" id="discountBtn">할인 적용하기</button>
-            </form>
+                <div class="btn btn-primary" id="discountBtn" onclick="make_discount()">할인 적용하기</div>
+            </div>
         </div>
 
         </div>
