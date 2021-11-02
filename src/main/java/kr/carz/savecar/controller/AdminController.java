@@ -168,18 +168,64 @@ public class AdminController {
         // 이미 db에 등록된 차량인지 확인
         Optional<Discount> original_discount = discountService.findDiscountByCarNo(discountDTO.getCarNo());
         if(original_discount.isPresent()){
-//            original_discount.get().setDiscount(discountDTO.getDiscount());
-//            discountService.save(original_discount.get());
             jsonObject.put("result", 0);
         } else {
-
-            jsonObject.put("result", 1);
-
             Discount discount = new Discount();
             discount.setCarNo(discountDTO.getCarNo());
             discount.setDiscount(discountDTO.getDiscount());
 
             discountService.save(discount);
+
+            jsonObject.put("result", 1);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    // 할인가 수정하기 api
+    @GetMapping("/admin/discount/update/{carNo}/{discount}")
+    @ResponseBody
+    public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+
+        if(original_discount.isPresent()){
+            original_discount.get().setDiscount(discount);
+            discountService.save(original_discount.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    // 할인가 삭제하기 api
+    @GetMapping("/admin/discount/delete/{carNo}")
+    @ResponseBody
+    public void delete_discount(HttpServletResponse res, @PathVariable String carNo) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+
+        if(original_discount.isPresent()){
+            discountService.delete(original_discount.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
         }
 
         PrintWriter pw = res.getWriter();

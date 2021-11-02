@@ -135,6 +135,8 @@ function ajaxFileUpload() {
         , success:function(imgbbReturn) {
 
             if(imgbbReturn.success==true){
+
+                var imgbb = imgbbReturn.data;
                 console.log("imgbb.image.url : " +imgbb.image.url);
             }
 

@@ -26,5 +26,6 @@ public class DiscountService {
     public Long save(Discount save_dto) {
         return discountRepository.save(save_dto).getDiscountId();
     }
+    public void delete(Discount discount) { discountRepository.delete(discount); }
 
 }
