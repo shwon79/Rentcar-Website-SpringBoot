@@ -14,12 +14,13 @@ import javax.persistence.*;
 public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long carNo;
+    private Long discountId;
 
+    private String carNo;
     private String discount; // 할인금액
 
     @Builder
-    public Discount(Long carNo, String discount) {
+    public Discount(String carNo, String discount) {
         this.carNo = carNo;
         this.discount = discount;
     }

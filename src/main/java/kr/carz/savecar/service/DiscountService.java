@@ -23,7 +23,7 @@ public class DiscountService {
     }
 
     public Long save(DiscountSaveDTO dto) {
-        return discountRepository.save(dto.toEntity()).getCarNo();
+        return discountRepository.save(dto.toEntity()).getDiscountId();
     }
 
 }

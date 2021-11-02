@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.ArrayUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -265,7 +266,6 @@ public class RealtimeRentController {
                 responseJson = new JSONObject(sb.toString());
                 JSONArray list_json_array = (JSONArray) responseJson.get("list");
 
-
                 // list 안에 데이터
                 for(int i=0; i<list_json_array.length(); i++){
 
@@ -390,26 +390,34 @@ public class RealtimeRentController {
         // 라디오버튼 데이터 전달
         model.put("carType", realTimeDto.getCarType());
 
-        if (realTimeDto.getRentTerm().equals("12개월") || realTimeDto.getRentTerm().equals("24개월") ){
+        String [] above_year_field = {"12개월", "24개월"};
+        String [] yearly_kilometer_field = {"20000km", "30000km", "40000km"};
 
-            if (!realTimeDto.getKilometer().equals("20000km") && !realTimeDto.getKilometer().equals("30000km")  && !realTimeDto.getKilometer().equals("40000km")){
+
+//        if (realTimeDto.getRentTerm().equals("12개월") || realTimeDto.getRentTerm().equals("24개월") ){
+        if (ArrayUtils.contains(above_year_field, realTimeDto.getRentTerm()) ){
+
+//            if (!realTimeDto.getKilometer().equals("20000km") && !realTimeDto.getKilometer().equals("30000km")  && !realTimeDto.getKilometer().equals("40000km")){
+            if (!ArrayUtils.contains(yearly_kilometer_field, realTimeDto.getKilometer()) ){
                 model.put("kilometer", "20000km");
+                System.out.println("20000km");
             } else {
                 model.put("kilometer", realTimeDto.getKilometer());
+                System.out.println( realTimeDto.getKilometer());
             }
         } else if (realTimeDto.getRentTerm().equals("한달")) {
 
             if (!realTimeDto.getKilometer().equals("2000km") && !realTimeDto.getKilometer().equals("2500km") && !realTimeDto.getKilometer().equals("3000km")  && !realTimeDto.getKilometer().equals("4000km")){
                 model.put("kilometer", "2000km");
+                System.out.println("2000km");
             } else {
                 model.put("kilometer", realTimeDto.getKilometer());
+                System.out.println( realTimeDto.getKilometer());
             }
         }
 
         model.put("reservation", realTimeDto.getReserve_able());
         model.put("rentTerm", realTimeDto.getRentTerm());
-        model.put("kilometer", realTimeDto.getKilometer());
-
 
         return "rent_month2";
     }
