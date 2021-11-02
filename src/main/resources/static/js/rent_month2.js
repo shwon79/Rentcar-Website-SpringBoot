@@ -108,77 +108,38 @@ const reserveMonthlyRent = () => {
 }
 
 
-// function getBase64(file) {
-//     var reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = function () {
-//         console.log(reader.result);
-//     };
-//     reader.onerror = function (error) {
-//         console.log('Error: ', error);
-//     };
-// }
+function ajaxFileUpload() {
+    var form = jQuery("ajaxFrom")[0];
+    var formData = new FormData(form);
+    formData.append("message", "ajax로 파일 전송하기");
 
+    var fileValue = $("#ajaxFile").val().split("\\");
+    var fileName = fileValue[fileValue.length-1].replace(/(.png|.jpg|.jpeg|.gif)$/, ''); // 파일명
+    console.log("fileName : "+fileName);
 
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
-}
+    formData.append("key", "03b260a78d187a2dd3086b7fe1e70e80");
+    formData.append("image", jQuery("#ajaxFile")[0].files[0]);
+    formData.append("name", fileName);
 
+    console.log("파일 데이터");
+    console.dir(jQuery("#ajaxFile")[0].files[0]);
+    console.log("-------------");
+    console.log(jQuery("#ajaxFile")[0].files[0]);
 
+    jQuery.ajax({
+        url : "https://api.imgbb.com/1/upload"
+        , type : "POST"
+        , processData : false
+        ,contentType : false
+        , data : formData
+        , success:function(imgbbReturn) {
 
-// 이미지 서버에 올리기
-function upload_image() {
-
-    var file = document.querySelector('#files > input[type="file"]').files[0];
-
-    console.log(atob(file));
-
-    getBase64(file)
-        .then(data => {
-            // var data_post = {
-            //     key: "03b260a78d187a2dd3086b7fe1e70e80",
-            //     image: data
-            // };
-            // console.log(JSON.stringify(data_post))
-
-            // $.ajax({
-            //     type: 'POST',
-            //     url: 'https://api.imgbb.com/1/upload',
-            //     dataType: 'json',
-            //     processData: false,
-            //     contentType: 'application/json; charset=utf-8',
-            //     data: JSON.stringify(data_post)
-            // }).done(function () {
-            //     alert('POST 성공.');
-            // }).fail(function (error) {
-            //     alert(JSON.stringify(error));
-            // })
-
-            // var url = "https://api.imgbb.com/1/upload";
-            var url = "https://api.imgbb.com/1/upload?expiration=600&key=03b260a78d187a2dd3086b7fe1e70e80&image=" + data;
-            console.log(url);
-
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url);
-
-            // xhr.setRequestHeader("Content-Length", "0");
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    console.log(xhr.status);
-                    console.log(xhr.responseText);
-                }};
-
-            xhr.send();
+            if(imgbbReturn.success==true){
+                console.log("imgbb.image.url : " +imgbb.image.url);
+            }
 
         }
-    );
+    });
 }
 
 //숫자 사이에 콤마 넣기 시작

@@ -157,7 +157,7 @@ public class AdminController {
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
     @ResponseBody
-    public Long save_discount(@ModelAttribute DiscountSaveDTO discount) {
+    public Long save_discount(@RequestBody DiscountSaveDTO discount) {
 
         System.out.println(discount.getCarNo());
         System.out.println(discount.getDiscount());

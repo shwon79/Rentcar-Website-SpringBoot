@@ -36,8 +36,8 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
           <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
-<!--          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>-->
-<!--          <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>-->
+          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>
+          <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="width: 86%; margin: 0 auto">
@@ -233,12 +233,18 @@
                     <p><input id="reservation-detail-time" type="time" value="13:10:20" min="9:00:00" max="18:00:00"></p>
                   </div>
                 </div>
-                <div id="files" class="form-group has-feedback">
+<!--                <div id="files" class="form-group has-feedback">-->
+<!--                  <label class="control-label" for="driver-license"><i class="fas fa-star-of-life"></i> 운전면허증 첨부</label>-->
+<!--                  <div class="input-group"> <span class="input-group-addon" style="padding: 0 12px;"><i class="fas fa-file-image"></i></span>-->
+<!--                    <input type="file" id="driver-license" name="license" accept="image/png, image/jpeg, image/jpg" onchange="upload_image()">-->
+<!--                  </div>-->
+<!--                </div>-->
+                <form enctype="multipart/form-data" id="ajaxFrom" method="post">
                   <label class="control-label" for="driver-license"><i class="fas fa-star-of-life"></i> 운전면허증 첨부</label>
-                  <div class="input-group"> <span class="input-group-addon" style="padding: 0 12px;"><i class="fas fa-file-image"></i></span>
-                    <input type="file" id="driver-license" name="license" accept="image/png, image/jpeg, image/jpg" onchange="upload_image()">
-                  </div>
-                </div>
+                  <input type="file" id="ajaxFile" onchange="ajaxFileUpload()"/>
+
+<!--                  <input type="button" onclick="ajaxFileUpload()" value="업로드"/>-->
+                </form>
                 <div class="form-group has-feedback">
                   <label class="control-label" for="">신용 보증</label>
                   <div class="input-group"> <span class="input-group-addon"><i class="fas fa-credit-card"></i></span>
