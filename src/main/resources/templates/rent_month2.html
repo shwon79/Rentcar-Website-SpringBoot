@@ -201,6 +201,7 @@
                             <th>년식<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
                             <!--                                <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>-->
                             <th>월대여료[VAT별도]<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
+                            <th>할인가<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
                             <th th:if="${reservation} == 'expected'">반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
                             <th></th>
                         </tr>
@@ -216,6 +217,7 @@
                             <td scope="col" th:text="${moren.carOld}"></td>
                             <!--                                <td scope="col" th:text="${moren.carMileaget}"></td>-->
                             <td scope="col" th:text="${moren.carPrice}" class="number"></td>
+                            <td scope="col" th:text="${moren.discount}"></td>
                             <td th:if="${reservation} == 'expected'" scope="col" th:text="${moren.orderEnd}"></td>
                             <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}  + '/available'"><button >상세 페이지</button></a></td>
                         </tr>
