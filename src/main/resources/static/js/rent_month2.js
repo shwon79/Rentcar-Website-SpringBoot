@@ -142,6 +142,36 @@ function ajaxFileUpload() {
     });
 }
 
+//할인가격 스타일 적용
+
+const discountStyle = document.querySelectorAll('.discountStyle');
+const originalPrice = document.querySelectorAll('.discountStyle .originalPrice');
+const discountPrice = document.querySelectorAll('.discountStyle .discountPrice');
+
+function discountStyling() {
+    if (discountPrice) {
+        for (i = 0; i < discountPrice.length; i++) {
+            for (j = 0; j < originalPrice.length; j++) {
+                if (discountPrice[i].dataset['id'] === originalPrice[j].dataset['id']) {
+                    // console.log(discountPrice[i].dataset['id']);
+                    originalPrice[j].style.textDecoration = "line-through";
+                    originalPrice[j].style.textDecorationColor = "darkred";
+                    originalPrice[j].style.textDecorationThickness = "3px";
+                }
+            }
+        }
+    }
+}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    discountStyle.forEach(el => el.addEventListener('load',discountStyling(), false ))
+});
+
+// for (let a = 0; a < discountStyle.length; a++) {
+//     discountStyle.addEventListener('load', discountStyling(), false);
+// }
+
+
 //숫자 사이에 콤마 넣기 시작
 const number = document.querySelectorAll(".number");
 
@@ -153,8 +183,6 @@ function numberWithCommas() {
     }
 }
 
-number.addEventListener('load', numberWithCommas());
-
-//숫자 사이에 콤마 넣기 끝
-
-// 두 지점 사이 거리 시작
+window.addEventListener('DOMContentLoaded', (event) => {
+    number.forEach(el => el.addEventListener('load', numberWithCommas(), false ))
+});

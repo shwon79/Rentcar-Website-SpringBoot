@@ -155,3 +155,8 @@
         display: none;
     }
 }
+
+.discountPrice {
+    font-weight: bold;
+    color: darkred;
+}
