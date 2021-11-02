@@ -183,6 +183,8 @@ function numberWithCommas() {
     }
 }
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    number.forEach(el => el.addEventListener('load', numberWithCommas(), false ))
-});
+number.addEventListener('load', numberWithCommas());
+
+// window.addEventListener('DOMContentLoaded', (event) => {
+//     number.forEach(el => el.addEventListener('load', numberWithCommas(), false ))
+// });

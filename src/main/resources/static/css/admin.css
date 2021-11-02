@@ -397,7 +397,29 @@ form {
     width: 80%;
     margin: 0 0 10px 5px;
 }
-
+.content_container {
+    width: 60%;
+    margin: 0 auto;
+}
+#table_header {
+    background-color: #5e7fff;
+}
+#mainTable table {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+td {
+    border-bottom: 1px solid #5e7fff;
+}
+#mainTable button {
+    width: 40%;
+    height: 100%;
+    color: white;
+    background-color: #5e7fff;
+    border: none;
+    font-weight: 900;
+}
 @media (max-width: 600px) {
     .form-part {
         width: 90%;
@@ -406,5 +428,11 @@ form {
     #carNo.form-control,
     #discount.form-control {
         width: 60%;
+    }
+    .content_container {
+        width: 90%;
+    }
+    #mainTable button {
+        width: 100%;
     }
 }
