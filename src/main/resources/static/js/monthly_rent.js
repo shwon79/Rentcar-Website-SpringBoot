@@ -61,11 +61,6 @@ function make_easy_reservation () {
         return
     }
 
-    console.log(document.getElementsByClassName("carName")[0].innerHTML)
-    console.log(document.getElementsByClassName("carNo")[0].innerHTML)
-    console.log(document.getElementsByClassName("carOld")[0].innerHTML)
-
-
 
     var data = {
         name : $("#reservation-detail-name").val(),

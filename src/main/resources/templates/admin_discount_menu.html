@@ -7,11 +7,8 @@
     <title>SAVECAR - 관리자 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <!-- Style -->
     <link th:href="@{/css/admin.css}" rel="stylesheet">
-
     <script th:src="@{/js/admin.js}" defer></script>
-
 
 </head>
 <body>
@@ -31,7 +28,7 @@
         </div>
 
         <div class="form-part">
-            <form method="get" name="discountForm" action="">
+            <form method="post" name="discountForm" action="/admin/discount">
                 <div class="form-group">
                     <label for="carNo">차량번호</label>
                    <input type="text" class="form-control" name="carNo" id="carNo" aria-describedby="emailHelp">

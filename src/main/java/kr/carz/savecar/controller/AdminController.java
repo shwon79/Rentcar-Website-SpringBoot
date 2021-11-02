@@ -55,7 +55,7 @@ public class AdminController {
 
         try {
             Login user = loginService.findLoginByIdAndPwd(req.getParameter("id"), req.getParameter("pwd"));
-            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기
+            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기 => 다른 방식 찾기
 
 
             HttpSession session = req.getSession();
@@ -149,14 +149,15 @@ public class AdminController {
 
     // 할인가 적용하기 메뉴로 입장
     @GetMapping("/admin/discount/menu")
-    public String get_discount_menu(Model model) {
+    public String get_discount_menu() {
 
         return "admin_discount_menu";
     }
 
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
-    public String post_discount(ModelMap model, @ModelAttribute DiscountSaveDTO discount) {
+    @ResponseBody
+    public Long save_discount(@ModelAttribute DiscountSaveDTO discount) {
 
         System.out.println(discount.getCarNo());
         System.out.println(discount.getDiscount());
