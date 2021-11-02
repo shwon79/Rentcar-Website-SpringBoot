@@ -2,6 +2,7 @@ package kr.carz.savecar.controller;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -160,22 +161,31 @@ public class AdminController {
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
     @ResponseBody
-    public Long save_discount(@RequestBody DiscountSaveDTO discountDTO) {
+    public void save_discount(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
 
+        JSONObject jsonObject = new JSONObject();
 
-        Discount discount = new Discount();
-
-        discount.setCarNo(discountDTO.getCarNo());
-        discount.setDiscount(discountDTO.getDiscount());
-
-
+        // 이미 db에 등록된 차량인지 확인
         Optional<Discount> original_discount = discountService.findDiscountByCarNo(discountDTO.getCarNo());
         if(original_discount.isPresent()){
-            original_discount.get().setDiscount(discountDTO.getDiscount());
-            return discountService.save(original_discount.get());
+//            original_discount.get().setDiscount(discountDTO.getDiscount());
+//            discountService.save(original_discount.get());
+            jsonObject.put("result", 0);
+        } else {
+
+            jsonObject.put("reesult", 1);
+
+            Discount discount = new Discount();
+            discount.setCarNo(discountDTO.getCarNo());
+            discount.setDiscount(discountDTO.getDiscount());
+
+            discountService.save(discount);
         }
 
-        return discountService.save(discount);
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 
