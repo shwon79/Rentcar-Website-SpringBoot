@@ -172,10 +172,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
     discountStyle.forEach(el => el.addEventListener('load',discountStyling(), false ))
 });
 
-// for (let a = 0; a < discountStyle.length; a++) {
-//     discountStyle.addEventListener('load', discountStyling(), false);
-// }
+//할인 가격 천원 단위로 반올림
+function roundNumber() {
+    for (let i = 0; i < discountPrice.length; i++) {
+        let textNum = parseInt(discountPrice[i].innerText);
+        let roundedNumber = Math.round(textNum/1000)*1000;
+        discountPrice[i].innerText = roundedNumber;
+    }
+}
 
+// discountPrice.addEventListener('load',roundNumber());
+discountPrice.forEach(el => el.addEventListener('load', roundNumber(), false ));
 
 //숫자 사이에 콤마 넣기 시작
 const number = document.querySelectorAll(".number");
@@ -187,12 +194,15 @@ function numberWithCommas() {
             number[i].innerText = '상담';
         } else {
             const numberWithComma = parseInt(number[i].innerText).toLocaleString();
+            console.log(number[i].innerText);
+            console.log(numberWithComma);
             number[i].innerText = numberWithComma;
         }
     }
 }
 
 number.addEventListener('load', numberWithCommas());
+// number.forEach(el => el.addEventListener('load', numberWithCommas()));
 
 // window.addEventListener('DOMContentLoaded', (event) => {
 //     number.forEach(el => el.addEventListener('load', numberWithCommas(), false ))

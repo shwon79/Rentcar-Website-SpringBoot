@@ -25,6 +25,7 @@ const make_discount = () => {
         data : JSON.stringify(data)
     }).done(function () {
         alert('할인 가격이 적용되었습니다.');
+        window.location.href = '/admin/discount/menu';
     }).fail(function (error) {
         alert(JSON.stringify(error));
     })
@@ -44,15 +45,16 @@ $('.update-btn').click(function(e) {
         discount : editDiscount
     };
     console.log(data);
-
+    console.log(carNo);
+    console.log(editDiscount);
     $.ajax({
         type:'GET',
         url:'/admin/discount/update/'+ carNo + '/' + editDiscount,
         dataType:'json',
-        contentType : 'application/json; charset=utf-8',
-        data : JSON.stringify(data)
+        contentType : 'application/json; charset=utf-8'
     }).done(function () {
         alert('할인 가격이 수정되었습니다.');
+        window.location.href = '/admin/discount/menu';
     }).fail(function (error) {
         alert(JSON.stringify(error));
     })
@@ -64,6 +66,7 @@ $('.update-btn').click(function(e) {
 $('.delete-btn').click(function(e) {
     let carNo = e.target.dataset.index;
     console.log(carNo);
+
     if (confirm("할인 가격을 삭제하시겠습니까?")) {
         $.ajax({
             type:'GET',
@@ -72,6 +75,7 @@ $('.delete-btn').click(function(e) {
             contentType : 'application/json; charset=utf-8',
         }).done(function () {
             alert('할인 가격이 삭제되었습니다.');
+            window.location.href = '/admin/discount/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
