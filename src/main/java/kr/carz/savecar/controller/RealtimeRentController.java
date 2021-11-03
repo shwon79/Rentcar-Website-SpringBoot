@@ -278,7 +278,6 @@ public class RealtimeRentController {
                         JSONObject morenObject = (JSONObject)list_json_array.get(i);
                         String order_end = ((String)((JSONObject)list_json_array.get(i)).get("order_end"));
 
-
                         Integer expected_flg = 1;
                         java.lang.Integer tmp = 0;
 
@@ -335,9 +334,12 @@ public class RealtimeRentController {
                                                 kilometer_cost = monthlyRent2.getCost_for_3k();
                                             } else if (realTimeDto.getKilometer().equals("4000km")) {
                                                 kilometer_cost = monthlyRent2.getCost_for_4k();
+                                            } else if (realTimeDto.getKilometer().equals("기타")) {
+                                                kilometer_cost = monthlyRent2.getCost_for_others();
                                             } else {
                                                 kilometer_cost = monthlyRent2.getCost_for_2k();
                                             }
+
                                             dbid = monthlyRent2.getId();
 
                                         } else if (realTimeDto.getRentTerm().equals("12개월")) {
@@ -349,6 +351,8 @@ public class RealtimeRentController {
                                                 kilometer_cost = yearlyRent.getCost_for_30k();
                                             } else if (realTimeDto.getKilometer().equals("40000km")) {
                                                 kilometer_cost = yearlyRent.getCost_for_40k();
+                                            } else if (realTimeDto.getKilometer().equals("기타_long")) {
+                                                kilometer_cost = yearlyRent.getCost_for_others();
                                             } else {
                                                 kilometer_cost = yearlyRent.getCost_for_20k();
                                             }
@@ -363,6 +367,8 @@ public class RealtimeRentController {
                                                 kilometer_cost = twoYearlyRent.getCost_for_30Tk();
                                             } else if (realTimeDto.getKilometer().equals("40000km")) {
                                                 kilometer_cost = twoYearlyRent.getCost_for_40Tk();
+                                            } else if (realTimeDto.getKilometer().equals("기타_long")) {
+                                                kilometer_cost = twoYearlyRent.getCost_for_others();
                                             } else {
                                                 kilometer_cost = twoYearlyRent.getCost_for_20Tk();
                                             }
@@ -373,7 +379,6 @@ public class RealtimeRentController {
                                         Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                                         String discount_price = null;
                                         if(discount_object.isPresent()) {
-                                            System.out.println(discount_object.get().getCarNo());
                                             discount_price = discount_object.get().getDiscount();
                                         }
 
@@ -420,8 +425,8 @@ public class RealtimeRentController {
 
         // 한달 <-> 12개월, 24개월 : 약정 주행거리 디폴트  설정
         String [] above_year_field = {"12개월", "24개월"};
-        String [] yearly_kilometer_field = {"20000km", "30000km", "40000km"};
-        String [] monthly_kilometer_field = {"2000km", "2500km", "3000km", "4000km"};
+        String [] yearly_kilometer_field = {"20000km", "30000km", "40000km", "기타_long"};
+        String [] monthly_kilometer_field = {"2000km", "2500km", "3000km", "4000km", "기타"};
 
 
         if (ArrayUtils.contains(above_year_field, realTimeDto.getRentTerm()) ){
@@ -447,7 +452,7 @@ public class RealtimeRentController {
 
 
 
-    // 차량 상세 페이지
+    // 차량 상세 페이지 -> 월렌트만 처리된 상태, 12/24개월도 처리해줄 것
     @GetMapping(value = "/rent/month/detail/{carIdx}/{monthlyrentIdx}/{kilometer}/{rentStatus}")
     public String rent_month_detail(ModelMap model, @PathVariable String carIdx, @PathVariable Long monthlyrentIdx, @PathVariable String kilometer, @PathVariable String rentStatus) throws IOException {
 
@@ -504,6 +509,8 @@ public class RealtimeRentController {
                         kilometer_cost = monthlyRent.getCost_for_3k();
                     } else if (kilometer.equals("4000km")){
                         kilometer_cost = monthlyRent.getCost_for_4k();
+                    } else if (kilometer.equals("기타")){
+                        kilometer_cost = monthlyRent.getCost_for_others();
                     }
 
                     if(morenObject.get("carIdx").equals(carIdx)){
