@@ -182,7 +182,7 @@ public class AdminController {
 
 
     // 할인가 수정하기 api
-    @GetMapping("/admin/discount/update/{carNo}/{discount}")
+    @RequestMapping(value = "/admin/discount/update/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
 
