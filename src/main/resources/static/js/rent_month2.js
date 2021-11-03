@@ -2,7 +2,6 @@ let sortType = 'asc';
 let image_url;
 
 function sortContent(index) {
-    // let table = document.getElementsByTagName('table');
     let table = document.getElementsByClassName('table_expected')
 
     sortType = (sortType == 'asc') ? 'desc' : 'asc';

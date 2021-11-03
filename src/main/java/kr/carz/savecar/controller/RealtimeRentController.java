@@ -44,6 +44,9 @@ public class RealtimeRentController {
     /* ======================================================================================== */
 
     private String expected_day = "3";
+    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private DateFormat df_date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
@@ -51,7 +54,6 @@ public class RealtimeRentController {
         // 모두의 렌터카 데이터 가져오기
         HttpURLConnection conn;
         JSONObject responseJson;
-
 
         // 모렌 데이터 객체 생성
         List<MorenDTO> morenDTOList = new ArrayList<MorenDTO>();
@@ -61,11 +63,10 @@ public class RealtimeRentController {
         // 오늘 날짜
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat df_date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String today_date = df.format(cal.getTime());
         String today_date_time = df_date_time.format(cal.getTime());
 
+        // 며칠 이내 반납예정일
         cal.add(Calendar.DATE, Integer.parseInt(expected_day));
         String after_expected_date_format = df.format(cal.getTime());
 
@@ -224,33 +225,28 @@ public class RealtimeRentController {
 
 
 
-
-
     // 조건별로 차종 데이터 전달
     @PostMapping("/rent/month/lookup")
     public String rent_month_lookup(ModelMap model, @ModelAttribute RealTimeDTO realTimeDto) {
 
-        // 모두의 렌터카 데이터 가져오기
-        HttpURLConnection conn;
-        JSONObject responseJson;
+        // 오늘 날짜
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        String today_format = df.format(cal.getTime());
+        String today_date_time = df_date_time.format(cal.getTime());
+
+        cal.add(Calendar.DATE, Integer.parseInt(expected_day));
+        String after_expected_date_format = df.format(cal.getTime());
 
         // 모렌 데이터 객체 생성
         List<MorenDTO> morenDTOList = new ArrayList<MorenDTO>();
         List<MorenDTO> morenDTOListExpected = new ArrayList<MorenDTO>();
 
-        // 오늘 날짜
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String today_format = df.format(cal.getTime());
-
-
-        cal.add(Calendar.DATE, Integer.parseInt(expected_day));
-        String after_expected_date_format = df.format(cal.getTime());
-
+        // 모두의 렌터카 데이터 가져오기
+        HttpURLConnection conn;
+        JSONObject responseJson;
 
         try {
-
             String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_format + "&END=" + today_format + "&EXPECTED_DAY=" + expected_day;
             URL url = new URL(today_url);
 
@@ -290,7 +286,8 @@ public class RealtimeRentController {
                         if ((((JSONObject)list_json_array.get(i)).get("order_status").getClass().isInstance(tmp))
                             || (((JSONObject)list_json_array.get(i)).get("order_status").equals("2") &&
                                 order_end.length() > 10 &&
-                                order_end.substring(0, 10).compareTo(today_format) >= 0 && order_end.substring(0, 10).compareTo(after_expected_date_format) <= 0)
+                                order_end.substring(0, 19).compareTo(today_date_time) >= 0 &&
+                                order_end.substring(0, 10).compareTo(after_expected_date_format) <= 0)
                         ){
 
                             if (morenObject.get("reserve").equals(null)) {
@@ -319,6 +316,7 @@ public class RealtimeRentController {
                                         // 자체 db에서 가격 정보 가져오기
                                         MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, (String) ((JSONObject) list_json_array.get(i)).get("carCategory"));
                                         YearlyRent yearlyRent = yearlyRentService.findByMorenCar(carOld, carOld, (String) ((JSONObject) list_json_array.get(i)).get("carCategory"));
+                                        TwoYearlyRent twoYearlyRent = twoYearlyRentService.findByMorenCar(carOld, carOld, (String) ((JSONObject) list_json_array.get(i)).get("carCategory"));
 
                                         // 초기화 방법 다시 생각
                                         String kilometer_cost = "0";
@@ -356,6 +354,20 @@ public class RealtimeRentController {
                                             }
 
                                             dbid = yearlyRent.getId();
+                                        } else if (realTimeDto.getRentTerm().equals("24개월")) {
+
+                                            // 키로수별
+                                            if (realTimeDto.getKilometer().equals("20000km")) {
+                                                kilometer_cost = twoYearlyRent.getCost_for_20Tk();
+                                            } else if (realTimeDto.getKilometer().equals("30000km")) {
+                                                kilometer_cost = twoYearlyRent.getCost_for_30Tk();
+                                            } else if (realTimeDto.getKilometer().equals("40000km")) {
+                                                kilometer_cost = twoYearlyRent.getCost_for_40Tk();
+                                            } else {
+                                                kilometer_cost = twoYearlyRent.getCost_for_20Tk();
+                                            }
+
+                                            dbid = twoYearlyRent.getId();
                                         }
 
                                         Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
@@ -450,8 +462,7 @@ public class RealtimeRentController {
 
         // 오늘 날짜
         Date time = new Date();
-        SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
-        String today_format = format.format(time);
+        String today_format = df.format(time);
         model.put("today_format", today_format);
 
         try {
@@ -537,7 +548,6 @@ public class RealtimeRentController {
                         break;
 
                     }
-
                 }
             }
 
