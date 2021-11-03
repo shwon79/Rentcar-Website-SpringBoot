@@ -185,7 +185,7 @@ public class AdminController {
     @RequestMapping(value = "/admin/discount/update/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
-
+        System.out.println(carNo);
         JSONObject jsonObject = new JSONObject();
 
         // 이미 db에 등록된 차량인지 확인

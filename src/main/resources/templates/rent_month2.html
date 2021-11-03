@@ -218,7 +218,7 @@
                             <!--                                <td scope="col" th:text="${moren.carMileaget}"></td>-->
                             <td scope="col" class="discountStyle">
                                 <p th:text="${moren.carPrice}" class="number originalPrice" th:data-id="${moren.carIdx}"></p>
-                                <p th:if="${moren.discount}" th:text="${moren.discount}" class="number discountPrice" th:data-id="${moren.carIdx}"></p>
+                                <p th:if="${moren.discount}" th:text="${moren.carPrice}-${moren.discount}" class="number discountPrice" th:data-id="${moren.carIdx}"></p>
                             </td>
                             <td th:if="${reservation} == 'expected'" scope="col" th:text="${moren.orderEnd}"></td>
                             <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}  + '/available'"><button >상세 페이지</button></a></td>

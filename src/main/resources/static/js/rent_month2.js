@@ -183,8 +183,12 @@ const number = document.querySelectorAll(".number");
 function numberWithCommas() {
     // console.log(number);
     for (let i = 0; i < number.length; i++) {
-        const numberWithComma = parseInt(number[i].innerText).toLocaleString();
-        number[i].innerText = numberWithComma;
+        if (number[i].innerText === '상담') {
+            number[i].innerText = '상담';
+        } else {
+            const numberWithComma = parseInt(number[i].innerText).toLocaleString();
+            number[i].innerText = numberWithComma;
+        }
     }
 }
 
