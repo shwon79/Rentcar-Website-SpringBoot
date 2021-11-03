@@ -156,7 +156,26 @@
     }
 }
 
+.originalPrice {
+    margin: 0 0 5px 0;
+}
 .discountPrice {
     font-weight: bold;
     color: darkred;
+}
+.discountAnimation {
+    color:darkred;
+    font-weight: 600;
+    animation:colorchange 1s infinite alternate;
+}
+@keyframes colorchange {
+    0% {
+        color:darkred;
+    }
+    30% {
+        color:red;
+    }
+    60% {
+        color: mediumvioletred;
+    }
 }

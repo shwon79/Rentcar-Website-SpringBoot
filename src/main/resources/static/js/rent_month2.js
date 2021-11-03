@@ -169,8 +169,9 @@ function discountStyling() {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    discountStyle.forEach(el => el.addEventListener('load',discountStyling(), false ))
+    discountStyle.forEach(el => el.addEventListener('load', discountStyling(), false ));
 });
+
 
 //할인 가격 천원 단위로 반올림
 function roundNumber() {
@@ -194,8 +195,6 @@ function numberWithCommas() {
             number[i].innerText = '상담';
         } else {
             const numberWithComma = parseInt(number[i].innerText).toLocaleString();
-            console.log(number[i].innerText);
-            console.log(numberWithComma);
             number[i].innerText = numberWithComma;
         }
     }
