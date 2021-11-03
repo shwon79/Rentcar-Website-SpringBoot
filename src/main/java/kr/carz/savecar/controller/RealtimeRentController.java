@@ -378,7 +378,7 @@ public class RealtimeRentController {
 
                                         Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                                         String discount_price = null;
-                                        if(discount_object.isPresent()) {
+                                        if(discount_object.isPresent() && realTimeDto.getRentTerm().equals("한달")) {
                                             discount_price = discount_object.get().getDiscount();
                                         }
 

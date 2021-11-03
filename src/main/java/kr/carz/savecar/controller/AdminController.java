@@ -62,10 +62,8 @@ public class AdminController {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
 
-
             // admin view로 넘기기
 //            List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
-
 //            mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
             mav.setViewName("admin_campingcar_menu");
 
@@ -79,7 +77,6 @@ public class AdminController {
             // 다시 login page로 back
             mav.setViewName("login");
         }
-
         return mav;
     }
 
@@ -102,13 +99,12 @@ public class AdminController {
 
         mav.setViewName("login");
 
-
         return mav;
     }
 
 
 
-    // [관리자 메인페이지]캠핑카 예약내역 메뉴로 입장
+    // [관리자 메인페이지] 캠핑카 예약내역 메뉴로 입장
     @GetMapping(value = "/admin/campingcar/menu")
     @ResponseBody
     public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
@@ -173,7 +169,6 @@ public class AdminController {
             Discount discount = new Discount();
             discount.setCarNo(discountDTO.getCarNo());
             discount.setDiscount(discountDTO.getDiscount());
-
             discountService.save(discount);
 
             jsonObject.put("result", 1);

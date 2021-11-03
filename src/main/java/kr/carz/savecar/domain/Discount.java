@@ -17,7 +17,7 @@ public class Discount {
     private Long discountId;
 
     private String carNo;
-    private String discount; // 할인금액
+    private String discount; // 할인 퍼센트
 
     @Builder
     public Discount(Long discountId, String carNo, String discount) {
