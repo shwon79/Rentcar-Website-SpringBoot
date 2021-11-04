@@ -18,8 +18,8 @@
 
         $(document).ready(function(){
             // 반납예정일로 정렬
-            sortContent(7)
-            sortContent(7)
+            sortContent(6)
+            sortContent(6)
         });
     </script>
     <script th:src="@{/js/rent_month2.js}" defer></script>
@@ -163,8 +163,7 @@
                     </div>
                     <!-- selections -->
                     <div id="sel_able" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <label for="reserve_able"><input type="radio" id="reserve_able" name="reserve_able" value="possible" onclick="sendData()" th:checked="${reservation} == 'possible'">예약가능차량</label>
-<!--                        <label for="reserve_soon"><input type="radio" id="reserve_soon" name="reserve_able" value="expected" onclick="sendData()" th:checked="${reservation} == 'expected'">입고예정차량</label>-->
+                        <label for="reserve_able"><input type="radio" id="reserve_able" name="reserve_able" value="possible" onclick="sendData()" checked="checked">예약가능차량</label>
                     </div>
                 </div>
             </form>
@@ -200,9 +199,7 @@
                             <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(3)></th>
                             <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(4)></th>
                             <th>년식<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
-                            <!--                                <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>-->
                             <th>월대여료[VAT별도]<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
-                            <th th:if="${reservation} == 'expected'">반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
                             <th></th>
                         </tr>
                         </thead>
@@ -215,15 +212,13 @@
                             <td scope="col" th:text="${moren.carEngine}"></td>
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
-                            <!--                                <td scope="col" th:text="${moren.carMileaget}"></td>-->
                             <td scope="col" class="discountStyle">
-                                <p th:text="${moren.carPrice}" class="number originalPrice" th:data-id="${moren.carIdx}"></p>
-<!--                                <span th:if="${moren.discount}">-->
-<!--                                    <span th:if="${moren.carPrice} != '상담'" class="discountAnimation">할인 특가</span>-->
-<!--                                </span>-->
-<!--                                <span th:if="${moren.discount}" th:text="${moren.carPrice}*(100-${moren.discount})/100" class="number discountPrice" th:data-id="${moren.carIdx}"></span>-->
+                                <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
+                                <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
+                                    <span class="discountAnimation">할인 특가&nbsp</span>
+                                    <span th:text="${moren.carPrice}*(100-${moren.discount})/100" class="number"></span>원
+                                </div>
                             </td>
-                            <td th:if="${reservation} == 'expected'" scope="col" th:text="${moren.orderEnd}"></td>
                             <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}  + '/available'"><button >상세 페이지</button></a></td>
                         </tr>
                         </tbody>
@@ -237,14 +232,13 @@
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
                         <p>년식: <span th:text="${moren.carOld}"></span></p>
                         <p class="discountStyle">월 대여료[VAT별도]:
-                            <span th:text="${moren.carPrice}" class="number originalPrice"></span>
-<!--                            <span th:if="${moren.discount}">-->
-<!--                                <span th:if="${moren.carPrice} != '상담'" class="discountAnimation">할인 특가</span>-->
-<!--                            </span>-->
-<!--                            <span th:if="${moren.discount}" th:text="${moren.carPrice}*(100-${moren.discount})/100" class="number discountPrice" th:data-id="${moren.carIdx}"></span>-->
+                            <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
+                            <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
+                                <span class="discountAnimation">할인 특가&nbsp</span>
+                                <span th:text="${moren.carPrice}*(100-${moren.discount})/100" class="number"></span>원
+                            </div>
                         </p>
 
-                        <p th:if="${reservation} == 'expected'">반납예정일: <span th:text="${moren.orderEnd}"></span></p>
                         <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer} + '/available'"><button>상세 페이지</button></a>
                     </div>
                 </div>
@@ -268,9 +262,8 @@
                             <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(3)></th>
                             <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(4)></th>
                             <th>년식<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(5)></th>
-                            <!--                                <th>주행거리<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>-->
-                            <th>월대여료[VAT별도]<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
-                            <th>반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
+                            <th>반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(6)></th>
+                            <th>월대여료[VAT별도]<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortContent(7)></th>
                             <th></th>
                         </tr>
                         </thead>
@@ -283,16 +276,14 @@
                             <td scope="col" th:text="${moren.carEngine}"></td>
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
-                            <!--                                <td scope="col" th:text="${moren.carMileaget}"></td>-->
-                            <td scope="col" class="discountStyle">
-                                <p th:text="${moren.carPrice}" class="number originalPrice" th:data-id="${moren.carIdx}"></p>
-<!--                                <span th:if="${moren.discount}">-->
-<!--                                    <span th:if="${moren.carPrice} != '상담'" class="discountAnimation">할인 특가</span>-->
-<!--                                </span>-->
-<!--                                <span th:if="${moren.discount}" th:text="${moren.carPrice}*(100-${moren.discount})/100" class="number discountPrice" th:data-id="${moren.carIdx}"></span>-->
-                            </td>
-<!--                            <td scope="col" th:text="${moren.carPrice}" class="number"></td>-->
                             <td scope="col" th:text="${moren.orderEnd}"></td>
+                            <td scope="col" class="discountStyle">
+                                <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
+                                <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
+                                    <span class="discountAnimation">할인 특가&nbsp</span>
+                                    <span th:text="${moren.carPrice}*(100-${moren.discount})/100" class="number"></span>원
+                                </div>
+                            </td>
                             <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}  + '/expected'"><button >상세 페이지</button></a></td>
                         </tr>
                         </tbody>
@@ -305,14 +296,14 @@
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
                         <p>년식: <span th:text="${moren.carOld}"></span></p>
-                        <p class="discountStyle">월 대여료[VAT별도]:
-                            <span th:text="${moren.carPrice}" class="number originalPrice"></span>
-<!--                            <span th:if="${moren.discount}">-->
-<!--                                <span th:if="${moren.carPrice} != '상담'" class="discountAnimation">할인 특가</span>-->
-<!--                            </span>-->
-<!--                            <span th:if="${moren.discount}" th:text="${moren.carPrice}*(100-${moren.discount})/100" class="number discountPrice" th:data-id="${moren.carIdx}"></span>-->
-                        </p>
                         <p>반납예정일: <span th:text="${moren.orderEnd}"></span></p>
+                        <p class="discountStyle">월 대여료[VAT별도]:
+                            <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
+                            <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
+                                <span class="discountAnimation">할인 특가&nbsp</span>
+                                <span th:text="${moren.carPrice}*(100-${moren.discount})/100" class="number"></span>원
+                            </div>
+                        </p>
                         <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer} + '/expected'"><button>상세 페이지</button></a>
                     </div>
                 </div>

@@ -122,7 +122,12 @@
     border-radius: 10px;
 }
 
-
+.discount-wrap {
+    display: flex;
+    justify-content: center;
+    height: 25px;
+    line-height: 200%;
+}
 
 @media (max-width: 600px) {
     .realtime-btn {
@@ -153,6 +158,12 @@
 
     .not-show-in-mobile {
         display: none;
+    }
+
+    .discount-wrap {
+        justify-content: end;
+        padding-right: 25px;
+        line-height: unset;
     }
 }
 

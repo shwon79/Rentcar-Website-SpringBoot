@@ -149,7 +149,7 @@ const reserveMonthlyRent = () => {
 
 //할인가격 스타일 적용
 
-const discountStyle = document.querySelectorAll('.discountStyle');
+// const discountStyle = document.querySelectorAll('.discountStyle');
 const originalPrice = document.querySelectorAll('.discountStyle .originalPrice');
 const discountPrice = document.querySelectorAll('.discountStyle .discountPrice');
 
@@ -157,12 +157,25 @@ function discountStyling() {
     if (discountPrice) {
         for (i = 0; i < discountPrice.length; i++) {
             for (j = 0; j < originalPrice.length; j++) {
-                if (discountPrice[i].dataset['id'] === originalPrice[j].dataset['id']) {
-                    // console.log(discountPrice[i].dataset['id']);
-                    originalPrice[j].style.textDecoration = "line-through";
-                    originalPrice[j].style.textDecorationColor = "darkred";
-                    originalPrice[j].style.textDecorationThickness = "3px";
-                }
+
+
+                // originalPrice[j].style.textDecoration = "line-through";
+                // originalPrice[j].style.textDecorationColor = "darkred";
+                // originalPrice[j].style.textDecorationThickness = "3px";
+
+                // console.log(originalPrice[i].dataset)
+
+                // console.log(discountPrice[i].dataset['id'])
+                // console.log(originalPrice[j].dataset['id'])
+                //
+                // if (discountPrice[i].dataset['id'] === originalPrice[j].dataset['id']) {
+                //     console.log('in')
+                //     console.log(discountPrice[i].dataset['id']);
+                //     originalPrice[j].style.textDecoration = "line-through";
+                //     originalPrice[j].style.textDecorationColor = "darkred";
+                //     originalPrice[j].style.textDecorationThickness = "3px";
+                //     console.log('out')
+                // }
             }
         }
     }
