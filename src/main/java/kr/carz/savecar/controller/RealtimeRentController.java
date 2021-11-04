@@ -217,7 +217,6 @@ public class RealtimeRentController {
         // 라디오버튼 디폴트 데이터 전달
         model.put("carType", "전체");
         model.put("kilometer", "2000km");
-        model.put("reservation", "possible");
         model.put("rentTerm", "한달");
 
         return "rent_month2";
@@ -599,7 +598,6 @@ public class RealtimeRentController {
             }
         }
 
-        model.put("reservation", realTimeDto.getReserve_able());
         model.put("rentTerm", realTimeDto.getRentTerm());
 
         return "rent_month2";
@@ -819,6 +817,7 @@ public class RealtimeRentController {
 
 
     // 차량 상세 페이지 -> 월렌트만 처리된 상태, 12/24개월도 처리해줄 것
+    //              -> 할인가로 넘겨주기 처리해야함
     @GetMapping(value = "/rent/month/detail/{carIdx}/{monthlyrentIdx}/{kilometer}/{rentStatus}")
     public String rent_month_detail(ModelMap model, @PathVariable String carIdx, @PathVariable Long monthlyrentIdx, @PathVariable String kilometer, @PathVariable String rentStatus) throws IOException {
 
@@ -909,14 +908,19 @@ public class RealtimeRentController {
 
                         model.put("morenDto", morenDto);
 
-                        Integer tax = (int)(Integer.parseInt(kilometer_cost) * 0.1);
-                        Integer amount_total = (int)(Integer.parseInt(kilometer_cost) * 1.1);
-                        Integer amount_deposited = amount_total + 300000 + 100000;
+                        if (kilometer.equals("기타")) {
+                            model.put("tax", "상담");
+                            model.put("amount_total", "상담");
+                            model.put("amount_deposited", "상담");
+                        } else {
+                            Integer tax = (int) (Integer.parseInt(kilometer_cost) * 0.1);
+                            Integer amount_total = (int) (Integer.parseInt(kilometer_cost) * 1.1);
+                            Integer amount_deposited = amount_total + 300000 + 100000;
 
-                        // 프론트로 금액 정보 전달
-                        model.put("tax", tax);
-                        model.put("amount_total", amount_total);
-                        model.put("amount_deposited", amount_deposited);
+                            model.put("tax", tax);
+                            model.put("amount_total", amount_total);
+                            model.put("amount_deposited", amount_deposited);
+                        }
 
                         break;
 

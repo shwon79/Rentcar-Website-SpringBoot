@@ -58,7 +58,6 @@ public class AdminController {
             Login user = loginService.findLoginByIdAndPwd(req.getParameter("id"), req.getParameter("pwd"));
             System.out.println(user.getId());  // exception 발생코드임, 건들지 말기 => 다른 방식 찾기
 
-
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
 

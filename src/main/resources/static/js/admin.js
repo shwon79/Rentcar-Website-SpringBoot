@@ -71,7 +71,7 @@ $('.update-btn').click(function(e) {
             // if ()
             console.log(result);
             alert('할인 가격이 수정되었습니다.');
-            // window.location.href = '/admin/discount/menu';
+            window.location.href = '/admin/discount/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })

@@ -1010,7 +1010,8 @@ opacity: .5; }
     #home_pc { display: none }
     #home { display: block }
     .fixed_phone_btn { top: 83%; }
-    .fixed_phone_pc_btn { display: none; }
+    .fixed_phone_pc_btn { display: none;  }
+    /* text-decoration: line-through; text-decoration-color: darkred;  */
 }
 
 /* Extra Small Devices, Phones */
