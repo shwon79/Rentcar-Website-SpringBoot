@@ -167,10 +167,11 @@ function discountStyling() {
         }
     }
 }
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    discountStyle.forEach(el => el.addEventListener('load', discountStyling(), false ));
-});
+$('.discountStyle').ready(discountStyling());
+// $(window).resize(discountStyling());
+// window.addEventListener('DOMContentLoaded', (event) => {
+//     discountStyle.forEach(el => el.addEventListener('load', discountStyling(), false ));
+// });
 
 
 //할인 가격 천원 단위로 반올림
@@ -181,9 +182,11 @@ function roundNumber() {
         discountPrice[i].innerText = roundedNumber;
     }
 }
-
+$('.discountPrice').ready(roundNumber());
 // discountPrice.addEventListener('load',roundNumber());
-discountPrice.forEach(el => el.addEventListener('load', roundNumber(), false ));
+// discountPrice.forEach(el => el.addEventListener('DOMContentLoaded', roundNumber(), false ));
+// discountPrice.forEach(el => el.addEventListener('scroll', roundNumber()));
+
 
 //숫자 사이에 콤마 넣기 시작
 const number = document.querySelectorAll(".number");
@@ -200,7 +203,9 @@ function numberWithCommas() {
     }
 }
 
-number.addEventListener('load', numberWithCommas());
+$('.number').ready(numberWithCommas());
+
+// number.addEventListener('load', numberWithCommas());
 // number.forEach(el => el.addEventListener('load', numberWithCommas()));
 
 // window.addEventListener('DOMContentLoaded', (event) => {
