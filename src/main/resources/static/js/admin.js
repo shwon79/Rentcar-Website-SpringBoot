@@ -68,9 +68,11 @@ $('.update-btn').click(function(e) {
             dataType:'json',
             contentType : 'application/json; charset=utf-8'
         }).done(function (result) {
-            // if ()
-            console.log(result);
-            alert('할인 가격이 수정되었습니다.');
+            if (result.result == 1) {
+                alert('할인 가격이 수정되었습니다.');
+            } else if (result.result == 0) {
+                alert('할인 가격 수정에 문제가 생겼습니다.');
+            };
             window.location.href = '/admin/discount/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));
@@ -91,8 +93,12 @@ $('.delete-btn').click(function(e) {
             url:'/admin/discount/delete/'+ carNo,
             dataType:'json',
             contentType : 'application/json; charset=utf-8',
-        }).done(function () {
-            alert('할인 가격이 삭제되었습니다.');
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('할인 가격이 삭제되었습니다.');
+            } else if (result.result == 0) {
+                alert('할인 가격 삭제에 문제가 생겼습니다.');
+            };
             window.location.href = '/admin/discount/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));

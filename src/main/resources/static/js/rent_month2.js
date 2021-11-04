@@ -180,7 +180,7 @@ function discountStyling() {
         }
     }
 }
-$('.discountStyle').ready(discountStyling());
+// $('.discountStyle').ready(discountStyling());
 // $(window).resize(discountStyling());
 // window.addEventListener('DOMContentLoaded', (event) => {
 //     discountStyle.forEach(el => el.addEventListener('load', discountStyling(), false ));
