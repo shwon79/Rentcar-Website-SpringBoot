@@ -147,47 +147,11 @@ const reserveMonthlyRent = () => {
     }
 }
 
-//할인가격 스타일 적용
-
-// const discountStyle = document.querySelectorAll('.discountStyle');
-const originalPrice = document.querySelectorAll('.discountStyle .originalPrice');
-const discountPrice = document.querySelectorAll('.discountStyle .discountPrice');
-
-function discountStyling() {
-    if (discountPrice) {
-        for (i = 0; i < discountPrice.length; i++) {
-            for (j = 0; j < originalPrice.length; j++) {
-
-
-                // originalPrice[j].style.textDecoration = "line-through";
-                // originalPrice[j].style.textDecorationColor = "darkred";
-                // originalPrice[j].style.textDecorationThickness = "3px";
-
-                // console.log(originalPrice[i].dataset)
-
-                // console.log(discountPrice[i].dataset['id'])
-                // console.log(originalPrice[j].dataset['id'])
-                //
-                // if (discountPrice[i].dataset['id'] === originalPrice[j].dataset['id']) {
-                //     console.log('in')
-                //     console.log(discountPrice[i].dataset['id']);
-                //     originalPrice[j].style.textDecoration = "line-through";
-                //     originalPrice[j].style.textDecorationColor = "darkred";
-                //     originalPrice[j].style.textDecorationThickness = "3px";
-                //     console.log('out')
-                // }
-            }
-        }
-    }
-}
-// $('.discountStyle').ready(discountStyling());
-// $(window).resize(discountStyling());
-// window.addEventListener('DOMContentLoaded', (event) => {
-//     discountStyle.forEach(el => el.addEventListener('load', discountStyling(), false ));
-// });
-
 
 //할인 가격 천원 단위로 반올림
+
+const discountPrice = document.querySelectorAll('.discountStyle .discountPrice');
+
 function roundNumber() {
     for (let i = 0; i < discountPrice.length; i++) {
         let textNum = parseInt(discountPrice[i].innerText);
@@ -196,9 +160,6 @@ function roundNumber() {
     }
 }
 $('.discountPrice').ready(roundNumber());
-// discountPrice.addEventListener('load',roundNumber());
-// discountPrice.forEach(el => el.addEventListener('DOMContentLoaded', roundNumber(), false ));
-// discountPrice.forEach(el => el.addEventListener('scroll', roundNumber()));
 
 
 //숫자 사이에 콤마 넣기 시작
@@ -218,9 +179,3 @@ function numberWithCommas() {
 
 $('.number').ready(numberWithCommas());
 
-// number.addEventListener('load', numberWithCommas());
-// number.forEach(el => el.addEventListener('load', numberWithCommas()));
-
-// window.addEventListener('DOMContentLoaded', (event) => {
-//     number.forEach(el => el.addEventListener('load', numberWithCommas(), false ))
-// });

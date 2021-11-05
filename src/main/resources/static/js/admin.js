@@ -18,36 +18,28 @@ const make_discount = () => {
 
     let carNo = $("#carNo").val().replace(/(\s*)/g,""); // 공백 제거
 
-    const existingCarNo = document.querySelectorAll('.editCarNo');
-    const existingCarNoList = [];
-    for (i = 0; i < existingCarNo.length; i++) {
-        existingCarNoList.push(existingCarNo[i].innerText);
-    }
-    console.log(existingCarNoList.indexOf(carNo));
+    var data = {
+        carNo : carNo,
+        discount : $("#discount").val()
+    };
+    console.log(data);
 
-    if (existingCarNoList.indexOf(carNo) == -1) {
-        var data = {
-            carNo : carNo,
-            discount : $("#discount").val()
-        };
-        console.log(data);
-
-        $.ajax({
-            type:'POST',
-            url:'/admin/discount',
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
-        }).done(function () {
+    $.ajax({
+        type:'POST',
+        url:'/admin/discount',
+        dataType:'json',
+        contentType : 'application/json; charset=utf-8',
+        data : JSON.stringify(data)
+    }).done(function (result) {
+        if (result.result == 1) {
             alert('할인 가격이 적용되었습니다.');
-            window.location.href = '/admin/discount/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    } else {
-        alert('이미 할인이 적용된 차량입니다. 아래 수정 기능을 이용하세요.');
+        } else if (result.result == 0) {
+            alert('할인 가격이 적용에 문제가 생겼습니다.');
+        };
         window.location.href = '/admin/discount/menu';
-    }
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    })
 }
 
 
