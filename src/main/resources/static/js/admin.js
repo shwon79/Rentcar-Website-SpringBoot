@@ -11,18 +11,23 @@ const make_discount = () => {
         return
     }
 
-    let carNo = $("#carNo").val();
+    if (document.getElementById("discount").value > 0){
+        alert('현재는 할인가만 적용가능합니다. 음수값으로 입력해주세요.')
+        return
+    }
+
+    let carNo = $("#carNo").val().replace(/(\s*)/g,""); // 공백 제거
 
     const existingCarNo = document.querySelectorAll('.editCarNo');
     const existingCarNoList = [];
     for (i = 0; i < existingCarNo.length; i++) {
         existingCarNoList.push(existingCarNo[i].innerText);
     }
-
     console.log(existingCarNoList.indexOf(carNo));
+
     if (existingCarNoList.indexOf(carNo) == -1) {
         var data = {
-            carNo : $("#carNo").val(),
+            carNo : carNo,
             discount : $("#discount").val()
         };
         console.log(data);
@@ -53,6 +58,12 @@ $('.update-btn').click(function(e) {
     let originalDiscount = document.querySelectorAll('.editDiscount');
     let editDiscount = prompt("수정할 할인가(%)를 입력하세요.", "");
 
+    if (editDiscount > 0){
+        alert('현재는 할인가만 적용가능합니다. 음수값으로 입력해주세요.')
+        return
+    }
+
+    // 할인 퍼센트 입력 안해줬을 경우 -> 원래대로
     if (!editDiscount) {
         for (let i = 0; i < originalDiscount.length; i++) {
             if (originalDiscount[i].dataset.index === carNo) {
