@@ -11,7 +11,7 @@ body {
 
 #logout_box button {
     border: none;
-    background-color: #5e7fff;
+    background-color: #5495b1;
     border-radius: 0.5vh;
     color: white;
     margin: 5px;
@@ -30,7 +30,7 @@ body {
 }
 
 .menu_container {
-    background-color: #5e7fff;
+    background-color: #5495b1;
     width: 20vw;
     margin: 0 10px;
     border: 1px solid lightgray;
@@ -67,7 +67,7 @@ body {
 }
 
 .detail_container {
-    background-color: #5e7fff;
+    background-color: #5495b1;
     width: 50vw;
     margin: 0 10px;
     border: 1px solid lightgray;
@@ -95,7 +95,7 @@ body {
     flex-direction: row;
     border-radius: 0.5vh 0.5vh 0 0;
     font-size: 13px;
-    border-bottom: 1px #3952ff dotted;
+    border-bottom: 1px #5495b1 dotted;
 }
 
 /*form {*/
@@ -116,7 +116,7 @@ body {
 #reserve_list_title {
     border-bottom: 1px solid lightgray;
     font-weight: bold;
-    background: #5e7fff;
+    background: #5495b1;
     color: white;
 }
 
@@ -133,7 +133,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background: white;
-    border-bottom: 1px #3952ff dotted;
+    border-bottom: 1px #5495b1 dotted;
 
 }
 
@@ -145,7 +145,7 @@ body {
 #detail_list_title {
     border-bottom: 1px solid lightgray;
     font-weight: bold;
-    background: #5e7fff;
+    background: #5495b1;
     color: white;
 }
 
@@ -217,7 +217,7 @@ body {
     flex: 1;
     padding: 10px;
     margin: 5px 10px 5px 0;
-    background-color: #5e7fff;
+    background-color: #5495b1;
     border-radius: 0.5vh;
     border: none;
     color: white;
@@ -258,12 +258,12 @@ form {
 }
 
 #reserve_list_title .set_reserve {
-    background-color: #5e7fff;
+    background-color: #5495b1;
     color: white;
 }
 
 #go_back_wrapper {
-    background: #5e7fff;
+    background: #5495b1;
 }
 
 #go_back {
@@ -284,7 +284,7 @@ form {
 
 #detail_set_reserve, #detail_set_delete {
     justify-content: flex-end;
-    background: #5e7fff;
+    background: #5495b1;
 }
 
 #custom_demand {
@@ -299,7 +299,7 @@ form {
 
 .detail_list .set_reserve {
     background: white;
-    color: #2a52ee;
+    color: #5495b1;
 }
 
 .detail_list .set_reserve:hover {
@@ -375,7 +375,7 @@ form {
 
 #discountBtn {
     border: none;
-    background-color: #5e7fff;
+    background-color: #5495b1;
     border-radius: 0.5vh;
     color: white;
     margin: 5px;
@@ -402,7 +402,7 @@ form {
     margin: 0 auto;
 }
 #table_header {
-    background-color: #5e7fff;
+    background-color: #5495b1;
 }
 #mainTable table {
     width: 100%;
@@ -410,13 +410,13 @@ form {
     text-align: center;
 }
 td {
-    border-bottom: 1px solid #5e7fff;
+    border-bottom: 1px solid #5495b1;
 }
 #mainTable button {
     width: 40%;
     height: 100%;
     color: white;
-    background-color: #5e7fff;
+    background-color: #5495b1;
     border: none;
     font-weight: 900;
 }
