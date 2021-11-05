@@ -106,7 +106,7 @@ $('.description-update-btn').click(function(e) {
     } else {
         $.ajax({
             type:'PUT',
-            url:'/admin/discount/'+ carNo + '/' + editDescription,
+            url:'/admin/description/'+ carNo + '/' + editDescription,
             dataType:'json',
             contentType : 'application/json; charset=utf-8'
         }).done(function (result) {

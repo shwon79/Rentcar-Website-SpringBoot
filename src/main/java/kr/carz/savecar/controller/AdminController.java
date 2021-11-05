@@ -168,6 +168,7 @@ public class AdminController {
             Discount discount = new Discount();
             discount.setCarNo(discountDTO.getCarNo());
             discount.setDiscount(discountDTO.getDiscount());
+            discount.setDescription(discountDTO.getDescription());
             discountService.save(discount);
 
             jsonObject.put("result", 1);
@@ -184,7 +185,7 @@ public class AdminController {
     @RequestMapping(value = "/admin/discount/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
     public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
-        System.out.println(carNo);
+
         JSONObject jsonObject = new JSONObject();
 
         // 이미 db에 등록된 차량인지 확인
@@ -208,7 +209,7 @@ public class AdminController {
     @RequestMapping(value = "/admin/description/{carNo}/{description}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
     public void update_description(HttpServletResponse res, @PathVariable String carNo, @PathVariable String description) throws IOException {
-        System.out.println(carNo);
+
         JSONObject jsonObject = new JSONObject();
 
         // 이미 db에 등록된 차량인지 확인
