@@ -222,7 +222,7 @@ public class RealtimeRentController {
         return "rent_month2";
     }
 
-//    @GetMapping("/rent/month/new")
+//    @GetMapping("/rent/month/new") -> order_status Integer version
 //    public String rent_month(ModelMap model) {
 //
 //        // 모두의 렌터카 데이터 가져오기
@@ -604,7 +604,7 @@ public class RealtimeRentController {
     }
 
 
-//    // 조건별로 차종 데이터 전달
+//    // 조건별로 차종 데이터 전달 -> order_status Integer version
 //    @PostMapping("/rent/month/lookup")
 //    public String rent_month_lookup(ModelMap model, @ModelAttribute RealTimeDTO realTimeDto) {
 //
