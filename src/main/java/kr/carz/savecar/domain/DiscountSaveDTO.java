@@ -15,11 +15,13 @@ public class DiscountSaveDTO {
     private Long discountId;
     private String carNo;
     private String discount; // 할인 퍼센트
+    private String description;
 
-    public DiscountSaveDTO(Long discountId, String carNo, String discount) {
+    public DiscountSaveDTO(Long discountId, String carNo, String discount, String description) {
         this.discountId = discountId;
         this.carNo = carNo;
         this.discount = discount;
+        this.description = description;
     }
 
     public Discount toEntity() {
@@ -27,6 +29,7 @@ public class DiscountSaveDTO {
                 .discountId(discountId)
                 .carNo(carNo)
                 .discount(discount)
+                .description(description)
                 .build();
 
     }
