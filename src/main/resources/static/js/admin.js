@@ -11,6 +11,11 @@ const make_discount = () => {
         return
     }
 
+    if (document.getElementById("discount-description").value == ""){
+        alert('할인 설명을 입력해주세요.')
+        return
+    }
+
     if (document.getElementById("discount").value > 0){
         alert('현재는 할인가만 적용가능합니다. 음수값으로 입력해주세요.')
         return
@@ -18,42 +23,35 @@ const make_discount = () => {
 
     let carNo = $("#carNo").val().replace(/(\s*)/g,""); // 공백 제거
 
-    const existingCarNo = document.querySelectorAll('.editCarNo');
-    const existingCarNoList = [];
-    for (i = 0; i < existingCarNo.length; i++) {
-        existingCarNoList.push(existingCarNo[i].innerText);
-    }
-    console.log(existingCarNoList.indexOf(carNo));
+    var data = {
+        carNo : carNo,
+        discount : $("#discount").val(),
+        description: $("#discount-description").val()
+    };
+    console.log(data);
 
-    if (existingCarNoList.indexOf(carNo) == -1) {
-        var data = {
-            carNo : carNo,
-            discount : $("#discount").val()
-        };
-        console.log(data);
-
-        $.ajax({
-            type:'POST',
-            url:'/admin/discount',
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
-        }).done(function () {
+    $.ajax({
+        type:'POST',
+        url:'/admin/discount',
+        dataType:'json',
+        contentType : 'application/json; charset=utf-8',
+        data : JSON.stringify(data)
+    }).done(function (result) {
+        if (result.result == 1) {
             alert('할인 가격이 적용되었습니다.');
-            window.location.href = '/admin/discount/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    } else {
-        alert('이미 할인이 적용된 차량입니다. 아래 수정 기능을 이용하세요.');
+        } else if (result.result == 0) {
+            alert('할인 가격이 적용에 문제가 생겼습니다.');
+        };
         window.location.href = '/admin/discount/menu';
-    }
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    })
 }
 
 
-// 할인 수정하기
+// 할인 가격 수정하기
 
-$('.update-btn').click(function(e) {
+$('.money-update-btn').click(function(e) {
     let carNo = e.target.dataset.index;
     let originalDiscount = document.querySelectorAll('.editDiscount');
     let editDiscount = prompt("수정할 할인가(%)를 입력하세요.", "");
@@ -74,8 +72,8 @@ $('.update-btn').click(function(e) {
         alert('0% 할인을 할 수 없습니다. 삭제 버튼을 이용해주세요.');
     } else {
         $.ajax({
-            type:'GET',
-            url:'/admin/discount/update/'+ carNo + '/' + editDiscount,
+            type:'PUT',
+            url:'/admin/discount/'+ carNo + '/' + editDiscount,
             dataType:'json',
             contentType : 'application/json; charset=utf-8'
         }).done(function (result) {
@@ -83,6 +81,39 @@ $('.update-btn').click(function(e) {
                 alert('할인 가격이 수정되었습니다.');
             } else if (result.result == 0) {
                 alert('할인 가격 수정에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/discount/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
+})
+
+// 할인 설명 수정하기
+
+$('.description-update-btn').click(function(e) {
+    let carNo = e.target.dataset.index;
+    let originalDescription = document.querySelectorAll('.discountDescription');
+    let editDescription = prompt("수정할 할인 설명을 입력하세요.", "");
+
+    // 할인 설명 입력 안해줬을 경우 -> 원래대로
+    if (!editDescription) {
+        for (let i = 0; i < originalDescription.length; i++) {
+            if (originalDescription[i].dataset.index === carNo) {
+                editDescription = originalDescription[i].innerText;
+            }
+        }
+    } else {
+        $.ajax({
+            type:'PUT',
+            url:'/admin/discount/'+ carNo + '/' + editDescription,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8'
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('할인 설명이 수정되었습니다.');
+            } else if (result.result == 0) {
+                alert('할인 설명 수정에 문제가 생겼습니다.');
             };
             window.location.href = '/admin/discount/menu';
         }).fail(function (error) {

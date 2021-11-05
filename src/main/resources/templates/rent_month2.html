@@ -217,8 +217,8 @@
                             <td scope="col" class="discountStyle">
                                 <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                                 <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
-                                    <span class="discountAnimation">할인 특가&nbsp</span>
-                                    <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span>원
+                                    <p class="discountAnimation" style="width: max-content;">할인 특가&nbsp</p>
+                                    <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
                                 </div>
                             </td>
                             <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}  + '/available'"><button >상세 페이지</button></a></td>
@@ -236,8 +236,8 @@
                         <p class="discountStyle">월 대여료[VAT별도]:
                             <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                             <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
-                                <span class="discountAnimation">할인 특가&nbsp</span>
-                                <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span>원
+                                <p class="discountAnimation">할인 특가&nbsp</p>
+                                <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
                             </div>
                         </p>
 
@@ -282,8 +282,8 @@
                             <td scope="col" class="discountStyle">
                                 <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                                 <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
-                                    <span class="discountAnimation">할인 특가&nbsp</span>
-                                    <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span>원
+                                    <span class="discountAnimation" style="width: max-content;">할인 특가&nbsp</span>
+                                    <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>
                                 </div>
                             </td>
                             <td><a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer}  + '/expected'"><button >상세 페이지</button></a></td>
@@ -303,7 +303,7 @@
                             <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                             <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
                                 <span class="discountAnimation">할인 특가&nbsp</span>
-                                <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span>원
+                                <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>
                             </div>
                         </p>
                         <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer} + '/expected'"><button>상세 페이지</button></a>
