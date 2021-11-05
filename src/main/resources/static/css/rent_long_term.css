@@ -24,30 +24,44 @@ h2 {
     margin-bottom: 60px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .car_cards {
     background-color: white;
     box-shadow: red 0px 3px 8px;
     border-radius: 2rem;
-    margin: 2rem;
+    margin: 2rem 1rem;
     padding: 2rem;
     background-image: url("https://i.ibb.co/2cHb8cq/Group-1.jpg");
     background-size: cover;
     background-position: center right;
     transition: 1s all;
+    min-height: 45rem;
 }
 
+.glance_card_section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
 .glance_card {
+    /*background-color: white;*/
+    box-shadow: red 0px 3px 8px;
+    border-radius: 2rem;
+    transition: 1s all;
     background-image: none;
     display: flex;
     align-items: center;
     text-align: center;
-    width: 450px;
+    width: 100%;
+    padding: 2rem 3rem;
+    margin: 2rem 0;
+    height: auto !important;
 }
 .glance_card .car_card_img {
-    margin: 10px;
+    margin: 0 5rem 0 0;
 }
 .glance_card img {
     height: 200px;
@@ -166,7 +180,18 @@ h2 {
     #car_card_list {
         flex-direction: column;
     }
-
+    .glance_card_section a {
+        width: 100%;
+    }
+    .glance_card .car_card_img {
+        margin: 0 1rem 0 0;
+    }
+    .glance_card .car_card_type {
+        font-size: 1.5rem !important;
+    }
+    .glance_card {
+        padding: 2rem;
+    }
     .car_cards {
         width: 70%;
         max-width: 350px;
@@ -213,10 +238,10 @@ h2 {
 
 }
 
-@media (max-width: 425px) {
-    .card_container {
-       height: 44rem;
-       /* margin-top: -9rem;*/
-    }
+/*@media (max-width: 425px) {*/
+/*    .card_container {*/
+/*       height: 44rem;*/
+/*       !* margin-top: -9rem;*!*/
+/*    }*/
 
-}
+/*}*/
