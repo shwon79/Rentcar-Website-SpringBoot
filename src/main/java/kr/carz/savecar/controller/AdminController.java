@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.util.*;
 
 @Controller
@@ -43,7 +41,7 @@ public class AdminController {
 
     @GetMapping("/admin/login")
     public String login(Model model) {
-        return "login";
+        return "admin_login";
     }
 
 
@@ -74,7 +72,7 @@ public class AdminController {
             out.flush();
 
             // 다시 login page로 back
-            mav.setViewName("login");
+            mav.setViewName("admin_login");
         }
         return mav;
     }
@@ -96,7 +94,7 @@ public class AdminController {
         out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
         out.flush();
 
-        mav.setViewName("login");
+        mav.setViewName("admin_login");
 
         return mav;
     }
@@ -118,7 +116,7 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("login");
+            mav.setViewName("admin_login");
         } else {
 
             // admin view로 넘기기
