@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.util.*;
 
 @Controller
@@ -43,7 +41,7 @@ public class AdminController {
 
     @GetMapping("/admin/login")
     public String login(Model model) {
-        return "login";
+        return "admin_login";
     }
 
 
@@ -74,7 +72,7 @@ public class AdminController {
             out.flush();
 
             // 다시 login page로 back
-            mav.setViewName("login");
+            mav.setViewName("admin_login");
         }
         return mav;
     }
@@ -96,7 +94,7 @@ public class AdminController {
         out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
         out.flush();
 
-        mav.setViewName("login");
+        mav.setViewName("admin_login");
 
         return mav;
     }
@@ -118,7 +116,7 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("login");
+            mav.setViewName("admin_login");
         } else {
 
             // admin view로 넘기기
@@ -168,6 +166,7 @@ public class AdminController {
             Discount discount = new Discount();
             discount.setCarNo(discountDTO.getCarNo());
             discount.setDiscount(discountDTO.getDiscount());
+            discount.setDescription(discountDTO.getDescription());
             discountService.save(discount);
 
             jsonObject.put("result", 1);
@@ -181,10 +180,10 @@ public class AdminController {
 
 
     // 할인가 수정하기 api
-    @RequestMapping(value = "/admin/discount/update/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/discount/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
     public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
-        System.out.println(carNo);
+
         JSONObject jsonObject = new JSONObject();
 
         // 이미 db에 등록된 차량인지 확인
@@ -204,6 +203,29 @@ public class AdminController {
         pw.close();
     }
 
+    // 할인가 description 수정하기 api
+    @RequestMapping(value = "/admin/description/{carNo}/{description}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @ResponseBody
+    public void update_description(HttpServletResponse res, @PathVariable String carNo, @PathVariable String description) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+
+        if(original_discount.isPresent()){
+            original_discount.get().setDescription(description);
+            discountService.save(original_discount.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 
     // 할인가 삭제하기 api
     @GetMapping("/admin/discount/delete/{carNo}")
