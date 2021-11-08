@@ -392,13 +392,14 @@ form {
     font-size: 1rem;
 }
 #carNo.form-control,
-#discount.form-control {
+#discount.form-control,
+#discount-description.form-control {
     height: 20px;
     width: 80%;
     margin: 0 0 10px 5px;
 }
 .content_container {
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
 }
 #table_header {
