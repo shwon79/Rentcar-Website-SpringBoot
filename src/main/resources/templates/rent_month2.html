@@ -236,7 +236,7 @@
                         <p class="discountStyle">월 대여료[VAT별도]:
                             <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                             <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
-                                <p class="discountAnimation">할인 특가&nbsp</p>
+                                <p class="discountAnimation">할인 특가 </p>
                                 <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
                             </div>
                         </p>
