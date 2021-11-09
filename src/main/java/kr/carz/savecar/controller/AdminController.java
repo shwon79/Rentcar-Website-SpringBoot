@@ -163,6 +163,17 @@ public class AdminController {
         return "admin_moren_reservation_menu";
     }
 
+    // 월렌트 실시간 모렌 예약 메뉴로 입장
+    @GetMapping("/admin/moren/reservation/detail/{reservationId}")
+    public String get_moren_reservation_detail(Model model) {
+
+        List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
+        model.addAttribute("morenReservationList", morenReservationList);
+
+        return "admin_moren_reservation_detail";
+    }
+
+
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
     @ResponseBody
