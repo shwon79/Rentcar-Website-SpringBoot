@@ -71,20 +71,19 @@
                 <!-- Mobile --->
                 <div id="morenReservationCard">
                     <div class="card" th:each="reservation, iterStat : ${morenReservationList}">
-                        <h4>예약한 시간</h4>
+                        <p>예약한 시간</p>
                         <p>차량 번호: <span th:text="${reservation.carNo}"></span></p>
                         <p>이름: <span th:text="${reservation.reservationName}"></span> | 전화번호: <span th:text="${reservation.reservationPhone}"></span></p>
                         <p>날짜: <span th:text="${reservation.reservationDate}"></span> | 월 대여료: <span th:text="${reservation.carAmountTotal}"></span></p>
                         <p>
-                            <span style="margin-right: 3%;"><button class="reservation-delete-btn" th:data-index="${reservation.carNo}">취소</button></span>
-                            <span><button class="reservation-confirm-btn" th:data-index="${reservation.carNo}">확정</button></span>
+                            <span style="margin-right: 3%;"><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
+                            <span><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>
                         </p>
                         <p>
                             <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
                                 <button>상세 페이지</button>
                             </a>
                         </p>
-                        <a th:href="'/rent/month/detail/' + ${moren.carIdx} +'/' + ${moren.monthlyrentIdx} + '/' + ${kilometer} + '/available'"><button>상세 페이지</button></a>
                     </div>
                 </div>
 
