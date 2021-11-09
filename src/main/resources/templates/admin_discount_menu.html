@@ -22,9 +22,6 @@
                 <a href="/admin/counsel/menu"><li>상담 신청</li></a>
                 <a href="/admin/discount/menu" style="color: white;"><li style="background: #3a708f">할인/인상 적용</li></a>
                 <a href="/admin/moren/reservation/menu"><li>모렌 예약 신청</li></a>
-                <li>메뉴5</li>
-                <li>메뉴6</li>
-                <li>메뉴7</li>
             </div>
         </div>
 
@@ -70,11 +67,11 @@
                         <td scope="col" th:text="${discount.carNo}" class="editCarNo" th:data-index="${discount.carNo}"></td>
                         <td scope="col" th:text="${discount.discount} + '%'" class="editDiscount" th:data-index="${discount.carNo}"></td>
                         <td>
-                            <span style="margin-right: 3%;"><button class="money-update-btn" th:data-index="${discount.carNo}">비율 수정</button></span>
+                            <span style="margin-right: 3%;"><button class="money-update-btn" th:data-index="${discount.carNo}">수정</button></span>
                         </td>
                         <td scope="col" th:text="${discount.description}" class="discountDescription" th:data-index="${discount.carNo}"></td>
                         <td>
-                            <span style="margin-right: 3%;"><button class="description-update-btn" th:data-index="${discount.carNo}">설명 수정</button></span>
+                            <span style="margin-right: 3%;"><button class="description-update-btn" th:data-index="${discount.carNo}">수정</button></span>
                         </td>
                         <td>
                             <span><button class="delete-btn" th:data-index="${discount.carNo}">삭제</button></span>
