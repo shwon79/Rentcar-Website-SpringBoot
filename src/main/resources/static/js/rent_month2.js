@@ -138,32 +138,11 @@ const reserveMonthlyRent = () => {
                 alert(JSON.stringify(error));
             })
         };
-    };
-
-    //     let reserveConfirm = confirm('예약을 완료하시겠습니까?');
-    //
-    //     if (reserveConfirm) {
-    //         $.ajax({
-    //             type:'POST',
-    //             url:'/admin/moren/reservation',
-    //             dataType:'json',
-    //             contentType : 'application/json; charset=utf-8',
-    //             data : JSON.stringify(data)
-    //         }).done(function (result) {
-    //             if (result.result == 1) {
-    //                 alert('예약이 완료되었습니다.');
-    //             } else if (result.result == 0) {
-    //                 alert('예약에 문제가 생겼습니다.');
-    //             };
-    //             // window.location.href = '/admin/discount/menu';
-    //         }).fail(function (error) {
-    //             alert(JSON.stringify(error));
-    //         })
-    //     }
-    // } else if (reservationDetailName == '' || reservationDetailPhone=='' || reservationDetailDate=='' || reservationDetailTime=='' || reservationFile=='' || addressKakao == '' || addressKakaoDetail == '' ) {
-    //     alert('입력을 완료해주세요!')
+    }
+    // else if (reservationName == '' && reservationPhone == '' && reservationAge == '' && reservationDate == '' && reservationTime == '' && reservationGuarantee == '' && address == '' && addressDetail == '') {
+    //         alert('입력을 완료해주세요!')
     // } else if (check1 != true) {
-    //     alert('동의를 완료해주세요!')
+    //         alert('동의를 완료해주세요!')
     // }
 }
 
