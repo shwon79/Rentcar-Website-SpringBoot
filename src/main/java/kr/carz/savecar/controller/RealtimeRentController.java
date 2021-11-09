@@ -10,9 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.ArrayUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
@@ -27,15 +26,17 @@ public class RealtimeRentController {
     private final TwoYearlyRentService twoYearlyRentService;
     private final ReservationService reservationService;
     private final DiscountService discountService;
+    private final MorenReservationService morenReservationService;
 
     @Autowired
     public RealtimeRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
-                                  ReservationService reservationService, DiscountService discountService) {
+                                  ReservationService reservationService, DiscountService discountService, MorenReservationService morenReservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
         this.reservationService = reservationService;
         this.discountService = discountService;
+        this.morenReservationService = morenReservationService;
     }
 
 
@@ -127,16 +128,17 @@ public class RealtimeRentController {
 
                                 Optional<Discount> discount_object = discountService.findDiscountByCarNo((String)morenObject.get("carNo"));
                                 String discount_price = null;
+                                String discount_description = null;
                                 if(discount_object.isPresent()) {
-                                    System.out.println(discount_object.get().getCarNo());
                                     discount_price = discount_object.get().getDiscount();
+                                    discount_description = discount_object.get().getDescription();
                                 }
 
                                 MorenDTO moren = new MorenDTO((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
                                         (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                         (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                         (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                        monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price);
+                                        monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description);
                                 morenDTOListExpected.add(moren);
 
                             } catch (Exception e) {
@@ -164,16 +166,17 @@ public class RealtimeRentController {
 
                                 Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                                 String discount_price = null;
+                                String discount_description = null;
                                 if(discount_object.isPresent()) {
-                                    System.out.println(discount_object.get().getCarNo());
                                     discount_price = discount_object.get().getDiscount();
+                                    discount_description = discount_object.get().getDescription();
                                 }
 
                                 MorenDTO moren = new MorenDTO((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
                                         (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                         (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                         (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                        monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price);
+                                        monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description);
                                 morenDTOList.add(moren);
 
                             } catch (Exception e) {
@@ -347,8 +350,10 @@ public class RealtimeRentController {
 
                                     Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                                     String discount_price = null;
+                                    String discount_description = null;
                                     if(discount_object.isPresent() && realTimeDto.getRentTerm().equals("한달")) {
                                         discount_price = discount_object.get().getDiscount();
+                                        discount_description = discount_object.get().getDescription();
                                     }
 
 
@@ -356,7 +361,7 @@ public class RealtimeRentController {
                                             (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                             (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                             (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                            kilometer_cost, (String) morenObject.get("order_end"), dbid, carList, discount_price);
+                                            kilometer_cost, (String) morenObject.get("order_end"), dbid, carList, discount_price, discount_description);
 
                                     if ((Integer)morenObject.get("order_status") == 0) {
                                         morenDTOList.add(moren);
@@ -494,16 +499,17 @@ public class RealtimeRentController {
 
                         Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                         String discount_price = null;
+                        String discount_description = null;
                         if(discount_object.isPresent()) {
-                            System.out.println(discount_object.get().getCarNo());
                             discount_price = discount_object.get().getDiscount();
+                            discount_description = discount_object.get().getDescription();
                         }
 
                         MorenDTO morenDto = new MorenDTO((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
                                 (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                 (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                kilometer_cost, (String) morenObject.get("order_end"), monthlyrentIdx, carList, discount_price);
+                                kilometer_cost, (String) morenObject.get("order_end"), monthlyrentIdx, carList, discount_price, discount_description);
 
                         model.put("morenDto", morenDto);
 
@@ -532,16 +538,32 @@ public class RealtimeRentController {
         }
 
         model.put("rentStatus", rentStatus);
+        model.put("kilometer", kilometer);
 
         return "rent_month2_detail";
     }
 
 
 
+    @PostMapping("/rent/month/moren/reservation")
+    @ResponseBody
+    public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
 
+        MorenReservationDTO morenReservation = new MorenReservationDTO(morenReservationDTO.getCarNo(), morenReservationDTO.getKilometer(),morenReservationDTO.getReservationName(),morenReservationDTO.getReservationPhone(),
+                morenReservationDTO.getReservationAge(),morenReservationDTO.getReservationDate(),morenReservationDTO.getReservationTime(),morenReservationDTO.getReservationGuarantee(),
+                morenReservationDTO.getReservationDetails(),morenReservationDTO.getAddress(),morenReservationDTO.getAddressDetail(),morenReservationDTO.getCarPrice(),
+                morenReservationDTO.getCarTax(),morenReservationDTO.getCarAmountTotal(),morenReservationDTO.getCarDeposit());
 
+        morenReservationService.save(morenReservation);
 
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
 
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 
 
 

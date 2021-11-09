@@ -75,75 +75,73 @@ function ajaxFileUpload() {
 // Sending Data;
 const reserveMonthlyRent = () => {
 
-
     // 예약 정보 받기
-    const reservationDetailName = document.getElementById('reservation-detail-name').value;
-    const reservationDetailPhone = document.getElementById('reservation-detail-phone').value;
-    const reservationDetailDate = document.getElementById('reservation-detail-date').value;
-    const reservationDetailTime = document.getElementById('reservation-detail-time').value;
-    const reservationDetailDetails = document.getElementById('reservation-detail-details').value;
-
-    const addressKakao = document.getElementById('address_kakao').value;
-    const addressKakaoDetail = document.getElementById('address_kakao_detail').value;
+    const carNo = document.getElementById('carNo').innerText;
+    const kilometer = document.getElementById('kilometer').innerText;
+    const reservationName = document.getElementById('reservation-detail-name').value;
+    const reservationPhone = document.getElementById('reservation-detail-phone').value;
+    const reservationAge = document.getElementById('reservation-detail-age').value;
+    const reservationDate = document.getElementById('reservation-detail-date').value;
+    const reservationTime = document.getElementById('reservation-detail-time').value;
+    const reservationGuarantee = document.getElementById('reservation-detail-guarantee').value;
+    // const reservationLicense = image_url;
+    const reservationDetails = document.getElementById('reservation-detail-details').value;
+    const address = document.getElementById('address_kakao').value;
+    const addressDetail = document.getElementById('address_kakao_detail').value;
+    const carPrice = document.getElementById('carPrice').innerText;
+    const carTax = document.getElementById('carTax').innerText;
+    const carAmountTotal = document.getElementById('carAmountTotal').innerText;
+    const carDeposit = document.getElementById('carDeposit').innerText;
     // ftp://itscar@itscar.cafe24.com/tomcat/webapps/manager/images/add.gif
 
-    console.log(reservationDetailName)
-    console.log(reservationDetailPhone)
-    console.log(reservationDetailDate)
-    console.log(reservationDetailTime)
-    console.log(reservationDetailDetails)
-    console.log(addressKakao)
-    console.log(addressKakaoDetail)
-    console.log(image_url)
-
     let check1 = document.getElementById('check_info').checked;
+    console.log(check1);
 
-
-
-    if (reservationDetailName != '' && reservationDetailPhone!='' && reservationDetailDate!='' && reservationDetailTime != '' &&  addressKakao != '' && addressKakaoDetail != '') {
-        let finalDate = {
-            'carType': carType,
-            'rentDate': rentDateNum,
-            'rentTime':  rentTime,
-            'returnDate': returnDateNum,
-            'returnTime' : returnTime,
-            'extraTime' : extraTime,
-            'agree': 1,
-            'deposit':totalHalf,
-            'depositor': depositName,
-            'detail': customDemand,
-            'name': customName,
-            'phone': phoneNum,
-            'total': totalPrice,
-            'totalHalf': totalHalf,
-            'reservation': 0,
-            'day': useDay,
+    if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
+        var data = {
+            carNo: carNo,
+            kilometer: kilometer,
+            reservationName: reservationName,
+            reservationPhone: reservationPhone,
+            reservationAge: reservationAge,
+            reservationDate: reservationDate,
+            reservationTime: reservationTime,
+            reservationGuarantee: reservationGuarantee,
+            reservationDetails: reservationDetails,
+            address: address,
+            addressDetail: addressDetail,
+            carPrice: carPrice,
+            carTax: carTax,
+            carAmountTotal: carAmountTotal,
+            carDeposit: carDeposit
         }
 
-        console.log(finalDate);
+        console.log(data);
 
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
+
         if (reserveConfirm) {
-            let url = '/reserve/campingcar';
-            fetch(url, {
-                method: 'POST',
-                headers:{
-                    'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify(finalDate),
-            }).then(response => response.json())
-                .then(result => {
-                    if (result[0] == "1") {
-                        alert('차량 예약 대기 신청이 완료되었습니다.')
-                        window.location.href = '/rent/month/new';
-                    } else if (result[0] == "0") alert('차량 예약 대기 신청을 실패하였습니다.')
-                })
-            // .catch(err => console.error('Error: ', err))
-        }
-    } else if (reservationDetailName == '' || reservationDetailPhone=='' || reservationDetailDate=='' || reservationDetailTime=='' || addressKakao == '' || addressKakaoDetail == '' ) {
-        alert('입력을 완료해주세요!')
-    } else if (check1 != true || check2 != true || check3 != true || check4 != true) {
-        alert('동의를 완료해주세요!')
+            $.ajax({
+                type:'POST',
+                url:'/rent/month/moren/reservation',
+                dataType:'json',
+                contentType : 'application/json; charset=utf-8',
+                data : JSON.stringify(data)
+            }).done(function (result) {
+                if (result.result == 1) {
+                    alert('예약이 완료되었습니다.');
+                } else {
+                    alert('예약에 문제가 생겼습니다.');
+                };
+                // window.location.href = '/admin/discount/menu';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
+        };
+    } else if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
+            alert('입력을 완료해주세요!')
+    } else if (check1 != true) {
+            alert('동의를 완료해주세요!')
     }
 }
 
@@ -178,4 +176,3 @@ function numberWithCommas() {
 }
 
 $('.number').ready(numberWithCommas());
-

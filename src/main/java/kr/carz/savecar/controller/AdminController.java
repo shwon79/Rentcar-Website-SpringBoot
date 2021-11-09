@@ -24,12 +24,13 @@ public class AdminController {
     LoginService loginService;
     ReservationService reservationService;
     DiscountService discountService;
+    MorenReservationService morenReservationService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
                            LoginService loginService, ReservationService reservationService,
-                           DiscountService discountService) {
+                           DiscountService discountService, MorenReservationService morenReservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -37,6 +38,7 @@ public class AdminController {
         this.loginService = loginService;
         this.reservationService = reservationService;
         this.discountService = discountService;
+        this.morenReservationService = morenReservationService;
     }
 
     @GetMapping("/admin/login")
@@ -60,8 +62,6 @@ public class AdminController {
             session.setAttribute("user", user);
 
             // admin view로 넘기기
-//            List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
-//            mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
             mav.setViewName("admin_campingcar_menu");
 
         } catch (NullPointerException e){
@@ -120,9 +120,6 @@ public class AdminController {
         } else {
 
             // admin view로 넘기기
-//            List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
-
-//            mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
             mav.setViewName("admin_campingcar_menu");
         }
 
@@ -132,24 +129,91 @@ public class AdminController {
 
     //상담 메뉴로 입장
     @GetMapping("/admin/counsel/menu")
-    public String get_counsel_menu(Model model) {
-        List<Reservation> reservationList = reservationService.findAllReservations();
-        model.addAttribute("reservationList", reservationList);
+    public ModelAndView get_counsel_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
-        return "admin_counsel_menu";
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if((Login)session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+
+            List<Reservation> reservationList = reservationService.findAllReservations();
+            mav.addObject("reservationList", reservationList);
+            mav.setViewName("admin_counsel_menu");
+        }
+
+        return mav;
     }
 
 
 
     // 할인가 적용하기 메뉴로 입장
     @GetMapping("/admin/discount/menu")
-    public String get_discount_menu(Model model) {
+    public ModelAndView get_discount_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
-        List<Discount> discountList = discountService.findAllDiscounts();
-        model.addAttribute("discountList", discountList);
 
-        return "admin_discount_menu";
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if((Login)session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+            List<Discount> discountList = discountService.findAllDiscounts();
+            mav.addObject("discountList", discountList);
+            mav.setViewName("admin_discount_menu");
+        }
+
+        return mav;
     }
+
+    // 월렌트 실시간 모렌 예약 메뉴로 입장
+    @GetMapping("/admin/moren/reservation/menu")
+    public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if((Login)session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+
+            List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
+            mav.addObject("morenReservationList", morenReservationList);
+            mav.setViewName("admin_moren_reservation_menu");
+        }
+
+        return mav;
+    }
+
+    // 월렌트 실시간 모렌 예약 메뉴로 입장
+    @GetMapping("/admin/moren/reservation/detail/{reservationId}")
+    public String get_moren_reservation_detail(Model model) {
+
+        List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
+        model.addAttribute("morenReservationList", morenReservationList);
+
+        return "admin_moren_reservation_detail";
+    }
+
 
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
@@ -242,6 +306,34 @@ public class AdminController {
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    // 월렌트 데이터 가져오기 api
+    @PostMapping("/admin/moren/reservation")
+    @ResponseBody
+    public void moren_reservation(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(discountDTO.getCarNo());
+        if(original_discount.isPresent()){
+            jsonObject.put("result", 0);
+        } else {
+            Discount discount = new Discount();
+            discount.setCarNo(discountDTO.getCarNo());
+            discount.setDiscount(discountDTO.getDiscount());
+            discount.setDescription(discountDTO.getDescription());
+            discountService.save(discount);
+
+            jsonObject.put("result", 1);
         }
 
         PrintWriter pw = res.getWriter();

@@ -16,11 +16,6 @@ const make_discount = () => {
         return
     }
 
-    if (document.getElementById("discount").value > 0){
-        alert('현재는 할인가만 적용가능합니다. 음수값으로 입력해주세요.')
-        return
-    }
-
     let carNo = $("#carNo").val().replace(/(\s*)/g,""); // 공백 제거
 
     var data = {

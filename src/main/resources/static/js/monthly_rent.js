@@ -94,21 +94,21 @@ function make_easy_reservation () {
 // 월렌트실시간 상담요청
 function make_monthly_rent_reservation () {
 
-    if (document.getElementById("reservation-detail-name").value == ""){
+    if (document.getElementById("reservation-simple-name").value == ""){
         alert('성함을 입력해주세요.')
         return
     }
 
-    if (document.getElementById("reservation-detail-phone").value == ""){
+    if (document.getElementById("reservation-simple-phone").value == ""){
         alert('전화번호를 입력해주세요.')
         return
     }
 
 
     var data = {
-        name : $("#reservation-detail-name").val(),
-        phoneNo : $("#reservation-detail-phone").val(),
-        detail : $("#reservation-detail-details").val(),
+        name : $("#reservation-simple-name").val(),
+        phoneNo : $("#reservation-simple-phone").val(),
+        detail : $("#reservation-simple-details").val(),
         title : "월렌트실시간",
         car_name : document.getElementsByClassName("carName")[0].innerHTML,
         mileage : document.getElementsByClassName("carNo")[0].innerHTML,
