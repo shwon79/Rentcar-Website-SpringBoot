@@ -442,7 +442,8 @@ td {
         margin-top: 1rem;
     }
     #carNo.form-control,
-    #discount.form-control {
+    #discount.form-control,
+    #discount-description.form-control {
         width: 60%;
     }
     .content_container {
