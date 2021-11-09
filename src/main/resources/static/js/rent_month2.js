@@ -97,48 +97,48 @@ const reserveMonthlyRent = () => {
     let check1 = document.getElementById('check_info').checked;
     console.log(check1);
 
-    // if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '') {
-    //     var data = {
-    //         carNo: carNo,
-    //         kilometer: kilometer,
-    //         reservationName: reservationName,
-    //         reservationPhone: reservationPhone,
-    //         reservationAge: reservationAge,
-    //         reservationDate: reservationDate,
-    //         reservationTime: reservationTime,
-    //         reservationGuarantee: reservationGuarantee,
-    //         reservationDetails: reservationDetails,
-    //         address: address,
-    //         addressDetail: addressDetail,
-    //         carPrice: carPrice,
-    //         carTax: carTax,
-    //         carAmountTotal: carAmountTotal,
-    //         carDeposit: carDeposit
-    //     }
-    //
-    //     console.log(data);
-    //
-    //     let reserveConfirm = confirm('예약을 완료하시겠습니까?');
-    //
-    //     if (reserveConfirm) {
-    //         $.ajax({
-    //             type:'POST',
-    //             url:'/admin/moren/reservation',
-    //             dataType:'json',
-    //             contentType : 'application/json; charset=utf-8',
-    //             data : JSON.stringify(data)
-    //         }).done(function (result) {
-    //             if (result.result == 1) {
-    //                 alert('예약이 완료되었습니다.');
-    //             } else if (result.result == 0) {
-    //                 alert('예약에 문제가 생겼습니다.');
-    //             };
-    //             // window.location.href = '/admin/discount/menu';
-    //         }).fail(function (error) {
-    //             alert(JSON.stringify(error));
-    //         })
-    //     };
-    // };
+    if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '') {
+        var data = {
+            carNo: carNo,
+            kilometer: kilometer,
+            reservationName: reservationName,
+            reservationPhone: reservationPhone,
+            reservationAge: reservationAge,
+            reservationDate: reservationDate,
+            reservationTime: reservationTime,
+            reservationGuarantee: reservationGuarantee,
+            reservationDetails: reservationDetails,
+            address: address,
+            addressDetail: addressDetail,
+            carPrice: carPrice,
+            carTax: carTax,
+            carAmountTotal: carAmountTotal,
+            carDeposit: carDeposit
+        }
+
+        console.log(data);
+
+        let reserveConfirm = confirm('예약을 완료하시겠습니까?');
+
+        if (reserveConfirm) {
+            $.ajax({
+                type:'POST',
+                url:'/rent/month/moren/reservation',
+                dataType:'json',
+                contentType : 'application/json; charset=utf-8',
+                data : JSON.stringify(data)
+            }).done(function (result) {
+                if (result.result == 1) {
+                    alert('예약이 완료되었습니다.');
+                } else {
+                    alert('예약에 문제가 생겼습니다.');
+                };
+                // window.location.href = '/admin/discount/menu';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
+        };
+    };
 
     //     let reserveConfirm = confirm('예약을 완료하시겠습니까?');
     //
