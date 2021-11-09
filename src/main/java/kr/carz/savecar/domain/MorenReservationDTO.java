@@ -9,21 +9,21 @@ import javax.persistence.Column;
 @Setter
 public class MorenReservationDTO {
 
-    private String carNo;
-    private String kilometer;
-    private String reservationName;
-    private String reservationPhone;
-    private String reservationAge;
-    private String reservationDate;
-    private String reservationTime;
-    private String reservationGuarantee;
-    private String reservationDetails;
-    private String address;
-    private String addressDetail;
-    private String carPrice;
-    private String carTax;
-    private String carAmountTotal;
-    private String carDeposit;
+    private String carNo;      // 차량번호
+    private String kilometer;  // 약정주행거리
+    private String reservationName;   // 예약자 이름(입금자명)
+    private String reservationPhone;  // 예약자 전화번호
+    private String reservationAge;    // 예약자 만 나이
+    private String reservationDate;   // 예약 날짜
+    private String reservationTime;   // 예약 시간
+    private String reservationGuarantee;   // 신용카드보유 or 소득증빙
+    private String reservationDetails;     // 요청사항
+    private String address;                // 배차주소
+    private String addressDetail;          // 베치주소 디테일
+    private String carPrice;               // 렌트료
+    private String carTax;                 // 부가세
+    private String carAmountTotal;         // 총렌트료
+    private String carDeposit;             // 보증금
 
     public MorenReservationDTO(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
                                String reservationDate, String reservationTime, String reservationGuarantee, String reservationDetails,
