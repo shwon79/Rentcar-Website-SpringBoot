@@ -217,7 +217,7 @@
                             <td scope="col" class="discountStyle">
                                 <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                                 <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
-                                    <p class="discountAnimation" style="width: max-content;">할인 특가&nbsp</p>
+                                    <p th:text="${moren.discountDescription}" class="discountAnimation" style="width: max-content;"></p>
                                     <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
                                 </div>
                             </td>
@@ -236,7 +236,7 @@
                         <p class="discountStyle">월 대여료[VAT별도]:
                             <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                             <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
-                                <p class="discountAnimation">할인 특가 </p>
+                                <p th:text="${moren.discountDescription}" class="discountAnimation"></p>
                                 <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
                             </div>
                         </p>
@@ -282,7 +282,7 @@
                             <td scope="col" class="discountStyle">
                                 <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                                 <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
-                                    <span class="discountAnimation" style="width: max-content;">할인 특가&nbsp</span>
+                                    <span th:text="${moren.discountDescription}" class="discountAnimation" style="width: max-content;"></span>
                                     <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>
                                 </div>
                             </td>
@@ -302,7 +302,7 @@
                         <p class="discountStyle">월 대여료[VAT별도]:
                             <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                             <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
-                                <span class="discountAnimation">할인 특가&nbsp</span>
+                                <span th:text="${moren.discountDescription}" class="discountAnimation"></span>
                                 <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>
                             </div>
                         </p>
