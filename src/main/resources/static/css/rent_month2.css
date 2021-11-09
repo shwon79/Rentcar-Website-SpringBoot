@@ -178,6 +178,7 @@
     color:darkred;
     font-weight: 600;
     animation:colorchange 1s infinite alternate;
+    margin-right: 5px;
 }
 @keyframes colorchange {
     0% {
