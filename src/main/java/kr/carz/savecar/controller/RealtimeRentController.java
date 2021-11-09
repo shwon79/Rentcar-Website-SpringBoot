@@ -532,6 +532,7 @@ public class RealtimeRentController {
         }
 
         model.put("rentStatus", rentStatus);
+        model.put("kilometer", kilometer);
 
         return "rent_month2_detail";
     }
