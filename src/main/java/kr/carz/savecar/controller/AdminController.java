@@ -24,12 +24,13 @@ public class AdminController {
     LoginService loginService;
     ReservationService reservationService;
     DiscountService discountService;
+    MorenReservationService morenReservationService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
                            LoginService loginService, ReservationService reservationService,
-                           DiscountService discountService) {
+                           DiscountService discountService, MorenReservationService morenReservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -37,6 +38,7 @@ public class AdminController {
         this.loginService = loginService;
         this.reservationService = reservationService;
         this.discountService = discountService;
+        this.morenReservationService = morenReservationService;
     }
 
     @GetMapping("/admin/login")
@@ -149,6 +151,16 @@ public class AdminController {
         model.addAttribute("discountList", discountList);
 
         return "admin_discount_menu";
+    }
+
+    // 월렌트 실시간 모렌 예약 메뉴로 입장
+    @GetMapping("/admin/moren/reservation/menu")
+    public String get_moren_reservation_menu(Model model) {
+
+        List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
+        model.addAttribute("morenReservationList", morenReservationList);
+
+        return "admin_moren_reservation_menu";
     }
 
     // 할인가 적용하기 api
