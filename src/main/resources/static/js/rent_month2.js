@@ -97,7 +97,7 @@ const reserveMonthlyRent = () => {
     let check1 = document.getElementById('check_info').checked;
     console.log(check1);
 
-    if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '') {
+    if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
         var data = {
             carNo: carNo,
             kilometer: kilometer,
@@ -138,12 +138,11 @@ const reserveMonthlyRent = () => {
                 alert(JSON.stringify(error));
             })
         };
+    } else if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
+            alert('입력을 완료해주세요!')
+    } else if (check1 != true) {
+            alert('동의를 완료해주세요!')
     }
-    // else if (reservationName == '' && reservationPhone == '' && reservationAge == '' && reservationDate == '' && reservationTime == '' && reservationGuarantee == '' && address == '' && addressDetail == '') {
-    //         alert('입력을 완료해주세요!')
-    // } else if (check1 != true) {
-    //         alert('동의를 완료해주세요!')
-    // }
 }
 
 
