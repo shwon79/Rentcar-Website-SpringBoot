@@ -128,16 +128,17 @@ public class RealtimeRentController {
 
                                 Optional<Discount> discount_object = discountService.findDiscountByCarNo((String)morenObject.get("carNo"));
                                 String discount_price = null;
+                                String discount_description = null;
                                 if(discount_object.isPresent()) {
-                                    System.out.println(discount_object.get().getCarNo());
                                     discount_price = discount_object.get().getDiscount();
+                                    discount_description = discount_object.get().getDescription();
                                 }
 
                                 MorenDTO moren = new MorenDTO((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
                                         (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                         (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                         (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                        monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price);
+                                        monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description);
                                 morenDTOListExpected.add(moren);
 
                             } catch (Exception e) {
@@ -165,16 +166,17 @@ public class RealtimeRentController {
 
                                 Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                                 String discount_price = null;
+                                String discount_description = null;
                                 if(discount_object.isPresent()) {
-                                    System.out.println(discount_object.get().getCarNo());
                                     discount_price = discount_object.get().getDiscount();
+                                    discount_description = discount_object.get().getDescription();
                                 }
 
                                 MorenDTO moren = new MorenDTO((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
                                         (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                         (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                         (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                        monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price);
+                                        monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description);
                                 morenDTOList.add(moren);
 
                             } catch (Exception e) {
@@ -348,8 +350,10 @@ public class RealtimeRentController {
 
                                     Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                                     String discount_price = null;
+                                    String discount_description = null;
                                     if(discount_object.isPresent() && realTimeDto.getRentTerm().equals("한달")) {
                                         discount_price = discount_object.get().getDiscount();
+                                        discount_description = discount_object.get().getDescription();
                                     }
 
 
@@ -357,7 +361,7 @@ public class RealtimeRentController {
                                             (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                             (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                             (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                            kilometer_cost, (String) morenObject.get("order_end"), dbid, carList, discount_price);
+                                            kilometer_cost, (String) morenObject.get("order_end"), dbid, carList, discount_price, discount_description);
 
                                     if ((Integer)morenObject.get("order_status") == 0) {
                                         morenDTOList.add(moren);
@@ -495,16 +499,17 @@ public class RealtimeRentController {
 
                         Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                         String discount_price = null;
+                        String discount_description = null;
                         if(discount_object.isPresent()) {
-                            System.out.println(discount_object.get().getCarNo());
                             discount_price = discount_object.get().getDiscount();
+                            discount_description = discount_object.get().getDescription();
                         }
 
                         MorenDTO morenDto = new MorenDTO((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
                                 (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                 (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                kilometer_cost, (String) morenObject.get("order_end"), monthlyrentIdx, carList, discount_price);
+                                kilometer_cost, (String) morenObject.get("order_end"), monthlyrentIdx, carList, discount_price, discount_description);
 
                         model.put("morenDto", morenDto);
 
