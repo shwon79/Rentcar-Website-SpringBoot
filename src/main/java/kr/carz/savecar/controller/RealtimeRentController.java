@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.ArrayUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -538,23 +539,25 @@ public class RealtimeRentController {
 
 
 
-
     @PostMapping("/rent/month/moren/reservation")
     @ResponseBody
-    public String moren_reservation_test(@RequestBody MorenReservationDTO morenReservationDTO) {
+    public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
 
         MorenReservationDTO morenReservation = new MorenReservationDTO(morenReservationDTO.getCarNo(), morenReservationDTO.getKilometer(),morenReservationDTO.getReservationName(),morenReservationDTO.getReservationPhone(),
-                                                                morenReservationDTO.getReservationAge(),morenReservationDTO.getReservationDate(),morenReservationDTO.getReservationTime(),morenReservationDTO.getReservationGuarantee(),
-                                                                morenReservationDTO.getReservationDetails(),morenReservationDTO.getAddress(),morenReservationDTO.getAddressDetail(),morenReservationDTO.getCarPrice(),
-                                                                morenReservationDTO.getCarTax(),morenReservationDTO.getCarAmountTotal(),morenReservationDTO.getCarDeposit());
+                morenReservationDTO.getReservationAge(),morenReservationDTO.getReservationDate(),morenReservationDTO.getReservationTime(),morenReservationDTO.getReservationGuarantee(),
+                morenReservationDTO.getReservationDetails(),morenReservationDTO.getAddress(),morenReservationDTO.getAddressDetail(),morenReservationDTO.getCarPrice(),
+                morenReservationDTO.getCarTax(),morenReservationDTO.getCarAmountTotal(),morenReservationDTO.getCarDeposit());
 
         morenReservationService.save(morenReservation);
 
-        return "rent_month2";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
-
-
-
 
 
 
