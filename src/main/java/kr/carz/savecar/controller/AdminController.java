@@ -251,6 +251,34 @@ public class AdminController {
     }
 
 
+    // 월렌트 데이터 가져오기 api
+    @PostMapping("/admin/moren/reservation")
+    @ResponseBody
+    public void moren_reservation(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(discountDTO.getCarNo());
+        if(original_discount.isPresent()){
+            jsonObject.put("result", 0);
+        } else {
+            Discount discount = new Discount();
+            discount.setCarNo(discountDTO.getCarNo());
+            discount.setDiscount(discountDTO.getDiscount());
+            discount.setDescription(discountDTO.getDescription());
+            discountService.save(discount);
+
+            jsonObject.put("result", 1);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
 
 //    @GetMapping("/admin/detail/{date_time_id}")
 //    public String get_admin_detail(Model model,  @PathVariable String date_time_id) throws Exception {
