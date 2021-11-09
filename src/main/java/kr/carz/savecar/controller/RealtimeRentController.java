@@ -25,15 +25,17 @@ public class RealtimeRentController {
     private final TwoYearlyRentService twoYearlyRentService;
     private final ReservationService reservationService;
     private final DiscountService discountService;
+    private final MorenReservationService morenReservationService;
 
     @Autowired
     public RealtimeRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
-                                  ReservationService reservationService, DiscountService discountService) {
+                                  ReservationService reservationService, DiscountService discountService, MorenReservationService morenReservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
         this.reservationService = reservationService;
         this.discountService = discountService;
+        this.morenReservationService = morenReservationService;
     }
 
 
@@ -537,39 +539,16 @@ public class RealtimeRentController {
 
 
 
-    @GetMapping("/rent/month/moren/reservation")
-    public String moren_reservation_test() {
+    @PostMapping("/rent/month/moren/reservation")
+    @ResponseBody
+    public String moren_reservation_test(@RequestBody MorenReservationDTO morenReservationDTO) {
 
-        try {
-            String reservation_url = "https://www.moderentcar.co.kr/api/mycar/request.php";
-            URL url = new URL(reservation_url);
+        MorenReservationDTO morenReservation = new MorenReservationDTO(morenReservationDTO.getCarNo(), morenReservationDTO.getKilometer(),morenReservationDTO.getReservationName(),morenReservationDTO.getReservationPhone(),
+                                                                morenReservationDTO.getReservationAge(),morenReservationDTO.getReservationDate(),morenReservationDTO.getReservationTime(),morenReservationDTO.getReservationGuarantee(),
+                                                                morenReservationDTO.getReservationDetails(),morenReservationDTO.getAddress(),morenReservationDTO.getAddressDetail(),morenReservationDTO.getCarPrice(),
+                                                                morenReservationDTO.getCarTax(),morenReservationDTO.getCarAmountTotal(),morenReservationDTO.getCarDeposit());
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-            conn.setDoOutput(true);
-
-            JSONObject jsonData = new JSONObject();
-            jsonData.put("COMPANY_ID", "999");
-            jsonData.put("CAR_NUM", "00하0000");
-            jsonData.put("ORDER_TYPE", "new");
-            jsonData.put("ORDER_CUSTOMER_NAME", "테스트");
-            jsonData.put("ORDER_CUSTOMER_PHONE", "010-0000-0000");
-            jsonData.put("ORDER_START_TIME", "2021-11-08");
-            jsonData.put("ORDER_END_TIME", "2021-12-08");
-
-            System.out.println(jsonData.toString());
-
-            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
-            printWriter.write(jsonData.toString());
-            printWriter.flush();
-
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        morenReservationService.save(morenReservation);
 
         return "rent_month2";
     }
