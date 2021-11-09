@@ -62,5 +62,3 @@ function closeWinFour() {
 
     document.getElementById('divpop4').style.visibility = "hidden";
 }
-
-
