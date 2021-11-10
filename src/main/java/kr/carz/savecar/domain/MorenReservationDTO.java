@@ -18,8 +18,8 @@ public class MorenReservationDTO {
     private String reservationTime;   // 예약 시간
     private String reservationGuarantee;   // 신용카드보유 or 소득증빙
     private String reservationDetails;     // 요청사항
-    private String address;                // 배차주소
-    private String addressDetail;          // 베치주소 디테일
+    private String address;                // 배차요청 주소
+    private String addressDetail;          // 배차요청 상세주소
     private String carPrice;               // 렌트료
     private String carTax;                 // 부가세
     private String carAmountTotal;         // 총렌트료

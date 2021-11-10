@@ -1,5 +1,6 @@
 package kr.carz.savecar.controller;
 
+import kr.carz.savecar.domain.MorenReservationApplyDTO;
 import kr.carz.savecar.domain.Reservation;
 import kr.carz.savecar.domain.ReservationSaveDTO;
 import kr.carz.savecar.service.ReservationService;
@@ -14,6 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
@@ -164,4 +169,74 @@ public class ReservationController {
 
         return reservationService.save(dto);
     }
+
+
+    // 예약 저장 api
+    @PostMapping("/moren/reservation/apply")
+    @ResponseBody
+    public void moren_reserve(HttpServletResponse res, @RequestBody MorenReservationApplyDTO dto) throws IOException{
+        try {
+            URL url = new URL("https://www.moderentcar.co.kr/api/mycar/request.php");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            String orderStartTime = dto.getReservationDate() + " " + dto.getReservationTime();
+            System.out.println(orderStartTime);
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("COMPANY_ID", "999");
+            jsonObject.put("CAR_NUM", dto.getCarNo());
+            jsonObject.put("ORDER_TYPE", "new");
+            jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
+            jsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
+            jsonObject.put("ORDER_START_TIME", orderStartTime);
+            jsonObject.put("ORDER_END_TIME", orderStartTime);
+            jsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
+            jsonObject.put("ORDER_DELIVERY_PLACE_EXTRA", dto.getAddressDetail());
+
+
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+
+            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
+            printWriter.write(jsonObject.toString());
+            printWriter.flush();
+
+            // 응답
+            BufferedReader bufferedReader = null;
+            int status = conn.getResponseCode();
+            if (status == HttpURLConnection.HTTP_OK){
+                bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                bufferedReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+
+            String line;
+            StringBuffer response = new StringBuffer();
+
+            while ((line = bufferedReader.readLine()) != null){
+                response.append(line);
+            }
+            bufferedReader.close();
+            System.out.println("응답값 : " + response.toString());
+
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+        org.json.JSONObject jsonObject_return = new org.json.JSONObject();
+        jsonObject_return.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject_return);
+        pw.flush();
+        pw.close();
+
+    }
+
 }

@@ -137,3 +137,52 @@ $('.delete-btn').click(function(e) {
         })
     }
 })
+
+
+
+// 모렌으로 데이터 전달, 예약하기
+$('.reservation-confirm-btn').click(function(e) {
+
+    // 예약 정보 받기
+    const carNo = '72너9879';
+    const reservationName = '관리자';
+    const reservationPhone = '123-456-7899';
+    const reservationDate = '2021-11-11';
+    const reservationTime = '15:00:00';
+    const address = '서울시 송파구';
+    const addressDetail = '상세주소';
+
+    var data = {
+        carNo: carNo,
+        reservationName: reservationName,
+        reservationPhone: reservationPhone,
+        reservationDate: reservationDate,
+        reservationTime: reservationTime,
+        address: address,
+        addressDetail: addressDetail,
+    }
+
+    console.log(data);
+
+    let reserveConfirm = confirm('예약을 완료하시겠습니까?');
+
+    if (reserveConfirm) {
+        $.ajax({
+            type:'POST',
+            url:'/moren/reservation/apply',
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('예약이 완료되었습니다.');
+            } else {
+                alert('예약에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/moren/reservation/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    };
+
+})
