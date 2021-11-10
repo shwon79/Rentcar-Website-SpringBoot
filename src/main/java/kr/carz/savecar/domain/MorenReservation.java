@@ -60,11 +60,15 @@ public class MorenReservation extends BaseTimeEntity {
     @Column(nullable = true)
     private String carDeposit;
 
+    @Column(nullable = true)
+    private String reservationStatus;
+
+
     @Builder
     public MorenReservation(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
                             String reservationDate, String reservationTime, String reservationGuarantee,
                             String reservationDetails, String address, String addressDetail, String carPrice, String carTax,
-                            String carAmountTotal, String carDeposit) {
+                            String carAmountTotal, String carDeposit, String reservationStatus) {
         this.carNo = carNo;
         this.kilometer = kilometer;
         this.reservationName = reservationName;
@@ -80,5 +84,6 @@ public class MorenReservation extends BaseTimeEntity {
         this.carTax = carTax;
         this.carAmountTotal = carAmountTotal;
         this.carDeposit = carDeposit;
+        this.reservationStatus = reservationStatus;
     }
 }

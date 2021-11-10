@@ -52,6 +52,8 @@ const reserveMonthlyRent = () => {
     const carTax = document.getElementById('carTax').innerText;
     const carAmountTotal = document.getElementById('carAmountTotal').innerText;
     const carDeposit = document.getElementById('carDeposit').innerText;
+    const reservationStatus = 0;
+
 
     let check1 = document.getElementById('check_info').checked;
     console.log(check1);
@@ -72,7 +74,8 @@ const reserveMonthlyRent = () => {
             carPrice: carPrice,
             carTax: carTax,
             carAmountTotal: carAmountTotal,
-            carDeposit: carDeposit
+            carDeposit: carDeposit,
+            reservationStatus : reservationStatus
         }
 
         console.log(data);
