@@ -189,24 +189,88 @@
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <h1 th:text="${morenDto.carName}" class="car_name"></h1>
-                <hr style="border-top: 2px solid#000000;">
-                <div class="info_table" style="display: none;"><p>차량번호  <span th:text="${morenDto.carNo}" id="carNo"></span></p></div>
-                <div class="info_table" style="display: none;"><p>약정 주행거리  <span th:text="${kilometer}" id="kilometer"></span></p></div>
-                <div class="info_table"><p>공급가  <span th:text="${morenDto.carPrice}" class="number" id="carPrice"></span><span>원</span></p></div>
-                <div class="info_table"><p>부가세  <span th:text="${tax}" class="number" id="carTax"></span><span>원</span></p></div>
-                <hr style="border-top: 1px solid black;">
-                <div class="info_table"><p>월대여료  <span th:text="${amount_total}" class="number" id="carAmountTotal"></span><span>원</span></p></div>
-                <div class="info_table"><p>보증금  <span th:text="${amount_deposited}" class="number" id="carDeposit"></span><span>원</span></p></div>
-                <hr style="border-top: 1px solid black;">
-                <div class="info_table"><p>예약금[입금하실 금액]  <span>100,000원</span></p></div>
-<!--                <div class="info_table"><p>총 입금하실 금액  <span th:text="${amount_deposited}" class="number"></span><span>원</span></p></div>-->
-                <hr style="border-top: 2px solid#000000;">
-                <div class="form-group has-feedback">
-                  <label class="control-label" for="name" style="color: black; font-size: 40px; text-align: center; display: block; margin: 30px;">계좌이체</label>
-                  <h2 style="text-align: center">하나은행 810-626121-01404<br>(주)세이브카</h2>
+                <div th:unless="${kilometer=='기타' || kilometer=='기타_long'}">
+                  <hr style="border-top: 2px solid#000000;">
+                  <div class="info_table" style="display: none;"><p>차량번호  <span th:text="${morenDto.carNo}" id="carNo"></span></p></div>
+                  <div class="info_table" style="display: none;"><p>약정 주행거리  <span th:text="${kilometer}" id="kilometer"></span></p></div>
+                  <div class="info_table">
+                    <p>공급가
+                      <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}" class="number" id="carPrice"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}" class="number" id="carPrice"></span>
+                      <span>원</span>
+                    </p>
+                  </div>
+                  <div class="info_table">
+                    <p>부가세
+                      <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*0.1" class="number" id="carTax"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*0.1" class="number" id="carTax"></span>
+                      <span>원</span>
+                    </p>
+                  </div>
+                  <hr style="border-top: 1px solid black;">
+                  <div class="info_table">
+                    <p>월대여료
+                      <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*0.9" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*0.9" class="number" id="carAmountTotal"></span>
+                      <span>원</span>
+                    </p>
+                  </div>
+                  <div class="info_table">
+                    <p>보증금
+                      <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
+                      <span>원</span>
+                    </p>
+                  </div>
+                  <hr style="border-top: 1px solid black;">
+                  <div class="info_table"><p>예약금[입금하실 금액]  <span>100,000원</span></p></div>
+                  <!--                <div class="info_table"><p>총 입금하실 금액  <span th:text="${amount_deposited}" class="number"></span><span>원</span></p></div>-->
+                  <hr style="border-top: 2px solid#000000;">
+                  <div class="form-group has-feedback">
+                    <label class="control-label" for="name" style="color: black; font-size: 40px; text-align: center; display: block; margin: 30px;">계좌이체</label>
+                    <h2 style="text-align: center">하나은행 810-626121-01404<br>(주)세이브카</h2>
+                  </div>
+                  <p style="text-align: center;">* 예약금 입금이 확인되면<br>예약이 확정되고<br>확인 문자가 전송됩니다.</p>
+                  <p style="text-align: center;">* 예약 취소시, 예약금 반환이 어렵습니다.</p>
                 </div>
-                <p style="text-align: center;">* 예약금 입금이 확인되면<br>예약이 확정되고<br>확인 문자가 전송됩니다.</p>
-                <p style="text-align: center;">* 예약 취소시, 예약금 반환이 어렵습니다.</p>
+                <div th:if="${kilometer=='기타' || kilometer=='기타_long'}">
+                  <div class="form-group has-feedback">
+                    <h2>자세한 가격은 상담을 통해 확인하실 수 있습니다.</h2>
+                  </div>
+                </div>
+
               </div>
               <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pinside10 reservation-form">
                 <div class="form-title">
