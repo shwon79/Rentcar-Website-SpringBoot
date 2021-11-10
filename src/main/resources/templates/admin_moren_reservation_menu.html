@@ -53,7 +53,7 @@
                         <td scope="col" th:text="${reservation.reservationDate}" ></td>
                         <td scope="col" th:text="${reservation.carAmountTotal}"></td>
                         <td>
-                            <span style="margin-right: 3%;"><button class="reservation-delete-btn" th:data-index="${reservation.carNo}">취소</button></span>
+                            <span><button class="reservation-delete-btn" th:data-index="${reservation.carNo}">취소</button></span>
                             <span><button class="reservation-confirm-btn" th:data-index="${reservation.carNo}">확정</button></span>
                         </td>
                         <td>
@@ -72,13 +72,13 @@
                         <p>차량 번호: <span th:text="${reservation.carNo}"></span></p>
                         <p>이름: <span th:text="${reservation.reservationName}"></span> | 전화번호: <span th:text="${reservation.reservationPhone}"></span></p>
                         <p>날짜: <span th:text="${reservation.reservationDate}"></span> | 월 대여료: <span th:text="${reservation.carAmountTotal}"></span></p>
-                        <p>
-                            <span style="margin-right: 3%;"><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
-                            <span><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>
+                        <p style="display: flex; justify-content: space-between;">
+                            <span style="width: 49%;"><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
+                            <span style="width: 49%;"><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>
                         </p>
                         <p>
                             <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
-                                <button>상세 페이지</button>
+                                <button style="width: 100%;">상세 페이지</button>
                             </a>
                         </p>
                     </div>

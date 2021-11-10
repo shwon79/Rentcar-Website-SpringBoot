@@ -186,3 +186,13 @@ $('.reservation-confirm-btn').click(function(e) {
     };
 
 })
+
+// 모렌 예약 신청 목록에서 취소
+$('.reservation-delete-btn').click(function(e) {
+    let deleteConfirm = confirm('취소하시겠습니까?');
+
+    if (deleteConfirm) {
+        alert('취소되었습니다.');
+
+    }
+})
