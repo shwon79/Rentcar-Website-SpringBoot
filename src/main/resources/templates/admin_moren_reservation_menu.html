@@ -33,11 +33,11 @@
                 <table id="morenReservationTable">
                     <thead id="table_header">
                     <tr>
-                        <th>예약한 시간</th>
+                        <th>예약 신청 시간</th>
                         <th>차량 번호</th>
                         <th>이름</th>
                         <th>전화번호</th>
-                        <th>날짜</th>
+                        <th>대여시작일</th>
                         <th>월 대여료</th>
                         <th>취소 및 확정</th>
                         <th></th>
@@ -46,7 +46,7 @@
                     <!-- pc -->
                     <tbody id="mainTable_tbody">
                     <tr th:each="reservation, iterStat : ${morenReservationList}">
-                        <td scope="col" >예약한 시간</td>
+                        <td scope="col" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></td>
                         <td scope="col" th:text="${reservation.carNo}"></td>
                         <td scope="col" th:text="${reservation.reservationName}"></td>
                         <td scope="col" th:text="${reservation.reservationPhone}" ></td>
@@ -68,10 +68,10 @@
                 <!-- Mobile --->
                 <div id="morenReservationCard">
                     <div class="card" th:each="reservation, iterStat : ${morenReservationList}">
-                        <p>예약한 시간</p>
+                        <p>예약 신청 시간: <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></span></p>
                         <p>차량 번호: <span th:text="${reservation.carNo}"></span></p>
                         <p>이름: <span th:text="${reservation.reservationName}"></span> | 전화번호: <span th:text="${reservation.reservationPhone}"></span></p>
-                        <p>날짜: <span th:text="${reservation.reservationDate}"></span> | 월 대여료: <span th:text="${reservation.carAmountTotal}"></span></p>
+                        <p>대여시작일: <span th:text="${reservation.reservationDate}"></span> | 월 대여료: <span th:text="${reservation.carAmountTotal}"></span></p>
                         <p style="display: flex; justify-content: space-between;">
                             <span style="width: 49%;"><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
                             <span style="width: 49%;"><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>

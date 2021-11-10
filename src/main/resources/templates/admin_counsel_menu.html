@@ -29,7 +29,7 @@
     <div class="list_container">
       <div class="reserve_list" id="reserve_list_title">
         <p class="name">성명</p>
-        <!--                <p class="created_date">생성일</p>-->
+        <p class="created_date">상담신청일</p>
         <!--                <p class="modified_date">수정일</p>-->
         <p class="rent_type">유형</p>
         <p class="product_name">제품명</p>
@@ -47,7 +47,7 @@
         <div class="reserve_list" >
           <!--                    th:onclick="'location.href = \'/admin/detail/'+${date.dateTimeId}+'\''"-->
           <p class="name" th:text="${reservation.name}"></p>
-          <!--                    <p class="created_date" th:text="${#strings.arraySplit(date.createdDate, 'T')[0]}"></p>-->
+          <p class="created_date" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></p>
           <!--                    <p class="modified_date" th:text="${#strings.arraySplit(date.modifiedDate, 'T')[0]}"></p>-->
           <p class="rent_type" th:text="${reservation.title}"></p>
           <p class="product_name" th:text="${reservation.product}"></p>
