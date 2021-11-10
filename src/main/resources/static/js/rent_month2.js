@@ -135,3 +135,24 @@ function numberWithCommas() {
 }
 
 $('.number').ready(numberWithCommas());
+
+// 렌트 기간 선택하면 약정 주행거리 선택 보여주기
+function displaySelectKilometer(e) {
+    let monthKilometer = ["2000km", "2500km", "3000km", "4000km", "기타"];
+    let yearKilometer = ["20000km", "30000km", "40000km", "기타"];
+    let selectKilometer = document.getElementById('selectKilometer');
+
+    if (e.value == "한달") {
+        let displaySelect = monthKilometer;
+    } else if (e.value == "12개월" || e.value == "24개월") {
+        let displaySelect = yearKilometer;
+    };
+
+    // selectKilometer.option.length = 0;
+
+    for (x in displaySelect) {
+        let option = document.createElement('option');
+        option.value = displaySelect[x];
+        selectKilometer.appendChild(option);
+    };
+}
