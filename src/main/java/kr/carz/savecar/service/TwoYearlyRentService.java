@@ -7,6 +7,7 @@ import kr.carz.savecar.repository.YearlyRentRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public class TwoYearlyRentService {
@@ -30,5 +31,8 @@ public class TwoYearlyRentService {
     }
     public TwoYearlyRent findByMorenCar(Long start, Long end, String name){
         return twoYearlyRentRepository.findByEndGreaterThanEqualAndStartIsLessThanEqualAndNameMoren(end, start, name);
+    }
+    public Optional findById(Long id){
+        return twoYearlyRentRepository.findById(id);
     }
 }
