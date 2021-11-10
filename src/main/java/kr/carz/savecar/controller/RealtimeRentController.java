@@ -52,10 +52,6 @@ public class RealtimeRentController {
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
 
-        // 모두의 렌터카 데이터 가져오기
-        HttpURLConnection conn;
-        JSONObject responseJson;
-
         // 모렌 데이터 객체 생성
         List<MorenDTO> morenDTOList = new ArrayList<MorenDTO>();
         List<MorenDTO> morenDTOListExpected = new ArrayList<MorenDTO>();
@@ -75,7 +71,7 @@ public class RealtimeRentController {
             String today_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + today_date + "&END=" + today_date + "&EXPECTED_DAY=" + expected_day;
             URL url = new URL(today_url);
 
-            conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
             conn.setRequestMethod("GET");
@@ -92,7 +88,7 @@ public class RealtimeRentController {
                 }
 
                 // list 가져오기
-                responseJson = new JSONObject(sb.toString());
+                JSONObject responseJson = new JSONObject(sb.toString());
                 JSONArray list_json_array = (JSONArray) responseJson.get("list");
 
                 // list 안에 데이터
