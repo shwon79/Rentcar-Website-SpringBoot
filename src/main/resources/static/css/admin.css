@@ -467,11 +467,12 @@ td {
         display: block;
     }
     #morenReservationCard button {
-        width: 40%;
+        width: 49%;
         height: 100%;
         color: white;
         background-color: #5495b1;
         border: none;
         font-weight: 900;
+        padding: 0.3rem 0;
     }
 }
