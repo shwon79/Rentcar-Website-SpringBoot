@@ -412,14 +412,14 @@ public class RealtimeRentController {
 
 
     // 차량 상세 페이지 -> 월렌트만 처리된 상태, 12/24개월도 처리해줄 것
-    //              -> 할인가로 넘겨주기 처리해야함
+    //               -> 할인가로 넘겨주기 처리해야함
     @GetMapping(value = "/rent/month/detail/{carIdx}/{monthlyrentIdx}/{kilometer}/{rentStatus}")
     public String rent_month_detail(ModelMap model, @PathVariable String carIdx, @PathVariable Long monthlyrentIdx, @PathVariable String kilometer, @PathVariable String rentStatus) throws IOException {
 
         // 세이브카 db에서 해당 차 객체 가져오기
         Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(monthlyrentIdx);
         MonthlyRent monthlyRent = monthlyRentOptional.get();
-        model.put("monthlyRent", monthlyRent);
+//        model.put("monthlyRent", monthlyRent);
 
         // 오늘 날짜
         Date time = new Date();
@@ -454,22 +454,23 @@ public class RealtimeRentController {
                 for(int i=0; i<list_json_array.length(); i++){
 
                     JSONObject morenObject = (JSONObject)list_json_array.get(i);
-                    String kilometer_cost = monthlyRent.getCost_for_2k();
-
-                    // 키로수별
-                    if (kilometer.equals("2000km")){
-                        kilometer_cost = monthlyRent.getCost_for_2k();
-                    } else if (kilometer.equals("2500km")){
-                        kilometer_cost = monthlyRent.getCost_for_2_5k();
-                    } else if (kilometer.equals("3000km")){
-                        kilometer_cost = monthlyRent.getCost_for_3k();
-                    } else if (kilometer.equals("4000km")){
-                        kilometer_cost = monthlyRent.getCost_for_4k();
-                    } else if (kilometer.equals("기타")){
-                        kilometer_cost = monthlyRent.getCost_for_others();
-                    }
 
                     if(morenObject.get("carIdx").equals(carIdx)){
+
+                        String kilometer_cost = monthlyRent.getCost_for_2k();
+
+                        // 키로수별
+                        if (kilometer.equals("2000km")){
+                            kilometer_cost = monthlyRent.getCost_for_2k();
+                        } else if (kilometer.equals("2500km")){
+                            kilometer_cost = monthlyRent.getCost_for_2_5k();
+                        } else if (kilometer.equals("3000km")){
+                            kilometer_cost = monthlyRent.getCost_for_3k();
+                        } else if (kilometer.equals("4000km")){
+                            kilometer_cost = monthlyRent.getCost_for_4k();
+                        } else if (kilometer.equals("기타")){
+                            kilometer_cost = monthlyRent.getCost_for_others();
+                        }
 
                         // 차량 이미지
                         List<String> carList = new ArrayList<>();

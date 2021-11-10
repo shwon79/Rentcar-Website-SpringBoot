@@ -1,5 +1,4 @@
 let sortType = 'asc';
-let image_url;
 
 function sortContent(index) {
     let table = document.getElementsByClassName('table_expected')
@@ -34,44 +33,6 @@ function sendData(){
 
 
 
-function ajaxFileUpload() {
-    var form = jQuery("ajaxFrom")[0];
-    var formData = new FormData(form);
-    formData.append("message", "ajax로 파일 전송하기");
-
-    var fileValue = $("#ajaxFile").val().split("\\");
-    var fileName = fileValue[fileValue.length-1].replace(/(.png|.jpg|.jpeg|.gif)$/, ''); // 파일명
-    console.log("fileName : "+fileName);
-
-    formData.append("key", "03b260a78d187a2dd3086b7fe1e70e80");
-    formData.append("image", jQuery("#ajaxFile")[0].files[0]);
-    formData.append("name", fileName);
-
-    console.log("파일 데이터");
-    console.dir(jQuery("#ajaxFile")[0].files[0]);
-    console.log("-------------");
-    console.log(jQuery("#ajaxFile")[0].files[0]);
-
-    jQuery.ajax({
-        url : "https://api.imgbb.com/1/upload"
-        , type : "POST"
-        , processData : false
-        ,contentType : false
-        , data : formData
-        , success:function(imgbbReturn) {
-
-            if(imgbbReturn.success==true){
-
-                var imgbb = imgbbReturn.data;
-                console.log("imgbb.image.url : " +imgbb.image.url);
-                image_url = imgbb.image.url;
-            }
-
-        }
-    });
-}
-
-
 // Sending Data;
 const reserveMonthlyRent = () => {
 
@@ -84,7 +45,6 @@ const reserveMonthlyRent = () => {
     const reservationDate = document.getElementById('reservation-detail-date').value;
     const reservationTime = document.getElementById('reservation-detail-time').value;
     const reservationGuarantee = document.getElementById('reservation-detail-guarantee').value;
-    // const reservationLicense = image_url;
     const reservationDetails = document.getElementById('reservation-detail-details').value;
     const address = document.getElementById('address_kakao').value;
     const addressDetail = document.getElementById('address_kakao_detail').value;
@@ -92,7 +52,6 @@ const reserveMonthlyRent = () => {
     const carTax = document.getElementById('carTax').innerText;
     const carAmountTotal = document.getElementById('carAmountTotal').innerText;
     const carDeposit = document.getElementById('carDeposit').innerText;
-    // ftp://itscar@itscar.cafe24.com/tomcat/webapps/manager/images/add.gif
 
     let check1 = document.getElementById('check_info').checked;
     console.log(check1);
