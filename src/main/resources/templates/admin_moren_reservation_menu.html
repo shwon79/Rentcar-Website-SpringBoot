@@ -26,10 +26,10 @@
         </div>
 
         <div class="content_container">
+            <div class="head_title" style="margin-top: 50px; text-align: center;">
+                <h2>예약 신청 목록</h2>
+            </div>
             <div id="mainTable">
-                <div class="head_title" style="margin-top: 50px; text-align: center;">
-                    <h2>예약 신청 목록</h2>
-                </div>
                 <table id="morenReservationTable">
                     <thead id="table_header">
                     <tr>
@@ -58,7 +58,7 @@
                         </td>
                         <td>
                             <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
-                                <button >상세 페이지</button>
+                                <button style="width: 100%;">상세 페이지</button>
                             </a>
                         </td>
                     </tr>
