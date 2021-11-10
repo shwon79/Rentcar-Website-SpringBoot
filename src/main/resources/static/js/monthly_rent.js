@@ -68,8 +68,8 @@ function make_easy_reservation () {
         detail : $("#reservation-detail-details").val(),
         title : "간편상담신청",
         car_name : $("#reservation-detail-carname").val(),
-        mileage : $("#reservation-detail-region").val(),
-        option : $("#reservation-detail-resdate").val()
+        region : $("#reservation-detail-region").val(),
+        resDate : $("#reservation-detail-resdate").val()
     };
 
     var checkbox = document.getElementById("agree")

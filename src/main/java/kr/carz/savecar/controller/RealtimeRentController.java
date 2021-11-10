@@ -511,12 +511,7 @@ public class RealtimeRentController {
     @ResponseBody
     public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
 
-        MorenReservationDTO morenReservation = new MorenReservationDTO(morenReservationDTO.getCarNo(), morenReservationDTO.getKilometer(),morenReservationDTO.getReservationName(),morenReservationDTO.getReservationPhone(),
-                morenReservationDTO.getReservationAge(),morenReservationDTO.getReservationDate(),morenReservationDTO.getReservationTime(),morenReservationDTO.getReservationGuarantee(),
-                morenReservationDTO.getReservationDetails(),morenReservationDTO.getAddress(),morenReservationDTO.getAddressDetail(),morenReservationDTO.getCarPrice(),
-                morenReservationDTO.getCarTax(),morenReservationDTO.getCarAmountTotal(),morenReservationDTO.getCarDeposit());
-
-        morenReservationService.save(morenReservation);
+        morenReservationService.save(morenReservationDTO);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);
