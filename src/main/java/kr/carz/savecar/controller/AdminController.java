@@ -204,6 +204,29 @@ public class AdminController {
         return mav;
     }
 
+    // 월렌트 실시간 모렌 디테일 페이지로 입장
+    @GetMapping("/admin/moren/reservation/detail/{reservationId}")
+    public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req,  @PathVariable Long reservationId) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if((Login)session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+            Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
+            mav.addObject("morenReservationDTO", morenReservation.get());
+            mav.setViewName("admin_moren_reservation_detail");
+        }
+
+        return mav;
+    }
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
     @ResponseBody

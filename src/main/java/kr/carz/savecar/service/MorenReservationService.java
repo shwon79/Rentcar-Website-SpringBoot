@@ -7,6 +7,7 @@ import kr.carz.savecar.repository.MorenReservationRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public class MorenReservationService {
@@ -24,5 +25,8 @@ public class MorenReservationService {
 
     public List<MorenReservation> findAllMorenReservations(){
         return morenReservationRepository.findAll();
+    }
+    public Optional findMorenReservationById(Long id){
+        return morenReservationRepository.findById(id);
     }
 }
