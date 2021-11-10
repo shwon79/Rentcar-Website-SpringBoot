@@ -1,0 +1,60 @@
+<!-- 관리자페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" defer></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+
+</head>
+<body>
+<div class="page_wrapper">
+    <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
+    <div class="content_wrapper">
+        <div class="menu_container">
+            <div class="menu_list">
+                <a href="/admin/campingcar/menu"><li>캠핑카 예약</li></a>
+                <a href="/admin/counsel/menu"><li>상담 신청</li></a>
+                <a href="/admin/discount/menu"><li>할인/인상 적용</li></a>
+                <a href="/admin/moren/reservation/menu" style="color: white;"><li style="background: #3a708f">모렌 예약 신청</li></a>
+            </div>
+        </div>
+
+        <div class="content_container">
+            <div class="head_title" style="margin-top: 50px; text-align: center;">
+                <h2>예약 신청 상세 페이지</h2>
+            </div>
+            <div id="reservation-detail-card">
+                <p>예약한 시간: <span>예약한 시간</span></p>
+                <p>차량 번호: <span th:text="${morenReservationDTO.carNo}"></span></p>
+                <p>약정 주행거리: <span th:text="${morenReservationDTO.kilometer}"></span></p>
+                <p>예약자 이름(입금자명): <span th:text="${morenReservationDTO.reservationName}"></span></p>
+                <p>예약자 전화번호: <span th:text="${morenReservationDTO.reservationPhone}"></span></p>
+                <p>예약자 만 나이: <span th:text="${morenReservationDTO.reservationAge}"></span></p>
+                <p>대여 날짜 및 시간: <span th:text="${morenReservationDTO.reservationDate}"></span><span th:text="${morenReservationDTO.reservationTime}"></span></p>
+                <p>신용 보증: <span th:text="${morenReservationDTO.reservationGuarantee}"></span></p>
+                <p>배차 요청 주소: <span th:text="${morenReservationDTO.address}"></span></p>
+                <p>배차 요청 상세 주소: <span th:text="${morenReservationDTO.addressDetail}"></span></p>
+                <p>요청 사항: <span th:text="${morenReservationDTO.reservationDetails}"></span></p>
+                <p>렌트료: <span th:text="${morenReservationDTO.carPrice}"></span></p>
+                <p>부가세: <span th:text="${morenReservationDTO.carTax}"></span></p>
+                <p>총 렌트료: <span th:text="${morenReservationDTO.carAmountTotal}"></span></p>
+                <p>보증금: <span th:text="${morenReservationDTO.carDeposit}"></span></p>
+                <div style="display: flex; justify-content: space-between;">
+                    <button class="reservation-delete-btn">취소</button>
+                    <button class="reservation-confirm-btn">확정</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
