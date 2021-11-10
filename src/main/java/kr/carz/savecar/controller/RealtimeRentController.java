@@ -411,8 +411,7 @@ public class RealtimeRentController {
 
 
 
-    // 차량 상세 페이지 -> 월렌트만 처리된 상태, 12/24개월도 처리해줄 것
-    //               -> 할인가로 넘겨주기 처리해야함
+    // 차량 상세 페이지
     @GetMapping(value = "/rent/month/detail/{rentTerm}/{carIdx}/{rentIdx}/{kilometer}/{discount}/{rentStatus}")
     public String rent_month_detail(ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
 
