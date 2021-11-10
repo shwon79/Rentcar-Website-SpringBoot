@@ -1,4 +1,3 @@
-
 function erase_after_catergory1(){
 
     document.getElementById('select-category1').value = "";
@@ -68,8 +67,8 @@ function make_easy_reservation () {
         detail : $("#reservation-detail-details").val(),
         title : "간편상담신청",
         car_name : $("#reservation-detail-carname").val(),
-        mileage : $("#reservation-detail-region").val(),
-        option : $("#reservation-detail-resdate").val()
+        region : $("#reservation-detail-region").val(),
+        resDate : $("#reservation-detail-resdate").val()
     };
 
     var checkbox = document.getElementById("agree")
@@ -111,8 +110,8 @@ function make_monthly_rent_reservation () {
         detail : $("#reservation-simple-details").val(),
         title : "월렌트실시간",
         car_name : document.getElementsByClassName("carName")[0].innerHTML,
-        mileage : document.getElementsByClassName("carNo")[0].innerHTML,
-        option : document.getElementsByClassName("carOld")[0].innerHTML
+        car_num : document.getElementsByClassName("carNo")[0].innerHTML,
+        carAge : document.getElementsByClassName("carOld")[0].innerHTML
     };
 
     var checkbox = document.getElementById("agree")
@@ -193,7 +192,7 @@ function make_reservation () {
         } else {
             deposit = $("#deposit-0").val();
         }
-    // 월렌트
+        // 월렌트
     } else {
         deposit = document.getElementById("carDeposit").innerText;
     }
