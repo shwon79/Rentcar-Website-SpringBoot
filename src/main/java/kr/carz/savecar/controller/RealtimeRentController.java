@@ -413,8 +413,7 @@ public class RealtimeRentController {
 
     // 차량 상세 페이지
     @RequestMapping(value = "/rent/month/detail/{rentTerm}/{carIdx}/{rentIdx}/{kilometer}/{discount}/{rentStatus}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
-    @ResponseBody
-    public void rent_month_detail(HttpServletResponse res, ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
+    public String rent_month_detail(ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -514,10 +513,7 @@ public class RealtimeRentController {
 //        jsonObject.put("discount", discount);
 //        jsonObject.put("rentTerm", rentTerm);
 
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
+        return "rent_month2_detail";
     }
 
 
