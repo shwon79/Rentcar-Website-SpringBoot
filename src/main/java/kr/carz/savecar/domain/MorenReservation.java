@@ -65,10 +65,11 @@ public class MorenReservation extends BaseTimeEntity {
 
 
     @Builder
-    public MorenReservation(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
+    public MorenReservation(Long id, String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
                             String reservationDate, String reservationTime, String reservationGuarantee,
                             String reservationDetails, String address, String addressDetail, String carPrice, String carTax,
                             String carAmountTotal, String carDeposit, String reservationStatus) {
+        this.id = id;
         this.carNo = carNo;
         this.kilometer = kilometer;
         this.reservationName = reservationName;

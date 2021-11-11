@@ -327,25 +327,21 @@ public class AdminController {
     }
 
 
-    // 월렌트 데이터 가져오기 api
-    @PostMapping("/admin/moren/reservation")
+    // 모렌 reservation 취소 api
+    @GetMapping("/moren/reservation/cancel/{reservationId}")
     @ResponseBody
-    public void moren_reservation(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
+    public void moren_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
-        // 이미 db에 등록된 차량인지 확인
-        Optional<Discount> original_discount = discountService.findDiscountByCarNo(discountDTO.getCarNo());
-        if(original_discount.isPresent()){
-            jsonObject.put("result", 0);
-        } else {
-            Discount discount = new Discount();
-            discount.setCarNo(discountDTO.getCarNo());
-            discount.setDiscount(discountDTO.getDiscount());
-            discount.setDescription(discountDTO.getDescription());
-            discountService.save(discount);
-
+        Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(reservationId);
+        if(morenReservationOptional.isPresent()){
+            MorenReservation morenReservation = morenReservationOptional.get();
+            morenReservation.setReservationStatus("-1");
+            morenReservationService.save(morenReservation);
             jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
         }
 
         PrintWriter pw = res.getWriter();

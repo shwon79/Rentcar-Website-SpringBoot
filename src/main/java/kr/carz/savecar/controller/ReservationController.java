@@ -1,8 +1,7 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.domain.MorenReservationApplyDTO;
-import kr.carz.savecar.domain.Reservation;
-import kr.carz.savecar.domain.ReservationSaveDTO;
+import kr.carz.savecar.domain.*;
+import kr.carz.savecar.service.MorenReservationService;
 import kr.carz.savecar.service.ReservationService;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -21,13 +20,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ReservationController {
     private final ReservationService reservationService;
+    private final MorenReservationService morenReservationService;
+
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, MorenReservationService morenReservationService) {
         this.reservationService = reservationService;
+        this.morenReservationService = morenReservationService;
     }
 
     // 예약 저장 api
@@ -166,7 +169,6 @@ public class ReservationController {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
-
         return reservationService.save(dto);
     }
 
@@ -175,6 +177,10 @@ public class ReservationController {
     @PostMapping("/moren/reservation/apply")
     @ResponseBody
     public void moren_reserve(HttpServletResponse res, @RequestBody MorenReservationApplyDTO dto) throws IOException{
+
+
+        JSONObject jsonObject_return = new JSONObject();
+
         try {
             URL url = new URL("https://www.moderentcar.co.kr/api/mycar/request.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -221,16 +227,18 @@ public class ReservationController {
                 response.append(line);
             }
             bufferedReader.close();
-            System.out.println("응답값 : " + response.toString());
+//            System.out.println("응답값 : " + response.toString());
 
+            Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(dto.getId());
+            MorenReservation morenReservation = morenReservationOptional.get();
+            morenReservation.setReservationStatus("1");
+            morenReservationService.save(morenReservation);
 
+            jsonObject_return.put("result", 1);
         } catch (IOException e){
-            e.printStackTrace();
+
+            jsonObject_return.put("result", 0);
         }
-
-
-        org.json.JSONObject jsonObject_return = new org.json.JSONObject();
-        jsonObject_return.put("result", 1);
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject_return);

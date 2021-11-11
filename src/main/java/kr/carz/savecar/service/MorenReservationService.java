@@ -17,9 +17,11 @@ public class MorenReservationService {
     public MorenReservationService(MorenReservationRepository morenReservationRepository) {
         this.morenReservationRepository = morenReservationRepository;
     }
+    public Long save(MorenReservation morenReservation) {
+        return morenReservationRepository.save(morenReservation).getId();
+    }
 
-
-    public Long save(MorenReservationDTO dto) {
+    public Long saveDTO(MorenReservationDTO dto) {
         return morenReservationRepository.save(dto.toEntity()).getId();
     }
 
@@ -29,4 +31,5 @@ public class MorenReservationService {
     public Optional findMorenReservationById(Long id){
         return morenReservationRepository.findById(id);
     }
+
 }

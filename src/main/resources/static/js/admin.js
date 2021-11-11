@@ -144,6 +144,7 @@ $('.delete-btn').click(function(e) {
 $('.reservation-confirm-btn').click(function(e) {
 
     // 예약 정보 받기
+    const id = '1'
     const carNo = '72너9879';
     const reservationName = '관리자';
     const reservationPhone = '123-456-7899';
@@ -153,6 +154,7 @@ $('.reservation-confirm-btn').click(function(e) {
     const addressDetail = '상세주소';
 
     var data = {
+        id : id,
         carNo: carNo,
         reservationName: reservationName,
         reservationPhone: reservationPhone,
