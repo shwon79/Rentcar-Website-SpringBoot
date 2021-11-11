@@ -422,18 +422,18 @@ public class RealtimeRentController {
         if (rentTerm.equals("한달")){
             Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
             MonthlyRent monthlyRent = monthlyRentOptional.get();
-//            model.put("priceObject", monthlyRent);
-            jsonObject.put("priceObject", monthlyRent);
+            model.put("priceObject", monthlyRent);
+//            jsonObject.put("priceObject", monthlyRent);
         } else if (rentTerm.equals("12개월")){
             Optional<YearlyRent> yearlyRentOptional = yearlyRentService.findById(rentIdx);
             YearlyRent yearlyRent = yearlyRentOptional.get();
-//            model.put("priceObject", yearlyRent);
-            jsonObject.put("priceObject", yearlyRent);
+            model.put("priceObject", yearlyRent);
+//            jsonObject.put("priceObject", yearlyRent);
         } else if (rentTerm.equals("24개월")){
             Optional<TwoYearlyRent> twoYearlyRentOptional = twoYearlyRentService.findById(rentIdx);
             TwoYearlyRent twoYearlyRent = twoYearlyRentOptional.get();
-//            model.put("priceObject", twoYearlyRent);
-            jsonObject.put("priceObject", twoYearlyRent);
+            model.put("priceObject", twoYearlyRent);
+//            jsonObject.put("priceObject", twoYearlyRent);
         }
 
 
@@ -492,8 +492,8 @@ public class RealtimeRentController {
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
                                 null, (String) morenObject.get("order_end"), rentIdx, carList, null, null);
 
-//                        model.put("morenDto", morenDto);
-                        jsonObject.put("morenDto", morenDto);
+                        model.put("morenDto", morenDto);
+//                        jsonObject.put("morenDto", morenDto);
                         break;
 
                     }
@@ -504,22 +504,21 @@ public class RealtimeRentController {
             e.printStackTrace();
         }
 
-//        model.put("rentStatus", rentStatus);
-//        model.put("kilometer", kilometer);
-//        model.put("discount",discount);
-//        model.put("rentTerm",rentTerm);
+        model.put("rentStatus", rentStatus);
+        model.put("kilometer", kilometer);
+        model.put("discount",discount);
+        model.put("rentTerm",rentTerm);
 
-        jsonObject.put("rentStatus", rentStatus);
-        jsonObject.put("kilometer", kilometer);
-        jsonObject.put("discount", discount);
-        jsonObject.put("rentTerm", rentTerm);
+//        jsonObject.put("rentStatus", rentStatus);
+//        jsonObject.put("kilometer", kilometer);
+//        jsonObject.put("discount", discount);
+//        jsonObject.put("rentTerm", rentTerm);
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);
         pw.flush();
         pw.close();
     }
-
 
 
     @PostMapping("/rent/month/moren/reservation")
