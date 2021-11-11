@@ -195,25 +195,30 @@
                     <p>차량번호  <span th:text="${morenDto.carNo}" id="carNo"></span></p>
                     <p>약정 주행거리  <span th:text="${kilometer}" id="kilometer"></span></p>
                   </div>
-                  <div class="select_info">
-                    <div>
-                      <label for="selectrentTerm">렌트기간</label>
-                      <select name="selectrentTerm" id="selectrentTerm" onclick="displaySelectKilometer(this)">
-                        <option>선택하세요</option>
-                        <option value="한달">한달</option>
-                        <option value="12개월">12개월</option>
-                        <option value="24개월">24개월</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label for="selectKilometer">약정 주행거리</label>
-                      <select name="selectKilometer" id="selectKilometer">
-                        <option>선택하세요</option>
-                      </select>
-                    </div>
+<!--                  <div class="select_info">-->
+<!--                    <div>-->
+<!--                      <label for="selectrentTerm">렌트기간</label>-->
+<!--                      <select name="selectrentTerm" id="selectrentTerm" onclick="displaySelectKilometer(this)">-->
+<!--                        <option>선택하세요</option>-->
+<!--                        <option value="한달">한달</option>-->
+<!--                        <option value="12개월">12개월</option>-->
+<!--                        <option value="24개월">24개월</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                      <label for="selectKilometer">약정 주행거리</label>-->
+<!--                      <select name="selectKilometer" id="selectKilometer">-->
+<!--                        <option>선택하세요</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                  </div>-->
 
-                  </div>
                   <div class="info_table">
+                    <p style="margin-bottom: 0px;">렌트 기간&nbsp;<span th:text="${rentTerm}"></span></p>
+                    <p>약정 주행거리&nbsp;<span th:text="${kilometer}" class="number"></span><span>km</span></p>
+                    <p>* 다른 렌트 기간, 약정 주행거리는 이전 페이지를 이용하세요.</p>
+                    </p>
+                    <hr style="border-top: 1px solid black;">
                     <p>공급가
                       <span th:if="${discount} != 'null'">
                         <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*(100+${discount})/100" class="number" id="carPrice"></span>
