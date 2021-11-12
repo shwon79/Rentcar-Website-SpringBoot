@@ -439,7 +439,7 @@ td {
     position: absolute;
     top: 50%;
     left: 0;
-    border-bottom: 3px solid darkred;
+    border-bottom: 3px solid red;
     width: 100%;
 }
 

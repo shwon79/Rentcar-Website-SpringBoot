@@ -122,7 +122,7 @@
                             <span style="width: 100%; text-align: center; color: darkblue; margin-top: 5px;">이 예약 신청은 확정되었습니다.</span>
                         </p>
                         <p th:if="${reservation.reservationStatus == '-1'}" style="display: flex; justify-content: space-between;">
-                            <span style="width: 100%; text-align: center; color: darkred; margin-top: 5px;">이 예약 신청은 취소되었습니다.</span>
+                            <span style="width: 100%; text-align: center; color: red; margin-top: 5px;">이 예약 신청은 취소되었습니다.</span>
                         </p>
                         <p>
                             <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
