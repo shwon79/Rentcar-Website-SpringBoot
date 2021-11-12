@@ -15,10 +15,11 @@ public class MorenReservationApplyDTO {
     private String reservationTime;   // 예약 시간
     private String address;                // 배차요청 주소
     private String addressDetail;          // 배차요청 상세주소
+    private String rentTerm;   // 렌트 기간
 
     public MorenReservationApplyDTO(String carNo, String reservationName, String reservationPhone,
-                                    String reservationDate, String reservationTime, String address, String addressDetail,
-                                    Long id) {
+                                    String reservationDate, String reservationTime,
+                                    String address, String addressDetail, Long id, String rentTerm) {
         this.id = id;
         this.carNo = carNo;
         this.reservationName = reservationName;
@@ -27,6 +28,7 @@ public class MorenReservationApplyDTO {
         this.reservationTime = reservationTime;
         this.address = address;
         this.addressDetail = addressDetail;
+        this.rentTerm = rentTerm;
     }
 
     public MorenReservation toEntity() {
@@ -39,6 +41,7 @@ public class MorenReservationApplyDTO {
                 .reservationTime(reservationTime)
                 .address(address)
                 .addressDetail(addressDetail)
+                .rentTerm(rentTerm)
                 .build();
 
     }

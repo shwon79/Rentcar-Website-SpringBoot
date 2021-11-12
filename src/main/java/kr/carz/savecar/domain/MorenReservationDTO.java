@@ -25,11 +25,12 @@ public class MorenReservationDTO {
     private String carAmountTotal;         // 총렌트료
     private String carDeposit;             // 보증금
     private String reservationStatus;
+    private String rentTerm;
 
     public MorenReservationDTO(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
                                String reservationDate, String reservationTime, String reservationGuarantee, String reservationDetails,
                                String address, String addressDetail, String carPrice, String carTax, String carAmountTotal, String carDeposit,
-                               String reservationStatus) {
+                               String reservationStatus, String rentTerm) {
         this.carNo = carNo;
         this.kilometer = kilometer;
         this.reservationName = reservationName;
@@ -46,6 +47,7 @@ public class MorenReservationDTO {
         this.carAmountTotal = carAmountTotal;
         this.carDeposit = carDeposit;
         this.reservationStatus = reservationStatus;
+        this.rentTerm = rentTerm;
     }
 
     public MorenReservation toEntity() {
@@ -66,6 +68,7 @@ public class MorenReservationDTO {
                 .carAmountTotal(carAmountTotal)
                 .carDeposit(carDeposit)
                 .reservationStatus(reservationStatus)
+                .rentTerm(rentTerm)
                 .build();
 
     }

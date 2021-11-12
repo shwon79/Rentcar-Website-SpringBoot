@@ -18,9 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class ReservationController {
@@ -32,6 +31,18 @@ public class ReservationController {
         this.reservationService = reservationService;
         this.morenReservationService = morenReservationService;
     }
+
+    private static String AddDate(String strDate, int year, int month, int day) throws Exception {
+        SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        Date dt = dtFormat.parse(strDate);
+        cal.setTime(dt);
+        cal.add(Calendar.YEAR, year);
+        cal.add(Calendar.MONTH, month);
+        cal.add(Calendar.DATE, day);
+        return dtFormat.format(cal.getTime());
+    }
+
 
     // 예약 저장 api
     @PostMapping("/reservation/apply")
@@ -178,7 +189,6 @@ public class ReservationController {
     @ResponseBody
     public void moren_reserve(HttpServletResponse res, @RequestBody MorenReservationApplyDTO dto) throws IOException{
 
-
         JSONObject jsonObject_return = new JSONObject();
 
         try {
@@ -186,10 +196,21 @@ public class ReservationController {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             String orderStartTime = dto.getReservationDate() + " " + dto.getReservationTime();
+
+            String addReservationDate = new String();
+            if (dto.getRentTerm().equals("한달")){
+                addReservationDate = AddDate(dto.getReservationDate(), 0, 1, 0);
+            } else if (dto.getRentTerm().equals("12개월")){
+                addReservationDate = AddDate(dto.getReservationDate(), 1, 0, 0);
+            } else if (dto.getRentTerm().equals("24개월")){
+                addReservationDate = AddDate(dto.getReservationDate(), 2, 0, 0);
+            }
+            String orderEndTime = addReservationDate + " " + dto.getReservationTime();
             System.out.println(orderStartTime);
+            System.out.println(orderEndTime);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("COMPANY_ID", "999");
+            jsonObject.put("COMPANY_ID", "1343");
             jsonObject.put("CAR_NUM", dto.getCarNo());
             jsonObject.put("ORDER_TYPE", "new");
             jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
@@ -198,7 +219,6 @@ public class ReservationController {
             jsonObject.put("ORDER_END_TIME", orderStartTime);
             jsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
             jsonObject.put("ORDER_DELIVERY_PLACE_EXTRA", dto.getAddressDetail());
-
 
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
@@ -235,7 +255,7 @@ public class ReservationController {
             morenReservationService.save(morenReservation);
 
             jsonObject_return.put("result", 1);
-        } catch (IOException e){
+        } catch (Exception e){
 
             jsonObject_return.put("result", 0);
         }
