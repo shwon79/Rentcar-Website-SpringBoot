@@ -142,7 +142,6 @@ $('.delete-btn').click(function(e) {
 
 // 모렌으로 데이터 전달, 예약하기
 $('.reservation-confirm-btn').click(function(e) {
-    console.log(e.target.dataset.index);
 
     // 예약 정보 받기
     let idList = document.getElementsByClassName('reservationId');
@@ -153,6 +152,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let reservationTimeList = document.getElementsByClassName('reservationTime');
     let addressList = document.getElementsByClassName('reservationAddress');
     let addressDetailList = document.getElementsByClassName('reservationAddressDetail');
+    let rentTermList = document.getElementsByClassName('rentTerm');
 
     let id;
     let carNo;
@@ -162,6 +162,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let reservationTime;
     let address;
     let addressDetail;
+    let rentTerm;
 
     for (i=0; i < idList.length; i++) {
         if (e.target.dataset.index == idList[i].dataset.index) {
@@ -203,6 +204,11 @@ $('.reservation-confirm-btn').click(function(e) {
             addressDetail = addressDetailList[i].innerText;
         }
     }
+    for (i=0; i < rentTermList.length; i++) {
+        if (e.target.dataset.index == rentTermList[i].dataset.index) {
+            rentTerm = rentTermList[i].innerText;
+        }
+    }
 
     var data = {
         id : id,
@@ -213,6 +219,7 @@ $('.reservation-confirm-btn').click(function(e) {
         reservationTime: reservationTime,
         address: address,
         addressDetail: addressDetail,
+        rentTerm: rentTerm
     }
 
     console.log(data);
@@ -243,16 +250,6 @@ $('.reservation-confirm-btn').click(function(e) {
 // 모렌 예약 신청 목록에서 취소
 $('.reservation-delete-btn').click(function(e) {
     const reservationId = e.target.dataset.index;
-    // const trList = document.querySelectorAll('tr[data-index]');
-    // let tr;
-    //
-    // for (i=0; i < trList.length; i++) {
-    //     if (reservationId == trList[i].dataset.index) {
-    //         tr = trList[i];
-    //     }
-    // }
-    // console.log(tr);
-
     let deleteConfirm = confirm('취소하시겠습니까?');
 
     if (deleteConfirm) {

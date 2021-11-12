@@ -52,6 +52,7 @@ const reserveMonthlyRent = () => {
     const carTax = document.getElementById('carTax').innerText;
     const carAmountTotal = document.getElementById('carAmountTotal').innerText;
     const carDeposit = document.getElementById('carDeposit').innerText;
+    const rentTerm = document.getElementById('getRentTerm').innerText;
     const reservationStatus = 0;
 
 
@@ -75,7 +76,8 @@ const reserveMonthlyRent = () => {
             carTax: carTax,
             carAmountTotal: carAmountTotal,
             carDeposit: carDeposit,
-            reservationStatus : reservationStatus
+            reservationStatus : reservationStatus,
+            rentTerm: rentTerm
         }
 
         console.log(data);

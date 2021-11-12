@@ -56,6 +56,7 @@
                             <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" th:text="${reservation.carAmountTotal}"></td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td></td>
                             <td>
                                 <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
@@ -74,6 +75,7 @@
                             <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" th:text="${reservation.carAmountTotal}"></td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td>
                                 <span><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
                                 <span><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>
@@ -95,6 +97,7 @@
                             <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" th:text="${reservation.carAmountTotal}"></td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td></td>
                             <td>
                                 <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
