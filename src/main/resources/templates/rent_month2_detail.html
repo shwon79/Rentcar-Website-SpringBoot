@@ -37,7 +37,7 @@
         <ul class="nav nav-tabs">
           <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
 <!--          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>-->
-          <a href="#info_detail" data-toggle="tab"><button>예약하기</button></a>
+          <a href="#info_detail" data-toggle="tab"><button>예약 페이지로 가기</button></a>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="width: 86%; margin: 0 auto">
@@ -214,8 +214,8 @@
 <!--                  </div>-->
 
                   <div class="info_table">
-                    <p style="margin-bottom: 0px;">렌트 기간&nbsp;<span th:text="${rentTerm}"></span></p>
-                    <p>약정 주행거리&nbsp;<span th:text="${kilometer}" class="number"></span><span>km</span></p>
+                    <p style="margin-bottom: 0px;">렌트 기간&nbsp;&nbsp;<span th:text="${rentTerm}"></span></p>
+                    <p>약정 주행거리&nbsp;&nbsp;<span th:text="${kilometer}" class="number"></span><span>km</span></p>
                     <p>* 다른 렌트 기간, 약정 주행거리는 이전 페이지를 이용하세요.</p>
                     </p>
                     <hr style="border-top: 1px solid black;">
@@ -280,28 +280,28 @@
                   <div class="info_table">
                     <p>월대여료
                       <span th:if="${discount} != 'null'">
-                        <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
-                        <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*(100+${discount})/100*0.9" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*(100+${discount})/100*1.1" class="number" id="carAmountTotal"></span>
                       </span>
                       <span th:if="${discount} == 'null'">
-                        <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*0.9" class="number" id="carAmountTotal"></span>
-                      <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*0.9" class="number" id="carAmountTotal"></span>
+                        <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*1.1" class="number" id="carAmountTotal"></span>
+                      <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*1.1" class="number" id="carAmountTotal"></span>
                       </span>
                       <span>원</span>
                     </p>
@@ -329,7 +329,7 @@
                     <label class="control-label" for="name" style="color: black; font-size: 40px; text-align: center; display: block; margin: 30px;">계좌이체</label>
                     <h2 style="text-align: center">하나은행 810-626121-01404<br>(주)세이브카</h2>
                   </div>
-                  <p style="text-align: center;">* 예약금 입금이 확인되면<br>예약이 확정되고<br>확인 문자가 전송됩니다.</p>
+                  <p style="text-align: center; font-size: 18px;">* 예약금 입금이 확인되면<br>예약이 확정되고<br>확인 문자가 전송됩니다.</p>
                   <p style="text-align: center;">* 예약 취소시, 예약금 반환이 어렵습니다.</p>
                 </div>
                 <div th:if="${kilometer=='기타' || kilometer=='기타_long'}">
@@ -505,7 +505,7 @@
                   </div>
                 </div>
                 <!-- 예약 버튼 -->
-                <button id="btn_final" type="button" onclick="reserveMonthlyRent()" class="col">예약하기</button>
+                <button id="btn_final" type="button" onclick="reserveMonthlyRent()" class="col">예약 신청 하기</button>
               </div>
 
             </div>
