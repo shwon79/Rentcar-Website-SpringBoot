@@ -44,24 +44,64 @@
                     </tr>
                     </thead>
                     <!-- pc -->
-                    <tbody id="mainTable_tbody">
-                    <tr th:each="reservation, iterStat : ${morenReservationList}">
-                        <td scope="col" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></td>
-                        <td scope="col" th:text="${reservation.carNo}"></td>
-                        <td scope="col" th:text="${reservation.reservationName}"></td>
-                        <td scope="col" th:text="${reservation.reservationPhone}" ></td>
-                        <td scope="col" th:text="${reservation.reservationDate}" ></td>
-                        <td scope="col" th:text="${reservation.carAmountTotal}"></td>
-                        <td>
-                            <span><button class="reservation-delete-btn" th:data-index="${reservation.carNo}">취소</button></span>
-                            <span><button class="reservation-confirm-btn" th:data-index="${reservation.carNo}">확정</button></span>
-                        </td>
-                        <td>
-                            <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
-                                <button style="width: 100%;">상세 페이지</button>
-                            </a>
-                        </td>
-                    </tr>
+                    <tbody id="mainTable_tbody" th:each="reservation, iterStat : ${morenReservationList}">
+                        <tr th:if="${reservation.reservationStatus == '-1' }" class="red-line" th:data-index="${reservation.id}">
+                            <td scope="col" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></td>
+                            <td scope="col" class="carNo" th:text="${reservation.carNo}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationName" th:text="${reservation.reservationName}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationPhone" th:text="${reservation.reservationPhone}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationDate" th:text="${reservation.reservationDate}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" th:text="${reservation.carAmountTotal}"></td>
+                            <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td></td>
+                            <td>
+                                <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
+                                    <button style="width: 100%;">상세 페이지</button>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${reservation.reservationStatus == '0' }" th:data-index="${reservation.id}">
+                            <td scope="col" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></td>
+                            <td scope="col" class="carNo" th:text="${reservation.carNo}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationName" th:text="${reservation.reservationName}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationPhone" th:text="${reservation.reservationPhone}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationDate" th:text="${reservation.reservationDate}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" th:text="${reservation.carAmountTotal}"></td>
+                            <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td>
+                                <span><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
+                                <span><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>
+                            </td>
+                            <td>
+                                <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
+                                    <button style="width: 100%;">상세 페이지</button>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${reservation.reservationStatus == '1' }" class="blue-line" th:data-index="${reservation.id}">
+                            <td scope="col" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></td>
+                            <td scope="col" class="carNo" th:text="${reservation.carNo}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationName" th:text="${reservation.reservationName}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationPhone" th:text="${reservation.reservationPhone}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationDate" th:text="${reservation.reservationDate}" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" th:text="${reservation.carAmountTotal}"></td>
+                            <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td></td>
+                            <td>
+                                <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
+                                    <button style="width: 100%;">상세 페이지</button>
+                                </a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -70,11 +110,19 @@
                     <div class="card" th:each="reservation, iterStat : ${morenReservationList}">
                         <p>예약 신청 시간: <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></span></p>
                         <p>차량 번호: <span th:text="${reservation.carNo}"></span></p>
-                        <p>이름: <span th:text="${reservation.reservationName}"></span> | 전화번호: <span th:text="${reservation.reservationPhone}"></span></p>
-                        <p>대여시작일: <span th:text="${reservation.reservationDate}"></span> | 월 대여료: <span th:text="${reservation.carAmountTotal}"></span></p>
-                        <p style="display: flex; justify-content: space-between;">
+                        <p>이름: <span th:text="${reservation.reservationName}"></span></p>
+                        <p>전화번호: <span th:text="${reservation.reservationPhone}"></span></p>
+                        <p>대여시작일: <span th:text="${reservation.reservationDate}"></span></p>
+                        <p>월 대여료: <span th:text="${reservation.carAmountTotal}"></span><span>원</span></p>
+                        <p th:if="${reservation.reservationStatus == '0'}" style="display: flex; justify-content: space-between;">
                             <span style="width: 49%;"><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
                             <span style="width: 49%;"><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>
+                        </p>
+                        <p th:if="${reservation.reservationStatus == '1'}" style="display: flex; justify-content: space-between;">
+                            <span style="width: 100%; text-align: center; color: darkblue; margin-top: 5px;">이 예약 신청은 확정되었습니다.</span>
+                        </p>
+                        <p th:if="${reservation.reservationStatus == '-1'}" style="display: flex; justify-content: space-between;">
+                            <span style="width: 100%; text-align: center; color: darkred; margin-top: 5px;">이 예약 신청은 취소되었습니다.</span>
                         </p>
                         <p>
                             <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">

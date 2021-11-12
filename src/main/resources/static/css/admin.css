@@ -429,8 +429,30 @@ td {
     padding: 0.5rem;
 }
 #morenReservationTable {
-    display: block;
+    border-collapse: collapse;
 }
+#morenReservationTable td {
+    position: relative;
+}
+#morenReservationTable tr.red-line td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 3px solid darkred;
+    width: 100%;
+}
+
+#morenReservationTable tr.blue-line td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 3px solid darkblue;
+    width: 100%;
+}
+
+
 #morenReservationCard {
     display: none;
 }
