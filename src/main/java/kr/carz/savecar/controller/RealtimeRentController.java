@@ -137,7 +137,7 @@ public class RealtimeRentController {
                                 morenDTOListExpected.add(moren);
 
                             } catch (Exception e) {
-                                System.out.println("Error ! 차량이름 모렌과 맞출 것 !");
+                                System.out.println("Error ! 차량이름 모렌과 맞출 것 !"+ (String) morenObject.get("carCategory"));
                                 continue;
                             }
                         }
@@ -201,7 +201,7 @@ public class RealtimeRentController {
     }
 
 
-    // 조건별로 차종 데이터 전달 -> order_status Integer version
+    // 조건별로 차종 데이터 전달
     @PostMapping("/rent/month/lookup")
     public String rent_month_lookup(ModelMap model, @ModelAttribute RealTimeDTO realTimeDto) {
 
@@ -259,7 +259,7 @@ public class RealtimeRentController {
                         if (morenObject.get("reserve").equals(null)) {
 
                             // 차종별
-                            if (realTimeDto.getCarType().equals("전체") || realTimeDto.getCarType().equals((String) morenObject.get("carGubun"))) {
+                            if (realTimeDto.getCarType().equals("전체")  || (realTimeDto.getCarType().equals((String)morenObject.get("carGubun")) && (Integer)morenObject.get("carLocal") != 1) || (realTimeDto.getCarType().equals("수입") && (Integer)morenObject.get("carLocal") == 1 ) ) {
 
                                 Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
@@ -362,7 +362,7 @@ public class RealtimeRentController {
 
 
                                 } catch (Exception e) {
-                                    System.out.println("Error ! 차량이름 모렌과 맞출 것 !");
+                                    System.out.println("Error ! 차량이름 모렌과 맞출 것 !" + (String) morenObject.get("carCategory"));
                                     continue;
                                 }
                             }
