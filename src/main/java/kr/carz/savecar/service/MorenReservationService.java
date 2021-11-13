@@ -1,5 +1,6 @@
 package kr.carz.savecar.service;
 
+import kr.carz.savecar.domain.Discount;
 import kr.carz.savecar.domain.MorenReservation;
 import kr.carz.savecar.domain.MorenReservationDTO;
 import kr.carz.savecar.domain.ReservationSaveDTO;
@@ -31,5 +32,5 @@ public class MorenReservationService {
     public Optional findMorenReservationById(Long id){
         return morenReservationRepository.findById(id);
     }
-
+    public void delete(MorenReservation morenReservation) { morenReservationRepository.delete(morenReservation); }
 }

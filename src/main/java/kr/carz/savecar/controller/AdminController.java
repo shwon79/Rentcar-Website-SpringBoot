@@ -227,6 +227,7 @@ public class AdminController {
 
         return mav;
     }
+
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
     @ResponseBody
@@ -339,6 +340,27 @@ public class AdminController {
             MorenReservation morenReservation = morenReservationOptional.get();
             morenReservation.setReservationStatus("-1");
             morenReservationService.save(morenReservation);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    // 모렌 reservation 삭제 api
+    @DeleteMapping("/moren/reservation/{reservationId}")
+    @ResponseBody
+    public void delete_moren_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(reservationId);
+        if(morenReservationOptional.isPresent()){
+            morenReservationService.delete(morenReservationOptional.get());
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
