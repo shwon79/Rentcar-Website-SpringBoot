@@ -268,7 +268,7 @@ public class RealtimeRentController {
                         if (morenObject.get("reserve").equals(null)) {
 
                             // 차종별
-                            if (realTimeDto.getCarType().equals("전체") || realTimeDto.getCarType().equals((String) morenObject.get("carGubun"))) {
+                            if (realTimeDto.getCarType().equals("전체")  || (realTimeDto.getCarType().equals((String)morenObject.get("carGubun")) && (Integer)morenObject.get("carLocal") != 1) || (realTimeDto.getCarType().equals("수입") && (Integer)morenObject.get("carLocal") == 1 ) ) {
 
                                 Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
