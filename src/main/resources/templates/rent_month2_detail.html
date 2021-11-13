@@ -36,7 +36,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
           <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
-<!--          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>-->
+          <a href="#info_car" data-toggle="tab"><button>차량 정보</button></a>
           <a href="#info_detail" data-toggle="tab"><button>예약 페이지로 가기</button></a>
         </ul>
         <!-- Tab panes -->
@@ -388,7 +388,7 @@
 <!--&lt;!&ndash;                  <input type="button" onclick="ajaxFileUpload()" value="업로드"/>&ndash;&gt;-->
 <!--                </form>-->
                 <div class="form-group has-feedback">
-                  <label class="control-label" for="">신용 보증</label>
+                  <label class="control-label" for="">신용 보증 (수입차와 대형차는 신용 보증이 필요합니다.) </label>
                   <div class="input-group"> <span class="input-group-addon"><i class="fas fa-credit-card"></i></span>
                     <select class="form-control" id="reservation-detail-guarantee">
                       <option value="신용카드 보유">신용카드 보유</option>
@@ -400,19 +400,19 @@
                 <div class="form-group has-feedback">
                   <label class="control-label" for="address"><i class="fas fa-star-of-life"></i> 배차 받을 주소</label>
                   <div class="input-group"> <span class="input-group-addon"><i class="fas fa-map-marker-alt"></i></span>
-                    <input type="text" id="address_kakao" class="form-control" name="address" value="주소를 선택하세요" readonly /> <span id="address_button" class="input-group-addon">검색</span>
+                    <input type="text" id="address_kakao" class="form-control" name="address" value="주소를 선택하세요" readonly /> <a id="address_button" class="input-group-addon"><button>검색</button></a>
                   </div>
                 </div>
                 <div class="form-group has-feedback">
                   <label class="control-label" for="address-detail"><i class="fas fa-star-of-life"></i> 상세 주소</label><br/>
                   <div class="input-group"> <span class="input-group-addon"><i class="fas fa-map-marker-alt"></i></span>
-                    <input type="text" id="address_kakao_detail" class="form-control" name="address_detail" value="상세주소를 입력하세요"/>
+                    <input type="text" id="address_kakao_detail" class="form-control" name="address_detail" placeholder="상세주소를 입력하세요"/>
                   </div>
                 </div>
                 <div class="form-group has-feedback">
                   <label class="control-label" for="textarea">요청 사항</label>
                   <div class="input-group"> <span class="input-group-addon"><i class="fas fa-clipboard"></i></span>
-                    <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요."></textarea>
+                    <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요"></textarea>
                   </div>
                 </div>
                 <div>
