@@ -42,8 +42,8 @@ public class RealtimeRentController {
     /* ======================================================================================== */
 
     private String expected_day = "3";
-    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-    private DateFormat df_date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private DateFormat df_date = new SimpleDateFormat("yyyy-MM-dd");
+    private DateFormat df_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
@@ -52,7 +52,7 @@ public class RealtimeRentController {
         List<MorenDTO> morenDTOList = new ArrayList();
         List<MorenDTO> morenDTOListExpected = new ArrayList();
 
-        DateTime dateTime = new DateTime(expected_day, df, df_date_time);
+        DateTime dateTime = new DateTime(expected_day, df_date, df_time);
         dateTime.today();
         dateTime.expected();
 
@@ -171,7 +171,7 @@ public class RealtimeRentController {
         List<MorenDTO> morenDTOList = new ArrayList();
         List<MorenDTO> morenDTOListExpected = new ArrayList();
 
-        DateTime dateTime = new DateTime(expected_day, df, df_date_time);
+        DateTime dateTime = new DateTime(expected_day, df_date, df_time);
         dateTime.today();
         dateTime.expected();
 
@@ -341,7 +341,7 @@ public class RealtimeRentController {
     @RequestMapping(value = "/rent/month/detail/{rentTerm}/{carIdx}/{rentIdx}/{kilometer}/{discount}/{rentStatus}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     public String rent_month_detail(ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
 
-        DateTime dateTime = new DateTime(expected_day, df, df_date_time);
+        DateTime dateTime = new DateTime(expected_day, df_date, df_time);
         dateTime.today();
 
         // 세이브카 db에서 해당 차 객체 가져오기
