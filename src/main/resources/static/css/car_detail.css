@@ -2,7 +2,9 @@
     border: none;
     height: 80px;
     width: 86%;
-    margin: 0 auto;
+    margin: 3rem auto 0 auto;
+    display: flex;
+    justify-content: space-between;
 }
 
 .nav-tabs button {
@@ -13,9 +15,11 @@
     border-radius: 8px;
     box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
     font-size: 20px;
-    right: 10%;
-    position: absolute;
     margin-bottom: 10px;
+    margin-right: 20px;
+}
+.nav-tabs div a:last-child button {
+    margin-right: 0px;
 }
 
 .fa-arrow-left {
@@ -82,7 +86,7 @@
 }
 #info_detail hr {
     color: black;
-    margin: 20px 0px;
+    margin: 20px 0px 0px 0px;
 }
 
 #info_detail .car_name {
@@ -121,6 +125,11 @@
 #address_button.input-group-addon {
     font-size: 1.5rem;
 }
+#address_button.input-group-addon button {
+    border: none;
+    background-color: white;
+    color: black;
+}
 
 .fa-star-of-life {
     font-size: 5px;
@@ -151,6 +160,31 @@
     color: white;
 }
 
+.info_table table {
+
+}
+.info_table table td {
+    font-size: 2rem;
+    background-color: white;
+    padding: 20px 10px;
+}
+.account_info {
+    background-color: #e1e1e1;
+    text-align: center;
+    padding: 4rem 0;
+    border-radius: 2rem;
+}
+.account_info span {
+    background-color: black;
+    color: white;
+    border-radius: 1rem;
+    font-size: 3.3rem;
+    padding: 1rem;
+}
+.account_info h2 {
+    margin-top: 3rem;
+}
+
 
 @media (max-width: 600px) {
 
@@ -159,8 +193,9 @@
     }
 
     .nav-tabs button {
-        right: 7%;
-        position: absolute;
+        font-size: 16px;
+        padding: 15px 20px;
+        margin-right: 10px;
     }
 
     .fa-arrow-left {

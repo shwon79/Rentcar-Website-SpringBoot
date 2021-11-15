@@ -124,7 +124,7 @@ const reserveMonthlyRent = () => {
 
         console.log(data);
 
-        let reserveConfirm = confirm('예약을 완료하시겠습니까?');
+        let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
 
         if (reserveConfirm) {
             $.ajax({
@@ -183,23 +183,65 @@ function numberWithCommas() {
 
 $('.number').ready(numberWithCommas());
 
-// 렌트 기간 선택하면 약정 주행거리 선택 보여주기
-function displaySelectKilometer(e) {
-    let monthKilometer = ["2000km", "2500km", "3000km", "4000km", "기타"];
-    let yearKilometer = ["20000km", "30000km", "40000km", "기타"];
-    let selectKilometer = document.getElementById('selectKilometer');
+// Display return date
+function displayReturnDate() {
+    let startDate = document.getElementById('reservation-detail-date').value;
+    let startTime = document.getElementById('reservation-detail-time').value;
+    let rentTerm = document.getElementById('getRentTerm').innerText;
+    let displayReturn = document.getElementById('displayReturn');
+    let returnYear;
+    let returnMonth;
+    let returnDate;
+    let returnamPm;
+    let returnHour;
+    let returnMinute;
+    let returnString;
 
-    if (e.value == "한달") {
-        let displaySelect = monthKilometer;
-    } else if (e.value == "12개월" || e.value == "24개월") {
-        let displaySelect = yearKilometer;
-    };
+    startDate = new Date(startDate);
 
-    // selectKilometer.option.length = 0;
+    if (rentTerm == "한달") {
+        startDate.setMonth(startDate.getMonth() + 1);
+    } else if (rentTerm == "12개월") {
+        startDate.setMonth(startDate.getMonth() + 12);
+    } else if (rentTerm == "24개월") {
+        startDate.setMonth(startDate.getMonth() + 24);
+    }
 
-    for (x in displaySelect) {
-        let option = document.createElement('option');
-        option.value = displaySelect[x];
-        selectKilometer.appendChild(option);
-    };
+    returnYear = startDate.getFullYear();
+    returnMonth = startDate.getMonth() + 1;
+    returnDate = startDate.getDate();
+
+    returnHour = startTime.split(':')[0];
+    if (returnHour >= 12) {
+        returnamPm = '오후';
+    } else if (returnHour < 12) {
+        returnamPm = '오전';
+    }
+
+    returnMinute = startTime.split(':')[1];
+    returnString = returnYear + '년 ' + returnMonth + '월 ' + returnDate + '일 ' + returnamPm + returnHour + '시 ' + returnMinute + '분 ';
+
+    displayReturn.style.opacity = '1';
+    displayReturn.innerText = '차량 반납 일시는 ' + returnString + '입니다.';
 }
+
+// 렌트 기간 선택하면 약정 주행거리 선택 보여주기
+// function displaySelectKilometer(e) {
+//     let monthKilometer = ["2000km", "2500km", "3000km", "4000km", "기타"];
+//     let yearKilometer = ["20000km", "30000km", "40000km", "기타"];
+//     let selectKilometer = document.getElementById('selectKilometer');
+//
+//     if (e.value == "한달") {
+//         let displaySelect = monthKilometer;
+//     } else if (e.value == "12개월" || e.value == "24개월") {
+//         let displaySelect = yearKilometer;
+//     };
+//
+//     // selectKilometer.option.length = 0;
+//
+//     for (x in displaySelect) {
+//         let option = document.createElement('option');
+//         option.value = displaySelect[x];
+//         selectKilometer.appendChild(option);
+//     };
+// }

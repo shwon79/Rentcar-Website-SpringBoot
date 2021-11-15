@@ -451,6 +451,10 @@ td {
     border-bottom: 3px solid darkblue;
     width: 100%;
 }
+.no-line-column:before {
+    content: '' !important;
+    border: none !important;
+}
 
 
 #morenReservationCard {

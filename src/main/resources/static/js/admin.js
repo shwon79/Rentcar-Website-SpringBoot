@@ -270,3 +270,27 @@ $('.reservation-delete-btn').click(function(e) {
         })
     }
 })
+
+//모렌 예약 신청 삭제
+$('.reservation-completely-delete-btn').click(function(e) {
+    let reservationId = e.target.dataset.index;
+    let completeDeleteConfirm = confirm('예약 신청 목록에서 삭제 하시겠습니까?');
+
+    if (completeDeleteConfirm) {
+        $.ajax({
+            type:'DELETE',
+            url:'/moren/reservation/'+ reservationId,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('삭제 되었습니다.');
+            } else if (result.result == 0) {
+                alert('삭제에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/moren/reservation/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
+});

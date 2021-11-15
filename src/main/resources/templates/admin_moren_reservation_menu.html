@@ -40,7 +40,8 @@
                         <th>대여시작일</th>
                         <th>월 대여료</th>
                         <th>취소 및 확정</th>
-                        <th></th>
+                        <th>상세 페이지</th>
+                        <th>목록에서 삭제</th>
                     </tr>
                     </thead>
                     <!-- pc -->
@@ -62,6 +63,9 @@
                                 <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
                                     <button style="width: 100%;">상세 페이지</button>
                                 </a>
+                            </td>
+                            <td class="no-line-column">
+                                <button style="width: 100%;" th:data-index="${reservation.id}" class="reservation-completely-delete-btn">삭제</button>
                             </td>
                         </tr>
                         <tr th:if="${reservation.reservationStatus == '0' }" th:data-index="${reservation.id}">
@@ -104,6 +108,9 @@
                                     <button style="width: 100%;">상세 페이지</button>
                                 </a>
                             </td>
+                            <td class="no-line-column">
+                                <button style="width: 100%;" th:data-index="${reservation.id}" class="reservation-completely-delete-btn">삭제</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -131,6 +138,9 @@
                             <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
                                 <button style="width: 100%;">상세 페이지</button>
                             </a>
+                        </p>
+                        <p th:unless="${reservation.reservationStatus == '0'}">
+                            <button style="width: 100%;" th:data-index="${reservation.id}" class="reservation-completely-delete-btn">목록에서 삭제</button>
                         </p>
                     </div>
                 </div>
