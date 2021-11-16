@@ -197,6 +197,8 @@ public class ReservationController {
 
             String orderStartTime = dto.getReservationDate() + " " + dto.getReservationTime();
 
+            System.out.println(dto.getRentTerm());
+
             String addReservationDate = new String();
             if (dto.getRentTerm().equals("한달")){
                 addReservationDate = AddDate(dto.getReservationDate(), 0, 1, 0);
@@ -216,7 +218,7 @@ public class ReservationController {
             jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
             jsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
             jsonObject.put("ORDER_START_TIME", orderStartTime);
-            jsonObject.put("ORDER_END_TIME", orderStartTime);
+            jsonObject.put("ORDER_END_TIME", orderEndTime);
             jsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
             jsonObject.put("ORDER_DELIVERY_PLACE_EXTRA", dto.getAddressDetail());
 
