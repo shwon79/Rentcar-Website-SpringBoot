@@ -188,14 +188,11 @@ function displayReturnDate() {
     let startDate = document.getElementById('reservation-detail-date').value;
     let startTime = document.getElementById('reservation-detail-time').value;
     let rentTerm = document.getElementById('getRentTerm').innerText;
-    let displayReturn = document.getElementById('displayReturn');
+    let displayReturnDate = document.getElementById('reservation-detail-date_return');
+    let displayReturnTime = document.getElementById('reservation-detail-time_return');
     let returnYear;
     let returnMonth;
     let returnDate;
-    let returnamPm;
-    let returnHour;
-    let returnMinute;
-    let returnString;
 
     startDate = new Date(startDate);
 
@@ -211,18 +208,10 @@ function displayReturnDate() {
     returnMonth = startDate.getMonth() + 1;
     returnDate = startDate.getDate();
 
-    returnHour = startTime.split(':')[0];
-    if (returnHour >= 12) {
-        returnamPm = '오후';
-    } else if (returnHour < 12) {
-        returnamPm = '오전';
-    }
+    let returnDateString = returnYear + '-' + returnMonth + '-' + returnDate;
 
-    returnMinute = startTime.split(':')[1];
-    returnString = returnYear + '년 ' + returnMonth + '월 ' + returnDate + '일 ' + returnamPm + returnHour + '시 ' + returnMinute + '분 ';
-
-    displayReturn.style.opacity = '1';
-    displayReturn.innerText = '차량 반납 일시는 ' + returnString + '입니다.';
+    displayReturnDate.value = returnDateString;
+    displayReturnTime.value = startTime;
 }
 
 // 렌트 기간 선택하면 약정 주행거리 선택 보여주기

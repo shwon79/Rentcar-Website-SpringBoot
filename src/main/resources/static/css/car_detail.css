@@ -99,6 +99,14 @@
     margin: 50px 0px 20px 0px;
 }
 
+.car_name_mobile {
+    display: none;
+}
+
+.car_name_desktop {
+    display: block;
+}
+
 .info_table p {
     font-size: 20px;
 }
@@ -148,7 +156,7 @@
 #btn_final {
     background-color: white;
     border: 3px white solid;
-    width: 50%;
+    width: 70%;
     margin: 0 25%;
     padding: 20px;
     font-size: 24px;
@@ -183,6 +191,10 @@
 }
 .account_info h2 {
     margin-top: 3rem;
+}
+.date_time_form {
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -228,6 +240,25 @@
     #info_detail .car_name {
         margin-top: 0px;
     }
+    .car_name_mobile {
+        display: block;
+    }
+    .car_name_desktop {
+        display: none;
+    }
+    .date_time_form {
+        flex-direction: column;
+    }
 }
 
-
+@media (min-width: 601px) and (max-width: 991px) {
+    .car_name_mobile {
+        display: block;
+    }
+    .car_name_desktop {
+        display: none;
+    }
+    .date_time_form {
+        flex-direction: column;
+    }
+}
