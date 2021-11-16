@@ -24,9 +24,9 @@ public class MorenReservationDTO {
     private String carTax;                 // 부가세
     private String carAmountTotal;         // 총렌트료
     private String carDeposit;             // 보증금
-    private String reservationStatus;
-    private String rentTerm;
-    private String costPerKm;
+    private String reservationStatus;      // 예약 확정 취소 여부
+    private String rentTerm;               // 한달, 12개월, 24개월
+    private String costPerKm;              // 초과금액
 
     public MorenReservationDTO(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
                                String reservationDate, String reservationTime, String reservationGuarantee, String reservationDetails,
