@@ -13,7 +13,7 @@ public class MorenReservationDTO {
     private String kilometer;  // 약정주행거리
     private String reservationName;   // 예약자 이름(입금자명)
     private String reservationPhone;  // 예약자 전화번호
-    private String reservationAge;    // 예약자 만 나이
+    private String reservationAge;    // 예약자 생년월일
     private String reservationDate;   // 예약 날짜
     private String reservationTime;   // 예약 시간
     private String reservationGuarantee;   // 신용카드보유 or 소득증빙

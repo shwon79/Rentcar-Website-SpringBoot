@@ -30,5 +30,7 @@ public class MonthlyRent {
     private Long start;
     private Long end;
 
+    private String credit;
+
 
 }

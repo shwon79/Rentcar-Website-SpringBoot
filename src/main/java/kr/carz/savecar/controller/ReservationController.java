@@ -217,7 +217,7 @@ public class ReservationController {
             jsonObject.put("ORDER_TYPE", "new");
             jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
             jsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
-            jsonObject.put("ORDER_CUSTOMER_BIRTH", dto.getReservationPhone());
+            jsonObject.put("ORDER_CUSTOMER_BIRTH", dto.getReservationAge());
             jsonObject.put("ORDER_START_TIME", orderStartTime);
             jsonObject.put("ORDER_END_TIME", orderEndTime);
             jsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
@@ -255,7 +255,7 @@ public class ReservationController {
                 response.append(line);
             }
             bufferedReader.close();
-//            System.out.println("응답값 : " + response.toString());
+            System.out.println("응답값 : " + response.toString());
 
             Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(dto.getId());
             MorenReservation morenReservation = morenReservationOptional.get();
