@@ -197,19 +197,19 @@ public class ReservationController {
 
             String orderStartTime = dto.getReservationDate() + " " + dto.getReservationTime();
 
-            System.out.println(dto.getRentTerm());
-
-            String addReservationDate = new String();
+            String addReservationDate = null;
+            String contractTerm = null;
             if (dto.getRentTerm().equals("한달")){
                 addReservationDate = AddDate(dto.getReservationDate(), 0, 1, 0);
+                contractTerm = "1";
             } else if (dto.getRentTerm().equals("12개월")){
                 addReservationDate = AddDate(dto.getReservationDate(), 1, 0, 0);
+                contractTerm = "12";
             } else if (dto.getRentTerm().equals("24개월")){
                 addReservationDate = AddDate(dto.getReservationDate(), 2, 0, 0);
+                contractTerm = "24";
             }
             String orderEndTime = addReservationDate + " " + dto.getReservationTime();
-            System.out.println(orderStartTime);
-            System.out.println(orderEndTime);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("COMPANY_ID", "1343");
@@ -217,10 +217,16 @@ public class ReservationController {
             jsonObject.put("ORDER_TYPE", "new");
             jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
             jsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
+            jsonObject.put("ORDER_CUSTOMER_BIRTH", dto.getReservationPhone());
             jsonObject.put("ORDER_START_TIME", orderStartTime);
             jsonObject.put("ORDER_END_TIME", orderEndTime);
             jsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
             jsonObject.put("ORDER_DELIVERY_PLACE_EXTRA", dto.getAddressDetail());
+            jsonObject.put("ORDER_CUSTOMER_MEMO", dto.getReservationDetails());
+            jsonObject.put("ORDER_PRICE", dto.getCarAmountTotal());
+            jsonObject.put("ORDER_PRICE_TAX", "0");
+            jsonObject.put("ORDER_DEPOSIT", dto.getCarDeposit());
+            jsonObject.put("ORDER_CONTRACT_TERM", contractTerm);
 
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);

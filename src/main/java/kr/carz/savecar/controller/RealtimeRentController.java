@@ -101,7 +101,7 @@ public class RealtimeRentController {
                                 (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                 (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description);
+                                monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description, monthlyRent2.getCost_per_km());
                         morenDTOListExpected.add(moren);
 
                     } catch (Exception e) {
@@ -139,7 +139,8 @@ public class RealtimeRentController {
                                 (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                 (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description);
+                                monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description,
+                                monthlyRent2.getCost_per_km());
                         morenDTOList.add(moren);
 
                     } catch (Exception e) {
@@ -216,9 +217,9 @@ public class RealtimeRentController {
                             YearlyRent yearlyRent = yearlyRentService.findByMorenCar(carOld, carOld, (String) morenObject.get("carCategory"));
                             TwoYearlyRent twoYearlyRent = twoYearlyRentService.findByMorenCar(carOld, carOld, (String) morenObject.get("carCategory"));
 
-                            // 초기화 방법 다시 생각
-                            String kilometer_cost = "0";
+                            String kilometer_cost = null;
                             Long dbid = Long.parseLong("0");
+                            String cost_per_km = null;
 
                             // 렌트기간별
                             if (realTimeDto.getRentTerm().equals("한달")) {
@@ -239,6 +240,7 @@ public class RealtimeRentController {
                                 }
 
                                 dbid = monthlyRent2.getId();
+                                cost_per_km = monthlyRent2.getCost_per_km();
 
                             } else if (realTimeDto.getRentTerm().equals("12개월")) {
 
@@ -256,6 +258,8 @@ public class RealtimeRentController {
                                 }
 
                                 dbid = yearlyRent.getId();
+                                cost_per_km = yearlyRent.getCost_per_km();
+
                             } else if (realTimeDto.getRentTerm().equals("24개월")) {
 
                                 // 키로수별
@@ -272,6 +276,8 @@ public class RealtimeRentController {
                                 }
 
                                 dbid = twoYearlyRent.getId();
+                                cost_per_km = twoYearlyRent.getCost_per_km();
+
                             }
 
                             Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
@@ -286,7 +292,7 @@ public class RealtimeRentController {
                                     (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                     (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                     (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                    kilometer_cost, (String) morenObject.get("order_end"), dbid, carList, discount_price, discount_description);
+                                    kilometer_cost, (String) morenObject.get("order_end"), dbid, carList, discount_price, discount_description, cost_per_km);
 
                             if ((Integer)morenObject.get("order_status") == 0) {
                                 morenDTOList.add(moren);
@@ -344,18 +350,23 @@ public class RealtimeRentController {
         DateTime dateTime = new DateTime(expected_day, df_date, df_time);
         dateTime.today();
 
+        String cost_per_km = null;
+
         // 세이브카 db에서 해당 차 객체 가져오기
         if (rentTerm.equals("한달")){
             Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
             MonthlyRent monthlyRent = monthlyRentOptional.get();
+            cost_per_km = monthlyRent.getCost_per_km();
             model.put("priceObject", monthlyRent);
         } else if (rentTerm.equals("12개월")){
             Optional<YearlyRent> yearlyRentOptional = yearlyRentService.findById(rentIdx);
             YearlyRent yearlyRent = yearlyRentOptional.get();
+            cost_per_km = yearlyRent.getCost_per_km();
             model.put("priceObject", yearlyRent);
         } else if (rentTerm.equals("24개월")){
             Optional<TwoYearlyRent> twoYearlyRentOptional = twoYearlyRentService.findById(rentIdx);
             TwoYearlyRent twoYearlyRent = twoYearlyRentOptional.get();
+            cost_per_km = twoYearlyRent.getCost_per_km();
             model.put("priceObject", twoYearlyRent);
         }
 
@@ -387,7 +398,7 @@ public class RealtimeRentController {
                         (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                         (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                         (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                        null, (String) morenObject.get("order_end"), rentIdx, carList, null, null);
+                        null, (String) morenObject.get("order_end"), rentIdx, carList, null, null, cost_per_km);
 
                 model.put("morenDto", morenDto);
                 break;
