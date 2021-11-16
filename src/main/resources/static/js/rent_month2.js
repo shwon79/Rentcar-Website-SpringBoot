@@ -86,7 +86,7 @@ const reserveMonthlyRent = () => {
     const reservationAge = document.getElementById('reservation-detail-age').value;
     const reservationDate = document.getElementById('reservation-detail-date').value;
     const reservationTime = document.getElementById('reservation-detail-time').value;
-    const reservationGuarantee = document.getElementById('reservation-detail-guarantee').value;
+    const reservationGuarantee = document.getElementById('reservation-detail-credit').value;
     const reservationDetails = document.getElementById('reservation-detail-details').value;
     const address = document.getElementById('address_kakao').value;
     const addressDetail = document.getElementById('address_kakao_detail').value;
