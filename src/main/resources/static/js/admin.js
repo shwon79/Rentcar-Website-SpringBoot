@@ -153,6 +153,11 @@ $('.reservation-confirm-btn').click(function(e) {
     let addressList = document.getElementsByClassName('reservationAddress');
     let addressDetailList = document.getElementsByClassName('reservationAddressDetail');
     let rentTermList = document.getElementsByClassName('rentTerm');
+    let costPerKmList = document.getElementsByClassName('costPerKm');
+    let carAmountTotalList = document.getElementsByClassName('carAmountTotal');
+    let carDepositList = document.getElementsByClassName('carDeposit');
+    let reservationDetailsList = document.getElementsByClassName('reservationDetails');
+    let kilometerList =document.getElementsByClassName('kilometer');
 
     let id;
     let carNo;
@@ -163,52 +168,83 @@ $('.reservation-confirm-btn').click(function(e) {
     let address;
     let addressDetail;
     let rentTerm;
+    let costPerKm;
+    let carAmountTotal;
+    let carDeposit;
+    let reservationDetails;
+    let kilometer;
 
     for (i=0; i < idList.length; i++) {
         if (e.target.dataset.index == idList[i].dataset.index) {
             id = idList[i].innerText;
-        }
-    }
+        };
+    };
     for (i=0; i < carNoList.length; i++) {
         if (e.target.dataset.index == carNoList[i].dataset.index) {
             carNo = carNoList[i].innerText;
         }
-    }
+    };
     for (i=0; i < reservationNameList.length; i++) {
         if (e.target.dataset.index == reservationNameList[i].dataset.index) {
             reservationName = reservationNameList[i].innerText;
         }
-    }
+    };
     for (i=0; i < reservationPhoneList.length; i++) {
         if (e.target.dataset.index == reservationPhoneList[i].dataset.index) {
             reservationPhone = reservationPhoneList[i].innerText;
         }
-    }
+    };
     for (i=0; i < reservationDateList.length; i++) {
         if (e.target.dataset.index == reservationDateList[i].dataset.index) {
             reservationDate = reservationDateList[i].innerText;
         }
-    }
+    };
     for (i=0; i < reservationTimeList.length; i++) {
         if (e.target.dataset.index == reservationTimeList[i].dataset.index) {
             reservationTime = reservationTimeList[i].innerText;
         }
-    }
+    };
     for (i=0; i < addressList.length; i++) {
         if (e.target.dataset.index == addressList[i].dataset.index) {
             address = addressList[i].innerText;
         }
-    }
+    };
     for (i=0; i < addressDetailList.length; i++) {
         if (e.target.dataset.index == addressDetailList[i].dataset.index) {
             addressDetail = addressDetailList[i].innerText;
         }
-    }
+    };
     for (i=0; i < rentTermList.length; i++) {
         if (e.target.dataset.index == rentTermList[i].dataset.index) {
             rentTerm = rentTermList[i].innerText;
         }
-    }
+    };
+    for (i=0; i < costPerKmList.length; i++) {
+        if (e.target.dataset.index == costPerKmList[i].dataset.index) {
+            costPerKm = costPerKmList[i].innerText;
+        }
+    };
+    for (i=0; i < carAmountTotalList.length; i++) {
+        if (e.target.dataset.index == carAmountTotalList[i].dataset.index) {
+            let carAmountTotalString = carAmountTotalList[i].innerText;
+            carAmountTotal = carAmountTotalString.replace(/,/g, "");
+        }
+    };
+    for (i=0; i < carDepositList.length; i++) {
+        if (e.target.dataset.index == carDepositList[i].dataset.index) {
+            carDeposit = carDepositList[i].innerText;
+        }
+    };
+    for (i=0; i < reservationDetailsList.length; i++) {
+        if (e.target.dataset.index == reservationDetailsList[i].dataset.index) {
+            reservationDetails = reservationDetailsList[i].innerText;
+        }
+    };
+    for (i=0; i < kilometerList.length; i++) {
+        if (e.target.dataset.index == kilometerList[i].dataset.index) {
+            kilometer = kilometerList[i].innerText;
+        }
+    };
 
     var data = {
         id : id,
@@ -219,7 +255,12 @@ $('.reservation-confirm-btn').click(function(e) {
         reservationTime: reservationTime,
         address: address,
         addressDetail: addressDetail,
-        rentTerm: rentTerm
+        rentTerm: rentTerm,
+        costPerKm: costPerKm,
+        carAmountTotal: carAmountTotal,
+        carDeposit: carDeposit,
+        reservationDetails: reservationDetails,
+        kilometer: kilometer
     }
 
     console.log(data);

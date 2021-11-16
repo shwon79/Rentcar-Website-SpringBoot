@@ -95,11 +95,10 @@ const reserveMonthlyRent = () => {
     const carAmountTotal = document.getElementById('carAmountTotal').innerText;
     const carDeposit = document.getElementById('carDeposit').innerText;
     const rentTerm = document.getElementById('getRentTerm').innerText;
+    const costPerKm = document.getElementById('getCostPerKm').innerText;
     const reservationStatus = 0;
 
-
     let check1 = document.getElementById('check_info').checked;
-    console.log(check1);
 
     if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
         var data = {
@@ -119,7 +118,8 @@ const reserveMonthlyRent = () => {
             carAmountTotal: carAmountTotal,
             carDeposit: carDeposit,
             reservationStatus : reservationStatus,
-            rentTerm: rentTerm
+            rentTerm: rentTerm,
+            costPerKm: costPerKm
         }
 
         console.log(data);
