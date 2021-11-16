@@ -371,7 +371,7 @@ public class RealtimeRentController {
 
 
                                 } catch (Exception e) {
-                                    System.out.println("Error ! 차량이름 모렌과 맞출 것 !");
+                                    System.out.println("Error ! 차량이름 모렌과 맞출 것 !" + (String) morenObject.get("carCategory"));
                                     continue;
                                 }
                             }
