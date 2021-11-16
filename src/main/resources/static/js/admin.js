@@ -157,7 +157,8 @@ $('.reservation-confirm-btn').click(function(e) {
     let carAmountTotalList = document.getElementsByClassName('carAmountTotal');
     let carDepositList = document.getElementsByClassName('carDeposit');
     let reservationDetailsList = document.getElementsByClassName('reservationDetails');
-    let kilometerList =document.getElementsByClassName('kilometer');
+    let kilometerList = document.getElementsByClassName('kilometer');
+    let reservationAgeList = document.getElementsByClassName('reservationAge');
 
     let id;
     let carNo;
@@ -173,6 +174,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let carDeposit;
     let reservationDetails;
     let kilometer;
+    let reservationAge;
 
     for (i=0; i < idList.length; i++) {
         if (e.target.dataset.index == idList[i].dataset.index) {
@@ -245,6 +247,12 @@ $('.reservation-confirm-btn').click(function(e) {
             kilometer = kilometerList[i].innerText;
         }
     };
+    for (i=0; i < reservationAgeList.length; i++) {
+        if (e.target.dataset.index == reservationAgeList[i].dataset.index) {
+            let reservationAgeString = reservationAgeList[i].innerText.substring(2,10);
+            reservationAge = reservationAgeString.replace(/-/g, "");
+        }
+    };
 
     var data = {
         id : id,
@@ -260,7 +268,8 @@ $('.reservation-confirm-btn').click(function(e) {
         carAmountTotal: carAmountTotal,
         carDeposit: carDeposit,
         reservationDetails: reservationDetails,
-        kilometer: kilometer
+        kilometer: kilometer,
+        reservationAge: reservationAge
     }
 
     console.log(data);
