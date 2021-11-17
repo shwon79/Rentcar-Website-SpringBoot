@@ -2,6 +2,8 @@ package kr.carz.savecar.controller;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -435,6 +437,74 @@ public class RealtimeRentController {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);
+
+        String api_key = "NCS0P5SFAXLOJMJI";
+        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<String, String>();
+        HashMap<String, String> params2 = new HashMap<String, String>();
+
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", "01058283328"); // 01033453328 추가
+        params.put("from", "01052774113");
+        params.put("type", "LMS");
+
+        /* 고객에게 예약확인 문자 전송 */
+        params2.put("to", morenReservationDTO.getReservationPhone()); // 여러가지 번호형태 테스트
+        params2.put("from", "01052774113");
+        params2.put("type", "LMS");
+
+
+        params.put("text", "[실시간 예약 대기 신청]\n"
+                + "문의자 이름: " + morenReservationDTO.getReservationName() + "\n"
+                + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
+                + "차량번호: " + morenReservationDTO.getCarNo() + "\n"
+                + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
+                + "대여시간: " + morenReservationDTO.getReservationTime() + "\n"
+                + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
+                + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
+                + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"
+                + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n"
+                + "생년월일: " + morenReservationDTO.getReservationAge() + "\n"
+                + "신용증빙: " + morenReservationDTO.getReservationGuarantee() + "\n"
+                + "총렌트료(부포): " + morenReservationDTO.getCarAmountTotal() + "\n"
+                + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
+                + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n");
+
+        params2.put("text", "[세이브카 렌트카 예약 대기 신청이 완료되었습니다]" + "\n"
+                + "문의자 이름: " + morenReservationDTO.getReservationName() + "\n"
+                + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
+                + "차량번호: " + morenReservationDTO.getCarNo() + "\n"
+                + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
+                + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
+                + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
+                + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"
+                + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n"
+                + "기타증빙사항: " + morenReservationDTO.getReservationGuarantee() + "\n"
+                + "총렌트료: " + morenReservationDTO.getCarAmountTotal() + "\n"
+                + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
+                + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n");
+        params.put("app_version", "test app 1.2");
+        params2.put("app_version", "test app 1.2");
+
+        /* 세이브카에게 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj = (org.json.simple.JSONObject) coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        /* 고객에게 예약확인 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj2 = (org.json.simple.JSONObject) coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);

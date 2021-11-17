@@ -184,10 +184,8 @@ public class MonthlyRentController {
             throw new NullPointerException();
         }
 
-
         List<String> categoryHashToList = new ArrayList(categoryList);
         Collections.sort(categoryHashToList);
-
 
         JSONArray jsonArray = new JSONArray();
         for (String c : categoryHashToList) {
@@ -204,7 +202,6 @@ public class MonthlyRentController {
     @RequestMapping(value = "/rent/month/{period}/price/{carName}/{mileage}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void get_monthly_price(HttpServletResponse res, @PathVariable String period, @PathVariable String carName, @PathVariable String mileage) throws IOException {
-
 
         JSONArray jsonArray = new JSONArray();
 
