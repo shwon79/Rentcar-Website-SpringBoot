@@ -100,7 +100,6 @@ const wonText = document.getElementById('displayNone');
 let newDepositText = '차량가격의 30%(상담문의)';
 
 function displayDeposit() {
-    console.log(credit.value);
     if (credit.value == '차량 금액의 30% 보증금') {
         originalDepositText.innerText = newDepositText;
         wonText.style.display = 'none';
@@ -118,7 +117,7 @@ const reserveMonthlyRent = () => {
     const carNo = document.getElementById('carNo').innerText;
     const kilometer = document.getElementById('kilometer').innerText;
     const reservationName = document.getElementById('reservation-detail-name').value;
-    const reservationPhone = document.getElementById('reservation-detail-phone').value;
+    let reservationPhone = document.getElementById('reservation-detail-phone').value;
     const reservationAge = document.getElementById('reservation-detail-age').value;
     const reservationDate = document.getElementById('reservation-detail-date').value;
     const reservationTime = document.getElementById('reservation-detail-time').value;
@@ -137,13 +136,22 @@ const reserveMonthlyRent = () => {
     const reservationStatus = 0;
 
     let check1 = document.getElementById('check_info').checked;
+    let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    let phoneWithoutDash = /^\d{11}$/;
 
-    console.log(returnDate);
-    console.log(returnTime);
+    if (phoneWithoutDash.test(reservationPhone) == true) {
+        reservationPhone = reservationPhone.substr(0, 3) + "-" + reservationPhone.substr(3, 4) + "-" + reservationPhone.substr(7,4);
+    };
 
-    // if (reservationPhone)
-
-    if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
+    if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
+        alert('입력을 완료해주세요!')
+    } else if (check1 != true) {
+        alert('동의를 완료해주세요!')
+    } else if (returnDate == '' || returnTime == '') {
+        alert('대여 날짜 및 시간을 선택해주세요.')
+    } else if (regPhone.test(reservationPhone) == false) {
+        alert("연락처를 '010-1234-5678' 형식으로 입력해주세요.");
+    } else if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
         var data = {
             carNo: carNo,
             kilometer: kilometer,
@@ -167,30 +175,26 @@ const reserveMonthlyRent = () => {
 
         console.log(data);
 
-        // let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
-        //
-        // if (reserveConfirm) {
-        //     $.ajax({
-        //         type:'POST',
-        //         url:'/rent/month/moren/reservation',
-        //         dataType:'json',
-        //         contentType : 'application/json; charset=utf-8',
-        //         data : JSON.stringify(data)
-        //     }).done(function (result) {
-        //         if (result.result == 1) {
-        //             alert('예약이 완료되었습니다.');
-        //         } else {
-        //             alert('예약에 문제가 생겼습니다.');
-        //         };
-        //         window.location.href = '/rent/month/new';
-        //     }).fail(function (error) {
-        //         alert(JSON.stringify(error));
-        //     })
-        // };
-    } else if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
-            alert('입력을 완료해주세요!')
-    } else if (check1 != true) {
-            alert('동의를 완료해주세요!')
+        let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
+
+        if (reserveConfirm) {
+            $.ajax({
+                type:'POST',
+                url:'/rent/month/moren/reservation',
+                dataType:'json',
+                contentType : 'application/json; charset=utf-8',
+                data : JSON.stringify(data)
+            }).done(function (result) {
+                if (result.result == 1) {
+                    alert('예약이 완료되었습니다.');
+                } else {
+                    alert('예약에 문제가 생겼습니다.');
+                };
+                window.location.href = '/rent/month/new';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
+        };
     }
 }
 
