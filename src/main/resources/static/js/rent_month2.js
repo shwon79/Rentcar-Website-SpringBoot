@@ -74,10 +74,28 @@ function make_monthly_rent_reservation () {
     }
 }
 
+//숫자 사이에 콤마 넣기 시작
+const number = document.querySelectorAll(".number");
+
+function numberWithCommas() {
+    // console.log(number);
+    for (let i = 0; i < number.length; i++) {
+        if (number[i].innerText === '상담') {
+            number[i].innerText = '상담';
+        } else {
+            const numberWithComma = parseInt(number[i].innerText).toLocaleString();
+            number[i].innerText = numberWithComma;
+        }
+    }
+}
+
+$('.number').ready(numberWithCommas());
+
+
 // '차량금액의 30% 보증금 지불'일 경우 보증금 표기 하지 않기
 const credit = document.getElementById('reservation-detail-credit');
 let originalDepositText = document.getElementById('carDeposit');
-const realDeposit = parseInt(originalDepositText.innerText).toLocaleString();
+const realDeposit = originalDepositText.innerText;
 const wonText = document.getElementById('displayNone');
 let newDepositText = '차량가격의 30%(상담문의)';
 
@@ -87,11 +105,10 @@ function displayDeposit() {
         originalDepositText.innerText = newDepositText;
         wonText.style.display = 'none';
     } else {
-        originalDepositText.innerText = realDeposit;
+        originalDepositText.innerText = realDeposit.toLocaleString();
         wonText.style.display = 'inline-block';
     }
 }
-
 
 
 // Sending Data;
@@ -115,9 +132,16 @@ const reserveMonthlyRent = () => {
     const carDeposit = document.getElementById('carDeposit').innerText;
     const rentTerm = document.getElementById('getRentTerm').innerText;
     const costPerKm = document.getElementById('getCostPerKm').innerText;
+    const returnDate = document.getElementById('reservation-detail-date_return').value;
+    const returnTime = document.getElementById('reservation-detail-time_return').value;
     const reservationStatus = 0;
 
     let check1 = document.getElementById('check_info').checked;
+
+    console.log(returnDate);
+    console.log(returnTime);
+
+    // if (reservationPhone)
 
     if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
         var data = {
@@ -143,26 +167,26 @@ const reserveMonthlyRent = () => {
 
         console.log(data);
 
-        let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
-
-        if (reserveConfirm) {
-            $.ajax({
-                type:'POST',
-                url:'/rent/month/moren/reservation',
-                dataType:'json',
-                contentType : 'application/json; charset=utf-8',
-                data : JSON.stringify(data)
-            }).done(function (result) {
-                if (result.result == 1) {
-                    alert('예약이 완료되었습니다.');
-                } else {
-                    alert('예약에 문제가 생겼습니다.');
-                };
-                window.location.href = '/rent/month/new';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            })
-        };
+        // let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
+        //
+        // if (reserveConfirm) {
+        //     $.ajax({
+        //         type:'POST',
+        //         url:'/rent/month/moren/reservation',
+        //         dataType:'json',
+        //         contentType : 'application/json; charset=utf-8',
+        //         data : JSON.stringify(data)
+        //     }).done(function (result) {
+        //         if (result.result == 1) {
+        //             alert('예약이 완료되었습니다.');
+        //         } else {
+        //             alert('예약에 문제가 생겼습니다.');
+        //         };
+        //         window.location.href = '/rent/month/new';
+        //     }).fail(function (error) {
+        //         alert(JSON.stringify(error));
+        //     })
+        // };
     } else if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
             alert('입력을 완료해주세요!')
     } else if (check1 != true) {
@@ -184,23 +208,6 @@ function roundNumber() {
 }
 $('.discountPrice').ready(roundNumber());
 
-
-//숫자 사이에 콤마 넣기 시작
-const number = document.querySelectorAll(".number");
-
-function numberWithCommas() {
-    // console.log(number);
-    for (let i = 0; i < number.length; i++) {
-        if (number[i].innerText === '상담') {
-            number[i].innerText = '상담';
-        } else {
-            const numberWithComma = parseInt(number[i].innerText).toLocaleString();
-            number[i].innerText = numberWithComma;
-        }
-    }
-}
-
-$('.number').ready(numberWithCommas());
 
 // Display return date
 function displayReturnDate() {
