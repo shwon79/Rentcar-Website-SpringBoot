@@ -50,6 +50,7 @@
                 <p>총 렌트료: <span th:text="${morenReservationDTO.carAmountTotal}" class="carAmountTotal"></span></p>
                 <p>보증금: <span th:text="${morenReservationDTO.carDeposit}" class="carDeposit"></span></p>
                 <p class="costPerKm" th:text="${morenReservationDTO.costPerKm}" style="display: none;"></p>
+                <p class="reservationGuarantee" th:text="${morenReservationDTO.reservationGuarantee}" style="display: none;"></p>
                 <span class="reservationId" style="display: none;" th:text="${morenReservationDTO.id}"></span>
                 <div th:if="${morenReservationDTO.reservationStatus == '0'}" style="display: flex; justify-content: space-between;">
                     <button class="reservation-delete-btn" th:data-index="${morenReservationDTO.id}">취소</button>

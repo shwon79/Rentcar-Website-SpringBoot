@@ -159,6 +159,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let reservationDetailsList = document.getElementsByClassName('reservationDetails');
     let kilometerList = document.getElementsByClassName('kilometer');
     let reservationAgeList = document.getElementsByClassName('reservationAge');
+    let reservationGuaranteeList = document.getElementsByClassName('reservationGuarantee');
 
     let id;
     let carNo;
@@ -175,6 +176,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let reservationDetails;
     let kilometer;
     let reservationAge;
+    let reservationGuarantee;
 
     for (i=0; i < idList.length; i++) {
         if (e.target.dataset.index == idList[i].dataset.index) {
@@ -235,11 +237,21 @@ $('.reservation-confirm-btn').click(function(e) {
     for (i=0; i < carDepositList.length; i++) {
         if (e.target.dataset.index == carDepositList[i].dataset.index) {
             carDeposit = carDepositList[i].innerText;
+            if (carDeposit == '상담' || carDeposit == '차량가격의 30%(상담문의)') {
+                carDeposit = '0';
+            } else {
+                carDeposit = carDeposit.replace(/,/g, "");
+            }
+        }
+    };
+    for (i=0; i < reservationGuaranteeList.length; i++) {
+        if (e.target.dataset.index == reservationGuaranteeList[i].dataset.index) {
+            reservationGuarantee = reservationGuaranteeList[i].innerText;
         }
     };
     for (i=0; i < reservationDetailsList.length; i++) {
         if (e.target.dataset.index == reservationDetailsList[i].dataset.index) {
-            reservationDetails = reservationDetailsList[i].innerText;
+            reservationDetails = reservationDetailsList[i].innerText + ', 신용보증: ' + reservationGuarantee;
         }
     };
     for (i=0; i < kilometerList.length; i++) {
@@ -257,19 +269,19 @@ $('.reservation-confirm-btn').click(function(e) {
     var data = {
         id : id,
         carNo: carNo,
+        kilometer: kilometer,
         reservationName: reservationName,
         reservationPhone: reservationPhone,
+        reservationAge: reservationAge,
         reservationDate: reservationDate,
         reservationTime: reservationTime,
+        reservationDetails: reservationDetails,
         address: address,
         addressDetail: addressDetail,
-        rentTerm: rentTerm,
-        costPerKm: costPerKm,
         carAmountTotal: carAmountTotal,
         carDeposit: carDeposit,
-        reservationDetails: reservationDetails,
-        kilometer: kilometer,
-        reservationAge: reservationAge
+        rentTerm: rentTerm,
+        costPerKm: costPerKm
     }
 
     console.log(data);
@@ -294,7 +306,6 @@ $('.reservation-confirm-btn').click(function(e) {
             alert(JSON.stringify(error));
         })
     };
-
 })
 
 // 모렌 예약 신청 목록에서 취소

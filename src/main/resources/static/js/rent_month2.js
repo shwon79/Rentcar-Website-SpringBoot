@@ -74,6 +74,25 @@ function make_monthly_rent_reservation () {
     }
 }
 
+// '차량금액의 30% 보증금 지불'일 경우 보증금 표기 하지 않기
+const credit = document.getElementById('reservation-detail-credit');
+let originalDepositText = document.getElementById('carDeposit');
+const realDeposit = parseInt(originalDepositText.innerText).toLocaleString();
+const wonText = document.getElementById('displayNone');
+let newDepositText = '차량가격의 30%(상담문의)';
+
+function displayDeposit() {
+    console.log(credit.value);
+    if (credit.value == '차량 금액의 30% 보증금') {
+        originalDepositText.innerText = newDepositText;
+        wonText.style.display = 'none';
+    } else {
+        originalDepositText.innerText = realDeposit;
+        wonText.style.display = 'inline-block';
+    }
+}
+
+
 
 // Sending Data;
 const reserveMonthlyRent = () => {

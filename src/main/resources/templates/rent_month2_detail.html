@@ -211,7 +211,7 @@
                   <div class="form-group has-feedback">
                     <label class="control-label" for="phone"><i class="fas fa-star-of-life"></i> 생년월일</label>
                     <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                      <input type="date" class="form-control" id="reservation-detail-age" required >
+                      <input type="date" class="form-control" id="reservation-detail-age" required>
                     </div>
                   </div>
                   <div class="date_time_form">
@@ -267,7 +267,7 @@
                       해당 차량의 경우, 본인 명의 신용카드 소지 또는 소득 3개월 증빙 또는 보증금의 30% 이상을 지불하셔야 합니다.
                     </label>
                     <div class="input-group"> <span class="input-group-addon"><i class="fas fa-credit-card"></i></span>
-                      <select class="form-control" id="reservation-detail-credit">
+                      <select class="form-control" id="reservation-detail-credit" onchange="displayDeposit()">
                         <option value="본인 신용카드">본인 신용카드 (한도도 가능해야 함)</option>
                         <option value="소득 3개월 증빙">소득 3개월 증빙</option>
                         <option value="차량 금액의 30% 보증금">차량 금액의 30% 보증금 지불</option>
@@ -279,7 +279,7 @@
                       해당 차량의 경우, 본인 명의의 신용카드를 소지하시거나 보증금의 30%를 지불하셔야 합니다.
                     </label>
                     <div class="input-group"> <span class="input-group-addon"><i class="fas fa-credit-card"></i></span>
-                      <select class="form-control" id="reservation-detail-credit">
+                      <select class="form-control" id="reservation-detail-credit" onchange="displayDeposit()">
                         <option value="본인 신용카드">본인 신용카드 (한도도 가능해야 함)</option>
                         <option value="차량 금액의 30% 보증금">차량 금액의 30% 보증금 지불</option>
                       </select>
@@ -538,17 +538,17 @@
                       <tr>
                         <td style="text-align: left;">보증금</td>
                         <td style="text-align: right;">
-                          <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.deposit}" id="carDeposit"></span>
-                          <span>원</span>
+                          <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.deposit}" class="number" id="carDeposit"></span>
+                          <span id="displayNone">원</span>
                         </td>
                       </tr>
                       <tr style="color: red;">
