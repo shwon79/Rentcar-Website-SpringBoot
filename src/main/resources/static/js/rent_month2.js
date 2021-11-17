@@ -244,6 +244,17 @@ function displayReturnDate() {
     displayReturnTime.value = startTime;
 }
 
+// Datepicker
+$('#datePicker').datepicker({
+    format: "yyyy-mm-dd",
+    language: 'kr'
+});
+$('#click-btn').click(function () {
+    let date = $('#datePicker').val();
+    console.log(date);
+});
+
+
 // 렌트 기간 선택하면 약정 주행거리 선택 보여주기
 // function displaySelectKilometer(e) {
 //     let monthKilometer = ["2000km", "2500km", "3000km", "4000km", "기타"];
@@ -264,3 +275,4 @@ function displayReturnDate() {
 //         selectKilometer.appendChild(option);
 //     };
 // }
+

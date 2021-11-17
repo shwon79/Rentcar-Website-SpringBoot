@@ -10,9 +10,23 @@
 
   <!-- Style -->
   <link th:href="@{/css/car_detail.css}" rel="stylesheet">
+<!--  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">-->
+  <link th:href="@{/css/bootstrap-datepicker3.css}" rel="stylesheet">
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.css">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+  <script th:src="@{/js/bootstrap-datepicker.js}" ></script>
+  <script th:src="@{/js/bootstrap-datepicker.ko.min.js}"></script>
   <script th:src="@{/js/rent_month2.js}" defer></script>
+<!--  <script th:src="@{/js/jquery.min.js}"></script>-->
+<!--  <script th:src="@{/js/vendor/bootstrap.min.js}"></script>-->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.kr.min.js"></script>
+
   <script>
     window.onload = function(){
       document.getElementById("address_button").addEventListener("click", function(){ //주소입력칸을 클릭하면
@@ -212,6 +226,13 @@
                     <label class="control-label" for="phone"><i class="fas fa-star-of-life"></i> 생년월일</label>
                     <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                       <input type="date" class="form-control" id="reservation-detail-age" required>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="control-label" for="phone"><i class="fas fa-star-of-life"></i> datepicker 생년월일</label>
+                    <div>
+                      <input type="text" id="datePicker" required>
+                      <button type="button" id="click-btn"> 확인용 </button>
                     </div>
                   </div>
                   <div class="date_time_form">
