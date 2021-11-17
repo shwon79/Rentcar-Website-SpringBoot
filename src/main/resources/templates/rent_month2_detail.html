@@ -261,9 +261,12 @@
                   <!--&lt;!&ndash;                  <input type="button" onclick="ajaxFileUpload()" value="업로드"/>&ndash;&gt;-->
                   <!--                </form>-->
                   <div th:if="${morenDto.credit=='0'}" class="form-group has-feedback" style="display: none;">
+                    <select class="form-control" id="reservation-detail-credit">
+                      <option value="필요X">필요X</option>
+                    </select>
                   </div>
                   <div  th:if="${morenDto.credit=='1'}"  class="form-group has-feedback">
-                    <label class="control-label" for="">
+                    <label class="control-label" for=""><i class="fas fa-star-of-life"></i>
                       해당 차량의 경우, 본인 명의 신용카드 소지 또는 소득 3개월 증빙 또는 보증금의 30% 이상을 지불하셔야 합니다.
                     </label>
                     <div class="input-group"> <span class="input-group-addon"><i class="fas fa-credit-card"></i></span>
@@ -275,7 +278,7 @@
                     </div>
                   </div>
                   <div  th:if="${morenDto.credit=='2'}"  class="form-group has-feedback">
-                    <label class="control-label" for="">
+                    <label class="control-label" for=""><i class="fas fa-star-of-life"></i>
                       해당 차량의 경우, 본인 명의의 신용카드를 소지하시거나 보증금의 30%를 지불하셔야 합니다.
                     </label>
                     <div class="input-group"> <span class="input-group-addon"><i class="fas fa-credit-card"></i></span>
