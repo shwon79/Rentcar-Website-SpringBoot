@@ -64,7 +64,7 @@ function make_monthly_rent_reservation () {
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function () {
-            alert('예약이 완료되었습니다.');
+            alert('예약 신청이 완료되었습니다.');
             window.location.href = '/index';
         }).fail(function (error) {
             alert(JSON.stringify(error));
