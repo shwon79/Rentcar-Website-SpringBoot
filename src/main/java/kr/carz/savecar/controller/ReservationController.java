@@ -195,8 +195,8 @@ public class ReservationController {
             URL url = new URL("https://www.moderentcar.co.kr/api/mycar/request.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+            // 대여 날짜, 반납 날짜
             String orderStartTime = dto.getReservationDate() + " " + dto.getReservationTime();
-
             String addReservationDate = null;
             String contractTerm = null;
             if (dto.getRentTerm().equals("한달")){
@@ -211,10 +211,21 @@ public class ReservationController {
             }
             String orderEndTime = addReservationDate + " " + dto.getReservationTime();
 
+            // 계약타입
+            String contractType = null;
+            if (dto.getRentTerm().equals("1")){
+                contractType = "3"; //월렌트
+            } else {
+                contractType = "4"; //장기렌트
+            }
+            System.out.println(dto.getKilometer().split("km")[0]);
+
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("COMPANY_ID", "1343");
             jsonObject.put("CAR_NUM", dto.getCarNo());
+            jsonObject.put("CAR_CODE", dto.getCarCode());
             jsonObject.put("ORDER_TYPE", "new");
+            jsonObject.put("ORDER_CONTRACT_TYPE", contractType);
             jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
             jsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
             jsonObject.put("ORDER_CUSTOMER_BIRTH", dto.getReservationAge());
@@ -227,6 +238,9 @@ public class ReservationController {
             jsonObject.put("ORDER_PRICE_TAX", "0");
             jsonObject.put("ORDER_DEPOSIT", dto.getCarDeposit());
             jsonObject.put("ORDER_CONTRACT_TERM", contractTerm);
+            jsonObject.put("ORDER_EXTRA_DISTANCE", dto.getKilometer().split("km")[0]);
+            jsonObject.put("ORDER_EXTRA_DISTANCE_PRICE", dto.getCostPerKm());
+            jsonObject.put("ORDER_CDW", "1");
 
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
