@@ -180,6 +180,14 @@
     animation:colorchange 1s infinite alternate;
     margin-right: 5px;
 }
+.empty-list-card {
+    text-align: center;
+    margin: 2rem 0;
+}
+.empty-list-card p {
+    font-size: 16px;
+    color: darkblue;
+}
 @keyframes colorchange {
     0% {
         color:darkred;
