@@ -240,6 +240,16 @@ function displayReturnDate() {
     returnMonth = startDate.getMonth() + 1;
     returnDate = startDate.getDate();
 
+    let returnMonthToString = returnMonth.toString();
+    let returnDateToString = returnDate.toString();
+
+    if (returnMonthToString.length == 1) {
+        returnMonth = "0" + returnMonthToString;
+    }
+    if (returnDateToString.length == 1) {
+        returnDate = "0" + returnDateToString;
+    }
+
     let returnDateString = returnYear + '-' + returnMonth + '-' + returnDate;
 
     displayReturnDate.value = returnDateString;
