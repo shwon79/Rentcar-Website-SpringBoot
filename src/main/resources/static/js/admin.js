@@ -160,6 +160,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let kilometerList = document.getElementsByClassName('kilometer');
     let reservationAgeList = document.getElementsByClassName('reservationAge');
     let reservationGuaranteeList = document.getElementsByClassName('reservationGuarantee');
+    let carCodeList = document.getElementsByClassName('carCode');
 
     let id;
     let carNo;
@@ -177,6 +178,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let kilometer;
     let reservationAge;
     let reservationGuarantee;
+    let carCode;
 
     for (i=0; i < idList.length; i++) {
         if (e.target.dataset.index == idList[i].dataset.index) {
@@ -265,6 +267,11 @@ $('.reservation-confirm-btn').click(function(e) {
             reservationAge = reservationAgeString.replace(/-/g, "");
         }
     };
+    for (i=0; i < carCodeList.length; i++) {
+        if (e.target.dataset.index == carCodeList[i].dataset.index) {
+            carCode = carCodeList[i].innerText;
+        }
+    };
 
     var data = {
         id : id,
@@ -281,7 +288,8 @@ $('.reservation-confirm-btn').click(function(e) {
         carAmountTotal: carAmountTotal,
         carDeposit: carDeposit,
         rentTerm: rentTerm,
-        costPerKm: costPerKm
+        costPerKm: costPerKm,
+        carCode: carCode
     }
 
     console.log(data);

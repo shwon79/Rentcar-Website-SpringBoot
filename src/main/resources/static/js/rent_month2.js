@@ -133,6 +133,7 @@ const reserveMonthlyRent = () => {
     const costPerKm = document.getElementById('getCostPerKm').innerText;
     const returnDate = document.getElementById('reservation-detail-date_return').value;
     const returnTime = document.getElementById('reservation-detail-time_return').value;
+    const carCode = document.getElementById('getCarCode').innerText;
     const reservationStatus = 0;
 
     let check1 = document.getElementById('check_info').checked;
@@ -170,7 +171,8 @@ const reserveMonthlyRent = () => {
             carDeposit: carDeposit,
             reservationStatus : reservationStatus,
             rentTerm: rentTerm,
-            costPerKm: costPerKm
+            costPerKm: costPerKm,
+            carCode: carCode
         }
 
         console.log(data);
