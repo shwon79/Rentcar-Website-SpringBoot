@@ -51,6 +51,7 @@
         <ul class="nav-tabs">
           <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
         </ul>
+
         <!-- Tab panes -->
         <div class="tab-content" style="width: 86%; margin: 0 auto">
           <!-- info car -->
@@ -457,8 +458,8 @@
                           <span>원</span>
                         </td>
                         <td>
-                          <a href="#none" target="_blank" onclick="openOffer()"><button class="">견적서 보기</button></a>
-                          <a href="#none" target="_blank" onclick="openForm()"><button>예약 신청하기</button></a>
+                          <a target="_blank" onclick="openOffer()"><button>견적서 보기</button></a>
+                          <a target="_blank" onclick="openForm()"><button>예약 신청하기</button></a>
                         </td>
                       </tr>
                     </table>
@@ -692,7 +693,29 @@
         </div>
       </div>
     </div>
-
+    <div style="display: none;">
+      <p id="forPostCarIdx" th:text="${morenDto.carIdx}"></p>
+      <p id="forPostCarCategory" th:text="${morenDto.carCategory}"></p>
+      <p id="forPostCarName" th:text="${morenDto.carName}"></p>
+      <p id="forPostCarNo" th:text="${morenDto.carNo}"></p>
+      <p id="forPostCarExteriorColor" th:text="${morenDto.carExteriorColor}"></p>
+      <p id="forPostCarGubun" th:text="${morenDto.carGubun}"></p>
+      <p id="forPostCarDisplacement" th:text="${morenDto.carDisplacement}"></p>
+      <p id="forPostCarMileaget" th:text="${morenDto.carMileaget}"></p>
+      <p id="forPostCarColor" th:text="${morenDto.carColor}"></p>
+      <p id="forPostCarOld" th:text="${morenDto.carOld}"></p>
+      <p id="forPostCarEngine" th:text="${morenDto.carEngine}"></p>
+      <p id="forPostCarAttribute01" th:text="${morenDto.carAttribute01}"></p>
+      <p id="forPostCarPrice" th:text="${morenDto.carPrice}"></p>
+      <p id="forPostOrderEnd" th:text="${morenDto.orderEnd}"></p>
+      <p id="forPostRentIdx" th:text="${morenDto.rentIdx}"></p>
+      <p id="forPostCarImageList" th:text="${morenDto.carImageList}"></p>
+      <p id="forPostDiscount" th:text="${morenDto.discount}"></p>
+      <p id="forPostDiscountDescription" th:text="${morenDto.discountDescription}"></p>
+      <p id="forPostCostPerKm" th:text="${morenDto.costPerKm}"></p>
+      <p id="forPostCredit" th:text="${morenDto.credit}"></p>
+      <p id="forPostCarCode" th:text="${morenDto.carCode}"></p>
+    </div>
 
   </div>
 </div>

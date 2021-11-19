@@ -26,19 +26,6 @@ function sortContent(index) {
     }
 }
 
-function openOffer(){
-    let rentTerm = '한달';
-    let carIdx = '110074';
-    let rentIdx = '70';
-    let kilometer = '2000km';
-    let discount = 'null';
-    let popup = window.open('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/available', '견적서 보기', 'width=700px,height=800px,scrollbars=yes');
-}
-
-function openForm(){
-    let popup = window.open('http://www.naver.com', '예약 신청하기', 'width=700px,height=800px,scrollbars=yes');
-}
-
 
 function sendData(){
     document.getElementById('select_wrapper').submit();
@@ -312,22 +299,96 @@ function dataReset() {
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
 
-    // window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
-    console.log('/rent/month/detail/condition/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus);
+    window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
+    // console.log('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus);
+    //
+    // $.ajax({
+    //     type:'GET',
+    //     url:'/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus,
+    //     dataType:'json',
+    //     contentType : 'application/json; charset=utf-8',
+    // }).done(function (result) {
+    //     if (result.result == 1) {
+    //         alert('됨ㅇㅇ');
+    //     } else if (result.result == 0) {
+    //         alert('문제가 생겼습니다.');
+    //     };
+    // }).fail(function (error) {
+    //     alert(JSON.stringify(error));
+    // })
+}
+
+function openForm() {
+    let carIdx = document.getElementById('forPostCarIdx').innerHTML;
+    let carCategory = document.getElementById('forPostCarCategory').innerHTML;
+    let carName = document.getElementById('forPostCarName').innerHTML;
+    let carNo = document.getElementById('forPostCarNo').innerHTML;
+    let carExteriorColor = document.getElementById('forPostCarExteriorColor').innerHTML;
+    let carGubun = document.getElementById('forPostCarGubun').innerHTML;
+    let carDisplacement = document.getElementById('forPostCarDisplacement').innerHTML;
+    let carMileaget = document.getElementById('forPostCarMileaget').innerHTML;
+    let carColor = document.getElementById('forPostCarColor').innerHTML;
+    let carOld = document.getElementById('forPostCarOld').innerHTML;
+    let carEngine = document.getElementById('forPostCarEngine').innerHTML;
+    let carAttribute01 = document.getElementById('forPostCarAttribute01').innerHTML;
+    let carPrice = document.getElementById('forPostCarPrice').innerHTML;
+    let orderEnd = document.getElementById('forPostOrderEnd').innerHTML;
+    let rentIdx = document.getElementById('forPostRentIdx').innerHTML;
+    let carImageList = document.getElementById('forPostCarImageList').innerHTML;
+    let discount = document.getElementById('forPostDiscount').innerHTML;
+    let discountDescription = document.getElementById('forPostDiscountDescription').innerHTML;
+    let costPerKm = document.getElementById('forPostCostPerKm').innerHTML;
+    let credit = document.getElementById('forPostCredit').innerHTML;
+    let carCode = document.getElementById('forPostCarCode').innerHTML;
+
+    var data = {
+        carIdx : carIdx,
+        carCategory : carCategory,
+        carName: carName,
+        carNo: carNo,
+        carExteriorColor: carExteriorColor,
+        carGubun: carGubun,
+        carDisplacement: carDisplacement,
+        carMileaget: carMileaget,
+        carColor: carColor,
+        carOld: carOld,
+        carEngine: carEngine,
+        carAttribute01: carAttribute01,
+        carPrice: carPrice,
+        orderEnd: orderEnd,
+        rentIdx: rentIdx,
+        carImageList: carImageList,
+        discount: discount,
+        discountDescription: discountDescription,
+        costPerKm: costPerKm,
+        credit: credit,
+        carCode: carCode
+    };
+
+    console.log(data);
 
     $.ajax({
-        type:'GET',
-        url:'/rent/month/detail/condition/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus,
-        dataType:'json',
+        type : 'POST',
+        url : '/rent/month/detail/form/reservation',
+        dataType : 'json',
         contentType : 'application/json; charset=utf-8',
-    }).done(function (result) {
-        if (result.result == 1) {
-            alert('됨ㅇㅇ');
-        } else if (result.result == 0) {
-            alert('문제가 생겼습니다.');
-        };
+        data : JSON.stringify(data)
+    }).done(function () {
+        let popup = window.open('http://www.naver.com', '예약 신청하기', 'width=700px,height=800px,scrollbars=yes');
     }).fail(function (error) {
         alert(JSON.stringify(error));
     })
-
 }
+
+// function openOffer(){
+//     let rentTerm = '한달';
+//     let carIdx = '110074';
+//     let rentIdx = '70';
+//     let kilometer = '2000km';
+//     let discount = 'null';
+//     let popup = window.open('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/available', '견적서 보기', 'width=700px,height=800px,scrollbars=yes');
+// }
+
+// function openForm(){
+//     let popup = window.open('http://www.naver.com', '예약 신청하기', 'width=700px,height=800px,scrollbars=yes');
+// }
