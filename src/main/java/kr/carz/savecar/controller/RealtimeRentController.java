@@ -429,6 +429,98 @@ public class RealtimeRentController {
     }
 
 
+    // 차량 상세 페이지
+    @RequestMapping(value = "/rent/month/detail/condition/{rentTerm}/{carIdx}/{rentIdx}/{kilometer}/{discount}/{rentStatus}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
+    public void rent_month_detail_condition(HttpServletResponse res, ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
+
+        DateTime dateTime = new DateTime(expected_day, df_date, df_time);
+        dateTime.today();
+
+        String cost_per_km = null;
+        String credit = null;
+
+        // 세이브카 db에서 해당 차 객체 가져오기
+        if (rentTerm.equals("한달")){
+            Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
+            MonthlyRent monthlyRent = monthlyRentOptional.get();
+            cost_per_km = monthlyRent.getCost_per_km();
+            credit = monthlyRent.getCredit();
+            model.put("priceObject", monthlyRent);
+        } else if (rentTerm.equals("12개월")){
+            Optional<YearlyRent> yearlyRentOptional = yearlyRentService.findById(rentIdx);
+            YearlyRent yearlyRent = yearlyRentOptional.get();
+            cost_per_km = yearlyRent.getCost_per_km();
+            credit = yearlyRent.getCredit();
+            model.put("priceObject", yearlyRent);
+        } else if (rentTerm.equals("24개월")){
+            Optional<TwoYearlyRent> twoYearlyRentOptional = twoYearlyRentService.findById(rentIdx);
+            TwoYearlyRent twoYearlyRent = twoYearlyRentOptional.get();
+            cost_per_km = twoYearlyRent.getCost_per_km();
+            credit = twoYearlyRent.getCredit();
+            model.put("priceObject", twoYearlyRent);
+        }
+
+        HttpConnection http = new HttpConnection();
+        JSONObject responseJson = http.sendGetRequest("https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + dateTime.getToday_date() + "&END=" + dateTime.getToday_date() + "&EXPECTED_DAY=" + dateTime.getExpected_day());
+        JSONArray list_json_array = (JSONArray) responseJson.get("list");
+
+        // list 안에 데이터
+        for(int i=0; i<list_json_array.length(); i++){
+
+            JSONObject morenObject = (JSONObject)list_json_array.get(i);
+
+            if(morenObject.get("carIdx").equals(carIdx)){
+
+                // 차량 이미지
+                List<String> carList = new ArrayList<>();
+
+                if (!morenObject.get("carThumbImages").equals(null)) {
+                    JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
+                    for (int j = 0; j < carJsonArray.length(); j++) {
+                        carList.add((String) carJsonArray.get(j));
+                    }
+                    model.put("lenOfPictures", carJsonArray.length());
+                } else {
+                    model.put("lenOfPictures", 0);
+                }
+
+                MorenDTO morenDto = new MorenDTO((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
+                        (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
+                        (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
+                        (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
+                        null, (String) morenObject.get("order_end"), rentIdx, carList, null, null, cost_per_km,
+                        credit, (String) morenObject.get("carCode"));
+
+                model.put("morenDto", morenDto);
+                break;
+
+            }
+        }
+
+        model.put("today_format", dateTime.getToday_date());
+        model.put("rentStatus", rentStatus);
+        model.put("kilometer", kilometer);
+        model.put("discount",discount);
+        model.put("rentTerm",rentTerm);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+//    // 조건별로 차종 데이터 전달
+//    @PostMapping("/rent/month/reservation")
+//    public String rent_month_detail_(ModelMap model, @ModelAttribute RealTimeDTO realTimeDto) {
+//
+//    }
+
+
     @PostMapping("/rent/month/moren/reservation")
     @ResponseBody
     public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
