@@ -196,7 +196,21 @@
     display: flex;
     justify-content: space-between;
 }
-
+.selectRentermKilometerBox {
+    background-color: #f3f3f3;
+    padding: 3rem 1rem;
+    width: auto;
+}
+.select-box {
+    padding-bottom: 2rem;
+    font-size: 18px;
+}
+.result-box {
+    font-size: 18px;
+}
+.result-box table {
+    background: white;
+}
 
 @media (max-width: 600px) {
 
