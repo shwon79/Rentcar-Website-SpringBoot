@@ -438,6 +438,7 @@ public class RealtimeRentController {
     }
 
 
+
     @PostMapping("/rent/month/moren/reservation")
     @ResponseBody
     public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
