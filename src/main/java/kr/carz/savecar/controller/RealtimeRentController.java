@@ -201,6 +201,7 @@ public class RealtimeRentController {
         model.put("carType", "전체");
         model.put("kilometer", "2000km");
         model.put("rentTerm", "한달");
+        model.put("byOrderEnd",  Comparator.comparing(MorenDTO::getOrderEnd));
 
         return "rent_month2";
     }
@@ -414,6 +415,7 @@ public class RealtimeRentController {
         }
 
         model.put("rentTerm", realTimeDto.getRentTerm());
+        model.put("byOrderEnd",  Comparator.comparing(MorenDTO::getOrderEnd));
 
         return "rent_month2";
     }
