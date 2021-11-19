@@ -294,7 +294,6 @@ function displayNextOptions(e) {
         displaySelect = yearKilometer;
     };
 
-    console.log(selectKilometer);
     selectKilometer.options.length = 0;
 
     for (x in displaySelect) {
@@ -303,23 +302,32 @@ function displayNextOptions(e) {
         option.innerText = displaySelect[x];
         selectKilometer.appendChild(option);
     };
-
-    let selectedRentTerm = document.getElementById('selectRentTerm').value;
-    let selectedKilometer = document.getElementById('selectkilometer').value;
-    let showRentTerm = document.getElementById('showRentTerm');
-    let showKilometer = document.getElementById('showKilometer');
-
-    showRentTerm.innerText = selectedRentTerm;
-    showKilometer.innerText = selectedKilometer;
-
 }
 
-function showRentTermKilometer() {
-    let selectedRentTerm = document.getElementById('selectRentTerm').value;
-    let selectedKilometer = document.getElementById('selectkilometer').value;
-    let showRentTerm = document.getElementById('showRentTerm');
-    let showKilometer = document.getElementById('showKilometer');
+function dataReset() {
+    let rentTerm = document.getElementById('selectRentTerm').value;
+    let carIdx = document.getElementById('getCarIdx').innerText;
+    let kilometer = document.getElementById('selectkilometer').value;
+    let discount = document.getElementById('getDiscount').innerText;
+    let rentStatus = document.getElementById('getRentStatus').innerText;
+    let rentIdx = document.getElementById('getrentIdx').innerText;
 
-    showRentTerm.innerText = selectedRentTerm;
-    showKilometer.innerText = selectedKilometer;
+    // window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
+    console.log('/rent/month/detail/condition/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus);
+
+    $.ajax({
+        type:'GET',
+        url:'/rent/month/detail/condition/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus,
+        dataType:'json',
+        contentType : 'application/json; charset=utf-8',
+    }).done(function (result) {
+        if (result.result == 1) {
+            alert('됨ㅇㅇ');
+        } else if (result.result == 0) {
+            alert('문제가 생겼습니다.');
+        };
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    })
+
 }

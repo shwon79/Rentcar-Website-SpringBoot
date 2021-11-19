@@ -211,6 +211,9 @@
 .result-box table {
     background: white;
 }
+.result-box table td {
+    border-bottom: none;
+}
 
 @media (max-width: 600px) {
 
