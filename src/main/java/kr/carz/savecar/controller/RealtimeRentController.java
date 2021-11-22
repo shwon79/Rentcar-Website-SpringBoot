@@ -429,7 +429,7 @@ public class RealtimeRentController {
     }
 
 
-    // 새 창 띄우기
+    // 예약신청하기 새 창 띄우기
     @PostMapping("/rent/month/detail/form/reservation")
     public String rent_month_detail_form_reservation(ModelMap model, @ModelAttribute MorenDTO morenDTO) {
         model.put("morenDTO",morenDTO);
@@ -438,6 +438,18 @@ public class RealtimeRentController {
         System.out.println(morenDTO.getCarCategory());
 
         return "rent_month2_reservation_form";
+    }
+
+
+    // 견적서보기 새 창 띄우기
+    @PostMapping("/rent/month/detail/form/estimate")
+    public String rent_month_detail_form_estimate(ModelMap model, @ModelAttribute MorenDTO morenDTO) {
+        model.put("morenDTO",morenDTO);
+
+//        System.out.println(morenDTO.getCarIdx());
+//        System.out.println(morenDTO.getCarCategory());
+
+        return "rent_month2_estimate_form";
     }
 
 
