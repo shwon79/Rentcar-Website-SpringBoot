@@ -706,15 +706,42 @@
       <p id="forPostCarOld" th:text="${morenDto.carOld}"></p>
       <p id="forPostCarEngine" th:text="${morenDto.carEngine}"></p>
       <p id="forPostCarAttribute01" th:text="${morenDto.carAttribute01}"></p>
-      <p id="forPostCarPrice" th:text="${morenDto.carPrice}"></p>
+<!--      <p id="forPostCarPrice" th:text="${morenDto.carPrice}"></p>-->
+      <span th:if="${discount} != 'null'">
+        <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*(100+${discount})/100" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*(100+${discount})/100" id="forPostCarPrice"></span>
+      </span>
+      <span th:if="${discount} == 'null'">
+        <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='한달' && kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='한달' && kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='12개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='12개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='12개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}" id="forPostCarPrice"></span>
+        <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}" id="forPostCarPrice"></span>
+      </span>
+
+      <p id="forPostDeposit" th:text="${priceObject.deposit}"></p>
       <p id="forPostOrderEnd" th:text="${morenDto.orderEnd}"></p>
       <p id="forPostRentIdx" th:text="${morenDto.rentIdx}"></p>
       <p id="forPostCarImageList" th:text="${morenDto.carImageList}"></p>
-      <p id="forPostDiscount" th:text="${morenDto.discount}"></p>
+      <p id="forPostDiscount" th:text="${discount}"></p>
       <p id="forPostDiscountDescription" th:text="${morenDto.discountDescription}"></p>
       <p id="forPostCostPerKm" th:text="${morenDto.costPerKm}"></p>
       <p id="forPostCredit" th:text="${morenDto.credit}"></p>
       <p id="forPostCarCode" th:text="${morenDto.carCode}"></p>
+      <p id="forPostKilometer" th:text="${kilometer}"></p>
     </div>
 
   </div>
