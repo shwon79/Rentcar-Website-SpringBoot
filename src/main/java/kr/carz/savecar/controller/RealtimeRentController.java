@@ -434,6 +434,9 @@ public class RealtimeRentController {
     public String rent_month_detail_form_reservation(ModelMap model, @ModelAttribute MorenDTO morenDTO) {
         model.put("morenDTO",morenDTO);
 
+        System.out.println(morenDTO.getCarIdx());
+        System.out.println(morenDTO.getCarCategory());
+
         return "rent_month2_reservation_form";
     }
 
