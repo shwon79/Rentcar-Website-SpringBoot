@@ -354,7 +354,7 @@ function openForm() {
 
     document.body.appendChild(mapForm);
 
-    map = window.open("", "Map", "status=0,title=0,height=600,width=1000,scrollbars=1");
+    map = window.open("", "Map", "status=0,title=0,height=1000,width=1000,scrollbars=1");
 
     if (map) {
         mapForm.submit();
@@ -543,7 +543,7 @@ function openOffer() {
 
     document.body.appendChild(mapForm);
 
-    map = window.open("", "Map", "status=0,title=0,height=600,width=1000,scrollbars=1");
+    map = window.open("", "Map", "status=0,title=0,height=1000,width=1000,scrollbars=1");
 
     if (map) {
         mapForm.submit();
