@@ -205,6 +205,7 @@ function openForm() {
     mapForm.target = "Map";
     mapForm.method = "POST"; // or "post" if appropriate
     mapForm.action = "/rent/month/detail/form/reservation";
+    mapForm.style.display= "none";
 
     var mapCarCategory = document.createElement("input");
     mapCarCategory.type = "text";
