@@ -200,6 +200,7 @@ function openForm() {
     let carCode = document.getElementById('forPostCarCode').innerHTML;
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let deposit = document.getElementById('forPostDeposit').innerText;
+    let rentTerm = document.getElementById('forPostRentTerm').innerText;
 
     var mapForm = document.createElement("form");
     mapForm.target = "Map";
@@ -345,6 +346,12 @@ function openForm() {
     mapDeposit.value = deposit;
     mapForm.appendChild(mapDeposit);
 
+    var mapRentTerm = document.createElement("input");
+    mapRentTerm.type = "text";
+    mapRentTerm.name = "rentTerm";
+    mapRentTerm.value = rentTerm;
+    mapForm.appendChild(mapRentTerm);
+
     document.body.appendChild(mapForm);
 
     map = window.open("", "Map", "status=0,title=0,height=600,width=1000,scrollbars=1");
@@ -354,46 +361,6 @@ function openForm() {
     } else {
         alert('You must allow popups for this map to work.');
     }
-
-
-    //
-    // var data = {
-    //     carIdx : carIdx,
-    //     carCategory : carCategory,
-    //     carName: carName,
-    //     carNo: carNo,
-    //     carExteriorColor: carExteriorColor,
-    //     carGubun: carGubun,
-    //     carDisplacement: carDisplacement,
-    //     carMileaget: carMileaget,
-    //     carColor: carColor,
-    //     carOld: carOld,
-    //     carEngine: carEngine,
-    //     carAttribute01: carAttribute01,
-    //     carPrice: carPrice,
-    //     orderEnd: orderEnd,
-    //     rentIdx: rentIdx,
-    //     carImageList: carImageList,
-    //     discount: discount,
-    //     discountDescription: discountDescription,
-    //     costPerKm: costPerKm,
-    //     credit: credit,
-    //     carCode: carCode
-    // };
-    //
-    // console.log(data);
-    //
-    // $.ajax({
-    //     type : 'POST',
-    //     url : '/rent/month/detail/form/reservation',
-    //     dataType : 'json',
-    //     contentType : 'application/json; charset=utf-8',
-    //     data : JSON.stringify(data)
-    // }).done(function () {
-    //     let popup = window.open('http://www.naver.com', '예약 신청하기', 'width=700px,height=800px,scrollbars=yes');
-    // }).fail(function (error) {
-    //     alert(JSON.stringify(error));
-    // })
 }
 
 // function openOffer(){

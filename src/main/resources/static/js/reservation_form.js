@@ -79,19 +79,19 @@ const reserveMonthlyRent = () => {
     const returnDate = document.getElementById('reservation-detail-date_return').value;
     const returnTime = document.getElementById('reservation-detail-time_return').value;
     const carCode = document.getElementById('getCarCode').innerText;
-    const reservationStatus = 0;
+    let reservationStatus = 0;
 
     let check1 = document.getElementById('check_info').checked;
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     let phoneWithoutDash = /^\d{11}$/;
-    let regAge = /[0-9]{6}/;
+    let regAge = /[0-9]{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1])/;
 
     if (phoneWithoutDash.test(reservationPhone) == true) {
         reservationPhone = reservationPhone.substr(0, 3) + "-" + reservationPhone.substr(3, 4) + "-" + reservationPhone.substr(7,4);
     };
 
-    if (regAge.text(reservationAge) == false) {
-        alert("생년월일을 '680101'와 같이 숫자 6자리의 형태로 작성해주세요.");
+    if (regAge.test(reservationAge) == false) {
+        alert("생년월일을 '680101'와 같이 주민등록번호 앞자리 6자리의 형태로 작성해주세요.");
     };
 
     if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
