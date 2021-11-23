@@ -353,7 +353,7 @@ public class RealtimeRentController {
 
     // 차량 상세 페이지
     @RequestMapping(value = "/rent/month/detail/{rentTerm}/{carIdx}/{rentIdx}/{kilometer}/{discount}/{rentStatus}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
-    public String rent_month_detail(ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
+    public String rent_month_detail(HttpServletResponse res, ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
 
         DateTime dateTime = new DateTime(expected_day, df_date, df_time);
         dateTime.today();
@@ -379,11 +379,29 @@ public class RealtimeRentController {
             model.put("priceObject", yearlyRent);
         } else if (rentTerm.equals("24개월")){
             Optional<TwoYearlyRent> twoYearlyRentOptional = twoYearlyRentService.findById(rentIdx);
-            TwoYearlyRent twoYearlyRent = twoYearlyRentOptional.get();
-            cost_per_km = twoYearlyRent.getCost_per_km();
-            credit = twoYearlyRent.getCredit();
-            deposit = twoYearlyRent.getDeposit();
-            model.put("priceObject", twoYearlyRent);
+
+            if (!twoYearlyRentOptional.isPresent()){
+                res.setContentType("text/html; charset=UTF-8");
+                PrintWriter out = res.getWriter();
+                out.println("<script>alert('24개월 이용 불가한 차량입니다.'); </script>");
+                out.flush();
+
+                Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
+                MonthlyRent monthlyRent = monthlyRentOptional.get();
+                cost_per_km = monthlyRent.getCost_per_km();
+                credit = monthlyRent.getCredit();
+                deposit = monthlyRent.getDeposit();
+                model.put("priceObject", monthlyRent);
+
+                rentTerm = "한달";
+                kilometer = "2000km";
+            } else {
+                TwoYearlyRent twoYearlyRent = twoYearlyRentOptional.get();
+                cost_per_km = twoYearlyRent.getCost_per_km();
+                credit = twoYearlyRent.getCredit();
+                deposit = twoYearlyRent.getDeposit();
+                model.put("priceObject", twoYearlyRent);
+            }
         }
 
         HttpConnection http = new HttpConnection();
