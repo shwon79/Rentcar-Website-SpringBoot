@@ -63,7 +63,7 @@ const reserveMonthlyRent = () => {
     const kilometer = document.getElementById('kilometer').innerText;
     const reservationName = document.getElementById('reservation-detail-name').value;
     let reservationPhone = document.getElementById('reservation-detail-phone').value;
-    const reservationAge = document.getElementById('reservation-detail-age').value;
+    let reservationAge = document.getElementById('reservation-detail-age').value;
     const reservationDate = document.getElementById('reservation-detail-date').value;
     const reservationTime = document.getElementById('reservation-detail-time').value;
     const reservationGuarantee = document.getElementById('reservation-detail-credit').value;
@@ -84,9 +84,14 @@ const reserveMonthlyRent = () => {
     let check1 = document.getElementById('check_info').checked;
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     let phoneWithoutDash = /^\d{11}$/;
+    let regAge = /[0-9]{6}/;
 
     if (phoneWithoutDash.test(reservationPhone) == true) {
         reservationPhone = reservationPhone.substr(0, 3) + "-" + reservationPhone.substr(3, 4) + "-" + reservationPhone.substr(7,4);
+    };
+
+    if (regAge.text(reservationAge) == false) {
+        alert("생년월일을 '680101'와 같이 숫자 6자리의 형태로 작성해주세요.");
     };
 
     if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
