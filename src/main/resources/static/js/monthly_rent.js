@@ -81,6 +81,7 @@ function make_easy_reservation () {
             data : JSON.stringify(data)
         }).done(function () {
             alert('예약이 완료되었습니다.');
+            window.location.href = '/index';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
@@ -124,6 +125,7 @@ function make_monthly_rent_reservation () {
             data : JSON.stringify(data)
         }).done(function () {
             alert('예약이 완료되었습니다.');
+            window.location.href = '/rent/month/new';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
@@ -240,6 +242,7 @@ function make_reservation () {
             data : JSON.stringify(data)
         }).done(function () {
             alert('예약이 완료되었습니다.');
+            window.location.href = '/europe';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })

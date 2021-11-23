@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +31,7 @@ public class ReservationController {
     // 예약 저장 api
     @PostMapping("/reservation/apply")
     @ResponseBody
-    public Long save(@RequestBody ReservationSaveDTO dto){
+    public void save(HttpServletResponse res, @RequestBody ReservationSaveDTO dto) throws IOException {
 
         String api_key = "NCS0P5SFAXLOJMJI";
         String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
@@ -164,6 +167,15 @@ public class ReservationController {
             System.out.println(e.getCode());
         }
 
-        return reservationService.save(dto);
+        reservationService.save(dto);
+
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 }
