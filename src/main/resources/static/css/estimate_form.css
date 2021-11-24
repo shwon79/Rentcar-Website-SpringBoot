@@ -1,3 +1,7 @@
+.container {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
 .company_info_table {
     width: 25%;
     background: white;
@@ -8,7 +12,7 @@
 .company_info_table tr,
 .company_info_table td {
     font-size: 14px;
-    padding: 0px;
+    padding: 5px 0px;
 }
 .estimate_form table {
     background: white;
@@ -46,4 +50,7 @@
 .regulations_box p {
     font-size: 12px;
     margin: 0;
+}
+.signup td {
+    padding: 10px;
 }
