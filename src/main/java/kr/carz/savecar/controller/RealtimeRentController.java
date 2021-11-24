@@ -489,7 +489,8 @@ public class RealtimeRentController {
                 + "대여시간: " + morenReservationDTO.getReservationTime() + "\n"
                 + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
                 + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
-                + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"
+                + "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n"
+                + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"   // 방문시에는 어떻게 처리할지 확인
                 + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n"
                 + "생년월일: " + morenReservationDTO.getReservationAge() + "\n"
                 + "신용증빙: " + morenReservationDTO.getReservationGuarantee() + "\n"
@@ -504,12 +505,17 @@ public class RealtimeRentController {
                 + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
                 + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
                 + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
+                + "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n"
                 + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"
                 + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n"
                 + "기타증빙사항: " + morenReservationDTO.getReservationGuarantee() + "\n"
                 + "총렌트료: " + morenReservationDTO.getCarAmountTotal() + "\n"
                 + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
-                + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n");
+                + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n"
+
+                + "예약금 입금 후, 예약이 확정됩니다.\n"
+                + "계좌번호: 하나은행 503-xxx-xxxx 세이브카\n");
+
         params.put("app_version", "test app 1.2");
         params2.put("app_version", "test app 1.2");
 
