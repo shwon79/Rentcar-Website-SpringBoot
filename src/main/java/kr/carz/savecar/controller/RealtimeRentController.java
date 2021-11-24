@@ -44,7 +44,7 @@ public class RealtimeRentController {
     /*                              [New 버전] 실시간 월렌트 예약하                                    */
     /* ======================================================================================== */
 
-    private String expected_day = "3";
+    private String expected_day = "5";
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private DateFormat df_date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -201,6 +201,7 @@ public class RealtimeRentController {
         model.put("carType", "전체");
         model.put("kilometer", "2000km");
         model.put("rentTerm", "한달");
+        model.put("byOrderEnd",  Comparator.comparing(MorenDTO::getOrderEnd));
 
         return "rent_month2";
     }
@@ -268,7 +269,7 @@ public class RealtimeRentController {
                         if (morenObject.get("reserve").equals(null)) {
 
                             // 차종별
-                            if (realTimeDto.getCarType().equals("전체") || realTimeDto.getCarType().equals((String) morenObject.get("carGubun"))) {
+                            if (realTimeDto.getCarType().equals("전체")  || (realTimeDto.getCarType().equals((String)morenObject.get("carGubun")) && (Integer)morenObject.get("carLocal") != 1) || (realTimeDto.getCarType().equals("수입") && (Integer)morenObject.get("carLocal") == 1 ) ) {
 
                                 Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
@@ -371,7 +372,7 @@ public class RealtimeRentController {
 
 
                                 } catch (Exception e) {
-                                    System.out.println("Error ! 차량이름 모렌과 맞출 것 !");
+                                    System.out.println("Error ! 차량이름 모렌과 맞출 것 !" + (String) morenObject.get("carCategory"));
                                     continue;
                                 }
                             }
@@ -414,6 +415,7 @@ public class RealtimeRentController {
         }
 
         model.put("rentTerm", realTimeDto.getRentTerm());
+        model.put("byOrderEnd",  Comparator.comparing(MorenDTO::getOrderEnd));
 
         return "rent_month2";
     }
