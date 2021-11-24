@@ -44,7 +44,7 @@ public class RealtimeRentController {
     /*                              [New 버전] 실시간 월렌트 예약하                                    */
     /* ======================================================================================== */
 
-    private String expected_day = "5";
+    private String expected_day = "4";
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private DateFormat df_date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
