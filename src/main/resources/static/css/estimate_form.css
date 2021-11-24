@@ -1,0 +1,49 @@
+.company_info_table {
+    width: 25%;
+    background: white;
+    position: absolute;
+    top: 3rem;
+    border: 1px solid lightgrey;
+}
+.company_info_table tr,
+.company_info_table td {
+    font-size: 14px;
+    padding: 0px;
+}
+.estimate_form table {
+    background: white;
+}
+.estimate_form table tr,
+.estimate_form table td {
+    font-size: 14px;
+    text-align: left;
+}
+
+.estimate_form_basic {
+    border: 1px solid lightgrey;
+    border-top: 2px solid black;
+}
+.estimate_form_basic td {
+    border: 1px solid lightgrey;
+    padding: 3px 5px;
+}
+
+.estimate_form_basic .table_title {
+    background: #9a9a9a;
+}
+
+.estimate_form_basic .table_subtitle {
+    background: #eeeeee;
+}
+.regulations_box {
+    height: 200px;
+    overflow-y: scroll;
+}
+.regulations_box h6 {
+    font-size: 16px;
+    margin: 1rem 0;
+}
+.regulations_box p {
+    font-size: 12px;
+    margin: 0;
+}

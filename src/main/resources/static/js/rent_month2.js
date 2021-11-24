@@ -111,95 +111,7 @@ function displayDeposit() {
 }
 
 
-// Sending Data;
-const reserveMonthlyRent = () => {
 
-    // 예약 정보 받기
-    const carNo = document.getElementById('carNo').innerText;
-    const kilometer = document.getElementById('kilometer').innerText;
-    const reservationName = document.getElementById('reservation-detail-name').value;
-    let reservationPhone = document.getElementById('reservation-detail-phone').value;
-    const reservationAge = document.getElementById('reservation-detail-age').value;
-    const reservationDate = document.getElementById('reservation-detail-date').value;
-    const reservationTime = document.getElementById('reservation-detail-time').value;
-    const reservationGuarantee = document.getElementById('reservation-detail-credit').value;
-    const reservationDetails = document.getElementById('reservation-detail-details').value;
-    const address = document.getElementById('address_kakao').value;
-    const addressDetail = document.getElementById('address_kakao_detail').value;
-    const carPrice = document.getElementById('carPrice').innerText;
-    const carTax = document.getElementById('carTax').innerText;
-    const carAmountTotal = document.getElementById('carAmountTotal').innerText;
-    const carDeposit = document.getElementById('carDeposit').innerText;
-    const rentTerm = document.getElementById('getRentTerm').innerText;
-    const costPerKm = document.getElementById('getCostPerKm').innerText;
-    const returnDate = document.getElementById('reservation-detail-date_return').value;
-    const returnTime = document.getElementById('reservation-detail-time_return').value;
-    const carCode = document.getElementById('getCarCode').innerText;
-    const reservationStatus = 0;
-
-    let check1 = document.getElementById('check_info').checked;
-    let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-    let phoneWithoutDash = /^\d{11}$/;
-
-    if (phoneWithoutDash.test(reservationPhone) == true) {
-        reservationPhone = reservationPhone.substr(0, 3) + "-" + reservationPhone.substr(3, 4) + "-" + reservationPhone.substr(7,4);
-    };
-
-    if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
-        alert('입력을 완료해주세요!')
-    } else if (check1 != true) {
-        alert('동의를 완료해주세요!')
-    } else if (returnDate == '' || returnTime == '') {
-        alert('대여 날짜 및 시간을 선택해주세요.')
-    } else if (regPhone.test(reservationPhone) == false) {
-        alert("연락처를 '010-1234-5678' 형식으로 입력해주세요.");
-    } else if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
-        var data = {
-            carNo: carNo,
-            kilometer: kilometer,
-            reservationName: reservationName,
-            reservationPhone: reservationPhone,
-            reservationAge: reservationAge,
-            reservationDate: reservationDate,
-            reservationTime: reservationTime,
-            reservationGuarantee: reservationGuarantee,
-            reservationDetails: reservationDetails,
-            address: address,
-            addressDetail: addressDetail,
-            carPrice: carPrice,
-            carTax: carTax,
-            carAmountTotal: carAmountTotal,
-            carDeposit: carDeposit,
-            reservationStatus : reservationStatus,
-            rentTerm: rentTerm,
-            costPerKm: costPerKm,
-            carCode: carCode
-        }
-
-        console.log(data);
-
-        let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
-
-        if (reserveConfirm) {
-            $.ajax({
-                type:'POST',
-                url:'/rent/month/moren/reservation',
-                dataType:'json',
-                contentType : 'application/json; charset=utf-8',
-                data : JSON.stringify(data)
-            }).done(function (result) {
-                if (result.result == 1) {
-                    alert('예약이 완료되었습니다.');
-                } else {
-                    alert('예약에 문제가 생겼습니다.');
-                };
-                window.location.href = '/rent/month/new';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            })
-        };
-    }
-}
 
 
 //할인 가격 천원 단위로 반올림
@@ -216,56 +128,15 @@ function roundNumber() {
 $('.discountPrice').ready(roundNumber());
 
 
-// Display return date
-function displayReturnDate() {
-    let startDate = document.getElementById('reservation-detail-date').value;
-    let startTime = document.getElementById('reservation-detail-time').value;
-    let rentTerm = document.getElementById('getRentTerm').innerText;
-    let displayReturnDate = document.getElementById('reservation-detail-date_return');
-    let displayReturnTime = document.getElementById('reservation-detail-time_return');
-    let returnYear;
-    let returnMonth;
-    let returnDate;
-
-    startDate = new Date(startDate);
-
-    if (rentTerm == "한달") {
-        startDate.setMonth(startDate.getMonth() + 1);
-    } else if (rentTerm == "12개월") {
-        startDate.setMonth(startDate.getMonth() + 12);
-    } else if (rentTerm == "24개월") {
-        startDate.setMonth(startDate.getMonth() + 24);
-    }
-
-    returnYear = startDate.getFullYear();
-    returnMonth = startDate.getMonth() + 1;
-    returnDate = startDate.getDate();
-
-    let returnMonthToString = returnMonth.toString();
-    let returnDateToString = returnDate.toString();
-
-    if (returnMonthToString.length == 1) {
-        returnMonth = "0" + returnMonthToString;
-    }
-    if (returnDateToString.length == 1) {
-        returnDate = "0" + returnDateToString;
-    }
-
-    let returnDateString = returnYear + '-' + returnMonth + '-' + returnDate;
-
-    displayReturnDate.value = returnDateString;
-    displayReturnTime.value = startTime;
-}
-
 // Datepicker
-$('#datePicker').datepicker({
-    format: "yyyy-mm-dd",
-    language: 'kr'
-});
-$('#click-btn').click(function () {
-    let date = $('#datePicker').val();
-    console.log(date);
-});
+// $('#datePicker').datepicker({
+//     format: "yyyy-mm-dd",
+//     language: 'kr'
+// });
+// $('#click-btn').click(function () {
+//     let date = $('#datePicker').val();
+//     console.log(date);
+// });
 
 
 // 렌트 기간 선택하면 약정 주행거리 선택 보여주기
@@ -291,6 +162,7 @@ function displayNextOptions(e) {
     };
 }
 
+// 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동
 function dataReset() {
     let rentTerm = document.getElementById('selectRentTerm').value;
     let carIdx = document.getElementById('getCarIdx').innerText;
@@ -300,28 +172,14 @@ function dataReset() {
     let rentIdx = document.getElementById('getrentIdx').innerText;
 
     window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
-    // console.log('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus);
-    //
-    // $.ajax({
-    //     type:'GET',
-    //     url:'/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus,
-    //     dataType:'json',
-    //     contentType : 'application/json; charset=utf-8',
-    // }).done(function (result) {
-    //     if (result.result == 1) {
-    //         alert('됨ㅇㅇ');
-    //     } else if (result.result == 0) {
-    //         alert('문제가 생겼습니다.');
-    //     };
-    // }).fail(function (error) {
-    //     alert(JSON.stringify(error));
-    // })
 }
 
+// 예약 신청하기 버튼 누르면 새창에 폼 띄우기
+
 function openForm() {
-    let carIdx = document.getElementById('forPostCarIdx').innerHTML;
     let carCategory = document.getElementById('forPostCarCategory').innerHTML;
     let carName = document.getElementById('forPostCarName').innerHTML;
+    let carIdx = document.getElementById('forPostCarIdx').innerHTML;
     let carNo = document.getElementById('forPostCarNo').innerHTML;
     let carExteriorColor = document.getElementById('forPostCarExteriorColor').innerHTML;
     let carGubun = document.getElementById('forPostCarGubun').innerHTML;
@@ -340,55 +198,356 @@ function openForm() {
     let costPerKm = document.getElementById('forPostCostPerKm').innerHTML;
     let credit = document.getElementById('forPostCredit').innerHTML;
     let carCode = document.getElementById('forPostCarCode').innerHTML;
+    let kilometer = document.getElementById('forPostKilometer').innerText;
+    let deposit = document.getElementById('forPostDeposit').innerText;
+    let rentTerm = document.getElementById('forPostRentTerm').innerText;
 
-    var data = {
-        carIdx : carIdx,
-        carCategory : carCategory,
-        carName: carName,
-        carNo: carNo,
-        carExteriorColor: carExteriorColor,
-        carGubun: carGubun,
-        carDisplacement: carDisplacement,
-        carMileaget: carMileaget,
-        carColor: carColor,
-        carOld: carOld,
-        carEngine: carEngine,
-        carAttribute01: carAttribute01,
-        carPrice: carPrice,
-        orderEnd: orderEnd,
-        rentIdx: rentIdx,
-        carImageList: carImageList,
-        discount: discount,
-        discountDescription: discountDescription,
-        costPerKm: costPerKm,
-        credit: credit,
-        carCode: carCode
-    };
+    var mapForm = document.createElement("form");
+    mapForm.target = "Map";
+    mapForm.method = "POST"; // or "post" if appropriate
+    mapForm.action = "/rent/month/detail/form/reservation";
+    mapForm.style.display= "none";
 
-    console.log(data);
+    var mapCarCategory = document.createElement("input");
+    mapCarCategory.type = "text";
+    mapCarCategory.name = "carCategory";
+    mapCarCategory.value = carCategory;
+    mapForm.appendChild(mapCarCategory);
 
-    $.ajax({
-        type : 'POST',
-        url : '/rent/month/detail/form/reservation',
-        dataType : 'json',
-        contentType : 'application/json; charset=utf-8',
-        data : JSON.stringify(data)
-    }).done(function () {
-        let popup = window.open('http://www.naver.com', '예약 신청하기', 'width=700px,height=800px,scrollbars=yes');
-    }).fail(function (error) {
-        alert(JSON.stringify(error));
-    })
+    var mapCarName = document.createElement("input");
+    mapCarName.type = "text";
+    mapCarName.name = "carName";
+    mapCarName.value = carName;
+    mapForm.appendChild(mapCarName);
+
+    var mapCarIdx = document.createElement("input");
+    mapCarIdx.type = "text";
+    mapCarIdx.name = "carIdx";
+    mapCarIdx.value = carIdx;
+    mapForm.appendChild(mapCarIdx);
+
+    var mapCarNo = document.createElement("input");
+    mapCarNo.type = "text";
+    mapCarNo.name = "carNo";
+    mapCarNo.value = carNo;
+    mapForm.appendChild(mapCarNo);
+
+    var mapCarExteriorColor = document.createElement("input");
+    mapCarExteriorColor.type = "text";
+    mapCarExteriorColor.name = "carExteriorColor";
+    mapCarExteriorColor.value = carExteriorColor;
+    mapForm.appendChild(mapCarExteriorColor);
+
+    var mapCarGubun = document.createElement("input");
+    mapCarGubun.type = "text";
+    mapCarGubun.name = "carGubun";
+    mapCarGubun.value = carGubun;
+    mapForm.appendChild(mapCarGubun);
+
+    var mapCarDisplacement = document.createElement("input");
+    mapCarDisplacement.type = "text";
+    mapCarDisplacement.name = "carDisplacement";
+    mapCarDisplacement.value = carDisplacement;
+    mapForm.appendChild(mapCarDisplacement);
+
+    var mapCarMileaget = document.createElement("input");
+    mapCarMileaget.type = "text";
+    mapCarMileaget.name = "carMileaget";
+    mapCarMileaget.value = carMileaget;
+    mapForm.appendChild(mapCarMileaget);
+
+    var mapCarColor = document.createElement("input");
+    mapCarColor.type = "text";
+    mapCarColor.name = "carColor";
+    mapCarColor.value = carColor;
+    mapForm.appendChild(mapCarColor);
+
+    var mapCarOld = document.createElement("input");
+    mapCarOld.type = "text";
+    mapCarOld.name = "carOld";
+    mapCarOld.value = carOld;
+    mapForm.appendChild(mapCarOld);
+
+    var mapCarEngine = document.createElement("input");
+    mapCarEngine.type = "text";
+    mapCarEngine.name = "carEngine";
+    mapCarEngine.value = carEngine;
+    mapForm.appendChild(mapCarEngine);
+
+    var mapCarAttribute01 = document.createElement("input");
+    mapCarAttribute01.type = "text";
+    mapCarAttribute01.name = "carAttribute01";
+    mapCarAttribute01.value = carAttribute01;
+    mapForm.appendChild(mapCarAttribute01);
+
+    var mapCarPrice = document.createElement("input");
+    mapCarPrice.type = "text";
+    mapCarPrice.name = "carPrice";
+    mapCarPrice.value = carPrice;
+    mapForm.appendChild(mapCarPrice);
+
+    var mapOrderEnd = document.createElement("input");
+    mapOrderEnd.type = "text";
+    mapOrderEnd.name = "orderEnd";
+    mapOrderEnd.value = orderEnd;
+    mapForm.appendChild(mapOrderEnd);
+
+    var mapRentIdx = document.createElement("input");
+    mapRentIdx.type = "text";
+    mapRentIdx.name = "rentIdx";
+    mapRentIdx.value = rentIdx;
+    mapForm.appendChild(mapRentIdx);
+
+    var mapCarImageList = document.createElement("input");
+    mapCarImageList.type = "text";
+    mapCarImageList.name = "carImageList";
+    mapCarImageList.value = carImageList;
+    mapForm.appendChild(mapCarImageList);
+
+    var mapDiscount = document.createElement("input");
+    mapDiscount.type = "text";
+    mapDiscount.name = "discount";
+    mapDiscount.value = discount;
+    mapForm.appendChild(mapDiscount);
+
+    var mapDiscountDescription = document.createElement("input");
+    mapDiscountDescription.type = "text";
+    mapDiscountDescription.name = "discountDescription";
+    mapDiscountDescription.value = discountDescription;
+    mapForm.appendChild(mapDiscountDescription);
+
+    var mapCostPerKm = document.createElement("input");
+    mapCostPerKm.type = "text";
+    mapCostPerKm.name = "costPerKm";
+    mapCostPerKm.value = costPerKm;
+    mapForm.appendChild(mapCostPerKm);
+
+    var mapCredit = document.createElement("input");
+    mapCredit.type = "text";
+    mapCredit.name = "credit";
+    mapCredit.value = credit;
+    mapForm.appendChild(mapCredit);
+
+    var mapCarCode = document.createElement("input");
+    mapCarCode.type = "text";
+    mapCarCode.name = "carCode";
+    mapCarCode.value = carCode;
+    mapForm.appendChild(mapCarCode);
+
+    var mapKilometer = document.createElement("input");
+    mapKilometer.type = "text";
+    mapKilometer.name = "kilometer";
+    mapKilometer.value = kilometer;
+    mapForm.appendChild(mapKilometer);
+
+    var mapDeposit = document.createElement("input");
+    mapDeposit.type = "text";
+    mapDeposit.name = "deposit";
+    mapDeposit.value = deposit;
+    mapForm.appendChild(mapDeposit);
+
+    var mapRentTerm = document.createElement("input");
+    mapRentTerm.type = "text";
+    mapRentTerm.name = "rentTerm";
+    mapRentTerm.value = rentTerm;
+    mapForm.appendChild(mapRentTerm);
+
+    document.body.appendChild(mapForm);
+
+    map = window.open("", "Map", "status=0,title=0,height=1000,width=1000,scrollbars=1");
+
+    if (map) {
+        mapForm.submit();
+    } else {
+        alert('You must allow popups for this map to work.');
+    }
 }
 
-// function openOffer(){
-//     let rentTerm = '한달';
-//     let carIdx = '110074';
-//     let rentIdx = '70';
-//     let kilometer = '2000km';
-//     let discount = 'null';
-//     let popup = window.open('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/available', '견적서 보기', 'width=700px,height=800px,scrollbars=yes');
-// }
+// 예약 신청하기 버튼 누르면 새창에 폼 띄우기
 
-// function openForm(){
-//     let popup = window.open('http://www.naver.com', '예약 신청하기', 'width=700px,height=800px,scrollbars=yes');
-// }
+function openOffer() {
+    let carCategory = document.getElementById('forPostCarCategory').innerHTML;
+    let carName = document.getElementById('forPostCarName').innerHTML;
+    let carIdx = document.getElementById('forPostCarIdx').innerHTML;
+    let carNo = document.getElementById('forPostCarNo').innerHTML;
+    let carExteriorColor = document.getElementById('forPostCarExteriorColor').innerHTML;
+    let carGubun = document.getElementById('forPostCarGubun').innerHTML;
+    let carDisplacement = document.getElementById('forPostCarDisplacement').innerHTML;
+    let carMileaget = document.getElementById('forPostCarMileaget').innerHTML;
+    let carColor = document.getElementById('forPostCarColor').innerHTML;
+    let carOld = document.getElementById('forPostCarOld').innerHTML;
+    let carEngine = document.getElementById('forPostCarEngine').innerHTML;
+    let carAttribute01 = document.getElementById('forPostCarAttribute01').innerHTML;
+    let carPrice = document.getElementById('forPostCarPrice').innerHTML;
+    let orderEnd = document.getElementById('forPostOrderEnd').innerHTML;
+    let rentIdx = document.getElementById('forPostRentIdx').innerHTML;
+    let carImageList = document.getElementById('forPostCarImageList').innerHTML;
+    let discount = document.getElementById('forPostDiscount').innerHTML;
+    let discountDescription = document.getElementById('forPostDiscountDescription').innerHTML;
+    let costPerKm = document.getElementById('forPostCostPerKm').innerHTML;
+    let credit = document.getElementById('forPostCredit').innerHTML;
+    let carCode = document.getElementById('forPostCarCode').innerHTML;
+    let kilometer = document.getElementById('forPostKilometer').innerText;
+    let deposit = document.getElementById('forPostDeposit').innerText;
+    let rentTerm = document.getElementById('forPostRentTerm').innerText;
+
+    var mapForm = document.createElement("form");
+    mapForm.target = "Map";
+    mapForm.method = "POST"; // or "post" if appropriate
+    mapForm.action = "/rent/month/detail/form/estimate";
+    mapForm.style.display= "none";
+
+    var mapCarCategory = document.createElement("input");
+    mapCarCategory.type = "text";
+    mapCarCategory.name = "carCategory";
+    mapCarCategory.value = carCategory;
+    mapForm.appendChild(mapCarCategory);
+
+    var mapCarName = document.createElement("input");
+    mapCarName.type = "text";
+    mapCarName.name = "carName";
+    mapCarName.value = carName;
+    mapForm.appendChild(mapCarName);
+
+    var mapCarIdx = document.createElement("input");
+    mapCarIdx.type = "text";
+    mapCarIdx.name = "carIdx";
+    mapCarIdx.value = carIdx;
+    mapForm.appendChild(mapCarIdx);
+
+    var mapCarNo = document.createElement("input");
+    mapCarNo.type = "text";
+    mapCarNo.name = "carNo";
+    mapCarNo.value = carNo;
+    mapForm.appendChild(mapCarNo);
+
+    var mapCarExteriorColor = document.createElement("input");
+    mapCarExteriorColor.type = "text";
+    mapCarExteriorColor.name = "carExteriorColor";
+    mapCarExteriorColor.value = carExteriorColor;
+    mapForm.appendChild(mapCarExteriorColor);
+
+    var mapCarGubun = document.createElement("input");
+    mapCarGubun.type = "text";
+    mapCarGubun.name = "carGubun";
+    mapCarGubun.value = carGubun;
+    mapForm.appendChild(mapCarGubun);
+
+    var mapCarDisplacement = document.createElement("input");
+    mapCarDisplacement.type = "text";
+    mapCarDisplacement.name = "carDisplacement";
+    mapCarDisplacement.value = carDisplacement;
+    mapForm.appendChild(mapCarDisplacement);
+
+    var mapCarMileaget = document.createElement("input");
+    mapCarMileaget.type = "text";
+    mapCarMileaget.name = "carMileaget";
+    mapCarMileaget.value = carMileaget;
+    mapForm.appendChild(mapCarMileaget);
+
+    var mapCarColor = document.createElement("input");
+    mapCarColor.type = "text";
+    mapCarColor.name = "carColor";
+    mapCarColor.value = carColor;
+    mapForm.appendChild(mapCarColor);
+
+    var mapCarOld = document.createElement("input");
+    mapCarOld.type = "text";
+    mapCarOld.name = "carOld";
+    mapCarOld.value = carOld;
+    mapForm.appendChild(mapCarOld);
+
+    var mapCarEngine = document.createElement("input");
+    mapCarEngine.type = "text";
+    mapCarEngine.name = "carEngine";
+    mapCarEngine.value = carEngine;
+    mapForm.appendChild(mapCarEngine);
+
+    var mapCarAttribute01 = document.createElement("input");
+    mapCarAttribute01.type = "text";
+    mapCarAttribute01.name = "carAttribute01";
+    mapCarAttribute01.value = carAttribute01;
+    mapForm.appendChild(mapCarAttribute01);
+
+    var mapCarPrice = document.createElement("input");
+    mapCarPrice.type = "text";
+    mapCarPrice.name = "carPrice";
+    mapCarPrice.value = carPrice;
+    mapForm.appendChild(mapCarPrice);
+
+    var mapOrderEnd = document.createElement("input");
+    mapOrderEnd.type = "text";
+    mapOrderEnd.name = "orderEnd";
+    mapOrderEnd.value = orderEnd;
+    mapForm.appendChild(mapOrderEnd);
+
+    var mapRentIdx = document.createElement("input");
+    mapRentIdx.type = "text";
+    mapRentIdx.name = "rentIdx";
+    mapRentIdx.value = rentIdx;
+    mapForm.appendChild(mapRentIdx);
+
+    var mapCarImageList = document.createElement("input");
+    mapCarImageList.type = "text";
+    mapCarImageList.name = "carImageList";
+    mapCarImageList.value = carImageList;
+    mapForm.appendChild(mapCarImageList);
+
+    var mapDiscount = document.createElement("input");
+    mapDiscount.type = "text";
+    mapDiscount.name = "discount";
+    mapDiscount.value = discount;
+    mapForm.appendChild(mapDiscount);
+
+    var mapDiscountDescription = document.createElement("input");
+    mapDiscountDescription.type = "text";
+    mapDiscountDescription.name = "discountDescription";
+    mapDiscountDescription.value = discountDescription;
+    mapForm.appendChild(mapDiscountDescription);
+
+    var mapCostPerKm = document.createElement("input");
+    mapCostPerKm.type = "text";
+    mapCostPerKm.name = "costPerKm";
+    mapCostPerKm.value = costPerKm;
+    mapForm.appendChild(mapCostPerKm);
+
+    var mapCredit = document.createElement("input");
+    mapCredit.type = "text";
+    mapCredit.name = "credit";
+    mapCredit.value = credit;
+    mapForm.appendChild(mapCredit);
+
+    var mapCarCode = document.createElement("input");
+    mapCarCode.type = "text";
+    mapCarCode.name = "carCode";
+    mapCarCode.value = carCode;
+    mapForm.appendChild(mapCarCode);
+
+    var mapKilometer = document.createElement("input");
+    mapKilometer.type = "text";
+    mapKilometer.name = "kilometer";
+    mapKilometer.value = kilometer;
+    mapForm.appendChild(mapKilometer);
+
+    var mapDeposit = document.createElement("input");
+    mapDeposit.type = "text";
+    mapDeposit.name = "deposit";
+    mapDeposit.value = deposit;
+    mapForm.appendChild(mapDeposit);
+
+    var mapRentTerm = document.createElement("input");
+    mapRentTerm.type = "text";
+    mapRentTerm.name = "rentTerm";
+    mapRentTerm.value = rentTerm;
+    mapForm.appendChild(mapRentTerm);
+
+    document.body.appendChild(mapForm);
+
+    map = window.open("", "Map", "status=0,title=0,height=1000,width=1000,scrollbars=1");
+
+    if (map) {
+        mapForm.submit();
+    } else {
+        alert('You must allow popups for this map to work.');
+    }
+}
