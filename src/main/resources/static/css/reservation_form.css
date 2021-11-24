@@ -8,47 +8,99 @@ html {
 .basic_info table, .reservation-form table {
     border: solid 1px rgba(0, 0, 0, 0.3);
 }
-.basic_info tbody {
+.basic_info tbody,
+.reservation-form tbody {
     background: white;
 }
-.basic_info th {
+.basic_info th,
+.reservation-form th {
     font-size: 16px;
     text-align: center;
-    border-bottom: solid 2px rgba(0, 0, 0, 0.3);
+    /*border-bottom: solid 2px rgba(0, 0, 0, 0.3);*/
 }
 .basic_info td, .basic_info tr,
 .reservation-form td, .reservation-form tr {
     font-size: 14px;
     text-align: left;
 }
+.col_title {
+    background: #9a9a9a;
+}
+.col_subtitle {
+    background: #eeeeee;
+}
 .reservation-form {
     margin-top: 3rem;
 }
-.reservation-form tbody {
-    background: black;
-}
-.reservation-form th {
-    font-size: 16px;
-    text-align: center;
-    border-bottom: solid 2px white;
-    color: white;
-}
-.reservation-form td {
-    border-bottom: 1px solid white;
-}
-.reservation-form td label {
-    color: white;
-}
+
 .reservation-form td label i.fas{
     color: red;
 }
-.regulations {
-    padding: 15px;
-    border-top: none;
+
+.account_info {
+    background-color: #eeeeee;
+    text-align: center;
+    padding: 3rem 0;
+    /*border-radius: 2rem;*/
+}
+.account_info span {
     background-color: black;
     color: white;
-    margin-bottom: 2rem;
+    border-radius: 2rem;
+    font-size: 24px;
+    padding: 0.5rem 2rem;
 }
+.account_info h2 {
+    margin-top: 3rem;
+    font-size: 22px;
+}
+
+.instruction {
+    width: 300px;
+    margin: 50px auto;
+    border-radius: 15px;
+    background: #eeeeee;
+    /*color: #fff;*/
+    padding: 20px;
+    text-align: center;
+    font-weight: 400;
+    font-family: arial;
+    position: relative;
+    animation:colorchange 1s infinite alternate;
+}
+
+.instruction:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 13px solid #eeeeee;
+    border-right: 13px solid transparent;
+    border-top: 13px solid #eeeeee;
+    border-bottom: 13px solid transparent;
+    left: 19px;
+    bottom: -20px;
+}
+
+
+@keyframes colorchange {
+    0% {
+        color:darkred;
+        transform: scale(1);
+    }
+    35% {
+        color:red;
+        transform: scale(1.05);
+    }
+    70% {
+        color: mediumvioletred;
+        transform: scale(1.1);
+    }
+}
+
+
+
+
 #btn_final {
     color: white;
     background-color: black;
