@@ -30,33 +30,25 @@
       <div class="reserve_list" id="reserve_list_title">
         <p class="name">성명</p>
         <p class="created_date">상담신청일</p>
-        <!--                <p class="modified_date">수정일</p>-->
         <p class="rent_type">유형</p>
-        <p class="product_name">제품명</p>
-        <p class="cars_type">차종</p>
-        <p class="car_size">크기</p>
+        <p class="product_name">상품유형</p>
         <p class="car_name">차명</p>
+        <p class="car_name">차번호</p>
         <p class="mileage">주행거리</p>
-        <p class="deposit">보증금</p>
-        <p class="options">옵션</p>
+        <p class="total">예상대여일</p>
         <p class="total">금액</p>
         <p class="phone">연락처</p>
       </div>
-      <!--                th:onclick="'location.href = \'/'+${date.dateTimeId}+'\''"-->
       <div class="reserve_list_wrapper" th:each="i : ${#numbers.sequence(reservationList.size() - 1, 0, -1)}" th:with="reservation=${reservationList[i]}">
         <div class="reserve_list" >
-          <!--                    th:onclick="'location.href = \'/admin/detail/'+${date.dateTimeId}+'\''"-->
           <p class="name" th:text="${reservation.name}"></p>
           <p class="created_date" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></p>
-          <!--                    <p class="modified_date" th:text="${#strings.arraySplit(date.modifiedDate, 'T')[0]}"></p>-->
           <p class="rent_type" th:text="${reservation.title}"></p>
           <p class="product_name" th:text="${reservation.product}"></p>
-          <p class="cars_type" th:text="${reservation.category1}"></p>
-          <p class="car_size" th:text="${reservation.category2}"></p>
           <p class="car_name" th:text="${reservation.car_name}"></p>
+          <p class="car_name" th:text="${reservation.car_num}"></p>
           <p class="mileage" th:text="${reservation.mileage}"></p>
-          <p class="deposit" th:text="${reservation.deposit}"></p>
-          <p class="options" th:text="${reservation.option}"></p>
+          <p class="total" th:text="${reservation.resDate}"></p>
           <p class="total" th:text="${reservation.price}"></p>
           <p class="phone" th:text="${reservation.phoneNo}"></p>
 

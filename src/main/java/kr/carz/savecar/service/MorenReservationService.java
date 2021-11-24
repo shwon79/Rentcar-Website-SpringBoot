@@ -1,9 +1,7 @@
 package kr.carz.savecar.service;
 
-import kr.carz.savecar.domain.Discount;
 import kr.carz.savecar.domain.MorenReservation;
 import kr.carz.savecar.domain.MorenReservationDTO;
-import kr.carz.savecar.domain.ReservationSaveDTO;
 import kr.carz.savecar.repository.MorenReservationRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +27,7 @@ public class MorenReservationService {
     public List<MorenReservation> findAllMorenReservations(){
         return morenReservationRepository.findAll();
     }
-    public Optional findMorenReservationById(Long id){
+    public Optional<MorenReservation> findMorenReservationById(Long id){
         return morenReservationRepository.findById(id);
     }
     public void delete(MorenReservation morenReservation) { morenReservationRepository.delete(morenReservation); }
