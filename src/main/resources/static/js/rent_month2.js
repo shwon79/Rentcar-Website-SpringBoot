@@ -111,9 +111,6 @@ function displayDeposit() {
 }
 
 
-
-
-
 //할인 가격 천원 단위로 반올림
 
 const discountPrice = document.querySelectorAll('.discountStyle .discountPrice');
@@ -126,17 +123,6 @@ function roundNumber() {
     }
 }
 $('.discountPrice').ready(roundNumber());
-
-
-// Datepicker
-// $('#datePicker').datepicker({
-//     format: "yyyy-mm-dd",
-//     language: 'kr'
-// });
-// $('#click-btn').click(function () {
-//     let date = $('#datePicker').val();
-//     console.log(date);
-// });
 
 
 // 렌트 기간 선택하면 약정 주행거리 선택 보여주기

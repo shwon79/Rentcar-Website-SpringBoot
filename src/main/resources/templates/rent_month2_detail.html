@@ -191,7 +191,8 @@
                       <tr>
                         <td th:text="${morenDto.rentTerm}"></td>
                         <td th:text="${morenDto.kilometer}"></td>
-                        <td>
+                        <td th:if="${morenDto.kilometer=='기타'}">상담 필요</td>
+                        <td th:if="${morenDto.kilometer!='기타'}">
                           <span th:if="${morenDto.discount} != 'null'">
                             <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
                             <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
@@ -247,6 +248,7 @@
       <p id="forPostCarAttribute01" th:text="${morenDto.carAttribute01}"></p>
       <p id="forPostRentTerm" th:text="${morenDto.rentTerm}"></p>
 <!--      <p id="forPostCarPrice" th:text="${morenDto.carPrice}"></p>-->
+      <p th:if="${morenDto.kilometer=='기타'}" th:text="상담" id="forPostCarPrice"></p>
       <span th:if="${morenDto.discount} != 'null'">
         <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*(100+${morenDto.discount})/100" id="forPostCarPrice"></span>
         <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*(100+${morenDto.discount})/100" id="forPostCarPrice"></span>

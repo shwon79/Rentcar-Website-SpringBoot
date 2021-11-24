@@ -87,28 +87,31 @@
                 </tr>
                 <tr>
                     <td style="color: dimgrey;">공급가</td>
-                    <td>
+                    <td th:if="${morenDTO.carPrice!='상담'}">
                         <span th:text="${morenDTO.carPrice}" class="number"></span>
                         <span>원</span>
                     </td>
+                    <td th:if="${morenDTO.carPrice=='상담'}">상담 필요</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td style="color: dimgrey;">부가세</td>
-                    <td>
+                    <td th:if="${morenDTO.carPrice!='상담'}">
                         <span th:text="${morenDTO.carPrice}*0.1" class="number"></span>
                         <span>원</span>
                     </td>
+                    <td th:if="${morenDTO.carPrice=='상담'}">상담 필요</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td style="color: dimgrey;">월 대여료</td>
-                    <td>
+                    <td th:if="${morenDTO.carPrice!='상담'}">
                         <span th:text="${morenDTO.carPrice}*1.1" class="number"></span>
                         <span>원</span>
                     </td>
+                    <td th:if="${morenDTO.carPrice=='상담'}">상담 필요</td>
                     <td></td>
                     <td></td>
                 </tr>
