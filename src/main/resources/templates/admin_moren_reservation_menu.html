@@ -55,7 +55,7 @@
                             <td scope="col" class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
-                            <td scope="col" th:text="${reservation.carAmountTotal}"></td>
+                            <td scope="col" th:text="${reservation.carAmountTotal}" class="number"></td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td></td>
@@ -77,7 +77,7 @@
                             <td scope="col" class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
-                            <td scope="col" th:text="${reservation.carAmountTotal}"></td>
+                            <td scope="col" class="number" th:text="${reservation.carAmountTotal}"></td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="costPerKm" th:text="${reservation.costPerKm}" style="display: none;" th:data-index="${reservation.id}"></td>
@@ -132,7 +132,7 @@
                         <p>이름: <span th:text="${reservation.reservationName}"></span></p>
                         <p>전화번호: <span th:text="${reservation.reservationPhone}"></span></p>
                         <p>대여시작일: <span th:text="${reservation.reservationDate}"></span></p>
-                        <p>월 대여료: <span th:text="${reservation.carAmountTotal}"></span><span>원</span></p>
+                        <p>월 대여료: <span class="number" th:text="${reservation.carAmountTotal}"></span><span>원</span></p>
                         <p th:if="${reservation.reservationStatus == '0'}" style="display: flex; justify-content: space-between;">
                             <span style="width: 49%;"><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
                             <span style="width: 49%;"><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>

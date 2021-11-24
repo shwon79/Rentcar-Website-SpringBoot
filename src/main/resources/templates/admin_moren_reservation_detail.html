@@ -45,10 +45,10 @@
                 <p>배차 요청 주소: <span th:text="${morenReservationDTO.address}" class="reservationAddress"></span></p>
                 <p>배차 요청 상세 주소: <span th:text="${morenReservationDTO.addressDetail}" class="reservationAddressDetail"></span></p>
                 <p>요청 사항: <span th:text="${morenReservationDTO.reservationDetails}" class="reservationDetails"></span></p>
-                <p>렌트료: <span th:text="${morenReservationDTO.carPrice}"></span></p>
-                <p>부가세: <span th:text="${morenReservationDTO.carTax}"></span></p>
-                <p>총 렌트료: <span th:text="${morenReservationDTO.carAmountTotal}" class="carAmountTotal"></span></p>
-                <p>보증금: <span th:text="${morenReservationDTO.carDeposit}" class="carDeposit"></span></p>
+                <p>공급가: <span class="number" th:text="${morenReservationDTO.carPrice}"></span><span>원</span></p>
+                <p>부가세: <span class="number" th:text="${morenReservationDTO.carTax}"></span><span>원</span></p>
+                <p>총 렌트료: <span th:text="${morenReservationDTO.carAmountTotal}" class="carAmountTotal number"></span><span>원</span></p>
+                <p>보증금: <span th:text="${morenReservationDTO.carDeposit}" class="carDeposit number"></span><span>원</span></p>
                 <p class="costPerKm" th:text="${morenReservationDTO.costPerKm}" style="display: none;"></p>
                 <p class="reservationGuarantee" th:text="${morenReservationDTO.reservationGuarantee}" style="display: none;"></p>
                 <p class="carCode" th:text="${morenReservationDTO.carCode}" style="display: none;"></p>

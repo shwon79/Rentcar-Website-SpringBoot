@@ -79,6 +79,7 @@ const reserveMonthlyRent = () => {
     const returnDate = document.getElementById('reservation-detail-date_return').value;
     const returnTime = document.getElementById('reservation-detail-time_return').value;
     const carCode = document.getElementById('getCarCode').innerText;
+    const pickupPlace = document.getElementById('reservation-detail-pickup').value;
     let reservationStatus = 0;
 
     let check1 = document.getElementById('check_info').checked;
@@ -90,10 +91,6 @@ const reserveMonthlyRent = () => {
         reservationPhone = reservationPhone.substr(0, 3) + "-" + reservationPhone.substr(3, 4) + "-" + reservationPhone.substr(7,4);
     };
 
-    if (regAge.test(reservationAge) == false) {
-        alert("생년월일을 '680101'와 같이 주민등록번호 앞자리 6자리의 형태로 작성해주세요.");
-    };
-
     if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
         alert('입력을 완료해주세요!')
     } else if (check1 != true) {
@@ -102,6 +99,8 @@ const reserveMonthlyRent = () => {
         alert('대여 날짜 및 시간을 선택해주세요.')
     } else if (regPhone.test(reservationPhone) == false) {
         alert("연락처를 '010-1234-5678' 형식으로 입력해주세요.");
+    } else if (regAge.test(reservationAge) == false) {
+        alert("생년월일을 '680101'와 같이 주민등록번호 앞자리 6자리의 형태로 작성해주세요.");
     } else if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
         var data = {
             carNo: carNo,
@@ -122,7 +121,8 @@ const reserveMonthlyRent = () => {
             reservationStatus : reservationStatus,
             rentTerm: rentTerm,
             costPerKm: costPerKm,
-            carCode: carCode
+            carCode: carCode,
+            pickupPlace: pickupPlace
         }
 
         console.log(data);
