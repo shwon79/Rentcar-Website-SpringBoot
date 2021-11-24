@@ -7,7 +7,6 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,10 +43,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/login")
-    public String login(Model model) {
+    public String login() {
         return "admin_login";
     }
-
 
     //로그인
     @RequestMapping(value = "/admin/logininfo", method= RequestMethod.POST)
@@ -111,7 +109,7 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
 
-        if((Login)session.getAttribute("user") == null){
+        if(session.getAttribute("user") == null){
 
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
@@ -136,7 +134,7 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
 
-        if((Login)session.getAttribute("user") == null){
+        if(session.getAttribute("user") == null){
 
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
@@ -164,7 +162,7 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
 
-        if((Login)session.getAttribute("user") == null){
+        if(session.getAttribute("user") == null){
 
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
@@ -188,7 +186,7 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
 
-        if((Login)session.getAttribute("user") == null){
+        if(session.getAttribute("user") == null){
 
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
@@ -213,7 +211,7 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
 
-        if((Login)session.getAttribute("user") == null){
+        if(session.getAttribute("user") == null){
 
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
@@ -223,8 +221,17 @@ public class AdminController {
             mav.setViewName("admin_login");
         } else {
             Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
-            mav.addObject("morenReservationDTO", morenReservation.get());
-            mav.setViewName("admin_moren_reservation_detail");
+            if (morenReservation.isPresent()){
+                mav.addObject("morenReservationDTO", morenReservation.get());
+                mav.setViewName("admin_moren_reservation_detail");
+            } else {
+                res.setContentType("text/html; charset=UTF-8");
+                PrintWriter out = res.getWriter();
+                out.println("<script>alert('해당 차량 정보를 찾을 수 없습니다.'); </script>");
+                out.flush();
+
+                mav.setViewName("admin_moren_reservation_menu");
+            }
         }
 
         return mav;
@@ -339,6 +346,7 @@ public class AdminController {
 
         MorenReservation morenReservation = null;
 
+
         Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(reservationId);
         if(morenReservationOptional.isPresent()){
             morenReservation = morenReservationOptional.get();
@@ -349,11 +357,13 @@ public class AdminController {
             jsonObject.put("result", 0);
         }
 
+        assert morenReservation != null;
+
         String api_key = "NCS0P5SFAXLOJMJI";
         String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
         Message coolsms = new Message(api_key, api_secret);
-        HashMap<String, String> params = new HashMap<String, String>();
-        HashMap<String, String> params2 = new HashMap<String, String>();
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
 
         /* 세이브카에 예약확인 문자 전송 */
         params.put("to", "01058283328"); // 01033453328 추가
@@ -401,7 +411,7 @@ public class AdminController {
 
         /* 세이브카에게 문자 전송 */
         try {
-            org.json.simple.JSONObject obj = (org.json.simple.JSONObject) coolsms.send(params);
+            org.json.simple.JSONObject obj = coolsms.send(params);
             System.out.println(obj.toString()); //전송 결과 출력
         } catch (CoolsmsException e) {
             System.out.println(e.getMessage());
@@ -410,7 +420,7 @@ public class AdminController {
 
         /* 고객에게 예약확인 문자 전송 */
         try {
-            org.json.simple.JSONObject obj2 = (org.json.simple.JSONObject) coolsms.send(params2);
+            org.json.simple.JSONObject obj2 = coolsms.send(params2);
             System.out.println(obj2.toString()); //전송 결과 출력
         } catch (CoolsmsException e) {
             System.out.println(e.getMessage());
@@ -443,18 +453,4 @@ public class AdminController {
         pw.flush();
         pw.close();
     }
-
-
-
-//    @GetMapping("/admin/detail/{date_time_id}")
-//    public String get_admin_detail(Model model,  @PathVariable String date_time_id) throws Exception {
-//
-//        CampingcarDateTime2 campingcarDateTime2 = campingcarDateTimeService2.findByDateTimeId(Long.parseLong(date_time_id));
-//        model.addAttribute("campingcarDateTime2",campingcarDateTime2);
-//        System.out.println(campingcarDateTime2.getDateTimeId());
-//
-//        return "admin_detail";
-//    }
-
-
 }
