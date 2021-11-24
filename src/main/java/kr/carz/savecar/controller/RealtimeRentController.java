@@ -24,17 +24,15 @@ public class RealtimeRentController {
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
     private final TwoYearlyRentService twoYearlyRentService;
-    private final ReservationService reservationService;
     private final DiscountService discountService;
     private final MorenReservationService morenReservationService;
 
     @Autowired
     public RealtimeRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
-                                  ReservationService reservationService, DiscountService discountService, MorenReservationService morenReservationService) {
+                                  DiscountService discountService, MorenReservationService morenReservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
-        this.reservationService = reservationService;
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
     }
@@ -43,23 +41,19 @@ public class RealtimeRentController {
     /*                             [New 버전] 실시간 월렌트 예약하기                                */
     /* ======================================================================================== */
 
-    private String expected_day = "3";
-    private DateFormat df_date = new SimpleDateFormat("yyyy-MM-dd");
-    private DateFormat df_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final String expected_day = "5";
+    private final DateTime dateTime = new DateTime(expected_day);
+    private final String moren_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + dateTime.today_date_only() + "&END=" + dateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
+
 
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
 
-        // 모렌 데이터 객체 생성
-        List<MorenDTO> morenDTOList = new ArrayList();
-        List<MorenDTO> morenDTOListExpected = new ArrayList();
-
-        DateTime dateTime = new DateTime(expected_day, df_date, df_time);
-        dateTime.today();
-        dateTime.expected();
+        List<MorenDTO> morenDTOList = new ArrayList<>();
+        List<MorenDTO> morenDTOListExpected = new ArrayList<>();
 
         HttpConnection http = new HttpConnection();
-        JSONObject responseJson = http.sendGetRequest("https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + dateTime.getToday_date() + "&END=" + dateTime.getToday_date() + "&EXPECTED_DAY=" + dateTime.getExpected_day());
+        JSONObject responseJson = http.sendGetRequest(moren_url);
         JSONArray list_json_array = (JSONArray) responseJson.get("list");
 
         // list 안에 데이터
@@ -70,12 +64,13 @@ public class RealtimeRentController {
             String order_end = ((String)morenObject.get("order_end"));
             Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
-            // 3일 이내 반납예정차량
+            // n일 이내 반납예정차량
             if ( (Integer)morenObject.get("order_status") == 2 &&
                     order_end.length() >= 19 &&
-                    order_end.substring(0, 19).compareTo(dateTime.getToday_date()) >= 0 &&  // 시간 고려해서
-                    order_end.substring(0, 10).compareTo(dateTime.getAfter_expected_date()) <= 0 // 날짜만 고려해서
+                    order_end.substring(0, 19).compareTo(dateTime.today_date_and_time()) >= 0 &&  // 시간 고려해서
+                    order_end.substring(0, 10).compareTo(dateTime.expected()) <= 0 // 날짜만 고려해서
                 ) {
+
 
                 if (morenObject.get("reserve").equals(null)) {
                     // 차량 이미지
@@ -108,8 +103,7 @@ public class RealtimeRentController {
                         morenDTOListExpected.add(moren);
 
                     } catch (Exception e) {
-                        System.out.println("Error ! 차량이름 모렌과 맞출 것 !"+ (String) morenObject.get("carCategory"));
-                        continue;
+                        System.out.println("Error ! 차량이름 모렌과 맞출 것 !"+ morenObject.get("carCategory"));
                     }
                 }
             }
@@ -147,8 +141,7 @@ public class RealtimeRentController {
                         morenDTOList.add(moren);
 
                     } catch (Exception e) {
-                        System.out.println("Error ! 차량이름 모렌과 맞출 것 ! 차량이름 : " + (String) morenObject.get("carCategory"));
-                        continue;
+                        System.out.println("Error ! 차량이름 모렌과 맞출 것 ! 차량이름 : " + morenObject.get("carCategory"));
                     }
                 }
             }
@@ -172,15 +165,11 @@ public class RealtimeRentController {
     public String rent_month_lookup(ModelMap model, @ModelAttribute RealTimeDTO realTimeDto) {
 
         // 모렌 데이터 객체 생성
-        List<MorenDTO> morenDTOList = new ArrayList();
-        List<MorenDTO> morenDTOListExpected = new ArrayList();
-
-        DateTime dateTime = new DateTime(expected_day, df_date, df_time);
-        dateTime.today();
-        dateTime.expected();
+        List<MorenDTO> morenDTOList = new ArrayList<>();
+        List<MorenDTO> morenDTOListExpected = new ArrayList<>();
 
         HttpConnection http = new HttpConnection();
-        JSONObject responseJson = http.sendGetRequest("https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + dateTime.getToday_date() + "&END=" + dateTime.getToday_date() + "&EXPECTED_DAY=" + dateTime.getExpected_day());
+        JSONObject responseJson = http.sendGetRequest(moren_url);
         JSONArray list_json_array = (JSONArray) responseJson.get("list");
 
         // list 안에 데이터
@@ -194,13 +183,13 @@ public class RealtimeRentController {
             if ((Integer)morenObject.get("order_status") == 0 ||
                     ((Integer)morenObject.get("order_status") == 2 &&
                     order_end.length() > 10 &&
-                    order_end.substring(0, 19).compareTo(dateTime.getToday_date()) >= 0 &&
-                    order_end.substring(0, 10).compareTo(dateTime.getAfter_expected_date()) <= 0)){
+                    order_end.substring(0, 19).compareTo(dateTime.today_date_and_time()) >= 0 &&
+                    order_end.substring(0, 10).compareTo(dateTime.expected()) <= 0)){
 
                 if (morenObject.get("reserve").equals(null)) {
 
                     // 차종별
-                    if (realTimeDto.getCarType().equals("전체")  || (realTimeDto.getCarType().equals((String)morenObject.get("carGubun")) && (Integer)morenObject.get("carLocal") != 1) || (realTimeDto.getCarType().equals("수입") && (Integer)morenObject.get("carLocal") == 1 ) ) {
+                    if (realTimeDto.getCarType().equals("전체")  || (realTimeDto.getCarType().equals(morenObject.get("carGubun")) && (Integer)morenObject.get("carLocal") != 1) || (realTimeDto.getCarType().equals("수입") && (Integer)morenObject.get("carLocal") == 1 ) ) {
 
                         Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
@@ -310,8 +299,7 @@ public class RealtimeRentController {
 
 
                         } catch (Exception e) {
-                            System.out.println("Error ! 차량이름 모렌과 맞출 것 !" + (String) morenObject.get("carCategory"));
-                            continue;
+                            System.out.println("Error ! 차량이름 모렌과 맞출 것 !" + morenObject.get("carCategory"));
                         }
                     }
                 }
@@ -355,9 +343,6 @@ public class RealtimeRentController {
     @RequestMapping(value = "/rent/month/detail/{rentTerm}/{carIdx}/{rentIdx}/{kilometer}/{discount}/{rentStatus}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     public String rent_month_detail(ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
 
-        DateTime dateTime = new DateTime(expected_day, df_date, df_time);
-        dateTime.today();
-
         String cost_per_km = null;
         String credit = null;
 
@@ -383,7 +368,7 @@ public class RealtimeRentController {
         }
 
         HttpConnection http = new HttpConnection();
-        JSONObject responseJson = http.sendGetRequest("https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + dateTime.getToday_date() + "&END=" + dateTime.getToday_date() + "&EXPECTED_DAY=" + dateTime.getExpected_day());
+        JSONObject responseJson = http.sendGetRequest(moren_url);
         JSONArray list_json_array = (JSONArray) responseJson.get("list");
 
         // list 안에 데이터
@@ -419,7 +404,7 @@ public class RealtimeRentController {
             }
         }
 
-        model.put("today_format", dateTime.getToday_date());
+        model.put("today_format", dateTime.today_date_only());
         model.put("rentStatus", rentStatus);
         model.put("kilometer", kilometer);
         model.put("discount",discount);
