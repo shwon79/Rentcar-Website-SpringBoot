@@ -26,12 +26,11 @@ public class HttpConnection {
             } else {
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder();
-                String line = "";
+                String line;
                 while ((line = br.readLine()) != null) {
                     sb.append(line);
                 }
                 responseJson = new JSONObject(sb.toString());
-                return responseJson;
             }
         } catch (IOException e){
             System.out.println("Error ! 모렌 연결 Error !");

@@ -335,7 +335,10 @@ public class ReservationController {
                         + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
                         + "총렌트료: " + dto.getCarAmountTotal() + "\n"
                         + "보증금: " + dto.getCarDeposit() + "\n"
-                        + "요청사항: " + dto.getReservationDetails() + "\n\n");
+                        + "요청사항: " + dto.getReservationDetails() + "\n\n"
+
+                        + ": " + dto.getCarDeposit() + "\n"
+                        + "계좌번호: " + dto.getCarDeposit() + "\n");
                 params.put("app_version", "test app 1.2");
                 params2.put("app_version", "test app 1.2");
 

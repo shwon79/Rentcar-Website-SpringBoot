@@ -114,6 +114,7 @@ public class MonthlyRentController {
         List<String> categoryList2 = new ArrayList();
 
 
+
         if (period.equals("rentMonth")) {
             List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
 
