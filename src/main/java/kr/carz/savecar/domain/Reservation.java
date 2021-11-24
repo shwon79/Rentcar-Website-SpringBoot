@@ -69,6 +69,7 @@ public class Reservation extends BaseTimeEntity {
                        String category1, String category2, String car_name, String mileage,
                        String deposit, String option, String price, String age_limit, String car_num,
                        String region, String resDate) {
+      
         this.name = name;
         this.phoneNo = phoneNo;
         this.detail = detail;

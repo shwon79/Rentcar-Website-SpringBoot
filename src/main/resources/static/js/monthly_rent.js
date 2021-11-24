@@ -1,4 +1,3 @@
-
 function erase_after_catergory1(){
 
     document.getElementById('select-category1').value = "";
@@ -153,7 +152,7 @@ function make_reservation () {
         } else {
             deposit = $("#deposit-0").val();
         }
-    // 월렌트
+        // 월렌트
     } else {
         deposit = document.getElementById("carDeposit").innerText;
     }
@@ -201,6 +200,7 @@ function make_reservation () {
             data : JSON.stringify(data)
         }).done(function () {
             alert('예약이 완료되었습니다.');
+            window.location.href = '/europe';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
