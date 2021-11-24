@@ -231,7 +231,7 @@
                 <tr th:if="${morenDTO.credit=='1'}">
                     <td>
                         <label class="control-label" for=""><i class="fas fa-star-of-life"></i>
-                            해당 차량의 경우,<br>본인 명의 신용카드 소지<br>또는 소득 3개월 증빙<br>또는 보증금의 30% 이상을<br>지불하셔야 합니다.
+                            해당 차량의 경우,<br>본인 명의 신용카드 소지<br>또는 소득 3개월 증빙<br>또는 차량 금액의 30% 이상 보증금을<br>지불하셔야 합니다.
                         </label>
                     </td>
                     <td colspan="3">
@@ -240,7 +240,7 @@
                             <select class="form-control" id="reservation-detail-credit" onchange="displayDeposit()">
                                 <option value="본인 신용카드">본인 신용카드</option>
                                 <option value="소득 3개월 증빙">소득 3개월 증빙</option>
-                                <option value="차량 금액의 30% 보증금">차량 금액의 30% 보증금 지불</option>
+                                <option value="차량 금액의 30% 이상 보증금">차량 금액의 30% 이상 보증금 지불</option>
                             </select>
                         </div>
                     </td>
@@ -248,7 +248,7 @@
                 <tr th:if="${morenDTO.credit=='2'}">
                     <td>
                         <label class="control-label" for=""><i class="fas fa-star-of-life"></i>
-                            해당 차량의 경우,<br>본인 명의의 신용카드를<br>소지하시거나<br>보증금의 30%를 지불하셔야<br>합니다.
+                            해당 차량의 경우,<br>본인 명의의 신용카드를<br>소지하시거나<br>차량 금액의 30% 이상 보증금을<br>지불하셔야 합니다.
                         </label>
                     </td>
                     <td colspan="3">
@@ -256,7 +256,7 @@
                             <span class="input-group-addon"><i class="fas fa-credit-card"></i></span>
                             <select class="form-control" id="reservation-detail-credit" onchange="displayDeposit()">
                                 <option value="본인 신용카드">본인 신용카드 (한도도 가능해야 함)</option>
-                                <option value="차량 금액의 30% 보증금">차량 금액의 30% 보증금 지불</option>
+                                <option value="차량 금액의 30% 이상 보증금">차량 금액의 30% 이상 보증금 지불</option>
                             </select>
                         </div>
                     </td>
