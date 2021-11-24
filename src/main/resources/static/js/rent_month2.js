@@ -118,16 +118,19 @@ function numberWithCommas() {
 
 $('.number').ready(numberWithCommas());
 
+// 한 줄 내에서 클릭 시 상세 페이지로 이동
+// $('#mainTable_tbody').
+
 
 // '차량금액의 30% 보증금 지불'일 경우 보증금 표기 하지 않기
 const credit = document.getElementById('reservation-detail-credit');
 let originalDepositText = document.getElementById('carDeposit');
 const realDeposit = originalDepositText.innerText;
 const wonText = document.getElementById('displayNone');
-let newDepositText = '차량가격의 30%(상담문의)';
+let newDepositText = '차량가격의 30% 이상(상담문의)';
 
 function displayDeposit() {
-    if (credit.value == '차량 금액의 30% 보증금') {
+    if (credit.value == '차량 금액의 30% 이상 보증금') {
         originalDepositText.innerText = newDepositText;
         wonText.style.display = 'none';
     } else {
