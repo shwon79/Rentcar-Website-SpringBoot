@@ -39,7 +39,7 @@ public class RealtimeRentController {
     /*                             [New 버전] 실시간 월렌트 예약하기                                */
     /* ======================================================================================== */
 
-    private final String expected_day = "5";
+    private final String expected_day = "4";
     private final DateTime dateTime = new DateTime(expected_day);
     private final String moren_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + dateTime.today_date_only() + "&END=" + dateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 

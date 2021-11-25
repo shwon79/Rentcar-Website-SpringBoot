@@ -1,4 +1,4 @@
-let sortType = 'asc';
+let sortType = 'desc';
 
 function sortAvailableContent(index) {
     let table = document.getElementsByClassName('table_available')

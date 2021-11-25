@@ -68,11 +68,25 @@
                   <div class="carousel-inner" role="listbox" style="height: 100%">
                     <!-- 사진 -->
                     <div class="item active">
-                      <img th:src="@{/img/picture_not_found.png}" alt="211005" border="0"> <!-- 준비중 사진으로 변경 -->
+                      <img th:src="@{/img/picture_not_found.png}" alt="211005" border="0">
                     </div>
                   </div>
                 </div>
-                <div th:unless="${#lists.size(morenDto.carImageList) == 0}" id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 100%">
+                <div th:if="${#lists.size(morenDto.carImageList) == 1}" id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 100%">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators" >
+                    <li data-target="#carousel-example-generic"  th:each="image_url, iterStat: ${morenDto.carImageList}" th:data-slide-to="${iterStat.index}" th:class="${iterStat.index} == 0 ? 'active' : ''"></li>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox" style="height: 100%">
+                    <!-- 사진 -->
+                    <div th:each="image_url, iterStat: ${morenDto.carImageList}"  th:class="${iterStat.index} == 0 ? 'item active' : 'item'">
+                      <img th:src="${image_url}" style="padding: 50px;" alt="...">
+                    </div>
+                  </div>
+                </div>
+                <div th:if="${#lists.size(morenDto.carImageList) > 1}" id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 100%">
                   <!-- Indicators -->
                   <ol class="carousel-indicators" >
                     <li data-target="#carousel-example-generic"  th:each="image_url, iterStat: ${morenDto.carImageList}" th:data-slide-to="${iterStat.index}" th:class="${iterStat.index} == 0 ? 'active' : ''"></li>
@@ -194,7 +208,7 @@
                         </div>
                       </div>
                       <div style="text-align: right;">
-                        <p style="color: dimgrey; text-align: center; font-size: 16px;">약정 주행거리 선택에 따라 대여료가 달라집니다.</p>
+                        <p style="color: dimgrey; text-align: center; font-size: 16px;">렌트 기간, 약정 주행거리, 연령 선택에 따라 대여료가 달라집니다.</p>
                       </div>
                     </div>
                   </div>
@@ -203,7 +217,7 @@
                       <tr style="background: #eeeeee; border-bottom: 1px solid #3b3b3b;">
                         <td>렌트 기간</td>
                         <td>약정 주행거리</td>
-                        <td>공급가</td>
+                        <td>월대여료(VAT미포함)</td>
                         <td></td>
                       </tr>
                       <tr>

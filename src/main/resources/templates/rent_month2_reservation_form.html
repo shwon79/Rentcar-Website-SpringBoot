@@ -62,7 +62,7 @@
         <!--basic_info-->
         <div class="basic_info">
             <table>
-                <th colspan="4" class="col_title">선택 차량 기본 정보</th>
+                <th colspan="4" class="col_title">예약 정보</th>
                 <tr>
                     <td class="col_subtitle">차명</td>
                     <td th:text="${morenDTO.carName}" style="width: 350px;"></td>
@@ -264,6 +264,22 @@
                 </tr>
                 <tr>
                     <td class="col_subtitle">
+                        <label class="control-label" for=""><i class="fas fa-star-of-life"></i>
+                            차량 픽업 방법
+                        </label>
+                    </td>
+                    <td colspan="3">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fas fa-map-marker-alt"></i></span>
+                            <select class="form-control" id="reservation-detail-pickup">
+                                <option value="방문">방문</option>
+                                <option value="배차 신청">배차 신청</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col_subtitle">
                         <label class="control-label" for="address"><i class="fas fa-star-of-life"></i> 배차 받을 주소</label>
                     </td>
                     <td colspan="3">
@@ -281,22 +297,6 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fas fa-map-marker-alt"></i></span>
                             <input type="text" id="address_kakao_detail" class="form-control" name="address_detail" placeholder="상세주소를 입력하세요"/>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col_subtitle">
-                        <label class="control-label" for=""><i class="fas fa-star-of-life"></i>
-                            차량 픽업 방법
-                        </label>
-                    </td>
-                    <td colspan="3">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fas fa-map-marker-alt"></i></span>
-                            <select class="form-control" id="reservation-detail-pickup">
-                                <option value="방문">방문</option>
-                                <option value="배차 신청">배차 신청</option>
-                            </select>
                         </div>
                     </td>
                 </tr>
