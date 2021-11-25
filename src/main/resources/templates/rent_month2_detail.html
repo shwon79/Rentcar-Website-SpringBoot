@@ -107,7 +107,7 @@
                   </div>
                   <hr style="border-top: 2px solid white;">
                   <!-- table left -->
-                  <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 info-card-left">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info-card-left">
                     <p>연료</p>
                     <p>년식</p>
 <!--                    <p>주행거리</p>-->
@@ -118,7 +118,7 @@
                     <p>옵션</p>
                   </div>
                   <!-- table right -->
-                  <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 info-card-right">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info-card-right">
                     <p th:text="${morenDto.carEngine}"></p>
                     <p class="carOld" th:text="${morenDto.carOld}"></p>
 <!--                    <p th:text="${morenDto.carMileaget}+'km'"></p>-->
@@ -139,7 +139,7 @@
 
             <!--실시간 예약-->
             <h1>실시간 예약</h1>
-            <hr style="border-top: 3px solid black; margin-top: 0;">
+            <hr style="border-top: 3px solid #eeeeee; margin-top: 0;">
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <p id="getCarIdx" th:text="${carIdx}" style="display: none;"></p>
