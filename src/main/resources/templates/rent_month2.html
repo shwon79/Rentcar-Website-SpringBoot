@@ -209,7 +209,7 @@
                         </thead>
                         <!-- pc -->
                         <tbody id="mainTable_tbody">
-                        <tr th:each="moren, iterStat : ${morenDTOList}">
+                        <tr th:each="moren, iterStat : ${morenDTOList}" class="clickable">
                             <td scope="col" th:text="${moren.carIdx}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
                             <td scope="col" th:text="${moren.carName}"></td>

@@ -61,7 +61,7 @@ html {
     border-radius: 15px;
     background: #eeeeee;
     /*color: #fff;*/
-    padding: 20px;
+    padding: 5px;
     text-align: center;
     font-weight: 400;
     font-family: arial;
@@ -97,11 +97,11 @@ html {
     }
     35% {
         color:red;
-        transform: scale(1.05);
+        transform: scale(1.03);
     }
     70% {
         color: mediumvioletred;
-        transform: scale(1.1);
+        transform: scale(1.06);
     }
 }
 

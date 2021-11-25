@@ -119,7 +119,12 @@ function numberWithCommas() {
 $('.number').ready(numberWithCommas());
 
 // 한 줄 내에서 클릭 시 상세 페이지로 이동
-// $('#mainTable_tbody').
+// let clickable = document.getElementsByClassName('clickable');
+// function moveToDetail() {
+//     console.log('Hi');
+// }
+//
+// $('.clickable').onclick(moveToDetail());
 
 
 // '차량금액의 30% 보증금 지불'일 경우 보증금 표기 하지 않기

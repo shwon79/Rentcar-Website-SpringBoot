@@ -182,9 +182,11 @@
     justify-content: space-between;
 }
 .selectRentermKilometerBox {
-    background-color: #f3f3f3;
-    padding: 3rem 1rem;
+    padding: 0;
     width: auto;
+}
+.display_flex {
+    display: flex;
 }
 .select-box {
     padding-bottom: 2rem;
@@ -195,8 +197,8 @@
 }
 .result-box table {
     background: white;
-    border-top: 2px solid #3b3b3b;
-    border-bottom: 2px solid #3b3b3b;
+    border-top: 1px solid #3b3b3b;
+    border-bottom: 1px solid #3b3b3b;
 }
 .result-box table td {
     border-bottom: none;
@@ -285,7 +287,10 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
+    .display_flex {
+        flex-direction: column;
+    }
     .onlyDesktop {
         display: none;
     }
