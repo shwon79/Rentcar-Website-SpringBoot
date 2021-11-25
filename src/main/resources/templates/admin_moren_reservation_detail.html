@@ -49,6 +49,7 @@
                 <p>부가세: <span class="number" th:text="${morenReservationDTO.carTax}"></span><span>원</span></p>
                 <p>총 렌트료: <span th:text="${morenReservationDTO.carAmountTotal}" class="carAmountTotal number"></span><span>원</span></p>
                 <p>보증금: <span th:text="${morenReservationDTO.carDeposit}" class="carDeposit number"></span><span>원</span></p>
+                <p>방문 또는 배차 신청: <span th:text="${morenReservationDTO.pickupPlace}" class="pickupPlace"></span></p>
                 <p class="costPerKm" th:text="${morenReservationDTO.costPerKm}" style="display: none;"></p>
                 <p class="reservationGuarantee" th:text="${morenReservationDTO.reservationGuarantee}" style="display: none;"></p>
                 <p class="carCode" th:text="${morenReservationDTO.carCode}" style="display: none;"></p>

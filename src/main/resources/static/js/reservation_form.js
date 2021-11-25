@@ -71,8 +71,8 @@ const reserveMonthlyRent = () => {
     const address = document.getElementById('address_kakao').value;
     const addressDetail = document.getElementById('address_kakao_detail').value;
     const carPrice = document.getElementById('carPrice').innerText;
-    const carTax = document.getElementById('carTax').innerText;
-    const carAmountTotal = document.getElementById('carAmountTotal').innerText;
+    let carTax = document.getElementById('carTax').innerText;
+    let carAmountTotal = document.getElementById('carAmountTotal').innerText;
     const carDeposit = document.getElementById('carDeposit').innerText;
     const rentTerm = document.getElementById('getRentTerm').innerText;
     const costPerKm = document.getElementById('getCostPerKm').innerText;
@@ -86,6 +86,13 @@ const reserveMonthlyRent = () => {
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     let phoneWithoutDash = /^\d{11}$/;
     let regAge = /[0-9]{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1])/;
+
+    if (carTax!='상담') {
+        carTax = parseInt(carTax)*0.1;
+    }
+    if (carAmountTotal!='상담') {
+        carAmountTotal = parseInt(carAmountTotal)*1.1;
+    }
 
     if (phoneWithoutDash.test(reservationPhone) == true) {
         reservationPhone = reservationPhone.substr(0, 3) + "-" + reservationPhone.substr(3, 4) + "-" + reservationPhone.substr(7,4);

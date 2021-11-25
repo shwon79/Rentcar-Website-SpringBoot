@@ -91,7 +91,7 @@
                         <span th:text="${morenDTO.carPrice}" class="number"></span>
                         <span>원</span>
                     </td>
-                    <td th:if="${morenDTO.carPrice=='상담'}">상담 필요</td>
+                    <td th:if="${morenDTO.carPrice=='상담'}">상담</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -101,7 +101,7 @@
                         <span th:text="${morenDTO.carPrice}*0.1" class="number"></span>
                         <span>원</span>
                     </td>
-                    <td th:if="${morenDTO.carPrice=='상담'}">상담 필요</td>
+                    <td th:if="${morenDTO.carPrice=='상담'}">상담</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -111,7 +111,7 @@
                         <span th:text="${morenDTO.carPrice}*1.1" class="number"></span>
                         <span>원</span>
                     </td>
-                    <td th:if="${morenDTO.carPrice=='상담'}">상담 필요</td>
+                    <td th:if="${morenDTO.carPrice=='상담'}">상담</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -388,16 +388,6 @@
                 </tr>
             </table>
 
-            <div style="display: none;">
-                <p id="carNo" th:text="${morenDTO.carNo}"></p>
-                <p id="carPrice" th:text="${morenDTO.carPrice}"></p>
-                <p id="getCostPerKm" th:text="${morenDTO.getCostPerKm}"></p>
-                <p id="getCarCode" th:text="${morenDTO.carCode}"></p>
-                <p id="carTax" th:text="${morenDTO.carPrice}*0.1"></p>
-                <p id="carAmountTotal" th:text="${morenDTO.carPrice}*1.1"></p>
-                <p id="carDeposit" th:text="${morenDTO.deposit}"></p>
-            </div>
-
             <!-- 계좌이체 안내 및 예약 버튼 -->
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -418,6 +408,17 @@
                     <button id="btn_final" type="button" onclick="reserveMonthlyRent()" class="col">예약 신청 하기</button>
                 </div>
             </div>
+
+            <div style="display: none;">
+                <p id="carNo" th:text="${morenDTO.carNo}"></p>
+                <p id="carPrice" th:text="${morenDTO.carPrice}"></p>
+                <p id="getCostPerKm" th:text="${morenDTO.getCostPerKm}"></p>
+                <p id="getCarCode" th:text="${morenDTO.carCode}"></p>
+                <p id="carTax" th:text="${morenDTO.carPrice}"></p>
+                <p id="carAmountTotal" th:text="${morenDTO.carPrice}"></p>
+                <p id="carDeposit" th:text="${morenDTO.deposit}"></p>
+            </div>
+
         </div>
     </div>
 </body>
