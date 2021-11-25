@@ -309,6 +309,16 @@ public class ReservationController {
                 params2.put("from", "01052774113");
                 params2.put("type", "LMS");
 
+                String delivery_text = "";
+                if (dto.getPickupPlace().equals("방문")){
+
+                    delivery_text = "방문/배차: " + dto.getPickupPlace() + "\n";
+                } else {
+                    delivery_text = "방문/배차: " + dto.getPickupPlace() + "\n"
+                                  + "배차요청주소: " + dto.getAddress() + "\n"
+                                  + "배차요청상세주소: " + dto.getAddressDetail() + "\n";
+                }
+
                 params.put("text", "[실시간 예약 확정 처리 완료]\n"
                         + "문의자 이름: " + dto.getReservationName() + "\n"
                         + "연락처: " + dto.getReservationPhone() + "\n"
@@ -317,25 +327,26 @@ public class ReservationController {
                         + "대여시간: " + dto.getReservationTime() + "\n"
                         + "렌트기간: " + dto.getRentTerm() + "\n"
                         + "약정주행거리: " + dto.getKilometer() + "\n"
-                        + "배차요청주소: " + dto.getAddress() + "\n"
-                        + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
+                        + delivery_text
                         + "생년월일: " + dto.getReservationAge() + "\n"
                         + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
                         + "보증금: " + dto.getCarDeposit() + "\n"
                         + "요청사항: " + dto.getReservationDetails() + "\n\n");
 
                 params2.put("text", "[세이브카 렌트카 예약이 확정되었습니다]" + "\n"
-                        + "문의자 이름: " + dto.getReservationName() + "\n"
+                        + "성함: " + dto.getReservationName() + "\n"
                         + "연락처: " + dto.getReservationPhone() + "\n"
                         + "차량번호: " + dto.getCarNo() + "\n"
                         + "대여일자: " + dto.getReservationDate() + "\n"
                         + "렌트기간: " + dto.getRentTerm() + "\n"
                         + "약정주행거리: " + dto.getKilometer() + "\n"
-                        + "배차요청주소: " + dto.getAddress() + "\n"
-                        + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
+                        + delivery_text
                         + "총렌트료: " + dto.getCarAmountTotal() + "\n"
                         + "보증금: " + dto.getCarDeposit() + "\n"
-                        + "요청사항: " + dto.getReservationDetails() + "\n\n");
+                        + "요청사항: " + dto.getReservationDetails() + "\n\n"
+
+                        + "* 운전면허증을 촬영하여 문자로 보내주시기 바랍니다.\n");
+
                 params.put("app_version", "test app 1.2");
                 params2.put("app_version", "test app 1.2");
 
