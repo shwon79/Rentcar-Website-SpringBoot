@@ -88,7 +88,7 @@
                             <td scope="col" class="reservationAge" th:text="${reservation.reservationAge}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationGuarantee" th:text="${reservation.reservationGuarantee}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="carCode" th:text="${reservation.carCode}" style="display: none;" th:data-index="${reservation.id}"></td>
-
+                            <td scope="col" class="pickupPlace" th:text="${reservation.pickupPlace}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td>
                                 <span><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
                                 <span><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>

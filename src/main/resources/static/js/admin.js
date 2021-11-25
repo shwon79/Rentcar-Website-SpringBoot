@@ -177,6 +177,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let reservationAgeList = document.getElementsByClassName('reservationAge');
     let reservationGuaranteeList = document.getElementsByClassName('reservationGuarantee');
     let carCodeList = document.getElementsByClassName('carCode');
+    let pickupPlaceList = document.getElementsByClassName('pickupPlace');
 
     let id;
     let carNo;
@@ -195,6 +196,7 @@ $('.reservation-confirm-btn').click(function(e) {
     let reservationAge;
     let reservationGuarantee;
     let carCode;
+    let pickupPlace;
 
     for (i=0; i < idList.length; i++) {
         if (e.target.dataset.index == idList[i].dataset.index) {
@@ -288,6 +290,11 @@ $('.reservation-confirm-btn').click(function(e) {
             carCode = carCodeList[i].innerText;
         }
     };
+    for (i=0; i < pickupPlaceList.length; i++) {
+        if (e.target.dataset.index == pickupPlaceList[i].dataset.index) {
+            pickupPlace = pickupPlaceList[i].innerText;
+        }
+    };
 
     var data = {
         id : id,
@@ -305,31 +312,32 @@ $('.reservation-confirm-btn').click(function(e) {
         carDeposit: carDeposit,
         rentTerm: rentTerm,
         costPerKm: costPerKm,
-        carCode: carCode
+        carCode: carCode,
+        pickupPlace: pickupPlace
     }
 
     console.log(data);
 
-    let reserveConfirm = confirm('예약을 완료하시겠습니까?');
-
-    if (reserveConfirm) {
-        $.ajax({
-            type:'POST',
-            url:'/moren/reservation/apply',
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('예약이 완료되었습니다.');
-            } else {
-                alert('예약에 문제가 생겼습니다.');
-            };
-            window.location.href = '/admin/moren/reservation/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    };
+    // let reserveConfirm = confirm('예약을 완료하시겠습니까?');
+    //
+    // if (reserveConfirm) {
+    //     $.ajax({
+    //         type:'POST',
+    //         url:'/moren/reservation/apply',
+    //         dataType:'json',
+    //         contentType : 'application/json; charset=utf-8',
+    //         data : JSON.stringify(data)
+    //     }).done(function (result) {
+    //         if (result.result == 1) {
+    //             alert('예약이 완료되었습니다.');
+    //         } else {
+    //             alert('예약에 문제가 생겼습니다.');
+    //         };
+    //         window.location.href = '/admin/moren/reservation/menu';
+    //     }).fail(function (error) {
+    //         alert(JSON.stringify(error));
+    //     })
+    // };
 })
 
 // 모렌 예약 신청 목록에서 취소
