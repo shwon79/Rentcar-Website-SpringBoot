@@ -14,8 +14,6 @@ import org.thymeleaf.util.ArrayUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -72,15 +70,7 @@ public class RealtimeRentController {
 
 
                 if (morenObject.get("reserve").equals(null)) {
-                    // 차량 이미지
-                    List<String> carList = new ArrayList<>();
 
-                    if (!morenObject.get("carThumbImages").equals(null)) {
-                        JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
-                        for (int j = 0; j < carJsonArray.length(); j++) {
-                            carList.add((String) carJsonArray.get(j));
-                        }
-                    }
                     try {
                         // 자체 db에서 가격 정보 가져오기
                         MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, (String)morenObject.get("carCategory"));
@@ -97,7 +87,7 @@ public class RealtimeRentController {
                                 (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                 (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description,
+                                monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), null, discount_price, discount_description,
                                 monthlyRent2.getCost_per_km(), monthlyRent2.getCredit(), (String) morenObject.get("carCode"), null, null, null);
                         morenDTOListExpected.add(moren);
 
@@ -110,15 +100,6 @@ public class RealtimeRentController {
             else if ((Integer)morenObject.get("order_status") == 0){
 
                 if (morenObject.get("reserve").equals(null)) {
-                    // 차량 이미지
-                    List<String> carList = new ArrayList<>();
-
-                    if (!morenObject.get("carThumbImages").equals(null)) {
-                        JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
-                        for (int j = 0; j < carJsonArray.length(); j++) {
-                            carList.add((String) carJsonArray.get(j));
-                        }
-                    }
                     try {
                         // 자체 db에서 가격 정보 가져오기
                         MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, (String)morenObject.get("carCategory"));
@@ -135,7 +116,7 @@ public class RealtimeRentController {
                                 (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                 (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), carList, discount_price, discount_description,
+                                monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), null, discount_price, discount_description,
                                 monthlyRent2.getCost_per_km(), monthlyRent2.getCredit(), (String) morenObject.get("carCode"), null, null, null);
                         morenDTOList.add(moren);
 
@@ -193,15 +174,6 @@ public class RealtimeRentController {
 
                         Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
-                        // 차량 이미지
-                        List<String> carList = new ArrayList<>();
-
-                        if (!morenObject.get("carThumbImages").equals(null)) {
-                            JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
-                            for (int j = 0; j < carJsonArray.length(); j++) {
-                                carList.add((String) carJsonArray.get(j));
-                            }
-                        }
 
                         try {
                             // 자체 db에서 가격 정보 가져오기
@@ -288,7 +260,7 @@ public class RealtimeRentController {
                                     (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                                     (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                     (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                                    kilometer_cost, (String) morenObject.get("order_end"), dbid, carList, discount_price, discount_description, cost_per_km,
+                                    kilometer_cost, (String) morenObject.get("order_end"), dbid, null, discount_price, discount_description, cost_per_km,
                                     credit, (String) morenObject.get("carCode"), null, null, null);
 
                             if ((Integer)morenObject.get("order_status") == 0) {
@@ -347,10 +319,13 @@ public class RealtimeRentController {
         String credit = null;
         String deposit = null;
 
+        List<String> carList = new ArrayList<>();
+
         // 세이브카 db에서 해당 차 객체 가져오기
         if (rentTerm.equals("한달")){
             Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
             MonthlyRent monthlyRent = monthlyRentOptional.get();
+            carList.add(monthlyRent.getImg_url());
             cost_per_km = monthlyRent.getCost_per_km();
             credit = monthlyRent.getCredit();
             deposit = monthlyRent.getDeposit();
@@ -358,6 +333,7 @@ public class RealtimeRentController {
         } else if (rentTerm.equals("12개월")){
             Optional<YearlyRent> yearlyRentOptional = yearlyRentService.findById(rentIdx);
             YearlyRent yearlyRent = yearlyRentOptional.get();
+            carList.add(yearlyRent.getImg_url());
             cost_per_km = yearlyRent.getCost_per_km();
             credit = yearlyRent.getCredit();
             deposit = yearlyRent.getDeposit();
@@ -373,6 +349,7 @@ public class RealtimeRentController {
 
                 Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
                 MonthlyRent monthlyRent = monthlyRentOptional.get();
+                carList.add(monthlyRent.getImg_url());
                 cost_per_km = monthlyRent.getCost_per_km();
                 credit = monthlyRent.getCredit();
                 deposit = monthlyRent.getDeposit();
@@ -382,6 +359,7 @@ public class RealtimeRentController {
                 kilometer = "2000km";
             } else {
                 TwoYearlyRent twoYearlyRent = twoYearlyRentOptional.get();
+                carList.add(twoYearlyRent.getImg_url());
                 cost_per_km = twoYearlyRent.getCost_per_km();
                 credit = twoYearlyRent.getCredit();
                 deposit = twoYearlyRent.getDeposit();
@@ -400,17 +378,13 @@ public class RealtimeRentController {
 
             if(morenObject.get("carIdx").equals(carIdx)){
 
-                // 차량 이미지
-                List<String> carList = new ArrayList<>();
-
                 if (!morenObject.get("carThumbImages").equals(null)) {
+                    carList = new ArrayList<>();
+
                     JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
                     for (int j = 0; j < carJsonArray.length(); j++) {
                         carList.add((String) carJsonArray.get(j));
                     }
-                    model.put("lenOfPictures", carJsonArray.length());
-                } else {
-                    model.put("lenOfPictures", 0);
                 }
 
                 MorenDTO morenDto = new MorenDTO((String) morenObject.get("carIdx"), (String) morenObject.get("carCategory"), (String) morenObject.get("carName"),
@@ -480,6 +454,15 @@ public class RealtimeRentController {
         params2.put("from", "01052774113");
         params2.put("type", "LMS");
 
+        String delivery_text = "";
+        if (morenReservationDTO.getPickupPlace().equals("방문")){
+            delivery_text = "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n";
+        } else {
+            delivery_text = "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n"
+                    + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"
+                    + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n";
+        }
+
 
         params.put("text", "[실시간 예약 대기 신청]\n"
                 + "문의자 이름: " + morenReservationDTO.getReservationName() + "\n"
@@ -489,9 +472,7 @@ public class RealtimeRentController {
                 + "대여시간: " + morenReservationDTO.getReservationTime() + "\n"
                 + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
                 + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
-                + "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n"
-                + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"   // 방문시에는 어떻게 처리할지 확인
-                + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n"
+                + delivery_text
                 + "생년월일: " + morenReservationDTO.getReservationAge() + "\n"
                 + "신용증빙: " + morenReservationDTO.getReservationGuarantee() + "\n"
                 + "총렌트료(부포): " + morenReservationDTO.getCarAmountTotal() + "\n"
@@ -505,15 +486,13 @@ public class RealtimeRentController {
                 + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
                 + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
                 + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
-                + "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n"
-                + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"
-                + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n"
+                + delivery_text
                 + "기타증빙사항: " + morenReservationDTO.getReservationGuarantee() + "\n"
                 + "총렌트료: " + morenReservationDTO.getCarAmountTotal() + "\n"
                 + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
                 + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n"
 
-                + "예약금 입금하시면 직원이 확인 후, 예약이 확정됩니다.\n"
+                + "* 예약금 입금하시면 직원이 확인 후, 예약이 확정됩니다.\n"
                 + "계좌번호: 하나은행 810-626121-01404 (주)세이브카\n");
 
         params.put("app_version", "test app 1.2");
