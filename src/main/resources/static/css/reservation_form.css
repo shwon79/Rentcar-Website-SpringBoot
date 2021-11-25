@@ -82,7 +82,14 @@ html {
     bottom: -20px;
 }
 
-
+.panel-body h6 {
+    font-size: 16px;
+    margin: 1rem 0;
+}
+.panel-body p {
+    font-size: 12px;
+    margin: 0;
+}
 @keyframes colorchange {
     0% {
         color:darkred;
