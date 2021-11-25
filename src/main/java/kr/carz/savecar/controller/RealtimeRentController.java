@@ -499,7 +499,7 @@ public class RealtimeRentController {
                 + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n");
 
         params2.put("text", "[세이브카 렌트카 예약 대기 신청이 완료되었습니다]" + "\n"
-                + "문의자 이름: " + morenReservationDTO.getReservationName() + "\n"
+                + "성함: " + morenReservationDTO.getReservationName() + "\n"
                 + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
                 + "차량번호: " + morenReservationDTO.getCarNo() + "\n"
                 + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
@@ -513,8 +513,8 @@ public class RealtimeRentController {
                 + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
                 + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n"
 
-                + "예약금 입금 후, 예약이 확정됩니다.\n"
-                + "계좌번호: 하나은행 503-xxx-xxxx 세이브카\n");
+                + "예약금 입금하시면 직원이 확인 후, 예약이 확정됩니다.\n"
+                + "계좌번호: 하나은행 810-626121-01404 (주)세이브카\n");
 
         params.put("app_version", "test app 1.2");
         params2.put("app_version", "test app 1.2");
