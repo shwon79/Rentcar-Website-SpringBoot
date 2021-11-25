@@ -375,6 +375,15 @@ public class AdminController {
         params2.put("from", "01052774113");
         params2.put("type", "LMS");
 
+        String delivery_text = "";
+        if (morenReservation.getPickupPlace().equals("방문")){
+            delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n";
+        } else {
+            delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n"
+                    + "배차요청주소: " + morenReservation.getAddress() + "\n"
+                    + "배차요청상세주소: " + morenReservation.getAddressDetail() + "\n";
+        }
+
         params.put("text", "[실시간 예약 취소 처리 완료]\n"
                 + "문의자 이름: " + morenReservation.getReservationName() + "\n"
                 + "연락처: " + morenReservation.getReservationPhone() + "\n"
@@ -383,8 +392,7 @@ public class AdminController {
                 + "대여시간: " + morenReservation.getReservationTime() + "\n"
                 + "렌트기간: " + morenReservation.getRentTerm() + "\n"
                 + "약정주행거리: " + morenReservation.getKilometer() + "\n"
-                + "배차요청주소: " + morenReservation.getAddress() + "\n"
-                + "배차요청상세주소: " + morenReservation.getAddressDetail() + "\n"
+                + delivery_text
                 + "생년월일: " + morenReservation.getReservationAge() + "\n"
                 + "신용증빙: " + morenReservation.getReservationGuarantee() + "\n"
                 + "총렌트료(부포): " + morenReservation.getCarAmountTotal() + "\n"
@@ -400,8 +408,7 @@ public class AdminController {
                 + "대여일자: " + morenReservation.getReservationDate() + "\n"
                 + "렌트기간: " + morenReservation.getRentTerm() + "\n"
                 + "약정주행거리: " + morenReservation.getKilometer() + "\n"
-                + "배차요청주소: " + morenReservation.getAddress() + "\n"
-                + "배차요청상세주소: " + morenReservation.getAddressDetail() + "\n"
+                + delivery_text
                 + "기타증빙사항: " + morenReservation.getReservationGuarantee() + "\n"
                 + "총렌트료: " + morenReservation.getCarAmountTotal() + "\n"
                 + "보증금: " + morenReservation.getCarDeposit() + "\n"

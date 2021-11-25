@@ -31,6 +31,7 @@ public class MonthlyRent {
     private Long end;
 
     private String credit;
+    private String img_url;
 
 
 }
