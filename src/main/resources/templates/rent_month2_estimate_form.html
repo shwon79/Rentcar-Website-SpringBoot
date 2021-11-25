@@ -158,8 +158,8 @@
             </tr>
             <tr>
                 <td class="table_subtitle">약정주행거리</td>
-                <td th:if="${morenDTO.kilometer!='기타'}" th:text="${morenDTO.kilometer}"></td>
-                <td th:if="${morenDTO.kilometer=='기타'}"></td>
+                <td th:if="${morenDTO.kilometer!='기타'&&morenDTO.kilometer!='기타_long'}" th:text="${morenDTO.kilometer}"></td>
+                <td th:if="${morenDTO.kilometer=='기타'||morenDTO.kilometer=='기타_long'}"></td>
                 <td class="table_subtitle">초과시</td>
                 <td th:if="${morenDTO.kilometer!='기타'}">
                     <span th:text="${morenDTO.costPerKm}"></span>

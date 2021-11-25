@@ -119,30 +119,104 @@ function numberWithCommas() {
 $('.number').ready(numberWithCommas());
 
 // 한 줄 내에서 클릭 시 상세 페이지로 이동
-// let clickable = document.getElementsByClassName('clickable');
-// function moveToDetail() {
-//     console.log('Hi');
-// }
-//
-// $('.clickable').onclick(moveToDetail());
+$('.moveToAvailableDetail').click(function(e) {
+    let rentTermList = document.getElementsByClassName('rentTerm');
+    let carIdxList = document.getElementsByClassName('carIdx');
+    let kilometerList = document.getElementsByClassName('kilometer');
+    let discountList = document.getElementsByClassName('discount');
+
+    let dataIndex = e.currentTarget.dataset.index;
+    let rentTerm;
+    let carIdx;
+    let rentIdx = dataIndex;
+    let kilometer;
+    let discount;
+
+    for (i = 0; i < rentTermList.length; i++) {
+        if (rentTermList[i].dataset.index == dataIndex) {
+            rentTerm = rentTermList[i].innerText;
+        }
+    };
+    for (i = 0; i < carIdxList.length; i++) {
+        if (carIdxList[i].dataset.index == dataIndex) {
+            carIdx = carIdxList[i].innerText;
+        }
+    };
+    for (i = 0; i < discountList.length; i++) {
+        if (discountList[i].dataset.index == dataIndex) {
+            discount = discountList[i].innerText;
+            if (discount=='') {
+                discount = null;
+            }
+        }
+    };
+    for (i = 0; i < kilometerList.length; i++) {
+        if (kilometerList[i].dataset.index == dataIndex) {
+            kilometer = kilometerList[i].innerText;
+        }
+    };
+
+    window.location = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/available';
+});
+
+$('.moveToExpectedDetail').click(function(e) {
+    let rentTermList = document.getElementsByClassName('rentTerm');
+    let carIdxList = document.getElementsByClassName('carIdx');
+    let kilometerList = document.getElementsByClassName('kilometer');
+    let discountList = document.getElementsByClassName('discount');
+
+    let dataIndex = e.currentTarget.dataset.index;
+    let rentTerm;
+    let carIdx;
+    let rentIdx = dataIndex;
+    let kilometer;
+    let discount;
+
+    for (i = 0; i < rentTermList.length; i++) {
+        if (rentTermList[i].dataset.index == dataIndex) {
+            rentTerm = rentTermList[i].innerText;
+        }
+    };
+    for (i = 0; i < carIdxList.length; i++) {
+        if (carIdxList[i].dataset.index == dataIndex) {
+            carIdx = carIdxList[i].innerText;
+        }
+    };
+    for (i = 0; i < discountList.length; i++) {
+        if (discountList[i].dataset.index == dataIndex) {
+            discount = discountList[i].innerText;
+            if (discount=='') {
+                discount = null;
+            }
+        }
+    };
+    for (i = 0; i < kilometerList.length; i++) {
+        if (kilometerList[i].dataset.index == dataIndex) {
+            kilometer = kilometerList[i].innerText;
+        }
+    };
+
+    window.location = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/expected';
+});
+
 
 
 // '차량금액의 30% 보증금 지불'일 경우 보증금 표기 하지 않기
-const credit = document.getElementById('reservation-detail-credit');
-let originalDepositText = document.getElementById('carDeposit');
-const realDeposit = originalDepositText.innerText;
-const wonText = document.getElementById('displayNone');
-let newDepositText = '차량가격의 30% 이상(상담문의)';
-
-function displayDeposit() {
-    if (credit.value == '차량 금액의 30% 이상 보증금') {
-        originalDepositText.innerText = newDepositText;
-        wonText.style.display = 'none';
-    } else {
-        originalDepositText.innerText = realDeposit.toLocaleString();
-        wonText.style.display = 'inline-block';
-    }
-}
+// const credit = document.getElementById('reservation-detail-credit');
+// let originalDepositText = document.getElementById('carDeposit');
+// const realDeposit = originalDepositText.innerText;
+// const wonText = document.getElementById('displayNone');
+// let newDepositText = '차량가격의 30% 이상(상담문의)';
+//
+// function displayDeposit() {
+//     if (credit.value == '차량 금액의 30% 이상 보증금') {
+//         originalDepositText.innerText = newDepositText;
+//         wonText.style.display = 'none';
+//     } else {
+//         originalDepositText.innerText = realDeposit.toLocaleString();
+//         wonText.style.display = 'inline-block';
+//     }
+// }
 
 
 //할인 가격 천원 단위로 반올림

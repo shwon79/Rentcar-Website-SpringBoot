@@ -81,7 +81,8 @@
                 </tr>
                 <tr>
                     <td class="col_subtitle" style="width: 120px;">약정 주행거리</td>
-                    <td th:text="${morenDTO.kilometer}" id="kilometer"></td>
+                    <td th:if="${morenDTO.kilometer=='기타_long'}" id="kilometer">기타</td>
+                    <td th:if="${morenDTO.kilometer!='기타_long'}" th:text="${morenDTO.kilometer}" id="kilometer"></td>
                     <td></td>
                     <td></td>
                 </tr>

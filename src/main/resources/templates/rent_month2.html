@@ -209,13 +209,16 @@
                         </thead>
                         <!-- pc -->
                         <tbody id="mainTable_tbody">
-                        <tr th:each="moren, iterStat : ${morenDTOList}" class="clickable">
-                            <td scope="col" th:text="${moren.carIdx}"></td>
+                        <tr th:each="moren, iterStat : ${morenDTOList}" class="moveToAvailableDetail" th:data-index="${moren.rentIdx}">
+                            <td scope="col" th:text="${moren.carIdx}" class="carIdx" th:data-index="${moren.rentIdx}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
                             <td scope="col" th:text="${moren.carName}"></td>
                             <td scope="col" th:text="${moren.carEngine}"></td>
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
+                            <td scope="col" th:text="${rentTerm}" class="rentTerm" style="display: none;" th:data-index="${moren.rentIdx}"></td>
+                            <td scope="col" th:text="${kilometer}" class="kilometer" style="display: none;" th:data-index="${moren.rentIdx}"></td>
+                            <td scope="col" th:text="${moren.discount}" class="discount" style="display: none;" th:data-index="${moren.rentIdx}"></td>
                             <td scope="col" class="discountStyle">
                                 <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                                 <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
@@ -233,7 +236,7 @@
                 </div>
                 <!-- 모바일 --->
                 <div id="mobileCard">
-                    <div class="card" th:each="moren, iterStat : ${morenDTOList}">
+                    <div class="card moveToAvailableDetail" th:each="moren, iterStat : ${morenDTOList}" th:data-index="${moren.rentIdx}">
                         <h4 th:text="${moren.carName}"></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
@@ -275,14 +278,17 @@
                         </thead>
                         <!-- pc -->
                         <tbody id="mainTable_tbody">
-                        <tr th:each="moren, iterStat : ${morenDTOListExpected}">
-                            <td scope="col" th:text="${moren.carIdx}"></td>
+                        <tr th:each="moren, iterStat : ${morenDTOListExpected}" class="moveToExpectedDetail" th:data-index="${moren.rentIdx}">
+                            <td scope="col" th:text="${moren.carIdx}" class="carIdx" th:data-index="${moren.rentIdx}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
                             <td scope="col" th:text="${moren.carName}"></td>
                             <td scope="col" th:text="${moren.carEngine}"></td>
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
                             <td scope="col" th:text="${moren.orderEnd}"></td>
+                            <td scope="col" th:text="${rentTerm}" class="rentTerm" style="display: none;" th:data-index="${moren.rentIdx}"></td>
+                            <td scope="col" th:text="${kilometer}" class="kilometer" style="display: none;" th:data-index="${moren.rentIdx}"></td>
+                            <td scope="col" th:text="${moren.discount}" class="discount" style="display: none;" th:data-index="${moren.rentIdx}"></td>
                             <td scope="col" class="discountStyle">
                                 <span th:text="${moren.carPrice}" class="number" th:style="${moren.discount != null  and moren.carPrice != '상담' ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}"></span>
                                 <div th:if="${moren.discount != null and moren.carPrice != '상담'}" class="discount-wrap">
@@ -300,7 +306,7 @@
                 </div>
                 <!-- 모바일 -->
                 <div id="mobileCard">
-                    <div class="card" th:each="moren, iterStat : ${#lists.sort(morenDTOListExpected, byOrderEnd)}">
+                    <div class="card moveToAvailableDetail" th:each="moren, iterStat : ${#lists.sort(morenDTOListExpected, byOrderEnd)}" th:data-index="${moren.rentIdx}">
                         <h4 th:text="${moren.carName}"></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
