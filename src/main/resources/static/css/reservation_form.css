@@ -104,6 +104,16 @@ html {
         transform: scale(1.06);
     }
 }
+#pickupPriceBtn {
+    border: #9a9a9a 1px solid;
+    border-radius: 4px;
+    padding: 10px 20px;
+    background: #eeeeee;
+    transition: 0.5s all ease-in-out;
+}
+#pickupPriceBtn:hover {
+    background: #9a9a9a;
+}
 
 #pickupPriceModal {
     display: none;

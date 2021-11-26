@@ -75,7 +75,6 @@ function changeSelect(){
         })
         span.addEventListener('click', () => {
             modal.style.display = "none";
-
         })
         window.addEventListener('click', (e) => {
             if(e.target==modal) {
@@ -144,7 +143,7 @@ const reserveMonthlyRent = () => {
         carTax = parseInt(carTax)*0.1;
     }
     if (carAmountTotal!='상담') {
-        carAmountTotal = parseInt(carAmountTotal)*1.1;
+        carAmountTotal = Math.floor(parseInt(carAmountTotal)*1.1);
     }
 
     if (phoneWithoutDash.test(reservationPhone) == true) {
@@ -192,25 +191,25 @@ const reserveMonthlyRent = () => {
 
         console.log(data);
 
-        let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
-
-        if (reserveConfirm) {
-            $.ajax({
-                type:'POST',
-                url:'/rent/month/moren/reservation',
-                dataType:'json',
-                contentType : 'application/json; charset=utf-8',
-                data : JSON.stringify(data)
-            }).done(function (result) {
-                if (result.result == 1) {
-                    alert('예약이 완료되었습니다.');
-                } else {
-                    alert('예약에 문제가 생겼습니다.');
-                };
-                window.location.href = '/rent/month/new';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            })
-        };
+        // let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
+        //
+        // if (reserveConfirm) {
+        //     $.ajax({
+        //         type:'POST',
+        //         url:'/rent/month/moren/reservation',
+        //         dataType:'json',
+        //         contentType : 'application/json; charset=utf-8',
+        //         data : JSON.stringify(data)
+        //     }).done(function (result) {
+        //         if (result.result == 1) {
+        //             alert('예약이 완료되었습니다.');
+        //         } else {
+        //             alert('예약에 문제가 생겼습니다.');
+        //         };
+        //         window.location.href = '/rent/month/new';
+        //     }).fail(function (error) {
+        //         alert(JSON.stringify(error));
+        //     })
+        // };
     }
 };

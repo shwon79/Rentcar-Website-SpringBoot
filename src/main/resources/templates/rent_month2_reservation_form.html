@@ -142,7 +142,7 @@
                     <table>
                         <tr>
                             <td class="title">금액</td>
-                            <td class="title">지역(서울|경기)</td>
+                            <td class="title">지역 (서울|경기)</td>
                         </tr>
                         <tr>
                             <td class="subtitle">15,000원</td>
@@ -150,7 +150,7 @@
                         </tr>
                         <tr>
                             <td class="subtitle">15,000원~20,000원</td>
-                            <td>강동구 성남지[중원구]</td>
+                            <td>강동구, 성남시[중원구]</td>
                         </tr>
                         <tr>
                             <td class="subtitle">15,000원~25,000원</td>
@@ -217,7 +217,7 @@
                     <td class="col_subtitle">
                         <label class="control-label" for="date"><i class="fas fa-star-of-life"></i> 대여날짜</label>
                     </td>
-                    <td style="width: 300px;">
+                    <td style="width: 28.5%;">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             <p><input id="reservation-detail-date" type="date" th:value="${today_format}" th:min="${today_format}" onchange="displayReturnDate()"></p>
@@ -316,7 +316,7 @@
                             </select>
                         </div>
                     </td>
-                    <td id="displayText"></td>
+                    <td id="displayText" style="text-align: center;"></td>
                     <td></td>
                 </tr>
                 <tr id="pickup-address">

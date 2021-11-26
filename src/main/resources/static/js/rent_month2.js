@@ -248,8 +248,28 @@ function dataReset() {
     window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
 }
 
-// 예약 신청하기 버튼 누르면 새창에 폼 띄우기
+// 연령 바꾸면 가격 바꾸기
+const originalText = document.getElementById('carPrice').innerText;
+let displayPrice = document.querySelectorAll('#carPrice');
+let ageLimit = document.getElementById('getAgeLimit').innerText;
+let changedPrice;
 
+function displayEditedPrice(e) {
+    // console.log(originalText);
+    if (originalText!='상담') {
+        if (e.value == '만 21세 이상~만 26세 미만') {
+            let number = displayPrice[0].innerText.replace(/,/g, "");
+            changedPrice = parseInt(number) + parseInt(ageLimit);
+            displayPrice[0].innerText = changedPrice.toLocaleString();
+            displayPrice[1].innerText = changedPrice.toLocaleString();
+        } else if (e.value == '만 26세 이상') {
+            displayPrice[0].innerText = originalText;
+            displayPrice[1].innerText = originalText;
+        }
+    }
+}
+
+// 예약 신청하기 버튼 누르면 새창에 폼 띄우기
 function openForm() {
     let carCategory = document.getElementById('forPostCarCategory').innerHTML;
     let carName = document.getElementById('forPostCarName').innerHTML;
@@ -263,7 +283,7 @@ function openForm() {
     let carOld = document.getElementById('forPostCarOld').innerHTML;
     let carEngine = document.getElementById('forPostCarEngine').innerHTML;
     let carAttribute01 = document.getElementById('forPostCarAttribute01').innerHTML;
-    let carPrice = document.getElementById('forPostCarPrice').innerHTML;
+    let carPrice = document.getElementById('carPrice').innerHTML;
     let orderEnd = document.getElementById('forPostOrderEnd').innerHTML;
     let rentIdx = document.getElementById('forPostRentIdx').innerHTML;
     let carImageList = document.getElementById('forPostCarImageList').innerHTML;
@@ -275,6 +295,8 @@ function openForm() {
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
+
+    carPrice = carPrice.replace(/,/g, "");
 
     var mapForm = document.createElement("form");
     mapForm.target = "Map";
@@ -452,7 +474,7 @@ function openOffer() {
     let carOld = document.getElementById('forPostCarOld').innerHTML;
     let carEngine = document.getElementById('forPostCarEngine').innerHTML;
     let carAttribute01 = document.getElementById('forPostCarAttribute01').innerHTML;
-    let carPrice = document.getElementById('forPostCarPrice').innerHTML;
+    let carPrice = document.getElementById('carPrice').innerHTML;
     let orderEnd = document.getElementById('forPostOrderEnd').innerHTML;
     let rentIdx = document.getElementById('forPostRentIdx').innerHTML;
     let carImageList = document.getElementById('forPostCarImageList').innerHTML;
@@ -464,6 +486,8 @@ function openOffer() {
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
+
+    carPrice = carPrice.replace(/,/g, "");
 
     var mapForm = document.createElement("form");
     mapForm.target = "Map";

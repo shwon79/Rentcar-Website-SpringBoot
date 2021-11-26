@@ -225,7 +225,11 @@
                                     <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
                                 </div>
                             </td>
-                            <td><a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer}  + '/' + ${moren.discount} + '/available'"><button>상세 페이지</button></a></td>
+                            <td>
+                                <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer}  + '/' + ${moren.discount} + '/available'">
+                                    <button class="detail_btn">상세 페이지</button>
+                                </a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -247,7 +251,9 @@
                                 <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
                             </div>
                         </p>
-                        <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer}  + '/' + ${moren.discount} + '/available'"><button>상세 페이지</button></a>
+                        <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer}  + '/' + ${moren.discount} + '/available'">
+                            <button class="detail_btn">상세 페이지</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -295,7 +301,11 @@
                                     <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>
                                 </div>
                             </td>
-                            <td><a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer} + '/' + ${moren.discount} + '/expected'"><button >상세 페이지</button></a></td>
+                            <td>
+                                <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer} + '/' + ${moren.discount} + '/expected'">
+                                    <button class="detail_btn">상세 페이지</button>
+                                </a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -318,7 +328,9 @@
                                 <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>
                             </div>
                         </p>
-                        <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer} + '/' + ${moren.discount} + '/expected'"><button>상세 페이지</button></a>
+                        <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer} + '/' + ${moren.discount} + '/expected'">
+                            <button class="detail_btn">상세 페이지</button>
+                        </a>
                     </div>
                 </div>
             </div>
