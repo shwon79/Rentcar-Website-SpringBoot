@@ -20,7 +20,7 @@ html {
 }
 .basic_info td, .basic_info tr,
 .reservation-form td, .reservation-form tr {
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
 }
 .col_title {
@@ -112,8 +112,8 @@ html {
     color: white;
     background-color: black;
     border: 3px black solid;
-    width: 70%;
-    margin: 0 15%;
+    width: 90%;
+    margin: 0 5%;
     padding: 20px;
     font-size: 24px;
     border-radius: 12px;

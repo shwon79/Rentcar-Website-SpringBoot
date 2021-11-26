@@ -1,5 +1,7 @@
 //숫자 사이에 콤마 넣기
 let number = document.getElementsByClassName("number");
+document.getElementById("pickup-address").style.display = 'none';
+document.getElementById("pickup-address-detail").style.display = 'none';
 
 function numberWithCommas() {
     for (let i = 0; i < number.length; i++) {
@@ -54,6 +56,18 @@ function displayReturnDate() {
     displayReturnDate.value = returnDateString;
     displayReturnTime.value = startTime;
 }
+
+function changeSelect(){
+    var selectList = document.getElementById("reservation-detail-pickup")
+    if(selectList.options[selectList.selectedIndex].value == "배차 신청"){
+        document.getElementById("pickup-address").style.display = '';
+        document.getElementById("pickup-address-detail").style.display = '';
+    } else {
+        document.getElementById("pickup-address").style.display = 'none';
+        document.getElementById("pickup-address-detail").style.display = 'none';
+    }
+}
+
 
 // Sending Data;
 const reserveMonthlyRent = () => {

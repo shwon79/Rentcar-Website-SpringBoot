@@ -271,14 +271,14 @@
                     <td colspan="3">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fas fa-map-marker-alt"></i></span>
-                            <select class="form-control" id="reservation-detail-pickup">
+                            <select class="form-control" id="reservation-detail-pickup"  onchange="changeSelect()">
                                 <option value="방문">방문</option>
                                 <option value="배차 신청">배차 신청</option>
                             </select>
                         </div>
                     </td>
                 </tr>
-                <tr>
+                <tr id="pickup-address">
                     <td class="col_subtitle">
                         <label class="control-label" for="address"><i class="fas fa-star-of-life"></i> 배차 받을 주소</label>
                     </td>
@@ -289,7 +289,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
+                <tr id="pickup-address-detail">
                     <td class="col_subtitle">
                         <label class="control-label" for="address-detail"><i class="fas fa-star-of-life"></i> 상세 주소</label><br/>
                     </td>
