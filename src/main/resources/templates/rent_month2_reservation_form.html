@@ -83,8 +83,8 @@
                     <td class="col_subtitle" style="width: 120px;">약정 주행거리</td>
                     <td th:if="${morenDTO.kilometer=='기타_long'}" id="kilometer">기타</td>
                     <td th:if="${morenDTO.kilometer!='기타_long'}" th:text="${morenDTO.kilometer}" id="kilometer"></td>
-                    <td></td>
-                    <td></td>
+                    <td class="col_subtitle">렌트 기간</td>
+                    <td th:text="${morenDTO.rentTerm}"></td>
                 </tr>
                 <tr>
                     <td class="col_subtitle">공급가</td>
@@ -119,8 +119,8 @@
                 <tr>
                     <td class="col_subtitle">보증금</td>
                     <td>
-                        <span th:text="${morenDTO.deposit}" class="number"></span>
-                        <span>원</span>
+                        <span th:text="${morenDTO.deposit}" class="number" id="originalDeposit"></span>
+                        <span id="displayNone">원</span>
                     </td>
                     <td></td>
                     <td></td>
@@ -136,10 +136,49 @@
 
         <!--reservation_form-->
         <div class="reservation-form">
+            <div id="pickupPriceModal" class="modal">
+                <div class="modal_content">
+                    <span class="modal_close_btn">&times;</span>
+                    <table>
+                        <tr>
+                            <td class="title">금액</td>
+                            <td class="title">지역(서울|경기)</td>
+                        </tr>
+                        <tr>
+                            <td class="subtitle">15,000원</td>
+                            <td>송파구, 성남시[수정구]</td>
+                        </tr>
+                        <tr>
+                            <td class="subtitle">15,000원~20,000원</td>
+                            <td>강동구 성남지[중원구]</td>
+                        </tr>
+                        <tr>
+                            <td class="subtitle">15,000원~25,000원</td>
+                            <td>강남구, 서초구, 성동구, 동대문구, 중랑구, 용산구, 동작구, 관악구, 광진구, 하남시, 성남시[분당구]</td>
+                        </tr>
+                        <tr>
+                            <td class="subtitle">20,000원~30,000원</td>
+                            <td>노원구, 성북구, 종로구, 중구, 영등포구, 금천구, 도봉구, 강북구, 은평구, 서대문구, 마포구, 양천구, 구로구, 강서구, 광명시, 의정부시, 구리시, 남양주시, 광주시, 과천시, 안양시</td>
+                        </tr>
+                        <tr>
+                            <td class="subtitle">25,000원~35,000원</td>
+                            <td>부천시, 시흥시, 양주시, 고양시, 용인시, 수원시, 이천시, 군포시, 의왕시</td>
+                        </tr>
+                        <tr>
+                            <td class="subtitle">30,000원~50,000원</td>
+                            <td>가평군, 양평군, 화성시, 안산시, 김포시, 인천광영시, 파주시, 동두천시, 포천시, 오산시, 평택시, 안성시, 여주시, 연천군</td>
+                        </tr>
+                        <tr>
+                            <td class="subtitle"></td>
+                            <td>*이외의 지역은 별도 상담을 통해 문의하시기 바랍니다.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             <table>
                 <th colspan="4" class="col_title">예약 하기</th>
                 <tr>
-                    <td style="width: 200px;" class="col_subtitle">
+                    <td style="width: 21.5%;" class="col_subtitle">
                         <label class="control-label" for="name">
                             <i class="fas fa-star-of-life"></i>
                             계약자명<br>(입금 시, 반드시 적어주신<br>계약자명으로 입금해주시기<br>바랍니다.)
@@ -184,7 +223,7 @@
                             <p><input id="reservation-detail-date" type="date" th:value="${today_format}" th:min="${today_format}" onchange="displayReturnDate()"></p>
                         </div>
                     </td>
-                    <td class="col_subtitle">
+                    <td class="col_subtitle" style="width: 21.5%;">
                         <label class="control-label" for="time"><i class="fas fa-star-of-life"></i> 대여시간</label>
                     </td>
                     <td>
@@ -268,7 +307,7 @@
                             차량 픽업 방법
                         </label>
                     </td>
-                    <td colspan="3">
+                    <td>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fas fa-map-marker-alt"></i></span>
                             <select class="form-control" id="reservation-detail-pickup"  onchange="changeSelect()">
@@ -277,6 +316,8 @@
                             </select>
                         </div>
                     </td>
+                    <td id="displayText"></td>
+                    <td></td>
                 </tr>
                 <tr id="pickup-address">
                     <td class="col_subtitle">
@@ -325,12 +366,13 @@
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                     <div class="panel-heading" role="tab" id="headingOne">
                                         <h4 class="panel-title" style="text-align: center;">
-                                            개인정보 및 렌트 이용규칙에 대한 동의
+                                            약관 내용 보기
                                         </h4>
                                     </div>
                                 </a>
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body" style="color: black;">
+                                        <h3>개인정보 및 렌트 이용규칙에 대한 동의</h3>
                                         <h6>제 1 장 총 칙</h6>
                                         <p>
                                             제1조(목적) 이 약관은 대여용자동차 임대인(이하 "회사"라 합니다)과 임차인(이하 "고객"이라 합니다) 사이의 대여용자동차 임대차계약(이하 "대여계약"이라 합니다)상의 권리․의무에 관한 사항을 규정함을 목적으로 합니다.
@@ -773,6 +815,19 @@
                                         <p>
                                             제28조(관할법원) 이 약관의 해석과 이에 근거한 대여계약에 관련된 법적 분쟁이 발생할 경우 소송은 민사소송법상의 관할법원에 제기합니다. 단, 회사와 고객이 관할법원에 대해 약정할 경우에는 그에 따릅니다.
                                         </p>
+                                        <br>
+                                        <br>
+                                        <h3>특약사항 및 기타</h3>
+                                        <p>- 계약기간 또는 계약기간의 연장 등으로 운행기간 내에 자동차정기검사와 연장검사 발생시 임차인은 자동차검사소에 직접 방문하여 검사를 실시해야하며 미실행시 발생한 범칙금과 피해에 대해 배상한다. 단, 검사비용은 임대인이 지불한다.</p>
+                                        <p>- 대여중 발생한 차량고장으로 운행이 불가할 때에 가까운 카센타로의 이동조치 등의 고객님의 의무가 발생할 수 있습니다. 대차가 어렵거나 정비수리가 어려운 시간이나 지역에서 발생한 사고는 불가항력적이므로 부득이하게 다음 영업일까지 기다리실 수 있습니다.</p>
+                                        <p>- 월렌트 연장시 7일전 임차인이 직접 연락하여 연장을 알리고 연장 3일전 입금 완료가 되어야 연장이 확정됩니다. 미입금으로 인해 연장이 불가 할 수 있습니다.</p>
+                                        <p>- 차량반납시 주유는 배차시의 주유를 임차인은 채워서 반납해야 한다. 부족시 부족한만큼의 유류금액과 주유인건비 10000원을 부과한다.</p>
+                                        <p>- 차량을 내부에 동물이나 악취발생요인[김치나 부패물질,기름 등]으로 인한 피해 발생시 손해발생에 대한 비용[크리닉, 시트교환 등]은 임차인 전액 보상한다.</p>
+                                        <p>- 유실물/분실물에 대한 책임은 임차인에게 있으며 부득이 유실물 택배처리시 택배비와 처리인건비 15,000원을 부담한다.</p>
+                                        <p>- 대여기간 중 추가운전자 등록시 1인당 3만원의 비용이 부담됩니다.</p>
+                                        <p>잔여연료 : </p>
+                                        <p>- 자차 가입시에 자기부담금은 기본 50만원에서 최대 200만원으로 하며, 단, 과실의 30%는 임차인이 자기부담금을 지불한다.</p>
+                                        <p>- 대인, 대물, 자손에 대한 보험처리시 각 항목에 대한 보험접수 면책금을 각 50만원씩 지불한다.</p>
                                     </div>
                                 </div>
                             </div>

@@ -148,7 +148,7 @@
                 </td>
                 <td class="table_subtitle">월대여료</td>
                 <td th:if="${morenDTO.carPrice!='상담'}">
-                    <span th:text="${morenDTO.carPrice}*1.1" class="number"></span>
+                    <span th:text="${morenDTO.carPrice}" class="number"></span>
                     <span>원</span>
                 </td>
                 <td th:if="${morenDTO.carPrice=='상담'}">
@@ -183,7 +183,7 @@
                 <td class="table_subtitle" style="width: 10%;">운전자범위</td>
                 <td style="width: 15%; font-size: 12px;">계약서에 지정된 운전자</td>
                 <td class="table_subtitle" style="width: 10%;">자차보험</td>
-                <td style="width: 15%;">가입</td>
+                <td style="width: 15%;">가입[한도有]</td>
                 <td class="table_subtitle" colspan="4" style="text-align: center;">책임보험 및 사고 면책금 안내</td>
             </tr>
             <tr>

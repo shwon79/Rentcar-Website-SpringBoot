@@ -199,26 +199,6 @@ $('.moveToExpectedDetail').click(function(e) {
     window.location = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/expected';
 });
 
-
-
-// '차량금액의 30% 보증금 지불'일 경우 보증금 표기 하지 않기
-// const credit = document.getElementById('reservation-detail-credit');
-// let originalDepositText = document.getElementById('carDeposit');
-// const realDeposit = originalDepositText.innerText;
-// const wonText = document.getElementById('displayNone');
-// let newDepositText = '차량가격의 30% 이상(상담문의)';
-//
-// function displayDeposit() {
-//     if (credit.value == '차량 금액의 30% 이상 보증금') {
-//         originalDepositText.innerText = newDepositText;
-//         wonText.style.display = 'none';
-//     } else {
-//         originalDepositText.innerText = realDeposit.toLocaleString();
-//         wonText.style.display = 'inline-block';
-//     }
-// }
-
-
 //할인 가격 천원 단위로 반올림
 
 const discountPrice = document.querySelectorAll('.discountStyle .discountPrice');

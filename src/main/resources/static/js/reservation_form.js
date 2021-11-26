@@ -57,14 +57,53 @@ function displayReturnDate() {
     displayReturnTime.value = startTime;
 }
 
+// 차량 픽업 방법에 따라 주소 받으면서 배차비 보여주기
 function changeSelect(){
-    var selectList = document.getElementById("reservation-detail-pickup")
+    let selectList = document.getElementById("reservation-detail-pickup")
+    let displayText = document.getElementById('displayText');
     if(selectList.options[selectList.selectedIndex].value == "배차 신청"){
         document.getElementById("pickup-address").style.display = '';
         document.getElementById("pickup-address-detail").style.display = '';
+        displayText.innerHTML = '<button id="pickupPriceBtn">배차비 확인하기</button>';
+
+        let modal = document.getElementById('pickupPriceModal');
+        let btn = document.getElementById("pickupPriceBtn");
+        let span = document.getElementsByClassName("modal_close_btn")[0];
+
+        btn.addEventListener('click', () => {
+            modal.style.display = "block";
+        })
+        span.addEventListener('click', () => {
+            modal.style.display = "none";
+
+        })
+        window.addEventListener('click', (e) => {
+            if(e.target==modal) {
+                modal.style.display = 'none';
+            }
+        });
     } else {
         document.getElementById("pickup-address").style.display = 'none';
         document.getElementById("pickup-address-detail").style.display = 'none';
+        displayText.innerHTML = '';
+    }
+}
+
+
+// '차량금액의 30% 보증금 지불'일 경우 보증금 표기 하지 않기
+const credit = document.getElementById('reservation-detail-credit');
+let originalDepositText = document.getElementById('originalDeposit');
+const realDeposit = originalDepositText.innerText;
+const wonText = document.getElementById('displayNone');
+let newDepositText = '차량가격의 30% 이상(상담문의)';
+
+function displayDeposit() {
+    if (credit.value == '차량 금액의 30% 이상 보증금') {
+        originalDepositText.innerText = newDepositText;
+        wonText.style.display = 'none';
+    } else {
+        originalDepositText.innerText = realDeposit.toLocaleString();
+        wonText.style.display = 'inline-block';
     }
 }
 
@@ -82,8 +121,8 @@ const reserveMonthlyRent = () => {
     const reservationTime = document.getElementById('reservation-detail-time').value;
     const reservationGuarantee = document.getElementById('reservation-detail-credit').value;
     const reservationDetails = document.getElementById('reservation-detail-details').value;
-    const address = document.getElementById('address_kakao').value;
-    const addressDetail = document.getElementById('address_kakao_detail').value;
+    let address = document.getElementById('address_kakao').value;
+    let addressDetail = document.getElementById('address_kakao_detail').value;
     const carPrice = document.getElementById('carPrice').innerText;
     let carTax = document.getElementById('carTax').innerText;
     let carAmountTotal = document.getElementById('carAmountTotal').innerText;
@@ -110,6 +149,11 @@ const reserveMonthlyRent = () => {
 
     if (phoneWithoutDash.test(reservationPhone) == true) {
         reservationPhone = reservationPhone.substr(0, 3) + "-" + reservationPhone.substr(3, 4) + "-" + reservationPhone.substr(7,4);
+    };
+
+    if (pickupPlace=='방문') {
+        address = '방문';
+        addressDetail = '방문';
     };
 
     if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
