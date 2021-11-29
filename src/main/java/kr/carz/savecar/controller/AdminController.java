@@ -201,7 +201,7 @@ public class AdminController {
             mav.setViewName("admin_moren_reservation_menu");
         }
 
-        mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate));
+        mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate).reversed());
 
         return mav;
     }
