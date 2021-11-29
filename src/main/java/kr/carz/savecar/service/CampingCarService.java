@@ -4,9 +4,11 @@ import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.repository.CampingCarRepository;
 import kr.carz.savecar.repository.ShortRentRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 public class CampingCarService {
 
     private final CampingCarRepository campingCarRepository;

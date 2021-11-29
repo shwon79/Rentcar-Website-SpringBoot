@@ -1,6 +1,5 @@
 package kr.carz.savecar.domain;
 
-
 import lombok.Data;
 
 import javax.persistence.*;

@@ -4,11 +4,9 @@ import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.*;
 
 @Controller
@@ -26,109 +22,30 @@ public class AdminController {
     YearlyRentService yearlyRentService;
     ShortRentService shortRentService;
     CampingCarService campingCarService;
-    CalendarDateService calendarDateService;
-    DateCampingService dateCampingService;
-    CampingcarDateTimeService2 campingcarDateTimeService2;
     LoginService loginService;
-    CampingCarPriceService campingCarPriceService;
-    CalendarTimeService calendarTimeService;
     ReservationService reservationService;
-    private HttpURLConnection http;
+    DiscountService discountService;
+    MorenReservationService morenReservationService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                           ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
-                           DateCampingService dateCampingService, CampingcarDateTimeService2 campingcarDateTimeService2,
-                           LoginService loginService, CampingCarPriceService campingCarPriceService,
-                           CalendarTimeService calendarTimeService, ReservationService reservationService) {
+                           ShortRentService shortRentService, CampingCarService campingCarService,
+                           LoginService loginService, ReservationService reservationService,
+                           DiscountService discountService, MorenReservationService morenReservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarService = campingCarService;
-        this.calendarDateService = calendarDateService;
-        this.dateCampingService = dateCampingService;
-        this.campingcarDateTimeService2 = campingcarDateTimeService2;
         this.loginService = loginService;
-        this.campingCarPriceService = campingCarPriceService;
-        this.calendarTimeService = calendarTimeService;
         this.reservationService = reservationService;
+        this.discountService = discountService;
+        this.morenReservationService = morenReservationService;
     }
-
-    public AdminController(HttpURLConnection http){
-        this.http = http;
-    }
-
-    public void request(String method, String headerName, String headerValue, JSONObject jsonData) throws IOException {
-        http.setRequestMethod(method);
-        http.setRequestProperty(headerName, headerValue);
-
-        http.setDoOutput(true);
-
-        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter((http.getOutputStream())));
-        printWriter.write(jsonData.toString());
-        printWriter.flush();
-    }
-
-    public String response() throws IOException{
-        BufferedReader bufferedReader = null;
-
-        int status = http.getResponseCode();
-
-        if(status == HttpURLConnection.HTTP_OK){
-            System.out.println("Http Connection OK");
-            bufferedReader = new BufferedReader(new InputStreamReader(http.getInputStream()));
-        } else {
-            System.out.println("Http Connection Bad");
-            bufferedReader = new BufferedReader(new InputStreamReader(http.getErrorStream()));
-        }
-
-        String line;
-        StringBuffer response = new StringBuffer();
-
-        while ((line = bufferedReader.readLine()) != null){
-            response.append(line);
-        }
-        bufferedReader.close();
-
-        System.out.println(response.toString());
-
-        JSONObject jsonObject = new JSONObject(response.toString());
-
-        System.out.println("응답값 : " + jsonObject);
-
-        return jsonObject.toString();
-
-    }
-
 
     @GetMapping("/admin/login")
-    public String login(Model model) {
-
-        return "login";
+    public String login() {
+        return "admin_login";
     }
-
-
-    @GetMapping("/admin/detail/{date_time_id}")
-    public String get_admin_detail(Model model,  @PathVariable String date_time_id) throws Exception {
-
-        CampingcarDateTime2 campingcarDateTime2 = campingcarDateTimeService2.findByDateTimeId(Long.parseLong(date_time_id));
-        model.addAttribute("campingcarDateTime2",campingcarDateTime2);
-        System.out.println(campingcarDateTime2.getDateTimeId());
-
-        return "admin_detail";
-    }
-
-
-    //예약 목록 조회 api
-    @GetMapping("/admin/counsel")
-    public String reservation_list(Model model) {
-        List<Reservation> reservationList = reservationService.findAllReservations();
-        model.addAttribute("reservationList", reservationList);
-
-        return "admin_counsel";
-    }
-
-
 
     //로그인
     @RequestMapping(value = "/admin/logininfo", method= RequestMethod.POST)
@@ -139,21 +56,13 @@ public class AdminController {
 
         try {
             Login user = loginService.findLoginByIdAndPwd(req.getParameter("id"), req.getParameter("pwd"));
-            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기
-
+            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기 => 다른 방식 찾기
 
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
 
-
-            System.out.println("true");
-
-
             // admin view로 넘기기
-            List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
-
-            mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
-            mav.setViewName("admin");
+            mav.setViewName("admin_campingcar_menu");
 
         } catch (NullPointerException e){
 
@@ -162,47 +71,14 @@ public class AdminController {
             out.println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); </script>");
             out.flush();
 
-
             // 다시 login page로 back
-            mav.setViewName("login");
+            mav.setViewName("admin_login");
         }
-
         return mav;
     }
 
 
-    // 메인페이지
-    @GetMapping(value = "/admin/main")
-    @ResponseBody
-    public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-
-
-        HttpSession session = req.getSession();
-        if((Login)session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("login");
-        } else {
-
-            // admin view로 넘기기
-            List<CampingcarDateTime2> campingcarDateTimeList = campingcarDateTimeService2.findAllReservations();
-
-            mav.addObject("campingcarDateTimeList",campingcarDateTimeList);
-            mav.setViewName("admin");
-
-        }
-
-        return mav;
-    }
-
-
-    // 메인페이지
+    // 로그아웃
     @GetMapping(value = "/admin/logout")
     @ResponseBody
     public ModelAndView get_admin_logout(HttpServletResponse res, HttpServletRequest req) throws IOException {
@@ -218,13 +94,370 @@ public class AdminController {
         out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
         out.flush();
 
-        mav.setViewName("login");
-
+        mav.setViewName("admin_login");
 
         return mav;
     }
 
 
 
+    // [관리자 메인페이지] 캠핑카 예약내역 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/menu")
+    @ResponseBody
+    public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+
+            // admin view로 넘기기
+            mav.setViewName("admin_campingcar_menu");
+        }
+
+        return mav;
+    }
+
+
+    //상담 메뉴로 입장
+    @GetMapping("/admin/counsel/menu")
+    public ModelAndView get_counsel_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+
+            List<Reservation> reservationList = reservationService.findAllReservations();
+            mav.addObject("reservationList", reservationList);
+            mav.setViewName("admin_counsel_menu");
+        }
+
+        return mav;
+    }
+
+
+
+    // 할인가 적용하기 메뉴로 입장
+    @GetMapping("/admin/discount/menu")
+    public ModelAndView get_discount_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+            List<Discount> discountList = discountService.findAllDiscounts();
+            mav.addObject("discountList", discountList);
+            mav.setViewName("admin_discount_menu");
+        }
+
+        return mav;
+    }
+
+    // 월렌트 실시간 모렌 예약 메뉴로 입장
+    @GetMapping("/admin/moren/reservation/menu")
+    public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+
+            List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
+            mav.addObject("morenReservationList", morenReservationList);
+            mav.setViewName("admin_moren_reservation_menu");
+        }
+
+        return mav;
+    }
+
+    // 월렌트 실시간 모렌 디테일 페이지로 입장
+    @GetMapping("/admin/moren/reservation/detail/{reservationId}")
+    public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req,  @PathVariable Long reservationId) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin_login");
+        } else {
+            Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
+            if (morenReservation.isPresent()){
+                mav.addObject("morenReservationDTO", morenReservation.get());
+                mav.setViewName("admin_moren_reservation_detail");
+            } else {
+                res.setContentType("text/html; charset=UTF-8");
+                PrintWriter out = res.getWriter();
+                out.println("<script>alert('해당 차량 정보를 찾을 수 없습니다.'); </script>");
+                out.flush();
+
+                mav.setViewName("admin_moren_reservation_menu");
+            }
+        }
+
+        return mav;
+    }
+
+    // 할인가 적용하기 api
+    @PostMapping("/admin/discount")
+    @ResponseBody
+    public void save_discount(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(discountDTO.getCarNo());
+        if(original_discount.isPresent()){
+            jsonObject.put("result", 0);
+        } else {
+            Discount discount = new Discount();
+            discount.setCarNo(discountDTO.getCarNo());
+            discount.setDiscount(discountDTO.getDiscount());
+            discount.setDescription(discountDTO.getDescription());
+            discountService.save(discount);
+
+            jsonObject.put("result", 1);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    // 할인가 수정하기 api
+    @RequestMapping(value = "/admin/discount/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @ResponseBody
+    public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+
+        if(original_discount.isPresent()){
+            original_discount.get().setDiscount(discount);
+            discountService.save(original_discount.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    // 할인가 description 수정하기 api
+    @RequestMapping(value = "/admin/description/{carNo}/{description}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @ResponseBody
+    public void update_description(HttpServletResponse res, @PathVariable String carNo, @PathVariable String description) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+
+        if(original_discount.isPresent()){
+            original_discount.get().setDescription(description);
+            discountService.save(original_discount.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    // 할인가 삭제하기 api
+    @GetMapping("/admin/discount/delete/{carNo}")
+    @ResponseBody
+    public void delete_discount(HttpServletResponse res, @PathVariable String carNo) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+
+        if(original_discount.isPresent()){
+            discountService.delete(original_discount.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    // 모렌 reservation 취소 api
+    @GetMapping("/moren/reservation/cancel/{reservationId}")
+    @ResponseBody
+    public void moren_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        MorenReservation morenReservation = null;
+
+
+        Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(reservationId);
+        if(morenReservationOptional.isPresent()){
+            morenReservation = morenReservationOptional.get();
+            morenReservation.setReservationStatus("-1");
+            morenReservationService.save(morenReservation);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        assert morenReservation != null;
+
+        String api_key = "NCS0P5SFAXLOJMJI";
+        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", "01058283328"); // 01033453328 추가
+        params.put("from", "01052774113");
+        params.put("type", "LMS");
+
+        /* 고객에게 예약확인 문자 전송 */
+        params2.put("to", morenReservation.getReservationPhone()); // 여러가지 번호형태 테스트
+        params2.put("from", "01052774113");
+        params2.put("type", "LMS");
+
+        String delivery_text = "";
+        if (morenReservation.getPickupPlace().equals("방문")){
+            delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n";
+        } else {
+            delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n"
+                    + "배차요청주소: " + morenReservation.getAddress() + "\n"
+                    + "배차요청상세주소: " + morenReservation.getAddressDetail() + "\n";
+        }
+
+        params.put("text", "[실시간 예약 취소 처리 완료]\n"
+                + "문의자 이름: " + morenReservation.getReservationName() + "\n"
+                + "연락처: " + morenReservation.getReservationPhone() + "\n"
+                + "차량번호: " + morenReservation.getCarNo() + "\n"
+                + "대여일자: " + morenReservation.getReservationDate() + "\n"
+                + "대여시간: " + morenReservation.getReservationTime() + "\n"
+                + "렌트기간: " + morenReservation.getRentTerm() + "\n"
+                + "약정주행거리: " + morenReservation.getKilometer() + "\n"
+                + delivery_text
+                + "생년월일: " + morenReservation.getReservationAge() + "\n"
+                + "신용증빙: " + morenReservation.getReservationGuarantee() + "\n"
+                + "총렌트료(부포): " + morenReservation.getCarAmountTotal() + "\n"
+                + "보증금: " + morenReservation.getCarDeposit() + "\n"
+                + "요청사항: " + morenReservation.getReservationDetails() + "\n\n");
+
+        params2.put("text", "[세이브카 렌트카 예약이 취소되었습니다]" + "\n"
+                + "* 예약자가 여러 명일 경우, 예약금 입금 순서로 예약이 확정됩니다." + "\n"
+                + "* 예약금 입금이 되지 않았거나 다른 선입금 예약자가 있어 예약이 취소되었을 수 있습니다." + "\n\n"
+                + "문의자 이름: " + morenReservation.getReservationName() + "\n"
+                + "연락처: " + morenReservation.getReservationPhone() + "\n"
+                + "차량번호: " + morenReservation.getCarNo() + "\n"
+                + "대여일자: " + morenReservation.getReservationDate() + "\n"
+                + "렌트기간: " + morenReservation.getRentTerm() + "\n"
+                + "약정주행거리: " + morenReservation.getKilometer() + "\n"
+                + delivery_text
+                + "기타증빙사항: " + morenReservation.getReservationGuarantee() + "\n"
+                + "총렌트료: " + morenReservation.getCarAmountTotal() + "\n"
+                + "보증금: " + morenReservation.getCarDeposit() + "\n"
+                + "요청사항: " + morenReservation.getReservationDetails() + "\n\n");
+        params.put("app_version", "test app 1.2");
+        params2.put("app_version", "test app 1.2");
+
+        /* 세이브카에게 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj = coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        /* 고객에게 예약확인 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    // 모렌 reservation 삭제 api
+    @DeleteMapping("/moren/reservation/{reservationId}")
+    @ResponseBody
+    public void delete_moren_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(reservationId);
+        if(morenReservationOptional.isPresent()){
+            morenReservationService.delete(morenReservationOptional.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 }

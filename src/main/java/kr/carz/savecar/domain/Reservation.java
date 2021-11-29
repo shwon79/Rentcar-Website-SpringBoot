@@ -52,11 +52,27 @@ public class Reservation extends BaseTimeEntity {
     @Column(nullable = true)
     private String price;
 
+    @Column(nullable = true)
+    private String age_limit;
+
+    @Column(nullable = true)
+    private String car_num;
+
+    @Column(nullable = true)
+    private String region;
+
+    @Column(nullable = true)
+    private String resDate;
+
+    @Column(nullable = true)
+    private String carAge;
 
     @Builder
     public Reservation(String name, String phoneNo, String detail, String title, String product,
                        String category1, String category2, String car_name, String mileage,
-                       String deposit, String option, String price) {
+                       String deposit, String option, String price, String age_limit, String car_num,
+                       String region, String resDate, String carAge) {
+      
         this.name = name;
         this.phoneNo = phoneNo;
         this.detail = detail;
@@ -69,5 +85,10 @@ public class Reservation extends BaseTimeEntity {
         this.deposit = deposit;
         this.option = option;
         this.price = price;
+        this.age_limit = age_limit;
+        this.car_num = car_num;
+        this.region = region;
+        this.resDate = resDate;
+        this.carAge = carAge;
     }
 }

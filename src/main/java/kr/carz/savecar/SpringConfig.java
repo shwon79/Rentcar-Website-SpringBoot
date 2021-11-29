@@ -13,6 +13,10 @@ public class SpringConfig {
     private final ShortRentRepository shortRentRepository;
     private final CampingCarRepository campingCarRepository;
     private final ReservationRepository reservationRepository;
+    private final TwoYearlyRentRepository twoYearlyRentRepository;
+    private final LoginRepository loginRepository;
+    private final DiscountRepository discountRepository;
+    private final MorenReservationRepository morenReservationRepository;
     private final CampingCarPriceRepository campingCarPriceRepository;
     private final CalendarDateRepository calendarDateRepository;
     private final CalendarTimeRepository calendarTimeRepository;
@@ -24,6 +28,9 @@ public class SpringConfig {
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
                         ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
+                        ReservationRepository reservationRepository, TwoYearlyRentRepository twoYearlyRentRepository,
+                        LoginRepository loginRepository, DiscountRepository discountRepository,
+                        MorenReservationRepository morenReservationRepository) {
                         ReservationRepository reservationRepository, CampingCarPriceRepository campingCarPriceRepository,
                         CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository,
                         DateCampingRepository dateCampingRepository, CampingcarDateTimeRepository2 campingcarDateTimeRepository2,
@@ -33,6 +40,10 @@ public class SpringConfig {
         this.shortRentRepository = shortRentRepository;
         this.campingCarRepository = campingCarRepository;
         this.reservationRepository = reservationRepository;
+        this.twoYearlyRentRepository = twoYearlyRentRepository;
+        this.loginRepository = loginRepository;
+        this.discountRepository = discountRepository;
+        this.morenReservationRepository = morenReservationRepository;
         this.campingCarPriceRepository = campingCarPriceRepository;
         this.calendarDateRepository = calendarDateRepository;
         this.calendarTimeRepository = calendarTimeRepository;
@@ -59,6 +70,18 @@ public class SpringConfig {
 
     @Bean
     public CampingCarService campingCarService() { return new CampingCarService(campingCarRepository); }
+
+    @Bean
+    public TwoYearlyRentService twoYearlyRentService() { return new TwoYearlyRentService(twoYearlyRentRepository); }
+
+    @Bean
+    public LoginService loginService() { return new LoginService(loginRepository); }
+
+    @Bean
+    public DiscountService discountService() { return new DiscountService(discountRepository); }
+
+    @Bean
+    public MorenReservationService morenReservationService() { return new MorenReservationService(morenReservationRepository); }
 
     @Bean
     public CampingCarPriceService campingCarVariableService() { return new CampingCarPriceService(campingCarPriceRepository); }

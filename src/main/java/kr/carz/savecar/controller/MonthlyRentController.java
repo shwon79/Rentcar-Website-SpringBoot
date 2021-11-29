@@ -1,8 +1,9 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.domain.MonthlyRent;
-import kr.carz.savecar.domain.YearlyRent;
+import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.MonthlyRentService;
+import kr.carz.savecar.service.ReservationService;
+import kr.carz.savecar.service.TwoYearlyRentService;
 import kr.carz.savecar.service.YearlyRentService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,59 +14,84 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class MonthlyRentController {
 
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
+    private final TwoYearlyRentService twoYearlyRentService;
+    private final ReservationService reservationService;
 
     @Autowired
-    public MonthlyRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService) {
+    public MonthlyRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
+                                 ReservationService reservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
+        this.twoYearlyRentService = twoYearlyRentService;
+        this.reservationService = reservationService;
     }
+
+
+    /* ======================================================================================== */
+    /*                             [이전 버전] 실시간 월렌트 견적내기                                    */
+    /* ======================================================================================== */
+
 
 
     @GetMapping("/rent/month")
     public String rent_month() {
-        return "mon_rent2";
-    }
-
-    @GetMapping("/rent/month/detail")
-    public String rent_month_detail() {
-        return "car_detail";
+        return "rent_month";
     }
 
     @RequestMapping("/rent/month/{category1}/{category2}")
-    public String handleRequest(ModelMap model, @PathVariable("category1") String category1,@PathVariable("category2") String category2) throws Exception {
+    public String handleRequest(ModelMap model, @PathVariable("category1") String category1, @PathVariable("category2") String category2) throws Exception {
         model.put("category1", category1);
         model.put("category2", category2);
 
         return "rent_month";
     }
 
-
-
-    //월렌트 차종 api
-    @RequestMapping(value = "/rent/month/rentMonth", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    // 차종 api
+    @RequestMapping(value = "/rent/month/{period}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
-    public void get_monthly_rent_category1(HttpServletResponse res, HttpServletRequest req) throws IOException {
+    public void get_monthly_rent_category1(HttpServletResponse res, HttpServletRequest req, @PathVariable String period) throws IOException {
 
-        List<MonthlyRent> monthlyRents = monthlyRentService.findMonthlyRents();
         HashSet<String> categoryList = new HashSet<String>();
 
-        for (int i = 0; i < monthlyRents.size(); i++) {
-            categoryList.add(monthlyRents.get(i).getCategory1());
+        if (period.equals("rentMonth")) {
+            List<MonthlyRent> monthlyRents = monthlyRentService.findMonthlyRents();
+
+            for (int i = 0; i < monthlyRents.size(); i++) {
+                categoryList.add(monthlyRents.get(i).getCategory1());
+            }
+        } else if (period.equals("rentYear")) {
+            List<YearlyRent> yearlyRents = yearlyRentService.findYearlyRents();
+
+            for (int i = 0; i < yearlyRents.size(); i++) {
+                categoryList.add(yearlyRents.get(i).getCategory1());
+            }
+        } else if (period.equals("rent2Year")) {
+            List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findTwoYearlyRents();
+
+            for (int i = 0; i < twoYearlyRents.size(); i++) {
+                categoryList.add(twoYearlyRents.get(i).getCategory1());
+            }
+        } else {
+            throw new NullPointerException();
         }
 
-        List <String> categoryHashToList = new ArrayList(categoryList);
+
+        List<String> categoryHashToList = new ArrayList(categoryList);
         Collections.sort(categoryHashToList);
 
         JSONArray jsonArray = new JSONArray();
@@ -80,19 +106,41 @@ public class MonthlyRentController {
     }
 
     //차 분류api
-    @RequestMapping(value = "/rent/month/rentMonth/{category1}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/rent/month/{period}/{category1}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
-    public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable String category1) throws IOException {
-
-        List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
-
-        List <String> categoryList2 = new ArrayList();
+    public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable String period, @PathVariable String category1) throws IOException {
 
 
-        for (int i = 0; i < monthlyRents.size(); i++) {
-            if (!categoryList2.contains(monthlyRents.get(i).getCategory2() )){
-                categoryList2.add(monthlyRents.get(i).getCategory2());
+        List<String> categoryList2 = new ArrayList();
+
+
+
+        if (period.equals("rentMonth")) {
+            List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
+
+            for (int i = 0; i < monthlyRents.size(); i++) {
+                if (!categoryList2.contains(monthlyRents.get(i).getCategory2())) {
+                    categoryList2.add(monthlyRents.get(i).getCategory2());
+                }
             }
+        } else if (period.equals("rentYear")) {
+            List<YearlyRent> yearlyRents = yearlyRentService.findCategory2OfMonthlyRents(category1);
+
+            for (int i = 0; i < yearlyRents.size(); i++) {
+                if (!categoryList2.contains(yearlyRents.get(i).getCategory2())) {
+                    categoryList2.add(yearlyRents.get(i).getCategory2());
+                }
+            }
+        } else if (period.equals("rent2Year")) {
+            List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findByCategory1(category1);
+
+            for (int i = 0; i < twoYearlyRents.size(); i++) {
+                if (!categoryList2.contains(twoYearlyRents.get(i).getCategory2())) {
+                    categoryList2.add(twoYearlyRents.get(i).getCategory2());
+                }
+            }
+        } else {
+            throw new NullPointerException();
         }
 
         JSONArray jsonArray = new JSONArray();
@@ -108,22 +156,37 @@ public class MonthlyRentController {
     }
 
     // 차명 api
-    @RequestMapping(value = "/rent/month/rentMonth/name/{category1}/{category2}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/rent/month/{period}/name/{category1}/{category2}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
-    public void get_monthly_rent_name(HttpServletResponse res, @PathVariable String category1, @PathVariable String category2) throws IOException {
-
-        List<MonthlyRent> monthlyRents = monthlyRentService.findNameOfMonthlyRents(category1, category2);
+    public void get_monthly_rent_name(HttpServletResponse res, @PathVariable String period, @PathVariable String category1, @PathVariable String category2) throws IOException {
 
         HashSet<String> categoryList = new HashSet<String>();
 
 
-        for (int i = 0; i < monthlyRents.size(); i++) {
-            categoryList.add(monthlyRents.get(i).getName());
+        if (period.equals("rentMonth")) {
+            List<MonthlyRent> monthlyRents = monthlyRentService.findNameOfMonthlyRents(category1, category2);
+
+            for (int i = 0; i < monthlyRents.size(); i++) {
+                categoryList.add(monthlyRents.get(i).getName());
+            }
+        } else if (period.equals("rentYear")) {
+            List<YearlyRent> yearlyRents = yearlyRentService.findNameOfYearlyRents(category1, category2);
+
+            for (int i = 0; i < yearlyRents.size(); i++) {
+                categoryList.add(yearlyRents.get(i).getName());
+            }
+        } else if (period.equals("rent2Year")) {
+            List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findNameOfTwoYearlyRents(category1, category2);
+
+            for (int i = 0; i < twoYearlyRents.size(); i++) {
+                categoryList.add(twoYearlyRents.get(i).getName());
+            }
+        } else {
+            throw new NullPointerException();
         }
 
-        List <String> categoryHashToList = new ArrayList(categoryList);
+        List<String> categoryHashToList = new ArrayList(categoryList);
         Collections.sort(categoryHashToList);
-
 
         JSONArray jsonArray = new JSONArray();
         for (String c : categoryHashToList) {
@@ -137,80 +200,64 @@ public class MonthlyRentController {
     }
 
     //가격 구하는 api
-    @RequestMapping(value = "/rent/month/rentMonth/price/{carName}/{mileage}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/rent/month/{period}/price/{carName}/{mileage}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
-    public void get_monthly_price(HttpServletResponse res, @PathVariable String carName, @PathVariable String mileage) throws IOException {
-
-        MonthlyRent rentCar = monthlyRentService.findPrice(carName);
-        JSONArray jsonArray = new JSONArray();
-        if(mileage.equals("2500")) {
-            jsonArray.put(rentCar.getCost_for_2_5k());
-        } else if(mileage.equals("2000")) {
-            jsonArray.put(rentCar.getCost_for_2k());
-        } else if(mileage.equals("3000")) {
-            jsonArray.put(rentCar.getCost_for_3k());
-        } else if(mileage.equals("4000")) {
-            jsonArray.put(rentCar.getCost_for_4k());
-        } else if(mileage.equals("기타주행거리")) {
-            jsonArray.put(rentCar.getCost_for_others());
-        }
-
-        jsonArray.put(rentCar.getDeposit());
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
-        pw.flush();
-        pw.close();
-    }
-
-
-    //12개월 렌트 차종 api
-    @RequestMapping(value = "/rent/month/rentYear", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-    @ResponseBody
-    public void get_yearly_rent_category1(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        List<YearlyRent> yearlyRents = yearlyRentService.findYearlyRents();
-
-        HashSet<String> categoryList = new HashSet<String>();
-
-        for (int i = 0; i < yearlyRents.size(); i++) {
-            categoryList.add(yearlyRents.get(i).getCategory1());
-        }
-
-        List <String> categoryHashToList = new ArrayList(categoryList);
-        Collections.sort(categoryHashToList);
-
+    public void get_monthly_price(HttpServletResponse res, @PathVariable String period, @PathVariable String carName, @PathVariable String mileage) throws IOException {
 
         JSONArray jsonArray = new JSONArray();
-        for (String c : categoryHashToList) {
-            jsonArray.put(c);
-        }
 
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
-        pw.flush();
-        pw.close();
-    }
+        if (period.equals("rentMonth")) {
+            MonthlyRent rentCar = monthlyRentService.findPrice(carName);
 
-    //차 분류 api
-    @RequestMapping(value = "/rent/month/rentYear/{category1}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-    @ResponseBody
-    public void get_yearly_rent_category2(HttpServletResponse res, @PathVariable String category1) throws IOException {
-
-        List<YearlyRent> yearlyRents = yearlyRentService.findCategory2OfMonthlyRents(category1);
-
-        List <String> categoryList2 = new ArrayList();
-
-        for (int i = 0; i < yearlyRents.size(); i++) {
-            if (!categoryList2.contains(yearlyRents.get(i).getCategory2() )){
-                categoryList2.add(yearlyRents.get(i).getCategory2());
+            if (mileage.equals("2500")) {
+                jsonArray.put(rentCar.getCost_for_2_5k());
+            } else if (mileage.equals("2000")) {
+                jsonArray.put(rentCar.getCost_for_2k());
+            } else if (mileage.equals("3000")) {
+                jsonArray.put(rentCar.getCost_for_3k());
+            } else if (mileage.equals("4000")) {
+                jsonArray.put(rentCar.getCost_for_4k());
+            } else if (mileage.equals("기타주행거리")) {
+                jsonArray.put(rentCar.getCost_for_others());
             }
-        }
 
-        JSONArray jsonArray = new JSONArray();
+            jsonArray.put(rentCar.getDeposit());
+            jsonArray.put(rentCar.getAge_limit());
 
-        for (String c : categoryList2) {
-            jsonArray.put(c);
+        } else if (period.equals("rentYear")) {
+            YearlyRent rentCar = yearlyRentService.findPrice(carName);
+
+            if (mileage.equals("20000")) {
+                jsonArray.put(rentCar.getCost_for_20k());
+            } else if (mileage.equals("30000")) {
+                jsonArray.put(rentCar.getCost_for_30k());
+            } else if (mileage.equals("40000")) {
+                jsonArray.put(rentCar.getCost_for_40k());
+            } else if (mileage.equals("기타주행거리")) {
+                jsonArray.put(rentCar.getCost_for_others());
+            }
+
+            jsonArray.put(rentCar.getDeposit());
+            jsonArray.put(rentCar.getAge_limit());
+
+        } else if (period.equals("rent2Year")) {
+            TwoYearlyRent rentCar = twoYearlyRentService.findPrice(carName);
+
+            if (mileage.equals("20000")) {
+                jsonArray.put(rentCar.getCost_for_20Tk());
+            } else if (mileage.equals("30000")) {
+                jsonArray.put(rentCar.getCost_for_30Tk());
+            } else if (mileage.equals("40000")) {
+                jsonArray.put(rentCar.getCost_for_40Tk());
+            } else if (mileage.equals("기타주행거리")) {
+                jsonArray.put(rentCar.getCost_for_others());
+            }
+
+            jsonArray.put(rentCar.getDeposit());
+            jsonArray.put(rentCar.getAge_limit());
+
+        } else {
+            throw new NullPointerException();
         }
 
         PrintWriter pw = res.getWriter();
@@ -219,58 +266,5 @@ public class MonthlyRentController {
         pw.close();
     }
 
-    //차명 api
-    @RequestMapping(value = "/rent/month/rentYear/name/{category1}/{category2}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-    @ResponseBody
-    public void get_yearly_rent_name(HttpServletResponse res, @PathVariable String category1, @PathVariable String category2) throws IOException {
-
-        List<YearlyRent> yearlyRents = yearlyRentService.findNameOfYearlyRents(category1, category2);
-
-        HashSet<String> categoryList = new HashSet<String>();
-
-        for (int i = 0; i < yearlyRents.size(); i++) {
-            categoryList.add(yearlyRents.get(i).getName());
-        }
-
-        List <String> categoryHashToList = new ArrayList(categoryList);
-        Collections.sort(categoryHashToList);
-
-
-        JSONArray jsonArray = new JSONArray();
-        for (String c : categoryHashToList) {
-            jsonArray.put(c);
-        }
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
-        pw.flush();
-        pw.close();
-    }
-
-    // 가격 구하는 api
-    @RequestMapping(value = "/rent/month/rentYear/price/{carName}/{mileage}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-    @ResponseBody
-    public void get_yearly_price(HttpServletResponse res, @PathVariable String carName, @PathVariable String mileage) throws IOException {
-
-        YearlyRent rentCar = yearlyRentService.findPrice(carName);
-
-        JSONArray jsonArray = new JSONArray();
-        if(mileage.equals("20000")) {
-            jsonArray.put(rentCar.getCost_for_20k());
-        } else if(mileage.equals("30000")) {
-            jsonArray.put(rentCar.getCost_for_30k());
-        } else if(mileage.equals("40000")) {
-            jsonArray.put(rentCar.getCost_for_40k());
-        } else if(mileage.equals("기타주행거리")) {
-            jsonArray.put(rentCar.getCost_for_others());
-        }
-
-        jsonArray.put(rentCar.getDeposit());
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
-        pw.flush();
-        pw.close();
-    }
 
 }

@@ -24,5 +24,14 @@ public class MonthlyRent {
     private String cost_for_4k;
     private String cost_for_others;
     private String age_limit;
+    private String cost_per_km;
+
+    private String nameMoren;
+    private Long start;
+    private Long end;
+
+    private String credit;
+    private String img_url;
+
 
 }

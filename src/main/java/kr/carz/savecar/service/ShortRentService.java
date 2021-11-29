@@ -3,9 +3,11 @@ package kr.carz.savecar.service;
 import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.ShortRent;
 import kr.carz.savecar.repository.ShortRentRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 public class ShortRentService {
     private final ShortRentRepository shortRentRepository;
 

@@ -295,10 +295,11 @@ p:last-child {
   z-index: 300;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  background-color: rgba(0, 0, 0, 0.76);
+  background-color: #2b2929f0;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
+  height: 75px;
 }
 .main_menu_bg {
   margin-top: 0px;
@@ -555,8 +556,8 @@ Button
 Section
 */
 .sections {
-  padding-top: 85px;
-  padding-bottom: 105px;
+  padding-top: 120px;
+  padding-bottom: 0px;
   /*overflow: hidden;*/
 }
 .sections.footer {
@@ -684,11 +685,11 @@ Separator
 /*====================================================================
                         Home Section
 ======================================================================*/
-.home {
-  background: url(../img/header1.jpg)
-  no-repeat center center;
-  background-size: cover;
-}
+/*.home {*/
+/*  background: url(../img/header1.jpg)*/
+/*  no-repeat center center;*/
+/*  background-size: cover;*/
+/*}*/
 .home_skew_border {
   position: relative;
 }
@@ -713,7 +714,7 @@ Separator
   border-left: 680px solid transparent;
 }
 .main_home {
-  padding-top: 250px;
+  padding-top: 200px;
   padding-bottom: 250px;
   display: block;
 }
@@ -979,6 +980,41 @@ button.btn-md:hover {
   text-decoration: none;
   border: 0px solid #f4720a;
 }
+
+.btn-bl:active,
+.btn-bl.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.125);
+}
+button.btn-bl:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: none;
+  box-shadow: 5px 5px 30px #707070;
+  /*color: #e74c3c;*/
+}
+button.btn-bl {
+  text-align: center;
+  color: #444;
+  letter-spacing: 1px;
+  margin: 0;
+  margin-top: 0px;
+  transition: 0.5s;
+  background: #d3d3d3;
+  border-radius: 20px;
+  border: 0px solid #e74c3c;
+  padding: 10px;
+}
+button.btn-bl:hover {
+  background-color: rgba(18, 165, 135, 0.64);
+  box-shadow: 5px 5px 30px #707070;
+  text-decoration: none;
+}
 .portfolio .toolbar {
   margin-bottom: 50px;
 }
@@ -1185,7 +1221,7 @@ button.btn-md:hover {
 
 .width-height-box {
   position:relative;
-  height:500px;
+  /*height:500px;*/
   text-align: center;
   vertical-align:middle;
 }

@@ -11,7 +11,7 @@ body {
 
 #logout_box button {
     border: none;
-    background-color: #5e7fff;
+    background-color: #5495b1;
     border-radius: 0.5vh;
     color: white;
     margin: 5px;
@@ -30,7 +30,7 @@ body {
 }
 
 .menu_container {
-    background-color: #5e7fff;
+    background-color: #5495b1;
     width: 20vw;
     margin: 0 10px;
     border: 1px solid lightgray;
@@ -67,7 +67,7 @@ body {
 }
 
 .detail_container {
-    background-color: #5e7fff;
+    background-color: #5495b1;
     width: 50vw;
     margin: 0 10px;
     border: 1px solid lightgray;
@@ -95,7 +95,7 @@ body {
     flex-direction: row;
     border-radius: 0.5vh 0.5vh 0 0;
     font-size: 13px;
-    border-bottom: 1px #3952ff dotted;
+    border-bottom: 1px #5495b1 dotted;
 }
 
 /*form {*/
@@ -116,7 +116,7 @@ body {
 #reserve_list_title {
     border-bottom: 1px solid lightgray;
     font-weight: bold;
-    background: #5e7fff;
+    background: #5495b1;
     color: white;
 }
 
@@ -133,7 +133,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background: white;
-    border-bottom: 1px #3952ff dotted;
+    border-bottom: 1px #5495b1 dotted;
 
 }
 
@@ -145,7 +145,7 @@ body {
 #detail_list_title {
     border-bottom: 1px solid lightgray;
     font-weight: bold;
-    background: #5e7fff;
+    background: #5495b1;
     color: white;
 }
 
@@ -217,7 +217,7 @@ body {
     flex: 1;
     padding: 10px;
     margin: 5px 10px 5px 0;
-    background-color: #5e7fff;
+    background-color: #5495b1;
     border-radius: 0.5vh;
     border: none;
     color: white;
@@ -258,12 +258,12 @@ form {
 }
 
 #reserve_list_title .set_reserve {
-    background-color: #5e7fff;
+    background-color: #5495b1;
     color: white;
 }
 
 #go_back_wrapper {
-    background: #5e7fff;
+    background: #5495b1;
 }
 
 #go_back {
@@ -284,7 +284,7 @@ form {
 
 #detail_set_reserve, #detail_set_delete {
     justify-content: flex-end;
-    background: #5e7fff;
+    background: #5495b1;
 }
 
 #custom_demand {
@@ -299,7 +299,7 @@ form {
 
 .detail_list .set_reserve {
     background: white;
-    color: #2a52ee;
+    color: #5495b1;
 }
 
 .detail_list .set_reserve:hover {
@@ -363,4 +363,147 @@ form {
     /*#custom_demand {*/
     /*    width: 200%;*/
     /*}*/
+}
+.form-part {
+    width: 50%;
+    margin: auto;
+}
+form {
+    flex-direction: column;
+    align-items: inherit;
+}
+
+#discountBtn {
+    border: none;
+    background-color: #5495b1;
+    border-radius: 0.5vh;
+    color: white;
+    margin: 5px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+}
+.form-group {
+    display: flex;
+    justify-content: space-between;
+}
+.form-group label {
+    font-size: 1rem;
+}
+#carNo.form-control,
+#discount.form-control,
+#discount-description.form-control {
+    height: 20px;
+    width: 80%;
+    margin: 0 0 10px 5px;
+}
+.content_container {
+    width: 70%;
+    margin: 0 auto;
+}
+#table_header {
+    background-color: #5495b1;
+}
+#mainTable table {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+td {
+    border-bottom: 1px solid #5495b1;
+}
+.discount-table button,
+#morenReservationTable button,
+#morenReservationCard button,
+#reservation-detail-card button {
+    width: 40%;
+    height: 100%;
+    color: white;
+    background-color: #5495b1;
+    border: none;
+    font-weight: 900;
+}
+#reservation-detail-card button {
+    width: 49.5%;
+    padding: 0.5rem;
+}
+#morenReservationTable {
+    border-collapse: collapse;
+}
+#morenReservationTable td {
+    position: relative;
+}
+#morenReservationTable tr.red-line td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 3px solid red;
+    width: 100%;
+}
+
+#morenReservationTable tr.blue-line td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 3px solid darkblue;
+    width: 100%;
+}
+.no-line-column:before {
+    content: '' !important;
+    border: none !important;
+}
+
+
+#morenReservationCard {
+    display: none;
+}
+#morenReservationCard .card {
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid #5495b1;
+}
+#morenReservationCard p {
+    margin: 0.3rem 0;
+}
+@media (max-width: 600px) {
+    .form-part {
+        width: 90%;
+        margin-top: 1rem;
+    }
+    #carNo.form-control,
+    #discount.form-control,
+    #discount-description.form-control {
+        width: 60%;
+    }
+    .content_container {
+        width: 90%;
+    }
+    #mainTable button {
+        width: 100%;
+    }
+    .discount-table {
+        font-size: 14px;
+    }
+    .discount-table th, .discount-table td {
+        padding: 4px !important;
+    }
+    #morenReservationTable {
+        display: none;
+    }
+    #morenReservationCard {
+        display: block;
+    }
+    #morenReservationCard button {
+        width: 100%;
+        height: 100%;
+        color: white;
+        background-color: #5495b1;
+        border: none;
+        font-weight: 900;
+        padding: 0.3rem 0;
+    }
 }

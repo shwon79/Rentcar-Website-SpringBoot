@@ -1,4 +1,4 @@
-<!-- React로 구현하기 전 레이아웃 설정 -->
+
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -8,6 +8,11 @@
     <!-- Title -->
     <title>SAVE-CAR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+    </style>
     <script th:src="@{/js/popup.js}"></script>
 </head>
 
@@ -22,44 +27,310 @@
 
 
     <!----------------------------------------->
-    <!-------------- home section ------------->
+    <!------------ home pc section ------------>
     <!----------------------------------------->
 
-    <!--home Section -->
-    <section id="home" class="home">
-        <div class="overlay">
-            <div class="home_skew_border">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 main_clogo">
-                            <div class="main_home_slider text-center">
-                                <div class="single_home_slider">
-                                    <div class="main_home wow fadeInUp" data-wow-duration="700ms">
-                                        <h3 class="index-text">WELCOME TO SAVE-CAR</h3>
-                                        <h1 class="index-text"><b>세이브카 사이트 가격오픈</b></h1>
-                                        <div class="separator"></div>
-                                        <h3 class="index-text">다양한 차량 제공 및 고객의 안전을 최우선으로 한 정비
-                                            <br> 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다.</h3>
-                                        <br>
-                                        <div class="home_btn">
-                                            <a class="btn1 btn2-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 240px; height: 50px;">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
-                                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 240px; height: 50px;">간단 문자보내기  &nbsp; <img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></a>
-                                        </div>
-                                    </div>
+
+    <!-- service block -->
+    <section id="home_pc" class="feature sections">
+        <div class="container space-small">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >
+                    <a href="/rent/month/new">
+                        <div class="row main-card"  style="border: 2px solid #2b2d2c; border-radius: 10px; padding-top: 70px; padding-bottom: 60px; background: black">
+
+                            <div class="service-block text-center">
+
+                                <!-- service block -->
+                                <div class="service-content" style="padding: 20px 0 0 0; line-height: 0;">
+                                    <h1 style="font-family: 'Do Hyeon', sans-serif;color: whitesmoke;">월렌트+12/24개월렌트</h1>
+                                </div>
+                                <br>
+                                <!-- service content -->
+                                <div class="service-img-main ">
+                                    <img th:src="@{/img/main-card-monthly.png}" width="200" height="200" style="border-radius: 30%">
+                                </div>
+                                <!-- service content -->
+                                <div class="service-img-main" style="padding-top: 40px;">
+                                    <p style="font-size: 1.6rem; color: whitesmoke; margin: 0px;">월 단위로 대여하는 상품입니다.</p>
+                                    <p style="font-size: 1.6rem; color: whitesmoke">실시간으로 가격을 조회해보실 수 있습니다.</p>
+                                </div>
+                                <!-- service img -->
+                                <div class="service-content" style="padding-top: 20px">
+                                    <img th:src="@{/img/arrow1.png}" width="50" height="50"  style="border-radius: 50%">
+                                </div>
+
+                                <a href="/rent/month/new"><button class="fixed_phone_pc_btn" >월렌트 예약가능차량 보기</button></a>
+<!--                                <a href="sms:010-5277-4113"><button class="fixed_message_btn" ><img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>-->
+
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <a href="/rent/long_term">
+                        <div class="row main-card"  style="border: 2px solid #c70808; border-radius: 10px; padding-top: 70px; padding-bottom: 60px; margin-left: 5px;  background: white">
+
+                            <div class="service-block text-center" >
+
+                                <!-- service block -->
+                                <div class="service-content" style="padding: 20px 0 0 0; line-height: 0;">
+                                    <h1 style="font-family: 'Do Hyeon', sans-serif;color: black;">누구나 장기렌트</h1>
+                                </div>
+
+                                <br>
+                                <!-- service content -->
+                                <div class="service-img-main ">
+                                    <img th:src="@{/img/main-card-yearly.png}" width="200" height="200"  style="border-radius: 30%">
+                                </div>
+                                <!-- service content -->
+                                <div class="service-img-main" style="padding-top: 40px;">
+                                    <p style="font-size: 1.6rem; color: black; margin: 0px;">누구나 이용할 수 있는 장기렌트 상품입니다.</p>
+                                    <p style="font-size: 1.6rem; color: black">원하시는 차량의 견적을 받아보실 수 있습니다.</p>
+                                </div>
+                                <!-- service img -->
+                                <div class="service-content" style="padding-top: 20px">
+                                    <img th:src="@{/img/arrow1.png}" width="50" height="50"  style="border-radius: 50%">
                                 </div>
                             </div>
+
                         </div>
-                    </div>
+                    </a>
                 </div>
-                <div class="scrooldown">
-                    <a href="#trial"><i class="fa fa-arrow-down"></i></a>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <a href="/europe">
+                        <div class="row main-card"  style="border: 2px solid #4e4c4c; border-radius: 10px; padding-top: 70px; padding-bottom: 60px; margin-left: 5px; background: #4e4c4c">
+
+
+                            <div class="service-block text-center">
+
+                                <!-- service block -->
+                                <div class="service-content" style="padding: 20px 0 0 0; line-height: 0;">
+                                    <h1 style="font-family: 'Do Hyeon', sans-serif;color: whitesmoke;">캠핑카 렌트</h1>
+                                </div>
+                                <br>
+                                <!-- service content -->
+                                <div class="service-img-main ">
+                                    <img th:src="@{/img/main-card-camp.png}"  width="200" height="200" style="border-radius: 30%;">
+                                </div>
+                                <!-- service content -->
+                                <div class="service-img-main" style="padding-top: 40px;">
+                                    <p style="font-size: 1.6rem; color: whitesmoke; margin: 0px;">캠핑카를 대여하는 상품입니다.</p>
+                                    <p style="font-size: 1.6rem; color: whitesmoke">럭셔리한 캠핑카가 준비되어 있습니다.</p>
+                                </div>
+                                <!-- service img -->
+                                <div class="service-content" style="padding-top: 20px">
+                                    <img th:src="@{/img/arrow1.png}" width="50" height="50"  style="border-radius: 50%">
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+
                 </div>
-            </div>
-            <div>
             </div>
         </div>
     </section>
+    <!-- end of service block -->
+
+
+    <!--home mobile Section -->
+    <section id="home" class="home">
+        <div class="container" style="padding: 0px;">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12" style="margin-top: 115px;">
+                    <div class="service-block-mobile text-center align-center">
+
+                        <!-- service content -->
+                        <div class="service-img-main ">
+                            <p style="font-family: 'Do Hyeon', sans-serif; font-size: 2rem;">세이브카 Services</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-right: -5px; margin-left: -5px;">
+                <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
+
+                </div>
+                <div class="col-sm-10 col-lg-10 col-xs-10 col-md-10">
+                    <a href="/rent/month/new">
+                        <div class="row" style="margin: 0 -20px; border: 2px solid #2b2d2c; border-radius: 20px; background: black">
+
+
+                            <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5" style="margin-top: 30px;">
+                                <div class="service-block-mobile text-center align-center">
+                                    <img th:src="@{/img/main-card-monthly.png}" width="70%" height="90" style="border-radius: 30%">
+                                </div>
+                            </div>
+                            <div class="col-sm-7 col-lg-7 col-xs-7 col-md-7">
+                                <div class="row">
+
+                                    <!-- service block -->
+                                    <div class="service-content-mobile text-center" style="height: 80px; padding: 25px 20px 0 0; line-height: 0;">
+                                        <h2 style="font-family: 'Do Hyeon', sans-serif;color: whitesmoke;margin: 0;">월렌트+</h2>
+                                        <h2 style="font-family: 'Do Hyeon', sans-serif;color: whitesmoke;margin: 0;">12/24개월렌트</h2>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="row">
+
+                                    <!-- service img -->
+                                    <div class="service-content text-center"  style="padding: 0 20px 0 0; margin-bottom: 15px">
+                                        <img th:src="@{/img/arrow1.png}" width="30" height="30"  style="border-radius: 50%">
+                                    </div>
+
+                                    <a href="tel:1661-3331"><button class="fixed_phone_btn" ><img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>
+                                    <a href="sms:010-5277-4113"><button class="fixed_message_btn" ><img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
+
+                </div>
+            </div>
+
+            <!-- -->
+
+            <div class="row" style="margin-right: -5px; margin-left: -5px;">
+                <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
+
+                </div>
+                <div class="col-sm-10 col-lg-10 col-xs-10 col-md-10">
+                    <a href="/rent/long_term">
+                        <div class="row" style="margin: 0 -20px; border: 2px solid #c70808; border-radius: 20px; background: white">
+
+
+                            <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5" style="margin-top: 30px;">
+                                <div class="service-block-mobile text-center align-center">
+                                    <img th:src="@{/img/main-card-yearly.png}" width="70%" height="90" style="border-radius: 30%">
+                                </div>
+                            </div>
+                            <div class="col-sm-7 col-lg-7 col-xs-7 col-md-7">
+                                <div class="row">
+
+                                    <!-- service block -->
+                                    <div class="service-content-mobile text-center" style="height: 80px; padding: 30px 20px 0 0; line-height: 0;">
+                                        <h2 style="font-family: 'Do Hyeon', sans-serif;color: black;margin: 0;">누구나</h2>
+                                        <h2 style="font-family: 'Do Hyeon', sans-serif;color: black;margin: 0;">장기렌트</h2>
+                                    </div>
+                                    <br>
+
+                                </div>
+                                <div class="row">
+
+                                    <!-- service img -->
+                                    <div class="service-content text-center"  style="padding: 0 20px 0 0; margin-bottom: 15px">
+                                        <img th:src="@{/img/arrow1.png}" width="30" height="30"  style="border-radius: 50%">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
+
+                </div>
+            </div>
+
+            <!-- -->
+            <div class="row" style="margin-right: -5px; margin-left: -5px;">
+                <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
+
+                </div>
+                <div class="col-sm-10 col-lg-10 col-xs-10 col-md-10">
+                    <a href="/europe">
+                        <div class="row" style="margin: 0 -20px; border: 2px solid #4e4c4c; border-radius: 20px; background: #4e4c4c">
+
+
+                            <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5" style="margin-top: 30px;">
+                                <div class="service-block-mobile text-center align-center">
+                                    <img th:src="@{/img/main-card-camp.png}" width="70%" height="90" style="border-radius: 30%">
+                                </div>
+                            </div>
+                            <div class="col-sm-7 col-lg-7 col-xs-7 col-md-7">
+                                <div class="row">
+
+                                    <!-- service block -->
+                                    <div class="service-content-mobile text-center" style="height: 80px; padding: 40px 20px 0 0; line-height: 0;">
+                                        <h2 style="font-family: 'Do Hyeon', sans-serif;color: whitesmoke;margin: 0;">캠핑카렌트</h2>
+                                    </div>
+                                    <br>
+
+                                </div>
+                                <div class="row">
+
+                                    <!-- service img -->
+                                    <div class="service-content text-center"  style="padding: 0 20px 0 0; margin-bottom: 15px">
+                                        <img th:src="@{/img/arrow1.png}" width="30" height="30"  style="border-radius: 50%">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
+
+                </div>
+            </div>
+
+        </div>
+    </section>
     <!--End of home section -->
+
+
+    <!--home mobile Section -->
+<!--    <section id="home" class="home">-->
+<!--        <div class="overlay">-->
+<!--            <div class="home_skew_border">-->
+<!--                <div class="container">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 main_clogo">-->
+
+
+<!--                            <div class="main_home_slider text-center">-->
+<!--                                <div class="single_home_slider">-->
+<!--                                    <div class="main_home wow fadeInUp" data-wow-duration="700ms">-->
+
+
+<!--                                        <h3 class="index-text">WELCOME TO SAVE-CAR</h3>-->
+<!--                                        <h1 class="index-text"><b>세이브카 사이트 가격오픈</b></h1>-->
+<!--                                        <div class="separator"></div>-->
+<!--                                        <h3 class="index-text">다양한 차량 제공 및 고객의 안전을 최우선으로 한 정비-->
+<!--                                            <br> 그리고 더욱 더 저렴한 렌트료 제공으로 고객의 만족을 위한 세이브카가 되겠습니다.</h3>-->
+<!--                                        <br>-->
+<!--                                        <div class="home_btn">-->
+<!--                                            <a class="btn1 btn2-default" href="tel:1661-3331" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 240px; height: 50px;">1661-3331 &nbsp; <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>-->
+<!--                                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 240px; height: 50px;">간단 문자보내기  &nbsp; <img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="scrooldown">-->
+<!--                    <a href="#trial"><i class="fa fa-arrow-down"></i></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+    <!--End of home section -->
+
 
     <!----------------------------------------->
     <!------------ 간편 상담신청 section ------------>
@@ -152,7 +423,7 @@
             <div class="container">
                 <div class="row">
                     <div class="head_title sections text-center">
-                        <h1><a href="/rent/month">월렌트 + 12개월 렌트</a></h1>
+                        <h1><a href="/rent/month/new">월렌트 + 12/24개월 렌트</a></h1>
                         <div class="subtitle">
                             <span style="color: red">자차, 정비</span>포함<br>
                             주행거리별 마일리지 제도<br>
@@ -161,7 +432,7 @@
                         </div>
                         <div class="separator"></div>
                         <div class="home_btn">
-                            <a class="btn1 btn2-default" href="/rent/month" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">온라인 상담신청 &nbsp; <img th:src="@{/img/calendar.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+                            <a class="btn1 btn2-default" href="/rent/month/new" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">실시간 견적내기 &nbsp; <img th:src="@{/img/calendar.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
 <!--                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>-->
                         </div>
                     </div>
@@ -302,9 +573,8 @@
                 <div class="head_title sections text-center">
                     <h1><a href="/europe">캠핑카 렌트</a></h1>
                     <div class="subtitle">
-                        <h5>CAMPERSAVE Motorhome</h5>
+<!--                        <h5>CAMPERSAVE Motorhome</h5>-->
                     </div>
-                    <!--              <div class="separator"></div>-->
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="service-block text-center">
@@ -389,10 +659,10 @@
                     <br/>
                     <div class="separator"></div>
 
-                    <a target='_blank' href="https://cafe.naver.com/savecarz/5" class="imghover"><img th:src="@{/img/camp_sharing.png}" width="100%" height="400"> </a>
+                    <a target='_blank' href="https://cafe.naver.com/savecarz/5" class="imghover"><img th:src="@{/img/campingcar-banner.png}" width="100%" height="100%"> </a>
                     <br/><br/>
                     <div class="home_btn">
-                        <a target='_blank' class="btn1 btn2-default" href="https://cafe.naver.com/savecarz/5" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 250px;">카페 상품보러가기&nbsp; <img th:src="@{/img/click1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
+                        <a target='_blank' class="btn1 btn5-default" href="https://cafe.naver.com/savecarz/5" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 250px;">카페 상품보러가기&nbsp; <img th:src="@{/img/click1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
                         <!--                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>-->
                     </div>
                 </div>
@@ -411,8 +681,8 @@
             <div class="row">
                 <div class="main_pricing_area sections">
                     <div class="head_title text-center">
-                        <h1><a target='_blank'  href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">한눈에 보는</a></h1>
-                        <h1><a target='_blank'  href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">세이브카 가격표</a></h1>
+                        <h1><a target='_blank'  href="https://blog.naver.com/PostView.naver?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=6&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=6">한눈에 보는</a></h1>
+                        <h1><a target='_blank'  href="https://blog.naver.com/PostView.naver?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=6&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=6">세이브카 가격표</a></h1>
                         <div class="separator"></div>
                         <h3 class="index-text" style="color: red; font-weight: bold; font-size: 2.5vh">사이트 가격 오픈 !!</h3>
                         <br/>
@@ -428,7 +698,7 @@
                                 <h2 class="index-text">월렌트 가격표</h2>
                             </div>
                             <div class="pricing_body">
-                                <a target='_blank' class="btn btn-md" href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">
+                                <a target='_blank' class="btn btn-md" href="https://blog.naver.com/PostView.naver?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=6&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=6">
                                     가격 보기
                                 </a>
                             </div>
@@ -443,7 +713,7 @@
                                 <h2 class="index-text">12개월 렌트 가격표</h2>
                             </div>
                             <div class="pricing_body">
-                                <a target='_blank' class="btn btn-md" href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222222675741&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=2">
+                                <a target='_blank' class="btn btn-md" href="https://blog.naver.com/PostView.naver?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=6&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=6">
                                     가격 보기
                                 </a>
                             </div>
@@ -488,9 +758,9 @@
 
 
     <!-- START SCROLL TO TOP  -->
-    <div class="scrollup">
-        <a href="#"><i class="fa fa-chevron-up"></i></a>
-    </div>
+<!--    <div class="scrollup">-->
+<!--        <a href="#"><i class="fa fa-chevron-up"></i></a>-->
+<!--    </div>-->
 </div>
 
 

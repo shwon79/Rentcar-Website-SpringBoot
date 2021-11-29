@@ -1,5 +1,6 @@
 package kr.carz.savecar;
 
+import kr.carz.savecar.domain.DateTime;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -17,6 +18,7 @@ public class SavecarApplication extends SpringBootServletInitializer{
 	@PostConstruct
 	void started() {
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+		new DateTime("4");
 	}
 
 

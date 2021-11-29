@@ -3,9 +3,11 @@ package kr.carz.savecar.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+
 @Getter
 @Setter
-public class ReservationSaveDto {
+public class ReservationSaveDTO {
 
     private String name;
     private String phoneNo;
@@ -19,10 +21,16 @@ public class ReservationSaveDto {
     private String deposit;
     private String option;
     private String price;
+    private String age_limit;
+    private String car_num;
+    private String region;
+    private String resDate;
+    private String carAge;
 
-    public ReservationSaveDto(String name, String phoneNo, String detail, String product, String title,
+    public ReservationSaveDTO(String name, String phoneNo, String detail, String product, String title,
                               String category1, String category2, String car_name, String mileage,
-                              String deposit, String option, String price) {
+                              String deposit, String option, String price, String age_limit,String car_num,
+                              String region, String resDate, String carAge) {
         this.name = name;
         this.phoneNo = phoneNo;
         this.detail = detail;
@@ -35,6 +43,11 @@ public class ReservationSaveDto {
         this.deposit = deposit;
         this.option = option;
         this.price = price;
+        this.age_limit = age_limit;
+        this.car_num = car_num;
+        this.region = region;
+        this.resDate = resDate;
+        this.carAge = carAge;
     }
 
     public Reservation toEntity() {
@@ -51,6 +64,11 @@ public class ReservationSaveDto {
                 .deposit(deposit)
                 .option(option)
                 .price(price)
+                .age_limit(age_limit)
+                .car_num(car_num)
+                .region(region)
+                .resDate(resDate)
+                .carAge(carAge)
                 .build();
 
     }
