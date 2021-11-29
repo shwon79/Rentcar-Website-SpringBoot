@@ -2,8 +2,6 @@ package kr.carz.savecar.controller;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,82 +44,18 @@ public class CalendarController {
         this.campingcarDateTimeService2 = campingcarDateTimeService2;
     }
 
-
-
-    @GetMapping("/camping/price")
-    public String camping_price() {
-        return "camping_price";
-    }
-
-    @GetMapping("/test")
-    public String camping_europe_test(Model model) {
-        // 날짜
+    @GetMapping("/camping/calendar")
+    public String camping_calendar(Model model) {
         Calendar cal = Calendar.getInstance();
-
         int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
 
-        model.addAttribute("today", today);
         System.out.println(today);
+        model.addAttribute("today", today);
 
         int now_month = cal.get(Calendar.MONTH)+1;
         int now_year = cal.get(Calendar.YEAR);
 
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
 
-
-        // 전달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,1);
-
-        Long firstDateId = calendarDateList.get(0).getDateId();
-        Integer before = cal.get(Calendar.DAY_OF_WEEK);
-
-        for(int i=1; i<before; i++){
-            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-        }
-
-        // 다음달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-        Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-        for(int i=1; i<=7-after; i++){
-            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-        }
-
-        Integer daylast = 7-after;
-        System.out.println(daylast);
-
-        model.addAttribute("daylast", calendarDateList);
-        model.addAttribute("calendarDateList", calendarDateList);
-
-
-        // 날짜별 캠핑카
-        List<List<DateCamping>> dateCampingList = new ArrayList();
-
-        for (int i=0; i<calendarDateList.size(); i++){
-            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
-        }
-
-        model.addAttribute("dateCampingList", dateCampingList);
-        model.addAttribute("thisMonth", now_month);
-        model.addAttribute("thisYear", now_year);
-
-        return "calendar";
-    }
-
-    @GetMapping("/europe")
-    public String camping_europe(Model model) {
-        // 날짜
-        Calendar cal = Calendar.getInstance();
-
-        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
-
-        model.addAttribute("today", today);
-        System.out.println(today);
-
-        int now_month = cal.get(Calendar.MONTH)+1;
-        int now_year = cal.get(Calendar.YEAR);
 
 
 
@@ -169,7 +103,7 @@ public class CalendarController {
         model.addAttribute("thisMonth", now_month);
         model.addAttribute("thisYear", now_year);
 
-        return "calendar";
+        return "camping_calendar";
     }
 
 
@@ -185,10 +119,8 @@ public class CalendarController {
 
         if(month == this_month-1){
             model.addAttribute("today", today);
-            System.out.println(this_month);
         } else {
             model.addAttribute("today", 0);
-            System.out.println(0);
         }
 
         if(now_month > 11){
@@ -225,7 +157,6 @@ public class CalendarController {
             }
 
             Integer daylast = 7-after;
-            System.out.println(daylast);
 
             model.addAttribute("daylast", calendarDateList);
             model.addAttribute("calendarDateList", calendarDateList);
@@ -245,7 +176,7 @@ public class CalendarController {
         }
 
 
-        return "calendar";
+        return "camping_calendar";
     }
 
 
@@ -321,7 +252,7 @@ public class CalendarController {
         }
 
 
-        return "calendar";
+        return "camping_calendar";
     }
 
 
