@@ -3,12 +3,11 @@ package kr.carz.savecar.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-
 @Getter
 @Setter
-public class MorenReservationDTO {
+public class MorenReservationApplyDTO {
 
+    private Long id;
     private String carNo;      // 차량번호
     private String kilometer;  // 약정주행거리
     private String reservationName;   // 예약자 이름(입금자명)
@@ -16,42 +15,34 @@ public class MorenReservationDTO {
     private String reservationAge;    // 예약자 생년월일
     private String reservationDate;   // 예약 날짜
     private String reservationTime;   // 예약 시간
-    private String reservationGuarantee;   // 신용카드보유 or 소득증빙
-    private String reservationDetails;     // 요청사항
     private String address;                // 배차요청 주소
     private String addressDetail;          // 배차요청 상세주소
-    private String carPrice;               // 렌트료
-    private String carTax;                 // 부가세
+    private String rentTerm;   // 렌트 기간
     private String carAmountTotal;         // 총렌트료
     private String carDeposit;             // 보증금
-    private String reservationStatus;      // 예약 확정 취소 여부
-    private String rentTerm;               // 한달, 12개월, 24개월
+    private String reservationDetails;     // 요청사항
     private String costPerKm;              // 초과금액
     private String carCode;
     private String pickupPlace;
 
-
-    public MorenReservationDTO(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
-                               String reservationDate, String reservationTime, String reservationGuarantee, String reservationDetails,
-                               String address, String addressDetail, String carPrice, String carTax, String carAmountTotal, String carDeposit,
-                               String reservationStatus, String rentTerm, String costPerKm, String carCode, String pickupPlace) {
+    public MorenReservationApplyDTO(String carNo, String kilometer, String reservationName, String reservationPhone,
+                                    String reservationDate, String reservationTime,
+                                    String address, String addressDetail, Long id, String rentTerm,
+                                    String carAmountTotal, String carDeposit, String reservationDetails,
+                                    String costPerKm, String carCode, String pickupPlace) {
+        this.id = id;
         this.carNo = carNo;
         this.kilometer = kilometer;
         this.reservationName = reservationName;
         this.reservationPhone = reservationPhone;
-        this.reservationAge = reservationAge;
         this.reservationDate = reservationDate;
         this.reservationTime = reservationTime;
-        this.reservationGuarantee = reservationGuarantee;
-        this.reservationDetails = reservationDetails;
         this.address = address;
         this.addressDetail = addressDetail;
-        this.carPrice = carPrice;
-        this.carTax = carTax;
+        this.rentTerm = rentTerm;
         this.carAmountTotal = carAmountTotal;
         this.carDeposit = carDeposit;
-        this.reservationStatus = reservationStatus;
-        this.rentTerm = rentTerm;
+        this.reservationDetails = reservationDetails;
         this.costPerKm = costPerKm;
         this.carCode = carCode;
         this.pickupPlace = pickupPlace;
@@ -59,23 +50,19 @@ public class MorenReservationDTO {
 
     public MorenReservation toEntity() {
         return MorenReservation.builder()
+                .id(id)
                 .carNo(carNo)
                 .kilometer(kilometer)
                 .reservationName(reservationName)
                 .reservationPhone(reservationPhone)
-                .reservationAge(reservationAge)
                 .reservationDate(reservationDate)
                 .reservationTime(reservationTime)
-                .reservationGuarantee(reservationGuarantee)
-                .reservationDetails(reservationDetails)
                 .address(address)
                 .addressDetail(addressDetail)
-                .carPrice(carPrice)
-                .carTax(carTax)
+                .rentTerm(rentTerm)
                 .carAmountTotal(carAmountTotal)
                 .carDeposit(carDeposit)
-                .reservationStatus(reservationStatus)
-                .rentTerm(rentTerm)
+                .reservationDetails(reservationDetails)
                 .costPerKm(costPerKm)
                 .carCode(carCode)
                 .pickupPlace(pickupPlace)

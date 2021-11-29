@@ -91,48 +91,6 @@ function make_easy_reservation () {
 }
 
 
-// 월렌트실시간 상담요청
-function make_monthly_rent_reservation () {
-
-    if (document.getElementById("reservation-simple-name").value == ""){
-        alert('성함을 입력해주세요.')
-        return
-    }
-
-    if (document.getElementById("reservation-simple-phone").value == ""){
-        alert('전화번호를 입력해주세요.')
-        return
-    }
-
-
-    var data = {
-        name : $("#reservation-simple-name").val(),
-        phoneNo : $("#reservation-simple-phone").val(),
-        detail : $("#reservation-simple-details").val(),
-        title : "월렌트실시간",
-        car_name : document.getElementsByClassName("carName")[0].innerHTML,
-        car_num : document.getElementsByClassName("carNo")[0].innerHTML,
-        carAge : document.getElementsByClassName("carOld")[0].innerHTML
-    };
-
-    var checkbox = document.getElementById("agree")
-    if(checkbox.checked) {
-        $.ajax({
-            type : 'POST',
-            url : '/reservation/apply',
-            dataType : 'json',
-            contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
-        }).done(function () {
-            alert('예약이 완료되었습니다.');
-            window.location.href = '/rent/month/new';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    } else{
-        alert("개인정보 수집 및 이용에 동의해주세요.");
-    }
-}
 // 에약 요청
 function make_reservation () {
 

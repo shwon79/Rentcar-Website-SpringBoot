@@ -27,4 +27,7 @@ public class TwoYearlyRent {
     private String nameMoren;
     private Long start;
     private Long end;
+
+    private String credit;
+    private String img_url;
 }

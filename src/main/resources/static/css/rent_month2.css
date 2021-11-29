@@ -72,9 +72,21 @@
 }
 
 #table_header {
-    background-color: #b3b0ac;
+    background-color: #9a9a9a;
 }
-
+.detail_btn {
+    padding: 4px 10px;
+    background: #9a9a9a;
+    color: white;
+    border: 1px solid #9a9a9a;
+    word-break: keep-all;
+    transition: 0.3s all ease-in-out;
+    border-radius: 4px;
+}
+.detail_btn:hover {
+    color: #9a9a9a;
+    background: white;
+}
 .monthly_content {
     padding: 120px 60px 60px;
 }
@@ -106,7 +118,7 @@
 .card button {
     width: 50%;
     word-break: keep-all;
-    margin: 0 25%;
+    margin: 10px 25% 0 25%;
 }
 
 .to-prior-rent-month-text {
@@ -128,6 +140,7 @@
     height: 25px;
     line-height: 200%;
 }
+
 
 @media (max-width: 600px) {
     .realtime-btn {
@@ -179,6 +192,14 @@
     font-weight: 600;
     animation:colorchange 1s infinite alternate;
     margin-right: 5px;
+}
+.empty-list-card {
+    text-align: center;
+    margin: 2rem 0;
+}
+.empty-list-card p {
+    font-size: 16px;
+    color: darkblue;
 }
 @keyframes colorchange {
     0% {

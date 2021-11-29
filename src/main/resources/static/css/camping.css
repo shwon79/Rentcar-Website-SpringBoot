@@ -1,3 +1,17 @@
+.camping_nav-tabs {
+  border-bottom: 3px solid #f8f6f2;
+  margin-top: 30px;
+}
+.camping_nav-tabs button {
+  border: 3px solid #f8f6f2;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 20px 5px 20px;
+  border-bottom: 0;
+}
+@media (max-width: 600px) {
+  padding: 10px 5px 5px 5px;
+}
 table.type11 {
   border-collapse: collapse;
   border-spacing: 1px;

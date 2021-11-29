@@ -415,7 +415,8 @@ td {
 }
 .discount-table button,
 #morenReservationTable button,
-#morenReservationCard button {
+#morenReservationCard button,
+#reservation-detail-card button {
     width: 40%;
     height: 100%;
     color: white;
@@ -423,9 +424,39 @@ td {
     border: none;
     font-weight: 900;
 }
-#morenReservationTable {
-    display: block;
+#reservation-detail-card button {
+    width: 49.5%;
+    padding: 0.5rem;
 }
+#morenReservationTable {
+    border-collapse: collapse;
+}
+#morenReservationTable td {
+    position: relative;
+}
+#morenReservationTable tr.red-line td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 3px solid red;
+    width: 100%;
+}
+
+#morenReservationTable tr.blue-line td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 3px solid darkblue;
+    width: 100%;
+}
+.no-line-column:before {
+    content: '' !important;
+    border: none !important;
+}
+
+
 #morenReservationCard {
     display: none;
 }
@@ -467,11 +498,12 @@ td {
         display: block;
     }
     #morenReservationCard button {
-        width: 40%;
+        width: 100%;
         height: 100%;
         color: white;
         background-color: #5495b1;
         border: none;
         font-weight: 900;
+        padding: 0.3rem 0;
     }
 }

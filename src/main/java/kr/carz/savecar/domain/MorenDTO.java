@@ -23,18 +23,27 @@ public class MorenDTO {
     private String carAttribute01;
     private String carPrice;
     private String orderEnd;
-    private Long monthlyrentIdx;
+    private Long rentIdx;
     private List<String> carImageList;
     private String discount;
     private String discountDescription;
+    private String costPerKm;
+    private String credit;
+    private String carCode;
+    private String kilometer;
+    private String deposit;
+    private String rentTerm;
+    private String selectAge;
 
 
     public MorenDTO(String carIdx, String carCategory, String carName,
                     String carNo, String carExteriorColor, String carGubun,
                     String carDisplacement, String carMileaget, String carColor,
                     String carOld, String carEngine, String carAttribute01,
-                    String carPrice, String orderEnd, Long monthlyrentIdx,
-                    List<String> carImageList, String discount, String discountDescription) {
+                    String carPrice, String orderEnd, Long rentIdx,
+                    List<String> carImageList, String discount, String discountDescription,
+                    String costPerKm, String credit, String carCode,
+                    String kilometer, String deposit, String rentTerm, String selectAge) {
         this.carIdx = carIdx;
         this.carCategory = carCategory;
         this.carName = carName;
@@ -49,10 +58,17 @@ public class MorenDTO {
         this.carAttribute01 = carAttribute01;
         this.carPrice = carPrice;
         this.orderEnd = orderEnd;
-        this.monthlyrentIdx = monthlyrentIdx;
+        this.rentIdx = rentIdx;
         this.carImageList = carImageList;
         this.discount = discount;
         this.discountDescription = discountDescription;
+        this.costPerKm = costPerKm;
+        this.credit = credit;
+        this.carCode = carCode;
+        this.kilometer = kilometer;
+        this.deposit = deposit;
+        this.rentTerm = rentTerm;
+        this.selectAge = selectAge;
     }
 
 }
