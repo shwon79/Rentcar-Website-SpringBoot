@@ -48,17 +48,15 @@ public class CalendarController {
     private static SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
 
     private String AddDate(String strDate, int year, int month, int day) throws Exception {
-
-        SimpleDateFormat dtFormat = new SimpleDateFormat("yyyyMMdd");
         Calendar cal = Calendar.getInstance();
-        Date dt = dtFormat.parse(strDate);
+        Date dt = std_data_format.parse(strDate);
 
         cal.setTime(dt);
         cal.add(Calendar.YEAR, year);
         cal.add(Calendar.MONTH, month);
         cal.add(Calendar.DATE, day);
 
-        return dtFormat.format(cal.getTime());
+        return std_data_format.format(cal.getTime());
     }
 
     private int[] DateStringToInt(String date){
@@ -68,13 +66,11 @@ public class CalendarController {
     private int[] TodayDateInt() {
         Calendar cal = Calendar.getInstance();
         String df_date = std_data_format.format(cal.getTime());
-
         return DateStringToInt(df_date);
     }
 
     private String TodayDateString() {
         Calendar cal = Calendar.getInstance();
-
         return std_data_format.format(cal.getTime());
     }
 
@@ -91,34 +87,13 @@ public class CalendarController {
         int[] nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
 
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
-        CalendarDate today_calendar_date = calendarDateService.findCalendarDateByMonthAndDayAndYear( Integer.toString(thisMonth), Integer.toString(thisDay),  Integer.toString(cal.get(Calendar.YEAR)));
-
-        Long firstDateId = calendarDateList.get(0).getDateId();
-        for(Long i=firstDateId; i<=today_calendar_date.getDateId()-thisDayOfWeek; i++){
-            calendarDateList.remove(0);
-        }
-
-        // 이번주부터
-        cal.set(cal.get(Calendar.YEAR),thisMonth,1);
-
-        // 다음달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),thisMonth-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-        Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-        for(int i=1; i<=7-after; i++){
-            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-        }
-
-        // 날짜별 캠핑카
         List<List<DateCamping>> dateCampingList = new ArrayList();
 
-        for (int i=0; i<calendarDateList.size(); i++){
-            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
-        }
+        for(int i=0; i<=7-thisDayOfWeek; i++){ calendarDateList.remove(0); }
 
-        System.out.println(calendarDateList.size());
+        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+        for(int i=1; i<7-thisDayOfWeek; i++){ calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i)); }
+        for(int i=0; i<calendarDateList.size(); i++){ dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i))); }
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("dateCampingList", dateCampingList);
