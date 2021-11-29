@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+
     <script th:src="@{/js/jquery.min.js}" defer></script>
     <script th:src="@{/js/admin.js}" defer></script>
 
@@ -26,7 +29,13 @@
         </div>
 
         <div class="content_container">
-            <div class="head_title" style="margin-top: 50px; text-align: center;">
+            <div>
+                <a href="/admin/moren/reservation/menu">
+                    <i class="fas fa-arrow-left" style="margin-top: 30px; color: black; font-size: 30px;"></i>
+
+                </a>
+            </div>
+            <div class="head_title" style="text-align: center;">
                 <h2>예약 신청 상세 페이지</h2>
             </div>
             <div id="reservation-detail-card">

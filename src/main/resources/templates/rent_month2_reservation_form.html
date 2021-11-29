@@ -220,7 +220,7 @@
                     <td style="width: 28.5%;">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            <p><input id="reservation-detail-date" type="date" th:value="${today_format}" th:min="${today_format}" onchange="displayReturnDate()"></p>
+                            <p><input id="reservation-detail-date" type="date" th:value="${today_format}" th:min="${today_format}" onclick="displayReturnDate();" onchange="displayReturnDate();"></p>
                         </div>
                     </td>
                     <td class="col_subtitle" style="width: 21.5%;">

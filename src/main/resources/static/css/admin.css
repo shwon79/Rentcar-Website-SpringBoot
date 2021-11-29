@@ -469,6 +469,24 @@ td {
 #morenReservationCard p {
     margin: 0.3rem 0;
 }
+@media (max-width: 990px) {
+
+    #morenReservationTable {
+        display: none;
+    }
+    #morenReservationCard {
+        display: block;
+    }
+    #morenReservationCard button {
+        width: 100%;
+        height: 100%;
+        color: white;
+        background-color: #5495b1;
+        border: none;
+        font-weight: 900;
+        padding: 0.3rem 0;
+    }
+}
 @media (max-width: 600px) {
     .form-part {
         width: 90%;
@@ -491,19 +509,5 @@ td {
     .discount-table th, .discount-table td {
         padding: 4px !important;
     }
-    #morenReservationTable {
-        display: none;
-    }
-    #morenReservationCard {
-        display: block;
-    }
-    #morenReservationCard button {
-        width: 100%;
-        height: 100%;
-        color: white;
-        background-color: #5495b1;
-        border: none;
-        font-weight: 900;
-        padding: 0.3rem 0;
-    }
+
 }
