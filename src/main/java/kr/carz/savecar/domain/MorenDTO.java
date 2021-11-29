@@ -33,6 +33,7 @@ public class MorenDTO {
     private String kilometer;
     private String deposit;
     private String rentTerm;
+    private String selectAge;
 
 
     public MorenDTO(String carIdx, String carCategory, String carName,
@@ -42,7 +43,7 @@ public class MorenDTO {
                     String carPrice, String orderEnd, Long rentIdx,
                     List<String> carImageList, String discount, String discountDescription,
                     String costPerKm, String credit, String carCode,
-                    String kilometer, String deposit, String rentTerm) {
+                    String kilometer, String deposit, String rentTerm, String selectAge) {
         this.carIdx = carIdx;
         this.carCategory = carCategory;
         this.carName = carName;
@@ -67,6 +68,7 @@ public class MorenDTO {
         this.kilometer = kilometer;
         this.deposit = deposit;
         this.rentTerm = rentTerm;
+        this.selectAge = selectAge;
     }
 
 }

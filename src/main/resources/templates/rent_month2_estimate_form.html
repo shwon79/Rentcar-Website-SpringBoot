@@ -188,7 +188,8 @@
             </tr>
             <tr>
                 <td class="table_subtitle">보험연령</td>
-                <td>만 26세 이상</td>
+                <td th:if="${morenDTO.selectAge =='upper26'}">만 26세 이상</td>
+                <td th:if="${morenDTO.selectAge =='upper21'}">만 21세 이상</td>
                 <td class="table_subtitle">자차수리한도</td>
                 <td></td>
                 <td class="table_subtitle" style="width: 10%;">대인한도</td>

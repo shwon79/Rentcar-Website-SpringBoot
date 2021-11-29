@@ -7,6 +7,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -39,14 +40,17 @@ public class RealtimeRentController {
     /*                             [New 버전] 실시간 월렌트 예약하기                                */
     /* ======================================================================================== */
 
+    @Value("${moren_url}")
+    private String moren_url_except_date;
     private final String expected_day = "4";
-    private final String moren_url = "https://www.moderentcar.co.kr/api/mycar/cars.php?COMPANY_ID=1343&START=" + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
 
         List<MorenDTO> morenDTOList = new ArrayList<>();
         List<MorenDTO> morenDTOListExpected = new ArrayList<>();
+
+        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
         HttpConnection http = new HttpConnection();
         JSONObject responseJson = http.sendGetRequest(moren_url);
@@ -86,7 +90,7 @@ public class RealtimeRentController {
                             (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                             (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
                             monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), null, discount_price, discount_description,
-                            monthlyRent2.getCost_per_km(), monthlyRent2.getCredit(), (String) morenObject.get("carCode"), null, null, null);
+                            monthlyRent2.getCost_per_km(), monthlyRent2.getCredit(), (String) morenObject.get("carCode"), null, null, null, null);
                     morenDTOListExpected.add(moren);
 
                 } catch (Exception e) {
@@ -113,7 +117,7 @@ public class RealtimeRentController {
                             (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                             (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
                             monthlyRent2.getCost_for_2k(), (String) morenObject.get("order_end"), monthlyRent2.getId(), null, discount_price, discount_description,
-                            monthlyRent2.getCost_per_km(), monthlyRent2.getCredit(), (String) morenObject.get("carCode"), null, null, null);
+                            monthlyRent2.getCost_per_km(), monthlyRent2.getCredit(), (String) morenObject.get("carCode"), null, null, null, null);
                     morenDTOList.add(moren);
 
                 } catch (Exception e) {
@@ -143,6 +147,8 @@ public class RealtimeRentController {
         // 모렌 데이터 객체 생성
         List<MorenDTO> morenDTOList = new ArrayList<>();
         List<MorenDTO> morenDTOListExpected = new ArrayList<>();
+
+        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
         HttpConnection http = new HttpConnection();
         JSONObject responseJson = http.sendGetRequest(moren_url);
@@ -265,7 +271,7 @@ public class RealtimeRentController {
                                 (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                                 (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
                                 kilometer_cost, (String) morenObject.get("order_end"), dbid, null, discount_price, discount_description, cost_per_km,
-                                credit, (String) morenObject.get("carCode"), null, null, null);
+                                credit, (String) morenObject.get("carCode"), null, null, null, null);
 
                         if ((Integer)morenObject.get("order_status") == 0) {
                             morenDTOList.add(moren);
@@ -321,6 +327,8 @@ public class RealtimeRentController {
         String cost_per_km = null;
         String credit = null;
         String deposit = null;
+
+        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
         List<String> carList = new ArrayList<>();
 
@@ -394,7 +402,7 @@ public class RealtimeRentController {
                         (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                         (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
                         null, (String) morenObject.get("order_end"), rentIdx, carList, discount, null, cost_per_km,
-                        credit, (String) morenObject.get("carCode"), kilometer, deposit, rentTerm);
+                        credit, (String) morenObject.get("carCode"), kilometer, deposit, rentTerm, null);
 
                 model.put("morenDto", morenDto);
                 break;
@@ -447,12 +455,12 @@ public class RealtimeRentController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328"); // 01033453328 추가
+        params.put("to", "01058283328, 01033453328, 01052774113");
         params.put("from", "01052774113");
         params.put("type", "LMS");
 
         /* 고객에게 예약확인 문자 전송 */
-        params2.put("to", morenReservationDTO.getReservationPhone()); // 여러가지 번호형태 테스트
+        params2.put("to", morenReservationDTO.getReservationPhone());
         params2.put("from", "01052774113");
         params2.put("type", "LMS");
 

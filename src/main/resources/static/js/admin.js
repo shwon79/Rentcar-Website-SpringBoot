@@ -179,6 +179,8 @@ $('.reservation-confirm-btn').click(function(e) {
     let carCodeList = document.getElementsByClassName('carCode');
     let pickupPlaceList = document.getElementsByClassName('pickupPlace');
 
+    console.log(carAmountTotalList)
+
     let id;
     let carNo;
     let reservationName;
@@ -251,7 +253,7 @@ $('.reservation-confirm-btn').click(function(e) {
     for (i=0; i < carAmountTotalList.length; i++) {
         if (e.target.dataset.index == carAmountTotalList[i].dataset.index) {
             let carAmountTotalString = carAmountTotalList[i].innerText;
-            carAmountTotal = carAmountTotalString.replace(/,/g, "");
+            carAmountTotal = parseInt(carAmountTotalString.replace(/,/g, ""));
         }
     };
     for (i=0; i < carDepositList.length; i++) {

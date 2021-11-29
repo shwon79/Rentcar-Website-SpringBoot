@@ -257,12 +257,12 @@ let changedPrice;
 function displayEditedPrice(e) {
     // console.log(originalText);
     if (originalText!='상담') {
-        if (e.value == '만 21세 이상~만 26세 미만') {
+        if (e.value == 'upper21') {
             let number = displayPrice[0].innerText.replace(/,/g, "");
             changedPrice = parseInt(number) + parseInt(ageLimit);
             displayPrice[0].innerText = changedPrice.toLocaleString();
             displayPrice[1].innerText = changedPrice.toLocaleString();
-        } else if (e.value == '만 26세 이상') {
+        } else if (e.value == 'upper26') {
             displayPrice[0].innerText = originalText;
             displayPrice[1].innerText = originalText;
         }
@@ -459,7 +459,7 @@ function openForm() {
     }
 }
 
-// 예약 신청하기 버튼 누르면 새창에 폼 띄우기
+// 견적서보기 버튼 누르면 새창에 폼 띄우기
 
 function openOffer() {
     let carCategory = document.getElementById('forPostCarCategory').innerHTML;
@@ -486,6 +486,7 @@ function openOffer() {
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
+    let selectAge = document.getElementById('selectAge').value;
 
     carPrice = carPrice.replace(/,/g, "");
 
@@ -638,6 +639,13 @@ function openOffer() {
     mapRentTerm.name = "rentTerm";
     mapRentTerm.value = rentTerm;
     mapForm.appendChild(mapRentTerm);
+
+    var mapSelectAge = document.createElement("input");
+    mapSelectAge.type = "text";
+    mapSelectAge.name = "selectAge";
+    mapSelectAge.value = selectAge;
+    mapForm.appendChild(mapSelectAge);
+
 
     document.body.appendChild(mapForm);
 
