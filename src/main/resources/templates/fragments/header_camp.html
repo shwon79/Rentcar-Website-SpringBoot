@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/header_camp.css}" rel="stylesheet">
 
     <!----------------------------------------->
     <!----------------- header ---------------->
     <!----------------------------------------->
 
     <div th:fragment="headerFragment">
-        <div class="header_camp" style="padding: 100px;">
+        <div class="header_camp">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-
+                    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                        <img th:src="@{/img/header_camp.jpg}" alt="car">
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" style="margin-bottom: 0;">
+                        <div class="header_camp_title">
+                            <h4 style="color: white;">'Wheresoever you go, go with all your heart.'</h4>
+                        </div>
+                        <div class="header_camp_navbar">
+                            <div id="navigation" role="navigation" class="primary-navigation">
+                                <ul class="main_ul">
+                                    <li class="active">
+                                        <a href="/camping/europe" title="캠핑카렌트">EUROPE</a>
+                                        <ul>
+                                            <li><a href="/camping/liomousine">LIMOUSINE</a></li>
+                                            <li><a href="/camping/travel">TRAVEL</a></li>
+                                            <li><a href="/camping/calendar">실시간 예약</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#camp_description" title="캠핑카렌트">캠핑카 설명</a>
+                                        <ul>
+                                            <li><a href="#camp_picture">캠핑카 사진</a></li>
+                                            <li><a href="#camp_video">캠핑카 영상</a></li>
+                                            <li><a href="#camp_regulation">렌트 약관</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

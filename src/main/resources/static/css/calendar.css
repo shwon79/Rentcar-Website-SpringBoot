@@ -3,33 +3,33 @@ p {
 }
 
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 7rem;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*padding-top: 7rem;*/
 }
 
 .year-month {
   font-size: 30px;
 }
 
-.nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #6f6c6c;
-  border-radius: 5px;
-}
+/*.nav {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  border: 1px solid #6f6c6c;*/
+/*  border-radius: 5px;*/
+/*}*/
 
-.nav-btn {
-  width: 28px;
-  height: 30px;
-  border: none;
-  font-size: 16px;
-  line-height: 34px;
-  background-color: transparent;
-  cursor: pointer;
-}
+/*.nav-btn {*/
+/*  width: 28px;*/
+/*  height: 30px;*/
+/*  border: none;*/
+/*  font-size: 16px;*/
+/*  line-height: 34px;*/
+/*  background-color: transparent;*/
+/*  cursor: pointer;*/
+/*}*/
 
 /* 캠핑카 페이지 버튼 css */
 .camping_page {
