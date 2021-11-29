@@ -1,10 +1,8 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.*;
-import kr.carz.savecar.repository.CampingCarPriceRepository;
 import kr.carz.savecar.repository.DateCampingRepository;
 
-import java.util.Date;
 import java.util.List;
 
 public class DateCampingService {

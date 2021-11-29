@@ -45,7 +45,7 @@ public class CalendarController {
         this.campingcarDateTimeService2 = campingcarDateTimeService2;
     }
 
-    private static SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
+    private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
 
     private String AddDate(String strDate, int year, int month, int day) throws Exception {
         Calendar cal = Calendar.getInstance();
@@ -87,13 +87,13 @@ public class CalendarController {
         int[] nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
 
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
-        List<List<DateCamping>> dateCampingList = new ArrayList();
+        ArrayList dateCampingList = new ArrayList();
 
         for(int i=0; i<=7-thisDayOfWeek; i++){ calendarDateList.remove(0); }
 
         Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
         for(int i=1; i<7-thisDayOfWeek; i++){ calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i)); }
-        for(int i=0; i<calendarDateList.size(); i++){ dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i))); }
+        for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("dateCampingList", dateCampingList);
