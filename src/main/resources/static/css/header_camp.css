@@ -1,5 +1,5 @@
 .header_camp {
-    background: black;
+    background: #080d10;
     overflow-x: clip;
 }
 .header_camp .container {
@@ -9,7 +9,6 @@
 .header_camp_title h4 {
     color: white;
     margin-top: 50px;
-    /*border-top: 1px solid white;*/
     padding: 20px;
     text-align: center;
     border-style: solid;
@@ -27,7 +26,7 @@
 .header_camp_navbar #navigation ul li a {
     padding: 15px 80px 15px 20px;
     color: black;
-    margin-right: 20px;
+    margin-right: 16px;
 }
 
 .main_ul > li > a:after {
@@ -42,4 +41,8 @@
 }
 .main_ul > li > ul > li > a {
     background-color: white !important;
+}
+
+.main_ul > li > ul > li > a:hover {
+    color: black !important;
 }
