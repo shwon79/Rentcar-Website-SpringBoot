@@ -60,7 +60,6 @@
 <body>
 <div class="container">
     <!--견적서 타이틀-->
-    <h2 style="text-align: center; margin-top: 2rem;">세이브카 월렌트 견적서</h2>
     <table class="company_info_table">
         <tr>
             <td style="background: #eeeeee; border-bottom: 1px solid lightgrey;">(주)세이브카</td>
@@ -70,8 +69,9 @@
                 전화: 02-1661-3331<br>팩스: 02-858-1100
             </td>
         </tr>
-
     </table>
+    <h2 style="text-align: center; margin-top: 2rem;">세이브카 월렌트 견적서</h2>
+
 
     <!--견적서 내용 시작-->
     <div class="estimate_form" style="margin-top: 3.5rem;">
@@ -82,7 +82,7 @@
                 <td colspan="4" class="table_title">임차인 정보</td>
             </tr>
             <tr>
-                <td class="table_subtitle" style="width: 10%;">계약자</td>
+                <td class="table_subtitle responsive_width_10_86">계약자</td>
                 <td colspan="3"></td>
             </tr>
             <tr>
@@ -91,7 +91,7 @@
             <tr>
                 <td class="table_subtitle">이름</td>
                 <td style="width: 40%;"></td>
-                <td class="table_subtitle" style="width: 10%;">연락처</td>
+                <td class="table_subtitle responsive_width_10_50">연락처</td>
                 <td style="width: 40%;"></td>
             </tr>
             <tr>
@@ -109,115 +109,146 @@
         </table>
 
         <!--견적서_계약 조건-->
-        <table class="estimate_form_basic">
-            <tr>
-                <td colspan="4" class="table_title">계약 조건</td>
-                <td colspan="4" class="table_subtitle"></td>
-            </tr>
-            <tr>
-                <td class="table_subtitle">대여차량</td>
-                <td colspan="3" th:text="${morenDTO.carName}"></td>
-                <td class="table_subtitle">차량번호</td>
-                <td th:text="${morenDTO.carNo}"></td>
-                <td class="table_subtitle">유종/주유량</td>
-                <td th:text="${morenDTO.carEngine}"></td>
-            </tr>
-            <tr>
-                <td class="table_subtitle" style="width: 10%;">대여일시</td>
-                <td style="width: 15%;"></td>
-                <td class="table_subtitle" style="width: 10%;">반납일시</td>
-                <td style="width: 15%;"></td>
-                <td class="table_subtitle" style="width: 10%;">대여 기간</td>
-                <td style="width: 15%;"></td>
-                <td class="table_subtitle" style="width: 10%;">약정 기간</td>
-                <td style="width: 15%;"></td>
-            </tr>
-            <tr>
-                <td class="table_subtitle">배차장소</td>
-                <td colspan="3"></td>
-                <td class="table_subtitle">반납장소</td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td class="table_subtitle">결제일</td>
-                <td></td>
-                <td class="table_subtitle">보증금</td>
-                <td>
-                    <span th:text="${morenDTO.deposit}" class="number"></span>
-                    <span>원</span>
-                </td>
-                <td class="table_subtitle">월대여료</td>
-                <td th:if="${morenDTO.carPrice!='상담'}">
-                    <span th:text="${morenDTO.carPrice}" class="number"></span>
-                    <span>원</span>
-                </td>
-                <td th:if="${morenDTO.carPrice=='상담'}">
-                </td>
-                <td class="table_subtitle">위약율</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td class="table_subtitle">약정주행거리</td>
-                <td th:if="${morenDTO.kilometer!='기타'&&morenDTO.kilometer!='기타_long'}" th:text="${morenDTO.kilometer}"></td>
-                <td th:if="${morenDTO.kilometer=='기타'||morenDTO.kilometer=='기타_long'}"></td>
-                <td class="table_subtitle">초과시</td>
-                <td th:if="${morenDTO.kilometer!='기타'}">
-                    <span th:text="${morenDTO.costPerKm}"></span>
-                    <span>원/km</span>
-                </td>
-                <td th:if="${morenDTO.kilometer=='기타'}"></td>
-                <td class="table_subtitle">연체이자</td>
-                <td>연 20%</td>
-                <td class="table_subtitle">반납지연금</td>
-                <td>일 대여료 100% 적용</td>
-            </tr>
-        </table>
+        <div class="responsive_table">
+            <table class="estimate_form_basic">
+                <tr>
+                    <td colspan="4" class="table_title">계약 조건</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">대여차량</td>
+                    <td colspan="3" th:text="${morenDTO.carName}"></td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle responsive_width_20_86">대여일시</td>
+                    <td class="responsive_width_auto_100"></td>
+                    <td class="table_subtitle responsive_width_20_64">반납일시</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">배차장소</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">결제일</td>
+                    <td></td>
+                    <td class="table_subtitle">보증금</td>
+                    <td>
+                        <span th:text="${morenDTO.deposit}" class="number"></span>
+                        <span>원</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">약정주행거리</td>
+                    <td th:if="${morenDTO.kilometer!='기타'&&morenDTO.kilometer!='기타_long'}" th:text="${morenDTO.kilometer}"></td>
+                    <td th:if="${morenDTO.kilometer=='기타'||morenDTO.kilometer=='기타_long'}"></td>
+                    <td class="table_subtitle">초과시</td>
+                    <td th:if="${morenDTO.kilometer!='기타'}">
+                        <span th:text="${morenDTO.costPerKm}"></span>
+                        <span>원/km</span>
+                    </td>
+                    <td th:if="${morenDTO.kilometer=='기타'}"></td>
+                </tr>
+            </table>
+            <table class="estimate_form_basic border_none">
+                <tr>
+                    <td colspan="4" class="table_subtitle hidden-mobile">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle responsive_width_20_86">차량번호</td>
+                    <td th:text="${morenDTO.carNo}" class="responsive_width_auto_100"></td>
+                    <td class="table_subtitle responsive_width_20_86">유종/주유량</td>
+                    <td th:text="${morenDTO.carEngine}"></td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">대여 기간</td>
+                    <td></td>
+                    <td class="table_subtitle">약정 기간</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">반납장소</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">월대여료</td>
+                    <td th:if="${morenDTO.carPrice!='상담'}">
+                        <span th:text="${morenDTO.carPrice}" class="number"></span>
+                        <span>원</span>
+                    </td>
+                    <td th:if="${morenDTO.carPrice=='상담'}">
+                    </td>
+                    <td class="table_subtitle">위약율</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">연체이자</td>
+                    <td>연 20%</td>
+                    <td class="table_subtitle">반납지연금</td>
+                    <td>일 대여료 100% 적용</td>
+                </tr>
+            </table>
+        </div>
 
         <!--견적서_보험/면책 및 특약사항-->
-        <table class="estimate_form_basic">
-            <tr>
-                <td colspan="4" class="table_title">보험/면책 및 특약사항</td>
-                <td colspan="4" class="table_subtitle"></td>
-            </tr>
-            <tr>
-                <td class="table_subtitle" style="width: 10%;">운전자범위</td>
-                <td style="width: 15%; font-size: 12px;">계약서에 지정된 운전자</td>
-                <td class="table_subtitle" style="width: 10%;">자차보험</td>
-                <td style="width: 15%;">가입[한도有]</td>
-                <td class="table_subtitle" colspan="4" style="text-align: center;">책임보험 및 사고 면책금 안내</td>
-            </tr>
-            <tr>
-                <td class="table_subtitle">보험연령</td>
-                <td th:if="${morenDTO.selectAge =='upper26'}">만 26세 이상</td>
-                <td th:if="${morenDTO.selectAge =='upper21'}">만 21세 이상</td>
-                <td class="table_subtitle">자차수리한도</td>
-                <td></td>
-                <td class="table_subtitle" style="width: 10%;">대인한도</td>
-                <td style="width: 15%;">무제한</td>
-                <td class="table_subtitle" style="width: 10%;">대인면책금</td>
-                <td style="width: 15%;">50만원</td>
-            </tr>
-            <tr>
-                <td class="table_subtitle">휴차료</td>
-                <td>일 대여료 80% 적용</td>
-                <td class="table_subtitle">자차면책금</td>
-                <td>50만원</td>
-                <td class="table_subtitle">대물한도</td>
-                <td>2,000만원</td>
-                <td class="table_subtitle">대물면책금</td>
-                <td>50만원</td>
-            </tr>
-            <tr>
-                <td class="table_subtitle">금연위반벌금</td>
-                <td>15만원</td>
-                <td class="table_subtitle">외판손상시</td>
-                <td></td>
-                <td class="table_subtitle">자손한도</td>
-                <td>1,500만원</td>
-                <td class="table_subtitle">자손면책금</td>
-                <td>50만원</td>
-            </tr>
-        </table>
+        <div class="responsive_table">
+            <table class="estimate_form_basic">
+                <tr>
+                    <td colspan="4" class="table_title">보험/면책 및 특약사항</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle responsive_width_20_86">운전자범위</td>
+                    <td style="font-size: 12px;">계약서에 지정된 운전자</td>
+                    <td class="table_subtitle responsive_width_20_86">자차보험</td>
+                    <td>가입[한도有]</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">보험연령</td>
+                    <td th:if="${morenDTO.selectAge =='upper26'}">만 26세 이상</td>
+                    <td th:if="${morenDTO.selectAge =='upper21'}">만 21세 이상</td>
+                    <td class="table_subtitle">자차수리한도</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">휴차료</td>
+                    <td>일 대여료 80% 적용</td>
+                    <td class="table_subtitle">자차면책금</td>
+                    <td>50만원</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">금연위반벌금</td>
+                    <td>15만원</td>
+                    <td class="table_subtitle">외판손상시</td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="estimate_form_basic border_none">
+                <tr>
+                    <td colspan="4" class="table_subtitle hidden-mobile">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle" colspan="4" style="text-align: center;">책임보험 및 사고 면책금 안내</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle responsive_width_20_86">대인한도</td>
+                    <td>무제한</td>
+                    <td class="table_subtitle responsive_width_20_86">대인면책금</td>
+                    <td>50만원</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">대물한도</td>
+                    <td>2,000만원</td>
+                    <td class="table_subtitle">대물면책금</td>
+                    <td>50만원</td>
+                </tr>
+                <tr>
+                    <td class="table_subtitle">자손한도</td>
+                    <td>1,500만원</td>
+                    <td class="table_subtitle">자손면책금</td>
+                    <td>50만원</td>
+                </tr>
+            </table>
+        </div>
+
 
         <!--견적서_자동차 대여 약관-->
         <table class="estimate_form_basic">
@@ -728,27 +759,36 @@
         </table>
 
         <!--견적서_날인 부분-->
-        <table class="estimate_form_basic signup">
-            <tr>
-                <td colspan="2" style="text-align: center;">임대인</td>
-                <td colspan="2" style="text-align: center;">임차인</td>
-            </tr>
-            <tr>
-                <td style="width: 45%; border-right: none;">
-                    (주)세이브카 / 양성희<br>
-                    송파구 충민로 66 가든파이브 제8층 f-8026
-                </td>
-                <td style="width: 5%; border-left: none;">
-                    (인)
-                </td>
-                <td style="width: 45%; border-right: none;">
-                    제 1 운전자:
-                </td>
-                <td style="width: 5%; border-left: none;">
-                    (인)
-                </td>
-            </tr>
-        </table>
+        <div class="responsive_table">
+            <table class="estimate_form_basic signup">
+                <tr>
+                    <td colspan="2" style="text-align: center;">임대인</td>
+                </tr>
+                <tr>
+                    <td style="width: 45%; border-right: none;">
+                        (주)세이브카 / 양성희<br>
+                        송파구 충민로 66 가든파이브 제8층 f-8026
+                    </td>
+                    <td style="width: 5%; border-left: none;">
+                        (인)
+                    </td>
+                </tr>
+            </table>
+            <table class="estimate_form_basic signup border_none">
+                <tr>
+                    <td colspan="2" style="text-align: center;">임차인</td>
+                </tr>
+                <tr>
+                    <td style="width: 45%; border-right: none;">
+                        제 1 운전자:
+                    </td>
+                    <td style="width: 5%; border-left: none;">
+                        (인)
+                    </td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 
 </div>
