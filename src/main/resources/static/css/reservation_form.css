@@ -16,7 +16,6 @@ html {
 .reservation-form th {
     font-size: 16px;
     text-align: center;
-    /*border-bottom: solid 2px rgba(0, 0, 0, 0.3);*/
 }
 .basic_info td, .basic_info tr,
 .reservation-form td, .reservation-form tr {
@@ -32,7 +31,16 @@ html {
 .reservation-form {
     margin-top: 3rem;
 }
-
+.responsive_width_19 {
+    width: 19.5%;
+    min-width: 135px;
+}
+.responsive_width_21 {
+    width: 21.5%;
+}
+.responsive_width_28 {
+    width: 28.5%;
+}
 .reservation-form td label i.fas{
     color: red;
 }
@@ -177,4 +185,30 @@ html {
 #btn_final:hover {
     background-color: white;
     color: black;
+}
+
+@media (max-width:991px) {
+    .reservation-form table,
+    .reservation-form table tbody,
+    .modal_content table,
+    .modal_content table tbody {
+        display: block;
+        width: 100%;
+    }
+    .modal_content table tbody {
+        margin-top: 3rem;
+    }
+    .reservation-form table tr,
+    .modal_content table tr {
+        display: grid;
+        width: 100%;
+    }
+    .responsive_width_19,
+    .responsive_width_21,
+    .responsive_width_28 {
+        width: 100%;
+    }
+    .hidden-mobile {
+        display: none !important;
+    }
 }
