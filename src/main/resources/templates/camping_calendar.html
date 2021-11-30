@@ -1,4 +1,4 @@
-<!-- 캠핑카렌트(rent_camping.html) -->
+<!-- 캠핑카렌트(camping_calendar.html) -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Style -->
-    <link th:href="@{/css/calendar.css}" rel="stylesheet">
+    <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
 
 <!--    <script>-->
 <!--        function toggleImg(id) {-->
@@ -34,6 +34,9 @@
 <!--                <button id="reserve_page_btn" disabled>실시간 예약</button>-->
 <!--            </div>-->
             <div class="container">
+                <div>
+                    <span class="title">세이브카 캠핑카 예약 현황</span>
+                </div>
                 <div class="header">
                         <a th:href="'/camping/calendar/before/' + ${prevMonth}">
                             <button class="nav-btn go-prev" >&lt;</button>&nbsp;&nbsp;

@@ -2,6 +2,10 @@ p {
   font-size: 1.7rem;
 }
 
+.calendar_content .title {
+  font-size: 36px;
+}
+
 .header {
   /*display: flex;*/
   /*justify-content: center;*/
