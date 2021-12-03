@@ -1012,6 +1012,9 @@ opacity: .5; }
     .fixed_phone_btn { top: 83%; }
     .fixed_phone_pc_btn { display: none;  }
     /* text-decoration: line-through; text-decoration-color: darkred;  */
+    .not-show-in-mobile {
+        display: none;
+    }
 }
 
 /* Extra Small Devices, Phones */
@@ -1036,6 +1039,9 @@ opacity: .5; }
     #home { display: block }
     .fixed_phone_btn { top: 81%; }
     .fixed_phone_pc_btn { display: none; }
+    .not-show-in-mobile {
+        display: none;
+    }
 }
 
 
@@ -1062,6 +1068,9 @@ opacity: .5; }
     #home { display: block }
     .fixed_phone_btn { top: 80%; }
     .fixed_phone_pc_btn { display: none; }
+    .not-show-in-mobile {
+        display: none;
+    }
 }
 
 

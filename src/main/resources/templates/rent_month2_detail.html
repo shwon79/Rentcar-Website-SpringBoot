@@ -49,16 +49,21 @@
       <div class="row" style="margin-bottom: 150px;">
         <!-- Nav tabs -->
         <ul class="nav-tabs">
-          <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+            <a href="/rent/month/new"><i class="fas fa-arrow-left"></i></a>
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+            <h1 th:text="${morenDto.carName}"></h1>
+          </div>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content" style="width: 86%; margin: 0 auto">
           <!-- info car -->
           <div class="tab-pane active" id="info_car">
-            <div class="row">
+            <div class="row" style="margin-bottom: 60px;">
               <!-- car picture carousel -->
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-md-push-6 carousel-box">
+              <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 carousel-box">
                 <div class="row car_img_carousel">
                   <div th:if="${#lists.size(morenDto.carImageList) == 0}" id="carousel-example-empty" class="carousel slide" data-ride="carousel" style="height: 100%">
                     <!-- Indicators -->
@@ -117,7 +122,7 @@
                 </div>
               </div>
               <!-- infos -->
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-md-pull-6">
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 not-show-in-mobile" style="display: none;">
                 <!-- info table -->
                 <div class="row info-card">
                   <div class="col-lg-12">
@@ -157,10 +162,8 @@
 
 
             <!--실시간 예약-->
-            <h1 style="margin-top: 50px;">실시간 예약</h1>
-            <hr style="border-top: 3px solid #eeeeee; margin-top: 0px;">
             <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div th:unless="${rentStatus}=='expected'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <p id="getCarIdx" th:text="${carIdx}" style="display: none;"></p>
                 <p id="getDiscount" th:text="${morenDto.discount}" style="display: none;"></p>
                 <p id="getRentStatus" th:text="${rentStatus}" style="display: none;"></p>
@@ -169,7 +172,7 @@
                   <div class="select-box">
                     <div class="display_flex">
                       <div style="margin-right: 20px; margin-bottom: 1rem;">
-                        <span style="font-size: 20px;">렌트 기간&nbsp;&nbsp;</span>
+                        <span style="font-size: 15px;">렌트 기간&nbsp;&nbsp;</span>
                         <select onchange="displayNextOptions(this); dataReset();" id="selectRentTerm" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
                           <option th:if="${morenDto.rentTerm=='한달'}" value="한달" selected>한달</option>
                           <option th:unless="${morenDto.rentTerm=='한달'}" value="한달">한달</option>
@@ -180,7 +183,7 @@
                         </select>
                       </div>
                       <div style="margin-right: 20px; margin-bottom: 1rem;" id="display_age">
-                        <span style="font-size: 20px;">약정 주행거리&nbsp;&nbsp;</span>
+                        <span style="font-size: 15px;">약정 주행거리&nbsp;&nbsp;</span>
                         <select onchange="dataReset();" id="selectkilometer" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
                           <option th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" value="2000km" selected>2000km</option>
                           <option th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer!='2000km'}" value="2000km">2000km</option>
@@ -211,7 +214,7 @@
                         </select>
                       </div>
                       <div style="font-size: 20px; margin-bottom: 1rem;">
-                        <span>연령&nbsp;&nbsp;</span>
+                        <span style="font-size: 15px;">연령&nbsp;&nbsp;</span>
                         <select onchange="displayEditedPrice(this)" id="selectAge" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
                           <option value='upper26' selected>만 26세 이상</option>
                           <option value='upper21'>만 21세 이상~만 26세 미만</option>
@@ -265,7 +268,7 @@
                         </td>
                         <td style="display: flex; justify-content: space-evenly;">
                           <a target="_blank" onclick="openOffer()"><button class="detail_btn">견적서 보기</button></a>
-                          <a target="_blank" onclick="openForm()"><button class="detail_btn">예약 신청하기</button></a>
+                          <a target="_blank" onclick="openForm()"><button class="detail_btn_reserve">예약 신청하기</button></a>
                         </td>
                       </tr>
                     </table>
@@ -312,19 +315,66 @@
                       </p>
                       <div style="display: flex; justify-content: space-evenly;">
                         <a target="_blank" onclick="openOffer()"><button class="detail_btn">견적서 보기</button></a>
-                        <a target="_blank" onclick="openForm()"><button class="detail_btn">예약 신청하기</button></a>
+                        <a target="_blank" onclick="openForm()"><button class="detail_btn_reserve">예약 신청하기</button></a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <div th:if="${rentStatus}=='expected'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px; margin-top: 30px;">
+                <div class="pinside30">
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <h2 >상담 신청하기</h2>
+                      <hr>
+                      <form id="reservation-info" name="reservation-info" action="">
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                            <div class="form-group has-feedback">
+                              <label class="control-label" for="name">* 이름</label>
+                              <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" class="form-control" id="reservation-simple-name" placeholder="성함을 입력해주세요." required oninvalid="this.setCustomValidity('필수 입력 정보입니다.')">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                            <div class="form-group has-feedback">
+                              <label class="control-label" for="phone">* 연락처</label>
+                              <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                <input type="text" class="form-control" id="reservation-simple-phone" placeholder="연락처 ex) 010-0000-0000" required >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                            <div class="form-group has-feedback">
+                              <label class="control-label" for="textarea">요청 사항</label>
+                              <div class="input-group"> <span class="input-group-addon"><i class="fas fa-clipboard"></i></span>
+                                <textarea class="form-control" id="reservation-simple-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요.(약정 주행거리 등)"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group has-feedback">
+                              <p class="text-center"><input type="checkbox" id="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                            <div class="form-group text-center">
+                              <a class="detail_btn_reserve" onclick="make_monthly_rent_reservation()" href="#">상담신청 </a>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
           </div>
         </div>
       </div>
     </div>
-    <a href="tel:1661-3331"><button class="fixed_phone_btn" ><img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>
-    <a href="sms:010-5277-4113"><button class="fixed_message_btn" ><img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>
 
     <div style="display: none;">
       <p id="forPostCarIdx" th:text="${morenDto.carIdx}"></p>

@@ -169,10 +169,6 @@
         width: 120px;
     }
 
-    .not-show-in-mobile {
-        display: none;
-    }
-
     .discount-wrap {
         justify-content: end;
         padding-right: 25px;

@@ -78,8 +78,7 @@ function make_monthly_rent_reservation () {
         detail : $("#reservation-simple-details").val(),
         title : "월렌트실시간",
         car_name : document.getElementsByClassName("carName")[0].innerHTML,
-        mileage : document.getElementsByClassName("carNo")[0].innerHTML,
-        option : document.getElementsByClassName("carOld")[0].innerHTML
+        car_num : document.getElementsByClassName("carNo")[0].innerHTML
     };
 
     var checkbox = document.getElementById("agree")
@@ -91,7 +90,7 @@ function make_monthly_rent_reservation () {
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function () {
-            alert('예약 신청이 완료되었습니다.');
+            alert('상담 신청이 완료되었습니다.');
             window.location.href = '/index';
         }).fail(function (error) {
             alert(JSON.stringify(error));

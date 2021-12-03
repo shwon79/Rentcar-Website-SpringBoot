@@ -10,6 +10,7 @@ import javax.persistence.Column;
 public class MorenReservationDTO {
 
     private String carNo;      // 차량번호
+    private String carName;      // 차량명
     private String kilometer;  // 약정주행거리
     private String reservationName;   // 예약자 이름(입금자명)
     private String reservationPhone;  // 예약자 전화번호
@@ -34,7 +35,7 @@ public class MorenReservationDTO {
     public MorenReservationDTO(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
                                String reservationDate, String reservationTime, String reservationGuarantee, String reservationDetails,
                                String address, String addressDetail, String carPrice, String carTax, String carAmountTotal, String carDeposit,
-                               String reservationStatus, String rentTerm, String costPerKm, String carCode, String pickupPlace) {
+                               String reservationStatus, String rentTerm, String costPerKm, String carCode, String pickupPlace, String carName) {
         this.carNo = carNo;
         this.kilometer = kilometer;
         this.reservationName = reservationName;
@@ -55,6 +56,7 @@ public class MorenReservationDTO {
         this.costPerKm = costPerKm;
         this.carCode = carCode;
         this.pickupPlace = pickupPlace;
+        this.carName = carName;
     }
 
     public MorenReservation toEntity() {
@@ -79,6 +81,7 @@ public class MorenReservationDTO {
                 .costPerKm(costPerKm)
                 .carCode(carCode)
                 .pickupPlace(pickupPlace)
+                .carName(carName)
                 .build();
 
     }
