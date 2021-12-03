@@ -170,6 +170,7 @@
                 <p id="getrentIdx" th:text="${rentIdx}" style="display: none;"></p>
                 <div class="container selectRentermKilometerBox">
                   <div class="select-box">
+                    <p style="color: black; text-align: right; font-size: 16px;">※ 렌트 기간, 약정 주행거리, 연령 선택에 따라 대여료가 달라집니다.</p>
                     <div class="display_flex">
                       <div style="margin-right: 20px; margin-bottom: 1rem;">
                         <span style="font-size: 15px;">렌트 기간&nbsp;&nbsp;</span>
@@ -221,8 +222,7 @@
                         </select>
                       </div>
                     </div>
-                    <div
-                      <p style="color: black; text-align: right; font-size: 16px;">※ 렌트 기간, 약정 주행거리, 연령 선택에 따라 대여료가 달라집니다.</p>
+                    <div>
                     </div>
                   </div>
                   <div class="result-box">
@@ -268,7 +268,7 @@
                         </td>
                         <td style="display: flex; justify-content: space-evenly;">
                           <a target="_blank" onclick="openOffer()"><button class="detail_btn">견적서 보기</button></a>
-                          <a target="_blank" onclick="openForm()"><button class="detail_btn_reserve">예약 신청하기</button></a>
+                          <a target="_blank" onclick="openForm()"><button class="detail_btn_reserve">바로 예약하기</button></a>
                         </td>
                       </tr>
                     </table>
@@ -315,13 +315,13 @@
                       </p>
                       <div style="display: flex; justify-content: space-evenly;">
                         <a target="_blank" onclick="openOffer()"><button class="detail_btn">견적서 보기</button></a>
-                        <a target="_blank" onclick="openForm()"><button class="detail_btn_reserve">예약 신청하기</button></a>
+                        <a target="_blank" onclick="openForm()"><button class="detail_btn_reserve">바로 예약하기</button></a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div th:if="${rentStatus}=='expected'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px; margin-top: 30px;">
+              <div th:if="${rentStatus}=='expected'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
                 <div class="pinside30">
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

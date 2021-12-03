@@ -444,9 +444,6 @@ public class RealtimeRentController {
 
         morenReservationService.saveDTO(morenReservationDTO);
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
-
         String api_key = "NCS0P5SFAXLOJMJI";
         String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
         Message coolsms = new Message(api_key, api_secret);
@@ -527,6 +524,9 @@ public class RealtimeRentController {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);

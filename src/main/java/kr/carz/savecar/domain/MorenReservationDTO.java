@@ -10,7 +10,6 @@ import javax.persistence.Column;
 public class MorenReservationDTO {
 
     private String carNo;      // 차량번호
-    private String carName;      // 차량명
     private String kilometer;  // 약정주행거리
     private String reservationName;   // 예약자 이름(입금자명)
     private String reservationPhone;  // 예약자 전화번호
@@ -30,6 +29,7 @@ public class MorenReservationDTO {
     private String costPerKm;              // 초과금액
     private String carCode;
     private String pickupPlace;
+    private String carName;      // 차량명
 
 
     public MorenReservationDTO(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
