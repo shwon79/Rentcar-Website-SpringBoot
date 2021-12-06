@@ -219,11 +219,30 @@
     color: white;
     background: black;
 }
+.detail_btn_reserve {
+    color: white;
+    background: #6980f5;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    border-radius: 1rem;
+    font-size: 18px;
+}
+.detail_btn_reserve:hover {
+    color: white;
+    background: #2246e5;
+}
 .onlyDesktop {
     display: inline-table;
 }
 .onlyMobile {
     display: none;
+}
+.nav-tabs h1 {
+    font-size: 23px;
+}
+select {
+    font-size: 15px;
 }
 
 @media (min-width: 601px) and (max-width: 991px) {

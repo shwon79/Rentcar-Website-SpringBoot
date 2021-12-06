@@ -6,7 +6,6 @@ import kr.carz.savecar.service.ReservationService;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -94,14 +93,12 @@ public class ReservationController {
                     + "연락처: " + dto.getPhoneNo() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
                     + "차량번호: " + dto.getCar_num() + "\n"
-                    + "년식: " + dto.getCarAge() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
 
             params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "문의자 이름: " + dto.getName() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
                     + "차량번호: " + dto.getCar_num() + "\n"
-                    + "년식: " + dto.getCarAge() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
         else if (dto.getTitle().equals("월렌트, 12개월렌트, 24개월렌트")){

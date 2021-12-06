@@ -112,6 +112,7 @@ const reserveMonthlyRent = () => {
 
     // 예약 정보 받기
     const carNo = document.getElementById('carNo').innerText;
+    const carName = document.getElementById('carName').innerText;
     const kilometer = document.getElementById('kilometer').innerText;
     const reservationName = document.getElementById('reservation-detail-name').value;
     let reservationPhone = document.getElementById('reservation-detail-phone').value;
@@ -168,6 +169,7 @@ const reserveMonthlyRent = () => {
     } else if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
         var data = {
             carNo: carNo,
+            carName: carName,
             kilometer: kilometer,
             reservationName: reservationName,
             reservationPhone: reservationPhone,

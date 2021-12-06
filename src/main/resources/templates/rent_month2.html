@@ -265,7 +265,7 @@
             <div>
                 <div id="mainTable">
                     <div class="head_title" style="margin-top: 50px;">
-                        <h2>5일 이내 입고예정차량<br/><p>* 입고예정이나, 기존고객연장으로 예약이 불가할수있습니다 <a href="/rent/month">[상담신청]</a></p></h2>
+                        <h2>5일 이내 입고예정차량 <a href="/rent/month" style="color: red;">[상담신청만 가능]</a><br/><p>* 입고예정이나, 기존고객연장으로 예약이 불가할수있습니다 <a href="/rent/month">[상담신청]</a></p></h2>
                     </div>
                     <table class="table_expected" th:unless="${morenDTOListExpected.isEmpty()}">
                         <thead id="table_header">
@@ -315,7 +315,7 @@
                 </div>
                 <!-- 모바일 -->
                 <div id="mobileCard">
-                    <div class="card moveToAvailableDetail" th:each="moren, iterStat : ${#lists.sort(morenDTOListExpected, byOrderEnd)}" th:data-index="${moren.rentIdx}" style="cursor: pointer;">
+                    <div class="card moveToExpectedDetail" th:each="moren, iterStat : ${#lists.sort(morenDTOListExpected, byOrderEnd)}" th:data-index="${moren.rentIdx}" style="cursor: pointer;">
                         <h4 th:text="${moren.carName}"></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
