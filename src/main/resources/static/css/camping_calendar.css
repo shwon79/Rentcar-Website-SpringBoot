@@ -32,9 +32,10 @@ p {
   border: none;
   line-height: 34px;
   background-color: transparent;
+  vertical-align: super;
 }
 .calendar_nav-btn i {
-  font-size: 30px;
+  font-size: 40px;
   color: red;
 }
 
@@ -89,6 +90,9 @@ p {
   border-bottom: 3px solid gray
 }
 
+.days > .day {
+  padding-bottom: 16px;
+}
 #day_sat {
   border-bottom: 3px solid blue
 }
@@ -108,7 +112,6 @@ p {
   width: calc(100% / 7);
   padding: 15px;
   text-align: left;
-  border: 1px solid #e8e8e8;
 }
 
 
@@ -141,13 +144,10 @@ p {
 
 .downside a {
   padding: 5px;
-  border-radius: 2vh;
-  background: #ffe7b4;
 }
 
 .downside a:hover {
   color: indianred;
-  background-color: lightgray;
 }
 
 .day:nth-child(7n + 1),
@@ -171,6 +171,9 @@ p {
 }
 
 .reserved_selections {
+  color: lightgrey;
+}
+.reserved_selections span {
   padding: 5px;
 }
 
@@ -188,13 +191,13 @@ a:hover {
   margin-top: 2rem;
 }
 
-.date_available p {
-  margin-left: 2rem;
-}
+/*.date_available p {*/
+/*  margin-left: 2rem;*/
+/*}*/
 
-.date_available span {
-  margin-right: 1rem;
-}
+/*.date_available span {*/
+/*  margin-right: 1rem;*/
+/*}*/
 
 #main_mobile {
   display: none;

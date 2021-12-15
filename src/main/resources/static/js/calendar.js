@@ -17,3 +17,11 @@ const dayDetail = (id) => {
     target.style.display = 'flex'
 
 }
+
+//지난 달로 못가게 화살표 없애기
+const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');
+const curMonth = new Date();
+let thisMonthOnCalendar = hiddenOnlythisMonth.dataset.index;
+if (curMonth.getMonth()+1 == thisMonthOnCalendar) {
+    hiddenOnlythisMonth.style.display = "none";
+}
