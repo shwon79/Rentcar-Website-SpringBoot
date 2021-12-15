@@ -91,8 +91,8 @@ public class CalendarController {
 
         for(int i=0; i<=7-thisDayOfWeek; i++){ calendarDateList.remove(0); }
 
-        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-        for(int i=1; i<7-thisDayOfWeek; i++){ calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i)); }
+//        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+//        for(int i=1; i<7-thisDayOfWeek; i++){ calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i)); }
         for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
         model.addAttribute("calendarDateList", calendarDateList);
@@ -108,45 +108,37 @@ public class CalendarController {
     }
 
 
-    @RequestMapping("/camping/calendar/after/{month}")
-    public String handleRequest1(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
-        // 날짜
+    @GetMapping("/camping/calendar/{year}/{month}")
+    public String camping_calendar_after(ModelMap model, @PathVariable("year") int year, @PathVariable("month") int month) throws Exception {
+
+        // 이번달 날짜
+        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(month));
+
+        // 일 - 1, 수 - 4, 토 - 7
+        // 저번달 날짜
         Calendar cal = Calendar.getInstance();
+        cal.set(year, month-1, 1);
+        int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
-        int now_month = month.intValue()+1; // 9
-        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
-        int this_month = cal.get(Calendar.MONTH) + 1;
-
-
-        if(month == this_month-1){
-            model.addAttribute("today", today);
-        } else {
-            model.addAttribute("today", 0);
-        }
-
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(now_month));
-
-
-        // 전달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR), now_month, 1);
+        System.out.println(thisDayOfWeek);
 
         Long firstDateId = calendarDateList.get(0).getDateId();
-        Integer before = cal.get(Calendar.DAY_OF_WEEK);
-
-        for (int i = 1; i < before; i++) {
+        for (int i = 1; i < thisDayOfWeek; i++) {
             calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
         }
 
-        // 다음달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
 
-        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-        Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-        for (int i = 1; i <= 7 - after; i++) {
-            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-        }
-
+//
+//        // 다음달 날짜
+//        cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
+//
+//        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
+//        Integer after = cal.get(Calendar.DAY_OF_WEEK);
+//
+//        for (int i = 1; i <= 7 - after; i++) {
+//            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
+//        }
+//
         // 날짜별 캠핑카
         List<List<DateCamping>> dateCampingList = new ArrayList();
 
@@ -154,85 +146,20 @@ public class CalendarController {
             dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
         }
 
+        String date = year + String.format("%02d", month) + "01";
 
-        model.addAttribute("daylast", calendarDateList);
+        int[] prevMonthDate = DateStringToInt(AddDate(date, 0, -1, 0));
+        int[] nextMonthDate = DateStringToInt(AddDate(date, 0, 1, 0));
+
+
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("dateCampingList", dateCampingList);
-        model.addAttribute("prevMonth", now_month-1);
-        model.addAttribute("thisMonth", now_month);
-        model.addAttribute("thisYear", 2021);
 
-        return "camping_calendar";
-    }
-
-
-
-    @RequestMapping("/camping/calendar/before/{month}")
-    public String handleRequest2(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
-        // 날짜
-        Calendar cal = Calendar.getInstance();
-
-        int now_month = month.intValue(); // 9
-        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
-        int this_month = cal.get(Calendar.MONTH) + 1;
-
-
-        if(month == this_month){
-            model.addAttribute("today", today);
-            System.out.println(this_month);
-        } else {
-            model.addAttribute("today", 0);
-            System.out.println(0);
-        }
-
-        if(now_month < 8){
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('이용할 수 없는 예약일자입니다.'); location.href='/calendar/7';</script>");
-            out.flush();
-        } else {
-
-            List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(now_month));
-
-
-            // 전달 날짜 구하기
-            cal.set(cal.get(Calendar.YEAR), now_month - 1, 1); // 8
-
-            Long firstDateId = calendarDateList.get(0).getDateId();
-            Integer before = cal.get(Calendar.DAY_OF_WEEK);
-
-            for (int i = 1; i < before; i++) {
-                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-            }
-
-            // 다음달 날짜 구하기
-            cal.set(cal.get(Calendar.YEAR), now_month - 1, Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-            Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-            Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-            for (int i = 1; i <= 7 - after; i++) {
-                calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-            }
-            Integer daylast = 7-after;
-            System.out.println(daylast);
-
-
-            // 날짜별 캠핑카
-            List<List<DateCamping>> dateCampingList = new ArrayList();
-
-            for (int i = 0; i < calendarDateList.size(); i++) {
-                dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
-            }
-
-            model.addAttribute("daylast", calendarDateList);
-            model.addAttribute("calendarDateList", calendarDateList);
-            model.addAttribute("dateCampingList", dateCampingList);
-            model.addAttribute("prevMonth", now_month-1);
-            model.addAttribute("thisMonth", now_month);
-            model.addAttribute("thisYear", 2021);
-        }
-
+        model.addAttribute("thisMonth", month);
+        model.addAttribute("thisYear", year);
+        model.addAttribute("thisDay", 1);
+        model.addAttribute("prevMonth", prevMonthDate[1]);
+        model.addAttribute("nextMonth", nextMonthDate[1]);
 
         return "camping_calendar";
     }
