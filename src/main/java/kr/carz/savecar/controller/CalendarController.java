@@ -89,7 +89,9 @@ public class CalendarController {
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
         ArrayList dateCampingList = new ArrayList();
 
-        for(int i=0; i<=7-thisDayOfWeek; i++){ calendarDateList.remove(0); }
+        if (7 - thisDayOfWeek >= 0) {
+            calendarDateList.subList(0, 7 - thisDayOfWeek + 1).clear();
+        }
 
 //        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
 //        for(int i=1; i<7-thisDayOfWeek; i++){ calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i)); }
@@ -114,13 +116,10 @@ public class CalendarController {
         // 이번달 날짜
         List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(month));
 
-        // 일 - 1, 수 - 4, 토 - 7
         // 저번달 날짜
         Calendar cal = Calendar.getInstance();
         cal.set(year, month-1, 1);
         int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-
-        System.out.println(thisDayOfWeek);
 
         Long firstDateId = calendarDateList.get(0).getDateId();
         for (int i = 1; i < thisDayOfWeek; i++) {
@@ -142,8 +141,8 @@ public class CalendarController {
         // 날짜별 캠핑카
         List<List<DateCamping>> dateCampingList = new ArrayList();
 
-        for (int i = 0; i < calendarDateList.size(); i++) {
-            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
+        for (CalendarDate calendarDate : calendarDateList) {
+            dateCampingList.add(dateCampingService.findByDateId(calendarDate));
         }
 
         String date = year + String.format("%02d", month) + "01";
@@ -165,8 +164,8 @@ public class CalendarController {
     }
 
 
-    @GetMapping("/travel_reserve/{date_id}")
-    public String handleRequest_travel(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
+    @GetMapping("/camping/calendar/{carType}_reserve/{date_id}")
+    public String handleRequest(ModelMap model, @PathVariable("carType") String carType, @PathVariable("date_id") Long date_id) throws Exception {
 
         // 클릭한 날짜 데이터
         CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
@@ -188,219 +187,7 @@ public class CalendarController {
 
         // 시간
         CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("travel");
-
-        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
-
-        model.addAttribute("calendarTimeList", calendarTimeList);
-
-        for(int i=0; i<calendarTimeList.size(); i++){
-            System.out.println(calendarTimeList.get(i).getTimeId());
-        }
-
-
-        // 날짜
-        int now_month = Integer.parseInt(clickedDate.getMonth()); // 클릭한 데이터
-
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
-
-
-        if (Integer.parseInt(clickedDate.getMonth()) == this_month){
-
-
-            int now_day = cal.get(Calendar.DATE);
-            CalendarDate today_calendar_date = calendarDateService.findCalendarDateByMonthAndDayAndYear( Integer.toString(this_month), Integer.toString(now_day),  Integer.toString(cal.get(Calendar.YEAR)));
-
-            Integer before = cal.get(Calendar.DAY_OF_WEEK);
-
-            // 이번주부터
-            cal.set(cal.get(Calendar.YEAR),now_month-1,1);
-
-            Long firstDateId = calendarDateList.get(0).getDateId();
-
-            for(Long i=firstDateId; i<=today_calendar_date.getDateId()-before; i++){
-                calendarDateList.remove(0);
-            }
-
-        } else {
-
-            // 전달 날짜 구하기
-            cal.set(cal.get(Calendar.YEAR), now_month - 1, 1);
-
-            Long firstDateId = calendarDateList.get(0).getDateId();
-            Integer before = cal.get(Calendar.DAY_OF_WEEK);
-
-            System.out.println(before);
-
-            for (int i = 1; i < before; i++) {
-                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-            }
-        }
-
-        // 다음달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-        Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-        for(int i=1; i<=7-after; i++){
-            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-        }
-
-        model.addAttribute("calendarDateList", calendarDateList);
-
-
-        // 날짜별 캠핑카
-        List<List<DateCamping>> dateCampingList = new ArrayList();
-
-        for (int i=0; i<calendarDateList.size(); i++){
-            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
-        }
-
-        model.addAttribute("dateCampingList", dateCampingList);
-
-
-        // 캠핑카 가격
-        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-        model.addAttribute("thisMonth", this_month);
-        model.addAttribute("thisYear", 2021);
-
-        model.addAttribute("dateId", date_id);
-
-        return "camping_travel";
-    }
-
-    @GetMapping("/liomousine_reserve/{date_id}")
-    public String handleRequest_liomousine(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
-
-        // 클릭한 날짜 데이터
-        CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
-
-        model.addAttribute("clickedDay", clickedDate.getDay());
-        model.addAttribute("clickedMonth", clickedDate.getMonth());
-        model.addAttribute("clickedYear", clickedDate.getYear());
-        model.addAttribute("clickedWDay", clickedDate.getWDay());
-
-        // 날짜
-        Calendar cal = Calendar.getInstance();
-
-        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
-        int this_month = cal.get(Calendar.MONTH) + 1;
-
-        model.addAttribute("today", today);
-        model.addAttribute("thisMonth", this_month);
-
-
-        // 시간
-        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
-
-        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
-
-        model.addAttribute("calendarTimeList", calendarTimeList);
-
-        for(int i=0; i<calendarTimeList.size(); i++){
-            System.out.println(calendarTimeList.get(i).getTimeId());
-        }
-
-
-        // 날짜
-        int now_month = Integer.parseInt(clickedDate.getMonth()); // 클릭한 데이터
-
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(now_month));
-
-        if (Integer.parseInt(clickedDate.getMonth()) == this_month){
-
-
-            int now_day = cal.get(Calendar.DATE);
-            CalendarDate today_calendar_date = calendarDateService.findCalendarDateByMonthAndDayAndYear( Integer.toString(this_month), Integer.toString(now_day),  Integer.toString(cal.get(Calendar.YEAR)));
-
-            Integer before = cal.get(Calendar.DAY_OF_WEEK);
-
-            // 이번주부터
-            cal.set(cal.get(Calendar.YEAR),now_month-1,1);
-
-            Long firstDateId = calendarDateList.get(0).getDateId();
-
-            for(Long i=firstDateId; i<=today_calendar_date.getDateId()-before; i++){
-                calendarDateList.remove(0);
-            }
-
-        } else {
-
-            // 전달 날짜 구하기
-            cal.set(cal.get(Calendar.YEAR), now_month - 1, 1);
-
-            Long firstDateId = calendarDateList.get(0).getDateId();
-            Integer before = cal.get(Calendar.DAY_OF_WEEK);
-
-            System.out.println(before);
-
-            for (int i = 1; i < before; i++) {
-                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-            }
-        }
-
-        // 다음달 날짜 구하기
-        cal.set(cal.get(Calendar.YEAR),now_month-1,Integer.parseInt(calendarDateList.get(calendarDateList.size() - 1).getDay()));
-
-        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-        Integer after = cal.get(Calendar.DAY_OF_WEEK);
-
-        for(int i=1; i<=7-after; i++){
-            calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i));
-        }
-
-        model.addAttribute("calendarDateList", calendarDateList);
-
-
-        // 날짜별 캠핑카
-        List<List<DateCamping>> dateCampingList = new ArrayList();
-
-        for (int i=0; i<calendarDateList.size(); i++){
-            dateCampingList.add(dateCampingService.findByDateId(calendarDateList.get(i)));
-        }
-
-        model.addAttribute("dateCampingList", dateCampingList);
-
-
-        // 캠핑카 가격
-        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
-        model.addAttribute("thisMonth", this_month);
-        model.addAttribute("thisYear", 2021);
-
-        model.addAttribute("dateId", date_id);
-
-        return "camping_liomousine";
-    }
-
-
-
-
-    @RequestMapping("/europe_reserve/{date_id}")
-    public String handleRequest(ModelMap model, @PathVariable("date_id") Long date_id) throws Exception {
-
-        // 클릭한 날짜 데이터
-        CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
-
-        model.addAttribute("clickedDay", clickedDate.getDay());
-        model.addAttribute("clickedMonth", clickedDate.getMonth());
-        model.addAttribute("clickedYear", clickedDate.getYear());
-        model.addAttribute("clickedWDay", clickedDate.getWDay());
-
-        // 날짜
-        Calendar cal = Calendar.getInstance();
-
-        int today = cal.get(Calendar.DAY_OF_MONTH) + 1;
-        int this_month = cal.get(Calendar.MONTH) + 1;
-
-        model.addAttribute("today", today);
-        model.addAttribute("thisMonth", this_month);
-
-
-        // 시간
-        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("europe");
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
 
         List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
 
@@ -482,7 +269,7 @@ public class CalendarController {
 
 
 
-    @RequestMapping("/travel_reserve/after/{month}")
+    @RequestMapping("/camping/calendar/travel_reserve/after/{month}")
     public String handleRequest_travel_after(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
 
 
@@ -560,7 +347,7 @@ public class CalendarController {
 
 
 
-    @RequestMapping("/liomousine_reserve/after/{month}")
+    @RequestMapping("/camping/calendar/liomousine_reserve/after/{month}")
     public String handleRequest_liomousine_after(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -645,7 +432,7 @@ public class CalendarController {
 
 
 
-    @RequestMapping("/europe_reserve/after/{month}")
+    @RequestMapping("/camping/calendar/europe_reserve/after/{month}")
     public String handleRequest3(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -721,7 +508,7 @@ public class CalendarController {
 
 
 
-    @RequestMapping("/travel_reserve/before/{month}")
+    @RequestMapping("/camping/calendar/travel_reserve/before/{month}")
     public String handleRequest_travel_before(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -802,7 +589,7 @@ public class CalendarController {
 
 
 
-    @RequestMapping("/liomousine_reserve/before/{month}")
+    @RequestMapping("/camping/calendar/liomousine_reserve/before/{month}")
     public String handleRequest_liomousine_before(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -885,7 +672,7 @@ public class CalendarController {
 
 
 
-    @RequestMapping("/europe_reserve/before/{month}")
+    @RequestMapping("/camping/calendar/europe_reserve/before/{month}")
     public String handleRequest4(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("month") Long month) throws Exception {
         // 날짜
         Calendar cal = Calendar.getInstance();
@@ -967,7 +754,7 @@ public class CalendarController {
 
 
     // 캠핑카 예약 저장 api
-    @RequestMapping(value = "/travel/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/camping/calendar/travel/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void send_rent_date_travel(HttpServletResponse res, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
 
@@ -1005,7 +792,7 @@ public class CalendarController {
 
 
     // 캠핑카 예약 저장 api
-    @RequestMapping(value = "/liomousine/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/camping/calendar/liomousine/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void send_rent_date_liomousine(HttpServletResponse res, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
 
@@ -1043,7 +830,7 @@ public class CalendarController {
 
 
     // 캠핑카 예약 저장 api
-    @RequestMapping(value = "/europe/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/camping/calendar/europe/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void send_rent_date(HttpServletResponse res, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
 
@@ -1083,7 +870,7 @@ public class CalendarController {
 
 
 
-    @RequestMapping("/{carType}_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}/{extraFee}")
+    @RequestMapping("/camping/calendar/{carType}_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}/{extraFee}")
     public String handleRequest_reserve(ModelMap model, @PathVariable("carType") String carType,@PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total, @PathVariable("extraFee") Integer extraFee) throws Exception {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
@@ -1107,7 +894,7 @@ public class CalendarController {
 
 
     // europe 캠핑카 가격 구하는 api
-    @RequestMapping(value = "/{carType}/getprice/{season}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/camping/calendar/{carType}/getprice/{season}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void get_travel_price(HttpServletResponse res, @PathVariable String carType, @PathVariable String season) throws IOException {
 
@@ -1224,7 +1011,7 @@ public class CalendarController {
 
 
     // 캠핑카 대여가능일자 구하는 api
-    @RequestMapping(value = "/{carType}/getrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/camping/calendar/{carType}/getrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void get_rent_date(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
 
@@ -1268,7 +1055,7 @@ public class CalendarController {
 
 
     // 캠핑카 가능한 추가시간 구하는 api
-    @RequestMapping(value = "/{carType}/getextratime/{year}/{month}/{day}/{rentDays}/{rentStartTime}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    @RequestMapping(value = "/camping/calendar/{carType}/getextratime/{year}/{month}/{day}/{rentDays}/{rentStartTime}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
     public void get_extra_time(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day, @PathVariable Integer rentDays, @PathVariable String rentStartTime) throws IOException {
 
