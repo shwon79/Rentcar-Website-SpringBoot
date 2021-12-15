@@ -11,7 +11,7 @@ function doDisplay(){
 function doDisplay_rent_time(){
     var con = document.getElementById("calendar_rental_time")
     if(con.style.display==='none'){
-        con.style.display = 'block';
+        con.style.display = 'grid';
     } else {
         con.style.display = 'none';
     }

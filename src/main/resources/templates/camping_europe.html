@@ -75,20 +75,7 @@
                             <i class="far fa-circle"></i>
                             CAMPER 렌트정책
                         </h1>
-                        <div class="contents">
-                            <p>인수 및 반납</p>
-                            <p>운영시간 : 09시 ~ 18시</p>
-                            <p>연료 Full-To-Full : 연료는 입고 시 가득 채워서 반납하셔야 합니다.</p>
-                            <p>방문배회차지 : 장지역[가든파이브], 복정역[강남자동차매매단지] 中 당사 지정장소</p>
-                            <p>* 배회차는 방문으로만 진행합니다.</p>
-                            <br>
-                            <p>예약 안내</p>
-                            <p>요금은 24시간 기준으로 캠핑카대여 특성상 체크인 & 체크아웃 시간으로 운영하여야 하나</p>
-                            <p>고객의 편의중심으로 24시간 기준으로 요금을 책정하였습니다.</p>
-                            <p>예약금은 총렌트료의 50%를 현금으로 입금하시고, 대여료는 신용카드 및 네이버 스토어 결제가 가능합니다.</p>
-                            <p>자차요금이 포함 되어 있습니다.</p>
-                            <p>입금계좌 : 하나은행 810-626121-01404 ㈜세이브카</p>
-                        </div>
+                        <div th:replace="/fragments/camping_explanations.html :: rent_policy"></div>
                     </div>
                     <!--보험사항-->
                     <div class="row card white-card">
@@ -171,12 +158,10 @@
                             <div class="date_menu"><h5>시작날짜</h5></div>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                            <div class="date_time"><span id='rent_date' th:title="${dateId}" th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>
+                            <div class="date_time"><h5>날짜를 선택해주세요</h5></div>
+<!--                            <div class="date_time"><span id='rent_date' th:title="${dateId}" th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>-->
                         </div>
-<!--                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
-<!--                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">-->
-<!--                        </div>-->
-                    </div><hr />
+                    </div>
                     <!-- 대여날짜 달력 -->
                     <div id="calendar_rental" class="row">
                         <div class="header">
@@ -217,7 +202,7 @@
                                 <span style="padding-right: 30px"> <span style="color: rgb(180 255 175 / 57%);">●</span> 선택가능 </span>
                                 <span style="padding-right: 30px"> <span style="color: #9d9d9d">●</span> 선택불가 </span>
                             </div>
-                        </div><hr />
+                        </div>
                     </div>
 
                     <!-- 대여 시간 -->
@@ -228,13 +213,22 @@
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                             <div class="date_time"><h5>시간을 선택해주세요</h5></div>
                         </div>
-<!--                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
-<!--                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">-->
-<!--                        </div>-->
-                    </div><hr style="background: dimgray;" />
+                    </div>
+                    <!--대여 시간 리스트-->
+                    <div id="calendar_rental_time" class="row">
+                        <button>10시</button>
+                        <button>11시</button>
+                        <button>12시</button>
+                        <button>13시</button>
+                        <button>14시</button>
+                        <button>15시</button>
+                        <button>16시</button>
+                        <button>17시</button>
+                        <button>18시</button>
+                    </div>
 
                     <!-- 대여 시간 선택창 -->
-                    <div id="calendar_rental_time">
+                    <div id="">
                         <div id="rent_time" class="row">
                             <div class="times text-center">
                                 <label for="10시">
@@ -282,7 +276,7 @@
 <!--                        <div class="down_arrow col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
 <!--                            <img th:src="@{/img/down-arrow.png}" class="img-responsive">-->
 <!--                        </div>-->
-                    </div><hr style="background: dimgray;" />
+                    </div>
 
                     <div id="rent_days">
                         <div id="calendar_return">
@@ -357,17 +351,21 @@
                         </div>
                     </div>
 
+                    <!--선택 사항-->
+                    <div class="row result_wrapper">
+                        <span class="title">선택 사항</span>
+                    </div>
                     <!-- 계산 부분 -->
-                    <div class="row">
-                        <div>
-                            <div>
-                                <p id="total_result"></p>
-                            </div>
+<!--                    <div class="row">-->
+<!--                        <div>-->
+<!--                            <div>-->
+<!--                                <p id="total_result"></p>-->
+<!--                            </div>-->
 
-                                <button id="btn_reserve" onclick="postDate()">예약신청하기</button>
+<!--                                <button id="btn_reserve" onclick="postDate()">예약신청하기</button>-->
 
-                        </div>
-                    </div><hr style="background: dimgray;" />
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
 
                 <!-- 사진 -->

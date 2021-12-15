@@ -936,10 +936,16 @@ input[type=radio] {
 }
 .card .insurance div:first-child {
   border-right: 1px solid black;
+  padding-right: 10px;
+}
+.card .insurance div:last-child {
+  padding-left: 10px;
+}
+.card .insurance div {
+  flex-basis: 50%;
 }
 .card .insurance {
   text-align: center;
-
 }
 
 .black-card .contents {
@@ -958,4 +964,62 @@ input[type=radio] {
 
 .white-card .contents p:before {
   content: none;
+}
+
+.select_wrapper {
+  border: 2.5px solid black;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+.select_wrapper .col-lg-4 {
+  margin-bottom: 0;
+  padding: 20px;
+}
+.select_wrapper .col-lg-4 h5,
+.select_wrapper .col-lg-8 span,
+.select_wrapper .col-lg-8 h5 {
+  font-size: 24px;
+}
+.select_wrapper .col-lg-8 {
+  margin-bottom: 0;
+  padding: 20px;
+  background-color: black;
+  border-radius: 0 8px 8px 0;
+}
+.select_wrapper .col-lg-8 span,
+.select_wrapper .col-lg-8 h5 {
+  color: white;
+}
+#calendar_rental_time {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+#calendar_rental_time:before {
+  content: none;
+}
+#calendar_rental_time button{
+  border: 3px solid black;
+  font-size: 24px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 12px;
+}
+#calendar_rental_time button:hover {
+  background-color: black;
+  color: white;
+}
+.result_wrapper .title {
+  font-size: 32px;
+  font-weight: 400;
+  text-align: center;
+}
+.result_wrapper .title:before {
+  /*content: " ";*/
+  /*position: absolute;*/
+  /*top: 50%;*/
+  /*left: 0;*/
+  /*border-bottom: 3px solid black;*/
+  /*width: 100%;*/
 }
