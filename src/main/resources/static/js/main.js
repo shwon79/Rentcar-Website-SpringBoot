@@ -164,3 +164,10 @@ $( ".btn4-default" ).click(function() {
     document.getElementById('btn-sub1').className += ' btn-clicked';
 });
 
+// camping calendar
+function moveToCampingCalendar() {
+    let date = new Date();
+    let thisYear = date.getFullYear();
+    let thisMonth = date.getMonth() + 1;
+    window.location.href = '/camping/calendar/'+ thisYear + '/' + thisMonth;
+}
