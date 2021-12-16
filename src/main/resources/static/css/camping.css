@@ -567,8 +567,8 @@ a:hover {
 }
 
 #rent_cal label {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -576,7 +576,7 @@ a:hover {
 }
 
 .select_possible {
-  padding-top: 40px;
+  font-size: 15px;
 }
 
 .times {
@@ -645,10 +645,12 @@ a:hover {
 }
 
 select {
-  height: 37px;
-  background: lightyellow;
-  border: 1px solid gray;
-  border-radius: 1vh;
+  height: 27px;
+  border: none;
+  font-size: 24px;
+  /*background: lightyellow;*/
+  /*border: 1px solid gray;*/
+  /*border-radius: 1vh;*/
 }
 
 select option {
@@ -661,7 +663,7 @@ select option {
 }
 
 .able_radio {
-  background: rgb(180 255 175 / 57%);
+  /*background: rgb(180 255 175 / 57%);*/
 
 }
 
@@ -698,12 +700,12 @@ input[type=radio] {
   -webkit-appearance: none;
   appearance: none;
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background:  rgb(5 162 46 / 56%);
+  width: 40px;
+  height: 40px;
+  /*background:  rgb(5 162 46 / 56%);*/
   border-radius: 50%;
   margin: 0;
-
+  border: 3px solid black;
 }
 
 #rent_time input[type=radio]:checked{
@@ -778,15 +780,18 @@ input[type=radio] {
 }
 
 #btn_reserve {
-  padding: 20px 30px;
-  border: none;
-  border-radius: 30vh;
-  background-color: #E7A625;
-  color: whitesmoke;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  width: 100%;
+  border: 3px solid black;
+  font-size: 24px;
 }
 
 #btn_reserve:hover {
-  background-color: #13A0B2;
+  background-color: black;
+  color: white;
 }
 
 
@@ -990,7 +995,16 @@ input[type=radio] {
 .select_wrapper .col-lg-8 h5 {
   color: white;
 }
-#calendar_rental_time {
+#calendar_rental {
+  transition: 0.5s ease-in-out all;
+}
+#calendar_rental .days {
+  border-bottom: 1px solid black;
+}
+#calendar_rental .days .day {
+  padding-bottom: 10px;
+}
+#calendar_rental_time .time_options {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
@@ -999,27 +1013,86 @@ input[type=radio] {
 #calendar_rental_time:before {
   content: none;
 }
-#calendar_rental_time button{
+#calendar_rental_time label {
   border: 3px solid black;
   font-size: 24px;
   border-radius: 10px;
   background-color: white;
   padding: 12px;
+  cursor: pointer;
 }
-#calendar_rental_time button:hover {
+#calendar_rental_time label:hover {
   background-color: black;
   color: white;
 }
+.result_wrapper {
+  /*display: unset;*/
+  margin: 50px -15px 30px -15px;
+}
 .result_wrapper .title {
+  width: 100%;
+  border-bottom: 3px solid black;
+  line-height: 0.1em;
+  margin: 10px 0 30px 0;
   font-size: 32px;
   font-weight: 400;
   text-align: center;
 }
-.result_wrapper .title:before {
-  /*content: " ";*/
-  /*position: absolute;*/
-  /*top: 50%;*/
-  /*left: 0;*/
-  /*border-bottom: 3px solid black;*/
-  /*width: 100%;*/
+.result_wrapper .title span {
+  background-color: white;
+  padding: 0 15px;
+}
+.result_box {
+  background-color: black;
+  border-radius: 12px;
+  color: white;
+  padding: 30px;
+}
+.result_box p {
+  margin: 0;
+}
+.result_date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.result_date div {
+  background-color: white;
+  border-radius: 12px;
+  color: black;
+  width: 40%;
+  padding: 20px;
+}
+.result_date div hr {
+  margin: 4px auto 16px auto;
+  border-top: black 3px solid;
+  width: 85%;
+}
+.display_result_date {
+  font-size: 3rem;
+}
+.display_result_time {
+  font-size: 4rem;
+}
+.price_row {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.result_price .name {
+  color: white;
+  text-align: left;
+  font-size: 26px;
+}
+.result_price .price {
+  background-color: white;
+  width: 65%;
+  height: 40px;
+  border-radius: 12px;
+}
+#right_column .row {
+  /*margin-rignt: 0;*/
+  /*margin-left: 0;*/
 }
