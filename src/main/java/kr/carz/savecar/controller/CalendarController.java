@@ -74,41 +74,6 @@ public class CalendarController {
         return std_data_format.format(cal.getTime());
     }
 
-//    @GetMapping("/camping/calendar")
-//    public String camping_calendar(Model model) throws Exception {
-//        Calendar cal = Calendar.getInstance();
-//
-//        int thisYear = TodayDateInt()[0];
-//        int thisMonth = TodayDateInt()[1];
-//        int thisDay = TodayDateInt()[2];
-//        int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-//
-//        int[] prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
-//        int[] nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
-//
-//        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
-//        ArrayList dateCampingList = new ArrayList();
-//
-//        if (7 - thisDayOfWeek >= 0) {
-//            calendarDateList.subList(0, 7 - thisDayOfWeek + 1).clear();
-//        }
-//
-////        Long lastDateId = calendarDateList.get(calendarDateList.size() - 1).getDateId();
-////        for(int i=1; i<7-thisDayOfWeek; i++){ calendarDateList.add(calendarDateService.findCalendarDateByDateId(lastDateId + i)); }
-//        for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
-//
-//        model.addAttribute("calendarDateList", calendarDateList);
-//        model.addAttribute("dateCampingList", dateCampingList);
-//
-//        model.addAttribute("thisMonth", thisMonth);
-//        model.addAttribute("thisYear", thisYear);
-//        model.addAttribute("thisDay", thisDay);
-//        model.addAttribute("prevMonth", prevMonthDate[1]);
-//        model.addAttribute("nextMonth", nextMonthDate[1]);
-//
-//        return "camping_calendar";
-//    }
-
 
     @GetMapping("/camping/calendar/{year}/{month}")
     public String camping_calendar_different_month(ModelMap model, @PathVariable("year") int year, @PathVariable("month") int month) throws Exception {
@@ -215,6 +180,11 @@ public class CalendarController {
 
         for (CalendarDate calendarDateInd : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDateInd)); }
 
+        // 클릭된 날짜
+        String clickedDateFormated = calendarDate.getYear() + String.format("%02d", Integer.parseInt(calendarDate.getMonth())) + "01";
+        int[] clickedPrevMonthDate = DateStringToInt(AddDate(clickedDateFormated, 0, -1, 0));
+        int[] clickedNextMonthDate = DateStringToInt(AddDate(clickedDateFormated, 0, 1, 0));
+
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("dateCampingList", dateCampingList);
@@ -225,6 +195,12 @@ public class CalendarController {
         model.addAttribute("clickedMonth", clickedDate.getMonth());
         model.addAttribute("clickedYear", clickedDate.getYear());
         model.addAttribute("clickedWDay", clickedDate.getWDay());
+
+        model.addAttribute("clickedPrevYear", clickedPrevMonthDate[0]);
+        model.addAttribute("clickedPrevMonth", clickedPrevMonthDate[1]);
+        model.addAttribute("clickedNextYear", clickedNextMonthDate[0]);
+        model.addAttribute("clickedNextMonth", clickedNextMonthDate[1]);
+
         model.addAttribute("thisYear", thisYear);
         model.addAttribute("thisMonth", thisMonth);
         model.addAttribute("today", thisDay);
