@@ -82,10 +82,12 @@ public class CalendarController {
         int thisYear = TodayDateInt()[0];
         int thisMonth = TodayDateInt()[1];
 
-        if(thisYear == year && thisMonth == month){
-            Calendar cal = Calendar.getInstance();
+        // 저번달 날짜
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month-1, 1);
+        int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
-            int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+        if(thisYear == year && thisMonth == month){
 
             int[] prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
             int[] nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
@@ -93,7 +95,11 @@ public class CalendarController {
             List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
             ArrayList dateCampingList = new ArrayList();
 
-            if (7 - thisDayOfWeek >= 0) { calendarDateList.subList(0, 7 - thisDayOfWeek + 1).clear(); }
+            Long firstDateId = calendarDateList.get(0).getDateId();
+            for (int i = 1; i < thisDayOfWeek; i++) {
+                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+            }
+            System.out.println(thisDayOfWeek);
 
             for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
@@ -110,11 +116,6 @@ public class CalendarController {
 
             // 이번달 날짜
             List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(month));
-
-            // 저번달 날짜
-            Calendar cal = Calendar.getInstance();
-            cal.set(year, month-1, 1);
-            int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
             Long firstDateId = calendarDateList.get(0).getDateId();
             for (int i = 1; i < thisDayOfWeek; i++) {
@@ -147,69 +148,6 @@ public class CalendarController {
     }
 
 
-    @GetMapping("/camping/calendar/{carType}_reserve/{date_id}")
-    public String handleRequest(ModelMap model, @PathVariable("carType") String carType, @PathVariable("date_id") Long date_id) throws Exception {
-
-        // 클릭한 날짜 데이터
-        CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
-
-        // 날짜
-        int thisYear = TodayDateInt()[0];
-        int thisMonth = TodayDateInt()[1];
-        int thisDay = TodayDateInt()[2];
-
-        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
-
-        // 이번달 날짜
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(clickedDate.getMonth());
-
-        // 저번달 날짜
-        Calendar cal = Calendar.getInstance();
-        cal.set(Integer.parseInt(clickedDate.getYear()), Integer.parseInt(clickedDate.getMonth())-1, 1);
-        int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-
-        Long firstDateId = calendarDateList.get(0).getDateId();
-        for (int i = 1; i < thisDayOfWeek; i++) {
-            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-        }
-
-        // 날짜별 캠핑카
-        List<List<DateCamping>> dateCampingList = new ArrayList();
-
-        for (CalendarDate calendarDateInd : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDateInd)); }
-
-        // 클릭된 날짜
-        String clickedDateFormated = calendarDate.getYear() + String.format("%02d", Integer.parseInt(calendarDate.getMonth())) + "01";
-        int[] clickedPrevMonthDate = DateStringToInt(AddDate(clickedDateFormated, 0, -1, 0));
-        int[] clickedNextMonthDate = DateStringToInt(AddDate(clickedDateFormated, 0, 1, 0));
-
-
-        model.addAttribute("calendarDateList", calendarDateList);
-        model.addAttribute("dateCampingList", dateCampingList);
-        model.put("campingCarPrice", campingCarPrice);
-
-        model.addAttribute("dateId", date_id);
-        model.addAttribute("clickedDay", clickedDate.getDay());
-        model.addAttribute("clickedMonth", clickedDate.getMonth());
-        model.addAttribute("clickedYear", clickedDate.getYear());
-        model.addAttribute("clickedWDay", clickedDate.getWDay());
-
-        model.addAttribute("clickedPrevYear", clickedPrevMonthDate[0]);
-        model.addAttribute("clickedPrevMonth", clickedPrevMonthDate[1]);
-        model.addAttribute("clickedNextYear", clickedNextMonthDate[0]);
-        model.addAttribute("clickedNextMonth", clickedNextMonthDate[1]);
-
-        model.addAttribute("thisYear", thisYear);
-        model.addAttribute("thisMonth", thisMonth);
-        model.addAttribute("today", thisDay);
-        model.addAttribute("calendarTimeList", calendarTimeList);
-
-        return  "camping_" + carType;
-    }
-
-
     @GetMapping("/camping/calendar/{carType}_reserve/{clickedYear}/{clickedMonth}")
     public String camping_calendar_detail_different_month(ModelMap model, @PathVariable("carType") String carType, @PathVariable("clickedYear") int clickedYear, @PathVariable("clickedMonth") int clickedMonth) throws Exception {
 
@@ -228,7 +166,7 @@ public class CalendarController {
         int[] clickedNextMonthDate = DateStringToInt(AddDate(clickedDate, 0, 1, 0));
 
         // 클릭된 저번달 날짜
-        cal.set(clickedPrevMonthDate[0], clickedPrevMonthDate[1]-1, 1);
+        cal.set(clickedPrevMonthDate[0], clickedPrevMonthDate[1], 1);
         int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
         Long firstDateId = calendarDateList.get(0).getDateId();
@@ -514,6 +452,69 @@ public class CalendarController {
         pw.flush();
         pw.close();
     }
+
+
+//    @GetMapping("/camping/calendar/{carType}_reserve/{date_id}")
+//    public String handleRequest(ModelMap model, @PathVariable("carType") String carType, @PathVariable("date_id") Long date_id) throws Exception {
+//
+//        // 클릭한 날짜 데이터
+//        CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
+//
+//        // 날짜
+//        int thisYear = TodayDateInt()[0];
+//        int thisMonth = TodayDateInt()[1];
+//        int thisDay = TodayDateInt()[2];
+//
+//        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
+//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+//        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
+//
+//        // 이번달 날짜
+//        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(clickedDate.getMonth());
+//
+//        // 저번달 날짜
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Integer.parseInt(clickedDate.getYear()), Integer.parseInt(clickedDate.getMonth())-1, 1);
+//        int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+//
+//        Long firstDateId = calendarDateList.get(0).getDateId();
+//        for (int i = 1; i < thisDayOfWeek; i++) {
+//            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+//        }
+//
+//        // 날짜별 캠핑카
+//        List<List<DateCamping>> dateCampingList = new ArrayList();
+//
+//        for (CalendarDate calendarDateInd : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDateInd)); }
+//
+//        // 클릭된 날짜
+//        String clickedDateFormated = calendarDate.getYear() + String.format("%02d", Integer.parseInt(calendarDate.getMonth())) + "01";
+//        int[] clickedPrevMonthDate = DateStringToInt(AddDate(clickedDateFormated, 0, -1, 0));
+//        int[] clickedNextMonthDate = DateStringToInt(AddDate(clickedDateFormated, 0, 1, 0));
+//
+//
+//        model.addAttribute("calendarDateList", calendarDateList);
+//        model.addAttribute("dateCampingList", dateCampingList);
+//        model.put("campingCarPrice", campingCarPrice);
+//
+//        model.addAttribute("dateId", date_id);
+//        model.addAttribute("clickedDay", clickedDate.getDay());
+//        model.addAttribute("clickedMonth", clickedDate.getMonth());
+//        model.addAttribute("clickedYear", clickedDate.getYear());
+//        model.addAttribute("clickedWDay", clickedDate.getWDay());
+//
+//        model.addAttribute("clickedPrevYear", clickedPrevMonthDate[0]);
+//        model.addAttribute("clickedPrevMonth", clickedPrevMonthDate[1]);
+//        model.addAttribute("clickedNextYear", clickedNextMonthDate[0]);
+//        model.addAttribute("clickedNextMonth", clickedNextMonthDate[1]);
+//
+//        model.addAttribute("thisYear", thisYear);
+//        model.addAttribute("thisMonth", thisMonth);
+//        model.addAttribute("today", thisDay);
+//        model.addAttribute("calendarTimeList", calendarTimeList);
+//
+//        return  "camping_" + carType;
+//    }
 
 
 
