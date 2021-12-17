@@ -118,14 +118,14 @@
                     <!-- 대여날짜 달력 -->
                     <div id="calendar_rental" class="row" style="display: none;">
                         <div class="header">
-                            <a th:href="'/europe_reserve/before/' + ${clickedPrevMonth}">
+                            <a th:href="'/camping/calendar/europe_reserve/' + ${clickedPrevYear} + '/'+ ${clickedPrevMonth}">
                                 <button class="nav-btn go-prev"><i class="fas fa-caret-left" style="font-size: 28px;"></i></button>&nbsp;
                             </a>&nbsp;
                             <div class="year-month">
                                 <span name="thisYear" th:text="${clickedYear}"></span>년
                                 <span name="thisMonth" th:text="${clickedMonth}"></span>월
                             </div>&nbsp;&nbsp;
-                            <a th:href="'/europe_reserve/after/' + ${clickedMonth}">
+                            <a th:href="'/camping/calendar/europe_reserve/' + ${clickedNextYear} + '/'+ ${clickedNextMonth}">
                                 <button class="nav-btn go-next" ><i class="fas fa-caret-right" style="font-size: 28px;"></i></button>
                             </a>
                         </div>
@@ -142,7 +142,9 @@
                             <div id="rent_cal" class="dates btn-group">
                                 <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                     <label th:for="${date.month+'월 '+date.day+'일'}" th:id="${date.dateId}"
-                                           th:class="${dateCampingList[iterStat.index][0].reserved} == '1' or (${date.day} < ${today} and ${date.month} <= ${thisMonth}) or (${date.month} < ${thisMonth}) ? 'disabled_radio' : 'able_radio'">
+                                           th:class="${dateCampingList[iterStat.index][0].reserved} == '1' or (${date.year} < ${thisYear}) or (${date.month} < ${thisMonth} and ${date.year} == ${thisYear}) or (${date.day} < ${today} and ${date.month} == ${thisMonth} and ${date.year} == ${thisYear})  ? 'disabled_radio' : 'able_radio'">
+
+
                                         <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:title="${date.season}"
                                                th:name="${thisYear}" th:text="${date.day}" onclick="sendRentDate(id, name, value);"/>
                                     </label>

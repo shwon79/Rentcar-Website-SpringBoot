@@ -521,7 +521,7 @@ const postDate = () => {
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/${carType}_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}/${extraFee}`
+        window.location.href = `/camping/calendar/${carType}_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}/${extraFee}`
 
     } else {
         alert('입력을 완료해주세요!')

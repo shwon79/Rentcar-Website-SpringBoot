@@ -19,7 +19,7 @@ public class CampingCarPrice {
 
 
     @OneToMany(mappedBy = "carName", targetEntity=CalendarTime.class)
-    private List<CalendarTime> calendarTimeList = new ArrayList<CalendarTime>();
+    private List<CalendarTime> calendarTimeList = new ArrayList<>();
 
     public void addCalendarTime(CalendarTime calendarTime)
     {
