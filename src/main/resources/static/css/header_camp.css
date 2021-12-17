@@ -51,6 +51,9 @@
 .main_ul > li > ul > li > a {
     background-color: white !important;
 }
+.main_ul > li > ul > li > a {
+    background-color: white !important;
+}
 
 .main_ul > li > ul > li > a:hover {
     color: black !important;

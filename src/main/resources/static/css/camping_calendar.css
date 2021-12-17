@@ -188,7 +188,7 @@ a:hover {
 .date_available {
   display: flex;
   justify-content: flex-end;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 /*.date_available p {*/
@@ -265,7 +265,7 @@ a:hover {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
     border-radius: 50%;
   }
 
@@ -281,9 +281,11 @@ a:hover {
     flex-direction: column;
     align-items: center;
     padding: 3rem 0;
-    margin-top: 5rem;
-    font-family: FontAwesome;
-    font-weight: bold;
+    margin-top: 3rem;
+    /*font-family: FontAwesome;*/
+    /*font-weight: bold;*/
+    border: 1px solid black;
+    border-radius: 12px;
   }
 
   .detail_wrapper div {
@@ -293,7 +295,12 @@ a:hover {
     border-radius: 5vh;
   }
 
-
+  .calendar_content .title {
+    font-size: 30px;
+  }
+  .year-month {
+    font-size: 26px;
+  }
 
   a .detail_selections {
     width: 100%;

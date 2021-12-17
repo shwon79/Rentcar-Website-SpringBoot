@@ -489,7 +489,7 @@ label { }
  top: 23px;
  height: 0;
 }*/
-#navigation ul ul { position: absolute; left: -9999px; }
+#navigation ul ul { position: absolute; left: -9999px; z-index: 999;}
 #navigation.align-right ul ul { text-align: right; }
 #navigation ul ul li { height: 0; -webkit-transition: all .25s ease; -moz-transition: all .25s ease; -ms-transition: all .25s ease; -o-transition: all .25s ease; transition: all .25s ease; }
 #navigation li:hover > ul { left: auto; }

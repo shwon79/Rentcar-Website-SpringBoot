@@ -577,6 +577,7 @@ const postDate = () => {
     }
 }
 
+// 옵션 선택 다 해야 아래 결과 보여주기
 function displayResultWrapper() {
     let resultWrapper = document.getElementsByClassName('result_wrapper')[0];
     let startDate = document.getElementById('selected_date').innerText;
@@ -608,4 +609,12 @@ function displayResultWrapper() {
     } else {
         resultWrapper.style.display = 'none';
     }
+}
+
+//지난 달로 못가게 화살표 없애기
+const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');
+const curMonth = new Date();
+let thisMonthOnCalendar = hiddenOnlythisMonth.dataset.index;
+if (curMonth.getMonth()+1 == thisMonthOnCalendar) {
+    hiddenOnlythisMonth.style.display = "none";
 }

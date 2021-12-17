@@ -3,9 +3,9 @@ const dayDetail = (id) => {
     const restBtn = document.getElementsByClassName('able_day')
     const targetBtn = document.getElementById(id);
     for (const restBtnElement of restBtn) {
-        restBtnElement.style.background = 'aliceblue'
+        restBtnElement.style.border = 'none';
     }
-    targetBtn.style.background = 'rgb(32 151 255)';
+    targetBtn.style.border = '2px solid black';
 
     // 아래 부분
     const restDetails = document.getElementsByClassName('detail_wrapper');
