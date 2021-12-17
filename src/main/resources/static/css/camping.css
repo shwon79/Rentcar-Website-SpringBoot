@@ -780,6 +780,7 @@ input[type=radio] {
 }
 
 #btn_reserve {
+  margin-top: 30px;
   padding: 20px;
   border-radius: 12px;
   background-color: white;
@@ -1061,7 +1062,7 @@ input[type=radio] {
   background-color: white;
   border-radius: 12px;
   color: black;
-  width: 40%;
+  width: 42%;
   padding: 20px;
 }
 .result_date div hr {
@@ -1070,7 +1071,7 @@ input[type=radio] {
   width: 85%;
 }
 .display_result_date {
-  font-size: 3rem;
+  font-size: 2.7rem;
 }
 .display_result_time {
   font-size: 4rem;
@@ -1088,11 +1089,87 @@ input[type=radio] {
 }
 .result_price .price {
   background-color: white;
-  width: 65%;
+  color: black;
+  width: 60%;
   height: 40px;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
 }
 #right_column .row {
   /*margin-rignt: 0;*/
   /*margin-left: 0;*/
+}
+
+#mainRow {
+  display: flex;
+}
+.description_time {
+  margin: 0;
+  font-size: 15px;
+  text-align: right;
+}
+.description_time:last-child {
+  padding-bottom: 30px;
+}
+
+@media (max-width: 991px) {
+  #mainRow {
+    flex-direction: column-reverse;
+  }
+  .card {
+    padding-right: 0;
+  }
+  .container {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .select_wrapper .col-lg-4 h5,
+  .select_wrapper .col-lg-8 span,
+  .select_wrapper .col-lg-8 h5,
+  #calendar_rental_time label {
+    font-size: 20px;
+  }
+  select {
+    font-size: 20px;
+    height: 23px;
+  }
+  .select_wrapper .col-lg-4,
+  .select_wrapper .col-lg-8 {
+    padding: 14px 10px;
+  }
+  .description_time {
+    font-size: 14px;
+  }
+  .result_wrapper .title {
+    font-size: 28px;
+  }
+  .result_box {
+    padding: 20px;
+  }
+  .result_date div {
+    padding: 20px 10px;
+  }
+  .display_result_date {
+    font-size: 2rem;
+  }
+  .display_result_time {
+    font-size: 3.5rem;
+  }
+  .result_price .name {
+    font-size: 20px;
+  }
+  .result_price .price {
+    height: 34px;
+  }
+  .card .title {
+    font-size: 26px;
+  }
+  .card .title i {
+    font-size: 24px;
+  }
 }

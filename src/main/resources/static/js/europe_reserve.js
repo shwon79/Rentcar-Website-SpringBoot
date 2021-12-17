@@ -45,11 +45,11 @@ let priceList = [];
 const runIt = () => {
     let target = document.getElementById(rentDateNum);
     season = target.title;
-    if (season == '성수기') season = 1;
-    else if (season == '비성수기') season = 0;
+    if (season === '성수기') season = 1;
+    else if (season === '비성수기') season = 0;
 
     // 가격표 받아오기
-    fetch(`/${carType}/getprice/${season}`)
+    fetch(`/camping/calendar/${carType}/getprice/${season}`)
         .then(res => res.json())
         .then(result => {
             obj = result;
@@ -84,7 +84,10 @@ const runIt = () => {
             priceList[28] = obj['twentyeightdays'];
             priceList[29] = obj['twentyninedays'];
             priceList[30] = obj['thirtydays'];
-            // console.log(obj)
+            console.log(obj)
+            console.log(priceList);
+
+            return obj, priceList;
         })
 }
 
@@ -99,6 +102,7 @@ function sendRentDate(id, year, wDay) {
     const selectedDate = document.getElementById('selected_date');
     let resultSelectedDate = document.getElementById('display_result_start_date');
     let calendarRentalDate = document.getElementById("calendar_rental");
+    let calendarRentalTime = document.getElementById('calendar_rental_time');
 
 
     // 요일 한글화 swtich
@@ -127,9 +131,11 @@ function sendRentDate(id, year, wDay) {
             break;
     }
 
-    selectedDate.innerText = year + '년 ' + id + ' ' + whichDay + '요일';
+    selectedDate.innerText = year + '년 ' + id + '(' + whichDay + ')';
     calendarRentalDate.style.display = 'none';
     resultSelectedDate.innerText = id;
+    rentDateNum = id;
+    calendarRentalTime.style.display = 'grid';
 
 }
 // const sendRentDate = (id, year, wDay) => {
@@ -272,6 +278,7 @@ function sendRentTime(id) {
     const selectedTime = document.getElementById('selected_time');
     const resultSelectedTime = document.getElementById('display_result_start_time');
     const resultSelectedEndTime = document.getElementById('display_result_end_time');
+    let calendarRentalPeriod = document.getElementById('calendar_rental_period');
 
     let calendarRentalTime = document.getElementById('calendar_rental_time');
 
@@ -279,6 +286,7 @@ function sendRentTime(id) {
     calendarRentalTime.style.display = 'none';
     resultSelectedTime.innerText = id;
     resultSelectedEndTime.innerText = id;
+    calendarRentalPeriod.style.display = 'block';
 }
 const rentTimeSel = (id) => {
     rentTime = id;
@@ -348,13 +356,26 @@ const calculateDate = () => {
 let returnDateNum = '';
 let useDay = ''
 let useDayNum = 0;
-function daysSelect() {
+const daysSelect = () => {
     let select = document.getElementById('days_select');
     let selectedPeriod = document.getElementById('selected_period');
+    let calendarRentalPeriod = document.getElementById('calendar_rental_period');
     let resultSelectedEndDate = document.getElementById('display_result_end_date');
     let resultSelectedStartDate = document.getElementById('selected_date').innerText;
+    let param = '';
 
-    selectedPeriod.innerText = select.value + '일';
+    let plus = parseInt(select.value);
+
+    if (select.value === '한달') {
+        selectedPeriod.innerText = select.value;
+        param = 30;
+    } else if (select.value === '') {
+        selectedPeriod.innerText = '렌트일자를 선택해주세요';
+    } else {
+        param = plus;
+        selectedPeriod.innerText = select.value + '일';
+    }
+    calendarRentalPeriod.style.display = 'none';
 
     let splitString = resultSelectedStartDate.split(' ');
     let year = parseInt(splitString[0]);
@@ -363,14 +384,42 @@ function daysSelect() {
 
     let startDate = new Date(year, month-1, day);
 
-    let plus = parseInt(select.value);
-    startDate.setDate(startDate.getDate() + plus);
-    let calMonth = startDate.getMonth() + 1;
-    let calDate = startDate.getDate();
+    let calMonth;
+    let calDate;
+    if (select.value === '한달') {
+        startDate.setMonth(startDate.getMonth() + 1);
+        calMonth = startDate.getMonth() + 1;
+        calDate = day;
+    } else {
+        startDate.setDate(startDate.getDate() + plus);
+        calMonth = startDate.getMonth() + 1;
+        calDate = startDate.getDate();
+    }
 
     resultSelectedEndDate.innerText = calMonth + '월 ' + calDate + '일';
+
+    runIt();
+
+    setTimeout(function() {
+        displayCampingPrice(param);
+    }, 100);
 }
 
+function displayCampingPrice(param) {
+    let rentPrice = document.getElementById('rentPrice');
+    let rentVAT = document.getElementById('rentVAT');
+    let rentFullPrice = document.getElementById('rentFullPrice');
+
+    console.log(param);
+    console.log(obj);
+    console.log(priceList[param]);
+
+    let originPrice = parseInt(priceList[param]);
+
+    rentPrice.innerText = originPrice.toLocaleString() + '원';
+    rentVAT.innerText = (originPrice*0.1).toLocaleString() + '원';
+    rentFullPrice.innerText = (originPrice*1.1).toLocaleString() + '원';
+}
 // const daysSelect = () => {
 //     let daySelector = document.getElementById('days_select');
 //     let theVal = parseInt(daySelector.options[daySelector.selectedIndex].value);
@@ -503,9 +552,9 @@ const doIt = () => {
 
 
 // 만약 클릭한 곳이 아니라 달력으로 넘어갈시 날짜 표시 X
-const seasonTarget = document.getElementById('rent_date');
-let condition1 = parseInt(seasonTarget.title);
-if (condition1 > 0) doIt();
+// const seasonTarget = document.getElementById('rent_date');
+// let condition1 = parseInt(seasonTarget.title);
+// if (condition1 > 0) doIt();
 
 
 // // df
@@ -528,4 +577,35 @@ const postDate = () => {
     }
 }
 
+function displayResultWrapper() {
+    let resultWrapper = document.getElementsByClassName('result_wrapper')[0];
+    let startDate = document.getElementById('selected_date').innerText;
+    let startTime = $(".time_options input[type='radio']:checked")[0];
+    let rentPeriod = document.getElementById('selected_period').innerText;
 
+    if (startTime === undefined) {
+        startTime = '';
+    } else {
+        startTime = startTime.id;
+    }
+    console.log(startDate);
+    console.log(startTime);
+    // console.log(startTime[0].id);
+    console.log(rentPeriod);
+
+    let validStartDate = startDate.startsWith('20') ? true : false;
+    let validStartTime = startTime != '' ? true : false;
+    let validRentPeriod;
+
+    if (rentPeriod.endsWith('일') || rentPeriod === '한달') {
+        validRentPeriod = true;
+    } else {
+        validRentPeriod = false;
+    }
+
+    if (validStartDate & validStartTime & validRentPeriod) {
+        resultWrapper.style.display = 'block';
+    } else {
+        resultWrapper.style.display = 'none';
+    }
+}
