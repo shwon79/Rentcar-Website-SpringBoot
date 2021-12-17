@@ -472,6 +472,8 @@ public class RealtimeRentController {
 
 
         params.put("text", "[실시간 예약 대기 신청]\n"
+                + "* 계약 확인하기 " + "\n"
+                + "https://savecar.kr/admin/login" + "\n\n"
                 + "문의자 이름: " + morenReservationDTO.getReservationName() + "\n"
                 + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
                 + "차량명: " + morenReservationDTO.getCarName() + "\n"
