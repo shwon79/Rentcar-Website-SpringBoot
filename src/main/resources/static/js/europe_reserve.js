@@ -84,10 +84,6 @@ const runIt = () => {
             priceList[28] = obj['twentyeightdays'];
             priceList[29] = obj['twentyninedays'];
             priceList[30] = obj['thirtydays'];
-            console.log(obj)
-            console.log(priceList);
-
-            return obj, priceList;
         })
 }
 
@@ -362,6 +358,7 @@ const daysSelect = () => {
     let calendarRentalPeriod = document.getElementById('calendar_rental_period');
     let resultSelectedEndDate = document.getElementById('display_result_end_date');
     let resultSelectedStartDate = document.getElementById('selected_date').innerText;
+    let fullReturnDate = document.getElementById('fullReturnDate');
     let param = '';
 
     let plus = parseInt(select.value);
@@ -384,18 +381,24 @@ const daysSelect = () => {
 
     let startDate = new Date(year, month-1, day);
 
+    let calYear;
     let calMonth;
     let calDate;
     if (select.value === '한달') {
         startDate.setMonth(startDate.getMonth() + 1);
+        calYear = startDate.getFullYear();
         calMonth = startDate.getMonth() + 1;
         calDate = day;
+        console.log(calYear);
     } else {
         startDate.setDate(startDate.getDate() + plus);
+        calYear = startDate.getFullYear();
         calMonth = startDate.getMonth() + 1;
         calDate = startDate.getDate();
+        console.log(calYear);
     }
 
+    fullReturnDate.innerText = calYear + '년 ' + calMonth + '월 ' + calDate + '일';
     resultSelectedEndDate.innerText = calMonth + '월 ' + calDate + '일';
 
     runIt();
@@ -412,9 +415,9 @@ function displayCampingPrice(param) {
 
     let originPrice = parseInt(priceList[param]);
 
-    rentPrice.innerText = originPrice.toLocaleString() + '원';
-    rentVAT.innerText = (originPrice*0.1).toLocaleString() + '원';
-    rentFullPrice.innerText = (originPrice*1.1).toLocaleString() + '원';
+    rentPrice.innerText = Math.floor((originPrice/11*10)).toLocaleString() + '원';
+    rentVAT.innerText = Math.floor((originPrice/11)).toLocaleString() + '원';
+    rentFullPrice.innerText = originPrice.toLocaleString() + '원';
 }
 // const daysSelect = () => {
 //     let daySelector = document.getElementById('days_select');
@@ -562,6 +565,14 @@ const doIt = () => {
 // Sending Data;
 
 const postDate = () => {
+    rentDateNum = document.getElementById('selected_date').innerText;
+    rentTime = document.getElementById('selected_time').innerText;
+    returnDateNum = document.getElementById('fullReturnDate').innerText;
+    returnTime = rentTime;
+    useDay = document.getElementById('selected_period').innerText;
+
+    let totalPriceString = document.getElementById('rentFullPrice').innerText.replace(/,/g, "");
+    totalPrice = totalPriceString.substr(0, totalPriceString.length - 1);
 
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 

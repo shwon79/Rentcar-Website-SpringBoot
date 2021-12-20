@@ -1,3 +1,16 @@
+// 렌트 날짜 표기하기
+let originalRentStartDate = document.getElementById('original_rent_start_date').innerText;
+let originalRentEndDate = document.getElementById('original_rent_end_date').innerText;
+let displayRentStartDate = document.getElementById('display_result_start_date');
+let displayRentEndDate = document.getElementById('display_result_end_date');
+
+// let month = parseInt(originalRentDate.split(' ')[1]);
+// let day = parseInt(originalRentDate.split(' ')[2]);
+// displayRentDate.innerText = month + '월 ' + day + '일';
+let year = parseInt(originalRentStartDate.split(' ')[0]);
+
+displayRentStartDate.innerText = originalRentStartDate.split('(')[0];
+displayRentEndDate.innerText = year + '년 ' + originalRentEndDate;
 
 // 상품 이름 넣기
 let carType = document.getElementsByClassName('car_type')[0].id

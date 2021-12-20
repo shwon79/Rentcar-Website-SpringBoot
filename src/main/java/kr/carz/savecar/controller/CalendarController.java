@@ -191,7 +191,7 @@ public class CalendarController {
         model.addAttribute("thisMonth", thisMonth);
         model.addAttribute("today", thisDay);
 
-        return "rentcamping/" + carType;
+        return "rent_camping/" + carType;
     }
 
 

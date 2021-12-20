@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Style -->
+    <link th:href="@{/css/camping.css}" rel="stylesheet">
     <link th:href="@{/css/paying.css}" rel="stylesheet">
 
     <script th:src="@{/js/paying.js}" defer></script>
@@ -19,17 +20,37 @@
     <div layout:fragment="content">
         <div th:replace="fragments/header_camp::headerFragment"></div>
 
-        <div class="paying_content bg-light">
-            <!-- title -->
-            <div class="row">
-
-            </div>
+        <div class="paying_content">
             <!-- main content -->
-            <div class="row text-center">
+            <div class="row">
+                <p th:text="${rent_date}" style="display: none;" id="original_rent_start_date"></p>
+                <p th:text="${return_date}" style="display: none;" id="original_rent_end_date"></p>
 
                 <!-- left content -->
-                <div id="left_col" class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div id="left_col" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <!-- 예약 상품 정보 -->
+                    <div class="card">
+                        <p class="title"><span>예약 상품 정보</span></p>
+                        <div class="contents">
+                            <span th:text="${carType}" class="info_title"></span>
+                            <span th:text="${day}" class="info_title"></span>
+                            <div class="result_date">
+                                <div>
+                                    <p id="display_result_start_date" class="display_result_date"></p>
+                                    <hr>
+                                    <p id="display_result_start_time" class="display_result_time" th:text="${rent_time}"></p>
+                                </div>
+                                <p style="font-size: 7rem;">~</p>
+                                <div>
+                                    <p id="display_result_end_date" class="display_result_date" th:text="${return_date}"></p>
+                                    <hr>
+                                    <p id="display_result_end_time" class="display_result_time" th:text="${return_time}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="bg-white pinside20 margin-bottom-20" id="info_reserve">
                         <div>
                             <h3 class="text-left">예약 상품 정보</h3>
@@ -42,7 +63,7 @@
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                 <div id="product_info" class="">
                                     <p class="car_type" th:id="${carType}"></p><p id="use_day" th:text="${day}"></p>
-                                    <p id="extra_time" th:text="${'+ '+extraTime+'시간'}" ></p>
+<!--                                    <p id="extra_time" th:text="${'+ '+extraTime+'시간'}" ></p>-->
                                 </div><hr id="hr_reserve"/>
                                 <div class="reserve_detail">
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
@@ -136,7 +157,7 @@
                 </div>
 
                 <!-- right content -->
-                <div id="right_col" class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <div id="right_col" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <!-- 최종 금액 -->
                     <div class="bg-white pinside20 margin-bottom-20" id="info_price">
                         <div>
@@ -148,10 +169,10 @@
                                 <p>총 렌트료(VAT미포함)</p>
                                 <p id="total_fee"></p>
                             </div>
-                            <div class="price_between">
-                                <p>추가 시간 요금(VAT미포함)</p>
-                                <p id="extra_fee" th:class="${extraFee}"></p>
-                            </div>
+<!--                            <div class="price_between">-->
+<!--                                <p>추가 시간 요금(VAT미포함)</p>-->
+<!--                                <p id="extra_fee" th:class="${extraFee}"></p>-->
+<!--                            </div>-->
                             <div class="price_between">
                                 <p>VAT</p>
                                 <p id="vat_fee"></p>
