@@ -402,17 +402,13 @@ const daysSelect = () => {
 
     setTimeout(function() {
         displayCampingPrice(param);
-    }, 100);
+    }, 200);
 }
 
 function displayCampingPrice(param) {
     let rentPrice = document.getElementById('rentPrice');
     let rentVAT = document.getElementById('rentVAT');
     let rentFullPrice = document.getElementById('rentFullPrice');
-
-    console.log(param);
-    console.log(obj);
-    console.log(priceList[param]);
 
     let originPrice = parseInt(priceList[param]);
 
@@ -570,7 +566,7 @@ const postDate = () => {
     if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
 
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/camping/calendar/${carType}_reserve/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${extraTimeNum}/${totalPrice}/${extraFee}`
+        window.location.href = `/camping/calendar/${carType}_reserve/reservation/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${totalPrice}`
 
     } else {
         alert('입력을 완료해주세요!')
@@ -589,10 +585,6 @@ function displayResultWrapper() {
     } else {
         startTime = startTime.id;
     }
-    console.log(startDate);
-    console.log(startTime);
-    // console.log(startTime[0].id);
-    console.log(rentPeriod);
 
     let validStartDate = startDate.startsWith('20') ? true : false;
     let validStartTime = startTime != '' ? true : false;
