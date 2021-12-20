@@ -1,4 +1,4 @@
-<!-- 렌트가격표(price_month.html) -->
+<!-- 렌트가격표(month.html) -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -15,8 +15,6 @@
                 responsive: true,
             } );
         } );
-
-
     </script>
 </head>
 
@@ -26,7 +24,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-caption">
-                        <h3 class="page-title">12개월 렌트</h3>
+                        <h3 class="page-title">캠핑카 렌트</h3>
                         <br>
                     </div>
                 </div>
@@ -45,9 +43,9 @@
                       <div class="separator"></div>
                       <div id="filters" class="toolbar mb2 mt2">
                           <h2><a href="/price/month"><button class="btn-md fil-cat filter">월 렌트</button></a> /
-                              <a href="/price/long"><button class="btn-md fil-cat filter">12개월 렌트</button></a> /
-                              <a href="/price/short"><button class="btn-md fil-cat filter">단기 렌트</button></a></h2>
-<!--                              <a href="/price/camp"><button class="btn-md fil-cat filter">캠핑카</button></a></h2>-->
+                          <a href="/price/long"><button class="btn-md fil-cat filter">12개월 렌트</button></a> /
+                          <a href="/price/short"><button class="btn-md fil-cat filter">단기 렌트</button></a> </h2>
+<!--                          <a href="/price/camp"><button class="btn-md fil-cat filter">캠핑카</button></a></h2>-->
                       </div> 
                       <div class="separator"></div>
                   </div>    
@@ -106,32 +104,27 @@
 
           <section class="col-lg-12">
               <div class="pinside20" align="center">
-                  <h1 style="font-weight: bold">12개월 렌트</h1>
+                  <h1 style="font-weight: bold">캠핑카</h1>
               </div>
               <table id="example" class="table table-bordered table-responsive">
                   <thead>
-                      <tr>
-                          <th>차종</th>
-                          <th>차명</th>
-                          <th>보증금</th>
-                          <th>2만km</th>
-                          <th>3만km</th>
-                          <th>4만km</th>
-                          <th>21세</th>
-                          <th>km당 추가요금</th>
-                      </tr>
+                  <tr>
+                      <th>캠핑카 종류</th>
+                      <th>시즌</th>
+                      <th>기간</th>
+                      <th>Deposit</th>
+                      <th>가격</th>
+                      <th>월렌트</th>
+                  </tr>
                   </thead>
-
                   <tbody>
-                      <tr th:each="yearlyRent : ${yearlyRentList}">
-                          <td scope="col" th:text="${yearlyRent.category2}"></td>
-                          <td scope="col" th:text="${yearlyRent.name}"></td>
-                          <td scope="col" th:text="${yearlyRent.deposit}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_20k}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_30k}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_40k}"></td>
-                          <td scope="col" th:text="${yearlyRent.age_limit}"></td>
-                          <td><span scope="col" th:text="${yearlyRent.cost_per_km}"></span>원</td>
+                      <tr th:each="campingCar : ${campingCarList}">
+                          <td scope="col" th:text="${campingCar.category1}"></td>
+                          <td scope="col" th:text="${campingCar.season}"></td>
+                          <td scope="col" th:text="${campingCar.rent_period}"></td>
+                          <td scope="col" th:text="${campingCar.deposit}"></td>
+                          <td scope="col" th:text="${campingCar.price}"></td>
+                          <td scope="col" th:text="${campingCar.rent_for_month}"></td>
                       </tr>
                   </tbody>
               </table>
@@ -142,7 +135,6 @@
     <!--End of feature Section -->
 
     <div class="pinside50"></div>
-
 
     <!-- START SCROLL TO TOP  -->
     <div class="scrollup">
