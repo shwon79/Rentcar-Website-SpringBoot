@@ -137,7 +137,7 @@
 
                 <!-- Mobile --->
                 <div id="morenReservationCard">
-                    <div class="card" th:each="reservation, iterStat : ${morenReservationList}">
+                    <div class="card" th:each="reservation, iterStat : ${#lists.sort(morenReservationList, byTime)}">
                         <p>예약 신청 시간: <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></span></p>
                         <p>차량 번호: <span th:text="${reservation.carNo}"></span></p>
                         <p>이름: <span th:text="${reservation.reservationName}"></span></p>
