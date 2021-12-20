@@ -46,7 +46,7 @@ public class HelloController {
         List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
         model.addAttribute("monthlyRentList", monthlyRentList);
 
-        return "price/month";
+        return "rent_price/month";
     }
 
 
@@ -56,7 +56,7 @@ public class HelloController {
         List<YearlyRent> yearlyRentList = yearlyRentService.findYearlyRents();
         model.addAttribute("yearlyRentList", yearlyRentList);
 
-        return "price/long";
+        return "rent_price/long";
     }
 
 
@@ -71,7 +71,7 @@ public class HelloController {
         model.addAttribute("shortRentListForeign", shortRentListForeign);
         model.addAttribute("shortRentListNotForeign", shortRentListNotForeign);
 
-        return "price/short";
+        return "rent_price/short";
     }
 
 
@@ -82,7 +82,7 @@ public class HelloController {
 
         model.addAttribute("campingCarList", campingCarList);
 
-        return "price/camp";
+        return "rent_price/camp";
     }
 
 
