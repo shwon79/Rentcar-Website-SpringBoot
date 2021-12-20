@@ -51,7 +51,7 @@ public class MonthlyRentController {
         model.put("category1", category1);
         model.put("category2", category2);
 
-        return "rent/month";
+        return "rent_month/main";
     }
 
     // 차종 api

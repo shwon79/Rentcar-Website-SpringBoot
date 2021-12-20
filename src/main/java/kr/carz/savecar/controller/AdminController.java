@@ -43,7 +43,6 @@ public class AdminController {
         this.morenReservationService = morenReservationService;
     }
 
-
     @Value("${coolsms.api_key}")
     private String api_key;
 

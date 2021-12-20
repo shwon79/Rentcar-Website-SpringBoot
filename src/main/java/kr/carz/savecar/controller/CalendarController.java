@@ -191,7 +191,7 @@ public class CalendarController {
         model.addAttribute("thisMonth", thisMonth);
         model.addAttribute("today", thisDay);
 
-        return "rentcamping/" + carType;
+        return "rent_camping/" + carType;
     }
 
 
@@ -219,7 +219,6 @@ public class CalendarController {
 
         for (String c : categoryList2) {
             jsonArray.put(c);
-            System.out.println(c);
         }
 
         PrintWriter pw = res.getWriter();

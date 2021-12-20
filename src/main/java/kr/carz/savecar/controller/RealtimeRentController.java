@@ -40,6 +40,12 @@ public class RealtimeRentController {
     /*                             [New 버전] 실시간 월렌트 예약하기                                */
     /* ======================================================================================== */
 
+    @Value("${coolsms.api_key}")
+    private String api_key;
+
+    @Value("${coolsms.api_secret}")
+    private String api_secret;
+
     @Value("${moren_url}")
     private String moren_url_except_date;
     private final String expected_day = "4";
@@ -447,8 +453,6 @@ public class RealtimeRentController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);
 
-        String api_key = "NCS0P5SFAXLOJMJI";
-        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
         HashMap<String, String> params2 = new HashMap<>();
