@@ -219,7 +219,6 @@ public class CalendarController {
 
         for (String c : categoryList2) {
             jsonArray.put(c);
-            System.out.println(c);
         }
 
         PrintWriter pw = res.getWriter();
@@ -399,9 +398,7 @@ public class CalendarController {
 
         CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
         CampingCarPrice campingCarPrice;
-
         campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-
 
         Long date_start_id = calendarDate.getDateId();
         Long date_last_id = date_start_id + rentDays;
@@ -431,13 +428,9 @@ public class CalendarController {
             }
         }
 
-
-        System.out.println("마지막 time:"+calendarTimeList.get(i-1).getReserveTime());
         if (!calendarTimeList.get(i-1).getReserveTime().equals("18시") && extraTime >= 2){
             extraTime -= 2;
         }
-
-        System.out.println("extraTime: "+extraTime);
 
         JSONArray jsonArray = new JSONArray();
         jsonArray.put(extraTime);

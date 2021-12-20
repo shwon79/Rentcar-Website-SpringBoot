@@ -6,6 +6,7 @@ import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,6 +43,12 @@ public class AdminController {
         this.morenReservationService = morenReservationService;
     }
 
+    @Value("${coolsms.api_key}")
+    private String api_key;
+
+    @Value("${coolsms.api_secret}")
+    private String api_secret;
+
     @GetMapping("/admin/login")
     public String login() {
         return "admin/login";
@@ -62,7 +69,7 @@ public class AdminController {
             session.setAttribute("user", user);
 
             // admin view로 넘기기
-            mav.setViewName("admin_campingcar_menu");
+            mav.setViewName("admin/campingcar_menu");
 
         } catch (NullPointerException e){
 
@@ -218,7 +225,7 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
             Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
             if (morenReservation.isPresent()){
@@ -359,8 +366,6 @@ public class AdminController {
 
         assert morenReservation != null;
 
-        String api_key = "NCS0P5SFAXLOJMJI";
-        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
         HashMap<String, String> params2 = new HashMap<>();
