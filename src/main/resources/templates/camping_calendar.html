@@ -97,30 +97,30 @@
 <!--                                <div th:id="${date.day}" class="downside" th:style="${date.day} < ${thisDay} and ${date.month} <= ${thisMonth} ? 'display: none':''">-->
                                 <div th:id="${date.day}" class="downside">
                                     <div th:if="${dateCampingList[iterStat.index][0].reserved} != '1'">
-                                        <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][0].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}" th:unless="${date.day} < ${thisDay} and ${date.month} <= ${thisMonth}">
+                                        <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][0].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or ${date.month} < ${thisMonth}">
                                             <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
                                         </a>
-                                        <span th:if="${date.day} < ${thisDay} and ${date.month} <= ${thisMonth}" class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
+                                        <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or ${date.month} < ${thisMonth}" class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
                                     </div>
                                     <div class="reserved_selections" th:unless="${dateCampingList[iterStat.index][0].reserved} != '1'">
                                         <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}"></span>
                                     </div>
 
                                     <div th:if="${dateCampingList[iterStat.index][1].reserved} != '1'">
-                                        <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][1].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}" th:unless="${date.day} < ${thisDay} and ${date.month} <= ${thisMonth}">
+                                        <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][1].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or ${date.month} < ${thisMonth}">
                                             <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
                                         </a>
-                                        <span th:if="${date.day} < ${thisDay} and ${date.month} <= ${thisMonth}" class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
+                                        <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or ${date.month} < ${thisMonth}" class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
                                     </div>
                                     <div class="reserved_selections" th:unless="${dateCampingList[iterStat.index][1].reserved} != '1'">
                                         <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}"></span>
                                     </div>
 
                                     <div th:if="${dateCampingList[iterStat.index][2].reserved} != '1'" >
-                                        <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][2].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}" th:unless="${date.day} < ${thisDay} and ${date.month} <= ${thisMonth}">
+                                        <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][2].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or ${date.month} < ${thisMonth}">
                                             <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
                                         </a>
-                                        <span th:if="${date.day} < ${thisDay} and ${date.month} <= ${thisMonth}" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
+                                        <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or ${date.month} < ${thisMonth}" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
                                     </div>
                                     <div class="reserved_selections" th:unless="${dateCampingList[iterStat.index][2].reserved} != '1'" >
                                         <span th:text="${dateCampingList[iterStat.index][2].carName.carName}"></span>
