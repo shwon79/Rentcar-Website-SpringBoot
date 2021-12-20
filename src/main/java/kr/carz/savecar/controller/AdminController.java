@@ -44,7 +44,7 @@ public class AdminController {
 
     @GetMapping("/admin/login")
     public String login() {
-        return "admin_login";
+        return "admin/login";
     }
 
     //로그인
@@ -72,7 +72,7 @@ public class AdminController {
             out.flush();
 
             // 다시 login page로 back
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         }
         return mav;
     }
@@ -94,7 +94,7 @@ public class AdminController {
         out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
         out.flush();
 
-        mav.setViewName("admin_login");
+        mav.setViewName("admin/login");
 
         return mav;
     }
@@ -116,11 +116,11 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
 
             // admin view로 넘기기
-            mav.setViewName("admin_campingcar_menu");
+            mav.setViewName("admin/campingcar_menu");
         }
 
         return mav;
@@ -141,12 +141,12 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
 
             List<Reservation> reservationList = reservationService.findAllReservations();
             mav.addObject("reservationList", reservationList);
-            mav.setViewName("admin_counsel_menu");
+            mav.setViewName("admin/counsel_menu");
         }
 
         return mav;
@@ -169,11 +169,11 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
             List<Discount> discountList = discountService.findAllDiscounts();
             mav.addObject("discountList", discountList);
-            mav.setViewName("admin_discount_menu");
+            mav.setViewName("admin/discount_menu");
         }
 
         return mav;
@@ -193,12 +193,12 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
 
             List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
             mav.addObject("morenReservationList", morenReservationList);
-            mav.setViewName("admin_moren_reservation_menu");
+            mav.setViewName("admin/moren_reservation_menu");
         }
 
         return mav;
@@ -223,14 +223,14 @@ public class AdminController {
             Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
             if (morenReservation.isPresent()){
                 mav.addObject("morenReservationDTO", morenReservation.get());
-                mav.setViewName("admin_moren_reservation_detail");
+                mav.setViewName("admin/moren_reservation_detail");
             } else {
                 res.setContentType("text/html; charset=UTF-8");
                 PrintWriter out = res.getWriter();
                 out.println("<script>alert('해당 차량 정보를 찾을 수 없습니다.'); </script>");
                 out.flush();
 
-                mav.setViewName("admin_moren_reservation_menu");
+                mav.setViewName("admin/moren_reservation_menu");
             }
         }
 

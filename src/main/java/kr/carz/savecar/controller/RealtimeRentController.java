@@ -136,7 +136,7 @@ public class RealtimeRentController {
         model.put("rentTerm", "한달");
         model.put("byOrderEnd",  Comparator.comparing(MorenDTO::getOrderEnd));
 
-        return "rent_month2";
+        return "rent_month/main";
     }
 
 
@@ -316,7 +316,7 @@ public class RealtimeRentController {
         model.put("rentTerm", realTimeDto.getRentTerm());
         model.put("byOrderEnd",  Comparator.comparing(MorenDTO::getOrderEnd));
 
-        return "rent_month2";
+        return "rent_month/main";
     }
 
 
@@ -413,7 +413,7 @@ public class RealtimeRentController {
         model.put("today_format", DateTime.today_date_only());
         model.put("rentStatus", rentStatus);
 
-        return "rent_month2_detail";
+        return "rent_month/detail";
     }
 
 
@@ -424,7 +424,7 @@ public class RealtimeRentController {
         model.put("morenDTO",morenDTO);
         model.put("today_format",DateTime.today_date_only());
 
-        return "rent_month2_reservation_form";
+        return "rent_month/reservation_form";
     }
 
 
@@ -433,7 +433,7 @@ public class RealtimeRentController {
     public String rent_month_detail_form_estimate(ModelMap model, @ModelAttribute MorenDTO morenDTO) {
         model.put("morenDTO",morenDTO);
 
-        return "rent_month2_estimate_form";
+        return "rent_month/estimate_form";
     }
 
 

@@ -51,7 +51,7 @@ public class MonthlyRentController {
         model.put("category1", category1);
         model.put("category2", category2);
 
-        return "rent_month";
+        return "rent/month";
     }
 
     // 차종 api
@@ -93,7 +93,7 @@ public class MonthlyRentController {
         }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }
@@ -143,7 +143,7 @@ public class MonthlyRentController {
         }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }
@@ -187,7 +187,7 @@ public class MonthlyRentController {
         }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }
@@ -254,7 +254,7 @@ public class MonthlyRentController {
         }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }

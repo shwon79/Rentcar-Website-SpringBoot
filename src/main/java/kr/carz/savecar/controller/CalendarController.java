@@ -142,7 +142,7 @@ public class CalendarController {
         }
 
 
-        return "camping_calendar";
+        return "camping/calendar";
     }
 
 
@@ -191,7 +191,7 @@ public class CalendarController {
         model.addAttribute("thisMonth", thisMonth);
         model.addAttribute("today", thisDay);
 
-        return "camping_" + carType;
+        return "camping/" + carType;
     }
 
 
@@ -244,7 +244,7 @@ public class CalendarController {
         model.put("carType", carType);
 
 
-        return "camping_reservation";
+        return "camping/reservation";
     }
 
 

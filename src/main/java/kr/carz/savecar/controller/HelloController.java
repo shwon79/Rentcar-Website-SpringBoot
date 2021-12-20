@@ -37,7 +37,7 @@ public class HelloController {
 
     @GetMapping("/rent/long_term")
     public String rent_long_term() {
-        return "rent_long_term";
+        return "rent_longterm/main";
     }
 
     @GetMapping("/price/month")
@@ -46,7 +46,7 @@ public class HelloController {
         List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
         model.addAttribute("monthlyRentList", monthlyRentList);
 
-        return "price_month";
+        return "price/month";
     }
 
 
@@ -56,7 +56,7 @@ public class HelloController {
         List<YearlyRent> yearlyRentList = yearlyRentService.findYearlyRents();
         model.addAttribute("yearlyRentList", yearlyRentList);
 
-        return "price_long";
+        return "price/long";
     }
 
 
@@ -71,7 +71,7 @@ public class HelloController {
         model.addAttribute("shortRentListForeign", shortRentListForeign);
         model.addAttribute("shortRentListNotForeign", shortRentListNotForeign);
 
-        return "price_short";
+        return "price/short";
     }
 
 
@@ -82,7 +82,7 @@ public class HelloController {
 
         model.addAttribute("campingCarList", campingCarList);
 
-        return "price_camp";
+        return "price/camp";
     }
 
 
