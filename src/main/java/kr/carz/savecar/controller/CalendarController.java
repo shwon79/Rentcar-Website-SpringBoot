@@ -231,20 +231,18 @@ public class CalendarController {
     }
 
 
-    @RequestMapping("/camping/calendar/{carType}_reserve/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{extraTime}/{total}/{extraFee}")
-    public String handleRequest_reserve(ModelMap model, @PathVariable("carType") String carType,@PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("extraTime") String extraTime, @PathVariable("total") String total, @PathVariable("extraFee") Integer extraFee) throws Exception {
+    @GetMapping("/camping/calendar/{carType}_reserve/reservation/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{total}")
+    public String handleRequest_reserve(ModelMap model, @PathVariable("carType") String carType,@PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("total") String total) throws Exception {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
-        model.put("campingCarPrice", campingCarPrice);  // 리스트 => 도메인 변수랑 이름 똑같이 해서 쓸 수 있음
+        model.put("campingCarPrice", campingCarPrice);
 
         model.put("rent_date", rent_date);
         model.put("rent_time", rent_time);
         model.put("return_date", return_date);
         model.put("return_time", return_time);
         model.put("day", day);
-        model.put("extraTime", extraTime);
         model.put("total", total);
-        model.put("extraFee",extraFee);
         model.put("carType", carType);
 
 
