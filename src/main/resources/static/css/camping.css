@@ -647,10 +647,8 @@ a:hover {
 select {
   height: 27px;
   border: none;
-  font-size: 24px;
-  /*background: lightyellow;*/
-  /*border: 1px solid gray;*/
-  /*border-radius: 1vh;*/
+  font-size: 22px;
+  background: white;
 }
 
 select option {
@@ -973,13 +971,13 @@ input[type=radio] {
 }
 
 .select_wrapper {
-  border: 2.5px solid black;
+  border: 2px solid black;
   border-radius: 12px;
   margin-bottom: 30px;
 }
 .select_wrapper .col-lg-4 {
   margin-bottom: 0;
-  padding: 20px;
+  padding: 10px 20px;
 }
 .select_wrapper .col-lg-4 h5,
 .select_wrapper .col-lg-8 span,
@@ -988,7 +986,7 @@ input[type=radio] {
 }
 .select_wrapper .col-lg-8 {
   margin-bottom: 0;
-  padding: 20px;
+  padding: 10px 20px;
   background-color: black;
   border-radius: 0 8px 8px 0;
 }
@@ -1015,12 +1013,13 @@ input[type=radio] {
   content: none;
 }
 #calendar_rental_time label {
-  border: 3px solid black;
-  font-size: 24px;
+  border: 2px solid black;
+  font-size: 22px;
   border-radius: 10px;
   background-color: white;
   padding: 12px;
   cursor: pointer;
+  font-weight: 400;
 }
 #calendar_rental_time label:hover {
   background-color: black;
@@ -1035,7 +1034,7 @@ input[type=radio] {
   border-bottom: 3px solid black;
   line-height: 0.1em;
   margin: 10px 0 30px 0;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 400;
   text-align: center;
 }
@@ -1066,15 +1065,13 @@ input[type=radio] {
   padding: 20px;
 }
 .result_date div hr {
-  margin: 4px auto 16px auto;
+  margin: 4px auto 8px auto;
   border-top: black 3px solid;
   width: 85%;
 }
-.display_result_date {
-  font-size: 2.7rem;
-}
+.display_result_date,
 .display_result_time {
-  font-size: 4rem;
+  font-size: 24px;
 }
 .price_row {
   margin-bottom: 1em;
@@ -1085,7 +1082,7 @@ input[type=radio] {
 .result_price .name {
   color: white;
   text-align: left;
-  font-size: 26px;
+  font-size: 24px;
 }
 .result_price .price {
   background-color: white;
@@ -1154,15 +1151,15 @@ input[type=radio] {
   .result_date div {
     padding: 20px 10px;
   }
-  .display_result_date {
-    font-size: 2rem;
-  }
-  .display_result_time {
-    font-size: 3.5rem;
-  }
-  .result_price .name {
-    font-size: 20px;
-  }
+  /*.display_result_date {*/
+  /*  font-size: 2rem;*/
+  /*}*/
+  /*.display_result_time {*/
+  /*  font-size: 3.5rem;*/
+  /*}*/
+  /*.result_price .name {*/
+  /*  font-size: 20px;*/
+  /*}*/
   .result_price .price {
     height: 34px;
   }
