@@ -1,5 +1,5 @@
 p {
-  font-size: 1.7rem;
+  font-size: 16px;
 }
 
 .camping_nav-tabs {
@@ -926,7 +926,7 @@ input[type=radio] {
   padding-right: 30px;
 }
 .card .title {
-  font-size: 30px;
+  font-size: 24px;
 }
 .card .title i {
   font-size: 26px;
