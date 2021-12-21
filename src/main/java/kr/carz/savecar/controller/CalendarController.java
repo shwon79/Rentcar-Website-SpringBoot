@@ -28,12 +28,14 @@ public class CalendarController {
     DateCampingService dateCampingService;
     CampingCarPriceService campingCarPriceService;
     CampingcarReservationService campingcarReservationService;
+    ExplanationService explanationService;
 
     @Autowired
     public CalendarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                               ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
-                              CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService) {
+                              CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
+                              ExplanationService explanationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -43,6 +45,7 @@ public class CalendarController {
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
         this.campingcarReservationService = campingcarReservationService;
+        this.explanationService = explanationService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -185,6 +188,10 @@ public class CalendarController {
         List<List<DateCamping>> dateCampingList = new ArrayList();
         for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
+
+        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
+        model.put("explanation", explanation.get());
+
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("dateCampingList", dateCampingList);
         model.put("campingCarPrice", campingCarPrice);
@@ -253,6 +260,15 @@ public class CalendarController {
 
 
         return "rent_camping/reservation";
+    }
+
+    @GetMapping("/camping/europe/{id}")
+    public String camping_europe(ModelMap model, @PathVariable Long id)  {
+
+        Optional<Explanation> explanation = explanationService.findById(id);
+        model.put("explanation", explanation.get());
+
+        return "rent_camping/europe";
     }
 
 
