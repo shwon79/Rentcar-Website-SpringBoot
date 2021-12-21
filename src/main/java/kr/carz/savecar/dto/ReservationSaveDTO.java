@@ -1,9 +1,8 @@
-package kr.carz.savecar.domain;
+package kr.carz.savecar.dto;
 
+import kr.carz.savecar.domain.Reservation;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Column;
 
 @Getter
 @Setter

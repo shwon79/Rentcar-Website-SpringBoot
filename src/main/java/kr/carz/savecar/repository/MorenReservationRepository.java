@@ -1,8 +1,6 @@
 package kr.carz.savecar.repository;
 
 import kr.carz.savecar.domain.MorenReservation;
-import kr.carz.savecar.domain.MorenReservationDTO;
-import kr.carz.savecar.domain.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

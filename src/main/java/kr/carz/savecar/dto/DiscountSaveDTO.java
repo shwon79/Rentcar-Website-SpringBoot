@@ -1,11 +1,8 @@
-package kr.carz.savecar.domain;
+package kr.carz.savecar.dto;
 
+import kr.carz.savecar.domain.Discount;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 
 @Getter

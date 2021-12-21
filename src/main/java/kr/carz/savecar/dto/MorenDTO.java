@@ -1,4 +1,4 @@
-package kr.carz.savecar.domain;
+package kr.carz.savecar.dto;
 
 import lombok.Getter;
 import lombok.Setter;

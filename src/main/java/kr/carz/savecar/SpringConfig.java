@@ -21,7 +21,7 @@ public class SpringConfig {
     private final CalendarDateRepository calendarDateRepository;
     private final CalendarTimeRepository calendarTimeRepository;
     private final DateCampingRepository dateCampingRepository;
-    private final CampingcarDateTimeRepository2 campingcarDateTimeRepository2;
+    private final CampingcarReservationRepository campingcarReservationRepository;
 
 
     @Autowired
@@ -29,9 +29,9 @@ public class SpringConfig {
                         ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
                         ReservationRepository reservationRepository, TwoYearlyRentRepository twoYearlyRentRepository,
                         LoginRepository loginRepository, DiscountRepository discountRepository,
-                        MorenReservationRepository morenReservationRepository,CampingCarPriceRepository campingCarPriceRepository,
+                        MorenReservationRepository morenReservationRepository, CampingCarPriceRepository campingCarPriceRepository,
                         CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository,
-                        DateCampingRepository dateCampingRepository, CampingcarDateTimeRepository2 campingcarDateTimeRepository2) {
+                        DateCampingRepository dateCampingRepository, CampingcarReservationRepository campingcarReservationRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -45,7 +45,7 @@ public class SpringConfig {
         this.calendarDateRepository = calendarDateRepository;
         this.calendarTimeRepository = calendarTimeRepository;
         this.dateCampingRepository = dateCampingRepository;
-        this.campingcarDateTimeRepository2 = campingcarDateTimeRepository2;
+        this.campingcarReservationRepository = campingcarReservationRepository;
     }
 
     @Bean
@@ -92,7 +92,7 @@ public class SpringConfig {
     public DateCampingService dateCampingService() { return new DateCampingService(dateCampingRepository); }
 
     @Bean
-    public CampingcarDateTimeService2 campingcarDateTimeService() { return new CampingcarDateTimeService2(campingcarDateTimeRepository2); }
+    public CampingcarReservationService campingcarReservationService() { return new CampingcarReservationService(campingcarReservationRepository); }
 
 
 }

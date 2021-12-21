@@ -1,5 +1,6 @@
-package kr.carz.savecar.domain;
+package kr.carz.savecar.dto;
 
+import kr.carz.savecar.domain.MorenReservation;
 import lombok.Getter;
 import lombok.Setter;
 

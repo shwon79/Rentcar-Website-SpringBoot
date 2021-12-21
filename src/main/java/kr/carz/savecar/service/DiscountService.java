@@ -1,7 +1,6 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.Discount;
-import kr.carz.savecar.domain.DiscountSaveDTO;
 import kr.carz.savecar.repository.DiscountRepository;
 import org.springframework.transaction.annotation.Transactional;
 

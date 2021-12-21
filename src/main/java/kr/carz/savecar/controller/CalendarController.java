@@ -2,13 +2,15 @@ package kr.carz.savecar.controller;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
+import net.nurigo.java_sdk.api.Message;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,13 +27,13 @@ public class CalendarController {
     CalendarTimeService calendarTimeService;
     DateCampingService dateCampingService;
     CampingCarPriceService campingCarPriceService;
-    CampingcarDateTimeService2 campingcarDateTimeService2;
+    CampingcarReservationService campingcarReservationService;
 
     @Autowired
     public CalendarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                               ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
-                              CampingCarPriceService campingCarPriceService, CampingcarDateTimeService2 campingcarDateTimeService2) {
+                              CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -40,10 +42,17 @@ public class CalendarController {
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
-        this.campingcarDateTimeService2 = campingcarDateTimeService2;
+        this.campingcarReservationService = campingcarReservationService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
+
+    @Value("${coolsms.api_key}")
+    private String api_key;
+
+    @Value("${coolsms.api_secret}")
+    private String api_secret;
+
 
     private String AddDate(String strDate, int year, int month, int day) throws Exception {
         Calendar cal = Calendar.getInstance();
@@ -443,68 +452,91 @@ public class CalendarController {
     }
 
 
-//    @GetMapping("/camping/calendar/{carType}_reserve/{date_id}")
-//    public String handleRequest(ModelMap model, @PathVariable("carType") String carType, @PathVariable("date_id") Long date_id) throws Exception {
+    // 캠핑카 예약 저장 api
+    @PostMapping("/camping/calendar/reserve")
+    @ResponseBody
+    public void camping_calendar_reservation(HttpServletResponse res, @RequestBody CampingCarReservation dto) throws IOException{
+
+//        // 문자전송
+//        Message coolsms = new Message(api_key, api_secret);
+//        HashMap<String, String> params = new HashMap<>();
+//        HashMap<String, String> params2 = new HashMap<>();
 //
-//        // 클릭한 날짜 데이터
-//        CalendarDate clickedDate = calendarDateService.findCalendarDateByDateId(date_id);
 //
-//        // 날짜
-//        int thisYear = TodayDateInt()[0];
-//        int thisMonth = TodayDateInt()[1];
-//        int thisDay = TodayDateInt()[2];
+//        /* 세이브카에 예약확인 문자 전송 */
+//        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
+//        params.put("from", "01052774113");
+//        params.put("type", "LMS");
 //
-//        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(date_id);
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-//        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, campingCarPrice);
 //
-//        // 이번달 날짜
-//        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(clickedDate.getMonth());
+//        /* 고객에게 예약확인 문자 전송 */
 //
-//        // 저번달 날짜
-//        Calendar cal = Calendar.getInstance();
-//        cal.set(Integer.parseInt(clickedDate.getYear()), Integer.parseInt(clickedDate.getMonth())-1, 1);
-//        int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+//        params2.put("to", dto.getPhone());
+//        params2.put("from", "01052774113");  // 16613331 테스트하기
+//        params2.put("type", "LMS");
 //
-//        Long firstDateId = calendarDateList.get(0).getDateId();
-//        for (int i = 1; i < thisDayOfWeek; i++) {
-//            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
+//        params.put("text", "[캠핑카 실시간 예약]\n"
+//                + "성함: " + dto.getName() + "\n"
+//                + "전화번호: " + dto.getPhone() + "\n"
+//                + "차량명: " + dto.getCarType() + "\n"
+//                + "입금자명: " + dto.getDepositor() + "\n"
+//                + "대여날짜: " + dto.getRentDate() + "\n"
+//                + "대여시간: " + dto.getRentTime() + "\n"
+//                + "반납날짜: " + dto.getReturnDate() + "\n"
+//                + "반납시간: " + dto.getReturnTime() + "\n"
+//                + "이용날짜: " + dto.getDay() + "\n"
+//                + "총금액: " + dto.getTotal() + "\n"
+//                + "선결제금액: " + dto.getTotalHalf() + "\n"
+//                + "요청사항: " + dto.getDetail() + "\n\n");
+//
+//        params2.put("text", "[캠핑카 예약 대기 신청이 완료되었습니다.]" + "\n"
+//                + "성함: " + dto.getName() + "\n"
+//                + "전화번호: " + dto.getPhone() + "\n"
+//                + "차량명: " + dto.getCarType() + "\n"
+//                + "대여날짜: " + dto.getRentDate() + "\n"
+//                + "대여시간: " + dto.getRentTime() + "\n"
+//                + "반납날짜: " + dto.getReturnDate() + "\n"
+//                + "반납시간: " + dto.getReturnTime() + "\n"
+//                + "입금자명: " + dto.getDepositor() + "\n"
+//                + "이용날짜: " + dto.getDay() + "\n"
+//                + "총금액: " + dto.getTotal() + "\n"
+//                + "선결제금액: " + dto.getTotalHalf() + "\n"
+//                + "요청사항: " + dto.getDetail() + "\n\n"
+//                + "* 예약 확정 시 담당자가 따로 안내연락드립니다." + "\n\n");
+//
+//
+//        params.put("app_version", "test app 1.2");
+//        params2.put("app_version", "test app 1.2");
+//
+//
+//        /* 세이브카에게 문자 전송 */
+//
+//        try {
+//            org.json.simple.JSONObject obj = coolsms.send(params);
+//            System.out.println(obj.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
 //        }
 //
-//        // 날짜별 캠핑카
-//        List<List<DateCamping>> dateCampingList = new ArrayList();
+//        /* 고객에게 예약확인 문자 전송 */
 //
-//        for (CalendarDate calendarDateInd : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDateInd)); }
-//
-//        // 클릭된 날짜
-//        String clickedDateFormated = calendarDate.getYear() + String.format("%02d", Integer.parseInt(calendarDate.getMonth())) + "01";
-//        int[] clickedPrevMonthDate = DateStringToInt(AddDate(clickedDateFormated, 0, -1, 0));
-//        int[] clickedNextMonthDate = DateStringToInt(AddDate(clickedDateFormated, 0, 1, 0));
-//
-//
-//        model.addAttribute("calendarDateList", calendarDateList);
-//        model.addAttribute("dateCampingList", dateCampingList);
-//        model.put("campingCarPrice", campingCarPrice);
-//
-//        model.addAttribute("dateId", date_id);
-//        model.addAttribute("clickedDay", clickedDate.getDay());
-//        model.addAttribute("clickedMonth", clickedDate.getMonth());
-//        model.addAttribute("clickedYear", clickedDate.getYear());
-//        model.addAttribute("clickedWDay", clickedDate.getWDay());
-//
-//        model.addAttribute("clickedPrevYear", clickedPrevMonthDate[0]);
-//        model.addAttribute("clickedPrevMonth", clickedPrevMonthDate[1]);
-//        model.addAttribute("clickedNextYear", clickedNextMonthDate[0]);
-//        model.addAttribute("clickedNextMonth", clickedNextMonthDate[1]);
-//
-//        model.addAttribute("thisYear", thisYear);
-//        model.addAttribute("thisMonth", thisMonth);
-//        model.addAttribute("today", thisDay);
-//        model.addAttribute("calendarTimeList", calendarTimeList);
-//
-//        return  "camping_" + carType;
-//    }
+//        try {
+//            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+//            System.out.println(obj2.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
 
+        campingcarReservationService.save_campingcar_reservation(dto);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
 
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
 
+    }
 }
