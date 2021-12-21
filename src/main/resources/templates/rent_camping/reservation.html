@@ -10,21 +10,20 @@
 
     <!-- Style -->
     <link th:href="@{/css/camping.css}" rel="stylesheet">
-    <link th:href="@{/css/paying.css}" rel="stylesheet">
+    <link th:href="@{/css/reservation.css}" rel="stylesheet">
 
-    <script th:src="@{/js/paying.js}" defer></script>
-
-
+    <script th:src="@{/js/reservation.js}" defer></script>
 </head>
 <body>
     <div layout:fragment="content">
         <div th:replace="fragments/header_camp::headerFragment"></div>
 
-        <div class="paying_content">
+        <div class="paying_content container">
             <!-- main content -->
             <div class="row">
                 <p th:text="${rent_date}" style="display: none;" id="original_rent_start_date"></p>
                 <p th:text="${return_date}" style="display: none;" id="original_rent_end_date"></p>
+                <p th:text="${total}" style="display: none;" id="totalPrice"></p>
 
                 <!-- left content -->
                 <div id="left_col" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -32,110 +31,75 @@
                     <div class="card">
                         <p class="title"><span>예약 상품 정보</span></p>
                         <div class="contents">
-                            <span th:text="${carType}" class="info_title"></span>
-                            <span th:text="${day}" class="info_title"></span>
+                            <span th:text="${carType}" class="info_title" id="carType"></span>
+                            &nbsp;
+                            <span th:text="${day}" class="info_title" id="useDay"></span>
+                            <span class="info_title">&nbsp;대여</span>
                             <div class="result_date">
                                 <div>
-                                    <p id="display_result_start_date" class="display_result_date"></p>
-                                    <hr>
-                                    <p id="display_result_start_time" class="display_result_time" th:text="${rent_time}"></p>
-                                </div>
-                                <p style="font-size: 7rem;">~</p>
-                                <div>
-                                    <p id="display_result_end_date" class="display_result_date" th:text="${return_date}"></p>
-                                    <hr>
-                                    <p id="display_result_end_time" class="display_result_time" th:text="${return_time}"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="bg-white pinside20 margin-bottom-20" id="info_reserve">
-                        <div>
-                            <h3 class="text-left">예약 상품 정보</h3>
-                            <hr style="margin: 0 0 20px 0" />
-                        </div>
-                        <div>
-                            <div id="car_img_wrapper" class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
-                                <img id="car_img" th:src="@{/img/camping-car1.jpg}" alt="car_pic" />
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                                <div id="product_info" class="">
-                                    <p class="car_type" th:id="${carType}"></p><p id="use_day" th:text="${day}"></p>
-<!--                                    <p id="extra_time" th:text="${'+ '+extraTime+'시간'}" ></p>-->
-                                </div><hr id="hr_reserve"/>
-                                <div class="reserve_detail">
-                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                        <p class="rent_date_title">대여 일자</p>
-                                        <p id="rent_date" th:text="${rent_date}"></p>
-                                        <p id="rent_time" th:text="${rent_time}"></p>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding">
-                                        <button id="rent_length" disabled>➔</button>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                        <p class="rent_date_title">반납 일자</p>
-                                        <p id="return_date" th:text="${return_date}"></p>
-                                        <p id="return_time" th:text="${return_time}"></p>
+                                    <h1>대여 일시</h1>
+                                    <div style="display: flex; justify-content: flex-end; padding: 0;">
+                                        <span id="display_result_start_date" class="display_result_date"></span>
+                                        &nbsp;
+                                        <span id="display_result_start_time" class="display_result_time" th:text="${rent_time}"></span>
                                     </div>
                                 </div>
-                                <p style="margin-top: 15px; font-size: 14px"><span style="color: red">*</span>6시 이후 반납은 전화문의 해주시기 바랍니다.</p>
+                                <p style="font-size: 7rem; margin-top: 20px;">~</p>
+                                <div>
+                                    <h1>반납 일시</h1>
+                                    <div style="display: flex; justify-content: flex-end; padding: 0;">
+                                        <span id="display_result_end_date" class="display_result_date" th:text="${return_date}"></span>
+                                        &nbsp;
+                                        <span id="display_result_end_time" class="display_result_time" th:text="${return_time}"></span>
+                                    </div>
+                                </div>
                             </div>
+                            <p style="text-align: right; font-size: 16px; word-break: keep-all;">* 6시 이후 반납은 전화문의 해주시기 바랍니다.</p>
                         </div>
                     </div>
 
-                    <!-- 예약자 정보 -->
-                    <div class="bg-white pinside20 margin-bottom-20" id="info_custom">
-                        <div class="text-left">
-                            <h3>예약자 정보</h3>
-                            <hr style="margin: 0 0 20px 0" />
-                            <p id="must_desc"><span style="color: red">*</span>필수 입력 항목</p>
-                        </div>
-                        <div>
-                            <!-- 성명 연락처 -->
-                            <div class="input_person text-left">
-                                <div>
-                                    <label><span style="color: red">*</span>성명</label>
-                                    <input id="input_name" type="text" placeholder="성명" />
-                                </div>
-                                <div>
-                                    <label><span style="color: red">*</span>연락처</label>
-                                    <input id="input_number" type="number" placeholder="연락처" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" oninput="handleOnInput(this, 11)" />
-                                </div>
-                                <div>
-                                    <label><span style="color: red">*</span>입금자명</label>
-                                    <input id="input_deposit" type="text" placeholder="입금자명" />
-                                </div>
+                    <!--예약자 정보-->
+                    <div class="card" style="margin-top: 60px;">
+                        <p class="title"><span>예약자 정보</span></p>
+                        <div class="contents input_wrapper">
+                            <div class="input_row">
+                                <p class="input_name"><i class="fas fa-star-of-life"></i>성명</p>
+                                <input type="text" placeholder="홍길동" id="input_name">
                             </div>
-                            <!-- 요청사항 -->
-                            <div class="input_demand">
-                                <label class="text-left">요청사항</label>
-                                <textarea class="noscrollbars" onkeyup="autoGrow(this);" onkeydown="autoGrow(this)" id="input_demand" type="text" placeholder="요청사항"></textarea>
+                            <div class="input_row">
+                                <p class="input_name"><i class="fas fa-star-of-life"></i>연락처</p>
+                                <input type="text" placeholder="010-1234-5678" id="input_phone">
                             </div>
+                            <div class="input_row">
+                                <p class="input_name"><i class="fas fa-star-of-life"></i>입금자명</p>
+                                <input type="text" placeholder="홍길동" id="input_deposit_name">
+                            </div>
+                            <hr style="background-color: transparent; border-top: 1px dotted black;">
+                            <p class="input_name">요청사항</p>
+                            <textarea rows="5" id="input_demand"></textarea>
+
                         </div>
                     </div>
 
+<!--                    <div class="bg-white pinside20 margin-bottom-20" id="info_deposit">-->
+<!--                        <div>-->
+<!--                            <h3 class="text-left">렌트 이용규칙</h3>-->
+<!--                            <hr style="margin: 0 0 20px 0" />-->
+<!--                        </div>-->
 
-                    <div class="bg-white pinside20 margin-bottom-20" id="info_deposit">
-                        <div>
-                            <h3 class="text-left">렌트 이용규칙</h3>
-                            <hr style="margin: 0 0 20px 0" />
-                        </div>
-
-                        <div class="row pinside20 ">
-                            <div id="deposit_explain" class="explanations col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left" >
-                                <p>1) 총 결제 금액의 50%를 선결제하시고</p>
-                                <p>배차 당일에 보증금은 현금,</p>
-                                <p>대여료는 신용카드 및 네이버 스토어, 현금 결제가 가능합니다.</p>
-                                <p>2) 보증금은 반납 일주일 이내 환불됩니다.</p>
-                                <p>3) 예약 신청 후, 선입금자에게 예약이</p>
-                                <p>확정되고 확인 문자가 발송됩니다.</p>
-                                <p>4) 자차 포함 금액입니다. </p>
-                                <p>5) 26세기준, 21세 요금은 1일당 11만원이 추가됩니다.</p>
-                            </div>
-                        </div>
-                    </div>
+<!--                        <div class="row pinside20 ">-->
+<!--                            <div id="deposit_explain" class="explanations col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left" >-->
+<!--                                <p>1) 총 결제 금액의 50%를 선결제하시고</p>-->
+<!--                                <p>배차 당일에 보증금은 현금,</p>-->
+<!--                                <p>대여료는 신용카드 및 네이버 스토어, 현금 결제가 가능합니다.</p>-->
+<!--                                <p>2) 보증금은 반납 일주일 이내 환불됩니다.</p>-->
+<!--                                <p>3) 예약 신청 후, 선입금자에게 예약이</p>-->
+<!--                                <p>확정되고 확인 문자가 발송됩니다.</p>-->
+<!--                                <p>4) 자차 포함 금액입니다. </p>-->
+<!--                                <p>5) 26세기준, 21세 요금은 1일당 11만원이 추가됩니다.</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <!-- 취소 환불 규정에 대한 동의 -->
 <!--                    <div class="bg-white pinside20" id="info_refund">-->
@@ -158,85 +122,113 @@
 
                 <!-- right content -->
                 <div id="right_col" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <!-- 최종 금액 -->
-                    <div class="bg-white pinside20 margin-bottom-20" id="info_price">
-                        <div>
-                            <h3 class="text-left">최종 결제 금액</h3>
-                            <hr style="margin: 0 0 20px 0" />
-                        </div>
-                        <div>
-                            <div class="price_between">
-                                <p>총 렌트료(VAT미포함)</p>
-                                <p id="total_fee"></p>
+                    <!-- 최종 결제 금액 -->
+                    <div class="result_wrapper">
+                        <p class="title"><span>최종 결제 금액</span></p>
+                        <div class="result_box">
+                            <div class="price_row">
+                                <div class="name">총 렌트료</div>
+                                <div class="price" id="rentPrice"></div>
                             </div>
-<!--                            <div class="price_between">-->
-<!--                                <p>추가 시간 요금(VAT미포함)</p>-->
-<!--                                <p id="extra_fee" th:class="${extraFee}"></p>-->
-<!--                            </div>-->
-                            <div class="price_between">
-                                <p>VAT</p>
-                                <p id="vat_fee"></p>
-                            </div><hr style="color: dimgray" />
-                            <div class="price_between final_price">
-                                <p>총 결제 금액(VAT포함)</p>
-                                <p id="total_price" th:class="${total}"></p>
+                            <div class="price_row" style="display: none;">
+                                <div class="name">추가시간 요금</div>
+                                <div class="price"></div>
                             </div>
-                            <div id="pre_paying" class="price_between final_price">
-                                <p>선결제 금액(50%)</p>
-                                <p id="half_price"></p>
+                            <div class="price_row">
+                                <div class="name">VAT</div>
+                                <div class="price" id="rentVAT"></div>
                             </div>
-                            <div class="price_between">
-                                <p><span style="color:red;">*</span>보증금(배차시 결제)</p>
-                                <p id="deposits">300,000원</p>
-                            </div><hr/>
-                            <div class="price_between">
-                                <p>* 21세 추가요금 : 1일당 11만원</p>
+                            <hr style="background-color: transparent; border-top: 3px dotted white;">
+                            <div class="price_row">
+                                <div class="name">총 결제금액</div>
+                                <div class="price" id="rentFullPrice"></div>
                             </div>
-
-                            <div class="price_between">
-                                <p>전일정 전액 송금하시면 됩니다.</p>
-                            </div><hr/>
-
-                            <div class="text-center">
-                                <h4 style="margin-bottom: 0"><span style="font-weight: bold">하나은행</span> : 810-626121-01404</h4>
-                                <h4>㈜세이브카</h4>
+                            <div class="price_row">
+                                <div class="name">선결제금액<br>(50%)</div>
+                                <div class="price" id="prepayPrice"></div>
+                            </div>
+                            <div class="price_row">
+                                <div class="name">보증금<br>(현장 결제)</div>
+                                <div class="price" id="deposit">300,000 원</div>
                             </div>
                         </div>
                     </div>
+
+<!--                    <div class="bg-white pinside20 margin-bottom-20" id="info_price">-->
+<!--                        <div>-->
+<!--                            <h3 class="text-left">최종 결제 금액</h3>-->
+<!--                            <hr style="margin: 0 0 20px 0" />-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <div class="price_between">-->
+<!--                                <p>총 렌트료(VAT미포함)</p>-->
+<!--                                <p id="total_fee"></p>-->
+<!--                            </div>-->
+<!--&lt;!&ndash;                            <div class="price_between">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <p>추가 시간 요금(VAT미포함)</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <p id="extra_fee" th:class="${extraFee}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                            <div class="price_between">-->
+<!--                                <p>VAT</p>-->
+<!--                                <p id="vat_fee"></p>-->
+<!--                            </div><hr style="color: dimgray" />-->
+<!--                            <div class="price_between final_price">-->
+<!--                                <p>총 결제 금액(VAT포함)</p>-->
+<!--                                <p id="total_price" th:class="${total}"></p>-->
+<!--                            </div>-->
+<!--                            <div id="pre_paying" class="price_between final_price">-->
+<!--                                <p>선결제 금액(50%)</p>-->
+<!--                                <p id="half_price"></p>-->
+<!--                            </div>-->
+<!--                            <div class="price_between">-->
+<!--                                <p><span style="color:red;">*</span>보증금(배차시 결제)</p>-->
+<!--                                <p id="deposits">300,000원</p>-->
+<!--                            </div><hr/>-->
+<!--                            <div class="price_between">-->
+<!--                                <p>* 21세 추가요금 : 1일당 11만원</p>-->
+<!--                            </div>-->
+
+<!--                            <div class="price_between">-->
+<!--                                <p>전일정 전액 송금하시면 됩니다.</p>-->
+<!--                            </div><hr/>-->
+
+<!--                            <div class="text-center">-->
+<!--                                <h4 style="margin-bottom: 0"><span style="font-weight: bold">하나은행</span> : 810-626121-01404</h4>-->
+<!--                                <h4>㈜세이브카</h4>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
 
                     <!-- 결제 수단 -->
-                    <div class="text-left bg-white pinside20 margin-bottom-20" id="info_refund2">
-                        <div>
-                            <h3 class="text-left">취소/환불 규정에 대한 동의</h3>
-                            <hr style="margin: 0 0 20px 0" />
-                        </div>
-                        <div class="row pinside20 ">
-                            <div class="explanations col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
-                                <p>1) 31일전 취소 : 총렌트료의 100%환불</p>
-                                <p>2) 30일전 취소 : 총렌트료의 30% 수수료 부과</p>
-                                <p>3) 15일전 취소 : 총렌트료의 40% 수수료 부과</p>
-                                <p>4) 7일전 취소 : 총렌트료의 50% 수수료 부과</p>
-                                <p>5) 3일전 취소 : 총렌트료의 80% 수수료 부과</p>
-                                <p>6) 2일전 취소 : 환불불가</p>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="text-left bg-white pinside20 margin-bottom-20" id="info_refund2">-->
+<!--                        <div>-->
+<!--                            <h3 class="text-left">취소/환불 규정에 대한 동의</h3>-->
+<!--                            <hr style="margin: 0 0 20px 0" />-->
+<!--                        </div>-->
+<!--                        <div class="row pinside20 ">-->
+<!--                            <div class="explanations col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">-->
+<!--                                <p>1) 31일전 취소 : 총렌트료의 100%환불</p>-->
+<!--                                <p>2) 30일전 취소 : 총렌트료의 30% 수수료 부과</p>-->
+<!--                                <p>3) 15일전 취소 : 총렌트료의 40% 수수료 부과</p>-->
+<!--                                <p>4) 7일전 취소 : 총렌트료의 50% 수수료 부과</p>-->
+<!--                                <p>5) 3일전 취소 : 총렌트료의 80% 수수료 부과</p>-->
+<!--                                <p>6) 2일전 취소 : 환불불가</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <!-- 동의 및 예약완료 -->
-                    <div class="text-left bg-white pinside20" id="info_done">
-                        <div>
-                            <h3 class="text-left">약관 동의</h3>
-                            <hr style="margin: 0 0 20px 0" />
-                        </div>
-                        <div>
+                    <!-- 약관 동의 -->
+                    <div class="card" style="margin-top: 60px;">
+                        <p class="title"><span>약관 동의</span></p>
+                        <div class="contents">
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                 <!-- 1번째 동의 -->
                                 <div class="panel panel-default">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                         <div class="panel-heading" role="tab" id="headingOne">
                                             <h4 class="panel-title">
-                                                    개인정보 및 렌트 이용규칙에 대한 동의
+                                                개인정보 및 렌트 이용규칙에 대한 동의
                                             </h4>
                                         </div>
                                     </a>
@@ -291,32 +283,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="checkboxes"><input id="check_info" type="checkbox" value="rent"/>약관에 동의합니다</p>
-<!--                                &lt;!&ndash; 4번째 동의 &ndash;&gt;-->
-<!--                                <div class="panel panel-default">-->
-<!--                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">-->
-<!--                                        <div class="panel-heading" role="tab" id="headingFour">-->
-<!--                                            <h4 class="panel-title">-->
-<!--                                                    구매조건 확인 및 결제진행에 동의-->
-<!--                                            </h4>-->
-<!--                                        </div>-->
-<!--                                    </a>-->
-<!--                                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">-->
-<!--                                        <div class="panel-body">-->
-<!--                                            <p>구매 조건 확인 후</p>-->
-<!--                                            <p>결제 진행에 동의하시겠습니까?</p>-->
-<!--                                            <br>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <p class="checkboxes"><input id="check_last" type="checkbox" value="rent"/>구매조건 확인 및 결제진행에 동의</p>-->
-<!--                            </div>-->
-                        </div>
-                        <div id="btn_final_wrapper">
-                            <button id="btn_final" type="button" onclick="reserveDone()">예약 신청 완료</button>
+                                <p class="checkboxes"><input id="check_agreement" type="checkbox" value="rent"/>약관에 동의합니다</p>
+                            </div>
                         </div>
                     </div>
 
+                    <div id="btn_final_wrapper">
+                        <button id="btn_final" type="button" onclick="reserveDone()">예약 신청 완료</button>
+                    </div>
                 </div>
             </div>
         </div>

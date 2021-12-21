@@ -282,14 +282,12 @@ a:hover {
     align-items: center;
     padding: 3rem 0;
     margin-top: 3rem;
-    /*font-family: FontAwesome;*/
-    /*font-weight: bold;*/
-    border: 1px solid black;
+    border: 2px solid gray;
     border-radius: 12px;
   }
 
   .detail_wrapper div {
-    margin: 2rem 0;
+    margin: 1rem 0;
     padding: 1.5rem 0;
     width: 80%;
     border-radius: 5vh;
@@ -305,22 +303,29 @@ a:hover {
   a .detail_selections {
     width: 100%;
     background-color: white;
-    border: 1px solid lightblue;
-    box-shadow: 0 0 10px #03c5ff;
+    border: 1px solid lightgrey;
+  }
+  a .detail_selections:hover {
+    background-color: lightgrey;
+    border: 1px solid gray;
+  }
+  a .detail_selections:hover span {
+    color: white;
   }
 
-  .detail_selections span {
-    color: #6f6f6f;
-    /*font-family: 'FontAwesome';*/
-
-  }
+  /*.detail_selections span {*/
+  /*  color: #6f6f6f;*/
+  /*}*/
 
   a .detail_selections span {
     color: black;
   }
 
   .detail_selections {
-    background-color: #bbbbbb;
+    background-color: #646464;
+  }
+  .detail_selections span {
+    color: white;
   }
 
   .detail_wrapper a {

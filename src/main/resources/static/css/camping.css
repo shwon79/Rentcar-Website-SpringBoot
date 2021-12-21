@@ -1079,12 +1079,13 @@ input[type=radio] {
   justify-content: space-between;
   align-items: center;
 }
-.result_price .name {
+.price_row .name {
   color: white;
   text-align: left;
   font-size: 24px;
+  line-height: 1.2;
 }
-.result_price .price {
+.price_row .price {
   background-color: white;
   color: black;
   width: 60%;
@@ -1094,10 +1095,6 @@ input[type=radio] {
   align-items: center;
   justify-content: flex-end;
   padding-right: 20px;
-}
-#right_column .row {
-  /*margin-rignt: 0;*/
-  /*margin-left: 0;*/
 }
 
 #mainRow {
@@ -1149,19 +1146,11 @@ input[type=radio] {
     padding: 20px;
   }
   .result_date div {
-    padding: 20px 10px;
+    padding: 20px 6px;
   }
-  /*.display_result_date {*/
-  /*  font-size: 2rem;*/
-  /*}*/
-  /*.display_result_time {*/
-  /*  font-size: 3.5rem;*/
-  /*}*/
-  /*.result_price .name {*/
-  /*  font-size: 20px;*/
-  /*}*/
-  .result_price .price {
+  .price_row .price {
     height: 34px;
+    padding-right: 10px;
   }
   .card .title {
     font-size: 26px;

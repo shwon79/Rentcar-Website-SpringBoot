@@ -415,9 +415,9 @@ function displayCampingPrice(param) {
 
     let originPrice = parseInt(priceList[param]);
 
-    rentPrice.innerText = Math.floor((originPrice/11*10)).toLocaleString() + '원';
-    rentVAT.innerText = Math.floor((originPrice/11)).toLocaleString() + '원';
-    rentFullPrice.innerText = originPrice.toLocaleString() + '원';
+    rentPrice.innerText = Math.floor((originPrice/11*10)).toLocaleString() + ' 원';
+    rentVAT.innerText = Math.floor((originPrice/11)).toLocaleString() + ' 원';
+    rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
 }
 // const daysSelect = () => {
 //     let daySelector = document.getElementById('days_select');

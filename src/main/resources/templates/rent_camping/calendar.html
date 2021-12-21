@@ -170,33 +170,33 @@
                     <div id="day_detail">
                         <div th:id="${date.dateId}" class="detail_wrapper" th:each="date, iterStat: ${calendarDateList}"
                                 th:style="${date.day} == ${thisDay} and ${date.month} == ${thisMonth}? 'display:flex'">
-                            <div>
+                            <div style="margin: 0;">
                                 <p th:text="${thisYear+'년 '+date.month+'월 '+date.day+'일 ['+date.season+']'}" style="margin: 0;"></p>
-                                <p style="margin: 0;">선택한 날짜의 차  목록</p>
+                                <p style="margin: 0;">선택한 날짜의 차량 목록</p>
                             </div>
                             <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][0].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}">
                             <div class="detail_selections" th:if="${dateCampingList[iterStat.index][0].reserved} != '1'">
-                                <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName.toUpperCase()}"></span><span>(0/1)</span>
+                                <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName.toUpperCase()}"></span><span> (0/1)</span>
                             </div>
                             </a>
                             <div class="detail_selections" th:unless="${dateCampingList[iterStat.index][0].reserved} != '1'">
-                                <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName.toUpperCase()}"></span><span>(1/1)</span>
+                                <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName.toUpperCase()}"></span><span> (1/1)</span>
                             </div>
                             <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][1].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}">
                             <div class="detail_selections" th:if="${dateCampingList[iterStat.index][1].reserved} != '1'">
-                                <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName.toUpperCase()}"></span><span>(0/1)</span>
+                                <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName.toUpperCase()}"></span><span> (0/1)</span>
                             </div>
                             </a>
                             <div class="detail_selections" th:unless="${dateCampingList[iterStat.index][1].reserved} != '1'">
-                                <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName.toUpperCase()}"></span><span>(1/1)</span>
+                                <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName.toUpperCase()}"></span><span> (1/1)</span>
                             </div>
                             <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][2].carName.carName} + '_reserve/'+ ${thisYear} + '/' + ${thisMonth}">
                             <div class="detail_selections" th:if="${dateCampingList[iterStat.index][2].reserved} != '1'"  >
-                                <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span><span>(0/1)</span>
+                                <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span><span> (0/1)</span>
                             </div>
                             </a>
                             <div class="detail_selections" th:unless="${dateCampingList[iterStat.index][2].reserved} != '1'" >
-                                <span th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span><span>(1/1)</span>
+                                <span th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span><span> (1/1)</span>
                             </div>
                         </div>
                     </div>
