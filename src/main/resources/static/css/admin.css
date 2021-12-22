@@ -50,6 +50,10 @@ body {
     text-decoration: none;
     color: white;
 }
+.activeAdminMenu li {
+    background-color: #42758b;
+    color: indianred;
+}
 
 .menu_container li:hover {
     background-color: gray;

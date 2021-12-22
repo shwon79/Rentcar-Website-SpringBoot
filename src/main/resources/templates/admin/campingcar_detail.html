@@ -9,9 +9,14 @@
 
   <!-- Style -->
   <link th:href="@{/css/admin.css}" rel="stylesheet">
-
+  <script th:src="@{/js/jquery.min.js}"></script>
   <script th:src="@{/js/admin.js}" defer></script>
-
+  <script>
+    $(window).load(function() {
+      let campingcarMenu = document.getElementById('campingcarMenu');
+      campingcarMenu.classList.add('activeAdminMenu');
+    });
+  </script>
 
 </head>
 
