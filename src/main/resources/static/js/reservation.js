@@ -157,7 +157,7 @@ function reserveDone() {
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
 
         if (reserveConfirm) {
-            let url = '/campingcar/reserve';
+            let url = '/camping/calendar/reserve';
             fetch(url, {
                 method: 'POST',
                 headers: {
