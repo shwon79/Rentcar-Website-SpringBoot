@@ -389,3 +389,35 @@ $('.reservation-completely-delete-btn').click(function(e) {
         })
     }
 });
+
+// let editedText = document.getElementById('editedText');
+// let editableTextList = editedText.split('<br>');
+// editedText.innerText = editableTextList;
+
+
+let saveBtn = document.getElementById('saveBtn');
+saveBtn.addEventListener('click', () => {
+    let editedText = document.getElementById('editedText');
+    // let camper_price = editedText.value.replace(/\n/g,'<br>');
+
+    let data = {
+        camper_price: editedText.value
+    }
+    console.log(data);
+
+    $.ajax({
+        type:'POST',
+        url:'/admin/setting',
+        dataType:'json',
+        contentType : 'application/json; charset=utf-8',
+        data : JSON.stringify(data)
+    }).done(function (result) {
+        if (result.result == 1) {
+            alert('완료되었습니다.');
+        } else {
+            alert('문제가 생겼습니다.');
+        };
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    })
+})
