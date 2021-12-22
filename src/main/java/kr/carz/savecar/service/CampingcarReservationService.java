@@ -1,6 +1,7 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.CampingCarReservation;
+import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.repository.CampingcarReservationRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +26,8 @@ public class CampingcarReservationService {
        campingcarReservationRepository.deleteById(id);
     }
 
-    public Long save_campingcar_reservation(CampingCarReservation campingcarReservation) {
-        return campingcarReservationRepository.save(campingcarReservation).getId();
+    public Long save_campingcar_reservation(CampingCarReservationDTO dto) {
+        return campingcarReservationRepository.save(dto.toEntity()).getId();
     }
 
     public List<CampingCarReservation> findAllReservations(){

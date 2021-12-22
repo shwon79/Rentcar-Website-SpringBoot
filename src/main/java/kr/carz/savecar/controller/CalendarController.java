@@ -1,6 +1,7 @@
 package kr.carz.savecar.controller;
 
 import kr.carz.savecar.domain.*;
+import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONArray;
@@ -471,7 +472,7 @@ public class CalendarController {
     // 캠핑카 예약 저장 api
     @PostMapping("/camping/calendar/reserve")
     @ResponseBody
-    public void camping_calendar_reservation(HttpServletResponse res, @RequestBody CampingCarReservation dto) throws IOException{
+    public void camping_calendar_reservation(HttpServletResponse res, @RequestBody CampingCarReservationDTO dto) throws IOException{
 
 //        // 문자전송
 //        Message coolsms = new Message(api_key, api_secret);
@@ -553,6 +554,5 @@ public class CalendarController {
         pw.print(jsonObject);
         pw.flush();
         pw.close();
-
     }
 }
