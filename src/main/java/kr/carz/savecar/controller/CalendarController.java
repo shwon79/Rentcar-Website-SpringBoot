@@ -93,10 +93,8 @@ public class CalendarController {
         Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
         model.put("explanation", explanation.get());
 
-        return "rent_camping/" + carType;
+        return "rent_camping/" + carType + "_info";
     }
-
-
 
     @GetMapping("/camping/calendar/{year}/{month}")
     public String camping_calendar_different_month(ModelMap model, @PathVariable("year") int year, @PathVariable("month") int month) throws Exception {
@@ -378,96 +376,6 @@ public class CalendarController {
             pw.close();
         }
 
-    }
-
-
-    // 캠핑카 대여가능일자 구하는 api
-    @RequestMapping(value = "/camping/calendar/{carType}/getrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-    @ResponseBody
-    public void get_rent_date(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
-
-        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
-        CampingCarPrice campingCarPrice;
-        campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-
-
-        Long date_start_id = calendarDate.getDateId();
-
-        int possible_rent_date = 0;
-
-        for(int i=1; i<=31; i++){
-            if(date_start_id+i > 167){  // 12월 4일
-                break;
-            }
-            CalendarDate calendarDate_continue = calendarDateService.findCalendarDateByDateId(date_start_id+i);
-            DateCamping dateCamping_continue = dateCampingService.findByDateIdAndCarName(calendarDate_continue, campingCarPrice);
-            if(dateCamping_continue.getReserved().equals("1")){
-                break;
-            }
-            possible_rent_date += 1;
-        }
-
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put(possible_rent_date);
-
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonArray);
-        pw.flush();
-        pw.close();
-    }
-
-
-
-    // 캠핑카 가능한 추가시간 구하는 api
-    @RequestMapping(value = "/camping/calendar/{carType}/getextratime/{year}/{month}/{day}/{rentDays}/{rentStartTime}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-    @ResponseBody
-    public void get_extra_time(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day, @PathVariable Integer rentDays, @PathVariable String rentStartTime) throws IOException {
-
-        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
-        CampingCarPrice campingCarPrice;
-        campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-
-        Long date_start_id = calendarDate.getDateId();
-        Long date_last_id = date_start_id + rentDays;
-
-        CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(date_last_id);
-
-
-        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarLastDate, campingCarPrice);
-
-        Integer extraTime = 0;
-        Integer flg = 0;
-
-
-        int i;
-        for (i=0; i<calendarTimeList.size(); i++){
-
-            if (flg == 1){
-                if (calendarTimeList.get(i).getReserveComplete().equals("1")){
-                    break;
-                } else {
-                    extraTime += 1;
-                }
-            }
-
-            if (calendarTimeList.get(i).getReserveTime().equals(rentStartTime)){
-                flg = 1;
-            }
-        }
-
-        if (!calendarTimeList.get(i-1).getReserveTime().equals("18시") && extraTime >= 2){
-            extraTime -= 2;
-        }
-
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put(extraTime);
-
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonArray);
-        pw.flush();
-        pw.close();
     }
 
 
