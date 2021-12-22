@@ -511,3 +511,10 @@ td {
         padding: 0.3rem 0;
     }
 }
+
+#textarea_wrapper h3 {
+    text-align: center;
+    background: #5495b1;
+    color: white;
+    padding: 10px;
+}
