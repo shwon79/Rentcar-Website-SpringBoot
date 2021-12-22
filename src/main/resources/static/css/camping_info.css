@@ -1,0 +1,6 @@
+.displayOnlyActive {
+    display: none !important;
+}
+.activeCampingMenu {
+    display: block !important;
+}

@@ -1,3 +1,10 @@
+.displayOnlyActive {
+  display: none !important;
+}
+.activeCampingMenu {
+  display: block !important;
+}
+
 p {
   font-size: 1.7rem;
 }

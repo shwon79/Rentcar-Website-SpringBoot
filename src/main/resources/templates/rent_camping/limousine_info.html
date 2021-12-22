@@ -1,0 +1,47 @@
+<!-- 캠핑카렌트(limousine_info.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 캠핑카 렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/camping_info.css}" rel="stylesheet">
+<!--    <script th:src="@{/js/campingcar.js}"></script>-->
+
+
+    <script>
+        // function toggleImg(id) {
+        //     let before = document.getElementById("headerImg").src;
+        //     let tmp = document.getElementById(id).src;
+        //     document.getElementById("headerImg").src = tmp;
+        //     document.getElementById(id).src = before;
+        // }
+        $(window).load(function() {
+            let idList = document.getElementsByClassName('displayOnlyActive');
+            for (i=0; i < idList.length; i++) {
+                if (idList[i].dataset.id == 'limousine') {
+                    let activeMenu = idList[i];
+                    activeMenu.classList.add('activeCampingMenu');
+                }
+            };
+        });
+    </script>
+<!--    <script th:src="@{/js/europe_reserve.js}" defer ></script>-->
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div th:replace="fragments/header_camp::headerFragment"></div>
+
+    <!-- content whole wrapper-->
+    <div id="wrapper" class="content pinside60 container">
+        <!--  content body-->
+        내가 바로 리무진 인포
+    </div>
+</div>
+</body>
+</html>
