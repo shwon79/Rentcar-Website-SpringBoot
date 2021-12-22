@@ -1,5 +1,7 @@
 package kr.carz.savecar.service;
 
+import kr.carz.savecar.domain.Explanation;
+import kr.carz.savecar.dto.ExplanationDTO;
 import kr.carz.savecar.repository.DiscountRepository;
 import kr.carz.savecar.repository.ExplanationRepository;
 
@@ -16,6 +18,10 @@ public class ExplanationService {
 
     public Optional findById(Long id){
         return explanationRepository.findById(id);
+    }
+
+    public Explanation save(Explanation explanation){
+        return explanationRepository.save(explanation);
     }
 
 }

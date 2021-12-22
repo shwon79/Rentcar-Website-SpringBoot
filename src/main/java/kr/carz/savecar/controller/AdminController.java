@@ -2,6 +2,8 @@ package kr.carz.savecar.controller;
 
 import kr.carz.savecar.dto.DiscountSaveDTO;
 import kr.carz.savecar.domain.*;
+import kr.carz.savecar.dto.ExplanationDTO;
+import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -28,12 +30,14 @@ public class AdminController {
     ReservationService reservationService;
     DiscountService discountService;
     MorenReservationService morenReservationService;
+    ExplanationService explanationService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
                            LoginService loginService, ReservationService reservationService,
-                           DiscountService discountService, MorenReservationService morenReservationService) {
+                           DiscountService discountService, MorenReservationService morenReservationService,
+                           ExplanationService explanationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -42,6 +46,7 @@ public class AdminController {
         this.reservationService = reservationService;
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
+        this.explanationService = explanationService;
     }
 
     @Value("${coolsms.api_key}")
@@ -244,6 +249,34 @@ public class AdminController {
 
         return mav;
     }
+
+
+
+    // [관리자 메인페이지] 캠핑카 기본설정 메뉴로 입장
+    @GetMapping(value = "/admin/setting/menu")
+    @ResponseBody
+    public ModelAndView get_setting_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin/login");
+        } else {
+            mav.addObject("explanation",explanation.get());
+            mav.setViewName("admin/setting_menu");
+        }
+
+        return mav;
+    }
+
 
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
@@ -460,6 +493,37 @@ public class AdminController {
         } else {
             jsonObject.put("result", 0);
         }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @PostMapping("/admin/setting")
+    @ResponseBody
+    public void post_admin_setting(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
+
+        Optional<Explanation> explanation_optional = explanationService.findById(Long.valueOf(0));
+        Explanation explanation = explanation_optional.get();
+        explanation.setCamper_price(explanationDTO.getCamper_price());
+        explanation.setEurope_basic_option(explanationDTO.getEurope_basic_option());
+        explanation.setLimousine_basic_option(explanationDTO.getLimousine_basic_option());
+        explanation.setTravel_basic_option(explanationDTO.getTravel_basic_option());
+        explanation.setEurope_facility(explanationDTO.getEurope_facility());
+        explanation.setLimousine_facility(explanationDTO.getLimousine_facility());
+        explanation.setTravel_facility(explanationDTO.getTravel_facility());
+        explanation.setRent_policy(explanationDTO.getRent_policy());
+        explanation.setRent_insurance(explanationDTO.getRent_insurance());
+        explanation.setRent_rule(explanationDTO.getRent_rule());
+        explanation.setRefund_policy(explanationDTO.getRefund_policy());
+
+
+        explanationService.save(explanation);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);

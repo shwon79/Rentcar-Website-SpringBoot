@@ -1,5 +1,6 @@
 package kr.carz.savecar.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -45,4 +46,21 @@ public class Explanation {
     @Column(columnDefinition = "LONGTEXT", nullable = true)
     private String refund_policy;
 
+    @Builder
+    public Explanation(Long id, String camper_price, String europe_basic_option, String limousine_basic_option, String travel_basic_option,
+                       String europe_facility, String limousine_facility, String travel_facility,
+                       String rent_policy, String rent_insurance, String rent_rule, String refund_policy) {
+        this.id = id;
+        this.camper_price = camper_price;
+        this.europe_basic_option = europe_basic_option;
+        this.limousine_basic_option = limousine_basic_option;
+        this.travel_basic_option = travel_basic_option;
+        this.europe_facility = europe_facility;
+        this.limousine_facility = limousine_facility;
+        this.travel_facility = travel_facility;
+        this.rent_policy = rent_policy;
+        this.rent_insurance = rent_insurance;
+        this.rent_rule = rent_rule;
+        this.refund_policy = refund_policy;
+    }
 }
