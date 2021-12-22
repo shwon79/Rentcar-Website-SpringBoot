@@ -86,6 +86,18 @@ public class CalendarController {
     }
 
 
+
+    @GetMapping("/camping/{carType}")
+    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) throws Exception {
+
+        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
+        model.put("explanation", explanation.get());
+
+        return "rent_camping/" + carType;
+    }
+
+
+
     @GetMapping("/camping/calendar/{year}/{month}")
     public String camping_calendar_different_month(ModelMap model, @PathVariable("year") int year, @PathVariable("month") int month) throws Exception {
 
@@ -262,16 +274,6 @@ public class CalendarController {
 
         return "rent_camping/reservation";
     }
-
-    @GetMapping("/camping/europe/{id}")
-    public String camping_europe(ModelMap model, @PathVariable Long id)  {
-
-        Optional<Explanation> explanation = explanationService.findById(id);
-        model.put("explanation", explanation.get());
-
-        return "rent_camping/europe";
-    }
-
 
 
     // 캠핑카 가격 구하는 api
