@@ -16,14 +16,8 @@
 <div class="page_wrapper">
     <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
     <div class="content_wrapper">
-        <div class="menu_container">
-            <div class="menu_list">
-                <a href="/admin/campingcar/menu"><li>캠핑카 예약</li></a>
-                <a href="/admin/counsel/menu"><li>상담 신청</li></a>
-                <a href="/admin/discount/menu"><li>할인/인상 적용</li></a>
-                <a href="/admin/moren/reservation/menu" style="color: white;"><li style="background: #3a708f">모렌 예약 신청</li></a>
-            </div>
-        </div>
+
+        <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
         <div class="content_container">
             <div class="head_title" style="margin-top: 50px; text-align: center;">
