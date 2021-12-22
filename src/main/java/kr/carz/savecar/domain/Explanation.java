@@ -2,11 +2,13 @@ package kr.carz.savecar.domain;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "Explanation")
 public class Explanation {
     @Id
