@@ -15,52 +15,23 @@ public class CampingCarReservation extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true)
     private Integer agree;
-
-    @Column(nullable = true)
     private String carType;
-
-    @Column(nullable = true)
     private String day;
-
-    @Column(nullable = true)
     private Integer deposit;
-
-    @Column(nullable = true)
     private String depositor;
 
-    @Column(columnDefinition = "LONGTEXT", nullable = true)
+    @Column(columnDefinition = "LONGTEXT")
     private String detail;
-
-    @Column(nullable = true)
     private String name;
-
-    @Column(nullable = true)
     private String phone;
-
-    @Column(nullable = true)
     private String rentDate;
-
-    @Column(nullable = true)
     private String rentTime;
-
-    @Column(nullable = true)
     private Integer reservation;
-
-    @Column(nullable = true)
     private String returnDate;
-
-    @Column(nullable = true)
     private String returnTime;
-
-    @Column(nullable = true)
     private Integer total;
-
-    @Column(nullable = true)
     private Integer totalHalf;
-
-
 
     @Builder
     public CampingCarReservation(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, Integer agree, Integer reservation, String day, Integer totalHalf, String carType) {

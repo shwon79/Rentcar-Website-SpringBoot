@@ -31,13 +31,14 @@ public class AdminController {
     DiscountService discountService;
     MorenReservationService morenReservationService;
     ExplanationService explanationService;
+    CampingcarReservationService campingcarReservationService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
                            LoginService loginService, ReservationService reservationService,
                            DiscountService discountService, MorenReservationService morenReservationService,
-                           ExplanationService explanationService) {
+                           ExplanationService explanationService, CampingcarReservationService campingcarReservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -47,6 +48,7 @@ public class AdminController {
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
         this.explanationService = explanationService;
+        this.campingcarReservationService = campingcarReservationService;
     }
 
     @Value("${coolsms.api_key}")
@@ -74,7 +76,8 @@ public class AdminController {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
 
-            // admin view로 넘기기
+            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
+            mav.addObject("campingCarReservationList", campingCarReservationList);
             mav.setViewName("admin/campingcar_menu");
 
         } catch (NullPointerException e){
@@ -132,7 +135,8 @@ public class AdminController {
             mav.setViewName("admin/login");
         } else {
 
-            // admin view로 넘기기
+            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
+            mav.addObject("campingCarReservationList", campingCarReservationList);
             mav.setViewName("admin/campingcar_menu");
         }
 

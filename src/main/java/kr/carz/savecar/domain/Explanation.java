@@ -49,10 +49,9 @@ public class Explanation {
     private String refund_policy;
 
     @Builder
-    public Explanation(Long id, String camper_price, String europe_basic_option, String limousine_basic_option, String travel_basic_option,
+    public Explanation(String camper_price, String europe_basic_option, String limousine_basic_option, String travel_basic_option,
                        String europe_facility, String limousine_facility, String travel_facility,
                        String rent_policy, String rent_insurance, String rent_rule, String refund_policy) {
-        this.id = id;
         this.camper_price = camper_price;
         this.europe_basic_option = europe_basic_option;
         this.limousine_basic_option = limousine_basic_option;

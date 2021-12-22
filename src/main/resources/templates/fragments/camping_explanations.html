@@ -3,18 +3,15 @@
     <!-- 요금 -->
     <div th:fragment="camper_price" class="contents">
 
-        <div th:text="${explanation.camper_price}" th:wrap="hard"></div>
-<!--        <p>자차 요금 포함 [최대 2500만원 한정] / VAT 포함</p>-->
-<!--        <p>1일 요금은 24시간 단위</p>-->
-<!--        <p>성수기 기간: 7월 15일 ~ 8월 25일, 당사 지정일</p>-->
-<!--        <p>4일 이상: 성수기 기간 ~ 성수기 요금에 비례한 요금이 적용됩니다.</p>-->
-<!--        <p>26세기준, 21세 요금은 1일당 11만원이 추가됩니다.</p>-->
+        <pre th:text="${explanation.camper_price}"></pre>
+
     </div>
 
     <!-- 기본 옵션 -->
 
     <!-- 유럽 기본 옵션 -->
     <div th:fragment="europe_basic_option">
+
         <p>5인 탑승, 5인 취침</p>
         <p>2종 보통도 운전 가능</p>
         <p>프리미엄 인산철 배터리 1080A</p>
