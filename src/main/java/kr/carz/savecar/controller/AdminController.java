@@ -143,6 +143,32 @@ public class AdminController {
         return mav;
     }
 
+    // [관리자 메인페이지] 캠핑카 예약내역 detail 페이지로 입장
+    @GetMapping(value = "/admin/campingcar/detail/{reservationId}")
+    @ResponseBody
+    public ModelAndView get_admin_campincar_detail(HttpServletResponse res, HttpServletRequest req, @PathVariable Long reservationId) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin/login");
+        } else {
+
+            Optional<CampingCarReservation> campingCarReservation = campingcarReservationService.findById(reservationId);
+            mav.addObject("campingCarReservation", campingCarReservation.get());
+            mav.setViewName("admin/campingcar_detail");
+        }
+
+        return mav;
+    }
+
 
     //상담 메뉴로 입장
     @GetMapping("/admin/counsel/menu")
@@ -522,7 +548,6 @@ public class AdminController {
         explanation.setRent_insurance(explanationDTO.getRent_insurance());
         explanation.setRent_rule(explanationDTO.getRent_rule());
         explanation.setRefund_policy(explanationDTO.getRefund_policy());
-
 
         explanationService.save(explanation);
 
