@@ -94,18 +94,6 @@
                     <div id="dates" class="dates">
                         <div class="date" th:each="date, iterStat: ${calendarDateList}" >
                             <div>
-                                <span th:text="${date.year}"></span>
-                                <span th:text="${date.month}"></span>
-                                <span th:text="${date.day}"></span>
-                                <span>/</span>
-                                <span th:text="${thisYear}"></span>
-                                <span th:text="${thisMonth}"></span>
-                                <span th:text="${thisDay}"></span>
-                                <span>/</span>
-                                <span th:text="${clickedYear}"></span>
-                                <span th:text="${clickedMonth}"></span>
-                            </div>
-                            <div>
                                 <!--  calendar upside part  -->
                                 <div class="upside">
                                     <span class="this date_day" th:text="${date.day}"></span>&nbsp;
