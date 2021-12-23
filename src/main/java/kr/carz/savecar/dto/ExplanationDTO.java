@@ -20,10 +20,12 @@ public class ExplanationDTO {
     private String rent_insurance;
     private String rent_rule;
     private String refund_policy;
+    private String driver_license;
 
     public ExplanationDTO(String camper_price, String europe_basic_option, String limousine_basic_option, String travel_basic_option,
                           String europe_facility, String limousine_facility, String travel_facility,
-                          String rent_policy, String rent_insurance, String rent_rule, String refund_policy) {
+                          String rent_policy, String rent_insurance, String rent_rule, String refund_policy,
+                          String driver_license) {
         this.camper_price = camper_price;
         this.europe_basic_option = europe_basic_option;
         this.limousine_basic_option = limousine_basic_option;
@@ -35,23 +37,7 @@ public class ExplanationDTO {
         this.rent_insurance = rent_insurance;
         this.rent_rule = rent_rule;
         this.refund_policy = refund_policy;
-    }
-
-    public Explanation toEntity() {
-        return Explanation.builder()
-                .camper_price(camper_price)
-                .europe_basic_option(europe_basic_option)
-                .limousine_basic_option(limousine_basic_option)
-                .travel_basic_option(travel_basic_option)
-                .europe_facility(europe_facility)
-                .limousine_facility(limousine_facility)
-                .travel_facility(travel_facility)
-                .rent_policy(rent_policy)
-                .rent_insurance(rent_insurance)
-                .rent_rule(rent_rule)
-                .refund_policy(refund_policy)
-                .build();
-
+        this.driver_license = driver_license;
     }
 
 }

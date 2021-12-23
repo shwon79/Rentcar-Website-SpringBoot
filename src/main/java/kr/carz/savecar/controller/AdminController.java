@@ -318,31 +318,6 @@ public class AdminController {
     }
 
 
-    // 캠핑카 예약 수정하기 api
-    @PutMapping(value = "/admin/campingcar/reservation/{carType}/{rentDate}/{rentTime}/{day}")
-    @ResponseBody
-    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable String carType, @PathVariable String rentDate, @PathVariable String rentTime, @PathVariable String day) throws IOException {
-
-        JSONObject jsonObject = new JSONObject();
-        String [] splitedRentDate = rentDate.split(".");
-
-        if (splitedRentDate.length < 4){
-            System.out.println("날짜 형식 오류");
-            jsonObject.put("result", 0);
-        } else {
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-            CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
-            CalendarTime calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, rentTime);
-
-
-        }
-
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
-    }
 
 
 
