@@ -32,7 +32,7 @@
         <a href="/admin/campingcar/menu"><button id="go_back">🠔 뒤로가기</button></a>
       </div>
       <div class="detail_list" id="detail_set_reserve">
-        <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+campingCarReservation.id}">
+        <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/admin/campingcar/reservation/'+campingCarReservation.id}">
           <input th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray' : null" class="set_reserve" type="submit" value="확정"/>
         </form>
       </div>
@@ -96,11 +96,11 @@
         <p id="custom_demand">요구사항</p>
         <p id="custom_demand_detail" th:text="${campingCarReservation.detail}"></p>
       </div>
-      <div class="detail_list" id="detail_set_delete">
-        <form method="GET" onsubmit="return confirm('예약을 \'취소\'하시겠습니까?')" th:action="${'/reservation/cancel/'+campingCarReservation.id}">
-          <input class="set_reserve" type="submit" value="예약취소"/>
-        </form>
-      </div>
+<!--      <div class="detail_list" id="detail_set_delete">-->
+<!--        <form method="GET" onsubmit="return confirm('예약을 \'취소\'하시겠습니까?')" th:action="${'/reservation/cancel/'+campingCarReservation.id}">-->
+<!--          <input class="set_reserve" type="submit" value="예약취소"/>-->
+<!--        </form>-->
+<!--      </div>-->
 
     </div>
   </div>

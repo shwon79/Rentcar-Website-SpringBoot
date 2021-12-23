@@ -18,6 +18,7 @@ public class CampingCarPrice {
     private String carName;
 
 
+
     @OneToMany(mappedBy = "carName", targetEntity=CalendarTime.class)
     private List<CalendarTime> calendarTimeList = new ArrayList<>();
 
@@ -36,7 +37,6 @@ public class CampingCarPrice {
         dateCamping.setCarName(this);
         this.dateCampingList.add(dateCamping);
     }
-
 
     private String season;   // 0 비성수기  1 성수기
     private String onedays;

@@ -18,17 +18,16 @@ public class DateCampingService {
         return dateCampingRepository.save(dateCamping).getDateId();
     }
 
-    public List<DateCamping> findDateCampingPrice(){
-        return dateCampingRepository.findAll();
-    }
-
     public List<DateCamping> findByDateId(CalendarDate date_id){
         return dateCampingRepository.findByDateId(date_id);
     }
 
-
     public DateCamping findByDateIdAndCarName(CalendarDate date_id, CampingCarPrice car_name){
         return dateCampingRepository.findByDateIdAndCarName(date_id, car_name);
+    }
+
+    public List<DateCamping> findByCarNameAndDateIdGreaterThanEqualAndDateIdLessThanEqual(CampingCarPrice campingCarPrice, CalendarDate start_date, CalendarDate end_date){
+        return dateCampingRepository.findByCarNameAndDateIdGreaterThanEqualAndDateIdLessThanEqual(campingCarPrice, start_date, end_date);
     }
 
 }

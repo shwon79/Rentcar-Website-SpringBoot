@@ -52,7 +52,7 @@
           <p class="reservation" th:text="${reservation.reservation} == 1? 'O':'X'"></p>
         </div>
         <!--                    <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>-->
-        <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/admin/campingcar/detail/'+reservation.id}">
+        <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/admin/campingcar/reservation/'+reservation.id}">
           <input th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null" class="set_reserve" type="submit" value="확정"/>
         </form>
       </div>

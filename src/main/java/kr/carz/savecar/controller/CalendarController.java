@@ -3,15 +3,12 @@ package kr.carz.savecar.controller;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.service.*;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import net.nurigo.java_sdk.api.Message;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -86,46 +83,9 @@ public class CalendarController {
     }
 
 
-    // 캠핑카 예약 수정하기 api
-    @PutMapping(value = "/admin/campingcar/reservation/{carType}/{rentDate}/{rentTime}/{day}")
-    @ResponseBody
-    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable String carType, @PathVariable String rentDate, @PathVariable String rentTime, @PathVariable String day) throws Exception {
-
-        JSONObject jsonObject = new JSONObject();
-        String [] splitedRentDate = rentDate.split(".");
-
-        if (splitedRentDate.length < 4){
-            System.out.println("날짜 형식 오류");
-            jsonObject.put("result", 0);
-        } else {
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-            CalendarDate calendarStartDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
-            Long startDateId = calendarStartDate.getDateId();
-
-            String startDate = splitedRentDate[0] + String.format("%02d", splitedRentDate[1]) + String.format("%02d", splitedRentDate[2]);
-            String endDate = AddDate(startDate, 0, 0, Integer.valueOf(day));
-
-            CalendarDate calendarEndDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
-            Long endDateId = calendarEndDate.getDateId();
-
-//            CalendarTime calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, rentTime);
-//
-//            DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDate, campingCarPrice);
-//            dateCamping.setReserved("1");
-
-        }
-
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
-    }
-
-
 
     @GetMapping("/camping/{carType}")
-    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) throws Exception {
+    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
 
         Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
         model.put("explanation", explanation.get());
@@ -463,40 +423,6 @@ public class CalendarController {
         pw.flush();
         pw.close();
     }
-
-
-
-//    // 캠핑카 예약 저장 api
-//    @RequestMapping(value = "/camping/calendar/{carType}/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-//    @ResponseBody
-//    public void send_rent_date_travel(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
-//
-//
-//        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
-//
-//
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-//
-//        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
-//        List <String> categoryList2 = new ArrayList();
-//
-//        for (int i = 0; i < calendarTimeList.size(); i++) {
-//            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
-//
-//                categoryList2.add(calendarTimeList.get(i).getReserveTime());
-//            }
-//        }
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for (String c : categoryList2) {
-//            jsonArray.put(c);
-//        }
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonArray.toString());
-//        pw.flush();
-//        pw.close();
-//    }
 
 
 }

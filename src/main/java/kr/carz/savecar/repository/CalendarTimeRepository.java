@@ -16,5 +16,7 @@ public interface CalendarTimeRepository extends JpaRepository<CalendarTime, Long
     List<CalendarTime> findByDateIdAndCarName(CalendarDate dateId, CampingCarPrice carName);
     CalendarTime findByDateIdAndCarNameAndReserveTime(CalendarDate dateId, CampingCarPrice carName, String reserve_time);
     CalendarTime findByTimeId(Long timeId);
+    List<CalendarTime> findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(CalendarDate dateId, CampingCarPrice carName, String reserve_time);
+    List<CalendarTime> findByDateIdAndCarNameAndReserveTimeLessThanEqual(CalendarDate dateId, CampingCarPrice carName, String reserve_time);
 
 }

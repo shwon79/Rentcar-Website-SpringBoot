@@ -30,5 +30,19 @@ public class CalendarTimeService {
     public CalendarTime findCalendarTimeByTimeId(Long timeId){
         return calendarTimeRepository.findByTimeId(timeId);
     }
+    public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(CalendarDate dateId, CampingCarPrice carName, String reserve_time){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(dateId, carName, reserve_time);
+    }
+    public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeLessThanEqual(CalendarDate dateId, CampingCarPrice carName, String reserve_time){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateId, carName, reserve_time);
+    }
+    public void save_calendar_time_list(List<CalendarTime> calendarTimeList){
+        for(int i=0; i<calendarTimeList.size(); i++){
+            calendarTimeRepository.save(calendarTimeList.get(i));
+        }
+    }
+    public void save(CalendarTime CalendarTime) {
+        calendarTimeRepository.save(CalendarTime);
+    }
 
 }
