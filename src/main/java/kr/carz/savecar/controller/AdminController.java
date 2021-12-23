@@ -32,13 +32,19 @@ public class AdminController {
     MorenReservationService morenReservationService;
     ExplanationService explanationService;
     CampingcarReservationService campingcarReservationService;
+    CalendarTimeService calendarTimeService;
+    CampingCarPriceService campingCarPriceService;
+    CalendarDateService calendarDateService;
+    DateCampingService dateCampingService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
                            LoginService loginService, ReservationService reservationService,
                            DiscountService discountService, MorenReservationService morenReservationService,
-                           ExplanationService explanationService, CampingcarReservationService campingcarReservationService) {
+                           ExplanationService explanationService, CampingcarReservationService campingcarReservationService,
+                           CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
+                           CalendarDateService calendarDateService, DateCampingService dateCampingService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -49,6 +55,10 @@ public class AdminController {
         this.morenReservationService = morenReservationService;
         this.explanationService = explanationService;
         this.campingcarReservationService = campingcarReservationService;
+        this.calendarTimeService = calendarTimeService;
+        this.campingCarPriceService = campingCarPriceService;
+        this.calendarDateService = calendarDateService;
+        this.dateCampingService = dateCampingService;
     }
 
     @Value("${coolsms.api_key}")
@@ -308,24 +318,25 @@ public class AdminController {
     }
 
 
-
     // 캠핑카 예약 수정하기 api
-    @RequestMapping(value = "/admin/campingcar/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @PutMapping(value = "/admin/campingcar/reservation/{carType}/{rentDate}/{rentTime}/{day}")
     @ResponseBody
-    public void put_admin_campingcar(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
+    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable String carType, @PathVariable String rentDate, @PathVariable String rentTime, @PathVariable String day) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
+        String [] splitedRentDate = rentDate.split(".");
 
-        // 이미 db에 등록된 차량인지 확인
-        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
-
-        if(original_discount.isPresent()){
-            original_discount.get().setDiscount(discount);
-            discountService.save(original_discount.get());
-            jsonObject.put("result", 1);
-        } else {
+        if (splitedRentDate.length < 4){
+            System.out.println("날짜 형식 오류");
             jsonObject.put("result", 0);
+        } else {
+            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+            CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
+            CalendarTime calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, rentTime);
+
+
         }
+
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);

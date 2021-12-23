@@ -108,65 +108,60 @@ public class CalendarController {
         cal.set(year, month-1, 1);
         int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
+        List<CalendarDate> calendarDateList;
+        List<List<DateCamping>> dateCampingList = new ArrayList();
+
+        int[] prevMonthDate;
+        int[] nextMonthDate;
+
         if(thisYear == year && thisMonth == month){
 
-            int[] prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
-            int[] nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
+            prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
+            nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
 
-            List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
-            ArrayList dateCampingList = new ArrayList();
+            calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
 
             Long firstDateId = calendarDateList.get(0).getDateId();
             for (int i = 1; i < thisDayOfWeek; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
-            System.out.println(thisDayOfWeek);
 
             for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
-            model.addAttribute("calendarDateList", calendarDateList);
-            model.addAttribute("dateCampingList", dateCampingList);
-
-            model.addAttribute("thisMonth", thisMonth);
-            model.addAttribute("thisYear", thisYear);
-            model.addAttribute("thisDay", thisDay);
-            model.addAttribute("prevMonth", prevMonthDate[1]);
-            model.addAttribute("nextMonth", nextMonthDate[1]);
 
         } else {
 
-            // 이번달 날짜
-            List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(month));
+            calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(month));
 
             Long firstDateId = calendarDateList.get(0).getDateId();
             for (int i = 1; i < thisDayOfWeek; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
 
-            // 날짜별 캠핑카
-            List<List<DateCamping>> dateCampingList = new ArrayList();
 
             for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
             String date = year + String.format("%02d", month) + "01";
 
-            int[] prevMonthDate = DateStringToInt(AddDate(date, 0, -1, 0));
-            int[] nextMonthDate = DateStringToInt(AddDate(date, 0, 1, 0));
+            prevMonthDate = DateStringToInt(AddDate(date, 0, -1, 0));
+            nextMonthDate = DateStringToInt(AddDate(date, 0, 1, 0));
 
 
-            model.addAttribute("calendarDateList", calendarDateList);
-            model.addAttribute("dateCampingList", dateCampingList);
-
-            model.addAttribute("thisYear", thisYear);
-            model.addAttribute("thisMonth", thisMonth);
-            model.addAttribute("thisDay", thisDay);
-
-            model.addAttribute("clickedYear", year);
-            model.addAttribute("clickedMonth", month);
-
-            model.addAttribute("prevMonth", prevMonthDate[1]);
-            model.addAttribute("nextMonth", nextMonthDate[1]);
         }
+
+
+        model.addAttribute("calendarDateList", calendarDateList);
+        model.addAttribute("dateCampingList", dateCampingList);
+
+        model.addAttribute("thisYear", thisYear);
+        model.addAttribute("thisMonth", thisMonth);
+        model.addAttribute("thisDay", thisDay);
+
+        model.addAttribute("clickedYear", year);
+        model.addAttribute("clickedMonth", month);
+
+        model.addAttribute("prevMonth", prevMonthDate[1]);
+        model.addAttribute("nextMonth", nextMonthDate[1]);
 
 
         return "rent_camping/calendar";
