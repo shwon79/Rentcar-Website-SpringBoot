@@ -161,6 +161,9 @@ public class CalendarController {
             model.addAttribute("thisMonth", thisMonth);
             model.addAttribute("thisDay", thisDay);
 
+            model.addAttribute("clickedYear", year);
+            model.addAttribute("clickedMonth", month);
+
             model.addAttribute("prevMonth", prevMonthDate[1]);
             model.addAttribute("nextMonth", nextMonthDate[1]);
         }
