@@ -10,16 +10,29 @@
 
     <!-- Style -->
     <link th:href="@{/css/camping.css}" rel="stylesheet">
+    <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
+
     <script th:src="@{/js/campingcar.js}"></script>
 
 
     <script>
-        function toggleImg(id) {
-            let before = document.getElementById("headerImg").src;
-            let tmp = document.getElementById(id).src;
-            document.getElementById("headerImg").src = tmp;
-            document.getElementById(id).src = before;
-        }
+        // function toggleImg(id) {
+        //     let before = document.getElementById("headerImg").src;
+        //     let tmp = document.getElementById(id).src;
+        //     document.getElementById("headerImg").src = tmp;
+        //     document.getElementById(id).src = before;
+        // }
+        $(window).load(function() {
+            let idList = document.getElementsByClassName('displayOnlyActive');
+            for (i=0; i < idList.length; i++) {
+                if (idList[i].dataset.id == 'calendar') {
+                    let activeMenu = idList[i];
+                    activeMenu.classList.add('activeCampingMenu');
+                }
+            };
+            const subMenu = document.getElementById('displayNoneOnCalendarMenu');
+            subMenu.style.display = 'none';
+        });
     </script>
     <script th:src="@{/js/europe_reserve.js}" defer ></script>
 </head>
