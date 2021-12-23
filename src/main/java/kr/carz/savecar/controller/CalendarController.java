@@ -221,40 +221,6 @@ public class CalendarController {
         return "rent_camping/" + carType;
     }
 
-
-    // 캠핑카 예약 저장 api
-    @RequestMapping(value = "/camping/calendar/{carType}/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-    @ResponseBody
-    public void send_rent_date_travel(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
-
-
-        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
-
-
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-
-        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
-        List <String> categoryList2 = new ArrayList();
-
-        for (int i = 0; i < calendarTimeList.size(); i++) {
-            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
-
-                categoryList2.add(calendarTimeList.get(i).getReserveTime());
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-
-        for (String c : categoryList2) {
-            jsonArray.put(c);
-        }
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
-        pw.flush();
-        pw.close();
-    }
-
-
     @GetMapping("/camping/calendar/{carType}_reserve/reservation/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{total}")
     public String handleRequest_reserve(ModelMap model, @PathVariable("carType") String carType,@PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("total") String total) throws Exception {
 
@@ -428,8 +394,7 @@ public class CalendarController {
 //                + "이용날짜: " + dto.getDay() + "\n"
 //                + "총금액: " + dto.getTotal() + "\n"
 //                + "선결제금액: " + dto.getTotalHalf() + "\n"
-//                + "요청사항: " + dto.getDetail() + "\n\n"
-//                + "* 예약 확정 시 담당자가 따로 안내연락드립니다." + "\n\n");
+//                + "요청사항: " + dto.getDetail() + "\n\n");
 //
 //
 //        params.put("app_version", "test app 1.2");
@@ -465,4 +430,40 @@ public class CalendarController {
         pw.flush();
         pw.close();
     }
+
+
+
+//    // 캠핑카 예약 저장 api
+//    @RequestMapping(value = "/camping/calendar/{carType}/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+//    @ResponseBody
+//    public void send_rent_date_travel(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
+//
+//
+//        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
+//
+//
+//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+//
+//        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
+//        List <String> categoryList2 = new ArrayList();
+//
+//        for (int i = 0; i < calendarTimeList.size(); i++) {
+//            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
+//
+//                categoryList2.add(calendarTimeList.get(i).getReserveTime());
+//            }
+//        }
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for (String c : categoryList2) {
+//            jsonArray.put(c);
+//        }
+//
+//        PrintWriter pw = res.getWriter();
+//        pw.print(jsonArray.toString());
+//        pw.flush();
+//        pw.close();
+//    }
+
+
 }
