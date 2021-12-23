@@ -145,7 +145,7 @@
                         <div id="rent_cal" class="dates btn-group">
                             <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                 <label th:for="${date.month+'월 '+date.day+'일'}" th:id="${date.dateId}"
-                                       th:class="${dateCampingList[iterStat.index][0].reserved} == '1' or (${date.year} < ${thisYear}) or (${date.month} < ${thisMonth} and ${date.year} == ${thisYear}) or (${date.day} < ${today} and ${date.month} == ${thisMonth} and ${date.year} == ${thisYear})  ? 'disabled_radio' : 'able_radio'">
+                                       th:class="(${dateCampingList[iterStat.index][1].reserved} == '1') or (${date.year} < ${thisYear}) or (${date.month} < ${thisMonth} and ${date.year} == ${thisYear}) or (${date.day} < ${today} and ${date.month} == ${thisMonth} and ${date.year} == ${thisYear})  ? 'disabled_radio' : 'able_radio'">
 
 
                                     <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:title="${date.season}"
