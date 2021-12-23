@@ -396,6 +396,7 @@ saveBtn.addEventListener('click', () => {
     let editedCamperPrice = document.getElementById('editedCamperPrice');
     let editedRentPolicy = document.getElementById('editedRentPolicy');
     let editedRentInsurance = document.getElementById('editedRentInsurance');
+    let editedDriverLicense = document.getElementById('editedDriverLicense');
     let editedRentRule = document.getElementById('editedRentRule');
     let editedRefundPolicy = document.getElementById('editedRefundPolicy');
     let editedEuropeBasicOption = document.getElementById('editedEuropeBasicOption');
@@ -409,6 +410,7 @@ saveBtn.addEventListener('click', () => {
         camper_price: editedCamperPrice.value,
         rent_policy: editedRentPolicy.value,
         rent_insurance: editedRentInsurance.value,
+        driver_license: editedDriverLicense.value,
         rent_rule: editedRentRule.value,
         refund_policy: editedRefundPolicy.value,
         europe_basic_option: editedEuropeBasicOption.value,

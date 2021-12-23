@@ -953,14 +953,15 @@ pre {
 .card .insurance {
   display: flex;
 }
-.card .insurance div:first-child {
+.card .insurance pre:first-child {
   border-right: 1px solid black;
   padding-right: 10px;
+  border-radius: 0;
 }
-.card .insurance div:last-child {
+.card .insurance pre:last-child {
   padding-left: 10px;
 }
-.card .insurance div {
+.card .insurance pre {
   flex-basis: 50%;
 }
 .card .insurance {
@@ -1137,6 +1138,17 @@ pre {
 }
 
 @media (max-width: 600px) {
+  .insurance {
+    flex-direction: column;
+  }
+  .card .insurance pre:first-child {
+    border: none;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid black;
+  }
+  .card .insurance pre:last-child {
+    padding: 20px 0 0 0;
+  }
   .select_wrapper .col-lg-4 h5,
   .select_wrapper .col-lg-8 span,
   .select_wrapper .col-lg-8 h5,

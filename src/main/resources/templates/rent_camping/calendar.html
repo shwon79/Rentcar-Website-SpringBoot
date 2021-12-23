@@ -94,6 +94,16 @@
                     <div id="dates" class="dates">
                         <div class="date" th:each="date, iterStat: ${calendarDateList}" >
                             <div>
+                                <p th:text="${date.month}"></p>
+                                <p th:text="${date.day}"></p>
+
+                                <p th:text="${thisMonth}"></p>
+                                <p th:text="${thisDay}"></p>
+
+                                <p th:text="${clickedYear}"></p>
+                                <p th:text="${clickedMonth}"></p>
+                            </div>
+                            <div>
                                 <!--  calendar upside part  -->
                                 <div class="upside">
                                     <span class="this date_day" th:text="${date.day}"></span>&nbsp;
@@ -163,13 +173,7 @@
                     <div class="dates">
                         <div class="date" th:each="date, iterStat: ${calendarDateList}" >
                             <!--  calendar upside part  -->
-<!--                            <div>-->
-<!--                                <p th:text="${date.month}"></p>-->
-<!--                                <p th:text="${date.day}"></p>-->
 
-<!--                                <p th:text="${thisMonth}"></p>-->
-<!--                                <p th:text="${thisDay}"></p>-->
-<!--                            </div>-->
                             <div class="upside text-center">
                                 <div class="day_wrapper" th:id="${date.dateId+'day'}"
                                      th:class="(${dateCampingList[iterStat.index][0].reserved} == '1' and ${dateCampingList[iterStat.index][1].reserved} == '1' and ${dateCampingList[iterStat.index][2].reserved} == '1')
