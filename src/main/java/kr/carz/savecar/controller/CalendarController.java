@@ -99,9 +99,9 @@ public class CalendarController {
     @GetMapping("/camping/calendar/{year}/{month}")
     public String camping_calendar_different_month(ModelMap model, @PathVariable("year") int year, @PathVariable("month") int month) throws Exception {
 
-        int thisDay = TodayDateInt()[2];
         int thisYear = TodayDateInt()[0];
         int thisMonth = TodayDateInt()[1];
+        int thisDay = TodayDateInt()[2];
 
         // 저번달 날짜
         Calendar cal = Calendar.getInstance();
@@ -157,9 +157,10 @@ public class CalendarController {
             model.addAttribute("calendarDateList", calendarDateList);
             model.addAttribute("dateCampingList", dateCampingList);
 
-            model.addAttribute("thisMonth", month);
-            model.addAttribute("thisYear", year);
-            model.addAttribute("thisDay", 1);
+            model.addAttribute("thisYear", thisYear);
+            model.addAttribute("thisMonth", thisMonth);
+            model.addAttribute("thisDay", thisDay);
+
             model.addAttribute("prevMonth", prevMonthDate[1]);
             model.addAttribute("nextMonth", nextMonthDate[1]);
         }
@@ -216,7 +217,7 @@ public class CalendarController {
 
         model.addAttribute("thisYear", thisYear);
         model.addAttribute("thisMonth", thisMonth);
-        model.addAttribute("today", thisDay);
+        model.addAttribute("thisDay", thisDay);
 
         return "rent_camping/" + carType;
     }

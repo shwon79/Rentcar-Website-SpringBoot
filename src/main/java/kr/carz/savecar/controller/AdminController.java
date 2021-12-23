@@ -308,6 +308,33 @@ public class AdminController {
     }
 
 
+
+    // 캠핑카 예약 수정하기 api
+    @RequestMapping(value = "/admin/campingcar/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @ResponseBody
+    public void put_admin_campingcar(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+
+        if(original_discount.isPresent()){
+            original_discount.get().setDiscount(discount);
+            discountService.save(original_discount.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
     @ResponseBody
