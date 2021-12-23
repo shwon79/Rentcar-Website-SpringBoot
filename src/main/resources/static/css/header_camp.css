@@ -28,16 +28,18 @@
     color: black;
     margin-right: 16px;
 }
-.main_ul li:first-child:after {
-    content: "|";
-    position: absolute;
-    font-size: 28px;
-    bottom: 15%;
-    right: -5%;
-}
-.main_ul ul li:first-child:after {
-    content: "";
-}
+/*comment out for deploying*/
+/*.main_ul li:first-child:after {*/
+/*    content: "|";*/
+/*    position: absolute;*/
+/*    font-size: 28px;*/
+/*    bottom: 15%;*/
+/*    right: -5%;*/
+/*}*/
+/*.main_ul ul li:first-child:after {*/
+/*    content: "";*/
+/*}*/
+
 .main_ul > li > a:after {
     position: absolute;
     content: '+';
