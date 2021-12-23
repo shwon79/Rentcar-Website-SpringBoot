@@ -561,6 +561,7 @@ public class AdminController {
         explanation.setRent_insurance(explanationDTO.getRent_insurance());
         explanation.setRent_rule(explanationDTO.getRent_rule());
         explanation.setRefund_policy(explanationDTO.getRefund_policy());
+        explanation.setDriver_license(explanationDTO.getDriver_license());
 
         explanationService.save(explanation);
 
