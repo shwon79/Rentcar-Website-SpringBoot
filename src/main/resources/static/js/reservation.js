@@ -126,14 +126,14 @@ function reserveDone() {
     let startYear = parseInt(startTemp[0]);
     let startMonth = parseInt(startTemp[1]);
     let startDay = parseInt(startTemp[2]);
-    let startResult = startYear + '.' + startMonth + '.' + startDay;
+    let startResult = startYear + '-' + startMonth + '-' + startDay;
     rentStartDate = startResult;
 
     let endTemp = rentEndDate.split(' ');
     let endYear = parseInt(endTemp[0]);
     let endMonth = parseInt(endTemp[1]);
     let endDay = parseInt(endTemp[2]);
-    let endResult = endYear + '.' + endMonth + '.' + endDay;
+    let endResult = endYear + '-' + endMonth + '-' + endDay;
     rentEndDate = endResult;
 
     // 연락처 01011112222 로 작성했을 경우, 010-1111-2222로 처리
@@ -171,27 +171,48 @@ function reserveDone() {
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
 
         if (reserveConfirm) {
-            let url = '/camping/calendar/reserve';
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data),
+            $.ajax({
+                type:'POST',
+                url:'/camping/calendar/reserve',
+                dataType:'json',
+                contentType : 'application/json; charset=utf-8',
+                data : JSON.stringify(data)
+            }).done(function (result) {
+                if (result.result == 1) {
+                    alert('캠핑카 예약 대기 신청이 완료되었습니다.');
+                    let now = new Date();
+                    let year = now.getFullYear();
+                    let month = now.getMonth() + 1;
+                    window.location.href = '/camping/calendar/' + year + '/' + month;
+                } else {
+                    alert('캠핑카 예약 대기 신청이 정상적으로 진행되지 않았습니다.');
+                }
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
             })
-                .then(response => response.json())
-                .then(result => {
-                    if (result[0] == "1") {
-                        alert('캠핑카 예약 대기 신청이 완료되었습니다.');
-                        let now = new Date();
-                        let year = now.getFullYear();
-                        let month = now.getMonth() + 1;
-                        window.location.href = '/camping/calendar' + year + '/' + month;
-                    } else if (result[0] == "0") alert('이용할 수 없는 날짜입니다.')
-                })
+
+            // let url = '';
+            // fetch(url, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(data),
+            // })
+            //     .then(response => response.json())
+            //     .then(result => {
+            //         if (result[0] == "1") {
+            //             alert('캠핑카 예약 대기 신청이 완료되었습니다.');
+            //             let now = new Date();
+            //             let year = now.getFullYear();
+            //             let month = now.getMonth() + 1;
+            //             window.location.href = '/camping/calendar' + year + '/' + month;
+            //         } else if (result[0] == "0") alert('이용할 수 없는 날짜입니다.')
+            //     })
         }
     }
 }
+
 // const reserveDone = () => {
 //
 //
