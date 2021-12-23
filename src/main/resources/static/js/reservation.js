@@ -122,6 +122,20 @@ function reserveDone() {
     halfPrice = parseInt(halfPrice);
     deposit = parseInt(deposit);
 
+    let startTemp = rentStartDate.split(' ');
+    let startYear = parseInt(startTemp[0]);
+    let startMonth = parseInt(startTemp[1]);
+    let startDay = parseInt(startTemp[2]);
+    let startResult = startYear + '.' + startMonth + '.' + startDay;
+    rentStartDate = startResult;
+
+    let endTemp = rentEndDate.split(' ');
+    let endYear = parseInt(endTemp[0]);
+    let endMonth = parseInt(endTemp[1]);
+    let endDay = parseInt(endTemp[2]);
+    let endResult = endYear + '.' + endMonth + '.' + endDay;
+    rentEndDate = endResult;
+
     // 연락처 01011112222 로 작성했을 경우, 010-1111-2222로 처리
     if (phoneWithoutDash.test(phoneNum) == true) {
         phoneNum = phoneNum.substr(0, 3) + "-" + phoneNum.substr(3, 4) + "-" + phoneNum.substr(7,4);
@@ -152,7 +166,7 @@ function reserveDone() {
             reservation: 0,
             day: useDay
         }
-        console.log(data);
+        // console.log(data);
 
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
 
