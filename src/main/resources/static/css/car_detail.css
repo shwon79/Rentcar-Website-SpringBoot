@@ -38,6 +38,10 @@
     border-radius: 20px;
 }
 
+.carousel-box {
+    padding-left: 15px;
+}
+
 .info-card {
     background-color: black;
     color: white;
@@ -180,10 +184,6 @@
 .date_time_form {
     display: flex;
     justify-content: space-between;
-.info_table {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 .selectRentermKilometerBox {
     padding: 0;
@@ -219,11 +219,36 @@
     color: white;
     background: black;
 }
+.detail_btn_reserve {
+    color: white;
+    background: #6980f5;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    border-radius: 1rem;
+    font-size: 18px;
+}
+.detail_btn_reserve:hover {
+    color: white;
+    background: #2246e5;
+}
 .onlyDesktop {
     display: inline-table;
 }
 .onlyMobile {
     display: none;
+}
+.nav-tabs h1 {
+    font-size: 23px;
+}
+select {
+    font-size: 15px;
+}
+
+@media (min-width: 601px) and (max-width: 991px) {
+    .info-card {
+        margin-right: -15px !important;
+    }
 }
 
 @media (max-width: 600px) {
@@ -248,6 +273,10 @@
         height:100%;
     }
 
+    .carousel-box {
+        padding-left: 0;
+    }
+
     .info-card h1 {
         font-size: 30px;
     }
@@ -263,7 +292,7 @@
 
     .car_img_carousel {
         margin-left: 0;
-        margin-bottom: 30px;
+        /*margin-bottom: 30px;*/
     }
     #info_detail .car_name {
         margin-top: 0px;
