@@ -347,3 +347,9 @@ a:hover {
     font-size: 1em;
   }
 }
+
+.contents .contents {
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}

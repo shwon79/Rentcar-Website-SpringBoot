@@ -56,7 +56,13 @@
                         <i class="fas fa-circle"></i>
                         CAMPER 기본정보
                     </h1>
-                    <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>
+                    <div class="contents">
+                        <img th:src="@{/img/travel-price.jpg}" id="priceImg" width="100%" height="70%">
+                        <br /><br />
+                        <div th:replace="fragments/camping_explanations::camper_price"></div>
+                    </div>
+
+<!--                    <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>-->
                 </div>
                 <!--기본옵션-->
                 <div class="row card white-card">
