@@ -411,9 +411,23 @@ function displayCampingPrice(param) {
 
     let originPrice = parseInt(priceList[param]);
 
-    rentPrice.innerText = Math.floor((originPrice/11*10)).toLocaleString() + ' 원';
-    rentVAT.innerText = Math.floor((originPrice/11)).toLocaleString() + ' 원';
-    rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
+    if (Math.floor((originPrice/11*10)).toLocaleString() == NaN) {
+        rentPrice.innerText ='';
+    } else {
+        rentPrice.innerText = Math.floor((originPrice/11*10)).toLocaleString() + ' 원';
+    }
+
+    if (Math.floor((originPrice/11)).toLocaleString() == NaN) {
+        rentVAT.innerText ='';
+    } else {
+        rentVAT.innerText = Math.floor((originPrice/11)).toLocaleString() + ' 원';
+    }
+
+    if (originPrice.toLocaleString() == NaN) {
+        rentFullPrice.innerText ='';
+    } else {
+        rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
+    }
 }
 // const daysSelect = () => {
 //     let daySelector = document.getElementById('days_select');
@@ -581,34 +595,34 @@ const postDate = () => {
 }
 
 // 옵션 선택 다 해야 아래 결과 보여주기
-function displayResultWrapper() {
-    let resultWrapper = document.getElementsByClassName('result_wrapper')[0];
-    let startDate = document.getElementById('selected_date').innerText;
-    let startTime = $(".time_options input[type='radio']:checked")[0];
-    let rentPeriod = document.getElementById('selected_period').innerText;
-
-    if (startTime === undefined) {
-        startTime = '';
-    } else {
-        startTime = startTime.id;
-    }
-
-    let validStartDate = startDate.startsWith('20') ? true : false;
-    let validStartTime = startTime != '' ? true : false;
-    let validRentPeriod;
-
-    if (rentPeriod.endsWith('일') || rentPeriod === '한달') {
-        validRentPeriod = true;
-    } else {
-        validRentPeriod = false;
-    }
-
-    if (validStartDate & validStartTime & validRentPeriod) {
-        resultWrapper.style.display = 'block';
-    } else {
-        resultWrapper.style.display = 'none';
-    }
-}
+// function displayResultWrapper() {
+//     let resultWrapper = document.getElementsByClassName('result_wrapper')[0];
+//     let startDate = document.getElementById('selected_date').innerText;
+//     let startTime = $(".time_options input[type='radio']:checked")[0];
+//     let rentPeriod = document.getElementById('selected_period').innerText;
+//
+//     if (startTime === undefined) {
+//         startTime = '';
+//     } else {
+//         startTime = startTime.id;
+//     }
+//
+//     let validStartDate = startDate.startsWith('20') ? true : false;
+//     let validStartTime = startTime != '' ? true : false;
+//     let validRentPeriod;
+//
+//     if (rentPeriod.endsWith('일') || rentPeriod === '한달') {
+//         validRentPeriod = true;
+//     } else {
+//         validRentPeriod = false;
+//     }
+//
+//     if (validStartDate & validStartTime & validRentPeriod) {
+//         resultWrapper.style.display = 'block';
+//     } else {
+//         resultWrapper.style.display = 'none';
+//     }
+// }
 
 //지난 달로 못가게 화살표 없애기
 const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');
