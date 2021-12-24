@@ -442,6 +442,7 @@ saveBtn.addEventListener('click', () => {
 
 function setCampingReserve(id) {
     let checkConfirm = confirm('예약을 확정하시겠습니까?');
+    console.log(id)
 
     if (checkConfirm) {
         $.ajax({
@@ -456,7 +457,7 @@ function setCampingReserve(id) {
                 alert('캠핑카 예약에 문제가 생겼습니다.');
             };
             window.location.href = '/admin/campingcar/menu';
-        }).fail(function (error) {용
+        }).fail(function (error) {
             alert(JSON.stringify(error));
         })
     };

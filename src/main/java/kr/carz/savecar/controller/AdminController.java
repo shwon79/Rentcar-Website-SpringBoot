@@ -361,6 +361,7 @@ public class AdminController {
                 }
             }
             campingCarReservationOptional.get().setReservation(1);
+            campingcarReservationService.save(campingCarReservationOptional.get());
             jsonObject.put("result", 1);
         }
 
