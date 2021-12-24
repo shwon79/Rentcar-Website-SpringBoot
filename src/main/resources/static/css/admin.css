@@ -50,6 +50,10 @@ body {
     text-decoration: none;
     color: white;
 }
+.activeAdminMenu li {
+    background-color: #42758b;
+    color: indianred;
+}
 
 .menu_container li:hover {
     background-color: gray;
@@ -510,4 +514,11 @@ td {
         padding: 4px !important;
     }
 
+}
+
+#textarea_wrapper h3 {
+    text-align: center;
+    background: #5495b1;
+    color: white;
+    padding: 10px;
 }

@@ -1,13 +1,7 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.domain.CampingCar;
-import kr.carz.savecar.domain.MonthlyRent;
-import kr.carz.savecar.domain.ShortRent;
-import kr.carz.savecar.domain.YearlyRent;
-import kr.carz.savecar.service.CampingCarService;
-import kr.carz.savecar.service.MonthlyRentService;
-import kr.carz.savecar.service.ShortRentService;
-import kr.carz.savecar.service.YearlyRentService;
+import kr.carz.savecar.domain.*;
+import kr.carz.savecar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,15 +15,19 @@ public class HelloController {
     YearlyRentService yearlyRentService;
     ShortRentService shortRentService;
     CampingCarService campingCarService;
+    CalendarDateService calendarDateService;
+    DateCampingService dateCampingService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                           ShortRentService shortRentService, CampingCarService campingCarService) {
+                           ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
+                           DateCampingService dateCampingService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarService = campingCarService;
-
+        this.calendarDateService = calendarDateService;
+        this.dateCampingService = dateCampingService;
     }
 
     @GetMapping("/index")
@@ -39,7 +37,7 @@ public class HelloController {
 
     @GetMapping("/rent/long_term")
     public String rent_long_term() {
-        return "rent_long_term";
+        return "rent_longterm/main";
     }
 
     @GetMapping("/price/month")
@@ -48,7 +46,7 @@ public class HelloController {
         List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
         model.addAttribute("monthlyRentList", monthlyRentList);
 
-        return "price_month";
+        return "rent_price/month";
     }
 
 
@@ -58,7 +56,7 @@ public class HelloController {
         List<YearlyRent> yearlyRentList = yearlyRentService.findYearlyRents();
         model.addAttribute("yearlyRentList", yearlyRentList);
 
-        return "price_long";
+        return "rent_price/long";
     }
 
 
@@ -73,7 +71,7 @@ public class HelloController {
         model.addAttribute("shortRentListForeign", shortRentListForeign);
         model.addAttribute("shortRentListNotForeign", shortRentListNotForeign);
 
-        return "price_short";
+        return "rent_price/short";
     }
 
 
@@ -84,25 +82,9 @@ public class HelloController {
 
         model.addAttribute("campingCarList", campingCarList);
 
-
-        return "price_camp";
+        return "rent_price/camp";
     }
 
-
-    @GetMapping("/travel")
-    public String camping_travel() {
-        return "camping_travel";
-    }
-
-    @GetMapping("/liomousine")
-    public String camping_liomousine() {
-        return "camping_liomousine";
-    }
-
-    @GetMapping("/europe")
-    public String camping_europe() {
-        return "camping_europe";
-    }
 
 
 

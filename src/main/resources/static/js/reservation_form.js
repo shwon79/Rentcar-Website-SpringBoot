@@ -191,8 +191,6 @@ const reserveMonthlyRent = () => {
             pickupPlace: pickupPlace
         }
 
-        console.log(data);
-
         let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
 
         if (reserveConfirm) {

@@ -1,11 +1,15 @@
 package kr.carz.savecar.controller;
 
+import kr.carz.savecar.dto.DiscountSaveDTO;
 import kr.carz.savecar.domain.*;
+import kr.carz.savecar.dto.ExplanationDTO;
+import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,12 +30,21 @@ public class AdminController {
     ReservationService reservationService;
     DiscountService discountService;
     MorenReservationService morenReservationService;
+    ExplanationService explanationService;
+    CampingcarReservationService campingcarReservationService;
+    CalendarTimeService calendarTimeService;
+    CampingCarPriceService campingCarPriceService;
+    CalendarDateService calendarDateService;
+    DateCampingService dateCampingService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
                            LoginService loginService, ReservationService reservationService,
-                           DiscountService discountService, MorenReservationService morenReservationService) {
+                           DiscountService discountService, MorenReservationService morenReservationService,
+                           ExplanationService explanationService, CampingcarReservationService campingcarReservationService,
+                           CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
+                           CalendarDateService calendarDateService, DateCampingService dateCampingService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -40,11 +53,23 @@ public class AdminController {
         this.reservationService = reservationService;
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
+        this.explanationService = explanationService;
+        this.campingcarReservationService = campingcarReservationService;
+        this.calendarTimeService = calendarTimeService;
+        this.campingCarPriceService = campingCarPriceService;
+        this.calendarDateService = calendarDateService;
+        this.dateCampingService = dateCampingService;
     }
+
+    @Value("${coolsms.api_key}")
+    private String api_key;
+
+    @Value("${coolsms.api_secret}")
+    private String api_secret;
 
     @GetMapping("/admin/login")
     public String login() {
-        return "admin_login";
+        return "admin/login";
     }
 
     //로그인
@@ -61,8 +86,9 @@ public class AdminController {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
 
-            // admin view로 넘기기
-            mav.setViewName("admin_campingcar_menu");
+            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
+            mav.addObject("campingCarReservationList", campingCarReservationList);
+            mav.setViewName("admin/campingcar_menu");
 
         } catch (NullPointerException e){
 
@@ -72,7 +98,7 @@ public class AdminController {
             out.flush();
 
             // 다시 login page로 back
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         }
         return mav;
     }
@@ -94,7 +120,7 @@ public class AdminController {
         out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
         out.flush();
 
-        mav.setViewName("admin_login");
+        mav.setViewName("admin/login");
 
         return mav;
     }
@@ -116,11 +142,38 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
 
-            // admin view로 넘기기
-            mav.setViewName("admin_campingcar_menu");
+            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
+            mav.addObject("campingCarReservationList", campingCarReservationList);
+            mav.setViewName("admin/campingcar_menu");
+        }
+
+        return mav;
+    }
+
+    // [관리자 메인페이지] 캠핑카 예약내역 detail 페이지로 입장
+    @GetMapping(value = "/admin/campingcar/detail/{reservationId}")
+    @ResponseBody
+    public ModelAndView get_admin_campincar_detail(HttpServletResponse res, HttpServletRequest req, @PathVariable Long reservationId) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin/login");
+        } else {
+
+            Optional<CampingCarReservation> campingCarReservation = campingcarReservationService.findById(reservationId);
+            mav.addObject("campingCarReservation", campingCarReservation.get());
+            mav.setViewName("admin/campingcar_detail");
         }
 
         return mav;
@@ -141,12 +194,12 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
 
             List<Reservation> reservationList = reservationService.findAllReservations();
             mav.addObject("reservationList", reservationList);
-            mav.setViewName("admin_counsel_menu");
+            mav.setViewName("admin/counsel_menu");
         }
 
         return mav;
@@ -169,11 +222,11 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
             List<Discount> discountList = discountService.findAllDiscounts();
             mav.addObject("discountList", discountList);
-            mav.setViewName("admin_discount_menu");
+            mav.setViewName("admin/discount_menu");
         }
 
         return mav;
@@ -193,12 +246,12 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
 
             List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
             mav.addObject("morenReservationList", morenReservationList);
-            mav.setViewName("admin_moren_reservation_menu");
+            mav.setViewName("admin/moren_reservation_menu");
         }
 
         mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate).reversed());
@@ -220,24 +273,181 @@ public class AdminController {
             out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin_login");
+            mav.setViewName("admin/login");
         } else {
             Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
             if (morenReservation.isPresent()){
                 mav.addObject("morenReservationDTO", morenReservation.get());
-                mav.setViewName("admin_moren_reservation_detail");
+                mav.setViewName("admin/moren_reservation_detail");
             } else {
                 res.setContentType("text/html; charset=UTF-8");
                 PrintWriter out = res.getWriter();
                 out.println("<script>alert('해당 차량 정보를 찾을 수 없습니다.'); </script>");
                 out.flush();
 
-                mav.setViewName("admin_moren_reservation_menu");
+                mav.setViewName("admin/moren_reservation_menu");
             }
         }
 
         return mav;
     }
+
+
+
+    // [관리자 메인페이지] 캠핑카 기본설정 메뉴로 입장
+    @GetMapping(value = "/admin/setting/menu")
+    @ResponseBody
+    public ModelAndView get_setting_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
+
+        if(session.getAttribute("user") == null){
+
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin/login");
+        } else {
+            mav.addObject("explanation",explanation.get());
+            mav.setViewName("admin/setting_menu");
+        }
+
+        return mav;
+    }
+
+
+    // 캠핑카 예약 수정하기 api
+    @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
+    @ResponseBody
+    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarReservation> campingCarReservationOptional = campingcarReservationService.findById(reservationId);
+        CampingCarReservation campingCarReservation = campingCarReservationOptional.get();
+        String [] splitedRentDate = campingCarReservation.getRentDate().split("-");
+        String [] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
+
+        if (splitedRentDate.length < 3){
+            System.out.println("날짜 형식 오류");
+            jsonObject.put("result", 0);
+        } else {
+            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservation.getCarType());
+
+            CalendarDate calendarStartDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
+            CalendarDate calendarEndDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedReturnDate[1], splitedReturnDate[2], splitedReturnDate[0]);
+
+            List<DateCamping> dateCampingList = dateCampingService.findByCarNameAndDateIdGreaterThanEqualAndDateIdLessThanEqual(campingCarPrice, calendarStartDate, calendarEndDate);
+
+            int dateCampingListSize = dateCampingList.size();
+            for(int i=0; i<dateCampingListSize; i++){
+                List<CalendarTime> calendarTimeList;
+                DateCamping dateCamping = dateCampingList.get(i);
+
+                if(i==0 && !campingCarReservation.getRentTime().equals("10시")){
+                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(dateCamping.getDateId(),campingCarPrice, campingCarReservation.getRentTime());
+                } else if(i==dateCampingListSize-1 && !campingCarReservation.getReturnTime().equals("18시")){
+                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(),campingCarPrice, campingCarReservation.getReturnTime());
+                } else{
+                    calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCamping.getDateId(), campingCarPrice);
+                    dateCampingList.get(i).setReserved("1");
+                }
+
+                for(int j=0; j<calendarTimeList.size(); j++){
+                    calendarTimeList.get(j).setReserveComplete("1");
+                    calendarTimeService.save(calendarTimeList.get(j));
+                }
+            }
+            campingCarReservationOptional.get().setReservation(1);
+            campingcarReservationService.save(campingCarReservationOptional.get());
+            jsonObject.put("result", 1);
+
+
+            // 문자전송
+            Message coolsms = new Message(api_key, api_secret);
+            HashMap<String, String> params = new HashMap<>();
+            HashMap<String, String> params2 = new HashMap<>();
+
+
+            /* 세이브카에 예약확인 문자 전송 */
+            params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
+            params.put("from", "01052774113");
+            params.put("type", "LMS");
+
+
+            /* 고객에게 예약확인 문자 전송 */
+
+            params2.put("to", campingCarReservation.getPhone());
+            params2.put("from", "01052774113");  // 16613331 테스트하기
+            params2.put("type", "LMS");
+
+            params.put("text", "[캠핑카 캘린더 예약 확정]\n"
+                    + "성함: " + campingCarReservation.getName() + "\n"
+                    + "전화번호: " + campingCarReservation.getPhone() + "\n"
+                    + "차량명: " + campingCarReservation.getCarType() + "\n"
+                    + "입금자명: " + campingCarReservation.getDepositor() + "\n"
+                    + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
+                    + "대여시간: " + campingCarReservation.getRentTime() + "\n"
+                    + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
+                    + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
+                    + "이용날짜: " + campingCarReservation.getDay() + "\n"
+                    + "총금액: " + campingCarReservation.getTotal() + "\n"
+                    + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
+                    + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
+
+            params2.put("text", "[캠핑카 예약이 완료되었습니다.]" + "\n"
+                    + "성함: " + campingCarReservation.getName() + "\n"
+                    + "전화번호: " + campingCarReservation.getPhone() + "\n"
+                    + "차량명: " + campingCarReservation.getCarType() + "\n"
+                    + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
+                    + "대여시간: " + campingCarReservation.getRentTime() + "\n"
+                    + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
+                    + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
+                    + "입금자명: " + campingCarReservation.getDepositor() + "\n"
+                    + "이용날짜: " + campingCarReservation.getDay() + "\n"
+                    + "총금액: " + campingCarReservation.getTotal() + "\n"
+                    + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
+                    + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
+
+
+            params.put("app_version", "test app 1.2");
+            params2.put("app_version", "test app 1.2");
+
+
+            /* 세이브카에게 문자 전송 */
+
+            try {
+                org.json.simple.JSONObject obj = coolsms.send(params);
+                System.out.println(obj.toString()); //전송 결과 출력
+            } catch (CoolsmsException e) {
+                System.out.println(e.getMessage());
+                System.out.println(e.getCode());
+            }
+
+            /* 고객에게 예약확인 문자 전송 */
+
+            try {
+                org.json.simple.JSONObject obj2 = coolsms.send(params2);
+                System.out.println(obj2.toString()); //전송 결과 출력
+            } catch (CoolsmsException e) {
+                System.out.println(e.getMessage());
+                System.out.println(e.getCode());
+            }
+        }
+
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
 
     // 할인가 적용하기 api
     @PostMapping("/admin/discount")
@@ -361,8 +571,6 @@ public class AdminController {
 
         assert morenReservation != null;
 
-        String api_key = "NCS0P5SFAXLOJMJI";
-        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
         HashMap<String, String> params2 = new HashMap<>();
@@ -456,6 +664,37 @@ public class AdminController {
         } else {
             jsonObject.put("result", 0);
         }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @PostMapping("/admin/setting")
+    @ResponseBody
+    public void post_admin_setting(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
+
+        Optional<Explanation> explanation_optional = explanationService.findById(Long.valueOf(0));
+        Explanation explanation = explanation_optional.get();
+        explanation.setCamper_price(explanationDTO.getCamper_price());
+        explanation.setEurope_basic_option(explanationDTO.getEurope_basic_option());
+        explanation.setLimousine_basic_option(explanationDTO.getLimousine_basic_option());
+        explanation.setTravel_basic_option(explanationDTO.getTravel_basic_option());
+        explanation.setEurope_facility(explanationDTO.getEurope_facility());
+        explanation.setLimousine_facility(explanationDTO.getLimousine_facility());
+        explanation.setTravel_facility(explanationDTO.getTravel_facility());
+        explanation.setRent_policy(explanationDTO.getRent_policy());
+        explanation.setRent_insurance(explanationDTO.getRent_insurance());
+        explanation.setRent_rule(explanationDTO.getRent_rule());
+        explanation.setRefund_policy(explanationDTO.getRefund_policy());
+        explanation.setDriver_license(explanationDTO.getDriver_license());
+
+        explanationService.save(explanation);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);

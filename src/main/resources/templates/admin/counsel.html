@@ -1,0 +1,71 @@
+<!-- 관리자페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+
+    <script th:src="@{/js/admin.js}" defer></script>
+
+
+</head>
+<body>
+<div class="page_wrapper">
+    <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
+    <div class="content_wrapper">
+
+        <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+        <div class="list_container">
+            <div class="reserve_list" id="reserve_list_title">
+                <p class="name">성명</p>
+<!--                <p class="created_date">생성일</p>-->
+<!--                <p class="modified_date">수정일</p>-->
+                <p class="rent_type">유형</p>
+                <p class="product_name">제품명</p>
+                <p class="cars_type">차종</p>
+                <p class="car_size">크기</p>
+                <p class="car_name">차명</p>
+                <p class="mileage">주행거리</p>
+                <p class="deposit">보증금</p>
+                <p class="options">옵션</p>
+                <p class="total">금액</p>
+                <p class="phone">연락처</p>
+            </div>
+            <!--                th:onclick="'location.href = \'/'+${date.dateTimeId}+'\''"-->
+            <div class="reserve_list_wrapper" th:each="i : ${#numbers.sequence(reservationList.size() - 1, 0, -1)}" th:with="reservation=${reservationList[i]}">
+                <div class="reserve_list" >
+<!--                    th:onclick="'location.href = \'/admin/detail/'+${date.dateTimeId}+'\''"-->
+                    <p class="name" th:text="${reservation.name}"></p>
+<!--                    <p class="created_date" th:text="${#strings.arraySplit(date.createdDate, 'T')[0]}"></p>-->
+<!--                    <p class="modified_date" th:text="${#strings.arraySplit(date.modifiedDate, 'T')[0]}"></p>-->
+                    <p class="rent_type" th:text="${reservation.title}"></p>
+                    <p class="product_name" th:text="${reservation.product}"></p>
+                    <p class="cars_type" th:text="${reservation.category1}"></p>
+                    <p class="car_size" th:text="${reservation.category2}"></p>
+                    <p class="car_name" th:text="${reservation.car_name}"></p>
+                    <p class="mileage" th:text="${reservation.mileage}"></p>
+                    <p class="deposit" th:text="${reservation.deposit}"></p>
+                    <p class="options" th:text="${reservation.option}"></p>
+                    <p class="total" th:text="${reservation.price}"></p>
+                    <p class="phone" th:text="${reservation.phoneNo}"></p>
+
+                </div>
+                <!--                    <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>-->
+<!--                <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+date.dateTimeId}">-->
+<!--                    <input th:style="${date.reservation} == 1? 'pointer-events:none; background: gray '" class="set_reserve" type="submit" value="확정"/>-->
+<!--                </form>-->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

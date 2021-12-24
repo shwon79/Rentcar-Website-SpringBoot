@@ -1,5 +1,8 @@
 package kr.carz.savecar.controller;
 
+import kr.carz.savecar.dto.MorenDTO;
+import kr.carz.savecar.dto.MorenReservationDTO;
+import kr.carz.savecar.dto.RealTimeDTO;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
@@ -39,6 +42,12 @@ public class RealtimeRentController {
     /* ======================================================================================== */
     /*                             [New 버전] 실시간 월렌트 예약하기                                */
     /* ======================================================================================== */
+
+    @Value("${coolsms.api_key}")
+    private String api_key;
+
+    @Value("${coolsms.api_secret}")
+    private String api_secret;
 
     @Value("${moren_url}")
     private String moren_url_except_date;
@@ -136,7 +145,7 @@ public class RealtimeRentController {
         model.put("rentTerm", "한달");
         model.put("byOrderEnd",  Comparator.comparing(MorenDTO::getOrderEnd));
 
-        return "rent_month2";
+        return "rent_month/main";
     }
 
 
@@ -316,7 +325,7 @@ public class RealtimeRentController {
         model.put("rentTerm", realTimeDto.getRentTerm());
         model.put("byOrderEnd",  Comparator.comparing(MorenDTO::getOrderEnd));
 
-        return "rent_month2";
+        return "rent_month/main";
     }
 
 
@@ -413,7 +422,7 @@ public class RealtimeRentController {
         model.put("today_format", DateTime.today_date_only());
         model.put("rentStatus", rentStatus);
 
-        return "rent_month2_detail";
+        return "rent_month/detail";
     }
 
 
@@ -424,7 +433,7 @@ public class RealtimeRentController {
         model.put("morenDTO",morenDTO);
         model.put("today_format",DateTime.today_date_only());
 
-        return "rent_month2_reservation_form";
+        return "rent_month/reservation_form";
     }
 
 
@@ -433,7 +442,7 @@ public class RealtimeRentController {
     public String rent_month_detail_form_estimate(ModelMap model, @ModelAttribute MorenDTO morenDTO) {
         model.put("morenDTO",morenDTO);
 
-        return "rent_month2_estimate_form";
+        return "rent_month/estimate_form";
     }
 
 
@@ -444,8 +453,9 @@ public class RealtimeRentController {
 
         morenReservationService.saveDTO(morenReservationDTO);
 
-        String api_key = "NCS0P5SFAXLOJMJI";
-        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
         HashMap<String, String> params2 = new HashMap<>();
@@ -526,9 +536,6 @@ public class RealtimeRentController {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);

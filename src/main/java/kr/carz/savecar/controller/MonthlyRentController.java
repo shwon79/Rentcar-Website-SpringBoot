@@ -6,7 +6,6 @@ import kr.carz.savecar.service.ReservationService;
 import kr.carz.savecar.service.TwoYearlyRentService;
 import kr.carz.savecar.service.YearlyRentService;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,14 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -50,7 +43,7 @@ public class MonthlyRentController {
 
     @GetMapping("/rent/month")
     public String rent_month() {
-        return "rent_month";
+        return "rent_month/main";
     }
 
     @RequestMapping("/rent/month/{category1}/{category2}")
@@ -58,7 +51,7 @@ public class MonthlyRentController {
         model.put("category1", category1);
         model.put("category2", category2);
 
-        return "rent_month";
+        return "rent_month/main";
     }
 
     // 차종 api
@@ -100,7 +93,7 @@ public class MonthlyRentController {
         }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }
@@ -150,7 +143,7 @@ public class MonthlyRentController {
         }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }
@@ -194,7 +187,7 @@ public class MonthlyRentController {
         }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }
@@ -261,7 +254,7 @@ public class MonthlyRentController {
         }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonArray.toString());
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }

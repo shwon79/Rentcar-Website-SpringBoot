@@ -1,7 +1,7 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.MorenReservation;
-import kr.carz.savecar.domain.MorenReservationDTO;
+import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.repository.MorenReservationRepository;
 import org.springframework.transaction.annotation.Transactional;
 
