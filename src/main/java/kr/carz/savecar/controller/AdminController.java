@@ -318,6 +318,59 @@ public class AdminController {
     }
 
 
+    // 캠핑카 예약 수정하기 api
+    @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
+    @ResponseBody
+    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarReservation> campingCarReservationOptional = campingcarReservationService.findById(reservationId);
+        CampingCarReservation campingCarReservation = campingCarReservationOptional.get();
+        String [] splitedRentDate = campingCarReservation.getRentDate().split("-");
+        String [] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
+
+        if (splitedRentDate.length < 3){
+            System.out.println("날짜 형식 오류");
+            jsonObject.put("result", 0);
+        } else {
+            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservation.getCarType());
+
+            CalendarDate calendarStartDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
+            CalendarDate calendarEndDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedReturnDate[1], splitedReturnDate[2], splitedReturnDate[0]);
+
+            List<DateCamping> dateCampingList = dateCampingService.findByCarNameAndDateIdGreaterThanEqualAndDateIdLessThanEqual(campingCarPrice, calendarStartDate, calendarEndDate);
+
+            int dateCampingListSize = dateCampingList.size();
+            for(int i=0; i<dateCampingListSize; i++){
+                List<CalendarTime> calendarTimeList;
+                DateCamping dateCamping = dateCampingList.get(i);
+
+                if(i==0 && !campingCarReservation.getRentTime().equals("10시")){
+                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(dateCamping.getDateId(),campingCarPrice, campingCarReservation.getRentTime());
+                } else if(i==dateCampingListSize-1 && !campingCarReservation.getReturnTime().equals("18시")){
+                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(),campingCarPrice, campingCarReservation.getReturnTime());
+                } else{
+                    calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCamping.getDateId(), campingCarPrice);
+                    dateCampingList.get(i).setReserved("1");
+                }
+
+                for(int j=0; j<calendarTimeList.size(); j++){
+                    calendarTimeList.get(j).setReserveComplete("1");
+                    calendarTimeService.save(calendarTimeList.get(j));
+                }
+            }
+            campingCarReservationOptional.get().setReservation(1);
+            jsonObject.put("result", 1);
+        }
+
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
 
 
 

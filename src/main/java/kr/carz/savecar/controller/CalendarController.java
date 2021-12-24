@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import net.nurigo.java_sdk.api.Message;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -85,42 +86,6 @@ public class CalendarController {
         return std_data_format.format(cal.getTime());
     }
 
-
-    // 캠핑카 예약 수정하기 api
-    @PutMapping(value = "/admin/campingcar/reservation/{carType}/{rentDate}/{rentTime}/{day}")
-    @ResponseBody
-    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable String carType, @PathVariable String rentDate, @PathVariable String rentTime, @PathVariable String day) throws Exception {
-
-        JSONObject jsonObject = new JSONObject();
-        String [] splitedRentDate = rentDate.split(".");
-
-        if (splitedRentDate.length < 4){
-            System.out.println("날짜 형식 오류");
-            jsonObject.put("result", 0);
-        } else {
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-            CalendarDate calendarStartDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
-            Long startDateId = calendarStartDate.getDateId();
-
-            String startDate = splitedRentDate[0] + String.format("%02d", splitedRentDate[1]) + String.format("%02d", splitedRentDate[2]);
-            String endDate = AddDate(startDate, 0, 0, Integer.valueOf(day));
-
-            CalendarDate calendarEndDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
-            Long endDateId = calendarEndDate.getDateId();
-
-//            CalendarTime calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, rentTime);
-//
-//            DateCamping dateCamping = dateCampingService.findByDateIdAndCarName(calendarDate, campingCarPrice);
-//            dateCamping.setReserved("1");
-
-        }
-
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
-    }
 
 
 

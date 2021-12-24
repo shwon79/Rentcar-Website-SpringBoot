@@ -1,9 +1,6 @@
 package kr.carz.savecar.service;
 
-import kr.carz.savecar.domain.CalendarDate;
-import kr.carz.savecar.domain.CalendarTime;
-import kr.carz.savecar.domain.CampingCar;
-import kr.carz.savecar.domain.CampingCarPrice;
+import kr.carz.savecar.domain.*;
 import kr.carz.savecar.repository.CalendarTimeRepository;
 import kr.carz.savecar.repository.CampingCarRepository;
 
@@ -29,6 +26,16 @@ public class CalendarTimeService {
     }
     public CalendarTime findCalendarTimeByTimeId(Long timeId){
         return calendarTimeRepository.findByTimeId(timeId);
+    }
+
+    public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(CalendarDate date_id, CampingCarPrice car_name, String start_date){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(date_id, car_name, start_date);
+    }
+    public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeLessThanEqual(CalendarDate date_id,CampingCarPrice car_name, String start_date){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeLessThanEqual(date_id, car_name, start_date);
+    }
+    public void save(CalendarTime calendarTime){
+        calendarTimeRepository.save(calendarTime);
     }
 
 }
