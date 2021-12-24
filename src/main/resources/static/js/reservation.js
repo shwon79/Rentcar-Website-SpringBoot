@@ -166,7 +166,7 @@ function reserveDone() {
             reservation: 0,
             day: useDay
         }
-        // console.log(data);
+        console.log(rentEndDate);
 
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
 
@@ -190,25 +190,6 @@ function reserveDone() {
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             })
-
-            // let url = '';
-            // fetch(url, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(data),
-            // })
-            //     .then(response => response.json())
-            //     .then(result => {
-            //         if (result[0] == "1") {
-            //             alert('캠핑카 예약 대기 신청이 완료되었습니다.');
-            //             let now = new Date();
-            //             let year = now.getFullYear();
-            //             let month = now.getMonth() + 1;
-            //             window.location.href = '/camping/calendar' + year + '/' + month;
-            //         } else if (result[0] == "0") alert('이용할 수 없는 날짜입니다.')
-            //     })
         }
     }
 }

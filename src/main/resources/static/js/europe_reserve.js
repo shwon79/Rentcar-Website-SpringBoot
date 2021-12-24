@@ -381,21 +381,17 @@ const daysSelect = () => {
 
     let startDate = new Date(year, month-1, day);
 
-    let calYear;
-    let calMonth;
-    let calDate;
+    let calYear, calMonth, calDate;
     if (select.value === '한달') {
         startDate.setMonth(startDate.getMonth() + 1);
         calYear = startDate.getFullYear();
         calMonth = startDate.getMonth() + 1;
         calDate = day;
-        console.log(calYear);
     } else {
         startDate.setDate(startDate.getDate() + plus);
         calYear = startDate.getFullYear();
         calMonth = startDate.getMonth() + 1;
         calDate = startDate.getDate();
-        console.log(calYear);
     }
 
     fullReturnDate.innerText = calYear + '년 ' + calMonth + '월 ' + calDate + '일';
