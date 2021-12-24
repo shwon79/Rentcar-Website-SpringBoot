@@ -151,7 +151,7 @@
 
 
                                         <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:title="${date.season}"
-                                               th:name="${date.year}" th:text="${date.day}" onclick="sendRentDate(id, name, value); displayResultWrapper();"/>
+                                               th:name="${date.year}" th:text="${date.day}" onclick="sendRentDate(id, name, value); "/>
                                     </label>
 
                                 </div>
@@ -176,31 +176,31 @@
                     <div id="calendar_rental_time" class="row" style="display: none;">
                         <div class="time_options">
                             <label for="10시">
-                                <input type="radio" id="10시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 10시
+                                <input type="radio" id="10시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 10시
                             </label>
                             <label for="11시">
-                                <input type="radio" id="11시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 11시
+                                <input type="radio" id="11시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 11시
                             </label>
                             <label for="12시">
-                                <input type="radio" id="12시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 12시
+                                <input type="radio" id="12시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 12시
                             </label>
                             <label for="13시">
-                                <input type="radio" id="13시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 13시
+                                <input type="radio" id="13시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 13시
                             </label>
                             <label for="14시">
-                                <input type="radio" id="14시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 14시
+                                <input type="radio" id="14시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 14시
                             </label>
                             <label for="15시">
-                                <input type="radio" id="15시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 15시
+                                <input type="radio" id="15시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 15시
                             </label>
                             <label for="16시">
-                                <input type="radio" id="16시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 16시
+                                <input type="radio" id="16시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 16시
                             </label>
                             <label for="17시">
-                                <input type="radio" id="17시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 17시
+                                <input type="radio" id="17시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 17시
                             </label>
                             <label for="18시">
-                                <input type="radio" id="18시" class="rent_time_radio" name="time1" onclick="sendRentTime(id); displayResultWrapper();" /> 18시
+                                <input type="radio" id="18시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 18시
                             </label>
                         </div>
                         <p class="description_time"><span style="color: red">* </span>6시 이후 대여 및 반납은 전화 문의 해주시기 바랍니다.</p>
@@ -222,7 +222,7 @@
                                 <div class="date_menu"><h5>렌트 일자</h5></div>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="background: white; border-left: 2.5px solid black;">
-                                <select name="days" id="days_select" onchange="daysSelect(); displayResultWrapper();">
+                                <select name="days" id="days_select" onchange="daysSelect();">
                                     <option value="">클릭하세요&nbsp;</option>
                                     <option value="1">1일&nbsp;</option>
                                     <option value="2">2일&nbsp;</option>
@@ -305,7 +305,7 @@
 <!--                    </div>-->
 
                     <!--선택 사항-->
-                    <div class="row result_wrapper" style="display: none;">
+                    <div class="row result_wrapper">
                         <p class="row title"><span>선택 사항</span></p>
                         <div class="result_box">
                             <div class="result_date">
