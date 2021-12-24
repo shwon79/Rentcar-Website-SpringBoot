@@ -431,6 +431,7 @@ saveBtn.addEventListener('click', () => {
     }).done(function (result) {
         if (result.result == 1) {
             alert('완료되었습니다.');
+            window.location.href = '/admin/setting/menu';
         } else {
             alert('문제가 생겼습니다.');
         };
@@ -438,3 +439,25 @@ saveBtn.addEventListener('click', () => {
         alert(JSON.stringify(error));
     })
 })
+
+function setCampingReserve(id) {
+    let confirm = confirm('예약을 확정하시겠습니까?');
+
+    if (confirm) {
+        $.ajax({
+            type:'PUT',
+            url:'/admin/campingcar/reservation/' + id,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8'
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('캠핑카 예약이 확정되었습니다.');
+            } else if (result.result == 0) {
+                alert('캠핑카 예약에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/campingcar/menu';
+        }).fail(function (error) {용
+            alert(JSON.stringify(error));
+        })
+    };
+};
