@@ -441,9 +441,9 @@ saveBtn.addEventListener('click', () => {
 })
 
 function setCampingReserve(id) {
-    let confirm = confirm('예약을 확정하시겠습니까?');
+    let checkConfirm = confirm('예약을 확정하시겠습니까?');
 
-    if (confirm) {
+    if (checkConfirm) {
         $.ajax({
             type:'PUT',
             url:'/admin/campingcar/reservation/' + id,

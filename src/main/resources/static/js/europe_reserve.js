@@ -133,6 +133,23 @@ function sendRentDate(id, year, wDay) {
     rentDateNum = id;
     calendarRentalTime.style.display = 'grid';
 
+    let availableDays = 0;
+
+    console.log(carType);
+    console.log(rentDateYear);
+    console.log(rentDateMonth);
+    console.log(rentDateDay);
+    //선택 불가능한 가까운 날짜 받아오기
+    fetch(`/${carType}/getrentdate/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
+        .then(res => res.json())
+        .then(result => {
+            // 현재 남아있는 options 없애기
+            let targetSelect = document.getElementById('days_select');
+            targetSelect.options.length = 0;
+            availableDays = result[0];
+            console.log(availableDays);
+            makeOptions(availableDays)
+        })
 }
 // const sendRentDate = (id, year, wDay) => {
 //     console.log(id);
