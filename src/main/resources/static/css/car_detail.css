@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
 }
-
+/**/
 .nav-tabs button {
     background-color: black;
     color: white;
@@ -183,10 +183,6 @@
 
 .date_time_form {
     display: flex;
-    justify-content: space-between;
-.info_table {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 .selectRentermKilometerBox {
