@@ -344,7 +344,7 @@ public class CalendarController {
 
 
     // 캠핑카 예약 저장 api
-    @PostMapping("/camping/calendar/reserve")
+    @RequestMapping(value = "/camping/calendar/reserve", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public void camping_calendar_reservation(HttpServletResponse res, @RequestBody CampingCarReservationDTO dto) throws IOException{
 
