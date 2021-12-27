@@ -25,3 +25,9 @@ let thisMonthOnCalendar = hiddenOnlythisMonth.dataset.index;
 if (curMonth.getMonth()+1 == thisMonthOnCalendar) {
     hiddenOnlythisMonth.style.display = "none";
 }
+
+// 9월 달력까지만 보이게
+const hiddenFromSep = document.getElementById('hiddenFromSep');
+if (hiddenFromSep.dataset.index == '8') {
+    hiddenFromSep.style.display = 'none';
+}
