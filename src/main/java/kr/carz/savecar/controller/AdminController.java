@@ -448,61 +448,61 @@ public class AdminController {
     }
 
 
-    // 캠핑카 예약 수정하기 api
-    @GetMapping(value = "/admin/campingcar/reservation/{reservationId}")
-    @ResponseBody
-    @Transactional
-    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws Exception {
-
-        Optional<CampingCarReservation> campingCarReservationOptional = campingcarReservationService.findById(reservationId);
-        CampingCarReservation campingCarReservation = campingCarReservationOptional.get();
-        campingCarReservation.setReservation(1);
-
-        JSONObject jsonObject = new JSONObject();
-        String [] splitedRentDate = campingCarReservation.getRentDate().split("-");
-        String [] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
-
-        if (splitedRentDate.length < 3){
-            System.out.println("날짜 형식 오류");
-            jsonObject.put("result", 0);
-        } else {
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservation.getCarType());
-
-            CalendarDate calendarStartDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
-            CalendarDate calendarEndDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedReturnDate[1], splitedReturnDate[2], splitedReturnDate[0]);
-
-            List<DateCamping> dateCampingList = dateCampingService.findByCarNameAndDateIdGreaterThanEqualAndDateIdLessThanEqual(campingCarPrice, calendarStartDate, calendarEndDate);
-
-            int dateCampingListSize = dateCampingList.size();
-
-            for(int i=0; i<dateCampingListSize; i++){
-                List<CalendarTime> calendarTimeList;
-
-                if (i == 0 && !campingCarReservation.getRentTime().equals("10시")){
-                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(dateCampingList.get(i).getDateId(), campingCarPrice, campingCarReservation.getRentTime());
-
-                } else if(i == dateCampingListSize-1 && !campingCarReservation.getReturnTime().equals("18시")){
-                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCampingList.get(i).getDateId(), campingCarPrice, campingCarReservation.getReturnTime());
-                } else {
-                    calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCampingList.get(i).getDateId(), campingCarPrice);
-
-                    dateCampingList.get(i).setReserved("1");
-                }
-
-                for(int j=0; j<calendarTimeList.size(); j++){
-                    calendarTimeList.get(j).setReserveComplete("1");
-                }
-            }
-            jsonObject.put("result", 1);
-        }
-
-        campingcarReservationService.save(campingCarReservation);
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
-    }
+//    // 캠핑카 예약 수정하기 api
+//    @GetMapping(value = "/admin/campingcar/reservation/{reservationId}")
+//    @ResponseBody
+//    @Transactional
+//    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws Exception {
+//
+//        Optional<CampingCarReservation> campingCarReservationOptional = campingcarReservationService.findById(reservationId);
+//        CampingCarReservation campingCarReservation = campingCarReservationOptional.get();
+//        campingCarReservation.setReservation(1);
+//
+//        JSONObject jsonObject = new JSONObject();
+//        String [] splitedRentDate = campingCarReservation.getRentDate().split("-");
+//        String [] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
+//
+//        if (splitedRentDate.length < 3){
+//            System.out.println("날짜 형식 오류");
+//            jsonObject.put("result", 0);
+//        } else {
+//            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservation.getCarType());
+//
+//            CalendarDate calendarStartDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
+//            CalendarDate calendarEndDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedReturnDate[1], splitedReturnDate[2], splitedReturnDate[0]);
+//
+//            List<DateCamping> dateCampingList = dateCampingService.findByCarNameAndDateIdGreaterThanEqualAndDateIdLessThanEqual(campingCarPrice, calendarStartDate, calendarEndDate);
+//
+//            int dateCampingListSize = dateCampingList.size();
+//
+//            for(int i=0; i<dateCampingListSize; i++){
+//                List<CalendarTime> calendarTimeList;
+//
+//                if (i == 0 && !campingCarReservation.getRentTime().equals("10시")){
+//                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(dateCampingList.get(i).getDateId(), campingCarPrice, campingCarReservation.getRentTime());
+//
+//                } else if(i == dateCampingListSize-1 && !campingCarReservation.getReturnTime().equals("18시")){
+//                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCampingList.get(i).getDateId(), campingCarPrice, campingCarReservation.getReturnTime());
+//                } else {
+//                    calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCampingList.get(i).getDateId(), campingCarPrice);
+//
+//                    dateCampingList.get(i).setReserved("1");
+//                }
+//
+//                for(int j=0; j<calendarTimeList.size(); j++){
+//                    calendarTimeList.get(j).setReserveComplete("1");
+//                }
+//            }
+//            jsonObject.put("result", 1);
+//        }
+//
+//        campingcarReservationService.save(campingCarReservation);
+//
+//        PrintWriter pw = res.getWriter();
+//        pw.print(jsonObject);
+//        pw.flush();
+//        pw.close();
+//    }
 
 
 
