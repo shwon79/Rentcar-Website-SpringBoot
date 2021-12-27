@@ -436,41 +436,57 @@ public class CalendarController {
 
 
 
-    // 선택 불가능한 가까운 날짜 받아오기
-//    @GetMapping(value = "/camping/calendar/impossible/{carType}/{dateId}")
-//    @ResponseBody
-//    public void send_(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId) throws IOException {
-//
-//        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(dateId);
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-//        dateCampingService.findByDateIdAndCarName(calendarDate, campingCarPrice);
-//
-//
-//        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
-//
-//
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-//
-//        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
-//        List <String> categoryList2 = new ArrayList();
-//
-//        for (int i = 0; i < calendarTimeList.size(); i++) {
-//            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
-//
-//                categoryList2.add(calendarTimeList.get(i).getReserveTime());
-//            }
-//        }
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for (String c : categoryList2) {
-//            jsonArray.put(c);
-//        }
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonArray);
-//        pw.flush();
-//        pw.close();
-//    }
+    // 예약 가능한 날짜 가져오기
+    @GetMapping("/camping/calendar/possible/{carType}/{dateId}/{reserveTime}")
+    @ResponseBody
+    public void get_impossible_date(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId, @PathVariable String reserveTime) throws Exception {
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        CalendarDate calendarStartDate = calendarDateService.findCalendarDateByDateId(dateId);
+
+        String startDate = calendarStartDate.getYear() + String.format("%02d", Integer.parseInt(calendarStartDate.getMonth()) ) + String.format("%02d", Integer.parseInt(calendarStartDate.getDay()) );
+
+        int [] nextMonthDate = DateStringToInt(AddDate(startDate, 0, 1, 0));
+
+        CalendarDate calendarNextMonthDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(Integer.toString(nextMonthDate[1]), Integer.toString(nextMonthDate[2]), Integer.toString(nextMonthDate[0]));
+
+        int possible_days = 0;
+        int extra_time = 0;
+        int extra_time_flg = 0;
+        for(Long i=dateId+1; i<=calendarNextMonthDate.getDateId(); i++){
+            CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(i);
+            CalendarTime calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, reserveTime);
+            if(calendarTime.getReserveComplete().equals("0")){
+                possible_days += 1;
+            } else {
+                Long lastDateId = i - 1;
+                CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(lastDateId);
+                CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
+                for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
+                    CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
+                    if(calendarExtraTime.getReserveComplete().equals("0")){
+                        extra_time += 1;
+                    } else {
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        if(extra_time == 3){
+            extra_time_flg = 1;
+        }
+
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("possible_days", possible_days);
+        jsonObject.put("extra_time_flg", extra_time_flg);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 
 
 }
