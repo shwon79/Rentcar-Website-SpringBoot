@@ -154,7 +154,7 @@ p {
 }
 
 .downside a:hover {
-  color: indianred;
+  color: blue;
 }
 
 .day:nth-child(7n + 1),
@@ -272,7 +272,6 @@ a:hover {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /*background-color: aliceblue;*/
     border-radius: 50%;
   }
 
@@ -294,10 +293,8 @@ a:hover {
   }
 
   .detail_wrapper div {
-    margin: 1rem 0;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     width: 80%;
-    border-radius: 5vh;
   }
 
   .calendar_content .title {
@@ -307,38 +304,33 @@ a:hover {
     font-size: 26px;
   }
 
-  a .detail_selections {
+  #day_detail a {
     width: 100%;
+  }
+  .detail_selections {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
     background-color: white;
-    border: 1px solid lightgrey;
+    align-items: center;
   }
-  a .detail_selections:hover {
-    background-color: lightgrey;
-    border: 1px solid gray;
-  }
-  a .detail_selections:hover span {
+  .detail_selections button {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    background: royalblue;
     color: white;
   }
-
-  /*.detail_selections span {*/
-  /*  color: #6f6f6f;*/
-  /*}*/
-
-  a .detail_selections span {
-    color: black;
-  }
-
-  .detail_selections {
-    background-color: #646464;
+  .detail_selections button:disabled {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    background: lightgrey;
+    color: white;
   }
   .detail_selections span {
-    color: white;
+    color: black;
   }
-
-  .detail_wrapper a {
-    width: 80%;
-  }
-
 }
 
 @media (max-width: 600px) {
