@@ -32,7 +32,7 @@
                 <table id="morenReservationTable">
                     <thead id="table_header">
                     <tr>
-                        <th>예약 신청 시간</th>
+                        <th style="width: 90px;">예약 신청 시간</th>
                         <th>차량 번호</th>
                         <th>이름</th>
                         <th>전화번호</th>
@@ -44,7 +44,7 @@
                     </tr>
                     </thead>
                     <!-- pc -->
-                    <tbody id="mainTable_tbody" th:each="reservation, iterStat : ${morenReservationList}">
+                    <tbody id="mainTable_tbody" th:each="reservation, iterStat : ${#lists.sort(morenReservationList, byTime)}">
                         <tr th:if="${reservation.reservationStatus == '-1' }" class="red-line" th:data-index="${reservation.id}">
                             <td scope="col" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></td>
                             <td scope="col" class="carNo" th:text="${reservation.carNo}" th:data-index="${reservation.id}"></td>
@@ -54,7 +54,10 @@
                             <td scope="col" class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
-                            <td scope="col" th:text="${reservation.carAmountTotal}" class="number"></td>
+                            <td scope="col">
+                                <span th:text="${reservation.carAmountTotal}" class="number"></span>
+                                <span>원</span>
+                            </td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td></td>
@@ -76,7 +79,10 @@
                             <td scope="col" class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
-                            <td scope="col" class="number" th:text="${reservation.carAmountTotal}"></td>
+                            <td scope="col">
+                                <span class="number" th:text="${reservation.carAmountTotal}"></span>
+                                <span>원</span>
+                            </td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="costPerKm" th:text="${reservation.costPerKm}" style="display: none;" th:data-index="${reservation.id}"></td>
@@ -89,13 +95,15 @@
                             <td scope="col" class="carCode" th:text="${reservation.carCode}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="pickupPlace" th:text="${reservation.pickupPlace}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td>
-                                <span><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
-                                <span><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>
+                                <p><button class="reservation-delete-btn" th:data-index="${reservation.id}" style="word-break: keep-all; width: 100%;">취소</button></p>
+                                <p><button class="reservation-confirm-btn" th:data-index="${reservation.id}" style="word-break: keep-all; width: 100%;">확정</button></p>
                             </td>
                             <td>
                                 <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
                                     <button style="width: 100%;">상세 페이지</button>
                                 </a>
+                            </td>
+                            <td class="no-line-column">
                             </td>
                         </tr>
                         <tr th:if="${reservation.reservationStatus == '1' }" class="blue-line" th:data-index="${reservation.id}">
@@ -107,7 +115,10 @@
                             <td scope="col" class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></td>
-                            <td scope="col" th:text="${reservation.carAmountTotal}"></td>
+                            <td scope="col">
+                                <span th:text="${reservation.carAmountTotal}"></span>
+                                <span>원</span>
+                            </td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td></td>
@@ -125,7 +136,7 @@
 
                 <!-- Mobile --->
                 <div id="morenReservationCard">
-                    <div class="card" th:each="reservation, iterStat : ${morenReservationList}">
+                    <div class="card" th:each="reservation, iterStat : ${#lists.sort(morenReservationList, byTime)}">
                         <p>예약 신청 시간: <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></span></p>
                         <p>차량 번호: <span th:text="${reservation.carNo}"></span></p>
                         <p>이름: <span th:text="${reservation.reservationName}"></span></p>

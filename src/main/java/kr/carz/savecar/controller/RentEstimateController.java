@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 @Controller
-public class MonthlyRentController {
+public class RentEstimateController {
 
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
@@ -26,8 +26,8 @@ public class MonthlyRentController {
     private final ReservationService reservationService;
 
     @Autowired
-    public MonthlyRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
-                                 ReservationService reservationService) {
+    public RentEstimateController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
+                                  ReservationService reservationService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
@@ -41,21 +41,21 @@ public class MonthlyRentController {
 
 
 
-    @GetMapping("/rent/month")
+    @GetMapping("/rent/estimate")
     public String rent_month() {
-        return "rent_month/main";
+        return "rent_month/original";
     }
 
-    @RequestMapping("/rent/month/{category1}/{category2}")
+    @RequestMapping("/rent/estimate/{category1}/{category2}")
     public String handleRequest(ModelMap model, @PathVariable("category1") String category1, @PathVariable("category2") String category2) throws Exception {
         model.put("category1", category1);
         model.put("category2", category2);
 
-        return "rent_month/main";
+        return "rent_month/original";
     }
 
     // 차종 api
-    @RequestMapping(value = "/rent/month/{period}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
+    @RequestMapping(value = "/rent/estimate/{period}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void get_monthly_rent_category1(HttpServletResponse res, HttpServletRequest req, @PathVariable String period) throws IOException {
 
@@ -99,14 +99,12 @@ public class MonthlyRentController {
     }
 
     //차 분류api
-    @RequestMapping(value = "/rent/month/{period}/{category1}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
+    @RequestMapping(value = "/rent/estimate/{period}/{category1}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable String period, @PathVariable String category1) throws IOException {
 
 
         List<String> categoryList2 = new ArrayList();
-
-
 
         if (period.equals("rentMonth")) {
             List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
@@ -149,12 +147,11 @@ public class MonthlyRentController {
     }
 
     // 차명 api
-    @RequestMapping(value = "/rent/month/{period}/name/{category1}/{category2}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
+    @RequestMapping(value = "/rent/estimate/{period}/name/{category1}/{category2}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void get_monthly_rent_name(HttpServletResponse res, @PathVariable String period, @PathVariable String category1, @PathVariable String category2) throws IOException {
 
         HashSet<String> categoryList = new HashSet<String>();
-
 
         if (period.equals("rentMonth")) {
             List<MonthlyRent> monthlyRents = monthlyRentService.findNameOfMonthlyRents(category1, category2);
@@ -193,7 +190,7 @@ public class MonthlyRentController {
     }
 
     //가격 구하는 api
-    @RequestMapping(value = "/rent/month/{period}/price/{carName}/{mileage}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
+    @RequestMapping(value = "/rent/estimate/{period}/price/{carName}/{mileage}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void get_monthly_price(HttpServletResponse res, @PathVariable String period, @PathVariable String carName, @PathVariable String mileage) throws IOException {
 

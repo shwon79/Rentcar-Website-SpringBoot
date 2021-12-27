@@ -254,6 +254,8 @@ public class AdminController {
             mav.setViewName("admin/moren_reservation_menu");
         }
 
+        mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate).reversed());
+
         return mav;
     }
 
@@ -448,7 +450,7 @@ public class AdminController {
 
 
     // 할인가 적용하기 api
-    @PostMapping("/admin/discount")
+    @RequestMapping(value = "/admin/discount", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public void save_discount(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
 
@@ -669,8 +671,7 @@ public class AdminController {
         pw.close();
     }
 
-
-    @PostMapping("/admin/setting")
+    @RequestMapping(value = "/admin/setting", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public void post_admin_setting(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
 

@@ -3,7 +3,7 @@
     margin-bottom: 3rem;
 }
 .company_info_table {
-    width: 25%;
+    width: 180px;
     background: white;
     position: absolute;
     top: 3rem;
@@ -53,4 +53,62 @@
 }
 .signup td {
     padding: 10px;
+}
+
+.responsive_width_10_86,
+.responsive_width_10_50 {
+    width: 10%;
+}
+.responsive_width_20_86,
+.responsive_width_10_64 {
+    width: 20%;
+}
+
+.responsive_table {
+    display: flex;
+    flex-direction: row;
+}
+.responsive_width_auto_100 {
+    width: auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: auto !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .company_info_table {
+        position: revert;
+    }
+}
+
+@media (max-width: 895px) {
+    .responsive_width_10_86 {
+        min-width: 86px;
+    }
+    .responsive_width_20_86 {
+        min-width: 86px;
+        width: 10%;
+    }
+    .responsive_width_20_64 {
+        min-width: 64px;
+        width: 10%;
+    }
+    .responsive_width_10_50 {
+        min-width: 50px;
+    }
+    .responsive_table {
+        flex-direction: column;
+    }
+    .responsive_width_auto_100 {
+        width: 100px;
+    }
+    .hidden-mobile {
+        display: none;
+    }
+    .border_none {
+        border-top: none;
+    }
 }
