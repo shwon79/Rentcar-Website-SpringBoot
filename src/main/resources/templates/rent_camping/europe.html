@@ -154,7 +154,7 @@
 
 
                                         <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:title="${date.season}"
-                                               th:name="${date.year}" th:text="${date.day}" onclick="sendRentDate(id, name, value); "/>
+                                               th:name="${date.year}" th:text="${date.day}" th:onclick="'sendRentDate(id, name, value, '+${date.dateId}+')'" />
                                     </label>
 
                                 </div>
@@ -219,51 +219,53 @@
                         </div>
                     </div>
 
+                    <!-- 렌트 기간 리스트-->
                     <div id="calendar_rental_period" class="row" style="display: none;">
                         <div class="select_wrapper row" style="margin: 0 0 20px 0; border: 1px solid black;">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
                                 <div class="date_menu"><h5>렌트 일자</h5></div>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="background: white; border-left: 2.5px solid black;">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="background: white; border-left: 2.5px solid black; border-radius: 0 12px 12px 0;">
                                 <select name="days" id="days_select" onchange="daysSelect();">
-                                    <option value="">클릭하세요&nbsp;</option>
-                                    <option value="1">1일&nbsp;</option>
-                                    <option value="2">2일&nbsp;</option>
-                                    <option value="3">3일&nbsp;</option>
-                                    <option value="4">4일&nbsp;</option>
-                                    <option value="5">5일&nbsp;</option>
-                                    <option value="6">6일&nbsp;</option>
-                                    <option value="7">7일&nbsp;</option>
-                                    <option value="8">8일&nbsp;</option>
-                                    <option value="9">9일&nbsp;</option>
-                                    <option value="10">10일&nbsp;</option>
-                                    <option value="11">11일&nbsp;</option>
-                                    <option value="12">12일&nbsp;</option>
-                                    <option value="13">13일&nbsp;</option>
-                                    <option value="14">14일&nbsp;</option>
-                                    <option value="15">15일&nbsp;</option>
-                                    <option value="16">16일&nbsp;</option>
-                                    <option value="17">17일&nbsp;</option>
-                                    <option value="18">18일&nbsp;</option>
-                                    <option value="19">19일&nbsp;</option>
-                                    <option value="20">20일&nbsp;</option>
-                                    <option value="21">21일&nbsp;</option>
-                                    <option value="22">22일&nbsp;</option>
-                                    <option value="23">23일&nbsp;</option>
-                                    <option value="24">24일&nbsp;</option>
-                                    <option value="25">25일&nbsp;</option>
-                                    <option value="26">26일&nbsp;</option>
-                                    <option value="27">27일&nbsp;</option>
-                                    <option value="28">28일&nbsp;</option>
-                                    <option value="29">29일&nbsp;</option>
-                                    <option value="한달">한달&nbsp;</option>
+                                    <option value="">렌트 일자 선택</option>
                                 </select>
+                                <p style="font-size: 15px; text-align: right; margin-top: 10px;"><span style="color: red; font-size: 15px;">* </span>최소 2일 이상 예약 가능합니다.</p>
                             </div>
                         </div>
 <!--                        <label for="days_select">렌트 일자</label>-->
 <!--                        <select name="days" id="days_select" onchange="daysSelect()">-->
 <!--                        </select>-->
 <!--                        <p><span style="color: red">*</span>다음 예약일 전까지 가능한 날짜만큼만 표시됩니다.</p>-->
+                    </div>
+
+
+                    <!-- 추가 시간 -->
+                    <div class="select_wrapper row" style="border: 1px solid black;" onclick="doDisplay('extra_time_options')">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                            <div class="date_menu"><h5>렌트 기간</h5></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="date_time"><h5 id="selected_period" style="word-break: keep-all;">렌트일자를 선택해주세요</h5></div>
+                        </div>
+                    </div>
+
+                    <!-- 추가 시간 리스트-->
+                    <div id="calendar_rental_extra_time" class="row" style="display: none;">
+                        <div class="select_wrapper row" style="margin: 0 0 20px 0; border: 1px solid black;">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                                <div class="date_menu"><h5>렌트 일자</h5></div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="background: white; border-left: 2.5px solid black; border-radius: 0 12px 12px 0;">
+                                <select name="days" id="days_select" onchange="daysSelect();">
+                                    <option value="">렌트 일자 선택</option>
+                                </select>
+                                <p style="font-size: 15px; text-align: right; margin-top: 10px;"><span style="color: red; font-size: 15px;">* </span>최소 2일 이상 예약 가능합니다.</p>
+                            </div>
+                        </div>
+                        <!--                        <label for="days_select">렌트 일자</label>-->
+                        <!--                        <select name="days" id="days_select" onchange="daysSelect()">-->
+                        <!--                        </select>-->
+                        <!--                        <p><span style="color: red">*</span>다음 예약일 전까지 가능한 날짜만큼만 표시됩니다.</p>-->
                     </div>
 
 <!--                    <div>-->

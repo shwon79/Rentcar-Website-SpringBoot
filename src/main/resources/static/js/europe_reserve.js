@@ -3,6 +3,7 @@ function doDisplay(param){
     let calendarRentalDate = document.getElementById("calendar_rental");
     let calendarRentalTime = document.getElementById('calendar_rental_time');
     let calendarRentalPeriod = document.getElementById('calendar_rental_period');
+    let calendarRentalExtraTime = document.getElementById('calendar_rental_extra_time');
 
     switch (param) {
         case 'calendar':
@@ -25,6 +26,14 @@ function doDisplay(param){
             } else {
                 calendarRentalPeriod.style.display = 'none';
             };
+            break;
+        case 'extra_time_options':
+            // if (calendarRentalTime.style.display == 'none') {
+            //     calendarRentalTime.style.display = 'block';
+            // } else {
+            //     calendarRentalTime.style.display = 'none';
+            // };
+            // break;
     }
 }
 
@@ -93,8 +102,10 @@ let rentDateNum='';
 let rentDateYear='';
 let rentDateMonth='';
 let rentDateDay='';
+let dateId = '';
+let reserveTime = '';
 
-function sendRentDate(id, year, wDay) {
+function sendRentDate(id, year, wDay, getdateId) {
     const selectedDate = document.getElementById('selected_date');
     let resultSelectedDate = document.getElementById('display_result_start_date');
     let calendarRentalDate = document.getElementById("calendar_rental");
@@ -133,23 +144,21 @@ function sendRentDate(id, year, wDay) {
     rentDateNum = id;
     calendarRentalTime.style.display = 'grid';
 
-    // let availableDays = 0;
-    //
-    // // console.log(carType);
-    // // console.log(rentDateYear);
-    // // console.log(rentDateMonth);
-    // // console.log(rentDateDay);
-    // //선택 불가능한 가까운 날짜 받아오기
-    // fetch(`/${carType}/getrentdate/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
-    //     .then(res => res.json())
-    //     .then(result => {
-    //         // 현재 남아있는 options 없애기
-    //         let targetSelect = document.getElementById('days_select');
-    //         targetSelect.options.length = 0;
-    //         availableDays = result[0];
-    //         console.log(availableDays);
-    //         makeOptions(availableDays)
-    //     })
+    dateId = getdateId;
+    reserveTime = '10시';
+
+    let availableDays = 0;
+
+    //선택 불가능한 가까운 날짜 받아오기
+    fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}`)
+        .then(res => res.json())
+        .then(result => {
+            // 현재 남아있는 options 없애기
+            let targetSelect = document.getElementById('days_select');
+            targetSelect.options.length = 0;
+            availableDays = result.possible_days;
+            makeOptions(availableDays)
+        })
 }
 // const sendRentDate = (id, year, wDay) => {
 //     console.log(id);
@@ -264,11 +273,10 @@ const makeOptions = (days) => {
         if (i>30) break;
         if (i == 30) {
             createdOpt.text = '한달권';
-            createdOpt.value = i;
+            createdOpt.value = '한달';
         } else if(i == 0) {
-            createdOpt.text = '==렌트 일자 선택(2일이상)==';
+            createdOpt.text = '=렌트 일자 선택=';
             createdOpt.value = 0;
-
         }
         else if (i == 1){
             createdOpt.text = i +'일권(선택 불가)';
@@ -300,6 +308,21 @@ function sendRentTime(id) {
     resultSelectedTime.innerText = id;
     resultSelectedEndTime.innerText = id;
     calendarRentalPeriod.style.display = 'block';
+
+    reserveTime = id;
+
+    //선택 불가능한 가까운 날짜 받아오기
+    fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}`)
+        .then(res => res.json())
+        .then(result => {
+            if(result.extra_time_flg == 0) {
+                console.log('추가 노노');
+            } else {
+                console.log('추가 ok');
+            }
+
+        })
+
 }
 const rentTimeSel = (id) => {
     rentTime = id;
@@ -383,7 +406,7 @@ const daysSelect = () => {
     if (select.value === '한달') {
         selectedPeriod.innerText = select.value;
         param = 30;
-    } else if (select.value === '') {
+    } else if (select.value === 0) {
         selectedPeriod.innerText = '렌트일자를 선택해주세요';
     } else {
         param = plus;
