@@ -453,30 +453,33 @@ public class CalendarController {
         int possible_days = 0;
         int extra_time = 0;
         int extra_time_flg = 0;
-        for(Long i=dateId+1; i<=calendarNextMonthDate.getDateId(); i++){
+
+        Long i;
+        for(i=dateId+1; i<=calendarNextMonthDate.getDateId(); i++){
             CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(i);
             CalendarTime calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, reserveTime);
             if(calendarTime.getReserveComplete().equals("0")){
                 possible_days += 1;
             } else {
-                Long lastDateId = i - 1;
-                CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(lastDateId);
-                CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
-                for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
-                    CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
-                    if(calendarExtraTime.getReserveComplete().equals("0")){
-                        extra_time += 1;
-                    } else {
-                        break;
-                    }
-                }
+                break;
+            }
+        }
+
+        Long lastDateId = i - 1;
+        CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(lastDateId);
+        CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
+
+        for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
+            CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
+            if(calendarExtraTime.getReserveComplete().equals("0")){
+                extra_time += 1;
+            } else {
                 break;
             }
         }
         if(extra_time == 3){
             extra_time_flg = 1;
         }
-
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("possible_days", possible_days);
