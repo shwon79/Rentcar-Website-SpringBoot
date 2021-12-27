@@ -5,6 +5,7 @@ import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -120,7 +121,7 @@ public class CalendarController {
             prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
             nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
 
-            calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
+            calendarDateList = calendarDateService.findByYearAndMonth(Integer.toString(thisYear), Integer.toString(thisMonth));
 
             Long firstDateId = calendarDateList.get(0).getDateId();
             for (int i = 1; i < thisDayOfWeek; i++) {
@@ -132,9 +133,10 @@ public class CalendarController {
 
         } else {
 
-            calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(month));
+            calendarDateList = calendarDateService.findByYearAndMonth(Long.toString(year), Long.toString(month));
 
             Long firstDateId = calendarDateList.get(0).getDateId();
+            System.out.println(firstDateId);
             for (int i = 1; i < thisDayOfWeek; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
@@ -171,7 +173,7 @@ public class CalendarController {
 
         Calendar cal = Calendar.getInstance();
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(clickedMonth));
+        List<CalendarDate> calendarDateList = calendarDateService.findByYearAndMonth(Long.toString(clickedYear), Long.toString(clickedMonth));
 
         // 오늘 날짜
         int thisYear = TodayDateInt()[0];
@@ -434,10 +436,14 @@ public class CalendarController {
 
 
 
-//    // 선택 불가능한 가까운 날짜 받아오기
-//    @RequestMapping(value = "/camping/calendar/{carType}/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+    // 선택 불가능한 가까운 날짜 받아오기
+//    @GetMapping(value = "/camping/calendar/impossible/{carType}/{dateId}")
 //    @ResponseBody
-//    public void send_rent_date_travel(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
+//    public void send_(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId) throws IOException {
+//
+//        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(dateId);
+//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+//        dateCampingService.findByDateIdAndCarName(calendarDate, campingCarPrice);
 //
 //
 //        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
@@ -461,7 +467,7 @@ public class CalendarController {
 //        }
 //
 //        PrintWriter pw = res.getWriter();
-//        pw.print(jsonArray.toString());
+//        pw.print(jsonArray);
 //        pw.flush();
 //        pw.close();
 //    }
