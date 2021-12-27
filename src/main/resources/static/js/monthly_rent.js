@@ -211,10 +211,9 @@ function make_reservation () {
 
 //차종 구하기
 const get_category1 = (fr, detailedSelect) => {
-  fetch(`/rent/month/${fr}`)
+  fetch(`/rent/estimate/${fr}`)
       .then(response => response.json())
       .then(result => {
-          console.log(detailedSelect)
           for (let i = 0; i < result.length; i++) {
               detailedSelect.options[i+1] = new Option(result[i], result[i]);
           }
@@ -242,7 +241,7 @@ function get_category1(fr, detailedSelect) {
 //차 분류 구하기
 const get_category2 = (fr1, fr2, detailedSelect) => {
 
-    fetch(`/rent/month/${fr1}/${fr2}`)
+    fetch(`/rent/estimate/${fr1}/${fr2}`)
         .then(response => response.json())
         .then(result => {
             detailedSelect.length = 1;
@@ -273,12 +272,14 @@ const get_category2 = (fr1, fr2, detailedSelect) => {
 // 차명 구하기
 const get_car_name = (fr1, fr2, fr3, detailedSelect) => {
 
-    fetch(`/rent/month/${fr1}/name/${fr2}/${fr3}`)
+    fetch(`/rent/estimate/${fr1}/name/${fr2}/${fr3}`)
         .then(response => response.json())
         .then(result => {
             detailedSelect.options.length = 1;
+            console.log(result.length);
             for (let i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
+                console.log(detailedSelect.options[i+1]);
             }
         }).catch(err=>console.log(err))
 
@@ -329,7 +330,7 @@ const int_to_price = (price) => {
 // 요청한 값들에 따라 가격 구하기
 const get_price = (fr1, fr2, fr3, detailedSelect) => {
 
-    fetch(`/rent/month/${fr1}/price/${fr2}/${fr3}`)
+    fetch(`/rent/estimate/${fr1}/price/${fr2}/${fr3}`)
         .then((response) => response.json())
         .then(result => {
             let price = result[0];

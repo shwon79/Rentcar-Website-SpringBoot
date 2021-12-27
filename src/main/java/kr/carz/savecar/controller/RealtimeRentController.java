@@ -447,7 +447,7 @@ public class RealtimeRentController {
 
 
 
-    @PostMapping("/rent/month/moren/reservation")
+    @RequestMapping(value = "/rent/month/moren/reservation", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
 
@@ -482,8 +482,11 @@ public class RealtimeRentController {
 
 
         params.put("text", "[실시간 예약 대기 신청]\n"
+                + "* 계약 확인하기 " + "\n"
+                + "https://savecar.kr/admin/login" + "\n\n"
                 + "문의자 이름: " + morenReservationDTO.getReservationName() + "\n"
                 + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
+                + "차량명: " + morenReservationDTO.getCarName() + "\n"
                 + "차량번호: " + morenReservationDTO.getCarNo() + "\n"
                 + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
                 + "대여시간: " + morenReservationDTO.getReservationTime() + "\n"
@@ -499,6 +502,7 @@ public class RealtimeRentController {
         params2.put("text", "[세이브카 렌트카 예약 대기 신청이 완료되었습니다]" + "\n"
                 + "성함: " + morenReservationDTO.getReservationName() + "\n"
                 + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
+                + "차량명: " + morenReservationDTO.getCarName() + "\n"
                 + "차량번호: " + morenReservationDTO.getCarNo() + "\n"
                 + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
                 + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"

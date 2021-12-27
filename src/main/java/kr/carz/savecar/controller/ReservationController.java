@@ -11,9 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -52,7 +50,7 @@ public class ReservationController {
 
 
     // 예약 저장 api
-    @PostMapping("/reservation/apply")
+    @RequestMapping(value = "/reservation/apply", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public void save(HttpServletResponse res, @RequestBody ReservationSaveDTO dto) throws IOException {
 
@@ -95,14 +93,12 @@ public class ReservationController {
                     + "연락처: " + dto.getPhoneNo() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
                     + "차량번호: " + dto.getCar_num() + "\n"
-                    + "년식: " + dto.getCarAge() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
 
             params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "문의자 이름: " + dto.getName() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
                     + "차량번호: " + dto.getCar_num() + "\n"
-                    + "년식: " + dto.getCarAge() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
         else if (dto.getTitle().equals("월렌트, 12개월렌트, 24개월렌트")){
@@ -199,7 +195,7 @@ public class ReservationController {
 
 
     // 예약 확정 api -> 모렌으로 데이터 전송
-    @PostMapping("/moren/reservation/apply")
+    @RequestMapping(value = "/moren/reservation/apply", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public void moren_reserve(HttpServletResponse res, @RequestBody MorenReservationApplyDTO dto) throws IOException{
 
