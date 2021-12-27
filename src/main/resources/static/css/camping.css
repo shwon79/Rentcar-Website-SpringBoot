@@ -341,7 +341,7 @@ hr {
 ===================================================================*/
 
 
-.header {
+#calendar_rental .header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -450,7 +450,7 @@ hr {
 ===================================================================*/
 
 
-.header {
+#calendar_rental .header {
   display: flex;
   justify-content: center;
   align-items: center;

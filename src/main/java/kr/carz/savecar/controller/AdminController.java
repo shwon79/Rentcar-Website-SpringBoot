@@ -319,6 +319,132 @@ public class AdminController {
     }
 
 
+    // 캠핑카 예약 수정하기 api
+    @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
+    @ResponseBody
+    public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarReservation> campingCarReservationOptional = campingcarReservationService.findById(reservationId);
+        CampingCarReservation campingCarReservation = campingCarReservationOptional.get();
+        String [] splitedRentDate = campingCarReservation.getRentDate().split("-");
+        String [] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
+
+        if (splitedRentDate.length < 3){
+            System.out.println("날짜 형식 오류");
+            jsonObject.put("result", 0);
+        } else {
+            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservation.getCarType());
+
+            CalendarDate calendarStartDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
+            CalendarDate calendarEndDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedReturnDate[1], splitedReturnDate[2], splitedReturnDate[0]);
+
+            List<DateCamping> dateCampingList = dateCampingService.findByCarNameAndDateIdGreaterThanEqualAndDateIdLessThanEqual(campingCarPrice, calendarStartDate, calendarEndDate);
+
+            int dateCampingListSize = dateCampingList.size();
+            for(int i=0; i<dateCampingListSize; i++){
+                List<CalendarTime> calendarTimeList;
+                DateCamping dateCamping = dateCampingList.get(i);
+
+                if(i==0 && !campingCarReservation.getRentTime().equals("10시")){
+                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(dateCamping.getDateId(),campingCarPrice, campingCarReservation.getRentTime());
+                } else if(i==dateCampingListSize-1 && !campingCarReservation.getReturnTime().equals("18시")){
+                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(),campingCarPrice, campingCarReservation.getReturnTime());
+                } else{
+                    calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCamping.getDateId(), campingCarPrice);
+                    dateCampingList.get(i).setReserved("1");
+                }
+
+                for(int j=0; j<calendarTimeList.size(); j++){
+                    calendarTimeList.get(j).setReserveComplete("1");
+                    calendarTimeService.save(calendarTimeList.get(j));
+                }
+            }
+            campingCarReservationOptional.get().setReservation(1);
+            campingcarReservationService.save(campingCarReservationOptional.get());
+            jsonObject.put("result", 1);
+
+
+            // 문자전송
+            Message coolsms = new Message(api_key, api_secret);
+            HashMap<String, String> params = new HashMap<>();
+            HashMap<String, String> params2 = new HashMap<>();
+
+
+            /* 세이브카에 예약확인 문자 전송 */
+            params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
+            params.put("from", "01052774113");
+            params.put("type", "LMS");
+
+
+            /* 고객에게 예약확인 문자 전송 */
+
+            params2.put("to", campingCarReservation.getPhone());
+            params2.put("from", "01052774113");  // 16613331 테스트하기
+            params2.put("type", "LMS");
+
+            params.put("text", "[캠핑카 캘린더 예약 확정]\n"
+                    + "성함: " + campingCarReservation.getName() + "\n"
+                    + "전화번호: " + campingCarReservation.getPhone() + "\n"
+                    + "차량명: " + campingCarReservation.getCarType() + "\n"
+                    + "입금자명: " + campingCarReservation.getDepositor() + "\n"
+                    + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
+                    + "대여시간: " + campingCarReservation.getRentTime() + "\n"
+                    + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
+                    + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
+                    + "이용날짜: " + campingCarReservation.getDay() + "\n"
+                    + "총금액: " + campingCarReservation.getTotal() + "\n"
+                    + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
+                    + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
+
+            params2.put("text", "[캠핑카 예약이 완료되었습니다.]" + "\n"
+                    + "성함: " + campingCarReservation.getName() + "\n"
+                    + "전화번호: " + campingCarReservation.getPhone() + "\n"
+                    + "차량명: " + campingCarReservation.getCarType() + "\n"
+                    + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
+                    + "대여시간: " + campingCarReservation.getRentTime() + "\n"
+                    + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
+                    + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
+                    + "입금자명: " + campingCarReservation.getDepositor() + "\n"
+                    + "이용날짜: " + campingCarReservation.getDay() + "\n"
+                    + "총금액: " + campingCarReservation.getTotal() + "\n"
+                    + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
+                    + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
+
+
+            params.put("app_version", "test app 1.2");
+            params2.put("app_version", "test app 1.2");
+
+
+            /* 세이브카에게 문자 전송 */
+
+            try {
+                org.json.simple.JSONObject obj = coolsms.send(params);
+                System.out.println(obj.toString()); //전송 결과 출력
+            } catch (CoolsmsException e) {
+                System.out.println(e.getMessage());
+                System.out.println(e.getCode());
+            }
+
+            /* 고객에게 예약확인 문자 전송 */
+
+            try {
+                org.json.simple.JSONObject obj2 = coolsms.send(params2);
+                System.out.println(obj2.toString()); //전송 결과 출력
+            } catch (CoolsmsException e) {
+                System.out.println(e.getMessage());
+                System.out.println(e.getCode());
+            }
+        }
+
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
 
     // 캠핑카 예약 수정하기 api
     @GetMapping(value = "/admin/campingcar/reservation/{reservationId}")

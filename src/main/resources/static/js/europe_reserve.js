@@ -133,6 +133,23 @@ function sendRentDate(id, year, wDay) {
     rentDateNum = id;
     calendarRentalTime.style.display = 'grid';
 
+    // let availableDays = 0;
+    //
+    // // console.log(carType);
+    // // console.log(rentDateYear);
+    // // console.log(rentDateMonth);
+    // // console.log(rentDateDay);
+    // //선택 불가능한 가까운 날짜 받아오기
+    // fetch(`/${carType}/getrentdate/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
+    //     .then(res => res.json())
+    //     .then(result => {
+    //         // 현재 남아있는 options 없애기
+    //         let targetSelect = document.getElementById('days_select');
+    //         targetSelect.options.length = 0;
+    //         availableDays = result[0];
+    //         console.log(availableDays);
+    //         makeOptions(availableDays)
+    //     })
 }
 // const sendRentDate = (id, year, wDay) => {
 //     console.log(id);
@@ -381,21 +398,17 @@ const daysSelect = () => {
 
     let startDate = new Date(year, month-1, day);
 
-    let calYear;
-    let calMonth;
-    let calDate;
+    let calYear, calMonth, calDate;
     if (select.value === '한달') {
         startDate.setMonth(startDate.getMonth() + 1);
         calYear = startDate.getFullYear();
         calMonth = startDate.getMonth() + 1;
         calDate = day;
-        console.log(calYear);
     } else {
         startDate.setDate(startDate.getDate() + plus);
         calYear = startDate.getFullYear();
         calMonth = startDate.getMonth() + 1;
         calDate = startDate.getDate();
-        console.log(calYear);
     }
 
     fullReturnDate.innerText = calYear + '년 ' + calMonth + '월 ' + calDate + '일';
@@ -415,9 +428,23 @@ function displayCampingPrice(param) {
 
     let originPrice = parseInt(priceList[param]);
 
-    rentPrice.innerText = Math.floor((originPrice/11*10)).toLocaleString() + ' 원';
-    rentVAT.innerText = Math.floor((originPrice/11)).toLocaleString() + ' 원';
-    rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
+    if (Math.floor((originPrice/11*10)).toLocaleString() == NaN) {
+        rentPrice.innerText ='';
+    } else {
+        rentPrice.innerText = Math.floor((originPrice/11*10)).toLocaleString() + ' 원';
+    }
+
+    if (Math.floor((originPrice/11)).toLocaleString() == NaN) {
+        rentVAT.innerText ='';
+    } else {
+        rentVAT.innerText = Math.floor((originPrice/11)).toLocaleString() + ' 원';
+    }
+
+    if (originPrice.toLocaleString() == NaN) {
+        rentFullPrice.innerText ='';
+    } else {
+        rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
+    }
 }
 // const daysSelect = () => {
 //     let daySelector = document.getElementById('days_select');
@@ -585,34 +612,34 @@ const postDate = () => {
 }
 
 // 옵션 선택 다 해야 아래 결과 보여주기
-function displayResultWrapper() {
-    let resultWrapper = document.getElementsByClassName('result_wrapper')[0];
-    let startDate = document.getElementById('selected_date').innerText;
-    let startTime = $(".time_options input[type='radio']:checked")[0];
-    let rentPeriod = document.getElementById('selected_period').innerText;
-
-    if (startTime === undefined) {
-        startTime = '';
-    } else {
-        startTime = startTime.id;
-    }
-
-    let validStartDate = startDate.startsWith('20') ? true : false;
-    let validStartTime = startTime != '' ? true : false;
-    let validRentPeriod;
-
-    if (rentPeriod.endsWith('일') || rentPeriod === '한달') {
-        validRentPeriod = true;
-    } else {
-        validRentPeriod = false;
-    }
-
-    if (validStartDate & validStartTime & validRentPeriod) {
-        resultWrapper.style.display = 'block';
-    } else {
-        resultWrapper.style.display = 'none';
-    }
-}
+// function displayResultWrapper() {
+//     let resultWrapper = document.getElementsByClassName('result_wrapper')[0];
+//     let startDate = document.getElementById('selected_date').innerText;
+//     let startTime = $(".time_options input[type='radio']:checked")[0];
+//     let rentPeriod = document.getElementById('selected_period').innerText;
+//
+//     if (startTime === undefined) {
+//         startTime = '';
+//     } else {
+//         startTime = startTime.id;
+//     }
+//
+//     let validStartDate = startDate.startsWith('20') ? true : false;
+//     let validStartTime = startTime != '' ? true : false;
+//     let validRentPeriod;
+//
+//     if (rentPeriod.endsWith('일') || rentPeriod === '한달') {
+//         validRentPeriod = true;
+//     } else {
+//         validRentPeriod = false;
+//     }
+//
+//     if (validStartDate & validStartTime & validRentPeriod) {
+//         resultWrapper.style.display = 'block';
+//     } else {
+//         resultWrapper.style.display = 'none';
+//     }
+// }
 
 //지난 달로 못가게 화살표 없애기
 const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');

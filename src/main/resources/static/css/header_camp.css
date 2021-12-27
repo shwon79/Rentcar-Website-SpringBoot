@@ -27,6 +27,7 @@
     padding: 15px 80px 15px 20px;
     color: black;
     margin-right: 16px;
+    width: max-content;
 }
 /*comment out for deploying*/
 /*.main_ul li:first-child:after {*/

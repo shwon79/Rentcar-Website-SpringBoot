@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -84,8 +85,9 @@ public class CalendarController {
 
 
 
+
     @GetMapping("/camping/{carType}")
-    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
+    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) throws Exception {
 
         Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
         model.put("explanation", explanation.get());
@@ -343,76 +345,76 @@ public class CalendarController {
     @ResponseBody
     public void camping_calendar_reservation(HttpServletResponse res, @RequestBody CampingCarReservationDTO dto) throws IOException{
 
-//        // 문자전송
-//        Message coolsms = new Message(api_key, api_secret);
-//        HashMap<String, String> params = new HashMap<>();
-//        HashMap<String, String> params2 = new HashMap<>();
-//
-//
-//        /* 세이브카에 예약확인 문자 전송 */
-//        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-//        params.put("from", "01052774113");
-//        params.put("type", "LMS");
-//
-//
-//        /* 고객에게 예약확인 문자 전송 */
-//
-//        params2.put("to", dto.getPhone());
-//        params2.put("from", "01052774113");  // 16613331 테스트하기
-//        params2.put("type", "LMS");
-//
-//        params.put("text", "[캠핑카 실시간 예약]\n"
-//                + "성함: " + dto.getName() + "\n"
-//                + "전화번호: " + dto.getPhone() + "\n"
-//                + "차량명: " + dto.getCarType() + "\n"
-//                + "입금자명: " + dto.getDepositor() + "\n"
-//                + "대여날짜: " + dto.getRentDate() + "\n"
-//                + "대여시간: " + dto.getRentTime() + "\n"
-//                + "반납날짜: " + dto.getReturnDate() + "\n"
-//                + "반납시간: " + dto.getReturnTime() + "\n"
-//                + "이용날짜: " + dto.getDay() + "\n"
-//                + "총금액: " + dto.getTotal() + "\n"
-//                + "선결제금액: " + dto.getTotalHalf() + "\n"
-//                + "요청사항: " + dto.getDetail() + "\n\n");
-//
-//        params2.put("text", "[캠핑카 예약 대기 신청이 완료되었습니다.]" + "\n"
-//                + "성함: " + dto.getName() + "\n"
-//                + "전화번호: " + dto.getPhone() + "\n"
-//                + "차량명: " + dto.getCarType() + "\n"
-//                + "대여날짜: " + dto.getRentDate() + "\n"
-//                + "대여시간: " + dto.getRentTime() + "\n"
-//                + "반납날짜: " + dto.getReturnDate() + "\n"
-//                + "반납시간: " + dto.getReturnTime() + "\n"
-//                + "입금자명: " + dto.getDepositor() + "\n"
-//                + "이용날짜: " + dto.getDay() + "\n"
-//                + "총금액: " + dto.getTotal() + "\n"
-//                + "선결제금액: " + dto.getTotalHalf() + "\n"
-//                + "요청사항: " + dto.getDetail() + "\n\n");
-//
-//
-//        params.put("app_version", "test app 1.2");
-//        params2.put("app_version", "test app 1.2");
-//
-//
-//        /* 세이브카에게 문자 전송 */
-//
-//        try {
-//            org.json.simple.JSONObject obj = coolsms.send(params);
-//            System.out.println(obj.toString()); //전송 결과 출력
-//        } catch (CoolsmsException e) {
-//            System.out.println(e.getMessage());
-//            System.out.println(e.getCode());
-//        }
-//
-//        /* 고객에게 예약확인 문자 전송 */
-//
-//        try {
-//            org.json.simple.JSONObject obj2 = coolsms.send(params2);
-//            System.out.println(obj2.toString()); //전송 결과 출력
-//        } catch (CoolsmsException e) {
-//            System.out.println(e.getMessage());
-//            System.out.println(e.getCode());
-//        }
+        // 문자전송
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
+
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
+        params.put("from", "01052774113");
+        params.put("type", "LMS");
+
+
+        /* 고객에게 예약확인 문자 전송 */
+
+        params2.put("to", dto.getPhone());
+        params2.put("from", "01052774113");  // 16613331 테스트하기
+        params2.put("type", "LMS");
+
+        params.put("text", "[캠핑카 캘린더 예약]\n"
+                + "성함: " + dto.getName() + "\n"
+                + "전화번호: " + dto.getPhone() + "\n"
+                + "차량명: " + dto.getCarType() + "\n"
+                + "입금자명: " + dto.getDepositor() + "\n"
+                + "대여날짜: " + dto.getRentDate() + "\n"
+                + "대여시간: " + dto.getRentTime() + "\n"
+                + "반납날짜: " + dto.getReturnDate() + "\n"
+                + "반납시간: " + dto.getReturnTime() + "\n"
+                + "이용날짜: " + dto.getDay() + "\n"
+                + "총금액: " + dto.getTotal() + "\n"
+                + "선결제금액: " + dto.getTotalHalf() + "\n"
+                + "요청사항: " + dto.getDetail() + "\n\n");
+
+        params2.put("text", "[캠핑카 예약 대기 신청이 완료되었습니다.]" + "\n"
+                + "성함: " + dto.getName() + "\n"
+                + "전화번호: " + dto.getPhone() + "\n"
+                + "차량명: " + dto.getCarType() + "\n"
+                + "대여날짜: " + dto.getRentDate() + "\n"
+                + "대여시간: " + dto.getRentTime() + "\n"
+                + "반납날짜: " + dto.getReturnDate() + "\n"
+                + "반납시간: " + dto.getReturnTime() + "\n"
+                + "입금자명: " + dto.getDepositor() + "\n"
+                + "이용날짜: " + dto.getDay() + "\n"
+                + "총금액: " + dto.getTotal() + "\n"
+                + "선결제금액: " + dto.getTotalHalf() + "\n"
+                + "요청사항: " + dto.getDetail() + "\n\n");
+
+
+        params.put("app_version", "test app 1.2");
+        params2.put("app_version", "test app 1.2");
+
+
+        /* 세이브카에게 문자 전송 */
+
+        try {
+            org.json.simple.JSONObject obj = coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        /* 고객에게 예약확인 문자 전송 */
+
+        try {
+            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
 
         campingcarReservationService.save_campingcar_reservation(dto);
         JSONObject jsonObject = new JSONObject();
@@ -423,6 +425,40 @@ public class CalendarController {
         pw.flush();
         pw.close();
     }
+
+
+
+//    // 선택 불가능한 가까운 날짜 받아오기
+//    @RequestMapping(value = "/camping/calendar/{carType}/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
+//    @ResponseBody
+//    public void send_rent_date_travel(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
+//
+//
+//        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
+//
+//
+//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+//
+//        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
+//        List <String> categoryList2 = new ArrayList();
+//
+//        for (int i = 0; i < calendarTimeList.size(); i++) {
+//            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
+//
+//                categoryList2.add(calendarTimeList.get(i).getReserveTime());
+//            }
+//        }
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for (String c : categoryList2) {
+//            jsonArray.put(c);
+//        }
+//
+//        PrintWriter pw = res.getWriter();
+//        pw.print(jsonArray.toString());
+//        pw.flush();
+//        pw.close();
+//    }
 
 
 }
