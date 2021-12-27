@@ -194,13 +194,17 @@ public class CalendarController {
 
         // 날짜별 캠핑카
         List<List<DateCamping>> dateCampingList = new ArrayList();
-        for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
-
+        List<List<CalendarTime>> calendarTimeList = new ArrayList<>();
+        for (CalendarDate calendarDate : calendarDateList) {
+            dateCampingList.add(dateCampingService.findByDateId(calendarDate));
+            calendarTimeList.add(calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice));
+        }
 
         Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
         model.put("explanation", explanation.get());
 
         model.addAttribute("calendarDateList", calendarDateList);
+        model.addAttribute("calendarTimeList", calendarTimeList);
         model.addAttribute("dateCampingList", dateCampingList);
         model.put("campingCarPrice", campingCarPrice);
 
