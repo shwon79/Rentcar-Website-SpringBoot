@@ -513,7 +513,7 @@ public class AdminController {
             params2.put("from", "01052774113");  // 16613331 테스트하기
             params2.put("type", "LMS");
 
-            params.put("text", "[캠핑카 캘린더 예약 확정]\n"
+            params.put("text", "[캠핑카 캘린더 예약 취소]\n"
                     + "성함: " + campingCarReservation.getName() + "\n"
                     + "전화번호: " + campingCarReservation.getPhone() + "\n"
                     + "차량명: " + campingCarReservation.getCarType() + "\n"
@@ -527,7 +527,7 @@ public class AdminController {
                     + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
                     + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
 
-            params2.put("text", "[캠핑카 예약이 완료되었습니다.]" + "\n"
+            params2.put("text", "[캠핑카 예약이 취소되었습니다.]" + "\n"
                     + "성함: " + campingCarReservation.getName() + "\n"
                     + "전화번호: " + campingCarReservation.getPhone() + "\n"
                     + "차량명: " + campingCarReservation.getCarType() + "\n"

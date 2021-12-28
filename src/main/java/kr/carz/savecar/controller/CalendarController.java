@@ -226,17 +226,21 @@ public class CalendarController {
 
 
     @GetMapping("/camping/calendar/{carType}_reserve/time_list/{dateId}")
-    public String get_campingcar_time_list(ModelMap model, @PathVariable String carType, @PathVariable Long dateId) {
-
+    @ResponseBody
+    public void get_campingcar_time_list(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId) throws Exception {
 
         CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(dateId);
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
 
         List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
 
-        model.addAttribute("calendarTimeList", calendarTimeList);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("calendarTimeList", calendarTimeList);
 
-        return "rent_camping/" + carType;
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 
