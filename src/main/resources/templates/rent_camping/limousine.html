@@ -146,7 +146,7 @@
 
 
                                     <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:title="${date.season}"
-                                           th:name="${date.year}" th:text="${date.day}" onclick="sendRentDate(id, name, value);"/>
+                                           th:name="${date.year}" th:text="${date.day}" th:onclick="'sendRentDate(id, name, value, '+${date.dateId}+')'" />
                                 </label>
 
                             </div>
