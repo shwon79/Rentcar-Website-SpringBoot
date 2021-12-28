@@ -464,9 +464,9 @@ public class CalendarController {
 
 
     // 예약 가능한 날짜 가져오기
-    @GetMapping("/camping/calendar/possible/{carType}/{dateId}/{reserveTime}")
+    @GetMapping("/camping/calendar/possible/{carType}/{dateId}/{reserveTime}/{days}")
     @ResponseBody
-    public void get_impossible_date(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId, @PathVariable String reserveTime) throws Exception {
+    public void get_impossible_date(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId, @PathVariable String reserveTime, @PathVariable Long days) throws Exception {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
         CalendarDate calendarStartDate = calendarDateService.findCalendarDateByDateId(dateId);
@@ -481,8 +481,7 @@ public class CalendarController {
         int extra_time = 0;
         int extra_time_flg = 0;
 
-        Long i;
-        for(i=dateId+1; i<=calendarNextMonthDate.getDateId(); i++){
+        for(Long i=dateId+1; i<=calendarNextMonthDate.getDateId(); i++){
             CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(i);
             CalendarTime calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, reserveTime);
             if(calendarTime.getReserveComplete().equals("0")){
@@ -492,7 +491,7 @@ public class CalendarController {
             }
         }
 
-        Long lastDateId = i - 1;
+        Long lastDateId = dateId + days;
         CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(lastDateId);
         CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
 

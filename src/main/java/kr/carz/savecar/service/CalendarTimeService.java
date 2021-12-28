@@ -40,6 +40,12 @@ public class CalendarTimeService {
     public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeLessThanEqual(CalendarDate date_id,CampingCarPrice car_name, String start_date){
         return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeLessThanEqual(date_id, car_name, start_date);
     }
+    public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeGreaterThan(CalendarDate date_id, CampingCarPrice car_name, String start_date){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeGreaterThan(date_id, car_name, start_date);
+    }
+    public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeLessThan(CalendarDate date_id,CampingCarPrice car_name, String start_date){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeLessThan(date_id, car_name, start_date);
+    }
     public void save(CalendarTime calendarTime){
         calendarTimeRepository.save(calendarTime);
     }
