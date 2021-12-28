@@ -224,8 +224,8 @@ public class CalendarController {
         return "rent_camping/" + carType;
     }
 
-    @GetMapping("/camping/calendar/{carType}_reserve/reservation/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{total}")
-    public String handleRequest_reserve(ModelMap model, @PathVariable("carType") String carType,@PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("total") String total) throws Exception {
+    @GetMapping("/camping/calendar/{carType}_reserve/reservation/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{total}/{extraTime}")
+    public String get_reservation_information(ModelMap model, @PathVariable String carType,@PathVariable String rent_date, @PathVariable String rent_time, @PathVariable String return_date, @PathVariable String return_time, @PathVariable String day, @PathVariable String total, @PathVariable String extraTime) {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
         model.put("campingCarPrice", campingCarPrice);
@@ -236,8 +236,8 @@ public class CalendarController {
         model.put("return_time", return_time);
         model.put("day", day);
         model.put("total", total);
-        model.put("carType", carType);
-
+        model.put("carType", carType);;
+        model.put("extraTime", extraTime);
 
         return "rent_camping/reservation";
     }
