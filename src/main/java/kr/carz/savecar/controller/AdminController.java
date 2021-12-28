@@ -324,6 +324,7 @@ public class AdminController {
     // 캠핑카 예약 확정하기 api
     @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
     @ResponseBody
+    @Transactional
     public void put_admin_campingcar_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
