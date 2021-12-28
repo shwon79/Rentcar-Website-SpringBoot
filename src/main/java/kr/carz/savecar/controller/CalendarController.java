@@ -495,6 +495,7 @@ public class CalendarController {
         CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(lastDateId);
         CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
 
+
         for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
             CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
             if(calendarExtraTime.getReserveComplete().equals("0")){
