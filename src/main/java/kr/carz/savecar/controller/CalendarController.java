@@ -234,11 +234,13 @@ public class CalendarController {
 
         List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("calendarTimeList", calendarTimeList);
+        JSONArray jsonArray = new JSONArray();
+        for (CalendarTime c : calendarTimeList) {
+            jsonArray.put(c.getReserveComplete());
+        }
 
         PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
+        pw.print(jsonArray);
         pw.flush();
         pw.close();
     }
