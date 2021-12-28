@@ -76,6 +76,11 @@
         <p th:text="${campingCarReservation.day}"></p>
       </div>
       <div class="detail_list">
+        <p>추가 시간</p>
+        <p th:if="${campingCarReservation.extraTime == 0}">X</p>
+        <p th:if="${campingCarReservation.extraTime == 1}">3시간</p>
+      </div>
+      <div class="detail_list">
         <p>성명</p>
         <p th:text="${campingCarReservation.name}"></p>
       </div>
