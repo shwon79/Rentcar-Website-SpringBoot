@@ -27,9 +27,9 @@ public class CampingCarReservationDTO {
     private String returnTime;
     private Integer total;
     private Integer totalHalf;
+    private Integer extraTime;
 
-
-    public CampingCarReservationDTO(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, Integer agree, Integer reservation, String day, Integer totalHalf, String carType) {
+    public CampingCarReservationDTO(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, Integer agree, Integer reservation, String day, Integer totalHalf, String carType, Integer extraTime) {
         this.agree = agree;
         this.carType = carType;
         this.day = day;
@@ -45,6 +45,7 @@ public class CampingCarReservationDTO {
         this.returnTime = returnTime;
         this.total = total;
         this.totalHalf = totalHalf;
+        this.extraTime = extraTime;
     }
 
     public CampingCarReservation toEntity() {
@@ -64,6 +65,7 @@ public class CampingCarReservationDTO {
                 .returnTime(returnTime)
                 .total(total)
                 .totalHalf(totalHalf)
+                .extraTime(extraTime)
                 .build();
 
     }

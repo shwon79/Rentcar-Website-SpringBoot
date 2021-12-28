@@ -224,6 +224,22 @@ public class CalendarController {
         return "rent_camping/" + carType;
     }
 
+
+    @GetMapping("/camping/calendar/{carType}_reserve/time_list/{dateId}")
+    public String get_campingcar_time_list(ModelMap model, @PathVariable String carType, @PathVariable Long dateId) {
+
+
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(dateId);
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+
+        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
+
+        model.addAttribute("calendarTimeList", calendarTimeList);
+
+        return "rent_camping/" + carType;
+    }
+
+
     @GetMapping("/camping/calendar/{carType}_reserve/reservation/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{total}/{extraTime}")
     public String get_reservation_information(ModelMap model, @PathVariable String carType,@PathVariable String rent_date, @PathVariable String rent_time, @PathVariable String return_date, @PathVariable String return_time, @PathVariable String day, @PathVariable String total, @PathVariable String extraTime) {
 
@@ -246,7 +262,7 @@ public class CalendarController {
     // 캠핑카 가격 구하는 api
     @RequestMapping(value = "/camping/calendar/{carType}/getprice/{season}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void get_travel_price(HttpServletResponse res, @PathVariable String carType, @PathVariable String season) throws IOException {
+    public void get_campingcar_price(HttpServletResponse res, @PathVariable String carType, @PathVariable String season) throws IOException {
 
         if(season.equals("0")){
             CampingCarPrice campingCarPrice;
@@ -348,7 +364,7 @@ public class CalendarController {
     }
 
 
-    // 캠핑카 예약 저장 api
+    // 캠핑카 예약 대기 신청
     @RequestMapping(value = "/camping/calendar/reserve", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public void camping_calendar_reservation(HttpServletResponse res, @RequestBody CampingCarReservationDTO dto) throws IOException{
@@ -364,12 +380,15 @@ public class CalendarController {
         params.put("from", "01052774113");
         params.put("type", "LMS");
 
-
         /* 고객에게 예약확인 문자 전송 */
-
         params2.put("to", dto.getPhone());
         params2.put("from", "01052774113");  // 16613331 테스트하기
         params2.put("type", "LMS");
+
+        String extraTimeDescription = "사용X";
+        if(dto.getExtraTime() == 1){
+            extraTimeDescription = "사용O";
+        }
 
         params.put("text", "[캠핑카 캘린더 예약]\n"
                 + "성함: " + dto.getName() + "\n"
@@ -380,6 +399,7 @@ public class CalendarController {
                 + "대여시간: " + dto.getRentTime() + "\n"
                 + "반납날짜: " + dto.getReturnDate() + "\n"
                 + "반납시간: " + dto.getReturnTime() + "\n"
+                + "추가3시간권(+11만원): " + extraTimeDescription + "\n"
                 + "이용날짜: " + dto.getDay() + "\n"
                 + "총금액: " + dto.getTotal() + "\n"
                 + "선결제금액: " + dto.getTotalHalf() + "\n"
@@ -393,6 +413,7 @@ public class CalendarController {
                 + "대여시간: " + dto.getRentTime() + "\n"
                 + "반납날짜: " + dto.getReturnDate() + "\n"
                 + "반납시간: " + dto.getReturnTime() + "\n"
+                + "추가3시간권: " + extraTimeDescription + "\n"
                 + "입금자명: " + dto.getDepositor() + "\n"
                 + "이용날짜: " + dto.getDay() + "\n"
                 + "총금액: " + dto.getTotal() + "\n"
