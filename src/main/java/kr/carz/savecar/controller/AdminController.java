@@ -482,15 +482,15 @@ public class AdminController {
                     calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(),campingCarPrice, campingCarReservation.getReturnTime());
                 } else{
                     calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCamping.getDateId(), campingCarPrice);
-                    dateCampingList.get(i).setReserved("1");
+                    dateCampingList.get(i).setReserved("0");
                 }
 
                 for(int j=0; j<calendarTimeList.size(); j++){
-                    calendarTimeList.get(j).setReserveComplete("1");
+                    calendarTimeList.get(j).setReserveComplete("0");
                     calendarTimeService.save(calendarTimeList.get(j));
                 }
             }
-            campingCarReservationOptional.get().setReservation(1);
+            campingCarReservationOptional.get().setReservation(0);
             campingcarReservationService.save(campingCarReservationOptional.get());
             jsonObject.put("result", 1);
 
