@@ -447,7 +447,8 @@ public class RealtimeRentController {
 
 
 
-    @RequestMapping(value = "/rent/month/moren/reservation", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+//    @RequestMapping(value = "/rent/month/moren/reservation", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    @PostMapping("/rent/month/moren/reservation")
     @ResponseBody
     public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
 

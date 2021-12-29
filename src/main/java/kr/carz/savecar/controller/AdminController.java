@@ -74,7 +74,8 @@ public class AdminController {
     }
 
     //로그인
-    @RequestMapping(value = "/admin/logininfo", method= RequestMethod.POST)
+//    @RequestMapping(value = "/admin/logininfo", method= RequestMethod.POST)
+    @PostMapping("/admin/logininfo")
     @ResponseBody
     public ModelAndView post_login_info(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
@@ -604,7 +605,8 @@ public class AdminController {
 
 
     // 할인가 적용하기 api
-    @RequestMapping(value = "/admin/discount", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+//    @RequestMapping(value = "/admin/discount", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    @PostMapping("/admin/discount")
     @ResponseBody
     public void save_discount(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
 
@@ -825,7 +827,8 @@ public class AdminController {
         pw.close();
     }
 
-    @RequestMapping(value = "/admin/setting", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+//    @RequestMapping(value = "/admin/setting", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    @PostMapping("/admin/setting")
     @ResponseBody
     public void post_admin_setting(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
 
