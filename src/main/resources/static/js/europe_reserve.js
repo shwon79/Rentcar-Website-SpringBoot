@@ -160,15 +160,16 @@ function sendRentDate(id, year, wDay, getdateId) {
     fetch(`/camping/calendar/${carType}_reserve/time_list/${dateId}`)
         .then(res => res.json())
         .then(result => {
-            // let time;
             let options = document.getElementsByName('time_option');
             options.forEach(option => {
-                option.style.display = 'block';
+                option.style.pointerEvents = 'auto';
+                option.style.backgroundColor = 'white';
             })
 
             for (i=0; i < result.length; i++) {
                 if (result[i]=='1') {
-                    options[i].style.display = 'none';
+                    options[i].style.pointerEvents = 'none';
+                    options[i].style.backgroundColor = 'dimgray';
                 }
             }
         })
@@ -454,6 +455,7 @@ const daysSelect = () => {
     fullReturnDate.innerText = calYear + '년 ' + calMonth + '월 ' + calDate + '일';
     resultSelectedEndDate.innerText = calMonth + '월 ' + calDate + '일';
     document.getElementById('calendar_rental_extra_time').style.display = 'block';
+    document.getElementById('selected_extra_time').innerText = '추가시간을 선택해주세요';
 
     //추가시간 가능 여부 받아오기
     fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}/${select.value}`)
@@ -540,7 +542,7 @@ function extraTimeSelect() {
     let displayExtraTime = document.getElementById('selected_extra_time');
     let selectedExtraTime = document.getElementById('extra_time_select');
 
-    if (selectedExtraTime.value === 'cannotExtraTime') {
+    if (selectedExtraTime.value === '') {
         displayExtraTime.innerText = '추가 시간 X';
         resultSelectedEndTime.innerText = resultStartTime.innerText;
     } else if (selectedExtraTime.value === '0') {
@@ -554,6 +556,8 @@ function extraTimeSelect() {
         displayExtraTime.innerText = '추가 시간을 선택하세요.';
         resultSelectedEndTime.innerText = '';
     }
+
+    document.getElementById('calendar_rental_extra_time').style.display = 'none';
 
 
     runIt();

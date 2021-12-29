@@ -1034,7 +1034,7 @@ pre {
   font-weight: 400;
 }
 #calendar_rental_time label:hover {
-  background-color: black;
+  background-color: black !important;
   color: white;
 }
 .result_wrapper {
