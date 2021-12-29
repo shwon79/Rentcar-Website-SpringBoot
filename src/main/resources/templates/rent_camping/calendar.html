@@ -65,7 +65,7 @@
                         <span name="thisYear" th:text="${clickedYear}"></span>년
                         <span name="thisMonth" th:text="${clickedMonth}"></span>월
                     </div>
-                    <div id="hiddenFromSep" th:data-index="${clickedMonth}">
+                    <div id="hiddenFromJuly" th:data-index="${clickedMonth}">
                         <a th:unless="${clickedMonth +1 > 12}" th:href="'/camping/calendar/' + ${clickedYear} + '/' + ${clickedMonth +1}">
                             &nbsp;&nbsp;
                             <button class="calendar_nav-btn go-next"  >
@@ -132,8 +132,8 @@
                                         </div>
 
                                         <div th:if="${dateCampingList[iterStat.index][2].reserved} != '1'" >
-                                            <span><i class="fas fa-circle" style="color: blue;"></i></span>
-                                            <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][2].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
+                                            <span style="padding-left: 5px;"><i class="fas fa-circle" style="color: blue;"></i></span>
+                                            <a style="padding-left: 0;" th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][2].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
                                                 <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span>
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}" style="color: lightgrey; padding: 5px;"></span>

@@ -41,7 +41,7 @@
           확정
         </button>
         <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="deleteCampingReserve(id)"
-                th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">
+                th:style="${campingCarReservation.reservation} == 0? 'pointer-events:none; background: gray ' : null">
           확정 취소
         </button>
         <!--        <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+campingCarReservation.id}">-->
