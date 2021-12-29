@@ -1,14 +1,6 @@
 // 렌트 날짜 표기하기
 let originalRentStartDate = document.getElementById('original_rent_start_date').innerText;
 let displayRentStartDate = document.getElementById('display_result_start_date');
-let displayReturnTime = document.getElementById('display_result_end_time');
-let extraTime = document.getElementById('extraTime');
-
-if (extraTime.innerText === '1') {
-    let resultTime = parseInt(displayReturnTime.innerText) + 3;
-    // console.log(parseInt(displayReturnTime))
-    displayReturnTime.innerText = resultTime + '시';
-}
 
 displayRentStartDate.innerText = originalRentStartDate.split('(')[0];
 

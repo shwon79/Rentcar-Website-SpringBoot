@@ -711,7 +711,7 @@ const postDate = () => {
     rentDateNum = document.getElementById('selected_date').innerText;
     rentTime = document.getElementById('selected_time').innerText;
     returnDateNum = document.getElementById('fullReturnDate').innerText;
-    returnTime = rentTime;
+    returnTime = '';
     useDay = document.getElementById('selected_period').innerText;
     let extraTime = document.getElementById('extra_time_select');
 
@@ -721,13 +721,15 @@ const postDate = () => {
     if (extraTime.value != '') {
         if (extraTime.value ==='0') {
             extraTime = 0;
+            returnTime = rentTime;
         } else if (extraTime.value ==='3') {
             extraTime = 1;
+            let calculateTime = parseInt(rentTime) + 3;
+            returnTime = calculateTime + '시';
         }
     }
 
-    if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='' && extraTime.value!='') {
-
+    if (!rentDateNum.endsWith('주세요') && !rentTime.endsWith('주세요')&& returnDateNum!='' && returnTime!='' && extraTime.value!='') {
         alert('예약 창으로 넘어갑니다.')
         window.location.href = `/camping/calendar/${carType}_reserve/reservation/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${totalPrice}/${extraTime}`
 

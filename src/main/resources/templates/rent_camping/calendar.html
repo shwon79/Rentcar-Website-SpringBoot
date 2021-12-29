@@ -132,10 +132,10 @@
                                         </div>
 
                                         <div th:if="${dateCampingList[iterStat.index][2].reserved} != '1'" >
+                                            <span><i class="fas fa-circle" style="color: blue;"></i></span>
                                             <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][2].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
                                                 <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span>
                                             </a>
-                                            <span><i class="fas fa-circle" style="color: blue;"></i></span>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
                                         </div>
                                         <div class="reserved_selections" th:unless="${dateCampingList[iterStat.index][2].reserved} != '1'" >
