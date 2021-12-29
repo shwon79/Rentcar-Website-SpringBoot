@@ -1,6 +1,7 @@
 // 렌트 날짜 표기하기
 let originalRentStartDate = document.getElementById('original_rent_start_date').innerText;
 let displayRentStartDate = document.getElementById('display_result_start_date');
+let extraTime = document.getElementById('extraTime');
 
 displayRentStartDate.innerText = originalRentStartDate.split('(')[0];
 
@@ -11,20 +12,30 @@ let displayVAT = document.getElementById('rentVAT');
 let displayTotalPrice = document.getElementById('rentFullPrice');
 let displayPrepayPrice = document.getElementById('prepayPrice');
 let displayExtraTimePrice = document.getElementById('extraTimePrice');
+let carType = document.getElementById('carType').innerText;
+
 let realFullPrice;
 
-if (extraTime.innerText === '1') {
-    displayExtraTimePrice.innerText = '110,000 원';
-    realFullPrice = parseInt(totalPrice) - 110000;
+if (extraTime.innerText == '1') {
+    if (carType == 'EUROPE') {
+        displayExtraTimePrice.innerText = '110,000 원';
+        realFullPrice = parseInt(totalPrice) - 110000;
+        console.log('europe' + realFullPrice);
+    } else if (carType == 'LIMOUSINE' || carType == 'TRAVEL') {
+        displayExtraTimePrice.innerText = '90,000 원';
+        realFullPrice = parseInt(totalPrice) - 90000;
+        console.log('limousine' + realFullPrice);
+    }
 } else {
     displayExtraTimePrice = '- 원';
-    realFullPrice = totalPrice;
+    realFullPrice = parseInt(totalPrice);
 }
 
-displayPrice.innerText = Math.floor((parseInt(realFullPrice/11*10))).toLocaleString() + ' 원';
-displayVAT.innerText = Math.floor((parseInt(realFullPrice/11))).toLocaleString() + ' 원';
+displayPrice.innerText = Math.floor(realFullPrice/11*10).toLocaleString() + ' 원';
+displayVAT.innerText = Math.floor(realFullPrice/11).toLocaleString() + ' 원';
+
 displayTotalPrice.innerText = parseInt(totalPrice).toLocaleString() + ' 원';
-displayPrepayPrice.innerText = Math.floor(parseInt(totalPrice/2)).toLocaleString() + ' 원';
+displayPrepayPrice.innerText = Math.floor(parseInt(totalPrice)/2).toLocaleString() + ' 원';
 
 // phone number length limit
 function handleOnInput(el, maxlength) {
