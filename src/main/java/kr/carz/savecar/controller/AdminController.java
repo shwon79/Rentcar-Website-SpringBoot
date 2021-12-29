@@ -357,8 +357,9 @@ public class AdminController {
 
                     int start_chk = 1;
                     for(int j=0; j<calendarTimeForCheckList.size(); j++){
-                        if(calendarTimeForCheckList.get(j).getReserveComplete().equals("1")){
+                        if(calendarTimeForCheckList.get(j).getReserveComplete().equals("0")){
                             start_chk = 0;
+                            break;
                         }
                     }
                     if(start_chk == 1){
@@ -370,8 +371,9 @@ public class AdminController {
 
                     int end_chk = 1;
                     for(int j=0; j<calendarTimeForCheckList.size(); j++){
-                        if(calendarTimeForCheckList.get(j).getReserveComplete().equals("1")){
+                        if(calendarTimeForCheckList.get(j).getReserveComplete().equals("0")){
                             end_chk = 0;
+                            break;
                         }
                     }
                     if(end_chk == 1){
@@ -507,8 +509,8 @@ public class AdminController {
                     calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(),campingCarPrice, campingCarReservation.getReturnTime());
                 } else{
                     calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCamping.getDateId(), campingCarPrice);
-                    dateCampingList.get(i).setReserved("0");
                 }
+                dateCampingList.get(i).setReserved("0");
 
                 for(int j=0; j<calendarTimeList.size(); j++){
                     calendarTimeList.get(j).setReserveComplete("0");
