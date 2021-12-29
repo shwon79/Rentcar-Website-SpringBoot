@@ -162,6 +162,7 @@
                 </div>
 
                 <!-- mobile version -->
+                <p class="mobile_calendar_explain">* 날짜를 선택하시면 아래에<br>해당 날짜에 예약 가능한 캠핑카가 뜹니다.</p>
                 <div class="main" id="main_mobile">
                     <div class="days" id="days">
                         <div id="day_sun" class="day">일</div>
@@ -187,10 +188,9 @@
                         </div>
                     </div>
                     <div class="date_available">
-<!--                        <p><span style="color: aliceblue;">● </span>선택가능</p>-->
-<!--                        <p>&nbsp;/&nbsp;</p>-->
                         <p><span style="color: #bbbbbb; ">● </span>선택불가</p>
                     </div>
+                    <i id="mobile_arrow" class="fas fa-arrow-down"></i>
                     <div id="day_detail">
                         <div th:id="${date.dateId}" class="detail_wrapper" th:each="date, iterStat: ${calendarDateList}"
                                 th:style="${date.day} == ${thisDay} and ${date.month} == ${thisMonth}? 'display:flex'">
