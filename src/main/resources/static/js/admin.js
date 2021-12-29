@@ -442,7 +442,7 @@ saveBtn.addEventListener('click', () => {
 
 function setCampingReserve(id) {
     let checkConfirm = confirm('예약을 확정하시겠습니까?');
-    console.log(id)
+    // console.log(id)
 
     if (checkConfirm) {
         $.ajax({
@@ -462,3 +462,26 @@ function setCampingReserve(id) {
         })
     };
 };
+
+function deleteCampingReserve(id) {
+    let checkConfirm = confirm('캠핑카 예약을 취소하시겠습니까?');
+
+    if (checkConfirm) {
+        $.ajax({
+            type:'DELETE',
+            url:'/admin/campingcar/reservation/'+ id,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('캠핑카 예약이 취소되었습니다.');
+            } else if (result.result == 0) {
+                alert('캠핑카 예약이 취소에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/campingcar/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
+
+}

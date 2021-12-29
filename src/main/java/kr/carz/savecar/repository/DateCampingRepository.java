@@ -3,6 +3,7 @@ package kr.carz.savecar.repository;
 import kr.carz.savecar.domain.CalendarDate;
 import kr.carz.savecar.domain.CampingCarPrice;
 import kr.carz.savecar.domain.DateCamping;
+import kr.carz.savecar.domain.MonthlyRent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

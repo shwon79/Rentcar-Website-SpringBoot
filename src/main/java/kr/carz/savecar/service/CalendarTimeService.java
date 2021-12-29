@@ -28,11 +28,23 @@ public class CalendarTimeService {
         return calendarTimeRepository.findByTimeId(timeId);
     }
 
+    public void save_calendar_time_list(List<CalendarTime> calendarTimeList){
+        for(int i=0; i<calendarTimeList.size(); i++){
+            calendarTimeRepository.save(calendarTimeList.get(i));
+        }
+    }
+
     public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(CalendarDate date_id, CampingCarPrice car_name, String start_date){
         return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(date_id, car_name, start_date);
     }
     public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeLessThanEqual(CalendarDate date_id,CampingCarPrice car_name, String start_date){
         return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeLessThanEqual(date_id, car_name, start_date);
+    }
+    public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeGreaterThan(CalendarDate date_id, CampingCarPrice car_name, String start_date){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeGreaterThan(date_id, car_name, start_date);
+    }
+    public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeLessThan(CalendarDate date_id,CampingCarPrice car_name, String start_date){
+        return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeLessThan(date_id, car_name, start_date);
     }
     public void save(CalendarTime calendarTime){
         calendarTimeRepository.save(calendarTime);

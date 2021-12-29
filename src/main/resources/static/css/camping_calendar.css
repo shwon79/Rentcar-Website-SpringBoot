@@ -154,7 +154,7 @@ p {
 }
 
 .downside a:hover {
-  color: indianred;
+  color: blue;
 }
 
 .day:nth-child(7n + 1),
@@ -197,18 +197,21 @@ a:hover {
   justify-content: flex-end;
   margin-top: 1rem;
 }
-
-/*.date_available p {*/
-/*  margin-left: 2rem;*/
-/*}*/
-
-/*.date_available span {*/
-/*  margin-right: 1rem;*/
-/*}*/
+.mobile_calendar_explain {
+  text-align: center;
+  display: none;
+}
 
 #main_mobile {
   display: none;
   font-size: 1.3em;
+}
+#mobile_arrow {
+  display: none;
+  text-align: center;
+  color: dimgray;
+  font-size: 28px;
+  margin-top: 20px;
 }
 
 
@@ -220,11 +223,19 @@ a:hover {
     margin: 100px 0;
   }
 
+  .calendar_header {
+    margin-bottom: 1rem;
+  }
+
+  #mobile_arrow {
+    display: block;
+  }
+
   #main_pc {
     display: none;
   }
 
-  #main_mobile {
+  .mobile_calendar_explain, #main_mobile {
     display: block;
   }
 
@@ -272,7 +283,6 @@ a:hover {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /*background-color: aliceblue;*/
     border-radius: 50%;
   }
 
@@ -294,10 +304,8 @@ a:hover {
   }
 
   .detail_wrapper div {
-    margin: 1rem 0;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     width: 80%;
-    border-radius: 5vh;
   }
 
   .calendar_content .title {
@@ -307,38 +315,33 @@ a:hover {
     font-size: 26px;
   }
 
-  a .detail_selections {
+  #day_detail a {
     width: 100%;
+  }
+  .detail_selections {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
     background-color: white;
-    border: 1px solid lightgrey;
+    align-items: center;
   }
-  a .detail_selections:hover {
-    background-color: lightgrey;
-    border: 1px solid gray;
-  }
-  a .detail_selections:hover span {
+  .detail_selections button {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    background: royalblue;
     color: white;
   }
-
-  /*.detail_selections span {*/
-  /*  color: #6f6f6f;*/
-  /*}*/
-
-  a .detail_selections span {
-    color: black;
-  }
-
-  .detail_selections {
-    background-color: #646464;
+  .detail_selections button:disabled {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    background: lightgrey;
+    color: white;
   }
   .detail_selections span {
-    color: white;
+    color: black;
   }
-
-  .detail_wrapper a {
-    width: 80%;
-  }
-
 }
 
 @media (max-width: 600px) {

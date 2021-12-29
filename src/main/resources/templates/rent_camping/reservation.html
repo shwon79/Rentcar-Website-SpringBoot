@@ -38,6 +38,7 @@
                 <p th:text="${rent_date}" style="display: none;" id="original_rent_start_date"></p>
                 <p th:text="${return_date}" style="display: none;" id="original_rent_end_date"></p>
                 <p th:text="${total}" style="display: none;" id="totalPrice"></p>
+                <p th:text="${extraTime}" style="display: none;" id="extraTime"></p>
 
                 <!-- left content -->
                 <div id="left_col" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -144,9 +145,9 @@
                                 <div class="name">총 렌트료</div>
                                 <div class="price" id="rentPrice"></div>
                             </div>
-                            <div class="price_row" style="display: none;">
+                            <div class="price_row">
                                 <div class="name">추가시간 요금</div>
-                                <div class="price"></div>
+                                <div class="price" id="extraTimePrice"></div>
                             </div>
                             <div class="price_row">
                                 <div class="name">VAT</div>

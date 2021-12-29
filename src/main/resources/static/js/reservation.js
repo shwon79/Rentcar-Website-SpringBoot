@@ -10,9 +10,19 @@ let displayPrice = document.getElementById('rentPrice');
 let displayVAT = document.getElementById('rentVAT');
 let displayTotalPrice = document.getElementById('rentFullPrice');
 let displayPrepayPrice = document.getElementById('prepayPrice');
+let displayExtraTimePrice = document.getElementById('extraTimePrice');
+let realFullPrice;
 
-displayPrice.innerText = Math.floor((parseInt(totalPrice/11*10))).toLocaleString() + ' 원';
-displayVAT.innerText = Math.floor((parseInt(totalPrice/11))).toLocaleString() + ' 원';
+if (extraTime.innerText === '1') {
+    displayExtraTimePrice.innerText = '110,000 원';
+    realFullPrice = parseInt(totalPrice) - 110000;
+} else {
+    displayExtraTimePrice = '- 원';
+    realFullPrice = totalPrice;
+}
+
+displayPrice.innerText = Math.floor((parseInt(realFullPrice/11*10))).toLocaleString() + ' 원';
+displayVAT.innerText = Math.floor((parseInt(realFullPrice/11))).toLocaleString() + ' 원';
 displayTotalPrice.innerText = parseInt(totalPrice).toLocaleString() + ' 원';
 displayPrepayPrice.innerText = Math.floor(parseInt(totalPrice/2)).toLocaleString() + ' 원';
 
@@ -154,7 +164,6 @@ function reserveDone() {
             rentTime: rentStartTime,
             returnDate: rentEndDate,
             returnTime: rentEndTime,
-            // extraTime : extraTime,
             agree: 1,
             depositor: depositName,
             detail: demand,
@@ -164,9 +173,10 @@ function reserveDone() {
             totalHalf: halfPrice,
             deposit: deposit,
             reservation: 0,
-            day: useDay
+            day: useDay,
+            extraTime: parseInt(extraTime.innerText)
         }
-        console.log(rentEndDate);
+        // console.log(data);
 
         let reserveConfirm = confirm('예약을 완료하시겠습니까?');
 

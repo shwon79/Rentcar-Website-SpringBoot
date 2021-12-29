@@ -3,6 +3,7 @@ function doDisplay(param){
     let calendarRentalDate = document.getElementById("calendar_rental");
     let calendarRentalTime = document.getElementById('calendar_rental_time');
     let calendarRentalPeriod = document.getElementById('calendar_rental_period');
+    let calendarRentalExtraTime = document.getElementById('calendar_rental_extra_time');
 
     switch (param) {
         case 'calendar':
@@ -25,6 +26,14 @@ function doDisplay(param){
             } else {
                 calendarRentalPeriod.style.display = 'none';
             };
+            break;
+        case 'extra_time_options':
+            if (calendarRentalExtraTime.style.display == 'none') {
+                calendarRentalExtraTime.style.display = 'block';
+            } else {
+                calendarRentalExtraTime.style.display = 'none';
+            };
+            break;
     }
 }
 
@@ -93,8 +102,12 @@ let rentDateNum='';
 let rentDateYear='';
 let rentDateMonth='';
 let rentDateDay='';
+let dateId = '';
+let reserveTime = '';
 
-function sendRentDate(id, year, wDay) {
+function sendRentDate(id, year, wDay, getdateId) {
+
+
     const selectedDate = document.getElementById('selected_date');
     let resultSelectedDate = document.getElementById('display_result_start_date');
     let calendarRentalDate = document.getElementById("calendar_rental");
@@ -133,23 +146,36 @@ function sendRentDate(id, year, wDay) {
     rentDateNum = id;
     calendarRentalTime.style.display = 'grid';
 
-    // let availableDays = 0;
-    //
-    // // console.log(carType);
-    // // console.log(rentDateYear);
-    // // console.log(rentDateMonth);
-    // // console.log(rentDateDay);
-    // //선택 불가능한 가까운 날짜 받아오기
-    // fetch(`/${carType}/getrentdate/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
-    //     .then(res => res.json())
-    //     .then(result => {
-    //         // 현재 남아있는 options 없애기
-    //         let targetSelect = document.getElementById('days_select');
-    //         targetSelect.options.length = 0;
-    //         availableDays = result[0];
-    //         console.log(availableDays);
-    //         makeOptions(availableDays)
-    //     })
+    document.getElementById('selected_time').innerText = '시간을 선택해주세요';
+    document.getElementById('display_result_start_time').innerText = '시간';
+    document.getElementById('selected_period').innerText = '렌트일자를 선택해주세요';
+    document.getElementById('selected_extra_time').innerText = '추가시간을 선택해주세요';
+    document.getElementById('display_result_end_date').innerText = '반납 날짜';
+    document.getElementById('display_result_end_time').innerText = '반납 시간';
+    document.getElementById('calendar_rental_extra_time').style.display = 'none';
+    dateId = getdateId;
+
+
+    // 선택 가능한 시간 받아오기
+    fetch(`/camping/calendar/${carType}_reserve/time_list/${dateId}`)
+        .then(res => res.json())
+        .then(result => {
+            let options = document.getElementsByName('time_option');
+            options.forEach(option => {
+                option.style.pointerEvents = 'auto';
+                option.style.backgroundColor = 'white';
+            })
+
+            for (i=0; i < result.length; i++) {
+                if (result[i]=='1') {
+                    options[i].style.pointerEvents = 'none';
+                    options[i].style.backgroundColor = 'dimgray';
+                }
+            }
+        })
+
+    // reserveTime='10시';
+
 }
 // const sendRentDate = (id, year, wDay) => {
 //     console.log(id);
@@ -264,11 +290,10 @@ const makeOptions = (days) => {
         if (i>30) break;
         if (i == 30) {
             createdOpt.text = '한달권';
-            createdOpt.value = i;
+            createdOpt.value = '한달';
         } else if(i == 0) {
-            createdOpt.text = '==렌트 일자 선택(2일이상)==';
+            createdOpt.text = '=렌트 일자 선택=';
             createdOpt.value = 0;
-
         }
         else if (i == 1){
             createdOpt.text = i +'일권(선택 불가)';
@@ -279,7 +304,6 @@ const makeOptions = (days) => {
         }
 
     targetSelect.appendChild(createdOpt);
-
     }
 }
 
@@ -290,7 +314,6 @@ let returnTime = '';
 function sendRentTime(id) {
     const selectedTime = document.getElementById('selected_time');
     const resultSelectedTime = document.getElementById('display_result_start_time');
-    const resultSelectedEndTime = document.getElementById('display_result_end_time');
     let calendarRentalPeriod = document.getElementById('calendar_rental_period');
 
     let calendarRentalTime = document.getElementById('calendar_rental_time');
@@ -298,8 +321,26 @@ function sendRentTime(id) {
     selectedTime.innerText = id;
     calendarRentalTime.style.display = 'none';
     resultSelectedTime.innerText = id;
-    resultSelectedEndTime.innerText = id;
+
     calendarRentalPeriod.style.display = 'block';
+    document.getElementById('selected_period').innerText = '렌트일자를 선택해주세요';
+    document.getElementById('selected_extra_time').innerText = '추가시간을 선택해주세요';
+
+    reserveTime = id;
+
+    let availableDays = 0;
+
+    //선택 불가능한 가까운 날짜 받아오기
+    fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}/100`)
+        .then(res => res.json())
+        .then(result => {
+            // 현재 남아있는 options 없애기
+            let targetSelect = document.getElementById('days_select');
+            targetSelect.options.length = 0;
+            availableDays = result.possible_days;
+            // console.log(availableDays);
+            makeOptions(availableDays)
+        })
 }
 const rentTimeSel = (id) => {
     rentTime = id;
@@ -369,6 +410,7 @@ const calculateDate = () => {
 let returnDateNum = '';
 let useDay = ''
 let useDayNum = 0;
+let param = '';
 const daysSelect = () => {
     let select = document.getElementById('days_select');
     let selectedPeriod = document.getElementById('selected_period');
@@ -376,14 +418,13 @@ const daysSelect = () => {
     let resultSelectedEndDate = document.getElementById('display_result_end_date');
     let resultSelectedStartDate = document.getElementById('selected_date').innerText;
     let fullReturnDate = document.getElementById('fullReturnDate');
-    let param = '';
 
     let plus = parseInt(select.value);
 
     if (select.value === '한달') {
         selectedPeriod.innerText = select.value;
         param = 30;
-    } else if (select.value === '') {
+    } else if (select.value === 0) {
         selectedPeriod.innerText = '렌트일자를 선택해주세요';
     } else {
         param = plus;
@@ -413,20 +454,62 @@ const daysSelect = () => {
 
     fullReturnDate.innerText = calYear + '년 ' + calMonth + '월 ' + calDate + '일';
     resultSelectedEndDate.innerText = calMonth + '월 ' + calDate + '일';
+    document.getElementById('calendar_rental_extra_time').style.display = 'block';
+    document.getElementById('selected_extra_time').innerText = '추가시간을 선택해주세요';
 
-    runIt();
+    //추가시간 가능 여부 받아오기
+    fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}/${select.value}`)
+        .then(res => res.json())
+        .then(result => {
+            let targetSelect = document.getElementById('extra_time_select');
 
-    setTimeout(function() {
-        displayCampingPrice(param);
-    }, 200);
+            if(result.extra_time_flg == 0) {
+                targetSelect.options.length = 0;
+                let opt = document.createElement('option');
+                opt.text = '=추가 시간 선택=';
+                opt.value = '';
+                let opt1 = document.createElement('option');
+                opt1.text = '추가 시간 X';
+                opt1.value = '0';
+                targetSelect.appendChild(opt);
+                targetSelect.appendChild(opt1);
+            } else {
+                targetSelect.options.length = 0;
+                let opt = document.createElement('option');
+                opt.text = '=추가 시간 선택=';
+                opt.value = '';
+                let opt1 = document.createElement('option');
+                opt1.text = '추가 시간 X';
+                opt1.value = '0';
+                let opt2 = document.createElement('option');
+                opt2.text = '3시간';
+                opt2.value = '3';
+                targetSelect.appendChild(opt);
+                targetSelect.appendChild(opt1);
+                targetSelect.appendChild(opt2);
+            }
+        })
+    // runIt();
+    //
+    // setTimeout(function() {
+    //     displayCampingPrice(param);
+    // }, 200);
 }
 
 function displayCampingPrice(param) {
     let rentPrice = document.getElementById('rentPrice');
     let rentVAT = document.getElementById('rentVAT');
     let rentFullPrice = document.getElementById('rentFullPrice');
+    let extraTimePrice = document.getElementById('extraTimePrice');
+    let selectedExtraTime = document.getElementById('extra_time_select');
 
     let originPrice = parseInt(priceList[param]);
+
+    if (selectedExtraTime.value == '3') {
+        extraTimePrice.innerText = '110,000 원';
+    } else {
+        extraTimePrice.innerText = '- 원';
+    }
 
     if (Math.floor((originPrice/11*10)).toLocaleString() == NaN) {
         rentPrice.innerText ='';
@@ -443,8 +526,45 @@ function displayCampingPrice(param) {
     if (originPrice.toLocaleString() == NaN) {
         rentFullPrice.innerText ='';
     } else {
-        rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
+        if (selectedExtraTime.value == '3') {
+            rentFullPrice.innerText = (originPrice + 110000).toLocaleString() + ' 원';
+        } else {
+            rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
+        }
     }
+}
+
+//추가 시간 선택시 표기
+function extraTimeSelect() {
+    let resultSelectedEndTime = document.getElementById('display_result_end_time');
+    let resultStartTime = document.getElementById('display_result_start_time');
+
+    let displayExtraTime = document.getElementById('selected_extra_time');
+    let selectedExtraTime = document.getElementById('extra_time_select');
+
+    if (selectedExtraTime.value === '') {
+        displayExtraTime.innerText = '추가 시간 X';
+        resultSelectedEndTime.innerText = resultStartTime.innerText;
+    } else if (selectedExtraTime.value === '0') {
+        displayExtraTime.innerText = '추가 시간 X';
+        resultSelectedEndTime.innerText = resultStartTime.innerText;
+    } else if (selectedExtraTime.value === '3') {
+        displayExtraTime.innerText = '3시간';
+        let res = parseInt(resultStartTime.innerText) + 3;
+        resultSelectedEndTime.innerText = res + '시';
+    } else if (selectedExtraTime.value === 0) {
+        displayExtraTime.innerText = '추가 시간을 선택하세요.';
+        resultSelectedEndTime.innerText = '';
+    }
+
+    document.getElementById('calendar_rental_extra_time').style.display = 'none';
+
+
+    runIt();
+
+    setTimeout(function() {
+        displayCampingPrice(param);
+    }, 200);
 }
 // const daysSelect = () => {
 //     let daySelector = document.getElementById('days_select');
@@ -510,19 +630,19 @@ function displayCampingPrice(param) {
 //     calculateDate();
 // }
 
-let extraTimeTarget = document.getElementById('extra_time_sel')
-const getAvailableExtra = () => {
-    fetch(`/${carType}/getextratime/${rentDateYear}/${rentDateMonth}/${rentDateDay}/${useDayNum}/${rentTime}`)
-        .then(res => res.json())
-        .then(result => {
-            // 현재 남아있는 options 없애기
-            let targetSelect = document.getElementById('extratime_select');
-            targetSelect.options.length = 0;
-            let availableExtra = result[0];
-            makeExtraOptions(availableExtra)
-            extraTimeTarget.style.display = 'block'
-        })
-}
+// let extraTimeTarget = document.getElementById('extra_time_sel')
+// const getAvailableExtra = () => {
+//     fetch(`/${carType}/getextratime/${rentDateYear}/${rentDateMonth}/${rentDateDay}/${useDayNum}/${rentTime}`)
+//         .then(res => res.json())
+//         .then(result => {
+//             // 현재 남아있는 options 없애기
+//             let targetSelect = document.getElementById('extratime_select');
+//             targetSelect.options.length = 0;
+//             let availableExtra = result[0];
+//             makeExtraOptions(availableExtra)
+//             extraTimeTarget.style.display = 'block'
+//         })
+// }
 
 
 
@@ -534,7 +654,7 @@ const makeExtraOptions = (times) => {
 
         if(i == 0) {
             createdOpt.text = '==추가 시간 선택==';
-            createdOpt.value = 0;
+            createdOpt.value = '';
         }
         else {
             createdOpt.text = '+'+ i +'시간';
@@ -595,16 +715,27 @@ const postDate = () => {
     rentDateNum = document.getElementById('selected_date').innerText;
     rentTime = document.getElementById('selected_time').innerText;
     returnDateNum = document.getElementById('fullReturnDate').innerText;
-    returnTime = rentTime;
+    returnTime = '';
     useDay = document.getElementById('selected_period').innerText;
+    let extraTime = document.getElementById('extra_time_select');
 
     let totalPriceString = document.getElementById('rentFullPrice').innerText.replace(/,/g, "");
     totalPrice = totalPriceString.substr(0, totalPriceString.length - 1);
 
-    if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='') {
+    if (extraTime.value != '') {
+        if (extraTime.value ==='0') {
+            extraTime = 0;
+            returnTime = rentTime;
+        } else if (extraTime.value ==='3') {
+            extraTime = 1;
+            let calculateTime = parseInt(rentTime) + 3;
+            returnTime = calculateTime + '시';
+        }
+    }
 
+    if (!rentDateNum.endsWith('주세요') && !rentTime.endsWith('주세요')&& returnDateNum!='' && returnTime!='' && extraTime.value!='') {
         alert('예약 창으로 넘어갑니다.')
-        window.location.href = `/camping/calendar/${carType}_reserve/reservation/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${totalPrice}`
+        window.location.href = `/camping/calendar/${carType}_reserve/reservation/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${totalPrice}/${extraTime}`
 
     } else {
         alert('입력을 완료해주세요!')
@@ -647,4 +778,11 @@ const curMonth = new Date();
 let thisMonthOnCalendar = hiddenOnlythisMonth.dataset.index;
 if (curMonth.getMonth()+1 == thisMonthOnCalendar) {
     hiddenOnlythisMonth.style.display = "none";
+}
+
+
+// 6월 달력까지만 보이게
+const hiddenFromJuly = document.getElementById('hiddenFromJuly');
+if (hiddenFromJuly.dataset.index == '6') {
+    hiddenFromJuly.style.display = 'none';
 }

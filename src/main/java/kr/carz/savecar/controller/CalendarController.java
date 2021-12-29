@@ -3,6 +3,7 @@ package kr.carz.savecar.controller;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.service.*;
+import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import net.nurigo.java_sdk.api.Message;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.text.html.Option;
 import java.io.IOException;
@@ -121,7 +121,7 @@ public class CalendarController {
             prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
             nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
 
-            calendarDateList = calendarDateService.findCalendarDateByMonth(Integer.toString(thisMonth));
+            calendarDateList = calendarDateService.findByYearAndMonth(Integer.toString(thisYear), Integer.toString(thisMonth));
 
             Long firstDateId = calendarDateList.get(0).getDateId();
             for (int i = 1; i < thisDayOfWeek; i++) {
@@ -133,9 +133,10 @@ public class CalendarController {
 
         } else {
 
-            calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(month));
+            calendarDateList = calendarDateService.findByYearAndMonth(Long.toString(year), Long.toString(month));
 
             Long firstDateId = calendarDateList.get(0).getDateId();
+            System.out.println(firstDateId);
             for (int i = 1; i < thisDayOfWeek; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
@@ -172,7 +173,7 @@ public class CalendarController {
 
         Calendar cal = Calendar.getInstance();
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-        List<CalendarDate> calendarDateList = calendarDateService.findCalendarDateByMonth(Long.toString(clickedMonth));
+        List<CalendarDate> calendarDateList = calendarDateService.findByYearAndMonth(Long.toString(clickedYear), Long.toString(clickedMonth));
 
         // 오늘 날짜
         int thisYear = TodayDateInt()[0];
@@ -195,13 +196,17 @@ public class CalendarController {
 
         // 날짜별 캠핑카
         List<List<DateCamping>> dateCampingList = new ArrayList();
-        for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
-
+        List<List<CalendarTime>> calendarTimeList = new ArrayList<>();
+        for (CalendarDate calendarDate : calendarDateList) {
+            dateCampingList.add(dateCampingService.findByDateId(calendarDate));
+            calendarTimeList.add(calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice));
+        }
 
         Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
         model.put("explanation", explanation.get());
 
         model.addAttribute("calendarDateList", calendarDateList);
+        model.addAttribute("calendarTimeList", calendarTimeList);
         model.addAttribute("dateCampingList", dateCampingList);
         model.put("campingCarPrice", campingCarPrice);
 
@@ -219,8 +224,30 @@ public class CalendarController {
         return "rent_camping/" + carType;
     }
 
-    @GetMapping("/camping/calendar/{carType}_reserve/reservation/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{total}")
-    public String handleRequest_reserve(ModelMap model, @PathVariable("carType") String carType,@PathVariable("rent_date") String rent_date, @PathVariable("rent_time") String rent_time, @PathVariable("return_date") String return_date, @PathVariable("return_time") String return_time, @PathVariable("day") String day, @PathVariable("total") String total) throws Exception {
+
+    @GetMapping("/camping/calendar/{carType}_reserve/time_list/{dateId}")
+    @ResponseBody
+    public void get_campingcar_time_list(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId) throws Exception {
+
+        CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(dateId);
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+
+        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
+
+        JSONArray jsonArray = new JSONArray();
+        for (CalendarTime c : calendarTimeList) {
+            jsonArray.put(c.getReserveComplete());
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @GetMapping("/camping/calendar/{carType}_reserve/reservation/{rent_date}/{rent_time}/{return_date}/{return_time}/{day}/{total}/{extraTime}")
+    public String get_reservation_information(ModelMap model, @PathVariable String carType,@PathVariable String rent_date, @PathVariable String rent_time, @PathVariable String return_date, @PathVariable String return_time, @PathVariable String day, @PathVariable String total, @PathVariable String extraTime) {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName("limousine");
         model.put("campingCarPrice", campingCarPrice);
@@ -231,8 +258,8 @@ public class CalendarController {
         model.put("return_time", return_time);
         model.put("day", day);
         model.put("total", total);
-        model.put("carType", carType);
-
+        model.put("carType", carType);;
+        model.put("extraTime", extraTime);
 
         return "rent_camping/reservation";
     }
@@ -241,7 +268,7 @@ public class CalendarController {
     // 캠핑카 가격 구하는 api
     @RequestMapping(value = "/camping/calendar/{carType}/getprice/{season}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void get_travel_price(HttpServletResponse res, @PathVariable String carType, @PathVariable String season) throws IOException {
+    public void get_campingcar_price(HttpServletResponse res, @PathVariable String carType, @PathVariable String season) throws IOException {
 
         if(season.equals("0")){
             CampingCarPrice campingCarPrice;
@@ -343,7 +370,7 @@ public class CalendarController {
     }
 
 
-    // 캠핑카 예약 저장 api
+    // 캠핑카 예약 대기 신청
     @RequestMapping(value = "/camping/calendar/reserve", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public void camping_calendar_reservation(HttpServletResponse res, @RequestBody CampingCarReservationDTO dto) throws IOException{
@@ -359,12 +386,15 @@ public class CalendarController {
         params.put("from", "01052774113");
         params.put("type", "LMS");
 
-
         /* 고객에게 예약확인 문자 전송 */
-
         params2.put("to", dto.getPhone());
         params2.put("from", "01052774113");  // 16613331 테스트하기
         params2.put("type", "LMS");
+
+        String extraTimeDescription = "사용X";
+        if(dto.getExtraTime() == 1){
+            extraTimeDescription = "사용O";
+        }
 
         params.put("text", "[캠핑카 캘린더 예약]\n"
                 + "성함: " + dto.getName() + "\n"
@@ -375,6 +405,7 @@ public class CalendarController {
                 + "대여시간: " + dto.getRentTime() + "\n"
                 + "반납날짜: " + dto.getReturnDate() + "\n"
                 + "반납시간: " + dto.getReturnTime() + "\n"
+                + "추가3시간권(+11만원): " + extraTimeDescription + "\n"
                 + "이용날짜: " + dto.getDay() + "\n"
                 + "총금액: " + dto.getTotal() + "\n"
                 + "선결제금액: " + dto.getTotalHalf() + "\n"
@@ -388,6 +419,7 @@ public class CalendarController {
                 + "대여시간: " + dto.getRentTime() + "\n"
                 + "반납날짜: " + dto.getReturnDate() + "\n"
                 + "반납시간: " + dto.getReturnTime() + "\n"
+                + "추가3시간권: " + extraTimeDescription + "\n"
                 + "입금자명: " + dto.getDepositor() + "\n"
                 + "이용날짜: " + dto.getDay() + "\n"
                 + "총금액: " + dto.getTotal() + "\n"
@@ -431,37 +463,62 @@ public class CalendarController {
 
 
 
-//    // 선택 불가능한 가까운 날짜 받아오기
-//    @RequestMapping(value = "/camping/calendar/{carType}/sendrentdate/{year}/{month}/{day}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
-//    @ResponseBody
-//    public void send_rent_date_travel(HttpServletResponse res, @PathVariable String carType, @PathVariable String year, @PathVariable String month, @PathVariable String day) throws IOException {
-//
-//
-//        CalendarDate calendarDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(month, day, year);
-//
-//
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-//
-//        List<CalendarTime> calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice);
-//        List <String> categoryList2 = new ArrayList();
-//
-//        for (int i = 0; i < calendarTimeList.size(); i++) {
-//            if (calendarTimeList.get(i).getReserveComplete().equals("0")){
-//
-//                categoryList2.add(calendarTimeList.get(i).getReserveTime());
-//            }
-//        }
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for (String c : categoryList2) {
-//            jsonArray.put(c);
-//        }
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonArray.toString());
-//        pw.flush();
-//        pw.close();
-//    }
+    // 예약 가능한 날짜, 추가시간 가져오기
+    @GetMapping("/camping/calendar/possible/{carType}/{dateId}/{reserveTime}/{days}")
+    @ResponseBody
+    public void get_impossible_date(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId, @PathVariable String reserveTime, @PathVariable Long days) throws Exception {
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        CalendarDate calendarStartDate = calendarDateService.findCalendarDateByDateId(dateId);
+
+        String startDate = calendarStartDate.getYear() + String.format("%02d", Integer.parseInt(calendarStartDate.getMonth()) ) + String.format("%02d", Integer.parseInt(calendarStartDate.getDay()) );
+
+        int [] nextMonthDate = DateStringToInt(AddDate(startDate, 0, 1, 0));
+
+        CalendarDate calendarNextMonthDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(Integer.toString(nextMonthDate[1]), Integer.toString(nextMonthDate[2]), Integer.toString(nextMonthDate[0]));
+
+        int possible_days = 0;
+        int extra_time = 0;
+        int extra_time_flg = 0;
+
+        for(Long i=dateId+1; i<=calendarNextMonthDate.getDateId(); i++){
+            CalendarDate calendarDate = calendarDateService.findCalendarDateByDateId(i);
+            CalendarTime calendarTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarDate, campingCarPrice, reserveTime);
+            if(calendarTime.getReserveComplete().equals("0")){
+                possible_days += 1;
+            } else {
+                break;
+            }
+        }
+
+        Long lastDateId = dateId + days;
+        CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(lastDateId);
+        CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
+
+        if(reserveTime.compareTo("16시") < 0){
+            for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
+                CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
+                if(calendarExtraTime.getReserveComplete().equals("0")){
+                    extra_time += 1;
+                } else {
+                    break;
+                }
+            }
+            if(extra_time == 3){
+                extra_time_flg = 1;
+            }
+        }
+
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("possible_days", possible_days);
+        jsonObject.put("extra_time_flg", extra_time_flg);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 
 
 }

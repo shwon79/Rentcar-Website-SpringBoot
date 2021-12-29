@@ -14,14 +14,7 @@
 
     <script th:src="@{/js/campingcar.js}"></script>
 
-
     <script>
-        // function toggleImg(id) {
-        //     let before = document.getElementById("headerImg").src;
-        //     let tmp = document.getElementById(id).src;
-        //     document.getElementById("headerImg").src = tmp;
-        //     document.getElementById(id).src = before;
-        // }
         $(window).load(function() {
             let idList = document.getElementsByClassName('displayOnlyActive');
             for (i=0; i < idList.length; i++) {
@@ -44,7 +37,6 @@
     <!-- content whole wrapper-->
     <p class="car_type" th:id="${carType}" style="display: none;"></p>
     <p id="fullReturnDate" style="display: none;"></p>
-
     <div id="wrapper" class="content pinside60 container">
         <!--  content body-->
         <div class="row" id="mainRow">
@@ -121,7 +113,6 @@
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                         <div class="date_time"><h5 id="selected_date">날짜를 선택해주세요</h5></div>
-                        <!--                            <div class="date_time"><span id='rent_date' th:title="${dateId}" th:class="${clickedYear}+'년'+${clickedMonth}+'월 '+${clickedDay}+'일요일'+${clickedWDay}"></span></div>-->
                     </div>
                 </div>
                 <!-- 대여날짜 달력 -->
@@ -134,7 +125,7 @@
                             <span name="thisYear" th:text="${clickedYear}"></span>년
                             <span name="thisMonth" th:text="${clickedMonth}"></span>월
                         </div>&nbsp;&nbsp;
-                        <a th:href="'/camping/calendar/limousine_reserve/' + ${clickedNextYear} + '/'+ ${clickedNextMonth}">
+                        <a th:href="'/camping/calendar/limousine_reserve/' + ${clickedNextYear} + '/'+ ${clickedNextMonth}" id="hiddenFromJuly" th:data-index="${clickedMonth}">
                             <button class="nav-btn go-next" ><i class="fas fa-caret-right" style="font-size: 28px;"></i></button>
                         </a>
                     </div>
@@ -155,13 +146,12 @@
 
 
                                     <input class="this date_day" type="radio" th:id="${date.month+'월 '+date.day+'일'}" th:value="${date.wDay}" th:title="${date.season}"
-                                           th:name="${date.year}" th:text="${date.day}" onclick="sendRentDate(id, name, value);"/>
+                                           th:name="${date.year}" th:text="${date.day}" th:onclick="'sendRentDate(id, name, value, '+${date.dateId}+')'" />
                                 </label>
 
                             </div>
                         </div>
                         <div class="select_possible text-right">
-                            <!--                                <span style="padding-right: 30px"> <span style="color: rgb(180 255 175 / 57%);">●</span> 선택가능 </span>-->
                             <span style="padding-right: 30px"> <span style="color: #9d9d9d">●</span> 선택불가 </span>
                         </div>
                     </div>
@@ -178,32 +168,32 @@
                 </div>
                 <!-- 대여 시간 리스트 -->
                 <div id="calendar_rental_time" class="row" style="display: none;">
-                    <div class="time_options">
-                        <label for="10시">
+                    <div class="time_options" id="time_select">
+                        <label for="10시" name="time_option">
                             <input type="radio" id="10시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 10시
                         </label>
-                        <label for="11시">
+                        <label for="11시" name="time_option">
                             <input type="radio" id="11시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 11시
                         </label>
-                        <label for="12시">
+                        <label for="12시" name="time_option">
                             <input type="radio" id="12시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 12시
                         </label>
-                        <label for="13시">
+                        <label for="13시" name="time_option">
                             <input type="radio" id="13시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 13시
                         </label>
-                        <label for="14시">
+                        <label for="14시" name="time_option">
                             <input type="radio" id="14시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 14시
                         </label>
-                        <label for="15시">
+                        <label for="15시" name="time_option">
                             <input type="radio" id="15시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 15시
                         </label>
-                        <label for="16시">
+                        <label for="16시" name="time_option">
                             <input type="radio" id="16시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 16시
                         </label>
-                        <label for="17시">
+                        <label for="17시" name="time_option">
                             <input type="radio" id="17시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 17시
                         </label>
-                        <label for="18시">
+                        <label for="18시" name="time_option">
                             <input type="radio" id="18시" class="rent_time_radio" name="time1" onclick="sendRentTime(id);" /> 18시
                         </label>
                     </div>
@@ -227,86 +217,37 @@
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="background: white; border-left: 2.5px solid black;">
                             <select name="days" id="days_select" onchange="daysSelect();">
-                                <option value="">클릭하세요&nbsp;</option>
-                                <option value="1">1일&nbsp;</option>
-                                <option value="2">2일&nbsp;</option>
-                                <option value="3">3일&nbsp;</option>
-                                <option value="4">4일&nbsp;</option>
-                                <option value="5">5일&nbsp;</option>
-                                <option value="6">6일&nbsp;</option>
-                                <option value="7">7일&nbsp;</option>
-                                <option value="8">8일&nbsp;</option>
-                                <option value="9">9일&nbsp;</option>
-                                <option value="10">10일&nbsp;</option>
-                                <option value="11">11일&nbsp;</option>
-                                <option value="12">12일&nbsp;</option>
-                                <option value="13">13일&nbsp;</option>
-                                <option value="14">14일&nbsp;</option>
-                                <option value="15">15일&nbsp;</option>
-                                <option value="16">16일&nbsp;</option>
-                                <option value="17">17일&nbsp;</option>
-                                <option value="18">18일&nbsp;</option>
-                                <option value="19">19일&nbsp;</option>
-                                <option value="20">20일&nbsp;</option>
-                                <option value="21">21일&nbsp;</option>
-                                <option value="22">22일&nbsp;</option>
-                                <option value="23">23일&nbsp;</option>
-                                <option value="24">24일&nbsp;</option>
-                                <option value="25">25일&nbsp;</option>
-                                <option value="26">26일&nbsp;</option>
-                                <option value="27">27일&nbsp;</option>
-                                <option value="28">28일&nbsp;</option>
-                                <option value="29">29일&nbsp;</option>
-                                <option value="한달">한달&nbsp;</option>
+                                <option value="">렌트 일자 선택</option>
                             </select>
+                            <p style="font-size: 15px; text-align: right; margin-top: 10px;"><span style="color: red; font-size: 15px;">* </span>최소 2일 이상 예약 가능합니다.</p>
                         </div>
                     </div>
-                    <!--                        <label for="days_select">렌트 일자</label>-->
-                    <!--                        <select name="days" id="days_select" onchange="daysSelect()">-->
-                    <!--                        </select>-->
                     <!--                        <p><span style="color: red">*</span>다음 예약일 전까지 가능한 날짜만큼만 표시됩니다.</p>-->
                 </div>
 
-                <!--                    <div>-->
-                <!--                        <div id="calResultWrapper">-->
-                <!--                            <div class="sel_options" id="sel_option">-->
-                <!--                                <h2>선택 사항</h2>-->
-                <!--                                <hr style="color: dimgray;"/>-->
+                <!-- 추가 시간 -->
+                <div class="select_wrapper row" style="border: 1px solid black;" onclick="doDisplay('extra_time_options')">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                        <div class="date_menu"><h5>추가 시간</h5></div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <div class="date_time"><h5 id="selected_extra_time" style="word-break: keep-all;">추가시간을 선택해주세요</h5></div>
+                    </div>
+                </div>
 
-                <!--                                <div id="sel_options_output">-->
-                <!--                                    <div class="sel_options_outputs">-->
-                <!--                                        <p id="sel_option_output1_1"></p>-->
-                <!--                                        <p id="sel_option_output1_2"></p>-->
-                <!--                                    </div>-->
-                <!--                                    <p id="sel_option_length">➔</p>-->
-                <!--                                    <div class="sel_options_outputs">-->
-                <!--                                        <p id="sel_option_output2_1"></p>-->
-                <!--                                        <p id="sel_option_output2_2"></p>-->
-                <!--                                    </div>-->
-                <!--                                </div>-->
-
-                <!--                                <hr style="margin: 10px 0;"/>-->
-                <!--                            </div>-->
-                <!--                            <div class="sel_options" id="sel_price">-->
-                <!--                                <div class="result_details">-->
-                <!--                                    <h4>총 렌트료(VAT 미포함)</h4>-->
-                <!--                                    <p id="calRentFee"></p>-->
-                <!--                                </div>-->
-                <!--                                <div class="result_details">-->
-                <!--                                    <h4>추가 시간 요금(VAT 미포함)</h4>-->
-                <!--                                    <p id="calExtraFee"></p>-->
-                <!--                                </div>-->
-                <!--                                <div class="result_details">-->
-                <!--                                    <h4>VAT</h4>-->
-                <!--                                    <p id="calVat"></p>-->
-                <!--                                </div><hr style="color: dimgray" />-->
-                <!--                                <div class="result_details">-->
-                <!--                                    <h4>총 결제금액(VAT 포함)</h4>-->
-                <!--                                    <p id="calResult"></p>-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
+                <!-- 추가 시간 리스트-->
+                <div id="calendar_rental_extra_time" class="row" style="display: none;">
+                    <div class="select_wrapper row" style="margin: 0 0 20px 0; border: 1px solid black;">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                            <div class="date_menu"><h5>추가 시간</h5></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="background: white; border-left: 2.5px solid black; border-radius: 0 12px 12px 0;">
+                            <select name="extra_time" id="extra_time_select" onchange="extraTimeSelect();">
+                                <option value="">추가 시간 선택</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
                 <!--선택 사항-->
                 <div class="row result_wrapper">
@@ -330,9 +271,9 @@
                                 <div class="name">총 렌트료</div>
                                 <div class="price" id="rentPrice"></div>
                             </div>
-                            <div class="price_row" style="display: none;">
+                            <div class="price_row">
                                 <div class="name">추가시간 요금</div>
-                                <div class="price"></div>
+                                <div class="price" id="extraTimePrice"></div>
                             </div>
                             <div class="price_row">
                                 <div class="name">VAT</div>

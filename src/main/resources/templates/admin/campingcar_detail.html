@@ -29,12 +29,21 @@
 
     <div class="detail_container" >
       <div class="detail_list" id="go_back_wrapper">
-        <a href="/admin/campingcar/menu"><button id="go_back">🠔 뒤로가기</button></a>
+        <a href="/admin/campingcar/menu">
+          <button id="go_back">
+            <i class="fas fa-arrow-left"></i>  뒤로가기
+          </button>
+        </a>
       </div>
       <div class="detail_list" id="detail_set_reserve">
         <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="setCampingReserve(id)"
-                th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">확정</button>
-
+                th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">
+          확정
+        </button>
+        <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="deleteCampingReserve(id)"
+                th:style="${campingCarReservation.reservation} == 0? 'pointer-events:none; background: gray ' : null">
+          확정 취소
+        </button>
         <!--        <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+campingCarReservation.id}">-->
 <!--          <input th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray' : null" class="set_reserve" type="submit" value="확정"/>-->
 <!--        </form>-->
@@ -76,6 +85,11 @@
         <p th:text="${campingCarReservation.day}"></p>
       </div>
       <div class="detail_list">
+        <p>추가 시간</p>
+        <p th:if="${campingCarReservation.extraTime == 0}">X</p>
+        <p th:if="${campingCarReservation.extraTime == 1}">3시간</p>
+      </div>
+      <div class="detail_list">
         <p>성명</p>
         <p th:text="${campingCarReservation.name}"></p>
       </div>
@@ -101,7 +115,7 @@
       </div>
       <div class="detail_list">
         <p>예약</p>
-        <p th:text="${campingCarReservation.reservation}"></p>
+        <p th:text="${campingCarReservation.reservation} == 1? 'O':'X'"></p>
       </div>
       <div class="detail_list">
         <p id="custom_demand">요구사항</p>
