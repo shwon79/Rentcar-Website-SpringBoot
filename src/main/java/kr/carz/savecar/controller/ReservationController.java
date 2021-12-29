@@ -50,7 +50,8 @@ public class ReservationController {
 
 
     // 예약 저장 api
-    @RequestMapping(value = "/reservation/apply", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+//    @RequestMapping(value = "/reservation/apply", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    @PostMapping("/reservation/apply")
     @ResponseBody
     public void save(HttpServletResponse res, @RequestBody ReservationSaveDTO dto) throws IOException {
 
@@ -195,7 +196,8 @@ public class ReservationController {
 
 
     // 예약 확정 api -> 모렌으로 데이터 전송
-    @RequestMapping(value = "/moren/reservation/apply", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+//    @RequestMapping(value = "/moren/reservation/apply", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    @PostMapping("/moren/reservation/apply")
     @ResponseBody
     public void moren_reserve(HttpServletResponse res, @RequestBody MorenReservationApplyDTO dto) throws IOException{
 
