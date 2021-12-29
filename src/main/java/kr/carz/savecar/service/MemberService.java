@@ -31,7 +31,7 @@ public class MemberService implements UserDetailsService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
 
-        // password를 암호화 한 뒤 dp에 저장
+        // password를 암호화 한 뒤 db에 저장
         return memberRepository.save(memberDto.toEntity()).getId();
     }
 

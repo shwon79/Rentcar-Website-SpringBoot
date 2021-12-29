@@ -18,9 +18,9 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/member/example")
     public String index() {
-        return "/home/index";
+        return "/member/example";
     }
 
     @GetMapping("/member/signup")
