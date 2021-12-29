@@ -463,7 +463,7 @@ public class CalendarController {
 
 
 
-    // 예약 가능한 날짜 가져오기
+    // 예약 가능한 날짜, 추가시간 가져오기
     @GetMapping("/camping/calendar/possible/{carType}/{dateId}/{reserveTime}/{days}")
     @ResponseBody
     public void get_impossible_date(HttpServletResponse res, @PathVariable String carType, @PathVariable Long dateId, @PathVariable String reserveTime, @PathVariable Long days) throws Exception {
@@ -495,18 +495,20 @@ public class CalendarController {
         CalendarDate calendarLastDate = calendarDateService.findCalendarDateByDateId(lastDateId);
         CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
 
-
-        for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
-            CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
-            if(calendarExtraTime.getReserveComplete().equals("0")){
-                extra_time += 1;
-            } else {
-                break;
+        if(reserveTime.compareTo("16시") < 0){
+            for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
+                CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
+                if(calendarExtraTime.getReserveComplete().equals("0")){
+                    extra_time += 1;
+                } else {
+                    break;
+                }
+            }
+            if(extra_time == 3){
+                extra_time_flg = 1;
             }
         }
-        if(extra_time == 3){
-            extra_time_flg = 1;
-        }
+
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("possible_days", possible_days);
