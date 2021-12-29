@@ -1096,11 +1096,12 @@ pre {
   text-align: left;
   font-size: 24px;
   line-height: 1.2;
+  word-break: keep-all;
 }
 .price_row .price {
   background-color: white;
   color: black;
-  width: 60%;
+  width: 55%;
   height: 40px;
   border-radius: 12px;
   display: flex;
@@ -1119,6 +1120,9 @@ pre {
 }
 .description_time:last-child {
   padding-bottom: 30px;
+}
+.mobile_small {
+  font-size: 24px;
 }
 
 @media (max-width: 991px) {
@@ -1180,5 +1184,8 @@ pre {
   }
   .card .title i {
     font-size: 24px;
+  }
+  .mobile_small {
+    font-size: 22px !important;
   }
 }

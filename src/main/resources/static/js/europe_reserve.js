@@ -506,7 +506,11 @@ function displayCampingPrice(param) {
     let originPrice = parseInt(priceList[param]);
 
     if (selectedExtraTime.value == '3') {
-        extraTimePrice.innerText = '110,000 원';
+        if (carType == 'europe') {
+            extraTimePrice.innerText = '110,000 원';
+        } else if (carType == 'limousine' || carType == 'travel') {
+            extraTimePrice.innerText = '90,000 원';
+        }
     } else {
         extraTimePrice.innerText = '- 원';
     }
@@ -527,7 +531,11 @@ function displayCampingPrice(param) {
         rentFullPrice.innerText ='';
     } else {
         if (selectedExtraTime.value == '3') {
-            rentFullPrice.innerText = (originPrice + 110000).toLocaleString() + ' 원';
+            if (carType == 'europe') {
+                rentFullPrice.innerText = (originPrice + 110000).toLocaleString() + ' 원';
+            } else if (carType == 'limousine' || carType == 'travel') {
+                rentFullPrice.innerText = (originPrice + 90000).toLocaleString() + ' 원';
+            }
         } else {
             rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
         }
