@@ -121,6 +121,14 @@
                 </div>
                 <!-- 대여날짜 달력 -->
                 <div id="calendar_rental" class="row">
+                    <p class="description_time hidden-xs" style="margin-bottom: 2rem; line-height: 1.5; word-break: keep-all;">
+                        <span style="color: red; font-size: 15px;">* </span>
+                        캠핑카 정비를 위해 기존 고객 반납 직후에는 바로 대여가 불가할 수 있습니다.
+                    </p>
+                    <p class="description_time hidden-lg hidden-md hidden-sm" style="margin-bottom: 2rem; line-height: 1.5;">
+                        <span style="color: red; font-size: 15px;">* </span>
+                        캠핑카 정비를 위해 기존 고객 반납 직후에는<br>바로 대여가 불가할 수 있습니다.
+                    </p>
                     <div class="header">
                         <a th:href="'/camping/calendar/travel_reserve/' + ${clickedPrevYear} + '/'+ ${clickedPrevMonth}" id="hiddenOnlythisMonth" th:data-index="${clickedMonth}">
                             <button class="nav-btn go-prev"><i class="fas fa-caret-left" style="font-size: 28px;"></i></button>&nbsp;
