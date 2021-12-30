@@ -79,6 +79,18 @@ body {
     font-size: 17px
 }
 
+.detail_container textarea,
+.detail_container select {
+    padding: 10px;
+    font-size: 17px;
+}
+
+.detail_container input {
+    width: fit-content;
+    font-size: 17px;
+    border: none;
+    background: white;
+}
 
 #mainTable td {
     padding: 10px;

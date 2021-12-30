@@ -16,6 +16,31 @@
       let campingcarMenu = document.getElementById('campingcarMenu');
       campingcarMenu.classList.add('activeAdminMenu');
     });
+
+    $(window).load(function() {
+      let getRentDate = document.getElementById('getRentDate').innerText;
+      let rentDate = document.getElementById('rentDate');
+      let getReturnDate = document.getElementById('getReturnDate').innerText;
+      let returnDate = document.getElementById('returnDate');
+      let splitedRentList = getRentDate.split('-');
+      let splitedReturnList = getReturnDate.split('-');
+      let rentMonth, rentDay, returnMonth, returnDay;
+      if (splitedRentList[1].length == 1) {
+        rentMonth = '0' + splitedRentList[1];
+      }
+      if (splitedRentList[2].length == 1) {
+        rentDay = '0' + splitedRentList[2];
+      }
+      if (splitedReturnList[1].length == 1) {
+        returnMonth = '0' + splitedReturnList[1];
+      }
+      if (splitedReturnList[2].length == 1) {
+        returnDay = '0' + splitedReturnList[2];
+      }
+      rentDate.value = splitedRentList[0] + '-' + rentMonth + '-' + rentDay;
+      returnDate.value = splitedReturnList[0] + '-' + returnMonth + '-' + returnDay;
+
+    })
   </script>
 
 </head>
@@ -47,9 +72,6 @@
         <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="setCampingReserve('edit')">
           내용 수정
         </button>
-        <!--        <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+campingCarReservation.id}">-->
-<!--          <input th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray' : null" class="set_reserve" type="submit" value="확정"/>-->
-<!--        </form>-->
       </div>
       <div class="detail_list" id="detail_list_title">
         <p>종류</p>
@@ -57,7 +79,11 @@
       </div>
       <div class="detail_list">
         <p>차종</p>
-        <textarea id="carType" th:text="${campingCarReservation.carType.toUpperCase()}"></textarea>
+        <select name="" id="carType">
+          <option value="europe" th:selected="${campingCarReservation.carType} == 'europe' ? true : false">EUROPE</option>
+          <option value="limousine" th:selected="${campingCarReservation.carType} == 'limousine' ? true : false">LIMOUSINE</option>
+          <option value="travel" th:selected="${campingCarReservation.carType} == 'travel' ? true : false">TRAVEL</option>
+        </select>
       </div>
       <div class="detail_list">
         <p>생성일</p>
@@ -69,29 +95,83 @@
       </div>
       <div class="detail_list">
         <p>시작일</p>
-        <textarea id="rentDate" th:text="${campingCarReservation.rentDate}"></textarea>
+        <input type="date" id="rentDate" th:value="${campingCarReservation.rentDate}">
+        <p th:text="${campingCarReservation.rentDate}" style="display: none;" id="getRentDate"></p>
       </div>
       <div class="detail_list">
         <p>시작시간</p>
-        <textarea id="rentTime" th:text="${campingCarReservation.rentTime}"></textarea>
+        <select id="rentTime">
+          <option value="10시" th:selected="${campingCarReservation.rentTime} == '10시' ? true : false">10시</option>
+          <option value="11시" th:selected="${campingCarReservation.rentTime} == '11시' ? true : false">11시</option>
+          <option value="12시" th:selected="${campingCarReservation.rentTime} == '12시' ? true : false">12시</option>
+          <option value="13시" th:selected="${campingCarReservation.rentTime} == '13시' ? true : false">13시</option>
+          <option value="14시" th:selected="${campingCarReservation.rentTime} == '14시' ? true : false">14시</option>
+          <option value="15시" th:selected="${campingCarReservation.rentTime} == '15시' ? true : false">15시</option>
+          <option value="16시" th:selected="${campingCarReservation.rentTime} == '16시' ? true : false">16시</option>
+          <option value="17시" th:selected="${campingCarReservation.rentTime} == '17시' ? true : false">17시</option>
+          <option value="18시" th:selected="${campingCarReservation.rentTime} == '18시' ? true : false">18시</option>
+        </select>
       </div>
       <div class="detail_list">
         <p>반납일</p>
-        <textarea id="returnDate" th:text="${campingCarReservation.returnDate}"></textarea>
+        <input type="date" id="returnDate" th:value="${campingCarReservation.returnDate}">
+        <p th:text="${campingCarReservation.returnDate}" style="display: none;" id="getReturnDate"></p>
       </div>
       <div class="detail_list">
         <p>반납시간</p>
-        <textarea id="returnTime" th:text="${campingCarReservation.returnTime}"></textarea>
+        <select id="returnTime">
+          <option value="10시" th:selected="${campingCarReservation.returnTime} == '10시' ? true : false">10시</option>
+          <option value="11시" th:selected="${campingCarReservation.returnTime} == '11시' ? true : false">11시</option>
+          <option value="12시" th:selected="${campingCarReservation.returnTime} == '12시' ? true : false">12시</option>
+          <option value="13시" th:selected="${campingCarReservation.returnTime} == '13시' ? true : false">13시</option>
+          <option value="14시" th:selected="${campingCarReservation.returnTime} == '14시' ? true : false">14시</option>
+          <option value="15시" th:selected="${campingCarReservation.returnTime} == '15시' ? true : false">15시</option>
+          <option value="16시" th:selected="${campingCarReservation.returnTime} == '16시' ? true : false">16시</option>
+          <option value="17시" th:selected="${campingCarReservation.returnTime} == '17시' ? true : false">17시</option>
+          <option value="18시" th:selected="${campingCarReservation.returnTime} == '18시' ? true : false">18시</option>
+        </select>
       </div>
       <div class="detail_list">
         <p>일권</p>
-        <textarea id="day" th:text="${campingCarReservation.day}"></textarea>
+        <select id="day">
+          <option value="1일" th:selected="${campingCarReservation.day} == '1일' ? true : false">1일</option>
+          <option value="2일" th:selected="${campingCarReservation.day} == '2일' ? true : false">2일</option>
+          <option value="3일" th:selected="${campingCarReservation.day} == '3일' ? true : false">3일</option>
+          <option value="4일" th:selected="${campingCarReservation.day} == '4일' ? true : false">4일</option>
+          <option value="5일" th:selected="${campingCarReservation.day} == '5일' ? true : false">5일</option>
+          <option value="6일" th:selected="${campingCarReservation.day} == '6일' ? true : false">6일</option>
+          <option value="7일" th:selected="${campingCarReservation.day} == '7일' ? true : false">7일</option>
+          <option value="8일" th:selected="${campingCarReservation.day} == '8일' ? true : false">8일</option>
+          <option value="9일" th:selected="${campingCarReservation.day} == '9일' ? true : false">9일</option>
+          <option value="10일" th:selected="${campingCarReservation.day} == '10일' ? true : false">10일</option>
+          <option value="11일" th:selected="${campingCarReservation.day} == '11일' ? true : false">11일</option>
+          <option value="12일" th:selected="${campingCarReservation.day} == '12일' ? true : false">12일</option>
+          <option value="13일" th:selected="${campingCarReservation.day} == '13일' ? true : false">13일</option>
+          <option value="14일" th:selected="${campingCarReservation.day} == '14일' ? true : false">14일</option>
+          <option value="15일" th:selected="${campingCarReservation.day} == '15일' ? true : false">15일</option>
+          <option value="16일" th:selected="${campingCarReservation.day} == '16일' ? true : false">16일</option>
+          <option value="17일" th:selected="${campingCarReservation.day} == '17일' ? true : false">17일</option>
+          <option value="18일" th:selected="${campingCarReservation.day} == '18일' ? true : false">18일</option>
+          <option value="19일" th:selected="${campingCarReservation.day} == '19일' ? true : false">19일</option>
+          <option value="20일" th:selected="${campingCarReservation.day} == '20일' ? true : false">20일</option>
+          <option value="21일" th:selected="${campingCarReservation.day} == '21일' ? true : false">21일</option>
+          <option value="22일" th:selected="${campingCarReservation.day} == '22일' ? true : false">22일</option>
+          <option value="23일" th:selected="${campingCarReservation.day} == '23일' ? true : false">23일</option>
+          <option value="24일" th:selected="${campingCarReservation.day} == '24일' ? true : false">24일</option>
+          <option value="25일" th:selected="${campingCarReservation.day} == '25일' ? true : false">25일</option>
+          <option value="26일" th:selected="${campingCarReservation.day} == '26일' ? true : false">26일</option>
+          <option value="27일" th:selected="${campingCarReservation.day} == '27일' ? true : false">27일</option>
+          <option value="28일" th:selected="${campingCarReservation.day} == '28일' ? true : false">28일</option>
+          <option value="29일" th:selected="${campingCarReservation.day} == '29일' ? true : false">29일</option>
+          <option value="한달" th:selected="${campingCarReservation.day} == '한달' ? true : false">한달권</option>
+        </select>
       </div>
       <div class="detail_list">
         <p>추가 시간</p>
-        <textarea id="extraTime" th:text="${campingCarReservation.extraTime} == 1? '3시간':'X'"></textarea>
-<!--        <textarea id="extraTime" th:if="${campingCarReservation.extraTime == 0}">X</textarea>-->
-<!--        <textarea id="extraTime" th:if="${campingCarReservation.extraTime == 1}">3시간</textarea>-->
+        <select id="extraTime">
+          <option value="0" th:selected="${campingCarReservation.extraTime} == 0 ? true : false">추가 시간 없음</option>
+          <option value="1" th:selected="${campingCarReservation.extraTime} == 1 ? true : false">3시간</option>
+        </select>
       </div>
       <div class="detail_list">
         <p>성명</p>
@@ -119,11 +199,15 @@
       </div>
       <div class="detail_list">
         <p>예약</p>
-        <textarea id="campingReservation" th:text="${#numbers.formatInteger(campingCarReservation.reservation,0, 'COMMA')}"></textarea>
+<!--        <textarea id="campingReservation" th:text="${campingCarReservation.reservation}"></textarea>-->
+        <select id="campingReservation">
+          <option value="0" th:selected="${campingCarReservation.reservation} == 0 ? true : false">예약 X</option>
+          <option value="1" th:selected="${campingCarReservation.reservation} == 1 ? true : false">예약 O</option>
+        </select>
       </div>
       <div class="detail_list">
         <p id="custom_demand">요구사항</p>
-        <textarea id="detail" th:text="${campingCarReservation.detail}"></textarea>
+        <textarea id="detail" th:text="${campingCarReservation.detail}" style="text-align: left;"></textarea>
       </div>
       <div class="detail_list" style="display: none;">
         <p>약관 동의</p>
