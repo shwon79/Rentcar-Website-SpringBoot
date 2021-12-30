@@ -334,8 +334,26 @@ public class AdminController {
         Optional<CampingCarReservation> campingCarReservationWrapper = campingcarReservationService.findById(reservationId);
         CampingCarReservation campingCarReservation = campingCarReservationWrapper.get();
 
+        campingCarReservation.setAgree(campingCarReservationDTO.getAgree());
+        campingCarReservation.setCarType(campingCarReservationDTO.getCarType());
+        campingCarReservation.setDay(campingCarReservationDTO.getDay());
+        campingCarReservation.setDeposit(campingCarReservationDTO.getDeposit());
+        campingCarReservation.setDepositor(campingCarReservationDTO.getDepositor());
+        campingCarReservation.setDetail(campingCarReservationDTO.getDetail());
+        campingCarReservation.setName(campingCarReservationDTO.getName());
+        campingCarReservation.setPhone(campingCarReservationDTO.getPhone());
+        campingCarReservation.setRentDate(campingCarReservationDTO.getRentDate());
+        campingCarReservation.setRentTime(campingCarReservationDTO.getRentTime());
+        campingCarReservation.setReservation(campingCarReservationDTO.getReservation());
+        campingCarReservation.setReturnDate(campingCarReservationDTO.getReturnDate());
+        campingCarReservation.setReturnTime(campingCarReservationDTO.getReturnTime());
+        campingCarReservation.setTotal(campingCarReservationDTO.getTotal());
+        campingCarReservation.setTotalHalf(campingCarReservationDTO.getTotalHalf());
+        campingCarReservation.setExtraTime(campingCarReservationDTO.getExtraTime());
+
+        campingcarReservationService.save(campingCarReservation);
+
         if(campingCarReservation.getReservation() == campingCarReservationDTO.getReservation()) {
-            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
             jsonObject.put("result", 1);
 
             PrintWriter pw = res.getWriter();
@@ -360,7 +378,6 @@ public class AdminController {
 
             return;
         }
-
 
         // 문자전송
         Message coolsms = new Message(api_key, api_secret);
@@ -431,7 +448,8 @@ public class AdminController {
                     calendarTimeService.save(calendarTimeList.get(j));
                 }
             }
-            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
+
+//            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
 
         } else if (campingCarReservation.getReservation() == 1 && campingCarReservationDTO.getReservation() == 0) {
             taskName = "취소";
@@ -453,10 +471,11 @@ public class AdminController {
                     calendarTimeService.save(calendarTimeList.get(j));
                 }
             }
-            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
+//            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
         } else {
             throw new Exception("There is no matching action");
         }
+
 
 //        params.put("text", "[캠핑카 캘린더 예약 " + taskName + "]\n"
 //                + "성함: " + campingCarReservation.getName() + "\n"
