@@ -323,7 +323,7 @@ public class AdminController {
     }
 
 
-    // 캠핑카 예약 확정하기 api
+    // 캠핑카 예약 수정, 확정, 취소하기 api
     @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
     @ResponseBody
     @Transactional
@@ -431,8 +431,7 @@ public class AdminController {
                     calendarTimeService.save(calendarTimeList.get(j));
                 }
             }
-            campingCarReservationWrapper.get().setReservation(1);
-            campingcarReservationService.save(campingCarReservationWrapper.get());
+            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
 
         } else if (campingCarReservation.getReservation() == 1 && campingCarReservationDTO.getReservation() == 0) {
             taskName = "취소";
@@ -454,61 +453,60 @@ public class AdminController {
                     calendarTimeService.save(calendarTimeList.get(j));
                 }
             }
-            campingCarReservationWrapper.get().setReservation(0);
-            campingcarReservationService.save(campingCarReservationWrapper.get());
+            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
         } else {
             throw new Exception("There is no matching action");
         }
 
-        params.put("text", "[캠핑카 캘린더 예약 " + taskName + "]\n"
-                + "성함: " + campingCarReservation.getName() + "\n"
-                + "전화번호: " + campingCarReservation.getPhone() + "\n"
-                + "차량명: " + campingCarReservation.getCarType() + "\n"
-                + "입금자명: " + campingCarReservation.getDepositor() + "\n"
-                + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
-                + "대여시간: " + campingCarReservation.getRentTime() + "\n"
-                + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
-                + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
-                + "이용날짜: " + campingCarReservation.getDay() + "\n"
-                + "총금액: " + campingCarReservation.getTotal() + "\n"
-                + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
-                + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
-
-        params2.put("text", "[캠핑카 예약이 " + taskName + "되었습니다.]" + "\n"
-                + "성함: " + campingCarReservation.getName() + "\n"
-                + "전화번호: " + campingCarReservation.getPhone() + "\n"
-                + "차량명: " + campingCarReservation.getCarType() + "\n"
-                + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
-                + "대여시간: " + campingCarReservation.getRentTime() + "\n"
-                + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
-                + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
-                + "입금자명: " + campingCarReservation.getDepositor() + "\n"
-                + "이용날짜: " + campingCarReservation.getDay() + "\n"
-                + "총금액: " + campingCarReservation.getTotal() + "\n"
-                + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
-                + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
-
-
-        params.put("app_version", "test app 1.2");
-        params2.put("app_version", "test app 1.2");
-
-        /* 세이브카에게 문자 전송 */
-        try {
-            org.json.simple.JSONObject obj = coolsms.send(params);
-            System.out.println(obj.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
-
-        /* 고객에게 예약확인 문자 전송 */
-        try {
-            org.json.simple.JSONObject obj2 = coolsms.send(params2);
-            System.out.println(obj2.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
+//        params.put("text", "[캠핑카 캘린더 예약 " + taskName + "]\n"
+//                + "성함: " + campingCarReservation.getName() + "\n"
+//                + "전화번호: " + campingCarReservation.getPhone() + "\n"
+//                + "차량명: " + campingCarReservation.getCarType() + "\n"
+//                + "입금자명: " + campingCarReservation.getDepositor() + "\n"
+//                + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
+//                + "대여시간: " + campingCarReservation.getRentTime() + "\n"
+//                + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
+//                + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
+//                + "이용날짜: " + campingCarReservation.getDay() + "\n"
+//                + "총금액: " + campingCarReservation.getTotal() + "\n"
+//                + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
+//                + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
+//
+//        params2.put("text", "[캠핑카 예약이 " + taskName + "되었습니다.]" + "\n"
+//                + "성함: " + campingCarReservation.getName() + "\n"
+//                + "전화번호: " + campingCarReservation.getPhone() + "\n"
+//                + "차량명: " + campingCarReservation.getCarType() + "\n"
+//                + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
+//                + "대여시간: " + campingCarReservation.getRentTime() + "\n"
+//                + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
+//                + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
+//                + "입금자명: " + campingCarReservation.getDepositor() + "\n"
+//                + "이용날짜: " + campingCarReservation.getDay() + "\n"
+//                + "총금액: " + campingCarReservation.getTotal() + "\n"
+//                + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
+//                + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
+//
+//
+//        params.put("app_version", "test app 1.2");
+//        params2.put("app_version", "test app 1.2");
+//
+//        /* 세이브카에게 문자 전송 */
+//        try {
+//            org.json.simple.JSONObject obj = coolsms.send(params);
+//            System.out.println(obj.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
+//
+//        /* 고객에게 예약확인 문자 전송 */
+//        try {
+//            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+//            System.out.println(obj2.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
         jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();
