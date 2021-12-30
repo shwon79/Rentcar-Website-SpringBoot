@@ -1,8 +1,10 @@
 .header_camp {
     background: #080d10;
     overflow-x: clip;
+    height: 276px;
 }
 .header_camp .container {
+    max-width: 1440px;
     width: 100%;
     padding: 75px 0 0 0;
 }
@@ -16,48 +18,47 @@
     border-image-slice: 1;
     border-image-width: 1px 0 0 0;
 }
+.pc_title {
+    display: block;
+}
+.mobile_title {
+    display: none;
+}
 
 .header_camp_navbar {
     background: linear-gradient(to right, red, cornflowerblue);
-    padding: 0px 10px;
     margin-bottom: -5px;
 }
 
-.header_camp_navbar #navigation ul li a {
-    padding: 15px 80px 15px 20px;
+.header_camp_navbar ul {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.header_camp_navbar li {
+    width: 25%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.header_camp_navbar a:hover {
     color: black;
-    margin-right: 16px;
-    width: max-content;
-}
-/*comment out for deploying*/
-/*.main_ul li:first-child:after {*/
-/*    content: "|";*/
-/*    position: absolute;*/
-/*    font-size: 28px;*/
-/*    bottom: 15%;*/
-/*    right: -5%;*/
-/*}*/
-/*.main_ul ul li:first-child:after {*/
-/*    content: "";*/
-/*}*/
-
-.main_ul > li > a:after {
-    position: absolute;
-    content: '+';
-    top: 18%;
-    right: 0%;
-    font-size: 28px;
-}
-.main_ul > li > a:hover {
-    background-color: transparent !important;
-}
-.main_ul > li > ul > li > a {
-    background-color: white !important;
-}
-.main_ul > li > ul > li > a {
-    background-color: white !important;
 }
 
-.main_ul > li > ul > li > a:hover {
-    color: black !important;
+.header_camp_navbar .active {
+    background-color: white;
+}
+
+@media (max-width: 600px) {
+    .header_camp {
+        height: 300px;
+    }
+    .pc_title {
+        display: none;
+    }
+    .mobile_title {
+        display: block;
+    }
 }

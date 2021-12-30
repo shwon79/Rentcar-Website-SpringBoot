@@ -21,11 +21,11 @@
         }
 
         $(window).load(function() {
-            let idList = document.getElementsByClassName('displayOnlyActive');
-            for (i=0; i < idList.length; i++) {
-                if (idList[i].dataset.id == 'limousine') {
-                    let activeMenu = idList[i];
-                    activeMenu.classList.add('activeCampingMenu');
+            let ulList = document.getElementsByClassName('header_camp_li');
+            console.log(ulList);
+            for (i=0; i < ulList.length; i++) {
+                if (ulList[i].dataset.id == 'limousine') {
+                    ulList[i].classList.add('active');
                 }
             };
         });
