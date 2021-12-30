@@ -30,8 +30,8 @@ public class CampingcarReservationService {
         return campingcarReservationRepository.save(dto.toEntity()).getId();
     }
 
-    public void save(CampingCarReservation campingCarReservation) {
-        campingcarReservationRepository.save(campingCarReservation);
+    public Long save(CampingCarReservation campingCarReservation) {
+        return campingcarReservationRepository.save(campingCarReservation).getId();
     }
 
     public List<CampingCarReservation> findAllReservations(){
