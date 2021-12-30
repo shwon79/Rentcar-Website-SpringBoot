@@ -406,7 +406,7 @@ public class CalendarController {
                 + "대여시간: " + dto.getRentTime() + "\n"
                 + "반납날짜: " + dto.getReturnDate() + "\n"
                 + "반납시간: " + dto.getReturnTime() + "\n"
-                + "추가3시간권(+11만원): " + extraTimeDescription + "\n"
+                + "추가3시간권: " + extraTimeDescription + "\n"
                 + "이용날짜: " + dto.getDay() + "\n"
                 + "총금액: " + dto.getTotal() + "\n"
                 + "선결제금액: " + dto.getTotalHalf() + "\n"
