@@ -39,7 +39,7 @@ const make_discount = () => {
         discount : $("#discount").val(),
         description: $("#discount-description").val()
     };
-    console.log(data);
+    // console.log(data);
 
     $.ajax({
         type:'POST',
@@ -179,8 +179,6 @@ $('.reservation-confirm-btn').click(function(e) {
     let carCodeList = document.getElementsByClassName('carCode');
     let pickupPlaceList = document.getElementsByClassName('pickupPlace');
 
-    console.log(carAmountTotalList)
-
     let id;
     let carNo;
     let reservationName;
@@ -318,7 +316,7 @@ $('.reservation-confirm-btn').click(function(e) {
         pickupPlace: pickupPlace
     }
 
-    console.log(data);
+    // console.log(data);
 
     let reserveConfirm = confirm('예약을 완료하시겠습니까?');
 
@@ -420,7 +418,7 @@ saveBtn.addEventListener('click', () => {
         limousine_facility: editedLimousineFacility.value,
         travel_facility: editedTravelFacility.value
     }
-    console.log(data);
+    // console.log(data);
 
     $.ajax({
         type:'POST',
@@ -440,48 +438,116 @@ saveBtn.addEventListener('click', () => {
     })
 })
 
-function setCampingReserve(id) {
-    let checkConfirm = confirm('예약을 확정하시겠습니까?');
-    // console.log(id)
+// 캠핑카 예약 확정 버튼
+function setCampingReserve(behavior) {
+    let carType = document.getElementById('carType').value.toLowerCase();
+    let rentDate = document.getElementById('rentDate').value;
+    let rentTime = document.getElementById('rentTime').value;
+    let returnDate = document.getElementById('returnDate').value;
+    let returnTime = document.getElementById('returnTime').value;
+    let day = document.getElementById('day').value;
+    let extraTime = document.getElementById('extraTime').value;
+    let deposit = document.getElementById('deposit').value;
+    let total = document.getElementById('total').value;
+    let totalHalf = document.getElementById('totalHalf').value;
+    let name = document.getElementById('name').value;
+    let phone = document.getElementById('phone').value;
+    let depositor = document.getElementById('depositor').value;
+    let detail = document.getElementById('detail').value;
+    let agree = parseInt(document.getElementById('agree').innerText);
+    let reservation = parseInt(document.getElementById('campingReservation').value);
+    let id = document.getElementById('campingReservationId');
 
-    if (checkConfirm) {
-        $.ajax({
-            type:'PUT',
-            url:'/admin/campingcar/reservation/' + id,
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8'
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('캠핑카 예약이 확정되었습니다.');
-            } else if (result.result == 0) {
-                alert('캠핑카 예약에 문제가 생겼습니다.');
-            };
-            window.location.href = '/admin/campingcar/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    };
-};
+    // let checkConfirm = confirm('예약을 확정하시겠습니까?');
+    // let checkDelete = confirm('예약 확정을 취소하시겠습니까?');
+    // let checkEdit = confirm('예약 내용을 수정하시겠습니까?');
 
-function deleteCampingReserve(id) {
-    let checkConfirm = confirm('캠핑카 예약을 취소하시겠습니까?');
-
-    if (checkConfirm) {
-        $.ajax({
-            type:'DELETE',
-            url:'/admin/campingcar/reservation/'+ id,
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8',
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('캠핑카 예약이 취소되었습니다.');
-            } else if (result.result == 0) {
-                alert('캠핑카 예약이 취소에 문제가 생겼습니다.');
-            };
-            window.location.href = '/admin/campingcar/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
+    if (extraTime === 'X' || extraTime === 'x') {
+        extraTime = 0;
+    } else if (extraTime === '3시간') {
+        extraTime = 1;
     }
 
-}
+    deposit = parseInt(deposit.replace(/,/g, ""));
+    total = parseInt(total.replace(/,/g, ""));
+    totalHalf = parseInt(totalHalf.replace(/,/g, ""));
+
+    if (behavior === 'confirm') {
+        reservation = 1;
+    } else if (behavior === 'delete') {
+        reservation = 0;
+    }
+
+    let data = {
+        carType: carType,
+        rentDate: rentDate,
+        rentTime: rentTime,
+        returnDate: returnDate,
+        returnTime: returnTime,
+        day: day,
+        extraTime: extraTime,
+        deposit: deposit,
+        total: total,
+        totalHalf: totalHalf,
+        name: name,
+        phone: phone,
+        depositor: depositor,
+        detail: detail,
+        agree: agree,
+        reservation: reservation
+    }
+
+    console.log(data);
+    // if (behavior === 'confirm') {
+    //     if (checkConfirm) {
+    //         setCampingData();
+    //     }
+    // };
+    //
+    // function setCampingData() {
+    //     $.ajax({
+    //         type:'PUT',
+    //         url:'/admin/campingcar/reservation/' + id,
+    //         dataType:'json',
+    //         contentType : 'application/json; charset=utf-8',
+    //         data : JSON.stringify(data)
+    //     }).done(function (result) {
+    //         if (result.result == 1) {
+    //             alert('캠핑카 예약이 확정되었습니다.');
+    //         } else if (result.result == 0) {
+    //             alert('캠핑카 예약에 문제가 생겼습니다.');
+    //         };
+    //         window.location.href = '/admin/campingcar/menu';
+    //     }).fail(function (error) {
+    //         alert(JSON.stringify(error));
+    //     })
+    // }
+};
+
+// 캠핑카 예약 확정 취소
+// function deleteCampingReserve(id) {
+//     let checkConfirm = confirm('캠핑카 예약을 취소하시겠습니까?');
+//
+//     if (checkConfirm) {
+//         $.ajax({
+//             type:'DELETE',
+//             url:'/admin/campingcar/reservation/'+ id,
+//             dataType:'json',
+//             contentType : 'application/json; charset=utf-8',
+//         }).done(function (result) {
+//             if (result.result == 1) {
+//                 alert('캠핑카 예약이 취소되었습니다.');
+//             } else if (result.result == 0) {
+//                 alert('캠핑카 예약이 취소에 문제가 생겼습니다.');
+//             };
+//             window.location.href = '/admin/campingcar/menu';
+//         }).fail(function (error) {
+//             alert(JSON.stringify(error));
+//         })
+//     }
+// }
+
+//캠핑카 예약 내용 수정
+// function editCampingReserve(id) {
+//
+// }

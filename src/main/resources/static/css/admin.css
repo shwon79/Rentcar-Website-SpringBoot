@@ -297,7 +297,7 @@ form {
     text-align: left;
 }
 
-#custom_demand_detail {
+#detail {
     flex: 7;
     text-align: right;
 }
