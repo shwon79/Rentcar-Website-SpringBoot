@@ -69,6 +69,15 @@ public class AdminController {
     @Value("${coolsms.api_secret}")
     private String api_secret;
 
+    @Value("${phone.admin1}")
+    private String admin1;
+
+    @Value("${phone.admin2}")
+    private String admin2;
+
+    @Value("${phone.admin3}")
+    private String admin3;
+
     @GetMapping("/admin/login")
     public String login() {
         return "admin/login";
@@ -364,20 +373,6 @@ public class AdminController {
             return;
         }
 
-        String[] splitedRentDate = campingCarReservation.getRentDate().split("-");
-        String[] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
-
-        if (splitedRentDate.length < 3) {
-            System.out.println("날짜 형식 오류");
-            jsonObject.put("result", 0);
-
-            PrintWriter pw = res.getWriter();
-            pw.print(jsonObject);
-            pw.flush();
-            pw.close();
-
-            return;
-        }
 
         // 문자전송
         Message coolsms = new Message(api_key, api_secret);
@@ -385,15 +380,18 @@ public class AdminController {
         HashMap<String, String> params2 = new HashMap<>();
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-        params.put("from", "01052774113");
+        params.put("to", admin1+", "+admin2+", "+admin3); // 01033453328 추가
+        params.put("from", admin3);
         params.put("type", "LMS");
 
         /* 고객에게 예약확인 문자 전송 */
         params2.put("to", campingCarReservation.getPhone());
-        params2.put("from", "01052774113");
+        params2.put("from", admin3);
         params2.put("type", "LMS");
 
+
+        String[] splitedRentDate = campingCarReservation.getRentDate().split("-");
+        String[] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservation.getCarType());
         CalendarDate calendarStartDate = calendarDateService.findCalendarDateByMonthAndDayAndYear(splitedRentDate[1], splitedRentDate[2], splitedRentDate[0]);
@@ -449,8 +447,6 @@ public class AdminController {
                 }
             }
 
-//            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
-
         } else if (campingCarReservation.getReservation() == 1 && campingCarReservationDTO.getReservation() == 0) {
             taskName = "취소";
             for (int i = 0; i < dateCampingListSize; i++) {
@@ -471,7 +467,6 @@ public class AdminController {
                     calendarTimeService.save(calendarTimeList.get(j));
                 }
             }
-//            campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
         } else {
             throw new Exception("There is no matching action");
         }
@@ -588,16 +583,15 @@ public class AdminController {
 //            HashMap<String, String> params2 = new HashMap<>();
 //
 //
+
 //            /* 세이브카에 예약확인 문자 전송 */
-//            params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-//            params.put("from", "01052774113");
+//            params.put("to", admin1+", "+admin2+", "+admin3); // 01033453328 추가
+//            params.put("from", admin3);
 //            params.put("type", "LMS");
 //
-//
 //            /* 고객에게 예약확인 문자 전송 */
-//
 //            params2.put("to", campingCarReservation.getPhone());
-//            params2.put("from", "01052774113");  // 16613331 테스트하기
+//            params2.put("from", admin3);
 //            params2.put("type", "LMS");
 //
 //            params.put("text", "[캠핑카 캘린더 예약 취소]\n"
