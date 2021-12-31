@@ -214,6 +214,16 @@ a:hover {
   margin-top: 20px;
 }
 
+.camping_price_table {
+  background: white !important;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.camping_price_table td {
+  font-size: 16px !important;
+  padding: 10px !important;
+}
 
 /* 모바일 화면 */
 @media (max-width: 990px) {

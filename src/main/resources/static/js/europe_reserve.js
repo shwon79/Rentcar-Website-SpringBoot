@@ -62,7 +62,6 @@ const runIt = () => {
         .then(res => res.json())
         .then(result => {
             obj = result;
-            // deposits = parseInt(obj['deposit']);
             priceList[1] = obj['onedays'];
             priceList[2] = obj['twodays'];
             priceList[3] = obj['threedays'];
@@ -794,3 +793,205 @@ const hiddenFromJuly = document.getElementById('hiddenFromJuly');
 if (hiddenFromJuly.dataset.index == '6') {
     hiddenFromJuly.style.display = 'none';
 }
+
+// 유럽 가격 테이블
+
+let europeOffObj, europePeakObj;
+let europeOff = [];
+let europePeak = [];
+
+function displayEuropePrice() {
+    let europeOffOne = document.getElementById('europeOffOne');
+    let europeOffFour = document.getElementById('europeOffFour');
+    let europeOffFive = document.getElementById('europeOffFive');
+    let europeOffSeven = document.getElementById('europeOffSeven');
+    let europeOffTen = document.getElementById('europeOffTen');
+    let europeOffFifteen = document.getElementById('europeOffFifteen');
+    let europePeakOne = document.getElementById('europePeakOne');
+    let europePeakFour = document.getElementById('europePeakFour');
+    let europePeakFive = document.getElementById('europePeakFive');
+    let europePeakSeven = document.getElementById('europePeakSeven');
+    let europePeakTen = document.getElementById('europePeakTen');
+    let europePeakFifteen = document.getElementById('europePeakFifteen');
+    let europeMonth = document.getElementById('europeMonth');
+
+
+    // 비성수기 가격
+    fetch(`/camping/calendar/europe/getprice/0`)
+        .then(res => res.json())
+        .then(result => {
+            europeOffObj = result;
+            europeOff[1] = europeOffObj['onedays'];
+            europeOff[4] = europeOffObj['fourdays'];
+            europeOff[5] = europeOffObj['fivedays'];
+            europeOff[7] = europeOffObj['sevendays'];
+            europeOff[10] = europeOffObj['tendays'];
+            europeOff[15] = europeOffObj['fifteendays'];
+            europeOff[30] = europeOffObj['thirtydays'];
+
+            europeOffOne.innerText = parseInt(europeOff[1]).toLocaleString();
+            europeOffFour.innerText = parseInt(europeOff[4]).toLocaleString();
+            europeOffFive.innerText = parseInt(europeOff[5]).toLocaleString();
+            europeOffSeven.innerText = parseInt(europeOff[7]).toLocaleString();
+            europeOffTen.innerText = parseInt(europeOff[10]).toLocaleString();
+            europeOffFifteen.innerText = parseInt(europeOff[15]).toLocaleString();
+            europeMonth.innerText = parseInt(europeOff[30]).toLocaleString();
+        })
+
+    // 성수기 가격
+    fetch(`/camping/calendar/europe/getprice/1`)
+        .then(res => res.json())
+        .then(result => {
+            europePeakObj = result;
+            europePeak[1] = europePeakObj['onedays'];
+            europePeak[4] = europePeakObj['fourdays'];
+            europePeak[5] = europePeakObj['fivedays'];
+            europePeak[7] = europePeakObj['sevendays'];
+            europePeak[10] = europePeakObj['tendays'];
+            europePeak[15] = europePeakObj['fifteendays'];
+
+            europePeakOne.innerText = parseInt(europePeak[1]).toLocaleString();
+            europePeakFour.innerText = parseInt(europePeak[4]).toLocaleString();
+            europePeakFive.innerText = parseInt(europePeak[5]).toLocaleString();
+            europePeakSeven.innerText = parseInt(europePeak[7]).toLocaleString();
+            europePeakTen.innerText = parseInt(europePeak[10]).toLocaleString();
+            europePeakFifteen.innerText = parseInt(europePeak[15]).toLocaleString();
+        })
+};
+
+window.onload = displayEuropePrice();
+
+// 리무진 가격 테이블
+
+let limoOffObj, limoPeakObj;
+let limoOff = [];
+let limoPeak = [];
+
+function displayLimousinePrice() {
+    let limoOffOne = document.getElementById('limoOffOne');
+    let limoOffFour = document.getElementById('limoOffFour');
+    let limoOffFive = document.getElementById('limoOffFive');
+    let limoOffSeven = document.getElementById('limoOffSeven');
+    let limoOffTen = document.getElementById('limoOffTen');
+    let limoOffFifteen = document.getElementById('limoOffFifteen');
+    let limoPeakOne = document.getElementById('limoPeakOne');
+    let limoPeakFour = document.getElementById('limoPeakFour');
+    let limoPeakFive = document.getElementById('limoPeakFive');
+    let limoPeakSeven = document.getElementById('limoPeakSeven');
+    let limoPeakTen = document.getElementById('limoPeakTen');
+    let limoPeakFifteen = document.getElementById('limoPeakFifteen');
+    let limoMonth = document.getElementById('limoMonth');
+
+
+    // 비성수기 가격
+    fetch(`/camping/calendar/limousine/getprice/0`)
+        .then(res => res.json())
+        .then(result => {
+            limoOffObj = result;
+            limoOff[1] = limoOffObj['onedays'];
+            limoOff[4] = limoOffObj['fourdays'];
+            limoOff[5] = limoOffObj['fivedays'];
+            limoOff[7] = limoOffObj['sevendays'];
+            limoOff[10] = limoOffObj['tendays'];
+            limoOff[15] = limoOffObj['fifteendays'];
+            limoOff[30] = limoOffObj['thirtydays'];
+
+            limoOffOne.innerText = parseInt(limoOff[1]).toLocaleString();
+            limoOffFour.innerText = parseInt(limoOff[4]).toLocaleString();
+            limoOffFive.innerText = parseInt(limoOff[5]).toLocaleString();
+            limoOffSeven.innerText = parseInt(limoOff[7]).toLocaleString();
+            limoOffTen.innerText = parseInt(limoOff[10]).toLocaleString();
+            limoOffFifteen.innerText = parseInt(limoOff[15]).toLocaleString();
+            limoMonth.innerText = parseInt(limoOff[30]).toLocaleString();
+        })
+
+    // 성수기 가격
+    fetch(`/camping/calendar/limousine/getprice/1`)
+        .then(res => res.json())
+        .then(result => {
+            limoPeakObj = result;
+            limoPeak[1] = limoPeakObj['onedays'];
+            limoPeak[4] = limoPeakObj['fourdays'];
+            limoPeak[5] = limoOffObj['fivedays'];
+            limoPeak[7] = limoOffObj['sevendays'];
+            limoPeak[10] = limoOffObj['tendays'];
+            limoPeak[15] = limoOffObj['fifteendays'];
+
+            limoPeakOne.innerText = parseInt(limoPeak[1]).toLocaleString();
+            limoPeakFour.innerText = parseInt(limoPeak[4]).toLocaleString();
+            limoPeakFive.innerText = parseInt(limoPeak[5]).toLocaleString();
+            limoPeakSeven.innerText = parseInt(limoPeak[7]).toLocaleString();
+            limoPeakTen.innerText = parseInt(limoPeak[10]).toLocaleString();
+            limoPeakFifteen.innerText = parseInt(limoPeak[15]).toLocaleString();
+        })
+};
+
+
+window.onload = displayLimousinePrice();
+
+// 트레블 가격 테이블
+
+let travelOffObj, travelPeakObj;
+let travelOff = [];
+let travelPeak = [];
+
+function displayTravelPrice() {
+    let travelOffOne = document.getElementById('travelOffOne');
+    let travelOffFour = document.getElementById('travelOffFour');
+    let travelOffFive = document.getElementById('travelOffFive');
+    let travelOffSeven = document.getElementById('travelOffSeven');
+    let travelOffTen = document.getElementById('travelOffTen');
+    let travelOffFifteen = document.getElementById('travelOffFifteen');
+    let travelPeakOne = document.getElementById('travelPeakOne');
+    let travelPeakFour = document.getElementById('travelPeakFour');
+    let travelPeakFive = document.getElementById('travelPeakFive');
+    let travelPeakSeven = document.getElementById('travelPeakSeven');
+    let travelPeakTen = document.getElementById('travelPeakTen');
+    let travelPeakFifteen = document.getElementById('travelPeakFifteen');
+    let travelMonth = document.getElementById('travelMonth');
+
+
+    // 비성수기 가격
+    fetch(`/camping/calendar/travel/getprice/0`)
+        .then(res => res.json())
+        .then(result => {
+            travelOffObj = result;
+            travelOff[1] = travelOffObj['onedays'];
+            travelOff[4] = travelOffObj['fourdays'];
+            travelOff[5] = travelOffObj['fivedays'];
+            travelOff[7] = travelOffObj['sevendays'];
+            travelOff[10] = travelOffObj['tendays'];
+            travelOff[15] = travelOffObj['fifteendays'];
+            travelOff[30] = travelOffObj['thirtydays'];
+
+            travelOffOne.innerText = parseInt(travelOff[1]).toLocaleString();
+            travelOffFour.innerText = parseInt(travelOff[4]).toLocaleString();
+            travelOffFive.innerText = parseInt(travelOff[5]).toLocaleString();
+            travelOffSeven.innerText = parseInt(travelOff[7]).toLocaleString();
+            travelOffTen.innerText = parseInt(travelOff[10]).toLocaleString();
+            travelOffFifteen.innerText = parseInt(travelOff[15]).toLocaleString();
+            travelMonth.innerText = parseInt(travelOff[30]).toLocaleString();
+        })
+
+    // 성수기 가격
+    fetch(`/camping/calendar/travel/getprice/1`)
+        .then(res => res.json())
+        .then(result => {
+            travelPeakObj = result;
+            travelPeak[1] = travelPeakObj['onedays'];
+            travelPeak[4] = travelPeakObj['fourdays'];
+            travelPeak[5] = travelPeakObj['fivedays'];
+            travelPeak[7] = travelPeakObj['sevendays'];
+            travelPeak[10] = travelPeakObj['tendays'];
+            travelPeak[15] = travelPeakObj['fifteendays'];
+
+            travelPeakOne.innerText = parseInt(travelPeak[1]).toLocaleString();
+            travelPeakFour.innerText = parseInt(travelPeak[4]).toLocaleString();
+            travelPeakFive.innerText = parseInt(travelPeak[5]).toLocaleString();
+            travelPeakSeven.innerText = parseInt(travelPeak[7]).toLocaleString();
+            travelPeakTen.innerText = parseInt(travelPeak[10]).toLocaleString();
+            travelPeakFifteen.innerText = parseInt(travelPeak[15]).toLocaleString();
+        })
+};
+
+window.onload = displayTravelPrice();
