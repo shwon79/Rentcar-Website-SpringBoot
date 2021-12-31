@@ -445,17 +445,17 @@ function setCampingReserve(behavior) {
     let rentTime = document.getElementById('rentTime').value;
     let returnDate = document.getElementById('returnDate').value;
     let returnTime = document.getElementById('returnTime').value;
-    let day = document.getElementById('day').value;
-    let extraTime = parseInt(document.getElementById('extraTime').value);
+    let day = document.getElementById('day').innerText;
+    let extraTime = document.getElementById('extraTime').innerText;
     let deposit = document.getElementById('deposit').value;
-    let total = document.getElementById('total').value;
-    let totalHalf = document.getElementById('totalHalf').value;
+    let total = document.getElementById('total').innerText;
+    let totalHalf = document.getElementById('totalHalf').innerText;
     let name = document.getElementById('name').value;
     let phone = document.getElementById('phone').value;
     let depositor = document.getElementById('depositor').value;
     let detail = document.getElementById('detail').value;
     let agree = parseInt(document.getElementById('agree').innerText);
-    let reservation = parseInt(document.getElementById('campingReservation').value);
+    let reservation = document.getElementById('campingReservation').innerText;
     let id = document.getElementById('campingReservationId').innerText;
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
@@ -467,7 +467,13 @@ function setCampingReserve(behavior) {
         reservation = 1;
     } else if (behavior === 'delete') {
         reservation = 0;
-    }
+    } else if (behavior === 'edit') {
+        if (reservation == '예약 O') {
+            reservation = 1;
+        } else if (reservation == '예약 X') {
+            reservation = 0;
+        };
+    };
 
     let rentYear = parseInt(rentDate.split('-')[0]);
     let rentMonth = parseInt(rentDate.split('-')[1]);
@@ -480,6 +486,14 @@ function setCampingReserve(behavior) {
     let returnDay = parseInt(returnDate.split('-')[2]);
 
     returnDate = returnYear + '-' + returnMonth + '-' + returnDay;
+
+    if (extraTime == '추가 시간 없음') {
+        extraTime = 0;
+    } else if (extraTime == '3시간') {
+        extraTime = 1;
+    };
+
+
 
     let data = {
         carType: carType,
@@ -502,23 +516,23 @@ function setCampingReserve(behavior) {
 
     console.log(data);
 
-    if (regPhone.test(phone) === false) {
-        alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
-    } else {
-        if (behavior === 'confirm') {
-            if (confirm('예약을 확정하시겠습니까?')) {
-                setCampingData();
-            }
-        } else if (behavior === 'delete') {
-            if (confirm('예약 확정을 취소하시겠습니까?')) {
-                setCampingData();
-            }
-        } else if (behavior === 'edit') {
-            if (confirm('예약 내용을 수정하시겠습니까?')) {
-                setCampingData();
-            }
-        }
-    }
+    // if (regPhone.test(phone) === false) {
+    //     alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
+    // } else {
+    //     if (behavior === 'confirm') {
+    //         if (confirm('예약을 확정하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     } else if (behavior === 'delete') {
+    //         if (confirm('예약 확정을 취소하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     } else if (behavior === 'edit') {
+    //         if (confirm('예약 내용을 수정하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     }
+    // }
 
     function setCampingData() {
         $.ajax({
@@ -539,3 +553,17 @@ function setCampingReserve(behavior) {
         })
     }
 };
+
+function displayExtraCampingData() {
+    let carType = document.getElementById('carType').value.toLowerCase();
+    let rentDate = document.getElementById('rentDate').value;
+    let rentTime = document.getElementById('rentTime').value;
+    let returnDate = document.getElementById('returnDate').value;
+    let returnTime = document.getElementById('returnTime').value;
+    let day = document.getElementById('day').innerText;
+    let extraTime = document.getElementById('extraTime').innerText;
+    let total = document.getElementById('total').innerText;
+    let totalHalf = document.getElementById('totalHalf').innerText;
+
+
+}
