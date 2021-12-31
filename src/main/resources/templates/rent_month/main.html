@@ -15,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 
     <script>
-
         $(document).ready(function(){
             // 반납예정일로 정렬
             sortExpectedContent(6)
@@ -153,21 +152,6 @@
                         <label for="reg_others_long"><input type="radio" id="reg_others_long" name="kilometer" value="기타_long" onclick="sendData()" th:checked="${kilometer} == '기타_long'">기타</label>
                     </div>
                 </div>
-
-
-
-<!--                <hr style="background: lightgrey; margin: 10px 0" />-->
-                    <!-- 대기 상황 -->
-<!--                <div class="row">-->
-<!--                        &lt;!&ndash; left title &ndash;&gt;-->
-<!--                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">-->
-<!--                        <p>대여상태</p>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; selections &ndash;&gt;-->
-<!--                    <div id="sel_able" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">-->
-<!--                        <label for="reserve_able"><input type="radio" id="reserve_able" name="reserve_able" value="possible" onclick="sendData()" checked="checked">예약가능차량</label>-->
-<!--                    </div>-->
-<!--                </div>-->
             </form>
         </div>
 
@@ -176,17 +160,6 @@
             <div>
                 <div class="to-prior-rent-month-text">* 조건을 선택하면 아래에 해당하는 차량이 조회됩니다.</div>
             </div>
-
-            <!-- content row -->
-<!--            <div>-->
-<!--                <div class="to-prior-rent-month-text">* 아래의 목록에 없는 차량은 [상시차량 실시간 예약]으로 필요한 차량을 예약하세요</div>-->
-<!--                <div class="to-prior-rent-month-button-wrap"><a href="/rent/month"><button class="to-prior-rent-month-button">상시차량 실시간 예약</button></a></div>-->
-<!--            </div>-->
-            <!-- content description -->
-            <!--            <div >-->
-            <!--                <span>※ 상세페이지에서 차량예약이 가능합니다.</span>-->
-            <!--                <span align="right">총 <span th:text="${total_num}"></span> 대</span>-->
-            <!--            </div>-->
         </div>
 
         <!-- content row -->
@@ -232,7 +205,7 @@
                             </td>
                             <td>
                                 <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer}  + '/' + ${moren.discount} + '/available'">
-                                    <button class="detail_btn">상세 페이지</button>
+                                    <button class="detail_btn">실시간 예약하기</button>
                                 </a>
                             </td>
                         </tr>
@@ -257,7 +230,7 @@
                             </div>
                         </p>
                         <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer}  + '/' + ${moren.discount} + '/available'">
-                            <button class="detail_btn">상세 페이지</button>
+                            <button class="detail_btn">실시간 예약하기</button>
                         </a>
                     </div>
                 </div>
@@ -308,7 +281,7 @@
                             </td>
                             <td>
                                 <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer} + '/' + ${moren.discount} + '/expected'">
-                                    <button class="detail_btn">상세 페이지</button>
+                                    <button class="detail_btn">상담 신청</button>
                                 </a>
                             </td>
                         </tr>
@@ -334,7 +307,7 @@
                             </div>
                         </p>
                         <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.rentIdx} + '/' + ${kilometer} + '/' + ${moren.discount} + '/expected'">
-                            <button class="detail_btn">상세 페이지</button>
+                            <button class="detail_btn">상담 신청</button>
                         </a>
                     </div>
                 </div>
