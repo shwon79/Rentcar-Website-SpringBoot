@@ -281,7 +281,6 @@ public class CalendarController {
             jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
             jsonObject.put("carName",campingCarPrice.getCarName());
             jsonObject.put("onedays",campingCarPrice.getOnedays());
-            System.out.println("oneoneoneone - "+campingCarPrice.getOnedays());
             jsonObject.put("twodays",campingCarPrice.getTwodays());
             jsonObject.put("threedays",campingCarPrice.getThreedays());
             jsonObject.put("fourdays",campingCarPrice.getFourdays());
@@ -312,7 +311,6 @@ public class CalendarController {
             jsonObject.put("twentyninedays",campingCarPrice.getTwentyninedays());
             jsonObject.put("thirtydays",campingCarPrice.getThirtydays());
 
-
             PrintWriter pw = res.getWriter();
             pw.print(jsonObject);
             pw.flush();
@@ -329,7 +327,6 @@ public class CalendarController {
             jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
             jsonObject.put("carName",campingCarPrice.getCarName());
             jsonObject.put("onedays",campingCarPrice.getOnedays());
-            System.out.println("oneoneoneone - "+campingCarPrice.getOnedays());
             jsonObject.put("twodays",campingCarPrice.getTwodays());
             jsonObject.put("threedays",campingCarPrice.getThreedays());
             jsonObject.put("fourdays",campingCarPrice.getFourdays());

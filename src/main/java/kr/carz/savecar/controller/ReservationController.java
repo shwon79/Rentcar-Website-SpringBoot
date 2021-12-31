@@ -31,6 +31,9 @@ public class ReservationController {
     @Value("${coolsms.api_secret}")
     private String api_secret;
 
+    @Value("${moren.request_url}")
+    private String request_url;
+
     @Autowired
     public ReservationController(ReservationService reservationService, MorenReservationService morenReservationService) {
         this.reservationService = reservationService;
@@ -204,7 +207,7 @@ public class ReservationController {
         JSONObject jsonObject_return = new JSONObject();
 
         try {
-            URL url = new URL("https://www.moderentcar.co.kr/api/mycar/request.php");
+            URL url = new URL(request_url);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             // 대여 날짜, 반납 날짜

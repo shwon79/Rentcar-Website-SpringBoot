@@ -36,7 +36,7 @@
         <p class="return_time">반납날짜</p>
         <p class="total">총결제금액</p>
         <p class="reservation">예약</p>
-        <p id="set_reserve_header" class="set_reserve">확정</p>
+<!--        <p id="set_reserve_header" class="set_reserve">확정</p>-->
       </div>
       <div class="reserve_list_wrapper" th:each="reservation : ${campingCarReservationList}">
         <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
@@ -51,8 +51,10 @@
           <p class="reservation" th:text="${reservation.reservation} == 1? 'O':'X'"></p>
         </div>
 
-        <button th:id="${reservation.id}" class="set_reserve" onclick="setCampingReserve(id)"
-                th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">확정</button>
+<!--        <button class="set_reserve" onclick="setCampingReserve('confirm')"-->
+<!--                th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">-->
+<!--          확정-->
+<!--        </button>-->
       </div>
 
     </div>

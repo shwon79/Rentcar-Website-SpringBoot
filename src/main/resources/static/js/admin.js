@@ -516,23 +516,23 @@ function setCampingReserve(behavior) {
 
     console.log(data);
 
-    // if (regPhone.test(phone) === false) {
-    //     alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
-    // } else {
-    //     if (behavior === 'confirm') {
-    //         if (confirm('예약을 확정하시겠습니까?')) {
-    //             setCampingData();
-    //         }
-    //     } else if (behavior === 'delete') {
-    //         if (confirm('예약 확정을 취소하시겠습니까?')) {
-    //             setCampingData();
-    //         }
-    //     } else if (behavior === 'edit') {
-    //         if (confirm('예약 내용을 수정하시겠습니까?')) {
-    //             setCampingData();
-    //         }
-    //     }
-    // }
+    if (regPhone.test(phone) === false) {
+        alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
+    } else {
+        if (behavior === 'confirm') {
+            if (confirm('예약을 확정하시겠습니까?')) {
+                setCampingData();
+            }
+        } else if (behavior === 'delete') {
+            if (confirm('예약 확정을 취소하시겠습니까?')) {
+                setCampingData();
+            }
+        } else if (behavior === 'edit') {
+            if (confirm('예약 내용을 수정하시겠습니까?')) {
+                setCampingData();
+            }
+        }
+    }
 
     function setCampingData() {
         $.ajax({
