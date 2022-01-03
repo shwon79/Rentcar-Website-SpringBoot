@@ -377,7 +377,6 @@ public class AdminController {
         Optional<CampingCarReservation> campingCarReservationWrapper = campingcarReservationService.findById(reservationId);
         CampingCarReservation campingCarReservation = campingCarReservationWrapper.get();
 
-
         if(campingCarReservation.getReservation() == campingCarReservationDTO.getReservation()) {
             jsonObject.put("result", 1);
 
@@ -511,84 +510,144 @@ public class AdminController {
             throw new Exception("There is no matching action");
         }
 
-        try {
-            URL url = new URL(request_url);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        if(taskName.equals("확정")) {
 
-            // 대여 날짜, 반납 날짜
-            String orderStartTime = campingCarReservationDTO.getRentDate() + " " + campingCarReservationDTO.getRentTime().substring(0,2) + ":00";
-            String orderEndTime = campingCarReservationDTO.getReturnDate() + " " + campingCarReservationDTO.getReturnTime().substring(0,2) + ":00";
+            try {
+                URL url = new URL(request_url);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            // 계약타입
-            String contractType = "2";
+                // 대여 날짜, 반납 날짜
+                String orderStartTime = campingCarReservationDTO.getRentDate() + " " + campingCarReservationDTO.getRentTime().substring(0,2) + ":00";
+                String orderEndTime = campingCarReservationDTO.getReturnDate() + " " + campingCarReservationDTO.getReturnTime().substring(0,2) + ":00";
 
-            CampingCarPrice campingCarPriceForMoren = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservationDTO.getCarType());
+                // 계약타입
+                String contractType = "2";
 
-            morenJsonObject.put("COMPANY_ID", "1343");
-            morenJsonObject.put("CAR_NUM", campingCarPriceForMoren.getCarNum());
-            morenJsonObject.put("CAR_CODE", campingCarPriceForMoren.getCarCode());
-            morenJsonObject.put("ORDER_TYPE", orderType);
-            morenJsonObject.put("ORDER_CONTRACT_TYPE", contractType);
-            morenJsonObject.put("ORDER_CUSTOMER_NAME", campingCarReservationDTO.getName());
-            morenJsonObject.put("ORDER_CUSTOMER_PHONE", campingCarReservationDTO.getPhone());
-            morenJsonObject.put("ORDER_START_TIME", orderStartTime);
-            morenJsonObject.put("ORDER_END_TIME", orderEndTime);
-            morenJsonObject.put("ORDER_CUSTOMER_MEMO", campingCarReservationDTO.getDetail());
-            morenJsonObject.put("ORDER_PRICE", campingCarReservationDTO.getTotal());
-            morenJsonObject.put("ORDER_PRICE_TAX", "0");
-            morenJsonObject.put("ORDER_DEPOSIT", campingCarReservationDTO.getDeposit());
-            morenJsonObject.put("ORDER_CDW", "1");
+                CampingCarPrice campingCarPriceForMoren = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservationDTO.getCarType());
 
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
+                morenJsonObject.put("COMPANY_ID", "1343");
+                morenJsonObject.put("CAR_NUM", campingCarPriceForMoren.getCarNum());
+                morenJsonObject.put("CAR_CODE", campingCarPriceForMoren.getCarCode());
+                morenJsonObject.put("ORDER_TYPE", orderType);
+                morenJsonObject.put("ORDER_CONTRACT_TYPE", contractType);
+                morenJsonObject.put("ORDER_CUSTOMER_NAME", campingCarReservationDTO.getName());
+                morenJsonObject.put("ORDER_CUSTOMER_PHONE", campingCarReservationDTO.getPhone());
+                morenJsonObject.put("ORDER_START_TIME", orderStartTime);
+                morenJsonObject.put("ORDER_END_TIME", orderEndTime);
+                morenJsonObject.put("ORDER_CUSTOMER_MEMO", campingCarReservationDTO.getDetail());
+                morenJsonObject.put("ORDER_PRICE", campingCarReservationDTO.getTotal());
+                morenJsonObject.put("ORDER_PRICE_TAX", "0");
+                morenJsonObject.put("ORDER_DEPOSIT", campingCarReservationDTO.getDeposit());
+                morenJsonObject.put("ORDER_CDW", "1");
+                morenJsonObject.put("ORDER_CODE", campingCarReservationDTO.getOrderCode());
 
-            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
-            printWriter.write(morenJsonObject.toString());
-            printWriter.flush();
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json; utf-8");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setDoOutput(true);
 
-            // 응답
-            BufferedReader bufferedReader;
-            int status = conn.getResponseCode();
-            if (status == HttpURLConnection.HTTP_OK){
-                bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            } else {
-                bufferedReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-            }
+                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
+                printWriter.write(morenJsonObject.toString());
+                printWriter.flush();
 
-            String line;
-            StringBuffer response = new StringBuffer();
-
-            while ((line = bufferedReader.readLine()) != null){
-                response.append(line);
-            }
-            bufferedReader.close();
-            System.out.println("응답값 : " + response);
-
-            if(taskName.equals("확정")) {
-
-                String[] splited_response = getTwoHundredStrings(response, "\"");
-                System.out.println(splited_response.length);
-                for (int k = 0; k < 10; k++) {
-                    System.out.println(splited_response[k]);
+                // 응답
+                BufferedReader bufferedReader;
+                int status = conn.getResponseCode();
+                if (status == HttpURLConnection.HTTP_OK){
+                    bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                } else {
+                    bufferedReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
                 }
 
+                String line;
+                StringBuffer response = new StringBuffer();
+
+                while ((line = bufferedReader.readLine()) != null){
+                    response.append(line);
+                }
+                bufferedReader.close();
+                System.out.println("응답값 : " + response);
+
+                String[] splited_response = getTwoHundredStrings(response, "\"");
                 campingCarReservation.setOrderCode(splited_response[9]);
+
+            } catch (Exception e){
+                System.out.println(e);
+                jsonObject.put("result", 0);
+
+                PrintWriter pw = res.getWriter();
+                pw.print(jsonObject);
+                pw.flush();
+                pw.close();
+
+                return;
             }
+        } else if(taskName.equals("취소")){
 
-        } catch (Exception e){
-            System.out.println(e);
-            jsonObject.put("result", 0);
+            try {
+                URL url = new URL(request_url);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            PrintWriter pw = res.getWriter();
-            pw.print(jsonObject);
-            pw.flush();
-            pw.close();
+                // 대여 날짜, 반납 날짜
+                String orderStartTime = campingCarReservationDTO.getRentDate() + " " + campingCarReservationDTO.getRentTime().substring(0,2) + ":00";
+                String orderEndTime = campingCarReservationDTO.getReturnDate() + " " + campingCarReservationDTO.getReturnTime().substring(0,2) + ":00";
 
-            return;
+                // 계약타입
+                String contractType = "2";
+
+                CampingCarPrice campingCarPriceForMoren = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservationDTO.getCarType());
+
+                morenJsonObject.put("COMPANY_ID", "1343");
+                morenJsonObject.put("CAR_NUM", campingCarPriceForMoren.getCarNum());
+                morenJsonObject.put("CAR_CODE", campingCarPriceForMoren.getCarCode());
+                morenJsonObject.put("ORDER_TYPE", orderType);
+                morenJsonObject.put("ORDER_CUSTOMER_NAME", campingCarReservationDTO.getName());
+                morenJsonObject.put("ORDER_CUSTOMER_PHONE", campingCarReservationDTO.getPhone());
+                morenJsonObject.put("ORDER_START_TIME", orderStartTime);
+                morenJsonObject.put("ORDER_END_TIME", orderEndTime);
+
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json; utf-8");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setDoOutput(true);
+
+                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
+                printWriter.write(morenJsonObject.toString());
+                printWriter.flush();
+
+                // 응답
+                BufferedReader bufferedReader;
+                int status = conn.getResponseCode();
+                if (status == HttpURLConnection.HTTP_OK){
+                    bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                } else {
+                    bufferedReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                }
+
+                String line;
+                StringBuffer response = new StringBuffer();
+
+                while ((line = bufferedReader.readLine()) != null){
+                    response.append(line);
+                }
+                bufferedReader.close();
+                System.out.println("응답값 : " + response);
+
+            } catch (Exception e){
+                System.out.println(e);
+                jsonObject.put("result", 0);
+
+                PrintWriter pw = res.getWriter();
+                pw.print(jsonObject);
+                pw.flush();
+                pw.close();
+
+                return;
+            }
         }
 
         campingCarReservation.setAgree(campingCarReservationDTO.getAgree());
