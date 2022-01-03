@@ -301,16 +301,16 @@
                           <option th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer!='30000km'}" value="30000km" >30000km</option>
                           <option th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" value="40000km" selected>40000km</option>
                           <option th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer!='40000km'}" value="40000km">40000km</option>
-                          <option th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='기타_long'}" value="기타_long" selected>기타</option>
-                          <option th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer!='기타_long'}" value="기타_long">기타</option>
+                          <option th:if="${(morenDto.rentTerm=='12개월' && morenDto.kilometer=='기타_long') or (morenDto.rentTerm=='12개월' && morenDto.kilometer=='기타')}" value="기타_long" selected>기타</option>
+                          <option th:if="${(morenDto.rentTerm=='12개월' && morenDto.kilometer!='기타_long') or (morenDto.rentTerm=='12개월' && morenDto.kilometer!='기타')}" value="기타_long">기타</option>
                           <option th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" value="20000km" selected>20000km</option>
                           <option th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer!='20000km'}" value="20000km">20000km</option>
                           <option th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" value="30000km" selected>30000km</option>
                           <option th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer!='30000km'}" value="30000km" >30000km</option>
                           <option th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" value="40000km" selected>40000km</option>
                           <option th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer!='40000km'}" value="40000km">40000km</option>
-                          <option th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='기타_long'}" value="기타_long" selected>기타</option>
-                          <option th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer!='기타_long'}" value="기타_long">기타</option>
+                          <option th:if="${(morenDto.rentTerm=='24개월' && morenDto.kilometer=='기타_long') or (morenDto.rentTerm=='24개월' && morenDto.kilometer=='기타')}" value="기타_long" selected>기타</option>
+                          <option th:if="${(morenDto.rentTerm=='24개월' && morenDto.kilometer!='기타_long') or (morenDto.rentTerm=='24개월' && morenDto.kilometer!='기타')}" value="기타_long">기타</option>
                         </select>
                       </p>
                       <p>
