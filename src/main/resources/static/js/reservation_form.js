@@ -135,7 +135,10 @@ const reserveMonthlyRent = () => {
     const pickupPlace = document.getElementById('reservation-detail-pickup').value;
     let reservationStatus = 0;
 
-    let check1 = document.getElementById('check_info').checked;
+    let check1 = document.getElementById('check_info1').checked;
+    let check2 = document.getElementById('check_info2').checked;
+    let check3 = document.getElementById('check_info3').checked;
+
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     let phoneWithoutDash = /^\d{11}$/;
     let regAge = /[0-9]{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1])/;
@@ -158,7 +161,7 @@ const reserveMonthlyRent = () => {
 
     if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
         alert('입력을 완료해주세요!')
-    } else if (check1 != true) {
+    } else if (check1 != true || check2 != true || check3 != true) {
         alert('동의를 완료해주세요!')
     } else if (returnDate == '' || returnTime == '') {
         alert('대여 날짜 및 시간을 선택해주세요.')
