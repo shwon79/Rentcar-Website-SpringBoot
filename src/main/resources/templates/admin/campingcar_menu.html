@@ -51,28 +51,28 @@
           <p class="reservation" th:text="${reservation.reservation} == 1? 'O':'X'"></p>
 
           <div style="display: none;">
-            <p id="carTypeList" th:data-id="${reservation.id}" th:text="${reservation.carType}"></p>
-            <p id="rentDateList" th:data-id="${reservation.id}" th:text="${reservation.rentDate}"></p>
-            <p id="rentTimeList" th:data-id="${reservation.id}" th:text="${reservation.rentTime}"></p>
-            <p id="returnDateList" th:data-id="${reservation.id}" th:text="${reservation.returnDate}"></p>
-            <p id="returnTimeList" th:data-id="${reservation.id}" th:text="${reservation.returnTime}"></p>
-            <p id="dayList" th:data-id="${reservation.id}" th:text="${reservation.day}"></p>
-            <p id="extraTimeList" th:data-id="${reservation.id}" th:text="${reservation.extraTime}"></p>
-            <p id="depositList" th:data-id="${reservation.id}" th:text="${reservation.deposit}"></p>
-            <p id="totalList" th:data-id="${reservation.id}" th:text="${reservation.total}"></p>
-            <p id="totalHalfList" th:data-id="${reservation.id}" th:text="${reservation.totalHalf}"></p>
-            <p id="nameList" th:data-id="${reservation.id}" th:text="${reservation.name}"></p>
-            <p id="phoneList" th:data-id="${reservation.id}" th:text="${reservation.phone}"></p>
-            <p id="depositorList" th:data-id="${reservation.id}" th:text="${reservation.depositor}"></p>
-            <p id="detailList" th:data-id="${reservation.id}" th:text="${reservation.detail}"></p>
-            <p id="agreeList" th:data-id="${reservation.id}" th:text="${reservation.agree}"></p>
-            <p id="campingReservationList" th:data-id="${reservation.id}" th:text="${reservation.reservation}"></p>
-            <p id="campingReservationIdList" th:data-id="${reservation.id}" th:text="${reservation.id}"></p>
-            <p id="orderCodeList" th:data-id="${reservation.id}" th:text="${reservation.orderCode}"></p>
+            <p class="carTypeList" th:data-index="${reservation.id}" th:text="${reservation.carType}"></p>
+            <p class="rentDateList" th:data-index="${reservation.id}" th:text="${reservation.rentDate}"></p>
+            <p class="rentTimeList" th:data-index="${reservation.id}" th:text="${reservation.rentTime}"></p>
+            <p class="returnDateList" th:data-index="${reservation.id}" th:text="${reservation.returnDate}"></p>
+            <p class="returnTimeList" th:data-index="${reservation.id}" th:text="${reservation.returnTime}"></p>
+            <p class="dayList" th:data-index="${reservation.id}" th:text="${reservation.day}"></p>
+            <p class="extraTimeList" th:data-index="${reservation.id}" th:text="${reservation.extraTime}"></p>
+            <p class="depositList" th:data-index="${reservation.id}" th:text="${reservation.deposit}"></p>
+            <p class="totalList" th:data-index="${reservation.id}" th:text="${reservation.total}"></p>
+            <p class="totalHalfList" th:data-index="${reservation.id}" th:text="${reservation.totalHalf}"></p>
+            <p class="nameList" th:data-index="${reservation.id}" th:text="${reservation.name}"></p>
+            <p class="phoneList" th:data-index="${reservation.id}" th:text="${reservation.phone}"></p>
+            <p class="depositorList" th:data-index="${reservation.id}" th:text="${reservation.depositor}"></p>
+            <p class="detailList" th:data-index="${reservation.id}" th:text="${reservation.detail}"></p>
+            <p class="agreeList" th:data-index="${reservation.id}" th:text="${reservation.agree}"></p>
+            <p class="campingReservationList" th:data-index="${reservation.id}" th:text="${reservation.reservation}"></p>
+            <p class="campingReservationIdList" th:data-index="${reservation.id}" th:text="${reservation.id}"></p>
+            <p class="orderCodeList" th:data-index="${reservation.id}" th:text="${reservation.orderCode}"></p>
           </div>
         </div>
 
-        <button class="set_reserve" onclick="setCampingReserveOnMenu('confirm')"
+        <button class="set_reserve" th:data-index="${reservation.id}" onclick="setReservationOnMenu(this)"
                 th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">
           확정
         </button>
