@@ -557,34 +557,31 @@ function setCampingReserve(behavior) {
 };
 
 function displayExtraCampingData() {
-    let carType = document.getElementById('carType').value.toLowerCase();
     let rentDate = document.getElementById('rentDate').value;
-    let rentTime = document.getElementById('rentTime').value;
+    let rentTime = parseInt(document.getElementById('rentTime').value);
     let returnDate = document.getElementById('returnDate').value;
-    let returnTime = document.getElementById('returnTime').value;
-    let day = document.getElementById('day').innerText;
-    let extraTime = document.getElementById('extraTime').innerText;
-    let total = document.getElementById('total').innerText;
-    let totalHalf = document.getElementById('totalHalf').innerText;
+    let returnTime = parseInt(document.getElementById('returnTime').value);
+    let day = document.getElementById('day');
+    let extraTime = document.getElementById('extraTime');
 
+    let changedDate = new Date(rentDate);
+    let changedReturn = new Date(returnDate);
+    let currDay = 24 * 60 * 60 * 1000;// 차이를 일 단위로 환산
+    let diffDate = ((changedReturn - changedDate)/currDay);
+    let diffTime = returnTime - rentTime;
+
+    if (diffTime <= 3 && diffTime > 0) {
+        extraTime.innerText = '3시간';
+    } else if (diffTime == 0 || diffTime < 0) {
+        extraTime.innerText = '추가 시간 없음';
+    } else if (diffTime > 3) {
+        extraTime.innerText = '추가 시간 없음';
+        diffDate = diffDate + 1;
+    }
+
+    day.innerText = diffDate + '일';
 
 }
-
-// document.querySelectorAll('.setReservationOnMenu').forEach(menu => {
-//     menu.addEventListener('click', event => {
-//         console.log(menu);
-//     })
-// })
-
-// $(window).load(function() {
-//     let btnList = document.getElementsByClassName('.setReservationOnMenu');
-//     console.log(btnList);
-//     btnList.forEach(btn => {
-//         btn.addEventListener('click', (e) => {
-//             console.log(e);
-//         })
-//     })
-// })
 
 
 // 캠핑카 예약 확정 버튼_메뉴 페이지
