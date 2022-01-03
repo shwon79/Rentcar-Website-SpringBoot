@@ -36,7 +36,7 @@
         <p class="return_time">반납날짜</p>
         <p class="total">총결제금액</p>
         <p class="reservation">예약</p>
-<!--        <p id="set_reserve_header" class="set_reserve">확정</p>-->
+        <p id="set_reserve_header" class="set_reserve">확정</p>
       </div>
       <div class="reserve_list_wrapper" th:each="reservation : ${campingCarReservationList}">
         <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
@@ -49,12 +49,33 @@
           <p class="return_time" th:text="${reservation.returnTime}"></p>
           <p class="total" th:text="${#numbers.formatInteger(reservation.total,0, 'COMMA')}"></p>
           <p class="reservation" th:text="${reservation.reservation} == 1? 'O':'X'"></p>
+
+          <div style="display: none;">
+            <p id="carTypeList" th:data-id="${reservation.id}" th:text="${reservation.carType}"></p>
+            <p id="rentDateList" th:data-id="${reservation.id}" th:text="${reservation.rentDate}"></p>
+            <p id="rentTimeList" th:data-id="${reservation.id}" th:text="${reservation.rentTime}"></p>
+            <p id="returnDateList" th:data-id="${reservation.id}" th:text="${reservation.returnDate}"></p>
+            <p id="returnTimeList" th:data-id="${reservation.id}" th:text="${reservation.returnTime}"></p>
+            <p id="dayList" th:data-id="${reservation.id}" th:text="${reservation.day}"></p>
+            <p id="extraTimeList" th:data-id="${reservation.id}" th:text="${reservation.extraTime}"></p>
+            <p id="depositList" th:data-id="${reservation.id}" th:text="${reservation.deposit}"></p>
+            <p id="totalList" th:data-id="${reservation.id}" th:text="${reservation.total}"></p>
+            <p id="totalHalfList" th:data-id="${reservation.id}" th:text="${reservation.totalHalf}"></p>
+            <p id="nameList" th:data-id="${reservation.id}" th:text="${reservation.name}"></p>
+            <p id="phoneList" th:data-id="${reservation.id}" th:text="${reservation.phone}"></p>
+            <p id="depositorList" th:data-id="${reservation.id}" th:text="${reservation.depositor}"></p>
+            <p id="detailList" th:data-id="${reservation.id}" th:text="${reservation.detail}"></p>
+            <p id="agreeList" th:data-id="${reservation.id}" th:text="${reservation.agree}"></p>
+            <p id="campingReservationList" th:data-id="${reservation.id}" th:text="${reservation.reservation}"></p>
+            <p id="campingReservationIdList" th:data-id="${reservation.id}" th:text="${reservation.id}"></p>
+            <p id="orderCodeList" th:data-id="${reservation.id}" th:text="${reservation.orderCode}"></p>
+          </div>
         </div>
 
-<!--        <button class="set_reserve" onclick="setCampingReserve('confirm')"-->
-<!--                th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">-->
-<!--          확정-->
-<!--        </button>-->
+        <button class="set_reserve" onclick="setCampingReserveOnMenu('confirm')"
+                th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">
+          확정
+        </button>
       </div>
 
     </div>

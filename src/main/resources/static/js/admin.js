@@ -438,7 +438,7 @@ saveBtn.addEventListener('click', () => {
     })
 })
 
-// 캠핑카 예약 확정 버튼
+// 캠핑카 예약 확정, 확정 취소, 삭제 버튼_디테일 페이지
 function setCampingReserve(behavior) {
     let carType = document.getElementById('carType').value.toLowerCase();
     let rentDate = document.getElementById('rentDate').value;
@@ -457,6 +457,7 @@ function setCampingReserve(behavior) {
     let agree = parseInt(document.getElementById('agree').innerText);
     let reservation = document.getElementById('campingReservation').innerText;
     let id = document.getElementById('campingReservationId').innerText;
+    let orderCode = document.getElementById('orderCode').innerText;
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
     deposit = parseInt(deposit.replace(/,/g, ""));
@@ -511,28 +512,29 @@ function setCampingReserve(behavior) {
         depositor: depositor,
         detail: detail,
         agree: agree,
-        reservation: reservation
+        reservation: reservation,
+        orderCode: orderCode
     }
 
     console.log(data);
 
-    if (regPhone.test(phone) === false) {
-        alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
-    } else {
-        if (behavior === 'confirm') {
-            if (confirm('예약을 확정하시겠습니까?')) {
-                setCampingData();
-            }
-        } else if (behavior === 'delete') {
-            if (confirm('예약 확정을 취소하시겠습니까?')) {
-                setCampingData();
-            }
-        } else if (behavior === 'edit') {
-            if (confirm('예약 내용을 수정하시겠습니까?')) {
-                setCampingData();
-            }
-        }
-    }
+    // if (regPhone.test(phone) === false) {
+    //     alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
+    // } else {
+    //     if (behavior === 'confirm') {
+    //         if (confirm('예약을 확정하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     } else if (behavior === 'delete') {
+    //         if (confirm('예약 확정을 취소하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     } else if (behavior === 'edit') {
+    //         if (confirm('예약 내용을 수정하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     }
+    // }
 
     function setCampingData() {
         $.ajax({
@@ -567,3 +569,129 @@ function displayExtraCampingData() {
 
 
 }
+
+// 캠핑카 예약 확정 버튼_메뉴 페이지
+function setCampingReserveOnMenu(behavior) {
+    let carTypeList = document.getElementById('carType').innerText;
+    let rentDateList = document.getElementById('rentDate').innerText;
+    let rentTimeList = document.getElementById('rentTime').innerText;
+    let returnDateList = document.getElementById('returnDate').innerText;
+    let returnTimeList = document.getElementById('returnTime').innerText;
+    let dayList = document.getElementById('day').innerText;
+    let extraTimeList = document.getElementById('extraTime').innerText;
+    let depositList = document.getElementById('deposit').innerText;
+    let totalList = document.getElementById('total').innerText;
+    let totalHalfList = document.getElementById('totalHalf').innerText;
+    let nameList = document.getElementById('name').innerText;
+    let phoneList = document.getElementById('phone').innerText;
+    let depositorList = document.getElementById('depositor').innerText;
+    let detailList = document.getElementById('detail').innerText;
+    let agreeList = parseInt(document.getElementById('agree').innerText);
+    let reservationList = document.getElementById('campingReservation').innerText;
+    let idList = document.getElementById('campingReservationId').innerText;
+    let orderCodeList = document.getElementById('orderCode').innerText;
+
+    function findData() {
+
+    }
+
+    for (i = 0; i < carTypeList.length; i++) {
+
+    }
+    // let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+    // deposit = parseInt(deposit.replace(/,/g, ""));
+    // total = parseInt(total.replace(/,/g, ""));
+    // totalHalf = parseInt(totalHalf.replace(/,/g, ""));
+    //
+    // if (behavior === 'confirm') {
+    //     reservation = 1;
+    // } else if (behavior === 'delete') {
+    //     reservation = 0;
+    // } else if (behavior === 'edit') {
+    //     if (reservation == '예약 O') {
+    //         reservation = 1;
+    //     } else if (reservation == '예약 X') {
+    //         reservation = 0;
+    //     };
+    // };
+    //
+    // let rentYear = parseInt(rentDate.split('-')[0]);
+    // let rentMonth = parseInt(rentDate.split('-')[1]);
+    // let rentDay = parseInt(rentDate.split('-')[2]);
+    //
+    // rentDate = rentYear + '-' + rentMonth + '-' + rentDay;
+    //
+    // let returnYear = parseInt(returnDate.split('-')[0]);
+    // let returnMonth = parseInt(returnDate.split('-')[1]);
+    // let returnDay = parseInt(returnDate.split('-')[2]);
+    //
+    // returnDate = returnYear + '-' + returnMonth + '-' + returnDay;
+    //
+    // if (extraTime == '추가 시간 없음') {
+    //     extraTime = 0;
+    // } else if (extraTime == '3시간') {
+    //     extraTime = 1;
+    // };
+
+
+
+    let data = {
+        carType: carType,
+        rentDate: rentDate,
+        rentTime: rentTime,
+        returnDate: returnDate,
+        returnTime: returnTime,
+        day: day,
+        extraTime: extraTime,
+        deposit: deposit,
+        total: total,
+        totalHalf: totalHalf,
+        name: name,
+        phone: phone,
+        depositor: depositor,
+        detail: detail,
+        agree: agree,
+        reservation: reservation,
+        orderCode: orderCode
+    }
+
+    console.log(data);
+
+    // if (regPhone.test(phone) === false) {
+    //     alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
+    // } else {
+    //     if (behavior === 'confirm') {
+    //         if (confirm('예약을 확정하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     } else if (behavior === 'delete') {
+    //         if (confirm('예약 확정을 취소하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     } else if (behavior === 'edit') {
+    //         if (confirm('예약 내용을 수정하시겠습니까?')) {
+    //             setCampingData();
+    //         }
+    //     }
+    // }
+
+    function setCampingData() {
+        $.ajax({
+            type:'PUT',
+            url:'/admin/campingcar/reservation/' + id,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('처리되었습니다.');
+            } else if (result.result == 0) {
+                alert('처리에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/campingcar/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
+};
