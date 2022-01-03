@@ -89,11 +89,11 @@
                                     <span class="this date_season season" th:text="${date.season}"></span>
                                 </div>
                                 <div th:id="${date.day}" class="downside">
-                                    <div th:if="(${date.year} == ${thisYear} and ${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
+                                    <div th:if="(${date.year} == ${thisYear} and ${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth}) or (${date.year} < ${thisYear})">
                                         <br>
                                         <p style="color: lightgrey; font-size: 16px; text-align: center;">예약 종료</p>
                                     </div>
-                                    <div th:unless="(${date.year} == ${thisYear} and ${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
+                                    <div th:unless="(${date.year} == ${thisYear} and ${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth}) or (${date.year} < ${thisYear})">
                                         <div th:if="${dateCampingList[iterStat.index][0].reserved} != '1'">
                                             <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][0].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
                                                 <span><i class="fas fa-circle" style="color: mediumblue;"></i></span>
