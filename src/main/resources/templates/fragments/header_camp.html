@@ -10,91 +10,37 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-                    <img th:src="@{/img/camping_header.jpg}" alt="car" style="max-height: 180px;">
+                    <img th:src="@{/img/camping_header.jpg}" alt="car" style="height: 180px; width: 270px;">
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" style="margin-bottom: 0;">
                     <div class="header_camp_title">
-                        <h4 style="color: white;">'Wheresoever you go, go with all your heart.'</h4>
+                        <div class="header_camp_title_flex">
+                            <h4 style="color: white;">자차포함, 최고사양 전기, 넘치는 물, 호텔급 인테리어</h4>
+                            <div>
+                                <h4 style="color: white;" class="remove_title">'Wheresoever you go, go with all your heart.'</h4>
+                            </div>
+                        </div>
                     </div>
                     <div class="header_camp_navbar">
-                        <div id="navigation" role="navigation" class="primary-navigation">
-                            <ul class="main_ul">
-                                <li class="active">
-                                    <a href="#" class="displayOnlyActive" data-id="europe">EUROPE</a>
-                                    <a href="#" class="displayOnlyActive" data-id="limousine">LIMOUSINE</a>
-                                    <a href="#" class="displayOnlyActive" data-id="travel">TRAVEL</a>
-                                    <a href="#" style="cursor: pointer;" class="displayOnlyActive" data-id="calendar">캠핑카 예약현황</a>
-                                    <ul>
-                                        <li><a href="/camping/europe">EUROPE</a></li>
-                                        <li><a href="/camping/limousine">LIMOUSINE</a></li>
-                                        <li><a href="/camping/travel">TRAVEL</a></li>
-                                        <li><a onclick="moveToCampingCalendar()" style="cursor: pointer;">캠핑카 예약현황</a></li>
-                                    </ul>
-                                </li>
-                                <li class="active" id="displayNoneOnCalendarMenu" style="display: none;">
-                                    <a href="#camp_description" title="캠핑카렌트">캠핑카 설명</a>
-                                    <ul>
-                                        <li><a href="#camp_picture">캠핑카 사진</a></li>
-                                        <li><a href="#camp_video">캠핑카 영상</a></li>
-                                        <li><a href="#camp_regulation">렌트 약관</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                        <ul>
+                            <li class="header_camp_li" data-id="europe">
+                                <a href="/camping/europe">EUROPE</a>
+                            </li>
+                            <li class="header_camp_li" data-id="limousine">
+                                <a href="/camping/limousine">LIMOUSINE</a>
+                            </li>
+                            <li class="header_camp_li" data-id="travel">
+                                <a href="/camping/travel">TRAVEL</a>
+                            </li>
+                            <li class="header_camp_li" data-id="calendar">
+                                <a onclick="moveToCampingCalendar()" style="cursor: pointer; word-break: keep-all; text-align: center;">캠핑카 예약현황</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--        <div class="page-header">-->
-    <!--            <div class="container">-->
-    <!--                <div class="row">-->
-    <!--                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
-    <!--                        <div class="page-caption">-->
-    <!--                            <h2 class="page-title">모터홈 캠핑카</h2>-->
-    <!--                            <br>-->
-    <!--                            <p>-->
-    <!--                                <a target='_blank' href="https://cafe.naver.com/savecarz">-->
-    <!--                                    <button id="singlebutton" name="singlebutton" class="btn1 btn1-default" style="margin: 2.5px">캠핑카 렌트 카페 연결</button>-->
-    <!--                                </a>-->
-    <!--                                <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222276016511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=1">-->
-    <!--                                    <button id="singlebutton2" name="singlebutton" class="btn1 btn1-default" style="margin: 2.5px">한눈에 보는 캠핑카 렌트 가격표</button>-->
-    <!--                                </a>-->
-
-    <!--                            </p>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-
-    <!--feature section -->
-    <!--        <section id="feature" class="feature sections" style="padding: 80px 0px 0px 0px; background: lightgray;">-->
-    <!--            <div class="container text-center">-->
-    <!--                <div class="row padding-bottom-0">-->
-    <!--                    <div class="main_portfolio pinside10">-->
-    <!--                        <div class="work-menu text-center">-->
-
-    <!--&lt;!&ndash;                            <div class="separator"></div>&ndash;&gt;-->
-    <!--                            <div id="filters" class="toolbar mb2 mt2">-->
-    <!--                                <div class="sub-menu-camp" >-->
-    <!--                                    <a href="/europe"><button class="btn-bl btn-vw fil-cat filter" style="font-size: 3vh;">Europe</button></a> |-->
-    <!--                                    <a href="/liomousine"><button class="btn-bl btn-vw fil-cat filter" style="font-size: 3vh;">Limousine</button></a> |-->
-    <!--                                    <a href="/travel"><button class="btn-bl btn-vw fil-cat filter" style="font-size: 3vh;">Travel</button></a>-->
-    <!--                                </div>-->
-
-    <!--&lt;!&ndash;                                <div class="home_btn">&ndash;&gt;-->
-    <!--&lt;!&ndash;                                    <a href="/europe" ><button id="btn-sub1" class="btn1 btn4-default" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 240px; height: 50px;">Europe &nbsp;  </button></a>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                    <a class="btn1 btn4-default" href="/liomousine" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 240px; height: 50px;">Limousine  &nbsp; </a>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                    <a class="btn1 btn4-default" href="/travel" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 240px; height: 50px;">Travel  &nbsp; </a>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-    <!--                            </div>-->
-    <!--                            <div class="separator"></div>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </section>-->
 </div>
 <!-- end of Header-top -->
 </html>

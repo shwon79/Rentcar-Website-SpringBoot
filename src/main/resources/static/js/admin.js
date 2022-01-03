@@ -39,7 +39,7 @@ const make_discount = () => {
         discount : $("#discount").val(),
         description: $("#discount-description").val()
     };
-    console.log(data);
+    // console.log(data);
 
     $.ajax({
         type:'POST',
@@ -179,8 +179,6 @@ $('.reservation-confirm-btn').click(function(e) {
     let carCodeList = document.getElementsByClassName('carCode');
     let pickupPlaceList = document.getElementsByClassName('pickupPlace');
 
-    console.log(carAmountTotalList)
-
     let id;
     let carNo;
     let reservationName;
@@ -318,7 +316,7 @@ $('.reservation-confirm-btn').click(function(e) {
         pickupPlace: pickupPlace
     }
 
-    console.log(data);
+    // console.log(data);
 
     let reserveConfirm = confirm('예약을 완료하시겠습니까?');
 
@@ -420,7 +418,7 @@ saveBtn.addEventListener('click', () => {
         limousine_facility: editedLimousineFacility.value,
         travel_facility: editedTravelFacility.value
     }
-    console.log(data);
+    // console.log(data);
 
     $.ajax({
         type:'POST',
@@ -440,48 +438,310 @@ saveBtn.addEventListener('click', () => {
     })
 })
 
-function setCampingReserve(id) {
-    let checkConfirm = confirm('예약을 확정하시겠습니까?');
-    // console.log(id)
+// 캠핑카 예약 확정, 확정 취소, 삭제 버튼_디테일 페이지
+function setCampingReserve(behavior) {
+    let carType = document.getElementById('carType').value.toLowerCase();
+    let rentDate = document.getElementById('rentDate').value;
+    let rentTime = document.getElementById('rentTime').value;
+    let returnDate = document.getElementById('returnDate').value;
+    let returnTime = document.getElementById('returnTime').value;
+    let day = document.getElementById('day').innerText;
+    let extraTime = document.getElementById('extraTime').innerText;
+    let deposit = document.getElementById('deposit').value;
+    let total = document.getElementById('total').innerText;
+    let totalHalf = document.getElementById('totalHalf').innerText;
+    let name = document.getElementById('name').value;
+    let phone = document.getElementById('phone').value;
+    let depositor = document.getElementById('depositor').value;
+    let detail = document.getElementById('detail').value;
+    let agree = parseInt(document.getElementById('agree').innerText);
+    let reservation = document.getElementById('campingReservation').innerText;
+    let id = document.getElementById('campingReservationId').innerText;
+    let orderCode = document.getElementById('orderCode').innerText;
+    let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-    if (checkConfirm) {
+    deposit = parseInt(deposit.replace(/,/g, ""));
+    total = parseInt(total.replace(/,/g, ""));
+    totalHalf = parseInt(totalHalf.replace(/,/g, ""));
+
+    if (behavior === 'confirm') {
+        reservation = 1;
+    } else if (behavior === 'delete') {
+        reservation = 0;
+    } else if (behavior === 'edit') {
+        if (reservation == '예약 O') {
+            reservation = 1;
+        } else if (reservation == '예약 X') {
+            reservation = 0;
+        };
+    };
+
+    let rentYear = parseInt(rentDate.split('-')[0]);
+    let rentMonth = parseInt(rentDate.split('-')[1]);
+    let rentDay = parseInt(rentDate.split('-')[2]);
+
+    rentDate = rentYear + '-' + rentMonth + '-' + rentDay;
+
+    let returnYear = parseInt(returnDate.split('-')[0]);
+    let returnMonth = parseInt(returnDate.split('-')[1]);
+    let returnDay = parseInt(returnDate.split('-')[2]);
+
+    returnDate = returnYear + '-' + returnMonth + '-' + returnDay;
+
+    if (extraTime == '추가 시간 없음') {
+        extraTime = 0;
+    } else if (extraTime == '3시간') {
+        extraTime = 1;
+    };
+
+
+
+    let data = {
+        carType: carType,
+        rentDate: rentDate,
+        rentTime: rentTime,
+        returnDate: returnDate,
+        returnTime: returnTime,
+        day: day,
+        extraTime: extraTime,
+        deposit: deposit,
+        total: total,
+        totalHalf: totalHalf,
+        name: name,
+        phone: phone,
+        depositor: depositor,
+        detail: detail,
+        agree: agree,
+        reservation: reservation,
+        orderCode: orderCode
+    }
+
+    console.log(data);
+
+    if (regPhone.test(phone) === false) {
+        alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
+    } else {
+        if (behavior === 'confirm') {
+            if (confirm('예약을 확정하시겠습니까?')) {
+                setCampingData();
+            }
+        } else if (behavior === 'delete') {
+            if (confirm('예약 확정을 취소하시겠습니까?')) {
+                setCampingData();
+            }
+        } else if (behavior === 'edit') {
+            if (confirm('예약 내용을 수정하시겠습니까?')) {
+                setCampingData();
+            }
+        }
+    }
+
+    function setCampingData() {
         $.ajax({
             type:'PUT',
             url:'/admin/campingcar/reservation/' + id,
             dataType:'json',
-            contentType : 'application/json; charset=utf-8'
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('캠핑카 예약이 확정되었습니다.');
-            } else if (result.result == 0) {
-                alert('캠핑카 예약에 문제가 생겼습니다.');
-            };
-            window.location.href = '/admin/campingcar/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    };
-};
-
-function deleteCampingReserve(id) {
-    let checkConfirm = confirm('캠핑카 예약을 취소하시겠습니까?');
-
-    if (checkConfirm) {
-        $.ajax({
-            type:'DELETE',
-            url:'/admin/campingcar/reservation/'+ id,
-            dataType:'json',
             contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
         }).done(function (result) {
             if (result.result == 1) {
-                alert('캠핑카 예약이 취소되었습니다.');
+                alert('처리되었습니다.');
             } else if (result.result == 0) {
-                alert('캠핑카 예약이 취소에 문제가 생겼습니다.');
+                alert('처리에 문제가 생겼습니다.');
             };
             window.location.href = '/admin/campingcar/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
     }
+};
+
+function displayExtraCampingData() {
+    let rentDate = document.getElementById('rentDate').value;
+    let rentTime = parseInt(document.getElementById('rentTime').value);
+    let returnDate = document.getElementById('returnDate').value;
+    let returnTime = parseInt(document.getElementById('returnTime').value);
+    let day = document.getElementById('day');
+    let extraTime = document.getElementById('extraTime');
+
+    let changedDate = new Date(rentDate);
+    let changedReturn = new Date(returnDate);
+    let currDay = 24 * 60 * 60 * 1000;// 차이를 일 단위로 환산
+    let diffDate = ((changedReturn - changedDate)/currDay);
+    let diffTime = returnTime - rentTime;
+
+    if (diffTime <= 3 && diffTime > 0) {
+        extraTime.innerText = '3시간';
+    } else if (diffTime == 0 || diffTime < 0) {
+        extraTime.innerText = '추가 시간 없음';
+    } else if (diffTime > 3) {
+        extraTime.innerText = '추가 시간 없음';
+        diffDate = diffDate + 1;
+    }
+
+    day.innerText = diffDate + '일';
 
 }
+
+
+// 캠핑카 예약 확정 버튼_메뉴 페이지
+function setReservationOnMenu(event) {
+    let carTypeList = document.getElementsByClassName('carTypeList');
+    let rentDateList = document.getElementsByClassName('rentDateList');
+    let rentTimeList = document.getElementsByClassName('rentTimeList');
+    let returnDateList = document.getElementsByClassName('returnDateList');
+    let returnTimeList = document.getElementsByClassName('returnTimeList');
+    let dayList = document.getElementsByClassName('dayList');
+    let extraTimeList = document.getElementsByClassName('extraTimeList');
+    let depositList = document.getElementsByClassName('depositList');
+    let totalList = document.getElementsByClassName('totalList');
+    let totalHalfList = document.getElementsByClassName('totalHalfList');
+    let nameList = document.getElementsByClassName('nameList');
+    let phoneList = document.getElementsByClassName('phoneList');
+    let depositorList = document.getElementsByClassName('depositorList');
+    let detailList = document.getElementsByClassName('detailList');
+    let agreeList = document.getElementsByClassName('agreeList');
+    let reservationList = document.getElementsByClassName('campingReservationList');
+    let idList = document.getElementsByClassName('campingReservationIdList');
+    let orderCodeList = document.getElementsByClassName('orderCodeList');
+    let carType, rentDate, rentTime, returnDate, returnTime, day, extraTime, deposit, total, totalHalf, name, phone, depositor, detail, agree, reservation, orderCode;
+    let targetIndex = event.dataset.index;
+
+    for (i=0; i < carTypeList.length; i++) {
+        if (targetIndex == carTypeList[i].dataset.index) {
+            carType = carTypeList[i].innerText;
+        };
+    };
+
+    for (i=0; i < rentDateList.length; i++) {
+        if (targetIndex == rentDateList[i].dataset.index) {
+            rentDate = rentDateList[i].innerText;
+        };
+    };
+
+    for (i=0; i < rentTimeList.length; i++) {
+        if (targetIndex == rentTimeList[i].dataset.index) {
+            rentTime = rentTimeList[i].innerText;
+        };
+    };
+
+    for (i=0; i < returnDateList.length; i++) {
+        if (targetIndex == returnDateList[i].dataset.index) {
+            returnDate = returnDateList[i].innerText;
+        };
+    };
+
+    for (i=0; i < returnTimeList.length; i++) {
+        if (targetIndex == returnTimeList[i].dataset.index) {
+            returnTime = returnTimeList[i].innerText;
+        };
+    };
+
+    for (i=0; i < dayList.length; i++) {
+        if (targetIndex == dayList[i].dataset.index) {
+            day = dayList[i].innerText;
+        };
+    };
+
+    for (i=0; i < extraTimeList.length; i++) {
+        if (targetIndex == extraTimeList[i].dataset.index) {
+            extraTime = parseInt(extraTimeList[i].innerText);
+        };
+    };
+
+    for (i=0; i < depositList.length; i++) {
+        if (targetIndex == depositList[i].dataset.index) {
+            deposit = parseInt(depositList[i].innerText);
+        };
+    };
+
+    for (i=0; i < totalList.length; i++) {
+        if (targetIndex == totalList[i].dataset.index) {
+            total = parseInt(totalList[i].innerText);
+        };
+    };
+
+    for (i=0; i < totalHalfList.length; i++) {
+        if (targetIndex == totalHalfList[i].dataset.index) {
+            totalHalf = parseInt(totalHalfList[i].innerText);
+        };
+    };
+
+    for (i=0; i < nameList.length; i++) {
+        if (targetIndex == nameList[i].dataset.index) {
+            name = nameList[i].innerText;
+        };
+    };
+
+    for (i=0; i < phoneList.length; i++) {
+        if (targetIndex == phoneList[i].dataset.index) {
+            phone = phoneList[i].innerText;
+        };
+    };
+    for (i=0; i < depositorList.length; i++) {
+        if (targetIndex == depositorList[i].dataset.index) {
+            depositor = depositorList[i].innerText;
+        };
+    };
+    for (i=0; i < detailList.length; i++) {
+        if (targetIndex == detailList[i].dataset.index) {
+            detail = detailList[i].innerText;
+        };
+    };
+    for (i=0; i < agreeList.length; i++) {
+        if (targetIndex == agreeList[i].dataset.index) {
+            agree = parseInt(agreeList[i].innerText);
+        };
+    };
+    for (i=0; i < idList.length; i++) {
+        if (targetIndex == idList[i].dataset.index) {
+            id = idList[i].innerText;
+        };
+    };
+    for (i=0; i < orderCodeList.length; i++) {
+        if (orderCode == orderCodeList[i].dataset.index) {
+            orderCode = orderCodeList[i].innerText;
+        };
+    };
+    reservation = 1;
+
+
+    let data = {
+        carType: carType,
+        rentDate: rentDate,
+        rentTime: rentTime,
+        returnDate: returnDate,
+        returnTime: returnTime,
+        day: day,
+        extraTime: extraTime,
+        deposit: deposit,
+        total: total,
+        totalHalf: totalHalf,
+        name: name,
+        phone: phone,
+        depositor: depositor,
+        detail: detail,
+        agree: agree,
+        reservation: reservation,
+        orderCode: orderCode
+    }
+
+    // console.log(data);
+
+    $.ajax({
+        type:'PUT',
+        url:'/admin/campingcar/reservation/' + id,
+        dataType:'json',
+        contentType : 'application/json; charset=utf-8',
+        data : JSON.stringify(data)
+    }).done(function (result) {
+        if (result.result == 1) {
+            alert('처리되었습니다.');
+        } else if (result.result == 0) {
+            alert('처리에 문제가 생겼습니다.');
+        };
+        window.location.href = '/admin/campingcar/menu';
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    })
+};

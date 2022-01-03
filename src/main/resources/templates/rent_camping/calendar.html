@@ -13,15 +13,12 @@
 
     <script>
         $(window).load(function() {
-            let idList = document.getElementsByClassName('displayOnlyActive');
-            for (i=0; i < idList.length; i++) {
-                if (idList[i].dataset.id == 'calendar') {
-                    let activeMenu = idList[i];
-                    activeMenu.classList.add('activeCampingMenu');
+            let ulList = document.getElementsByClassName('header_camp_li');
+            for (i=0; i < ulList.length; i++) {
+                if (ulList[i].dataset.id == 'calendar') {
+                    ulList[i].classList.add('active');
                 }
             };
-            const subMenu = document.getElementById('displayNoneOnCalendarMenu');
-            subMenu.style.display = 'none';
         });
     </script>
 
@@ -33,10 +30,6 @@
         <div th:replace="fragments/header_camp::headerFragment"></div>
 
         <div class="calendar_content">
-<!--            <div class="camping_page text-center">-->
-<!--                <a href="/camping/price"><button id="price_page_btn">캠핑카 안내</button></a>-->
-<!--                <button id="reserve_page_btn" disabled>실시간 예약</button>-->
-<!--            </div>-->
             <div class="container">
                 <div style="width: fit-content; margin: 0 auto;">
                     <span class="title">세이브카 캠핑카 예약 현황</span>
@@ -96,11 +89,11 @@
                                     <span class="this date_season season" th:text="${date.season}"></span>
                                 </div>
                                 <div th:id="${date.day}" class="downside">
-                                    <div th:if="(${date.year} == ${thisYear} and ${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
+                                    <div th:if="(${date.year} == ${thisYear} and ${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth}) or (${date.year} < ${thisYear})">
                                         <br>
                                         <p style="color: lightgrey; font-size: 16px; text-align: center;">예약 종료</p>
                                     </div>
-                                    <div th:unless="(${date.year} == ${thisYear} and ${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
+                                    <div th:unless="(${date.year} == ${thisYear} and ${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth}) or (${date.year} < ${thisYear})">
                                         <div th:if="${dateCampingList[iterStat.index][0].reserved} != '1'">
                                             <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][0].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
                                                 <span><i class="fas fa-circle" style="color: mediumblue;"></i></span>

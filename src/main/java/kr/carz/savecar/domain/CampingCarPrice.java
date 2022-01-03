@@ -38,6 +38,8 @@ public class CampingCarPrice {
         this.dateCampingList.add(dateCamping);
     }
 
+    private String carNum;
+    private String carCode;
     private String season;   // 0 비성수기  1 성수기
     private String onedays;
     private String twodays;

@@ -16,21 +16,18 @@
 
     <script>
         $(window).load(function() {
-            let idList = document.getElementsByClassName('displayOnlyActive');
-            for (i=0; i < idList.length; i++) {
-                if (idList[i].dataset.id == 'calendar') {
-                    let activeMenu = idList[i];
-                    activeMenu.classList.add('activeCampingMenu');
+            let ulList = document.getElementsByClassName('header_camp_li');
+            for (i=0; i < ulList.length; i++) {
+                if (ulList[i].dataset.id == 'calendar') {
+                    ulList[i].classList.add('active');
                 }
             };
-            const subMenu = document.getElementById('displayNoneOnCalendarMenu');
-            subMenu.style.display = 'none';
         });
     </script>
     <script th:src="@{/js/europe_reserve.js}" defer ></script>
 </head>
 
-<body>
+<body onload="displayTravelPrice();">
 <div layout:fragment="content">
     <div th:replace="fragments/header_camp::headerFragment"></div>
 
@@ -50,12 +47,58 @@
                         CAMPER 기본정보
                     </h1>
                     <div class="contents">
-                        <img th:src="@{/img/travel-price.jpg}" id="priceImg" width="100%" height="70%">
-                        <br /><br />
-                        <div th:replace="fragments/camping_explanations::camper_price"></div>
-                    </div>
+<!--                        <img th:src="@{/img/travel-price.jpg}" id="priceImg" width="100%" height="70%">-->
+                        <table id="travel_price_table" class="camping_price_table">
+                            <tr>
+                                <td></td>
+                                <td>비수기</td>
+                                <td style="background-color: #e0f5fb;">성수기</td>
+                            </tr>
+                            <tr>
+                                <td>1일</td>
+                                <td id="travelOffOne"></td>
+                                <td id="travelPeakOne" style="background-color: #e0f5fb;"></td>
 
-<!--                    <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>-->
+                            </tr>
+                            <tr>
+                                <td>4일</td>
+                                <td id="travelOffFour"></td>
+                                <td id="travelPeakFour" style="background-color: #e0f5fb;"></td>
+
+                            </tr>
+                            <tr>
+                                <td>5일</td>
+                                <td id="travelOffFive"></td>
+                                <td id="travelPeakFive" style="background-color: #e0f5fb;"></td>
+                            </tr>
+                            <tr>
+                                <td>7일</td>
+                                <td id="travelOffSeven"></td>
+                                <td id="travelPeakSeven" style="background-color: #e0f5fb;"></td>
+                            </tr>
+                            <tr>
+                                <td>10일</td>
+                                <td id="travelOffTen"></td>
+                                <td id="travelPeakTen" style="background-color: #e0f5fb;"></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid black;">15일</td>
+                                <td style="border-bottom: 1px solid black;" id="travelOffFifteen"></td>
+                                <td style="border-bottom: 1px solid black; background-color: #e0f5fb;" id="travelPeakFifteen"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" style="color: mediumblue;">자차 포함</td>
+                                <td>Deposit</td>
+                                <td>총 렌트료의 50%</td>
+                            </tr>
+                            <tr>
+                                <td>월렌트</td>
+                                <td id="travelMonth"></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>
+                    </div>
                 </div>
                 <!--기본옵션-->
                 <div class="row card white-card">

@@ -49,10 +49,33 @@
           <p class="return_time" th:text="${reservation.returnTime}"></p>
           <p class="total" th:text="${#numbers.formatInteger(reservation.total,0, 'COMMA')}"></p>
           <p class="reservation" th:text="${reservation.reservation} == 1? 'O':'X'"></p>
+
+          <div style="display: none;">
+            <p class="carTypeList" th:data-index="${reservation.id}" th:text="${reservation.carType}"></p>
+            <p class="rentDateList" th:data-index="${reservation.id}" th:text="${reservation.rentDate}"></p>
+            <p class="rentTimeList" th:data-index="${reservation.id}" th:text="${reservation.rentTime}"></p>
+            <p class="returnDateList" th:data-index="${reservation.id}" th:text="${reservation.returnDate}"></p>
+            <p class="returnTimeList" th:data-index="${reservation.id}" th:text="${reservation.returnTime}"></p>
+            <p class="dayList" th:data-index="${reservation.id}" th:text="${reservation.day}"></p>
+            <p class="extraTimeList" th:data-index="${reservation.id}" th:text="${reservation.extraTime}"></p>
+            <p class="depositList" th:data-index="${reservation.id}" th:text="${reservation.deposit}"></p>
+            <p class="totalList" th:data-index="${reservation.id}" th:text="${reservation.total}"></p>
+            <p class="totalHalfList" th:data-index="${reservation.id}" th:text="${reservation.totalHalf}"></p>
+            <p class="nameList" th:data-index="${reservation.id}" th:text="${reservation.name}"></p>
+            <p class="phoneList" th:data-index="${reservation.id}" th:text="${reservation.phone}"></p>
+            <p class="depositorList" th:data-index="${reservation.id}" th:text="${reservation.depositor}"></p>
+            <p class="detailList" th:data-index="${reservation.id}" th:text="${reservation.detail}"></p>
+            <p class="agreeList" th:data-index="${reservation.id}" th:text="${reservation.agree}"></p>
+            <p class="campingReservationList" th:data-index="${reservation.id}" th:text="${reservation.reservation}"></p>
+            <p class="campingReservationIdList" th:data-index="${reservation.id}" th:text="${reservation.id}"></p>
+            <p class="orderCodeList" th:data-index="${reservation.id}" th:text="${reservation.orderCode}"></p>
+          </div>
         </div>
 
-        <button th:id="${reservation.id}" class="set_reserve" onclick="setCampingReserve(id)"
-                th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">확정</button>
+        <button class="set_reserve" th:data-index="${reservation.id}" onclick="setReservationOnMenu(this)"
+                th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">
+          확정
+        </button>
       </div>
 
     </div>
