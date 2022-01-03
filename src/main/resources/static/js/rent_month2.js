@@ -59,7 +59,7 @@ function sendData(){
 
 
 // 월렌트실시간 상담요청
-function make_monthly_rent_reservation () {
+function make_monthly_rent_reservation (e) {
 
     if (document.getElementById("reservation-simple-name").value == ""){
         alert('성함을 입력해주세요.')
@@ -81,22 +81,25 @@ function make_monthly_rent_reservation () {
         car_num : document.getElementsByClassName("carNo")[0].innerHTML
     };
 
-    var checkbox = document.getElementById("agree")
-    if(checkbox.checked) {
-        $.ajax({
-            type : 'POST',
-            url : '/reservation/apply',
-            dataType : 'json',
-            contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
-        }).done(function () {
-            alert('상담 신청이 완료되었습니다.');
-            window.location.href = '/index';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    } else{
-        alert("개인정보 수집 및 이용에 동의해주세요.");
+    let check1 = document.getElementById("agree1").checked;
+    let check2 = document.getElementById("agree2").checked;
+    let check3 = document.getElementById("agree3").checked;
+
+    if (check1 != true || check2 != true || check3 != true) {
+        alert("약관에 동의해주세요.");
+    } else {
+            $.ajax({
+                type : 'POST',
+                url : '/reservation/apply',
+                dataType : 'json',
+                contentType : 'application/json; charset=utf-8',
+                data : JSON.stringify(data)
+            }).done(function () {
+                alert('상담 신청이 완료되었습니다.');
+                window.location.href = '/index';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
     }
 }
 
@@ -217,6 +220,8 @@ function displayNextOptions(e) {
     let monthKilometer = ["2000km", "2500km", "3000km", "4000km", "기타"];
     let yearKilometer = ["20000km", "30000km", "40000km", "기타"];
     let selectKilometer = document.getElementById('selectkilometer');
+    let selectKilometer2 = document.getElementById('selectkilometer2');
+
     let displaySelect;
 
     if (e.value == "한달") {
@@ -226,12 +231,14 @@ function displayNextOptions(e) {
     };
 
     selectKilometer.options.length = 0;
+    selectKilometer2.options.length = 0;
 
     for (x in displaySelect) {
         let option = document.createElement('option');
         option.value = displaySelect[x];
         option.innerText = displaySelect[x];
         selectKilometer.appendChild(option);
+        selectKilometer2.appendChild(option);
     };
 }
 
@@ -243,6 +250,33 @@ function dataReset() {
     let discount = document.getElementById('getDiscount').innerText;
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
+
+    if (rentTerm == '한달' && kilometer == '') {
+        kilometer = '2000km';
+    } else if (rentTerm == '12개월' && kilometer == '') {
+        kilometer = '20000km';
+    } else if (rentTerm == '24개월' && kilometer == '') {
+        kilometer = '20000km';
+    }
+
+    window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
+}
+// 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동
+function dataReset2() {
+    let rentTerm = document.getElementById('selectRentTerm2').value;
+    let carIdx = document.getElementById('getCarIdx').innerText;
+    let kilometer = document.getElementById('selectkilometer2').value;
+    let discount = document.getElementById('getDiscount').innerText;
+    let rentStatus = document.getElementById('getRentStatus').innerText;
+    let rentIdx = document.getElementById('getrentIdx').innerText;
+
+    if (rentTerm == '한달' && kilometer == '') {
+        kilometer = '2000km';
+    } else if (rentTerm == '12개월' && kilometer == '') {
+        kilometer = '20000km';
+    } else if (rentTerm == '24개월' && kilometer == '') {
+        kilometer = '20000km';
+    }
 
     window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
 }

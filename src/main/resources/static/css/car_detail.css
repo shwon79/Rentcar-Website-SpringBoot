@@ -322,7 +322,8 @@ select {
 
 @media (max-width: 991px) {
     .display_flex {
-        flex-direction: column;
+        /*flex-direction: column;*/
+        display: none;
     }
     .onlyDesktop {
         display: none;
