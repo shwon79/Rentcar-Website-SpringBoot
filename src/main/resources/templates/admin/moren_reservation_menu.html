@@ -9,7 +9,7 @@
 
     <link th:href="@{/css/admin.css}" rel="stylesheet">
     <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin.js}"></script>
     <script>
         $(window).load(function() {
             let morenReservationMenu = document.getElementById('morenReservationMenu');
@@ -83,6 +83,10 @@
                                 <span class="number" th:text="${reservation.carAmountTotal}"></span>
                                 <span>원</span>
                             </td>
+                            <td scope="col" class="reservationStatus" th:text="${reservation.reservationStatus}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="carPrice" th:text="${reservation.carPrice}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="carTax" th:text="${reservation.carTax}" style="display: none;" th:data-index="${reservation.id}"></td>
+                            <td scope="col" class="carName" th:text="${reservation.carName}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="reservationId" th:text="${reservation.id}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="rentTerm" th:text="${reservation.rentTerm}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="costPerKm" th:text="${reservation.costPerKm}" style="display: none;" th:data-index="${reservation.id}"></td>
@@ -95,8 +99,8 @@
                             <td scope="col" class="carCode" th:text="${reservation.carCode}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="pickupPlace" th:text="${reservation.pickupPlace}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td>
-                                <p><button class="reservation-delete-btn" th:data-index="${reservation.id}" style="word-break: keep-all; width: 100%;">취소</button></p>
-                                <p><button class="reservation-confirm-btn" th:data-index="${reservation.id}" style="word-break: keep-all; width: 100%;">확정</button></p>
+                                <p><button class="moren-reservation-btn" data-behavior="confirm" th:data-index="${reservation.id}" style="word-break: keep-all; width: 100%;">확정</button></p>
+                                <p><button class="moren-reservation-btn" data-behavior="cancel" th:data-index="${reservation.id}" style="word-break: keep-all; width: 100%;">확정 취소</button></p>
                             </td>
                             <td>
                                 <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
@@ -144,8 +148,18 @@
                         <p>대여시작일: <span th:text="${reservation.reservationDate}"></span></p>
                         <p>월 대여료: <span class="number" th:text="${reservation.carAmountTotal}"></span><span>원</span></p>
                         <p th:if="${reservation.reservationStatus == '0'}" style="display: flex; justify-content: space-between;">
-                            <span style="width: 49%;"><button class="reservation-delete-btn" th:data-index="${reservation.id}">취소</button></span>
-                            <span style="width: 49%;"><button class="reservation-confirm-btn" th:data-index="${reservation.id}">확정</button></span>
+                            <span style="width: 49%;">
+                                <button class="moren-reservation-btn" th:data-index="${reservation.id}" data-behavior="confirm"
+                                        th:style="${reservation.reservationStatus} == '1' ? 'pointer-events: none; background: gray' : null">
+                                    확정
+                                </button>
+                            </span>
+                            <span style="width: 49%;">
+                                <button class="moren-reservation-btn" th:data-index="${reservation.id}" data-behavior="cancel"
+                                        th:style="${reservation.reservationStatus} == '0' ? 'pointer-events: none; background: gray' : null">
+                                    확정 취소
+                                </button>
+                            </span>
                         </p>
                         <p th:if="${reservation.reservationStatus == '1'}" style="display: flex; justify-content: space-between;">
                             <span style="width: 100%; text-align: center; color: darkblue; margin-top: 5px;">이 예약 신청은 확정되었습니다.</span>
