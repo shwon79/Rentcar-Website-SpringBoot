@@ -143,15 +143,15 @@
                 <span class="reservationId" style="display: none;" th:text="${morenReservationDTO.id}"></span>
                 <span class="reservationStatus" style="display: none;" th:text="${morenReservationDTO.reservationStatus}"></span>
                 <div th:if="${morenReservationDTO.reservationStatus == '0'}" style="display: flex; justify-content: space-between;">
-                    <button class="moren-reservation-btn set_reserve" data-behavior="confirm"
+                    <button class="moren-reservation-btn set_reserve" data-behavior="confirm" th:name="${morenReservationDTO.id}"
                             th:style="${morenReservationDTO.reservationStatus} == '1' ? 'pointer-events: none; background: gray' : null">
                         확정
                     </button>
-                    <button class="moren-reservation-btn set_reserve" data-behavior="cancel"
+                    <button class="moren-reservation-btn set_reserve" data-behavior="cancel" th:name="${morenReservationDTO.id}"
                             th:style="${morenReservationDTO.reservationStatus} == '0' ? 'pointer-events: none; background: gray' : null">
                         확정 취소
                     </button>
-                    <button class="moren-reservation-btn set_reserve" data-behavior="edit">수정</button>
+                    <button class="moren-reservation-btn set_reserve" data-behavior="edit" th:name="${morenReservationDTO.id}">수정</button>
                 </div>
                 <div th:if="${morenReservationDTO.reservationStatus == '1'}" style="display: flex; justify-content: space-between;">
                     <p style="text-align: center; width: 100%; color: darkblue;">위 예약 신청은 확정되었습니다.</p>

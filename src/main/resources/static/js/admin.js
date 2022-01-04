@@ -158,7 +158,6 @@ $('.delete-btn').click(function(e) {
 
 // 모렌으로 데이터 전달, 예약하기
 $('.moren-reservation-btn').click(function(e) {
-
     // 예약 정보 받기
     let carNoList = document.getElementsByClassName('carNo');
     let carNameList = document.getElementsByClassName('carName');
@@ -182,7 +181,7 @@ $('.moren-reservation-btn').click(function(e) {
     let pickupPlaceList = document.getElementsByClassName('pickupPlace');
     let reservationStatusList = document.getElementsByClassName('reservationStatus');
 
-    let id = e.target.dataset.index;
+    let id = e.target.name || e.target.dataset.index;
     let carNo, carName, reservationName, reservationPhone, reservationDate, reservationTime, address, addressDetail, rentTerm, costPerKm, reservationStatus;
     let carAmountTotal, carDeposit,reservationDetails, kilometer, reservationAge, reservationGuarantee, carCode, pickupPlace, carPrice, carTax;
 
@@ -326,18 +325,18 @@ $('.moren-reservation-btn').click(function(e) {
         if (confirm('예약을 확정하시겠습니까?')) {
             data.reservationStatus = '1';
             console.log(data);
-            // connectMoren();
+            connectMoren();
         }
     } else if (e.target.dataset.behavior === 'cancel') {
         if (confirm('예약 확정을 취소하시겠습니까?')) {
             data.reservationStatus = '0';
             console.log(data);
-            // connectMoren();
+            connectMoren();
         }
     } else if (e.target.dataset.behavior === 'edit') {
         if (confirm('예약 내용을 수정하시겠습니까?')) {
             console.log(data);
-            // connectMoren();
+            connectMoren();
         }
     }
 

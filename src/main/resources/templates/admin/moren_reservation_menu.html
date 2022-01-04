@@ -9,7 +9,7 @@
 
     <link th:href="@{/css/admin.css}" rel="stylesheet">
     <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/admin.js}"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
     <script>
         $(window).load(function() {
             let morenReservationMenu = document.getElementById('morenReservationMenu');
@@ -99,8 +99,18 @@
                             <td scope="col" class="carCode" th:text="${reservation.carCode}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td scope="col" class="pickupPlace" th:text="${reservation.pickupPlace}" style="display: none;" th:data-index="${reservation.id}"></td>
                             <td>
-                                <p><button class="moren-reservation-btn" data-behavior="confirm" th:data-index="${reservation.id}" style="word-break: keep-all; width: 100%;">확정</button></p>
-                                <p><button class="moren-reservation-btn" data-behavior="cancel" th:data-index="${reservation.id}" style="word-break: keep-all; width: 100%;">확정 취소</button></p>
+                                <p>
+                                    <button class="moren-reservation-btn" data-behavior="confirm" th:name="${reservation.id}" th:data-index="${reservation.id}"
+                                        th:style="${reservation.reservationStatus} == '1' ? 'pointer-events: none; background: gray; word-break: keep-all; width: 100%;' : 'word-break: keep-all; width: 100%; cursor: pointer;'">
+                                    확정
+                                    </button>
+                                </p>
+                                <p>
+                                    <button class="moren-reservation-btn" data-behavior="cancel" th:name="${reservation.id}" th:data-index="${reservation.id}"
+                                            th:style="${reservation.reservationStatus} == '0' ? 'pointer-events: none; background: gray; word-break: keep-all; width: 100%;' : 'word-break: keep-all; width: 100%; cursor: pointer;'">
+                                        확정 취소
+                                    </button>
+                                </p>
                             </td>
                             <td>
                                 <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
