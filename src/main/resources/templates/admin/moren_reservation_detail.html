@@ -53,7 +53,7 @@
                 </div>
                 <div class="detail_list">
                     <p>렌트 기간</p>
-                    <select name="" class="rentTerm">
+                    <select name="" class="rentTerm" onchange="displayNextOptions(this)">
                         <option value="한달" th:selected="${morenReservationDTO.rentTerm} == '한달' ? true : false">한달</option>
                         <option value="12개월" th:selected="${morenReservationDTO.rentTerm} == '12개월' ? true : false">12개월</option>
                         <option value="24개월" th:selected="${morenReservationDTO.rentTerm} == '24개월' ? true : false">24개월</option>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="detail_list">
                     <p>약정 주행거리</p>
-                    <select name="" class="kilometer">
+                    <select name="" class="kilometer" id="selectKilometer">
                         <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="2000km" th:selected="${morenReservationDTO.kilometer} == '2000km' ? true : false">2000km</option>
                         <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="2500km" th:selected="${morenReservationDTO.kilometer} == '2500km' ? true : false">2500km</option>
                         <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="3000km" th:selected="${morenReservationDTO.kilometer} == '3000km' ? true : false">3000km</option>
@@ -111,18 +111,18 @@
                 <div class="detail_list">
                     <p>공급가</p>
                     <div style="display: flex; align-items: center;">
-                        <p class="number carPrice" th:text="${morenReservationDTO.carPrice}"></p><span>원</span>
+                        <p class="number carPrice" th:text="${morenReservationDTO.carPrice}" id="displayCarPrice"></p><span>원</span>
                     </div>
                 </div>
                 <div class="detail_list">
                     <p>부가세</p>
                     <div style="display: flex; align-items: center;">
-                        <p class="number carTax" th:text="${morenReservationDTO.carTax}"></p><span>원</span>
+                        <p class="number carTax" th:text="${morenReservationDTO.carTax}" id="displayCarTax"></p><span>원</span>
                     </div>
                 </div>
                 <div class="detail_list">
                     <p>총 렌트료</p>
-                    <textarea class="carAmountTotal" th:text="${morenReservationDTO.carAmountTotal}"></textarea>
+                    <textarea class="carAmountTotal" onkeyup="changePrice(this);" id="carAmountTotalInput" th:text="${morenReservationDTO.carAmountTotal}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>보증금</p>
