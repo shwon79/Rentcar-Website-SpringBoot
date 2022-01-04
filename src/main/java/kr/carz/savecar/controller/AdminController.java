@@ -906,7 +906,7 @@ public class AdminController {
 
         // 계약타입
         String contractType;
-        if (dto.getRentTerm().equals("1")) {
+        if (dto.getRentTerm().equals("한달")) {
             contractType = "3"; //월렌트
         } else {
             contractType = "4"; //장기렌트
@@ -938,27 +938,27 @@ public class AdminController {
                 URL url = new URL(request_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("COMPANY_ID", "1343");
-                jsonObject.put("CAR_NUM", dto.getCarNo());
-                jsonObject.put("CAR_CODE", dto.getCarCode());
-                jsonObject.put("ORDER_TYPE", "new");
-                jsonObject.put("ORDER_CONTRACT_TYPE", contractType);
-                jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
-                jsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
-                jsonObject.put("ORDER_CUSTOMER_BIRTH", dto.getReservationAge());
-                jsonObject.put("ORDER_START_TIME", orderStartTime);
-                jsonObject.put("ORDER_END_TIME", orderEndTime);
-                jsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
-                jsonObject.put("ORDER_DELIVERY_PLACE_EXTRA", dto.getAddressDetail());
-                jsonObject.put("ORDER_CUSTOMER_MEMO", dto.getReservationDetails());
-                jsonObject.put("ORDER_PRICE", dto.getCarAmountTotal());
-                jsonObject.put("ORDER_PRICE_TAX", "0");
-                jsonObject.put("ORDER_DEPOSIT", dto.getCarDeposit());
-                jsonObject.put("ORDER_CONTRACT_TERM", contractTerm);
-                jsonObject.put("ORDER_EXTRA_DISTANCE", dto.getKilometer().split("km")[0]);
-                jsonObject.put("ORDER_EXTRA_DISTANCE_PRICE", dto.getCostPerKm());
-                jsonObject.put("ORDER_CDW", "1");
+                JSONObject morenJsonObject = new JSONObject();
+                morenJsonObject.put("COMPANY_ID", "1343");
+                morenJsonObject.put("CAR_NUM", dto.getCarNo());
+                morenJsonObject.put("CAR_CODE", dto.getCarCode());
+                morenJsonObject.put("ORDER_TYPE", "new");
+                morenJsonObject.put("ORDER_CONTRACT_TYPE", contractType);
+                morenJsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
+                morenJsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
+                morenJsonObject.put("ORDER_CUSTOMER_BIRTH", dto.getReservationAge());
+                morenJsonObject.put("ORDER_START_TIME", orderStartTime);
+                morenJsonObject.put("ORDER_END_TIME", orderEndTime);
+                morenJsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
+                morenJsonObject.put("ORDER_DELIVERY_PLACE_EXTRA", dto.getAddressDetail());
+                morenJsonObject.put("ORDER_CUSTOMER_MEMO", dto.getReservationDetails());
+                morenJsonObject.put("ORDER_PRICE", dto.getCarAmountTotal());
+                morenJsonObject.put("ORDER_PRICE_TAX", "0");
+                morenJsonObject.put("ORDER_DEPOSIT", dto.getCarDeposit());
+                morenJsonObject.put("ORDER_CONTRACT_TERM", contractTerm);
+                morenJsonObject.put("ORDER_EXTRA_DISTANCE", dto.getKilometer().split("km")[0]);
+                morenJsonObject.put("ORDER_EXTRA_DISTANCE_PRICE", dto.getCostPerKm());
+                morenJsonObject.put("ORDER_CDW", "1");
 
                 conn.setConnectTimeout(5000);
                 conn.setReadTimeout(5000);
@@ -968,7 +968,7 @@ public class AdminController {
                 conn.setDoOutput(true);
 
                 PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
-                printWriter.write(jsonObject.toString());
+                printWriter.write(morenJsonObject.toString());
                 printWriter.flush();
 
                 // 응답
@@ -1080,14 +1080,14 @@ public class AdminController {
                 URL url = new URL(request_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("COMPANY_ID", "1343");
-                jsonObject.put("CAR_NUM", dto.getCarNo());
-                jsonObject.put("CAR_CODE", dto.getCarCode());
-                jsonObject.put("ORDER_TYPE", "cancel");
-                jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
-                jsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
-                jsonObject.put("ORDER_CODE", dto.getOrderCode());
+                JSONObject morenJsonObject = new JSONObject();
+                morenJsonObject.put("COMPANY_ID", "1343");
+                morenJsonObject.put("CAR_NUM", dto.getCarNo());
+                morenJsonObject.put("CAR_CODE", dto.getCarCode());
+                morenJsonObject.put("ORDER_TYPE", "cancel");
+                morenJsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
+                morenJsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
+                morenJsonObject.put("ORDER_CODE", dto.getOrderCode());
 
                 conn.setConnectTimeout(5000);
                 conn.setReadTimeout(5000);
@@ -1097,7 +1097,7 @@ public class AdminController {
                 conn.setDoOutput(true);
 
                 PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
-                printWriter.write(jsonObject.toString());
+                printWriter.write(morenJsonObject.toString());
                 printWriter.flush();
 
                 // 응답
@@ -1158,8 +1158,6 @@ public class AdminController {
                         + "요청사항: " + morenReservation.getReservationDetails() + "\n\n");
 
                 params2.put("text", "[세이브카 렌트카 예약이 취소되었습니다]" + "\n"
-                        + "* 예약자가 여러 명일 경우, 예약금 입금 순서로 예약이 확정됩니다." + "\n"
-                        + "* 예약금 입금이 되지 않았거나 다른 선입금 예약자가 있어 예약이 취소되었을 수 있습니다." + "\n\n"
                         + "문의자 이름: " + morenReservation.getReservationName() + "\n"
                         + "연락처: " + morenReservation.getReservationPhone() + "\n"
                         + "차량번호: " + morenReservation.getCarNo() + "\n"
@@ -1209,27 +1207,27 @@ public class AdminController {
                     URL url = new URL(request_url);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("COMPANY_ID", "1343");
-                    jsonObject.put("CAR_NUM", dto.getCarNo());
-                    jsonObject.put("CAR_CODE", dto.getCarCode());
-                    jsonObject.put("ORDER_TYPE", "update");
-                    jsonObject.put("ORDER_CONTRACT_TYPE", contractType);
-                    jsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
-                    jsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
-                    jsonObject.put("ORDER_CUSTOMER_BIRTH", dto.getReservationAge());
-                    jsonObject.put("ORDER_START_TIME", orderStartTime);
-                    jsonObject.put("ORDER_END_TIME", orderEndTime);
-                    jsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
-                    jsonObject.put("ORDER_DELIVERY_PLACE_EXTRA", dto.getAddressDetail());
-                    jsonObject.put("ORDER_CUSTOMER_MEMO", dto.getReservationDetails());
-                    jsonObject.put("ORDER_PRICE", dto.getCarAmountTotal());
-                    jsonObject.put("ORDER_PRICE_TAX", "0");
-                    jsonObject.put("ORDER_DEPOSIT", dto.getCarDeposit());
-                    jsonObject.put("ORDER_CONTRACT_TERM", contractTerm);
-                    jsonObject.put("ORDER_EXTRA_DISTANCE", dto.getKilometer().split("km")[0]);
-                    jsonObject.put("ORDER_EXTRA_DISTANCE_PRICE", dto.getCostPerKm());
-                    jsonObject.put("ORDER_CDW", "1");
+                    JSONObject morenJsonObject = new JSONObject();
+                    morenJsonObject.put("COMPANY_ID", "1343");
+                    morenJsonObject.put("CAR_NUM", dto.getCarNo());
+                    morenJsonObject.put("CAR_CODE", dto.getCarCode());
+                    morenJsonObject.put("ORDER_TYPE", "update");
+                    morenJsonObject.put("ORDER_CONTRACT_TYPE", contractType);
+                    morenJsonObject.put("ORDER_CUSTOMER_NAME", dto.getReservationName());
+                    morenJsonObject.put("ORDER_CUSTOMER_PHONE", dto.getReservationPhone());
+                    morenJsonObject.put("ORDER_CUSTOMER_BIRTH", dto.getReservationAge());
+                    morenJsonObject.put("ORDER_START_TIME", orderStartTime);
+                    morenJsonObject.put("ORDER_END_TIME", orderEndTime);
+                    morenJsonObject.put("ORDER_DELIVERY_PLACE", dto.getAddress());
+                    morenJsonObject.put("ORDER_DELIVERY_PLACE_EXTRA", dto.getAddressDetail());
+                    morenJsonObject.put("ORDER_CUSTOMER_MEMO", dto.getReservationDetails());
+                    morenJsonObject.put("ORDER_PRICE", dto.getCarAmountTotal());
+                    morenJsonObject.put("ORDER_PRICE_TAX", "0");
+                    morenJsonObject.put("ORDER_DEPOSIT", dto.getCarDeposit());
+                    morenJsonObject.put("ORDER_CONTRACT_TERM", contractTerm);
+                    morenJsonObject.put("ORDER_EXTRA_DISTANCE", dto.getKilometer().split("km")[0]);
+                    morenJsonObject.put("ORDER_EXTRA_DISTANCE_PRICE", dto.getCostPerKm());
+                    morenJsonObject.put("ORDER_CDW", "1");
 
                     conn.setConnectTimeout(5000);
                     conn.setReadTimeout(5000);
@@ -1239,7 +1237,7 @@ public class AdminController {
                     conn.setDoOutput(true);
 
                     PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
-                    printWriter.write(jsonObject.toString());
+                    printWriter.write(morenJsonObject.toString());
                     printWriter.flush();
 
                     // 응답
@@ -1289,7 +1287,6 @@ public class AdminController {
             morenReservation.setCarCode(dto.getCarCode());
             morenReservation.setPickupPlace(dto.getPickupPlace());
             morenReservation.setCarName(dto.getCarName());
-            morenReservation.setOrderCode(dto.getOrderCode());
 
             jsonObject_return.put("result", 1);
         }

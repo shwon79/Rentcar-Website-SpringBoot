@@ -180,9 +180,10 @@ $('.moren-reservation-btn').click(function(e) {
     let carCodeList = document.getElementsByClassName('carCode');
     let pickupPlaceList = document.getElementsByClassName('pickupPlace');
     let reservationStatusList = document.getElementsByClassName('reservationStatus');
+    let orderCodeList = document.getElementsByClassName('orderCode');
 
     let id = e.target.name || e.target.dataset.index;
-    let carNo, carName, reservationName, reservationPhone, reservationDate, reservationTime, address, addressDetail, rentTerm, costPerKm, reservationStatus;
+    let carNo, carName, reservationName, reservationPhone, reservationDate, reservationTime, address, addressDetail, rentTerm, costPerKm, reservationStatus, orderCode;
     let carAmountTotal, carDeposit,reservationDetails, kilometer, reservationAge, reservationGuarantee, carCode, pickupPlace, carPrice, carTax;
 
     for (i=0; i < carNoList.length; i++) {
@@ -296,6 +297,11 @@ $('.moren-reservation-btn').click(function(e) {
             reservationStatus = reservationStatusList[i].value || reservationStatusList[i].innerText;
         }
     };
+    for (i=0; i < orderCodeList.length; i++) {
+        if (e.target.dataset.index == orderCodeList[i].dataset.index) {
+            orderCode = orderCodeList[i].value || orderCodeList[i].innerText;
+        }
+    };
 
     var data = {
         carName: carName,
@@ -318,8 +324,11 @@ $('.moren-reservation-btn').click(function(e) {
         costPerKm: costPerKm,
         carCode: carCode,
         reservationStatus: reservationStatus,
-        pickupPlace: pickupPlace
+        pickupPlace: pickupPlace,
+        orderCode: orderCode
     }
+
+    console.log(data);
 
     if (e.target.dataset.behavior === 'confirm') {
         if (confirm('예약을 확정하시겠습니까?')) {
