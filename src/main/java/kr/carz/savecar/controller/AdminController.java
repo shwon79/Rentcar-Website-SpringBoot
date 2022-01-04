@@ -764,26 +764,27 @@ public class AdminController {
     }
 
 
-//    // 모렌 reservation 삭제 api
-//    @DeleteMapping("/moren/reservation/{reservationId}")
-//    @ResponseBody
-//    public void delete_moren_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws IOException {
-//
-//        JSONObject jsonObject = new JSONObject();
-//
-//        Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(reservationId);
-//        if(morenReservationOptional.isPresent()){
-//            morenReservationService.delete(morenReservationOptional.get());
-//            jsonObject.put("result", 1);
-//        } else {
-//            jsonObject.put("result", 0);
-//        }
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonObject);
-//        pw.flush();
-//        pw.close();
-//    }
+    // 캠핑카 reservation 삭제 api
+    @DeleteMapping("/admin/campingcar/reservation/{reservationId}")
+    @ResponseBody
+    public void delete_campingcar_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarReservation> campingCarReservationWrapper = campingcarReservationService.findById(reservationId);
+
+        if(campingCarReservationWrapper.isPresent()){
+            campingcarReservationService.delete(campingCarReservationWrapper.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 
 
     // 할인가 적용하기 api
