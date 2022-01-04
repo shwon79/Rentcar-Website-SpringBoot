@@ -38,35 +38,122 @@
             <div class="head_title" style="text-align: center;">
                 <h2>예약 신청 상세 페이지</h2>
             </div>
-            <div id="reservation-detail-card">
-                <p>예약한 시간: <span>예약한 시간</span></p>
-                <p>차량 번호: <span th:text="${morenReservationDTO.carNo}" class="carNo"></span></p>
-                <p>약정 주행거리: <span th:text="${morenReservationDTO.kilometer}" class="kilometer"></span></p>
-                <p>렌트 기간: <span th:text="${morenReservationDTO.rentTerm}" class="rentTerm"></span></p>
-                <p>예약자 이름(입금자명): <span th:text="${morenReservationDTO.reservationName}" class="reservationName"></span></p>
-                <p>예약자 전화번호: <span th:text="${morenReservationDTO.reservationPhone}" class="reservationPhone"></span></p>
-                <p>예약자 생년월일: <span th:text="${morenReservationDTO.reservationAge}" class="reservationAge"></span></p>
-                <p>대여 날짜 및 시간:
-                    <span th:text="${morenReservationDTO.reservationDate}" class="reservationDate"></span>
-                    <span th:text="${morenReservationDTO.reservationTime}" class="reservationTime"></span>
-                </p>
-                <p>신용 보증: <span th:text="${morenReservationDTO.reservationGuarantee}"></span></p>
-                <p>배차 요청 주소: <span th:text="${morenReservationDTO.address}" class="reservationAddress"></span></p>
-                <p>배차 요청 상세 주소: <span th:text="${morenReservationDTO.addressDetail}" class="reservationAddressDetail"></span></p>
-                <p>요청 사항: <span th:text="${morenReservationDTO.reservationDetails}" class="reservationDetails"></span></p>
-                <p>공급가: <span class="number" th:text="${morenReservationDTO.carPrice}"></span><span>원</span></p>
-                <p>부가세: <span class="number" th:text="${morenReservationDTO.carTax}"></span><span>원</span></p>
-                <p>총 렌트료: <span th:text="${morenReservationDTO.carAmountTotal}" class="carAmountTotal number"></span><span>원</span></p>
-                <p>보증금: <span th:text="${morenReservationDTO.carDeposit}" class="carDeposit number"></span><span>원</span></p>
-                <p>방문 또는 배차 신청: <span th:text="${morenReservationDTO.pickupPlace}" class="pickupPlace"></span></p>
+            <div class="detail_container">
+                <div th:if="${morenReservationDTO.reservationStatus == '0'}" style="display: flex; justify-content: space-between; background-color: white;">
+                    <button class="moren-reservation-btn set_reserve" data-behavior="confirm" th:name="${morenReservationDTO.id}"
+                            th:style="${morenReservationDTO.reservationStatus} == '1' ? 'pointer-events: none; background: gray; margin: 5px;' : 'margin: 5px;'">
+                        확정
+                    </button>
+                    <button class="moren-reservation-btn set_reserve" data-behavior="cancel" th:name="${morenReservationDTO.id}"
+                            th:style="${morenReservationDTO.reservationStatus} == '0' ? 'pointer-events: none; background: gray; margin: 5px;': 'margin: 5px;'">
+                        확정 취소
+                    </button>
+                    <button class="moren-reservation-btn set_reserve" data-behavior="edit" th:name="${morenReservationDTO.id}" style="margin: 5px;">수정</button>
+                </div>
+                <div class="detail_list" id="detail_list_title">
+                    <p>종류</p>
+                    <p>값</p>
+                </div>
+                <div class="detail_list">
+                    <p>예약한 시간</p>
+                    <p>예약한 시간</p>
+                </div>
+                <div class="detail_list">
+                    <p>차량 번호</p>
+                    <p th:text="${morenReservationDTO.carNo}" class="carNo">예약한 시간</p>
+                </div>
+                <div class="detail_list">
+                    <p>렌트 기간</p>
+                    <select name="" class="rentTerm" onchange="displayNextOptions(this)">
+                        <option value="한달" th:selected="${morenReservationDTO.rentTerm} == '한달' ? true : false">한달</option>
+                        <option value="12개월" th:selected="${morenReservationDTO.rentTerm} == '12개월' ? true : false">12개월</option>
+                        <option value="24개월" th:selected="${morenReservationDTO.rentTerm} == '24개월' ? true : false">24개월</option>
+                    </select>
+                </div>
+                <div class="detail_list">
+                    <p>약정 주행거리</p>
+                    <select name="" class="kilometer" id="selectKilometer">
+                        <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="2000km" th:selected="${morenReservationDTO.kilometer} == '2000km' ? true : false">2000km</option>
+                        <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="2500km" th:selected="${morenReservationDTO.kilometer} == '2500km' ? true : false">2500km</option>
+                        <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="3000km" th:selected="${morenReservationDTO.kilometer} == '3000km' ? true : false">3000km</option>
+                        <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="4000km" th:selected="${morenReservationDTO.kilometer} == '4000km' ? true : false">4000km</option>
+                        <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="기타" th:selected="${morenReservationDTO.kilometer} == '기타' ? true : false">기타</option>
+                        <option th:if="${(morenReservationDTO.rentTerm=='12개월')||(morenReservationDTO.rentTerm=='24개월')}" value="20000km" th:selected="${morenReservationDTO.kilometer} == '20000km' ? true : false">20000km</option>
+                        <option th:if="${(morenReservationDTO.rentTerm=='12개월')||(morenReservationDTO.rentTerm=='24개월')}" value="30000km" th:selected="${morenReservationDTO.kilometer} == '2500km' ? true : false">30000km</option>
+                        <option th:if="${(morenReservationDTO.rentTerm=='12개월')||(morenReservationDTO.rentTerm=='24개월')}" value="40000km" th:selected="${morenReservationDTO.kilometer} == '3000km' ? true : false">40000km</option>
+                        <option th:if="${(morenReservationDTO.rentTerm=='12개월')||(morenReservationDTO.rentTerm=='24개월')}" value="기타" th:selected="${morenReservationDTO.kilometer} == '기타' ? true : false">기타</option>
+                    </select>
+                </div>
+                <div class="detail_list">
+                    <p>예약자 이름(입금자명)</p>
+                    <textarea class="reservationName" th:text="${morenReservationDTO.reservationName}"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>예약자 전화번호</p>
+                    <textarea class="reservationPhone" th:text="${morenReservationDTO.reservationPhone}"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>예약자 생년월일</p>
+                    <textarea class="reservationAge" th:text="${morenReservationDTO.reservationAge}"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>대여 날짜 및 시간</p>
+                    <div style="display: flex; align-items: center;">
+                        <input type="date" class="reservationDate" th:value="${morenReservationDTO.reservationDate}">
+                        <input type="time" class="reservationTime" th:value="${morenReservationDTO.reservationTime}">
+                    </div>
+                </div>
+                <div class="detail_list">
+                    <p>신용 보증</p>
+                    <p th:text="${morenReservationDTO.reservationGuarantee}"></p>
+                </div>
+                <div class="detail_list">
+                    <p>배차 요청 주소</p>
+                    <textarea class="reservationAddress" th:text="${morenReservationDTO.address}"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>배차 요청 상세 주소</p>
+                    <textarea class="reservationAddressDetail" th:text="${morenReservationDTO.addressDetail}"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>요청 사항</p>
+                    <textarea class="reservationDetails" th:text="${morenReservationDTO.reservationDetails}"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>공급가</p>
+                    <div style="display: flex; align-items: center;">
+                        <p class="number carPrice" th:text="${morenReservationDTO.carPrice}" id="displayCarPrice"></p><span>원</span>
+                    </div>
+                </div>
+                <div class="detail_list">
+                    <p>부가세</p>
+                    <div style="display: flex; align-items: center;">
+                        <p class="number carTax" th:text="${morenReservationDTO.carTax}" id="displayCarTax"></p><span>원</span>
+                    </div>
+                </div>
+                <div class="detail_list">
+                    <p>총 렌트료</p>
+                    <textarea class="carAmountTotal" onkeyup="changePrice(this);" id="carAmountTotalInput" th:text="${morenReservationDTO.carAmountTotal}"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>보증금</p>
+                    <textarea class="carDeposit" th:text="${morenReservationDTO.carDeposit}"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>방문 또는 배차 신청</p>
+                    <select name="" class="pickupPlace">
+                        <option value="방문" th:selected="${morenReservationDTO.pickupPlace} == '방문' ? true : false">방문</option>
+                        <option value="배차 신청" th:selected="${morenReservationDTO.pickupPlace} == '배차 신청' ? true : false">배차 신청</option>
+                    </select>
+                </div>
+                <p class="reservationStatus" th:text="${morenReservationDTO.reservationStatus}" style="display: none;"></p>
+                <p class="carName" th:text="${morenReservationDTO.carName}" style="display: none;"></p>
                 <p class="costPerKm" th:text="${morenReservationDTO.costPerKm}" style="display: none;"></p>
                 <p class="reservationGuarantee" th:text="${morenReservationDTO.reservationGuarantee}" style="display: none;"></p>
                 <p class="carCode" th:text="${morenReservationDTO.carCode}" style="display: none;"></p>
                 <span class="reservationId" style="display: none;" th:text="${morenReservationDTO.id}"></span>
-                <div th:if="${morenReservationDTO.reservationStatus == '0'}" style="display: flex; justify-content: space-between;">
-                    <button class="reservation-delete-btn" th:data-index="${morenReservationDTO.id}">취소</button>
-                    <button class="reservation-confirm-btn">확정</button>
-                </div>
+                <span class="reservationStatus" style="display: none;" th:text="${morenReservationDTO.reservationStatus}"></span>
+
                 <div th:if="${morenReservationDTO.reservationStatus == '1'}" style="display: flex; justify-content: space-between;">
                     <p style="text-align: center; width: 100%; color: darkblue;">위 예약 신청은 확정되었습니다.</p>
                 </div>

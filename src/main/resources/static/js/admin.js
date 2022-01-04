@@ -157,11 +157,10 @@ $('.delete-btn').click(function(e) {
 
 
 // 모렌으로 데이터 전달, 예약하기
-$('.reservation-confirm-btn').click(function(e) {
-
+$('.moren-reservation-btn').click(function(e) {
     // 예약 정보 받기
-    let idList = document.getElementsByClassName('reservationId');
     let carNoList = document.getElementsByClassName('carNo');
+    let carNameList = document.getElementsByClassName('carName');
     let reservationNameList = document.getElementsByClassName('reservationName');
     let reservationPhoneList = document.getElementsByClassName('reservationPhone');
     let reservationDateList = document.getElementsByClassName('reservationDate');
@@ -171,6 +170,8 @@ $('.reservation-confirm-btn').click(function(e) {
     let rentTermList = document.getElementsByClassName('rentTerm');
     let costPerKmList = document.getElementsByClassName('costPerKm');
     let carAmountTotalList = document.getElementsByClassName('carAmountTotal');
+    let carPriceList = document.getElementsByClassName('carPrice');
+    let carTaxList = document.getElementsByClassName('carTax');
     let carDepositList = document.getElementsByClassName('carDeposit');
     let reservationDetailsList = document.getElementsByClassName('reservationDetails');
     let kilometerList = document.getElementsByClassName('kilometer');
@@ -178,69 +179,56 @@ $('.reservation-confirm-btn').click(function(e) {
     let reservationGuaranteeList = document.getElementsByClassName('reservationGuarantee');
     let carCodeList = document.getElementsByClassName('carCode');
     let pickupPlaceList = document.getElementsByClassName('pickupPlace');
+    let reservationStatusList = document.getElementsByClassName('reservationStatus');
+    let orderCodeList = document.getElementsByClassName('orderCode');
 
-    let id;
-    let carNo;
-    let reservationName;
-    let reservationPhone;
-    let reservationDate;
-    let reservationTime;
-    let address;
-    let addressDetail;
-    let rentTerm;
-    let costPerKm;
-    let carAmountTotal;
-    let carDeposit;
-    let reservationDetails;
-    let kilometer;
-    let reservationAge;
-    let reservationGuarantee;
-    let carCode;
-    let pickupPlace;
+    let id = e.target.name || e.target.dataset.index;
+    let carNo, carName, reservationName, reservationPhone, reservationDate, reservationTime, address, addressDetail, rentTerm, costPerKm, reservationStatus, orderCode;
+    let carAmountTotal, carDeposit,reservationDetails, kilometer, reservationAge, reservationGuarantee, carCode, pickupPlace, carPrice, carTax;
 
-    for (i=0; i < idList.length; i++) {
-        if (e.target.dataset.index == idList[i].dataset.index) {
-            id = idList[i].innerText;
-        };
-    };
     for (i=0; i < carNoList.length; i++) {
         if (e.target.dataset.index == carNoList[i].dataset.index) {
             carNo = carNoList[i].innerText;
         }
     };
+    for (i=0; i < carNameList.length; i++) {
+        if (e.target.dataset.index == carNameList[i].dataset.index) {
+            carName = carNameList[i].innerText;
+        }
+    };
     for (i=0; i < reservationNameList.length; i++) {
         if (e.target.dataset.index == reservationNameList[i].dataset.index) {
-            reservationName = reservationNameList[i].innerText;
+            reservationName = reservationNameList[i].value || reservationNameList[i].innerText;
         }
     };
     for (i=0; i < reservationPhoneList.length; i++) {
         if (e.target.dataset.index == reservationPhoneList[i].dataset.index) {
-            reservationPhone = reservationPhoneList[i].innerText;
+            reservationPhone = reservationPhoneList[i].value || reservationPhoneList[i].innerText;
         }
     };
     for (i=0; i < reservationDateList.length; i++) {
         if (e.target.dataset.index == reservationDateList[i].dataset.index) {
-            reservationDate = reservationDateList[i].innerText;
+            reservationDate = reservationDateList[i].value || reservationDateList[i].innerText;
         }
     };
     for (i=0; i < reservationTimeList.length; i++) {
         if (e.target.dataset.index == reservationTimeList[i].dataset.index) {
-            reservationTime = reservationTimeList[i].innerText;
+            reservationTime = reservationTimeList[i].value || reservationTimeList[i].innerText;
         }
     };
     for (i=0; i < addressList.length; i++) {
         if (e.target.dataset.index == addressList[i].dataset.index) {
-            address = addressList[i].innerText;
+            address = addressList[i].value || addressList[i].innerText;
         }
     };
     for (i=0; i < addressDetailList.length; i++) {
         if (e.target.dataset.index == addressDetailList[i].dataset.index) {
-            addressDetail = addressDetailList[i].innerText;
+            addressDetail = addressDetailList[i].value || addressDetailList[i].innerText;
         }
     };
     for (i=0; i < rentTermList.length; i++) {
         if (e.target.dataset.index == rentTermList[i].dataset.index) {
-            rentTerm = rentTermList[i].innerText;
+            rentTerm = rentTermList[i].value || rentTermList[i].innerText;
         }
     };
     for (i=0; i < costPerKmList.length; i++) {
@@ -250,13 +238,23 @@ $('.reservation-confirm-btn').click(function(e) {
     };
     for (i=0; i < carAmountTotalList.length; i++) {
         if (e.target.dataset.index == carAmountTotalList[i].dataset.index) {
-            let carAmountTotalString = carAmountTotalList[i].innerText;
-            carAmountTotal = parseInt(carAmountTotalString.replace(/,/g, ""));
+            let carAmountTotalString = carAmountTotalList[i].value || carAmountTotalList[i].innerText;
+            carAmountTotal = carAmountTotalString.replace(/,/g, "");
+        }
+    };
+    for (i=0; i < carPriceList.length; i++) {
+        if (e.target.dataset.index == carPriceList[i].dataset.index) {
+            carPrice = (carPriceList[i].innerText).replace(/,/g, "");
+        }
+    };
+    for (i=0; i < carTaxList.length; i++) {
+        if (e.target.dataset.index == carTaxList[i].dataset.index) {
+            carTax = (carTaxList[i].innerText).replace(/,/g, "");
         }
     };
     for (i=0; i < carDepositList.length; i++) {
         if (e.target.dataset.index == carDepositList[i].dataset.index) {
-            carDeposit = carDepositList[i].innerText;
+            carDeposit = carDepositList[i].value || carDepositList[i].innerText;
             if (carDeposit == '상담' || carDeposit == '차량가격의 30%(상담문의)') {
                 carDeposit = '0';
             } else {
@@ -271,18 +269,17 @@ $('.reservation-confirm-btn').click(function(e) {
     };
     for (i=0; i < reservationDetailsList.length; i++) {
         if (e.target.dataset.index == reservationDetailsList[i].dataset.index) {
-            reservationDetails = reservationDetailsList[i].innerText + ', 신용보증: ' + reservationGuarantee;
+            reservationDetails = reservationDetailsList[i].value || reservationDetailsList[i].innerText;
         }
     };
     for (i=0; i < kilometerList.length; i++) {
         if (e.target.dataset.index == kilometerList[i].dataset.index) {
-            kilometer = kilometerList[i].innerText;
+            kilometer = kilometerList[i].value || kilometerList[i].innerText;
         }
     };
     for (i=0; i < reservationAgeList.length; i++) {
         if (e.target.dataset.index == reservationAgeList[i].dataset.index) {
-            let reservationAgeString = reservationAgeList[i].innerText.substring(2,10);
-            reservationAge = reservationAgeString.replace(/-/g, "");
+            reservationAge = reservationAgeList[i].value || reservationAgeList[i].innerText;
         }
     };
     for (i=0; i < carCodeList.length; i++) {
@@ -292,12 +289,22 @@ $('.reservation-confirm-btn').click(function(e) {
     };
     for (i=0; i < pickupPlaceList.length; i++) {
         if (e.target.dataset.index == pickupPlaceList[i].dataset.index) {
-            pickupPlace = pickupPlaceList[i].innerText;
+            pickupPlace = pickupPlaceList[i].value || pickupPlaceList[i].innerText;
+        }
+    };
+    for (i=0; i < reservationStatusList.length; i++) {
+        if (e.target.dataset.index == reservationStatusList[i].dataset.index) {
+            reservationStatus = reservationStatusList[i].value || reservationStatusList[i].innerText;
+        }
+    };
+    for (i=0; i < orderCodeList.length; i++) {
+        if (e.target.dataset.index == orderCodeList[i].dataset.index) {
+            orderCode = orderCodeList[i].value || orderCodeList[i].innerText;
         }
     };
 
     var data = {
-        id : id,
+        carName: carName,
         carNo: carNo,
         kilometer: kilometer,
         reservationName: reservationName,
@@ -306,56 +313,54 @@ $('.reservation-confirm-btn').click(function(e) {
         reservationDate: reservationDate,
         reservationTime: reservationTime,
         reservationDetails: reservationDetails,
+        reservationGuarantee: reservationGuarantee,
         address: address,
         addressDetail: addressDetail,
+        carPrice: carPrice,
+        carTax: carTax,
         carAmountTotal: carAmountTotal,
         carDeposit: carDeposit,
         rentTerm: rentTerm,
         costPerKm: costPerKm,
         carCode: carCode,
-        pickupPlace: pickupPlace
+        reservationStatus: reservationStatus,
+        pickupPlace: pickupPlace,
+        orderCode: orderCode
     }
 
-    // console.log(data);
+    console.log(data);
 
-    let reserveConfirm = confirm('예약을 완료하시겠습니까?');
+    if (e.target.dataset.behavior === 'confirm') {
+        if (confirm('예약을 확정하시겠습니까?')) {
+            data.reservationStatus = '1';
+            console.log(data);
+            connectMoren();
+        }
+    } else if (e.target.dataset.behavior === 'cancel') {
+        if (confirm('예약 확정을 취소하시겠습니까?')) {
+            data.reservationStatus = '0';
+            console.log(data);
+            connectMoren();
+        }
+    } else if (e.target.dataset.behavior === 'edit') {
+        if (confirm('예약 내용을 수정하시겠습니까?')) {
+            console.log(data);
+            connectMoren();
+        }
+    }
 
-    if (reserveConfirm) {
+    function connectMoren() {
         $.ajax({
-            type:'POST',
-            url:'/moren/reservation/apply',
+            type:'PUT',
+            url:'/moren/reservation/apply/' + id,
             dataType:'json',
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function (result) {
             if (result.result == 1) {
-                alert('예약이 완료되었습니다.');
+                alert('처리되었습니다.');
             } else {
-                alert('예약에 문제가 생겼습니다.');
-            };
-            window.location.href = '/admin/moren/reservation/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    };
-})
-
-// 모렌 예약 신청 목록에서 취소
-$('.reservation-delete-btn').click(function(e) {
-    const reservationId = e.target.dataset.index;
-    let deleteConfirm = confirm('취소하시겠습니까?');
-
-    if (deleteConfirm) {
-        $.ajax({
-            type:'GET',
-            url:'/moren/reservation/cancel/'+ reservationId,
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8',
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('취소 되었습니다.');
-            } else if (result.result == 0) {
-                alert('취소에 문제가 생겼습니다.');
+                alert('처리에 문제가 생겼습니다.');
             };
             window.location.href = '/admin/moren/reservation/menu';
         }).fail(function (error) {
@@ -364,7 +369,50 @@ $('.reservation-delete-btn').click(function(e) {
     }
 })
 
-//모렌 예약 신청 삭제
+// 렌트 기간 선택하면 약정 주행거리 선택 보여주기
+function displayNextOptions(e) {
+    let monthKilometer = ["2000km", "2500km", "3000km", "4000km", "기타"];
+    let yearKilometer = ["20000km", "30000km", "40000km", "기타"];
+    let selectKilometer = document.getElementById('selectKilometer');
+
+    let displaySelect;
+
+    if (e.value == "한달") {
+        displaySelect = monthKilometer;
+    } else if (e.value == "12개월" || e.value == "24개월") {
+        displaySelect = yearKilometer;
+    };
+
+    selectKilometer.options.length = 0;
+
+    for (x in displaySelect) {
+        let option = document.createElement('option');
+        option.value = displaySelect[x];
+        option.innerText = displaySelect[x];
+        selectKilometer.appendChild(option);
+    };
+}
+
+//총 렌트료 수정하면 공급가, 부가세 자동 변경
+function changePrice(e) {
+    let carPrice = document.getElementById('displayCarPrice');
+    let carTax = document.getElementById('displayCarTax');
+    let input = parseInt(e.value);
+
+    if (e.value == '') {
+    } else {
+        if (isNaN(input) == true) {
+            alert('숫자로만 작성해주세요!');
+        } else {
+            let calCarPrice = Math.round((input/11*10)).toLocaleString();
+            let calCarTax = Math.round((input/11)).toLocaleString();
+            carPrice.innerText = calCarPrice;
+            carTax.innerText = calCarTax;
+        }
+    }
+};
+
+//모렌 예약 신청 아예 삭제
 $('.reservation-completely-delete-btn').click(function(e) {
     let reservationId = e.target.dataset.index;
     let completeDeleteConfirm = confirm('예약 신청 목록에서 삭제 하시겠습니까?');

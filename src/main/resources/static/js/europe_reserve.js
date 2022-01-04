@@ -330,7 +330,7 @@ function sendRentTime(id) {
     let availableDays = 0;
 
     //선택 불가능한 가까운 날짜 받아오기
-    fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}/100`)
+    fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}/29`)
         .then(res => res.json())
         .then(result => {
             // 현재 남아있는 options 없애기
