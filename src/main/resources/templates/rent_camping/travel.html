@@ -15,6 +15,13 @@
     <script th:src="@{/js/campingcar.js}"></script>
 
     <script>
+        function toggleImg(id) {
+            let before = document.getElementById("headerImg").src;
+            let tmp = document.getElementById(id).src;
+            document.getElementById("headerImg").src = tmp;
+            document.getElementById(id).src = before;
+        }
+
         $(window).load(function() {
             let ulList = document.getElementsByClassName('header_camp_li');
             for (i=0; i < ulList.length; i++) {
@@ -40,12 +47,62 @@
         <div class="row" id="mainRow">
             <!-- left column -->
             <div id="left_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60">
-                <!--기본정보-->
+                <!--기본 정보-->
+<!--                <div class="row card white-card">-->
+<!--                    <h1 class="title">-->
+<!--                        <i class="fas fa-circle"></i>-->
+<!--                        CAMPER 기본 정보-->
+<!--                    </h1>-->
+<!--                    <div class="contents">-->
+<!--                        <div>-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td>CAMPER 명</td>-->
+<!--                                    <td>연료 / 미션</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Travel VIP</td>-->
+<!--                                    <td>디젤 / Auto</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td>면허 종류</td>-->
+<!--                                    <td>인원정보</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>2종 보통</td>-->
+<!--                                    <td>4인승</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <!--사진-->
+<!--                <div class="row card white-card" style="display: none;">-->
+<!--                    <h1 class="title">-->
+<!--                        <i class="fas fa-circle"></i>-->
+<!--                        CAMPER 사진-->
+<!--                    </h1>-->
+<!--                    <div class="contents">-->
+<!--                        <div style="margin-bottom: 2em;">-->
+<!--                            <img th:src="@{/img/travel2.JPG}" id="headerImg" width="100%" height="100%" style="object-fit:contain">-->
+<!--                        </div>-->
+<!--                        <div class="camping_img_small" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 0px;">-->
+<!--                            <img th:src="@{/img/travel1.JPG}" id="carImg1" onclick="toggleImg('carImg1')">-->
+<!--                            <img th:src="@{/img/travel2.JPG}" id="carImg2" onclick="toggleImg('carImg2')">-->
+<!--                            <img th:src="@{/img/travel3.JPG}" id="carImg3" onclick="toggleImg('carImg3')">-->
+<!--                            <img th:src="@{/img/travel4.JPG}" id="carImg4" onclick="toggleImg('carImg4')">-->
+<!--                            <img th:src="@{/img/travel5.JPG}" id="carImg5" onclick="toggleImg('carImg5')">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <!--요금-->
                 <div class="row card white-card">
                     <h1 class="title">
                         <i class="fas fa-circle"></i>
-                        CAMPER 기본정보
-                    </h1>
+                        CAMPER 요금
+                   </h1>
                     <div class="contents">
 <!--                        <img th:src="@{/img/travel-price.jpg}" id="priceImg" width="100%" height="70%">-->
                         <table id="travel_price_table" class="camping_price_table">
