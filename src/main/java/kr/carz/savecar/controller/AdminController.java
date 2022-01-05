@@ -496,7 +496,6 @@ public class AdminController {
                         }
                     }
                     if (start_chk == 1){
-                        System.out.println("here 3");
                         dateCampingList.get(i).setReserved("0");
                     }
                 } else {
