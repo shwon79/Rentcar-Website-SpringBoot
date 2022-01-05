@@ -369,81 +369,81 @@ public class CalendarController {
     @ResponseBody
     public void camping_calendar_reservation(HttpServletResponse res, @RequestBody CampingCarReservationDTO dto) throws IOException{
 
-        // 문자전송
-        Message coolsms = new Message(api_key, api_secret);
-        HashMap<String, String> params = new HashMap<>();
-        HashMap<String, String> params2 = new HashMap<>();
-
-
-        /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-        params.put("from", "01052774113");
-        params.put("type", "LMS");
-
-        /* 고객에게 예약확인 문자 전송 */
-        params2.put("to", dto.getPhone());
-        params2.put("from", "01052774113");  // 16613331 테스트하기
-        params2.put("type", "LMS");
-
-        String extraTimeDescription = "사용X";
-        if(dto.getExtraTime() == 1){
-            extraTimeDescription = "사용O";
-        }
-
-        params.put("text", "[캠핑카 캘린더 예약]\n"
-                + "성함: " + dto.getName() + "\n"
-                + "전화번호: " + dto.getPhone() + "\n"
-                + "차량명: " + dto.getCarType() + "\n"
-                + "입금자명: " + dto.getDepositor() + "\n"
-                + "대여날짜: " + dto.getRentDate() + "\n"
-                + "대여시간: " + dto.getRentTime() + "\n"
-                + "반납날짜: " + dto.getReturnDate() + "\n"
-                + "반납시간: " + dto.getReturnTime() + "\n"
-                + "추가3시간권: " + extraTimeDescription + "\n"
-                + "이용날짜: " + dto.getDay() + "\n"
-                + "총금액: " + dto.getTotal() + "\n"
-                + "선결제금액: " + dto.getTotalHalf() + "\n"
-                + "요청사항: " + dto.getDetail() + "\n\n");
-
-        params2.put("text", "[캠핑카 예약 대기 신청이 완료되었습니다.]" + "\n"
-                + "성함: " + dto.getName() + "\n"
-                + "전화번호: " + dto.getPhone() + "\n"
-                + "차량명: " + dto.getCarType() + "\n"
-                + "대여날짜: " + dto.getRentDate() + "\n"
-                + "대여시간: " + dto.getRentTime() + "\n"
-                + "반납날짜: " + dto.getReturnDate() + "\n"
-                + "반납시간: " + dto.getReturnTime() + "\n"
-                + "추가3시간권: " + extraTimeDescription + "\n"
-                + "입금자명: " + dto.getDepositor() + "\n"
-                + "이용날짜: " + dto.getDay() + "\n"
-                + "총금액: " + dto.getTotal() + "\n"
-                + "선결제금액: " + dto.getTotalHalf() + "\n"
-                + "요청사항: " + dto.getDetail() + "\n\n");
-
-
-        params.put("app_version", "test app 1.2");
-        params2.put("app_version", "test app 1.2");
-
-
-        /* 세이브카에게 문자 전송 */
-
-        try {
-            org.json.simple.JSONObject obj = coolsms.send(params);
-            System.out.println(obj.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
-
-        /* 고객에게 예약확인 문자 전송 */
-
-        try {
-            org.json.simple.JSONObject obj2 = coolsms.send(params2);
-            System.out.println(obj2.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
+//        // 문자전송
+//        Message coolsms = new Message(api_key, api_secret);
+//        HashMap<String, String> params = new HashMap<>();
+//        HashMap<String, String> params2 = new HashMap<>();
+//
+//
+//        /* 세이브카에 예약확인 문자 전송 */
+//        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
+//        params.put("from", "01052774113");
+//        params.put("type", "LMS");
+//
+//        /* 고객에게 예약확인 문자 전송 */
+//        params2.put("to", dto.getPhone());
+//        params2.put("from", "01052774113");  // 16613331 테스트하기
+//        params2.put("type", "LMS");
+//
+//        String extraTimeDescription = "사용X";
+//        if(dto.getExtraTime() == 1){
+//            extraTimeDescription = "사용O";
+//        }
+//
+//        params.put("text", "[캠핑카 캘린더 예약]\n"
+//                + "성함: " + dto.getName() + "\n"
+//                + "전화번호: " + dto.getPhone() + "\n"
+//                + "차량명: " + dto.getCarType() + "\n"
+//                + "입금자명: " + dto.getDepositor() + "\n"
+//                + "대여날짜: " + dto.getRentDate() + "\n"
+//                + "대여시간: " + dto.getRentTime() + "\n"
+//                + "반납날짜: " + dto.getReturnDate() + "\n"
+//                + "반납시간: " + dto.getReturnTime() + "\n"
+//                + "추가3시간권: " + extraTimeDescription + "\n"
+//                + "이용날짜: " + dto.getDay() + "\n"
+//                + "총금액: " + dto.getTotal() + "\n"
+//                + "선결제금액: " + dto.getTotalHalf() + "\n"
+//                + "요청사항: " + dto.getDetail() + "\n\n");
+//
+//        params2.put("text", "[캠핑카 예약 대기 신청이 완료되었습니다.]" + "\n"
+//                + "성함: " + dto.getName() + "\n"
+//                + "전화번호: " + dto.getPhone() + "\n"
+//                + "차량명: " + dto.getCarType() + "\n"
+//                + "대여날짜: " + dto.getRentDate() + "\n"
+//                + "대여시간: " + dto.getRentTime() + "\n"
+//                + "반납날짜: " + dto.getReturnDate() + "\n"
+//                + "반납시간: " + dto.getReturnTime() + "\n"
+//                + "추가3시간권: " + extraTimeDescription + "\n"
+//                + "입금자명: " + dto.getDepositor() + "\n"
+//                + "이용날짜: " + dto.getDay() + "\n"
+//                + "총금액: " + dto.getTotal() + "\n"
+//                + "선결제금액: " + dto.getTotalHalf() + "\n"
+//                + "요청사항: " + dto.getDetail() + "\n\n");
+//
+//
+//        params.put("app_version", "test app 1.2");
+//        params2.put("app_version", "test app 1.2");
+//
+//
+//        /* 세이브카에게 문자 전송 */
+//
+//        try {
+//            org.json.simple.JSONObject obj = coolsms.send(params);
+//            System.out.println(obj.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
+//
+//        /* 고객에게 예약확인 문자 전송 */
+//
+//        try {
+//            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+//            System.out.println(obj2.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
 
         campingcarReservationService.save_campingcar_reservation(dto);
         JSONObject jsonObject = new JSONObject();
