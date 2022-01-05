@@ -236,6 +236,17 @@ a:hover {
   height: 120px;
 }
 
+
+.double_circle {
+  border: double dimgray;
+}
+
+.disabled_radio.double_circle {
+  border: none;
+}
+.disabled_day.double_circle {
+  border: none;
+}
 /* 모바일 화면 */
 @media (max-width: 990px) {
 

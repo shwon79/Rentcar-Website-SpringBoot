@@ -664,12 +664,7 @@ select option {
   /*background: rgb(180 255 175 / 57%);*/
 
 }
-.disabled_radio.double_circle {
-  border: none;
-}
-.double_circle {
-  border: double dimgray;
-}
+
 .disabled_radio input[type=radio]{
   display: none;
 }
