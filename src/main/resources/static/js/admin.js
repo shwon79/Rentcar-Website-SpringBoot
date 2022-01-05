@@ -15,7 +15,6 @@ function numberWithCommas() {
 $('.number').ready(numberWithCommas());
 
 // 할인 적용하기
-
 const make_discount = () => {
     if (document.getElementById("carNo").value == ""){
         alert('차량 번호를 입력해주세요.')
@@ -413,26 +412,62 @@ function changePrice(e) {
 };
 
 //모렌 예약 신청 아예 삭제
-$('.reservation-completely-delete-btn').click(function(e) {
-    let reservationId = e.target.dataset.index;
+$('.moren-completely-delete-btn').click(function() {
     let completeDeleteConfirm = confirm('예약 신청 목록에서 삭제 하시겠습니까?');
+    let selectedOptions = document.querySelectorAll('input[name="selected_moren_reservation"]:checked');
+    let id;
 
     if (completeDeleteConfirm) {
-        $.ajax({
-            type:'DELETE',
-            url:'/moren/reservation/'+ reservationId,
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8',
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('삭제 되었습니다.');
-            } else if (result.result == 0) {
-                alert('삭제에 문제가 생겼습니다.');
-            };
-            window.location.href = '/admin/moren/reservation/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
+        for (i=0; i < selectedOptions.length; i++) {
+            id = selectedOptions[i].value;
+            // console.log(id);
+
+            // $.ajax({
+            //     type:'DELETE',
+            //     url:'/moren/reservation/'+ id,
+            //     dataType:'json',
+            //     contentType : 'application/json; charset=utf-8',
+            // }).done(function (result) {
+            //     if (result.result == 1) {
+            //         alert('삭제 되었습니다.');
+            //     } else if (result.result == 0) {
+            //         alert('삭제에 문제가 생겼습니다.');
+            //     };
+            //     window.location.href = '/admin/moren/reservation/menu';
+            // }).fail(function (error) {
+            //     alert(JSON.stringify(error));
+            // })
+        }
+    }
+});
+
+//캠핑카 예약 신청 아예 삭제
+$('.camping-completely-delete-btn').click(function() {
+    let completeDeleteConfirm = confirm('예약 신청 목록에서 삭제 하시겠습니까?');
+    let selectedOptions = document.querySelectorAll('input[name="selected_camping_reservation"]:checked');
+    let id;
+
+    if (completeDeleteConfirm) {
+        for (i=0; i < selectedOptions.length; i++) {
+            id = selectedOptions[i].value;
+            // console.log(id);
+
+            // $.ajax({
+            //     type:'DELETE',
+            //     url:'/admin/campingcar/reservation/'+ id,
+            //     dataType:'json',
+            //     contentType : 'application/json; charset=utf-8',
+            // }).done(function (result) {
+            //     if (result.result == 1) {
+            //         alert('삭제 되었습니다.');
+            //     } else if (result.result == 0) {
+            //         alert('삭제에 문제가 생겼습니다.');
+            //     };
+            //     window.location.href = '/admin/campingcar/reservation/menu';
+            // }).fail(function (error) {
+            //     alert(JSON.stringify(error));
+            // })
+        }
     }
 });
 

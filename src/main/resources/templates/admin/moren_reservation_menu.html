@@ -25,7 +25,11 @@
         <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
         <div class="list_container">
+            <div style="text-align: right;">
+                <button class="moren-completely-delete-btn set_reserve">목록에서 삭제</button>
+            </div>
             <div class="reserve_list" id="reserve_list_title" style="justify-content: space-between;">
+                <p style="flex: 1">삭제</p>
                 <p style="flex: 2">예약 신청 시간</p>
                 <p style="flex: 1">차량 번호</p>
                 <p style="flex: 1">이름</p>
@@ -38,6 +42,9 @@
             </div>
             <div class="reserve_list_wrapper" th:each="reservation, iterStat : ${#lists.sort(morenReservationList, byTime)}">
                 <div class="reserve_list" style="justify-content: space-between;">
+                    <p style="flex: 1">
+                        <input type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">
+                    </p>
                     <p style="flex: 2" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></p>
                     <p style="flex: 1" class="carNo" th:text="${reservation.carNo}" th:data-index="${reservation.id}"></p>
                     <p style="flex: 1" class="reservationName" th:text="${reservation.reservationName}" th:data-index="${reservation.id}"></p>

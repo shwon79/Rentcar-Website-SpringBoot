@@ -26,7 +26,11 @@
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
     <div class="list_container">
+      <div style="text-align: right;">
+        <button class="camping-completely-delete-btn set_reserve">목록에서 삭제</button>
+      </div>
       <div class="reserve_list" id="reserve_list_title">
+        <p style="flex: 1">삭제</p>
         <p class="created_date">예약신청날짜</p>
         <p class="name">성명</p>
         <p class="car_type">차종</p>
@@ -39,7 +43,11 @@
         <p id="set_reserve_header" class="set_reserve">확정</p>
       </div>
       <div class="reserve_list_wrapper" th:each="reservation : ${campingCarReservationList}">
+        <p style="flex: 1; display: flex; justify-content: center; align-items: center;">
+          <input type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
+        </p>
         <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
+
           <p class="created_date" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]}"></p>
           <p class="name" th:text="${reservation.name}"></p>
           <p class="car_type" th:text="${#strings.substring(reservation.carType.toUpperCase(), 0,4)}"></p>
