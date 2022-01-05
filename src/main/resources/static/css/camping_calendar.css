@@ -224,7 +224,29 @@ a:hover {
   font-size: 16px !important;
   padding: 10px !important;
 }
+.camping_img_small {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 0px;
+}
 
+.camping_img_small > img {
+  width: 24%;
+  height: 120px;
+}
+
+
+.double_circle {
+  border: double dimgray;
+}
+
+.disabled_radio.double_circle {
+  border: none;
+}
+.disabled_day.double_circle {
+  border: none;
+}
 /* 모바일 화면 */
 @media (max-width: 990px) {
 

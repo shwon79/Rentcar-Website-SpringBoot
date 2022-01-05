@@ -39,7 +39,7 @@
                 <h2>예약 신청 상세 페이지</h2>
             </div>
             <div class="detail_container">
-                <div th:if="${morenReservationDTO.reservationStatus == '0'}" style="display: flex; justify-content: space-between; background-color: white;">
+                <div style="display: flex; justify-content: space-between; background-color: white;">
                     <button class="moren-reservation-btn set_reserve" data-behavior="confirm" th:name="${morenReservationDTO.id}"
                             th:style="${morenReservationDTO.reservationStatus} == '1' ? 'pointer-events: none; background: gray; margin: 5px;' : 'margin: 5px;'">
                         확정
