@@ -90,7 +90,7 @@ public class CalendarController {
 
 
     @GetMapping("/camping/{carType}")
-    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) throws Exception {
+    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
 
         Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
         model.put("explanation", explanation.get());
@@ -130,17 +130,13 @@ public class CalendarController {
 
             for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
-
         } else {
-
             calendarDateList = calendarDateService.findByYearAndMonth(Long.toString(year), Long.toString(month));
 
             Long firstDateId = calendarDateList.get(0).getDateId();
-            System.out.println(firstDateId);
             for (int i = 1; i < thisDayOfWeek; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
-
 
             for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
