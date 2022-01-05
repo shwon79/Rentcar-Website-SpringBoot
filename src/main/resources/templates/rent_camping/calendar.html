@@ -189,7 +189,7 @@
                                      th:class="(${dateCampingList[iterStat.index][0].reserved} == '2' and ${dateCampingList[iterStat.index][1].reserved} == '2' and ${dateCampingList[iterStat.index][2].reserved} == '2')
                                      or (${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth}) or (${date.year} < ${thisYear}) ? 'day_wrapper disabled_day' : 'day_wrapper able_day'" onclick="dayDetail(id)"
                                      th:style="${date.month} == ${thisMonth} and ${date.day} == ${thisDay} ? 'border: 2px solid black'"
-                                     th:classappend="(${dateCampingList[iterStat.index][0].reserved} == '1') or (${dateCampingList[iterStat.index][1].reserved} == '1') or (${dateCampingList[iterStat.index][2].reserved} == '1') ? 'double_circle' : ''">
+                                     th:classappend="!(${dateCampingList[iterStat.index][0].reserved} == '2' and ${dateCampingList[iterStat.index][1].reserved} == '2') and !(${dateCampingList[iterStat.index][0].reserved} == '0' and ${dateCampingList[iterStat.index][1].reserved} == '0') ? 'double_circle' : ''">
                                     <p th:text="${date.day}" ></p>
                                 </div>
                             </div>
