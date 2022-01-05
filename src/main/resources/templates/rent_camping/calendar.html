@@ -166,7 +166,7 @@
                             <div class="upside text-center">
                                 <div class="day_wrapper" th:id="${date.dateId+'day'}"
                                      th:class="(${dateCampingList[iterStat.index][0].reserved} == '1' and ${dateCampingList[iterStat.index][1].reserved} == '1' and ${dateCampingList[iterStat.index][2].reserved} == '1')
-                                     or (${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth}) ? 'day_wrapper disabled_day' : 'day_wrapper able_day'" onclick="dayDetail(id)"
+                                     or (${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth}) or (${date.year} < ${thisYear}) ? 'day_wrapper disabled_day' : 'day_wrapper able_day'" onclick="dayDetail(id)"
                                      th:style="${date.month} == ${thisMonth} and ${date.day} == ${thisDay} ? 'border: 2px solid black'"
                                 >
                                     <p th:text="${date.day}" ></p>
