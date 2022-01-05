@@ -44,7 +44,7 @@
       </div>
       <div class="reserve_list_wrapper" th:each="reservation : ${campingCarReservationList}">
         <p style="flex: 1; display: flex; justify-content: center; align-items: center;">
-          <input type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
+          <input th:if="${reservation.reservation != 1}" type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
         </p>
         <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
 

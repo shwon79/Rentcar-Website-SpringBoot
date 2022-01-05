@@ -413,7 +413,7 @@ function changePrice(e) {
 
 //모렌 예약 신청 아예 삭제
 $('.moren-completely-delete-btn').click(function() {
-    let completeDeleteConfirm = confirm('예약 신청 목록에서 삭제 하시겠습니까?');
+    let completeDeleteConfirm = confirm('삭제를 하시면 현재 admin 페이지에 반영이 되며, 프라임클럽 사이트에는 반영되지 않습니다. 예약 신청 목록에서 삭제 하시겠습니까?');
     let selectedOptions = document.querySelectorAll('input[name="selected_moren_reservation"]:checked');
     let id;
 
@@ -422,28 +422,28 @@ $('.moren-completely-delete-btn').click(function() {
             id = selectedOptions[i].value;
             // console.log(id);
 
-            // $.ajax({
-            //     type:'DELETE',
-            //     url:'/moren/reservation/'+ id,
-            //     dataType:'json',
-            //     contentType : 'application/json; charset=utf-8',
-            // }).done(function (result) {
-            //     if (result.result == 1) {
-            //         alert('삭제 되었습니다.');
-            //     } else if (result.result == 0) {
-            //         alert('삭제에 문제가 생겼습니다.');
-            //     };
-            //     window.location.href = '/admin/moren/reservation/menu';
-            // }).fail(function (error) {
-            //     alert(JSON.stringify(error));
-            // })
+            $.ajax({
+                type:'DELETE',
+                url:'/moren/reservation/'+ id,
+                dataType:'json',
+                contentType : 'application/json; charset=utf-8',
+            }).done(function (result) {
+                if (result.result == 1) {
+                    alert('삭제 되었습니다.');
+                } else if (result.result == 0) {
+                    alert('삭제에 문제가 생겼습니다.');
+                };
+                window.location.href = '/admin/moren/reservation/menu';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
         }
     }
 });
 
 //캠핑카 예약 신청 아예 삭제
 $('.camping-completely-delete-btn').click(function() {
-    let completeDeleteConfirm = confirm('예약 신청 목록에서 삭제 하시겠습니까?');
+    let completeDeleteConfirm = confirm('삭제를 하시면 현재 admin 페이지에 반영이 되며, 프라임클럽 사이트에는 반영되지 않습니다. 예약 신청 목록에서 삭제 하시겠습니까?');
     let selectedOptions = document.querySelectorAll('input[name="selected_camping_reservation"]:checked');
     let id;
 
@@ -452,21 +452,21 @@ $('.camping-completely-delete-btn').click(function() {
             id = selectedOptions[i].value;
             // console.log(id);
 
-            // $.ajax({
-            //     type:'DELETE',
-            //     url:'/admin/campingcar/reservation/'+ id,
-            //     dataType:'json',
-            //     contentType : 'application/json; charset=utf-8',
-            // }).done(function (result) {
-            //     if (result.result == 1) {
-            //         alert('삭제 되었습니다.');
-            //     } else if (result.result == 0) {
-            //         alert('삭제에 문제가 생겼습니다.');
-            //     };
-            //     window.location.href = '/admin/campingcar/reservation/menu';
-            // }).fail(function (error) {
-            //     alert(JSON.stringify(error));
-            // })
+            $.ajax({
+                type:'DELETE',
+                url:'/admin/campingcar/reservation/'+ id,
+                dataType:'json',
+                contentType : 'application/json; charset=utf-8',
+            }).done(function (result) {
+                if (result.result == 1) {
+                    alert('삭제 되었습니다.');
+                } else if (result.result == 0) {
+                    alert('삭제에 문제가 생겼습니다.');
+                };
+                window.location.href = '/admin/campingcar/menu';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
         }
     }
 });
@@ -577,8 +577,6 @@ function setCampingReserve(behavior) {
         extraTime = 1;
     };
 
-
-
     let data = {
         carType: carType,
         rentDate: rentDate,
@@ -599,7 +597,7 @@ function setCampingReserve(behavior) {
         orderCode: orderCode
     }
 
-    console.log(data);
+    // console.log(data);
 
     if (regPhone.test(phone) === false) {
         alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
