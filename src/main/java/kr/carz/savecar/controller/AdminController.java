@@ -484,16 +484,12 @@ public class AdminController {
                         dateCampingList.get(i).setReserved("0");
                     }
                 } else if (i == dateCampingListSize - 1 && !campingCarReservation.getReturnTime().equals("18시")) {
-                    System.out.println("here 1");
                     calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getReturnTime());
                     List<CalendarTime> calendarTimeForCheckList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThan(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getReturnTime());
 
-                    System.out.println(campingCarReservation.getRentTime());
                     int start_chk = 1;
                     for (int j = 0; j < calendarTimeForCheckList.size(); j++) {
                         if (calendarTimeForCheckList.get(j).getReserveComplete().equals("1")) {
-                            System.out.println("here 2");
-                            System.out.println(calendarTimeForCheckList.get(j).getTimeId());
                             dateCampingList.get(i).setReserved("1");
                             start_chk = 0;
                             break;
