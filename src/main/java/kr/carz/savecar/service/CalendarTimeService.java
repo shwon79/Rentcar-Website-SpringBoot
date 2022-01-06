@@ -33,6 +33,9 @@ public class CalendarTimeService {
             calendarTimeRepository.save(calendarTimeList.get(i));
         }
     }
+    public List<CalendarTime> findCalendarTimeByDateId(CalendarDate dateId){
+        return calendarTimeRepository.findByDateId(dateId);
+    }
 
     public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(CalendarDate date_id, CampingCarPrice car_name, String start_date){
         return calendarTimeRepository.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(date_id, car_name, start_date);

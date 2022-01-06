@@ -171,3 +171,10 @@ function moveToCampingCalendar() {
     let thisMonth = date.getMonth() + 1;
     window.location.href = '/camping/calendar/'+ thisYear + '/' + thisMonth;
 }
+
+function moveToCampingReservation(carType) {
+    let date = new Date();
+    let thisYear = date.getFullYear();
+    let thisMonth = date.getMonth() + 1;
+    window.location.href = '/camping/calendar/'+ carType + '_reserve/' + thisYear + '/' + thisMonth;
+}

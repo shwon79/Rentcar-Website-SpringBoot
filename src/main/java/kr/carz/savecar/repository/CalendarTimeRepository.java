@@ -13,6 +13,7 @@ import java.util.List;
 public interface CalendarTimeRepository extends JpaRepository<CalendarTime, Long> {
 
     List<CalendarTime> findAll();
+    List<CalendarTime> findByDateId(CalendarDate dateId);
     List<CalendarTime> findByDateIdAndCarName(CalendarDate dateId, CampingCarPrice carName);
     CalendarTime findByDateIdAndCarNameAndReserveTime(CalendarDate dateId, CampingCarPrice carName, String reserve_time);
     CalendarTime findByTimeId(Long timeId);

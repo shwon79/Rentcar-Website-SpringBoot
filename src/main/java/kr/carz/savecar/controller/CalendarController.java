@@ -118,9 +118,6 @@ public class CalendarController {
 
         if(thisYear == year && thisMonth == month){
 
-            prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
-            nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
-
             calendarDateList = calendarDateService.findByYearAndMonth(Integer.toString(thisYear), Integer.toString(thisMonth));
 
             Long firstDateId = calendarDateList.get(0).getDateId();
@@ -130,6 +127,8 @@ public class CalendarController {
 
             for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
+            prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
+            nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
         } else {
             calendarDateList = calendarDateService.findByYearAndMonth(Long.toString(year), Long.toString(month));
 
@@ -140,14 +139,21 @@ public class CalendarController {
 
             for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
+
             String date = year + String.format("%02d", month) + "01";
 
             prevMonthDate = DateStringToInt(AddDate(date, 0, -1, 0));
             nextMonthDate = DateStringToInt(AddDate(date, 0, 1, 0));
         }
+        List<List<CalendarTime>> calendarTimeList = new ArrayList<>();
+
+        for (CalendarDate calendarDate : calendarDateList) {
+            calendarTimeList.add(calendarTimeService.findCalendarTimeByDateId(calendarDate));
+        }
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("dateCampingList", dateCampingList);
+        model.addAttribute("calendarTimeList", calendarTimeList);
 
         model.addAttribute("thisYear", thisYear);
         model.addAttribute("thisMonth", thisMonth);
