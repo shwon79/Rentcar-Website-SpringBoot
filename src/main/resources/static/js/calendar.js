@@ -4,12 +4,20 @@ const dayDetail = (id) => {
     const targetBtn = document.getElementById(id);
     for (const restBtnElement of restBtn) {
         if (restBtnElement.classList.contains('double_circle')) {
-            restBtnElement.style.border = 'double dimgray';
+            restBtnElement.style.backgroundColor = 'royalblue';
+            restBtnElement.style.boxShadow = 'inset 0px 0px 0px 5px white';
+            restBtnElement.style.border = '2px solid royalblue';
+            restBtnElement.style.color = 'white';
         } else {
+            restBtnElement.style.boxShadow = 'none';
             restBtnElement.style.border = 'none';
+            restBtnElement.style.backgroundColor = 'royalblue';
+            restBtnElement.style.color = 'white';
         }
     };
-    targetBtn.style.border = '2px solid black';
+    targetBtn.style.border = '2px solid royalblue';
+    targetBtn.style.color = 'royalblue';
+    targetBtn.style.backgroundColor = 'white';
 
     // 아래 부분
     const restDetails = document.getElementsByClassName('detail_wrapper');

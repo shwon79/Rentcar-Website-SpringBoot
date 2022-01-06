@@ -25,7 +25,7 @@
         $(window).load(function() {
             let ulList = document.getElementsByClassName('header_camp_li');
             for (i=0; i < ulList.length; i++) {
-                if (ulList[i].dataset.id == 'calendar') {
+                if (ulList[i].dataset.id == 'limousine') {
                     ulList[i].classList.add('active');
                 }
             };
@@ -46,37 +46,64 @@
         <div class="row" id="mainRow">
             <!-- left column -->
             <div id="left_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60">
-                <!--사진-->
-<!--                <div class="row card white-card" style="display: none;">-->
-<!--                    <h1 class="title">-->
-<!--                        <i class="fas fa-circle"></i>-->
-<!--                        CAMPER 사진-->
-<!--                    </h1>-->
-<!--                    <div class="contents">-->
-<!--                        <div style="margin-bottom: 2em;">-->
-<!--                            <img th:src="@{/img/limimg7.JPG}" id="headerImg" width="100%" height="100%" style="object-fit:contain">-->
-<!--                        </div>-->
-<!--                        <div class="camping_img_small" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 0px;">-->
-<!--                            <img th:src="@{/img/limimg10.JPG}" id="carImg9" onclick="toggleImg('carImg9')">-->
-<!--                            <img th:src="@{/img/limimg19.JPG}" id="carImg20" onclick="toggleImg('carImg20')">-->
-<!--                            <img th:src="@{/img/limimg22.JPG}" id="carImg18" onclick="toggleImg('carImg18')">-->
-<!--                            <img th:src="@{/img/limimg5.JPG}" id="carImg4" onclick="toggleImg('carImg4')">-->
-<!--                            <img th:src="@{/img/limimg1.JPG}" id="carImg6" onclick="toggleImg('carImg6')">-->
-<!--                            <img th:src="@{/img/limimg2.JPG}" id="carImg2" onclick="toggleImg('carImg2')">-->
-<!--                            <img th:src="@{/img/limimg16.JPG}" id="carImg16" onclick="toggleImg('carImg16')">-->
-<!--                            <img th:src="@{/img/limimg14.JPG}" id="carImg14" onclick="toggleImg('carImg14')">-->
-<!--                            <img th:src="@{/img/limimg12.JPG}" id="carImg11" onclick="toggleImg('carImg11')">-->
-<!--                            <img th:src="@{/img/limimg11.JPG}" id="carImg10" onclick="toggleImg('carImg10')">-->
-<!--                            <img th:src="@{/img/limimg4.JPG}" id="carImg3" onclick="toggleImg('carImg3')">-->
-<!--                            <img th:src="@{/img/limimg9.JPG}" id="carImg8" onclick="toggleImg('carImg8')">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-                <!--기본정보-->
+                <!--기본 정보-->
                 <div class="row card white-card">
                     <h1 class="title">
                         <i class="fas fa-circle"></i>
-                        CAMPER 기본정보
+                        CAMPER 기본 정보
+                    </h1>
+                    <div class="contents">
+                        <table class="camping_info_table">
+                            <tr>
+                                <td>CAMPER 명</td>
+                                <td>Limousine VIP</td>
+                            </tr>
+                            <tr>
+                                <td>연료 / 미션</td>
+                                <td>디젤 / Auto</td>
+                            </tr>
+                            <tr>
+                                <td>면허 종류</td>
+                                <td>1종 보통</td>
+                            </tr>
+                            <tr>
+                                <td>인원정보</td>
+                                <td>4인승</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--사진-->
+                <div class="row card white-card">
+                    <h1 class="title">
+                        <i class="fas fa-circle"></i>
+                        CAMPER 사진
+                    </h1>
+                    <div class="contents">
+                        <div style="margin-bottom: 2em;">
+                            <img th:src="@{/img/limimg7.JPG}" id="headerImg" width="100%" height="100%" style="object-fit:contain">
+                        </div>
+                        <div class="camping_img_small" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 0px;">
+                            <img th:src="@{/img/limimg10.JPG}" id="carImg9" onclick="toggleImg('carImg9')">
+                            <img th:src="@{/img/limimg19.JPG}" id="carImg20" onclick="toggleImg('carImg20')">
+                            <img th:src="@{/img/limimg22.JPG}" id="carImg18" onclick="toggleImg('carImg18')">
+                            <img th:src="@{/img/limimg5.JPG}" id="carImg4" onclick="toggleImg('carImg4')">
+                            <img th:src="@{/img/limimg1.JPG}" id="carImg6" onclick="toggleImg('carImg6')">
+                            <img th:src="@{/img/limimg2.JPG}" id="carImg2" onclick="toggleImg('carImg2')">
+                            <img th:src="@{/img/limimg16.JPG}" id="carImg16" onclick="toggleImg('carImg16')">
+                            <img th:src="@{/img/limimg14.JPG}" id="carImg14" onclick="toggleImg('carImg14')">
+                            <img th:src="@{/img/limimg12.JPG}" id="carImg11" onclick="toggleImg('carImg11')">
+                            <img th:src="@{/img/limimg11.JPG}" id="carImg10" onclick="toggleImg('carImg10')">
+                            <img th:src="@{/img/limimg4.JPG}" id="carImg3" onclick="toggleImg('carImg3')">
+                            <img th:src="@{/img/limimg9.JPG}" id="carImg8" onclick="toggleImg('carImg8')">
+                        </div>
+                    </div>
+                </div>
+                <!--요금-->
+                <div class="row card white-card">
+                    <h1 class="title">
+                        <i class="fas fa-circle"></i>
+                        CAMPER 요금
                     </h1>
                     <div class="contents">
 <!--                        <img th:src="@{/img/limousine-detail-price.png}" id="priceImg" width="100%" height="70%">-->
