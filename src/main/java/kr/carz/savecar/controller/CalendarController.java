@@ -85,6 +85,15 @@ public class CalendarController {
         return std_data_format.format(cal.getTime());
     }
 
+    public CampingCarPrice get_campingcar_by_index(int idx) {
+        if(idx == 0){
+            return campingCarPriceService.findCampingCarPriceByCarName("europe");
+        } else if(idx == 1){
+            return campingCarPriceService.findCampingCarPriceByCarName("limousine");
+        } else {
+            return campingCarPriceService.findCampingCarPriceByCarName("travel");
+        }
+    }
 
     @GetMapping("/camping/{carType}")
     public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
@@ -94,6 +103,7 @@ public class CalendarController {
 
         return "rent_camping/" + carType + "_info";
     }
+
 
     @GetMapping("/camping/calendar/{year}/{month}")
     public String camping_calendar_different_month(ModelMap model, @PathVariable("year") int year, @PathVariable("month") int month) throws Exception {
@@ -109,6 +119,7 @@ public class CalendarController {
 
         List<CalendarDate> calendarDateList;
         List<List<DateCamping>> dateCampingList = new ArrayList();
+        List<List<String>> calendarTimeList = new ArrayList<>();
 
         int[] prevMonthDate;
         int[] nextMonthDate;
@@ -122,8 +133,6 @@ public class CalendarController {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
 
-            for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
-
             prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
             nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
         } else {
@@ -133,18 +142,40 @@ public class CalendarController {
             for (int i = 1; i < thisDayOfWeek; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
-            for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
 
             String date = year + String.format("%02d", month) + "01";
 
             prevMonthDate = DateStringToInt(AddDate(date, 0, -1, 0));
             nextMonthDate = DateStringToInt(AddDate(date, 0, 1, 0));
         }
-        List<List<CalendarTime>> calendarTimeList = new ArrayList<>();
 
         for (CalendarDate calendarDate : calendarDateList) {
-            calendarTimeList.add(calendarTimeService.findCalendarTimeByDateId(calendarDate));
+            List<DateCamping> dateCampingListByDateId = dateCampingService.findByDateId(calendarDate);
+            dateCampingList.add(dateCampingListByDateId);
+
+            List<String> calendarTimeListString = new ArrayList<>();
+            for(int k=0; k<dateCampingListByDateId.size(); k++){
+                if(dateCampingListByDateId.get(k).getReserved().equals("1")){
+                    List<CalendarTime> calendarTimeListByDate = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, get_campingcar_by_index(k));
+                    String reserve_status = calendarTimeListByDate.get(0).getReserveComplete();
+                    int m;
+                    for(m=1; m<calendarTimeListByDate.size(); m++){
+                        if(!calendarTimeListByDate.get(m).getReserveComplete().equals(reserve_status)){
+                            break;
+                        }
+                    }
+                    if(reserve_status.equals("1")){
+                        calendarTimeListString.add(calendarTimeListByDate.get(m).getReserveTime() + "~");
+                    } else {
+                        calendarTimeListString.add("~" + calendarTimeListByDate.get(m-1).getReserveTime());
+                    }
+                } else {
+                    calendarTimeListString.add("0");
+                }
+            }
+            calendarTimeList.add(calendarTimeListString);
         }
+
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("dateCampingList", dateCampingList);
