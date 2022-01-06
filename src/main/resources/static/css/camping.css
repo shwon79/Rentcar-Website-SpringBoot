@@ -885,6 +885,17 @@ input[type=radio] {
   display: block;
 }
 
+.camping_info_table > tbody {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+.camping_info_table td {
+  padding: 10px !important;
+  font-size: 16px;
+}
+.camping_info_table tr td:last-child {
+  background-color: white;
+}
 
 
 @media (max-width: 990px) {
