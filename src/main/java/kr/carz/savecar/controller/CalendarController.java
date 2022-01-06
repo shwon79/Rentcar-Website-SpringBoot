@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -87,8 +86,6 @@ public class CalendarController {
     }
 
 
-
-
     @GetMapping("/camping/{carType}")
     public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
 
@@ -136,9 +133,7 @@ public class CalendarController {
             for (int i = 1; i < thisDayOfWeek; i++) {
                 calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
             }
-
             for (CalendarDate calendarDate : calendarDateList) { dateCampingList.add(dateCampingService.findByDateId(calendarDate)); }
-
 
             String date = year + String.format("%02d", month) + "01";
 
