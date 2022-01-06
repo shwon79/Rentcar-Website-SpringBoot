@@ -48,55 +48,51 @@
             <!-- left column -->
             <div id="left_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60">
                 <!--기본 정보-->
-<!--                <div class="row card white-card">-->
-<!--                    <h1 class="title">-->
-<!--                        <i class="fas fa-circle"></i>-->
-<!--                        CAMPER 기본 정보-->
-<!--                    </h1>-->
-<!--                    <div class="contents">-->
-<!--                        <div>-->
-<!--                            <table>-->
-<!--                                <tr>-->
-<!--                                    <td>CAMPER 명</td>-->
-<!--                                    <td>연료 / 미션</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td>Travel VIP</td>-->
-<!--                                    <td>디젤 / Auto</td>-->
-<!--                                </tr>-->
-<!--                            </table>-->
-<!--                            <table>-->
-<!--                                <tr>-->
-<!--                                    <td>면허 종류</td>-->
-<!--                                    <td>인원정보</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td>2종 보통</td>-->
-<!--                                    <td>4인승</td>-->
-<!--                                </tr>-->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="row card white-card">
+                    <h1 class="title">
+                        <i class="fas fa-circle"></i>
+                        CAMPER 기본 정보
+                    </h1>
+                    <div class="contents">
+                        <table class="camping_info_table">
+                            <tr>
+                                <td>CAMPER 명</td>
+                                <td>Travel VIP</td>
+                            </tr>
+                            <tr>
+                                <td>연료 / 미션</td>
+                                <td>디젤 / Auto</td>
+                            </tr>
+                            <tr>
+                                <td>면허 종류</td>
+                                <td>2종 보통</td>
+                            </tr>
+                            <tr>
+                                <td>인원정보</td>
+                                <td>4인승</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
                 <!--사진-->
-<!--                <div class="row card white-card" style="display: none;">-->
-<!--                    <h1 class="title">-->
-<!--                        <i class="fas fa-circle"></i>-->
-<!--                        CAMPER 사진-->
-<!--                    </h1>-->
-<!--                    <div class="contents">-->
-<!--                        <div style="margin-bottom: 2em;">-->
-<!--                            <img th:src="@{/img/travel2.JPG}" id="headerImg" width="100%" height="100%" style="object-fit:contain">-->
-<!--                        </div>-->
-<!--                        <div class="camping_img_small" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 0px;">-->
-<!--                            <img th:src="@{/img/travel1.JPG}" id="carImg1" onclick="toggleImg('carImg1')">-->
-<!--                            <img th:src="@{/img/travel2.JPG}" id="carImg2" onclick="toggleImg('carImg2')">-->
-<!--                            <img th:src="@{/img/travel3.JPG}" id="carImg3" onclick="toggleImg('carImg3')">-->
-<!--                            <img th:src="@{/img/travel4.JPG}" id="carImg4" onclick="toggleImg('carImg4')">-->
-<!--                            <img th:src="@{/img/travel5.JPG}" id="carImg5" onclick="toggleImg('carImg5')">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="row card white-card">
+                    <h1 class="title">
+                        <i class="fas fa-circle"></i>
+                        CAMPER 사진
+                    </h1>
+                    <div class="contents">
+                        <div style="margin-bottom: 2em;">
+                            <img th:src="@{/img/travel2.JPG}" id="headerImg" width="100%" height="100%" style="object-fit:contain">
+                        </div>
+                        <div class="camping_img_small" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 0px;">
+                            <img th:src="@{/img/travel1.JPG}" id="carImg1" onclick="toggleImg('carImg1')">
+                            <img th:src="@{/img/travel2.JPG}" id="carImg2" onclick="toggleImg('carImg2')">
+                            <img th:src="@{/img/travel3.JPG}" id="carImg3" onclick="toggleImg('carImg3')">
+                            <img th:src="@{/img/travel4.JPG}" id="carImg4" onclick="toggleImg('carImg4')">
+                            <img th:src="@{/img/travel5.JPG}" id="carImg5" onclick="toggleImg('carImg5')">
+                        </div>
+                    </div>
+                </div>
                 <!--요금-->
                 <div class="row card white-card">
                     <h1 class="title">
@@ -254,7 +250,7 @@
                         <div id="rent_cal" class="dates btn-group">
                             <div class="date no-padding" th:each="date, iterStat: ${calendarDateList}">
                                 <label th:for="${date.month+'월 '+date.day+'일'}" th:id="${date.dateId}"
-                                       th:class="${dateCampingList[iterStat.index][2].reserved} == '1' or (${date.year} < ${thisYear}) or (${date.month} < ${thisMonth} and ${date.year} == ${thisYear}) or (${date.day} < ${thisDay} and ${date.month} == ${thisMonth} and ${date.year} == ${thisYear})  ? 'disabled_radio' : 'able_radio'"
+                                       th:class="${dateCampingList[iterStat.index][2].reserved} == '2' or (${date.year} < ${thisYear}) or (${date.month} < ${thisMonth} and ${date.year} == ${thisYear}) or (${date.day} < ${thisDay} and ${date.month} == ${thisMonth} and ${date.year} == ${thisYear})  ? 'disabled_radio' : 'able_radio'"
                                        th:classappend="${dateCampingList[iterStat.index][2].reserved} == '1' ? 'double_circle' : ''">
 
 
