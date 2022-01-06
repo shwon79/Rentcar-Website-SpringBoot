@@ -429,10 +429,15 @@ public class AdminController {
                             one_cnt += 1;
                         }
                     }
-                    if (one_cnt == calendarTimeForCheckList.size()) {
+
+                    if (one_cnt != calendarTimeForCheckList.size()) {
+                        if(calendarTimeForCheckList.get(0).getReserveComplete().equals("1")){
+                            dateCampingList.get(i).setReserved("2");
+                        } else {
+                            dateCampingList.get(i).setReserved("1");
+                        }
+                    } else if(one_cnt == calendarTimeForCheckList.size()){
                         dateCampingList.get(i).setReserved("2");
-                    } else {
-                        dateCampingList.get(i).setReserved("1");
                     }
                 } else if (i == dateCampingListSize - 1 && !campingCarReservation.getReturnTime().equals("18시")) {
                     calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getReturnTime());
@@ -444,10 +449,15 @@ public class AdminController {
                             one_cnt += 1;
                         }
                     }
-                    if (one_cnt == calendarTimeForCheckList.size()) {
+
+                    if (one_cnt != calendarTimeForCheckList.size()) {
+                        if(calendarTimeForCheckList.get(calendarTimeForCheckList.size()-1).getReserveComplete().equals("1")){
+                            dateCampingList.get(i).setReserved("2");
+                        } else {
+                            dateCampingList.get(i).setReserved("1");
+                        }
+                    } else if(one_cnt == calendarTimeForCheckList.size()){
                         dateCampingList.get(i).setReserved("2");
-                    } else {
-                        dateCampingList.get(i).setReserved("1");
                     }
                 } else {
                     calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCamping.getDateId(), campingCarPrice);
