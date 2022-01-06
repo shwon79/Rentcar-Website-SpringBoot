@@ -236,9 +236,17 @@ a:hover {
   height: 120px;
 }
 
+.able_day {
+  background-color: royalblue;
+  color: white;
+}
 
 .double_circle {
-  border: double dimgray;
+  /*border: double dimgray;*/
+  background-color: royalblue;
+  box-shadow: inset 0px 0px 0px 5px white;
+  border: 2px solid royalblue;
+  color: white;
 }
 
 .disabled_radio.double_circle {
@@ -246,6 +254,7 @@ a:hover {
 }
 .disabled_day.double_circle {
   border: none;
+  box-shadow: none;
 }
 /* 모바일 화면 */
 @media (max-width: 990px) {
