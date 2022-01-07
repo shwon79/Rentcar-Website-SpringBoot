@@ -43,7 +43,7 @@
             <div class="reserve_list_wrapper" th:each="reservation, iterStat : ${#lists.sort(morenReservationList, byTime)}">
                 <div class="reserve_list" style="justify-content: space-between;">
                     <p style="flex: 1">
-                        <input th:if="${reservation.reservationStatus == '1'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">
+                        <input th:if="${reservation.reservationStatus == '0'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">
                     </p>
                     <p style="flex: 2" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></p>
                     <p style="flex: 1" class="carNo" th:text="${reservation.carNo}" th:data-index="${reservation.id}"></p>

@@ -101,13 +101,13 @@
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
                                         </div>
-                                        <div th:if="${dateCampingList[iterStat.index][0].reserved} == '1'" style="display: flex; align-items: center; justify-content: space-between;">
+                                        <div th:if="${dateCampingList[iterStat.index][0].reserved} == '1'" style="display: flex; align-items: center;">
                                             <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][0].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
                                                 <span><i class="far fa-dot-circle" style="color: mediumblue;"></i></span>
                                                 <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName.toUpperCase()}"></span>
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
-                                            <span th:if="${calendarTimeList[iterStat.index][0] != '0'}" th:text="${calendarTimeList[iterStat.index][0]}"></span>
+                                            <span th:if="${calendarTimeList[iterStat.index][0] != '0'}" th:text="${calendarTimeList[iterStat.index][0]}" style="padding-left: 3px;"></span>
                                         </div>
                                         <div class="reserved_selections" th:if="${dateCampingList[iterStat.index][0].reserved} == '2'" style="display:flex;">
                                             <span style="padding-right: 5px;"><i class="fas fa-circle" style="color: #d3d3d3;"></i></span>
@@ -121,13 +121,13 @@
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
                                         </div>
-                                        <div th:if="${dateCampingList[iterStat.index][1].reserved} == '1'" style="display: flex; align-items: center; justify-content: space-between;">
+                                        <div th:if="${dateCampingList[iterStat.index][1].reserved} == '1'" style="display: flex; align-items: center;">
                                             <a th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][1].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
                                                 <span><i class="far fa-dot-circle" style="color: mediumblue;"></i></span>
                                                 <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName.toUpperCase()}"></span>
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
-                                            <span th:if="${calendarTimeList[iterStat.index][1] != '0'}" th:text="${calendarTimeList[iterStat.index][1]}"></span>
+                                            <span th:if="${calendarTimeList[iterStat.index][1] != '0'}" th:text="${calendarTimeList[iterStat.index][1]}" style="padding-left: 3px;"></span>
                                         </div>
                                         <div class="reserved_selections" th:if="${dateCampingList[iterStat.index][1].reserved} == '2'" style="display:flex;">
                                             <span style="padding-right: 5px;"><i class="fas fa-circle" style="color: #d3d3d3;"></i></span>
@@ -141,13 +141,13 @@
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
                                         </div>
-                                        <div th:if="${dateCampingList[iterStat.index][2].reserved} == '1'"  style="display: flex; align-items: center; justify-content: space-between;">
+                                        <div th:if="${dateCampingList[iterStat.index][2].reserved} == '1'"  style="display: flex; align-items: center;">
                                             <span style="padding-left: 5px;"><i class="far fa-dot-circle" style="color: mediumblue;"></i></span>
                                             <a style="padding-left: 0;" th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][2].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}" th:unless="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})">
                                                 <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span>
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
-                                            <span th:if="${calendarTimeList[iterStat.index][2] != '0'}" th:text="${calendarTimeList[iterStat.index][2]}"></span>
+                                            <span th:if="${calendarTimeList[iterStat.index][2] != '0'}" th:text="${calendarTimeList[iterStat.index][2]}" style="padding-left: 3px;"></span>
                                         </div>
                                         <div class="reserved_selections" th:if="${dateCampingList[iterStat.index][2].reserved} == '2'" style="display:flex;">
                                             <span style="padding-right: 5px;"><i class="fas fa-circle" style="color: #d3d3d3;"></i></span>
@@ -166,7 +166,8 @@
                         </p>
                         <p>&nbsp;/&nbsp;</p>
                         <p>
-                            <span><i class="fas fa-circle" style="color: blue;"></i></span>
+                            <span><i class="fas fa-circle" style="color: mediumblue;"></i></span>
+                            <span><i class="far fa-dot-circle" style="color: mediumblue;"></i></span>
                             <span>예약 가능</span>
                         </p>
                     </div>
@@ -191,15 +192,20 @@
                                 <div class="day_wrapper" th:id="${date.dateId+'day'}"
                                      th:class="(${dateCampingList[iterStat.index][0].reserved} == '2' and ${dateCampingList[iterStat.index][1].reserved} == '2' and ${dateCampingList[iterStat.index][2].reserved} == '2')
                                      or (${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth}) or (${date.year} < ${thisYear}) ? 'day_wrapper disabled_day' : 'day_wrapper able_day'" onclick="dayDetail(id)"
-                                     th:style="${date.month} == ${thisMonth} and ${date.day} == ${thisDay} ? 'border: 2px solid royalblue; color: royalblue; background-color: white;'"
+                                     th:style="((${date.month} == ${thisMonth} and ${date.day} == ${thisDay}) and (${dateCampingList[iterStat.index][0].reserved} != '2' and ${dateCampingList[iterStat.index][1].reserved} != '2' and ${dateCampingList[iterStat.index][2].reserved} != '2')) ? 'border: 2px solid royalblue; color: royalblue; background-color: white;' : ''"
                                      th:classappend="!(${dateCampingList[iterStat.index][0].reserved} == '2' and ${dateCampingList[iterStat.index][1].reserved} == '2') and !(${dateCampingList[iterStat.index][0].reserved} == '0' and ${dateCampingList[iterStat.index][1].reserved} == '0') ? 'double_circle' : ''">
                                     <p th:text="${date.day}" ></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="date_available">
-                        <p><span style="color: #bbbbbb; ">● </span>선택불가</p>
+                    <div class="date_available" style="flex-direction: column; align-items: end;">
+                        <p style="margin: 0;"><span style="color: #bbbbbb; ">● </span>선택불가</p>
+                        <p>
+                            <span><i class="fas fa-circle" style="color: mediumblue;"></i></span>
+                            <span><i class="far fa-dot-circle" style="color: mediumblue;"></i></span>
+                            <span>예약 가능</span>
+                        </p>
                     </div>
                     <i id="mobile_arrow" class="fas fa-arrow-down"></i>
                     <div id="day_detail">
@@ -219,9 +225,9 @@
                                             <i class="far fa-dot-circle" style="color: royalblue;"></i>
                                         </span>
                                         <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName.toUpperCase()}"></span>
+                                        <span style="padding-left: 10px;" th:if="${calendarTimeList[iterStat.index][0] != '0'}" th:text="${calendarTimeList[iterStat.index][0]}"></span>
                                     </div>
                                     <div style="width: auto;">
-                                        <span th:if="${calendarTimeList[iterStat.index][0] != '0'}" th:text="${calendarTimeList[iterStat.index][0]}"></span>
                                         <button th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][0].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}">예약</button>
                                     </div>
     <!--                                <span> (0/1)</span>-->
@@ -245,9 +251,9 @@
                                             <i class="far fa-dot-circle" style="color: royalblue;"></i>
                                         </span>
                                         <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName.toUpperCase()}"></span>
+                                        <span style="padding-left: 10px;" th:if="${calendarTimeList[iterStat.index][1] != '0'}" th:text="${calendarTimeList[iterStat.index][1]}"></span>
                                     </div>
                                     <div style="width: auto;">
-                                        <span th:if="${calendarTimeList[iterStat.index][1] != '0'}" th:text="${calendarTimeList[iterStat.index][1]}"></span>
                                         <button th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][1].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}">예약</button>
                                     </div>
                                     <!--                                <span> (0/1)</span>-->
@@ -272,9 +278,9 @@
                                             <i class="far fa-dot-circle" style="color: royalblue;"></i>
                                         </span>
                                         <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span>
+                                        <span style="padding-left: 10px;" th:if="${calendarTimeList[iterStat.index][2] != '0'}" th:text="${calendarTimeList[iterStat.index][2]}"></span>
                                     </div>
                                     <div style="width: auto;">
-                                        <span th:if="${calendarTimeList[iterStat.index][2] != '0'}" th:text="${calendarTimeList[iterStat.index][2]}"></span>
                                         <button th:href="'/camping/calendar/'+ ${dateCampingList[iterStat.index][2].carName.carName} + '_reserve/'+ ${clickedYear} + '/' + ${clickedMonth}">예약</button>
                                     </div>
                                     <!--                                <span> (0/1)</span>-->

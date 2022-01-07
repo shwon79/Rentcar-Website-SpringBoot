@@ -33,14 +33,6 @@ p {
   font-size: 30px;
 }
 
-/*.nav {*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*  border: 1px solid #6f6c6c;*/
-/*  border-radius: 5px;*/
-/*}*/
-
 .calendar_nav-btn {
   width: 28px;
   height: 30px;
@@ -153,10 +145,6 @@ p {
   color: black;
 }
 
-.downside div {
-  /*margin-bottom: 10px;*/
-}
-
 .downside a,
 .downdise span {
   padding: 5px 0;
@@ -245,13 +233,16 @@ a:hover {
   height: 120px;
 }
 
-.able_day {
+.able_day, .able_radio {
   background-color: royalblue;
   color: white;
 }
+.able_day:checked {
+  background-color: white;
+  color: royalblue;
+}
 
 .double_circle {
-  /*border: double dimgray;*/
   background-color: royalblue;
   box-shadow: inset 0px 0px 0px 5px white;
   border: 2px solid royalblue;
