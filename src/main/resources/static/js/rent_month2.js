@@ -99,7 +99,7 @@ function make_monthly_rent_reservation (e) {
         category2: '',
         car_name : document.getElementsByClassName("carName")[0].innerHTML,
         mileage: carMileaget,
-        carDeposit: carDeposit.toString(),
+        deposit: carDeposit.toString(),
         option: '',
         price: carAmountTotal.toString(),
         age_limit: ageLimit,
