@@ -1,4 +1,3 @@
-
 // 캠핑카 상담요청
 function campingcar_rent_reservation () {
 
@@ -40,4 +39,25 @@ function campingcar_rent_reservation () {
     } else{
         alert("개인정보 수집 및 이용에 동의해주세요.");
     }
+}
+
+const clickedDay = (e) => {
+    const restBtn = document.getElementsByClassName('able_radio');
+
+    for (const restBtnElement of restBtn) {
+        if (restBtnElement.classList.contains('double_circle')) {
+            restBtnElement.style.backgroundColor = 'royalblue';
+            restBtnElement.style.boxShadow = 'inset 0px 0px 0px 5px white';
+            restBtnElement.style.border = '2px solid royalblue';
+            restBtnElement.style.color = 'white';
+        } else {
+            restBtnElement.style.boxShadow = 'none';
+            restBtnElement.style.border = 'none';
+            restBtnElement.style.backgroundColor = 'royalblue';
+            restBtnElement.style.color = 'white';
+        }
+    };
+    e.style.border = '2px solid royalblue';
+    e.style.color = 'royalblue';
+    e.style.backgroundColor = 'white';
 }

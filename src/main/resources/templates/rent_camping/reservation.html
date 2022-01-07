@@ -17,8 +17,9 @@
     <script>
         $(window).load(function() {
             let ulList = document.getElementsByClassName('header_camp_li');
+            let carType = document.getElementById('carType').innerText.toLowerCase();
             for (i=0; i < ulList.length; i++) {
-                if (ulList[i].dataset.id == 'calendar') {
+                if (ulList[i].dataset.id == carType) {
                     ulList[i].classList.add('active');
                 }
             };
