@@ -170,7 +170,7 @@ const reserveMonthlyRent = () => {
     } else if (regAge.test(reservationAge) == false) {
         alert("생년월일을 '680101'와 같이 주민등록번호 앞자리 6자리의 형태로 작성해주세요.");
     } else if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
-        var data = {
+        let data = {
             carNo: carNo,
             carName: carName,
             kilometer: kilometer,
@@ -193,6 +193,8 @@ const reserveMonthlyRent = () => {
             carCode: carCode,
             pickupPlace: pickupPlace
         }
+
+        // console.log(data);
 
         let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
 

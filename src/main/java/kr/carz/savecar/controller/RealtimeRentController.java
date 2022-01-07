@@ -80,7 +80,7 @@ public class RealtimeRentController {
                     order_end.length() >= 19 &&
                     order_end.substring(0, 19).compareTo(DateTime.today_date_and_time()) >= 0 &&  // 시간 고려해서
                     order_end.substring(0, 10).compareTo(DateTime.expected()) <= 0 // 날짜만 고려해서
-                ) {
+            ) {
 
                 try {
                     // 자체 db에서 가격 정보 가져오기
@@ -177,9 +177,9 @@ public class RealtimeRentController {
             // 예약가능차량
             if ((Integer)morenObject.get("order_status") == 0 ||
                     ((Integer)morenObject.get("order_status") == 2 &&
-                    order_end.length() > 10 &&
-                    order_end.substring(0, 19).compareTo(DateTime.today_date_and_time()) >= 0 &&
-                    order_end.substring(0, 10).compareTo(DateTime.expected()) <= 0)){
+                            order_end.length() > 10 &&
+                            order_end.substring(0, 19).compareTo(DateTime.today_date_and_time()) >= 0 &&
+                            order_end.substring(0, 10).compareTo(DateTime.expected()) <= 0)){
 
                 // 차종별
                 if (realTimeDto.getCarType().equals("전체")  || (realTimeDto.getCarType().equals(morenObject.get("carGubun")) && (Integer)morenObject.get("carLocal") != 1) || (realTimeDto.getCarType().equals("수입") && (Integer)morenObject.get("carLocal") == 1 ) ) {
@@ -447,7 +447,7 @@ public class RealtimeRentController {
 
 
 
-//    @RequestMapping(value = "/rent/month/moren/reservation", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    //    @RequestMapping(value = "/rent/month/moren/reservation", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @PostMapping("/rent/month/moren/reservation")
     @ResponseBody
     public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
@@ -455,7 +455,6 @@ public class RealtimeRentController {
         morenReservationService.saveDTO(morenReservationDTO);
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
 
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
@@ -472,15 +471,14 @@ public class RealtimeRentController {
         params2.put("from", "01052774113");
         params2.put("type", "LMS");
 
-        String delivery_text;
+        String delivery_text = "";
         if (morenReservationDTO.getPickupPlace().equals("방문")){
             delivery_text = "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n";
-        } else {
+        } else if (morenReservationDTO.getPickupPlace().equals("배차 신청")){
             delivery_text = "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n"
                     + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"
                     + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n";
         }
-
 
         params.put("text", "[실시간 예약 대기 신청]\n"
                 + "* 계약 확인하기 " + "\n"
@@ -537,6 +535,7 @@ public class RealtimeRentController {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
+        jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);
