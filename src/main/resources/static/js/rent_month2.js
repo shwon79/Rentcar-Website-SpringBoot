@@ -97,7 +97,14 @@ function make_monthly_rent_reservation (e) {
         carDeposit: carDeposit,
         carPrice: carPrice,
         carTax: carTax,
-        carAmountTotal: carAmountTotal
+        carAmountTotal: carAmountTotal,
+        reservationAge: '',
+        reservationDate: '',
+        reservationTime: '',
+        reservationGuarantee: '',
+        address: '',
+        addressDetail: '',
+        pickupPlace: ''
     };
 
     // console.log(data);
