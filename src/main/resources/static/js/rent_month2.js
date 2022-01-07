@@ -71,15 +71,36 @@ function make_monthly_rent_reservation (e) {
         return
     }
 
+    let carCode = document.getElementById('forPostCarCode').innerText;
+    let kilometer = document.getElementById('forPostKilometer').innerText;
+    let rentTerm = document.getElementById('forPostRentTerm').innerText;
+    let costPerKm = document.getElementById('forPostCostPerKm').innerText;
+    let carDeposit = document.getElementById('forPostDeposit').innerText;
+    let carPrice = parseInt(document.getElementById('carPrice').innerText.replace(/,/g, ""));
+    let reservationPhone = $("#reservation-simple-phone").val();
+    let carTax = carPrice / 10;
+    let carAmountTotal = carPrice + carTax;
 
-    var data = {
-        name : $("#reservation-simple-name").val(),
-        phoneNo : $("#reservation-simple-phone").val(),
-        detail : $("#reservation-simple-details").val(),
-        title : "월렌트실시간",
-        car_name : document.getElementsByClassName("carName")[0].innerHTML,
-        car_num : document.getElementsByClassName("carNo")[0].innerHTML
+    let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+    let data = {
+        reservationName : $("#reservation-simple-name").val(),
+        reservationPhone : reservationPhone,
+        reservationDetails : $("#reservation-simple-details").val(),
+        carName : document.getElementsByClassName("carName")[0].innerHTML,
+        carNo : document.getElementsByClassName("carNo")[0].innerHTML,
+        carCode: carCode,
+        reservationStatus: 0,
+        kilometer: kilometer,
+        rentTerm: rentTerm,
+        costPerKm: costPerKm,
+        carDeposit: carDeposit,
+        carPrice: carPrice,
+        carTax: carTax,
+        carAmountTotal: carAmountTotal
     };
+
+    // console.log(data);
 
     let check1 = document.getElementById("agree1").checked;
     let check2 = document.getElementById("agree2").checked;
@@ -87,10 +108,12 @@ function make_monthly_rent_reservation (e) {
 
     if (check1 != true || check2 != true || check3 != true) {
         alert("약관에 동의해주세요.");
+    } else if (regPhone.test(reservationPhone) == false) {
+        alert("연락처를 '010-1234-5678' 형식으로 입력해주세요.");
     } else {
             $.ajax({
                 type : 'POST',
-                url : '/reservation/apply',
+                url : '/rent/month/moren/reservation',
                 dataType : 'json',
                 contentType : 'application/json; charset=utf-8',
                 data : JSON.stringify(data)
