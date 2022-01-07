@@ -71,11 +71,11 @@ function make_monthly_rent_reservation (e) {
         return
     }
 
-    let carCode = document.getElementById('forPostCarCode').innerText;
-    let kilometer = document.getElementById('forPostKilometer').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
-    let costPerKm = document.getElementById('forPostCostPerKm').innerText;
     let carDeposit = document.getElementById('forPostDeposit').innerText;
+    let carOld = document.getElementById('forPostCarOld').innerText;
+    let ageLimit = document.getElementById('selectAge').value;
+    let carMileaget = document.getElementById('forPostCarMileaget').innerText;
     let carPrice = parseInt(document.getElementById('carPrice').innerText.replace(/,/g, ""));
     let reservationPhone = $("#reservation-simple-phone").val();
     let carTax = carPrice / 10;
@@ -83,28 +83,30 @@ function make_monthly_rent_reservation (e) {
 
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
+    if (ageLimit === 'upper26') {
+        ageLimit = '만 26세 이상';
+    } else if (ageLimit === 'upper21') {
+        ageLimit = '만 21세 이상~만 26세 미만';
+    }
+
     let data = {
-        reservationName : $("#reservation-simple-name").val(),
-        reservationPhone : reservationPhone,
-        reservationDetails : $("#reservation-simple-details").val(),
-        carName : document.getElementsByClassName("carName")[0].innerHTML,
-        carNo : document.getElementsByClassName("carNo")[0].innerHTML,
-        carCode: carCode,
-        reservationStatus: 0,
-        kilometer: kilometer,
-        rentTerm: rentTerm,
-        costPerKm: costPerKm,
-        carDeposit: carDeposit,
-        carPrice: carPrice,
-        carTax: carTax,
-        carAmountTotal: carAmountTotal,
-        reservationAge: '',
-        reservationDate: '',
-        reservationTime: '',
-        reservationGuarantee: '',
-        address: '',
-        addressDetail: '',
-        pickupPlace: ''
+        name : $("#reservation-simple-name").val(),
+        phoneNo : reservationPhone,
+        detail : $("#reservation-simple-details").val(),
+        product: rentTerm,
+        title: '월렌트실시간',
+        category1: '',
+        category2: '',
+        car_name : document.getElementsByClassName("carName")[0].innerHTML,
+        mileage: carMileaget,
+        carDeposit: carDeposit.toString(),
+        option: '',
+        price: carAmountTotal.toString(),
+        age_limit: ageLimit,
+        car_num : document.getElementsByClassName("carNo")[0].innerHTML,
+        region: '',
+        resDate: '',
+        carAge: carOld
     };
 
     // console.log(data);
@@ -120,7 +122,7 @@ function make_monthly_rent_reservation (e) {
     } else {
             $.ajax({
                 type : 'POST',
-                url : '/rent/month/moren/reservation',
+                url : '/reservation/apply',
                 dataType : 'json',
                 contentType : 'application/json; charset=utf-8',
                 data : JSON.stringify(data)
