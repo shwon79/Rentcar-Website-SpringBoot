@@ -89,7 +89,7 @@ public class ReservationController {
                     + "차량번호: " + dto.getCar_num() + "\n"
                     + "년식: " + dto.getCarAge() + "\n"
                     + "대여기간: " + dto.getProduct() + "\n"
-                    + "주행거리: " + dto.getMileage() + "\n"
+                    + "약정 주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n"
                     + "총렌트료[부포]: " + dto.getPrice() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
@@ -102,7 +102,7 @@ public class ReservationController {
                     + "차량번호: " + dto.getCar_num() + "\n"
                     + "년식: " + dto.getCarAge() + "\n"
                     + "대여기간: " + dto.getProduct() + "\n"
-                    + "주행거리: " + dto.getMileage() + "\n"
+                    + "약정 주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n"
                     + "총렌트료: " + dto.getPrice() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
