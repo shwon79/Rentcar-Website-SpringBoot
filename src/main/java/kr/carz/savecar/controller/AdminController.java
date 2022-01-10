@@ -355,7 +355,7 @@ public class AdminController {
 
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
-        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
+        Optional<Explanation> explanation = explanationService.findById((long) 0);
 
         if(session.getAttribute("user") == null){
 
@@ -463,7 +463,7 @@ public class AdminController {
                         } else {
                             dateCampingList.get(i).setReserved("1");
                         }
-                    } else if(one_cnt == calendarTimeForCheckList.size()){
+                    } else {
                         dateCampingList.get(i).setReserved("2");
                     }
                 } else if (i == dateCampingListSize - 1 && !campingCarReservation.getReturnTime().equals("18시")) {
@@ -483,7 +483,7 @@ public class AdminController {
                         } else {
                             dateCampingList.get(i).setReserved("1");
                         }
-                    } else if(one_cnt == calendarTimeForCheckList.size()){
+                    } else {
                         dateCampingList.get(i).setReserved("2");
                     }
                 } else {
@@ -667,7 +667,6 @@ public class AdminController {
                 System.out.println("응답값 : " + response);
 
             } catch (Exception e){
-                System.out.println(e);
                 jsonObject.put("result", 0);
 
                 PrintWriter pw = res.getWriter();
@@ -732,7 +731,6 @@ public class AdminController {
                     System.out.println("응답값 : " + response);
 
                 } catch (Exception e) {
-                    System.out.println(e);
                     jsonObject.put("result", 0);
 
                     PrintWriter pw = res.getWriter();
@@ -1131,7 +1129,6 @@ public class AdminController {
                 jsonObject_return.put("result", 1);
 
             } catch (Exception e) {
-                System.out.println(e);
                 jsonObject_return.put("result", 0);
             }
 
@@ -1196,7 +1193,7 @@ public class AdminController {
                 params2.put("from", "01052774113");
                 params2.put("type", "LMS");
 
-                String delivery_text = "";
+                String delivery_text;
                 if (morenReservation.getPickupPlace().equals("방문")){
                     delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n";
                 } else {
@@ -1256,7 +1253,6 @@ public class AdminController {
                 jsonObject_return.put("result", 1);
 
             } catch (Exception e) {
-                System.out.println(e);
                 jsonObject_return.put("result", 0);
             }
 
@@ -1324,7 +1320,6 @@ public class AdminController {
                     jsonObject_return.put("result", 1);
 
                 } catch (Exception e) {
-                    System.out.println(e);
                     jsonObject_return.put("result", 0);
                 }
             }
@@ -1388,7 +1383,7 @@ public class AdminController {
     @ResponseBody
     public void post_admin_setting(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
 
-        Optional<Explanation> explanation_optional = explanationService.findById(Long.valueOf(0));
+        Optional<Explanation> explanation_optional = explanationService.findById((long) 0);
         Explanation explanation = explanation_optional.get();
         explanation.setCamper_price(explanationDTO.getCamper_price());
         explanation.setEurope_basic_option(explanationDTO.getEurope_basic_option());
@@ -1404,6 +1399,62 @@ public class AdminController {
         explanation.setDriver_license(explanationDTO.getDriver_license());
 
         explanationService.save(explanation);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    //    @RequestMapping(value = "/admin/campingcar/price", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    @PostMapping("/admin/campingcar/price")
+    @ResponseBody
+    public void post_admin_campingcar_price(HttpServletResponse res, @RequestBody CampingCarPriceDTO campingCarPriceDTO) throws IOException {
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarPriceDTO.getCarName());
+
+        double one_day_price = Double.parseDouble(campingCarPriceDTO.getOnedays());
+
+        campingCarPrice.setCarNum(campingCarPriceDTO.getCarNum());
+        campingCarPrice.setCarCode(campingCarPriceDTO.getCarCode());
+        campingCarPrice.setSeason(campingCarPriceDTO.getSeason());
+        campingCarPrice.setOnedays(campingCarPriceDTO.getOnedays());
+        campingCarPrice.setTwodays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwodays()) * one_day_price));
+        campingCarPrice.setThreedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getThreedays()) * one_day_price));
+        campingCarPrice.setFourdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getFourdays()) * one_day_price));
+        campingCarPrice.setFivedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getFivedays()) * one_day_price));
+        campingCarPrice.setSixdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getSixdays()) * one_day_price));
+        campingCarPrice.setSevendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getSevendays()) * one_day_price));
+        campingCarPrice.setEightdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getEightdays()) * one_day_price));
+        campingCarPrice.setNinedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getNinedays()) * one_day_price));
+        campingCarPrice.setTendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTendays()) * one_day_price));
+        campingCarPrice.setElevendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getElevendays()) * one_day_price));
+        campingCarPrice.setTwelvedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwelvedays()) * one_day_price));
+        campingCarPrice.setThirteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getThirteendays()) * one_day_price));
+        campingCarPrice.setFourteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getFourteendays()) * one_day_price));
+        campingCarPrice.setFifteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getFifteendays()) * one_day_price));
+        campingCarPrice.setSixteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getSixteendays()) * one_day_price));
+        campingCarPrice.setSeventeendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getSeventeendays()) * one_day_price));
+        campingCarPrice.setEighteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getEighteendays()) * one_day_price));
+        campingCarPrice.setNinetinedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getNinetinedays()) * one_day_price));
+        campingCarPrice.setTwentydays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentydays()) * one_day_price));
+        campingCarPrice.setTwentyonedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyonedays()) * one_day_price));
+        campingCarPrice.setTwentytwodays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentytwodays()) * one_day_price));
+        campingCarPrice.setTwentythreedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentythreedays()) * one_day_price));
+        campingCarPrice.setTwentyfourdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyfourdays()) * one_day_price));
+        campingCarPrice.setTwentyfivedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyfivedays()) * one_day_price));
+        campingCarPrice.setTwentysixdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentysixdays()) * one_day_price));
+        campingCarPrice.setTwentysevendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentysevendays()) * one_day_price));
+        campingCarPrice.setTwentyeightdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyeightdays()) * one_day_price));
+        campingCarPrice.setTwentyninedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyninedays()) * one_day_price));
+        campingCarPrice.setThirtydays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getThirtydays()) * one_day_price));
+        campingCarPrice.setDeposit(campingCarPriceDTO.getDeposit());
+        campingCarPrice.setYearmodel(campingCarPriceDTO.getYearmodel());
+
+        campingCarPriceService.save(campingCarPrice);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);
