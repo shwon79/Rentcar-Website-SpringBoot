@@ -355,7 +355,7 @@ public class AdminController {
 
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
-        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
+        Optional<Explanation> explanation = explanationService.findById((long) 0);
 
         if(session.getAttribute("user") == null){
 
@@ -463,7 +463,7 @@ public class AdminController {
                         } else {
                             dateCampingList.get(i).setReserved("1");
                         }
-                    } else if(one_cnt == calendarTimeForCheckList.size()){
+                    } else {
                         dateCampingList.get(i).setReserved("2");
                     }
                 } else if (i == dateCampingListSize - 1 && !campingCarReservation.getReturnTime().equals("18시")) {
@@ -483,7 +483,7 @@ public class AdminController {
                         } else {
                             dateCampingList.get(i).setReserved("1");
                         }
-                    } else if(one_cnt == calendarTimeForCheckList.size()){
+                    } else {
                         dateCampingList.get(i).setReserved("2");
                     }
                 } else {
@@ -667,7 +667,6 @@ public class AdminController {
                 System.out.println("응답값 : " + response);
 
             } catch (Exception e){
-                System.out.println(e);
                 jsonObject.put("result", 0);
 
                 PrintWriter pw = res.getWriter();
@@ -732,7 +731,6 @@ public class AdminController {
                     System.out.println("응답값 : " + response);
 
                 } catch (Exception e) {
-                    System.out.println(e);
                     jsonObject.put("result", 0);
 
                     PrintWriter pw = res.getWriter();
@@ -1131,7 +1129,6 @@ public class AdminController {
                 jsonObject_return.put("result", 1);
 
             } catch (Exception e) {
-                System.out.println(e);
                 jsonObject_return.put("result", 0);
             }
 
@@ -1196,7 +1193,7 @@ public class AdminController {
                 params2.put("from", "01052774113");
                 params2.put("type", "LMS");
 
-                String delivery_text = "";
+                String delivery_text;
                 if (morenReservation.getPickupPlace().equals("방문")){
                     delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n";
                 } else {
@@ -1256,7 +1253,6 @@ public class AdminController {
                 jsonObject_return.put("result", 1);
 
             } catch (Exception e) {
-                System.out.println(e);
                 jsonObject_return.put("result", 0);
             }
 
@@ -1324,7 +1320,6 @@ public class AdminController {
                     jsonObject_return.put("result", 1);
 
                 } catch (Exception e) {
-                    System.out.println(e);
                     jsonObject_return.put("result", 0);
                 }
             }
@@ -1388,7 +1383,7 @@ public class AdminController {
     @ResponseBody
     public void post_admin_setting(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
 
-        Optional<Explanation> explanation_optional = explanationService.findById(Long.valueOf(0));
+        Optional<Explanation> explanation_optional = explanationService.findById((long) 0);
         Explanation explanation = explanation_optional.get();
         explanation.setCamper_price(explanationDTO.getCamper_price());
         explanation.setEurope_basic_option(explanationDTO.getEurope_basic_option());
@@ -1421,7 +1416,7 @@ public class AdminController {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarPriceDTO.getCarName());
 
-        Double one_day_price = Double.parseDouble(campingCarPriceDTO.getOnedays());
+        double one_day_price = Double.parseDouble(campingCarPriceDTO.getOnedays());
 
         campingCarPrice.setCarNum(campingCarPriceDTO.getCarNum());
         campingCarPrice.setCarCode(campingCarPriceDTO.getCarCode());
