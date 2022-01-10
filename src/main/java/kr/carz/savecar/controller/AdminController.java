@@ -118,7 +118,7 @@ public class AdminController {
         return nameArray;
     }
 
-    @GetMapping("/admin/main")
+    @GetMapping("/admin/index")
     public String index() {
         return "/admin/index";
     }
@@ -134,7 +134,7 @@ public class AdminController {
     public String signup(AdminDTO adminDTO) {
         adminService.signUp(adminDTO);
 
-        return "redirect:/admin/main";
+        return "redirect:/admin/index";
     }
 
     @GetMapping("/admin/login")
