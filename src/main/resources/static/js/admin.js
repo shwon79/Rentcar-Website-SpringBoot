@@ -1,3 +1,10 @@
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+});
+
 //숫자 사이에 콤마 넣기
 let number = document.getElementsByClassName("number");
 
