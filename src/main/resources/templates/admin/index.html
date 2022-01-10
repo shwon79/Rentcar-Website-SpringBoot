@@ -1,8 +1,6 @@
 <!-- 관리자 메인페이지 -->
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>SAVECAR - 관리자 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -23,6 +21,11 @@
 
         <div class="list_container">
             <h1>관리자 메인 페이지</h1>
+            <h3 sec:authorize="isAuthenticated()">반갑습니다. <span sec:authentication="name"></span>님!</h3>
+            <hr>
+            <a sec:authorize="isAnonymous()" th:href="@{/admin/login}">로그인</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/admin/logout}">로그아웃</a>
+            <a sec:authorize="isAnonymous()" th:href="@{/admin/signup}">회원가입</a>
         </div>
     </div>
 </div>

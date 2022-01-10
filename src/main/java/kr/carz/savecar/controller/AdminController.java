@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +29,6 @@ public class AdminController {
     YearlyRentService yearlyRentService;
     ShortRentService shortRentService;
     CampingCarService campingCarService;
-    LoginService loginService;
     ReservationService reservationService;
     DiscountService discountService;
     MorenReservationService morenReservationService;
@@ -38,20 +38,21 @@ public class AdminController {
     CampingCarPriceService campingCarPriceService;
     CalendarDateService calendarDateService;
     DateCampingService dateCampingService;
+    AdminService adminService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
-                           LoginService loginService, ReservationService reservationService,
+                           ReservationService reservationService,
                            DiscountService discountService, MorenReservationService morenReservationService,
                            ExplanationService explanationService, CampingcarReservationService campingcarReservationService,
                            CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
-                           CalendarDateService calendarDateService, DateCampingService dateCampingService) {
+                           CalendarDateService calendarDateService, DateCampingService dateCampingService,
+                           AdminService adminService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarService = campingCarService;
-        this.loginService = loginService;
         this.reservationService = reservationService;
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
@@ -61,6 +62,7 @@ public class AdminController {
         this.campingCarPriceService = campingCarPriceService;
         this.calendarDateService = calendarDateService;
         this.dateCampingService = dateCampingService;
+        this.adminService = adminService;
     }
 
     @Value("${coolsms.api_key}")
@@ -116,66 +118,88 @@ public class AdminController {
         return nameArray;
     }
 
+    @GetMapping("/admin/main")
+    public String index() {
+        return "/admin/index";
+    }
 
+    @GetMapping("/admin/signup")
+    public String signupForm(ModelMap model) {
+        model.addAttribute("admin",new AdminDTO());
+
+        return "/admin/signupForm";
+    }
+
+    @PostMapping("/admin/signup")
+    public String signup(AdminDTO adminDTO) {
+        adminService.signUp(adminDTO);
+
+        return "redirect:/admin/main";
+    }
 
     @GetMapping("/admin/login")
     public String login() {
-        return "admin/login";
+        return "/admin/loginForm";
     }
+
+//    @GetMapping("/admin/login")
+//    public String login() {
+//        return "admin/login";
+//    }
 
     //로그인
 //    @RequestMapping(value = "/admin/logininfo", method= RequestMethod.POST)
-    @PostMapping("/admin/logininfo")
-    @ResponseBody
-    public ModelAndView post_login_info(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-
-        try {
-            Login user = loginService.findLoginByIdAndPwd(req.getParameter("id"), req.getParameter("pwd"));
-            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기 => 다른 방식 찾기
-
-            HttpSession session = req.getSession();
-            session.setAttribute("user", user);
-
-            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
-            mav.addObject("campingCarReservationList", campingCarReservationList);
-            mav.setViewName("admin/campingcar_menu");
-
-        } catch (NullPointerException e){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); </script>");
-            out.flush();
-
-            // 다시 login page로 back
-            mav.setViewName("admin/login");
-        }
-        return mav;
-    }
-
-
-    // 로그아웃
-    @GetMapping(value = "/admin/logout")
-    @ResponseBody
-    public ModelAndView get_admin_logout(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-
-        HttpSession session = req.getSession();
-        session.removeAttribute("user");
-        session.invalidate();
-
-        res.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = res.getWriter();
-        out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
-        out.flush();
-
-        mav.setViewName("admin/login");
-
-        return mav;
-    }
+//    @PostMapping("/admin/logininfo")
+//    @ResponseBody
+//    public ModelAndView post_login_info(HttpServletResponse res, HttpServletRequest req) throws IOException {
+//
+//        ModelAndView mav = new ModelAndView();
+//
+//        try {
+//            Login user = loginService.findLoginByIdAndPwd(req.getParameter("id"), req.getParameter("pwd"));
+//            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기 => 다른 방식 찾기
+//
+//            HttpSession session = req.getSession();
+//            session.setAttribute("user", user);
+//
+//            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
+//            mav.addObject("campingCarReservationList", campingCarReservationList);
+//            mav.setViewName("admin/campingcar_menu");
+//
+//        } catch (NullPointerException e){
+//
+//            res.setContentType("text/html; charset=UTF-8");
+//            PrintWriter out = res.getWriter();
+//            out.println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); </script>");
+//            out.flush();
+//
+//            // 다시 login page로 back
+//            mav.setViewName("admin/login");
+//        }
+//        return mav;
+//    }
+//
+//
+//    // 로그아웃
+//    @GetMapping(value = "/admin/logout")
+//    @ResponseBody
+//    public ModelAndView get_admin_logout(HttpServletResponse res, HttpServletRequest req) throws IOException {
+//
+//        ModelAndView mav = new ModelAndView();
+//
+//        HttpSession session = req.getSession();
+//        session.removeAttribute("user");
+//        session.invalidate();
+//
+//        res.setContentType("text/html; charset=UTF-8");
+//        PrintWriter out = res.getWriter();
+//        out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
+//        out.flush();
+//
+//        mav.setViewName("admin/login");
+//
+//        return mav;
+//    }
 
 
 
@@ -185,22 +209,10 @@ public class AdminController {
     public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
         ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
 
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-
-            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
-            mav.addObject("campingCarReservationList", campingCarReservationList);
-            mav.setViewName("admin/campingcar_menu");
-        }
+        List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
+        mav.addObject("campingCarReservationList", campingCarReservationList);
+        mav.setViewName("admin/campingcar_menu");
 
         return mav;
     }
@@ -211,24 +223,12 @@ public class AdminController {
     public ModelAndView get_admin_campincar_detail(HttpServletResponse res, HttpServletRequest req, @PathVariable Long reservationId) throws IOException {
 
         ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
 
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-
-            Optional<CampingCarReservation> campingCarReservation = campingcarReservationService.findById(reservationId);
-            if(campingCarReservation.isPresent()){
-                mav.addObject("campingCarReservation", campingCarReservation.get());
-            }
-            mav.setViewName("admin/campingcar_detail");
+        Optional<CampingCarReservation> campingCarReservation = campingcarReservationService.findById(reservationId);
+        if(campingCarReservation.isPresent()){
+            mav.addObject("campingCarReservation", campingCarReservation.get());
         }
+        mav.setViewName("admin/campingcar_detail");
 
         return mav;
     }
@@ -239,22 +239,10 @@ public class AdminController {
     public ModelAndView get_counsel_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
         ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
 
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-
-            List<Reservation> reservationList = reservationService.findAllReservations();
-            mav.addObject("reservationList", reservationList);
-            mav.setViewName("admin/counsel_menu");
-        }
+        List<Reservation> reservationList = reservationService.findAllReservations();
+        mav.addObject("reservationList", reservationList);
+        mav.setViewName("admin/counsel_menu");
 
         return mav;
     }
@@ -267,21 +255,10 @@ public class AdminController {
 
 
         ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
 
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-            List<Discount> discountList = discountService.findAllDiscounts();
-            mav.addObject("discountList", discountList);
-            mav.setViewName("admin/discount_menu");
-        }
+        List<Discount> discountList = discountService.findAllDiscounts();
+        mav.addObject("discountList", discountList);
+        mav.setViewName("admin/discount_menu");
 
         return mav;
     }
@@ -291,22 +268,10 @@ public class AdminController {
     public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
         ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
 
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-
-            List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
-            mav.addObject("morenReservationList", morenReservationList);
-            mav.setViewName("admin/moren_reservation_menu");
-        }
+        List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
+        mav.addObject("morenReservationList", morenReservationList);
+        mav.setViewName("admin/moren_reservation_menu");
 
         mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate).reversed());
 
@@ -320,27 +285,17 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
 
-        if(session.getAttribute("user") == null){
-
+        Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
+        if (morenReservation.isPresent()){
+            mav.addObject("morenReservationDTO", morenReservation.get());
+            mav.setViewName("admin/moren_reservation_detail");
+        } else {
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.println("<script>alert('해당 차량 정보를 찾을 수 없습니다.'); </script>");
             out.flush();
 
-            mav.setViewName("admin/login");
-        } else {
-            Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
-            if (morenReservation.isPresent()){
-                mav.addObject("morenReservationDTO", morenReservation.get());
-                mav.setViewName("admin/moren_reservation_detail");
-            } else {
-                res.setContentType("text/html; charset=UTF-8");
-                PrintWriter out = res.getWriter();
-                out.println("<script>alert('해당 차량 정보를 찾을 수 없습니다.'); </script>");
-                out.flush();
-
-                mav.setViewName("admin/moren_reservation_menu");
-            }
+            mav.setViewName("admin/moren_reservation_menu");
         }
 
         return mav;
@@ -354,21 +309,10 @@ public class AdminController {
     public ModelAndView get_setting_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
         ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
         Optional<Explanation> explanation = explanationService.findById((long) 0);
 
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-            mav.addObject("explanation",explanation.get());
-            mav.setViewName("admin/setting_menu");
-        }
+        mav.addObject("explanation",explanation.get());
+        mav.setViewName("admin/setting_menu");
 
         return mav;
     }
@@ -381,19 +325,8 @@ public class AdminController {
     public ModelAndView get_campingcar_price_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
         ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
 
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-            mav.setViewName("admin/campingcar_price_menu");
-        }
+        mav.setViewName("admin/campingcar_price_menu");
 
         return mav;
     }
