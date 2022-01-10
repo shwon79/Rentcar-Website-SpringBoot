@@ -186,7 +186,7 @@ $('.moren-reservation-btn').click(function(e) {
         orderCode: orderCode
     }
 
-    console.log(data);
+    // console.log(data);
 
     if (e.target.dataset.behavior === 'confirm') {
         if (confirm('예약을 확정하시겠습니까?')) {
@@ -382,6 +382,7 @@ saveBtn.addEventListener('click', () => {
 
 // 캠핑카 예약 확정, 확정 취소, 삭제 버튼_디테일 페이지
 function setCampingReserve(behavior) {
+    console.log('clicked');
     let carType = document.getElementById('carType').value.toLowerCase();
     let rentDate = document.getElementById('rentDate').value;
     let rentTime = document.getElementById('rentTime').value;
@@ -390,8 +391,8 @@ function setCampingReserve(behavior) {
     let day = document.getElementById('day').innerText;
     let extraTime = document.getElementById('extraTime').innerText;
     let deposit = document.getElementById('deposit').value;
-    let total = document.getElementById('total').innerText;
-    let totalHalf = document.getElementById('totalHalf').innerText;
+    let total = document.getElementById('total').value;
+    let totalHalf = document.getElementById('totalHalf').value;
     let name = document.getElementById('name').value;
     let phone = document.getElementById('phone').value;
     let depositor = document.getElementById('depositor').value;
@@ -456,7 +457,7 @@ function setCampingReserve(behavior) {
         orderCode: orderCode
     }
 
-    // console.log(data);
+    console.log(data);
 
     if (regPhone.test(phone) === false) {
         alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
