@@ -165,11 +165,11 @@
       </div>
       <div class="detail_list">
         <p>총결제금액</p>
-        <p id="total" th:text="${#numbers.formatInteger(campingCarReservation.total,0, 'COMMA')}"></p>
+        <textarea id="total" th:text="${#numbers.formatInteger(campingCarReservation.total,0, 'COMMA')}"></textarea>
       </div>
       <div class="detail_list">
         <p>선결제금액</p>
-        <p id="totalHalf" th:text="${#numbers.formatInteger(campingCarReservation.totalHalf,0, 'COMMA')}"></p>
+        <textarea id="totalHalf" th:text="${#numbers.formatInteger(campingCarReservation.totalHalf,0, 'COMMA')}"></textarea>
       </div>
       <div class="detail_list">
         <p>예약</p>

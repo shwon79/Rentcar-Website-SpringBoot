@@ -75,7 +75,7 @@ function make_monthly_rent_reservation (e) {
     let carDeposit = document.getElementById('forPostDeposit').innerText;
     let carOld = document.getElementById('forPostCarOld').innerText;
     let ageLimit = document.getElementById('selectAge').value;
-    let carMileaget = document.getElementById('forPostCarMileaget').innerText;
+    let kilometer = document.getElementById('forPostKilometer').innerText;
     let carPrice = parseInt(document.getElementById('carPrice').innerText.replace(/,/g, ""));
     let reservationPhone = $("#reservation-simple-phone").val();
     let carTax = carPrice / 10;
@@ -98,7 +98,7 @@ function make_monthly_rent_reservation (e) {
         category1: '',
         category2: '',
         car_name : document.getElementsByClassName("carName")[0].innerHTML,
-        mileage: carMileaget,
+        mileage: kilometer,
         deposit: carDeposit.toString(),
         option: '',
         price: carAmountTotal.toString(),
@@ -269,6 +269,7 @@ function displayNextOptions(e) {
         let option = document.createElement('option');
         option.value = displaySelect[x];
         option.innerText = displaySelect[x];
+
         selectKilometer.appendChild(option);
         selectKilometer2.appendChild(option);
     };
@@ -283,6 +284,7 @@ function dataReset() {
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
 
+    console.log(kilometer);
     if (rentTerm == '한달' && kilometer == '') {
         kilometer = '2000km';
     } else if (rentTerm == '12개월' && kilometer == '') {
@@ -301,6 +303,8 @@ function dataReset2() {
     let discount = document.getElementById('getDiscount').innerText;
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
+
+    console.log(kilometer);
 
     if (rentTerm == '한달' && kilometer == '') {
         kilometer = '2000km';
