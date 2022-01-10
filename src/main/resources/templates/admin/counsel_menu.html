@@ -24,11 +24,21 @@
 
 </head>
 <body>
-<div class="page_wrapper">
-  <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
-  <div class="content_wrapper">
+<div class="wrapper content_wrapper">
 
-    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+  <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+  <div class="content list_container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+        <button type="button" id="sidebarCollapse" class="navbar-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
 
     <div class="list_container">
       <div class="reserve_list" id="reserve_list_title">
@@ -57,10 +67,6 @@
           <p class="phone" th:text="${reservation.phoneNo}"></p>
 
         </div>
-        <!--                    <button th:id="${date.dateTimeId}" class="set_reserve" onclick="setReserve(id)">확정</button>-->
-        <!--                <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+date.dateTimeId}">-->
-        <!--                    <input th:style="${date.reservation} == 1? 'pointer-events:none; background: gray '" class="set_reserve" type="submit" value="확정"/>-->
-        <!--                </form>-->
       </div>
     </div>
   </div>

@@ -24,13 +24,13 @@
 
 </head>
 <body>
-<div class="page_wrapper">
-    <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
-    <div class="content_wrapper">
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
+    <div class="content detail_container">
         <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-        <div class="detail_container" >
+        <div>
             <div class="detail_list" id="go_back_wrapper">
                 <a href="/admin/main"><button id="go_back">🠔 뒤로가기</button></a>
             </div>

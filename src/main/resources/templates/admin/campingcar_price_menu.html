@@ -23,17 +23,25 @@
 
 </head>
 <body>
-<div class="page_wrapper">
-    <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
-    <div class="content_wrapper">
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-        <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+    <div class="content list_container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
 
-        <div class="list_container">
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
 
-
-
+        <div class="container">
+            <h1>캠핑카 가격 수정</h1>
         </div>
+
     </div>
 </div>
 
