@@ -92,6 +92,32 @@ public class AdminController {
         return dtFormat.format(cal.getTime());
     }
 
+
+    public String[] getTwoHundredStrings(StringBuffer inputBuff, String someToken) {
+        String[] nameArray = new String[200];
+
+        int currentPos = 0;
+        int nextPos;
+
+        for (int i = 0; i < 200; i++) {
+
+            nextPos = inputBuff.indexOf(someToken, currentPos);
+
+            if (nextPos < 0) {
+                break;
+            }
+
+            String nextName = inputBuff.substring(currentPos, nextPos);
+
+            nameArray[i] = nextName;
+            currentPos = nextPos+1;
+        }
+
+        return nameArray;
+    }
+
+
+
     @GetMapping("/admin/login")
     public String login() {
         return "admin/login";
@@ -347,29 +373,30 @@ public class AdminController {
         return mav;
     }
 
-    public String[] getTwoHundredStrings(StringBuffer inputBuff, String someToken) {
-        String[] nameArray = new String[200];
 
-        int currentPos = 0;
-        int nextPos;
 
-        for (int i = 0; i < 200; i++) {
+    // [관리자 메인페이지] 캠핑카 가격 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/price/menu")
+    @ResponseBody
+    public ModelAndView get_campingcar_price_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
-            nextPos = inputBuff.indexOf(someToken, currentPos);
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
 
-            if (nextPos < 0) {
-                break;
-            }
+        if(session.getAttribute("user") == null){
 
-            String nextName = inputBuff.substring(currentPos, nextPos);
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
+            out.flush();
 
-            nameArray[i] = nextName;
-            currentPos = nextPos+1;
+            mav.setViewName("admin/login");
+        } else {
+            mav.setViewName("admin/campingcar_price_menu");
         }
 
-        return nameArray;
+        return mav;
     }
-
 
     // 캠핑카 예약 수정, 확정, 취소하기 api
     @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
