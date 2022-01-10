@@ -1413,4 +1413,35 @@ public class AdminController {
         pw.flush();
         pw.close();
     }
+
+    //    @RequestMapping(value = "/admin/campingcar/price", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    @PostMapping("/admin/campingcar/price")
+    @ResponseBody
+    public void post_admin_campingcar_price(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
+
+        Optional<Explanation> explanation_optional = explanationService.findById(Long.valueOf(0));
+        Explanation explanation = explanation_optional.get();
+        explanation.setCamper_price(explanationDTO.getCamper_price());
+        explanation.setEurope_basic_option(explanationDTO.getEurope_basic_option());
+        explanation.setLimousine_basic_option(explanationDTO.getLimousine_basic_option());
+        explanation.setTravel_basic_option(explanationDTO.getTravel_basic_option());
+        explanation.setEurope_facility(explanationDTO.getEurope_facility());
+        explanation.setLimousine_facility(explanationDTO.getLimousine_facility());
+        explanation.setTravel_facility(explanationDTO.getTravel_facility());
+        explanation.setRent_policy(explanationDTO.getRent_policy());
+        explanation.setRent_insurance(explanationDTO.getRent_insurance());
+        explanation.setRent_rule(explanationDTO.getRent_rule());
+        explanation.setRefund_policy(explanationDTO.getRefund_policy());
+        explanation.setDriver_license(explanationDTO.getDriver_license());
+
+        explanationService.save(explanation);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 }
