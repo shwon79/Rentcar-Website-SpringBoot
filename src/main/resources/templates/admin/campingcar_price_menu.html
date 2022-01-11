@@ -14,6 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_campingcar_price.js}" defer></script>
+
     <script>
         $(window).on('load', function () {
             let campingcarMenu = document.getElementById('campingcarPriceMenu');
@@ -39,7 +41,281 @@
         </nav>
 
         <div class="container">
-            <h1>캠핑카 가격 수정</h1>
+            <h4 style="text-align: center;">캠핑카 가격 수정</h4>
+            <div style="margin-top: 30px;">
+                <ul class="nav nav-tabs" style="justify-content: center;">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#europePrice">EUROPE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#limousinePrice">LIMOUSINE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#travelPrice">TRAVEL</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div style="display: none;">
+                        <p th:text="${campingCarPriceList[0].carNum}" id="europe_carNum"></p>
+                        <p th:text="${campingCarPriceList[0].carCode}" id="europe_carCode"></p>
+                        <p th:text="${campingCarPriceList[0].yearmodel}" id="europe_yearmodel"></p>
+                        <p th:text="${campingCarPriceList[2].carNum}" id="limousine_carNum"></p>
+                        <p th:text="${campingCarPriceList[2].carCode}" id="limousine_carCode"></p>
+                        <p th:text="${campingCarPriceList[2].yearmodel}" id="limousine_yearmodel"></p>
+                        <p th:text="${campingCarPriceList[4].carNum}" id="travel_carNum"></p>
+                        <p th:text="${campingCarPriceList[4].carCode}" id="travel_carCode"></p>
+                        <p th:text="${campingCarPriceList[4].yearmodel}" id="travel_yearmodel"></p>
+                    </div>
+                    <div class="tab-pane fade show active" id="europePrice">
+                        <table class="table campingPriceEditTable">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="2">
+                                        <button onclick="EditCampingcarPrice('europe', 0);">
+                                            비수기 가격 수정
+                                        </button>
+                                    </td>
+                                    <td colspan="2">
+                                        <button onclick="EditCampingcarPrice('europe_peak', 1);">
+                                            성수기 가격 수정
+                                        </button>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="col">이용권</th>
+                                    <th scope="col">비수기</th>
+                                    <th scope="col">비수기 할인 %</th>
+                                    <th scope="col">성수기</th>
+                                    <th scope="col">성수기 할인 %</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">1일</th>
+                                    <td><textarea type="text" th:text="${#numbers.formatInteger(campingCarPriceList[0].onedays, 0, 'COMMA')}" id="europe_off_oneday"></textarea></td>
+                                    <td class="offPercent1">1.0</td>
+                                    <td><textarea type="text" th:text="${#numbers.formatInteger(campingCarPriceList[1].onedays, 0, 'COMMA')}" id="europe_on_oneday"></textarea></td>
+                                    <td class="onPercent">1.0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twodays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent2" th:text="${campingCarPriceList[0].twodays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twodays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent2" th:text="${campingCarPriceList[1].twodays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].threedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent3" th:text="${campingCarPriceList[0].threedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].threedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent3" th:text="${campingCarPriceList[1].threedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].fourdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent4" th:text="${campingCarPriceList[0].fourdays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].fourdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent4" th:text="${campingCarPriceList[1].fourdays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].fivedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent5" th:text="${campingCarPriceList[0].fivedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].fivedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent5" th:text="${campingCarPriceList[1].fivedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].sixdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent6" th:text="${campingCarPriceList[0].sixdays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].sixdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent6" th:text="${campingCarPriceList[1].sixdays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">7일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].sevendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent7" th:text="${campingCarPriceList[0].sevendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].sevendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent7" th:text="${campingCarPriceList[1].sevendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">8일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].eightdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent8" th:text="${campingCarPriceList[0].eightdays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].eightdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent8" th:text="${campingCarPriceList[1].eightdays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">9일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].ninedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent9" th:text="${campingCarPriceList[0].ninedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].ninedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent9" th:text="${campingCarPriceList[1].ninedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">10일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].tendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent10" th:text="${campingCarPriceList[0].tendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].tendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent10" th:text="${campingCarPriceList[1].tendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">11일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].elevendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent11" th:text="${campingCarPriceList[0].elevendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].elevendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent11" th:text="${campingCarPriceList[1].elevendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">12일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twelvedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent12" th:text="${campingCarPriceList[0].twelvedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twelvedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent12" th:text="${campingCarPriceList[1].twelvedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">13일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].thirteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent13" th:text="${campingCarPriceList[0].thirteendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].thirteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent13" th:text="${campingCarPriceList[1].thirteendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">14일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].fourteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent14" th:text="${campingCarPriceList[0].fourteendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].fourteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent14" th:text="${campingCarPriceList[1].fourteendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">15일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].fifteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent15" th:text="${campingCarPriceList[0].fifteendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].fifteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent15" th:text="${campingCarPriceList[1].fifteendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">16일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].sixteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent16" th:text="${campingCarPriceList[0].sixteendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].sixteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent16" th:text="${campingCarPriceList[1].sixteendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">17일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].seventeendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent17" th:text="${campingCarPriceList[0].seventeendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].seventeendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent17" th:text="${campingCarPriceList[1].seventeendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">18일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].eighteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent18" th:text="${campingCarPriceList[0].eighteendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].eighteendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent18" th:text="${campingCarPriceList[1].eighteendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">19일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].ninetinedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent19" th:text="${campingCarPriceList[0].ninetinedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].ninetinedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent19" th:text="${campingCarPriceList[1].ninetinedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">20일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentydays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent20" th:text="${campingCarPriceList[0].twentydays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentydays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent20" th:text="${campingCarPriceList[1].twentydays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">21일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentyonedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent21" th:text="${campingCarPriceList[0].twentyonedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentyonedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent21" th:text="${campingCarPriceList[1].twentyonedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">22일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentytwodays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent22" th:text="${campingCarPriceList[0].twentytwodays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentytwodays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent22" th:text="${campingCarPriceList[1].twentytwodays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">23일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentythreedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent23" th:text="${campingCarPriceList[0].twentythreedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentythreedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent23" th:text="${campingCarPriceList[1].twentythreedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">24일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentyfourdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent24" th:text="${campingCarPriceList[0].twentyfourdays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentyfourdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent24" th:text="${campingCarPriceList[1].twentyfourdays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">25일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentyfivedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent25" th:text="${campingCarPriceList[0].twentyfivedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentyfivedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent25" th:text="${campingCarPriceList[1].twentyfivedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">26일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentysixdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent26" th:text="${campingCarPriceList[0].twentysixdays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentysixdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent26" th:text="${campingCarPriceList[1].twentysixdays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">27일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentysevendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent27" th:text="${campingCarPriceList[0].twentysevendays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentysevendays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent27" th:text="${campingCarPriceList[1].twentysevendays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">28일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentyeightdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent28" th:text="${campingCarPriceList[0].twentyeightdays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentyeightdays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent28" th:text="${campingCarPriceList[1].twentyeightdays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">29일</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].twentyninedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent29" th:text="${campingCarPriceList[0].twentyninedays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].twentyninedays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent29" th:text="${campingCarPriceList[1].twentyninedays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">한달권</th>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[0].thirtydays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="offPercent30" th:text="${campingCarPriceList[0].thirtydays / campingCarPriceList[0].onedays}"></textarea></td>
+                                    <td th:text="${#numbers.formatInteger(campingCarPriceList[1].thirtydays, 0, 'COMMA')}"></td>
+                                    <td><textarea type="text" class="onPercent30" th:text="${campingCarPriceList[1].thirtydays / campingCarPriceList[1].onedays}"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="limousinePrice">
+                        <table class="table campingPriceEditTable">
+
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="travelPrice">
+                        <table class="table campingPriceEditTable">
+
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
