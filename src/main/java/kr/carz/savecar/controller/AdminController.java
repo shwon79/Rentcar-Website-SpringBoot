@@ -272,6 +272,9 @@ public class AdminController {
 
         ModelAndView mav = new ModelAndView();
 
+        List<CampingCarPrice> campingCarPriceList = campingCarPriceService.findCampingCarPrice();
+
+        mav.addObject("campingCarPriceList", campingCarPriceList);
         mav.setViewName("admin/campingcar_price_menu");
 
         return mav;
