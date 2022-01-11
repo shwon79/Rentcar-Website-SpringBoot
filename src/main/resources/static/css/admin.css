@@ -680,6 +680,15 @@ td {
     color: white;
 }
 
+.campingPriceEditTable {
+    text-align: center;
+}
+.campingPriceEditTable textarea {
+    height: 2em;
+    width: 6em;
+    text-align: center;
+}
+
 @media (max-width: 990px) {
 
     #morenReservationTable {
