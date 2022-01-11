@@ -232,15 +232,9 @@ body {
     text-decoration: none;
     color: white;
 }
-.activeAdminMenu li {
-    background-color: #42758b;
-    color: indianred;
-}
-
-.menu_container li:hover {
-    background-color: gray;
-    color: indianred;
-
+.activeAdminMenu {
+    background-color: white;
+    color: #5495b1 !important;
 }
 
 
@@ -248,7 +242,7 @@ body {
     background-color: white;
     width: 80vw;
     margin: 0 10px;
-    border: 1px solid lightgray;
+    /*border: 1px solid lightgray;*/
     border-radius: 0.5vh;
 }
 

@@ -16,12 +16,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script th:src="@{/js/admin.js}" defer></script>
   <script>
-    $(window).load(function() {
+    $(window).on('load', function () {
       let campingcarMenu = document.getElementById('campingcarMenu');
       campingcarMenu.classList.add('activeAdminMenu');
     });
 
-    $(window).load(function() {
+    $(window).on('load', function () {
       let getRentDate = document.getElementById('getRentDate').innerText;
       let rentDate = document.getElementById('rentDate');
       let getReturnDate = document.getElementById('getReturnDate').innerText;
@@ -51,7 +51,7 @@
       };
       rentDate.value = splitRentList[0] + '-' + rentMonth + '-' + rentDay;
       returnDate.value = splitReturnList[0] + '-' + returnMonth + '-' + returnDay;
-    })
+    });
   </script>
 
 </head>
@@ -61,7 +61,7 @@
 
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
     <div class="content list_container">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
 
           <button type="button" id="sidebarCollapse" class="navbar-btn">

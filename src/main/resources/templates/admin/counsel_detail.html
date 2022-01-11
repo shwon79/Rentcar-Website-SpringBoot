@@ -16,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script th:src="@{/js/admin.js}" defer></script>
     <script>
-        $(window).load(function() {
+        $(window).on('load', function () {
             let counselMenu = document.getElementById('counselMenu');
             counselMenu.classList.add('activeAdminMenu');
         });
@@ -28,7 +28,16 @@
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
     <div class="content detail_container">
-        <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
 
         <div>
             <div class="detail_list" id="go_back_wrapper">

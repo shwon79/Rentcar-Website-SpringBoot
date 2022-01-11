@@ -12,14 +12,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script th:src="@{/js/admin.js}" defer></script>
+    <script>
+        $(window).on('load', function () {
+            let indexMenu = document.getElementById('indexMenu');
+            indexMenu.classList.add('activeAdminMenu');
+        });
+    </script>
 </head>
 <body>
-<div class="page_wrapper">
-    <div class="content_wrapper">
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-        <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+    <div class="content list_container">
+        <nav class="navbar navbar-expand-lg navbar-light" sec:authorize="isAuthenticated()">
+            <div class="container-fluid">
 
-        <div class="list_container">
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container">
             <h1>관리자 메인 페이지</h1>
             <h3 sec:authorize="isAuthenticated()">반갑습니다. <span sec:authentication="name"></span>님!</h3>
             <hr>
@@ -27,6 +43,7 @@
             <a sec:authorize="isAuthenticated()" th:href="@{/admin/logout}">로그아웃</a>
             <a sec:authorize="isAnonymous()" th:href="@{/admin/signup}">회원가입</a>
         </div>
+
     </div>
 </div>
 
