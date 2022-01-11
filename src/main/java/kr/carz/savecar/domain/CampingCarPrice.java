@@ -41,44 +41,44 @@ public class CampingCarPrice {
     private String carNum;
     private String carCode;
     private String season;   // 0 비성수기  1 성수기
-    private String onedays;
-    private String twodays;
-    private String threedays;
-    private String fourdays;
-    private String fivedays;
-    private String sixdays;
-    private String sevendays;
-    private String eightdays;
-    private String ninedays;
-    private String tendays;
-    private String elevendays;
-    private String twelvedays;
-    private String thirteendays;
-    private String fourteendays;
-    private String fifteendays;
-    private String sixteendays;
-    private String seventeendays;
-    private String eighteendays;
-    private String ninetinedays;
-    private String twentydays;
-    private String twentyonedays;
-    private String twentytwodays;
-    private String twentythreedays;
-    private String twentyfourdays;
-    private String twentyfivedays;
-    private String twentysixdays;
-    private String twentysevendays;
-    private String twentyeightdays;
-    private String twentyninedays;
-    private String thirtydays;
+    private Float onedays;
+    private Float twodays;
+    private Float threedays;
+    private Float fourdays;
+    private Float fivedays;
+    private Float sixdays;
+    private Float sevendays;
+    private Float eightdays;
+    private Float ninedays;
+    private Float tendays;
+    private Float elevendays;
+    private Float twelvedays;
+    private Float thirteendays;
+    private Float fourteendays;
+    private Float fifteendays;
+    private Float sixteendays;
+    private Float seventeendays;
+    private Float eighteendays;
+    private Float ninetinedays;
+    private Float twentydays;
+    private Float twentyonedays;
+    private Float twentytwodays;
+    private Float twentythreedays;
+    private Float twentyfourdays;
+    private Float twentyfivedays;
+    private Float twentysixdays;
+    private Float twentysevendays;
+    private Float twentyeightdays;
+    private Float twentyninedays;
+    private Float thirtydays;
     private String deposit;
     private String yearmodel;
 
     @Builder
-    public CampingCarPrice(String carName, String carNum, String carCode, String season, String onedays, String twodays, String threedays, String fourdays, String fivedays, String sixdays, String sevendays, String eightdays, String ninedays, String tendays, String elevendays, String twelvedays, String thirteendays, String fourteendays
-                        , String fifteendays, String sixteendays, String seventeendays, String eighteendays, String ninetinedays, String twentydays, String twentyonedays
-                        , String twentytwodays, String twentythreedays, String twentyfourdays, String twentyfivedays, String twentysixdays, String twentysevendays
-                        , String twentyeightdays, String twentyninedays, String thirtydays, String deposit, String yearmodel) {
+    public CampingCarPrice(String carName, String carNum, String carCode, String season, Float onedays, Float twodays, Float threedays, Float fourdays, Float fivedays, Float sixdays, Float sevendays, Float eightdays, Float ninedays, Float tendays, Float elevendays, Float twelvedays, Float thirteendays, Float fourteendays
+                        , Float fifteendays, Float sixteendays, Float seventeendays, Float eighteendays, Float ninetinedays, Float twentydays, Float twentyonedays
+                        , Float twentytwodays, Float twentythreedays, Float twentyfourdays, Float twentyfivedays, Float twentysixdays, Float twentysevendays
+                        , Float twentyeightdays, Float twentyninedays, Float thirtydays, String deposit, String yearmodel) {
         this.carName = carName;
         this.carNum = carNum;
         this.carCode = carCode;
