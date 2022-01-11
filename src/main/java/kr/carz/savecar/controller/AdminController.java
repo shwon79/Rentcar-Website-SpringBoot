@@ -138,69 +138,15 @@ public class AdminController {
     }
 
     @GetMapping("/admin/login")
-    public String login() {
+    public String login(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "exception", required = false) String exception,
+                        ModelMap model)
+    {
+        model.addAttribute("error",error);
+        model.addAttribute("exception",exception);
+
         return "/admin/loginForm";
     }
-
-//    @GetMapping("/admin/login")
-//    public String login() {
-//        return "admin/login";
-//    }
-
-    //로그인
-//    @RequestMapping(value = "/admin/logininfo", method= RequestMethod.POST)
-//    @PostMapping("/admin/logininfo")
-//    @ResponseBody
-//    public ModelAndView post_login_info(HttpServletResponse res, HttpServletRequest req) throws IOException {
-//
-//        ModelAndView mav = new ModelAndView();
-//
-//        try {
-//            Login user = loginService.findLoginByIdAndPwd(req.getParameter("id"), req.getParameter("pwd"));
-//            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기 => 다른 방식 찾기
-//
-//            HttpSession session = req.getSession();
-//            session.setAttribute("user", user);
-//
-//            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
-//            mav.addObject("campingCarReservationList", campingCarReservationList);
-//            mav.setViewName("admin/campingcar_menu");
-//
-//        } catch (NullPointerException e){
-//
-//            res.setContentType("text/html; charset=UTF-8");
-//            PrintWriter out = res.getWriter();
-//            out.println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); </script>");
-//            out.flush();
-//
-//            // 다시 login page로 back
-//            mav.setViewName("admin/login");
-//        }
-//        return mav;
-//    }
-//
-//
-//    // 로그아웃
-//    @GetMapping(value = "/admin/logout")
-//    @ResponseBody
-//    public ModelAndView get_admin_logout(HttpServletResponse res, HttpServletRequest req) throws IOException {
-//
-//        ModelAndView mav = new ModelAndView();
-//
-//        HttpSession session = req.getSession();
-//        session.removeAttribute("user");
-//        session.invalidate();
-//
-//        res.setContentType("text/html; charset=UTF-8");
-//        PrintWriter out = res.getWriter();
-//        out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
-//        out.flush();
-//
-//        mav.setViewName("admin/login");
-//
-//        return mav;
-//    }
-
 
 
     // [관리자 메인페이지] 캠핑카 예약내역 메뉴로 입장
@@ -1342,48 +1288,45 @@ public class AdminController {
         pw.close();
     }
 
-    //    @RequestMapping(value = "/admin/campingcar/price", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
-    @PostMapping("/admin/campingcar/price")
+    @PutMapping("/admin/campingcar/price/{carType}")
     @ResponseBody
-    public void post_admin_campingcar_price(HttpServletResponse res, @RequestBody CampingCarPriceDTO campingCarPriceDTO) throws IOException {
+    public void post_admin_campingcar_price(HttpServletResponse res,  @PathVariable String carType, @RequestBody CampingCarPriceDTO campingCarPriceDTO) throws IOException {
 
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(campingCarPriceDTO.getCarName());
-
-        double one_day_price = Double.parseDouble(campingCarPriceDTO.getOnedays());
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
 
         campingCarPrice.setCarNum(campingCarPriceDTO.getCarNum());
         campingCarPrice.setCarCode(campingCarPriceDTO.getCarCode());
         campingCarPrice.setSeason(campingCarPriceDTO.getSeason());
         campingCarPrice.setOnedays(campingCarPriceDTO.getOnedays());
-        campingCarPrice.setTwodays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwodays()) * one_day_price));
-        campingCarPrice.setThreedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getThreedays()) * one_day_price));
-        campingCarPrice.setFourdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getFourdays()) * one_day_price));
-        campingCarPrice.setFivedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getFivedays()) * one_day_price));
-        campingCarPrice.setSixdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getSixdays()) * one_day_price));
-        campingCarPrice.setSevendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getSevendays()) * one_day_price));
-        campingCarPrice.setEightdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getEightdays()) * one_day_price));
-        campingCarPrice.setNinedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getNinedays()) * one_day_price));
-        campingCarPrice.setTendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTendays()) * one_day_price));
-        campingCarPrice.setElevendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getElevendays()) * one_day_price));
-        campingCarPrice.setTwelvedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwelvedays()) * one_day_price));
-        campingCarPrice.setThirteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getThirteendays()) * one_day_price));
-        campingCarPrice.setFourteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getFourteendays()) * one_day_price));
-        campingCarPrice.setFifteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getFifteendays()) * one_day_price));
-        campingCarPrice.setSixteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getSixteendays()) * one_day_price));
-        campingCarPrice.setSeventeendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getSeventeendays()) * one_day_price));
-        campingCarPrice.setEighteendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getEighteendays()) * one_day_price));
-        campingCarPrice.setNinetinedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getNinetinedays()) * one_day_price));
-        campingCarPrice.setTwentydays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentydays()) * one_day_price));
-        campingCarPrice.setTwentyonedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyonedays()) * one_day_price));
-        campingCarPrice.setTwentytwodays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentytwodays()) * one_day_price));
-        campingCarPrice.setTwentythreedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentythreedays()) * one_day_price));
-        campingCarPrice.setTwentyfourdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyfourdays()) * one_day_price));
-        campingCarPrice.setTwentyfivedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyfivedays()) * one_day_price));
-        campingCarPrice.setTwentysixdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentysixdays()) * one_day_price));
-        campingCarPrice.setTwentysevendays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentysevendays()) * one_day_price));
-        campingCarPrice.setTwentyeightdays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyeightdays()) * one_day_price));
-        campingCarPrice.setTwentyninedays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getTwentyninedays()) * one_day_price));
-        campingCarPrice.setThirtydays(String.valueOf(Double.parseDouble(campingCarPriceDTO.getThirtydays()) * one_day_price));
+        campingCarPrice.setTwodays(campingCarPriceDTO.getTwodays());
+        campingCarPrice.setThreedays(campingCarPriceDTO.getThreedays());
+        campingCarPrice.setFourdays(campingCarPriceDTO.getFourdays());
+        campingCarPrice.setFivedays(campingCarPriceDTO.getFivedays());
+        campingCarPrice.setSixdays(campingCarPriceDTO.getSixdays());
+        campingCarPrice.setSevendays(campingCarPriceDTO.getSevendays());
+        campingCarPrice.setEightdays(campingCarPriceDTO.getEightdays());
+        campingCarPrice.setNinedays(campingCarPriceDTO.getNinedays());
+        campingCarPrice.setTendays(campingCarPriceDTO.getTendays());
+        campingCarPrice.setElevendays(campingCarPriceDTO.getElevendays());
+        campingCarPrice.setTwelvedays(campingCarPriceDTO.getTwelvedays());
+        campingCarPrice.setThirteendays(campingCarPriceDTO.getThirteendays());
+        campingCarPrice.setFourteendays(campingCarPriceDTO.getFourteendays());
+        campingCarPrice.setFifteendays(campingCarPriceDTO.getFifteendays());
+        campingCarPrice.setSixteendays(campingCarPriceDTO.getSixteendays());
+        campingCarPrice.setSeventeendays(campingCarPriceDTO.getSeventeendays());
+        campingCarPrice.setEighteendays(campingCarPriceDTO.getEighteendays());
+        campingCarPrice.setNinetinedays(campingCarPriceDTO.getNinetinedays());
+        campingCarPrice.setTwentydays(campingCarPriceDTO.getTwentydays());
+        campingCarPrice.setTwentyonedays(campingCarPriceDTO.getTwentyonedays());
+        campingCarPrice.setTwentytwodays(campingCarPriceDTO.getTwentytwodays());
+        campingCarPrice.setTwentythreedays(campingCarPriceDTO.getTwentythreedays());
+        campingCarPrice.setTwentyfourdays(campingCarPriceDTO.getTwentyfourdays());
+        campingCarPrice.setTwentyfivedays(campingCarPriceDTO.getTwentyfivedays());
+        campingCarPrice.setTwentysixdays(campingCarPriceDTO.getTwentysixdays());
+        campingCarPrice.setTwentysevendays(campingCarPriceDTO.getTwentysevendays());
+        campingCarPrice.setTwentyeightdays(campingCarPriceDTO.getTwentyeightdays());
+        campingCarPrice.setTwentyninedays(campingCarPriceDTO.getTwentyninedays());
+        campingCarPrice.setThirtydays(campingCarPriceDTO.getThirtydays());
         campingCarPrice.setDeposit(campingCarPriceDTO.getDeposit());
         campingCarPrice.setYearmodel(campingCarPriceDTO.getYearmodel());
 

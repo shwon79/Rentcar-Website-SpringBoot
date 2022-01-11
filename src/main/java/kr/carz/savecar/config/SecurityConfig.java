@@ -19,10 +19,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private AdminService adminService;
+    private AuthFailureHandler customFailureHandler;
 
     @Autowired
-    public SecurityConfig(AdminService adminService){
+    public SecurityConfig(AdminService adminService, AuthFailureHandler customFailureHandler){
         this.adminService = adminService;
+        this.customFailureHandler = customFailureHandler;
     }
 
     @Bean
@@ -45,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()     // 로그인 설정
                 .loginPage("/admin/login")      // 커스텀 login 페이지를 사용
                 .defaultSuccessUrl("/admin/index")      // 로그인 성공 시 이동할 페이지
+                .failureHandler(customFailureHandler)
                 .permitAll()
                 .and()
                 .logout()
