@@ -462,7 +462,7 @@ public class RealtimeRentController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328, 01058283328, 01058283328");
+        params.put("to", "01058283328, 01052774113, 01033453328");
         params.put("from", "01052774113");
         params.put("type", "LMS");
 
