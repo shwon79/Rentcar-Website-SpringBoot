@@ -462,7 +462,7 @@ public class RealtimeRentController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328, 01033453328, 01052774113");
+        params.put("to", "01058283328, 01058283328, 01058283328");
         params.put("from", "01052774113");
         params.put("type", "LMS");
 
@@ -481,28 +481,40 @@ public class RealtimeRentController {
         }
 
         params.put("text", "[실시간 예약 대기 신청]\n"
-                + "* 계약 확인하기 " + "\n"
+                + "▼ 계약 확인하기 " + "\n"
                 + "https://savecar.kr/admin/login" + "\n\n"
-                + "문의자 이름: " + morenReservationDTO.getReservationName() + "\n"
+
+                + "▼ 문의자 정보 " + "\n"
+                + "이름: " + morenReservationDTO.getReservationName() + "\n"
                 + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
+                + "생년월일: " + morenReservationDTO.getReservationAge() + "\n\n"
+
+                + "▼ 차량 정보 " + "\n"
                 + "차량명: " + morenReservationDTO.getCarName() + "\n"
-                + "차량번호: " + morenReservationDTO.getCarNo() + "\n"
+                + "차량번호: " + morenReservationDTO.getCarNo() + "\n\n"
+
+                + "▼ 대여 정보 " + "\n"
                 + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
                 + "대여시간: " + morenReservationDTO.getReservationTime() + "\n"
                 + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
                 + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
                 + delivery_text
-                + "생년월일: " + morenReservationDTO.getReservationAge() + "\n"
                 + "신용증빙: " + morenReservationDTO.getReservationGuarantee() + "\n"
                 + "총렌트료(부포): " + morenReservationDTO.getCarAmountTotal() + "\n"
                 + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
                 + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n");
 
-        params2.put("text", "[세이브카 렌트카 예약 대기 신청이 완료되었습니다]" + "\n"
-                + "성함: " + morenReservationDTO.getReservationName() + "\n"
+        params2.put("text", "[세이브카 렌트카 예약 대기 신청이 완료되었습니다]" + "\n\n"
+                + "▼ 문의자 정보 " + "\n"
+                + "이름: " + morenReservationDTO.getReservationName() + "\n"
                 + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
+                + "생년월일: " + morenReservationDTO.getReservationAge() + "\n\n"
+
+                + "▼ 차량 정보 " + "\n"
                 + "차량명: " + morenReservationDTO.getCarName() + "\n"
-                + "차량번호: " + morenReservationDTO.getCarNo() + "\n"
+                + "차량번호: " + morenReservationDTO.getCarNo() + "\n\n"
+
+                + "▼ 대여 정보 " + "\n"
                 + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
                 + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
                 + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
@@ -512,7 +524,8 @@ public class RealtimeRentController {
                 + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
                 + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n"
 
-                + "* 예약금 입금하시면 직원이 확인 후, 예약이 확정됩니다.\n"
+                + "▼ 예약금 입금하시면 직원이 확인 후, 예약이 확정됩니다.\n"
+                + "예약금: 100,000원\n"
                 + "계좌번호: 하나은행 810-626121-01404 (주)세이브카\n");
 
         params.put("app_version", "test app 1.2");
