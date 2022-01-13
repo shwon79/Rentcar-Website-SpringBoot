@@ -245,7 +245,6 @@ const get_category2 = (fr1, fr2, detailedSelect) => {
         .then(response => response.json())
         .then(result => {
             detailedSelect.length = 1;
-            console.log(result)
             for (let i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
             }
@@ -276,10 +275,8 @@ const get_car_name = (fr1, fr2, fr3, detailedSelect) => {
         .then(response => response.json())
         .then(result => {
             detailedSelect.options.length = 1;
-            console.log(result.length);
             for (let i = 0; i < result.length; i++) {
                 detailedSelect.options[i+1] = new Option(result[i], result[i]);
-                console.log(detailedSelect.options[i+1]);
             }
         }).catch(err=>console.log(err))
 
@@ -334,6 +331,7 @@ const get_price = (fr1, fr2, fr3, detailedSelect) => {
         .then((response) => response.json())
         .then(result => {
             let price = result[0];
+            let age_limit = result[2];
 
             if (price==='상담') {
                 let vat = price
@@ -346,10 +344,16 @@ const get_price = (fr1, fr2, fr3, detailedSelect) => {
                 document.getElementById("carTotal").innerText =  total;
 
             } else {
-                let vat = price.replace(/,/gi, "");
-                vat = parseInt(vat) * 0.1;
-                let deposit = result[1];
-                let total = parseInt(price.replace(/,/gi, "")) + vat;
+
+                if(document.getElementById("age_limit").checked) {
+                    price = parseInt(price) + parseInt(age_limit);
+                } else {
+                    price = parseInt(price)
+                }
+
+                let vat = price * 0.1;
+                let deposit = parseInt(result[1]).toLocaleString();
+                let total = price + vat;
 
                 price = int_to_price(price.toString());
                 vat = int_to_price(vat.toString());
