@@ -93,28 +93,30 @@ function EditCampingcarPrice(carName, season) {
         twentyninedays: twentyninedays,
         thirtydays: thirtydays
     }
-    console.log(data);
 
-    // sendingPriceData();
-};
+    if (confirm('가격을 수정하시겠습니까?')) {
+        console.log(data);
+        sendingPriceData();
+    };
 
-function sendingPriceData() {
-    $.ajax({
-        type:'PUT',
-        url:'/admin/campingcar/price/' + carType,
-        dataType:'json',
-        contentType : 'application/json; charset=utf-8',
-        data : JSON.stringify(data)
-    }).done(function (result) {
-        if (result.result == 1) {
-            alert('처리되었습니다.');
-        } else {
-            alert('처리에 문제가 생겼습니다.');
-        };
-        window.location.href = '/admin/campingcar/price/menu';
-    }).fail(function (error) {
-        alert(JSON.stringify(error));
-    })
+    function sendingPriceData() {
+        $.ajax({
+            type:'PUT',
+            url:'/admin/campingcar/price/' + carName,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('처리되었습니다.');
+            } else {
+                alert('처리에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/campingcar/price/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    };
 };
 
 function getData(index) {
