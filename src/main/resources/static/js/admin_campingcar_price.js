@@ -1,24 +1,23 @@
 const europeCarNum = document.getElementById('europe_carNum').innerText;
 const europeCarCode = document.getElementById('europe_carCode').innerText;
 const europeYearModel = document.getElementById('europe_yearmodel').innerText;
-const europeOffOneDay = parseInt(document.getElementById('europe_off_oneday').value.replace(/,/g, ""));
-const europeOnOneDay = parseInt(document.getElementById('europe_on_oneday').value.replace(/,/g, ""));
 const limousineCarNum = document.getElementById('limousine_carNum').innerText;
 const limousineCarCode = document.getElementById('limousine_carCode').innerText;
 const limousineYearModel = document.getElementById('limousine_yearmodel').innerText;
-const limousineOffOneDay = parseInt(document.getElementById('limousine_off_oneday').value.replace(/,/g, ""));
-const limousineOnOneDay = parseInt(document.getElementById('limousine_on_oneday').value.replace(/,/g, ""));
 const travelCarNum = document.getElementById('travel_carNum').innerText;
 const travelCarCode = document.getElementById('travel_carCode').innerText;
 const travelYearModel = document.getElementById('travel_yearmodel').innerText;
-const travelOffOneDay = parseInt(document.getElementById('travel_off_oneday').value.replace(/,/g, ""));
-const travelOnOneDay = parseInt(document.getElementById('travel_on_oneday').value.replace(/,/g, ""));
 let twodays, threedays, fourdays, fivedays, sixdays, sevendays, eightdays, ninedays, tendays;
 let elevendays, twelvedays, thirteendays, fourteendays, fifteendays, sixteendays, seventeendays, eighteendays, ninetinedays, twentydays;
 let twentyonedays, twentytwodays, twentythreedays, twentyfourdays, twentyfivedays, twentysixdays, twentysevendays, twentyeightdays, twentyninedays, thirtydays;
 
-
 function EditCampingcarPrice(carName, season) {
+    const europeOffOneDay = parseInt(document.getElementById('europe_off_oneday').value.replace(/,/g, ""));
+    const europeOnOneDay = parseInt(document.getElementById('europe_on_oneday').value.replace(/,/g, ""));
+    const limousineOffOneDay = parseInt(document.getElementById('limousine_off_oneday').value.replace(/,/g, ""));
+    const limousineOnOneDay = parseInt(document.getElementById('limousine_on_oneday').value.replace(/,/g, ""));
+    const travelOffOneDay = parseInt(document.getElementById('travel_off_oneday').value.replace(/,/g, ""));
+    const travelOnOneDay = parseInt(document.getElementById('travel_on_oneday').value.replace(/,/g, ""));
     let carNum, carCode, yearModel, oneDay;
 
     if (carName.startsWith('europe')) {
@@ -27,10 +26,10 @@ function EditCampingcarPrice(carName, season) {
         yearModel = europeYearModel;
         if (season === 0) {
             oneDay = europeOffOneDay;
-            getData(0, 0);
+            getData(0);
         } else {
             oneDay = europeOnOneDay;
-            getData(1, 0);
+            getData(1);
         }
     } else if (carName.startsWith('limousine')) {
         carNum = limousineCarNum;
@@ -38,10 +37,10 @@ function EditCampingcarPrice(carName, season) {
         yearModel = limousineYearModel;
         if (season === 0) {
             oneDay = limousineOffOneDay;
-            getData(0, 1);
+            getData(2);
         } else {
             oneDay = limousineOnOneDay;
-            getData(1, 1);
+            getData(3);
         }
     } else if (carName.startsWith('travel')) {
         carNum = travelCarNum;
@@ -49,14 +48,13 @@ function EditCampingcarPrice(carName, season) {
         yearModel = travelYearModel;
         if (season === 0) {
             oneDay = travelOffOneDay;
-            getData(0, 2);
+            getData(4);
         } else {
             oneDay = travelOnOneDay;
-            getData(1, 2);
+            getData(5);
         }
     }
 
-    // twoday부터는 곱할 거 1, 2(숫자로) 이렇게
     let data = {
         carName: carName,
         carNum: carNum,
@@ -119,67 +117,36 @@ function sendingPriceData() {
     })
 };
 
-function getData(season, index) {
-    // index는 europe은 1, limousine은 2, travel은 3
-    if (season === 0) {
-        twodays = parseFloat(document.getElementsByClassName('offPercent2')[index].value);
-        threedays = parseFloat(document.getElementsByClassName('offPercent3')[index].value);
-        fourdays = parseFloat(document.getElementsByClassName('offPercent4')[index].value);
-        fivedays = parseFloat(document.getElementsByClassName('offPercent5')[index].value);
-        sixdays = parseFloat(document.getElementsByClassName('offPercent6')[index].value);
-        sevendays = parseFloat(document.getElementsByClassName('offPercent7')[index].value);
-        eightdays = parseFloat(document.getElementsByClassName('offPercent8')[index].value);
-        ninedays = parseFloat(document.getElementsByClassName('offPercent9')[index].value);
-        tendays = parseFloat(document.getElementsByClassName('offPercent10')[index].value);
-        elevendays = parseFloat(document.getElementsByClassName('offPercent11')[index].value);
-        twelvedays = parseFloat(document.getElementsByClassName('offPercent12')[index].value);
-        thirteendays = parseFloat(document.getElementsByClassName('offPercent13')[index].value);
-        fourteendays = parseFloat(document.getElementsByClassName('offPercent14')[index].value);
-        fifteendays = parseFloat(document.getElementsByClassName('offPercent15')[index].value);
-        sixteendays = parseFloat(document.getElementsByClassName('offPercent16')[index].value);
-        seventeendays = parseFloat(document.getElementsByClassName('offPercent17')[index].value);
-        eighteendays = parseFloat(document.getElementsByClassName('offPercent18')[index].value);
-        ninetinedays = parseFloat(document.getElementsByClassName('offPercent19')[index].value);
-        twentydays = parseFloat(document.getElementsByClassName('offPercent20')[index].value);
-        twentyonedays = parseFloat(document.getElementsByClassName('offPercent21')[index].value);
-        twentytwodays = parseFloat(document.getElementsByClassName('offPercent22')[index].value);
-        twentythreedays = parseFloat(document.getElementsByClassName('offPercent23')[index].value);
-        twentyfourdays = parseFloat(document.getElementsByClassName('offPercent24')[index].value);
-        twentyfivedays = parseFloat(document.getElementsByClassName('offPercent25')[index].value);
-        twentysixdays = parseFloat(document.getElementsByClassName('offPercent26')[index].value);
-        twentysevendays = parseFloat(document.getElementsByClassName('offPercent27')[index].value);
-        twentyeightdays = parseFloat(document.getElementsByClassName('offPercent28')[index].value);
-        twentyninedays = parseFloat(document.getElementsByClassName('offPercent29')[index].value);
-        thirtydays = parseFloat(document.getElementsByClassName('offPercent30')[index].value);
-    } else if (season === 1) {
-        twodays = parseFloat(document.getElementsByClassName('onPercent2')[index].value);
-        threedays = parseFloat(document.getElementsByClassName('onPercent3')[index].value);
-        fourdays = parseFloat(document.getElementsByClassName('onPercent4')[index].value);
-        fivedays = parseFloat(document.getElementsByClassName('onPercent5')[index].value);
-        sixdays = parseFloat(document.getElementsByClassName('onPercent6')[index].value);
-        sevendays = parseFloat(document.getElementsByClassName('onPercent7')[index].value);
-        eightdays = parseFloat(document.getElementsByClassName('onPercent8')[index].value);
-        ninedays = parseFloat(document.getElementsByClassName('onPercent9')[index].value);
-        tendays = parseFloat(document.getElementsByClassName('onPercent10')[index].value);
-        elevendays = parseFloat(document.getElementsByClassName('onPercent11')[index].value);
-        twelvedays = parseFloat(document.getElementsByClassName('onPercent12')[index].value);
-        thirteendays = parseFloat(document.getElementsByClassName('onPercent13')[index].value);
-        fourteendays = parseFloat(document.getElementsByClassName('onPercent14')[index].value);
-        fifteendays = parseFloat(document.getElementsByClassName('onPercent15')[index].value);
-        sixteendays = parseFloat(document.getElementsByClassName('onPercent16')[index].value);
-        seventeendays = parseFloat(document.getElementsByClassName('onPercent17')[index].value);
-        eighteendays = parseFloat(document.getElementsByClassName('onPercent18')[index].value);
-        ninetinedays = parseFloat(document.getElementsByClassName('onPercent19')[index].value);
-        twentydays = parseFloat(document.getElementsByClassName('onPercent20')[index].value);
-        twentyonedays = parseFloat(document.getElementsByClassName('onPercent21')[index].value);
-        twentytwodays = parseFloat(document.getElementsByClassName('onPercent22')[index].value);
-        twentythreedays = parseFloat(document.getElementsByClassName('onPercent23')[index].value);
-        twentyfourdays = parseFloat(document.getElementsByClassName('onPercent24')[index].value);
-        twentyfivedays = parseFloat(document.getElementsByClassName('onPercent25')[index].value);
-        twentysixdays = parseFloat(document.getElementsByClassName('onPercent26')[index].value);
-        twentysevendays = parseFloat(document.getElementsByClassName('onPercent27')[index].value);
-        twentyeightdays = parseFloat(document.getElementsByClassName('onPercent28')[index].value);
-        twentyninedays = parseFloat(document.getElementsByClassName('onPercent29')[index].value);
-        thirtydays = parseFloat(document.getElementsByClassName('onPercent30')[index].value);
-    }
+function getData(index) {
+    // index는
+    // europe 비수기 0, europe 성수기 1, limousine 비수기 2, limousine 성수기 3, travel 비수기 4, travel 성수기 5
+    twodays = parseFloat(document.getElementsByClassName('percent2')[index].value);
+    threedays = parseFloat(document.getElementsByClassName('percent3')[index].value);
+    fourdays = parseFloat(document.getElementsByClassName('percent4')[index].value);
+    fivedays = parseFloat(document.getElementsByClassName('percent5')[index].value);
+    sixdays = parseFloat(document.getElementsByClassName('percent6')[index].value);
+    sevendays = parseFloat(document.getElementsByClassName('percent7')[index].value);
+    eightdays = parseFloat(document.getElementsByClassName('percent8')[index].value);
+    ninedays = parseFloat(document.getElementsByClassName('percent9')[index].value);
+    tendays = parseFloat(document.getElementsByClassName('percent10')[index].value);
+    elevendays = parseFloat(document.getElementsByClassName('percent11')[index].value);
+    twelvedays = parseFloat(document.getElementsByClassName('percent12')[index].value);
+    thirteendays = parseFloat(document.getElementsByClassName('percent13')[index].value);
+    fourteendays = parseFloat(document.getElementsByClassName('percent14')[index].value);
+    fifteendays = parseFloat(document.getElementsByClassName('percent15')[index].value);
+    sixteendays = parseFloat(document.getElementsByClassName('percent16')[index].value);
+    seventeendays = parseFloat(document.getElementsByClassName('percent17')[index].value);
+    eighteendays = parseFloat(document.getElementsByClassName('percent18')[index].value);
+    ninetinedays = parseFloat(document.getElementsByClassName('percent19')[index].value);
+    twentydays = parseFloat(document.getElementsByClassName('percent20')[index].value);
+    twentyonedays = parseFloat(document.getElementsByClassName('percent21')[index].value);
+    twentytwodays = parseFloat(document.getElementsByClassName('percent22')[index].value);
+    twentythreedays = parseFloat(document.getElementsByClassName('percent23')[index].value);
+    twentyfourdays = parseFloat(document.getElementsByClassName('percent24')[index].value);
+    twentyfivedays = parseFloat(document.getElementsByClassName('percent25')[index].value);
+    twentysixdays = parseFloat(document.getElementsByClassName('percent26')[index].value);
+    twentysevendays = parseFloat(document.getElementsByClassName('percent27')[index].value);
+    twentyeightdays = parseFloat(document.getElementsByClassName('percent28')[index].value);
+    twentyninedays = parseFloat(document.getElementsByClassName('percent29')[index].value);
+    thirtydays = parseFloat(document.getElementsByClassName('percent30')[index].value);
 }
