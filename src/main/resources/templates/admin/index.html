@@ -35,13 +35,16 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container" style="text-align: center; margin: 10vh auto;">
             <h1>관리자 메인 페이지</h1>
             <h3 sec:authorize="isAuthenticated()">반갑습니다. <span sec:authentication="name"></span>님!</h3>
-            <hr>
-            <a sec:authorize="isAnonymous()" th:href="@{/admin/login}">로그인</a>
-            <a sec:authorize="isAuthenticated()" th:href="@{/admin/logout}">로그아웃</a>
-            <a sec:authorize="isAnonymous()" th:href="@{/admin/signup}">회원가입</a>
+
+
+            <div style="margin-top: 50px;">
+                <a sec:authorize="isAnonymous()" class="btn btn-info" th:href="@{/admin/login}">로그인</a>
+                <a sec:authorize="isAuthenticated()" class="btn btn-info" th:href="@{/admin/logout}">로그아웃</a>
+                <a sec:authorize="isAnonymous()" class="btn btn-info" th:href="@{/admin/signup}">회원가입</a>
+            </div>
         </div>
 
     </div>
