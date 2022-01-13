@@ -46,7 +46,7 @@ public class RentEstimateController {
         return "rent_month/original";
     }
 
-    @RequestMapping("/rent/estimate/{category1}/{category2}")
+    @RequestMapping("/rent/estimate/categories/{category1}/{category2}")
     public String handleRequest(ModelMap model, @PathVariable("category1") String category1, @PathVariable("category2") String category2) throws Exception {
         model.put("category1", category1);
         model.put("category2", category2);
@@ -102,7 +102,6 @@ public class RentEstimateController {
     @RequestMapping(value = "/rent/estimate/{period}/{category1}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public void get_monthly_rent_category2(HttpServletResponse res, @PathVariable String period, @PathVariable String category1) throws IOException {
-
 
         List<String> categoryList2 = new ArrayList();
 
