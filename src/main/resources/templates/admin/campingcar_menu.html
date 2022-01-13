@@ -55,9 +55,9 @@
         <p id="set_reserve_header" class="set_reserve">확정</p>
       </div>
       <div class="reserve_list_wrapper" th:each="reservation : ${campingCarReservationList}">
-        <p style="flex: 1; display: flex; justify-content: center; align-items: center;">
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; border-bottom: 1px #5495b1 dotted;">
           <input th:if="${reservation.reservation != 1}" type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
-        </p>
+        </div>
         <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
 
           <p class="created_date" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]}"></p>

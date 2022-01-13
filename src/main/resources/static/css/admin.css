@@ -4,7 +4,8 @@
     width: 100%;
     align-items: stretch;
     perspective: 1500px;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
 }
 
 
@@ -242,18 +243,19 @@ body {
 .list_container {
     background-color: white;
     width: 80vw;
-    margin: 0 10px;
+    margin: 0 auto;
     /*border: 1px solid lightgray;*/
     border-radius: 0.5vh;
+    height: fit-content;
 }
 
 .detail_container {
     background-color: #5495b1;
     width: 50vw;
-    margin: 0 10px;
+    margin: 0 auto 100px auto;
     border: 1px solid lightgray;
     border-radius: 0.5vh;
-    font-size: 17px
+    font-size: 17px;
 }
 
 .detail_container textarea,
@@ -291,11 +293,6 @@ body {
     border-bottom: 1px #5495b1 dotted;
 }
 
-/*form {*/
-/*    border-bottom: 1px #3952ff dotted;*/
-
-/*}*/
-
 .reserve_list:hover {
     cursor: pointer;
     background-color: rgba(108, 108, 108, 0.45);
@@ -315,7 +312,6 @@ body {
 
 #reserve_list_title:hover {
     pointer-events: none;
-    /*background-color: transparent;*/
 }
 
 .detail_list {
