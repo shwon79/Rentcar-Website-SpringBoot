@@ -56,7 +56,6 @@ function EditCampingcarPrice(carName, season) {
     }
 
     let data = {
-        carName: carName,
         carNum: carNum,
         carCode: carCode,
         season: season.toString(),
@@ -102,10 +101,15 @@ function EditCampingcarPrice(carName, season) {
     function sendingPriceData() {
         $.ajax({
             type:'PUT',
-            url:'/admin/campingcar/price/' + carName,
+            url:'/admin/campingcar/price/by/' + carName,
             dataType:'json',
             contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
+            data : JSON.stringify(data),
+            beforeSend: function (jqXHR, settings) {
+                var header = $("meta[name='_csrf_header']").attr("content");
+                var token = $("meta[name='_csrf']").attr("content");
+                jqXHR.setRequestHeader(header, token);
+            }
         }).done(function (result) {
             if (result.result == 1) {
                 alert('처리되었습니다.');

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -117,6 +118,25 @@ public class AdminController {
 
         return nameArray;
     }
+
+//    private S3Service s3Service;
+//    private GalleryService galleryService;
+//
+//    @GetMapping("/gallery")
+//    public String dispWrite() {
+//
+//        return "/gallery";
+//    }
+//
+//    @PostMapping("/gallery")
+//    public String execWrite(GalleryDto galleryDto, MultipartFile file) throws IOException {
+//        String imgPath = s3Service.upload(file);
+//        galleryDto.setFilePath(imgPath);
+//
+//        galleryService.savePost(galleryDto);
+//
+//        return "redirect:/gallery";
+//    }
 
     @GetMapping("/admin/index")
     public String index() {
@@ -1291,9 +1311,10 @@ public class AdminController {
         pw.close();
     }
 
-    @PutMapping("/admin/campingcar/price/{carType}")
+    @PutMapping("/admin/campingcar/price/by/{carType}")
     @ResponseBody
-    public void post_admin_campingcar_price(HttpServletResponse res,  @PathVariable String carType, @RequestBody CampingCarPriceDTO campingCarPriceDTO) throws IOException {
+    @Transactional
+    public void put_admin_campingcar_price(HttpServletResponse res, @RequestBody CampingCarPriceDTO campingCarPriceDTO, @PathVariable String carType) throws IOException {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
 

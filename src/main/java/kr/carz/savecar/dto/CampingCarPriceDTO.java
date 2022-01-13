@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CampingCarPriceDTO {
 
-    private String carName;
     private String carNum;
     private String carCode;
     private String season;
@@ -50,7 +49,6 @@ public class CampingCarPriceDTO {
 
     public CampingCarPrice toEntity() {
         return CampingCarPrice.builder()
-                .carName(carName)
                 .carNum(carNum)
                 .carCode(carCode)
                 .season(season)
