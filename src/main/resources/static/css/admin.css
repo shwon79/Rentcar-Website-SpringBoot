@@ -166,18 +166,18 @@ a.article, a.article:hover {
         opacity: 1;
         margin: 5px auto;
     }
-    #sidebarCollapse.active span {
-        margin: 0 auto;
-    }
-    #sidebarCollapse.active span:first-of-type {
-        transform: rotate(45deg) translate(2px, 2px);
-    }
-    #sidebarCollapse.active span:nth-of-type(2) {
-        opacity: 0;
-    }
-    #sidebarCollapse.active span:last-of-type {
-        transform: rotate(-45deg) translate(1px, -1px);
-    }
+    /*#sidebarCollapse.active span {*/
+    /*    margin: 0 auto;*/
+    /*}*/
+    /*#sidebarCollapse.active span:first-of-type {*/
+    /*    transform: rotate(45deg) translate(2px, 2px);*/
+    /*}*/
+    /*#sidebarCollapse.active span:nth-of-type(2) {*/
+    /*    opacity: 0;*/
+    /*}*/
+    /*#sidebarCollapse.active span:last-of-type {*/
+    /*    transform: rotate(-45deg) translate(1px, -1px);*/
+    /*}*/
 
 }
 /* Admin Menu End */
@@ -202,7 +202,8 @@ body {
     width: 95%;
 }
 .page_title {
-    margin-top: 30px;
+    margin: 1em 0;
+    text-align: center;
 }
 
 @media (max-width: 480px) {
@@ -590,20 +591,7 @@ form {
     font-size: 1.2rem;
     text-align: center;
 }
-.form-group {
-    display: flex;
-    justify-content: space-between;
-}
-.form-group label {
-    font-size: 1rem;
-}
-#carNo.form-control,
-#discount.form-control,
-#discount-description.form-control {
-    height: 20px;
-    width: 80%;
-    margin: 0 0 10px 5px;
-}
+
 .content_container {
     width: 70%;
     margin: 0 auto;
@@ -736,11 +724,6 @@ td {
     .form-part {
         width: 90%;
         margin-top: 1rem;
-    }
-    #carNo.form-control,
-    #discount.form-control,
-    #discount-description.form-control {
-        width: 60%;
     }
     .content_container {
         width: 90%;

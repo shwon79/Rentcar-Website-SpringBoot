@@ -40,14 +40,14 @@
         </nav>
 
         <div name="discountForm">
-            <h2 class="head_title">할인/인상가 적용하기</h2>
+            <h2 class="page_title">할인/인상가 적용하기</h2>
             <div class="form-group">
                 <label for="carNo">차량번호</label>
                <input type="text" class="form-control" name="carNo" id="carNo" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
                 <label for="discount">할인/인상률(%)</label>
-                <input type="number" class="form-control" name="discount" id="discount">
+                <input type="text" class="form-control" name="discount" id="discount">
             </div>
             <div style="margin-bottom: 1rem;">
                 <label style="color: red;">↑ 할인을 하고 싶으면 음수 값으로, 인상을 하고 싶으면 양수 값으로 적어주세요.</label>
@@ -56,13 +56,12 @@
                 <label for="discount-description">할인/인상 설명</label>
                 <input type="text" class="form-control" name="discount-description" id="discount-description">
             </div>
-            <div class="btn btn-info" id="discountBtn" onclick="make_discount()">할인/인상 적용하기</div>
-        </div>
-        <br /><br />
-        <div id="mainTable" class="discount-table">
-            <div class="head_title" style="margin-top: 50px; text-align: center;">
-                <h2>할인/인상가 적용 차량 목록</h2>
+            <div style="text-align: center;">
+                <button class="btn btn-info" onclick="make_discount()">할인/인상 적용하기</button>
             </div>
+        </div>
+        <div id="mainTable" class="discount-table">
+            <h2 class="page_title">할인/인상가 적용 차량 목록</h2>
             <table>
                 <thead id="table_header">
                 <tr>
