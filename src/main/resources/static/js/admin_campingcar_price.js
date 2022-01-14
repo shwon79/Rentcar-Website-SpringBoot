@@ -104,12 +104,7 @@ function EditCampingcarPrice(carName, season) {
             url:'/admin/campingcar/price/by/' + carName,
             dataType:'json',
             contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data),
-            beforeSend: function (jqXHR, settings) {
-                var header = $("meta[name='_csrf_header']").attr("content");
-                var token = $("meta[name='_csrf']").attr("content");
-                jqXHR.setRequestHeader(header, token);
-            }
+            data : JSON.stringify(data)
         }).done(function (result) {
             if (result.result == 1) {
                 alert('처리되었습니다.');

@@ -56,6 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)    // 세션 초기화
                 .and()
                 .exceptionHandling();
+
+        http
+                .csrf().disable();
     }
 
     @Override
