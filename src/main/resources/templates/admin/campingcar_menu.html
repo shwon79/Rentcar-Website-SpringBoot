@@ -1,4 +1,4 @@
-<!-- 관리자 메인페이지 -->
+<!-- 관리자 캠핑카 예약리스트_메뉴 -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -7,11 +7,15 @@
   <title>SAVECAR - 관리자 페이지</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link th:href="@{/css/admin.css}" rel="stylesheet">
   <script th:src="@{/js/jquery.min.js}"></script>
   <script th:src="@{/js/admin.js}" defer></script>
+<!--  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
-    $(window).load(function() {
+    $(window).on('load', function () {
       let campingcarMenu = document.getElementById('campingcarMenu');
       campingcarMenu.classList.add('activeAdminMenu');
     });
@@ -19,13 +23,21 @@
 
 </head>
 <body>
-<div class="page_wrapper">
-  <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
-  <div class="content_wrapper">
-
+<div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-    <div class="list_container">
+    <div class="content list_container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+
+          <button type="button" id="sidebarCollapse" class="navbar-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+
       <div style="text-align: right;">
         <button class="camping-completely-delete-btn set_reserve">목록에서 삭제</button>
       </div>
@@ -43,9 +55,9 @@
         <p id="set_reserve_header" class="set_reserve">확정</p>
       </div>
       <div class="reserve_list_wrapper" th:each="reservation : ${campingCarReservationList}">
-        <p style="flex: 1; display: flex; justify-content: center; align-items: center;">
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; border-bottom: 1px #5495b1 dotted;">
           <input th:if="${reservation.reservation != 1}" type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
-        </p>
+        </div>
         <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
 
           <p class="created_date" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]}"></p>
@@ -87,7 +99,6 @@
       </div>
 
     </div>
-  </div>
 </div>
 
 </body>

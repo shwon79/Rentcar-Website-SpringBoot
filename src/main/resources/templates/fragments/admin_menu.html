@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-    <div th:fragment="adminMenuFragment" class="menu_container">
-        <div class="menu_list">
-            <a href="/admin/campingcar/menu" id="campingcarMenu"><li>캠핑카 예약</li></a>
-            <a href="/admin/counsel/menu" id="counselMenu"><li>상담 신청</li></a>
-            <a href="/admin/discount/menu" id="discountMenu"><li>할인/인상 적용</li></a>
-            <a href="/admin/moren/reservation/menu" id="morenReservationMenu"><li>모렌 예약 신청</li></a>
-            <a href="/admin/setting/menu" id="settingMenu"><li>기본 내용 설정</li></a>
-        </div>
-    </div>
+<!--    <div >-->
+        <nav id="sidebar" th:fragment="adminMenuFragment" sec:authorize="isAuthenticated()">
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <h3>세이브카</h3>
+            </div>
 
+            <!-- Sidebar Links -->
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="/admin/index" id="indexMenu">메인</a>
+                </li>
+                <li>
+                    <a href="/admin/campingcar/menu" id="campingcarMenu">캠핑카 예약 현황</a>
+                </li>
+                <li>
+                    <a href="/admin/campingcar/price/menu" id="campingcarPriceMenu">캠핑카 가격 수정</a>
+                </li>
+<!--                <li class="active">-->
+<!--                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">캠핑카</a>-->
+<!--                    <ul class="collapse list-unstyled" id="homeSubmenu">-->
+<!--                        <li>-->
+<!--                            <a href="" id="campingcarMenu">예약 리스트</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="" id="campingcarPriceMenu">가격 수정</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+                <li>
+                    <a href="/admin/moren/reservation/menu" id="morenReservationMenu">모렌 예약 신청</a>
+                </li>
+                <li>
+                    <a href="/admin/counsel/menu" id="counselMenu">상담 신청</a>
+                </li>
+                <li>
+                    <a href="/admin/discount/menu" id="discountMenu">할인/인상 적용</a>
+                </li>
+                <li>
+                    <a href="/admin/setting/menu" id="settingMenu">기본 내용 설정</a>
+                </li>
+            </ul>
+        </nav>
 </html>

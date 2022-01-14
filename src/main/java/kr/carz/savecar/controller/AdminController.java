@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +30,6 @@ public class AdminController {
     YearlyRentService yearlyRentService;
     ShortRentService shortRentService;
     CampingCarService campingCarService;
-    LoginService loginService;
     ReservationService reservationService;
     DiscountService discountService;
     MorenReservationService morenReservationService;
@@ -38,20 +39,21 @@ public class AdminController {
     CampingCarPriceService campingCarPriceService;
     CalendarDateService calendarDateService;
     DateCampingService dateCampingService;
+    AdminService adminService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                            ShortRentService shortRentService, CampingCarService campingCarService,
-                           LoginService loginService, ReservationService reservationService,
+                           ReservationService reservationService,
                            DiscountService discountService, MorenReservationService morenReservationService,
                            ExplanationService explanationService, CampingcarReservationService campingcarReservationService,
                            CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
-                           CalendarDateService calendarDateService, DateCampingService dateCampingService) {
+                           CalendarDateService calendarDateService, DateCampingService dateCampingService,
+                           AdminService adminService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarService = campingCarService;
-        this.loginService = loginService;
         this.reservationService = reservationService;
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
@@ -61,6 +63,7 @@ public class AdminController {
         this.campingCarPriceService = campingCarPriceService;
         this.calendarDateService = calendarDateService;
         this.dateCampingService = dateCampingService;
+        this.adminService = adminService;
     }
 
     @Value("${coolsms.api_key}")
@@ -92,260 +95,6 @@ public class AdminController {
         return dtFormat.format(cal.getTime());
     }
 
-    @GetMapping("/admin/login")
-    public String login() {
-        return "admin/login";
-    }
-
-    //로그인
-//    @RequestMapping(value = "/admin/logininfo", method= RequestMethod.POST)
-    @PostMapping("/admin/logininfo")
-    @ResponseBody
-    public ModelAndView post_login_info(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-
-        try {
-            Login user = loginService.findLoginByIdAndPwd(req.getParameter("id"), req.getParameter("pwd"));
-            System.out.println(user.getId());  // exception 발생코드임, 건들지 말기 => 다른 방식 찾기
-
-            HttpSession session = req.getSession();
-            session.setAttribute("user", user);
-
-            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
-            mav.addObject("campingCarReservationList", campingCarReservationList);
-            mav.setViewName("admin/campingcar_menu");
-
-        } catch (NullPointerException e){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); </script>");
-            out.flush();
-
-            // 다시 login page로 back
-            mav.setViewName("admin/login");
-        }
-        return mav;
-    }
-
-
-    // 로그아웃
-    @GetMapping(value = "/admin/logout")
-    @ResponseBody
-    public ModelAndView get_admin_logout(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-
-        HttpSession session = req.getSession();
-        session.removeAttribute("user");
-        session.invalidate();
-
-        res.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = res.getWriter();
-        out.println("<script>alert('로그아웃이 완료되었습니다.'); </script>");
-        out.flush();
-
-        mav.setViewName("admin/login");
-
-        return mav;
-    }
-
-
-
-    // [관리자 메인페이지] 캠핑카 예약내역 메뉴로 입장
-    @GetMapping(value = "/admin/campingcar/menu")
-    @ResponseBody
-    public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
-
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-
-            List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
-            mav.addObject("campingCarReservationList", campingCarReservationList);
-            mav.setViewName("admin/campingcar_menu");
-        }
-
-        return mav;
-    }
-
-    // [관리자 메인페이지] 캠핑카 예약내역 detail 페이지로 입장
-    @GetMapping(value = "/admin/campingcar/detail/{reservationId}")
-    @ResponseBody
-    public ModelAndView get_admin_campincar_detail(HttpServletResponse res, HttpServletRequest req, @PathVariable Long reservationId) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
-
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-
-            Optional<CampingCarReservation> campingCarReservation = campingcarReservationService.findById(reservationId);
-            if(campingCarReservation.isPresent()){
-                mav.addObject("campingCarReservation", campingCarReservation.get());
-            }
-            mav.setViewName("admin/campingcar_detail");
-        }
-
-        return mav;
-    }
-
-
-    //상담 메뉴로 입장
-    @GetMapping("/admin/counsel/menu")
-    public ModelAndView get_counsel_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
-
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-
-            List<Reservation> reservationList = reservationService.findAllReservations();
-            mav.addObject("reservationList", reservationList);
-            mav.setViewName("admin/counsel_menu");
-        }
-
-        return mav;
-    }
-
-
-
-    // 할인가 적용하기 메뉴로 입장
-    @GetMapping("/admin/discount/menu")
-    public ModelAndView get_discount_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-
-        ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
-
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-            List<Discount> discountList = discountService.findAllDiscounts();
-            mav.addObject("discountList", discountList);
-            mav.setViewName("admin/discount_menu");
-        }
-
-        return mav;
-    }
-
-    // 월렌트 실시간 모렌 예약 메뉴로 입장
-    @GetMapping("/admin/moren/reservation/menu")
-    public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
-
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-
-            List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
-            mav.addObject("morenReservationList", morenReservationList);
-            mav.setViewName("admin/moren_reservation_menu");
-        }
-
-        mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate).reversed());
-
-        return mav;
-    }
-
-    // 월렌트 실시간 모렌 디테일 페이지로 입장
-    @GetMapping("/admin/moren/reservation/detail/{reservationId}")
-    public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req,  @PathVariable Long reservationId) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
-
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-            Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
-            if (morenReservation.isPresent()){
-                mav.addObject("morenReservationDTO", morenReservation.get());
-                mav.setViewName("admin/moren_reservation_detail");
-            } else {
-                res.setContentType("text/html; charset=UTF-8");
-                PrintWriter out = res.getWriter();
-                out.println("<script>alert('해당 차량 정보를 찾을 수 없습니다.'); </script>");
-                out.flush();
-
-                mav.setViewName("admin/moren_reservation_menu");
-            }
-        }
-
-        return mav;
-    }
-
-
-
-    // [관리자 메인페이지] 캠핑카 기본설정 메뉴로 입장
-    @GetMapping(value = "/admin/setting/menu")
-    @ResponseBody
-    public ModelAndView get_setting_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
-        ModelAndView mav = new ModelAndView();
-        HttpSession session = req.getSession();
-        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
-
-        if(session.getAttribute("user") == null){
-
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>alert('로그인 정보가 없습니다.'); </script>");
-            out.flush();
-
-            mav.setViewName("admin/login");
-        } else {
-            mav.addObject("explanation",explanation.get());
-            mav.setViewName("admin/setting_menu");
-        }
-
-        return mav;
-    }
 
     public String[] getTwoHundredStrings(StringBuffer inputBuff, String someToken) {
         String[] nameArray = new String[200];
@@ -370,6 +119,187 @@ public class AdminController {
         return nameArray;
     }
 
+//    private S3Service s3Service;
+//    private GalleryService galleryService;
+//
+//    @GetMapping("/gallery")
+//    public String dispWrite() {
+//
+//        return "/gallery";
+//    }
+//
+//    @PostMapping("/gallery")
+//    public String execWrite(GalleryDto galleryDto, MultipartFile file) throws IOException {
+//        String imgPath = s3Service.upload(file);
+//        galleryDto.setFilePath(imgPath);
+//
+//        galleryService.savePost(galleryDto);
+//
+//        return "redirect:/gallery";
+//    }
+
+    @GetMapping("/admin/index")
+    public String index(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "exception", required = false) String exception,
+                        ModelMap model) {
+
+        model.addAttribute("error",error);
+        model.addAttribute("exception",exception);
+
+        return "/admin/index";
+    }
+
+    @GetMapping("/admin/signup")
+    public String signupForm(ModelMap model) {
+        model.addAttribute("admin",new AdminDTO());
+
+        return "/admin/signupForm";
+    }
+
+    @PostMapping("/admin/signup")
+    public String signup(AdminDTO adminDTO) {
+        adminService.signUp(adminDTO);
+
+        return "redirect:/admin/index";
+    }
+
+    @GetMapping("/admin/login")
+    public String login()
+    {
+        return "redirect:/admin/index";
+    }
+
+
+    // [관리자 메인페이지] 캠핑카 예약내역 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/menu")
+    @ResponseBody
+    public ModelAndView get_admin_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
+        mav.addObject("campingCarReservationList", campingCarReservationList);
+        mav.setViewName("admin/campingcar_menu");
+
+        return mav;
+    }
+
+    // [관리자 메인페이지] 캠핑카 예약내역 detail 페이지로 입장
+    @GetMapping(value = "/admin/campingcar/detail/{reservationId}")
+    @ResponseBody
+    public ModelAndView get_admin_campincar_detail(HttpServletResponse res, HttpServletRequest req, @PathVariable Long reservationId) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+        Optional<CampingCarReservation> campingCarReservation = campingcarReservationService.findById(reservationId);
+        if(campingCarReservation.isPresent()){
+            mav.addObject("campingCarReservation", campingCarReservation.get());
+        }
+        mav.setViewName("admin/campingcar_detail");
+
+        return mav;
+    }
+
+
+    //상담 메뉴로 입장
+    @GetMapping("/admin/counsel/menu")
+    public ModelAndView get_counsel_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<Reservation> reservationList = reservationService.findAllReservations();
+        mav.addObject("reservationList", reservationList);
+        mav.setViewName("admin/counsel_menu");
+
+        return mav;
+    }
+
+
+
+    // 할인가 적용하기 메뉴로 입장
+    @GetMapping("/admin/discount/menu")
+    public ModelAndView get_discount_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+
+        ModelAndView mav = new ModelAndView();
+
+        List<Discount> discountList = discountService.findAllDiscounts();
+        mav.addObject("discountList", discountList);
+        mav.setViewName("admin/discount_menu");
+
+        return mav;
+    }
+
+    // 월렌트 실시간 모렌 예약 메뉴로 입장
+    @GetMapping("/admin/moren/reservation/menu")
+    public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
+        mav.addObject("morenReservationList", morenReservationList);
+        mav.setViewName("admin/moren_reservation_menu");
+
+        mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate).reversed());
+
+        return mav;
+    }
+
+    // 월렌트 실시간 모렌 디테일 페이지로 입장
+    @GetMapping("/admin/moren/reservation/detail/{reservationId}")
+    public ModelAndView get_moren_reservation_menu(HttpServletResponse res, HttpServletRequest req,  @PathVariable Long reservationId) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+
+        Optional<MorenReservation> morenReservation = morenReservationService.findMorenReservationById(reservationId);
+        if (morenReservation.isPresent()){
+            mav.addObject("morenReservationDTO", morenReservation.get());
+            mav.setViewName("admin/moren_reservation_detail");
+        } else {
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('해당 차량 정보를 찾을 수 없습니다.'); </script>");
+            out.flush();
+
+            mav.setViewName("admin/moren_reservation_menu");
+        }
+
+        return mav;
+    }
+
+
+
+    // [관리자 메인페이지] 캠핑카 기본설정 메뉴로 입장
+    @GetMapping(value = "/admin/setting/menu")
+    @ResponseBody
+    public ModelAndView get_setting_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+        Optional<Explanation> explanation = explanationService.findById((long) 0);
+
+        mav.addObject("explanation",explanation.get());
+        mav.setViewName("admin/setting_menu");
+
+        return mav;
+    }
+
+
+
+    // [관리자 메인페이지] 캠핑카 가격 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/price/menu")
+    @ResponseBody
+    public ModelAndView get_campingcar_price_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<CampingCarPrice> campingCarPriceList = campingCarPriceService.findCampingCarPrice();
+
+        mav.addObject("campingCarPriceList", campingCarPriceList);
+        mav.setViewName("admin/campingcar_price_menu");
+
+        return mav;
+    }
 
     // 캠핑카 예약 수정, 확정, 취소하기 api
     @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
@@ -390,7 +320,7 @@ public class AdminController {
         HashMap<String, String> params2 = new HashMap<>();
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1+", "+admin2+", "+admin3); // 01033453328 추가
+        params.put("to", admin1+", "+admin2+", "+admin3);
         params.put("from", admin3);
         params.put("type", "LMS");
 
@@ -436,7 +366,7 @@ public class AdminController {
                         } else {
                             dateCampingList.get(i).setReserved("1");
                         }
-                    } else if(one_cnt == calendarTimeForCheckList.size()){
+                    } else {
                         dateCampingList.get(i).setReserved("2");
                     }
                 } else if (i == dateCampingListSize - 1 && !campingCarReservation.getReturnTime().equals("18시")) {
@@ -456,7 +386,7 @@ public class AdminController {
                         } else {
                             dateCampingList.get(i).setReserved("1");
                         }
-                    } else if(one_cnt == calendarTimeForCheckList.size()){
+                    } else {
                         dateCampingList.get(i).setReserved("2");
                     }
                 } else {
@@ -640,7 +570,6 @@ public class AdminController {
                 System.out.println("응답값 : " + response);
 
             } catch (Exception e){
-                System.out.println(e);
                 jsonObject.put("result", 0);
 
                 PrintWriter pw = res.getWriter();
@@ -705,7 +634,6 @@ public class AdminController {
                     System.out.println("응답값 : " + response);
 
                 } catch (Exception e) {
-                    System.out.println(e);
                     jsonObject.put("result", 0);
 
                     PrintWriter pw = res.getWriter();
@@ -1033,13 +961,13 @@ public class AdminController {
                 HashMap<String, String> params2 = new HashMap<>();
 
                 /* 세이브카에 예약확인 문자 전송 */
-                params.put("to", "01058283328, 01033453328, 01052774113");
-                params.put("from", "01052774113");
+                params.put("to", admin1+", "+admin2+", "+admin3);
+                params.put("from", admin3);
                 params.put("type", "LMS");
 
                 /* 고객에게 예약확인 문자 전송 */
                 params2.put("to", dto.getReservationPhone());
-                params2.put("from", "01052774113");
+                params2.put("from", admin3);
                 params2.put("type", "LMS");
 
                 String delivery_text;
@@ -1104,7 +1032,6 @@ public class AdminController {
                 jsonObject_return.put("result", 1);
 
             } catch (Exception e) {
-                System.out.println(e);
                 jsonObject_return.put("result", 0);
             }
 
@@ -1160,16 +1087,16 @@ public class AdminController {
                 HashMap<String, String> params2 = new HashMap<>();
 
                 /* 세이브카에 예약확인 문자 전송 */
-                params.put("to", "01058283328"); // 01033453328 추가
+                params.put("to", "01058283328");
                 params.put("from", "01052774113");
                 params.put("type", "LMS");
 
                 /* 고객에게 예약확인 문자 전송 */
-                params2.put("to", morenReservation.getReservationPhone()); // 여러가지 번호형태 테스트
+                params2.put("to", morenReservation.getReservationPhone());
                 params2.put("from", "01052774113");
                 params2.put("type", "LMS");
 
-                String delivery_text = "";
+                String delivery_text;
                 if (morenReservation.getPickupPlace().equals("방문")){
                     delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n";
                 } else {
@@ -1229,7 +1156,6 @@ public class AdminController {
                 jsonObject_return.put("result", 1);
 
             } catch (Exception e) {
-                System.out.println(e);
                 jsonObject_return.put("result", 0);
             }
 
@@ -1297,7 +1223,6 @@ public class AdminController {
                     jsonObject_return.put("result", 1);
 
                 } catch (Exception e) {
-                    System.out.println(e);
                     jsonObject_return.put("result", 0);
                 }
             }
@@ -1361,7 +1286,7 @@ public class AdminController {
     @ResponseBody
     public void post_admin_setting(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
 
-        Optional<Explanation> explanation_optional = explanationService.findById(Long.valueOf(0));
+        Optional<Explanation> explanation_optional = explanationService.findById((long) 0);
         Explanation explanation = explanation_optional.get();
         explanation.setCamper_price(explanationDTO.getCamper_price());
         explanation.setEurope_basic_option(explanationDTO.getEurope_basic_option());
@@ -1377,6 +1302,60 @@ public class AdminController {
         explanation.setDriver_license(explanationDTO.getDriver_license());
 
         explanationService.save(explanation);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    @PutMapping("/admin/campingcar/price/by/{carType}")
+    @ResponseBody
+    @Transactional
+    public void put_admin_campingcar_price(HttpServletResponse res, @RequestBody CampingCarPriceDTO campingCarPriceDTO, @PathVariable String carType) throws IOException {
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+
+        campingCarPrice.setCarNum(campingCarPriceDTO.getCarNum());
+        campingCarPrice.setCarCode(campingCarPriceDTO.getCarCode());
+        campingCarPrice.setSeason(campingCarPriceDTO.getSeason());
+        campingCarPrice.setOnedays(campingCarPriceDTO.getOnedays());
+        campingCarPrice.setTwodays(campingCarPriceDTO.getTwodays());
+        campingCarPrice.setThreedays(campingCarPriceDTO.getThreedays());
+        campingCarPrice.setFourdays(campingCarPriceDTO.getFourdays());
+        campingCarPrice.setFivedays(campingCarPriceDTO.getFivedays());
+        campingCarPrice.setSixdays(campingCarPriceDTO.getSixdays());
+        campingCarPrice.setSevendays(campingCarPriceDTO.getSevendays());
+        campingCarPrice.setEightdays(campingCarPriceDTO.getEightdays());
+        campingCarPrice.setNinedays(campingCarPriceDTO.getNinedays());
+        campingCarPrice.setTendays(campingCarPriceDTO.getTendays());
+        campingCarPrice.setElevendays(campingCarPriceDTO.getElevendays());
+        campingCarPrice.setTwelvedays(campingCarPriceDTO.getTwelvedays());
+        campingCarPrice.setThirteendays(campingCarPriceDTO.getThirteendays());
+        campingCarPrice.setFourteendays(campingCarPriceDTO.getFourteendays());
+        campingCarPrice.setFifteendays(campingCarPriceDTO.getFifteendays());
+        campingCarPrice.setSixteendays(campingCarPriceDTO.getSixteendays());
+        campingCarPrice.setSeventeendays(campingCarPriceDTO.getSeventeendays());
+        campingCarPrice.setEighteendays(campingCarPriceDTO.getEighteendays());
+        campingCarPrice.setNinetinedays(campingCarPriceDTO.getNinetinedays());
+        campingCarPrice.setTwentydays(campingCarPriceDTO.getTwentydays());
+        campingCarPrice.setTwentyonedays(campingCarPriceDTO.getTwentyonedays());
+        campingCarPrice.setTwentytwodays(campingCarPriceDTO.getTwentytwodays());
+        campingCarPrice.setTwentythreedays(campingCarPriceDTO.getTwentythreedays());
+        campingCarPrice.setTwentyfourdays(campingCarPriceDTO.getTwentyfourdays());
+        campingCarPrice.setTwentyfivedays(campingCarPriceDTO.getTwentyfivedays());
+        campingCarPrice.setTwentysixdays(campingCarPriceDTO.getTwentysixdays());
+        campingCarPrice.setTwentysevendays(campingCarPriceDTO.getTwentysevendays());
+        campingCarPrice.setTwentyeightdays(campingCarPriceDTO.getTwentyeightdays());
+        campingCarPrice.setTwentyninedays(campingCarPriceDTO.getTwentyninedays());
+        campingCarPrice.setThirtydays(campingCarPriceDTO.getThirtydays());
+        campingCarPrice.setDeposit(campingCarPriceDTO.getDeposit());
+        campingCarPrice.setYearmodel(campingCarPriceDTO.getYearmodel());
+
+        campingCarPriceService.save(campingCarPrice);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);

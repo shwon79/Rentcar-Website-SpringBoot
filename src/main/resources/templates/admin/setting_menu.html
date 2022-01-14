@@ -1,4 +1,4 @@
-<!-- 관리자페이지 -->
+<!-- 관리자 기본 내용 설정 -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -7,31 +7,43 @@
     <title>SAVECAR - 관리자 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/admin.css}" rel="stylesheet">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/admin.js}" defer></script>
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <script>
-        $(window).load(function() {
+        $(window).on('load', function () {
             let settingMenu = document.getElementById('settingMenu');
             settingMenu.classList.add('activeAdminMenu');
         });
     </script>
 </head>
 <body>
-<div class="page_wrapper">
-    <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
-    <div class="content_wrapper">
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-        <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
 
-        <div class="content_container" style="text-align: center;">
-            <div class="head_title" style="margin-top: 50px; text-align: center;">
-                <h2>기본 내용 설정</h2>
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <div style="text-align: right;">
-                <button id="saveBtn">저장하기</button>
+        </nav>
+
+        <div style="text-align: center;">
+            <h2 class="page_title">기본 내용 설정</h2>
+            <div style="text-align: right; margin-bottom: 20px;">
+                <button id="settingSaveBtn" class="btn btn-outline-info">저장하기</button>
             </div>
-            <div id="textarea_wrapper">
+            <div id="textarea_wrapper" style="margin-bottom: 100px;">
                 <h3>공통 정보</h3>
                 <article>
                     <h4 class="text_explanation">기본 정보</h4>
