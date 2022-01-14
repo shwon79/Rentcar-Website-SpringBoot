@@ -23,7 +23,7 @@
 <div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-    <div class="content">
+    <div class="content sm-content">
         <nav class="navbar navbar-expand-lg navbar-light" sec:authorize="isAuthenticated()">
             <div class="container-fluid">
 
@@ -41,7 +41,7 @@
 
             <br />
             <div sec:authorize="isAnonymous()" style="text-align: center;">
-                <h1>로그인</h1>
+                <h2>로그인</h2>
                 <hr>
                 <div th:if="${error}">
                     <p th:text="${exception}" ></p>
@@ -57,7 +57,9 @@
                         <label for="exampleInputPassword1">비밀번호</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" name="password" style="text-align: center;">
                     </div>
-                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">로그인</button>
+                    </div>
                 </form>
             </div>
 

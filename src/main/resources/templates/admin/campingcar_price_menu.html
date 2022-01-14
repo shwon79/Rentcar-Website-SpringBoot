@@ -28,7 +28,7 @@
 <div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-    <div class="content list_container">
+    <div class="content">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
 
@@ -40,8 +40,8 @@
             </div>
         </nav>
 
-        <div class="container">
-            <h4 style="text-align: center;">캠핑카 가격 수정</h4>
+        <div class="container inner_content">
+            <h2 class="page_title" style="text-align: center;">캠핑카 가격 수정</h2>
             <div style="margin-top: 30px;">
                 <ul class="nav nav-tabs" style="justify-content: center;">
                     <li class="nav-item">
@@ -67,16 +67,16 @@
                         <p th:text="${campingCarPriceList[4].yearmodel}" id="travel_yearmodel"></p>
                     </div>
                     <div class="tab-pane fade show active" id="europePrice">
-                        <table class="table campingPriceEditTable">
+                        <table class="table campingPriceEditTable table-striped">
                             <thead>
                                 <tr>
-                                    <td></td>
-                                    <td colspan="2">
+                                    <td style="border-top: none;"></td>
+                                    <td style="border-top: none;" colspan="2">
                                         <button onclick="EditCampingcarPrice('europe', 0);" class="btn btn-primary btn-sm">
                                             비수기 가격 수정
                                         </button>
                                     </td>
-                                    <td colspan="2">
+                                    <td style="border-top: none;" colspan="2">
                                         <button onclick="EditCampingcarPrice('europe_peak', 1);" class="btn btn-primary btn-sm">
                                             성수기 가격 수정
                                         </button>
@@ -84,7 +84,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr class="thead-dark">
                                     <th scope="col">이용권</th>
                                     <th scope="col">비수기</th>
                                     <th scope="col">비수기 할인 %</th>
@@ -305,16 +305,16 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="limousinePrice">
-                        <table class="table campingPriceEditTable">
+                        <table class="table campingPriceEditTable table-striped">
                             <thead>
                             <tr>
-                                <td></td>
-                                <td colspan="2">
+                                <td style="border-top: none;"></td>
+                                <td style="border-top: none;" colspan="2">
                                     <button onclick="EditCampingcarPrice('limousine', 0);" class="btn btn-primary btn-sm">
                                         비수기 가격 수정
                                     </button>
                                 </td>
-                                <td colspan="2">
+                                <td style="border-top: none;" colspan="2">
                                     <button onclick="EditCampingcarPrice('limousine_peak', 1);" class="btn btn-primary btn-sm">
                                         성수기 가격 수정
                                     </button>
@@ -322,7 +322,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th scope="col">이용권</th>
                                 <th scope="col">비수기</th>
                                 <th scope="col">비수기 할인 %</th>
@@ -543,16 +543,16 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="travelPrice">
-                        <table class="table campingPriceEditTable">
+                        <table class="table campingPriceEditTable table-striped">
                             <thead>
                             <tr>
-                                <td></td>
-                                <td colspan="2">
+                                <td style="border-top: none;"></td>
+                                <td style="border-top: none;" colspan="2">
                                     <button onclick="EditCampingcarPrice('travel', 0);" class="btn btn-primary btn-sm">
                                         비수기 가격 수정
                                     </button>
                                 </td>
-                                <td colspan="2">
+                                <td style="border-top: none;" colspan="2">
                                     <button onclick="EditCampingcarPrice('travel_peak', 1);" class="btn btn-primary btn-sm">
                                         성수기 가격 수정
                                     </button>
@@ -560,7 +560,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th scope="col">이용권</th>
                                 <th scope="col">비수기</th>
                                 <th scope="col">비수기 할인 %</th>

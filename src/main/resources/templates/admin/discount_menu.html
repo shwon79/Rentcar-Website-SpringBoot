@@ -27,7 +27,7 @@
 <div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-    <div class="content content_container">
+    <div class="content">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
 
@@ -39,57 +39,59 @@
             </div>
         </nav>
 
-        <div name="discountForm">
-            <h2 class="page_title">할인/인상가 적용하기</h2>
-            <div class="form-group">
-                <label for="carNo">차량번호</label>
-               <input type="text" class="form-control" name="carNo" id="carNo" aria-describedby="emailHelp">
+        <div class="inner_content">
+            <div name="discountForm">
+                <h2 class="page_title" style="text-align: center;">할인/인상가 적용하기</h2>
+                <div class="form-group">
+                    <label for="carNo">차량번호</label>
+                    <input type="text" class="form-control" name="carNo" id="carNo" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="discount">할인/인상률(%)</label>
+                    <input type="text" class="form-control" name="discount" id="discount">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: red;">↑ 할인을 하고 싶으면 음수 값으로, 인상을 하고 싶으면 양수 값으로 적어주세요.</label>
+                </div>
+                <div class="form-group">
+                    <label for="discount-description">할인/인상 설명</label>
+                    <input type="text" class="form-control" name="discount-description" id="discount-description">
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-info" onclick="make_discount()">할인/인상 적용하기</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="discount">할인/인상률(%)</label>
-                <input type="text" class="form-control" name="discount" id="discount">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label style="color: red;">↑ 할인을 하고 싶으면 음수 값으로, 인상을 하고 싶으면 양수 값으로 적어주세요.</label>
-            </div>
-            <div class="form-group">
-                <label for="discount-description">할인/인상 설명</label>
-                <input type="text" class="form-control" name="discount-description" id="discount-description">
-            </div>
-            <div style="text-align: center;">
-                <button class="btn btn-info" onclick="make_discount()">할인/인상 적용하기</button>
+            <div id="mainTable" class="discount-table">
+                <h2 class="page_title">할인/인상가 적용 차량 목록</h2>
+                <table class="table table-striped">
+                    <thead id="table_header" class="thead-dark">
+                    <tr>
+                        <th>차량번호</th>
+                        <th colspan="2">할인/인상률</th>
+                        <th colspan="2">할인/인상 설명</th>
+                        <th>삭제</th>
+                    </tr>
+                    </thead>
+                    <tbody id="mainTable_tbody">
+                    <tr th:each="discount, iterStat : ${discountList}">
+                        <td scope="col" th:text="${discount.carNo}" class="editCarNo" th:data-index="${discount.carNo}"></td>
+                        <td scope="col" th:text="${discount.discount} + '%'" class="editDiscount" th:data-index="${discount.carNo}"></td>
+                        <td>
+                            <span style="margin-right: 3%;"><button class="money-update-btn btn btn-info btn-sm" th:data-index="${discount.carNo}">수정</button></span>
+                        </td>
+                        <td scope="col" th:text="${discount.description}" class="discountDescription" th:data-index="${discount.carNo}"></td>
+                        <td>
+                            <span style="margin-right: 3%;"><button class="description-update-btn btn btn-info btn-sm" th:data-index="${discount.carNo}">수정</button></span>
+                        </td>
+                        <td>
+                            <span><button class="delete-btn btn btn-info btn-sm" th:data-index="${discount.carNo}">삭제</button></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div id="mainTable" class="discount-table">
-            <h2 class="page_title">할인/인상가 적용 차량 목록</h2>
-            <table>
-                <thead id="table_header">
-                <tr>
-                    <th>차량번호</th>
-                    <th colspan="2">할인/인상률</th>
-                    <th colspan="2">할인/인상 설명</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <!-- pc -->
-                <tbody id="mainTable_tbody">
-                <tr th:each="discount, iterStat : ${discountList}">
-                    <td scope="col" th:text="${discount.carNo}" class="editCarNo" th:data-index="${discount.carNo}"></td>
-                    <td scope="col" th:text="${discount.discount} + '%'" class="editDiscount" th:data-index="${discount.carNo}"></td>
-                    <td>
-                        <span style="margin-right: 3%;"><button class="money-update-btn" th:data-index="${discount.carNo}">수정</button></span>
-                    </td>
-                    <td scope="col" th:text="${discount.description}" class="discountDescription" th:data-index="${discount.carNo}"></td>
-                    <td>
-                        <span style="margin-right: 3%;"><button class="description-update-btn" th:data-index="${discount.carNo}">수정</button></span>
-                    </td>
-                    <td>
-                        <span><button class="delete-btn" th:data-index="${discount.carNo}">삭제</button></span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+
     </div>
 </div>
 
