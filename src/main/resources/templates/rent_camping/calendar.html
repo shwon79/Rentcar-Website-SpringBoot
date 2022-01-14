@@ -107,7 +107,7 @@
                                                 <span class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName.toUpperCase()}"></span>
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][0].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
-                                            <span th:if="${calendarTimeList[iterStat.index][0] != '0'}" th:text="${calendarTimeList[iterStat.index][0]}" style="padding-left: 3px;"></span>
+<!--                                            <span th:if="${calendarTimeList[iterStat.index][0] != '0'}" th:text="${calendarTimeList[iterStat.index][0]}" style="padding-left: 3px;"></span>-->
                                         </div>
                                         <div class="reserved_selections" th:if="${dateCampingList[iterStat.index][0].reserved} == '2'" style="display:flex;">
                                             <span style="padding-right: 5px;"><i class="fas fa-circle" style="color: #d3d3d3;"></i></span>
@@ -127,7 +127,7 @@
                                                 <span class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName.toUpperCase()}"></span>
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][1].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
-                                            <span th:if="${calendarTimeList[iterStat.index][1] != '0'}" th:text="${calendarTimeList[iterStat.index][1]}" style="padding-left: 3px;"></span>
+<!--                                            <span th:if="${calendarTimeList[iterStat.index][1] != '0'}" th:text="${calendarTimeList[iterStat.index][1]}" style="padding-left: 3px;"></span>-->
                                         </div>
                                         <div class="reserved_selections" th:if="${dateCampingList[iterStat.index][1].reserved} == '2'" style="display:flex;">
                                             <span style="padding-right: 5px;"><i class="fas fa-circle" style="color: #d3d3d3;"></i></span>
@@ -147,7 +147,7 @@
                                                 <span class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName.toUpperCase()}"></span>
                                             </a>
                                             <span th:if="(${date.month} == ${thisMonth} and ${date.day} < ${thisDay}) or (${date.year} == ${thisYear} and ${date.month} < ${thisMonth})" class="this" th:text="${dateCampingList[iterStat.index][2].carName.carName}" style="color: lightgrey; padding: 5px;"></span>
-                                            <span th:if="${calendarTimeList[iterStat.index][2] != '0'}" th:text="${calendarTimeList[iterStat.index][2]}" style="padding-left: 3px;"></span>
+<!--                                            <span th:if="${calendarTimeList[iterStat.index][2] != '0'}" th:text="${calendarTimeList[iterStat.index][2]}" style="padding-left: 3px;"></span>-->
                                         </div>
                                         <div class="reserved_selections" th:if="${dateCampingList[iterStat.index][2].reserved} == '2'" style="display:flex;">
                                             <span style="padding-right: 5px;"><i class="fas fa-circle" style="color: #d3d3d3;"></i></span>

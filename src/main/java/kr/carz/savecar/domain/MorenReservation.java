@@ -81,12 +81,16 @@ public class MorenReservation extends BaseTimeEntity {
     @Column(nullable = true)
     private String orderCode;
 
+    @Column(nullable = true)
+    private String selectAge;
+
     @Builder
     public MorenReservation(Long id, String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
                             String reservationDate, String reservationTime, String reservationGuarantee,
                             String reservationDetails, String address, String addressDetail, String carPrice, String carTax,
                             String carAmountTotal, String carDeposit, String reservationStatus, String rentTerm,
-                            String costPerKm, String carCode, String pickupPlace, String carName, String orderCode) {
+                            String costPerKm, String carCode, String pickupPlace, String carName, String orderCode,
+                            String selectAge) {
         this.id = id;
         this.carNo = carNo;
         this.kilometer = kilometer;
@@ -110,5 +114,6 @@ public class MorenReservation extends BaseTimeEntity {
         this.pickupPlace = pickupPlace;
         this.carName = carName;
         this.orderCode = orderCode;
+        this.selectAge = selectAge;
     }
 }

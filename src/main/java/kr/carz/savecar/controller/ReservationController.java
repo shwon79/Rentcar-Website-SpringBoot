@@ -31,8 +31,14 @@ public class ReservationController {
     @Value("${coolsms.api_secret}")
     private String api_secret;
 
-    @Value("${moren.request_url}")
-    private String request_url;
+    @Value("${phone.admin1}")
+    private String admin1;
+
+    @Value("${phone.admin2}")
+    private String admin2;
+
+    @Value("${phone.admin3}")
+    private String admin3;
 
     @Autowired
     public ReservationController(ReservationService reservationService, MorenReservationService morenReservationService) {
@@ -53,14 +59,14 @@ public class ReservationController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-        params.put("from", "01052774113");
+        params.put("to", admin1+", "+admin2+", "+admin3); // 01033453328 추가
+        params.put("from", admin3);
         params.put("type", "LMS");
 
 
         /* 고객에게 예약확인 문자 전송 */
         params2.put("to", dto.getPhoneNo());
-        params2.put("from", "01052774113");  // 16613331 테스트하기
+        params2.put("from", admin3);  // 16613331 테스트하기
         params2.put("type", "LMS");
 
 
@@ -89,7 +95,7 @@ public class ReservationController {
                     + "차량번호: " + dto.getCar_num() + "\n"
                     + "년식: " + dto.getCarAge() + "\n"
                     + "대여기간: " + dto.getProduct() + "\n"
-                    + "주행거리: " + dto.getMileage() + "\n"
+                    + "약정 주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n"
                     + "총렌트료[부포]: " + dto.getPrice() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
@@ -102,7 +108,7 @@ public class ReservationController {
                     + "차량번호: " + dto.getCar_num() + "\n"
                     + "년식: " + dto.getCarAge() + "\n"
                     + "대여기간: " + dto.getProduct() + "\n"
-                    + "주행거리: " + dto.getMileage() + "\n"
+                    + "약정 주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n"
                     + "총렌트료: " + dto.getPrice() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");

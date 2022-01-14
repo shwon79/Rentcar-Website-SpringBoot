@@ -320,7 +320,7 @@ public class AdminController {
         HashMap<String, String> params2 = new HashMap<>();
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1+", "+admin2+", "+admin3); // 01033453328 추가
+        params.put("to", admin1+", "+admin2+", "+admin3);
         params.put("from", admin3);
         params.put("type", "LMS");
 
@@ -961,13 +961,13 @@ public class AdminController {
                 HashMap<String, String> params2 = new HashMap<>();
 
                 /* 세이브카에 예약확인 문자 전송 */
-                params.put("to", "01058283328, 01033453328, 01052774113");
-                params.put("from", "01052774113");
+                params.put("to", admin1+", "+admin2+", "+admin3);
+                params.put("from", admin3);
                 params.put("type", "LMS");
 
                 /* 고객에게 예약확인 문자 전송 */
                 params2.put("to", dto.getReservationPhone());
-                params2.put("from", "01052774113");
+                params2.put("from", admin3);
                 params2.put("type", "LMS");
 
                 String delivery_text;
@@ -1087,12 +1087,12 @@ public class AdminController {
                 HashMap<String, String> params2 = new HashMap<>();
 
                 /* 세이브카에 예약확인 문자 전송 */
-                params.put("to", "01058283328"); // 01033453328 추가
+                params.put("to", "01058283328");
                 params.put("from", "01052774113");
                 params.put("type", "LMS");
 
                 /* 고객에게 예약확인 문자 전송 */
-                params2.put("to", morenReservation.getReservationPhone()); // 여러가지 번호형태 테스트
+                params2.put("to", morenReservation.getReservationPhone());
                 params2.put("from", "01052774113");
                 params2.put("type", "LMS");
 
