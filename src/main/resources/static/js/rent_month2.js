@@ -74,7 +74,7 @@ function make_monthly_rent_reservation (e) {
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
     let carDeposit = document.getElementById('forPostDeposit').innerText;
     let carOld = document.getElementById('forPostCarOld').innerText;
-    let ageLimit = document.getElementById('selectAge').value;
+    let ageLimit = document.getElementById('selectAge1').value;
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let carPrice = parseInt(document.getElementById('carPrice').innerText.replace(/,/g, ""));
     let reservationPhone = $("#reservation-simple-phone").val();
@@ -338,6 +338,16 @@ function displayEditedPrice(e) {
     }
 }
 
+// 데스크탑, 모바일 연령 맞추기
+function sameAgeLimit(e) {
+    // console.log(e.id);
+    if (e.id === 'selectAge1') {
+        document.getElementById('selectAge2').value = document.getElementById('selectAge1').value;
+    } else if (e.id === 'selectAge2') {
+        document.getElementById('selectAge1').value = document.getElementById('selectAge2').value;
+    }
+};
+
 // 예약 신청하기 버튼 누르면 새창에 폼 띄우기
 function openForm() {
     let carCategory = document.getElementById('forPostCarCategory').innerHTML;
@@ -364,6 +374,7 @@ function openForm() {
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
+    let ageLimit = document.getElementById('selectAge1').value;
 
     carPrice = carPrice.replace(/,/g, "");
 
@@ -372,6 +383,12 @@ function openForm() {
     mapForm.method = "POST"; // or "post" if appropriate
     mapForm.action = "/rent/month/detail/form/reservation";
     mapForm.style.display= "none";
+
+    var mapAgeLimit = document.createElement("input");
+    mapAgeLimit.type = "text";
+    mapAgeLimit.name = "selectAge";
+    mapAgeLimit.value = ageLimit;
+    mapForm.appendChild(mapAgeLimit);
 
     var mapCarCategory = document.createElement("input");
     mapCarCategory.type = "text";
@@ -555,7 +572,7 @@ function openOffer() {
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
-    let selectAge = document.getElementById('selectAge').value;
+    let selectAge = document.getElementById('selectAge1').value;
 
     carPrice = carPrice.replace(/,/g, "");
 

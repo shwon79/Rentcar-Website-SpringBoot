@@ -133,6 +133,7 @@ const reserveMonthlyRent = () => {
     const returnTime = document.getElementById('reservation-detail-time_return').value;
     const carCode = document.getElementById('getCarCode').innerText;
     const pickupPlace = document.getElementById('reservation-detail-pickup').value;
+    let selectAge = document.getElementById('selectAge').innerText;
     let reservationStatus = 0;
 
     let check1 = document.getElementById('check_info1').checked;
@@ -142,6 +143,12 @@ const reserveMonthlyRent = () => {
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     let phoneWithoutDash = /^\d{11}$/;
     let regAge = /[0-9]{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1])/;
+
+    if (selectAge === 'upper26') {
+        selectAge = '만 26세 이상';
+    } else if (selectAge === 'upper21') {
+        selectAge = '만 21세 이상~만 26세 미만';
+    }
 
     if (carTax!='상담') {
         carTax = parseInt(carTax)*0.1;
@@ -191,7 +198,8 @@ const reserveMonthlyRent = () => {
             rentTerm: rentTerm,
             costPerKm: costPerKm,
             carCode: carCode,
-            pickupPlace: pickupPlace
+            pickupPlace: pickupPlace,
+            selectAge: selectAge
         }
 
         // console.log(data);

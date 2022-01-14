@@ -206,7 +206,7 @@
                       </div>
                       <div style="font-size: 20px; margin-bottom: 1rem;">
                         <span style="font-size: 15px;">연령&nbsp;&nbsp;</span>
-                        <select onchange="displayEditedPrice(this)" id="selectAge" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
+                        <select onchange="displayEditedPrice(this); sameAgeLimit(this);" id="selectAge1" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
                           <option value='upper26' selected>만 26세 이상</option>
                           <option value='upper21'>만 21세 이상~만 26세 미만</option>
                         </select>
@@ -307,7 +307,7 @@
                       </p>
                       <p>
                         <span>연령</span>
-                        <select onchange="displayEditedPrice(this)" id="selectAge" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
+                        <select onchange="displayEditedPrice(this); sameAgeLimit(this);" id="selectAge2" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
                           <option value='upper26' selected>만 26세 이상</option>
                           <option value='upper21'>만 21세 이상~만 26세 미만</option>
                         </select>
