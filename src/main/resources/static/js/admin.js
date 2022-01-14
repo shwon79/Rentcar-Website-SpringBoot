@@ -338,8 +338,8 @@ $('.camping-completely-delete-btn').click(function() {
 });
 
 // setting에서 캠핑카 내용 수정 버튼
-let saveBtn = document.getElementById('saveBtn');
-saveBtn.addEventListener('click', () => {
+let settingSaveBtn = document.getElementById('settingSaveBtn');
+settingSaveBtn.addEventListener('click', () => {
     let editedCamperPrice = document.getElementById('editedCamperPrice');
     let editedRentPolicy = document.getElementById('editedRentPolicy');
     let editedRentInsurance = document.getElementById('editedRentInsurance');

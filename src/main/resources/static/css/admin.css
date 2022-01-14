@@ -188,6 +188,30 @@ body {
     font-weight: bold;
 }
 
+.content {
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 75%;
+    height: auto;
+    min-height: 100vh;
+}
+.sm-content {
+    width: 50%;
+}
+.lg-content {
+    width: 95%;
+}
+.page_title {
+    margin-top: 30px;
+}
+
+@media (max-width: 480px) {
+    .content, .sm-content {
+        width: 95%;
+    }
+}
+
+
 #logout_box {
     /*margin: 10px 20px 10px 10px;*/
     text-align: right;
@@ -209,8 +233,8 @@ body {
 }
 
 .content_wrapper {
-    display: flex;
-    flex-direction: row;
+    /*display: flex;*/
+    /*flex-direction: row;*/
 }
 
 .menu_container {
@@ -661,21 +685,25 @@ td {
 }
 
 #textarea_wrapper textarea {
-    width: 70%;
-}
-#saveBtn {
-    border: #5495b1 solid 3px;
-    background: white;
-    border-radius: 8px;
-    padding: 8px 30px;
-    font-size: 16px;
-    cursor: pointer;
+    width: 80%;
 }
 
-#saveBtn:hover {
-    background: #5495b1;
-    color: white;
+#textarea_wrapper article {
+    margin: 15px 0;
 }
+/*#saveBtn {*/
+/*    border: #5495b1 solid 3px;*/
+/*    background: white;*/
+/*    border-radius: 8px;*/
+/*    padding: 8px 30px;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*#saveBtn:hover {*/
+/*    background: #5495b1;*/
+/*    color: white;*/
+/*}*/
 
 .campingPriceEditTable {
     text-align: center;
@@ -727,6 +755,6 @@ td {
         padding: 4px !important;
     }
     #textarea_wrapper textarea {
-        width: 90%;
+        width: 95%;
     }
 }
