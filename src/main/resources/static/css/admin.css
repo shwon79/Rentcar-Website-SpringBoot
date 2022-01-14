@@ -8,7 +8,6 @@
     min-height: 100vh;
 }
 
-
 #sidebar {
     min-width: 250px;
     max-width: 250px;
@@ -17,7 +16,6 @@
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
 }
-
 #sidebar.active {
     margin-left: -250px;
     transform: rotateY(100deg);
@@ -30,7 +28,6 @@
 
 #sidebar ul.components {
     padding: 20px 0;
-    /*border-bottom: 1px solid #47748b;*/
 }
 
 #sidebar ul p {
@@ -45,6 +42,7 @@
     text-decoration: none;
     color: white;
 }
+
 #sidebar ul li a:hover {
     color: #5495b1;
     background: #fff;
@@ -55,7 +53,6 @@
     color: #fff;
     background: #5495b1;
 }
-
 
 a[data-toggle="collapse"] {
     position: relative;
@@ -99,8 +96,6 @@ a.article, a.article:hover {
     color: #fff !important;
 }
 
-
-
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -132,20 +127,20 @@ a.article, a.article:hover {
 #sidebarCollapse span:first-of-type {
     transform: rotate(45deg) translate(2px, 2px);
 }
+
 #sidebarCollapse span:nth-of-type(2) {
     opacity: 0;
 }
+
 #sidebarCollapse span:last-of-type {
     transform: rotate(-45deg) translate(1px, -1px);
 }
-
 
 #sidebarCollapse.active span {
     transform: none;
     opacity: 1;
     margin: 5px auto;
 }
-
 
 /* ---------------------------------------------------
     MEDIAQUERIES
@@ -155,10 +150,12 @@ a.article, a.article:hover {
         margin-left: -250px;
         transform: rotateY(90deg);
     }
+
     #sidebar.active {
         margin-left: 0;
         transform: none;
     }
+
     #sidebarCollapse span:first-of-type,
     #sidebarCollapse span:nth-of-type(2),
     #sidebarCollapse span:last-of-type {
@@ -166,6 +163,7 @@ a.article, a.article:hover {
         opacity: 1;
         margin: 5px auto;
     }
+
     /*#sidebarCollapse.active span {*/
     /*    margin: 0 auto;*/
     /*}*/
@@ -178,7 +176,6 @@ a.article, a.article:hover {
     /*#sidebarCollapse.active span:last-of-type {*/
     /*    transform: rotate(-45deg) translate(1px, -1px);*/
     /*}*/
-
 }
 /* Admin Menu End */
 
@@ -204,6 +201,12 @@ body {
 .page_title {
     margin: 1em 0;
     text-align: center;
+}
+.inner_content {
+    padding: 0 1em;
+}
+button {
+    width: max-content;
 }
 
 @media (max-width: 480px) {
@@ -298,6 +301,7 @@ body {
 
 #mainTable td {
     padding: 10px;
+    vertical-align: middle;
 }
 
 #mainTable th{
@@ -458,9 +462,10 @@ form {
 
 }
 
-#mainTable_tbody td {
-    padding: 10px;
-}
+/*#mainTable_tbody td {*/
+/*    padding: 10px;*/
+/*    */
+/*}*/
 
 #mainTable_tbody {
     border-spacing: 10px;
@@ -605,9 +610,8 @@ form {
     text-align: center;
 }
 td {
-    border-bottom: 1px solid #5495b1;
+    /*border-bottom: 1px solid #5495b1;*/
 }
-.discount-table button,
 #morenReservationTable button,
 #morenReservationCard button,
 #reservation-detail-card button {
@@ -695,12 +699,14 @@ td {
 
 .campingPriceEditTable {
     text-align: center;
+    margin-top: 30px;
 }
 .campingPriceEditTable textarea {
     height: 2em;
-    width: 6em;
+    width: 5em;
     text-align: center;
 }
+
 
 @media (max-width: 990px) {
 
@@ -729,7 +735,7 @@ td {
         width: 90%;
     }
     #mainTable button {
-        width: 100%;
+        /*width: 100%;*/
     }
     .discount-table {
         font-size: 14px;
@@ -739,5 +745,9 @@ td {
     }
     #textarea_wrapper textarea {
         width: 95%;
+    }
+    .campingPriceEditTable td,
+    .campingPriceEditTable th {
+        padding: 0;
     }
 }
