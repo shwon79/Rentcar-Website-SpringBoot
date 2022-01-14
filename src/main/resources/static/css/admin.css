@@ -702,6 +702,7 @@ td {
     text-align: center;
 }
 
+
 @media (max-width: 990px) {
 
     #morenReservationTable {
@@ -739,5 +740,9 @@ td {
     }
     #textarea_wrapper textarea {
         width: 95%;
+    }
+    .campingPriceEditTable td,
+    .campingPriceEditTable th {
+        padding: 0;
     }
 }
