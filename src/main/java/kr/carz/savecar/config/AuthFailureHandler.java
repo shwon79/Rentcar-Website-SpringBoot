@@ -27,7 +27,7 @@ public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
             error = "Your password has expired. Please contact the website administrator.";
         }
 
-        setDefaultFailureUrl("/admin/login?error=true&exception="+error);
+        setDefaultFailureUrl("/admin/index?error=true&exception="+error);
 
         super.onAuthenticationFailure(request,response,exception);
     }
