@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>SAVECAR - 관리자 페이지</title>
@@ -39,6 +40,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary">로그인</button>
             </form>
+
+<!--            <a sec:authorize="isAnonymous()" class="btn btn-info" th:href="@{/admin/signup}">회원가입</a>-->
         </div>
     </div>
 </div>

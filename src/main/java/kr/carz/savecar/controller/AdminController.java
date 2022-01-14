@@ -139,7 +139,13 @@ public class AdminController {
 //    }
 
     @GetMapping("/admin/index")
-    public String index() {
+    public String index(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "exception", required = false) String exception,
+                        ModelMap model) {
+
+        model.addAttribute("error",error);
+        model.addAttribute("exception",exception);
+
         return "/admin/index";
     }
 
@@ -158,14 +164,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/login")
-    public String login(@RequestParam(value = "error", required = false) String error,
-                        @RequestParam(value = "exception", required = false) String exception,
-                        ModelMap model)
+    public String login()
     {
-        model.addAttribute("error",error);
-        model.addAttribute("exception",exception);
-
-        return "/admin/loginForm";
+        return "redirect:/admin/index";
     }
 
 
