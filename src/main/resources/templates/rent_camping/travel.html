@@ -15,12 +15,12 @@
     <script th:src="@{/js/campingcar.js}"></script>
 
     <script>
-        function toggleImg(id) {
-            let before = document.getElementById("headerImg").src;
-            let tmp = document.getElementById(id).src;
-            document.getElementById("headerImg").src = tmp;
-            document.getElementById(id).src = before;
-        }
+        // function toggleImg(id) {
+        //     let before = document.getElementById("headerImg").src;
+        //     let tmp = document.getElementById(id).src;
+        //     document.getElementById("headerImg").src = tmp;
+        //     document.getElementById(id).src = before;
+        // }
 
         $(window).load(function() {
             let ulList = document.getElementsByClassName('header_camp_li');
@@ -29,6 +29,13 @@
                     ulList[i].classList.add('active');
                 }
             };
+        });
+
+        $(function(){
+            $('.carousel').carousel({
+                autoplay: true,
+                interval: 2000
+            });
         });
     </script>
     <script th:src="@{/js/europe_reserve.js}" defer ></script>
@@ -47,165 +54,200 @@
         <div class="row" id="mainRow">
             <!-- left column -->
             <div id="left_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60">
-                <!--기본 정보-->
-                <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="fas fa-circle"></i>
-                        CAMPER 기본 정보
-                    </h1>
-                    <div class="contents">
-                        <table class="camping_info_table">
-                            <tr>
-                                <td>CAMPER 명</td>
-                                <td>Travel VIP</td>
-                            </tr>
-                            <tr>
-                                <td>연료 / 미션</td>
-                                <td>디젤 / Auto</td>
-                            </tr>
-                            <tr>
-                                <td>면허 종류</td>
-                                <td>2종 보통</td>
-                            </tr>
-                            <tr>
-                                <td>인원정보</td>
-                                <td>4인승</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
                 <!--사진-->
                 <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="fas fa-circle"></i>
-                        CAMPER 사진
-                    </h1>
-                    <div class="contents">
-                        <div style="margin-bottom: 2em;">
-                            <img th:src="@{/img/travel2.jpg}" id="headerImg" width="100%" height="100%" style="object-fit:contain">
-                        </div>
-                        <div class="camping_img_small" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 0px;">
-                            <img th:src="@{/img/travel1.jpg}" id="carImg1" onclick="toggleImg('carImg1')">
-                            <img th:src="@{/img/travel2.jpg}" id="carImg2" onclick="toggleImg('carImg2')">
-                            <img th:src="@{/img/travel3.jpg}" id="carImg3" onclick="toggleImg('carImg3')">
-                            <img th:src="@{/img/travel4.jpg}" id="carImg4" onclick="toggleImg('carImg4')">
-                            <img th:src="@{/img/travel5.jpg}" id="carImg5" onclick="toggleImg('carImg5')">
-
+                    <!-- Carousel container -->
+                    <div id="my-pics" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#my-pics" data-slide-to="0" class="active"></li>
+                            <li data-target="#my-pics" data-slide-to="1"></li>
+                            <li data-target="#my-pics" data-slide-to="2"></li>
+                            <li data-target="#my-pics" data-slide-to="3"></li>
+                            <li data-target="#my-pics" data-slide-to="4"></li>
+                        </ol>
+                        <!-- Content -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img th:src="@{/img/travel2.jpg}" alt="Travel Camper">
+                            </div>
+                            <div class="item">
+                                <img th:src="@{/img/travel1.jpg}" alt="Travel Camper">
+                            </div>
+                            <div class="item">
+                                <img th:src="@{/img/travel3.jpg}" alt="Travel Camper">
+                            </div>
+                            <div class="item">
+                                <img th:src="@{/img/travel4.jpg}" alt="Travel Camper">
+                            </div>
+                            <div class="item">
+                                <img th:src="@{/img/travel5.jpg}" alt="Travel Camper">
+                            </div>
                         </div>
                     </div>
+                    <h1 class="car_name_under_images">Travel Camper</h1>
                 </div>
-                <!--요금-->
-                <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="fas fa-circle"></i>
-                        CAMPER 요금
-                   </h1>
-                    <div class="contents">
-<!--                        <img th:src="@{/img/travel-price.jpg}" id="priceImg" width="100%" height="70%">-->
-                        <table id="travel_price_table" class="camping_price_table">
-                            <tr>
-                                <td></td>
-                                <td>비수기</td>
-                                <td style="background-color: #e0f5fb;">성수기</td>
-                            </tr>
-                            <tr>
-                                <td>1일</td>
-                                <td id="travelOffOne"></td>
-                                <td id="travelPeakOne" style="background-color: #e0f5fb;"></td>
 
-                            </tr>
-                            <tr>
-                                <td>4일</td>
-                                <td id="travelOffFour"></td>
-                                <td id="travelPeakFour" style="background-color: #e0f5fb;"></td>
+                <!--탭 메뉴-->
+                <div class="row card" style="margin-top: 50px;">
+                    <div class="tabs">
+                        <input id="info" type="radio" name="tab_item" checked>
+                        <label class="tab_item" for="info">상세정보</label>
+                        <input id="review" type="radio" name="tab_item">
+                        <label class="tab_item" for="review">후기</label>
+                        <input id="qna" type="radio" name="tab_item">
+                        <label class="tab_item" for="qna">QnA</label>
 
-                            </tr>
-                            <tr>
-                                <td>5일</td>
-                                <td id="travelOffFive"></td>
-                                <td id="travelPeakFive" style="background-color: #e0f5fb;"></td>
-                            </tr>
-                            <tr>
-                                <td>7일</td>
-                                <td id="travelOffSeven"></td>
-                                <td id="travelPeakSeven" style="background-color: #e0f5fb;"></td>
-                            </tr>
-                            <tr>
-                                <td>10일</td>
-                                <td id="travelOffTen"></td>
-                                <td id="travelPeakTen" style="background-color: #e0f5fb;"></td>
-                            </tr>
-                            <tr>
-                                <td style="border-bottom: 1px solid black;">15일</td>
-                                <td style="border-bottom: 1px solid black;" id="travelOffFifteen"></td>
-                                <td style="border-bottom: 1px solid black; background-color: #e0f5fb;" id="travelPeakFifteen"></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2" style="color: mediumblue;">자차 포함</td>
-                                <td>Deposit</td>
-                                <td>총 렌트료의 50%</td>
-                            </tr>
-                            <tr>
-                                <td>월렌트</td>
-                                <td id="travelMonth"></td>
-                            </tr>
-                        </table>
-                        <br>
-                        <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>
+                        <div class="tab_content" id="info_content">
+                            <!--기본 정보-->
+                            <div class="row white-card" style="margin: 0;">
+                                <h1 class="title">
+                                    <i class="fas fa-circle"></i>
+                                    CAMPER 기본 정보
+                                </h1>
+                                <div class="contents">
+                                    <table class="camping_info_table">
+                                        <tr>
+                                            <td>CAMPER 명</td>
+                                            <td>Travel VIP</td>
+                                        </tr>
+                                        <tr>
+                                            <td>연료 / 미션</td>
+                                            <td>디젤 / Auto</td>
+                                        </tr>
+                                        <tr>
+                                            <td>면허 종류</td>
+                                            <td>2종 보통</td>
+                                        </tr>
+                                        <tr>
+                                            <td>인원정보</td>
+                                            <td>4인승</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--요금-->
+                            <div class="row white-card" style="margin: 0;">
+                                <h1 class="title">
+                                    <i class="fas fa-circle"></i>
+                                    CAMPER 요금
+                                </h1>
+                                <div class="contents">
+                                    <!--                        <img th:src="@{/img/travel-price.jpg}" id="priceImg" width="100%" height="70%">-->
+                                    <table id="travel_price_table" class="camping_price_table">
+                                        <tr>
+                                            <td></td>
+                                            <td>비수기</td>
+                                            <td style="background-color: #e0f5fb;">성수기</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1일</td>
+                                            <td id="travelOffOne"></td>
+                                            <td id="travelPeakOne" style="background-color: #e0f5fb;"></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>4일</td>
+                                            <td id="travelOffFour"></td>
+                                            <td id="travelPeakFour" style="background-color: #e0f5fb;"></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>5일</td>
+                                            <td id="travelOffFive"></td>
+                                            <td id="travelPeakFive" style="background-color: #e0f5fb;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7일</td>
+                                            <td id="travelOffSeven"></td>
+                                            <td id="travelPeakSeven" style="background-color: #e0f5fb;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>10일</td>
+                                            <td id="travelOffTen"></td>
+                                            <td id="travelPeakTen" style="background-color: #e0f5fb;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-bottom: 1px solid black;">15일</td>
+                                            <td style="border-bottom: 1px solid black;" id="travelOffFifteen"></td>
+                                            <td style="border-bottom: 1px solid black; background-color: #e0f5fb;" id="travelPeakFifteen"></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2" style="color: mediumblue;">자차 포함</td>
+                                            <td>Deposit</td>
+                                            <td>총 렌트료의 50%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>월렌트</td>
+                                            <td id="travelMonth"></td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>
+                                </div>
+                            </div>
+                            <!--기본옵션-->
+                            <div class="row white-card" style="margin: 0;">
+                                <h1 class="title">
+                                    <i class="fas fa-circle"></i>
+                                    CAMPER 기본 옵션
+                                </h1>
+                                <div th:replace="/fragments/camping_explanations.html :: travel_basic_option"></div>
+                            </div>
+                            <!--시설-->
+                            <div class="row white-card" style="margin: 0;">
+                                <h1 class="title">
+                                    <i class="fas fa-circle"></i>
+                                    CAMPER 시설
+                                </h1>
+                                <div th:replace="/fragments/camping_explanations.html :: travel_installation"></div>
+                            </div>
+                            <!--렌트정책-->
+                            <div class="row white-card" style="margin: 0;">
+                                <h1 class="title">
+                                    <i class="far fa-circle"></i>
+                                    CAMPER 렌트정책
+                                </h1>
+                                <div th:replace="/fragments/camping_explanations.html :: rent_policy"></div>
+                            </div>
+                            <!--보험사항-->
+                            <div class="row white-card" style="margin: 0;">
+                                <h1 class="title">
+                                    <i class="far fa-circle"></i>
+                                    CAMPER 보험사항
+                                </h1>
+                                <div th:replace="/fragments/camping_explanations.html :: rent_insurance"></div>
+                            </div>
+                            <!--이용규칙-->
+                            <div class="row white-card" style="margin: 0;">
+                                <h1 class="title">
+                                    <i class="far fa-circle"></i>
+                                    CAMPER 이용규칙
+                                </h1>
+                                <div th:replace="/fragments/camping_explanations.html :: rent_rule"></div>
+                            </div>
+                            <!--환불정책-->
+                            <div class="row white-card" style="margin: 0;">
+                                <h1 class="title">
+                                    <i class="far fa-circle"></i>
+                                    CAMPER 환불정책
+                                </h1>
+                                <div th:replace="/fragments/camping_explanations.html :: refund_policy"></div>
+                            </div>
+                        </div>
+                        <div class="tab_content" id="review_content">
+                        </div>
+                        <div class="tab_content" id="qna_content">
+                        </div>
                     </div>
-                </div>
-                <!--기본옵션-->
-                <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="fas fa-circle"></i>
-                        CAMPER 기본 옵션
-                    </h1>
-                    <div th:replace="/fragments/camping_explanations.html :: travel_basic_option"></div>
-                </div>
-                <!--시설-->
-                <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="fas fa-circle"></i>
-                        CAMPER 시설
-                    </h1>
-                    <div th:replace="/fragments/camping_explanations.html :: travel_installation"></div>
-                </div>
-                <!--렌트정책-->
-                <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="far fa-circle"></i>
-                        CAMPER 렌트정책
-                    </h1>
-                    <div th:replace="/fragments/camping_explanations.html :: rent_policy"></div>
-                </div>
-                <!--보험사항-->
-                <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="far fa-circle"></i>
-                        CAMPER 보험사항
-                    </h1>
-                    <div th:replace="/fragments/camping_explanations.html :: rent_insurance"></div>
-                </div>
-                <!--이용규칙-->
-                <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="far fa-circle"></i>
-                        CAMPER 이용규칙
-                    </h1>
-                    <div th:replace="/fragments/camping_explanations.html :: rent_rule"></div>
-                </div>
-                <!--환불정책-->
-                <div class="row card white-card">
-                    <h1 class="title">
-                        <i class="far fa-circle"></i>
-                        CAMPER 환불정책
-                    </h1>
-                    <div th:replace="/fragments/camping_explanations.html :: refund_policy"></div>
                 </div>
             </div>
 
             <!-- right column -->
             <div id="right_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60 text-center">
+                <div onclick="seeMobileReserve();" class="modal_close">
+                    <i class="fas fa-times"></i>
+                </div>
                 <h1>Travel Camper</h1>
                 <!-- 대여날짜 -->
                 <div class="select_wrapper row" onclick="doDisplay('calendar')">
@@ -413,6 +455,7 @@
                     <button id="btn_reserve" onclick="postDate()">예약신청하기</button>
                 </div>
             </div>
+            <button class="see_modal" onclick="seeMobileReserve();">예약하기</button>
         </div>
     </div>
 </div>
