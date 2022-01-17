@@ -61,3 +61,9 @@ const clickedDay = (e) => {
     e.style.color = 'royalblue';
     e.style.backgroundColor = 'white';
 }
+
+// 모바일 예약하기 버튼 누르면 달력 뜨기
+function seeMobileReserve() {
+    const rightColumn = document.getElementById('right_column');
+    rightColumn.classList.toggle('onMobile');
+}
