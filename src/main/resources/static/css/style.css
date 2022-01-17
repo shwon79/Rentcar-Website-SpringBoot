@@ -962,7 +962,7 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
-    .fixed_phone_btn { top: 85%;  }
+    .fixed_phone_btn { top: 81%;  }
     .fixed_phone_pc_btn { display: none; }
 }
 
@@ -1009,7 +1009,7 @@ opacity: .5; }
     .work-menu { padding: 40px 0 0 0; }
     #home_pc { display: none }
     #home { display: block }
-    .fixed_phone_btn { top: 83%; }
+    .fixed_phone_btn { top: 80%; }
     .fixed_phone_pc_btn { display: none;  }
     /* text-decoration: line-through; text-decoration-color: darkred;  */
     .not-show-in-mobile {
@@ -1140,3 +1140,27 @@ div.popStyle4 {
     box-shadow: 5px 5px 30px #707070;
 }
 
+.mobile_navbar_phone_btn, .mobile_navbar_message_btn {
+    display: block;
+    background: transparent;
+    color: #ffffff;
+    padding: 10px 10px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 30vh;
+}
+.mobile_navbar_btns {
+    display: none;
+}
+
+@media only screen and (max-width:768px) {
+    .mobile_navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .mobile_navbar_btns {
+        display: flex;
+        margin-top: 8px;
+    }
+}

@@ -965,8 +965,8 @@ pre {
 }
 
 .select_wrapper {
-  border: 2px solid black;
-  border-radius: 12px;
+  border-bottom: 1px solid gray;
+  /*border-radius: 12px;*/
   margin-bottom: 30px;
 }
 .select_wrapper .col-lg-4 {
@@ -981,12 +981,11 @@ pre {
 .select_wrapper .col-lg-8 {
   margin-bottom: 0;
   padding: 10px 20px;
-  background-color: black;
-  border-radius: 0 8px 8px 0;
+  background-color: lightgrey;
 }
 .select_wrapper .col-lg-8 span,
 .select_wrapper .col-lg-8 h5 {
-  color: white;
+  color: black;
 }
 #calendar_rental {
   transition: 0.5s ease-in-out all;
