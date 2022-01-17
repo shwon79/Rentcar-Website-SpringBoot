@@ -1142,9 +1142,9 @@ div.popStyle4 {
 
 .mobile_navbar_phone_btn, .mobile_navbar_message_btn {
     display: block;
-    background: #61eccc;
+    background: transparent;
     color: #ffffff;
-    padding: 13px 13px;
+    padding: 10px 10px;
     font-size: 1.2em;
     border: none;
     border-radius: 30vh;
@@ -1161,6 +1161,6 @@ div.popStyle4 {
     }
     .mobile_navbar_btns {
         display: flex;
-        margin-top: 3px;
+        margin-top: 8px;
     }
 }
