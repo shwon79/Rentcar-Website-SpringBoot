@@ -5,13 +5,6 @@
     <!----------------- header ---------------->
     <!----------------------------------------->
 
-
-
-
-
-
-
-
     <div th:fragment="headerFragment" class="header navbar-fixed-top small menu-scroll" style="overflow: hidden;">
         <nav class="header navbar-fixed-top small menu-scroll">
             <div class="container">
@@ -21,7 +14,7 @@
                             <img th:src="@{/img/savecar-logo.png}" width="200" height="50" alt="savecar-logo"></a>
                         </a>
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mobile_navbar" >
                         <div id="navigation" role="navigation" class="primary-navigation">
                             <ul>
                                 <li class="active"><a href="/index" title="Home">Home</a></li>
@@ -39,6 +32,18 @@
                                 <li class="active"><a target='_blank' href="https://cafe.naver.com/savecarz/5" title="캠핑카 장기 & 쉐어링">캠핑카 장기 & 쉐어링</a></li>
                                 <li class="active"><a href="/price/month" title="한눈에 보는 세이브카 가격표">한눈에 보는 세이브카 가격표</a></li>
                             </ul>
+                        </div>
+                        <div class="mobile_navbar_btns">
+                            <a href="tel:1661-3331" style="margin-right: 15px;">
+                                <button class="mobile_navbar_phone_btn" >
+                                    <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 20px; height: 20px; display: inline-block">
+                                </button>
+                            </a>
+                            <a href="sms:010-5277-4113">
+                                <button class="mobile_navbar_message_btn" >
+                                    <img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 20px; height: 20px; display: inline-block">
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
