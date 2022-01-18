@@ -2,6 +2,7 @@ package kr.carz.savecar.dto;
 
 import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.domain.MorenReservation;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +10,8 @@ import javax.persistence.Column;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class CampingCarReservationDTO {
-
 
     private Integer agree;
     private String carType;
@@ -29,26 +30,6 @@ public class CampingCarReservationDTO {
     private Integer totalHalf;
     private Integer extraTime;
     private String orderCode;
-
-    public CampingCarReservationDTO(String rentDate, String rentTime, String returnDate, String returnTime, String name, String phone, String depositor, String detail, Integer total, Integer deposit, Integer agree, Integer reservation, String day, Integer totalHalf, String carType, Integer extraTime, String orderCode) {
-        this.agree = agree;
-        this.carType = carType;
-        this.day = day;
-        this.deposit = deposit;
-        this.depositor = depositor;
-        this.detail = detail;
-        this.name = name;
-        this.phone = phone;
-        this.rentDate = rentDate;
-        this.rentTime = rentTime;
-        this.reservation = reservation;
-        this.returnDate = returnDate;
-        this.returnTime = returnTime;
-        this.total = total;
-        this.totalHalf = totalHalf;
-        this.extraTime = extraTime;
-        this.orderCode = orderCode;
-    }
 
     public CampingCarReservation toEntity() {
         return CampingCarReservation.builder()
