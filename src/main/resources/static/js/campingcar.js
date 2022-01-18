@@ -63,7 +63,27 @@ const clickedDay = (e) => {
 }
 
 // 모바일 예약하기 버튼 누르면 달력 뜨기
-function seeMobileReserve() {
+function seeMobileReserve(behavior) {
     const rightColumn = document.getElementById('right_column');
-    rightColumn.classList.toggle('onMobile');
+    if (behavior === 'open') {
+        rightColumn.classList.add('onMobile');
+        localStorage.setItem('modalStatus', behavior);
+    } else if (behavior === 'close') {
+        rightColumn.classList.remove('onMobile');
+        modalStatus = behavior;
+        localStorage.setItem('modalStatus', behavior);
+    }
 }
+
+function checkModal() {
+    let modalStatus = localStorage.getItem('modalStatus');
+    const rightColumn = document.getElementById('right_column');
+
+    if (modalStatus === 'open') {
+        rightColumn.classList.add('onMobile');
+    } else {
+        rightColumn.classList.remove('onMobile');
+    }
+}
+
+window.onload = checkModal();

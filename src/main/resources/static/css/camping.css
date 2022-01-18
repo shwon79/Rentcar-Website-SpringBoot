@@ -1156,6 +1156,9 @@ input[name="tab_item"] {
   background-color: #333333;
   color: #fff;
 }
+.carousel-inner > .item > img {
+  margin: 0 auto;
+}
 
 @media (max-width: 991px) {
   #mainRow {
@@ -1227,6 +1230,7 @@ input[name="tab_item"] {
     color: white;
     font-size: 24px;
     height: 70px;
+    border-radius: 0;
   }
 }
 
