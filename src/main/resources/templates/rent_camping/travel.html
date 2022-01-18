@@ -12,7 +12,7 @@
     <link th:href="@{/css/camping.css}" rel="stylesheet">
     <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
 
-    <script th:src="@{/js/campingcar.js}"></script>
+    <script th:src="@{/js/campingcar.js}" defer></script>
 
     <script>
         $(window).load(function() {
@@ -34,7 +34,7 @@
     <script th:src="@{/js/europe_reserve.js}" defer ></script>
 </head>
 
-<body onload="displayTravelPrice();">
+<body onload="displayTravelPrice();" style="width: 100%;">
 <div layout:fragment="content">
     <div th:replace="fragments/header_camp::headerFragment"></div>
 
@@ -293,7 +293,7 @@
 
             <!-- right column -->
             <div id="right_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60 text-center">
-                <div onclick="seeMobileReserve();" class="modal_close">
+                <div onclick="seeMobileReserve('close');" class="modal_close">
                     <i class="fas fa-times"></i>
                 </div>
                 <h1>Travel Camper</h1>
@@ -504,7 +504,7 @@
                     <button id="btn_reserve" onclick="postDate()">예약신청하기</button>
                 </div>
             </div>
-            <button class="see_modal" onclick="seeMobileReserve();">예약하기</button>
+            <button class="see_modal" onclick="seeMobileReserve('open');">예약하기</button>
         </div>
     </div>
 </div>
