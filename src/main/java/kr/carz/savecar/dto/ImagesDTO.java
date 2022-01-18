@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ImageDTO {
+public class ImagesDTO {
 
     private String title;
     private String url;
