@@ -1,11 +1,13 @@
 package kr.carz.savecar.dto;
 
 import kr.carz.savecar.domain.MorenReservation;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class MorenReservationDTO {
 
     private String carNo;      // 차량번호
@@ -31,37 +33,6 @@ public class MorenReservationDTO {
     private String carName;      // 차량명
     private String orderCode;
     private String selectAge;
-
-
-    public MorenReservationDTO(String carNo, String kilometer, String reservationName, String reservationPhone, String reservationAge,
-                               String reservationDate, String reservationTime, String reservationGuarantee, String reservationDetails,
-                               String address, String addressDetail, String carPrice, String carTax, String carAmountTotal, String carDeposit,
-                               String reservationStatus, String rentTerm, String costPerKm, String carCode, String pickupPlace, String carName,
-                               String orderCode, String selectAge) {
-        this.carNo = carNo;
-        this.kilometer = kilometer;
-        this.reservationName = reservationName;
-        this.reservationPhone = reservationPhone;
-        this.reservationAge = reservationAge;
-        this.reservationDate = reservationDate;
-        this.reservationTime = reservationTime;
-        this.reservationGuarantee = reservationGuarantee;
-        this.reservationDetails = reservationDetails;
-        this.address = address;
-        this.addressDetail = addressDetail;
-        this.carPrice = carPrice;
-        this.carTax = carTax;
-        this.carAmountTotal = carAmountTotal;
-        this.carDeposit = carDeposit;
-        this.reservationStatus = reservationStatus;
-        this.rentTerm = rentTerm;
-        this.costPerKm = costPerKm;
-        this.carCode = carCode;
-        this.pickupPlace = pickupPlace;
-        this.carName = carName;
-        this.orderCode = orderCode;
-        this.selectAge = selectAge;
-    }
 
     public MorenReservation toEntity() {
         return MorenReservation.builder()
