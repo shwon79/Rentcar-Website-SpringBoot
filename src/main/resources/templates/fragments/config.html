@@ -61,6 +61,40 @@
         <script th:src="@{/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js}"></script>
 
         <script th:src="@{/js/monthly_rent.js}"></script>
+        <script defer>
+            (function($) {
+                $(function() {
+                    $('#subMenuBtn').click(function(e) {
+                        $(this).siblings('.nav-dropdown').toggle();
+                        $('.dropdown').not($(this).siblings()).hide();
+                        e.stopPropagation();
+                    });
+                    $('html').click(function() {
+                        $('.nav-dropdown').hide();
+                    });
+                    $('#nav-toggle').click(function() {
+                        $('nav ul').slideToggle();
+                    });
+                    $('#nav-toggle').on('click', function() {
+                        this.classList.toggle('active');
+                    });
+                });
+            })(jQuery);
+            function openSubMenu() {
+                const plusBtn = document.getElementsByClassName('submenu-button')[0];
+                const dropdown = document.getElementsByClassName('nav-dropdown')[0];
+                if (plusBtn.classList.contains('openSubMenu')) {
+                    plusBtn.classList.remove('openSubMenu');
+                    // dropdown.style.display = 'none !important';
+                    // dropdown.style.display = 'none !important';
+                    // console.log(dropdown);
+                } else {
+                    plusBtn.classList.add('openSubMenu');
+                    // dropdown.style.display = 'block !important';
+                    // console.log(dropdown);
+                }
+            }
+        </script>
 
         <!--
           manifest.json provides metadata used when your web app is installed on a
