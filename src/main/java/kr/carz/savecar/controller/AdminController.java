@@ -40,6 +40,8 @@ public class AdminController {
     CalendarDateService calendarDateService;
     DateCampingService dateCampingService;
     AdminService adminService;
+    S3Service s3Service;
+    ImagesService imagesService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
@@ -49,7 +51,7 @@ public class AdminController {
                            ExplanationService explanationService, CampingcarReservationService campingcarReservationService,
                            CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
                            CalendarDateService calendarDateService, DateCampingService dateCampingService,
-                           AdminService adminService) {
+                           AdminService adminService, S3Service s3Service, ImagesService imagesService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -64,6 +66,8 @@ public class AdminController {
         this.calendarDateService = calendarDateService;
         this.dateCampingService = dateCampingService;
         this.adminService = adminService;
+        this.s3Service = s3Service;
+        this.imagesService = imagesService;
     }
 
     @Value("${coolsms.api_key}")
@@ -119,24 +123,7 @@ public class AdminController {
         return nameArray;
     }
 
-//    private S3Service s3Service;
-//    private GalleryService galleryService;
-//
-//    @GetMapping("/gallery")
-//    public String dispWrite() {
-//
-//        return "/gallery";
-//    }
-//
-//    @PostMapping("/gallery")
-//    public String execWrite(GalleryDto galleryDto, MultipartFile file) throws IOException {
-//        String imgPath = s3Service.upload(file);
-//        galleryDto.setFilePath(imgPath);
-//
-//        galleryService.savePost(galleryDto);
-//
-//        return "redirect:/gallery";
-//    }
+
 
     @GetMapping("/admin/index")
     public String index(@RequestParam(value = "error", required = false) String error,
@@ -299,6 +286,35 @@ public class AdminController {
         mav.setViewName("admin/campingcar_price_menu");
 
         return mav;
+    }
+
+    @GetMapping("/admin/image/{title}")
+    @ResponseBody
+    public void getAdminImage(HttpServletResponse res, @PathVariable String title) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<Images> imagesWrapper = imagesService.findImageByTitle(title);
+
+        if(imagesWrapper.isPresent()){
+            Images image = imagesWrapper.get();
+            jsonObject.put("image_url", image.getUrl());
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    @PostMapping("/admin/image")
+    public String postAdminImage(ImagesDTO imagesDTO, MultipartFile file) throws IOException {
+        String imgPath = s3Service.upload(file);
+        imagesDTO.setUrl(imgPath);
+
+        imagesService.save(imagesDTO);
+
+        return "redirect:/admin/index";
     }
 
     // 캠핑카 예약 수정, 확정, 취소하기 api
