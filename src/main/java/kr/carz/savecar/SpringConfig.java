@@ -23,7 +23,7 @@ public class SpringConfig {
     private final CampingcarReservationRepository campingcarReservationRepository;
     private final ExplanationRepository explanationRepository;
     private final AdminRepository adminRepository;
-
+    private final ImagesRepository imagesRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -33,7 +33,7 @@ public class SpringConfig {
                         MorenReservationRepository morenReservationRepository, CampingCarPriceRepository campingCarPriceRepository,
                         CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository,
                         DateCampingRepository dateCampingRepository, CampingcarReservationRepository campingcarReservationRepository,
-                        ExplanationRepository explanationRepository, AdminRepository adminRepository) {
+                        ExplanationRepository explanationRepository, AdminRepository adminRepository, ImagesRepository imagesRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -49,6 +49,7 @@ public class SpringConfig {
         this.campingcarReservationRepository = campingcarReservationRepository;
         this.explanationRepository = explanationRepository;
         this.adminRepository = adminRepository;
+        this.imagesRepository = imagesRepository;
     }
 
     @Bean
@@ -99,4 +100,7 @@ public class SpringConfig {
 
     @Bean
     public AdminService adminService() { return new AdminService(adminRepository); }
+
+    @Bean
+    public ImagesService imagesService() { return new ImagesService(imagesRepository); }
 }
