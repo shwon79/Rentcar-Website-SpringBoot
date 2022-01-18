@@ -7,11 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class RealTimeDTO {
+public class ImageDTO {
 
-    private String carType;
-    private String kilometer;
-    private String reserve_able;
-    private String rentTerm;
-
+    private String title;
+    private String url;
 }

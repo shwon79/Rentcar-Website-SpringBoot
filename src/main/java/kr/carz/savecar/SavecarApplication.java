@@ -17,17 +17,13 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class SavecarApplication extends SpringBootServletInitializer{
 
-	private static final Logger logger = LoggerFactory.getLogger(SavecarApplication.class);
-
 	@PostConstruct
 	void started() {
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
 		new DateTime("4");
 	}
 
-
 	public static void main(String[] args) {
-		logger.info("HELLO SAVECAR");
 		SpringApplication.run(SavecarApplication.class, args);
 	}
 

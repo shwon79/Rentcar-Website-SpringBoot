@@ -1,11 +1,13 @@
 package kr.carz.savecar.dto;
 
 import kr.carz.savecar.domain.MorenReservation;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class MorenReservationApplyDTO {
 
     private Long id;
@@ -26,30 +28,6 @@ public class MorenReservationApplyDTO {
     private String carCode;
     private String pickupPlace;
     private String carName;
-
-    public MorenReservationApplyDTO(String carNo, String kilometer, String reservationName, String reservationPhone,
-                                    String reservationDate, String reservationTime,
-                                    String address, String addressDetail, Long id, String rentTerm,
-                                    String carAmountTotal, String carDeposit, String reservationDetails,
-                                    String costPerKm, String carCode, String pickupPlace, String carName) {
-        this.id = id;
-        this.carNo = carNo;
-        this.kilometer = kilometer;
-        this.reservationName = reservationName;
-        this.reservationPhone = reservationPhone;
-        this.reservationDate = reservationDate;
-        this.reservationTime = reservationTime;
-        this.address = address;
-        this.addressDetail = addressDetail;
-        this.rentTerm = rentTerm;
-        this.carAmountTotal = carAmountTotal;
-        this.carDeposit = carDeposit;
-        this.reservationDetails = reservationDetails;
-        this.costPerKm = costPerKm;
-        this.carCode = carCode;
-        this.pickupPlace = pickupPlace;
-        this.carName = carName;
-    }
 
     public MorenReservation toEntity() {
         return MorenReservation.builder()
