@@ -229,7 +229,11 @@ nav ul li a:visited:not(:only-child):after {
     content: ' ▾';
 }
 nav ul li ul li {
-    min-width: 190px;
+    min-width: 150px;
+}
+nav ul li ul li:hover {
+    color: black;
+    background: white;
 }
 nav ul li ul li a {
     padding: 15px;
@@ -294,7 +298,7 @@ nav ul li ul li a {
     height: 0;
 }
 
-@media only screen and (max-width: 798px) {
+@media only screen and (max-width: 990px) {
     .nav-mobile {
         display: block;
         /*margin-right: 30px;*/

@@ -54,20 +54,40 @@
                 <p style="flex: 2">상세 페이지</p>
                 <!--                <p>목록에서 삭제</p>-->
             </div>
+            <div class="reserve_list" id="reserve_list_title_mobile">
+                <p style="flex: 1; text-align: center; margin-bottom: 0;">삭제</p>
+                <p style="flex: 10; text-align: center; margin-bottom: 0;">예약 신청 내용</p>
+            </div>
             <div class="reserve_list_wrapper" th:each="reservation, iterStat : ${#lists.sort(morenReservationList, byTime)}">
+                <div class="reserve_checkbox">
+                    <input th:if="${reservation.reservationStatus == '0'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">
+                </div>
                 <div class="reserve_list" style="justify-content: space-between;">
-                    <p style="flex: 1">
-                        <input th:if="${reservation.reservationStatus == '0'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">
+                    <p style="flex: 2" class="grid_oneline">
+                        <span class="reserve_list_mobile_title">예약 신청 시간: </span>
+                        <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></span>
                     </p>
-                    <p style="flex: 2" th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}" ></p>
-                    <p style="flex: 1" class="carNo" th:text="${reservation.carNo}" th:data-index="${reservation.id}"></p>
-                    <p style="flex: 1" class="reservationName" th:text="${reservation.reservationName}" th:data-index="${reservation.id}"></p>
-                    <p style="flex: 2" class="reservationPhone" th:text="${reservation.reservationPhone}" th:data-index="${reservation.id}"></p>
-                    <p style="flex: 2" class="reservationDate" th:text="${reservation.reservationDate}" th:data-index="${reservation.id}"></p>
+                    <p style="flex: 1">
+                        <span class="reserve_list_mobile_title">차량 번호: </span>
+                        <span class="carNo" th:text="${reservation.carNo}" th:data-index="${reservation.id}"></span>
+                    </p>
+                    <p style="flex: 1">
+                        <span class="reserve_list_mobile_title">이름: </span>
+                        <span class="reservationName" th:text="${reservation.reservationName}" th:data-index="${reservation.id}"></span>
+                    </p>
+                    <p style="flex: 2" class="grid_oneline">
+                        <span class="reserve_list_mobile_title">전화번호: </span>
+                        <span class="reservationPhone" th:text="${reservation.reservationPhone}" th:data-index="${reservation.id}"></span>
+                    </p>
+                    <p style="flex: 2" class="grid_oneline">
+                        <span class="reserve_list_mobile_title">대여시작일: </span>
+                        <span class="reservationDate" th:text="${reservation.reservationDate}" th:data-index="${reservation.id}"></span>
+                    </p>
                     <p class="reservationTime" th:text="${reservation.reservationTime}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p class="reservationAddress" th:text="${reservation.Address}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p class="reservationAddressDetail" th:text="${reservation.AddressDetail}" style="display: none;" th:data-index="${reservation.id}"></p>
-                    <p style="flex: 2">
+                    <p style="flex: 2" class="grid_oneline">
+                        <span class="reserve_list_mobile_title">월 대여료: </span>
                         <span class="number" th:text="${reservation.carAmountTotal}"></span>
                         <span>원</span>
                     </p>
@@ -87,7 +107,7 @@
                     <p class="carCode" th:text="${reservation.carCode}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p class="pickupPlace" th:text="${reservation.pickupPlace}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p class="orderCode" th:text="${reservation.orderCode}" style="display: none;" th:data-index="${reservation.id}"></p>
-                    <p style="flex: 3">
+                    <p style="flex: 3" class="grid_oneline">
                         <button class="moren-reservation-btn set_reserve" data-behavior="confirm" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '1' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
                             확정
@@ -98,9 +118,9 @@
                             확정 취소
                         </button>
                     </p>
-                    <p style="flex: 2">
+                    <p style="flex: 2" class="grid_oneline">
                         <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
-                            <button class="set_reserve" style="margin: 0;">상세 페이지</button>
+                            <button class="set_reserve btn_mobile_card" style="margin: 0;">상세 페이지</button>
                         </a>
                     </p>
                 </div>
