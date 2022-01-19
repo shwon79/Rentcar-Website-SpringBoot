@@ -5,6 +5,7 @@ import kr.carz.savecar.dto.ReservationSaveDTO;
 import kr.carz.savecar.repository.ReservationRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Transactional
@@ -27,5 +28,8 @@ public class ReservationService {
         return reservationRepository.findByTitle(title);
     }
 
+    public List<Reservation> findByCreatedDateAfter(LocalDateTime date){
+        return reservationRepository.findByCreatedDateIsAfter(date);
+    }
 
 }

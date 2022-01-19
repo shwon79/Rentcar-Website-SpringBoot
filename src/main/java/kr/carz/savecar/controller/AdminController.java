@@ -22,6 +22,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -197,8 +198,12 @@ public class AdminController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<Reservation> reservationList = reservationService.findAllReservations();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalDateTime startDateTime = currentDateTime.minusDays(15);
+
+        List<Reservation> reservationList = reservationService.findByCreatedDateAfter(startDateTime);
         mav.addObject("reservationList", reservationList);
+
         mav.setViewName("admin/counsel_menu");
 
         return mav;
@@ -209,7 +214,6 @@ public class AdminController {
     // 할인가 적용하기 메뉴로 입장
     @GetMapping("/admin/discount/menu")
     public ModelAndView get_discount_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
-
 
         ModelAndView mav = new ModelAndView();
 
