@@ -259,9 +259,6 @@ nav ul li ul li a {
 .hover_menu:hover > ul {
     display: block;
 }
-/*hover .nav-dropdown {*/
-/*    display: block;*/
-/*}*/
 .submenu-button {
     display: none !important;
     position: absolute;
@@ -301,7 +298,6 @@ nav ul li ul li a {
 @media only screen and (max-width: 990px) {
     .nav-mobile {
         display: block;
-        /*margin-right: 30px;*/
     }
     .submenu-button {
         display: block !important;
