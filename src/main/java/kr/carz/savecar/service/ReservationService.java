@@ -23,4 +23,9 @@ public class ReservationService {
     public List<Reservation> findAllReservations(){
         return reservationRepository.findAll();
     }
+    public List<Reservation> findByTitle(String title){
+        return reservationRepository.findByTitle(title);
+    }
+
+
 }
