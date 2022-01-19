@@ -112,6 +112,7 @@ a.article, a.article:hover {
     background: #f5f5f5;
     cursor: pointer;
     border: 3px solid #5495b1;
+    padding: 0 5px;
 }
 
 #sidebarCollapse span {
@@ -163,19 +164,6 @@ a.article, a.article:hover {
         opacity: 1;
         margin: 5px auto;
     }
-
-    /*#sidebarCollapse.active span {*/
-    /*    margin: 0 auto;*/
-    /*}*/
-    /*#sidebarCollapse.active span:first-of-type {*/
-    /*    transform: rotate(45deg) translate(2px, 2px);*/
-    /*}*/
-    /*#sidebarCollapse.active span:nth-of-type(2) {*/
-    /*    opacity: 0;*/
-    /*}*/
-    /*#sidebarCollapse.active span:last-of-type {*/
-    /*    transform: rotate(-45deg) translate(1px, -1px);*/
-    /*}*/
 }
 /* Admin Menu End */
 
@@ -217,7 +205,6 @@ button {
 
 
 #logout_box {
-    /*margin: 10px 20px 10px 10px;*/
     text-align: right;
 }
 
@@ -234,11 +221,6 @@ button {
 #logout_box button:hover {
     background-color: indianred;
     cursor: pointer;
-}
-
-.content_wrapper {
-    /*display: flex;*/
-    /*flex-direction: row;*/
 }
 
 .menu_container {
@@ -272,7 +254,6 @@ button {
     background-color: white;
     width: 80vw;
     margin: 0 auto;
-    /*border: 1px solid lightgray;*/
     border-radius: 0.5vh;
     height: fit-content;
 }
@@ -290,6 +271,7 @@ button {
 .detail_container select {
     padding: 10px;
     font-size: 17px;
+    max-width: 168px;
 }
 
 .detail_container input {
@@ -330,6 +312,13 @@ button {
 .reserve_list p {
     text-align: center;
     align-self: center;
+    margin-bottom: 0;
+}
+.reserve_checkbox {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #reserve_list_title {
@@ -337,12 +326,79 @@ button {
     font-weight: bold;
     background: #5495b1;
     color: white;
+    display: flex;
+}
+#reserve_list_title_mobile {
+    display: none;
 }
 
 #reserve_list_title:hover {
     pointer-events: none;
 }
+.reserve_list_mobile_title {
+    display: none;
+}
+.desktop_flex_mobile_block {
+    display: flex;
+    align-items: center;
+}
 
+@media (max-width: 600px) {
+    .reserve_list_wrapper {
+        border: 1px solid #5495b1;
+        border-top: none;
+    }
+    #reserve_list_title {
+        display: none;
+    }
+    #reserve_list_title_mobile {
+        display: block;
+        display: flex;
+        text-align: center;
+        border-bottom: 1px solid #5495b1;
+        font-weight: bold;
+        background: #5495b1;
+        color: white;
+        padding: 12px 10px;
+        font-size: 15px;
+        margin-top: 20px;
+    }
+    .reserve_list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 20px;
+        border-bottom: none;
+        margin: 0 auto !important;
+        flex: 10 !important;
+        padding: 12px 10px 6px 10px;
+    }
+    .reserve_list:hover {
+        background-color: white;
+    }
+    .reserve_list_mobile_title {
+        display:inline-block;
+    }
+    .reserve_list p {
+        margin-bottom: 5px;
+        text-align: left;
+    }
+    .btn_mobile_card {
+        width: 100%;
+    }
+    .grid_oneline {
+        grid-column: 1/3;
+    }
+    .reserve_checkbox {
+        padding: 12px 5px;
+        border-right: 1px solid #5495b1;
+    }
+    .moren-reservation-btn {
+        width: 49%;
+    }
+    .desktop_flex_mobile_block {
+        flex-direction: column;
+    }
+}
 .detail_list {
     color: #424242;
     padding: 5px 10px;
@@ -356,8 +412,9 @@ button {
 }
 
 .detail_list p {
-    text-align: center;
+    /*text-align: center;*/
     align-self: center;
+    word-break: keep-all;
 }
 
 #detail_list_title {
@@ -431,6 +488,7 @@ button {
     flex: 19;
 }
 
+
 .set_reserve {
     flex: 1;
     padding: 10px;
@@ -462,11 +520,6 @@ form {
 
 }
 
-/*#mainTable_tbody td {*/
-/*    padding: 10px;*/
-/*    */
-/*}*/
-
 #mainTable_tbody {
     border-spacing: 10px;
 
@@ -481,16 +534,11 @@ form {
     color: white;
 }
 
-#go_back_wrapper {
-    /*background: #5495b1;*/
-}
 
 #go_back {
-    /*color: white;*/
     font-weight: bold;
     background-color: transparent;
     padding: 10px;
-    /*margin: 10px;*/
     border: none;
     border-radius: 0.5vh;
     font-size: 16px;
@@ -528,10 +576,6 @@ form {
 }
 
 @media (max-width: 990px) {
-    /*.content_wrapper {*/
-    /*    flex-direction: column;*/
-    /*}*/
-
     .menu_container {
         width: 100%;
         margin: 10px 0;
@@ -566,7 +610,7 @@ form {
     }
 
     .created_date {
-        display: none;
+        /*display: none;*/
     }
     .modified_date {
         display: none;
@@ -608,9 +652,6 @@ form {
     width: 100%;
     margin: 0 auto;
     text-align: center;
-}
-td {
-    /*border-bottom: 1px solid #5495b1;*/
 }
 #morenReservationTable button,
 #morenReservationCard button,
@@ -683,19 +724,6 @@ td {
 #textarea_wrapper article {
     margin: 15px 0;
 }
-/*#saveBtn {*/
-/*    border: #5495b1 solid 3px;*/
-/*    background: white;*/
-/*    border-radius: 8px;*/
-/*    padding: 8px 30px;*/
-/*    font-size: 16px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*#saveBtn:hover {*/
-/*    background: #5495b1;*/
-/*    color: white;*/
-/*}*/
 
 .campingPriceEditTable {
     text-align: center;
@@ -733,9 +761,6 @@ td {
     }
     .content_container {
         width: 90%;
-    }
-    #mainTable button {
-        /*width: 100%;*/
     }
     .discount-table {
         font-size: 14px;

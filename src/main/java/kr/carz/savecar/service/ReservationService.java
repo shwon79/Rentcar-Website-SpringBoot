@@ -24,6 +24,10 @@ public class ReservationService {
     public List<Reservation> findAllReservations(){
         return reservationRepository.findAll();
     }
+    public List<Reservation> findByTitle(String title){
+        return reservationRepository.findByTitle(title);
+    }
+
     public List<Reservation> findByCreatedDateAfter(LocalDateTime date){
         return reservationRepository.findByCreatedDateIsAfter(date);
     }

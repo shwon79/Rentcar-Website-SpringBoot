@@ -1,8 +1,10 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.Admin;
+import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.domain.Images;
 import kr.carz.savecar.dto.AdminDTO;
+import kr.carz.savecar.dto.ImagesDTO;
 import kr.carz.savecar.repository.AdminRepository;
 import kr.carz.savecar.repository.ImagesRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,4 +32,7 @@ public class ImagesService {
         return imagesRepository.findByTitle(title);
     }
 
+    public Long save(ImagesDTO imagesDTO) {
+        return imagesRepository.save(imagesDTO.toEntity()).getImageId();
+    }
 }

@@ -11,8 +11,7 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
     List<Reservation> findAll();
+    List<Reservation> findByTitle(String title);
     List<Reservation> findByCreatedDateAfter(LocalDateTime date);
     List<Reservation> findByCreatedDateIsAfter(LocalDateTime date);
-
-
 }

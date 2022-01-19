@@ -107,7 +107,7 @@
                 </div>
                 <div class="detail_list">
                     <p>대여 날짜 및 시간</p>
-                    <div style="display: flex; align-items: center;">
+                    <div class="desktop_flex_mobile_block">
                         <input type="date" class="reservationDate" th:value="${morenReservationDTO.reservationDate}">
                         <input type="time" class="reservationTime" th:value="${morenReservationDTO.reservationTime}">
                     </div>
@@ -129,13 +129,13 @@
                     <textarea class="reservationDetails" th:text="${morenReservationDTO.reservationDetails}"></textarea>
                 </div>
                 <div class="detail_list">
-                    <p>공급가</p>
+                    <p style="margin: 0;">공급가</p>
                     <div style="display: flex; align-items: center;">
                         <p class="number carPrice" th:text="${morenReservationDTO.carPrice}" id="displayCarPrice"></p><span>원</span>
                     </div>
                 </div>
                 <div class="detail_list">
-                    <p>부가세</p>
+                    <p style="margin: 0;">부가세</p>
                     <div style="display: flex; align-items: center;">
                         <p class="number carTax" th:text="${morenReservationDTO.carTax}" id="displayCarTax"></p><span>원</span>
                     </div>
