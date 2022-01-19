@@ -42,6 +42,7 @@ public class AdminController {
     AdminService adminService;
     S3Service s3Service;
     ImagesService imagesService;
+    ValuesForWebService valuesForWebService;
 
     @Autowired
     public AdminController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
@@ -51,7 +52,8 @@ public class AdminController {
                            ExplanationService explanationService, CampingcarReservationService campingcarReservationService,
                            CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
                            CalendarDateService calendarDateService, DateCampingService dateCampingService,
-                           AdminService adminService, S3Service s3Service, ImagesService imagesService) {
+                           AdminService adminService, S3Service s3Service, ImagesService imagesService,
+                           ValuesForWebService valuesForWebService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
@@ -68,6 +70,7 @@ public class AdminController {
         this.adminService = adminService;
         this.s3Service = s3Service;
         this.imagesService = imagesService;
+        this.valuesForWebService = valuesForWebService;
     }
 
     @Value("${coolsms.api_key}")
@@ -276,7 +279,7 @@ public class AdminController {
     // [관리자 메인페이지] 캠핑카 가격 메뉴로 입장
     @GetMapping(value = "/admin/campingcar/price/menu")
     @ResponseBody
-    public ModelAndView get_campingcar_price_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
+    public ModelAndView get_campingcar_price_main() throws IOException {
 
         ModelAndView mav = new ModelAndView();
 
@@ -308,13 +311,57 @@ public class AdminController {
     }
 
     @PostMapping("/admin/image")
-    public String postAdminImage(ImagesDTO imagesDTO, MultipartFile file) throws IOException {
+    @ResponseBody
+    public void postAdminImage(HttpServletResponse res, ImagesDTO imagesDTO, MultipartFile file) throws IOException {
         String imgPath = s3Service.upload(file);
         imagesDTO.setUrl(imgPath);
 
         imagesService.save(imagesDTO);
 
-        return "redirect:/admin/index";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @GetMapping("/admin/value/{title}")
+    @ResponseBody
+    public void getAdminValue(HttpServletResponse res, @PathVariable String title) throws IOException {
+
+        Optional<ValuesForWeb> valueWrapper = valuesForWebService.findValueByTitle(title);
+
+        JSONObject jsonObject = new JSONObject();
+        if(valueWrapper.isPresent()){
+            ValuesForWeb value = valueWrapper.get();
+            jsonObject.put("value", value.getValue());
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    @PostMapping("/admin/value")
+    @ResponseBody
+    public void postAdminValue(HttpServletResponse res, ValuesForWebDTO valuesForWebDTO) throws IOException {
+
+        List<ValuesForWebDTO> valuesForWebDTOList = valuesForWebDTO.getValuesList();
+        for(int i=0; i<valuesForWebDTOList.size(); i++){
+            valuesForWebService.save(valuesForWebDTOList.get(i));
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
     // 캠핑카 예약 수정, 확정, 취소하기 api
