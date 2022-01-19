@@ -1,6 +1,5 @@
 package kr.carz.savecar.dto;
 
-import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.domain.Images;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

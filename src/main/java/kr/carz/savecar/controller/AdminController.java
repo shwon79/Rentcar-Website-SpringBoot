@@ -350,7 +350,10 @@ public class AdminController {
     @ResponseBody
     public void postAdminValue(HttpServletResponse res, ValuesForWebDTO valuesForWebDTO) throws IOException {
 
-        valuesForWebService.save(valuesForWebDTO);
+        List<ValuesForWebDTO> valuesForWebDTOList = valuesForWebDTO.getValuesList();
+        for(int i=0; i<valuesForWebDTOList.size(); i++){
+            valuesForWebService.save(valuesForWebDTOList.get(i));
+        }
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);
