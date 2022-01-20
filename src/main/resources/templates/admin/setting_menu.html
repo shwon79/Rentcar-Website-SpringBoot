@@ -9,15 +9,17 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin_campingcar.css}" rel="stylesheet">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_campingcar_setting.js}" defer></script>
 <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
         $(window).on('load', function () {
-            let settingMenu = document.getElementById('settingMenu');
+            let settingMenu = document.getElementById('campingcarSettingMenu');
             settingMenu.classList.add('activeAdminMenu');
         });
     </script>
@@ -39,7 +41,7 @@
         </nav>
 
         <div class="inner_content" style="text-align: center;">
-            <h2 class="page_title">기본 내용 설정</h2>
+            <h2 class="page_title">캠핑카 내용 수정</h2>
             <div style="text-align: right; margin-bottom: 20px;">
                 <button id="settingSaveBtn" class="btn btn-primary btn-lg">저장하기</button>
             </div>
@@ -68,6 +70,74 @@
                 <article>
                     <h4 class="text_explanation">환불 정책</h4>
                     <textarea rows="8" id="editedRefundPolicy" th:text="${explanation.refund_policy}"></textarea>
+                </article>
+
+                <h3 style="display: flex; justify-content: space-between;">
+                    팝업 내용
+                    <button id="campingcarPopupEditBtn" class="btn btn-outline-info" style="background-color: white;">수정하기</button>
+                </h3>
+                <article>
+                    <div id="divpop4" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle4">
+                        <div class="popup_upper">
+                            <div class="popup_content">
+                                <div class="popup_bg_img_wrapper">
+                                    <div class="popup_bg_img" th:style="'background-image:url('+ @{/img/popup_campingcar.png} +');'">
+                                    </div>
+                                </div>
+                                <div class="popup_bg_red">
+                                    <h4>
+                                        <input type="text" id="popup_contact">
+                                    </h4>
+                                    <h3 class="popup_outline_text">모터홈 캠핑카</h3>
+                                    <h1 class="popup_outline_text">특가대여</h1>
+                                </div>
+                                <div class="popup_bg_green">
+                                    <div class="popup_bottom_content_wrapper">
+                                        <div class="popup_box popup_box_slogan">
+                                            주중주말 똑같이! 자차포함!
+                                        </div>
+                                        <div class="popup_box_wrapper">
+                                            <div class="popup_box">
+                                                <p class="popup_box_title">EUROPE</p>
+                                                <p class="popup_box_subtitle">VIP 모터홈</p>
+                                                <p class="popup_box_price">
+                                                    <span class="popup_box_text">주중 : </span>
+                                                    <span class="popup_box_price_number">45</span>
+                                                    <span class="popup_box_text">만원</span>
+                                                </p>
+                                                <p class="popup_box_price">
+                                                    <span class="popup_box_text">주말 : </span>
+                                                    <span class="popup_box_price_number">45</span>
+                                                    <span class="popup_box_text">만원</span>
+                                                </p>
+                                                <p class="popup_box_text">2종 보통</p>
+                                                <p class="popup_box_text">인원정보: 5인승</p>
+                                            </div>
+                                            <div class="popup_box">
+                                                <p class="popup_box_title">LIMOUSINE</p>
+                                                <p class="popup_box_subtitle">VIP 모터홈</p>
+                                                <p class="popup_box_price">
+                                                    <span class="popup_box_text">주중 : </span>
+                                                    <span class="popup_box_price_number">38</span>
+                                                    <span class="popup_box_text">만원</span>
+                                                </p>
+                                                <p class="popup_box_price">
+                                                    <span class="popup_box_text">주말 : </span>
+                                                    <span class="popup_box_price_number">38</span>
+                                                    <span class="popup_box_text">만원</span>
+                                                </p>
+                                                <p class="popup_box_text">1종 보통</p>
+                                                <p class="popup_box_text">인원정보: 4인승</p>
+                                            </div>
+                                        </div>
+                                        <div class="popup_button">
+                                            최고급모터홈 자세히 보기
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </article>
 
                 <h3>유럽</h3>
