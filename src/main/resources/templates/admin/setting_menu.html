@@ -72,73 +72,117 @@
                     <textarea rows="8" id="editedRefundPolicy" th:text="${explanation.refund_policy}"></textarea>
                 </article>
 
-                <h3 style="display: flex; justify-content: space-between;">
-                    팝업 내용
-                    <button id="campingcarPopupEditBtn" class="btn btn-outline-info" style="background-color: white;">수정하기</button>
-                </h3>
-                <article>
-                    <div id="divpop4" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle4">
-                        <div class="popup_upper">
-                            <div class="popup_content">
-                                <div class="popup_bg_img_wrapper">
-                                    <div class="popup_bg_img" th:style="'background-image:url('+ @{/img/popup_campingcar.png} +');'">
-                                    </div>
-                                </div>
-                                <div class="popup_bg_red">
-                                    <h4>
-                                        <input type="text" id="popup_contact">
-                                    </h4>
-                                    <h3 class="popup_outline_text">모터홈 캠핑카</h3>
-                                    <h1 class="popup_outline_text">특가대여</h1>
-                                </div>
-                                <div class="popup_bg_green">
-                                    <div class="popup_bottom_content_wrapper">
-                                        <div class="popup_box popup_box_slogan">
-                                            주중주말 똑같이! 자차포함!
-                                        </div>
-                                        <div class="popup_box_wrapper">
-                                            <div class="popup_box">
-                                                <p class="popup_box_title">EUROPE</p>
-                                                <p class="popup_box_subtitle">VIP 모터홈</p>
-                                                <p class="popup_box_price">
-                                                    <span class="popup_box_text">주중 : </span>
-                                                    <span class="popup_box_price_number">45</span>
-                                                    <span class="popup_box_text">만원</span>
-                                                </p>
-                                                <p class="popup_box_price">
-                                                    <span class="popup_box_text">주말 : </span>
-                                                    <span class="popup_box_price_number">45</span>
-                                                    <span class="popup_box_text">만원</span>
-                                                </p>
-                                                <p class="popup_box_text">2종 보통</p>
-                                                <p class="popup_box_text">인원정보: 5인승</p>
-                                            </div>
-                                            <div class="popup_box">
-                                                <p class="popup_box_title">LIMOUSINE</p>
-                                                <p class="popup_box_subtitle">VIP 모터홈</p>
-                                                <p class="popup_box_price">
-                                                    <span class="popup_box_text">주중 : </span>
-                                                    <span class="popup_box_price_number">38</span>
-                                                    <span class="popup_box_text">만원</span>
-                                                </p>
-                                                <p class="popup_box_price">
-                                                    <span class="popup_box_text">주말 : </span>
-                                                    <span class="popup_box_price_number">38</span>
-                                                    <span class="popup_box_text">만원</span>
-                                                </p>
-                                                <p class="popup_box_text">1종 보통</p>
-                                                <p class="popup_box_text">인원정보: 4인승</p>
-                                            </div>
-                                        </div>
-                                        <div class="popup_button">
-                                            최고급모터홈 자세히 보기
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+<!--                <h3 style="display: flex; justify-content: space-between;">-->
+<!--                    팝업 내용-->
+<!--                    <button id="campingcarPopupEditBtn" class="btn btn-outline-info" style="background-color: white;">수정하기</button>-->
+<!--                </h3>-->
+<!--                <article>-->
+<!--                    <div id="divpop4" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle4">-->
+<!--                        <div class="popup_upper">-->
+<!--                            <div class="popup_content">-->
+<!--                                <div class="popup_bg_img_wrapper">-->
+<!--                                    <div class="popup_bg_img" th:style="'background-image:url('+ @{/img/popup_campingcar.png} +');'">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="popup_bg_red">-->
+<!--                                    <h4>-->
+<!--                                        <input type="text" id="popup_contact">-->
+<!--                                    </h4>-->
+<!--                                    <h4 class="popup_outline_text">-->
+<!--                                        <input type="text" id="popup_subtitle">-->
+<!--                                    </h4>-->
+<!--                                    <h4 class="popup_outline_text" style="position: relative;">-->
+<!--                                        <input type="text" id="popup_title">-->
+<!--                                    </h4>-->
+<!--                                </div>-->
+<!--                                <div class="popup_bg_green">-->
+<!--                                    <div class="popup_bottom_content_wrapper">-->
+<!--                                        <div class="popup_box popup_box_slogan">-->
+<!--                                            <input type="text" id="popup_slogan">-->
+<!--                                        </div>-->
+<!--                                        <div class="popup_box_wrapper">-->
+<!--                                            <div class="popup_box">-->
+<!--                                                <p class="popup_box_title">-->
+<!--                                                    <input type="text" id="popup_box1_title">-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_subtitle">-->
+<!--                                                    <input type="text" id="popup_box1_subtitle">-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_price">-->
+<!--                                                    <span class="popup_box_text">-->
+<!--                                                        <input type="text" id="popup_box1_line1_title">-->
+<!--                                                    </span>-->
+<!--                                                    <span class="popup_box_price_number">-->
+<!--                                                        <input type="text" id="popup_box1_line1_red_text">-->
+<!--                                                    </span>-->
+<!--                                                    <span class="popup_box_text">-->
+<!--                                                        <input type="text" id="popup_box1_line1_text">-->
+<!--                                                    </span>-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_price">-->
+<!--                                                    <span class="popup_box_text">-->
+<!--                                                        <input type="text" id="popup_box1_line2_title">-->
+<!--                                                    </span>-->
+<!--                                                    <span class="popup_box_price_number">-->
+<!--                                                        <input type="text" id="popup_box1_line2_red_text">-->
+<!--                                                    </span>-->
+<!--                                                    <span class="popup_box_text">-->
+<!--                                                        <input type="text" id="popup_box1_line2_text">-->
+<!--                                                    </span>-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_text">-->
+<!--                                                    <input type="text" id="popup_box1_line3">-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_text">-->
+<!--                                                    <input type="text" id="popup_box1_line3">-->
+<!--                                                </p>-->
+<!--                                            </div>-->
+<!--                                            <div class="popup_box">-->
+<!--                                                <p class="popup_box_title">-->
+<!--                                                    <input type="text" id="popup_box2_title">-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_subtitle">-->
+<!--                                                    <input type="text" id="popup_box2_subtitle">-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_price">-->
+<!--                                                    <span class="popup_box_text">-->
+<!--                                                        <input type="text" id="popup_box2_line1_title">-->
+<!--                                                    </span>-->
+<!--                                                    <span class="popup_box_price_number">-->
+<!--                                                        <input type="text" id="popup_box2_line1_red_text">-->
+<!--                                                    </span>-->
+<!--                                                    <span class="popup_box_text">-->
+<!--                                                        <input type="text" id="popup_box2_line1_text">-->
+<!--                                                    </span>-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_price">-->
+<!--                                                    <span class="popup_box_text">-->
+<!--                                                        <input type="text" id="popup_box2_line2_title">-->
+<!--                                                    </span>-->
+<!--                                                    <span class="popup_box_price_number">-->
+<!--                                                        <input type="text" id="popup_box2_line2_red_text">-->
+<!--                                                    </span>-->
+<!--                                                    <span class="popup_box_text">-->
+<!--                                                        <input type="text" id="popup_box2_line2_text">-->
+<!--                                                    </span>-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_text">-->
+<!--                                                    <input type="text" id="popup_box2_line3">-->
+<!--                                                </p>-->
+<!--                                                <p class="popup_box_text">-->
+<!--                                                    <input type="text" id="popup_box2_line4">-->
+<!--                                                </p>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="popup_button">-->
+<!--                                            <input type="text" id="popup_button">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </article>-->
 
                 <h3>유럽</h3>
                 <article>

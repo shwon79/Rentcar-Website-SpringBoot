@@ -31,26 +31,26 @@
     text-align: center;
     padding-bottom: 2em;
 }
-.popup_bg_red h1 {
-    position: relative;
-    font-size: 4.5em;
-    line-height: 100%;
-    margin: 0;
-}
-.popup_bg_red h3 {
-    position: relative;
-    font-size: 3em;
-    line-height: 100%;
-    margin: 0;
-    background: transparent !important;
-    color: #40c4b6 !important;
-    text-align: center !important;
-    padding: 0 !important;
-}
+/*.popup_bg_red h1 {*/
+/*    position: relative;*/
+/*    font-size: 4.5em;*/
+/*    line-height: 100%;*/
+/*    margin: 0;*/
+/*}*/
+/*.popup_bg_red h3 {*/
+/*    position: relative;*/
+/*    font-size: 3em;*/
+/*    line-height: 100%;*/
+/*    margin: 0;*/
+/*    background: transparent !important;*/
+/*    color: #40c4b6 !important;*/
+/*    text-align: center !important;*/
+/*    padding: 0 !important;*/
+/*}*/
 .popup_bg_red h4 {
     color: white;
     line-height: 100%;
-    padding: 1em 0;
+    padding: 0.5em 0;
     margin: 0;
 }
 .popup_outline_text {

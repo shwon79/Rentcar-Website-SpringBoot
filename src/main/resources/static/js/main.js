@@ -185,6 +185,6 @@ $(window).load(function () {
     fetch(`/admin/value/${title}`)
         .then(res => res.json())
         .then(result => {
-            console.log(result);
+            document.getElementById('display_popup2_contact').innerText = result.value;
         })
 });
