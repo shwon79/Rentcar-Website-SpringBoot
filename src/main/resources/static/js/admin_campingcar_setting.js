@@ -4,10 +4,9 @@ campingcarPopupEditBtn.addEventListener('click', () => {
     const contact = document.getElementById('popup_contact').value;
 
     let data = {
-        "title" : "",
-        "value" : "",
         "valuesList": [
-            { "title" : "contact", "value" : contact }
+            { "title" : "contact",
+                "value" : contact }
         ]
     };
     console.log(data);

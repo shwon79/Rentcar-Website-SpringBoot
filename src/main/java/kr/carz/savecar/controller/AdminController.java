@@ -352,11 +352,20 @@ public class AdminController {
 
     @PostMapping("/admin/value")
     @ResponseBody
-    public void postAdminValue(HttpServletResponse res, ValuesForWebDTO valuesForWebDTO) throws IOException {
+    public void postAdminValue(HttpServletResponse res, @RequestBody ValuesVO valuesVO) throws IOException {
 
-        List<ValuesForWebDTO> valuesForWebDTOList = valuesForWebDTO.getValuesList();
+        List<ValuesForWebDTO> valuesForWebDTOList = valuesVO.getValuesList();
+
         for(int i=0; i<valuesForWebDTOList.size(); i++){
-            valuesForWebService.save(valuesForWebDTOList.get(i));
+
+            Optional<ValuesForWeb> valuesForCheck = valuesForWebService.findValueByTitle(valuesForWebDTOList.get(i).getTitle());
+            if(valuesForCheck.isPresent()){
+                ValuesForWeb originalValuesForWeb = valuesForCheck.get();
+                originalValuesForWeb.setValue(valuesForWebDTOList.get(i).getValue());
+                valuesForWebService.save(originalValuesForWeb);
+            } else {
+                valuesForWebService.saveDTO(valuesForWebDTOList.get(i));
+            }
         }
 
         JSONObject jsonObject = new JSONObject();
