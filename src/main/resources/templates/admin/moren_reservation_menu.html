@@ -60,6 +60,7 @@
             </div>
             <div class="reserve_list_wrapper" th:each="reservation, iterStat : ${#lists.sort(morenReservationList, byTime)}">
                 <div class="reserve_checkbox">
+                    <p th:text="${iterStat.index + 1}" style="margin-bottom: 4px;"></p>
                     <input th:if="${reservation.reservationStatus == '0'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">
                 </div>
                 <div class="reserve_list" style="justify-content: space-between;">
