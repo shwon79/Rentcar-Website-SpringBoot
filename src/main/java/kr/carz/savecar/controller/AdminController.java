@@ -1381,7 +1381,6 @@ public class AdminController {
 
     @PutMapping("/admin/campingcar/price/by/{carType}")
     @ResponseBody
-    @Transactional
     public void put_admin_campingcar_price(HttpServletResponse res, @RequestBody CampingCarPriceDTO campingCarPriceDTO, @PathVariable String carType) throws IOException {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
@@ -1421,6 +1420,9 @@ public class AdminController {
         campingCarPrice.setThirtydays(campingCarPriceDTO.getThirtydays());
         campingCarPrice.setDeposit(campingCarPriceDTO.getDeposit());
         campingCarPrice.setYearmodel(campingCarPriceDTO.getYearmodel());
+
+        System.out.println(campingCarPriceDTO.getTwodays());
+        System.out.println(campingCarPrice.getTwodays());
 
         campingCarPriceService.save(campingCarPrice);
 
