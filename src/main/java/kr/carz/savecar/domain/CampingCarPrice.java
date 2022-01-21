@@ -73,12 +73,17 @@ public class CampingCarPrice {
     private Float thirtydays;
     private String deposit;
     private String yearmodel;
+    private String fuel;
+    private String gearBox;
+    private String license;
+    private String personnel;
+
 
     @Builder
     public CampingCarPrice(String carName, String carNum, String carCode, String season, Float onedays, Float twodays, Float threedays, Float fourdays, Float fivedays, Float sixdays, Float sevendays, Float eightdays, Float ninedays, Float tendays, Float elevendays, Float twelvedays, Float thirteendays, Float fourteendays
                         , Float fifteendays, Float sixteendays, Float seventeendays, Float eighteendays, Float ninetinedays, Float twentydays, Float twentyonedays
                         , Float twentytwodays, Float twentythreedays, Float twentyfourdays, Float twentyfivedays, Float twentysixdays, Float twentysevendays
-                        , Float twentyeightdays, Float twentyninedays, Float thirtydays, String deposit, String yearmodel) {
+                        , Float twentyeightdays, Float twentyninedays, Float thirtydays, String deposit, String yearmodel, String fuel, String gearBox, String license, String personnel) {
         this.carName = carName;
         this.carNum = carNum;
         this.carCode = carCode;
@@ -115,5 +120,9 @@ public class CampingCarPrice {
         this.thirtydays = thirtydays;
         this.deposit = deposit;
         this.yearmodel = yearmodel;
+        this.fuel = fuel;
+        this.gearBox = gearBox;
+        this.license = license;
+        this.personnel = personnel;
     }
 }

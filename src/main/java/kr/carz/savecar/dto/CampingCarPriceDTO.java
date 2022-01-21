@@ -45,6 +45,10 @@ public class CampingCarPriceDTO {
     private Float thirtydays;
     private String deposit;
     private String yearmodel;
+    private String fuel;
+    private String gearBox;
+    private String license;
+    private String personnel;
 
 
     public CampingCarPrice toEntity() {
@@ -84,6 +88,10 @@ public class CampingCarPriceDTO {
                 .thirtydays(thirtydays)
                 .deposit(deposit)
                 .yearmodel(yearmodel)
+                .fuel(fuel)
+                .gearBox(gearBox)
+                .license(license)
+                .personnel(personnel)
                 .build();
 
     }
