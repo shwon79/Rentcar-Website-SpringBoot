@@ -265,7 +265,7 @@ public class AdminController {
 
 
     // [관리자 메인페이지] 캠핑카 기본설정 메뉴로 입장
-    @GetMapping(value = "/admin/setting/menu")
+    @GetMapping(value = "/admin/campingcar/setting/menu")
     @ResponseBody
     public ModelAndView get_setting_main(HttpServletResponse res, HttpServletRequest req) throws IOException {
 
@@ -273,7 +273,7 @@ public class AdminController {
         Optional<Explanation> explanation = explanationService.findById((long) 0);
 
         mav.addObject("explanation",explanation.get());
-        mav.setViewName("admin/setting_menu");
+        mav.setViewName("admin/campingcar_setting_menu");
 
         return mav;
     }
@@ -294,6 +294,20 @@ public class AdminController {
 
         return mav;
     }
+
+
+    // [관리자 메인페이지] 팝업 내용설정 메뉴로 입장
+    @GetMapping(value = "/admin/popup/menu")
+    @ResponseBody
+    public ModelAndView get_popup_menu(HttpServletResponse res, HttpServletRequest req) throws IOException {
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("admin/popup_menu");
+
+        return mav;
+    }
+
 
     @GetMapping("/admin/image/{title}")
     @ResponseBody
