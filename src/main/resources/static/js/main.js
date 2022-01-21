@@ -178,13 +178,3 @@ function moveToCampingReservation(carType) {
     let thisMonth = date.getMonth() + 1;
     window.location.href = '/camping/calendar/'+ carType + '_reserve/' + thisYear + '/' + thisMonth;
 }
-
-// 팝업 내용 불러오기
-$(window).load(function () {
-    let title = 'contact';
-    fetch(`/admin/value/${title}`)
-        .then(res => res.json())
-        .then(result => {
-            document.getElementById('display_popup2_contact').innerText = result.value;
-        })
-});
