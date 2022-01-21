@@ -60,7 +60,7 @@ $(window).load(function () {
         function getData(title, target) {
             $.ajax({
                 type: "GET",
-                url: `/admin/value/${title}`,
+                url: `/admin/popup/value/${title}`,
                 dataType: "json",
                 cache: false,
                 success: function(data){
@@ -71,32 +71,47 @@ $(window).load(function () {
                     console.log("Status: " + textStatus);
                 }
             });
-        }
+        };
+
+        function getCampingcarInfoData(carType, targetCarName, targetPrice1, targetPrice2) {
+            fetch(`/camping/calendar/${carType}/getprice/0`)
+                .then(res => res.json())
+                .then(result => {
+                    const carName = document.getElementById(targetCarName);
+                    const target1Ele = document.getElementById(targetPrice1);
+                    const target2Ele = document.getElementById(targetPrice2);
+
+                    carName.innerText = result['carName'].toUpperCase();
+
+                    let price = result['onedays'].toString().substr(0, 3);
+
+                    if (price.charAt(price.length -1) === '0') {
+                        target1Ele.innerText = price.substr(0, 2);
+                        target2Ele.innerText = price.substr(0, 2);
+                    } else {
+                        target1Ele.innerText = (parseInt(price) / 10).toString();
+                        target2Ele.innerText = (parseInt(price) / 10).toString();
+                    }
+                })
+        };
 
         getData('popup2_contact', 'popup2_contact');
         getData('popup2_subtitle', 'popup2_subtitle');
         getData('popup2_title', 'popup2_title');
         getData('popup2_slogan', 'popup2_slogan');
-        getData('popup2_box1_title', 'popup2_box1_title');
         getData('popup2_box1_subtitle', 'popup2_box1_subtitle');
-        getData('popup2_box1_line1_title', 'popup2_box1_line1_title');
         getData('popup2_box1_line1_red_text', 'popup2_box1_line1_red_text');
-        getData('popup2_box1_line1_text', 'popup2_box1_line1_text');
-        getData('popup2_box1_line2_title', 'popup2_box1_line2_title');
         getData('popup2_box1_line2_red_text', 'popup2_box1_line2_red_text');
-        getData('popup2_box1_line2_text', 'popup2_box1_line2_text');
         getData('popup2_box1_line3', 'popup2_box1_line3');
         getData('popup2_box1_line4', 'popup2_box1_line4');
         getData('popup2_box2_subtitle', 'popup2_box2_subtitle');
-        getData('popup2_box2_title', 'popup2_box2_title');
-        getData('popup2_box2_line1_title', 'popup2_box2_line1_title');
         getData('popup2_box2_line1_red_text', 'popup2_box2_line1_red_text');
-        getData('popup2_box2_line1_text', 'popup2_box2_line1_text');
-        getData('popup2_box2_line2_title', 'popup2_box2_line2_title');
         getData('popup2_box2_line2_red_text', 'popup2_box2_line2_red_text');
-        getData('popup2_box2_line2_text', 'popup2_box2_line2_text');
         getData('popup2_box2_line3', 'popup2_box2_line3');
         getData('popup2_box2_line4', 'popup2_box2_line4');
         getData('popup2_button', 'popup2_button');
+        getCampingcarInfoData('europe', 'popup2_box1_title','popup2_box1_line1_price', 'popup2_box1_line2_price');
+        getCampingcarInfoData('limousine', 'popup2_box2_title','popup2_box2_line1_price', 'popup2_box2_line2_price');
+
     };
 });

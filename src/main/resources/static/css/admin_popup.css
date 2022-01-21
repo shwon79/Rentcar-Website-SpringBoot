@@ -98,6 +98,14 @@
     font-size: 1.3em;
     color: #40c4b6;
 }
+.display_text {
+    display: flex;
+    justify-content: space-between;
+    width: 100%
+}
+.display_text .fixed_width {
+    width: 50%;
+}
 @media (min-width: 769px) and (max-width: 991px) {
     .popup_bottom_content_wrapper {
         padding: 80px 30px 30px 30px;
@@ -112,6 +120,12 @@
     }
     .popup_box_slogan {
         top: 14%;
+    }
+    .display_text {
+        flex-direction: column;
+    }
+    .display_text .fixed_width {
+        width: 100%;
     }
 }
 @media (max-width: 629px) {
@@ -143,5 +157,11 @@
     }
     .popup_bottom_content_wrapper {
         padding: 80px 10px 20px 10px;
+    }
+    .display_text {
+        flex-direction: column;
+    }
+    .display_text .fixed_width {
+        width: 100%;
     }
 }
