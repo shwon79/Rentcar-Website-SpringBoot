@@ -21,12 +21,12 @@ import java.util.*;
 
 @Controller
 public class CampingCarController {
-    ExplanationService explanationService;
-    CampingcarReservationService campingcarReservationService;
-    CalendarTimeService calendarTimeService;
-    CampingCarPriceService campingCarPriceService;
-    CalendarDateService calendarDateService;
-    DateCampingService dateCampingService;
+    private final ExplanationService explanationService;
+    private final CampingcarReservationService campingcarReservationService;
+    private final CalendarTimeService calendarTimeService;
+    private final CampingCarPriceService campingCarPriceService;
+    private final CalendarDateService calendarDateService;
+    private final DateCampingService dateCampingService;
 
     @Autowired
     public CampingCarController(ExplanationService explanationService, CampingcarReservationService campingcarReservationService,

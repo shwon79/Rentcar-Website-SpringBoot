@@ -18,13 +18,11 @@ import java.util.Optional;
 
 @Controller
 public class S3Controller {
-    AdminService adminService;
-    S3Service s3Service;
-    ImagesService imagesService;
+    private final S3Service s3Service;
+    private final ImagesService imagesService;
 
     @Autowired
-    public S3Controller(AdminService adminService, S3Service s3Service, ImagesService imagesService) {
-        this.adminService = adminService;
+    public S3Controller(S3Service s3Service, ImagesService imagesService) {
         this.s3Service = s3Service;
         this.imagesService = imagesService;
     }

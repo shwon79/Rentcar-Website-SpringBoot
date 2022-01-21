@@ -16,7 +16,7 @@ import java.util.*;
 
 @Controller
 public class PopupController {
-    ValuesForWebService valuesForWebService;
+    private final ValuesForWebService valuesForWebService;
 
     @Autowired
     public PopupController(ValuesForWebService valuesForWebService) {

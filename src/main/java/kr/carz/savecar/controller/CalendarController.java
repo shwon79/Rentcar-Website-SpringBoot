@@ -20,10 +20,6 @@ import java.util.*;
 
 @Controller
 public class CalendarController {
-    MonthlyRentService monthlyRentService;
-    YearlyRentService yearlyRentService;
-    ShortRentService shortRentService;
-    CampingCarService campingCarService;
     CalendarDateService calendarDateService;
     CalendarTimeService calendarTimeService;
     DateCampingService dateCampingService;
@@ -32,15 +28,10 @@ public class CalendarController {
     ExplanationService explanationService;
 
     @Autowired
-    public CalendarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                              ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
+    public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
                               ExplanationService explanationService) {
-        this.monthlyRentService = monthlyRentService;
-        this.yearlyRentService = yearlyRentService;
-        this.shortRentService = shortRentService;
-        this.campingCarService = campingCarService;
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
@@ -98,8 +89,8 @@ public class CalendarController {
     @GetMapping("/camping/{carType}")
     public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
 
-        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
-        model.put("explanation", explanation.get());
+        Optional<Explanation> explanation = explanationService.findById((long) 0);
+        explanation.ifPresent(value -> model.put("explanation", value));
 
         return "rent_camping/" + carType + "_info";
     }
@@ -230,8 +221,8 @@ public class CalendarController {
             calendarTimeList.add(calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice));
         }
 
-        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
-        model.put("explanation", explanation.get());
+        Optional<Explanation> explanation = explanationService.findById((long) 0);
+        explanation.ifPresent(value -> model.put("explanation", value));
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("calendarTimeList", calendarTimeList);
@@ -286,7 +277,7 @@ public class CalendarController {
         model.put("return_time", return_time);
         model.put("day", day);
         model.put("total", total);
-        model.put("carType", carType);;
+        model.put("carType", carType);
         model.put("extraTime", extraTime);
 
         return "rent_camping/reservation";
@@ -522,7 +513,7 @@ public class CalendarController {
         CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
 
         if(reserveTime.compareTo("16시") < 0){
-            for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
+            for(long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
                 CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
                 if(calendarExtraTime.getReserveComplete().equals("0")){
                     extra_time += 1;

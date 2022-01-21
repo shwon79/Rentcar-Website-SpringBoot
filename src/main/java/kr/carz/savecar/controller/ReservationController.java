@@ -1,9 +1,6 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.dto.MorenReservationApplyDTO;
 import kr.carz.savecar.dto.ReservationSaveDTO;
-import kr.carz.savecar.domain.*;
-import kr.carz.savecar.service.MorenReservationService;
 import kr.carz.savecar.service.ReservationService;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -15,15 +12,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
 public class ReservationController {
     private final ReservationService reservationService;
-    private final MorenReservationService morenReservationService;
+
+    @Autowired
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
 
     @Value("${coolsms.api_key}")
     private String api_key;
@@ -39,12 +37,6 @@ public class ReservationController {
 
     @Value("${phone.admin3}")
     private String admin3;
-
-    @Autowired
-    public ReservationController(ReservationService reservationService, MorenReservationService morenReservationService) {
-        this.reservationService = reservationService;
-        this.morenReservationService = morenReservationService;
-    }
 
 
     // 예약 저장 api

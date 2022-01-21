@@ -22,11 +22,4 @@ public class AdminDTO {
                 .password(password)
                 .build();
     }
-
-    @Builder
-    public AdminDTO(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
 }

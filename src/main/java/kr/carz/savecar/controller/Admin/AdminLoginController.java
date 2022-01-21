@@ -10,15 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AdminLoginController {
-    AdminService adminService;
-    S3Service s3Service;
-    ImagesService imagesService;
+    private final AdminService adminService;
 
     @Autowired
-    public AdminLoginController(AdminService adminService, S3Service s3Service, ImagesService imagesService) {
+    public AdminLoginController(AdminService adminService) {
         this.adminService = adminService;
-        this.s3Service = s3Service;
-        this.imagesService = imagesService;
     }
 
 

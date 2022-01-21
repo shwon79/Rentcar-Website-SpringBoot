@@ -12,7 +12,7 @@ import java.util.*;
 
 @Controller
 public class CounselController {
-    ReservationService reservationService;
+    private final ReservationService reservationService;
 
     @Autowired
     public CounselController(ReservationService reservationService) {

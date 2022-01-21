@@ -22,7 +22,7 @@ import java.util.*;
 
 @Controller
 public class MorenController {
-    MorenReservationService morenReservationService;
+    private final MorenReservationService morenReservationService;
 
     @Autowired
     public MorenController(MorenReservationService morenReservationService) {

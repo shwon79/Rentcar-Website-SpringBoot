@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Controller
 public class DiscountController {
-    DiscountService discountService;
+    private final DiscountService discountService;
 
     @Autowired
     public DiscountController(DiscountService discountService) {
