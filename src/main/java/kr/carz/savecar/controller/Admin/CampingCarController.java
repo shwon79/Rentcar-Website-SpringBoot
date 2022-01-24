@@ -642,8 +642,10 @@ public class CampingCarController {
     public void put_admin_campingcar_price(HttpServletResponse res, @RequestBody CampingCarPriceRateDTO campingCarPriceRateDTO, @PathVariable String carType) throws IOException {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        CampingCarPriceRate campingCarPriceRate = campingCarPriceRateService.findByCarNameAndSeason(campingCarPrice, campingCarPriceRateDTO.getSeason());
+        campingCarPriceRate.setValueByDto(campingCarPriceRateDTO);
 
-        campingCarPriceRateService.saveDto(campingCarPriceRateDTO, campingCarPrice);
+        campingCarPriceRateService.save(campingCarPriceRate);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);

@@ -1,6 +1,7 @@
 package kr.carz.savecar.domain;
 
 
+import kr.carz.savecar.dto.CampingCarPriceRateDTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -94,6 +95,40 @@ public class CampingCarPriceRate {
         this.twentyeightdays = twentyeightdays;
         this.twentyninedays = twentyninedays;
         this.thirtydays = thirtydays;
+    }
+
+    public void setValueByDto(CampingCarPriceRateDTO dto){
+        this.deposit = dto.getDeposit();
+        this.onedays = dto.getOnedays();
+        this.twodays = dto.getTwodays();
+        this.threedays = dto.getThreedays();
+        this.fourdays = dto.getFourdays();
+        this.fivedays = dto.getFivedays();
+        this.sixdays = dto.getSixdays();
+        this.sevendays = dto.getSevendays();
+        this.eightdays = dto.getEightdays();
+        this.ninedays = dto.getNinedays();
+        this.tendays = dto.getTendays();
+        this.elevendays = dto.getElevendays();
+        this.twelvedays = dto.getTwelvedays();
+        this.thirteendays = dto.getThirteendays();
+        this.fourteendays = dto.getFourteendays();
+        this.fifteendays = dto.getFifteendays();
+        this.sixteendays = dto.getSixteendays();
+        this.seventeendays = dto.getSeventeendays();
+        this.eighteendays = dto.getEighteendays();
+        this.ninetinedays = dto.getNinetinedays();
+        this.twentydays = dto.getTwentydays();
+        this.twentyonedays = dto.getTwentyonedays();
+        this.twentytwodays = dto.getTwentytwodays();
+        this.twentythreedays = dto.getTwentythreedays();
+        this.twentyfourdays = dto.getTwentyfourdays();
+        this.twentyfivedays = dto.getTwentyfivedays();
+        this.twentysixdays = dto.getTwentysixdays();
+        this.twentysevendays = dto.getTwentysevendays();
+        this.twentyeightdays = dto.getTwentyeightdays();
+        this.twentyninedays = dto.getTwentyninedays();
+        this.thirtydays = dto.getThirtydays();
     }
 
 }
