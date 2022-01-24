@@ -20,6 +20,16 @@ public class CampingCarPrice {
     @Column(name = "car_name")
     private String carName;
 
+
+    @OneToMany(mappedBy = "carName", targetEntity=CampingCarPriceRate.class)
+    private List<CampingCarPriceRate> campingCarPriceRates = new ArrayList<>();
+
+    public void addCampingCarPriceRates(CampingCarPriceRate campingCarPriceRate)
+    {
+        campingCarPriceRate.setCarName(this);
+        this.campingCarPriceRates.add(campingCarPriceRate);
+    }
+
     @OneToMany(mappedBy = "carName", targetEntity=CalendarTime.class)
     private List<CalendarTime> calendarTimeList = new ArrayList<>();
 

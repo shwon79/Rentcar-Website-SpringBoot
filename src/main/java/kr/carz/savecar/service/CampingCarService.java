@@ -1,9 +1,7 @@
 package kr.carz.savecar.service;
 
-import kr.carz.savecar.domain.CampingCar;
-import kr.carz.savecar.domain.MonthlyRent;
+import kr.carz.savecar.domain.CampingCarPriceRate;
 import kr.carz.savecar.repository.CampingCarRepository;
-import kr.carz.savecar.repository.ShortRentRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,7 +15,7 @@ public class CampingCarService {
         this.campingCarRepository = campingCarRepository;
     }
 
-    public List<CampingCar> findCampingCarRents(){
+    public List<CampingCarPriceRate> findCampingCarRents(){
         return campingCarRepository.findAll();
     }
 

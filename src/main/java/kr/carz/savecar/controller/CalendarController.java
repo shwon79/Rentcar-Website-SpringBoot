@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -92,6 +94,8 @@ public class CalendarController {
         }
     }
 
+
+
     @GetMapping("/camping/{carType}")
     public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
 
@@ -122,15 +126,13 @@ public class CalendarController {
         int[] nextMonthDate;
 
 
-//        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
-//
-//        HttpConnection http = new HttpConnection();
-//        JSONObject responseJson = http.sendGetRequest(moren_url);
-//        JSONArray list_json_array = (JSONArray) responseJson.get("list");
-//
-//        for(int i=0; i<list_json_array.length(); i++) {
-//
-//        }
+        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
+
+        HttpConnection http = new HttpConnection();
+        JSONObject responseJson = http.sendGetRequest(moren_url);
+        JSONArray list_json_array = (JSONArray) responseJson.get("list");
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        List<OrderStartEnd> primeClubReservedList = new ArrayList<>();
 
 
         if(thisYear == year && thisMonth == month){
@@ -162,8 +164,17 @@ public class CalendarController {
             List<DateCamping> dateCampingListByDateId = dateCampingService.findByDateId(calendarDate);
             dateCampingList.add(dateCampingListByDateId);
 
+//            String calendar_date_string = calendarDate.getYear() + "-" + calendarDate.getMonth() + "-" + calendarDate.getDay() + " 00:00:00";
+//            LocalDateTime calendar_date_date_time = LocalDateTime.parse(calendar_date_string, formatter);
+//
+//            // 차량명도 신경써야함
+//            for(OrderStartEnd orderStartEnd : primeClubReservedList){
+//                if(calendar_date_date_time.isAfter(orderStartEnd.startDate) && )
+//            }
+
             List<String> calendarTimeListString = new ArrayList<>();
             for(int k=0; k<dateCampingListByDateId.size(); k++){
+
                 if(dateCampingListByDateId.get(k).getReserved().equals("1")){
                     List<CalendarTime> calendarTimeListByDate = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, get_campingcar_by_index(k));
                     String reserve_status = calendarTimeListByDate.get(0).getReserveComplete();
@@ -184,6 +195,22 @@ public class CalendarController {
             }
             calendarTimeList.add(calendarTimeListString);
         }
+
+
+//        for(int i=0; i<list_json_array.length(); i++) {
+//            JSONObject selectedObject = (JSONObject)list_json_array.get(i);
+//            String carGubun = ((String)selectedObject.get("carGubun"));
+//            if(carGubun.equals("캠핑카")){
+//                String order_start = ((String)selectedObject.get("order_start"));
+//                String order_end = ((String)selectedObject.get("order_end"));
+//
+////                LocalDateTime order_start_date_time = LocalDateTime.parse(order_start, formatter);
+////                LocalDateTime order_end_date_time = LocalDateTime.parse(order_end, formatter);
+////                primeClubReservedList.add(new OrderStartEnd(order_start_date_time, order_end_date_time));
+//
+//            }
+//        }
+
 
 
         model.addAttribute("calendarDateList", calendarDateList);

@@ -1,9 +1,6 @@
 package kr.carz.savecar.service;
 
-import kr.carz.savecar.domain.CalendarDate;
-import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.CampingCarPrice;
-import kr.carz.savecar.repository.CalendarDateRepository;
 import kr.carz.savecar.repository.CampingCarPriceRepository;
 
 import java.util.List;

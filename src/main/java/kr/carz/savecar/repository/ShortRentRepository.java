@@ -1,6 +1,5 @@
 package kr.carz.savecar.repository;
 
-import kr.carz.savecar.domain.CampingCar;
 import kr.carz.savecar.domain.ShortRent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

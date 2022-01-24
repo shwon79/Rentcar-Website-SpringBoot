@@ -27,17 +27,20 @@ public class CampingCarController {
     private final CampingCarPriceService campingCarPriceService;
     private final CalendarDateService calendarDateService;
     private final DateCampingService dateCampingService;
+    private final CampingCarPriceRateService campingCarPriceRateService;
 
     @Autowired
     public CampingCarController(ExplanationService explanationService, CampingcarReservationService campingcarReservationService,
                                 CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
-                                CalendarDateService calendarDateService, DateCampingService dateCampingService) {
+                                CalendarDateService calendarDateService, DateCampingService dateCampingService,
+                                CampingCarPriceRateService campingCarPriceRateService) {
         this.explanationService = explanationService;
         this.campingcarReservationService = campingcarReservationService;
         this.calendarTimeService = calendarTimeService;
         this.campingCarPriceService = campingCarPriceService;
         this.calendarDateService = calendarDateService;
         this.dateCampingService = dateCampingService;
+        this.campingCarPriceRateService = campingCarPriceRateService;
     }
 
     @Value("${coolsms.api_key}")
@@ -636,47 +639,11 @@ public class CampingCarController {
 
     @PutMapping("/admin/campingcar/price/by/{carType}")
     @ResponseBody
-    public void put_admin_campingcar_price(HttpServletResponse res, @RequestBody CampingCarPriceDTO campingCarPriceDTO, @PathVariable String carType) throws IOException {
+    public void put_admin_campingcar_price(HttpServletResponse res, @RequestBody CampingCarPriceRateDTO campingCarPriceRateDTO, @PathVariable String carType) throws IOException {
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
 
-        campingCarPrice.setCarNum(campingCarPriceDTO.getCarNum());
-        campingCarPrice.setCarCode(campingCarPriceDTO.getCarCode());
-        campingCarPrice.setSeason(campingCarPriceDTO.getSeason());
-        campingCarPrice.setOnedays(campingCarPriceDTO.getOnedays());
-        campingCarPrice.setTwodays(campingCarPriceDTO.getTwodays());
-        campingCarPrice.setThreedays(campingCarPriceDTO.getThreedays());
-        campingCarPrice.setFourdays(campingCarPriceDTO.getFourdays());
-        campingCarPrice.setFivedays(campingCarPriceDTO.getFivedays());
-        campingCarPrice.setSixdays(campingCarPriceDTO.getSixdays());
-        campingCarPrice.setSevendays(campingCarPriceDTO.getSevendays());
-        campingCarPrice.setEightdays(campingCarPriceDTO.getEightdays());
-        campingCarPrice.setNinedays(campingCarPriceDTO.getNinedays());
-        campingCarPrice.setTendays(campingCarPriceDTO.getTendays());
-        campingCarPrice.setElevendays(campingCarPriceDTO.getElevendays());
-        campingCarPrice.setTwelvedays(campingCarPriceDTO.getTwelvedays());
-        campingCarPrice.setThirteendays(campingCarPriceDTO.getThirteendays());
-        campingCarPrice.setFourteendays(campingCarPriceDTO.getFourteendays());
-        campingCarPrice.setFifteendays(campingCarPriceDTO.getFifteendays());
-        campingCarPrice.setSixteendays(campingCarPriceDTO.getSixteendays());
-        campingCarPrice.setSeventeendays(campingCarPriceDTO.getSeventeendays());
-        campingCarPrice.setEighteendays(campingCarPriceDTO.getEighteendays());
-        campingCarPrice.setNinetinedays(campingCarPriceDTO.getNinetinedays());
-        campingCarPrice.setTwentydays(campingCarPriceDTO.getTwentydays());
-        campingCarPrice.setTwentyonedays(campingCarPriceDTO.getTwentyonedays());
-        campingCarPrice.setTwentytwodays(campingCarPriceDTO.getTwentytwodays());
-        campingCarPrice.setTwentythreedays(campingCarPriceDTO.getTwentythreedays());
-        campingCarPrice.setTwentyfourdays(campingCarPriceDTO.getTwentyfourdays());
-        campingCarPrice.setTwentyfivedays(campingCarPriceDTO.getTwentyfivedays());
-        campingCarPrice.setTwentysixdays(campingCarPriceDTO.getTwentysixdays());
-        campingCarPrice.setTwentysevendays(campingCarPriceDTO.getTwentysevendays());
-        campingCarPrice.setTwentyeightdays(campingCarPriceDTO.getTwentyeightdays());
-        campingCarPrice.setTwentyninedays(campingCarPriceDTO.getTwentyninedays());
-        campingCarPrice.setThirtydays(campingCarPriceDTO.getThirtydays());
-        campingCarPrice.setDeposit(campingCarPriceDTO.getDeposit());
-        campingCarPrice.setYearmodel(campingCarPriceDTO.getYearmodel());
-
-        campingCarPriceService.save(campingCarPrice);
+        campingCarPriceRateService.saveDto(campingCarPriceRateDTO, campingCarPrice);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);
