@@ -60,7 +60,7 @@ $(window).load(function () {
         function getData(title, target) {
             $.ajax({
                 type: "GET",
-                url: `/admin/popup/value/${title}`,
+                url: `/index/popup/value/${title}`,
                 dataType: "json",
                 cache: false,
                 success: function(data){
@@ -100,13 +100,13 @@ $(window).load(function () {
         getData('popup2_title', 'popup2_title');
         getData('popup2_slogan', 'popup2_slogan');
         getData('popup2_box1_subtitle', 'popup2_box1_subtitle');
-        getData('popup2_box1_line1_red_text', 'popup2_box1_line1_red_text');
-        getData('popup2_box1_line2_red_text', 'popup2_box1_line2_red_text');
+        // getData('popup2_box1_line1_red_text', 'popup2_box1_line1_red_text');
+        // getData('popup2_box1_line2_red_text', 'popup2_box1_line2_red_text');
         getData('popup2_box1_line3', 'popup2_box1_line3');
         getData('popup2_box1_line4', 'popup2_box1_line4');
         getData('popup2_box2_subtitle', 'popup2_box2_subtitle');
-        getData('popup2_box2_line1_red_text', 'popup2_box2_line1_red_text');
-        getData('popup2_box2_line2_red_text', 'popup2_box2_line2_red_text');
+        // getData('popup2_box2_line1_red_text', 'popup2_box2_line1_red_text');
+        // getData('popup2_box2_line2_red_text', 'popup2_box2_line2_red_text');
         getData('popup2_box2_line3', 'popup2_box2_line3');
         getData('popup2_box2_line4', 'popup2_box2_line4');
         getData('popup2_button', 'popup2_button');

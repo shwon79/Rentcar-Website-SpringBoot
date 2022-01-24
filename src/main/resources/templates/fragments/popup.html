@@ -7,30 +7,124 @@
     <div class="row container popup_display">
         <!-- POPUP1 월렌트 -->
         <div id="divpop1" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 popStyle1">
-            <a href="/rent/month/new">
-                <table>
-                    <tr>
-                        <td align="center">
-                            <div class="popContentStyle1">
-                                <img th:src="@{/img/popupimg1.png}">
+            <div class="popup_upper" onclick="location.href='/rent/month/new';" style="cursor: pointer;">
+                <div class="popup_content">
+                    <div class="popup_header">
+                        <h1>세이브카 대표콜 1661-3331</h1>
+                    </div>
+                    <div class="popup1_box1">
+                        <table>
+                            <tr>
+                                <td>중형 / SUV</td>
+                                <td>
+                                    <span>월차</span>
+                                    <span class="popup1_box1_yellow">40만원</span>
+                                    <span>부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>그랜져 / K7 / 승합</td>
+                                <td><span>월차</span>
+                                    <span class="popup1_box1_yellow">52만원</span>
+                                    <span>부터</span></td>
+                            </tr>
+                            <tr>
+                                <td>G80 / 펠리세이드</td>
+                                <td>
+                                    <span>월차</span>
+                                    <span class="popup1_box1_yellow">105만원</span>
+                                    <span>부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>준중형 / 중형</td>
+                                <td>
+                                    <span>일</span>
+                                    <span class="popup1_box1_yellow">4만원</span>
+                                    <span>부터</span>
+                                    <span class="popup1_box1_small">[최소 3일 이상]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>그랜져 / K7</td>
+                                <td>
+                                    <span>일</span>
+                                    <span class="popup1_box1_yellow">5만원</span>
+                                    <span>부터</span>
+                                    <span class="popup1_box1_small">[최소 3일 이상]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>승합[신차도! 주말도!]</td>
+                                <td>
+                                    <span>3일</span>
+                                    <span class="popup1_box1_yellow">18만원</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="popup1_box2">
+                        <div class="popup1_box2_upper">
+                            <p class="popup1_box2_upper_title">E220D / 520D / A6D / 디스커버리 S디젤</p>
+                            <p>
+                                <span>1일 </span>
+                                <span class="popup1_box2_purple">11</span>
+                                <span>만원 ~ 월차</span>
+                                <span class="popup1_box2_purple">135</span>
+                                <span>만원</span>
+                            </p>
+                            <p class="popup1_box2_upper_title">Audi A7D / 벤츠 ML350D / CLS250D</p>
+                            <p>
+                                <span>1일 </span>
+                                <span class="popup1_box2_purple">11</span>
+                                <span>만원 ~ 월차</span>
+                                <span class="popup1_box2_purple">165</span>
+                                <span>만원</span>
+                            </p>
+                            <p class="popup1_box2_upper_title">Audi A8L 50 TDI 디젤 블랙 색상</p>
+                            <p>
+                                <span>1일 </span>
+                                <span class="popup1_box2_purple">11</span>
+                                <span>만원 ~ 월차</span>
+                                <span class="popup1_box2_purple">210</span>
+                                <span>만원</span>
+                            </p>
+                        </div>
+                        <div class="popup1_box2_bottom">
+                            <i class="fas fa-clipboard-check"></i>
+                            <div style="display: flex; flex-direction: column; justify-content: center;">
+                                <p>경차 / EQ900 / 신차 장기렌트 : 상담 필요</p>
+                                <p>
+                                    <span style="color: #7506db;">수입단기: </span>
+                                    <span>1일 이상, 신용카드 사용 가능</span>
+                                    <span class="popup1_box2_small">[일 200Km 기준]</span>
+                                </p>
+                                <p>
+                                    <span style="color: #7506db;">국산단기: </span>
+                                    <span>3일 이상 사용 가능</span>
+                                    <span class="popup1_box2_small">[일 200Km 기준]</span>
+                                </p>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <form name="pop_form1">
-                            <td align="right">
-                                <input type="checkbox" name="chkbox" id="form1" value="checkbox">
-                                <label for="form1">오늘 하루동안 보지 않기</label>
-                                <a href="javascript:closeWinOne()">[닫기]</a>
-                            </td>
-                        </form>
-                    </tr>
-                </table>
-            </a>
+                        </div>
+                    </div>
+                    <div class="popup_footer">
+                        <h4>팝업 창 클릭 시 <strong>한눈에 보는 렌트표 이동</strong>!</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="popup_bottom">
+                <form name="pop_form1">
+                    <td align="right">
+                        <input type="checkbox" name="chkbox" id="form1" value="checkbox">
+                        <label for="form1">오늘 하루동안 보지 않기</label>
+                        <a href="javascript:closeWinOne()">[닫기]</a>
+                    </td>
+                </form>
+            </div>
         </div>
 
         <!-- POPUP2 캠핑카렌트 -->
-        <div id="divpop2" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 popStyle4">
+        <div id="divpop2" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 popStyle2">
             <div class="popup_upper" onclick="moveToCampingCalendar()" style="cursor: pointer;">
                 <div class="popup_content">
                     <div class="popup_bg_img_wrapper">

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/admin.css}" rel="stylesheet">
     <link th:href="@{/css/admin_popup.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link th:href="@{/css/library/font-awesome.min.css}" rel="stylesheet">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/admin.js}" defer></script>
     <script th:src="@{/js/admin_popup.js}" defer></script>
@@ -45,7 +47,219 @@
             <div style="text-align: right; margin-bottom: 20px;">
                 <button id="campingcarInfoEditBtn" class="btn btn-primary btn-lg">저장하기</button>
             </div>
-            <div id="divpop4" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle4">
+            <div id="divpop1" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 popStyle1">
+                <div class="popup_upper">
+                    <div class="popup_content">
+                        <div class="popup_header">
+                            <h1>
+                                <input type="text" id="popup1_contact">
+                            </h1>
+                        </div>
+                        <div class="popup1_box1">
+                            <table style="margin: 0 auto;">
+                                <tr>
+                                    <td>
+                                        <input type="text" id="popup1_box1_line1_title">
+                                    </td>
+                                    <td class="three_span">
+                                        <span>
+                                            <input type="text" id="popup1_box1_line1_text1">
+                                        </span>
+                                        <span class="popup1_box1_yellow">
+                                            <input type="text" id="popup1_box1_line1_price">
+                                        </span>
+                                        <span>
+                                            <input type="text" id="popup1_box1_line1_text2">
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="popup1_box1_line2_title">
+                                    </td>
+                                    <td class="three_span">
+                                        <span>
+                                            <input type="text" id="popup1_box1_line12_text1">
+                                        </span>
+                                        <span class="popup1_box1_yellow">
+                                            <input type="text" id="popup1_box1_line2_price">
+                                        </span>
+                                        <span>
+                                            <input type="text" id="popup1_box1_line2_text2">
+                                        </span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="popup1_box1_line3_title">
+                                    </td>
+                                    <td class="three_span">
+                                        <span>
+                                            <input type="text" id="popup1_box1_line3_text1">
+                                        </span>
+                                        <span class="popup1_box1_yellow">
+                                            <input type="text" id="popup1_box1_line3_price">
+                                        </span>
+                                        <span>
+                                            <input type="text" id="popup1_box1_line3_text2">
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="popup1_box1_line4_title">
+                                    </td>
+                                    <td class="four_span">
+                                        <span>
+                                            <input type="text" id="popup1_box1_line4_text1">
+                                        </span>
+                                        <span class="popup1_box1_yellow">
+                                            <input type="text" id="popup1_box1_line4_price">
+                                        </span>
+                                        <span>
+                                            <input type="text" id="popup1_box1_line4_text2">
+                                        </span>
+                                        <span class="popup1_box1_small">
+                                            <input type="text" id="popup1_box1_line4_text3">
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="popup1_box1_line5_title">
+                                    </td>
+                                    <td class="four_span">
+                                        <span>
+                                            <input type="text" id="popup1_box1_line5_text1">
+                                        </span>
+                                        <span class="popup1_box1_yellow">
+                                            <input type="text" id="popup1_box1_line5_price">
+                                        </span>
+                                        <span>
+                                            <input type="text" id="popup1_box1_line5_text2">
+                                        </span>
+                                        <span class="popup1_box1_small">
+                                            <input type="text" id="popup1_box1_line5_text3">
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="popup1_box1_line6_title">
+                                    </td>
+                                    <td class="three_span">
+                                        <span>
+                                            <input type="text" id="popup1_box1_line6_text1">
+                                        </span>
+                                        <span class="popup1_box1_yellow">
+                                            <input type="text" id="popup1_box1_line6_price">
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="popup1_box2">
+                            <div class="popup1_box2_upper">
+                                <p class="popup1_box2_upper_title">
+                                    <input type="text" id="popup1_box2_line1_title">
+                                </p>
+                                <p class="five_span">
+                                    <span>
+                                        <input type="text" id="popup1_box2_line1_text1">
+                                    </span>
+                                    <span class="popup1_box2_purple">
+                                        <input type="text" id="popup1_box2_line1_price1">
+                                    </span>
+                                    <span>
+                                        <input type="text" id="popup1_box2_line1_text2">
+                                    </span>
+                                    <span class="popup1_box2_purple">
+                                        <input type="text" id="popup1_box2_line1_price2">
+                                    </span>
+                                    <span>
+                                        <input type="text" id="popup1_box2_line1_text3">
+                                    </span>
+                                </p>
+                                <p class="popup1_box2_upper_title">
+                                    <input type="text" id="popup1_box2_line2_title">
+                                </p>
+                                <p class="five_span">
+                                    <span>
+                                        <input type="text" id="popup1_box2_line2_text1">
+                                    </span>
+                                    <span class="popup1_box2_purple">
+                                        <input type="text" id="popup1_box2_line2_price1">
+                                    </span>
+                                    <span>
+                                        <input type="text" id="popup1_box2_line2_text2">
+                                    </span>
+                                    <span class="popup1_box2_purple">
+                                        <input type="text" id="popup1_box2_line2_price2">
+                                    </span>
+                                    <span>
+                                        <input type="text" id="popup1_box2_line2_text3">
+                                    </span>
+                                </p>
+                                <p class="popup1_box2_upper_title">
+                                    <input type="text" id="popup1_box2_line3_title">
+                                </p>
+                                <p class="five_span">
+                                    <span>
+                                        <input type="text" id="popup1_box2_line3_text1">
+                                    </span>
+                                    <span class="popup1_box2_purple">
+                                        <input type="text" id="popup1_box2_line3_price1">
+                                    </span>
+                                    <span>
+                                        <input type="text" id="popup1_box2_line3_text2">
+                                    </span>
+                                    <span class="popup1_box2_purple">
+                                        <input type="text" id="popup1_box2_line3_price2">
+                                    </span>
+                                    <span>
+                                        <input type="text" id="popup1_box2_line3_text3">
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="popup1_box2_bottom">
+                                <i class="fas fa-clipboard-check"></i>
+                                <div style="display: flex; flex-direction: column; justify-content: center;">
+                                    <p>
+                                        <input type="text" id="popup1_box2_bottom_line1">
+                                    </p>
+                                    <p class="three_span">
+                                        <span style="color: #7506db;">
+                                            <input type="text" id="popup1_box2_bottom_line2_title">
+                                        </span>
+                                        <span>
+                                            <input type="text" id="popup1_box2_bottom_line2_text1">
+                                        </span>
+                                        <span class="popup1_box2_small">
+                                            <input type="text" id="popup1_box2_bottom_line2_text2">
+                                        </span>
+                                    </p>
+                                    <p class="three_span">
+                                        <span style="color: #7506db;">
+                                            <input type="text" id="popup1_box2_bottom_line3_title">
+                                        </span>
+                                        <span>
+                                            <input type="text" id="popup1_box2_bottom_line3_text1">
+                                        </span>
+                                        <span class="popup1_box2_small">
+                                            <input type="text" id="popup1_box2_bottom_line3_text2">
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popup_footer">
+                            <h4 style="margin: 10px 20px;">
+                                <input type="text" id="popup1_button">
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="divpop2" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle2">
                 <div class="popup_upper">
                     <div class="popup_content">
                         <div class="popup_bg_img_wrapper">
