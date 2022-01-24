@@ -140,9 +140,9 @@ public class CampingCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<CampingCarPrice> campingCarPriceList = campingCarPriceService.findCampingCarPrice();
+        List<CampingCarPriceRate> campingCarPriceRateList = campingCarPriceRateService.findAllCampingCarPriceRate();
 
-        mav.addObject("campingCarPriceList", campingCarPriceList);
+        mav.addObject("campingCarPriceList", campingCarPriceRateList);
         mav.setViewName("admin/campingcar_price_menu");
 
         return mav;

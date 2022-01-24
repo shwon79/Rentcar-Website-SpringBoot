@@ -24,4 +24,8 @@ public class CampingCarPriceRateService {
         return campingCarPriceRateRepository.save(dto.toEntity(carName)).getId();
     }
 
+    public List<CampingCarPriceRate> findAllCampingCarPriceRate(){
+        return campingCarPriceRateRepository.findAll();
+    }
+
 }
