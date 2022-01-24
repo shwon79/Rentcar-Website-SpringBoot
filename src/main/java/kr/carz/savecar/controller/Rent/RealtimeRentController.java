@@ -61,7 +61,9 @@ public class RealtimeRentController {
 
     @Value("${moren_url}")
     private String moren_url_except_date;
-    private final String expected_day = "4";
+
+    @Value("${moren.expected_day}")
+    private String expected_day;
 
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {

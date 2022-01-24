@@ -36,24 +36,6 @@ public class PopupController {
     }
 
 
-    @GetMapping("/admin/popup/value/{title}")
-    @ResponseBody
-    public void getAdminValue(HttpServletResponse res, @PathVariable String title) throws IOException {
-
-        Optional<ValuesForWeb> valueWrapper = valuesForWebService.findValueByTitle(title);
-
-        JSONObject jsonObject = new JSONObject();
-        if(valueWrapper.isPresent()){
-            ValuesForWeb value = valueWrapper.get();
-            jsonObject.put("value", value.getValue());
-        }
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
-    }
-
     @PostMapping("/admin/popup/value")
     @ResponseBody
     public void postAdminValue(HttpServletResponse res, @RequestBody ValuesVO valuesVO) throws IOException {

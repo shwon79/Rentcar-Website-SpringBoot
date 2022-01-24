@@ -48,6 +48,12 @@ public class CalendarController {
     @Value("${coolsms.api_secret}")
     private String api_secret;
 
+    @Value("${moren_url}")
+    private String moren_url_except_date;
+
+    @Value("${moren.expected_day}")
+    private String expected_day;
+
 
     private String AddDate(String strDate, int year, int month, int day) throws Exception {
         Calendar cal = Calendar.getInstance();
@@ -114,6 +120,18 @@ public class CalendarController {
 
         int[] prevMonthDate;
         int[] nextMonthDate;
+
+
+//        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
+//
+//        HttpConnection http = new HttpConnection();
+//        JSONObject responseJson = http.sendGetRequest(moren_url);
+//        JSONArray list_json_array = (JSONArray) responseJson.get("list");
+//
+//        for(int i=0; i<list_json_array.length(); i++) {
+//
+//        }
+
 
         if(thisYear == year && thisMonth == month){
 
