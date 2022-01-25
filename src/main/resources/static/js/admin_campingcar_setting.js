@@ -1,14 +1,8 @@
 // setting에서 캠핑카 내용 수정 버튼
 let fuel, gearBox, license, personnel, camperPrice, rentPolicy, rentInsurance, driverLicense;
 let rentRule, refundPolicy, basicOption, facility, carNum, carCode, yearmodel;
-function editCampingcarSetting(carName) {
-    if (carName === 'europe') {
-        getData(0);
-    } else if (carName === 'limousine') {
-        getData(1);
-    } else if (carName === 'travel') {
-        getData(2);
-    };
+function editCampingcarSetting(carName, index) {
+    getData(index);
 
     let data = {
         basic_option: basicOption,
@@ -28,6 +22,8 @@ function editCampingcarSetting(carName) {
         driver_license: driverLicense
     }
 
+    // console.log(data);
+    // console.log(carName);
     if (confirm('캠핑카 내용을 수정하시겠습니까?')) {
         console.log(data);
         sendSettingData();

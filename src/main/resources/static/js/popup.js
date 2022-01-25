@@ -159,12 +159,10 @@ $(window).load(function () {
         getData('popup2_subtitle', 'popup2_subtitle');
         getData('popup2_title', 'popup2_title');
         getData('popup2_slogan', 'popup2_slogan');
+        getData('popup2_box1_title', 'popup2_box1_title');
         getData('popup2_box1_subtitle', 'popup2_box1_subtitle');
-        // getData('popup2_box1_line3', 'popup2_box1_line3');
-        // getData('popup2_box1_line4', 'popup2_box1_line4');
+        getData('popup2_box2_title', 'popup2_box2_title');
         getData('popup2_box2_subtitle', 'popup2_box2_subtitle');
-        // getData('popup2_box2_line3', 'popup2_box2_line3');
-        // getData('popup2_box2_line4', 'popup2_box2_line4');
         getData('popup2_button', 'popup2_button');
         getCampingcarInfoData('europe', 'popup2_box1_title','popup2_box1_line1_price', 'popup2_box1_line2_price');
         getCampingcarInfoData('limousine', 'popup2_box2_title','popup2_box2_line1_price', 'popup2_box2_line2_price');
