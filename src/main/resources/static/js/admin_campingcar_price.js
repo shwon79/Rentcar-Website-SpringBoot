@@ -1,12 +1,3 @@
-// const europeCarNum = document.getElementById('europe_carNum').innerText;
-// const europeCarCode = document.getElementById('europe_carCode').innerText;
-// const europeYearModel = document.getElementById('europe_yearmodel').innerText;
-// const limousineCarNum = document.getElementById('limousine_carNum').innerText;
-// const limousineCarCode = document.getElementById('limousine_carCode').innerText;
-// const limousineYearModel = document.getElementById('limousine_yearmodel').innerText;
-// const travelCarNum = document.getElementById('travel_carNum').innerText;
-// const travelCarCode = document.getElementById('travel_carCode').innerText;
-// const travelYearModel = document.getElementById('travel_yearmodel').innerText;
 let twodays, threedays, fourdays, fivedays, sixdays, sevendays, eightdays, ninedays, tendays;
 let elevendays, twelvedays, thirteendays, fourteendays, fifteendays, sixteendays, seventeendays, eighteendays, ninetinedays, twentydays;
 let twentyonedays, twentytwodays, twentythreedays, twentyfourdays, twentyfivedays, twentysixdays, twentysevendays, twentyeightdays, twentyninedays, thirtydays;
@@ -18,7 +9,7 @@ function EditCampingcarPrice(carName, season) {
     const limousineOnOneDay = parseInt(document.getElementById('limousine_on_oneday').value.replace(/,/g, ""));
     const travelOffOneDay = parseInt(document.getElementById('travel_off_oneday').value.replace(/,/g, ""));
     const travelOnOneDay = parseInt(document.getElementById('travel_on_oneday').value.replace(/,/g, ""));
-    let carNum, carCode, yearModel, oneDay;
+    let oneDay;
 
     if (carName.startsWith('europe')) {
         if (season === 0) {

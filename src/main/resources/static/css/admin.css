@@ -734,7 +734,9 @@ form {
 #textarea_wrapper table tr td:first-child {
     background-color: rgb(248 246 242);
 }
-
+#textarea_wrapper table tr td input {
+    text-align: center;
+}
 #textarea_wrapper article {
     margin: 15px 0;
 }

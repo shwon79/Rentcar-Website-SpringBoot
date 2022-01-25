@@ -39,161 +39,98 @@
             </div>
         </nav>
 
-        <div class="inner_content" style="text-align: center;">
+        <div class="inner_content container" style="text-align: center;">
             <h2 class="page_title">캠핑카 내용 수정</h2>
-            <div style="text-align: right; margin-bottom: 20px;">
-                <button id="settingSaveBtn" class="btn btn-primary btn-lg">저장하기</button>
-            </div>
-            <div id="textarea_wrapper" style="margin-bottom: 100px;">
-                <h3>공통 정보</h3>
-                <article>
-                    <h4 class="text_explanation">기본 정보</h4>
-                    <textarea rows="8" id="editedCamperPrice" th:text="${explanation.camper_price}"></textarea>
-                </article>
-                <article>
-                    <h4 class="text_explanation">렌트 정책</h4>
-                    <textarea rows="8" id="editedRentPolicy" th:text="${explanation.rent_policy}"></textarea>
-                </article>
-                <article>
-                    <h4 class="text_explanation">보험 사항_보험 안내</h4>
-                    <textarea rows="8" id="editedRentInsurance" th:text="${explanation.rent_insurance}"></textarea>
-                </article>
-                <article>
-                    <h4 class="text_explanation">보험 사항_운전자 조건</h4>
-                    <textarea rows="8" id="editedDriverLicense" th:text="${explanation.driver_license}"></textarea>
-                </article>
-                <article>
-                    <h4 class="text_explanation">이용 규칙</h4>
-                    <textarea rows="8" id="editedRentRule" th:text="${explanation.rent_rule}"></textarea>
-                </article>
-                <article>
-                    <h4 class="text_explanation">환불 정책</h4>
-                    <textarea rows="8" id="editedRefundPolicy" th:text="${explanation.refund_policy}"></textarea>
-                </article>
-
-                <h3>유럽</h3>
-                <article>
-                    <h4 class="text_explanation">유럽 기본 정보</h4>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>CAMPER 명</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>연료 / 미션</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>면허 종류</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>인원정보</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </article>
-                <article>
-                    <h4 class="text_explanation">유럽 기본 옵션</h4>
-                    <textarea rows="8" id="editedEuropeBasicOption" th:text="${explanation.europe_basic_option}"></textarea>
-                </article>
-                <article>
-                    <h4 class="text_explanation">유럽 시설</h4>
-                    <textarea rows="8" id="editedEuropeFacility" th:text="${explanation.europe_facility}"></textarea>
-                </article>
-
-                <h3>리무진</h3>
-                <article>
-                    <h4 class="text_explanation">리무진 기본 정보</h4>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>CAMPER 명</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>연료 / 미션</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>면허 종류</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>인원정보</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </article>
-                <article>
-                    <h4 class="text_explanation">리무진 기본 옵션</h4>
-                    <textarea rows="8" id="editedLimousineBasicOption" th:text="${explanation.limousine_basic_option}"></textarea>
-                </article>
-                <article>
-                    <h4 class="text_explanation">리무진 시설</h4>
-                    <textarea rows="8" id="editedLimousineFacility" th:text="${explanation.limousine_facility}"></textarea>
-                </article>
-
-                <h3>트레블</h3>
-                <article>
-                    <h4 class="text_explanation">트레블 기본 정보</h4>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>CAMPER 명</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>연료 / 미션</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>면허 종류</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>인원정보</td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </article>
-                <article>
-                    <h4 class="text_explanation">트래블 기본 옵션</h4>
-                    <textarea rows="8" id="editedTravelBasicOption" th:text="${explanation.travel_basic_option}"></textarea>
-                </article>
-                <article>
-                    <h4 class="text_explanation">트래블 시설</h4>
-                    <textarea rows="8" id="editedTravelFacility" th:text="${explanation.travel_facility}"></textarea>
-                </article>
-
+            <div style="margin-top: 30px;">
+                <ul class="nav nav-tabs" style="justify-content: center;">
+                    <li class="nav-item" th:each="campingCar, i : ${campingCarList}">
+                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${campingCar.carName}}" th:text="${campingCar.carName}"
+                           th:classappend="${i.index == 0 ? 'show active' : ''}"></a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="margin-top: 30px;">
+                    <div class="tab-pane fade" th:each="campingCar, i : ${campingCarList}" th:id="${campingCar.carName}"
+                         th:classappend="${i.index == 0 ? 'show active' : ''}">
+                        <div style="text-align: right";>
+                            <button onclick="editCampingcarSetting(name)" th:name="${campingCar.carName}" class="btn btn-primary" th:text="${campingCar.carName.toUpperCase() + ' 내용 수정하기'}"></button>
+                        </div>
+                        <div id="textarea_wrapper" style="margin-bottom: 100px;">
+                            <article style="display: none;">
+                                <p th:text="${campingCar.carNum}" class="carNum"></p>
+                                <p th:text="${campingCar.carCode}" class="carCode"></p>
+                                <p th:text="${campingCar.yearmodel}" class="yearmodel"></p>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">기본 정보</h4>
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td>CAMPER 명</td>
+                                        <td>
+                                            <span th:text="${campingCar.carName.toUpperCase()}"></span>
+                                            <span>VIP</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>연료 / 미션</td>
+                                        <td>
+                                            <div style="display:flex; justify-content: space-between;">
+                                                <input type="text" class="fuel" style="width: 45%;" th:value="${campingCar.fuel}">
+                                                <span> / </span>
+                                                <input type="text" class="gearBox" style="width: 45%;" th:value="${campingCar.gearBox}">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>면허 종류</td>
+                                        <td>
+                                            <input type="text" class="license" th:value="${campingCar.license}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>인원정보</td>
+                                        <td>
+                                            <input type="text" class="personnel" th:value="${campingCar.personnel}">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">요금 설명</h4>
+                                <textarea rows="8" class="camperPrice" th:text="${campingCar.camper_price}"></textarea>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">기본 옵션</h4>
+                                <textarea rows="8" class="basicOption" th:text="${campingCar.basic_option}"></textarea>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">시설</h4>
+                                <textarea rows="8" class="facility" th:text="${campingCar.facility}"></textarea>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">렌트 정책</h4>
+                                <textarea rows="8" class="rentPolicy" th:text="${campingCar.rent_policy}"></textarea>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">보험 사항_보험 안내</h4>
+                                <textarea rows="8" class="rentInsurance" th:text="${campingCar.rent_insurance}"></textarea>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">보험 사항_운전자 조건</h4>
+                                <textarea rows="8" class="driverLicense" th:text="${campingCar.driver_license}"></textarea>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">이용 규칙</h4>
+                                <textarea rows="8" class="rentRule" th:text="${campingCar.rent_rule}"></textarea>
+                            </article>
+                            <article>
+                                <h4 class="text_explanation">환불 정책</h4>
+                                <textarea rows="8" class="refundPolicy" th:text="${campingCar.refund_policy}"></textarea>
+                            </article>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
