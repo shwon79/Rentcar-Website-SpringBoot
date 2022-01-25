@@ -39,8 +39,19 @@ public class HelloController {
         this.valuesForWebService = valuesForWebService;
     }
 
-    @GetMapping("/index")
+
+    @GetMapping("/")
     public String home(Model model) {
+
+        List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
+
+        model.addAttribute("campingCarList", campingCarList);
+
+        return "index";
+    }
+
+    @GetMapping("/index")
+    public String index(Model model) {
 
         List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
 
