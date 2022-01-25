@@ -60,6 +60,8 @@ public class RealtimeRentController {
 
     @Value("${moren_url}")
     private String moren_url_except_date;
+
+    @Value("moren.expected_day")
     private final String expected_day = "4";
 
     @GetMapping("/rent/month/new")
