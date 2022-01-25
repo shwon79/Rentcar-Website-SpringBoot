@@ -339,7 +339,6 @@ $('.camping-completely-delete-btn').click(function() {
 
 // 캠핑카 예약 확정, 확정 취소, 삭제 버튼_디테일 페이지
 function setCampingReserve(behavior) {
-    console.log('clicked');
     let carType = document.getElementById('carType').value.toLowerCase();
     let rentDate = document.getElementById('rentDate').value;
     let rentTime = document.getElementById('rentTime').value;
