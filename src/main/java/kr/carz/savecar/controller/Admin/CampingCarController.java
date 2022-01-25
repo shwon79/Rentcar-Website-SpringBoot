@@ -150,6 +150,24 @@ public class CampingCarController {
     }
 
 
+    // 캠핑카 reservation 등록 api
+    @PostMapping("/admin/campingcar/reservation")
+    @ResponseBody
+    public void post_camping_car_reservation(HttpServletResponse res, @RequestBody CampingCarReservationDTO campingCarReservationDTO) throws IOException {
+
+        campingcarReservationService.save_campingcar_reservation(campingCarReservationDTO);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
     // 캠핑카 예약 수정, 확정, 취소하기 api
     @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
     @ResponseBody
