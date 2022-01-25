@@ -1,10 +1,10 @@
-package kr.carz.savecar.controller;
+package kr.carz.savecar.controller.Admin;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AdminReactController {
+public class ReactController {
 
     @GetMapping("/react")
     public String getReact(){

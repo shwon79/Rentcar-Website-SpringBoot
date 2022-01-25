@@ -1,4 +1,4 @@
-package kr.carz.savecar.controller;
+package kr.carz.savecar.controller.Utils;
 
 import org.json.JSONObject;
 

@@ -55,17 +55,6 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div style="display: none;">
-                        <p th:text="${campingCarPriceList[0].carNum}" id="europe_carNum"></p>
-                        <p th:text="${campingCarPriceList[0].carCode}" id="europe_carCode"></p>
-                        <p th:text="${campingCarPriceList[0].yearmodel}" id="europe_yearmodel"></p>
-                        <p th:text="${campingCarPriceList[2].carNum}" id="limousine_carNum"></p>
-                        <p th:text="${campingCarPriceList[2].carCode}" id="limousine_carCode"></p>
-                        <p th:text="${campingCarPriceList[2].yearmodel}" id="limousine_yearmodel"></p>
-                        <p th:text="${campingCarPriceList[4].carNum}" id="travel_carNum"></p>
-                        <p th:text="${campingCarPriceList[4].carCode}" id="travel_carCode"></p>
-                        <p th:text="${campingCarPriceList[4].yearmodel}" id="travel_yearmodel"></p>
-                    </div>
                     <div class="tab-pane fade show active" id="europePrice">
                         <table class="table campingPriceEditTable table-striped">
                             <thead>
@@ -77,7 +66,7 @@
                                         </button>
                                     </td>
                                     <td style="border-top: none;" colspan="2">
-                                        <button onclick="EditCampingcarPrice('europe_peak', 1);" class="btn btn-primary btn-sm">
+                                        <button onclick="EditCampingcarPrice('europe', 1);" class="btn btn-primary btn-sm">
                                             성수기 가격 수정
                                         </button>
                                     </td>
@@ -315,7 +304,7 @@
                                     </button>
                                 </td>
                                 <td style="border-top: none;" colspan="2">
-                                    <button onclick="EditCampingcarPrice('limousine_peak', 1);" class="btn btn-primary btn-sm">
+                                    <button onclick="EditCampingcarPrice('limousine', 1);" class="btn btn-primary btn-sm">
                                         성수기 가격 수정
                                     </button>
                                 </td>
@@ -553,7 +542,7 @@
                                     </button>
                                 </td>
                                 <td style="border-top: none;" colspan="2">
-                                    <button onclick="EditCampingcarPrice('travel_peak', 1);" class="btn btn-primary btn-sm">
+                                    <button onclick="EditCampingcarPrice('travel', 1);" class="btn btn-primary btn-sm">
                                         성수기 가격 수정
                                     </button>
                                 </td>

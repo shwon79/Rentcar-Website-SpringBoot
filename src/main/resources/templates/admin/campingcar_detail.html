@@ -85,11 +85,11 @@
           <div class="detail_list" id="detail_set_reserve">
             <button class="set_reserve" onclick="setCampingReserve('confirm')"
                     th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">
-              확정
+              모렌전송
             </button>
             <button class="set_reserve" onclick="setCampingReserve('delete')"
                     th:style="${campingCarReservation.reservation} == 0? 'pointer-events:none; background: gray ' : null">
-              확정 취소
+              모렌전송 회수
             </button>
             <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="setCampingReserve('edit')">
               내용 수정

@@ -1,8 +1,6 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.Explanation;
-import kr.carz.savecar.dto.ExplanationDTO;
-import kr.carz.savecar.repository.DiscountRepository;
 import kr.carz.savecar.repository.ExplanationRepository;
 
 import java.util.Optional;

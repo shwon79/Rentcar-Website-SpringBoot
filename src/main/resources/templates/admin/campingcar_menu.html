@@ -60,8 +60,9 @@
           <p style="flex: 1; text-align: center; margin-bottom: 0;">삭제</p>
           <p style="flex: 10; text-align: center; margin-bottom: 0;">예약 신청 내용</p>
         </div>
-        <div class="reserve_list_wrapper" th:each="reservation : ${campingCarReservationList}">
+        <div class="reserve_list_wrapper" th:each="reservation, i : ${campingCarReservationList}">
           <div class="reserve_checkbox">
+            <p th:text="${i.index + 1}" style="margin-bottom: 4px;"></p>
             <input th:if="${reservation.reservation != 1}" type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
           </div>
           <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
@@ -105,7 +106,7 @@
             <p class="grid_oneline">
               <button class="set_reserve btn_mobile_card" th:data-index="${reservation.id}" onclick="setReservationOnMenu(this)"
                       th:style="${reservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">
-                확정
+                모렌전송
               </button>
             </p>
             <div style="display: none;">

@@ -18,7 +18,10 @@ public class ValuesForWebService {
         return valuesForWebRepository.findByTitle(title);
     }
 
-    public Long save(ValuesForWebDTO valuesForWebDTO) {
+    public Long saveDTO(ValuesForWebDTO valuesForWebDTO) {
         return valuesForWebRepository.save(valuesForWebDTO.toEntity()).getValueId();
+    }
+    public Long save(ValuesForWeb valuesForWeb) {
+        return valuesForWebRepository.save(valuesForWeb).getValueId();
     }
 }

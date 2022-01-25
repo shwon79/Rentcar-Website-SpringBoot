@@ -14,7 +14,6 @@ public class ValuesForWebDTO {
 
     private String title;
     private String value;
-    private List<ValuesForWebDTO> valuesList;
 
     public ValuesForWeb toEntity() {
         return ValuesForWeb.builder()

@@ -1,12 +1,3 @@
-const europeCarNum = document.getElementById('europe_carNum').innerText;
-const europeCarCode = document.getElementById('europe_carCode').innerText;
-const europeYearModel = document.getElementById('europe_yearmodel').innerText;
-const limousineCarNum = document.getElementById('limousine_carNum').innerText;
-const limousineCarCode = document.getElementById('limousine_carCode').innerText;
-const limousineYearModel = document.getElementById('limousine_yearmodel').innerText;
-const travelCarNum = document.getElementById('travel_carNum').innerText;
-const travelCarCode = document.getElementById('travel_carCode').innerText;
-const travelYearModel = document.getElementById('travel_yearmodel').innerText;
 let twodays, threedays, fourdays, fivedays, sixdays, sevendays, eightdays, ninedays, tendays;
 let elevendays, twelvedays, thirteendays, fourteendays, fifteendays, sixteendays, seventeendays, eighteendays, ninetinedays, twentydays;
 let twentyonedays, twentytwodays, twentythreedays, twentyfourdays, twentyfivedays, twentysixdays, twentysevendays, twentyeightdays, twentyninedays, thirtydays;
@@ -18,12 +9,9 @@ function EditCampingcarPrice(carName, season) {
     const limousineOnOneDay = parseInt(document.getElementById('limousine_on_oneday').value.replace(/,/g, ""));
     const travelOffOneDay = parseInt(document.getElementById('travel_off_oneday').value.replace(/,/g, ""));
     const travelOnOneDay = parseInt(document.getElementById('travel_on_oneday').value.replace(/,/g, ""));
-    let carNum, carCode, yearModel, oneDay;
+    let oneDay;
 
     if (carName.startsWith('europe')) {
-        carNum = europeCarNum;
-        carCode = europeCarCode;
-        yearModel = europeYearModel;
         if (season === 0) {
             oneDay = europeOffOneDay;
             getData(0);
@@ -32,9 +20,6 @@ function EditCampingcarPrice(carName, season) {
             getData(1);
         }
     } else if (carName.startsWith('limousine')) {
-        carNum = limousineCarNum;
-        carCode = limousineCarCode;
-        yearModel = limousineYearModel;
         if (season === 0) {
             oneDay = limousineOffOneDay;
             getData(2);
@@ -43,9 +28,6 @@ function EditCampingcarPrice(carName, season) {
             getData(3);
         }
     } else if (carName.startsWith('travel')) {
-        carNum = travelCarNum;
-        carCode = travelCarCode;
-        yearModel = travelYearModel;
         if (season === 0) {
             oneDay = travelOffOneDay;
             getData(4);
@@ -56,11 +38,8 @@ function EditCampingcarPrice(carName, season) {
     }
 
     let data = {
-        carNum: carNum,
-        carCode: carCode,
         season: season.toString(),
         deposit: '300000',
-        yearmodel: yearModel,
         onedays: oneDay.toFixed(2),
         twodays: twodays.toFixed(2),
         threedays: threedays.toFixed(2),

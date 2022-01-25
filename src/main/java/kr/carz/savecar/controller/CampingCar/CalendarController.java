@@ -1,5 +1,6 @@
-package kr.carz.savecar.controller;
+package kr.carz.savecar.controller.CampingCar;
 
+import kr.carz.savecar.controller.Utils.HttpConnection;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.service.*;
@@ -20,33 +21,26 @@ import java.util.*;
 
 @Controller
 public class CalendarController {
-    MonthlyRentService monthlyRentService;
-    YearlyRentService yearlyRentService;
-    ShortRentService shortRentService;
-    CampingCarService campingCarService;
     CalendarDateService calendarDateService;
     CalendarTimeService calendarTimeService;
     DateCampingService dateCampingService;
     CampingCarPriceService campingCarPriceService;
     CampingcarReservationService campingcarReservationService;
     ExplanationService explanationService;
+    CampingCarPriceRateService campingCarPriceRateService;
 
     @Autowired
-    public CalendarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                              ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
+    public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
-                              ExplanationService explanationService) {
-        this.monthlyRentService = monthlyRentService;
-        this.yearlyRentService = yearlyRentService;
-        this.shortRentService = shortRentService;
-        this.campingCarService = campingCarService;
+                              ExplanationService explanationService, CampingCarPriceRateService campingCarPriceRateService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
         this.campingcarReservationService = campingcarReservationService;
         this.explanationService = explanationService;
+        this.campingCarPriceRateService = campingCarPriceRateService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -56,6 +50,12 @@ public class CalendarController {
 
     @Value("${coolsms.api_secret}")
     private String api_secret;
+
+    @Value("${moren_url}")
+    private String moren_url_except_date;
+
+    @Value("${moren.expected_day}")
+    private String expected_day;
 
 
     private String AddDate(String strDate, int year, int month, int day) throws Exception {
@@ -95,11 +95,13 @@ public class CalendarController {
         }
     }
 
+
+
     @GetMapping("/camping/{carType}")
     public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
 
-        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
-        model.put("explanation", explanation.get());
+        Optional<Explanation> explanation = explanationService.findById((long) 0);
+        explanation.ifPresent(value -> model.put("explanation", value));
 
         return "rent_camping/" + carType + "_info";
     }
@@ -123,6 +125,16 @@ public class CalendarController {
 
         int[] prevMonthDate;
         int[] nextMonthDate;
+
+
+        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
+
+        HttpConnection http = new HttpConnection();
+        JSONObject responseJson = http.sendGetRequest(moren_url);
+        JSONArray list_json_array = (JSONArray) responseJson.get("list");
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        List<OrderStartEnd> primeClubReservedList = new ArrayList<>();
+
 
         if(thisYear == year && thisMonth == month){
 
@@ -153,8 +165,17 @@ public class CalendarController {
             List<DateCamping> dateCampingListByDateId = dateCampingService.findByDateId(calendarDate);
             dateCampingList.add(dateCampingListByDateId);
 
+//            String calendar_date_string = calendarDate.getYear() + "-" + calendarDate.getMonth() + "-" + calendarDate.getDay() + " 00:00:00";
+//            LocalDateTime calendar_date_date_time = LocalDateTime.parse(calendar_date_string, formatter);
+//
+//            // 차량명도 신경써야함
+//            for(OrderStartEnd orderStartEnd : primeClubReservedList){
+//                if(calendar_date_date_time.isAfter(orderStartEnd.startDate) && )
+//            }
+
             List<String> calendarTimeListString = new ArrayList<>();
             for(int k=0; k<dateCampingListByDateId.size(); k++){
+
                 if(dateCampingListByDateId.get(k).getReserved().equals("1")){
                     List<CalendarTime> calendarTimeListByDate = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, get_campingcar_by_index(k));
                     String reserve_status = calendarTimeListByDate.get(0).getReserveComplete();
@@ -175,6 +196,22 @@ public class CalendarController {
             }
             calendarTimeList.add(calendarTimeListString);
         }
+
+
+//        for(int i=0; i<list_json_array.length(); i++) {
+//            JSONObject selectedObject = (JSONObject)list_json_array.get(i);
+//            String carGubun = ((String)selectedObject.get("carGubun"));
+//            if(carGubun.equals("캠핑카")){
+//                String order_start = ((String)selectedObject.get("order_start"));
+//                String order_end = ((String)selectedObject.get("order_end"));
+//
+////                LocalDateTime order_start_date_time = LocalDateTime.parse(order_start, formatter);
+////                LocalDateTime order_end_date_time = LocalDateTime.parse(order_end, formatter);
+////                primeClubReservedList.add(new OrderStartEnd(order_start_date_time, order_end_date_time));
+//
+//            }
+//        }
+
 
 
         model.addAttribute("calendarDateList", calendarDateList);
@@ -230,8 +267,8 @@ public class CalendarController {
             calendarTimeList.add(calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice));
         }
 
-        Optional<Explanation> explanation = explanationService.findById(Long.valueOf(0));
-        model.put("explanation", explanation.get());
+        Optional<Explanation> explanation = explanationService.findById((long) 0);
+        explanation.ifPresent(value -> model.put("explanation", value));
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("calendarTimeList", calendarTimeList);
@@ -286,7 +323,7 @@ public class CalendarController {
         model.put("return_time", return_time);
         model.put("day", day);
         model.put("total", total);
-        model.put("carType", carType);;
+        model.put("carType", carType);
         model.put("extraTime", extraTime);
 
         return "rent_camping/reservation";
@@ -296,102 +333,51 @@ public class CalendarController {
     // 캠핑카 가격 구하는 api
     @RequestMapping(value = "/camping/calendar/{carType}/getprice/{season}", produces = "application/json; charset=UTF-8", method= RequestMethod.GET)
     @ResponseBody
-    public void get_campingcar_price(HttpServletResponse res, @PathVariable String carType, @PathVariable String season) throws IOException {
+    public void get_camping_car_price(HttpServletResponse res, @PathVariable String carType, @PathVariable String season) throws IOException {
 
-        if(season.equals("0")){
-            CampingCarPrice campingCarPrice;
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        CampingCarPriceRate campingCarPriceRate = campingCarPriceRateService.findByCarNameAndSeason(campingCarPrice, season);
 
-            campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        JSONObject jsonObject = new JSONObject();
 
-            JSONObject jsonObject = new JSONObject();
+        jsonObject.put("carName",campingCarPriceRate.getCarName().getCarName());
+        jsonObject.put("deposit",campingCarPriceRate.getDeposit());
+        jsonObject.put("season",campingCarPriceRate.getSeason());
+        jsonObject.put("onedays",campingCarPriceRate.getOnedays());
+        jsonObject.put("twodays",campingCarPriceRate.getTwodays());
+        jsonObject.put("threedays",campingCarPriceRate.getThreedays());
+        jsonObject.put("fourdays",campingCarPriceRate.getFourdays());
+        jsonObject.put("fivedays",campingCarPriceRate.getFivedays());
+        jsonObject.put("sixdays",campingCarPriceRate.getSixdays());
+        jsonObject.put("sevendays",campingCarPriceRate.getSevendays());
+        jsonObject.put("eightdays",campingCarPriceRate.getEightdays());
+        jsonObject.put("ninedays",campingCarPriceRate.getNinedays());
+        jsonObject.put("tendays",campingCarPriceRate.getTendays());
+        jsonObject.put("elevendays",campingCarPriceRate.getElevendays());
+        jsonObject.put("twelvedays",campingCarPriceRate.getTwelvedays());
+        jsonObject.put("thirteendays",campingCarPriceRate.getThirteendays());
+        jsonObject.put("fourteendays",campingCarPriceRate.getFourteendays());
+        jsonObject.put("fifteendays",campingCarPriceRate.getFifteendays());
+        jsonObject.put("sixteendays",campingCarPriceRate.getSixteendays());
+        jsonObject.put("seventeendays",campingCarPriceRate.getSeventeendays());
+        jsonObject.put("eighteendays",campingCarPriceRate.getEighteendays());
+        jsonObject.put("ninetinedays",campingCarPriceRate.getNinetinedays());
+        jsonObject.put("twentydays",campingCarPriceRate.getTwentydays());
+        jsonObject.put("twentyonedays",campingCarPriceRate.getTwentyonedays());
+        jsonObject.put("twentytwodays",campingCarPriceRate.getTwentytwodays());
+        jsonObject.put("twentythreedays",campingCarPriceRate.getTwentythreedays());
+        jsonObject.put("twentyfourdays",campingCarPriceRate.getTwentyfourdays());
+        jsonObject.put("twentyfivedays",campingCarPriceRate.getTwentyfivedays());
+        jsonObject.put("twentysixdays",campingCarPriceRate.getTwentysixdays());
+        jsonObject.put("twentysevendays",campingCarPriceRate.getTwentysevendays());
+        jsonObject.put("twentyeightdays",campingCarPriceRate.getTwentyeightdays());
+        jsonObject.put("twentyninedays",campingCarPriceRate.getTwentyninedays());
+        jsonObject.put("thirtydays",campingCarPriceRate.getThirtydays());
 
-            jsonObject.put("deposit",campingCarPrice.getDeposit());
-            jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
-            jsonObject.put("carName",campingCarPrice.getCarName());
-            jsonObject.put("onedays",campingCarPrice.getOnedays());
-            jsonObject.put("twodays",campingCarPrice.getTwodays());
-            jsonObject.put("threedays",campingCarPrice.getThreedays());
-            jsonObject.put("fourdays",campingCarPrice.getFourdays());
-            jsonObject.put("fivedays",campingCarPrice.getFivedays());
-            jsonObject.put("sixdays",campingCarPrice.getSixdays());
-            jsonObject.put("sevendays",campingCarPrice.getSevendays());
-            jsonObject.put("eightdays",campingCarPrice.getEightdays());
-            jsonObject.put("ninedays",campingCarPrice.getNinedays());
-            jsonObject.put("tendays",campingCarPrice.getTendays());
-            jsonObject.put("elevendays",campingCarPrice.getElevendays());
-            jsonObject.put("twelvedays",campingCarPrice.getTwelvedays());
-            jsonObject.put("thirteendays",campingCarPrice.getThirteendays());
-            jsonObject.put("fourteendays",campingCarPrice.getFourteendays());
-            jsonObject.put("fifteendays",campingCarPrice.getFifteendays());
-            jsonObject.put("sixteendays",campingCarPrice.getSixteendays());
-            jsonObject.put("seventeendays",campingCarPrice.getSeventeendays());
-            jsonObject.put("eighteendays",campingCarPrice.getEighteendays());
-            jsonObject.put("ninetinedays",campingCarPrice.getNinetinedays());
-            jsonObject.put("twentydays",campingCarPrice.getTwentydays());
-            jsonObject.put("twentyonedays",campingCarPrice.getTwentyonedays());
-            jsonObject.put("twentytwodays",campingCarPrice.getTwentytwodays());
-            jsonObject.put("twentythreedays",campingCarPrice.getTwentythreedays());
-            jsonObject.put("twentyfourdays",campingCarPrice.getTwentyfourdays());
-            jsonObject.put("twentyfivedays",campingCarPrice.getTwentyfivedays());
-            jsonObject.put("twentysixdays",campingCarPrice.getTwentysixdays());
-            jsonObject.put("twentysevendays",campingCarPrice.getTwentysevendays());
-            jsonObject.put("twentyeightdays",campingCarPrice.getTwentyeightdays());
-            jsonObject.put("twentyninedays",campingCarPrice.getTwentyninedays());
-            jsonObject.put("thirtydays",campingCarPrice.getThirtydays());
-
-            PrintWriter pw = res.getWriter();
-            pw.print(jsonObject);
-            pw.flush();
-            pw.close();
-        } else if(season.equals("1")) {
-
-            CampingCarPrice campingCarPrice;
-
-            campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType+"_peak");
-
-            JSONObject jsonObject = new JSONObject();
-
-            jsonObject.put("deposit",campingCarPrice.getDeposit());
-            jsonObject.put("yearmodel",campingCarPrice.getYearmodel());
-            jsonObject.put("carName",campingCarPrice.getCarName());
-            jsonObject.put("onedays",campingCarPrice.getOnedays());
-            jsonObject.put("twodays",campingCarPrice.getTwodays());
-            jsonObject.put("threedays",campingCarPrice.getThreedays());
-            jsonObject.put("fourdays",campingCarPrice.getFourdays());
-            jsonObject.put("fivedays",campingCarPrice.getFivedays());
-            jsonObject.put("sixdays",campingCarPrice.getSixdays());
-            jsonObject.put("sevendays",campingCarPrice.getSevendays());
-            jsonObject.put("eightdays",campingCarPrice.getEightdays());
-            jsonObject.put("ninedays",campingCarPrice.getNinedays());
-            jsonObject.put("tendays",campingCarPrice.getTendays());
-            jsonObject.put("elevendays",campingCarPrice.getElevendays());
-            jsonObject.put("twelvedays",campingCarPrice.getTwelvedays());
-            jsonObject.put("thirteendays",campingCarPrice.getThirteendays());
-            jsonObject.put("fourteendays",campingCarPrice.getFourteendays());
-            jsonObject.put("fifteendays",campingCarPrice.getFifteendays());
-            jsonObject.put("sixteendays",campingCarPrice.getSixteendays());
-            jsonObject.put("seventeendays",campingCarPrice.getSeventeendays());
-            jsonObject.put("eighteendays",campingCarPrice.getEighteendays());
-            jsonObject.put("ninetinedays",campingCarPrice.getNinetinedays());
-            jsonObject.put("twentydays",campingCarPrice.getTwentydays());
-            jsonObject.put("twentyonedays",campingCarPrice.getTwentyonedays());
-            jsonObject.put("twentytwodays",campingCarPrice.getTwentytwodays());
-            jsonObject.put("twentythreedays",campingCarPrice.getTwentythreedays());
-            jsonObject.put("twentyfourdays",campingCarPrice.getTwentyfourdays());
-            jsonObject.put("twentyfivedays",campingCarPrice.getTwentyfivedays());
-            jsonObject.put("twentysixdays",campingCarPrice.getTwentysixdays());
-            jsonObject.put("twentysevendays",campingCarPrice.getTwentysevendays());
-            jsonObject.put("twentyeightdays",campingCarPrice.getTwentyeightdays());
-            jsonObject.put("twentyninedays",campingCarPrice.getTwentyninedays());
-            jsonObject.put("thirtydays",campingCarPrice.getThirtydays());
-
-
-            PrintWriter pw = res.getWriter();
-            pw.print(jsonObject);
-            pw.flush();
-            pw.close();
-        }
-
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 
@@ -522,7 +508,7 @@ public class CalendarController {
         CalendarTime calendarLastTime = calendarTimeService.findCalendarTimeByDateIdAndCarNameAndReserveTime(calendarLastDate, campingCarPrice, reserveTime);
 
         if(reserveTime.compareTo("16시") < 0){
-            for(Long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
+            for(long j=calendarLastTime.getTimeId()+1; j<=calendarLastTime.getTimeId()+3; j++){
                 CalendarTime calendarExtraTime = calendarTimeService.findCalendarTimeByTimeId(j);
                 if(calendarExtraTime.getReserveComplete().equals("0")){
                     extra_time += 1;

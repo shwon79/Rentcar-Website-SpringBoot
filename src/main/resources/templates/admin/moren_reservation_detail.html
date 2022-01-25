@@ -51,11 +51,11 @@
                 <div style="display: flex; justify-content: space-between; background-color: white;">
                     <button class="moren-reservation-btn set_reserve" data-behavior="confirm" th:name="${morenReservationDTO.id}"
                             th:style="${morenReservationDTO.reservationStatus} == '1' ? 'pointer-events: none; background: gray; margin: 5px;' : 'margin: 5px;'">
-                        확정
+                        모렌전송
                     </button>
                     <button class="moren-reservation-btn set_reserve" data-behavior="cancel" th:name="${morenReservationDTO.id}"
                             th:style="${morenReservationDTO.reservationStatus} == '0' ? 'pointer-events: none; background: gray; margin: 5px;': 'margin: 5px;'">
-                        확정 취소
+                        모렌전송 회수
                     </button>
                     <button class="moren-reservation-btn set_reserve" data-behavior="edit" th:name="${morenReservationDTO.id}" style="margin: 5px;">수정</button>
                 </div>

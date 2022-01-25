@@ -1,5 +1,6 @@
-package kr.carz.savecar.controller;
+package kr.carz.savecar.controller.Rent;
 
+import kr.carz.savecar.controller.Utils.HttpConnection;
 import kr.carz.savecar.dto.MorenDTO;
 import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.dto.RealTimeDTO;
@@ -61,8 +62,8 @@ public class RealtimeRentController {
     @Value("${moren_url}")
     private String moren_url_except_date;
 
-    @Value("moren.expected_day")
-    private final String expected_day = "4";
+    @Value("${moren.expected_day}")
+    private String expected_day;
 
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
