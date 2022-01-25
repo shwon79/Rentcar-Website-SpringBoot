@@ -12,4 +12,5 @@ public interface CampingCarPriceRateRepository extends JpaRepository<CampingCarP
 
     List<CampingCarPriceRate> findAll();
     CampingCarPriceRate findByCarNameAndSeason(CampingCarPrice carName, String season);
+    List<CampingCarPriceRate> findByCarName(CampingCarPrice carName);
 }
