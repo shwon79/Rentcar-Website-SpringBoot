@@ -21,19 +21,19 @@ public class HelloController {
     MonthlyRentService monthlyRentService;
     YearlyRentService yearlyRentService;
     ShortRentService shortRentService;
-    CampingCarService campingCarService;
+    CampingCarPriceService campingCarPriceService;
     CalendarDateService calendarDateService;
     DateCampingService dateCampingService;
     ValuesForWebService valuesForWebService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                           ShortRentService shortRentService, CampingCarService campingCarService, CalendarDateService calendarDateService,
+                           ShortRentService shortRentService, CampingCarPriceService campingCarPriceService, CalendarDateService calendarDateService,
                            DateCampingService dateCampingService, ValuesForWebService valuesForWebService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
-        this.campingCarService = campingCarService;
+        this.campingCarPriceService = campingCarPriceService;
         this.calendarDateService = calendarDateService;
         this.dateCampingService = dateCampingService;
         this.valuesForWebService = valuesForWebService;
@@ -47,7 +47,7 @@ public class HelloController {
 
     @GetMapping("/index/popup/value/{title}")
     @ResponseBody
-    public void getAdminValue(HttpServletResponse res, @PathVariable String title) throws IOException {
+    public void getPopUpValue(HttpServletResponse res, @PathVariable String title) throws IOException {
 
         Optional<ValuesForWeb> valueWrapper = valuesForWebService.findValueByTitle(title);
 
@@ -62,6 +62,23 @@ public class HelloController {
         pw.flush();
         pw.close();
     }
+
+
+    @GetMapping("/index/popup/value/campingCar/{carName}")
+    @ResponseBody
+    public void getPopUpCampingCarValue(HttpServletResponse res, @PathVariable String carName) throws IOException {
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carName);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("campingCarPrice", campingCarPrice);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
 
 
     @GetMapping("/rent/long_term")

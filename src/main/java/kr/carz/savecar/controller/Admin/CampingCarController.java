@@ -123,9 +123,10 @@ public class CampingCarController {
     public ModelAndView get_setting_main() {
 
         ModelAndView mav = new ModelAndView();
-        Optional<Explanation> explanation = explanationService.findById((long) 0);
 
-        explanation.ifPresent(value -> mav.addObject("explanation", value));
+        List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
+        mav.addObject("campingCarList", campingCarList);
+
         mav.setViewName("admin/campingcar_setting_menu");
 
         return mav;
@@ -603,39 +604,6 @@ public class CampingCarController {
     }
 
 
-    //    @RequestMapping(value = "/admin/campingcar/setting", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
-    @PostMapping("/admin/campingcar/setting")
-    @ResponseBody
-    public void post_admin_setting(HttpServletResponse res, @RequestBody ExplanationDTO explanationDTO) throws IOException {
-
-        Optional<Explanation> explanation_optional = explanationService.findById((long) 0);
-        if(explanation_optional.isPresent()) {
-            Explanation explanation = explanation_optional.get();
-            explanation.setCamper_price(explanationDTO.getCamper_price());
-            explanation.setEurope_basic_option(explanationDTO.getEurope_basic_option());
-            explanation.setLimousine_basic_option(explanationDTO.getLimousine_basic_option());
-            explanation.setTravel_basic_option(explanationDTO.getTravel_basic_option());
-            explanation.setEurope_facility(explanationDTO.getEurope_facility());
-            explanation.setLimousine_facility(explanationDTO.getLimousine_facility());
-            explanation.setTravel_facility(explanationDTO.getTravel_facility());
-            explanation.setRent_policy(explanationDTO.getRent_policy());
-            explanation.setRent_insurance(explanationDTO.getRent_insurance());
-            explanation.setRent_rule(explanationDTO.getRent_rule());
-            explanation.setRefund_policy(explanationDTO.getRefund_policy());
-            explanation.setDriver_license(explanationDTO.getDriver_license());
-
-            explanationService.save(explanation);
-        }
-
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
-    }
 
     @PutMapping("/admin/campingcar/price/by/{carType}")
     @ResponseBody
@@ -655,4 +623,24 @@ public class CampingCarController {
         pw.flush();
         pw.close();
     }
+
+
+    //    @RequestMapping(value = "/admin/campingcar/setting/{carName}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @PutMapping("/admin/campingcar/setting/{carName}")
+    @ResponseBody
+    public void put_admin_setting(HttpServletResponse res, @RequestBody CampingCarPriceDTO dto, @PathVariable String carName) throws IOException {
+
+        CampingCarPrice foundCampingCar = campingCarPriceService.findCampingCarPriceByCarName(carName);
+        campingCarPriceService.saveDTO(foundCampingCar, dto);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
 }

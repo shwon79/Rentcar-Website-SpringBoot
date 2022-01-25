@@ -13,43 +13,34 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"calendarTimeList", "dateCampingList"})
+@EqualsAndHashCode(exclude = {"campingCarPriceRates", "calendarTimeList", "dateCampingList"})
 @Table(name = "CampingCarPrice")
 public class CampingCarPrice {
     @Id
     @Column(name = "car_name")
     private String carName;
 
+    @Column(columnDefinition = "LONGTEXT")
+    private String basic_option;
 
-    @OneToMany(mappedBy = "carName", targetEntity=CampingCarPriceRate.class)
-    private List<CampingCarPriceRate> campingCarPriceRates = new ArrayList<>();
-
-    public void addCampingCarPriceRates(CampingCarPriceRate campingCarPriceRate)
-    {
-        campingCarPriceRate.setCarName(this);
-        this.campingCarPriceRates.add(campingCarPriceRate);
-    }
-
-    @OneToMany(mappedBy = "carName", targetEntity=CalendarTime.class)
-    private List<CalendarTime> calendarTimeList = new ArrayList<>();
-
-    public void addCalendarTime(CalendarTime calendarTime)
-    {
-        calendarTime.setCarName(this);
-        this.calendarTimeList.add(calendarTime);
-    }
-
-    @OneToMany(mappedBy = "carName", targetEntity=DateCamping.class)
-    private List<DateCamping> dateCampingList = new ArrayList<>();
-
-    public void addDateCamping(DateCamping dateCamping)
-    {
-        dateCamping.setCarName(this);
-        this.dateCampingList.add(dateCamping);
-    }
+    @Column(columnDefinition = "LONGTEXT")
+    private String facility;
 
     private String carNum;
     private String carCode;
+    private String yearmodel;
+    private String fuel;
+    private String gearBox;
+    private String license;
+    private String personnel;
+    private String camper_price;
+    private String rent_policy;
+    private String rent_insurance;
+    private String rent_rule;
+    private String refund_policy;
+    private String driver_license;
+
+
     private String season;   // 0 비성수기  1 성수기
     private Float onedays;
     private Float twodays;
@@ -82,18 +73,52 @@ public class CampingCarPrice {
     private Float twentyninedays;
     private Float thirtydays;
     private String deposit;
-    private String yearmodel;
-    private String fuel;
-    private String gearBox;
-    private String license;
-    private String personnel;
+
+
+
+    @OneToMany(mappedBy = "carName", targetEntity=CampingCarPriceRate.class)
+    private List<CampingCarPriceRate> campingCarPriceRates = new ArrayList<>();
+
+    public void addCampingCarPriceRates(CampingCarPriceRate campingCarPriceRate)
+    {
+        campingCarPriceRate.setCarName(this);
+        this.campingCarPriceRates.add(campingCarPriceRate);
+    }
+
+    @OneToMany(mappedBy = "carName", targetEntity=CalendarTime.class)
+    private List<CalendarTime> calendarTimeList = new ArrayList<>();
+
+    public void addCalendarTime(CalendarTime calendarTime)
+    {
+        calendarTime.setCarName(this);
+        this.calendarTimeList.add(calendarTime);
+    }
+
+    @OneToMany(mappedBy = "carName", targetEntity=DateCamping.class)
+    private List<DateCamping> dateCampingList = new ArrayList<>();
+
+    public void addDateCamping(DateCamping dateCamping)
+    {
+        dateCamping.setCarName(this);
+        this.dateCampingList.add(dateCamping);
+    }
 
 
     @Builder
-    public CampingCarPrice(String carName, String carNum, String carCode, String season, Float onedays, Float twodays, Float threedays, Float fourdays, Float fivedays, Float sixdays, Float sevendays, Float eightdays, Float ninedays, Float tendays, Float elevendays, Float twelvedays, Float thirteendays, Float fourteendays
+    public CampingCarPrice(String basic_option, String facility, String camper_price, String rent_policy, String rent_insurance, String rent_rule, String refund_policy, String driver_license
+                        , String carName, String carNum, String carCode, String season, Float onedays, Float twodays, Float threedays, Float fourdays, Float fivedays, Float sixdays, Float sevendays, Float eightdays, Float ninedays, Float tendays, Float elevendays, Float twelvedays, Float thirteendays, Float fourteendays
                         , Float fifteendays, Float sixteendays, Float seventeendays, Float eighteendays, Float ninetinedays, Float twentydays, Float twentyonedays
                         , Float twentytwodays, Float twentythreedays, Float twentyfourdays, Float twentyfivedays, Float twentysixdays, Float twentysevendays
                         , Float twentyeightdays, Float twentyninedays, Float thirtydays, String deposit, String yearmodel, String fuel, String gearBox, String license, String personnel) {
+        this.camper_price = camper_price;
+        this.rent_policy = rent_policy;
+        this.rent_insurance = rent_insurance;
+        this.rent_rule = rent_rule;
+        this.refund_policy = refund_policy;
+        this.driver_license = driver_license;
+
+        this.basic_option = basic_option;
+        this.facility = facility;
         this.carName = carName;
         this.carNum = carNum;
         this.carCode = carCode;

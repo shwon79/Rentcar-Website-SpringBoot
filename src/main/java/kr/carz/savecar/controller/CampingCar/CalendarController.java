@@ -1,5 +1,6 @@
-package kr.carz.savecar.controller;
+package kr.carz.savecar.controller.CampingCar;
 
+import kr.carz.savecar.controller.Utils.HttpConnection;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.service.*;
@@ -16,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller

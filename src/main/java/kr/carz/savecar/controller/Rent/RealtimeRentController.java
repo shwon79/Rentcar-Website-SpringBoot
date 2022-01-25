@@ -1,6 +1,6 @@
 package kr.carz.savecar.controller.Rent;
 
-import kr.carz.savecar.controller.HttpConnection;
+import kr.carz.savecar.controller.Utils.HttpConnection;
 import kr.carz.savecar.dto.MorenDTO;
 import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.dto.RealTimeDTO;

@@ -16,9 +16,6 @@ public class Explanation {
     private  Long id;
 
     @Column(columnDefinition = "LONGTEXT")
-    private String camper_price;
-
-    @Column(columnDefinition = "LONGTEXT")
     private String europe_basic_option;
 
     @Column(columnDefinition = "LONGTEXT")
@@ -50,5 +47,8 @@ public class Explanation {
 
     @Column(columnDefinition = "LONGTEXT")
     private String refund_policy;
+
+    @Column(columnDefinition = "LONGTEXT")
+    private String camper_price;
 
 }
