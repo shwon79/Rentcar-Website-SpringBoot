@@ -50,7 +50,7 @@
                 <p style="flex: 2">전화번호</p>
                 <p style="flex: 2">대여시작일</p>
                 <p style="flex: 2">월 대여료</p>
-                <p style="flex: 3">취소 및 확정</p>
+                <p style="flex: 3">모렌전송 및 회수</p>
                 <p style="flex: 2">상세 페이지</p>
                 <!--                <p>목록에서 삭제</p>-->
             </div>
@@ -111,12 +111,12 @@
                     <p style="flex: 3" class="grid_oneline">
                         <button class="moren-reservation-btn set_reserve" data-behavior="confirm" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '1' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
-                            확정
+                            모렌전송
                         </button>
 
                         <button class="moren-reservation-btn set_reserve" data-behavior="cancel" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '0' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
-                            확정 취소
+                            모렌전송 회수
                         </button>
                     </p>
                     <p style="flex: 2" class="grid_oneline">
