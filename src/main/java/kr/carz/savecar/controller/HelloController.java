@@ -40,7 +40,12 @@ public class HelloController {
     }
 
     @GetMapping("/index")
-    public String home() {
+    public String home(Model model) {
+
+        List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
+
+        model.addAttribute("campingCarList", campingCarList);
+
         return "index";
     }
 
