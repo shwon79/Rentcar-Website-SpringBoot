@@ -18,13 +18,13 @@ import java.util.Optional;
 
 @Controller
 public class HelloController {
-    MonthlyRentService monthlyRentService;
-    YearlyRentService yearlyRentService;
-    ShortRentService shortRentService;
-    CampingCarPriceService campingCarPriceService;
-    CalendarDateService calendarDateService;
-    DateCampingService dateCampingService;
-    ValuesForWebService valuesForWebService;
+    private final MonthlyRentService monthlyRentService;
+    private final YearlyRentService yearlyRentService;
+    private final ShortRentService shortRentService;
+    private final CampingCarPriceService campingCarPriceService;
+    private final CalendarDateService calendarDateService;
+    private final DateCampingService dateCampingService;
+    private final ValuesForWebService valuesForWebService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
@@ -68,9 +68,9 @@ public class HelloController {
     @ResponseBody
     public void getPopUpCampingCarValue(HttpServletResponse res, @PathVariable String carName) throws IOException {
 
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carName);
-
         JSONObject jsonObject = new JSONObject();
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carName);
         jsonObject.put("campingCarPrice", campingCarPrice);
 
         PrintWriter pw = res.getWriter();

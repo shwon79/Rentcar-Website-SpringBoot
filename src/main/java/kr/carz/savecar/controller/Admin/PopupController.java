@@ -1,8 +1,10 @@
 package kr.carz.savecar.controller.Admin;
 
+import kr.carz.savecar.domain.CampingCarPrice;
 import kr.carz.savecar.domain.ValuesForWeb;
 import kr.carz.savecar.dto.ValuesForWebDTO;
 import kr.carz.savecar.dto.ValuesVO;
+import kr.carz.savecar.service.CampingCarPriceService;
 import kr.carz.savecar.service.ValuesForWebService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,12 @@ import java.util.*;
 @Controller
 public class PopupController {
     private final ValuesForWebService valuesForWebService;
+    private final CampingCarPriceService campingCarPriceService;
 
     @Autowired
-    public PopupController(ValuesForWebService valuesForWebService) {
+    public PopupController(ValuesForWebService valuesForWebService, CampingCarPriceService campingCarPriceService) {
         this.valuesForWebService = valuesForWebService;
+        this.campingCarPriceService = campingCarPriceService;
     }
 
     // [관리자 메인페이지] 팝업 내용설정 메뉴로 입장
@@ -29,7 +33,9 @@ public class PopupController {
     public ModelAndView get_popup_menu() {
 
         ModelAndView mav = new ModelAndView();
+        List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
 
+        mav.addObject("campingCarList", campingCarList);
         mav.setViewName("admin/popup_menu");
 
         return mav;
