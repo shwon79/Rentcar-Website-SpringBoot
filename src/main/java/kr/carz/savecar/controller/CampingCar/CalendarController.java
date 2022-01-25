@@ -372,6 +372,11 @@ public class CalendarController {
         jsonObject.put("twentyeightdays",campingCarPriceRate.getTwentyeightdays());
         jsonObject.put("twentyninedays",campingCarPriceRate.getTwentyninedays());
         jsonObject.put("thirtydays",campingCarPriceRate.getThirtydays());
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 
