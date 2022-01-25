@@ -11,7 +11,6 @@ public class SpringConfig {
     private final MonthlyRentRepository monthlyRentRepository;
     private final YearlyRentRepository yearlyRentRepository;
     private final ShortRentRepository shortRentRepository;
-    private final CampingCarRepository campingCarRepository;
     private final ReservationRepository reservationRepository;
     private final TwoYearlyRentRepository twoYearlyRentRepository;
     private final DiscountRepository discountRepository;
@@ -29,7 +28,7 @@ public class SpringConfig {
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
-                        ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
+                        ShortRentRepository shortRentRepository,
                         ReservationRepository reservationRepository, TwoYearlyRentRepository twoYearlyRentRepository,
                         DiscountRepository discountRepository,
                         MorenReservationRepository morenReservationRepository, CampingCarPriceRepository campingCarPriceRepository,
@@ -40,7 +39,6 @@ public class SpringConfig {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
-        this.campingCarRepository = campingCarRepository;
         this.reservationRepository = reservationRepository;
         this.twoYearlyRentRepository = twoYearlyRentRepository;
         this.discountRepository = discountRepository;
@@ -72,9 +70,6 @@ public class SpringConfig {
 
     @Bean
     public ShortRentService shortRentService() { return new ShortRentService(shortRentRepository); }
-
-    @Bean
-    public CampingCarService campingCarService() { return new CampingCarService(campingCarRepository); }
 
     @Bean
     public TwoYearlyRentService twoYearlyRentService() { return new TwoYearlyRentService(twoYearlyRentRepository); }
