@@ -52,13 +52,11 @@
                     <div class="tab-pane fade" th:each="campingCar, i : ${campingCarList}" th:id="${campingCar.carName}"
                          th:classappend="${i.index == 0 ? 'show active' : ''}">
                         <div style="text-align: right";>
-                            <button onclick="editCampingcarSetting(name, title)" th:name="${campingCar.carName}" th:title="${i.index}" class="btn btn-primary" th:text="${campingCar.carName.toUpperCase() + ' 내용 수정하기'}"></button>
+                            <button onclick="editCampingcarSetting(name, id)" th:name="${campingCar.carName}" th:id="${i.index}" class="btn btn-primary" th:text="${campingCar.carName.toUpperCase() + ' 내용 수정하기'}"></button>
                         </div>
                         <div id="textarea_wrapper" style="margin-bottom: 100px;">
                             <article style="display: none;">
-                                <p th:text="${campingCar.carNum}" class="carNum"></p>
                                 <p th:text="${campingCar.carCode}" class="carCode"></p>
-                                <p th:text="${campingCar.yearmodel}" class="yearmodel"></p>
                             </article>
                             <article>
                                 <h4 class="text_explanation">기본 정보</h4>
@@ -91,6 +89,18 @@
                                         <td>인원정보</td>
                                         <td>
                                             <input type="text" class="personnel" th:value="${campingCar.personnel}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>차량 번호</td>
+                                        <td>
+                                            <input type="text" class="carNum" th:value="${campingCar.carNum}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>년식</td>
+                                        <td>
+                                            <input type="text" class="yearmodel" th:value="${campingCar.yearmodel}">
                                         </td>
                                     </tr>
                                     </tbody>

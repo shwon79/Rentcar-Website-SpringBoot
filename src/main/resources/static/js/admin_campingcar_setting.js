@@ -50,9 +50,9 @@ function editCampingcarSetting(carName, index) {
 }
 
 function getData(index) {
-    carNum = document.getElementsByClassName('carNum')[index].innerText;
     carCode = document.getElementsByClassName('carCode')[index].innerText;
-    yearmodel = document.getElementsByClassName('yearmodel')[index].innerText;
+    carNum = document.getElementsByClassName('carNum')[index].value;
+    yearmodel = document.getElementsByClassName('yearmodel')[index].value;
     fuel = document.getElementsByClassName('fuel')[index].value;
     gearBox = document.getElementsByClassName('gearBox')[index].value;
     license = document.getElementsByClassName('license')[index].value;
