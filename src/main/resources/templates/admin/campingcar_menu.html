@@ -104,11 +104,10 @@
               <span th:text="${reservation.reservation} == 1? 'O':'X'"></span>
             </p>
             <p class="grid_oneline">
-              <button th:if="${reservation.reservation} == 0" class="set_reserve btn_mobile_card" th:data-index="${reservation.id}" onclick="setReservationOnMenu(this)">
+              <button th:if="${reservation.reservation} == 0" class="set_reserve btn_mobile_card" th:data-index="${reservation.id}" onclick="event.stopPropagation(); setReservationOnMenu(this, 'confirm')">
                 모렌전송
               </button>
-              <button th:if="${reservation.reservation} == 1" class="set_reserve btn_mobile_card" th:data-index="${reservation.id}" onclick="setReservationOnMenu(this)"
-                      style="pointer-events: none; background: gray">
+              <button th:if="${reservation.reservation} == 1" class="set_reserve btn_mobile_card" th:data-index="${reservation.id}" onclick="event.stopPropagation(); setReservationOnMenu(this, 'delete')">
                 모렌전송 회수
               </button>
             </p>

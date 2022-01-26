@@ -627,6 +627,10 @@ form {
     background: indianred;
     color: white;
 }
+#reserveCampingForm input {
+    border: 1px solid black;
+    padding: 5px;
+}
 
 @media (max-width: 990px) {
     .menu_container {
