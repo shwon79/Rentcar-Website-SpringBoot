@@ -116,6 +116,19 @@ public class CampingCarController {
     }
 
 
+    // [관리자 메인페이지] 캠핑카 예약등록 폼으로 입장
+    @GetMapping(value = "/admin/campingcar/register")
+    @ResponseBody
+    public ModelAndView get_admin_campingcar_register_from() {
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("admin/campingcar_reservation_register");
+
+        return mav;
+    }
+
+
 
     // [관리자 메인페이지] 캠핑카 기본설정 메뉴로 입장
     @GetMapping(value = "/admin/campingcar/setting/menu")
