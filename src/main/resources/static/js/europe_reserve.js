@@ -820,7 +820,7 @@ function displayEuropePrice() {
     fetch(`/camping/calendar/europe/getprice/0`)
         .then(res => res.json())
         .then(result => {
-            console.log(result);
+            // console.log(result);
             europeOffObj = result;
             europeOff[1] = europeOffObj['onedays'];
             europeOff[4] = parseFloat(europeOffObj['fourdays']) * parseInt(europeOffObj['onedays']);

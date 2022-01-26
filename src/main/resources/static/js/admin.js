@@ -3,6 +3,11 @@ $(document).ready(function () {
         $('#sidebar').toggleClass('active');
         $(this).toggleClass('active');
     });
+    const campingSubmenuBtn = document.getElementById('camping-submenu-btn');
+    campingSubmenuBtn.addEventListener('click', () => {
+        document.getElementById('campingcarSubmenu').classList.toggle('camping-open');
+        campingSubmenuBtn.classList.toggle('active-span');
+    })
 });
 
 //숫자 사이에 콤마 넣기

@@ -12,29 +12,29 @@
                 <li>
                     <a href="/admin/index" id="indexMenu">메인</a>
                 </li>
-                <li>
-                    <a href="/admin/campingcar/menu" id="campingcarMenu">캠핑카 예약 현황</a>
-                </li>
-                <li>
-                    <a href="/admin/campingcar/price/menu" id="campingcarPriceMenu">캠핑카 가격 수정</a>
-                </li>
-                <li>
-                    <a href="/admin/campingcar/setting/menu" id="campingcarSettingMenu">캠핑카 내용 수정</a>
+                <li id="camingcarWholeMenu">
+                    <span id="camping-submenu-btn"></span>
+                    <a>캠핑카</a>
+                    <div id="campingcarSubmenu">
+                        <ul>
+<!--                            <li>-->
+<!--                                <a href="/admin/campingcar/reservation" id="campingcarReservationMenu">예약 등록</a>-->
+<!--                            </li>-->
+                            <li>
+                                <a href="/admin/campingcar/menu" id="campingcarMenu">예약 현황</a>
+                            </li>
+                            <li>
+                                <a href="/admin/campingcar/price/menu" id="campingcarPriceMenu">가격 수정</a>
+                            </li>
+                            <li>
+                                <a href="/admin/campingcar/setting/menu" id="campingcarSettingMenu">내용 수정</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="/admin/popup/menu" id="popupSettingMenu">팝업 내용 수정</a>
                 </li>
-<!--                <li class="active">-->
-<!--                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">캠핑카</a>-->
-<!--                    <ul class="collapse list-unstyled" id="homeSubmenu">-->
-<!--                        <li>-->
-<!--                            <a href="" id="campingcarMenu">예약 리스트</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a href="" id="campingcarPriceMenu">가격 수정</a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </li>-->
                 <li>
                     <a href="/admin/moren/reservation/menu" id="morenReservationMenu">월+12/24개월 예약 신청</a>
                 </li>
