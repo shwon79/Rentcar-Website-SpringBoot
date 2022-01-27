@@ -160,8 +160,16 @@ public class CampingCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<CampingCarPriceRate> campingCarPriceRateList = campingCarPriceRateService.findAllCampingCarPriceRate();
+        List<List<CampingCarPriceRate>> campingCarPriceRateList = new ArrayList<>();
+        List<CampingCarPriceRate> campingCarPriceAllList = campingCarPriceRateService.findAllCampingCarPriceRate();
 
+        for(int i=0 ;i<campingCarPriceAllList.size() / 2; i++){
+            List<CampingCarPriceRate> campingCarPriceRates = new ArrayList<>();
+            campingCarPriceRates.add(campingCarPriceAllList.get(i * 2));
+            campingCarPriceRates.add(campingCarPriceAllList.get(i * 2 + 1));
+
+            campingCarPriceRateList.add(campingCarPriceRates);
+        }
         mav.addObject("campingCarPriceList", campingCarPriceRateList);
         mav.setViewName("admin/campingcar_price_menu");
 
@@ -592,7 +600,7 @@ public class CampingCarController {
 
 
         if(taskName.equals("확정")) {
-            reservationController.send_message(admin1+", "+admin1+", "+admin1,
+            reservationController.send_message(admin1+", "+admin2+", "+admin3,
                                                 campingCarReservation.getPhone(),
                                                 "[캠핑카 캘린더 예약 " + taskName + "]\n"
                                                     + "성함: " + campingCarReservation.getName() + "\n"

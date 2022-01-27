@@ -35,4 +35,8 @@ public class CampingCarPriceRateService {
         return campingCarPriceRateRepository.findByCarName(carName);
     }
 
+    public List<CampingCarPriceRate> findBySeason(String season){
+        return campingCarPriceRateRepository.findBySeason(season);
+    }
+
 }
