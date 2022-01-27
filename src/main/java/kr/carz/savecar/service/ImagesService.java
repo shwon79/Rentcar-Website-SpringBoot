@@ -33,6 +33,10 @@ public class ImagesService {
         return imagesRepository.findByTitle(title);
     }
 
+    public List<Images> findAllImage(){
+        return imagesRepository.findAll();
+    }
+
     public Long saveDTO(ImagesDTO imagesDTO, CampingCarPrice carName) {
         return imagesRepository.save(imagesDTO.toEntity(carName)).getImageId();
     }
