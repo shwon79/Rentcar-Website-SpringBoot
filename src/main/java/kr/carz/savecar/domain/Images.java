@@ -15,13 +15,20 @@ public class Images {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
+    @ManyToOne
+    @JoinColumn(name = "car_name")
+    private CampingCarPrice carName; // 캠핑카 id
+
     private String title;
     private String url;
+    private String isUploaded;
 
     @Builder
-    public Images(Long imageId, String title, String url) {
+    public Images(Long imageId, CampingCarPrice carName, String title, String url, String isUploaded) {
+        this.carName = carName;
         this.imageId = imageId;
         this.title = title;
         this.url = url;
+        this.isUploaded = isUploaded;
     }
 }

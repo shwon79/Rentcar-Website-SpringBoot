@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,13 +31,16 @@ public class CampingCarController {
     private final CampingCarPriceRateService campingCarPriceRateService;
     private final ReservationService reservationService;
     private final ReservationController reservationController;
+    private final ImagesService imagesService;
+    private final S3Service s3Service;
 
     @Autowired
     public CampingCarController(CampingcarReservationService campingcarReservationService,
                                 CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
                                 CalendarDateService calendarDateService, DateCampingService dateCampingService,
                                 CampingCarPriceRateService campingCarPriceRateService, ReservationService reservationService,
-                                ReservationController reservationController) {
+                                ReservationController reservationController, ImagesService imagesService,
+                                S3Service s3Service) {
         this.campingcarReservationService = campingcarReservationService;
         this.calendarTimeService = calendarTimeService;
         this.campingCarPriceService = campingCarPriceService;
@@ -45,6 +49,8 @@ public class CampingCarController {
         this.campingCarPriceRateService = campingCarPriceRateService;
         this.reservationService = reservationService;
         this.reservationController = reservationController;
+        this.imagesService = imagesService;
+        this.s3Service = s3Service;
     }
 
     @Value("${coolsms.api_key}")
@@ -173,6 +179,21 @@ public class CampingCarController {
 
         return mav;
     }
+
+
+
+    // [관리자 메인페이지] 캠핑카 이미지 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/image/menu")
+    @ResponseBody
+    public ModelAndView get_camping_car_image_main() {
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("admin/campingcar_image_menu");
+
+        return mav;
+    }
+
 
 
     // 캠핑카 reservation 등록 api
@@ -679,8 +700,6 @@ public class CampingCarController {
         pw.close();
     }
 
-
-    //    @RequestMapping(value = "/admin/campingcar/setting/{carName}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @PutMapping("/admin/campingcar/setting/{carName}")
     @ResponseBody
     public void put_admin_setting(HttpServletResponse res, @RequestBody CampingCarPriceDTO dto, @PathVariable String carName) throws IOException {
@@ -698,4 +717,21 @@ public class CampingCarController {
     }
 
 
+    @PostMapping("/admin/campingcar/image")
+    @ResponseBody
+    public void postAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO, MultipartFile file) throws IOException {
+        String imgPath = s3Service.upload(file);
+        imagesDTO.setUrl(imgPath);
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(imagesDTO.getCarName());
+        imagesService.saveDTO(imagesDTO, campingCarPrice);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 }

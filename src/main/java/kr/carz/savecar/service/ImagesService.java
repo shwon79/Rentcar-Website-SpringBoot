@@ -1,6 +1,7 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.Admin;
+import kr.carz.savecar.domain.CampingCarPrice;
 import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.domain.Images;
 import kr.carz.savecar.dto.AdminDTO;
@@ -32,7 +33,7 @@ public class ImagesService {
         return imagesRepository.findByTitle(title);
     }
 
-    public Long save(ImagesDTO imagesDTO) {
-        return imagesRepository.save(imagesDTO.toEntity()).getImageId();
+    public Long saveDTO(ImagesDTO imagesDTO, CampingCarPrice carName) {
+        return imagesRepository.save(imagesDTO.toEntity(carName)).getImageId();
     }
 }

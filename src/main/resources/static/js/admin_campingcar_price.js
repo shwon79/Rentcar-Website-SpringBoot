@@ -11,7 +11,7 @@ function EditCampingcarPrice(carName, season) {
     const travelOnOneDay = parseInt(document.getElementById('travel_on_oneday').value.replace(/,/g, ""));
     let oneDay;
 
-    if (carName.startsWith('europe')) {
+    if (carName == 'europe') {
         if (season === 0) {
             oneDay = europeOffOneDay;
             getData(0);
@@ -19,7 +19,7 @@ function EditCampingcarPrice(carName, season) {
             oneDay = europeOnOneDay;
             getData(1);
         }
-    } else if (carName.startsWith('limousine')) {
+    } else if (carName == 'limousine') {
         if (season === 0) {
             oneDay = limousineOffOneDay;
             getData(2);
@@ -27,7 +27,7 @@ function EditCampingcarPrice(carName, season) {
             oneDay = limousineOnOneDay;
             getData(3);
         }
-    } else if (carName.startsWith('travel')) {
+    } else if (carName == 'travel') {
         if (season === 0) {
             oneDay = travelOffOneDay;
             getData(4);
@@ -71,6 +71,7 @@ function EditCampingcarPrice(carName, season) {
         twentyninedays: twentyninedays.toFixed(2),
         thirtydays: thirtydays.toFixed(2)
     }
+    // console.log(data);
 
     if (confirm('가격을 수정하시겠습니까?')) {
         console.log(data);

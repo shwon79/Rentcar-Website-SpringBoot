@@ -46,20 +46,4 @@ public class S3Controller {
         pw.close();
     }
 
-    @PostMapping("/admin/image")
-    @ResponseBody
-    public void postAdminImage(HttpServletResponse res, ImagesDTO imagesDTO, MultipartFile file) throws IOException {
-        String imgPath = s3Service.upload(file);
-        imagesDTO.setUrl(imgPath);
-
-        imagesService.save(imagesDTO);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
-    }
 }
