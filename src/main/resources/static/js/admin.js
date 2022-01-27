@@ -488,7 +488,6 @@ function displayExtraCampingData() {
 
 // 캠핑카 예약 확정 버튼_메뉴 페이지
 function setReservationOnMenu(event, behavior) {
-    console.log('clicked');
     let carTypeList = document.getElementsByClassName('carTypeList');
     let rentDateList = document.getElementsByClassName('rentDateList');
     let rentTimeList = document.getElementsByClassName('rentTimeList');
@@ -606,7 +605,12 @@ function setReservationOnMenu(event, behavior) {
             orderCode = orderCodeList[i].innerText;
         };
     };
-    reservation = 1;
+
+    if (behavior === 'confirm') {
+        reservation = 1;
+    } else if (behavior === 'delete') {
+        reservation = 0;
+    };
 
 
     let data = {
