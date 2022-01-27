@@ -716,6 +716,29 @@ public class CampingCarController {
         pw.close();
     }
 
+    @GetMapping("/admin/campingcar/image")
+    @ResponseBody
+    public void getAdminImage(HttpServletResponse res) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        List<List<Images>> imagesList = new ArrayList<>();
+        List<Images> imagesAllList = imagesService.findAllImage();
+
+        for(int i=0 ;i<imagesAllList.size() / 2; i++){
+            List<Images> images = new ArrayList<>();
+            images.add(imagesAllList.get(i * 2));
+            images.add(imagesAllList.get(i * 2 + 1));
+
+            imagesList.add(images);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
 
     @PostMapping("/admin/campingcar/image")
     @ResponseBody
