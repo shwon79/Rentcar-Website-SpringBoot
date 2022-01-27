@@ -1,0 +1,136 @@
+<!-- 관리자 캠핑카 사진 수정 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin_campingcar_image.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_campingcar_image.js}" defer></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        $(window).on('load', function () {
+            let campingcarImageMenu = document.getElementById('campingcarImageMenu');
+            campingcarImageMenu.classList.add('activeAdminMenu');
+        });
+    </script>
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="inner_content container" style="text-align: center;">
+            <h2 class="page_title">캠핑카 사진 수정</h2>
+            <div style="margin-top: 30px;">
+                <ul class="nav nav-tabs" style="justify-content: center;">
+                    <li class="nav-item show active" >
+                        <a class="nav-link" data-toggle="tab" href="#europe">EUROPE</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" data-toggle="tab" href="#limousine">LIMOUSINE</a>
+                    </li>
+<!--                    <li class="nav-item" th:each="campingCar, i : ${campingCarList}">-->
+<!--                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${campingCar.carName}}" th:text="${campingCar.carName}"-->
+<!--                           th:classappend="${i.index == 0 ? 'show active' : ''}"></a>-->
+<!--                    </li>-->
+                </ul>
+                <div class="tab-content" style="margin-top: 30px;">
+                    <div class="tab-pane fade show active image-box" id="europe">
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                        <div class="upload-box">
+                            <button  type="button" class="btn btn-info imgUploadBtn">이미지 업로드</button>
+                            <input class="btn-file d-none" type="file"> <!--파일 input box 형태-->
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="limousine">
+                        <p>limousine</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

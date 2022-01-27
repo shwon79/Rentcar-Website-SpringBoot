@@ -1,0 +1,31 @@
+.image-box {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+
+.image-box .upload-box{
+    /*width:500px;*/
+    height: 300px;
+    border:1px solid black;
+    padding:10px;
+}
+
+@media (max-width: 576px) {
+    .image-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .image-box {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+    .image-box {
+        grid-template-columns: 1fr 1fr;
+    }
+}
