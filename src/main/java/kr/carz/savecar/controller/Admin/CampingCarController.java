@@ -119,7 +119,7 @@ public class CampingCarController {
     // [관리자 메인페이지] 캠핑카 예약등록 폼으로 입장
     @GetMapping(value = "/admin/campingcar/register")
     @ResponseBody
-    public ModelAndView get_admin_campingcar_register_from() {
+    public ModelAndView get_admin_campingcar_register_form() {
 
         ModelAndView mav = new ModelAndView();
 
@@ -180,6 +180,132 @@ public class CampingCarController {
     }
 
 
+    // 캠핑카 예약 확정 - 세이브카 db
+    public void admin_camping_car_reservation_confirm_for_savecar(List<DateCamping> dateCampingList, int dateCampingListSize, CampingCarReservation campingCarReservation, CampingCarPrice campingCarPrice){
+        for (int i = 0; i < dateCampingListSize; i++) {
+            List<CalendarTime> calendarTimeList;
+            DateCamping dateCamping = dateCampingList.get(i);
+
+            if (i == 0 && !campingCarReservation.getRentTime().equals("10시")) {
+                calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getRentTime());
+                List<CalendarTime> calendarTimeForCheckList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThan(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getRentTime());
+
+                int one_cnt = 0;
+                for (CalendarTime calendarTime : calendarTimeForCheckList) {
+                    if (calendarTime.getReserveComplete().equals("1")) {
+                        one_cnt += 1;
+                    }
+                }
+
+                if (one_cnt != calendarTimeForCheckList.size()) {
+                    if(calendarTimeForCheckList.get(0).getReserveComplete().equals("1")){
+                        dateCampingList.get(i).setReserved("2");
+                    } else {
+                        dateCampingList.get(i).setReserved("1");
+                    }
+                } else {
+                    dateCampingList.get(i).setReserved("2");
+                }
+            } else if (i == dateCampingListSize - 1 && !campingCarReservation.getReturnTime().equals("18시")) {
+                calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getReturnTime());
+                List<CalendarTime> calendarTimeForCheckList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThan(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getRentTime());
+
+                int one_cnt = 0;
+                for (CalendarTime calendarTime : calendarTimeForCheckList) {
+                    if (calendarTime.getReserveComplete().equals("1")) {
+                        one_cnt += 1;
+                    }
+                }
+
+                if (one_cnt != calendarTimeForCheckList.size()) {
+                    if(calendarTimeForCheckList.get(calendarTimeForCheckList.size()-1).getReserveComplete().equals("1")){
+                        dateCampingList.get(i).setReserved("2");
+                    } else {
+                        dateCampingList.get(i).setReserved("1");
+                    }
+                } else {
+                    dateCampingList.get(i).setReserved("2");
+                }
+            } else {
+                calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCamping.getDateId(), campingCarPrice);
+                dateCampingList.get(i).setReserved("2");
+            }
+
+            for (CalendarTime calendarTime : calendarTimeList) {
+                calendarTime.setReserveComplete("1");
+                calendarTimeService.save(calendarTime);
+            }
+        }
+    }
+
+    // 캠핑카 예약 확정 - 모렌 전송
+    public HttpServletResponse admin_camping_car_reservation_confirm_for_moren(HttpServletResponse res, JSONObject jsonObject, JSONObject morenJsonObject, CampingCarReservationDTO campingCarReservationDTO, CampingCarReservation campingCarReservation, String orderType, String contractType, String orderStartTime, String orderEndTime) throws IOException {
+        try {
+            URL url = new URL(request_url);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            CampingCarPrice campingCarPriceForMoren = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservationDTO.getCarType());
+
+            morenJsonObject.put("COMPANY_ID", "1343");
+            morenJsonObject.put("CAR_NUM", campingCarPriceForMoren.getCarNum());
+            morenJsonObject.put("CAR_CODE", campingCarPriceForMoren.getCarCode());
+            morenJsonObject.put("ORDER_TYPE", orderType);
+            morenJsonObject.put("ORDER_CONTRACT_TYPE", contractType);
+            morenJsonObject.put("ORDER_CUSTOMER_NAME", campingCarReservationDTO.getName());
+            morenJsonObject.put("ORDER_CUSTOMER_PHONE", campingCarReservationDTO.getPhone());
+            morenJsonObject.put("ORDER_START_TIME", orderStartTime);
+            morenJsonObject.put("ORDER_END_TIME", orderEndTime);
+            morenJsonObject.put("ORDER_CUSTOMER_MEMO", campingCarReservationDTO.getDetail());
+            morenJsonObject.put("ORDER_PRICE", campingCarReservationDTO.getTotal());
+            morenJsonObject.put("ORDER_PRICE_TAX", "0");
+            morenJsonObject.put("ORDER_DEPOSIT", campingCarReservationDTO.getDeposit());
+            morenJsonObject.put("ORDER_CDW", "1");
+
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+
+            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
+            printWriter.write(morenJsonObject.toString());
+            printWriter.flush();
+
+            // 응답
+            BufferedReader bufferedReader;
+            int status = conn.getResponseCode();
+            if (status == HttpURLConnection.HTTP_OK){
+                bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                bufferedReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+
+            String line;
+            StringBuffer response = new StringBuffer();
+
+            while ((line = bufferedReader.readLine()) != null){
+                response.append(line);
+            }
+            bufferedReader.close();
+            System.out.println("응답값 : " + response);
+
+            String[] splited_response = getTwoHundredStrings(response, "\"");
+            campingCarReservation.setOrderCode(splited_response[9]);
+
+        } catch (Exception e){
+            jsonObject.put("result", 0);
+
+            PrintWriter pw = res.getWriter();
+            pw.print(jsonObject);
+            pw.flush();
+            pw.close();
+        }
+
+        return res;
+    }
+
+
 
     // 캠핑카 예약 수정, 확정, 취소하기 api
     @PutMapping(value = "/admin/campingcar/reservation/{reservationId}")
@@ -229,60 +355,7 @@ public class CampingCarController {
         if (campingCarReservation.getReservation() == 0 && campingCarReservationDTO.getReservation() == 1) {
             taskName = "확정";
             orderType = "new";
-            for (int i = 0; i < dateCampingListSize; i++) {
-                List<CalendarTime> calendarTimeList;
-                DateCamping dateCamping = dateCampingList.get(i);
-
-                if (i == 0 && !campingCarReservation.getRentTime().equals("10시")) {
-                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getRentTime());
-                    List<CalendarTime> calendarTimeForCheckList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThan(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getRentTime());
-
-                    int one_cnt = 0;
-                    for (CalendarTime calendarTime : calendarTimeForCheckList) {
-                        if (calendarTime.getReserveComplete().equals("1")) {
-                            one_cnt += 1;
-                        }
-                    }
-
-                    if (one_cnt != calendarTimeForCheckList.size()) {
-                        if(calendarTimeForCheckList.get(0).getReserveComplete().equals("1")){
-                            dateCampingList.get(i).setReserved("2");
-                        } else {
-                            dateCampingList.get(i).setReserved("1");
-                        }
-                    } else {
-                        dateCampingList.get(i).setReserved("2");
-                    }
-                } else if (i == dateCampingListSize - 1 && !campingCarReservation.getReturnTime().equals("18시")) {
-                    calendarTimeList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeLessThanEqual(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getReturnTime());
-                    List<CalendarTime> calendarTimeForCheckList = calendarTimeService.findByDateIdAndCarNameAndReserveTimeGreaterThan(dateCamping.getDateId(), campingCarPrice, campingCarReservation.getRentTime());
-
-                    int one_cnt = 0;
-                    for (CalendarTime calendarTime : calendarTimeForCheckList) {
-                        if (calendarTime.getReserveComplete().equals("1")) {
-                            one_cnt += 1;
-                        }
-                    }
-
-                    if (one_cnt != calendarTimeForCheckList.size()) {
-                        if(calendarTimeForCheckList.get(calendarTimeForCheckList.size()-1).getReserveComplete().equals("1")){
-                            dateCampingList.get(i).setReserved("2");
-                        } else {
-                            dateCampingList.get(i).setReserved("1");
-                        }
-                    } else {
-                        dateCampingList.get(i).setReserved("2");
-                    }
-                } else {
-                    calendarTimeList = calendarTimeService.findCalendarTimeByDateIdAndCarName(dateCamping.getDateId(), campingCarPrice);
-                    dateCampingList.get(i).setReserved("2");
-                }
-
-                for (CalendarTime calendarTime : calendarTimeList) {
-                    calendarTime.setReserveComplete("1");
-                    calendarTimeService.save(calendarTime);
-                }
-            }
+            admin_camping_car_reservation_confirm_for_savecar(dateCampingList, dateCampingListSize, campingCarReservation, campingCarPrice);
 
         } else if (campingCarReservation.getReservation() == 1 && campingCarReservationDTO.getReservation() == 0) {
             taskName = "취소";
@@ -343,71 +416,7 @@ public class CampingCarController {
         String orderEndTime = campingCarReservationDTO.getReturnDate() + " " + campingCarReservationDTO.getReturnTime().substring(0,2) + ":00";
 
         if(taskName.equals("확정")) {
-
-            try {
-                URL url = new URL(request_url);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-
-                CampingCarPrice campingCarPriceForMoren = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservationDTO.getCarType());
-
-                morenJsonObject.put("COMPANY_ID", "1343");
-                morenJsonObject.put("CAR_NUM", campingCarPriceForMoren.getCarNum());
-                morenJsonObject.put("CAR_CODE", campingCarPriceForMoren.getCarCode());
-                morenJsonObject.put("ORDER_TYPE", orderType);
-                morenJsonObject.put("ORDER_CONTRACT_TYPE", contractType);
-                morenJsonObject.put("ORDER_CUSTOMER_NAME", campingCarReservationDTO.getName());
-                morenJsonObject.put("ORDER_CUSTOMER_PHONE", campingCarReservationDTO.getPhone());
-                morenJsonObject.put("ORDER_START_TIME", orderStartTime);
-                morenJsonObject.put("ORDER_END_TIME", orderEndTime);
-                morenJsonObject.put("ORDER_CUSTOMER_MEMO", campingCarReservationDTO.getDetail());
-                morenJsonObject.put("ORDER_PRICE", campingCarReservationDTO.getTotal());
-                morenJsonObject.put("ORDER_PRICE_TAX", "0");
-                morenJsonObject.put("ORDER_DEPOSIT", campingCarReservationDTO.getDeposit());
-                morenJsonObject.put("ORDER_CDW", "1");
-
-                conn.setConnectTimeout(5000);
-                conn.setReadTimeout(5000);
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json; utf-8");
-                conn.setRequestProperty("Accept", "application/json");
-                conn.setDoOutput(true);
-
-                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
-                printWriter.write(morenJsonObject.toString());
-                printWriter.flush();
-
-                // 응답
-                BufferedReader bufferedReader;
-                int status = conn.getResponseCode();
-                if (status == HttpURLConnection.HTTP_OK){
-                    bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                } else {
-                    bufferedReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-                }
-
-                String line;
-                StringBuffer response = new StringBuffer();
-
-                while ((line = bufferedReader.readLine()) != null){
-                    response.append(line);
-                }
-                bufferedReader.close();
-                System.out.println("응답값 : " + response);
-
-                String[] splited_response = getTwoHundredStrings(response, "\"");
-                campingCarReservation.setOrderCode(splited_response[9]);
-
-            } catch (Exception e){
-                jsonObject.put("result", 0);
-
-                PrintWriter pw = res.getWriter();
-                pw.print(jsonObject);
-                pw.flush();
-                pw.close();
-
-                return;
-            }
+            res = admin_camping_car_reservation_confirm_for_moren(res, jsonObject, morenJsonObject, campingCarReservationDTO, campingCarReservation, orderType, contractType, orderStartTime, orderEndTime);
         } else if(taskName.equals("취소")){
 
             try {
@@ -552,7 +561,7 @@ public class CampingCarController {
         campingcarReservationService.save(campingCarReservation);
 
 
-        if(!taskName.equals("수정")) {
+        if(taskName.equals("확정")) {
             params.put("text", "[캠핑카 캘린더 예약 " + taskName + "]\n"
                     + "성함: " + campingCarReservation.getName() + "\n"
                     + "전화번호: " + campingCarReservation.getPhone() + "\n"
