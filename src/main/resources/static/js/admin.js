@@ -3,6 +3,11 @@ $(document).ready(function () {
         $('#sidebar').toggleClass('active');
         $(this).toggleClass('active');
     });
+    const campingSubmenuBtn = document.getElementById('camping-submenu-btn');
+    campingSubmenuBtn.addEventListener('click', () => {
+        document.getElementById('campingcarSubmenu').classList.toggle('camping-open');
+        campingSubmenuBtn.classList.toggle('active-span');
+    })
 });
 
 //숫자 사이에 콤마 넣기
@@ -413,7 +418,7 @@ function setCampingReserve(behavior) {
         orderCode: orderCode
     }
 
-    console.log(data);
+    // console.log(data);
 
     if (regPhone.test(phone) === false) {
         alert("연락처를 '010-1234-5678'의 형태로 작성해주세요.");
@@ -446,7 +451,7 @@ function setCampingReserve(behavior) {
             } else if (result.result == 0) {
                 alert('처리에 문제가 생겼습니다.');
             };
-            window.location.href = '/admin/campingcar/menu';
+            window.location.href = '/admin/campingcar/detail/' + id;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
@@ -482,7 +487,7 @@ function displayExtraCampingData() {
 
 
 // 캠핑카 예약 확정 버튼_메뉴 페이지
-function setReservationOnMenu(event) {
+function setReservationOnMenu(event, behavior) {
     let carTypeList = document.getElementsByClassName('carTypeList');
     let rentDateList = document.getElementsByClassName('rentDateList');
     let rentTimeList = document.getElementsByClassName('rentTimeList');
@@ -498,7 +503,7 @@ function setReservationOnMenu(event) {
     let depositorList = document.getElementsByClassName('depositorList');
     let detailList = document.getElementsByClassName('detailList');
     let agreeList = document.getElementsByClassName('agreeList');
-    let reservationList = document.getElementsByClassName('campingReservationList');
+    // let reservationList = document.getElementsByClassName('campingReservationList');
     let idList = document.getElementsByClassName('campingReservationIdList');
     let orderCodeList = document.getElementsByClassName('orderCodeList');
     let carType, rentDate, rentTime, returnDate, returnTime, day, extraTime, deposit, total, totalHalf, name, phone, depositor, detail, agree, reservation, orderCode;
@@ -600,7 +605,12 @@ function setReservationOnMenu(event) {
             orderCode = orderCodeList[i].innerText;
         };
     };
-    reservation = 1;
+
+    if (behavior === 'confirm') {
+        reservation = 1;
+    } else if (behavior === 'delete') {
+        reservation = 0;
+    };
 
 
     let data = {
@@ -625,20 +635,32 @@ function setReservationOnMenu(event) {
 
     // console.log(data);
 
-    $.ajax({
-        type:'PUT',
-        url:'/admin/campingcar/reservation/' + id,
-        dataType:'json',
-        contentType : 'application/json; charset=utf-8',
-        data : JSON.stringify(data)
-    }).done(function (result) {
-        if (result.result == 1) {
-            alert('처리되었습니다.');
-        } else if (result.result == 0) {
-            alert('처리에 문제가 생겼습니다.');
-        };
-        window.location.href = '/admin/campingcar/menu';
-    }).fail(function (error) {
-        alert(JSON.stringify(error));
-    })
+    if (behavior == 'confirm') {
+        if (confirm('해당 예약을 확정하시겠습니까?')) {
+            sendingData();
+        }
+    } else if (behavior == 'delete') {
+        if (confirm('확정된 예약을 취소하시겠습니까?')) {
+            sendingData();
+        }
+    }
+
+    function sendingData() {
+        $.ajax({
+            type:'PUT',
+            url:'/admin/campingcar/reservation/' + id,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('처리되었습니다.');
+            } else if (result.result == 0) {
+                alert('처리에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/campingcar/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    };
 };

@@ -1,6 +1,5 @@
 package kr.carz.savecar.controller.CampingCar;
 
-import kr.carz.savecar.controller.Utils.HttpConnection;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.service.*;
@@ -26,20 +25,18 @@ public class CalendarController {
     DateCampingService dateCampingService;
     CampingCarPriceService campingCarPriceService;
     CampingcarReservationService campingcarReservationService;
-    ExplanationService explanationService;
     CampingCarPriceRateService campingCarPriceRateService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
-                              ExplanationService explanationService, CampingCarPriceRateService campingCarPriceRateService) {
+                              CampingCarPriceRateService campingCarPriceRateService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
         this.campingcarReservationService = campingcarReservationService;
-        this.explanationService = explanationService;
         this.campingCarPriceRateService = campingCarPriceRateService;
     }
 
@@ -50,13 +47,6 @@ public class CalendarController {
 
     @Value("${coolsms.api_secret}")
     private String api_secret;
-
-    @Value("${moren_url}")
-    private String moren_url_except_date;
-
-    @Value("${moren.expected_day}")
-    private String expected_day;
-
 
     private String AddDate(String strDate, int year, int month, int day) throws Exception {
         Calendar cal = Calendar.getInstance();
@@ -96,17 +86,6 @@ public class CalendarController {
     }
 
 
-
-    @GetMapping("/camping/{carType}")
-    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
-
-        Optional<Explanation> explanation = explanationService.findById((long) 0);
-        explanation.ifPresent(value -> model.put("explanation", value));
-
-        return "rent_camping/" + carType + "_info";
-    }
-
-
     @GetMapping("/camping/calendar/{year}/{month}")
     public String camping_calendar_different_month(ModelMap model, @PathVariable("year") int year, @PathVariable("month") int month) throws Exception {
 
@@ -125,16 +104,6 @@ public class CalendarController {
 
         int[] prevMonthDate;
         int[] nextMonthDate;
-
-
-        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
-
-        HttpConnection http = new HttpConnection();
-        JSONObject responseJson = http.sendGetRequest(moren_url);
-        JSONArray list_json_array = (JSONArray) responseJson.get("list");
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        List<OrderStartEnd> primeClubReservedList = new ArrayList<>();
-
 
         if(thisYear == year && thisMonth == month){
 
@@ -165,14 +134,6 @@ public class CalendarController {
             List<DateCamping> dateCampingListByDateId = dateCampingService.findByDateId(calendarDate);
             dateCampingList.add(dateCampingListByDateId);
 
-//            String calendar_date_string = calendarDate.getYear() + "-" + calendarDate.getMonth() + "-" + calendarDate.getDay() + " 00:00:00";
-//            LocalDateTime calendar_date_date_time = LocalDateTime.parse(calendar_date_string, formatter);
-//
-//            // 차량명도 신경써야함
-//            for(OrderStartEnd orderStartEnd : primeClubReservedList){
-//                if(calendar_date_date_time.isAfter(orderStartEnd.startDate) && )
-//            }
-
             List<String> calendarTimeListString = new ArrayList<>();
             for(int k=0; k<dateCampingListByDateId.size(); k++){
 
@@ -196,22 +157,6 @@ public class CalendarController {
             }
             calendarTimeList.add(calendarTimeListString);
         }
-
-
-//        for(int i=0; i<list_json_array.length(); i++) {
-//            JSONObject selectedObject = (JSONObject)list_json_array.get(i);
-//            String carGubun = ((String)selectedObject.get("carGubun"));
-//            if(carGubun.equals("캠핑카")){
-//                String order_start = ((String)selectedObject.get("order_start"));
-//                String order_end = ((String)selectedObject.get("order_end"));
-//
-////                LocalDateTime order_start_date_time = LocalDateTime.parse(order_start, formatter);
-////                LocalDateTime order_end_date_time = LocalDateTime.parse(order_end, formatter);
-////                primeClubReservedList.add(new OrderStartEnd(order_start_date_time, order_end_date_time));
-//
-//            }
-//        }
-
 
 
         model.addAttribute("calendarDateList", calendarDateList);
@@ -267,8 +212,8 @@ public class CalendarController {
             calendarTimeList.add(calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice));
         }
 
-        Optional<Explanation> explanation = explanationService.findById((long) 0);
-        explanation.ifPresent(value -> model.put("explanation", value));
+        CampingCarPrice explanation = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        model.put("explanation", explanation);
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("calendarTimeList", calendarTimeList);

@@ -1,0 +1,152 @@
+<!-- 관리자 캠핑 예약 등록 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_campingcar_reservation.js}" defer></script>
+
+    <script>
+        $(window).on('load', function () {
+            let campingcarReservationMenu = document.getElementById('campingcarReservationMenu');
+            campingcarReservationMenu.classList.add('activeAdminMenu');
+        });
+    </script>
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="inner_content">
+            <h2 class="page_title" style="text-align: center;">캠핑카 예약 등록</h2>
+            <div style="text-align: right;">
+                <button class="btn btn-primary" onclick="reserveCampingcar();" style="margin-bottom: 30px;">예약 등록</button>
+            </div>
+            <div class="detail_container" id="reserveCampingForm">
+                <div class="detail_list" id="detail_list_title">
+                    <p>종류</p>
+                    <p>값</p>
+                </div>
+                <div class="detail_list">
+                    <p>차종</p>
+                    <select name="" id="carType">
+                        <option value="">선택하세요</option>
+                        <option value="europe">EUROPE</option>
+                        <option value="limousine">LIMOUSINE</option>
+                        <option value="travel">TRAVEL</option>
+                    </select>
+                </div>
+                <div class="detail_list">
+                    <p>시작일</p>
+                    <input type="date" id="rentDate" onchange="displayExtraCampingData();">
+                </div>
+                <div class="detail_list">
+                    <p>시작시간</p>
+                    <select id="rentTime" onchange="displayExtraCampingData();">
+                        <option value="">선택하세요</option>
+                        <option value="10시">10시</option>
+                        <option value="11시">11시</option>
+                        <option value="12시">12시</option>
+                        <option value="13시">13시</option>
+                        <option value="14시">14시</option>
+                        <option value="15시">15시</option>
+                        <option value="16시">16시</option>
+                        <option value="17시">17시</option>
+                        <option value="18시">18시</option>
+                    </select>
+                </div>
+                <div class="detail_list">
+                    <p>반납일</p>
+                    <input type="date" id="returnDate" onchange="displayExtraCampingData();">
+                </div>
+                <div class="detail_list">
+                    <p>반납시간</p>
+                    <select id="returnTime" onchange="displayExtraCampingData();">
+                        <option value="">선택하세요</option>
+                        <option value="10시">10시</option>
+                        <option value="11시">11시</option>
+                        <option value="12시">12시</option>
+                        <option value="13시">13시</option>
+                        <option value="14시">14시</option>
+                        <option value="15시">15시</option>
+                        <option value="16시">16시</option>
+                        <option value="17시">17시</option>
+                        <option value="18시">18시</option>
+                    </select>
+                </div>
+                <div class="detail_list">
+                    <p>일권</p>
+                    <p id="day"></p>
+                </div>
+                <div class="detail_list">
+                    <p>추가 시간</p>
+                    <p id="extraTime"></p>
+                </div>
+                <div class="detail_list">
+                    <p>성명</p>
+                    <input type="text" id="name">
+                </div>
+                <div class="detail_list">
+                    <p>연락처</p>
+                    <input type="text" id="phone">
+                </div>
+                <div class="detail_list">
+                    <p>입금자명</p>
+                    <input type="text" id="depositor">
+                </div>
+                <div class="detail_list">
+                    <div>
+                        <p style="margin: 0;">보증금</p>
+                        <p style="margin: 0; font-size: 14px;">숫자로만 작성 해주세요</p>
+                    </div>
+                    <input type="text" id="deposit">
+                </div>
+                <div class="detail_list">
+                    <div>
+                        <p style="margin: 0;">총결제금액</p>
+                        <p style="margin: 0; font-size: 14px;">숫자로만 작성 해주세요</p>
+                    </div>
+                    <input type="text" id="total">
+                </div>
+                <div class="detail_list">
+                    <div>
+                        <p style="margin: 0;">선결제금액</p>
+                        <p style="margin: 0; font-size: 14px;">숫자로만 작성 해주세요</p>
+                    </div>
+                    <input type="text" id="totalHalf">
+                </div>
+                <div class="detail_list">
+                    <p>요구사항</p>
+                    <textarea id="detail" style="text-align: left;"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>
