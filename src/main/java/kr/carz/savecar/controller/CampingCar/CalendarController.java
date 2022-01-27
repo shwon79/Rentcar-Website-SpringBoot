@@ -48,13 +48,6 @@ public class CalendarController {
     @Value("${coolsms.api_secret}")
     private String api_secret;
 
-    @Value("${moren_url}")
-    private String moren_url_except_date;
-
-    @Value("${moren.expected_day}")
-    private String expected_day;
-
-
     private String AddDate(String strDate, int year, int month, int day) throws Exception {
         Calendar cal = Calendar.getInstance();
         Date dt = std_data_format.parse(strDate);
@@ -91,17 +84,6 @@ public class CalendarController {
             return campingCarPriceService.findCampingCarPriceByCarName("travel");
         }
     }
-
-
-
-//    @GetMapping("/camping/{carType}")
-//    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
-//
-//        Optional<Explanation> explanation = explanationService.findById((long) 0);
-//        explanation.ifPresent(value -> model.put("explanation", value));
-//
-//        return "rent_camping/" + carType + "_info";
-//    }
 
 
     @GetMapping("/camping/calendar/{year}/{month}")
