@@ -1,6 +1,5 @@
 package kr.carz.savecar.controller.CampingCar;
 
-import kr.carz.savecar.controller.Utils.HttpConnection;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.service.*;
@@ -26,20 +25,18 @@ public class CalendarController {
     DateCampingService dateCampingService;
     CampingCarPriceService campingCarPriceService;
     CampingcarReservationService campingcarReservationService;
-    ExplanationService explanationService;
     CampingCarPriceRateService campingCarPriceRateService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
-                              ExplanationService explanationService, CampingCarPriceRateService campingCarPriceRateService) {
+                              CampingCarPriceRateService campingCarPriceRateService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
         this.campingcarReservationService = campingcarReservationService;
-        this.explanationService = explanationService;
         this.campingCarPriceRateService = campingCarPriceRateService;
     }
 
@@ -97,14 +94,14 @@ public class CalendarController {
 
 
 
-    @GetMapping("/camping/{carType}")
-    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
-
-        Optional<Explanation> explanation = explanationService.findById((long) 0);
-        explanation.ifPresent(value -> model.put("explanation", value));
-
-        return "rent_camping/" + carType + "_info";
-    }
+//    @GetMapping("/camping/{carType}")
+//    public String get_camping_carType(ModelMap model, @PathVariable("carType") String carType) {
+//
+//        Optional<Explanation> explanation = explanationService.findById((long) 0);
+//        explanation.ifPresent(value -> model.put("explanation", value));
+//
+//        return "rent_camping/" + carType + "_info";
+//    }
 
 
     @GetMapping("/camping/calendar/{year}/{month}")
@@ -233,8 +230,8 @@ public class CalendarController {
             calendarTimeList.add(calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice));
         }
 
-        Optional<Explanation> explanation = explanationService.findById((long) 0);
-        explanation.ifPresent(value -> model.put("explanation", value));
+        CampingCarPrice explanation = campingCarPriceService.findCampingCarPriceByCarName(carType);
+        model.put("explanation", explanation);
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("calendarTimeList", calendarTimeList);

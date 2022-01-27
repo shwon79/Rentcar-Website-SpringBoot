@@ -20,7 +20,6 @@ public class SpringConfig {
     private final CalendarTimeRepository calendarTimeRepository;
     private final DateCampingRepository dateCampingRepository;
     private final CampingcarReservationRepository campingcarReservationRepository;
-    private final ExplanationRepository explanationRepository;
     private final AdminRepository adminRepository;
     private final ImagesRepository imagesRepository;
     private final ValuesForWebRepository valuesForWebRepository;
@@ -34,7 +33,7 @@ public class SpringConfig {
                         MorenReservationRepository morenReservationRepository, CampingCarPriceRepository campingCarPriceRepository,
                         CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository,
                         DateCampingRepository dateCampingRepository, CampingcarReservationRepository campingcarReservationRepository,
-                        ExplanationRepository explanationRepository, AdminRepository adminRepository, ImagesRepository imagesRepository,
+                        AdminRepository adminRepository, ImagesRepository imagesRepository,
                         ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
@@ -48,7 +47,6 @@ public class SpringConfig {
         this.calendarTimeRepository = calendarTimeRepository;
         this.dateCampingRepository = dateCampingRepository;
         this.campingcarReservationRepository = campingcarReservationRepository;
-        this.explanationRepository = explanationRepository;
         this.adminRepository = adminRepository;
         this.imagesRepository = imagesRepository;
         this.valuesForWebRepository = valuesForWebRepository;
@@ -94,9 +92,6 @@ public class SpringConfig {
 
     @Bean
     public CampingcarReservationService campingcarReservationService() { return new CampingcarReservationService(campingcarReservationRepository); }
-
-    @Bean
-    public ExplanationService ExplanationService() { return new ExplanationService(explanationRepository); }
 
     @Bean
     public AdminService adminService() { return new AdminService(adminRepository); }

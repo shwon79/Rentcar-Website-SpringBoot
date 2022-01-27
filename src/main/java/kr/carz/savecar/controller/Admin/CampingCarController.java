@@ -22,7 +22,6 @@ import java.util.*;
 
 @Controller
 public class CampingCarController {
-    private final ExplanationService explanationService;
     private final CampingcarReservationService campingcarReservationService;
     private final CalendarTimeService calendarTimeService;
     private final CampingCarPriceService campingCarPriceService;
@@ -33,12 +32,11 @@ public class CampingCarController {
     private final ReservationController reservationController;
 
     @Autowired
-    public CampingCarController(ExplanationService explanationService, CampingcarReservationService campingcarReservationService,
+    public CampingCarController(CampingcarReservationService campingcarReservationService,
                                 CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
                                 CalendarDateService calendarDateService, DateCampingService dateCampingService,
                                 CampingCarPriceRateService campingCarPriceRateService, ReservationService reservationService,
                                 ReservationController reservationController) {
-        this.explanationService = explanationService;
         this.campingcarReservationService = campingcarReservationService;
         this.calendarTimeService = calendarTimeService;
         this.campingCarPriceService = campingCarPriceService;
