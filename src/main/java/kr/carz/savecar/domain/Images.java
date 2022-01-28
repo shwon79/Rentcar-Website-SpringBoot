@@ -19,12 +19,12 @@ public class Images implements Comparable<Images>{
     @JoinColumn(name = "car_name")
     private CampingCarPrice carName; // 캠핑카 id
 
-    private String title;
+    private int title;
     private String url;
     private String isUploaded;
 
     @Builder
-    public Images(Long imageId, CampingCarPrice carName, String title, String url, String isUploaded) {
+    public Images(Long imageId, CampingCarPrice carName, int title, String url, String isUploaded) {
         this.carName = carName;
         this.imageId = imageId;
         this.title = title;
@@ -34,6 +34,6 @@ public class Images implements Comparable<Images>{
 
     @Override
     public int compareTo(Images o) {
-        return title.compareTo(o.getTitle());
+        return Integer.compare(title, o.getTitle());
     }
 }

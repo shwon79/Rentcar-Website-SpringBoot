@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImagesDTO {
 
     private String carName;
-    private String title;
+    private int title;
     private String url;
     private String isUploaded;
     private MultipartFile file;
