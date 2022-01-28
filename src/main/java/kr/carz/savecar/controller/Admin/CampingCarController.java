@@ -750,14 +750,38 @@ public class CampingCarController {
 
     @PostMapping("/admin/campingcar/image")
     @ResponseBody
-    public void postAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO, MultipartFile file) throws IOException {
+    public void postAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO) throws IOException {
         if(imagesDTO.getIsUploaded().equals("1")) {
-            String imgPath = s3Service.upload(file);
+            String imgPath = s3Service.upload(imagesDTO.getFile());
             imagesDTO.setUrl(imgPath);
         }
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(imagesDTO.getCarName());
         imagesService.saveDTO(imagesDTO, campingCarPrice);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @PutMapping("/admin/campingcar/image/{imageId}")
+    @ResponseBody
+    public void putAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO, @PathVariable Long imageId) throws IOException {
+
+        Optional<Images> imagesWrapper = imagesService.findImageByImageId(imageId);
+        if(imagesWrapper.isPresent()){
+            String imgPath = s3Service.upload(imagesDTO.getFile());
+            imagesDTO.setUrl(imgPath);
+
+            Images images = imagesWrapper.get();
+            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(imagesDTO.getCarName());
+            imagesService.saveOriginalWithDTO(images, imagesDTO, campingCarPrice);
+        }
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);

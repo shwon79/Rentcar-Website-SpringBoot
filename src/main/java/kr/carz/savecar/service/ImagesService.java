@@ -36,6 +36,9 @@ public class ImagesService {
     public List<Images> findImageByCarName(CampingCarPrice carName){
         return imagesRepository.findByCarName(carName);
     }
+    public Optional<Images> findImageByImageId(Long imageId){
+        return imagesRepository.findByImageId(imageId);
+    }
 
     public List<Images> findAllImage(){
         return imagesRepository.findAll();
@@ -43,5 +46,15 @@ public class ImagesService {
 
     public Long saveDTO(ImagesDTO imagesDTO, CampingCarPrice carName) {
         return imagesRepository.save(imagesDTO.toEntity(carName)).getImageId();
+    }
+
+    public Long saveOriginalWithDTO(Images image, ImagesDTO dto, CampingCarPrice carName) {
+
+        image.setCarName(carName);
+        image.setTitle(dto.getTitle());
+        image.setUrl(dto.getUrl());
+        image.setIsUploaded(dto.getIsUploaded());
+
+        return imagesRepository.save(image).getImageId();
     }
 }
