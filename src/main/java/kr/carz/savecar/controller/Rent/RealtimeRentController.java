@@ -502,6 +502,11 @@ public class RealtimeRentController {
                     + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n";
         }
 
+        Map<String, String> map = new HashMap<>();
+        map.put("test", "test");
+
+        params.putAll(map);
+
         params.put("reservationId", String.valueOf(reservationId));
         params.put("reservationName", morenReservationDTO.getReservationName());
         params.put("reservationPhone", morenReservationDTO.getReservationPhone());
