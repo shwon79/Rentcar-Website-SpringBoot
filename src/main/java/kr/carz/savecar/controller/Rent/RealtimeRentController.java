@@ -65,6 +65,15 @@ public class RealtimeRentController {
     @Value("${moren.expected_day}")
     private String expected_day;
 
+    @Value("${kakao.ATA.template.senderkey.realtimerent}")
+    private String senderKey;
+
+    @Value("${kakao.ATA.template.templatecode.realtimerent.customer}")
+    private String realTimeRentTemplateCodeCustomer;
+
+    @Value("${kakao.ATA.template.templatecode.realtimerent.employee}")
+    private String realTimeRentTemplateCodeEmployer;
+
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
 
@@ -464,24 +473,25 @@ public class RealtimeRentController {
     @ResponseBody
     public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
 
-        morenReservationService.saveDTO(morenReservationDTO);
-
-        JSONObject jsonObject = new JSONObject();
+        Long reservationId = morenReservationService.saveDTO(morenReservationDTO);
 
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
         HashMap<String, String> params2 = new HashMap<>();
 
-
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1+", "+admin2+", "+admin3);
+        params.put("to", admin1);  // +", "+admin2+", "+admin3
         params.put("from", admin3);
-        params.put("type", "LMS");
+        params.put("type", "ATA");
+        params.put("template_code", realTimeRentTemplateCodeEmployer);
+        params.put("sender_key", senderKey);
 
         /* 고객에게 예약확인 문자 전송 */
         params2.put("to", morenReservationDTO.getReservationPhone());
         params2.put("from", admin3);
-        params2.put("type", "LMS");
+        params2.put("type", "ATA");
+        params2.put("template_code", realTimeRentTemplateCodeCustomer);
+        params2.put("sender_key", senderKey);
 
         String delivery_text = "";
         if (morenReservationDTO.getPickupPlace().equals("방문")){
@@ -492,56 +502,38 @@ public class RealtimeRentController {
                     + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n";
         }
 
-        params.put("text", "[실시간 예약 대기 신청]\n"
-                   
-                + "▼ 계약 확인하기 " + "\n"
-                + "https://savecar.kr/admin/index" + "\n\n"
+        params.put("reservationId", String.valueOf(reservationId));
+        params.put("reservationName", morenReservationDTO.getReservationName());
+        params.put("reservationPhone", morenReservationDTO.getReservationPhone());
+        params.put("selectAge", morenReservationDTO.getSelectAge());
+        params.put("reservationAge", morenReservationDTO.getReservationAge());
+        params.put("carName", morenReservationDTO.getCarName());
+        params.put("carNo", morenReservationDTO.getCarNo());
+        params.put("reservationDate", morenReservationDTO.getReservationDate());
+        params.put("reservationTime", morenReservationDTO.getReservationTime());
+        params.put("rentTerm", morenReservationDTO.getRentTerm());
+        params.put("kilometer", morenReservationDTO.getKilometer());
+        params.put("delivery_text", delivery_text);
+        params.put("reservationGuarantee", morenReservationDTO.getReservationGuarantee());
+        params.put("carAmountTotal", morenReservationDTO.getCarAmountTotal());
+        params.put("carDeposit", morenReservationDTO.getCarDeposit());
+        params.put("reservationDetails", morenReservationDTO.getReservationDetails());
 
-                + "▼ 문의자 정보 " + "\n"
-                + "이름: " + morenReservationDTO.getReservationName() + "\n"
-                + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
-                + "보험연령: " + morenReservationDTO.getSelectAge() + "\n"
-                + "생년월일: " + morenReservationDTO.getReservationAge() + "\n\n"
-
-                + "▼ 차량 정보 " + "\n"
-                + "차량명: " + morenReservationDTO.getCarName() + "\n"
-                + "차량번호: " + morenReservationDTO.getCarNo() + "\n\n"
-
-                + "▼ 대여 정보 " + "\n"
-                + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
-                + "대여시간: " + morenReservationDTO.getReservationTime() + "\n"
-                + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
-                + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
-                + delivery_text
-                + "신용증빙: " + morenReservationDTO.getReservationGuarantee() + "\n"
-                + "총렌트료(부포): " + morenReservationDTO.getCarAmountTotal() + "\n"
-                + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
-                + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n");
-
-        params2.put("text", "[세이브카 렌트카 예약 대기 신청이 완료되었습니다]" + "\n\n"
-                + "▼ 문의자 정보 " + "\n"
-                + "이름: " + morenReservationDTO.getReservationName() + "\n"
-                + "연락처: " + morenReservationDTO.getReservationPhone() + "\n"
-                + "보험연령: " + morenReservationDTO.getSelectAge() + "\n"
-                + "생년월일: " + morenReservationDTO.getReservationAge() + "\n\n"
-
-                + "▼ 차량 정보 " + "\n"
-                + "차량명: " + morenReservationDTO.getCarName() + "\n"
-                + "차량번호: " + morenReservationDTO.getCarNo() + "\n\n"
-
-                + "▼ 대여 정보 " + "\n"
-                + "대여일자: " + morenReservationDTO.getReservationDate() + "\n"
-                + "렌트기간: " + morenReservationDTO.getRentTerm() + "\n"
-                + "약정주행거리: " + morenReservationDTO.getKilometer() + "\n"
-                + delivery_text
-                + "기타증빙사항: " + morenReservationDTO.getReservationGuarantee() + "\n"
-                + "총렌트료: " + morenReservationDTO.getCarAmountTotal() + "\n"
-                + "보증금: " + morenReservationDTO.getCarDeposit() + "\n"
-                + "요청사항: " + morenReservationDTO.getReservationDetails() + "\n\n"
-
-                + "▼ 예약금 입금하시면 직원이 확인 후, 예약이 확정됩니다.\n"
-                + "예약금: 100,000원\n"
-                + "계좌번호: 하나은행 810-626121-01404 (주)세이브카\n");
+        params2.put("reservationName", morenReservationDTO.getReservationName());
+        params2.put("reservationPhone", morenReservationDTO.getReservationPhone());
+        params2.put("selectAge", morenReservationDTO.getSelectAge());
+        params2.put("reservationAge", morenReservationDTO.getReservationAge());
+        params2.put("carName", morenReservationDTO.getCarName());
+        params2.put("carNo", morenReservationDTO.getCarNo());
+        params2.put("reservationDate", morenReservationDTO.getReservationDate());
+        params2.put("reservationTime", morenReservationDTO.getReservationTime());
+        params2.put("rentTerm", morenReservationDTO.getRentTerm());
+        params2.put("kilometer", morenReservationDTO.getKilometer());
+        params2.put("delivery_text", delivery_text);
+        params2.put("reservationGuarantee", morenReservationDTO.getReservationGuarantee());
+        params2.put("carAmountTotal", morenReservationDTO.getCarAmountTotal());
+        params2.put("carDeposit", morenReservationDTO.getCarDeposit());
+        params2.put("reservationDetails", morenReservationDTO.getReservationDetails());
 
         params.put("app_version", "test app 1.2");
         params2.put("app_version", "test app 1.2");
@@ -563,6 +555,8 @@ public class RealtimeRentController {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
+
+        JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();
