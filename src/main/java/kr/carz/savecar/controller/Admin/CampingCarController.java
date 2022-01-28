@@ -189,6 +189,22 @@ public class CampingCarController {
 
         ModelAndView mav = new ModelAndView();
 
+        List<CampingCarPrice> campingCarPriceAll = campingCarPriceService.findAllCampingCarPrice();
+
+        List<List<Images>> imagesAllList = new ArrayList<>();
+
+        for(CampingCarPrice campingCar : campingCarPriceAll){
+            List<Images> imagesListByCarName = imagesService.findImageByCarName(campingCar);
+
+            Collections.sort(imagesListByCarName);
+            for(Images image : imagesListByCarName){
+                System.out.println(image.getTitle());
+            }
+
+            imagesAllList.add(imagesListByCarName);
+        }
+        mav.addObject("imagesAllList", imagesAllList);
+
         mav.setViewName("admin/campingcar_image_menu");
 
         return mav;
@@ -716,28 +732,29 @@ public class CampingCarController {
         pw.close();
     }
 
-    @GetMapping("/admin/campingcar/image")
-    @ResponseBody
-    public void getAdminImage(HttpServletResponse res) throws IOException {
-
-        JSONObject jsonObject = new JSONObject();
-
-        List<List<Images>> imagesList = new ArrayList<>();
-        List<Images> imagesAllList = imagesService.findAllImage();
-
-        for(int i=0 ;i<imagesAllList.size() / 2; i++){
-            List<Images> images = new ArrayList<>();
-            images.add(imagesAllList.get(i * 2));
-            images.add(imagesAllList.get(i * 2 + 1));
-
-            imagesList.add(images);
-        }
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
-    }
+//    @GetMapping("/admin/campingcar/image")
+//    @ResponseBody
+//    public void getAdminImage(HttpServletResponse res) throws IOException {
+//
+//        ModelAndView mav = new ModelAndView();
+//
+//        List<CampingCarPrice> campingCarPriceAll = campingCarPriceService.findAllCampingCarPrice();
+//
+//        List<List<Images>> imagesAllList = new ArrayList<>();
+//
+//        for(CampingCarPrice campingCar : campingCarPriceAll){
+//            List<Images> imagesListByCarName = imagesService.findImageByCarName(campingCar);
+//
+//            Collections.sort(imagesListByCarName);
+//            for(Images image : imagesListByCarName){
+//                System.out.println(image.getTitle());
+//            }
+//
+//            imagesAllList.add(imagesListByCarName);
+//        }
+//        mav.addObject("imagesAllList", imagesAllList);
+//
+//    }
 
 
     @PostMapping("/admin/campingcar/image")

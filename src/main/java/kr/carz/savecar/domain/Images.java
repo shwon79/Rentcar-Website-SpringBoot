@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table(name = "Images")
-public class Images {
+public class Images implements Comparable<Images>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
@@ -30,5 +30,10 @@ public class Images {
         this.title = title;
         this.url = url;
         this.isUploaded = isUploaded;
+    }
+
+    @Override
+    public int compareTo(Images o) {
+        return title.compareTo(o.getTitle());
     }
 }

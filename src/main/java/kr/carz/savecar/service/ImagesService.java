@@ -33,6 +33,10 @@ public class ImagesService {
         return imagesRepository.findByTitle(title);
     }
 
+    public List<Images> findImageByCarName(CampingCarPrice carName){
+        return imagesRepository.findByCarName(carName);
+    }
+
     public List<Images> findAllImage(){
         return imagesRepository.findAll();
     }
