@@ -61,6 +61,7 @@ public class ImagesService {
         image.setTitle(dto.getTitle());
         image.setUrl(dto.getUrl());
         image.setIsUploaded(dto.getIsUploaded());
+        image.setIsMain(dto.getIsMain());
 
         return imagesRepository.save(image).getImageId();
     }
