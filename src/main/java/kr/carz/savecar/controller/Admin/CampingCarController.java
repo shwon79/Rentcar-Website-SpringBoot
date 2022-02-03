@@ -400,9 +400,19 @@ public class CampingCarController {
             morenJsonObject.put("CAR_NUM", campingCarPriceForMoren.getCarNum());
             morenJsonObject.put("CAR_CODE", campingCarPriceForMoren.getCarCode());
             morenJsonObject.put("ORDER_TYPE", orderType);
+            morenJsonObject.put("ORDER_CONTRACT_TYPE", "2");
+            morenJsonObject.put("ORDER_CODE", campingCarReservationDTO.getOrderCode());
             morenJsonObject.put("ORDER_CUSTOMER_NAME", campingCarReservationDTO.getName());
             morenJsonObject.put("ORDER_CUSTOMER_PHONE", campingCarReservationDTO.getPhone());
+            morenJsonObject.put("ORDER_START_TIME", orderStartTime);
+            morenJsonObject.put("ORDER_END_TIME", orderEndTime);
+            morenJsonObject.put("ORDER_CUSTOMER_MEMO", campingCarReservationDTO.getDetail());
+            morenJsonObject.put("ORDER_PRICE", campingCarReservationDTO.getTotal());
+            morenJsonObject.put("ORDER_PRICE_TAX", "0");
+            morenJsonObject.put("ORDER_DEPOSIT", campingCarReservationDTO.getDeposit());
+            morenJsonObject.put("ORDER_CDW", "1");
             morenJsonObject.put("ORDER_CODE", campingCarReservationDTO.getOrderCode());
+
 
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
