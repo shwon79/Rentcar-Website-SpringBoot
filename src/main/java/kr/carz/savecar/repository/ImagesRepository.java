@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface ImagesRepository extends JpaRepository<Images, Long> {
     Optional<Images> findByTitle(String title);
     List<Images> findByCarName(CampingCarPrice carName);
+    List<Images> findByCarNameAndIsMain(CampingCarPrice carName, String isMain);
     Optional<Images> findByImageId(Long imageId);
 
     List<Images> findAll();

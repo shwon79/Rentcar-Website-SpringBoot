@@ -22,14 +22,16 @@ public class Images implements Comparable<Images>{
     private int title;
     private String url;
     private String isUploaded;
+    private String isMain;
 
     @Builder
-    public Images(Long imageId, CampingCarPrice carName, int title, String url, String isUploaded) {
+    public Images(Long imageId, CampingCarPrice carName, int title, String url, String isUploaded, String isMain) {
         this.carName = carName;
         this.imageId = imageId;
         this.title = title;
         this.url = url;
         this.isUploaded = isUploaded;
+        this.isMain = isMain;
     }
 
     @Override

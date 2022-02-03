@@ -17,6 +17,7 @@ public class ImagesDTO {
     private String url;
     private String isUploaded;
     private MultipartFile file;
+    private String isMain;
 
     public Images toEntity(CampingCarPrice carName) {
 
@@ -25,6 +26,7 @@ public class ImagesDTO {
                 .title(title)
                 .url(url)
                 .isUploaded(isUploaded)
+                .isMain(isMain)
                 .build();
 
     }

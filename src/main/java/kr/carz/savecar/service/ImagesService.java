@@ -36,6 +36,9 @@ public class ImagesService {
     public List<Images> findImageByCarName(CampingCarPrice carName){
         return imagesRepository.findByCarName(carName);
     }
+    public List<Images> findByCarNameAndIsMain(CampingCarPrice carName, String isMain){
+        return imagesRepository.findByCarNameAndIsMain(carName, isMain);
+    }
     public Optional<Images> findImageByImageId(Long imageId){
         return imagesRepository.findByImageId(imageId);
     }
