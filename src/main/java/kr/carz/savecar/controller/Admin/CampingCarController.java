@@ -734,7 +734,7 @@ public class CampingCarController {
 
     @PostMapping("/admin/campingcar/image")
     @ResponseBody
-    public void postAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO) throws IOException {
+    public void postAdminCampingCarImage(HttpServletResponse res, @RequestBody ImagesDTO imagesDTO) throws IOException {
 
         String imgPath = s3Service.upload(imagesDTO.getFile());
         imagesDTO.setUrl(imgPath);
@@ -754,7 +754,7 @@ public class CampingCarController {
 
     @PutMapping("/admin/campingcar/image/{imageId}")
     @ResponseBody
-    public void putAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO, @PathVariable Long imageId) throws IOException {
+    public void putAdminCampingCarImage(HttpServletResponse res, @RequestBody ImagesDTO imagesDTO, @PathVariable Long imageId) throws IOException {
 
         Optional<Images> imagesWrapper = imagesService.findImageByImageId(imageId);
         if (imagesWrapper.isPresent()) {
