@@ -44,46 +44,39 @@
             <h2 class="page_title">캠핑카 사진 수정</h2>
             <div style="margin-top: 30px;">
                 <ul class="nav nav-tabs" style="justify-content: center;">
-                    <li class="nav-item" th:each="car, i : ${imagesAllList}">
-                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${car[0].carName.carName}}" th:text="${car[0].carName.carName}"
+                    <li class="nav-item" th:each="car, i : ${imagesMainList}">
+                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${car.carName.carName}}" th:text="${car.carName.carName}"
                            th:classappend="${i.index == 0 ? 'show active' : ''}"></a>
                     </li>
                 </ul>
                 <div class="tab-content" style="margin-top: 30px;">
-                    <div class="tab-pane fade"  th:each="car, i : ${imagesAllList}" th:id="${car[0].carName.carName}"
+                    <div class="tab-pane fade"  th:each="car, i : ${imagesMainList}" th:id="${car.carName.carName}"
                          th:classappend="${i.index == 0 ? 'show active' : ''}">
-                        <div class="image-box">
-                            <div th:each="num : ${#numbers.sequence(0, 15)}">
-                                <div class="upload-box">
-                                    <p th:text="${num + 1}"></p>
-<!--                                    <form th:action="@{/admin/campingcar/image}" method="POST" enctype="multipart/form-data" th:if="${car[num].isUploaded == '0'}">-->
-<!--                                        <input type="hidden" name="title" th:value="${num + 1}">-->
-<!--                                        <input type="hidden" name="carName" th:value="${car[0].carName.carName}">-->
-<!--                                        <input type="hidden" name="isUploaded" value="1">-->
-                                        <input type="file" name="file" th:title="${car[0].carName.carName}" th:data-title="${num + 1}">
-                                        <button th:onclick="uploadImage([[${car[0].carName.carName}]], [[${num + 1}]], [[${car[num].imageId}]])">등록하기</button>
-                                    </form>
-
-                                    <img th:if="${car[num].isUploaded == '1'}" th:src="${car[num].url}" th:alt="${car[num].url}">
-                                    <p th:if="${car[num].isUploaded == '0'}">이미지가 없습니다.</p>
+                        <h4>대표 이미지</h4>
+                            <div class="image-box">
+                                <div class="upload-box" th:if="${car.isUploaded == '1'}">
+                                    <button th:onclick="uploadImage('mainDelete', [[${car.carName.carName}]], '0', [[${car.imageId}]])">대표 이미지 삭제하기</button>
+                                    <img th:src="${car.url}" th:alt="${car.imageId}">
+                                </div>
+                                <div class="upload-box" th:unless="${car.isUploaded == '1'}">
+                                    <input type="file" name="file" th:title="${car.carName.carName}" th:data-title="0">
+                                    <button th:onclick="uploadImage('mainUpload', [[${car.carName.carName}]], '0', [[${car.imageId}]])">대표 이미지 넣기</button>
                                 </div>
                             </div>
-<!--                            <div th:each="image, i : ${car}">-->
-<!--                                <div class="upload-box">-->
-<!--                                    <p th:text="${i.index}"></p>-->
-<!--                                    <form th:action="@{/admin/campingcar/image}" method="POST" enctype="multipart/form-data" th:if="${image.isUploaded == '0' || image.isUploaded == ''}">-->
-<!--                                        <input type="hidden" name="title" th:value="${i.index}">-->
-<!--                                        <input type="hidden" name="carName" th:value="${car[0].carName.carName}">-->
-<!--                                        <input type="hidden" name="isUploaded" value="1">-->
-<!--                                        <input type="file" name="file">-->
-<!--                                        <button>등록하기</button>-->
-<!--                                    </form>-->
+                        <h4>추가 이미지</h4>
+                            <button class="btn btn-primary">이미지 순서 변경</button>
+                            <div class="changeOrderBox">
 
-<!--                                    <img th:if="${image.isUploaded == '1'}" th:src="${image.url}" th:alt="${image.url}">-->
-<!--                                    <p th:if="${image.isUploaded == '0' || image.isUploaded == ''}">이미지가 없습니다.</p>-->
+                            </div>
+<!--                            <div class="image-box" th:if="${not #lists.isEmpty(imagesExtraList)}">-->
+<!--                                <div class="upload-box" th:each="car, i : ${imagesExtraList}">-->
+<!--&lt;!&ndash;                                    <button th:onclick="uploadImage('mainDelete', [[${car.carName.carName}]], '0', [[${car.imageId}]])">대표 이미지 삭제하기</button>&ndash;&gt;-->
+<!--                                    <img th:src="${car.url}" th:alt="${car.imageId}">-->
 <!--                                </div>-->
+<!--&lt;!&ndash;                                <div class="upload-box"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div class="upload-box"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div class="upload-box"></div>&ndash;&gt;-->
 <!--                            </div>-->
-                        </div>
                     </div>
                 </div>
             </div>
