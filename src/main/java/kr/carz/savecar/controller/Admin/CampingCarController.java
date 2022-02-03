@@ -190,10 +190,16 @@ public class CampingCarController {
 
             Collections.sort(imagesListByCarNameExtra);
             imagesExtraList.add(imagesListByCarNameExtra);
-            if(imagesListByCarNameMain.size() != 1){
+
+            if(imagesListByCarNameMain.size() > 1){
                 throw new Exception("The number of Main image must be only one");
             }
-            imagesMainList.add(imagesListByCarNameMain.get(0));
+
+            if(imagesListByCarNameMain.size() == 0) {
+                imagesMainList.add(new Images((long) -1, campingCar, -1, "", "0", "1"));
+            } else {
+                imagesMainList.add(imagesListByCarNameMain.get(0));
+            }
         }
         mav.addObject("imagesMainList", imagesMainList);
         mav.addObject("imagesExtraList", imagesExtraList);
