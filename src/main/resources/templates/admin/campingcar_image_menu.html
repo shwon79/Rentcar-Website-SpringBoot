@@ -63,20 +63,24 @@
                                     <button th:onclick="uploadImage('mainUpload', [[${car.carName.carName}]], '0', [[${car.imageId}]])">대표 이미지 넣기</button>
                                 </div>
                             </div>
+                        <br>
                         <h4>추가 이미지</h4>
+                        <div style="text-align: right;">
                             <button class="btn btn-primary">이미지 순서 변경</button>
-                            <div class="changeOrderBox">
+                        </div>
+                        <div class="changeOrderBox">
 
+                        </div>
+                        <div class="image-box" th:if="${not #lists.isEmpty(imagesExtraList[i.index])}">
+                            <div class="upload-box" th:each="car, i : ${imagesExtraList[i.index]}">
+                                <button th:onclick="uploadImage('extraDelete', [[${car.carName.carName}]], '0', [[${car.imageId}]])">이미지 삭제하기</button>
+                                <img th:src="${car.url}" th:alt="${car.imageId}">
                             </div>
-<!--                            <div class="image-box" th:if="${not #lists.isEmpty(imagesExtraList)}">-->
-<!--                                <div class="upload-box" th:each="car, i : ${imagesExtraList}">-->
-<!--&lt;!&ndash;                                    <button th:onclick="uploadImage('mainDelete', [[${car.carName.carName}]], '0', [[${car.imageId}]])">대표 이미지 삭제하기</button>&ndash;&gt;-->
-<!--                                    <img th:src="${car.url}" th:alt="${car.imageId}">-->
-<!--                                </div>-->
-<!--&lt;!&ndash;                                <div class="upload-box"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <div class="upload-box"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <div class="upload-box"></div>&ndash;&gt;-->
-<!--                            </div>-->
+                            <div class="upload-box">
+                                <input type="file" name="file" th:title="${car.carName.carName}" th:data-title="${car.imageId}">
+                                <button th:onclick="uploadImage('extraUpload', [[${car.carName.carName}]], [[${car.imageId}]], [[${car.imageId}]])">이미지 넣기</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
