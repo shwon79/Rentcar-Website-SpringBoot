@@ -75,16 +75,16 @@ function uploadImage(behavior, carName, title, imageId) {
         if (confirm('대표 이미지를 삭제 하시겠습니까?')) {
             $.ajax({
                 type:'DELETE',
-                url:'/admin/campingcar/image/'+ imageId,
-                dataType:'json',
-                contentType : 'application/json; charset=utf-8'
-            }).done(function (result) {
-                if (result.result == 1) {
-                    alert('삭제가 완료되었습니다.');
-                    window.location.href = '/admin/campingcar/image/menu';
-                } else {
-                    alert('삭제에 문제가 생겼습니다.');
-                };
+                url:'/admin/campingcar/image/'+ imageId
+            }).done(function () {
+                alert('삭제가 완료되었습니다.');
+                window.location.href = '/admin/campingcar/image/menu';
+                // if (result.result == 1) {
+                //     alert('삭제가 완료되었습니다.');
+                //     window.location.href = '/admin/campingcar/image/menu';
+                // } else {
+                //     alert('삭제에 문제가 생겼습니다.');
+                // };
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             })
