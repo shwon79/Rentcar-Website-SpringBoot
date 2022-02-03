@@ -195,7 +195,7 @@ public class CampingCarController {
             }
             imagesMainList.add(imagesListByCarNameMain.get(0));
         }
-        mav.addObject("imagesMainList", imagesExtraList);
+        mav.addObject("imagesMainList", imagesMainList);
         mav.addObject("imagesExtraList", imagesExtraList);
 
         mav.setViewName("admin/campingcar_image_menu");
