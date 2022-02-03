@@ -771,16 +771,9 @@ public class CampingCarController {
 
     @DeleteMapping("/admin/campingcar/image/{imageId}")
     @ResponseBody
-    public void deleteAdminCampingCarImage(HttpServletResponse res, @PathVariable Long imageId) throws IOException {
+    public void deleteAdminCampingCarImage(@PathVariable Long imageId) {
 
         imagesService.delete(imageId);
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
     }
 }
