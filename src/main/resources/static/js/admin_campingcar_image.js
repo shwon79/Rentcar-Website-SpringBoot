@@ -102,13 +102,9 @@ function uploadImage(behavior, carName, title, imageId) {
             url:'/admin/campingcar/image/'+ imageId,
             dataType:'json',
             contentType : 'application/json; charset=utf-8'
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('삭제가 완료되었습니다.');
-                window.location.href = '/admin/campingcar/image/menu';
-            } else {
-                alert('삭제에 문제가 생겼습니다.');
-            };
+        }).done(function () {
+            alert('삭제가 완료되었습니다.');
+            window.location.href = '/admin/campingcar/image/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
