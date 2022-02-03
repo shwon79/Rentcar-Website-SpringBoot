@@ -48,6 +48,10 @@ public class ImagesService {
         return imagesRepository.save(imagesDTO.toEntity(carName)).getImageId();
     }
 
+    public void delete(Long imageId) {
+        imagesRepository.deleteById(imageId);
+    }
+
     public Long saveOriginalWithDTO(Images image, ImagesDTO dto, CampingCarPrice carName) {
 
         image.setCarName(carName);
