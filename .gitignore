@@ -41,7 +41,4 @@ out/
 ### VS Code ###
 .vscode/
 /src/main/resources/application.yml
-/logs/myapp.log
-/logs/myapp.log.2022-01-21.0.gz
-/logs/myapp.log.2022-01-24.0.gz
-/logs/myapp.log.2022-01-25.0.gz
+/logs/
