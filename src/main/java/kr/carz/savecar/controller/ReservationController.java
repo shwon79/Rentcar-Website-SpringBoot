@@ -45,7 +45,7 @@ public class ReservationController {
     //    @RequestMapping(value = "/reservation/kakao/ATA", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @PostMapping("/reservation/kakao/ATA")
     @ResponseBody
-    public void moren_reservation(HttpServletResponse res, String to_manager_phone, String to_customer_phone, Map<String, String> employerMap, Map<String, String> customerMap, String employerTemplateCode, String customerTemplateCode) throws IOException {
+    public void kakao_reservation(HttpServletResponse res, String to_manager_phone, String to_customer_phone, Map<String, String> employerMap, Map<String, String> customerMap, String employerTemplateCode, String customerTemplateCode) throws IOException {
 
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
@@ -100,9 +100,6 @@ public class ReservationController {
 
 
     // 문자 전송 api
-//    @RequestMapping(value = "/reservation/message", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
-    @PostMapping("/reservation/message")
-    @ResponseBody
     public void send_message(String to_manager_phone, String to_customer_phone, String manager_text_message, String customer_text_message)  {
 
         // 문자전송
