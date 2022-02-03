@@ -61,13 +61,9 @@ function uploadImage(behavior, carName, title, imageId) {
                     processData:false,
                     contentType: false,
                     data: formData
-                }).done(function (result) {
-                    if (result.result == 1) {
-                        alert('업로드가 완료되었습니다.');
-                        window.location.href = '/admin/campingcar/image/menu';
-                    } else {
-                        alert('업로드에 문제가 생겼습니다.');
-                    };
+                }).done(function () {
+                    alert('업로드가 완료되었습니다.');
+                    window.location.href = '/admin/campingcar/image/menu';
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 })

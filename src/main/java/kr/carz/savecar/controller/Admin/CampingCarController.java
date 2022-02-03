@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -732,9 +733,9 @@ public class CampingCarController {
     }
 
 
-    @PostMapping("/admin/campingcar/image")
+    @PostMapping(value="/admin/campingcar/image", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public void postAdminCampingCarImage(HttpServletResponse res, @RequestBody ImagesDTO imagesDTO) throws IOException {
+    public void postAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO) throws IOException {
 
         String imgPath = s3Service.upload(imagesDTO.getFile());
         imagesDTO.setUrl(imgPath);
@@ -752,9 +753,9 @@ public class CampingCarController {
     }
 
 
-    @PutMapping("/admin/campingcar/image/{imageId}")
+    @PutMapping(value="/admin/campingcar/image/{imageId}", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public void putAdminCampingCarImage(HttpServletResponse res, @RequestBody ImagesDTO imagesDTO, @PathVariable Long imageId) throws IOException {
+    public void putAdminCampingCarImage(ImagesDTO imagesDTO, @PathVariable Long imageId) throws IOException {
 
         Optional<Images> imagesWrapper = imagesService.findImageByImageId(imageId);
         if (imagesWrapper.isPresent()) {
@@ -765,14 +766,6 @@ public class CampingCarController {
             CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(imagesDTO.getCarName());
             imagesService.saveOriginalWithDTO(images, imagesDTO, campingCarPrice);
         }
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
     }
 
 
