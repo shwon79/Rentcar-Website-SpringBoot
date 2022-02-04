@@ -754,7 +754,7 @@ public class CampingCarController {
 
     @PutMapping(value="/admin/campingcar/image/{imageId}")
     @ResponseBody
-    public void putAdminCampingCarImage(ImagesVO imagesVO, @PathVariable Long imageId) {
+    public void putAdminCampingCarImage(HttpServletResponse res, @RequestBody ImagesVO imagesVO, @PathVariable Long imageId) throws IOException  {
 
         Optional<Images> imagesWrapper = imagesService.findImageByImageId(imageId);
         if (imagesWrapper.isPresent()) {
@@ -764,6 +764,14 @@ public class CampingCarController {
 
             imagesService.save(images);
         }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 
