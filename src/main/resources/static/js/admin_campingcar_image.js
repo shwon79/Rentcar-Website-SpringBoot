@@ -106,8 +106,12 @@ function uploadImage(behavior, carName, title, imageId) {
 // 이미지 순서 변경 창 보이기
 function displaySortingBox() {
     let boxList = document.getElementsByClassName('changeOrderBox');
+    let btnList = document.getElementsByClassName('changeOrderBtn');
     [...boxList].forEach(function(box) {
         box.classList.toggle('active');
+    });
+    [...btnList].forEach(function(btn) {
+        btn.classList.toggle('active');
     });
 };
 
@@ -116,33 +120,42 @@ function saveChangedData(carName) {
     let boxList = document.getElementsByClassName(carName+'Item');
     if (confirm('추가 이미지 순서를 변경하시겠습니까?')) {
         let tempTitle = 1;
+        let imageTitleList = [];
 
         [...boxList].forEach(function(box) {
-            let imageId = box.dataset.imageid;
-            let data = {
+            let imageId = parseInt(box.dataset.imageid);
+            let oneData = {
+                imageId: imageId,
                 title: tempTitle
             }
-
-            $.ajax({
-                type: 'PUT',
-                url: '/admin/campingcar/image/' + imageId,
-                dataType: 'json',
-                contentType : 'application/json; charset=utf-8',
-                data : JSON.stringify(data)
-            }).done(function (result) {
-                // if (result.result == 1) {
-                //     alert('변경 되었습니다.');
-                // } else {
-                //     alert('변경에 문제가 생겼습니다.');
-                // };
-                // alert('변경이 완료되었습니다.');
-                // window.location.href = '/admin/campingcar/image/menu';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            })
             tempTitle++;
+            imageTitleList.push(oneData);
         });
-        window.location.href = '/admin/campingcar/image/menu';
+
+        let data = {
+            imageTitleList: imageTitleList
+        }
+
+        editData(data);
+    };
+
+    function editData(data) {
+        $.ajax({
+            type: 'PUT',
+            url: '/admin/campingcar/image/title',
+            dataType: 'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('이미지 순서가 변경 되었습니다.');
+            } else {
+                alert('이미지 순서 변경에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/campingcar/image/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     };
 }
 

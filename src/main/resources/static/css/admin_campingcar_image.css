@@ -21,6 +21,15 @@
 .changeOrderBox .btn-outline-primary {
     background-color: white;
 }
+.changeOrderBox .btn-outline-primary:hover {
+    color: #007bff;
+}
+.changeOrderBtn {
+    display: initial;
+}
+.changeOrderBtn.active {
+    display: none;
+}
 .changeOrderBoxTop {
     padding: 20px;
     background-color: lightskyblue;
