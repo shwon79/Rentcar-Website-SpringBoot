@@ -752,18 +752,17 @@ public class CampingCarController {
     }
 
 
-    @PutMapping(value="/admin/campingcar/image/{imageId}", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
+    @PutMapping(value="/admin/campingcar/image/{imageId}")
     @ResponseBody
-    public void putAdminCampingCarImage(ImagesDTO imagesDTO, @PathVariable Long imageId) throws IOException {
+    public void putAdminCampingCarImage(ImagesVO imagesVO, @PathVariable Long imageId) {
 
         Optional<Images> imagesWrapper = imagesService.findImageByImageId(imageId);
         if (imagesWrapper.isPresent()) {
-            String imgPath = s3Service.upload(imagesDTO.getFile());
-            imagesDTO.setUrl(imgPath);
 
             Images images = imagesWrapper.get();
-            CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(imagesDTO.getCarName());
-            imagesService.saveOriginalWithDTO(images, imagesDTO, campingCarPrice);
+            images.setTitle(imagesVO.getTitle());
+
+            imagesService.save(images);
         }
     }
 
