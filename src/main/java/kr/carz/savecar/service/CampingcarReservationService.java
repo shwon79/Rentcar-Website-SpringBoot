@@ -30,7 +30,7 @@ public class CampingcarReservationService {
         return campingcarReservationRepository.save(dto.toEntity()).getId();
     }
 
-    public Long saveDTO(CampingCarReservation campingCarReservation, CampingCarReservationDTO campingCarReservationDTO) {
+    public Long saveDTO(CampingCarReservationDTO campingCarReservationDTO) {
 
         return campingcarReservationRepository.save(campingCarReservationDTO.toEntity()).getId();
     }

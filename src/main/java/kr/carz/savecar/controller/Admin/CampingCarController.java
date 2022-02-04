@@ -588,7 +588,7 @@ public class CampingCarController {
                 }
             }
         }
-        campingcarReservationService.saveDTO(campingCarReservation, campingCarReservationDTO);
+        campingcarReservationService.saveDTO(campingCarReservationDTO);
 
         if(taskName.equals("확정")) {
             reservationController.send_message(admin1+", "+admin2+", "+admin3,
