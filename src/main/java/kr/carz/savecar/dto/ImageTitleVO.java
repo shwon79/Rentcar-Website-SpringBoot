@@ -5,14 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImagesVO {
+public class ImageTitleVO {
 
-    private List<ImageTitleVO> imageTitleList;
+    private Long imageId;
+    private int title;
 
 }
