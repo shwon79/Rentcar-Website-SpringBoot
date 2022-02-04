@@ -52,60 +52,12 @@
                     <div id="my-pics" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
                         <ol class="carousel-indicators">
-                            <li data-target="#my-pics" data-slide-to="0" class="active"></li>
-                            <li data-target="#my-pics" data-slide-to="1"></li>
-                            <li data-target="#my-pics" data-slide-to="2"></li>
-                            <li data-target="#my-pics" data-slide-to="3"></li>
-                            <li data-target="#my-pics" data-slide-to="4"></li>
-                            <li data-target="#my-pics" data-slide-to="5"></li>
-                            <li data-target="#my-pics" data-slide-to="6"></li>
-                            <li data-target="#my-pics" data-slide-to="7"></li>
-                            <li data-target="#my-pics" data-slide-to="8"></li>
-                            <li data-target="#my-pics" data-slide-to="9"></li>
-                            <li data-target="#my-pics" data-slide-to="10"></li>
-                            <li data-target="#my-pics" data-slide-to="11"></li>
-                            <li data-target="#my-pics" data-slide-to="12"></li>
+                            <li th:each="image, i : ${imagesList}" data-target="#my-pics" th:data-slide-to="${i.index}" th:classappend="${i.index == 0 ? 'active' : ''}"></li>
                         </ol>
                         <!-- Content -->
                         <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img th:src="@{/img/limimg7.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg10.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg19.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg22.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg5.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg1.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg2.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg16.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg14.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg11.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg12.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg4.jpg}" alt="Limousine Camper">
-                            </div>
-                            <div class="item">
-                                <img th:src="@{/img/limimg9.jpg}" alt="Limousine Camper">
+                            <div th:each="image, i : ${imagesList}" class="item" th:classappend="${i.index == 0 ? 'active' : ''}">
+                                <img th:src="${image.url}" th:alt="${image.carName.carName}">
                             </div>
                         </div>
                         <!-- Previous/Next controls -->
@@ -146,15 +98,19 @@
                                         </tr>
                                         <tr>
                                             <td>연료 / 미션</td>
-                                            <td>디젤 / Auto</td>
+                                            <td>
+                                                <span th:text="${explanation.fuel}"></span>
+                                                <span> / </span>
+                                                <span th:text="${explanation.gearBox}"></span>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>면허 종류</td>
-                                            <td>1종 보통</td>
+                                            <td th:text="${explanation.license}"></td>
                                         </tr>
                                         <tr>
                                             <td>인원정보</td>
-                                            <td>4인승</td>
+                                            <td th:text="${explanation.personnel}"></td>
                                         </tr>
                                     </table>
                                 </div>
