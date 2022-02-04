@@ -1,15 +1,12 @@
 .image-box {
-    /*display: block;*/
     display: grid !important;
     grid-template-columns: 32% 32% 32%;
     grid-gap: 20px;
 }
 
-
 .image-box .upload-box{
-    /*width:500px;*/
     height: 270px;
-    border: 1px solid gray;
+    border: 1px solid #dee2e6;
     padding:10px;
 }
 .upload-box img {
@@ -19,7 +16,6 @@
 .changeOrderBox {
     display: none;
     border: 1px solid lightskyblue;
-    /*padding: 20px 10px;*/
     margin-bottom: 20px;
 }
 .changeOrderBox .btn-outline-primary {

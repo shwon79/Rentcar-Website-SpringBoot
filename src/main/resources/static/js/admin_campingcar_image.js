@@ -114,40 +114,36 @@ function displaySortingBox() {
 // 이미지 순서 변경 후 저장
 function saveChangedData(carName) {
     let boxList = document.getElementsByClassName(carName+'Item');
-    // console.log(boxList);
-    // if (confirm('추가 이미지 순서를 변경하시겠습니까?')) {
-    //
-    // }
-    let tempTitle = 1;
-    [...boxList].forEach(function(box) {
-        let imageId = box.dataset.imageid;
+    if (confirm('추가 이미지 순서를 변경하시겠습니까?')) {
+        let tempTitle = 1;
 
-        let data = {
-            title: tempTitle
-        }
+        [...boxList].forEach(function(box) {
+            let imageId = box.dataset.imageid;
+            let data = {
+                title: tempTitle
+            }
 
-        console.log(data);
-
-        $.ajax({
-            type: 'PUT',
-            url: '/admin/campingcar/image/' + imageId,
-            dataType: 'json',
-            contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('변경 되었습니다.');
-            } else {
-                alert('변경에 문제가 생겼습니다.');
-            };
-            // alert('변경이 완료되었습니다.');
-            // window.location.href = '/admin/campingcar/image/menu';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-        tempTitle++;
-    });
-    // window.location.href = '/admin/campingcar/image/menu';
+            $.ajax({
+                type: 'PUT',
+                url: '/admin/campingcar/image/' + imageId,
+                dataType: 'json',
+                contentType : 'application/json; charset=utf-8',
+                data : JSON.stringify(data)
+            }).done(function (result) {
+                // if (result.result == 1) {
+                //     alert('변경 되었습니다.');
+                // } else {
+                //     alert('변경에 문제가 생겼습니다.');
+                // };
+                // alert('변경이 완료되었습니다.');
+                // window.location.href = '/admin/campingcar/image/menu';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
+            tempTitle++;
+        });
+        window.location.href = '/admin/campingcar/image/menu';
+    };
 }
 
 // Array.from(uploadBoxList).forEach(function(uploadBox) {
