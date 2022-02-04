@@ -526,15 +526,12 @@ public class CampingCarController {
 
         JSONObject jsonObject = new JSONObject();
 
-
         Optional<CampingCarReservation> campingCarReservationWrapper = campingcarReservationService.findById(reservationId);
 
         CampingCarReservation campingCarReservation = new CampingCarReservation();
         if(campingCarReservationWrapper.isPresent()){
             campingCarReservation = campingCarReservationWrapper.get();
         }
-
-
 
         String[] splitedRentDate = campingCarReservation.getRentDate().split("-");
         String[] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
@@ -570,14 +567,7 @@ public class CampingCarController {
         if(taskName.equals("확정")) {
             String moren_response = admin_camping_car_reservation_confirm_for_moren(campingCarReservationDTO, orderType, orderStartTime, orderEndTime);
             if(moren_response.equals("Connection Fail")){
-                jsonObject.put("result", 0);
-
-                PrintWriter pw = res.getWriter();
-                pw.print(jsonObject);
-                pw.flush();
-                pw.close();
-
-                return;
+                throw new Exception(moren_response);
             } else {
                 campingCarReservation.setOrderCode(moren_response);
             }
@@ -586,14 +576,7 @@ public class CampingCarController {
             String moren_response = admin_camping_car_reservation_cancel_for_moren(campingCarReservationDTO, orderType);
 
             if(moren_response.equals("Connection Fail")){
-                jsonObject.put("result", 0);
-
-                PrintWriter pw = res.getWriter();
-                pw.print(jsonObject);
-                pw.flush();
-                pw.close();
-
-                return;
+                throw new Exception(moren_response);
             }
 
         } else {
@@ -601,37 +584,11 @@ public class CampingCarController {
                 String moren_response = admin_camping_car_reservation_update_for_moren(campingCarReservationDTO, orderType, orderStartTime, orderEndTime);
 
                 if(moren_response.equals("Connection Fail")){
-                    jsonObject.put("result", 0);
-
-                    PrintWriter pw = res.getWriter();
-                    pw.print(jsonObject);
-                    pw.flush();
-                    pw.close();
-
-                    return;
+                    throw new Exception(moren_response);
                 }
             }
         }
-
-        campingCarReservation.setAgree(campingCarReservationDTO.getAgree());
-        campingCarReservation.setCarType(campingCarReservationDTO.getCarType());
-        campingCarReservation.setDay(campingCarReservationDTO.getDay());
-        campingCarReservation.setDeposit(campingCarReservationDTO.getDeposit());
-        campingCarReservation.setDepositor(campingCarReservationDTO.getDepositor());
-        campingCarReservation.setDetail(campingCarReservationDTO.getDetail());
-        campingCarReservation.setName(campingCarReservationDTO.getName());
-        campingCarReservation.setPhone(campingCarReservationDTO.getPhone());
-        campingCarReservation.setRentDate(campingCarReservationDTO.getRentDate());
-        campingCarReservation.setRentTime(campingCarReservationDTO.getRentTime());
-        campingCarReservation.setReservation(campingCarReservationDTO.getReservation());
-        campingCarReservation.setReturnDate(campingCarReservationDTO.getReturnDate());
-        campingCarReservation.setReturnTime(campingCarReservationDTO.getReturnTime());
-        campingCarReservation.setTotal(campingCarReservationDTO.getTotal());
-        campingCarReservation.setTotalHalf(campingCarReservationDTO.getTotalHalf());
-        campingCarReservation.setExtraTime(campingCarReservationDTO.getExtraTime());
-
-        campingcarReservationService.save(campingCarReservation);
-
+        campingcarReservationService.saveDTO(campingCarReservationDTO);
 
         if(taskName.equals("확정")) {
             reservationController.send_message(admin1+", "+admin2+", "+admin3,

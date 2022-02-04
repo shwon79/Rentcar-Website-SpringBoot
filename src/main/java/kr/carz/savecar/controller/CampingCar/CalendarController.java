@@ -20,24 +20,26 @@ import java.util.*;
 
 @Controller
 public class CalendarController {
-    CalendarDateService calendarDateService;
-    CalendarTimeService calendarTimeService;
-    DateCampingService dateCampingService;
-    CampingCarPriceService campingCarPriceService;
-    CampingcarReservationService campingcarReservationService;
-    CampingCarPriceRateService campingCarPriceRateService;
+    private final CalendarDateService calendarDateService;
+    private final CalendarTimeService calendarTimeService;
+    private final DateCampingService dateCampingService;
+    private final CampingCarPriceService campingCarPriceService;
+    private final CampingcarReservationService campingcarReservationService;
+    private final CampingCarPriceRateService campingCarPriceRateService;
+    private final ImagesService imagesService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
-                              CampingCarPriceRateService campingCarPriceRateService) {
+                              CampingCarPriceRateService campingCarPriceRateService, ImagesService imagesService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
         this.campingcarReservationService = campingcarReservationService;
         this.campingCarPriceRateService = campingCarPriceRateService;
+        this.imagesService = imagesService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -222,6 +224,18 @@ public class CalendarController {
         }
 
         CampingCarPrice explanation = campingCarPriceService.findCampingCarPriceByCarName(carType);
+
+
+        List<Images> imagesListByCarNameMain = imagesService.findByCarNameAndIsMain(campingCarPrice, "1");
+        List<Images> imagesList = imagesService.findByCarNameAndIsMain(campingCarPrice, "0");
+
+        Collections.sort(imagesList);
+
+        if(imagesListByCarNameMain.size() > 0) {
+            imagesList.add(0, imagesListByCarNameMain.get(0));
+        }
+
+        model.put("imagesList", imagesList);
         model.put("explanation", explanation);
 
         model.addAttribute("calendarDateList", calendarDateList);
