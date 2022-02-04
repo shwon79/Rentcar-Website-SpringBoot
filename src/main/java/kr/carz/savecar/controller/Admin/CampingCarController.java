@@ -567,14 +567,7 @@ public class CampingCarController {
         if(taskName.equals("확정")) {
             String moren_response = admin_camping_car_reservation_confirm_for_moren(campingCarReservationDTO, orderType, orderStartTime, orderEndTime);
             if(moren_response.equals("Connection Fail")){
-                jsonObject.put("result", 0);
-
-                PrintWriter pw = res.getWriter();
-                pw.print(jsonObject);
-                pw.flush();
-                pw.close();
-
-                return;
+                throw new Exception(moren_response);
             } else {
                 campingCarReservation.setOrderCode(moren_response);
             }
@@ -583,14 +576,7 @@ public class CampingCarController {
             String moren_response = admin_camping_car_reservation_cancel_for_moren(campingCarReservationDTO, orderType);
 
             if(moren_response.equals("Connection Fail")){
-                jsonObject.put("result", 0);
-
-                PrintWriter pw = res.getWriter();
-                pw.print(jsonObject);
-                pw.flush();
-                pw.close();
-
-                return;
+                throw new Exception(moren_response);
             }
 
         } else {
@@ -598,14 +584,7 @@ public class CampingCarController {
                 String moren_response = admin_camping_car_reservation_update_for_moren(campingCarReservationDTO, orderType, orderStartTime, orderEndTime);
 
                 if(moren_response.equals("Connection Fail")){
-                    jsonObject.put("result", 0);
-
-                    PrintWriter pw = res.getWriter();
-                    pw.print(jsonObject);
-                    pw.flush();
-                    pw.close();
-
-                    return;
+                    throw new Exception(moren_response);
                 }
             }
         }
