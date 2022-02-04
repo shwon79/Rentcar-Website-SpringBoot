@@ -754,7 +754,7 @@ public class CampingCarController {
 
     @PutMapping(value="/admin/campingcar/image/title")
     @ResponseBody
-    public void putAdminCampingCarImage(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException  {
+    public void putAdminCampingCarImageTitle(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException  {
 
         for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
 
