@@ -593,7 +593,8 @@
                         <div class="service-img ">
                             <!-- service img -->
                             <a th:onclick="moveToCampingReservation([[${campingCar.carName.carName}]])" style="cursor: pointer;" class="imghover">
-                                <img th:src="${campingCar.url}" width="360" height="360">
+                                <img th:if="${campingCar.imageId != -1}" th:src="${campingCar.url}" width="360" height="360">
+                                <img th:if="${campingCar.imageId == -1}" th:src="@{/img/popup_campingcar.png}" width="360" height="360">
                             </a>
                         </div>
                         <!-- service img -->
