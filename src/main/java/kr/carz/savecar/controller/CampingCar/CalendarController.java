@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -94,6 +96,32 @@ public class CalendarController {
         } else {
             return campingCarPriceService.findCampingCarPriceByCarName("travel");
         }
+    }
+
+
+    @GetMapping("/camping/main")
+    public ModelAndView get_camping_calendar_main() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
+        List<Images> imagesMainList = new ArrayList<>();
+
+        for(CampingCarPrice campingCar : campingCarList){
+            List<Images> mainImage = imagesService.findByCarNameAndIsMain(campingCar, "1");
+
+            if(mainImage.size() == 0){
+                imagesMainList.add(new Images((long) -1, campingCar, -1, "", "0", "1"));
+            } else {
+                imagesMainList.add(mainImage.get(0));
+            }
+        }
+
+        mav.addObject("imagesMainList", imagesMainList);
+
+        mav.setViewName("rent_camping/main");
+
+        return mav;
     }
 
 
