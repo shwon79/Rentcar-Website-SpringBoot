@@ -13,7 +13,7 @@
                         <h1 id="popup1_contact"></h1>
                     </div>
                     <div class="popup1_box1">
-                        <table>
+                        <table class="popup1_table">
                             <tr>
                                 <td id="popup1_box1_line1_title"></td>
                                 <td>
@@ -44,7 +44,7 @@
                                     <span id="popup1_box1_line4_text1"></span>
                                     <span class="popup1_box1_yellow" id="popup1_box1_line4_price"></span>
                                     <span id="popup1_box1_line4_text2"></span>
-                                    <span class="popup1_box1_small" id="popup1_box1_line4_text3"></span>
+<!--                                    <span class="popup1_box1_small" id="popup1_box1_line4_text3"></span>-->
                                 </td>
                             </tr>
                             <tr>
@@ -53,7 +53,7 @@
                                     <span id="popup1_box1_line5_text1"></span>
                                     <span class="popup1_box1_yellow" id="popup1_box1_line5_price"></span>
                                     <span id="popup1_box1_line5_text2"></span>
-                                    <span class="popup1_box1_small" id="popup1_box1_line5_text3"></span>
+<!--                                    <span class="popup1_box1_small" id="popup1_box1_line5_text3"></span>-->
                                 </td>
                             </tr>
                             <tr>
@@ -61,6 +61,12 @@
                                 <td>
                                     <span id="popup1_box1_line6_text1"></span>
                                     <span class="popup1_box1_yellow" id="popup1_box1_line6_price"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <span id="popup1_box1_line4_text3"></span>
                                 </td>
                             </tr>
                         </table>
@@ -127,7 +133,7 @@
 
         <!-- POPUP2 캠핑카렌트 -->
         <div id="divpop2" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 popStyle2">
-            <div class="popup_upper" onclick="moveToCampingCalendar()" style="cursor: pointer;">
+            <div class="popup_upper" onclick="moveToCampingReservation('europe')" style="cursor: pointer;">
                 <div class="popup_content">
                     <div class="popup_bg_img_wrapper">
                         <div class="popup_bg_img" th:style="'background-image:url('+ @{/img/popup_campingcar.png} +');'">

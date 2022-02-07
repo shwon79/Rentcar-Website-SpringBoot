@@ -1116,6 +1116,9 @@ div.popStyle1, div.popStyle2 {
     color: #7201da;
     margin: 0;
 }
+.popup1_table td {
+    padding: 10px;
+}
 .popup1_box1 {
     background-color: #a593e0;
     color: white;
@@ -1197,6 +1200,7 @@ div.popStyle1, div.popStyle2 {
     color: white;
     text-align: center;
     margin: 0;
+    word-break: keep-all;
 }
 .popup_bg_img_wrapper {
     width: 44%;
@@ -1239,7 +1243,7 @@ div.popStyle1, div.popStyle2 {
 }
 .popup_outline_text {
     color: #40c4b6;
-    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: white;
 }
 .popup_bg_green {

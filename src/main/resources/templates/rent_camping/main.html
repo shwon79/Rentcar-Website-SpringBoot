@@ -1,0 +1,92 @@
+<!--캠핑카 홈-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 캠핑카 렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/camping.css}" rel="stylesheet">
+    <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
+
+    <script th:src="@{/js/campingcar.js}" defer></script>
+
+    <script>
+        $(window).load(function() {
+            let ulList = document.getElementsByClassName('header_camp_li');
+            for (i=0; i < ulList.length; i++) {
+                if (ulList[i].dataset.id == 'campingCarHome') {
+                    ulList[i].classList.add('active');
+                };
+            };
+        });
+    </script>
+<!--    <script th:src="@{/js/europe_reserve.js}" defer ></script>-->
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div th:replace="fragments/header_camp::headerFragment"></div>
+
+    <!-- content whole wrapper-->
+
+    <div id="wrapper" class="content pinside60 container">
+        <!--  content body-->
+        <div class="row" id="mainRow">
+            <section id="feature" class="feature sections" style="margin: 0; padding: 0;">
+                <div class="container space-medium" style="padding: 0;">
+                    <div class="row">
+                        <div class="head_title sections text-center" style="padding: 0;">
+                            <h1><a href="/camping/main">캠핑카 렌트</a></h1>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="campingCar, i : ${imagesMainList}">
+                            <div class="service-block text-center">
+                                <!-- service block -->
+                                <div class="service-content">
+                                    <!-- service content -->
+                                    <h3>
+                                        <span th:text="${campingCar.carName.carName.toUpperCase()}"></span>
+                                        <span> VIP CAMPER</span>
+                                    </h3>
+                                </div>
+                                <br>
+                                <!-- service content -->
+                                <div class="service-img ">
+                                    <!-- service img -->
+                                    <a th:onclick="moveToCampingReservation([[${campingCar.carName.carName}]])" style="cursor: pointer;" class="imghover">
+                                        <img th:if="${campingCar.imageId != -1}" th:src="${campingCar.url}" width="360" height="360">
+                                        <img th:if="${campingCar.imageId == -1}" th:src="@{/img/popup_campingcar.png}" width="360" height="360">
+                                    </a>
+                                </div>
+                                <!-- service img -->
+                            </div>
+                            <!-- /.service block -->
+                        </div>
+                        <section id="feature1" class="feature sections">
+                            <div class="container text-center">
+                                <div class="row padding-bottom-60">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside30">
+                                        <h3><a href="https://cafe.naver.com/savecarz/5">캠핑카쉐어링 & 장기렌트</a></h3>
+                                        <div class="separator"></div>
+                                        <h3 class="index-text" style="color: black">캠핑카를 렌터카회사의 장기렌트 상품으로 구매하고
+                                            <br/>고가의 캠핑카의 경제적 가치를 높일 수 있는
+                                            <br/>세이브카 캠핑카 장기렌트 & 쉐어링 상품을 소개합니다.</h3>
+                                        <br/>
+                                        <div class="separator"></div>
+
+                                        <a target='_blank' href="https://cafe.naver.com/savecarz/5" class="imghover"><img th:src="@{/img/campingcar-banner.png}" width="100%" height="100%"> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+    </div>
+</div>
+</div>
+</body>
+</html>
