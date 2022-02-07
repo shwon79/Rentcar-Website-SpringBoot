@@ -411,13 +411,30 @@ public class CampingCarController {
 
             CampingCarPrice campingCarPriceForMoren = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservationDTO.getCarType());
 
+            StringBuilder sb = new StringBuilder();
+            sb.append("CAR_NUM : "+campingCarPriceForMoren.getCarNum());
+            sb.append(",CAR_CODE : "+campingCarPriceForMoren.getCarCode());
+            sb.append(",ORDER_TYPE : "+orderType);
+            sb.append(",ORDER_CODE : "+campingCarPriceForMoren.getCarCode());
+            sb.append(",ORDER_CUSTOMER_NAME : "+orderType);
+
             morenJsonObject.put("COMPANY_ID", "1343");
             morenJsonObject.put("CAR_NUM", campingCarPriceForMoren.getCarNum());
             morenJsonObject.put("CAR_CODE", campingCarPriceForMoren.getCarCode());
             morenJsonObject.put("ORDER_TYPE", orderType);
+            morenJsonObject.put("ORDER_CONTRACT_TYPE", "2");
+            morenJsonObject.put("ORDER_CODE", campingCarReservationDTO.getOrderCode());
             morenJsonObject.put("ORDER_CUSTOMER_NAME", campingCarReservationDTO.getName());
             morenJsonObject.put("ORDER_CUSTOMER_PHONE", campingCarReservationDTO.getPhone());
+            morenJsonObject.put("ORDER_START_TIME", orderStartTime);
+            morenJsonObject.put("ORDER_END_TIME", orderEndTime);
+            morenJsonObject.put("ORDER_CUSTOMER_MEMO", campingCarReservationDTO.getDetail());
+            morenJsonObject.put("ORDER_PRICE", campingCarReservationDTO.getTotal());
+            morenJsonObject.put("ORDER_PRICE_TAX", "0");
+            morenJsonObject.put("ORDER_DEPOSIT", campingCarReservationDTO.getDeposit());
+            morenJsonObject.put("ORDER_CDW", "1");
             morenJsonObject.put("ORDER_CODE", campingCarReservationDTO.getOrderCode());
+
 
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
@@ -590,36 +607,36 @@ public class CampingCarController {
         }
         campingcarReservationService.saveDTO(campingCarReservationDTO);
 
-        if(taskName.equals("확정")) {
-            reservationController.send_message(admin1+", "+admin2+", "+admin3,
-                                                campingCarReservation.getPhone(),
-                                                "[캠핑카 캘린더 예약 " + taskName + "]\n"
-                                                    + "성함: " + campingCarReservation.getName() + "\n"
-                                                    + "전화번호: " + campingCarReservation.getPhone() + "\n"
-                                                    + "차량명: " + campingCarReservation.getCarType() + "\n"
-                                                    + "입금자명: " + campingCarReservation.getDepositor() + "\n"
-                                                    + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
-                                                    + "대여시간: " + campingCarReservation.getRentTime() + "\n"
-                                                    + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
-                                                    + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
-                                                    + "이용날짜: " + campingCarReservation.getDay() + "\n"
-                                                    + "총금액: " + campingCarReservation.getTotal() + "\n"
-                                                    + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
-                                                    + "요청사항: " + campingCarReservation.getDetail() + "\n\n",
-                                            "[캠핑카 예약이 " + taskName + "되었습니다.]" + "\n"
-                                                    + "성함: " + campingCarReservation.getName() + "\n"
-                                                    + "전화번호: " + campingCarReservation.getPhone() + "\n"
-                                                    + "차량명: " + campingCarReservation.getCarType() + "\n"
-                                                    + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
-                                                    + "대여시간: " + campingCarReservation.getRentTime() + "\n"
-                                                    + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
-                                                    + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
-                                                    + "입금자명: " + campingCarReservation.getDepositor() + "\n"
-                                                    + "이용날짜: " + campingCarReservation.getDay() + "\n"
-                                                    + "총금액: " + campingCarReservation.getTotal() + "\n"
-                                                    + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
-                                                    + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
-        }
+//        if(taskName.equals("확정")) {
+//            reservationController.send_message(admin1+", "+admin2+", "+admin3,
+//                                                campingCarReservation.getPhone(),
+//                                                "[캠핑카 캘린더 예약 " + taskName + "]\n"
+//                                                    + "성함: " + campingCarReservation.getName() + "\n"
+//                                                    + "전화번호: " + campingCarReservation.getPhone() + "\n"
+//                                                    + "차량명: " + campingCarReservation.getCarType() + "\n"
+//                                                    + "입금자명: " + campingCarReservation.getDepositor() + "\n"
+//                                                    + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
+//                                                    + "대여시간: " + campingCarReservation.getRentTime() + "\n"
+//                                                    + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
+//                                                    + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
+//                                                    + "이용날짜: " + campingCarReservation.getDay() + "\n"
+//                                                    + "총금액: " + campingCarReservation.getTotal() + "\n"
+//                                                    + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
+//                                                    + "요청사항: " + campingCarReservation.getDetail() + "\n\n",
+//                                            "[캠핑카 예약이 " + taskName + "되었습니다.]" + "\n"
+//                                                    + "성함: " + campingCarReservation.getName() + "\n"
+//                                                    + "전화번호: " + campingCarReservation.getPhone() + "\n"
+//                                                    + "차량명: " + campingCarReservation.getCarType() + "\n"
+//                                                    + "대여날짜: " + campingCarReservation.getRentDate() + "\n"
+//                                                    + "대여시간: " + campingCarReservation.getRentTime() + "\n"
+//                                                    + "반납날짜: " + campingCarReservation.getReturnDate() + "\n"
+//                                                    + "반납시간: " + campingCarReservation.getReturnTime() + "\n"
+//                                                    + "입금자명: " + campingCarReservation.getDepositor() + "\n"
+//                                                    + "이용날짜: " + campingCarReservation.getDay() + "\n"
+//                                                    + "총금액: " + campingCarReservation.getTotal() + "\n"
+//                                                    + "선결제금액: " + campingCarReservation.getTotalHalf() + "\n"
+//                                                    + "요청사항: " + campingCarReservation.getDetail() + "\n\n");
+//        }
         jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();
