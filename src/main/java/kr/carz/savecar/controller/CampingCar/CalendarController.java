@@ -20,24 +20,26 @@ import java.util.*;
 
 @Controller
 public class CalendarController {
-    CalendarDateService calendarDateService;
-    CalendarTimeService calendarTimeService;
-    DateCampingService dateCampingService;
-    CampingCarPriceService campingCarPriceService;
-    CampingcarReservationService campingcarReservationService;
-    CampingCarPriceRateService campingCarPriceRateService;
+    private final CalendarDateService calendarDateService;
+    private final CalendarTimeService calendarTimeService;
+    private final DateCampingService dateCampingService;
+    private final CampingCarPriceService campingCarPriceService;
+    private final CampingcarReservationService campingcarReservationService;
+    private final CampingCarPriceRateService campingCarPriceRateService;
+    private final ImagesService imagesService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
-                              CampingCarPriceRateService campingCarPriceRateService) {
+                              CampingCarPriceRateService campingCarPriceRateService, ImagesService imagesService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceService = campingCarPriceService;
         this.campingcarReservationService = campingcarReservationService;
         this.campingCarPriceRateService = campingCarPriceRateService;
+        this.imagesService = imagesService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -47,6 +49,15 @@ public class CalendarController {
 
     @Value("${coolsms.api_secret}")
     private String api_secret;
+
+    @Value("${phone.admin1}")
+    private String admin1;
+
+    @Value("${phone.admin2}")
+    private String admin2;
+
+    @Value("${phone.admin3}")
+    private String admin3;
 
     private String AddDate(String strDate, int year, int month, int day) throws Exception {
         Calendar cal = Calendar.getInstance();
@@ -213,6 +224,18 @@ public class CalendarController {
         }
 
         CampingCarPrice explanation = campingCarPriceService.findCampingCarPriceByCarName(carType);
+
+
+        List<Images> imagesListByCarNameMain = imagesService.findByCarNameAndIsMain(campingCarPrice, "1");
+        List<Images> imagesList = imagesService.findByCarNameAndIsMain(campingCarPrice, "0");
+
+        Collections.sort(imagesList);
+
+        if(imagesListByCarNameMain.size() > 0) {
+            imagesList.add(0, imagesListByCarNameMain.get(0));
+        }
+
+        model.put("imagesList", imagesList);
         model.put("explanation", explanation);
 
         model.addAttribute("calendarDateList", calendarDateList);
@@ -339,13 +362,13 @@ public class CalendarController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-        params.put("from", "01052774113");
+        params.put("to", admin1+", "+admin2+", "+admin3); // 01033453328 추가
+        params.put("from", admin3);
         params.put("type", "LMS");
 
         /* 고객에게 예약확인 문자 전송 */
         params2.put("to", dto.getPhone());
-        params2.put("from", "01052774113");  // 16613331 테스트하기
+        params2.put("from", admin3);  // 16613331 테스트하기
         params2.put("type", "LMS");
 
         String extraTimeDescription = "사용X";

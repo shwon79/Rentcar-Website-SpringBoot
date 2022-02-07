@@ -4,15 +4,13 @@ import kr.carz.savecar.controller.ReservationController;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +27,6 @@ public class CampingCarController {
     private final CalendarDateService calendarDateService;
     private final DateCampingService dateCampingService;
     private final CampingCarPriceRateService campingCarPriceRateService;
-    private final ReservationService reservationService;
     private final ReservationController reservationController;
     private final ImagesService imagesService;
     private final S3Service s3Service;
@@ -38,7 +35,7 @@ public class CampingCarController {
     public CampingCarController(CampingcarReservationService campingcarReservationService,
                                 CalendarTimeService calendarTimeService, CampingCarPriceService campingCarPriceService,
                                 CalendarDateService calendarDateService, DateCampingService dateCampingService,
-                                CampingCarPriceRateService campingCarPriceRateService, ReservationService reservationService,
+                                CampingCarPriceRateService campingCarPriceRateService,
                                 ReservationController reservationController, ImagesService imagesService,
                                 S3Service s3Service) {
         this.campingcarReservationService = campingcarReservationService;
@@ -47,17 +44,10 @@ public class CampingCarController {
         this.calendarDateService = calendarDateService;
         this.dateCampingService = dateCampingService;
         this.campingCarPriceRateService = campingCarPriceRateService;
-        this.reservationService = reservationService;
         this.reservationController = reservationController;
         this.imagesService = imagesService;
         this.s3Service = s3Service;
     }
-
-    @Value("${coolsms.api_key}")
-    private String api_key;
-
-    @Value("${coolsms.api_secret}")
-    private String api_secret;
 
     @Value("${phone.admin1}")
     private String admin1;
@@ -185,9 +175,34 @@ public class CampingCarController {
     // [관리자 메인페이지] 캠핑카 이미지 메뉴로 입장
     @GetMapping(value = "/admin/campingcar/image/menu")
     @ResponseBody
-    public ModelAndView get_camping_car_image_main() {
+    public ModelAndView get_camping_car_image_main() throws Exception {
 
         ModelAndView mav = new ModelAndView();
+
+        List<CampingCarPrice> campingCarPriceAll = campingCarPriceService.findAllCampingCarPrice();
+
+        List<Images> imagesMainList = new ArrayList<>();
+        List<List<Images>> imagesExtraList = new ArrayList<>();
+
+        for(CampingCarPrice campingCar : campingCarPriceAll){
+            List<Images> imagesListByCarNameMain = imagesService.findByCarNameAndIsMain(campingCar, "1");
+            List<Images> imagesListByCarNameExtra = imagesService.findByCarNameAndIsMain(campingCar, "0");
+
+            Collections.sort(imagesListByCarNameExtra);
+            imagesExtraList.add(imagesListByCarNameExtra);
+
+            if(imagesListByCarNameMain.size() > 1){
+                throw new Exception("The number of Main image must be only one");
+            }
+
+            if(imagesListByCarNameMain.size() == 0) {
+                imagesMainList.add(new Images((long) -1, campingCar, -1, "", "0", "1"));
+            } else {
+                imagesMainList.add(imagesListByCarNameMain.get(0));
+            }
+        }
+        mav.addObject("imagesMainList", imagesMainList);
+        mav.addObject("imagesExtraList", imagesExtraList);
 
         mav.setViewName("admin/campingcar_image_menu");
 
@@ -387,7 +402,7 @@ public class CampingCarController {
     }
 
     // 캠핑카 예약 취소 - 모렌 전송
-    public String admin_camping_car_reservation_cancel_for_moren(CampingCarReservationDTO campingCarReservationDTO, String orderType, String orderStartTime, String orderEndTime){
+    public String admin_camping_car_reservation_cancel_for_moren(CampingCarReservationDTO campingCarReservationDTO, String orderType){
 
         try {
             URL url = new URL(request_url);
@@ -528,15 +543,12 @@ public class CampingCarController {
 
         JSONObject jsonObject = new JSONObject();
 
-
         Optional<CampingCarReservation> campingCarReservationWrapper = campingcarReservationService.findById(reservationId);
 
         CampingCarReservation campingCarReservation = new CampingCarReservation();
         if(campingCarReservationWrapper.isPresent()){
             campingCarReservation = campingCarReservationWrapper.get();
         }
-
-
 
         String[] splitedRentDate = campingCarReservation.getRentDate().split("-");
         String[] splitedReturnDate = campingCarReservation.getReturnDate().split("-");
@@ -572,30 +584,16 @@ public class CampingCarController {
         if(taskName.equals("확정")) {
             String moren_response = admin_camping_car_reservation_confirm_for_moren(campingCarReservationDTO, orderType, orderStartTime, orderEndTime);
             if(moren_response.equals("Connection Fail")){
-                jsonObject.put("result", 0);
-
-                PrintWriter pw = res.getWriter();
-                pw.print(jsonObject);
-                pw.flush();
-                pw.close();
-
-                return;
+                throw new Exception(moren_response);
             } else {
                 campingCarReservation.setOrderCode(moren_response);
             }
         } else if(taskName.equals("취소")){
 
-            String moren_response = admin_camping_car_reservation_cancel_for_moren(campingCarReservationDTO, orderType, orderStartTime, orderEndTime);
+            String moren_response = admin_camping_car_reservation_cancel_for_moren(campingCarReservationDTO, orderType);
 
             if(moren_response.equals("Connection Fail")){
-                jsonObject.put("result", 0);
-
-                PrintWriter pw = res.getWriter();
-                pw.print(jsonObject);
-                pw.flush();
-                pw.close();
-
-                return;
+                throw new Exception(moren_response);
             }
 
         } else {
@@ -603,37 +601,11 @@ public class CampingCarController {
                 String moren_response = admin_camping_car_reservation_update_for_moren(campingCarReservationDTO, orderType, orderStartTime, orderEndTime);
 
                 if(moren_response.equals("Connection Fail")){
-                    jsonObject.put("result", 0);
-
-                    PrintWriter pw = res.getWriter();
-                    pw.print(jsonObject);
-                    pw.flush();
-                    pw.close();
-
-                    return;
+                    throw new Exception(moren_response);
                 }
             }
         }
-
-        campingCarReservation.setAgree(campingCarReservationDTO.getAgree());
-        campingCarReservation.setCarType(campingCarReservationDTO.getCarType());
-        campingCarReservation.setDay(campingCarReservationDTO.getDay());
-        campingCarReservation.setDeposit(campingCarReservationDTO.getDeposit());
-        campingCarReservation.setDepositor(campingCarReservationDTO.getDepositor());
-        campingCarReservation.setDetail(campingCarReservationDTO.getDetail());
-        campingCarReservation.setName(campingCarReservationDTO.getName());
-        campingCarReservation.setPhone(campingCarReservationDTO.getPhone());
-        campingCarReservation.setRentDate(campingCarReservationDTO.getRentDate());
-        campingCarReservation.setRentTime(campingCarReservationDTO.getRentTime());
-        campingCarReservation.setReservation(campingCarReservationDTO.getReservation());
-        campingCarReservation.setReturnDate(campingCarReservationDTO.getReturnDate());
-        campingCarReservation.setReturnTime(campingCarReservationDTO.getReturnTime());
-        campingCarReservation.setTotal(campingCarReservationDTO.getTotal());
-        campingCarReservation.setTotalHalf(campingCarReservationDTO.getTotalHalf());
-        campingCarReservation.setExtraTime(campingCarReservationDTO.getExtraTime());
-
-        campingcarReservationService.save(campingCarReservation);
-
+        campingcarReservationService.saveDTO(campingCarReservationDTO);
 
 //        if(taskName.equals("확정")) {
 //            reservationController.send_message(admin1+", "+admin2+", "+admin3,
@@ -734,10 +706,11 @@ public class CampingCarController {
     }
 
 
-    @PostMapping("/admin/campingcar/image")
+    @PostMapping(value="/admin/campingcar/image", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public void postAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO, MultipartFile file) throws IOException {
-        String imgPath = s3Service.upload(file);
+    public void postAdminCampingCarImage(HttpServletResponse res, ImagesDTO imagesDTO) throws IOException {
+
+        String imgPath = s3Service.upload(imagesDTO.getFile());
         imagesDTO.setUrl(imgPath);
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(imagesDTO.getCarName());
@@ -750,5 +723,40 @@ public class CampingCarController {
         pw.print(jsonObject);
         pw.flush();
         pw.close();
+    }
+
+
+    @PutMapping(value="/admin/campingcar/image/title")
+    @ResponseBody
+    public void putAdminCampingCarImageTitle(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException  {
+
+        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+
+            Optional<Images> imagesWrapper = imagesService.findImageByImageId(imageTitleVO.getImageId());
+            if (imagesWrapper.isPresent()) {
+
+                Images images = imagesWrapper.get();
+                images.setTitle(imageTitleVO.getTitle());
+
+                imagesService.save(images);
+            }
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @DeleteMapping("/admin/campingcar/image/{imageId}")
+    @ResponseBody
+    public void deleteAdminCampingCarImage(@PathVariable Long imageId) {
+
+        imagesService.delete(imageId);
+
     }
 }

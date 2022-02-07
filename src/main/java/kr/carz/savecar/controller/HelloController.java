@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,40 +23,39 @@ public class HelloController {
     private final YearlyRentService yearlyRentService;
     private final ShortRentService shortRentService;
     private final CampingCarPriceService campingCarPriceService;
-    private final CalendarDateService calendarDateService;
-    private final DateCampingService dateCampingService;
     private final ValuesForWebService valuesForWebService;
+    private final ImagesService imagesService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                           ShortRentService shortRentService, CampingCarPriceService campingCarPriceService, CalendarDateService calendarDateService,
-                           DateCampingService dateCampingService, ValuesForWebService valuesForWebService) {
+                           ShortRentService shortRentService, CampingCarPriceService campingCarPriceService,
+                           ValuesForWebService valuesForWebService, ImagesService imagesService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarPriceService = campingCarPriceService;
-        this.calendarDateService = calendarDateService;
-        this.dateCampingService = dateCampingService;
         this.valuesForWebService = valuesForWebService;
+        this.imagesService = imagesService;
     }
 
 
-    @GetMapping("/")
-    public String home(Model model) {
-
-        List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
-
-        model.addAttribute("campingCarList", campingCarList);
-
-        return "index";
-    }
-
-    @GetMapping("/index")
+    @GetMapping(value={"/","/index"})
     public String index(Model model) {
 
         List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
+        List<Images> imagesMainList = new ArrayList<>();
 
+        for(CampingCarPrice campingCar : campingCarList){
+            List<Images> mainImage = imagesService.findByCarNameAndIsMain(campingCar, "1");
+
+            if(mainImage.size() == 0){
+                imagesMainList.add(new Images((long) -1, campingCar, -1, "", "0", "1"));
+            } else {
+                imagesMainList.add(mainImage.get(0));
+            }
+        }
         model.addAttribute("campingCarList", campingCarList);
+        model.addAttribute("imagesMainList", imagesMainList);
 
         return "index";
     }
