@@ -62,19 +62,19 @@ public class RentEstimateController {
         HashSet<String> categoryList = new HashSet<String>();
 
         if (period.equals("rentMonth")) {
-            List<MonthlyRent> monthlyRents = monthlyRentService.findMonthlyRents();
+            List<MonthlyRent> monthlyRents = monthlyRentService.findAllMonthlyRents();
 
             for (int i = 0; i < monthlyRents.size(); i++) {
                 categoryList.add(monthlyRents.get(i).getCategory1());
             }
         } else if (period.equals("rentYear")) {
-            List<YearlyRent> yearlyRents = yearlyRentService.findYearlyRents();
+            List<YearlyRent> yearlyRents = yearlyRentService.findAllYearlyRents();
 
             for (int i = 0; i < yearlyRents.size(); i++) {
                 categoryList.add(yearlyRents.get(i).getCategory1());
             }
         } else if (period.equals("rent2Year")) {
-            List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findTwoYearlyRents();
+            List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findAllTwoYearlyRents();
 
             for (int i = 0; i < twoYearlyRents.size(); i++) {
                 categoryList.add(twoYearlyRents.get(i).getCategory1());

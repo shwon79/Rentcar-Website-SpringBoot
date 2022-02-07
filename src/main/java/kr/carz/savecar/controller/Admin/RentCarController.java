@@ -27,20 +27,95 @@ public class RentCarController {
     }
 
 
-    @GetMapping("/admin/rentcar/price/menu")
-    public ModelAndView get_rent_car_price_menu() {
+    @GetMapping("/admin/rentcar/price/monthly/menu")
+    public ModelAndView get_rent_car_price_monthly_menu() {
 
         ModelAndView mav = new ModelAndView();
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
-        List<YearlyRent> yearlyRentList = yearlyRentService.findAllYearlyRents();
-        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findAllTwoYearlyRents();
 
         mav.addObject("monthlyRentList", monthlyRentList);
+
+        mav.setViewName("admin/rentcar_price_monthly_menu");
+
+        return mav;
+    }
+
+    @GetMapping("/admin/rentcar/price/monthly/detail/{monthlyId}")
+    public ModelAndView get_rent_car_price_monthly_detail(@PathVariable Long monthlyId) {
+
+        ModelAndView mav = new ModelAndView();
+
+        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+
+        if(monthlyRentWrapper.isPresent()){
+            mav.addObject("monthlyRent", monthlyRentWrapper.get());
+        }
+
+        mav.setViewName("admin/rentcar_price_monthly_detail");
+
+        return mav;
+    }
+
+
+
+    @GetMapping("/admin/rentcar/price/yearly/menu")
+    public ModelAndView get_rent_car_price_yearly_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<YearlyRent> yearlyRentList = yearlyRentService.findAllYearlyRents();
+
         mav.addObject("yearlyRentList", yearlyRentList);
+
+        mav.setViewName("admin/rentcar_price_yearly_menu");
+
+        return mav;
+    }
+
+
+    @GetMapping("/admin/rentcar/price/yearly/detail/{yearlyId}")
+    public ModelAndView get_rent_car_price_yearly_detail(@PathVariable Long yearlyId) {
+
+        ModelAndView mav = new ModelAndView();
+
+        Optional<YearlyRent> yearlyRentWrapper = yearlyRentService.findById(yearlyId);
+
+        if(yearlyRentWrapper.isPresent()){
+            mav.addObject("yearlyRent", yearlyRentWrapper.get());
+        }
+
+        mav.setViewName("admin/rentcar_price_yearly_detail");
+
+        return mav;
+    }
+
+    @GetMapping("/admin/rentcar/price/twoYearly/menu")
+    public ModelAndView get_rent_car_price_twoYearly_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findAllTwoYearlyRents();
+
         mav.addObject("twoYearlyRentList", twoYearlyRentList);
 
-        mav.setViewName("admin/rentcar_price_menu");
+        mav.setViewName("admin/rentcar_price_twoYearly_menu");
+
+        return mav;
+    }
+
+    @GetMapping("/admin/rentcar/price/twoYearly/detail/{twoYearlyId}")
+    public ModelAndView get_rent_car_price_twoYearly_detail(@PathVariable Long twoYearlyId) {
+
+        ModelAndView mav = new ModelAndView();
+
+        Optional<TwoYearlyRent> twoYearlyRentWrapper = twoYearlyRentService.findById(twoYearlyId);
+
+        if(twoYearlyRentWrapper.isPresent()){
+            mav.addObject("twoYearlyRent", twoYearlyRentWrapper.get());
+        }
+
+        mav.setViewName("admin/rentcar_price_twoYearly_detail");
 
         return mav;
     }

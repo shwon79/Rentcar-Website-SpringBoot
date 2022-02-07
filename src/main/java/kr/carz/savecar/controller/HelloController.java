@@ -105,7 +105,7 @@ public class HelloController {
     @GetMapping("/price/month")
     public String price_month(Model model) {
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
         model.addAttribute("monthlyRentList", monthlyRentList);
 
         return "rent_price/month";
@@ -115,7 +115,7 @@ public class HelloController {
     @GetMapping("/price/long")
     public String price_long(Model model) {
 
-        List<YearlyRent> yearlyRentList = yearlyRentService.findYearlyRents();
+        List<YearlyRent> yearlyRentList = yearlyRentService.findAllYearlyRents();
         model.addAttribute("yearlyRentList", yearlyRentList);
 
         return "rent_price/long";
