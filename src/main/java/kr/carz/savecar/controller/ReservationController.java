@@ -39,6 +39,9 @@ public class ReservationController {
     @Value("${phone.admin3}")
     private String admin3;
 
+    @Value("${kakao.ATA.template.templatecode.realtimerent.employee}")
+    private String realtimeRentEmployeeTemplateCode;
+
     @Value("${kakao.ATA.template.senderkey.realtimerent}")
     private String senderKey;
 
@@ -67,6 +70,102 @@ public class ReservationController {
 
         params.putAll(employerMap);
         params2.putAll(customerMap);
+
+        params.put("app_version", "test app 1.2");
+        params2.put("app_version", "test app 1.2");
+
+        /* 세이브카에게 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj = coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        /* 고객에게 예약확인 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        org.json.JSONObject jsonObject = new org.json.JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    @GetMapping("/test/reservation/kakao/ATA")
+    @ResponseBody
+    public void test_kakao_reservation(HttpServletResponse res) throws IOException {
+
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", "01058283328");  // +", "+admin2+", "+admin3
+        params.put("from", admin3);
+        params.put("type", "ATA");
+        params.put("template_code", realtimeRentEmployeeTemplateCode);
+        params.put("sender_key", senderKey);
+
+        /* 고객에게 예약확인 문자 전송 */
+        params2.put("to", "01058283328");
+        params2.put("from", admin3);
+        params2.put("type", "ATA");
+        params2.put("template_code", realtimeRentEmployeeTemplateCode);
+        params2.put("sender_key", senderKey);
+
+        params.put("text", "test");
+        params2.put("text", "test");
+        params.put("only_ata", "true");
+        params2.put("only_ata", "true");
+
+        params.put("country", "82");
+        params2.put("country", "82");
+
+        params.put("reservationId", "test");
+        params.put("reservationName", "test");
+        params.put("reservationPhone", "test");
+        params.put("selectAge", "test");
+        params.put("reservationAge", "test");
+        params.put("carName", "test");
+        params.put("carNo", "test");
+        params.put("reservationDate", "test");
+        params.put("reservationTime", "test");
+        params.put("rentTerm", "test");
+        params.put("kilometer", "test");
+        params.put("delivery_text", "test");
+        params.put("reservationGuarantee", "test");
+        params.put("carAmountTotal", "test");
+        params.put("carDeposit", "test");
+        params.put("reservationDetails", "test");
+
+
+        params2.put("reservationId", "test");
+        params2.put("reservationName", "test");
+        params2.put("reservationPhone", "test");
+        params2.put("selectAge", "test");
+        params2.put("reservationAge", "test");
+        params2.put("carName", "test");
+        params2.put("carNo", "test");
+        params2.put("reservationDate", "test");
+        params2.put("reservationTime", "test");
+        params2.put("rentTerm", "test");
+        params2.put("kilometer", "test");
+        params2.put("delivery_text", "test");
+        params2.put("reservationGuarantee", "test");
+        params2.put("carAmountTotal", "test");
+        params2.put("carDeposit", "test");
+        params2.put("reservationDetails", "test");
+
 
         params.put("app_version", "test app 1.2");
         params2.put("app_version", "test app 1.2");
