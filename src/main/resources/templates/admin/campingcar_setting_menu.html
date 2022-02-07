@@ -44,8 +44,8 @@
             <div style="margin-top: 30px;">
                 <ul class="nav nav-tabs" style="justify-content: center;">
                     <li class="nav-item" th:each="campingCar, i : ${campingCarList}">
-                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${campingCar.carName}}" th:text="${campingCar.carName}"
-                           th:classappend="${i.index == 0 ? 'show active' : ''}"></a>
+                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${campingCar.carName}}" th:text="${campingCar.carName.toUpperCase()}"
+                           th:classappend="${i.index == 0 ? 'show active' : ''}" th:data-title="${campingCar.carName}"></a>
                     </li>
                 </ul>
                 <div class="tab-content" style="margin-top: 30px;">

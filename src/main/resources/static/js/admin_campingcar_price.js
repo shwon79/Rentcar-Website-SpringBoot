@@ -15,25 +15,31 @@ function EditCampingcarPrice(carName, season) {
         if (season === 0) {
             oneDay = europeOffOneDay;
             getData(0);
+            sessionStorage.setItem('campingPriceTab', carName);
         } else {
             oneDay = europeOnOneDay;
             getData(1);
+            sessionStorage.setItem('campingPriceTab', carName);
         }
     } else if (carName == 'limousine') {
         if (season === 0) {
             oneDay = limousineOffOneDay;
             getData(2);
+            sessionStorage.setItem('campingPriceTab', carName);
         } else {
             oneDay = limousineOnOneDay;
             getData(3);
+            sessionStorage.setItem('campingPriceTab', carName);
         }
     } else if (carName == 'travel') {
         if (season === 0) {
             oneDay = travelOffOneDay;
             getData(4);
+            sessionStorage.setItem('campingPriceTab', carName);
         } else {
             oneDay = travelOnOneDay;
             getData(5);
+            sessionStorage.setItem('campingPriceTab', carName);
         }
     }
 
@@ -131,3 +137,36 @@ function getData(index) {
     twentyninedays = parseFloat(document.getElementsByClassName('percent29')[index].value);
     thirtydays = parseFloat(document.getElementsByClassName('percent30')[index].value);
 }
+
+function checkCampingPriceTab() {
+    let tabStatus = sessionStorage.getItem('campingPriceTab');
+    let navLinkList = document.getElementsByClassName('nav-link');
+    let tabPaneList = document.getElementsByClassName('tab-pane');
+
+    [...navLinkList].forEach((navLink) => {
+        if (tabStatus && tabStatus === navLink.dataset.title) {
+            navLink.classList.add('active');
+            navLink.classList.add('show');
+        } else {
+            navLink.classList.remove('active');
+            navLink.classList.remove('show');
+        }
+    });
+    [...tabPaneList].forEach((tabpane) => {
+        if (tabStatus && tabStatus === tabpane.id) {
+            tabpane.classList.add('show');
+            tabpane.classList.add('active');
+        } else {
+            tabpane.classList.remove('show');
+            tabpane.classList.remove('active');
+        }
+    });
+
+    if (!tabStatus) {
+        navLinkList[0].classList.add('active');
+        navLinkList[0].classList.add('show');
+        tabPaneList[0].classList.add('active');
+        tabPaneList[0].classList.add('show');
+    }
+}
+window.onload = checkCampingPriceTab();

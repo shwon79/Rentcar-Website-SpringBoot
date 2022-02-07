@@ -18,6 +18,7 @@ function uploadImage(behavior, carName, title, imageId) {
             formData.append('isMain', '1');
             if (confirm('해당 사진을 대표 이미지로 등록 하시겠습니까?')) {
                 postData();
+                sessionStorage.setItem('campingImageTab', carName);
             };
         } else {
             alert('업로드할 사진을 선택해주세요.');
@@ -25,6 +26,7 @@ function uploadImage(behavior, carName, title, imageId) {
     } else if (behavior == 'mainDelete') {
         if (confirm('대표 이미지를 삭제 하시겠습니까?')) {
             deleteData();
+            sessionStorage.setItem('campingImageTab', carName);
         };
     } else if (behavior == 'extraUpload') {
         let input = Array.from(inputFileList).filter(ele => ele.title == carName).find(ele => ele.dataset.title == imageId).files[0];
@@ -40,6 +42,7 @@ function uploadImage(behavior, carName, title, imageId) {
 
             if (confirm('해당 이미지를 등록 하시겠습니까?')) {
                 postData();
+                sessionStorage.setItem('campingImageTab', carName);
             };
         } else {
             alert('등록할 사진을 선택해주세요.');
@@ -47,6 +50,7 @@ function uploadImage(behavior, carName, title, imageId) {
     } else if (behavior == 'extraDelete') {
         if (confirm('이 이미지를 삭제 하시겠습니까?')) {
             deleteData();
+            sessionStorage.setItem('campingImageTab', carName);
         };
     };
 
@@ -82,27 +86,6 @@ function uploadImage(behavior, carName, title, imageId) {
     };
 }
 
-// $.ajax({
-//             enctype: 'multipart/form-data',
-//             cache: false,
-//             type: 'PUT',
-//             url: '/admin/campingcar/image/' + imageId,
-//             processData:false,
-//             contentType: false,
-//             data: formData
-
-//datatype: text
-//         }).done(function (result) {
-//             if (result.result == 1) {
-//                 alert('업로드가 완료되었습니다.');
-//                 window.location.href = '/admin/campingcar/image/menu';
-//             } else {
-//                 alert('업로드에 문제가 생겼습니다.');
-//             };
-//         }).fail(function (error) {
-//             alert(JSON.stringify(error));
-//         })
-
 // 이미지 순서 변경 창 보이기
 function displaySortingBox() {
     let boxList = document.getElementsByClassName('changeOrderBox');
@@ -137,6 +120,7 @@ function saveChangedData(carName) {
         }
 
         editData(data);
+        sessionStorage.setItem('campingImageTab', carName);
     };
 
     function editData(data) {
@@ -186,3 +170,36 @@ function saveChangedData(carName) {
 //         console.dir(data);
 //     });
 // });
+
+function checkCampingImageTab() {
+    let tabStatus = sessionStorage.getItem('campingImageTab');
+    let navLinkList = document.getElementsByClassName('nav-link');
+    let tabPaneList = document.getElementsByClassName('tab-pane');
+
+    [...navLinkList].forEach((navLink) => {
+        if (tabStatus && tabStatus === navLink.dataset.title) {
+            navLink.classList.add('active');
+            navLink.classList.add('show');
+        } else {
+            navLink.classList.remove('active');
+            navLink.classList.remove('show');
+        }
+    });
+    [...tabPaneList].forEach((tabpane) => {
+        if (tabStatus && tabStatus === tabpane.id) {
+            tabpane.classList.add('show');
+            tabpane.classList.add('active');
+        } else {
+            tabpane.classList.remove('show');
+            tabpane.classList.remove('active');
+        }
+    })
+
+    if (!tabStatus) {
+        navLinkList[0].classList.add('active');
+        navLinkList[0].classList.add('show');
+        tabPaneList[0].classList.add('active');
+        tabPaneList[0].classList.add('show');
+    }
+}
+window.onload = checkCampingImageTab();

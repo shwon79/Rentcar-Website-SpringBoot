@@ -6,8 +6,18 @@ $(document).ready(function () {
     const campingSubmenuBtn = document.getElementById('camping-submenu-btn');
     campingSubmenuBtn.addEventListener('click', () => {
         document.getElementById('campingcarSubmenu').classList.toggle('camping-open');
+        if (document.getElementById('campingcarSubmenu').classList.contains('camping-open')) {
+            document.getElementById('price-submenu-btn').style.top = '393px';
+        } else {
+            document.getElementById('price-submenu-btn').style.top = '190px';
+        }
         campingSubmenuBtn.classList.toggle('active-span');
-    })
+    });
+    const priceSubmenuBtn = document.getElementById('price-submenu-btn');
+    priceSubmenuBtn.addEventListener('click', () => {
+        document.getElementById('priceSubMenu').classList.toggle('price-open');
+        priceSubmenuBtn.classList.toggle('active-span');
+    });
 });
 
 //숫자 사이에 콤마 넣기
