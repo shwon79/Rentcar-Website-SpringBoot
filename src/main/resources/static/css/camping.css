@@ -1201,10 +1201,13 @@ input[name="tab_item"] {
     font-size: 24px;
     height: 70px;
   }
+  #left_column {
+    padding: 0;
+  }
   #right_column {
-    display: none;
-    position: fixed;
-    width: 100%;
+    /*display: none;*/
+    /*position: fixed;*/
+    /*width: 100%;*/
     background: #fff;
     color: #212121;
     z-index: 9999;
@@ -1212,8 +1215,9 @@ input[name="tab_item"] {
     left: 0;
     top: 0;
     overflow-y: auto;
-    padding: 30px 34px 65px 34px;
-    margin-bottom: 70px;
+    padding: 0;
+    /*padding: 30px 34px 65px 34px;*/
+    /*margin-bottom: 70px;*/
   }
   #right_column.onMobile {
     display: block;
@@ -1235,6 +1239,9 @@ input[name="tab_item"] {
     font-size: 24px;
     height: 70px;
     border-radius: 0;
+  }
+  .card .contents {
+    padding: 20px;
   }
 }
 
