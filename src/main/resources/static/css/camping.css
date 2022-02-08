@@ -213,9 +213,12 @@ button.btn-md:hover {
   clear: both;
   visibility: hidden;
 }
-#campingnav #menu-button,
-.car_name_under_images {
+#campingnav #menu-button {
   display: none;
+}
+.car_name_under_images {
+  display: block;
+  text-align: left;
 }
 #campingnav > ul > li {
   float: left;
@@ -1164,6 +1167,20 @@ input[name="tab_item"] {
   margin: 0 auto;
 }
 
+.campingTitle {
+  padding: 20px 0;
+}
+.campingTitle p, .campingTitle h1 {
+  margin: 0;
+}
+.title_price {
+  text-align: right;
+  margin-top: 20px !important;
+}
+.cheapestPrice {
+  font-size: 26px;
+}
+
 @media (max-width: 991px) {
   #mainRow {
     flex-direction: column;
@@ -1175,10 +1192,21 @@ input[name="tab_item"] {
     width: 90vw;
   }
   .car_name_under_images {
-    display: block;
-    text-align: center;
     margin-top: 30px;
   }
+  .campingTitle {
+    padding: 20px 20px 0 20px;
+  }
+  .campingTitle p, .campingTitle h1 {
+    margin: 0;
+  }
+  /*.title_price {*/
+  /*  text-align: right;*/
+  /*  margin-top: 20px !important;*/
+  /*}*/
+  /*.cheapestPrice {*/
+  /*  font-size: 26px;*/
+  /*}*/
   #btn_reserve {
     display: none;
   }
@@ -1203,6 +1231,7 @@ input[name="tab_item"] {
   }
   #left_column {
     padding: 0;
+    margin: 0;
   }
   #right_column {
     /*display: none;*/

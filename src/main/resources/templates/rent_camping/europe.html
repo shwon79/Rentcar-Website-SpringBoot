@@ -23,15 +23,9 @@
                 }
             };
         });
-
-        $(function(){
-            $('.carousel').carousel({
-                autoplay: true,
-                interval: 2000
-            });
-        });
     </script>
     <script th:src="@{/js/europe_reserve.js}" defer ></script>
+    <script src="../../../../../../../Downloads/bootstrap-3.3.5/js/carousel.js"></script>
 </head>
 
 <body onload="displayEuropePrice();">
@@ -41,6 +35,38 @@
         <!-- content whole wrapper-->
         <p class="car_type" th:id="${carType}" style="display: none;"></p>
         <p id="fullReturnDate" style="display: none;"></p>
+        <!--mobile image-->
+        <div class="row card white-card" id="mobile_carousel">
+            <!-- Carousel container -->
+            <div id="my-pics" class="carousel slide" data-ride="carousel" data-interval="false">
+                <!-- Content -->
+                <div class="carousel-inner" role="listbox">
+                    <div th:each="image, i : ${imagesList}" class="item" th:classappend="${i.index == 0 ? 'active' : ''}">
+                        <img th:src="${image.url}" th:alt="${image.carName.carName}">
+                    </div>
+                </div>
+                <!-- Previous/Next controls -->
+                <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+                    <span class="icon-prev" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+                    <span class="icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="mobileCampingTitle campingTitle">
+                <p style="font-size: initial;">세이브카</p>
+                <h1 class="car_name_under_images">
+                    <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
+                    <span>Camper</span>
+                </h1>
+                <p class="title_price">
+                    <span id="cheapestPriceMobile" class="cheapestPrice"></span>
+                    <span>원~</span>
+                </p>
+            </div>
+        </div>
 
         <div id="wrapper" class="content pinside60 container">
             <!--  content body-->
@@ -48,30 +74,45 @@
                 <!-- left column -->
                 <div id="left_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60">
                     <!--사진-->
-                    <div class="row card white-card">
+                    <div class="row card white-card" id="desktop_carousel">
                         <!-- Carousel container -->
-                        <div id="my-pics" class="carousel slide" data-ride="carousel">
+                        <div id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
                             <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li th:each="image, i : ${imagesList}" data-target="#my-pics" th:data-slide-to="${i.index}" th:classappend="${i.index == 0 ? 'active' : ''}"></li>
-                            </ol>
+<!--                            <ol class="carousel-indicators">-->
+<!--                                <li th:each="image, i : ${imagesList}" data-target="#my-pics" th:data-slide-to="${i.index}" th:classappend="${i.index == 0 ? 'active' : ''}"></li>-->
+<!--                            </ol>-->
                             <!-- Content -->
                             <div class="carousel-inner" role="listbox">
-                                <div th:each="image, i : ${imagesList}" class="item" th:classappend="${i.index == 0 ? 'active' : ''}">
+                                <div th:each="image, i : ${imagesList}" class="item main-item" th:data-title="${image.imageId}" th:classappend="${i.index == 0 ? 'active' : ''}">
                                     <img th:src="${image.url}" th:alt="${image.carName.carName}">
                                 </div>
                             </div>
                             <!-- Previous/Next controls -->
-                            <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+                            <a class="left carousel-control" href="#desktop_img" role="button" data-slide="prev">
                                 <span class="icon-prev" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+                            <a class="right carousel-control" href="#desktop_img" role="button" data-slide="next">
                                 <span class="icon-next" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <h1 class="car_name_under_images">Europe Camper</h1>
+                        <div class="small_image_List">
+                            <div th:each="image, i : ${imagesList}" class="small_image_box" th:data-title="${image.imageId}">
+                                <img th:src="${image.url}" th:alt="${image.carName.carName}">
+                            </div>
+                        </div>
+                        <div class="desktopCampingTitle campingTitle">
+                            <p style="font-size: initial;">세이브카</p>
+                            <h1 class="car_name_under_images">
+                                <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
+                                <span>Camper</span>
+                            </h1>
+                            <p class="title_price">
+                                <span id="cheapestPriceDesktop" class="cheapestPrice"></span>
+                                <span>원~</span>
+                            </p>
+                        </div>
                     </div>
 
                     <!--탭 메뉴-->
