@@ -27,6 +27,7 @@ function editCampingcarSetting(carName, index) {
     if (confirm('캠핑카 내용을 수정하시겠습니까?')) {
         console.log(data);
         sendSettingData();
+        sessionStorage.setItem('campingSettingTab', carName);
     };
 
     function sendSettingData() {
@@ -67,3 +68,36 @@ function getData(index) {
     facility = document.getElementsByClassName('facility')[index].value;
 
 }
+
+function checkCampingSettingTab() {
+    let tabStatus = sessionStorage.getItem('campingSettingTab');
+    let navLinkList = document.getElementsByClassName('nav-link');
+    let tabPaneList = document.getElementsByClassName('tab-pane');
+
+    [...navLinkList].forEach((navLink) => {
+        if (tabStatus && tabStatus === navLink.dataset.title) {
+            navLink.classList.add('active');
+            navLink.classList.add('show');
+        } else {
+            navLink.classList.remove('active');
+            navLink.classList.remove('show');
+        }
+    });
+    [...tabPaneList].forEach((tabpane) => {
+        if (tabStatus && tabStatus === tabpane.id) {
+            tabpane.classList.add('show');
+            tabpane.classList.add('active');
+        } else {
+            tabpane.classList.remove('show');
+            tabpane.classList.remove('active');
+        }
+    })
+
+    if (!tabStatus) {
+        navLinkList[0].classList.add('active');
+        navLinkList[0].classList.add('show');
+        tabPaneList[0].classList.add('active');
+        tabPaneList[0].classList.add('show');
+    }
+}
+window.onload = checkCampingSettingTab();

@@ -41,19 +41,19 @@
 .changeOrderBox.active {
     display: block;
 }
-#sortable {
+.sortable {
     list-style: none;
     padding: 0 20px 10px 20px;
     margin-bottom: 0;
 }
-#sortable .oneItem {
+.sortable .oneItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
     border: 1px solid darkgrey;
 }
-#sortable .oneItem:last-child {
+.sortable .oneItem:last-child {
     margin-bottom: 0px;
 }
 .changeOrderBox img {
@@ -69,7 +69,7 @@
     .changeOrderBoxTop {
         padding: 20px 10px;
     }
-    #sortable {
+    .sortable {
         padding: 0 10px 10px 10px;
     }
 }

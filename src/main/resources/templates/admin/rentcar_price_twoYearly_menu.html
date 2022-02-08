@@ -1,0 +1,145 @@
+<!-- 관리자 24개월 가격 수정 페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+<!--    <script th:src="@{/js/admin_campingcar_price.js}" defer></script>-->
+
+    <script>
+        $(window).on('load', function () {
+            let priceTwoYearlyMenu = document.getElementById('priceTwoYearlyMenu');
+            priceTwoYearlyMenu.classList.add('activeAdminMenu');
+        });
+    </script>
+
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container inner_content">
+            <h2 class="page_title" style="text-align: center;">24개월 가격 수정</h2>
+            <div style="margin-top: 30px;">
+                <p style="text-align: center;">준비 중 입니다.</p>
+
+<!--                <ul class="nav nav-tabs" style="justify-content: center;">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link show active" data-toggle="tab" href="#domesticCar">국산승용</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" data-toggle="tab" href="#domesticVan">국산승합•RV</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" data-toggle="tab" href="#importedCar">수입차</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <div class="tab-content">-->
+<!--                    <div class="tab-pane fade show active">-->
+<!--                        <table class="table campingPriceEditTable table-striped">-->
+<!--                            <thead>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr class="thead-dark">-->
+<!--                                <th scope="col">종류</th>-->
+<!--                                <th scope="col">분류</th>-->
+<!--                                <th scope="col">차명 년식</th>-->
+<!--                                <th scope="col" class="display_none_mobile">보증금</th>-->
+<!--                                <th scope="col" class="display_none_mobile">2,000km</th>-->
+<!--                                <th scope="col" class="display_none_mobile">2,500km</th>-->
+<!--                                <th scope="col" class="display_none_mobile">3,000km</th>-->
+<!--                                <th scope="col" class="display_none_mobile">4,000km</th>-->
+<!--                                <th scope="col" class="display_none_mobile">other</th>-->
+<!--                                &lt;!&ndash;                                <th scope="col">21세</th>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <th scope="col">km당<br>추가요금</th>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <th scope="col">모렌_차명</th>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <th scope="col">년식_시작</th>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <th scope="col">년식_끝</th>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <th scope="col">신용</th>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <th scope="col">image_url</th>&ndash;&gt;-->
+<!--                                <th scope="col"></th>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <select name="">-->
+<!--                                        <option value="">국산 승용</option>-->
+<!--                                        <option value="">국산승합•RV</option>-->
+<!--                                        <option value="">수입차</option>-->
+<!--                                    </select>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <select name="">-->
+<!--                                        <option value="">경형</option>-->
+<!--                                        <option value="">준중형</option>-->
+<!--                                        <option value="">중형</option>-->
+<!--                                        <option value="">중대형</option>-->
+<!--                                        <option value="">대형</option>-->
+<!--                                        <option value="">소중형SUV</option>-->
+<!--                                        <option value="">중형SUV</option>-->
+<!--                                        <option value="">중대형SUV</option>-->
+<!--                                        <option value="">대형SUV</option>-->
+<!--                                        <option value="">승합</option>-->
+<!--                                        <option value="">수입차</option>-->
+<!--                                    </select>-->
+<!--                                </td>-->
+<!--                                <td><textarea type="text"></textarea></td>-->
+<!--                                <td><textarea type="text" class="display_none_mobile"></textarea></td>-->
+<!--                                <td><textarea type="text" class="display_none_mobile"></textarea></td>-->
+<!--                                <td><textarea type="text" class="display_none_mobile"></textarea></td>-->
+<!--                                <td><textarea type="text" class="display_none_mobile"></textarea></td>-->
+<!--                                <td><textarea type="text" class="display_none_mobile"></textarea></td>-->
+<!--                                <td><textarea type="text" class="display_none_mobile"></textarea></td>-->
+<!--                                &lt;!&ndash;                                <td><textarea type="text" class="percent18"></textarea></td>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <td><textarea type="text" class="percent18"></textarea></td>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <td><textarea type="text" class="percent18"></textarea></td>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <td><textarea type="text" class="percent18"></textarea></td>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <td><textarea type="text" class="percent18"></textarea></td>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <td>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <select name="">&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                        <option value="">0</option>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                        <option value="">1</option>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                        <option value="">2</option>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    </select>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                <td>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <input type="file" name="file" style="width: -webkit-fill-available;">&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--                                <td>-->
+<!--                                    <button class="btn btn-primary btn-sm">수정하기</button>-->
+<!--                                    <a href=""><button class="btn btn-primary btn-sm">상세보기</button></a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

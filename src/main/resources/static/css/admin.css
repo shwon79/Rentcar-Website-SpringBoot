@@ -53,23 +53,23 @@
     color: #fff;
     background: #5495b1;
 }
-#campingcarSubmenu ul {
+#campingcarSubmenu ul, #priceSubMenu ul {
     padding: 0;
 }
 
-#campingcarSubmenu li {
+#campingcarSubmenu li, #priceSubMenu li {
     list-style: none;
 }
-#campingcarSubmenu li a {
+#campingcarSubmenu li a, #priceSubMenu li a {
     background-color: #84bad1;
 }
-#campingcarSubmenu li a.activeAdminMenu {
+#campingcarSubmenu li a.activeAdminMenu, #priceSubMenu li a.activeAdminMenu {
     background-color: #fff;
 }
-#campingcarSubmenu {
+#campingcarSubmenu, #priceSubMenu {
     display: none;
 }
-#campingcarSubmenu.camping-open {
+#campingcarSubmenu.camping-open, #priceSubMenu.price-open {
     display: block;
 }
 #camping-submenu-btn {
@@ -81,7 +81,16 @@
     width: 250px;
     cursor: pointer;
 }
-#camping-submenu-btn.active-span:before {
+#price-submenu-btn {
+    position: absolute;
+    z-index: 99;
+    top: 190px;
+    display: block;
+    height: 46px;
+    width: 250px;
+    cursor: pointer;
+}
+#camping-submenu-btn.active-span:before, #price-submenu-btn.active-span:before {
     width: 0;
     height: 0;
 }
@@ -95,7 +104,27 @@
     background: white;
     content: '';
 }
+#price-submenu-btn:before {
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    display: block;
+    width: 2px;
+    height: 12px;
+    background: white;
+    content: '';
+}
 #camping-submenu-btn:after {
+    position: absolute;
+    top: 20px;
+    right: 17px;
+    width: 12px;
+    height: 2px;
+    display: block;
+    background: white;
+    content: '';
+}
+#price-submenu-btn:after {
     position: absolute;
     top: 20px;
     right: 17px;

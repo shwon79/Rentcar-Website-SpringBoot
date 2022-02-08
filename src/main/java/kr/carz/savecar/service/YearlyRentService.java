@@ -16,7 +16,7 @@ public class YearlyRentService {
         this.yearlyRentRepository = yearlyRentRepository;
     }
 
-    public List<YearlyRent> findYearlyRents(){
+    public List<YearlyRent> findAllYearlyRents(){
         return yearlyRentRepository.findAll();
     }
     public List<YearlyRent> findCategory2OfMonthlyRents(String category1){
