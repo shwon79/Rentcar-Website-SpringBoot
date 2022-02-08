@@ -110,14 +110,14 @@ public class ReservationController {
         HashMap<String, String> params2 = new HashMap<>();
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328");  // +", "+admin2+", "+admin3
+        params.put("to", admin1);  // +", "+admin2+", "+admin3
         params.put("from", admin3);
         params.put("type", "ATA");
         params.put("template_code", realtimeRentEmployeeTemplateCode);
         params.put("sender_key", senderKey);
 
         /* 고객에게 예약확인 문자 전송 */
-        params2.put("to", "01058283328");
+        params2.put("to", admin1);
         params2.put("from", admin3);
         params2.put("type", "ATA");
         params2.put("template_code", realtimeRentEmployeeTemplateCode);
