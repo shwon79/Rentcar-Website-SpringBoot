@@ -826,11 +826,13 @@ form {
     margin: 15px 0;
 }
 
-.campingPriceEditTable {
+.campingPriceEditTable,
+.rentcarEditTable {
     text-align: center;
     margin-top: 30px;
 }
-.campingPriceEditTable textarea {
+.campingPriceEditTable textarea,
+.rentcarEditTable textarea {
     height: 2em;
     width: 5em;
     text-align: center;
