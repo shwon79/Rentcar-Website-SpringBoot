@@ -400,3 +400,36 @@ a:hover {
   padding: 0;
   box-shadow: none;
 }
+.small_image_List {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+.small_image_List img {
+  height: 50px;
+  width: 100%;
+  opacity: 0.6;
+}
+.small_image_List img:hover {
+  opacity: 1;
+  border: 2px solid black;
+}
+#desktop_carousel {
+  display: block;
+}
+#mobile_carousel {
+  display: none
+}
+
+@media (max-width: 991px) {
+
+}
+@media (max-width: 480px) {
+  #desktop_carousel {
+    display: none;
+  }
+  #mobile_carousel {
+    display: block;
+  }
+}

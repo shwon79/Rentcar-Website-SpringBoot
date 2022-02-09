@@ -86,4 +86,19 @@ function checkModal() {
     }
 }
 
-window.onload = checkModal();
+// window.onload = checkModal();
+
+let smallBox = document.getElementsByClassName('small_image_box');
+[...smallBox].forEach((box) => {
+    box.addEventListener('mouseover', function() {
+        let bigImages = document.getElementsByClassName('item main-item');
+        let selectedImage = [...bigImages].filter(image => image.dataset.title === box.dataset.title);
+        [...bigImages].forEach((image) => {
+            if (image === selectedImage[0]) {
+                image.classList.add('active');
+            } else {
+                image.classList.remove('active');
+            };
+        });
+    });
+});

@@ -786,6 +786,8 @@ let europeOff = [];
 let europePeak = [];
 
 function displayEuropePrice() {
+    let cheapestPriceMobile = document.getElementById('cheapestPriceMobile');
+    let cheapestPriceDesktop = document.getElementById('cheapestPriceDesktop');
     let europeOffOne = document.getElementById('europeOffOne');
     let europeOffTwo = document.getElementById('europeOffTwo');
     let europeOffThree = document.getElementById('europeOffThree');
@@ -821,6 +823,8 @@ function displayEuropePrice() {
             europeOff[15] = parseFloat(europeOffObj['fifteendays']) * parseInt(europeOffObj['onedays']);
             europeOff[30] = parseFloat(europeOffObj['thirtydays']) * parseInt(europeOffObj['onedays']);
 
+            cheapestPriceMobile.innerText = parseInt(europeOff[1]).toLocaleString();
+            cheapestPriceDesktop.innerText = parseInt(europeOff[1]).toLocaleString();
             europeOffOne.innerText = parseInt(europeOff[1]).toLocaleString();
             europeOffTwo.innerText = parseInt(europeOff[2]).toLocaleString();
             europeOffThree.innerText = parseInt(europeOff[3]).toLocaleString();
@@ -868,6 +872,8 @@ let limoOff = [];
 let limoPeak = [];
 
 function displayLimousinePrice() {
+    let cheapestPriceMobile = document.getElementById('cheapestPriceMobile');
+    let cheapestPriceDesktop = document.getElementById('cheapestPriceDesktop');
     let limoOffOne = document.getElementById('limoOffOne');
     let limoOffTwo = document.getElementById('limoOffTwo');
     let limoOffThree = document.getElementById('limoOffThree');
@@ -902,6 +908,8 @@ function displayLimousinePrice() {
             limoOff[15] = parseFloat(limoOffObj['fifteendays']) * parseInt(limoOffObj['onedays']);
             limoOff[30] = parseFloat(limoOffObj['thirtydays']) * parseInt(limoOffObj['onedays']);
 
+            cheapestPriceMobile.innerText = parseInt(limoOff[1]).toLocaleString();
+            cheapestPriceDesktop.innerText = parseInt(limoOff[1]).toLocaleString();
             limoOffOne.innerText = parseInt(limoOff[1]).toLocaleString();
             limoOffTwo.innerText = parseInt(limoOff[2]).toLocaleString();
             limoOffThree.innerText = parseInt(limoOff[3]).toLocaleString();
@@ -950,6 +958,8 @@ let travelOff = [];
 let travelPeak = [];
 
 function displayTravelPrice() {
+    let cheapestPriceMobile = document.getElementById('cheapestPriceMobile');
+    let cheapestPriceDesktop = document.getElementById('cheapestPriceDesktop');
     let travelOffOne = document.getElementById('travelOffOne');
     let travelOffTwo = document.getElementById('travelOffTwo');
     let travelOffThree = document.getElementById('travelOffThree');
@@ -982,6 +992,8 @@ function displayTravelPrice() {
             travelOff[15] = parseFloat(travelOffObj['fifteendays']) * parseInt(travelOffObj['onedays']);
             travelOff[30] = parseFloat(travelOffObj['thirtydays']) * parseInt(travelOffObj['onedays']);
 
+            cheapestPriceMobile.innerText = parseInt(travelOff[1]).toLocaleString();
+            cheapestPriceDesktop.innerText = parseInt(travelOff[1]).toLocaleString();
             travelOffOne.innerText = parseInt(travelOff[1]).toLocaleString();
             travelOffTwo.innerText = parseInt(travelOff[2]).toLocaleString();
             travelOffThree.innerText = parseInt(travelOff[3]).toLocaleString();
