@@ -1180,6 +1180,10 @@ input[name="tab_item"] {
 .cheapestPrice {
   font-size: 26px;
 }
+.carousel-control .icon-prev:before,
+.carousel-control .icon-next:before {
+  font-size: 50px;
+}
 
 @media (max-width: 991px) {
   #mainRow {
