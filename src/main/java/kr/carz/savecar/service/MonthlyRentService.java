@@ -39,4 +39,7 @@ public class MonthlyRentService {
         return monthlyRentRepository.findById(id);
     }
 
+    public List<String> findDistinctCategory1(){
+        return monthlyRentRepository.findDistinctCategory1();
+    }
 }
