@@ -27,7 +27,7 @@ window.onload = function() {
     getEditedData('popup1_box1_line5_text1', 'popup1_box1_line5_text1');
     getEditedData('popup1_box1_line5_price', 'popup1_box1_line5_price');
     getEditedData('popup1_box1_line5_text2', 'popup1_box1_line5_text2');
-    getEditedData('popup1_box1_line5_text3', 'popup1_box1_line5_text3');
+    // getEditedData('popup1_box1_line5_text3', 'popup1_box1_line5_text3');
 
     getEditedData('popup1_box1_line6_title', 'popup1_box1_line6_title');
     getEditedData('popup1_box1_line6_text1', 'popup1_box1_line6_text1');
@@ -138,7 +138,7 @@ function popupEdit() {
     const popup1_box1_line5_text1 = document.getElementById('popup1_box1_line5_text1').value;
     const popup1_box1_line5_price = document.getElementById('popup1_box1_line5_price').value;
     const popup1_box1_line5_text2 = document.getElementById('popup1_box1_line5_text2').value;
-    const popup1_box1_line5_text3 = document.getElementById('popup1_box1_line5_text3').value;
+    // const popup1_box1_line5_text3 = document.getElementById('popup1_box1_line5_text3').value;
     const popup1_box1_line6_title = document.getElementById('popup1_box1_line6_title').value;
     const popup1_box1_line6_text1 = document.getElementById('popup1_box1_line6_text1').value;
     const popup1_box1_line6_price = document.getElementById('popup1_box1_line6_price').value;
@@ -203,7 +203,6 @@ function popupEdit() {
             { "title" : "popup1_box1_line5_text1", "value" : popup1_box1_line5_text1 },
             { "title" : "popup1_box1_line5_price", "value" : popup1_box1_line5_price },
             { "title" : "popup1_box1_line5_text2", "value" : popup1_box1_line5_text2 },
-            { "title" : "popup1_box1_line5_text3", "value" : popup1_box1_line5_text3 },
             { "title" : "popup1_box1_line6_title", "value" : popup1_box1_line6_title },
             { "title" : "popup1_box1_line6_text1", "value" : popup1_box1_line6_text1 },
             { "title" : "popup1_box1_line6_price", "value" : popup1_box1_line6_price },

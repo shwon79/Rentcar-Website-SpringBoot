@@ -33,27 +33,6 @@ function closeWinTwo() {
     document.getElementById('divpop2').style.visibility = "hidden";
 }
 
-// function closeWinThree() {
-//
-//     if ( document.pop_form3.chkbox.checked ) {
-//         setCookieAt00( "maindiv3", "done" , 1 );
-//         console.log('if pass')
-//     }
-//
-//     document.getElementById('divpop3').style.visibility = "hidden";
-// }
-//
-//
-// function closeWinFour() {
-//
-//     if ( document.pop_form4.chkbox.checked ) {
-//         setCookieAt00( "maindiv4", "done" , 1 );
-//         console.log('if pass')
-//     }
-//
-//     document.getElementById('divpop4').style.visibility = "hidden";
-// }
-
 // 팝업 내용 불러오기
 $(window).load(function () {
     if (document.getElementById('popup2_contact')) {
@@ -121,7 +100,7 @@ $(window).load(function () {
         getData('popup1_box1_line5_text1', 'popup1_box1_line5_text1');
         getData('popup1_box1_line5_price', 'popup1_box1_line5_price');
         getData('popup1_box1_line5_text2', 'popup1_box1_line5_text2');
-        getData('popup1_box1_line5_text3', 'popup1_box1_line5_text3');
+        // getData('popup1_box1_line5_text3', 'popup1_box1_line5_text3');
 
         getData('popup1_box1_line6_title', 'popup1_box1_line6_title');
         getData('popup1_box1_line6_text1', 'popup1_box1_line6_text1');
