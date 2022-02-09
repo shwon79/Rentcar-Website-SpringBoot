@@ -60,7 +60,7 @@
                         <th scope="col" class="display_none_mobile">other</th>
                         <th scope="col"></th>
                     </tr>
-                    <tr th:each="car, i : ${ monthlyRentList }" th:if="${car.category1 == '국산승용'}">
+                    <tr th:each="car, i : ${ monthlyRentList }">
                         <td>
                             <select name="category1" class="category1" onchange="displayCategory2(this);" th:data-title="${car.id}">
                                 <option value="국산승용" th:selected="${car.category1} == '국산승용' ? true : false">국산승용</option>
@@ -77,16 +77,41 @@
                                 <option value="대형" th:selected="${car.category2} == '대형' ? true : false">대형</option>
                             </select>
                         </td>
-                        <td><textarea type="text" th:text="${car.name}"></textarea></td>
-                        <td class="display_none_mobile"><textarea type="text" th:text="${#numbers.formatInteger(car.deposit, 0, 'COMMA')}"></textarea></td>
-                        <td class="display_none_mobile"><textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_2k, 0, 'COMMA')}"></textarea></td>
-                        <td class="display_none_mobile"><textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_2_5k, 0, 'COMMA')}"></textarea></td>
-                        <td class="display_none_mobile"><textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_3k, 0, 'COMMA')}"></textarea></td>
-                        <td class="display_none_mobile"><textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_4k, 0, 'COMMA')}"></textarea></td>
-                        <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_others}"></textarea></td>
+                        <td><textarea type="text" th:text="${car.name}" class="name" th:data-title="${car.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <textarea type="text" th:text="${#numbers.formatInteger(car.deposit, 0, 'COMMA')}" class="deposit" th:data-title="${car.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_2k, 0, 'COMMA')}" class="cost_for_2k" th:data-title="${car.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_2_5k, 0, 'COMMA')}" class="cost_for_2_5k" th:data-title="${car.id}"></textarea>
+<!--                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_2_5k, 0, 'COMMA')}"></textarea>-->
+                        </td>
+                        <td class="display_none_mobile">
+                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_3k, 0, 'COMMA')}" class="cost_for_3k" th:data-title="${car.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_4k, 0, 'COMMA')}" class="cost_for_4k" th:data-title="${car.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <textarea type="text" th:text="${car.cost_for_others}" class="cost_for_others" th:data-title="${car.id}"></textarea>
+                        </td>
+                        <td style="display: none;">
+                            <span th:text="${car.age_limit}" class="age_limit" th:data-title="${car.id}"></span>
+                            <span th:text="${car.cost_per_km}" class="cost_per_km" th:data-title="${car.id}"></span>
+                            <span th:text="${car.nameMoren}" class="nameMoren" th:data-title="${car.id}"></span>
+                            <span th:text="${car.start}" class="start" th:data-title="${car.id}"></span>
+                            <span th:text="${car.end}" class="end" th:data-title="${car.id}"></span>
+                            <span th:text="${car.credit}" class="credit" th:data-title="${car.id}"></span>
+                            <span th:text="${car.img_url}" class="img_url" th:data-title="${car.id}"></span>
+                        </td>
                         <td>
-                            <button class="btn btn-primary btn-sm">수정하기</button>
-                            <a th:href="'/admin/rentcar/price/monthly/detail/' + ${car.id}"><button class="btn btn-info btn-sm">상세보기</button></a>
+                            <button class="btn btn-primary btn-sm" th:onclick="editMonthlyPriceMenu([[${car.id}]]);" style="margin: 4px;">수정하기</button>
+                            <a th:href="'/admin/rentcar/price/monthly/detail/' + ${car.id}">
+                                <button class="btn btn-info btn-sm" style="margin: 4px;">상세보기</button>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
