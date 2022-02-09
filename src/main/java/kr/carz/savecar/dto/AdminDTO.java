@@ -1,13 +1,11 @@
 package kr.carz.savecar.dto;
 
 import kr.carz.savecar.domain.Admin;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class AdminDTO {
     private Long id;
