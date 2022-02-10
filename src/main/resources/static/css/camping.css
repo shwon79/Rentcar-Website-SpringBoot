@@ -909,7 +909,7 @@ pre {
   background: white;
   font-size: 16px;
   font-family: 'NanumBarunGothic';
-  line-height: 2;
+  line-height: 1.5;
   margin-bottom: 0;
   white-space: pre-wrap; /* CSS3*/
   white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
@@ -1124,7 +1124,7 @@ pre {
 
 /*!* 탭 스타일 *!*/
 .tab_item {
-  width: calc(100%/3);
+  width: calc(100%/2);
   height: 50px;
   border-bottom: 3px solid #333333;
   line-height: 50px;
@@ -1155,6 +1155,10 @@ input:checked + .tab_item div {
 .tab_content_size {
   width: 80%;
   margin: 0 auto;
+}
+
+.tab_content_size > div {
+  margin-bottom: 30px;
 }
 
 .carousel-inner > .item > img {
@@ -1193,7 +1197,7 @@ input:checked + .tab_item div {
     margin-top: 30px;
   }
   .campingTitle {
-    padding: 20px 20px 0 20px;
+    /*padding: 20px 20px 0 20px;*/
   }
   .campingTitle p, .campingTitle h1 {
     margin: 0;

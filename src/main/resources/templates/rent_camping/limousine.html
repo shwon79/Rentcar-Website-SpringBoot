@@ -27,7 +27,7 @@
     <script th:src="@{/js/europe_reserve.js}" defer ></script>
 </head>
 
-<body onload="displayLimousinePrice();">
+<body th:onload="displayLimousinePrice([[${imagesList[0].carName.carName}]]);">
 <div layout:fragment="content">
     <div th:replace="fragments/header_camp::headerFragment"></div>
 
@@ -54,17 +54,16 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <div class="mobileCampingTitle campingTitle">
-<!--            <p style="font-size: initial;">세이브카</p>-->
-            <h1 class="car_name_under_images">
-                <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
-                <span>Camper</span>
-            </h1>
-            <p class="title_price">
-                <span id="cheapestPriceMobile" class="cheapestPrice"></span>
-                <span>원~</span>
-            </p>
-        </div>
+<!--        <div class="mobileCampingTitle campingTitle">-->
+<!--            <h1 class="car_name_under_images">-->
+<!--                <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>-->
+<!--                <span>Camper</span>-->
+<!--            </h1>-->
+<!--            <p class="title_price">-->
+<!--                <span id="cheapestPriceMobile" class="cheapestPrice"></span>-->
+<!--                <span>원~</span>-->
+<!--            </p>-->
+<!--        </div>-->
     </div>
 
     <div id="wrapper" class="content pinside60 container">
@@ -101,8 +100,30 @@
                             <img th:src="${image.url}" th:alt="${image.carName.carName}">
                         </div>
                     </div>
+                    <!--기본 정보-->
+                    <table class="camping_info_table" style="margin-top: 30px;">
+                        <tr>
+                            <td>CAMPER 명</td>
+                            <td>Limousine VIP</td>
+                        </tr>
+                        <tr>
+                            <td>연료 / 미션</td>
+                            <td>
+                                <span th:text="${explanation.fuel}"></span>
+                                <span> / </span>
+                                <span th:text="${explanation.gearBox}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>면허 종류</td>
+                            <td th:text="${explanation.license}"></td>
+                        </tr>
+                        <tr>
+                            <td>인원정보</td>
+                            <td th:text="${explanation.personnel}"></td>
+                        </tr>
+                    </table>
                 </div>
-
                 <!--탭 메뉴-->
 <!--                <div class="row card" style="margin-top: 50px;">-->
 <!--                    <div class="tabs">-->
@@ -311,19 +332,18 @@
 
             <!-- right column -->
             <div id="right_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60 text-center">
-                <div class="desktopCampingTitle campingTitle">
+                <div class="campingTitle">
 <!--                    <p style="font-size: initial;">세이브카</p>-->
                     <h1 class="car_name_under_images">
                         <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
                         <span>Camper</span>
                     </h1>
                     <p class="title_price">
-                        <span id="cheapestPriceDesktop" class="cheapestPrice"></span>
+                        <span id="cheapestPrice" class="cheapestPrice"></span>
                         <span>원~</span>
                     </p>
                 </div>
-                <!--기본 정보-->
-                <table class="camping_info_table">
+                <table class="camping_info_table" id="mobileInfoTable" style="margin: 20px 0;">
                     <tr>
                         <td>CAMPER 명</td>
                         <td>Limousine VIP</td>
@@ -345,6 +365,27 @@
                         <td th:text="${explanation.personnel}"></td>
                     </tr>
                 </table>
+                <div class="camping_price_info">
+                    <select name="" id="displayPriceDay" class="select_display_price" th:onchange="displayPrice();">
+                        <option value="">대여 기간</option>
+                        <option value="1">1일권[선택 불가]</option>
+                        <option th:each="num : ${#numbers.sequence(2,29)}" th:value="${num}" th:text="${num} + '일권'"></option>
+                        <option value="30">한달권</option>
+                    </select>
+                    <select name="" id="displayPricePeak" class="select_display_price" th:onchange="displayPrice();">
+                        <option value="">성수기/비성수기</option>
+                        <option value="0">비성수기</option>
+                        <option value="1">성수기</option>
+                    </select>
+                    <div class="display_price_info">
+                        <span>총 금액</span>
+                        <div style="font-size: 26px;">
+                            <span id="priceInfo"></span>
+                            <span>원</span>
+                        </div>
+                    </div>
+                    <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>
+                </div>
             </div>
         </div>
 <!--        <div class="row">-->
@@ -371,8 +412,8 @@
                 <!--탭 메뉴-->
                 <input id="tab_info" type="radio" name="tab_item" checked>
                 <label class="tab_item" for="tab_info"><div onclick="location.href='#info'">상세정보</div></label>
-                <input id="tab_review" type="radio" name="tab_item">
-                <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">후기</div></label>
+<!--                <input id="tab_review" type="radio" name="tab_item">-->
+<!--                <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">후기</div></label>-->
                 <input id="tab_counsel" type="radio" name="tab_item">
                 <label class="tab_item" for="tab_counsel"><div onclick="location.href='#counsel'">상담신청</div></label>
                 <!--탭 내용-->
@@ -388,7 +429,7 @@
                         <img th:src="@{/img/limo8.png}" alt="limo">
                         <img th:src="@{/img/limo9.png}" alt="limo">
                         <img th:src="@{/img/limo10.png}" alt="limo">
-                        <img th:src="@{/img/limo11.png}" alt="limo">
+<!--                        <img th:src="@{/img/limo11.png}" alt="limo">-->
                         <img th:src="@{/img/limo12.png}" alt="limo">
                         <img th:src="@{/img/limo13.png}" alt="limo">
 <!--                        &lt;!&ndash;요금&ndash;&gt;-->
@@ -509,9 +550,9 @@
 <!--                            <div th:replace="/fragments/camping_explanations.html :: refund_policy"></div>-->
 <!--                        </div>-->
                     </div>
-                    <div id="review">
-                        리뷰리뷰
-                    </div>
+<!--                    <div id="review">-->
+<!--                        리뷰리뷰-->
+<!--                    </div>-->
                     <div id="counsel">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -778,5 +819,5 @@
         </div>
     </div>
 </div>
-</body>
+</bodydisplayLimousinePrice>
 </html>

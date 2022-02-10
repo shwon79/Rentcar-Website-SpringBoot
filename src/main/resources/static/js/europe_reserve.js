@@ -865,36 +865,32 @@ if (document.getElementById('europe_price_table')) {
     window.onload = displayEuropePrice();
 }
 
-// 리무진 가격 테이블
-
-let limoOffObj, limoPeakObj;
+// 리무진 대여기간, 성수기/비성수기 선택시 가격 보여주기
+let limoOffObj, limoPeakObj, resultPrice;
 let limoOff = [];
 let limoPeak = [];
 
-function displayLimousinePrice() {
-    let cheapestPriceMobile = document.getElementById('cheapestPriceMobile');
-    let cheapestPriceDesktop = document.getElementById('cheapestPriceDesktop');
-    let limoOffOne = document.getElementById('limoOffOne');
-    let limoOffTwo = document.getElementById('limoOffTwo');
-    let limoOffThree = document.getElementById('limoOffThree');
-    let limoOffFour = document.getElementById('limoOffFour');
-    let limoOffFive = document.getElementById('limoOffFive');
-    let limoOffSeven = document.getElementById('limoOffSeven');
-    let limoOffTen = document.getElementById('limoOffTen');
-    let limoOffFifteen = document.getElementById('limoOffFifteen');
-    let limoPeakOne = document.getElementById('limoPeakOne');
-    let limoPeakTwo = document.getElementById('limoPeakTwo');
-    let limoPeakThree = document.getElementById('limoPeakThree');
-    let limoPeakFour = document.getElementById('limoPeakFour');
-    let limoPeakFive = document.getElementById('limoPeakFive');
-    let limoPeakSeven = document.getElementById('limoPeakSeven');
-    let limoPeakTen = document.getElementById('limoPeakTen');
-    let limoPeakFifteen = document.getElementById('limoPeakFifteen');
-    let limoMonth = document.getElementById('limoMonth');
+function displayPrice() {
+    let displayPriceDay = document.getElementById('displayPriceDay').value;
+    let displayPricePeak = document.getElementById('displayPricePeak').value;
+    let priceInfo = document.getElementById('priceInfo');
 
+    if (displayPriceDay != '' && displayPricePeak != '') {
+        if (displayPricePeak == '0') {
+            priceInfo.innerText = limoOff[displayPriceDay].toLocaleString();
+        } else if (displayPricePeak == '1') {
+            priceInfo.innerText = limoPeak[displayPriceDay].toLocaleString();
+        }
+    } else {
+        priceInfo.innerText = '';
+    }
+};
 
+// 페이지 로딩 시 가장 싼 가격 보여주면서 모든 가격 받아오기
+function displayLimousinePrice(carType) {
+    let cheapestPrice = document.getElementById('cheapestPrice');
     // 비성수기 가격
-    fetch(`/camping/calendar/limousine/getprice/0`)
+    fetch(`/camping/calendar/` + carType + `/getprice/0`)
         .then(res => res.json())
         .then(result => {
             limoOffObj = result;
@@ -903,22 +899,33 @@ function displayLimousinePrice() {
             limoOff[3] = parseFloat(limoOffObj['threedays']) * parseInt(limoOffObj['onedays']);
             limoOff[4] = parseFloat(limoOffObj['fourdays']) * parseInt(limoOffObj['onedays']);
             limoOff[5] = parseFloat(limoOffObj['fivedays']) * parseInt(limoOffObj['onedays']);
+            limoOff[6] = parseFloat(limoOffObj['sixdays']) * parseInt(limoOffObj['onedays']);
             limoOff[7] = parseFloat(limoOffObj['sevendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[8] = parseFloat(limoOffObj['eightdays']) * parseInt(limoOffObj['onedays']);
+            limoOff[9] = parseFloat(limoOffObj['ninedays']) * parseInt(limoOffObj['onedays']);
             limoOff[10] = parseFloat(limoOffObj['tendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[11] = parseFloat(limoOffObj['elevendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[12] = parseFloat(limoOffObj['twelvedays']) * parseInt(limoOffObj['onedays']);
+            limoOff[13] = parseFloat(limoOffObj['thirteendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[14] = parseFloat(limoOffObj['fourteendays']) * parseInt(limoOffObj['onedays']);
             limoOff[15] = parseFloat(limoOffObj['fifteendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[16] = parseFloat(limoOffObj['sixteendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[17] = parseFloat(limoOffObj['seventeendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[18] = parseFloat(limoOffObj['eighteendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[19] = parseFloat(limoOffObj['ninetinedays']) * parseInt(limoOffObj['onedays']);
+            limoOff[20] = parseFloat(limoOffObj['twentydays']) * parseInt(limoOffObj['onedays']);
+            limoOff[21] = parseFloat(limoOffObj['twentyonedays']) * parseInt(limoOffObj['onedays']);
+            limoOff[22] = parseFloat(limoOffObj['twentytwodays']) * parseInt(limoOffObj['onedays']);
+            limoOff[23] = parseFloat(limoOffObj['twentythreedays']) * parseInt(limoOffObj['onedays']);
+            limoOff[24] = parseFloat(limoOffObj['twentyfourdays']) * parseInt(limoOffObj['onedays']);
+            limoOff[25] = parseFloat(limoOffObj['twentyfivedays']) * parseInt(limoOffObj['onedays']);
+            limoOff[26] = parseFloat(limoOffObj['twentysixdays']) * parseInt(limoOffObj['onedays']);
+            limoOff[27] = parseFloat(limoOffObj['twentysevendays']) * parseInt(limoOffObj['onedays']);
+            limoOff[28] = parseFloat(limoOffObj['twentyeightdays']) * parseInt(limoOffObj['onedays']);
+            limoOff[29] = parseFloat(limoOffObj['twentyninedays']) * parseInt(limoOffObj['onedays']);
             limoOff[30] = parseFloat(limoOffObj['thirtydays']) * parseInt(limoOffObj['onedays']);
 
-            cheapestPriceMobile.innerText = parseInt(limoOff[1]).toLocaleString();
-            cheapestPriceDesktop.innerText = parseInt(limoOff[1]).toLocaleString();
-            limoOffOne.innerText = parseInt(limoOff[1]).toLocaleString();
-            limoOffTwo.innerText = parseInt(limoOff[2]).toLocaleString();
-            limoOffThree.innerText = parseInt(limoOff[3]).toLocaleString();
-            limoOffFour.innerText = parseInt(limoOff[4]).toLocaleString();
-            limoOffFive.innerText = parseInt(limoOff[5]).toLocaleString();
-            limoOffSeven.innerText = parseInt(limoOff[7]).toLocaleString();
-            limoOffTen.innerText = parseInt(limoOff[10]).toLocaleString();
-            limoOffFifteen.innerText = parseInt(limoOff[15]).toLocaleString();
-            limoMonth.innerText = parseInt(limoOff[30]).toLocaleString();
+            cheapestPrice.innerText = parseInt(limoOff[1]).toLocaleString();
         })
 
     // 성수기 가격
@@ -926,30 +933,42 @@ function displayLimousinePrice() {
         .then(res => res.json())
         .then(result => {
             limoPeakObj = result;
-            // console.log(limoPeakObj);
             limoPeak[1] = limoPeakObj['onedays'];
             limoPeak[2] = parseFloat(limoPeakObj['twodays']) * parseInt(limoPeakObj['onedays']);
             limoPeak[3] = parseFloat(limoPeakObj['threedays']) * parseInt(limoPeakObj['onedays']);
             limoPeak[4] = parseFloat(limoPeakObj['fourdays']) * parseInt(limoPeakObj['onedays']);
-            limoPeak[5] = parseFloat(limoOffObj['fivedays']) * parseInt(limoPeakObj['onedays']);
-            limoPeak[7] = parseFloat(limoOffObj['sevendays']) * parseInt(limoPeakObj['onedays']);
-            limoPeak[10] = parseFloat(limoOffObj['tendays']) * parseInt(limoPeakObj['onedays']);
-            limoPeak[15] = parseFloat(limoOffObj['fifteendays']) * parseInt(limoPeakObj['onedays']);
-
-            limoPeakOne.innerText = parseInt(limoPeak[1]).toLocaleString();
-            limoPeakTwo.innerText = parseInt(limoPeak[2]).toLocaleString();
-            limoPeakThree.innerText = parseInt(limoPeak[3]).toLocaleString();
-            limoPeakFour.innerText = parseInt(limoPeak[4]).toLocaleString();
-            limoPeakFive.innerText = parseInt(limoPeak[5]).toLocaleString();
-            limoPeakSeven.innerText = parseInt(limoPeak[7]).toLocaleString();
-            limoPeakTen.innerText = parseInt(limoPeak[10]).toLocaleString();
-            limoPeakFifteen.innerText = parseInt(limoPeak[15]).toLocaleString();
+            limoPeak[5] = parseFloat(limoPeakObj['fivedays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[6] = parseFloat(limoPeakObj['sixdays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[7] = parseFloat(limoPeakObj['sevendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[8] = parseFloat(limoPeakObj['eightdays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[9] = parseFloat(limoPeakObj['ninedays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[10] = parseFloat(limoPeakObj['tendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[11] = parseFloat(limoPeakObj['elevendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[12] = parseFloat(limoPeakObj['twelvedays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[13] = parseFloat(limoPeakObj['thirteendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[14] = parseFloat(limoPeakObj['fourteendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[15] = parseFloat(limoPeakObj['fifteendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[16] = parseFloat(limoPeakObj['sixteendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[17] = parseFloat(limoPeakObj['seventeendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[18] = parseFloat(limoPeakObj['eighteendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[19] = parseFloat(limoPeakObj['ninetinedays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[20] = parseFloat(limoPeakObj['twentydays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[21] = parseFloat(limoPeakObj['twentyonedays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[22] = parseFloat(limoPeakObj['twentytwodays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[23] = parseFloat(limoPeakObj['twentythreedays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[24] = parseFloat(limoPeakObj['twentyfourdays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[25] = parseFloat(limoPeakObj['twentyfivedays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[26] = parseFloat(limoPeakObj['twentysixdays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[27] = parseFloat(limoPeakObj['twentysevendays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[28] = parseFloat(limoPeakObj['twentyeightdays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[29] = parseFloat(limoPeakObj['twentyninedays']) * parseInt(limoPeakObj['onedays']);
+            limoPeak[30] = parseFloat(limoPeakObj['thirtydays']) * parseInt(limoPeakObj['onedays']);
         })
 };
 
-if (document.getElementById('limousine_price_table')) {
-    window.onload = displayLimousinePrice();
-}
+// if (document.getElementById('limousine_price_table')) {
+//     window.onload = displayLimousinePrice();
+// }
 
 // 트레블 가격 테이블
 

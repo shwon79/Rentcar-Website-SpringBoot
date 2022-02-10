@@ -421,16 +421,36 @@ a:hover {
 #mobile_carousel {
   display: none
 }
+.select_display_price {
+  width: 100%;
+  padding: 10px;
+  height: fit-content;
+  border: solid darkgrey 2px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.display_price_info {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+#mobileInfoTable {
+  display: none;
+}
 
 @media (max-width: 991px) {
 
 }
 @media (max-width: 480px) {
-  #desktop_carousel, .desktopCampingTitle {
+  #desktop_carousel {
     display: none;
   }
 
   #mobile_carousel {
     display: block;
+  }
+
+  #mobileInfoTable {
+    display: table;
   }
 }
