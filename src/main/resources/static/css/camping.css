@@ -1117,14 +1117,14 @@ pre {
   display: none;
 }
 
-/* 탭 전체 스타일 */
-.tabs {
-  margin: 0 auto;
-}
+/*!* 탭 전체 스타일 *!*/
+/*.tabs {*/
+/*  margin: 0 auto;*/
+/*}*/
 
-/* 탭 스타일 */
+/*!* 탭 스타일 *!*/
 .tab_item {
-  width: calc(100%/2);
+  width: calc(100%/3);
   height: 50px;
   border-bottom: 3px solid #333333;
   line-height: 50px;
@@ -1136,39 +1136,33 @@ pre {
   text-align: center;
   font-weight: bold;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-/* 라디오 버튼 UI삭제*/
+/*!* 라디오 버튼 UI삭제*!*/
 input[name="tab_item"] {
   display: none;
 }
 
-/* 탭 컨텐츠 스타일 */
-.tab_content {
-  display: none;
-  padding-top: 30px;
-  clear: both;
-  overflow: hidden;
-}
-
-/* 선택 된 탭 콘텐츠를 표시 */
-#info:checked ~ #info_content,
-#review:checked ~ #review_content,
-#qna:checked ~ #qna_content {
-  display: block;
-}
-
-/* 선택된 탭 스타일 */
-.tabs input:checked + .tab_item {
+/*!* 선택된 탭 스타일 *!*/
+input:checked + .tab_item {
   background-color: #333333;
+}
+input:checked + .tab_item div {
   color: #fff;
 }
+
+.tab_content_size {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .carousel-inner > .item > img {
   margin: 0 auto;
 }
 
 .campingTitle {
-  padding: 20px 0;
+  padding-bottom: 20px;
 }
 .campingTitle p, .campingTitle h1 {
   margin: 0;
@@ -1328,5 +1322,12 @@ input[name="tab_item"] {
   }
   .mobile_small {
     font-size: 22px !important;
+  }
+  .whole_tab {
+    padding: 0;
+  }
+  .tab_content_size {
+    width: 100%;
+    margin: 0 auto;
   }
 }

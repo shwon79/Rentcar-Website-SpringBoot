@@ -426,9 +426,10 @@ a:hover {
 
 }
 @media (max-width: 480px) {
-  #desktop_carousel {
+  #desktop_carousel, .desktopCampingTitle {
     display: none;
   }
+
   #mobile_carousel {
     display: block;
   }
