@@ -70,11 +70,16 @@
                         </td>
                         <td>
                             <select name="category2" class="category2" th:data-title="${car.id}">
-                                <option value="경형" th:selected="${car.category2} == '경형' ? true : false">경형</option>
-                                <option value="준중형" th:selected="${car.category2} == '준중형' ? true : false">준중형</option>
-                                <option value="중형" th:selected="${car.category2} == '중형' ? true : false">중형</option>
-                                <option value="중대형" th:selected="${car.category2} == '중대형' ? true : false">중대형</option>
-                                <option value="대형" th:selected="${car.category2} == '대형' ? true : false">대형</option>
+                                <option th:if="${car.category1 == '국산승용'}" value="경형" th:selected="${car.category2} == '경형' ? true : false">경형</option>
+                                <option th:if="${car.category1 == '국산승용'}" value="준중형" th:selected="${car.category2} == '준중형' ? true : false">준중형</option>
+                                <option th:if="${car.category1 == '국산승용'}" value="중형" th:selected="${car.category2} == '중형' ? true : false">중형</option>
+                                <option th:if="${car.category1 == '국산승용'}" value="중대형" th:selected="${car.category2} == '중대형' ? true : false">중대형</option>
+                                <option th:if="${car.category1 == '국산승용'}" value="대형" th:selected="${car.category2} == '대형' ? true : false">대형</option>
+                                <option th:if="${car.category1 == '국산승합•RV'}" value="소중형SUV" th:selected="${car.category2} == '소중형SUV' ? true : false">소중형SUV</option>
+                                <option th:if="${car.category1 == '국산승합•RV'}" value="중형SUV" th:selected="${car.category2} == '중형SUV' ? true : false">중형SUV</option>
+                                <option th:if="${car.category1 == '국산승합•RV'}" value="중대형SUV" th:selected="${car.category2} == '중대형SUV' ? true : false">중대형SUV</option>
+                                <option th:if="${car.category1 == '국산승합•RV'}" value="대형SUV" th:selected="${car.category2} == '대형SUV' ? true : false">대형SUV</option>
+                                <option th:if="${car.category1 == '수입차'}" value="수입차" th:selected="${car.category2} == '수입차' ? true : false">수입차</option>
                             </select>
                         </td>
                         <td><textarea type="text" th:text="${car.name}" class="name" th:data-title="${car.id}"></textarea>

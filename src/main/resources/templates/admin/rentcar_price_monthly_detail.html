@@ -80,11 +80,16 @@
                 <div class="detail_list">
                     <p>분류</p>
                     <select name="category2" class="category2" id="category2" th:data-title="${monthlyRent.id}">
-                        <option value="경형" th:selected="${monthlyRent.category2} == '경형' ? true : false">경형</option>
-                        <option value="준중형" th:selected="${monthlyRent.category2} == '준중형' ? true : false">준중형</option>
-                        <option value="중형" th:selected="${monthlyRent.category2} == '중형' ? true : false">중형</option>
-                        <option value="중대형" th:selected="${monthlyRent.category2} == '중대형' ? true : false">중대형</option>
-                        <option value="대형" th:selected="${monthlyRent.category2} == '대형' ? true : false">대형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="경형" th:selected="${monthlyRent.category2} == '경형' ? true : false">경형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="준중형" th:selected="${monthlyRent.category2} == '준중형' ? true : false">준중형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="중형" th:selected="${monthlyRent.category2} == '중형' ? true : false">중형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="중대형" th:selected="${monthlyRent.category2} == '중대형' ? true : false">중대형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="대형" th:selected="${monthlyRent.category2} == '대형' ? true : false">대형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승합•RV'}" value="소중형SUV" th:selected="${monthlyRent.category2} == '소중형SUV' ? true : false">소중형SUV</option>
+                        <option th:if="${monthlyRent.category1 == '국산승합•RV'}" value="중형SUV" th:selected="${monthlyRent.category2} == '중형SUV' ? true : false">중형SUV</option>
+                        <option th:if="${monthlyRent.category1 == '국산승합•RV'}" value="중대형SUV" th:selected="${monthlyRent.category2} == '중대형SUV' ? true : false">중대형SUV</option>
+                        <option th:if="${monthlyRent.category1 == '국산승합•RV'}" value="대형SUV" th:selected="${monthlyRent.category2} == '대형SUV' ? true : false">대형SUV</option>
+                        <option th:if="${monthlyRent.category1 == '수입차'}" value="수입차" th:selected="${monthlyRent.category2} == '수입차' ? true : false">수입차</option>
                     </select>
                 </div>
                 <div class="detail_list">
