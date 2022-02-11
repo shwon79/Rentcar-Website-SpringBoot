@@ -443,6 +443,7 @@ a:hover {
 #campingCarHome h1 {
   font-family: 'Black Han Sans', sans-serif;
   text-align: left;
+  line-height: normal;
 }
 
 @media (max-width: 991px) {
