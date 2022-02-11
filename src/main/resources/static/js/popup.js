@@ -80,6 +80,7 @@ $(window).load(function () {
         getData('popup1_box1_line1_text1', 'popup1_box1_line1_text1');
         getData('popup1_box1_line1_price', 'popup1_box1_line1_price');
         getData('popup1_box1_line1_text2', 'popup1_box1_line1_text2');
+
         getData('popup1_box1_line2_title', 'popup1_box1_line2_title');
         getData('popup1_box1_line2_text1', 'popup1_box1_line2_text1');
         getData('popup1_box1_line2_price', 'popup1_box1_line2_price');
@@ -105,6 +106,16 @@ $(window).load(function () {
         getData('popup1_box1_line6_title', 'popup1_box1_line6_title');
         getData('popup1_box1_line6_text1', 'popup1_box1_line6_text1');
         getData('popup1_box1_line6_price', 'popup1_box1_line6_price');
+
+        getData('popup1_box1_line7_title', 'popup1_box1_line7_title');
+        getData('popup1_box1_line7_text1', 'popup1_box1_line7_text1');
+        getData('popup1_box1_line7_price', 'popup1_box1_line7_price');
+        getData('popup1_box1_line7_text2', 'popup1_box1_line7_text2');
+
+        getData('popup1_box1_line8_title', 'popup1_box1_line8_title');
+        getData('popup1_box1_line8_text1', 'popup1_box1_line8_text1');
+        getData('popup1_box1_line8_price', 'popup1_box1_line8_price');
+        getData('popup1_box1_line8_text2', 'popup1_box1_line8_text2');
 
         getData('popup1_box2_line1_title', 'popup1_box2_line1_title');
         getData('popup1_box2_line1_text1', 'popup1_box2_line1_text1');

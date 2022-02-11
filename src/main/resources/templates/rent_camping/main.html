@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Style -->
+    <link th:href="@{/css/library/font-awesome.min.css}" rel="stylesheet">
     <link th:href="@{/css/camping.css}" rel="stylesheet">
     <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
 
@@ -35,40 +36,56 @@
 
     <div id="wrapper" class="content pinside60 container">
         <!--  content body-->
-        <div class="row" id="mainRow">
+        <div class="row" id="campingCarHome">
             <section id="feature" class="feature sections" style="margin: 0; padding: 0;">
                 <div class="space-medium" style="padding: 0;">
                     <div class="row" style="margin-bottom: 70px;">
                         <div class="head_title sections text-center" style="padding-top: 30px;">
-                            <h1 style="text-align: left;">캠핑카 렌트</h1>
+                            <h1>캠핑카 렌트</h1>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="campingCar, i : ${imagesMainList}" style="padding-top: 30px;">
                             <div class="service-block text-center">
                                 <!-- service block -->
+                                <!-- service img -->
+                                <div class="service-img ">
+                                    <!-- service img -->
+                                    <div th:onclick="moveToCampingReservation([[${campingCar.carName.carName}]])" style="cursor: pointer;">
+                                        <img th:if="${campingCar.imageId != -1}" th:src="${campingCar.url}" width="360" height="360" style="border-radius: 20px;">
+                                        <img th:if="${campingCar.imageId == -1}" th:src="@{/img/popup_campingcar.png}" width="360" height="360" style="border-radius: 20px;">
+                                    </div>
+                                </div>
                                 <div class="service-content">
                                     <!-- service content -->
-                                    <h3>
+                                    <h3 style="text-align: left;">
                                         <span th:text="${campingCar.carName.carName.toUpperCase()}"></span>
                                         <span> VIP CAMPER</span>
                                     </h3>
+                                    <div class="explanation">
+                                        <div>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>차고지: 대한민국 경기도</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-address-card"></i>
+                                            <span>2종 보통</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-bed"></i>
+                                            <span>5인 취침</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-oil-can"></i>
+                                            <span>디젤 / Auto</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <br>
-                                <!-- service content -->
-                                <div class="service-img ">
-                                    <!-- service img -->
-                                    <a th:onclick="moveToCampingReservation([[${campingCar.carName.carName}]])" style="cursor: pointer;" class="imghover">
-                                        <img th:if="${campingCar.imageId != -1}" th:src="${campingCar.url}" width="360" height="360">
-                                        <img th:if="${campingCar.imageId == -1}" th:src="@{/img/popup_campingcar.png}" width="360" height="360">
-                                    </a>
-                                </div>
-                                <!-- service img -->
                             </div>
                             <!-- /.service block -->
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 70px;">
                         <div class="head_title sections text-center" style="padding-top: 30px;">
-                            <h1 style="text-align: left;">프로모션</h1>
+                            <h1>프로모션</h1>
                             <br>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -80,7 +97,7 @@
                     </div>
                     <div class="row" style="margin: 50px auto;">
                         <div class="head_title sections text-center" style="padding-top: 30px;">
-                            <h1 style="text-align: left;">세이브카의 장점</h1>
+                            <h1>세이브카의 장점</h1>
                             <br>
                         </div>
                         <div class="tab_content_size">

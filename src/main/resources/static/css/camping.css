@@ -1182,6 +1182,22 @@ input:checked + .tab_item div {
 .carousel-control .icon-next:before {
   font-size: 50px;
 }
+.service-img {
+  margin-bottom: 10px;
+}
+.service-img img:hover {
+  transform: scale(1.02);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.explanation {
+  display: flex;
+  flex-wrap: wrap;
+  color: dimgray;
+}
+.explanation div {
+  margin: 5px 6px;
+  vertical-align: middle;
+}
 
 @media (max-width: 991px) {
   #mainRow {

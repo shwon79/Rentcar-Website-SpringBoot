@@ -440,6 +440,10 @@ a:hover {
 #mobileInfoTable {
   display: none;
 }
+#campingCarHome h1 {
+  font-family: 'Black Han Sans', sans-serif;
+  text-align: left;
+}
 
 @media (max-width: 991px) {
 
