@@ -210,6 +210,19 @@ public class CampingCarController {
     }
 
 
+    // [관리자 메인페이지] 캠핑카 본문 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/mainText/menu")
+    @ResponseBody
+    public ModelAndView get_campingcar_main_text_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("admin/campingcar_mainText_menu");
+
+        return mav;
+    }
+
+
 
     // 캠핑카 reservation 등록 api
     @PostMapping("/admin/campingcar/reservation")
