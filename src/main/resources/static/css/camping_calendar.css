@@ -429,6 +429,9 @@ a:hover {
   margin-bottom: 20px;
   font-size: 16px;
 }
+.camping_price_info hr {
+  margin: 30px 0;
+}
 .display_price_info {
   display: flex;
   justify-content: space-between;

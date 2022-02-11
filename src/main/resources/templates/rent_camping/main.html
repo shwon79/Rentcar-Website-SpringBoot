@@ -38,9 +38,9 @@
         <div class="row" id="mainRow">
             <section id="feature" class="feature sections" style="margin: 0; padding: 0;">
                 <div class="space-medium" style="padding: 0;">
-                    <div class="row">
+                    <div class="row" style="margin-bottom: 70px;">
                         <div class="head_title sections text-center" style="padding-top: 30px;">
-                            <h1>캠핑카 렌트</h1>
+                            <h1 style="text-align: left;">캠핑카 렌트</h1>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="campingCar, i : ${imagesMainList}" style="padding-top: 30px;">
                             <div class="service-block text-center">
@@ -66,9 +66,9 @@
                             <!-- /.service block -->
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-bottom: 70px;">
                         <div class="head_title sections text-center" style="padding-top: 30px;">
-                            <h1>프로모션</h1>
+                            <h1 style="text-align: left;">프로모션</h1>
                             <br>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -78,12 +78,15 @@
                             <img th:src="@{/img/europe9.png}" alt="promotion">
                         </div>
                     </div>
-                    <div class="row tab_content_size" style="margin: 50px auto;">
+                    <div class="row" style="margin: 50px auto;">
                         <div class="head_title sections text-center" style="padding-top: 30px;">
-                            <h1>세이브카만의 장점</h1>
+                            <h1 style="text-align: left;">세이브카의 장점</h1>
+                            <br>
                         </div>
-                        <img th:src="@{/img/europe2.png}" alt="all">
-                        <img th:src="@{/img/europe3.png}" alt="all">
+                        <div class="tab_content_size">
+                            <img th:src="@{/img/europe2.png}" alt="all">
+                            <img th:src="@{/img/europe3.png}" alt="all">
+                        </div>
                     </div>
                 </div>
             </section>

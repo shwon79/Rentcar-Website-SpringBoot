@@ -326,6 +326,7 @@
             <!-- right column -->
             <div id="right_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60 text-center">
                 <div class="campingTitle">
+                    <p style="text-align: left;">세이브카</p>
                     <h1 class="car_name_under_images">
                         <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
                         <span>Camper</span>
@@ -361,17 +362,19 @@
                     </tr>
                 </table>
                 <div class="camping_price_info">
+                    <hr>
                     <select name="" id="displayPriceDay" class="select_display_price" th:onchange="displayPrice();">
                         <option value="">대여 기간</option>
                         <option value="1">1일권[선택 불가]</option>
                         <option th:each="num : ${#numbers.sequence(2,29)}" th:value="${num}" th:text="${num} + '일권'"></option>
                         <option value="30">한달권</option>
                     </select>
-                    <select name="" id="displayPricePeak" class="select_display_price" th:onchange="displayPrice();">
+                    <select name="" id="displayPricePeak" class="select_display_price" th:onchange="displayPrice();" style="margin-bottom: 0;">
                         <option value="">성수기/비성수기</option>
                         <option value="0">비성수기</option>
                         <option value="1">성수기</option>
                     </select>
+                    <hr>
                     <div class="display_price_info">
                         <span>총 금액</span>
                         <div style="font-size: 26px;">
@@ -431,7 +434,7 @@
 <!--                    <div id="review">-->
 <!--                        리뷰리뷰-->
 <!--                    </div>-->
-                    <div id="counsel">
+                    <div id="counsel" style="padding-top: 70px;">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <h2>상담 신청하기</h2>
