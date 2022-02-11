@@ -3,6 +3,7 @@ package kr.carz.savecar.dto;
 import kr.carz.savecar.domain.CampingCarPrice;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Column;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CampingCarPriceDTO {
 
     private String carNum;

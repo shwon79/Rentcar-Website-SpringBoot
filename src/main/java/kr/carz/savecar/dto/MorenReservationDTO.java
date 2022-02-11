@@ -3,11 +3,13 @@ package kr.carz.savecar.dto;
 import kr.carz.savecar.domain.MorenReservation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class MorenReservationDTO {
 
     private String carNo;      // 차량번호

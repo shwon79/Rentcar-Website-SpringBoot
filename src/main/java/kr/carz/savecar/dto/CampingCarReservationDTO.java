@@ -4,6 +4,7 @@ import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.domain.MorenReservation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Column;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CampingCarReservationDTO {
 
     private Integer agree;
