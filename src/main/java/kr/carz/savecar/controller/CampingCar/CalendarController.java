@@ -118,6 +118,7 @@ public class CalendarController {
         }
 
         mav.addObject("imagesMainList", imagesMainList);
+        mav.addObject("campingCarList", campingCarList);
 
         mav.setViewName("rent_camping/main");
 
