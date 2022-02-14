@@ -798,17 +798,17 @@ public class CampingCarController {
 
     @PutMapping(value="/admin/campingcar/mainText/title")
     @ResponseBody
-    public void putAdminCampingCarMainTextImageTitle(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException  {
+    public void putAdminCampingCarMainTextImageTitle(HttpServletResponse res, @RequestBody CampingCarMainTextVO campingCarMainTextVO) throws IOException  {
 
-        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+        for(CampingCarMainTextTitleVO imageTitleVO : campingCarMainTextVO.getCampingCarMainTextTitleList()){
 
-            Optional<Images> imagesWrapper = imagesService.findImageByImageId(imageTitleVO.getImageId());
+            Optional<CampingCarMainText> imagesWrapper = campingCarMainTextService.findImageByImageId(imageTitleVO.getImageId());
             if (imagesWrapper.isPresent()) {
 
-                Images images = imagesWrapper.get();
-                images.setTitle(imageTitleVO.getTitle());
+                CampingCarMainText campingCarMainText = imagesWrapper.get();
+                campingCarMainText.setTitle(imageTitleVO.getTitle());
 
-                imagesService.save(images);
+                campingCarMainTextService.save(campingCarMainText);
             }
         }
 
