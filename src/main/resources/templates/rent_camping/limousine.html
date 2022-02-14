@@ -382,6 +382,7 @@
                             <span>원</span>
                         </div>
                     </div>
+                    <button onclick="location.href='#counsel'" class="btn btn-primary" style="border: none; margin: 10px 0 20px 0; border-radius: 12px;">상담신청</button>
                     <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>
                 </div>
             </div>
@@ -416,16 +417,8 @@
                 <label class="tab_item" for="tab_counsel"><div onclick="location.href='#counsel'">상담신청</div></label>
                 <!--탭 내용-->
                 <div class="card tab_content_size">
-                    <div id="info">
-                        <img th:src="@{/img/limo1.png}" alt="limo">
-                        <img th:src="@{/img/limo2.png}" alt="limo">
-                        <img th:src="@{/img/limo3.png}" alt="limo">
-                        <img th:src="@{/img/limo4.png}" alt="limo">
-                        <img th:src="@{/img/limo5.png}" alt="limo">
-                        <img th:src="@{/img/limo6.png}" alt="limo">
-                        <img th:src="@{/img/limo7.png}" alt="limo">
-                        <img th:src="@{/img/limo8.png}" alt="limo">
-                        <img th:src="@{/img/limo9.png}" alt="limo">
+                    <div id="info" th:each="img, i:${campingCarMainTextList}">
+                        <img th:src="${img.url}" th:alt="${img.carName.carName}">
                     </div>
 <!--                    <div id="review">-->
 <!--                        리뷰리뷰-->

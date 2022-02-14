@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/admin.js}" defer></script>
-    <script th:src="@{/js/admin_campingcar_image.js}" defer></script>
+    <script th:src="@{/js/admin_campingcar_mainText.js}" defer></script>
     <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -46,53 +46,70 @@
         </nav>
 
         <div class="inner_content container" style="text-align: center;">
-            <h2 class="page_title">캠핑카 사진 수정</h2>
+            <h2 class="page_title">캠핑카 본문 수정</h2>
             <div style="margin-top: 30px;">
-                <p style="text-align: center;">준비 중 입니다.</p>
-<!--                <ul class="nav nav-tabs" style="justify-content: center;">-->
-<!--                    <li class="nav-item" th:each="car, i : ${imagesMainList}">-->
-<!--                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${car.carName.carName}}" th:text="${car.carName.carName.toUpperCase()}"-->
-<!--                           th:classappend="${i.index == 0 ? 'show active' : ''}" th:data-title="${car.carName.carName}"></a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                <div class="tab-content" style="margin-top: 30px;">-->
-<!--                    <div class="tab-pane fade"  th:each="car, i : ${imagesMainList}" th:id="${car.carName.carName}"-->
-<!--                         th:classappend="${i.index == 0 ? 'show active' : ''}">-->
-<!--                        <h4>상세정보</h4>-->
-<!--                        <div style="text-align: right; margin-bottom: 10px;">-->
-<!--                            <button class="btn btn-primary changeOrderBtn" onclick="displaySortingBox();">이미지 순서 변경</button>-->
-<!--                        </div>-->
-<!--                        <div class="changeOrderBox">-->
-<!--                            <div class="changeOrderBoxTop">-->
-<!--                                <span style="font-size: 18px;">추가 이미지 순서 변경</span>-->
-<!--                                <button onclick="displaySortingBox();" class="btn btn-outline-primary">X</button>-->
-<!--                            </div>-->
-<!--                            <ul class="sortable">-->
-<!--                                <li th:each="car, i : ${imagesExtraList[i.index]}" class="oneItem" th:classappend="${car.carName.carName}+'Item'" th:data-title="${car.title}" th:data-imageId="${car.imageId}">-->
-<!--                                    <div>-->
-<!--                                        <img th:src="${car.url}" th:alt="${car.imageId}">-->
-<!--                                        <span>추가 이미지</span>-->
-<!--                                        <span th:text="${i.index + 1}"></span>-->
-<!--                                    </div>-->
-<!--                                    <i class="fas fa-bars" style="margin-right: 10px;"></i>-->
-<!--                                </li>-->
-<!--                                <button class="btn btn-primary" th:onclick="saveChangedData([[${car.carName.carName}]]);">순서 변경하기</button>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                        <div class="image-box" th:if="${not #lists.isEmpty(imagesExtraList[i.index])}">-->
-<!--                            <div class="upload-box" th:each="car, i : ${imagesExtraList[i.index]}">-->
-<!--                                <div style="text-align: right; margin-bottom: 10px;">-->
-<!--                                    <button class="btn btn-danger" th:onclick="uploadImage('extraDelete', [[${car.carName.carName}]], '0', [[${car.imageId}]])">삭제하기</button>-->
-<!--                                </div>-->
-<!--                                <img th:src="${car.url}" th:alt="${car.imageId}">-->
-<!--                            </div>-->
-<!--                            <div class="upload-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">-->
-<!--                                <input type="file" name="file" th:title="${car.carName.carName}" th:data-title="${car.imageId}" style="width: -webkit-fill-available;">-->
-<!--                                <button class="btn btn-primary" th:onclick="uploadImage('extraUpload', [[${car.carName.carName}]], [[${car.imageId}]], [[${car.imageId}]])" style="margin-top: 10px;">이미지 넣기</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+<!--                <p style="text-align: center;">준비 중 입니다.</p>-->
+                <ul class="nav nav-tabs" style="justify-content: center;">
+                    <li class="nav-item" th:each="car, i : ${mainTextList}">
+                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${car[0].carName.carName}}" th:text="${car[0].carName.carName.toUpperCase()}"
+                           th:classappend="${i.index == 0 ? 'show active' : ''}" th:data-title="${car[0].carName.carName}"></a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="margin-top: 30px;">
+                    <div class="tab-pane fade"  th:each="campingCar, i : ${mainTextList}" th:id="${campingCar[0].carName.carName}"
+                         th:classappend="${i.index == 0 ? 'show active' : ''}">
+                        <h4>
+                            <span th:text="${campingCar[0].carName.carName.toUpperCase()}"></span>
+                            <span> 본문 이미지</span>
+                        </h4>
+                        <div style="text-align: right; margin-bottom: 10px;">
+                            <button class="btn btn-primary changeOrderBtn" onclick="displaySortingBox();">이미지 순서 변경</button>
+                        </div>
+                        <div class="changeOrderBox">
+                            <div class="changeOrderBoxTop">
+                                <span style="font-size: 18px;">이미지 순서 변경</span>
+                                <button onclick="displaySortingBox();" class="btn btn-outline-primary">X</button>
+                            </div>
+                            <ul class="sortable">
+                                <li th:each="car, i : ${mainTextList[i.index]}" class="oneItem" th:classappend="${car.carName.carName}+'Item'" th:data-title="${car.title}" th:data-imageId="${car.imageId}">
+                                    <div>
+                                        <img th:src="${car.url}" th:alt="${car.imageId}" style="max-height: 500px;">
+                                        <span>본문 이미지</span>
+                                        <span th:text="${i.index + 1}"></span>
+                                    </div>
+                                    <i class="fas fa-bars" style="margin-right: 10px;"></i>
+                                </li>
+                                <button class="btn btn-primary"
+                                        th:onclick="saveChangedData([[${campingCar[0].carName.carName}]]);">
+                                    순서 변경하기
+                                </button>
+                            </ul>
+                        </div>
+                        <div class="image-box" th:if="${not #lists.isEmpty(mainTextList[i.index])}">
+                            <div class="upload-box" th:each="car, i : ${mainTextList[i.index]}" style="height: auto;">
+                                <p>
+                                    <span th:text="${i.index + 1}"></span>
+                                    <span>번째 이미지</span>
+                                </p>
+                                <div style="text-align: right; margin-bottom: 10px;">
+                                    <button class="btn btn-danger"
+                                            th:onclick="uploadImage('delete', [[${car.carName.carName}]], '0', [[${car.imageId}]])">
+                                        삭제하기
+                                    </button>
+                                </div>
+                                <img th:src="${car.url}" th:alt="${car.imageId}" style="height: auto;">
+                            </div>
+                            <div class="upload-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <input type="file" name="file" th:title="${campingCar[0].carName.carName}" th:data-title="${campingCar[0].imageId}" style="width: -webkit-fill-available;">
+                                <button class="btn btn-primary"
+                                        th:onclick="uploadImage('upload', [[${campingCar[0].carName.carName}]], [[${campingCar[0].imageId}]], [[${campingCar[0].imageId}]], [[${campingCar[0].imageId}]])"
+                                        style="margin-top: 10px;">
+                                    이미지 넣기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
