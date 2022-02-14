@@ -789,7 +789,7 @@ public class CampingCarController {
     }
 
 
-    @PostMapping(value="/admin/campingcar/mainText", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
+    @PostMapping(value="/admin/campingcar/mainText", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public void postAdminCampingCarMainTextImage(HttpServletResponse res, CampingCarMainTextDTO dto) throws IOException {
 
@@ -799,13 +799,6 @@ public class CampingCarController {
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarName());
         campingCarMainTextService.saveDTO(dto, campingCarPrice);
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
     }
 
 
