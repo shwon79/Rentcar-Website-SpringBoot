@@ -51,7 +51,8 @@
                                 <!-- service img -->
                                 <div class="service-img">
                                     <!-- service img -->
-                                    <div th:onclick="moveToCampingReservation([[${campingCar.carName}]])" style="cursor: pointer;">
+                                    <div th:onclick="moveToCampingReservation([[${campingCar.carName}]])"
+                                        th:style="${campingCar.carName == 'travel'} ? 'pointer-events: none;' : 'cursor: pointer'">
                                         <img th:if="${imagesMainList[i.index].imageId != -1}" th:src="${imagesMainList[i.index].url}" width="360" height="360" style="border-radius: 20px;">
                                         <img th:if="${imagesMainList[i.index].imageId == -1}" th:src="@{/img/popup_campingcar.png}" width="360" height="360" style="border-radius: 20px;">
                                     </div>
@@ -87,6 +88,7 @@
                                     <p style="text-align: right; color: dodgerblue; margin-top: 10px;">
                                         <span th:id="${campingCar.carName + 'Price'}" style="font-family: 'Black Han Sans', sans-serif; font-size: 24px;"></span>
                                         <span>원 부터</span>
+                                        <span th:if="${campingCar.carName=='travel'}" style="color: black;">[장기 대여중]</span>
                                     </p>
                                 </div>
                             </div>
@@ -99,10 +101,13 @@
                             </p>
                             <br>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <img th:src="@{/img/europe1.png}" alt="promotion">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <img th:src="@{/img/euro_price.png}" alt="promotion">
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <img th:src="@{/img/limo_price.png}" alt="promotion">
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <img th:src="@{/img/europe9.png}" alt="promotion">
                         </div>
                     </div>
