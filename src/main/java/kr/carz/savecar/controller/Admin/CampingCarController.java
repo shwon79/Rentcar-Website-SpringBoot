@@ -219,9 +219,19 @@ public class CampingCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<CampingCarMainText> campingCarMainTextList = campingCarMainTextService.findAllImage();
 
-        mav.addObject("campingCarMainTextList", campingCarMainTextList);
+        List<CampingCarPrice> campingCarPriceAll = campingCarPriceService.findAllCampingCarPrice();
+
+        List<List<CampingCarMainText>> mainTextList = new ArrayList<>();
+
+        for(CampingCarPrice campingCar : campingCarPriceAll){
+            List<CampingCarMainText> imagesListByCarName = campingCarMainTextService.findImageByCarName(campingCar);
+
+            Collections.sort(imagesListByCarName);
+            mainTextList.add(imagesListByCarName);
+        }
+        mav.addObject("mainTextList", mainTextList);
+
         mav.setViewName("admin/campingcar_mainText_menu");
 
         return mav;
