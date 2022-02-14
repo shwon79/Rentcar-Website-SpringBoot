@@ -27,7 +27,7 @@
     <script th:src="@{/js/europe_reserve.js}" defer ></script>
 </head>
 
-<body onload="displayLimousinePrice();">
+<body th:onload="getPriceData([[${imagesList[0].carName.carName}]])">
 <div layout:fragment="content">
     <div th:replace="fragments/header_camp::headerFragment"></div>
 
@@ -53,17 +53,6 @@
                 <span class="icon-next" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
-        </div>
-        <div class="mobileCampingTitle campingTitle">
-            <p style="font-size: initial;">세이브카</p>
-            <h1 class="car_name_under_images">
-                <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
-                <span>Camper</span>
-            </h1>
-            <p class="title_price">
-                <span id="cheapestPriceMobile" class="cheapestPrice"></span>
-                <span>원~</span>
-            </p>
         </div>
     </div>
 
@@ -101,19 +90,33 @@
                             <img th:src="${image.url}" th:alt="${image.carName.carName}">
                         </div>
                     </div>
-                    <div class="desktopCampingTitle campingTitle">
-                        <p style="font-size: initial;">세이브카</p>
-                        <h1 class="car_name_under_images">
-                            <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
-                            <span>Camper</span>
-                        </h1>
-                        <p class="title_price">
-                            <span id="cheapestPriceDesktop" class="cheapestPrice"></span>
-                            <span>원~</span>
-                        </p>
-                    </div>
+                    <!--기본 정보-->
+                    <table class="camping_info_table" style="margin-top: 30px;">
+                        <tr>
+                            <td>CAMPER 명</td>
+                            <td>
+                                <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
+                                <span>VIP</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>연료 / 미션</td>
+                            <td>
+                                <span th:text="${explanation.fuel}"></span>
+                                <span> / </span>
+                                <span th:text="${explanation.gearBox}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>면허 종류</td>
+                            <td th:text="${explanation.license}"></td>
+                        </tr>
+                        <tr>
+                            <td>인원정보</td>
+                            <td th:text="${explanation.personnel}"></td>
+                        </tr>
+                    </table>
                 </div>
-
                 <!--탭 메뉴-->
 <!--                <div class="row card" style="margin-top: 50px;">-->
 <!--                    <div class="tabs">-->
@@ -322,210 +325,145 @@
 
             <!-- right column -->
             <div id="right_column" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-bottom-60 text-center">
-                <!--탭 메뉴-->
-                <div class="row card">
-                    <div class="tabs">
-                        <input id="info" type="radio" name="tab_item" checked>
-                        <label class="tab_item" for="info">상세정보</label>
-<!--                        <input id="review" type="radio" name="tab_item">-->
-<!--                        <label class="tab_item" for="review">후기</label>-->
-                        <input id="qna" type="radio" name="tab_item">
-                        <label class="tab_item" for="qna">상담신청</label>
-
-                        <div class="tab_content" id="info_content">
-                            <!--기본 정보-->
-                            <div class="row white-card" style="margin: 0;">
-                                <h1 class="title">
-                                    <i class="fas fa-circle"></i>
-                                    CAMPER 기본 정보
-                                </h1>
-                                <div class="contents">
-                                    <table class="camping_info_table">
-                                        <tr>
-                                            <td>CAMPER 명</td>
-                                            <td>Limousine VIP</td>
-                                        </tr>
-                                        <tr>
-                                            <td>연료 / 미션</td>
-                                            <td>
-                                                <span th:text="${explanation.fuel}"></span>
-                                                <span> / </span>
-                                                <span th:text="${explanation.gearBox}"></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>면허 종류</td>
-                                            <td th:text="${explanation.license}"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>인원정보</td>
-                                            <td th:text="${explanation.personnel}"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <!--요금-->
-                            <div class="row white-card" style="margin: 0;">
-                                <h1 class="title">
-                                    <i class="fas fa-circle"></i>
-                                    CAMPER 요금
-                                </h1>
-                                <div class="contents">
-                                    <!--                        <img th:src="@{/img/limousine-detail-price.png}" id="priceImg" width="100%" height="70%">-->
-                                    <table id="limousine_price_table" class="camping_price_table">
-                                        <tr>
-                                            <td></td>
-                                            <td>비수기</td>
-                                            <td style="background-color: #e0f5fb;">성수기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1일</td>
-                                            <td id="limoOffOne"></td>
-                                            <td id="limoPeakOne" style="background-color: #e0f5fb;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2일</td>
-                                            <td id="limoOffTwo"></td>
-                                            <td id="limoPeakTwo" style="background-color: #e0f5fb;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3일</td>
-                                            <td id="limoOffThree"></td>
-                                            <td id="limoPeakThree" style="background-color: #e0f5fb;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4일</td>
-                                            <td id="limoOffFour"></td>
-                                            <td id="limoPeakFour" style="background-color: #e0f5fb;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5일</td>
-                                            <td id="limoOffFive"></td>
-                                            <td id="limoPeakFive" style="background-color: #e0f5fb;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>7일</td>
-                                            <td id="limoOffSeven"></td>
-                                            <td id="limoPeakSeven" style="background-color: #e0f5fb;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>10일</td>
-                                            <td id="limoOffTen"></td>
-                                            <td id="limoPeakTen" style="background-color: #e0f5fb;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border-bottom: 1px solid black;">15일</td>
-                                            <td style="border-bottom: 1px solid black;" id="limoOffFifteen"></td>
-                                            <td style="border-bottom: 1px solid black; background-color: #e0f5fb;" id="limoPeakFifteen"></td>
-                                        </tr>
-                                        <tr>
-                                            <td rowspan="2" style="color: mediumblue;">자차 포함</td>
-                                            <td>Deposit</td>
-                                            <td>총 렌트료의 50%</td>
-                                        </tr>
-                                        <tr>
-                                            <td>월렌트</td>
-                                            <td id="limoMonth"></td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>
-                                </div>
-
-                            </div>
-                            <!--기본옵션-->
-                            <div class="row white-card" style="margin: 0;">
-                                <h1 class="title">
-                                    <i class="fas fa-circle"></i>
-                                    CAMPER 기본 옵션
-                                </h1>
-                                <div th:replace="/fragments/camping_explanations.html :: limousine_basic_option"></div>
-                            </div>
-                            <!--시설-->
-                            <div class="row white-card" style="margin: 0;">
-                                <h1 class="title">
-                                    <i class="fas fa-circle"></i>
-                                    CAMPER 시설
-                                </h1>
-                                <div th:replace="/fragments/camping_explanations.html :: limousine_installation"></div>
-                            </div>
-                            <!--렌트정책-->
-                            <div class="row white-card" style="margin: 0;">
-                                <h1 class="title">
-                                    <i class="far fa-circle"></i>
-                                    CAMPER 렌트정책
-                                </h1>
-                                <div th:replace="/fragments/camping_explanations.html :: rent_policy"></div>
-                            </div>
-                            <!--보험사항-->
-                            <div class="row white-card" style="margin: 0;">
-                                <h1 class="title">
-                                    <i class="far fa-circle"></i>
-                                    CAMPER 보험사항
-                                </h1>
-                                <div th:replace="/fragments/camping_explanations.html :: rent_insurance"></div>
-                            </div>
-                            <!--이용규칙-->
-                            <div class="row white-card" style="margin: 0;">
-                                <h1 class="title">
-                                    <i class="far fa-circle"></i>
-                                    CAMPER 이용규칙
-                                </h1>
-                                <div th:replace="/fragments/camping_explanations.html :: rent_rule"></div>
-                            </div>
-                            <!--환불정책-->
-                            <div class="row white-card" style="margin: 0;">
-                                <h1 class="title">
-                                    <i class="far fa-circle"></i>
-                                    CAMPER 환불정책
-                                </h1>
-                                <div th:replace="/fragments/camping_explanations.html :: refund_policy"></div>
-                            </div>
+                <div class="campingTitle">
+                    <p style="text-align: left;">세이브카</p>
+                    <h1 class="car_name_under_images">
+                        <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
+                        <span>Camper</span>
+                    </h1>
+                    <p class="title_price">
+                        <span id="cheapestPrice" class="cheapestPrice"></span>
+                        <span>원~</span>
+                    </p>
+                </div>
+                <table class="camping_info_table" id="mobileInfoTable" style="margin: 20px 0;">
+                    <tr>
+                        <td>CAMPER 명</td>
+                        <td>
+                            <span th:text="${imagesList[0].carName.carName.toUpperCase()}"></span>
+                            <span>VIP</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>연료 / 미션</td>
+                        <td>
+                            <span th:text="${explanation.fuel}"></span>
+                            <span> / </span>
+                            <span th:text="${explanation.gearBox}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>면허 종류</td>
+                        <td th:text="${explanation.license}"></td>
+                    </tr>
+                    <tr>
+                        <td>인원정보</td>
+                        <td th:text="${explanation.personnel}"></td>
+                    </tr>
+                </table>
+                <div class="camping_price_info">
+                    <hr>
+                    <select name="" id="displayPriceDay" class="select_display_price" th:onchange="displayPrice();">
+                        <option value="">대여 기간</option>
+                        <option value="1">1일권[선택 불가]</option>
+                        <option th:each="num : ${#numbers.sequence(2,29)}" th:value="${num}" th:text="${num} + '일권'"></option>
+                        <option value="30">한달권</option>
+                    </select>
+                    <select name="" id="displayPricePeak" class="select_display_price" th:onchange="displayPrice();" style="margin-bottom: 0;">
+                        <option value="">성수기/비성수기</option>
+                        <option value="0">비성수기</option>
+                        <option value="1">성수기</option>
+                    </select>
+                    <hr>
+                    <div class="display_price_info">
+                        <span>총 금액</span>
+                        <div style="font-size: 26px;">
+                            <span id="priceInfo"></span>
+                            <span>원</span>
                         </div>
-<!--                        <div class="tab_content" id="review_content">-->
-<!--                        </div>-->
-                        <div class="tab_content" id="qna_content">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <h2>상담 신청하기</h2>
-                                    <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
-                                    <div name="reservation_info" id="rentProduct" value="유럽">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="form-group has-feedback">
-                                                    <label class="control-label" for="name">이름</label>
-                                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                        <input type="text" class="form-control" id="reservation-detail-name" placeholder="성함을 입력해주세요.">
-                                                    </div>
+                    </div>
+                    <button onclick="location.href='#counsel'" class="btn btn-primary" style="border: none; margin: 10px 0 20px 0; border-radius: 12px;">상담신청</button>
+                    <div th:replace="/fragments/camping_explanations.html :: camper_price"></div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="row">-->
+<!--            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-60 text-center">-->
+<!--                <a href="#info">-->
+<!--                    <button>상세정보</button>-->
+<!--                </a>-->
+<!--                <a href="#review">-->
+<!--                    <button>후기</button>-->
+<!--                </a>-->
+<!--                <a href="#counsel">-->
+<!--                    <button>상담신청</button>-->
+<!--                </a>-->
+<!--&lt;!&ndash;                <input id="info" type="radio" name="tab_item" checked>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="#info_content"><label class="tab_item" for="info">상세정보</label></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <input id="review" type="radio" name="tab_item">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label class="tab_item" for="review">후기</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <input id="qna" type="radio" name="tab_item">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label class="tab_item" for="qna">상담신청</label>&ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-60 text-center whole_tab">
+                <!--탭 메뉴-->
+                <input id="tab_info" type="radio" name="tab_item" checked>
+                <label class="tab_item" for="tab_info"><div onclick="location.href='#info'">상세정보</div></label>
+<!--                <input id="tab_review" type="radio" name="tab_item">-->
+<!--                <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">후기</div></label>-->
+                <input id="tab_counsel" type="radio" name="tab_item">
+                <label class="tab_item" for="tab_counsel"><div onclick="location.href='#counsel'">상담신청</div></label>
+                <!--탭 내용-->
+                <div class="card tab_content_size">
+                    <div id="info" th:each="img, i:${campingCarMainTextList}">
+                        <img th:src="${img.url}" th:alt="${img.carName.carName}">
+                    </div>
+<!--                    <div id="review">-->
+<!--                        리뷰리뷰-->
+<!--                    </div>-->
+                    <div id="counsel" style="padding-top: 70px;">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h2>상담 신청하기</h2>
+                                <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
+                                <div name="reservation_info" id="rentProduct" value="유럽">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="name">이름</label>
+                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="성함을 입력해주세요.">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="form-group has-feedback">
-                                                    <label class="control-label" for="phone">연락처</label>
-                                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                        <input type="text" class="form-control" id="reservation-detail-phone" placeholder="연락처 ex) 010-0000-0000">
-                                                    </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="phone">연락처</label>
+                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="연락처 ex) 010-0000-0000">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="form-group has-feedback">
-                                                    <label class="control-label" for="textarea">요청 사항</label>
-                                                    <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="21세 이상 및 렌트기간, 문의사항 등을 입력하세요."></textarea>
-                                                </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="textarea">요청 사항</label>
+                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="21세 이상 및 렌트기간, 문의사항 등을 입력하세요."></textarea>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="form-group has-feedback">
-                                                    <p><font color="red" style="font-weight: bold;"> * 21세 이상은 요청 사항에 입력해주세요 </font></p>
-                                                    <p><font style="font-weight: bold;"> * 문의 : 010-5277-4113  /  1544-4680 </font></p>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <p><font color="red" style="font-weight: bold;"> * 21세 이상은 요청 사항에 입력해주세요 </font></p>
+                                                <p><font style="font-weight: bold;"> * 문의 : 010-5277-4113  /  1544-4680 </font></p>
 
-                                                    <br />
-                                                    <p class="text-center"><input type="checkbox" id="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
-                                                </div>
+                                                <br />
+                                                <p class="text-center"><input type="checkbox" id="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="form-group text-center">
-                                                    <a class="btn1 btn1-default" style="background-color: royalblue;" onclick="campingcar_rent_reservation()">상담신청 </a>
-                                                </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group text-center">
+                                                <a class="btn1 btn1-default" style="background-color: royalblue;" onclick="campingcar_rent_reservation()">상담신청 </a>
                                             </div>
                                         </div>
                                     </div>
@@ -749,6 +687,7 @@
             </div>
 <!--            <button class="see_modal" onclick="seeMobileReserve('open');">예약하기</button>-->
         </div>
+        <button onclick="topFunction()" id="toTheTopBtn" title="Go to top">⬆</button>
     </div>
 </div>
 </body>

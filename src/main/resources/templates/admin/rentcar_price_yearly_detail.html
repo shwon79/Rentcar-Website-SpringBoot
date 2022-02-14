@@ -1,0 +1,157 @@
+<!-- 관리자 12개월 렌트 가격 수정 상세 페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin_rent_car.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_rentcar.js}" defer></script>
+
+    <script>
+        $(window).on('load', function () {
+            let priceYearlyMenu = document.getElementById('priceYearlyMenu');
+            priceYearlyMenu.classList.add('activeAdminMenu');
+        });
+    </script>
+
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content" style="width: 95%;">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container inner_content" style="width: 100%;">
+            <h2 class="page_title" style="text-align: center;">12개월 상세 가격 수정</h2>
+            <div class="detail_container">
+                <div class="detail_list" id="go_back_wrapper">
+                    <a href="/admin/rentcar/price/monthly/menu">
+                        <button id="go_back">
+                            <i class="fas fa-arrow-left"></i>  뒤로가기
+                        </button>
+                    </a>
+                    <button class="btn btn-primary" th:onclick="editMonthlyPriceDetail([[${yearlyRent.id}]])">수정하기</button>
+                </div>
+                <div class="detail_list" id="detail_set_reserve">
+<!--                    <button class="set_reserve" onclick="setCampingReserve('confirm')"-->
+<!--                            th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">-->
+<!--                        모렌전송-->
+<!--                    </button>-->
+<!--                    <button class="set_reserve" onclick="setCampingReserve('delete')"-->
+<!--                            th:style="${campingCarReservation.reservation} == 0? 'pointer-events:none; background: gray ' : null">-->
+<!--                        모렌전송 회수-->
+<!--                    </button>-->
+<!--                    <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="setCampingReserve('edit')">-->
+<!--                        내용 수정-->
+<!--                    </button>-->
+                </div>
+                <div class="detail_list" id="detail_list_title">
+                    <p>종류</p>
+                    <p>값</p>
+                </div>
+<!--                <div class="detail_list">-->
+<!--                    <p>종류</p>-->
+<!--                    <select name="category1" class="category1" id="category1" onchange="displayCategory2(this);" th:data-title="${yearlyRent.id}">-->
+<!--                        <option value="국산승용" th:selected="${yearlyRent.category1} == '국산승용' ? true : false">국산승용</option>-->
+<!--                        <option value="국산승합•RV" th:selected="${yearlyRent.category1} == '국산승합•RV' ? true : false">국산승합•RV</option>-->
+<!--                        <option value="수입차" th:selected="${yearlyRent.category1} == '수입차' ? true : false">수입차</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>분류</p>-->
+<!--                    <select name="category2" class="category2" id="category2" th:data-title="${yearlyRent.id}">-->
+<!--                        <option value="경형" th:selected="${yearlyRent.category2} == '경형' ? true : false">경형</option>-->
+<!--                        <option value="준중형" th:selected="${yearlyRent.category2} == '준중형' ? true : false">준중형</option>-->
+<!--                        <option value="중형" th:selected="${yearlyRent.category2} == '중형' ? true : false">중형</option>-->
+<!--                        <option value="중대형" th:selected="${yearlyRent.category2} == '중대형' ? true : false">중대형</option>-->
+<!--                        <option value="대형" th:selected="${yearlyRent.category2} == '대형' ? true : false">대형</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>차명 년식</p>-->
+<!--                    <textarea type="text" id="name" th:text="${yearlyRent.name}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>보증금</p>-->
+<!--                    <textarea type="text" id="deposit" th:text="${#numbers.formatInteger(yearlyRent.deposit, 0, 'COMMA')}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>20,000km</p>-->
+<!--                    <textarea type="text" id="cost_for_2k" th:text="${#numbers.formatInteger(yearlyRent.cost_for_20k, 0, 'COMMA')}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>30,000km</p>-->
+<!--                    <textarea type="text" id="cost_for_3k" th:text="${#numbers.formatInteger(yearlyRent.cost_for_30k, 0, 'COMMA')}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>40,000km</p>-->
+<!--                    <textarea type="text" id="cost_for_4k" th:text="${#numbers.formatInteger(yearlyRent.cost_for_40k, 0, 'COMMA')}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>other</p>-->
+<!--                    <textarea type="text" id="cost_for_others" th:text="${yearlyRent.cost_for_others}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>21세</p>-->
+<!--                    <textarea type="text" id="age_limit" th:text="${#numbers.formatInteger(yearlyRent.age_limit, 0, 'COMMA')}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>km당 추가요금</p>-->
+<!--                    <textarea type="text" id="cost_per_km" th:text="${yearlyRent.cost_per_km}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>모렌_차명</p>-->
+<!--                    <textarea type="text" id="nameMoren" th:text="${yearlyRent.nameMoren}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>년식_시작</p>-->
+<!--                    <textarea type="text" id="start" th:text="${yearlyRent.start}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>년식_끝</p>-->
+<!--                    <textarea type="text" id="end" th:text="${yearlyRent.end}"></textarea>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>신용</p>-->
+<!--                    <select name="credit" id="credit">-->
+<!--                        <option value="0" th:selected="${yearlyRent.credit == '0' ? true : false}">0</option>-->
+<!--                        <option value="1" th:selected="${yearlyRent.credit == '1' ? true : false}">1</option>-->
+<!--                        <option value="2" th:selected="${yearlyRent.credit == '2' ? true : false}">2</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="detail_list">-->
+<!--                    <p>img_url</p>-->
+<!--                    <div style="display: flex; flex-direction: column; align-items: flex-end;">-->
+<!--                        <img th:src="${yearlyRent.img_url}" alt="img" style="width: 50%" id="img_url">-->
+<!--                        <input type="file" style="width: 85%;">-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+</body>
+
+</html>

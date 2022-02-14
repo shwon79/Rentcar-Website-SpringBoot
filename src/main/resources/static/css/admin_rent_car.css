@@ -2,7 +2,9 @@
     padding: 0;
     vertical-align: middle;
 }
-
+.deposit {
+    display: block;
+}
 @media screen and (max-width: 600px) {
     .display_none_mobile {
         display: none;

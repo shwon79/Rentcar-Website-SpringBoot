@@ -7,7 +7,7 @@ $(document).ready(function () {
     campingSubmenuBtn.addEventListener('click', () => {
         document.getElementById('campingcarSubmenu').classList.toggle('camping-open');
         if (document.getElementById('campingcarSubmenu').classList.contains('camping-open')) {
-            document.getElementById('price-submenu-btn').style.top = '393px';
+            document.getElementById('price-submenu-btn').style.top = '433px';
         } else {
             document.getElementById('price-submenu-btn').style.top = '190px';
         }

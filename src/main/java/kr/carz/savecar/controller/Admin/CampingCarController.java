@@ -30,6 +30,7 @@ public class CampingCarController {
     private final ReservationController reservationController;
     private final ImagesService imagesService;
     private final S3Service s3Service;
+    private final CampingCarMainTextService campingCarMainTextService;
 
     @Autowired
     public CampingCarController(CampingcarReservationService campingcarReservationService,
@@ -37,7 +38,7 @@ public class CampingCarController {
                                 CalendarDateService calendarDateService, DateCampingService dateCampingService,
                                 CampingCarPriceRateService campingCarPriceRateService,
                                 ReservationController reservationController, ImagesService imagesService,
-                                S3Service s3Service) {
+                                S3Service s3Service, CampingCarMainTextService campingCarMainTextService) {
         this.campingcarReservationService = campingcarReservationService;
         this.calendarTimeService = calendarTimeService;
         this.campingCarPriceService = campingCarPriceService;
@@ -47,6 +48,7 @@ public class CampingCarController {
         this.reservationController = reservationController;
         this.imagesService = imagesService;
         this.s3Service = s3Service;
+        this.campingCarMainTextService = campingCarMainTextService;
     }
 
     @Value("${phone.admin1}")
@@ -205,6 +207,32 @@ public class CampingCarController {
         mav.addObject("imagesExtraList", imagesExtraList);
 
         mav.setViewName("admin/campingcar_image_menu");
+
+        return mav;
+    }
+
+
+    // [관리자 메인페이지] 캠핑카 본문 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/mainText/menu")
+    @ResponseBody
+    public ModelAndView get_campingcar_main_text_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+
+        List<CampingCarPrice> campingCarPriceAll = campingCarPriceService.findAllCampingCarPrice();
+
+        List<List<CampingCarMainText>> mainTextList = new ArrayList<>();
+
+        for(CampingCarPrice campingCar : campingCarPriceAll){
+            List<CampingCarMainText> imagesListByCarName = campingCarMainTextService.findImageByCarName(campingCar);
+
+            Collections.sort(imagesListByCarName);
+            mainTextList.add(imagesListByCarName);
+        }
+        mav.addObject("mainTextList", mainTextList);
+
+        mav.setViewName("admin/campingcar_mainText_menu");
 
         return mav;
     }
@@ -757,6 +785,54 @@ public class CampingCarController {
     public void deleteAdminCampingCarImage(@PathVariable Long imageId) {
 
         imagesService.delete(imageId);
+
+    }
+
+
+    @PostMapping(value="/admin/campingcar/mainText", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public void postAdminCampingCarMainTextImage(HttpServletResponse res, CampingCarMainTextDTO dto) throws IOException {
+
+        String imgPath = s3Service.upload(dto.getFile());
+        dto.setUrl(imgPath);
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarName());
+        campingCarMainTextService.saveDTO(dto, campingCarPrice);
+
+    }
+
+
+    @PutMapping(value="/admin/campingcar/mainText/title")
+    @ResponseBody
+    public void putAdminCampingCarMainTextImageTitle(HttpServletResponse res, @RequestBody CampingCarMainTextVO campingCarMainTextVO) throws IOException  {
+
+        for(CampingCarMainTextTitleVO imageTitleVO : campingCarMainTextVO.getCampingCarMainTextTitleList()){
+
+            Optional<CampingCarMainText> imagesWrapper = campingCarMainTextService.findImageByImageId(imageTitleVO.getImageId());
+            if (imagesWrapper.isPresent()) {
+
+                CampingCarMainText campingCarMainText = imagesWrapper.get();
+                campingCarMainText.setTitle(imageTitleVO.getTitle());
+
+                campingCarMainTextService.save(campingCarMainText);
+            }
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @DeleteMapping("/admin/campingcar/mainText/{imageId}")
+    @ResponseBody
+    public void deleteAdminCampingCarMainTextImage(@PathVariable Long imageId) {
+
+        campingCarMainTextService.delete(imageId);
 
     }
 }

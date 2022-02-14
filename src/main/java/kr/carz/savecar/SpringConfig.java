@@ -24,6 +24,7 @@ public class SpringConfig {
     private final ImagesRepository imagesRepository;
     private final ValuesForWebRepository valuesForWebRepository;
     private final CampingCarPriceRateRepository campingCarPriceRateRepository;
+    private final CampingCarMainTextRepository campingCarMainTextRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -34,7 +35,8 @@ public class SpringConfig {
                         CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository,
                         DateCampingRepository dateCampingRepository, CampingcarReservationRepository campingcarReservationRepository,
                         AdminRepository adminRepository, ImagesRepository imagesRepository,
-                        ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository) {
+                        ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository,
+                        CampingCarMainTextRepository campingCarMainTextRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -51,6 +53,7 @@ public class SpringConfig {
         this.imagesRepository = imagesRepository;
         this.valuesForWebRepository = valuesForWebRepository;
         this.campingCarPriceRateRepository = campingCarPriceRateRepository;
+        this.campingCarMainTextRepository = campingCarMainTextRepository;
     }
 
     @Bean
@@ -104,4 +107,7 @@ public class SpringConfig {
 
     @Bean
     public CampingCarPriceRateService campingCarPriceRateService() { return new CampingCarPriceRateService(campingCarPriceRateRepository); }
+
+    @Bean
+    public CampingCarMainTextService campingCarMainTextService() { return new CampingCarMainTextService(campingCarMainTextRepository); }
 }

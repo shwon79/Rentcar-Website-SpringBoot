@@ -29,12 +29,14 @@ public class CalendarController {
     private final CampingcarReservationService campingcarReservationService;
     private final CampingCarPriceRateService campingCarPriceRateService;
     private final ImagesService imagesService;
+    private final CampingCarMainTextService campingCarMainTextService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
-                              CampingCarPriceRateService campingCarPriceRateService, ImagesService imagesService) {
+                              CampingCarPriceRateService campingCarPriceRateService, ImagesService imagesService,
+                              CampingCarMainTextService campingCarMainTextService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
@@ -42,6 +44,7 @@ public class CalendarController {
         this.campingcarReservationService = campingcarReservationService;
         this.campingCarPriceRateService = campingCarPriceRateService;
         this.imagesService = imagesService;
+        this.campingCarMainTextService = campingCarMainTextService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -118,6 +121,7 @@ public class CalendarController {
         }
 
         mav.addObject("imagesMainList", imagesMainList);
+        mav.addObject("campingCarList", campingCarList);
 
         mav.setViewName("rent_camping/main");
 
@@ -263,6 +267,10 @@ public class CalendarController {
             imagesList.add(0, imagesListByCarNameMain.get(0));
         }
 
+        List<CampingCarMainText> campingCarMainTextList = campingCarMainTextService.findImageByCarName(campingCarPrice);
+        Collections.sort(campingCarMainTextList);
+
+        model.put("campingCarMainTextList", campingCarMainTextList);
         model.put("imagesList", imagesList);
         model.put("explanation", explanation);
 

@@ -1134,6 +1134,7 @@ div.popStyle1, div.popStyle2 {
     border-bottom : none;
     vertical-align: baseline;
     color: white;
+    width: 50%;
 }
 .popup1_box1 table tr td:first-child {
     border-right: dashed 1px white;

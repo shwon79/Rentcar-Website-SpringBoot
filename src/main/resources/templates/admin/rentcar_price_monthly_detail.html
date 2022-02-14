@@ -50,6 +50,7 @@
                             <i class="fas fa-arrow-left"></i>  뒤로가기
                         </button>
                     </a>
+                    <button class="btn btn-primary" th:onclick="editMonthlyPriceDetail([[${monthlyRent.id}]])">수정하기</button>
                 </div>
                 <div class="detail_list" id="detail_set_reserve">
 <!--                    <button class="set_reserve" onclick="setCampingReserve('confirm')"-->
@@ -70,7 +71,7 @@
                 </div>
                 <div class="detail_list">
                     <p>종류</p>
-                    <select name="category1" class="category1" onchange="displayCategory2(this);" th:data-title="${monthlyRent.id}">
+                    <select name="category1" class="category1" id="category1" onchange="displayCategory2(this);" th:data-title="${monthlyRent.id}">
                         <option value="국산승용" th:selected="${monthlyRent.category1} == '국산승용' ? true : false">국산승용</option>
                         <option value="국산승합•RV" th:selected="${monthlyRent.category1} == '국산승합•RV' ? true : false">국산승합•RV</option>
                         <option value="수입차" th:selected="${monthlyRent.category1} == '수입차' ? true : false">수입차</option>
@@ -78,65 +79,70 @@
                 </div>
                 <div class="detail_list">
                     <p>분류</p>
-                    <select name="category2" class="category2" th:data-title="${monthlyRent.id}">
-                        <option value="경형" th:selected="${monthlyRent.category2} == '경형' ? true : false">경형</option>
-                        <option value="준중형" th:selected="${monthlyRent.category2} == '준중형' ? true : false">준중형</option>
-                        <option value="중형" th:selected="${monthlyRent.category2} == '중형' ? true : false">중형</option>
-                        <option value="중대형" th:selected="${monthlyRent.category2} == '중대형' ? true : false">중대형</option>
-                        <option value="대형" th:selected="${monthlyRent.category2} == '대형' ? true : false">대형</option>
+                    <select name="category2" class="category2" id="category2" th:data-title="${monthlyRent.id}">
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="경형" th:selected="${monthlyRent.category2} == '경형' ? true : false">경형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="준중형" th:selected="${monthlyRent.category2} == '준중형' ? true : false">준중형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="중형" th:selected="${monthlyRent.category2} == '중형' ? true : false">중형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="중대형" th:selected="${monthlyRent.category2} == '중대형' ? true : false">중대형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승용'}" value="대형" th:selected="${monthlyRent.category2} == '대형' ? true : false">대형</option>
+                        <option th:if="${monthlyRent.category1 == '국산승합•RV'}" value="소중형SUV" th:selected="${monthlyRent.category2} == '소중형SUV' ? true : false">소중형SUV</option>
+                        <option th:if="${monthlyRent.category1 == '국산승합•RV'}" value="중형SUV" th:selected="${monthlyRent.category2} == '중형SUV' ? true : false">중형SUV</option>
+                        <option th:if="${monthlyRent.category1 == '국산승합•RV'}" value="중대형SUV" th:selected="${monthlyRent.category2} == '중대형SUV' ? true : false">중대형SUV</option>
+                        <option th:if="${monthlyRent.category1 == '국산승합•RV'}" value="대형SUV" th:selected="${monthlyRent.category2} == '대형SUV' ? true : false">대형SUV</option>
+                        <option th:if="${monthlyRent.category1 == '수입차'}" value="수입차" th:selected="${monthlyRent.category2} == '수입차' ? true : false">수입차</option>
                     </select>
                 </div>
                 <div class="detail_list">
                     <p>차명 년식</p>
-                    <textarea type="text" th:text="${monthlyRent.name}"></textarea>
+                    <textarea type="text" id="name" th:text="${monthlyRent.name}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>보증금</p>
-                    <textarea type="text" th:text="${#numbers.formatInteger(monthlyRent.deposit, 0, 'COMMA')}"></textarea>
+                    <textarea type="text" id="deposit" th:text="${#numbers.formatInteger(monthlyRent.deposit, 0, 'COMMA')}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>2,000km</p>
-                    <textarea type="text" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k, 0, 'COMMA')}"></textarea>
+                    <textarea type="text" id="cost_for_2k" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k, 0, 'COMMA')}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>2,500km</p>
-                    <textarea type="text" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2_5k, 0, 'COMMA')}"></textarea>
+                    <textarea type="text" id="cost_for_2_5k" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2_5k, 0, 'COMMA')}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>3,000km</p>
-                    <textarea type="text" th:text="${#numbers.formatInteger(monthlyRent.cost_for_3k, 0, 'COMMA')}"></textarea>
+                    <textarea type="text" id="cost_for_3k" th:text="${#numbers.formatInteger(monthlyRent.cost_for_3k, 0, 'COMMA')}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>4,000km</p>
-                    <textarea type="text" th:text="${#numbers.formatInteger(monthlyRent.cost_for_4k, 0, 'COMMA')}"></textarea>
+                    <textarea type="text" id="cost_for_4k" th:text="${#numbers.formatInteger(monthlyRent.cost_for_4k, 0, 'COMMA')}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>other</p>
-                    <textarea type="text" th:text="${monthlyRent.cost_for_others}"></textarea>
+                    <textarea type="text" id="cost_for_others" th:text="${monthlyRent.cost_for_others}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>21세</p>
-                    <textarea type="text" th:text="${#numbers.formatInteger(monthlyRent.age_limit, 0, 'COMMA')}"></textarea>
+                    <textarea type="text" id="age_limit" th:text="${#numbers.formatInteger(monthlyRent.age_limit, 0, 'COMMA')}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>km당 추가요금</p>
-                    <textarea type="text" th:text="${monthlyRent.cost_per_km}"></textarea>
+                    <textarea type="text" id="cost_per_km" th:text="${monthlyRent.cost_per_km}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>모렌_차명</p>
-                    <textarea type="text" th:text="${monthlyRent.nameMoren}"></textarea>
+                    <textarea type="text" id="nameMoren" th:text="${monthlyRent.nameMoren}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>년식_시작</p>
-                    <textarea type="text" th:text="${monthlyRent.start}"></textarea>
+                    <textarea type="text" id="start" th:text="${monthlyRent.start}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>년식_끝</p>
-                    <textarea type="text" th:text="${monthlyRent.end}"></textarea>
+                    <textarea type="text" id="end" th:text="${monthlyRent.end}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>신용</p>
-                    <select name="credit">
+                    <select name="credit" id="credit">
                         <option value="0" th:selected="${monthlyRent.credit == '0' ? true : false}">0</option>
                         <option value="1" th:selected="${monthlyRent.credit == '1' ? true : false}">1</option>
                         <option value="2" th:selected="${monthlyRent.credit == '2' ? true : false}">2</option>
@@ -145,7 +151,7 @@
                 <div class="detail_list">
                     <p>img_url</p>
                     <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                        <img th:src="${monthlyRent.img_url}" alt="img" style="width: 50%">
+                        <img th:src="${monthlyRent.img_url}" alt="img" style="width: 50%" id="img_url">
                         <input type="file" style="width: 85%;">
                     </div>
                 </div>
