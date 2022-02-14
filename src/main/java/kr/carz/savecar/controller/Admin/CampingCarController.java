@@ -30,6 +30,7 @@ public class CampingCarController {
     private final ReservationController reservationController;
     private final ImagesService imagesService;
     private final S3Service s3Service;
+    private final CampingCarMainTextService campingCarMainTextService;
 
     @Autowired
     public CampingCarController(CampingcarReservationService campingcarReservationService,
@@ -37,7 +38,7 @@ public class CampingCarController {
                                 CalendarDateService calendarDateService, DateCampingService dateCampingService,
                                 CampingCarPriceRateService campingCarPriceRateService,
                                 ReservationController reservationController, ImagesService imagesService,
-                                S3Service s3Service) {
+                                S3Service s3Service, CampingCarMainTextService campingCarMainTextService) {
         this.campingcarReservationService = campingcarReservationService;
         this.calendarTimeService = calendarTimeService;
         this.campingCarPriceService = campingCarPriceService;
@@ -47,6 +48,7 @@ public class CampingCarController {
         this.reservationController = reservationController;
         this.imagesService = imagesService;
         this.s3Service = s3Service;
+        this.campingCarMainTextService = campingCarMainTextService;
     }
 
     @Value("${phone.admin1}")
@@ -768,6 +770,61 @@ public class CampingCarController {
     @DeleteMapping("/admin/campingcar/image/{imageId}")
     @ResponseBody
     public void deleteAdminCampingCarImage(@PathVariable Long imageId) {
+
+        imagesService.delete(imageId);
+
+    }
+
+
+    @PostMapping(value="/admin/campingcar/mainText", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public void postAdminCampingCarMainTextImage(HttpServletResponse res, CampingCarMainTextDTO dto) throws IOException {
+
+        String imgPath = s3Service.upload(dto.getFile());
+        dto.setUrl(imgPath);
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarName());
+        campingCarMainTextService.saveDTO(dto, campingCarPrice);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @PutMapping(value="/admin/campingcar/mainText/title")
+    @ResponseBody
+    public void putAdminCampingCarMainTextImageTitle(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException  {
+
+        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+
+            Optional<Images> imagesWrapper = imagesService.findImageByImageId(imageTitleVO.getImageId());
+            if (imagesWrapper.isPresent()) {
+
+                Images images = imagesWrapper.get();
+                images.setTitle(imageTitleVO.getTitle());
+
+                imagesService.save(images);
+            }
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @DeleteMapping("/admin/campingcar/mainText/{imageId}")
+    @ResponseBody
+    public void deleteAdminCampingCarMainTextImage(@PathVariable Long imageId) {
 
         imagesService.delete(imageId);
 
