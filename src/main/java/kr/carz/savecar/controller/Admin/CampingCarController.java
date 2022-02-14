@@ -826,7 +826,7 @@ public class CampingCarController {
     @ResponseBody
     public void deleteAdminCampingCarMainTextImage(@PathVariable Long imageId) {
 
-        imagesService.delete(imageId);
+        campingCarMainTextService.delete(imageId);
 
     }
 }
