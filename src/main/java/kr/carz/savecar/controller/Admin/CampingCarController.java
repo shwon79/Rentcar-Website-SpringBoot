@@ -219,6 +219,9 @@ public class CampingCarController {
 
         ModelAndView mav = new ModelAndView();
 
+        List<CampingCarMainText> campingCarMainTextList = campingCarMainTextService.findAllImage();
+
+        mav.addObject("campingCarMainTextList", campingCarMainTextList);
         mav.setViewName("admin/campingcar_mainText_menu");
 
         return mav;
