@@ -25,6 +25,7 @@ public class CampingCarPriceRate {
 
     private String season;   // 0 비성수기  1 성수기
     private String deposit;
+    private Float threeHours;
     private Float onedays;
     private Float twodays;
     private Float threedays;
@@ -58,13 +59,14 @@ public class CampingCarPriceRate {
 
 
     @Builder
-    public CampingCarPriceRate(CampingCarPrice carName, String season, String deposit, Float onedays, Float twodays, Float threedays, Float fourdays, Float fivedays, Float sixdays, Float sevendays, Float eightdays, Float ninedays, Float tendays, Float elevendays, Float twelvedays, Float thirteendays, Float fourteendays
+    public CampingCarPriceRate(CampingCarPrice carName, String season, String deposit, Float threeHours, Float onedays, Float twodays, Float threedays, Float fourdays, Float fivedays, Float sixdays, Float sevendays, Float eightdays, Float ninedays, Float tendays, Float elevendays, Float twelvedays, Float thirteendays, Float fourteendays
             , Float fifteendays, Float sixteendays, Float seventeendays, Float eighteendays, Float ninetinedays, Float twentydays, Float twentyonedays
             , Float twentytwodays, Float twentythreedays, Float twentyfourdays, Float twentyfivedays, Float twentysixdays, Float twentysevendays
             , Float twentyeightdays, Float twentyninedays, Float thirtydays) {
         this.carName = carName;
         this.season = season;
         this.deposit = deposit;
+        this.threeHours = threeHours;
         this.onedays = onedays;
         this.twodays = twodays;
         this.threedays = threedays;
@@ -99,6 +101,7 @@ public class CampingCarPriceRate {
 
     public void setValueByDto(CampingCarPriceRateDTO dto){
         this.deposit = dto.getDeposit();
+        this.threeHours = dto.getThreeHours();
         this.onedays = dto.getOnedays();
         this.twodays = dto.getTwodays();
         this.threedays = dto.getThreedays();

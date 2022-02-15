@@ -15,6 +15,7 @@ public class CampingCarPriceRateDTO {
 
     private String season;
     private String deposit;
+    private Float threeHours;
     private Float onedays;
     private Float twodays;
     private Float threedays;
