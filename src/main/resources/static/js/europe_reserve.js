@@ -301,7 +301,6 @@ const makeOptions = (days) => {
             createdOpt.text = i +'일권';
             createdOpt.value = i;
         }
-
     targetSelect.appendChild(createdOpt);
     }
 }
@@ -812,6 +811,8 @@ function displayPrice() {
 // 페이지 로딩 시 가장 싼 가격 보여주면서 모든 가격 받아오기
 function getPriceData(carType) {
     let cheapestPrice = document.getElementById('cheapestPrice');
+    let displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
+
     // 비성수기 가격
     fetch(`/camping/calendar/` + carType + `/getprice/0`)
         .then(res => res.json())
@@ -850,6 +851,9 @@ function getPriceData(carType) {
             offList[30] = parseFloat(offObj['thirtydays']) * parseInt(offObj['onedays']);
 
             cheapestPrice.innerText = parseInt(offList[1]).toLocaleString();
+            if (displayPriceExtraTime) {
+                makeExtraTimeOptions(carType, offList[0]);
+            };
         })
 
     // 성수기 가격
@@ -890,6 +894,17 @@ function getPriceData(carType) {
             peakList[30] = parseFloat(peakObj['thirtydays']) * parseInt(peakObj['onedays']);
         })
 };
+
+// 추가요금 옵션 만들기
+function makeExtraTimeOptions(carType, price) {
+    const displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
+
+    let option1 = document.createElement('option');
+    option1.value = '1';
+    option1.text = '3시간권 (+' + price.toLocaleString() + '원)';
+
+    displayPriceExtraTime.appendChild(option1);
+}
 
 // //지난 달로 못가게 화살표 없애기
 // const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');
