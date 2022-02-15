@@ -77,6 +77,13 @@
                                     <th scope="col">성수기 할인 %</th>
                                 </tr>
                                 <tr>
+                                    <th scope="row">3시간</th>
+                                    <td><textarea type="text" th:text="${#numbers.formatInteger(campingCar[0].threeHours, 0, 'COMMA')}" th:id="${campingCar[0].carName.carName} + '_three_hours'"></textarea></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
                                     <th scope="row">1일</th>
                                     <td><textarea type="text" th:text="${#numbers.formatInteger(campingCar[0].onedays, 0, 'COMMA')}" th:id="${campingCar[0].carName.carName} + '_off_oneday'"></textarea></td>
                                     <td class="offPercent1">1.0</td>
