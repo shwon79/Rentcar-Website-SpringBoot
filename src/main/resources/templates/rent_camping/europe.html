@@ -368,10 +368,15 @@
                             <option th:each="num : ${#numbers.sequence(2,29)}" th:value="${num}" th:text="${num} + '일권'"></option>
                             <option value="30">한달권</option>
                         </select>
-                        <select name="" id="displayPricePeak" class="select_display_price" th:onchange="displayPrice();" style="margin-bottom: 0;">
+                        <select name="" id="displayPricePeak" class="select_display_price" th:onchange="displayPrice();">
                             <option value="">성수기/비성수기</option>
                             <option value="0">비성수기</option>
                             <option value="1">성수기</option>
+                        </select>
+                        <select name="" id="displayPriceExtraTime" class="select_display_price" th:onchange="displayPrice();" style="margin-bottom: 0;">
+                            <option value="">추가시간 선택</option>
+                            <option value="0">추가시간 없음</option>
+                            <option value="1">3시간권</option>
                         </select>
                         <hr>
                         <div class="display_price_info">

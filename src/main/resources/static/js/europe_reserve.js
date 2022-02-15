@@ -787,13 +787,22 @@ let peakList = [];
 function displayPrice() {
     let displayPriceDay = document.getElementById('displayPriceDay').value;
     let displayPricePeak = document.getElementById('displayPricePeak').value;
+    let displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
     let priceInfo = document.getElementById('priceInfo');
 
     if (displayPriceDay != '' && displayPricePeak != '') {
         if (displayPricePeak == '0') {
-            priceInfo.innerText = offList[displayPriceDay].toLocaleString();
+            if (displayPriceExtraTime && displayPriceExtraTime.value == '1') {
+                priceInfo.innerText = (offList[displayPriceDay] + offList[0]).toLocaleString();
+            } else {
+                priceInfo.innerText = offList[displayPriceDay].toLocaleString();
+            }
         } else if (displayPricePeak == '1') {
-            priceInfo.innerText = peakList[displayPriceDay].toLocaleString();
+            if (displayPriceExtraTime && displayPriceExtraTime.value == '1') {
+                priceInfo.innerText = (peakList[displayPriceDay] + offList[0]).toLocaleString();
+            } else {
+                priceInfo.innerText = peakList[displayPriceDay].toLocaleString();
+            }
         }
     } else {
         priceInfo.innerText = '';
@@ -808,6 +817,7 @@ function getPriceData(carType) {
         .then(res => res.json())
         .then(result => {
             offObj = result;
+            offList[0] = offObj['threeHours'];
             offList[1] = offObj['onedays'];
             offList[2] = parseFloat(offObj['twodays']) * parseInt(offObj['onedays']);
             offList[3] = parseFloat(offObj['threedays']) * parseInt(offObj['onedays']);
@@ -847,6 +857,7 @@ function getPriceData(carType) {
         .then(res => res.json())
         .then(result => {
             peakObj = result;
+            peakList[0] = peakObj['threeHours'];
             peakList[1] = peakObj['onedays'];
             peakList[2] = parseFloat(peakObj['twodays']) * parseInt(peakObj['onedays']);
             peakList[3] = parseFloat(peakObj['threedays']) * parseInt(peakObj['onedays']);
