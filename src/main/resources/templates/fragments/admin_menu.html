@@ -10,7 +10,7 @@
             <!-- Sidebar Links -->
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/admin/index" id="indexMenu">메인</a>
+                    <a href="/admin/index" id="indexMenu" onclick="setActiveMenu('0');">메인</a>
                 </li>
                 <li id="camingcarWholeMenu">
                     <span id="camping-submenu-btn"></span>
@@ -18,22 +18,22 @@
                     <div id="campingcarSubmenu">
                         <ul>
                             <li>
-                                <a href="/admin/campingcar/register" id="campingcarReservationMenu">예약 등록</a>
+                                <a href="/admin/campingcar/register" id="campingcarReservationMenu" onclick="setActiveMenu('campingCar');">예약 등록</a>
                             </li>
                             <li>
-                                <a href="/admin/campingcar/menu" id="campingcarMenu">예약 현황</a>
+                                <a href="/admin/campingcar/menu" id="campingcarMenu" onclick="setActiveMenu('campingCar');">예약 현황</a>
                             </li>
                             <li>
-                                <a href="/admin/campingcar/price/menu" id="campingcarPriceMenu">가격 수정</a>
+                                <a href="/admin/campingcar/price/menu" id="campingcarPriceMenu" onclick="setActiveMenu('campingCar');">가격 수정</a>
                             </li>
                             <li>
-                                <a href="/admin/campingcar/setting/menu" id="campingcarSettingMenu">캠핑카 정보 수정</a>
+                                <a href="/admin/campingcar/setting/menu" id="campingcarSettingMenu" onclick="setActiveMenu('campingCar');">캠핑카 정보 수정</a>
                             </li>
                             <li>
-                                <a href="/admin/campingcar/image/menu" id="campingcarImageMenu">사진 수정</a>
+                                <a href="/admin/campingcar/image/menu" id="campingcarImageMenu" onclick="setActiveMenu('campingCar');">사진 수정</a>
                             </li>
                             <li>
-                                <a href="/admin/campingcar/mainText/menu" id="campingcarMainTextMenu">본문 수정</a>
+                                <a href="/admin/campingcar/mainText/menu" id="campingcarMainTextMenu" onclick="setActiveMenu('campingCar');">본문 수정</a>
                             </li>
                         </ul>
                     </div>
@@ -44,28 +44,28 @@
                     <div id="priceSubMenu">
                         <ul>
                             <li>
-                                <a href="/admin/rentcar/counsel/menu" id="counselMenu">상담 신청</a>
+                                <a href="/admin/rentcar/counsel/menu" id="counselMenu" onclick="setActiveMenu('rentCar');">상담 신청</a>
                             </li>
                             <li>
-                                <a href="/admin/rentcar/price/monthly/menu" id="priceMonthlyMenu">월렌트 가격 수정</a>
+                                <a href="/admin/rentcar/price/monthly/menu" id="priceMonthlyMenu" onclick="setActiveMenu('rentCar');">월렌트 가격 수정</a>
                             </li>
                             <li>
-                                <a href="/admin/rentcar/price/yearly/menu" id="priceYearlyMenu">12개월 가격 수정</a>
+                                <a href="/admin/rentcar/price/yearly/menu" id="priceYearlyMenu" onclick="setActiveMenu('rentCar');">12개월 가격 수정</a>
                             </li>
                             <li>
-                                <a href="/admin/rentcar/price/twoYearly/menu" id="priceTwoYearlyMenu">24개월 가격 수정</a>
+                                <a href="/admin/rentcar/price/twoYearly/menu" id="priceTwoYearlyMenu" onclick="setActiveMenu('rentCar');">24개월 가격 수정</a>
                             </li>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="/admin/popup/menu" id="popupSettingMenu">팝업 내용 수정</a>
+                    <a href="/admin/popup/menu" id="popupSettingMenu" onclick="setActiveMenu('0');">팝업 내용 수정</a>
                 </li>
                 <li>
-                    <a href="/admin/moren/reservation/menu" id="morenReservationMenu">월+12/24개월 예약 신청</a>
+                    <a href="/admin/moren/reservation/menu" id="morenReservationMenu" onclick="setActiveMenu('0');">월+12/24개월 예약 신청</a>
                 </li>
                 <li>
-                    <a href="/admin/discount/menu" id="discountMenu">할인/인상 적용</a>
+                    <a href="/admin/discount/menu" id="discountMenu" onclick="setActiveMenu('0');">할인/인상 적용</a>
                 </li>
             </ul>
         </nav>
