@@ -3,6 +3,8 @@ package kr.carz.savecar.service;
 import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.repository.CampingcarReservationRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,4 +45,7 @@ public class CampingcarReservationService {
         return campingcarReservationRepository.findById(id);
     }
 
+    public Page<CampingCarReservation> findAllPageable(Pageable pageable){
+        return campingcarReservationRepository.findAllByOrderByIdDesc(pageable);
+    }
 }

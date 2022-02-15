@@ -7,6 +7,8 @@ import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -92,12 +94,17 @@ public class CampingCarController {
     // [관리자 메인페이지] 캠핑카 예약내역 메뉴로 입장
     @GetMapping(value = "/admin/campingcar/menu")
     @ResponseBody
-    public ModelAndView get_admin_main() {
+    public ModelAndView get_admin_main(Pageable pageable) {
 
         ModelAndView mav = new ModelAndView();
 
-        List<CampingCarReservation> campingCarReservationList = campingcarReservationService.findAllReservations();
-        mav.addObject("campingCarReservationList", campingCarReservationList);
+        Page<CampingCarReservation> campingCarReservationPage = campingcarReservationService.findAllPageable(pageable);
+
+        mav.addObject("currentPage", pageable.getPageNumber());
+        mav.addObject("pageSize", pageable.getPageSize());
+        mav.addObject("totalPages", campingCarReservationPage.getTotalPages());
+        mav.addObject("campingCarReservationList", campingCarReservationPage.getContent());
+
         mav.setViewName("admin/campingcar_menu");
 
         return mav;
