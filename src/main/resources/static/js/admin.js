@@ -1,3 +1,4 @@
+// sidebar
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
@@ -19,6 +20,30 @@ $(document).ready(function () {
         priceSubmenuBtn.classList.toggle('active-span');
     });
 });
+
+// 세부메뉴 클릭 시 sessionStorage에 저장
+function setActiveMenu(type) {
+    sessionStorage.setItem('activeMenu', type);
+}
+
+// 세부매뉴 기억하고 보여주기
+function displayActiveMenu() {
+    let menu = sessionStorage.getItem('activeMenu');
+    const campingSubmenuBtn = document.getElementById('camping-submenu-btn');
+    const campingcarSubmenu = document.getElementById('campingcarSubmenu');
+    const priceSubmenuBtn = document.getElementById('price-submenu-btn');
+    const priceSubMenu = document.getElementById('priceSubMenu');
+
+    if (menu === 'campingCar') {
+        campingSubmenuBtn.classList.add('active-span');
+        campingcarSubmenu.classList.add('camping-open');
+        priceSubmenuBtn.style.top = '433px';
+    } else if (menu === 'rentCar') {
+        priceSubmenuBtn.classList.add('active-span');
+        priceSubMenu.classList.add('price-open');
+    };
+}
+window.onload = displayActiveMenu();
 
 //숫자 사이에 콤마 넣기
 let number = document.getElementsByClassName("number");

@@ -20,7 +20,7 @@ function campingcar_rent_reservation () {
         product :document.getElementById("rentProduct").getAttribute("value")
     };
 
-    console.log(data);
+    // console.log(data);
 
     var checkbox = document.getElementById("agree")
     if(checkbox.checked) {

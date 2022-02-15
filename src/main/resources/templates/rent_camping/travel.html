@@ -391,8 +391,8 @@
                 <!--탭 메뉴-->
                 <input id="tab_info" type="radio" name="tab_item" checked>
                 <label class="tab_item" for="tab_info"><div onclick="location.href='#info'">상세정보</div></label>
-                <!--                <input id="tab_review" type="radio" name="tab_item">-->
-                <!--                <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">후기</div></label>-->
+<!--                <input id="tab_review" type="radio" name="tab_item">-->
+<!--                <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">후기</div></label>-->
                 <input id="tab_counsel" type="radio" name="tab_item">
                 <label class="tab_item" for="tab_counsel"><div onclick="location.href='#counsel'">상담신청</div></label>
                 <!--탭 내용-->
@@ -447,9 +447,60 @@
                             <div th:replace="/fragments/camping_explanations.html :: refund_policy"></div>
                         </div>
                     </div>
-                    <!--                    <div id="review">-->
-                    <!--                        리뷰리뷰-->
-                    <!--                    </div>-->
+<!--                    <div id="review">-->
+<!--                        <h2 style="text-align: center;">리뷰</h2>-->
+<!--                        <button class="btn btn-primary" id="openReviewBtn">리뷰 쓰기</button>-->
+<!--                        <div id="writeReviewBox">-->
+<!--                            <div>-->
+<!--                                <label for="reviewName" class="control-label">이름</label>-->
+<!--                                <div class="input-group">-->
+<!--                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>-->
+<!--                                    <input type="text" class="form-control" id="reviewName" placeholder="성함을 입력해주세요.">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label for="reviewPassward" class="control-label">비밀번호</label>-->
+<!--                                <div class="input-group">-->
+<!--                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>-->
+<!--                                    <input type="text" class="form-control" id="reviewPassward">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label for="reviewCarType" class="control-label">캠핑카 종류</label>-->
+<!--                                <div class="input-group" style="width: 100%;">-->
+<!--                                    <span class="input-group-addon"><i class="fa fa-car"></i></span>-->
+<!--                                    <select id="reviewCarType" class="form-control-select" style="width: 100%; margin-bottom: 0;">-->
+<!--                                        <option value="">선택하세요</option>-->
+<!--                                        <option value="europe">Europe</option>-->
+<!--                                        <option value="limousine">Limousine</option>-->
+<!--                                        <option value="travel">Travel</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label class="control-label">렌트 기간</label>-->
+<!--                                <div class="input-group">-->
+<!--                                    <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>-->
+<!--                                    <input type="date" class="form-control" style="width: 45%;">-->
+<!--                                    <span class="form-control" style="width: 10%;"> ~ </span>-->
+<!--                                    <input type="date" class="form-control" style="width: 45%;">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label for="reviewText" class="control-label">내용</label>-->
+<!--                                <div class="input-group" style="width: 100%;">-->
+<!--                                    <textarea name="" id="reviewText" rows="5" class="form-control" style="width: 100%;"></textarea>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label for="reviewMedia" class="control-label">이미지 첨부</label>-->
+<!--                                <div class="input-group" style="width: 100%;">-->
+<!--                                    <input type="file" multiple="multiple" id="reviewMedia" class="form-control">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <button class="btn btn-primary" id="submitReviewBtn">등록하기</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div id="counsel" style="padding-top: 70px;">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
