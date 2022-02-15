@@ -347,6 +347,7 @@ public class CalendarController {
         jsonObject.put("carName",campingCarPriceRate.getCarName().getCarName());
         jsonObject.put("deposit",campingCarPriceRate.getDeposit());
         jsonObject.put("season",campingCarPriceRate.getSeason());
+        jsonObject.put("threeHours",campingCarPriceRate.getThreeHours());
         jsonObject.put("onedays",campingCarPriceRate.getOnedays());
         jsonObject.put("twodays",campingCarPriceRate.getTwodays());
         jsonObject.put("threedays",campingCarPriceRate.getThreedays());

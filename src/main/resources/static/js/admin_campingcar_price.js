@@ -3,49 +3,53 @@ let elevendays, twelvedays, thirteendays, fourteendays, fifteendays, sixteendays
 let twentyonedays, twentytwodays, twentythreedays, twentyfourdays, twentyfivedays, twentysixdays, twentysevendays, twentyeightdays, twentyninedays, thirtydays;
 
 function EditCampingcarPrice(carName, season) {
+    const europeThreeHours = parseInt(document.getElementById('europe_three_hours').value.replace(/,/g, ""));
     const europeOffOneDay = parseInt(document.getElementById('europe_off_oneday').value.replace(/,/g, ""));
     const europeOnOneDay = parseInt(document.getElementById('europe_on_oneday').value.replace(/,/g, ""));
+    const limousineThreeHours = parseInt(document.getElementById('limousine_three_hours').value.replace(/,/g, ""));
     const limousineOffOneDay = parseInt(document.getElementById('limousine_off_oneday').value.replace(/,/g, ""));
     const limousineOnOneDay = parseInt(document.getElementById('limousine_on_oneday').value.replace(/,/g, ""));
+    const travelThreeHours = parseInt(document.getElementById('travel_three_hours').value.replace(/,/g, ""));
     const travelOffOneDay = parseInt(document.getElementById('travel_off_oneday').value.replace(/,/g, ""));
     const travelOnOneDay = parseInt(document.getElementById('travel_on_oneday').value.replace(/,/g, ""));
-    let oneDay;
+    let oneDay, threeHours;
 
     if (carName == 'europe') {
+        threeHours = europeThreeHours;
+        sessionStorage.setItem('campingPriceTab', carName);
         if (season === 0) {
             oneDay = europeOffOneDay;
             getData(0);
-            sessionStorage.setItem('campingPriceTab', carName);
         } else {
             oneDay = europeOnOneDay;
             getData(1);
-            sessionStorage.setItem('campingPriceTab', carName);
         }
     } else if (carName == 'limousine') {
+        threeHours = limousineThreeHours;
+        sessionStorage.setItem('campingPriceTab', carName);
         if (season === 0) {
             oneDay = limousineOffOneDay;
             getData(2);
-            sessionStorage.setItem('campingPriceTab', carName);
         } else {
             oneDay = limousineOnOneDay;
             getData(3);
-            sessionStorage.setItem('campingPriceTab', carName);
         }
     } else if (carName == 'travel') {
+        threeHours = travelThreeHours;
+        sessionStorage.setItem('campingPriceTab', carName);
         if (season === 0) {
             oneDay = travelOffOneDay;
             getData(4);
-            sessionStorage.setItem('campingPriceTab', carName);
         } else {
             oneDay = travelOnOneDay;
             getData(5);
-            sessionStorage.setItem('campingPriceTab', carName);
         }
     }
 
     let data = {
         season: season.toString(),
         deposit: '300000',
+        threeHours: threeHours.toFixed(2),
         onedays: oneDay.toFixed(2),
         twodays: twodays.toFixed(2),
         threedays: threedays.toFixed(2),
@@ -80,7 +84,6 @@ function EditCampingcarPrice(carName, season) {
     // console.log(data);
 
     if (confirm('가격을 수정하시겠습니까?')) {
-        console.log(data);
         sendingPriceData();
     };
 

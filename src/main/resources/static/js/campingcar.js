@@ -104,10 +104,7 @@ let smallBox = document.getElementsByClassName('small_image_box');
 });
 
 // To the top button
-//Get the button
 const mybutton = document.getElementById('toTheTopBtn');
-console.log(mybutton);
-// When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
@@ -116,11 +113,8 @@ function scrollFunction() {
     } else {
         mybutton.style.display = "none";
     }
-}
+};
 
-// When the user clicks on the button, scroll to the top of the document
 function topFunction() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // document.body.scrollTop = 0;
-    // document.documentElement.scrollTop = 0;
-}
+};

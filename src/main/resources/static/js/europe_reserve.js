@@ -301,7 +301,6 @@ const makeOptions = (days) => {
             createdOpt.text = i +'일권';
             createdOpt.value = i;
         }
-
     targetSelect.appendChild(createdOpt);
     }
 }
@@ -787,13 +786,22 @@ let peakList = [];
 function displayPrice() {
     let displayPriceDay = document.getElementById('displayPriceDay').value;
     let displayPricePeak = document.getElementById('displayPricePeak').value;
+    let displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
     let priceInfo = document.getElementById('priceInfo');
 
     if (displayPriceDay != '' && displayPricePeak != '') {
         if (displayPricePeak == '0') {
-            priceInfo.innerText = offList[displayPriceDay].toLocaleString();
+            if (displayPriceExtraTime && displayPriceExtraTime.value == '1') {
+                priceInfo.innerText = (offList[displayPriceDay] + offList[0]).toLocaleString();
+            } else {
+                priceInfo.innerText = offList[displayPriceDay].toLocaleString();
+            }
         } else if (displayPricePeak == '1') {
-            priceInfo.innerText = peakList[displayPriceDay].toLocaleString();
+            if (displayPriceExtraTime && displayPriceExtraTime.value == '1') {
+                priceInfo.innerText = (peakList[displayPriceDay] + offList[0]).toLocaleString();
+            } else {
+                priceInfo.innerText = peakList[displayPriceDay].toLocaleString();
+            }
         }
     } else {
         priceInfo.innerText = '';
@@ -803,11 +811,14 @@ function displayPrice() {
 // 페이지 로딩 시 가장 싼 가격 보여주면서 모든 가격 받아오기
 function getPriceData(carType) {
     let cheapestPrice = document.getElementById('cheapestPrice');
+    let displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
+
     // 비성수기 가격
     fetch(`/camping/calendar/` + carType + `/getprice/0`)
         .then(res => res.json())
         .then(result => {
             offObj = result;
+            offList[0] = offObj['threeHours'];
             offList[1] = offObj['onedays'];
             offList[2] = parseFloat(offObj['twodays']) * parseInt(offObj['onedays']);
             offList[3] = parseFloat(offObj['threedays']) * parseInt(offObj['onedays']);
@@ -840,6 +851,9 @@ function getPriceData(carType) {
             offList[30] = parseFloat(offObj['thirtydays']) * parseInt(offObj['onedays']);
 
             cheapestPrice.innerText = parseInt(offList[1]).toLocaleString();
+            if (displayPriceExtraTime) {
+                makeExtraTimeOptions(carType, offList[0]);
+            };
         })
 
     // 성수기 가격
@@ -847,6 +861,7 @@ function getPriceData(carType) {
         .then(res => res.json())
         .then(result => {
             peakObj = result;
+            peakList[0] = peakObj['threeHours'];
             peakList[1] = peakObj['onedays'];
             peakList[2] = parseFloat(peakObj['twodays']) * parseInt(peakObj['onedays']);
             peakList[3] = parseFloat(peakObj['threedays']) * parseInt(peakObj['onedays']);
@@ -879,6 +894,17 @@ function getPriceData(carType) {
             peakList[30] = parseFloat(peakObj['thirtydays']) * parseInt(peakObj['onedays']);
         })
 };
+
+// 추가요금 옵션 만들기
+function makeExtraTimeOptions(carType, price) {
+    const displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
+
+    let option1 = document.createElement('option');
+    option1.value = '1';
+    option1.text = '3시간권 (+' + price.toLocaleString() + '원)';
+
+    displayPriceExtraTime.appendChild(option1);
+}
 
 // //지난 달로 못가게 화살표 없애기
 // const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');

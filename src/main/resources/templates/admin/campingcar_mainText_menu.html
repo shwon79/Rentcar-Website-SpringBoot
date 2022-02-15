@@ -62,6 +62,14 @@
                             <span th:text="${campingCar[0].carName.carName.toUpperCase()}"></span>
                             <span> 본문 이미지</span>
                         </h4>
+                        <div class="upload-box" style="border: 1px solid #dee2e6; padding: 10px; margin: 30px auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <input type="file" name="file" th:title="${campingCar[0].carName.carName}" th:data-title="${campingCar[0].imageId}" style="width: -webkit-fill-available;">
+                            <button class="btn btn-primary"
+                                    th:onclick="uploadImage('upload', [[${campingCar[0].carName.carName}]], [[${campingCar[0].imageId}]], [[${campingCar[0].imageId}]], [[${campingCar[0].imageId}]])"
+                                    style="margin-top: 10px;">
+                                이미지 넣기
+                            </button>
+                        </div>
                         <div style="text-align: right; margin-bottom: 10px;">
                             <button class="btn btn-primary changeOrderBtn" onclick="displaySortingBox();">이미지 순서 변경</button>
                         </div>
@@ -98,14 +106,6 @@
                                     </button>
                                 </div>
                                 <img th:src="${car.url}" th:alt="${car.imageId}" style="height: auto;">
-                            </div>
-                            <div class="upload-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                <input type="file" name="file" th:title="${campingCar[0].carName.carName}" th:data-title="${campingCar[0].imageId}" style="width: -webkit-fill-available;">
-                                <button class="btn btn-primary"
-                                        th:onclick="uploadImage('upload', [[${campingCar[0].carName.carName}]], [[${campingCar[0].imageId}]], [[${campingCar[0].imageId}]], [[${campingCar[0].imageId}]])"
-                                        style="margin-top: 10px;">
-                                    이미지 넣기
-                                </button>
                             </div>
                         </div>
                     </div>
