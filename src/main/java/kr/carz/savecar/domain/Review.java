@@ -22,6 +22,9 @@ public class Review {
     @Column(columnDefinition = "LONGTEXT")
     private String text;
 
+    private String nickName;
+    private String startDate;
+    private String endDate;
     private String image1;
     private String image2;
     private String image3;
@@ -37,10 +40,15 @@ public class Review {
 
 
     @Builder
-    public Review(Long reviewId, CampingCarPrice carName, String text, String image1, String image2, String image3, String image4, String image5,
-                                                                        String image6, String image7, String image8, String image9, String image10, String video, String password) {
+    public Review(Long reviewId, CampingCarPrice carName, String text, String nickName, String startDate, String endDate,
+                                                                String image1, String image2, String image3, String image4, String image5,
+                                                                String image6, String image7, String image8, String image9, String image10, String video, String password) {
+        this.reviewId = reviewId;
         this.carName = carName;
         this.text = text;
+        this.nickName = nickName;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.image1 = image1;
         this.image2 = image2;
         this.image3 = image3;

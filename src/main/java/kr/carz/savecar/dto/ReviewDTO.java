@@ -19,6 +19,9 @@ public class ReviewDTO {
 
     private String carName;
     private String text;
+    private String nickName;
+    private String startDate;
+    private String endDate;
 
     private List<MultipartFile> imageList;
     private MultipartFile video;
@@ -29,6 +32,9 @@ public class ReviewDTO {
         return Review.builder()
                 .carName(carNameEntity)
                 .text(text)
+                .nickName(nickName)
+                .startDate(startDate)
+                .endDate(endDate)
                 .image1(imageList[0])
                 .image2(imageList[1])
                 .image3(imageList[2])
