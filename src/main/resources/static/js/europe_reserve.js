@@ -921,3 +921,103 @@ function makeExtraTimeOptions(carType, price) {
 //     hiddenFromJuly.style.display = 'none';
 // }
 
+// 리뷰쓰기 버튼 누르면 리뷰 폼 보이기
+function displayReviewBox() {
+    document.getElementById('openReviewBtn').classList.toggle('active');
+    document.getElementById('writeReviewBox').classList.toggle('active');
+}
+
+// 리뷰 등록하기 버튼
+function submitReview() {
+    let reviewName = document.getElementById('reviewName').value;
+    let reviewPassword = document.getElementById('reviewPassword').value;
+    let reviewCarType = document.getElementById('reviewCarType').value;
+    let reviewRentStartDate = document.getElementById('reviewRentStartDate').value;
+    let reviewRentEndDate = document.getElementById('reviewRentEndDate').value;
+    let reviewText = document.getElementById('reviewText').value;
+    let reviewImage = document.getElementById('reviewImage').files;
+    let reviewVideo = document.getElementById('reviewVideo').files[0];
+
+    // console.log(reviewPassword);
+    // 패스워드가 숫자로만 이루어져 있는지 확인
+    // if (/{}/.test(reviewPassword))
+    // if (reviewPassword.toString().length != 4) {
+    //     console.log(reviewPassword);
+    // }
+
+    // if (/^SW\d{4}$/.test(reviewPassword)) {
+    //     console.log(reviewPassword);
+    // } else {
+    //     console.log('no')
+    // }
+    // convert file object to list
+    reviewImage = Object.values(reviewImage);
+
+    // image 첨부 10개 미만일 경우 null 값 추가
+    if (reviewImage.length !== 10) {
+        do {
+            reviewImage.push(null);
+        } while (reviewImage.length < 10)
+    }
+
+    // video 첨부 안할 경우 null 값 주기
+    if (reviewVideo === undefined) { reviewVideo = null; }
+
+    // let data = {
+    //     reviewName : reviewName,
+    //     reviewPassword : reviewPassword,
+    //     reviewCarType : reviewCarType,
+    //     reviewRentStartDate : reviewRentStartDate,
+    //     reviewRentEndDate : reviewRentEndDate,
+    //     reviewText : reviewText,
+    //     reviewImage : reviewImage,
+    //     reviewVideo : reviewVideo
+    // }
+    //
+    // console.log(data);
+
+    let formData = new FormData();
+
+    if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
+        formData.append('carName', reviewCarType);
+        formData.append('text', reviewText);
+        formData.append('nickName', reviewName);
+        formData.append('startDate', reviewRentStartDate);
+        formData.append('endDate', reviewRentEndDate);
+        formData.append('imageList', reviewImage);
+        formData.append('video', reviewVideo);
+        formData.append('password', reviewPassword);
+        if (confirm('리뷰를 등록 하시겠습니까?')) {
+            postReview();
+        };
+    }
+
+    function postReview() {
+        $.ajax({
+            enctype: 'multipart/form-data',
+            cache: false,
+            type: 'POST',
+            url: '/camping/calendar/review',
+            processData:false,
+            contentType: false,
+            data: formData
+        }).done(function () {
+            alert('업로드가 완료되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    };
+}
+
+// 데스크탑에서 리뷰 클릭하면 크게 보여지도록
+function openReview(id) {
+    const reviewImageOpen = [...document.getElementsByClassName('review_image_open')];
+    const oneReviewClose = [...document.getElementsByClassName('one_review_close')];
+
+    let targetImageBox = reviewImageOpen.find(box => box.dataset.title == id);
+    targetImageBox.classList.toggle('active');
+
+    let targetReview = oneReviewClose.find(review => review.dataset.title == id);
+    targetReview.classList.toggle('opened');
+}
