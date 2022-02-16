@@ -1,7 +1,9 @@
 package kr.carz.savecar.controller.CampingCar;
 
 import kr.carz.savecar.domain.*;
+import kr.carz.savecar.dto.CampingCarMainTextDTO;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
+import kr.carz.savecar.dto.ReviewDTO;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -9,9 +11,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,13 +34,16 @@ public class CalendarController {
     private final CampingCarPriceRateService campingCarPriceRateService;
     private final ImagesService imagesService;
     private final CampingCarMainTextService campingCarMainTextService;
+    private final S3Service s3Service;
+    private final ReviewService reviewService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
                               CampingCarPriceRateService campingCarPriceRateService, ImagesService imagesService,
-                              CampingCarMainTextService campingCarMainTextService) {
+                              CampingCarMainTextService campingCarMainTextService, S3Service s3Service,
+                              ReviewService reviewService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
@@ -45,6 +52,8 @@ public class CalendarController {
         this.campingCarPriceRateService = campingCarPriceRateService;
         this.imagesService = imagesService;
         this.campingCarMainTextService = campingCarMainTextService;
+        this.s3Service = s3Service;
+        this.reviewService = reviewService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -536,6 +545,37 @@ public class CalendarController {
         pw.flush();
         pw.close();
     }
+
+
+
+    @PostMapping(value="/camping/calendar/review", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public void postCampingCarReview(ReviewDTO dto) throws IOException  {
+
+        String [] imageUrlList = new String[10];
+
+        List<MultipartFile> multipartFileList = dto.getImageList();
+        for(int i=0; i<10; i++){
+            if(multipartFileList.get(i) != null){
+                String imgPath = s3Service.upload(multipartFileList.get(i));
+                imageUrlList[i] = imgPath;
+            } else {
+                imageUrlList[i] = null;
+            }
+        }
+
+        String videoURL;
+        if(dto.getVideo() != null){
+            String imgPath = s3Service.upload(dto.getVideo());
+            videoURL = imgPath;
+        } else {
+            videoURL = null;
+        }
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarName());
+        reviewService.saveDTO(dto, campingCarPrice, imageUrlList, videoURL);
+    }
+
 
 
 }

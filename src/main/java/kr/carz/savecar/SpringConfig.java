@@ -25,6 +25,8 @@ public class SpringConfig {
     private final ValuesForWebRepository valuesForWebRepository;
     private final CampingCarPriceRateRepository campingCarPriceRateRepository;
     private final CampingCarMainTextRepository campingCarMainTextRepository;
+    private final ReviewRepository reviewRepository;
+
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -36,7 +38,7 @@ public class SpringConfig {
                         DateCampingRepository dateCampingRepository, CampingcarReservationRepository campingcarReservationRepository,
                         AdminRepository adminRepository, ImagesRepository imagesRepository,
                         ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository,
-                        CampingCarMainTextRepository campingCarMainTextRepository) {
+                        CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -54,6 +56,7 @@ public class SpringConfig {
         this.valuesForWebRepository = valuesForWebRepository;
         this.campingCarPriceRateRepository = campingCarPriceRateRepository;
         this.campingCarMainTextRepository = campingCarMainTextRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @Bean
@@ -110,4 +113,7 @@ public class SpringConfig {
 
     @Bean
     public CampingCarMainTextService campingCarMainTextService() { return new CampingCarMainTextService(campingCarMainTextRepository); }
+
+    @Bean
+    public ReviewService reviewService() { return new ReviewService(reviewRepository); }
 }
