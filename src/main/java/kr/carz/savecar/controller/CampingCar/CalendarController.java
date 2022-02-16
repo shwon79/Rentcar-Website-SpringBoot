@@ -279,6 +279,9 @@ public class CalendarController {
         List<CampingCarMainText> campingCarMainTextList = campingCarMainTextService.findImageByCarName(campingCarPrice);
         Collections.sort(campingCarMainTextList);
 
+        List<Review> reviewList = reviewService.findImageByCarName(campingCarPrice);
+
+        model.put("reviewList", reviewList);
         model.put("campingCarMainTextList", campingCarMainTextList);
         model.put("imagesList", imagesList);
         model.put("explanation", explanation);
