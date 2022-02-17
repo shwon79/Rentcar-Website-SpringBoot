@@ -24,7 +24,7 @@ public class ReviewDTO {
     private String endDate;
 
     private List<MultipartFile> imageList;
-    private MultipartFile video;
+    private List<MultipartFile> video;
     private String password;
 
     public Review toEntity(CampingCarPrice carNameEntity, String [] imageList, String videoURL) {

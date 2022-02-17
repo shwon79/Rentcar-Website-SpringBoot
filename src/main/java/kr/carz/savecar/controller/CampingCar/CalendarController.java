@@ -553,26 +553,23 @@ public class CalendarController {
 
     @PostMapping(value="/camping/calendar/review", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void postCampingCarReview(ReviewDTO dto) throws IOException  {
-
-        String [] imageUrlList = new String[10];
+    public void postCampingCarReview(ReviewDTO dto) throws Exception  {
 
         List<MultipartFile> multipartFileList = dto.getImageList();
-        for(int i=0; i<10; i++){
-            if(multipartFileList.get(i) != null){
-                String imgPath = s3Service.upload(multipartFileList.get(i));
-                imageUrlList[i] = imgPath;
-            } else {
-                imageUrlList[i] = null;
-            }
+        String [] imageUrlList = new String[multipartFileList.size()];
+
+        for(int i=0; i<multipartFileList.size(); i++){
+            String imgPath = s3Service.upload(multipartFileList.get(i));
+            imageUrlList[i] = imgPath;
         }
 
-        String videoURL;
-        if(dto.getVideo() != null){
-            String imgPath = s3Service.upload(dto.getVideo());
-            videoURL = imgPath;
-        } else {
-            videoURL = null;
+        List<MultipartFile> videoList = dto.getVideo();
+        String videoURL = "";
+        for(int i=0; i<videoList.size(); i++){
+            if(i > 0){
+                throw new Exception("You can only upload one video.");
+            }
+            videoURL = s3Service.upload(videoList.get(i));
         }
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarName());
