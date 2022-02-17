@@ -8,6 +8,7 @@ import kr.carz.savecar.dto.ReviewDTO;
 import kr.carz.savecar.repository.ImagesRepository;
 import kr.carz.savecar.repository.ReviewRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class ReviewService {
         return reviewRepository.save(review).getReviewId();
     }
 
-    public Long saveDTO(ReviewDTO dto, CampingCarPrice carName, String [] imageList, String videoURL) {
+    public Long saveDTO(ReviewDTO dto, CampingCarPrice carName, ArrayList<String> imageList, String videoURL) {
 
         return reviewRepository.save(dto.toEntity(carName, imageList, videoURL)).getReviewId();
     }

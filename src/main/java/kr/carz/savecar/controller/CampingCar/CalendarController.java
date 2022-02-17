@@ -1,7 +1,6 @@
 package kr.carz.savecar.controller.CampingCar;
 
 import kr.carz.savecar.domain.*;
-import kr.carz.savecar.dto.CampingCarMainTextDTO;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.dto.ReviewDTO;
 import kr.carz.savecar.service.*;
@@ -561,11 +560,11 @@ public class CalendarController {
         System.out.println(multipartFileList.size());
         System.out.println(req.getParameter("nickName"));
 
-        String [] imageUrlList = new String[multipartFileList.size()];
+        ArrayList<String> imageUrlList = new ArrayList<>();
 
         for(int i=0; i<multipartFileList.size(); i++){
             String imgPath = s3Service.upload(multipartFileList.get(i));
-            imageUrlList[i] = imgPath;
+            imageUrlList.add(imgPath);
         }
 
         List<MultipartFile> videoList = req.getFiles("video");
