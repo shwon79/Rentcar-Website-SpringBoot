@@ -948,18 +948,7 @@ function submitReview() {
     //     } while (reviewImage.length < 10)
     // }
 
-    // video 첨부 안할 경우 [] 값 주기
-    if (reviewVideo === undefined) { reviewVideo = []; }
-
-    let imageFormData = new FormData();
-    let videoFormData = new FormData();
-
-    // let formData = new FormData();
-    // formData.append('body', temp);
-    for (let i = 0; i < reviewImage.length; i++) {
-        imageFormData.append('files', reviewImage[i]);
-    }
-    videoFormData.append('file', reviewVideo);
+    let formDataWrapper = new FormData();
 
     // 사진 최대 갯수 10개
     if (reviewImage.length > 10) {
@@ -967,28 +956,17 @@ function submitReview() {
     } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
         alert('필수 입력 내용을 빠짐없이 작성해주세요.');
     } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
-        let data = {
-            reviewName : reviewName,
-            reviewPassword : reviewPassword,
-            reviewCarType : reviewCarType,
-            reviewRentStartDate : reviewRentStartDate,
-            reviewRentEndDate : reviewRentEndDate,
-            reviewText : reviewText,
-            reviewImage : imageFormData,
-            reviewVideo : videoFormData
-        }
 
-        console.log(data);
-        // formData.append('carName', reviewCarType);
-        // formData.append('text', reviewText);
-        // formData.append('nickName', reviewName);
-        // formData.append('startDate', reviewRentStartDate);
-        // formData.append('endDate', reviewRentEndDate);
-        // formData.append('imageList', reviewImage);
-        // formData.append('video', reviewVideo);
-        // formData.append('password', reviewPassword);
+        formDataWrapper.append('carName', reviewCarType);
+        formDataWrapper.append('text', reviewText);
+        formDataWrapper.append('nickName', reviewName);
+        formDataWrapper.append('startDate', reviewRentStartDate);
+        formDataWrapper.append('endDate', reviewRentEndDate);
+        formDataWrapper.append('file', reviewImage);
+        // formDataWrapper.append('video', reviewVideo);
+        formDataWrapper.append('password', reviewPassword);
         if (confirm('리뷰를 등록 하시겠습니까?')) {
-            postReview(data);
+            postReview(formDataWrapper);
         };
     };
 
