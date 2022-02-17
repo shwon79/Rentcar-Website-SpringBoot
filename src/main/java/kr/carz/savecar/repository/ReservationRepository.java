@@ -1,6 +1,5 @@
 package kr.carz.savecar.repository;
 
-import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.domain.Reservation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -3,6 +3,8 @@ package kr.carz.savecar.controller.Admin;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -121,15 +123,20 @@ public class RentCarController {
     }
 
     @GetMapping("/admin/rentcar/counsel/menu")
-    public ModelAndView get_rent_car_counsel_menu() {
+    public ModelAndView get_rent_car_counsel_menu(Pageable pageable) {
 
         ModelAndView mav = new ModelAndView();
 
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        LocalDateTime startDateTime = currentDateTime.minusDays(15);
+        Page<Reservation> reservationPage = reservationService.findAllPageable(pageable);
 
-        List<Reservation> reservationList = reservationService.findByCreatedDateAfter(startDateTime);
-        mav.addObject("reservationList", reservationList);
+        mav.addObject("currentPage", pageable.getPageNumber());
+        mav.addObject("pageSize", pageable.getPageSize());
+
+        mav.addObject("startPage", (pageable.getPageNumber() / 5) * 5 + 1);
+        mav.addObject("endPage", Integer.min((pageable.getPageNumber() / 5 + 1) * 5, reservationPage.getTotalPages()));
+
+        mav.addObject("totalPages", reservationPage.getTotalPages());
+        mav.addObject("reservationList", reservationPage.getContent());
 
         mav.setViewName("admin/rentcar_counsel_menu");
 

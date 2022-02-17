@@ -61,9 +61,9 @@
         <p style="flex: 10; text-align: center; margin-bottom: 0;">예약 신청 내용</p>
       </div>
 
-      <div class="reserve_list_wrapper" th:each="i : ${#numbers.sequence(reservationList.size() - 1, 0, -1)}" th:with="reservation=${reservationList[i]}">
+      <div class="reserve_list_wrapper" th:each="reservation, i : ${reservationList}">
         <div class="reserve_checkbox">
-          <p th:text="${iStat.index + 1}" style="margin-bottom: 4px;"></p>
+          <p th:text="${reservation.id}" style="margin-bottom: 4px;"></p>
 <!--          <input th:if="${reservation.reservationStatus == '0'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">-->
         </div>
         <div class="reserve_list">
@@ -109,6 +109,34 @@
           </p>
         </div>
       </div>
+    </div>
+    <!-- 게시판 하단의 페이징 버튼 -->
+    <div class="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" th:if="${currentPage} >= 5">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${0},size=${pageSize})}">
+            <i class="fa-solid fa-angles-left"></i>
+          </a>
+        </li>
+        <li class="page-item" th:if="${currentPage} > 0">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${currentPage}-1,size=${pageSize})}">
+            <i class="fa-solid fa-angles-left"></i>
+          </a>
+        </li>
+        <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
+        </li>
+        <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${currentPage}+1,size=${pageSize})}">
+            <i class="fa-solid fa-angles-right"></i>
+          </a>
+        </li>
+        <li class="page-item" th:if="${currentPage} < (5 * (${totalPages} / 5))">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${totalPages}-1,size=${pageSize})}">
+            <i class="fa-solid fa-angles-right"></i>
+          </a>
+        </li>
+      </ul>
     </div>
 
   </div>
