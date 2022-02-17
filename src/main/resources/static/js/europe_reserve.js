@@ -963,18 +963,18 @@ function submitReview() {
     // video 첨부 안할 경우 null 값 주기
     if (reviewVideo === undefined) { reviewVideo = null; }
 
-    // let data = {
-    //     reviewName : reviewName,
-    //     reviewPassword : reviewPassword,
-    //     reviewCarType : reviewCarType,
-    //     reviewRentStartDate : reviewRentStartDate,
-    //     reviewRentEndDate : reviewRentEndDate,
-    //     reviewText : reviewText,
-    //     reviewImage : reviewImage,
-    //     reviewVideo : reviewVideo
-    // }
-    //
-    // console.log(data);
+    let data = {
+        reviewName : reviewName,
+        reviewPassword : reviewPassword,
+        reviewCarType : reviewCarType,
+        reviewRentStartDate : reviewRentStartDate,
+        reviewRentEndDate : reviewRentEndDate,
+        reviewText : reviewText,
+        reviewImage : reviewImage,
+        reviewVideo : reviewVideo
+    }
+
+    console.log(data);
 
     let formData = new FormData();
 
@@ -1002,7 +1002,7 @@ function submitReview() {
             contentType: false,
             data: formData
         }).done(function () {
-            alert('업로드가 완료되었습니다.');
+            alert('리뷰가 등록되었습니다.');
             location.reload();
         }).fail(function (error) {
             alert(JSON.stringify(error));
