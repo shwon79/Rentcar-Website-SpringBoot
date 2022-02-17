@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -280,6 +281,7 @@ public class CalendarController {
         Collections.sort(campingCarMainTextList);
 
         List<Review> reviewList = reviewService.findImageByCarName(campingCarPrice);
+        System.out.println(reviewList.get(0).getReviewId());
 
         model.put("reviewList", reviewList);
         model.put("campingCarMainTextList", campingCarMainTextList);
@@ -553,27 +555,30 @@ public class CalendarController {
 
     @PostMapping(value="/camping/calendar/review", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void postCampingCarReview(ReviewDTO dto) throws Exception  {
+    public void postCampingCarReview(MultipartHttpServletRequest req) throws Exception  {
+        System.out.println("Success");
+        List<MultipartFile> multipartFileList = req.getFiles("file");
+        System.out.println(multipartFileList.size());
+        System.out.println(req.getParameter("nickName"));
 
-        List<MultipartFile> multipartFileList = dto.getImageList();
-        String [] imageUrlList = new String[multipartFileList.size()];
+//        String [] imageUrlList = new String[multipartFileList.size()];
 
-        for(int i=0; i<multipartFileList.size(); i++){
-            String imgPath = s3Service.upload(multipartFileList.get(i));
-            imageUrlList[i] = imgPath;
-        }
-
-        List<MultipartFile> videoList = dto.getVideo();
-        String videoURL = "";
-        for(int i=0; i<videoList.size(); i++){
-            if(i > 0){
-                throw new Exception("You can only upload one video.");
-            }
-            videoURL = s3Service.upload(videoList.get(i));
-        }
-
-        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarName());
-        reviewService.saveDTO(dto, campingCarPrice, imageUrlList, videoURL);
+//        for(int i=0; i<multipartFileList.size(); i++){
+//            String imgPath = s3Service.upload(multipartFileList.get(i));
+//            imageUrlList[i] = imgPath;
+//        }
+//
+//        List<MultipartFile> videoList = dto.getVideo();
+//        String videoURL = "";
+//        for(int i=0; i<videoList.size(); i++){
+//            if(i > 0){
+//                throw new Exception("You can only upload one video.");
+//            }
+//            videoURL = s3Service.upload(videoList.get(i));
+//        }
+//
+//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarName());
+//        reviewService.saveDTO(dto, campingCarPrice, imageUrlList, videoURL);
     }
 
 
