@@ -455,6 +455,11 @@
                                 <span style="font-size: 18px;">리뷰작성 하기</span>
                                 <button onclick="displayReviewBox();" class="btn btn-primary">X</button>
                             </div>
+                            <form th:action="@{/admin/image}" method="post" enctype="multipart/form-data">
+                                제목 : <input type="text" name="title"> <br>
+                                파일 : <input type="file" name="file"> <br>
+                                <button>등록하기</button>
+                            </form>
                             <div>
                                 <label for="reviewName" class="control-label">
                                     <span style="color: orangered; font-size: 16px;">*</span>
