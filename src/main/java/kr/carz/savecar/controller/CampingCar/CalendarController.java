@@ -561,24 +561,27 @@ public class CalendarController {
         System.out.println(multipartFileList.size());
         System.out.println(req.getParameter("nickName"));
 
-//        String [] imageUrlList = new String[multipartFileList.size()];
+        String [] imageUrlList = new String[multipartFileList.size()];
 
-//        for(int i=0; i<multipartFileList.size(); i++){
-//            String imgPath = s3Service.upload(multipartFileList.get(i));
-//            imageUrlList[i] = imgPath;
-//        }
-//
-//        List<MultipartFile> videoList = dto.getVideo();
-//        String videoURL = "";
-//        for(int i=0; i<videoList.size(); i++){
-//            if(i > 0){
-//                throw new Exception("You can only upload one video.");
-//            }
-//            videoURL = s3Service.upload(videoList.get(i));
-//        }
-//
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(dto.getCarName());
-//        reviewService.saveDTO(dto, campingCarPrice, imageUrlList, videoURL);
+        for(int i=0; i<multipartFileList.size(); i++){
+            String imgPath = s3Service.upload(multipartFileList.get(i));
+            imageUrlList[i] = imgPath;
+        }
+
+        List<MultipartFile> videoList = req.getFiles("video");
+        String videoURL = "";
+        for(int i=0; i<videoList.size(); i++){
+            if(i > 0){
+                throw new Exception("You can only upload one video.");
+            }
+            videoURL = s3Service.upload(videoList.get(i));
+        }
+
+        ReviewDTO reviewDTO = new ReviewDTO(req.getParameter("carName"), req.getParameter("text"), req.getParameter("nickName"), req.getParameter("startDate"), req.getParameter("endDate"),
+                                            multipartFileList, videoList, req.getParameter("password"));
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(req.getParameter("carName"));
+        reviewService.saveDTO(reviewDTO, campingCarPrice, imageUrlList, videoURL);
     }
 
 
