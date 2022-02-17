@@ -938,9 +938,8 @@ function submitReview() {
     let reviewImage = document.getElementById('reviewImage').files;
     let reviewVideo = document.getElementById('reviewVideo').files[0];
 
-
     // convert file object to list
-    reviewImage = Object.values(reviewImage);
+    // reviewImage = Object.values(reviewImage);
     // console.log(reviewImage);
     // image 첨부 10개 미만일 경우 null 값 추가
     // if (reviewImage.length !== 10) {
@@ -952,20 +951,15 @@ function submitReview() {
     // video 첨부 안할 경우 [] 값 주기
     if (reviewVideo === undefined) { reviewVideo = []; }
 
-    let data = {
-        reviewName : reviewName,
-        reviewPassword : reviewPassword,
-        reviewCarType : reviewCarType,
-        reviewRentStartDate : reviewRentStartDate,
-        reviewRentEndDate : reviewRentEndDate,
-        reviewText : reviewText,
-        reviewImage : reviewImage,
-        reviewVideo : reviewVideo
+    let imageFormData = new FormData();
+    let videoFormData = new FormData();
+
+    // let formData = new FormData();
+    // formData.append('body', temp);
+    for (let i = 0; i < reviewImage.length; i++) {
+        imageFormData.append('files', reviewImage[i]);
     }
-
-    console.log(data);
-
-    let formData = new FormData();
+    videoFormData.append('file', reviewVideo);
 
     // 사진 최대 갯수 10개
     if (reviewImage.length > 10) {
@@ -973,20 +967,32 @@ function submitReview() {
     } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
         alert('필수 입력 내용을 빠짐없이 작성해주세요.');
     } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
-        formData.append('carName', reviewCarType);
-        formData.append('text', reviewText);
-        formData.append('nickName', reviewName);
-        formData.append('startDate', reviewRentStartDate);
-        formData.append('endDate', reviewRentEndDate);
-        formData.append('imageList', reviewImage);
-        formData.append('video', reviewVideo);
-        formData.append('password', reviewPassword);
+        let data = {
+            reviewName : reviewName,
+            reviewPassword : reviewPassword,
+            reviewCarType : reviewCarType,
+            reviewRentStartDate : reviewRentStartDate,
+            reviewRentEndDate : reviewRentEndDate,
+            reviewText : reviewText,
+            reviewImage : imageFormData,
+            reviewVideo : videoFormData
+        }
+
+        console.log(data);
+        // formData.append('carName', reviewCarType);
+        // formData.append('text', reviewText);
+        // formData.append('nickName', reviewName);
+        // formData.append('startDate', reviewRentStartDate);
+        // formData.append('endDate', reviewRentEndDate);
+        // formData.append('imageList', reviewImage);
+        // formData.append('video', reviewVideo);
+        // formData.append('password', reviewPassword);
         if (confirm('리뷰를 등록 하시겠습니까?')) {
-            postReview();
+            postReview(data);
         };
     };
 
-    function postReview() {
+    function postReview(data) {
         $.ajax({
             enctype: 'multipart/form-data',
             cache: false,
@@ -994,7 +1000,7 @@ function submitReview() {
             url: '/camping/calendar/review',
             processData:false,
             contentType: false,
-            data: formData
+            data: data
         }).done(function () {
             alert('리뷰가 등록되었습니다.');
             location.reload();
