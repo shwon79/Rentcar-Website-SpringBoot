@@ -532,7 +532,7 @@ a:hover {
   text-align: left;
   border-top: 1px solid darkgray;
   border-bottom: 1px solid darkgray;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 .one_review_close {
   display: flex;
@@ -545,7 +545,7 @@ a:hover {
 }
 .one_review p {
   margin-bottom: 5px;
-  color: dimgray;
+  color: darkgrey;
 }
 .review_text {
   color: black !important;
@@ -569,6 +569,7 @@ a:hover {
 .review_image_open.active {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .review_image_open img {
   width: 50%;

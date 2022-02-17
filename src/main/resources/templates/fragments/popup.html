@@ -12,6 +12,10 @@
                     <div class="popup_header">
                         <h1 id="popup1_contact"></h1>
                     </div>
+<!--                    <div class="popup_rent_banner">-->
+<!--                        <h4>자차정비 모두포함!</h4>-->
+<!--                        <h4>전국최저가 월렌트/12개월/24개월 사이트가격오픈!</h4>-->
+<!--                    </div>-->
                     <div class="popup1_box1">
                         <table class="popup1_table">
                             <tr>
@@ -150,8 +154,12 @@
                         <div class="popup_bg_img" th:style="'background-image:url('+ @{/img/popup_campingcar.png} +');'">
                         </div>
                     </div>
-<!--                    <div>-->
-<!--                        <h3>장기여행 특별할인</h3>-->
+<!--                    <div class="popup_camping_banner">-->
+<!--                        <h4>-->
+<!--                            <span><i class="fa fa-star" aria-hidden="true"></i></span>-->
+<!--                            <span>장기여행 특별프로모션 진행중</span>-->
+<!--                            <span><i class="fa fa-star" aria-hidden="true"></i></span>-->
+<!--                        </h4>-->
 <!--                    </div>-->
                     <div class="popup_bg_red">
                         <h4 id="popup2_contact"></h4>
@@ -160,26 +168,24 @@
                     </div>
                     <div class="popup_bg_green">
                         <div class="popup_bottom_content_wrapper">
-                            <div class="popup_box popup_box_slogan" id="popup2_slogan">
-
-                            </div>
+                            <div class="popup_box popup_box_slogan" id="popup2_slogan"></div>
                             <div class="popup_box_wrapper">
                                 <div class="popup_box">
                                     <p class="popup_box_title" id="popup2_box1_title"></p>
                                     <p class="popup_box_subtitle" id="popup2_box1_subtitle"></p>
                                     <p class="popup_box_price">
-                                        <span class="popup_box_text">주중 : </span>
+                                        <span class="popup_box_text">주중: </span>
                                         <span class="popup_box_price_number" id="popup2_box1_line1_price"></span>
                                         <span class="popup_box_text">만원</span>
                                     </p>
                                     <p class="popup_box_price">
-                                        <span class="popup_box_text">주중 : </span>
+                                        <span class="popup_box_text">주말: </span>
                                         <span class="popup_box_price_number" id="popup2_box1_line2_price"></span>
                                         <span class="popup_box_text">만원</span>
                                     </p>
                                     <p class="popup_box_text" th:text="${campingCarList[0].license}"></p>
                                     <p>
-                                        <span class="popup_box_text">인원정보 : </span>
+<!--                                        <span class="popup_box_text">인원정보 : </span>-->
                                         <span class="popup_box_text" th:text="${campingCarList[0].personnel}"></span>
                                     </p>
                                 </div>
@@ -187,19 +193,64 @@
                                     <p class="popup_box_title" id="popup2_box2_title"></p>
                                     <p class="popup_box_subtitle" id="popup2_box2_subtitle"></p>
                                     <p class="popup_box_price">
-                                        <span class="popup_box_text">주중 : </span>
+                                        <span class="popup_box_text">주중: </span>
                                         <span class="popup_box_price_number" id="popup2_box2_line1_price"></span>
                                         <span class="popup_box_text">만원</span>
                                     </p>
                                     <p class="popup_box_price">
-                                        <span class="popup_box_text">주말 : </span>
+                                        <span class="popup_box_text">주말: </span>
                                         <span class="popup_box_price_number" id="popup2_box2_line2_price"></span>
                                         <span class="popup_box_text">만원</span>
                                     </p>
                                     <p class="popup_box_text" th:text="${campingCarList[1].license}"></p>
                                     <p>
-                                        <span class="popup_box_text">인원정보 : </span>
+<!--                                        <span class="popup_box_text">인원정보 : </span>-->
                                         <span class="popup_box_text" th:text="${campingCarList[1].personnel}"></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="popup_box popup_box_slogan promotion_slogan">
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                <span>장기여행 특별프로모션</span>
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="popup_box_wrapper">
+                                <div class="popup_box">
+                                    <p class="popup_box_title"></p>
+                                    <p class="popup_box_subtitle"></p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">7일: </span>
+                                        <span class="popup_box_price_number">180</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">10일: </span>
+                                        <span class="popup_box_price_number">225</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">15일: </span>
+                                        <span class="popup_box_price_number">295</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                </div>
+                                <div class="popup_box">
+                                    <p class="popup_box_title"></p>
+                                    <p class="popup_box_subtitle"></p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">7일: </span>
+                                        <span class="popup_box_price_number">152</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">10일: </span>
+                                        <span class="popup_box_price_number">190</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">15일: </span>
+                                        <span class="popup_box_price_number">250</span>
+                                        <span class="popup_box_text">만원</span>
                                     </p>
                                 </div>
                             </div>

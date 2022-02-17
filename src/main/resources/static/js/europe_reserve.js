@@ -938,30 +938,19 @@ function submitReview() {
     let reviewImage = document.getElementById('reviewImage').files;
     let reviewVideo = document.getElementById('reviewVideo').files[0];
 
-    // console.log(reviewPassword);
-    // 패스워드가 숫자로만 이루어져 있는지 확인
-    // if (/{}/.test(reviewPassword))
-    // if (reviewPassword.toString().length != 4) {
-    //     console.log(reviewPassword);
-    // }
 
-    // if (/^SW\d{4}$/.test(reviewPassword)) {
-    //     console.log(reviewPassword);
-    // } else {
-    //     console.log('no')
-    // }
     // convert file object to list
     reviewImage = Object.values(reviewImage);
-
+    // console.log(reviewImage);
     // image 첨부 10개 미만일 경우 null 값 추가
-    if (reviewImage.length !== 10) {
-        do {
-            reviewImage.push(null);
-        } while (reviewImage.length < 10)
-    }
+    // if (reviewImage.length !== 10) {
+    //     do {
+    //         reviewImage.push(null);
+    //     } while (reviewImage.length < 10)
+    // }
 
-    // video 첨부 안할 경우 null 값 주기
-    if (reviewVideo === undefined) { reviewVideo = null; }
+    // video 첨부 안할 경우 [] 값 주기
+    if (reviewVideo === undefined) { reviewVideo = []; }
 
     let data = {
         reviewName : reviewName,
@@ -978,7 +967,12 @@ function submitReview() {
 
     let formData = new FormData();
 
-    if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
+    // 사진 최대 갯수 10개
+    if (reviewImage.length > 10) {
+        alert('이미지 첨부는 최대 10장까지 가능합니다.');
+    } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
+        alert('필수 입력 내용을 빠짐없이 작성해주세요.');
+    } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
         formData.append('carName', reviewCarType);
         formData.append('text', reviewText);
         formData.append('nickName', reviewName);
@@ -990,7 +984,7 @@ function submitReview() {
         if (confirm('리뷰를 등록 하시겠습니까?')) {
             postReview();
         };
-    }
+    };
 
     function postReview() {
         $.ajax({

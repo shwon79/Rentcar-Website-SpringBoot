@@ -1219,6 +1219,15 @@ div.popStyle1, div.popStyle2 {
     position: absolute;
     margin-top: 7em;
 }
+.popup_camping_banner {
+    background-color: #40c4b6;
+}
+.popup_camping_banner h4 {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 0;
+}
 .popup_bg_red {
     background: #e71c36;
     text-align: center;
@@ -1267,6 +1276,12 @@ div.popStyle1, div.popStyle2 {
     grid-template-columns: 1fr 1fr;
     display: grid;
     grid-column-gap: 20px;
+}
+.popup_box_wrapper:first-child {
+    margin-bottom: 30px;
+}
+.promotion_slogan {
+    top: 55% !important;
 }
 .popup_box {
     border: 5px solid #e71c36;
@@ -1363,7 +1378,7 @@ div.popStyle1, div.popStyle2 {
     }
     .popup_box_slogan {
         font-size: 1.2em;
-        top: 20%;
+        top: 18%;
     }
     .popup_box_wrapper {
         grid-column-gap: 5px;
