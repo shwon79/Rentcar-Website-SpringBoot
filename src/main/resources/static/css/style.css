@@ -1116,6 +1116,19 @@ div.popStyle1, div.popStyle2 {
     color: #7201da;
     margin: 0;
 }
+.popup_rent_banner {
+    background-color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+.popup_rent_banner h4 {
+    color: #7506db;
+    line-height: 2rem;
+    word-break: keep-all;
+}
+.popup_rent_banner h4:last-child {
+    margin-bottom: 0;
+}
 .popup1_table td {
     padding: 10px;
 }
@@ -1267,7 +1280,7 @@ div.popStyle1, div.popStyle2 {
     position: absolute;
     width: 80%;
     left: 10%;
-    top: 17%;
+    top: 14%;
     padding: 10px !important;
     font-size: 1.5em;
     border-radius: 12px !important;
@@ -1281,7 +1294,7 @@ div.popStyle1, div.popStyle2 {
     margin-bottom: 30px;
 }
 .promotion_slogan {
-    top: 55% !important;
+    top: 58% !important;
 }
 .popup_box {
     border: 5px solid #e71c36;
@@ -1378,7 +1391,7 @@ div.popStyle1, div.popStyle2 {
     }
     .popup_box_slogan {
         font-size: 1.2em;
-        top: 18%;
+        top: 14%;
     }
     .popup_box_wrapper {
         grid-column-gap: 5px;
