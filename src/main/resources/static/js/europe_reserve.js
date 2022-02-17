@@ -1018,3 +1018,15 @@ function openReview(id) {
     let targetReview = oneReviewClose.find(review => review.dataset.title == id);
     targetReview.classList.toggle('opened');
 }
+
+// function sliceText() {
+//     let textTest = document.getElementById('textTest');
+//     console.log(textTest);
+//     console.log(textTest.innerText);
+//     console.log(textTest.value);
+//     if (textTest.length > 60) {
+//         console.log('too long');
+//     }
+// }
+//
+// window.onload = sliceText();

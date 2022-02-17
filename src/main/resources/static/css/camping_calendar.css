@@ -567,16 +567,26 @@ a:hover {
   display: none;
 }
 .review_image_open.active {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: block;
+  padding: 20px 0;
 }
-.review_image_open img {
-  width: 50%;
+.review_image_open .image {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.review_image_open .image img {
+  width: 48%;
   height: auto;
   max-height: 300px;
 }
-.review_image_open video {
+.review_image_open .video {
+  /*margin-top: 20px;*/
+  display: flex;
+  justify-content: center;
+}
+.review_image_open .video video {
   max-height: 500px;
 }
 @media (max-width: 991px) {
