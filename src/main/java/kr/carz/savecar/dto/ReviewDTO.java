@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,7 +28,9 @@ public class ReviewDTO {
     private List<MultipartFile> video;
     private String password;
 
-    public Review toEntity(CampingCarPrice carNameEntity, String [] imageList, String videoURL) {
+    public Review toEntity(CampingCarPrice carNameEntity, ArrayList<String> imageList, String videoURL) {
+
+        Integer imageListSize = imageList.size();
 
         return Review.builder()
                 .carName(carNameEntity)
@@ -35,16 +38,16 @@ public class ReviewDTO {
                 .nickName(nickName)
                 .startDate(startDate)
                 .endDate(endDate)
-                .image1(imageList[0])
-                .image2(imageList[1])
-                .image3(imageList[2])
-                .image4(imageList[3])
-                .image5(imageList[4])
-                .image6(imageList[5])
-                .image7(imageList[6])
-                .image8(imageList[7])
-                .image9(imageList[8])
-                .image10(imageList[9])
+                .image1((imageListSize > 0) ? imageList.get(0) : null)
+                .image2((imageListSize > 1) ? imageList.get(1) : null)
+                .image3((imageListSize > 2) ? imageList.get(2) : null)
+                .image4((imageListSize > 3) ? imageList.get(3) : null)
+                .image5((imageListSize > 4) ? imageList.get(4) : null)
+                .image6((imageListSize > 5) ? imageList.get(5) : null)
+                .image7((imageListSize > 6) ? imageList.get(6) : null)
+                .image8((imageListSize > 7) ? imageList.get(7) : null)
+                .image9((imageListSize > 8) ? imageList.get(8) : null)
+                .image10((imageListSize > 9) ? imageList.get(9) : null)
                 .video(videoURL)
                 .password(password)
                 .build();
