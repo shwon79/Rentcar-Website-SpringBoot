@@ -936,7 +936,7 @@ function submitReview() {
     let reviewRentEndDate = document.getElementById('reviewRentEndDate').value;
     let reviewText = document.getElementById('reviewText').value;
     let reviewImage = document.getElementById('reviewImage').files;
-    let reviewVideo = document.getElementById('reviewVideo').files[0];
+    let reviewVideo = document.getElementById('reviewVideo').files;
 
     // convert file object to list
     // reviewImage = Object.values(reviewImage);
@@ -947,23 +947,42 @@ function submitReview() {
     //         reviewImage.push(null);
     //     } while (reviewImage.length < 10)
     // }
+    console.log(reviewImage[0]);
+    console.log(reviewVideo);
+
+    // let data = {
+    //     'carName': reviewCarType,
+    //     'text': reviewText,
+    //     'nickName': reviewName,
+    //     'startDate': reviewRentStartDate,
+    //     'endDate': reviewRentEndDate,
+    //     'file': reviewImage,
+    //     'password': reviewPassword
+    // };
+    //
+    // console.log(data);
 
     let formDataWrapper = new FormData();
 
-    // 사진 최대 갯수 10개
-    if (reviewImage.length > 10) {
+
+    if (reviewVideo.length > 1) {
+        // 동영상 최대 갯수 1개
+        alert('동영상 첨부는 최대 1개까지 가능합니다.');
+    } else if (reviewImage.length > 10) {
+        // 사진 최대 갯수 10개
         alert('이미지 첨부는 최대 10장까지 가능합니다.');
     } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
         alert('필수 입력 내용을 빠짐없이 작성해주세요.');
     } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
-
         formDataWrapper.append('carName', reviewCarType);
         formDataWrapper.append('text', reviewText);
         formDataWrapper.append('nickName', reviewName);
         formDataWrapper.append('startDate', reviewRentStartDate);
         formDataWrapper.append('endDate', reviewRentEndDate);
-        formDataWrapper.append('file', reviewImage);
-        // formDataWrapper.append('video', reviewVideo);
+        for (let i = 0; i < reviewImage.length; i++) {
+            formDataWrapper.append('file', reviewImage[i]);
+        }
+        formDataWrapper.append('video', reviewVideo[0]);
         formDataWrapper.append('password', reviewPassword);
         if (confirm('리뷰를 등록 하시겠습니까?')) {
             postReview(formDataWrapper);
