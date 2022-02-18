@@ -420,22 +420,155 @@
                 <!--탭 메뉴-->
                 <input id="tab_info" type="radio" name="tab_item" checked>
                 <label class="tab_item" for="tab_info"><div onclick="location.href='#info'">상세정보</div></label>
-<!--                <input id="tab_review" type="radio" name="tab_item">-->
-<!--                <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">후기</div></label>-->
+                <input id="tab_review" type="radio" name="tab_item">
+                <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">리뷰</div></label>
                 <input id="tab_counsel" type="radio" name="tab_item">
                 <label class="tab_item" for="tab_counsel"><div onclick="location.href='#counsel'">상담신청</div></label>
                 <!--탭 내용-->
-                <div class="card tab_content_size">
-                    <div id="info" th:each="img, i:${campingCarMainTextList}">
-                        <img th:src="${img.url}" th:alt="${img.carName.carName}">
+                <div class="card">
+                    <div id="info">
+                        <h1 class="tab-title" style="padding-top: 70px;">상세정보</h1>
+                        <div class="tab_content_size" th:each="img, i:${campingCarMainTextList}">
+                            <img th:src="${img.url}" th:alt="${img.carName.carName}">
+                        </div>
                     </div>
-<!--                    <div id="review">-->
-<!--                        리뷰리뷰-->
-<!--                    </div>-->
+                    <div id="review" style="padding-top: 70px;">
+                        <h1 class="tab-title">리뷰</h1>
+                        <button class="btn btn-primary" id="openReviewBtn" onclick="displayReviewBox();">리뷰 쓰기</button>
+                        <div id="writeReviewBox">
+                            <div class="review_box_top">
+                                <span style="font-size: 18px;">리뷰작성 하기</span>
+                                <button onclick="displayReviewBox();" class="btn btn-primary">X</button>
+                            </div>
+                            <div>
+                                <label for="reviewName" class="control-label">
+                                    <span style="color: orangered; font-size: 16px;">*</span>
+                                    <span>닉네임</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" class="form-control" id="reviewName" placeholder="성함을 입력해주세요.">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="reviewPassword" class="control-label">
+                                    <span style="color: orangered; font-size: 16px;">*</span>
+                                    <span>비밀번호</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                    <input type="password" class="form-control" id="reviewPassword">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="reviewCarType" class="control-label">
+                                    <span style="color: orangered; font-size: 16px;">*</span>
+                                    <span>캠핑카 종류</span>
+                                </label>
+                                <div class="input-group" style="width: 100%;">
+                                    <span class="input-group-addon"><i class="fa fa-car"></i></span>
+                                    <select id="reviewCarType" class="form-control-select" style="width: 100%; margin-bottom: 0;">
+                                        <option value="">이용하신 캠핑카를 선택하세요</option>
+                                        <option value="europe">Europe</option>
+                                        <option value="limousine">Limousine</option>
+                                        <option value="travel">Travel</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="control-label">
+                                    <span style="color: orangered; font-size: 16px;">*</span>
+                                    <span>렌트 기간</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
+                                    <div class="review_box_date">
+                                        <input type="date" id="reviewRentStartDate" class="form-control review_date_long">
+                                        <span class="form-control"> ~ </span>
+                                        <input type="date" id="reviewRentEndDate" class="form-control review_date_long">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="reviewText" class="control-label">
+                                    <span style="color: orangered; font-size: 16px;">*</span>
+                                    <span>내용</span>
+                                </label>
+                                <div class="input-group" style="width: 100%;">
+                                    <textarea name="" id="reviewText" rows="5" class="form-control" style="width: 100%;"></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="reviewImage" class="control-label">이미지 첨부 (10장까지 첨부 가능)</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="file" accept="image/*" multiple="multiple" id="reviewImage" name="file" class="form-control">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="reviewVideo" class="control-label">동영상 첨부</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="file" accept="video/*" multiple="multiple" id="reviewVideo" class="form-control">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="submitReviewBtn" onclick="submitReview();">등록하기</button>
+                        </div>
+                        <ul id="displayReviewBox">
+                            <li th:if="${#lists.size(reviewList) == 0}" style="text-align: center; font-size: 16px; color: gray;">작성된 리뷰가 없습니다.</li>
+                            <li th:if="${#lists.size(reviewList) != 0}" th:each="review, i : ${reviewList}" class="one_review" th:data-id="${review.reviewId}">
+                                <div class="one_review_close" th:data-title="${review.reviewId}">
+                                    <div class="review_text_box" th:classappend="${review.image1 != null || review.video != ''} ? 'narrow' : 'wide'">
+                                        <p th:text="${review.nickName}"></p>
+                                        <p>
+                                            <span th:text="${review.carName.carName.toUpperCase()}"></span>
+                                            <span> | </span>
+                                            <span th:text="${review.startDate}"></span>
+                                            <span> ~ </span>
+                                            <span th:text="${review.endDate}"></span>
+                                        </p>
+                                        <pre th:text="${#strings.abbreviate(review.text,150)}" class="review_text review_text_short"></pre>
+                                        <pre th:text="${review.text}" class="review_text review_text_long"></pre>
+                                        <button th:if="${review.image1 != null || review.video != '' || review.text.length > 150}" th:onclick="'changeBtnText('+${review.reviewId}+', true)'" class="see_more_btn">
+                                            <div th:data-id="${review.reviewId}" class="see_more_btn_open">
+                                                <span class="see_more_button_text" th:data-id="${review.reviewId}">자세히 보기</span>
+                                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                            </div>
+                                            <div th:data-id="${review.reviewId}" class="see_more_btn_close">
+                                                <span class="see_more_button_text" th:data-id="${review.reviewId}">접기</span>
+                                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <img th:if="${review.image1 != null}" th:src="${review.image1}" th:data-title="${review.reviewId}" class="review_small_image" alt="image1">
+                                    <video th:if="${review.image1 == null && review.video != ''}" class="review_small_image video_part" controls preload="metadata">
+                                        <source th:src="${review.video}">
+                                    </video>
+                                </div>
+                                <div class="review_image_open" th:if="${review.image1 != null || review.video != ''}" th:data-title="${review.reviewId}">
+                                    <div class="image">
+                                        <img th:if="${review.image1}" th:src="${review.image1}" alt="image1">
+                                        <img th:if="${review.image2}" th:src="${review.image2}" alt="image2">
+                                        <img th:if="${review.image3}" th:src="${review.image3}" alt="image3">
+                                        <img th:if="${review.image4}" th:src="${review.image4}" alt="image4">
+                                        <img th:if="${review.image5}" th:src="${review.image5}" alt="image5">
+                                        <img th:if="${review.image6}" th:src="${review.image6}" alt="image6">
+                                        <img th:if="${review.image7}" th:src="${review.image7}" alt="image7">
+                                        <img th:if="${review.image8}" th:src="${review.image8}" alt="image8">
+                                        <img th:if="${review.image9}" th:src="${review.image9}" alt="image9">
+                                        <img th:if="${review.image10}" th:src="${review.image10}" alt="image10">
+                                    </div>
+                                    <div class="video">
+                                        <video th:if="${review.video != ''}" controls preload="metadata" class="video_real">
+                                            <source th:src="${review.video}">
+                                        </video>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                     <div id="counsel" style="padding-top: 70px;">
+                        <h1 class="tab-title">상담 신청하기</h1>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h2>상담 신청하기</h2>
                                 <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
                                 <div name="reservation_info" id="rentProduct" value="유럽">
                                     <div class="row">

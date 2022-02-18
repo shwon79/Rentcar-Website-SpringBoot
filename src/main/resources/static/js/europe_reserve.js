@@ -1021,5 +1021,34 @@ oneReview && [...oneReview].forEach((review) => {
             let targetReview = oneReviewClose.find(review => review.dataset.title == event.currentTarget.dataset.id);
             targetReview && targetReview.classList.toggle('opened');
         }
-    })
+        changeBtnText(review.dataset.id, false);
+    });
 });
+
+// 자세히 보기 버튼
+function changeBtnText(reviewId, boolean) {
+    reviewId = reviewId.toString();
+    const targetReview = [...document.getElementsByClassName('one_review_close')].find((review) => review.dataset.title === reviewId);
+    const targetOpenBtn = [...document.getElementsByClassName('see_more_btn_open')].find((btn) => btn.dataset.id === reviewId);
+    const targetCloseBtn = [...document.getElementsByClassName('see_more_btn_close')].find((btn) => btn.dataset.id === reviewId);
+
+    if (boolean) {
+        if (targetReview.classList.contains('opened')) {
+            targetOpenBtn.style.display = 'block';
+            targetCloseBtn.style.display = 'none';
+        } else {
+            targetOpenBtn.style.display = 'none';
+            targetCloseBtn.style.display = 'block';
+        }
+    } else {
+        if (targetReview.classList.contains('opened')) {
+            targetOpenBtn.style.display = 'none';
+            targetCloseBtn.style.display = 'block';
+        } else {
+            targetOpenBtn.style.display = 'block';
+            targetCloseBtn.style.display = 'none';
+        }
+    }
+
+
+}

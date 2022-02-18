@@ -1124,7 +1124,7 @@ pre {
 
 /*!* 탭 스타일 *!*/
 .tab_item {
-  width: calc(100%/2);
+  width: calc(100%/3);
   height: 50px;
   border-bottom: 3px solid #333333;
   line-height: 50px;
@@ -1159,6 +1159,11 @@ input:checked + .tab_item div {
 
 .tab_content_size > div {
   margin-bottom: 30px;
+}
+
+.tab-title {
+  text-align: left;
+  font-family: 'Black Han Sans', sans-serif;
 }
 
 .carousel-inner > .item > img {

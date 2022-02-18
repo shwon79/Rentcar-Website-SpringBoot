@@ -602,6 +602,21 @@ a:hover {
 .review_image_open .video video {
   max-height: 500px;
 }
+.see_more_btn {
+  border: none;
+  background: white;
+  margin-top: 20px;
+  padding-left: 0px;
+}
+.see_more_btn:hover {
+  text-decoration: underline;
+}
+.see_more_btn_open {
+  display: block;
+}
+.see_more_btn_close {
+  display: none;
+}
 @media (max-width: 991px) {
 
 }
