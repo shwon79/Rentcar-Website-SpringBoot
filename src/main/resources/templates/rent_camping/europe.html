@@ -401,7 +401,7 @@
                     <input id="tab_info" type="radio" name="tab_item" checked>
                     <label class="tab_item" for="tab_info"><div onclick="location.href='#info'">상세정보</div></label>
                     <input id="tab_review" type="radio" name="tab_item">
-                    <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">리뷰</div></label>
+                    <label class="tab_item" for="tab_review"><div onclick="location.href='#review'">리뷰(<span th:text="${#lists.size(reviewList)}">0</span>건)</div></label>
                     <input id="tab_counsel" type="radio" name="tab_item">
                     <label class="tab_item" for="tab_counsel"><div onclick="location.href='#counsel'">상담신청</div></label>
                     <!--탭 내용-->
@@ -413,7 +413,8 @@
                             </div>
                         </div>
                         <div id="review" style="padding-top: 70px;">
-                            <h1 class="tab-title">리뷰</h1>
+                            <h1 class="tab-title">리뷰(<span th:text="${#lists.size(reviewList)}">0</span>건) </h1>
+                            <p style="word-break: keep-all; text-align: left; color: dimgrey;">세이브카의 캠핑카를 이용하신 분들이 작성한 리뷰입니다.</p>
                             <button class="btn btn-primary" id="openReviewBtn" onclick="displayReviewBox();">리뷰 쓰기</button>
                             <div id="writeReviewBox">
                                 <div class="review_box_top">
@@ -497,10 +498,15 @@
                                 <li th:if="${#lists.size(reviewList) != 0}" th:each="review, i : ${reviewList}" class="one_review" th:data-id="${review.reviewId}">
                                     <div class="one_review_close" th:data-title="${review.reviewId}">
                                         <div class="review_text_box" th:classappend="${review.image1 != null || review.video != ''} ? 'narrow' : 'wide'">
-                                            <p th:text="${review.nickName}"></p>
                                             <p>
-                                                <span th:text="${review.carName.carName.toUpperCase()}"></span>
+                                                <span>닉네임 :</span>
+                                                <span th:text="${review.nickName}"></span>
                                                 <span> | </span>
+                                                <span>차량명 :</span>
+                                                <span th:text="${review.carName.carName.toUpperCase()}"></span>
+                                            </p>
+                                            <p>
+                                                <span>렌트 기간 :</span>
                                                 <span th:text="${review.startDate}"></span>
                                                 <span> ~ </span>
                                                 <span th:text="${review.endDate}"></span>
@@ -547,6 +553,7 @@
                         </div>
                         <div id="counsel" style="padding-top: 70px;">
                             <h1 class="tab-title">상담 신청하기</h1>
+                            <p style="word-break: keep-all; text-align: left; color: dimgrey;">간단한 정보입력으로 상담 신청을 받아보세요.</p>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
