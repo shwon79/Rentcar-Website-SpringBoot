@@ -644,7 +644,7 @@ a:hover {
     width: 100%;
   }
   .review_small_image {
-    width: 50%;
+    width: auto;
   }
   .video_part {
     width: 50%;
