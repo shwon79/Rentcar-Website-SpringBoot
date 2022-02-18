@@ -38,12 +38,12 @@
     border-left: 1px solid white;
     border-right: 1px solid white;
 }
-.popup_rent_banner {
-    background-color: white;
-    padding: 20px;
-    text-align: center;
-}
-.popup_rent_banner h4 {
+/*.popup_rent_banner {*/
+/*    background-color: white;*/
+/*    padding: 20px;*/
+/*    text-align: center;*/
+/*}*/
+.popup1_box2_upper h4 {
     color: #7506db;
     line-height: 2rem;
     word-break: keep-all;
