@@ -1121,12 +1121,12 @@ div.popStyle1, div.popStyle2 {
     padding: 10px 0;
     text-align: center;
 }
-.popup_rent_banner h4 {
-    color: #7506db;
+.popup1_box2_upper h4 {
+    color: #4A009D;
     line-height: 2rem;
     word-break: keep-all;
 }
-.popup_rent_banner h4:last-child {
+.popup1_box2_upper h4:last-child {
     margin-bottom: 0;
 }
 .popup1_table td {
