@@ -81,7 +81,7 @@
         </div>
         <div class="reserve_list_wrapper" th:each="reservation, i : ${campingCarReservationList}">
           <div class="reserve_checkbox">
-            <p th:text="${i.index + 1}" style="margin-bottom: 4px;"></p>
+<!--            <p th:text="${i.index + 1}" style="margin-bottom: 4px;"></p>-->
             <input th:if="${reservation.reservation != 1}" type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
           </div>
           <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
@@ -157,13 +157,13 @@
         <div class="Page navigation example">
           <ul class="pagination">
             <li class="page-item" th:if="${currentPage} >= 5">
-              <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${0},size=${pageSize})}">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${0},size=${pageSize})}">
                 <i class="fa-solid fa-angles-left"></i>
               </a>
             </li>
             <li class="page-item" th:if="${currentPage} > 0">
               <a class="page-link" th:href="@{/admin/campingcar/menu(page=${currentPage}-1,size=${pageSize})}">
-                <i class="fa-solid fa-angles-left"></i>
+                <i class="fa-solid fa-chevron-left"></i>
               </a>
             </li>
             <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
@@ -171,11 +171,11 @@
             </li>
             <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
               <a class="page-link" th:href="@{/admin/campingcar/menu(page=${currentPage}+1,size=${pageSize})}">
-                <i class="fa-solid fa-angles-right"></i>
+                <i class="fa-solid fa-chevron-right"></i>
               </a>
             </li>
             <li class="page-item" th:if="${currentPage} < (5 * (${totalPages} / 5))">
-              <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${totalPages}-1,size=${pageSize})}">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${totalPages}-1,size=${pageSize})}">
                 <i class="fa-solid fa-angles-right"></i>
               </a>
             </li>
