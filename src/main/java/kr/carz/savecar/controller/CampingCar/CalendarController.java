@@ -2,6 +2,7 @@ package kr.carz.savecar.controller.CampingCar;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
+import kr.carz.savecar.dto.ReviewDTO;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -9,9 +10,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,13 +34,16 @@ public class CalendarController {
     private final CampingCarPriceRateService campingCarPriceRateService;
     private final ImagesService imagesService;
     private final CampingCarMainTextService campingCarMainTextService;
+    private final S3Service s3Service;
+    private final ReviewService reviewService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
                               CalendarTimeService calendarTimeService, DateCampingService dateCampingService,
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
                               CampingCarPriceRateService campingCarPriceRateService, ImagesService imagesService,
-                              CampingCarMainTextService campingCarMainTextService) {
+                              CampingCarMainTextService campingCarMainTextService, S3Service s3Service,
+                              ReviewService reviewService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
@@ -45,6 +52,8 @@ public class CalendarController {
         this.campingCarPriceRateService = campingCarPriceRateService;
         this.imagesService = imagesService;
         this.campingCarMainTextService = campingCarMainTextService;
+        this.s3Service = s3Service;
+        this.reviewService = reviewService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -270,6 +279,9 @@ public class CalendarController {
         List<CampingCarMainText> campingCarMainTextList = campingCarMainTextService.findImageByCarName(campingCarPrice);
         Collections.sort(campingCarMainTextList);
 
+        List<Review> reviewList = reviewService.findAllReview();
+
+        model.put("reviewList", reviewList);
         model.put("campingCarMainTextList", campingCarMainTextList);
         model.put("imagesList", imagesList);
         model.put("explanation", explanation);
@@ -536,6 +548,40 @@ public class CalendarController {
         pw.flush();
         pw.close();
     }
+
+
+
+    @PostMapping(value="/camping/calendar/review", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public void postCampingCarReview(MultipartHttpServletRequest req) throws Exception  {
+        System.out.println("Success");
+        List<MultipartFile> multipartFileList = req.getFiles("file");
+        System.out.println(multipartFileList.size());
+        System.out.println(req.getParameter("nickName"));
+
+        ArrayList<String> imageUrlList = new ArrayList<>();
+
+        for(int i=0; i<multipartFileList.size(); i++){
+            String imgPath = s3Service.upload(multipartFileList.get(i));
+            imageUrlList.add(imgPath);
+        }
+
+        List<MultipartFile> videoList = req.getFiles("video");
+        String videoURL = "";
+        for(int i=0; i<videoList.size(); i++){
+            if(i > 0){
+                throw new Exception("You can only upload one video.");
+            }
+            videoURL = s3Service.upload(videoList.get(i));
+        }
+
+        ReviewDTO reviewDTO = new ReviewDTO(req.getParameter("carName"), req.getParameter("text"), req.getParameter("nickName"), req.getParameter("startDate"), req.getParameter("endDate"),
+                                            multipartFileList, videoList, req.getParameter("password"));
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(req.getParameter("carName"));
+        reviewService.saveDTO(reviewDTO, campingCarPrice, imageUrlList, videoURL);
+    }
+
 
 
 }

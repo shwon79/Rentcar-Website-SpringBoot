@@ -102,6 +102,10 @@ public class CampingCarController {
 
         mav.addObject("currentPage", pageable.getPageNumber());
         mav.addObject("pageSize", pageable.getPageSize());
+
+        mav.addObject("startPage", (pageable.getPageNumber() / 5) * 5 + 1);
+        mav.addObject("endPage", Integer.min((pageable.getPageNumber() / 5 + 1) * 5, campingCarReservationPage.getTotalPages()));
+
         mav.addObject("totalPages", campingCarReservationPage.getTotalPages());
         mav.addObject("campingCarReservationList", campingCarReservationPage.getContent());
 

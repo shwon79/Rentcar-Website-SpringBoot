@@ -837,7 +837,11 @@ form {
     width: 5em;
     text-align: center;
 }
-
+.pagination {
+    width: 70%;
+    margin: 30px auto;
+    justify-content: center;
+}
 
 @media (max-width: 990px) {
 
@@ -872,7 +876,8 @@ form {
         padding: 4px !important;
     }
     #textarea_wrapper textarea,
-    #textarea_wrapper table {
+    #textarea_wrapper table,
+    .pagination {
         width: 95%;
     }
     .campingPriceEditTable td,

@@ -12,6 +12,10 @@
                     <div class="popup_header">
                         <h1 id="popup1_contact"></h1>
                     </div>
+<!--                    <div class="popup_rent_banner">-->
+<!--                        <h4 id="popup1_banner1"></h4>-->
+<!--                        <h4 id="popup1_banner2"></h4>-->
+<!--                    </div>-->
                     <div class="popup1_box1">
                         <table class="popup1_table">
                             <tr>
@@ -84,6 +88,8 @@
                     </div>
                     <div class="popup1_box2">
                         <div class="popup1_box2_upper">
+                            <h4 id="popup1_banner1"></h4>
+                            <h4 id="popup1_banner2" style="margin-bottom: 20px;"></h4>
                             <p class="popup1_box2_upper_title" id="popup1_box2_line1_title"></p>
                             <p>
                                 <span id="popup1_box2_line1_text1"></span>
@@ -150,8 +156,12 @@
                         <div class="popup_bg_img" th:style="'background-image:url('+ @{/img/popup_campingcar.png} +');'">
                         </div>
                     </div>
-<!--                    <div>-->
-<!--                        <h3>장기여행 특별할인</h3>-->
+<!--                    <div class="popup_camping_banner">-->
+<!--                        <h4>-->
+<!--                            <span><i class="fa fa-star" aria-hidden="true"></i></span>-->
+<!--                            <span>장기여행 특별프로모션 진행중</span>-->
+<!--                            <span><i class="fa fa-star" aria-hidden="true"></i></span>-->
+<!--                        </h4>-->
 <!--                    </div>-->
                     <div class="popup_bg_red">
                         <h4 id="popup2_contact"></h4>
@@ -160,26 +170,24 @@
                     </div>
                     <div class="popup_bg_green">
                         <div class="popup_bottom_content_wrapper">
-                            <div class="popup_box popup_box_slogan" id="popup2_slogan">
-
-                            </div>
-                            <div class="popup_box_wrapper">
+                            <div class="popup_box popup_box_slogan" id="popup2_slogan"></div>
+                            <div class="popup_box_wrapper" style="margin-bottom: 30px;">
                                 <div class="popup_box">
                                     <p class="popup_box_title" id="popup2_box1_title"></p>
                                     <p class="popup_box_subtitle" id="popup2_box1_subtitle"></p>
                                     <p class="popup_box_price">
-                                        <span class="popup_box_text">주중 : </span>
+                                        <span class="popup_box_text">주중: </span>
                                         <span class="popup_box_price_number" id="popup2_box1_line1_price"></span>
                                         <span class="popup_box_text">만원</span>
                                     </p>
                                     <p class="popup_box_price">
-                                        <span class="popup_box_text">주중 : </span>
+                                        <span class="popup_box_text">주말: </span>
                                         <span class="popup_box_price_number" id="popup2_box1_line2_price"></span>
                                         <span class="popup_box_text">만원</span>
                                     </p>
                                     <p class="popup_box_text" th:text="${campingCarList[0].license}"></p>
                                     <p>
-                                        <span class="popup_box_text">인원정보 : </span>
+<!--                                        <span class="popup_box_text">인원정보 : </span>-->
                                         <span class="popup_box_text" th:text="${campingCarList[0].personnel}"></span>
                                     </p>
                                 </div>
@@ -187,19 +195,64 @@
                                     <p class="popup_box_title" id="popup2_box2_title"></p>
                                     <p class="popup_box_subtitle" id="popup2_box2_subtitle"></p>
                                     <p class="popup_box_price">
-                                        <span class="popup_box_text">주중 : </span>
+                                        <span class="popup_box_text">주중: </span>
                                         <span class="popup_box_price_number" id="popup2_box2_line1_price"></span>
                                         <span class="popup_box_text">만원</span>
                                     </p>
                                     <p class="popup_box_price">
-                                        <span class="popup_box_text">주말 : </span>
+                                        <span class="popup_box_text">주말: </span>
                                         <span class="popup_box_price_number" id="popup2_box2_line2_price"></span>
                                         <span class="popup_box_text">만원</span>
                                     </p>
                                     <p class="popup_box_text" th:text="${campingCarList[1].license}"></p>
                                     <p>
-                                        <span class="popup_box_text">인원정보 : </span>
+<!--                                        <span class="popup_box_text">인원정보 : </span>-->
                                         <span class="popup_box_text" th:text="${campingCarList[1].personnel}"></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="popup_box popup_box_slogan promotion_slogan">
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                <span>장기여행 특별프로모션</span>
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="popup_box_wrapper">
+                                <div class="popup_box">
+                                    <p class="popup_box_title"></p>
+                                    <p class="popup_box_subtitle"></p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">7일: </span>
+                                        <span class="popup_box_price_number">180</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">10일: </span>
+                                        <span class="popup_box_price_number">225</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">15일: </span>
+                                        <span class="popup_box_price_number">295</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                </div>
+                                <div class="popup_box">
+                                    <p class="popup_box_title"></p>
+                                    <p class="popup_box_subtitle"></p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">7일: </span>
+                                        <span class="popup_box_price_number">152</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">10일: </span>
+                                        <span class="popup_box_price_number">190</span>
+                                        <span class="popup_box_text">만원</span>
+                                    </p>
+                                    <p class="popup_box_price">
+                                        <span class="popup_box_text">15일: </span>
+                                        <span class="popup_box_price_number">250</span>
+                                        <span class="popup_box_text">만원</span>
                                     </p>
                                 </div>
                             </div>
@@ -217,163 +270,6 @@
             </div>
         </div>
     </div>
-
-    <!-- POPUP1 월렌트 -->
-<!--    <div id="divpop1" class="hidden-xs hidden-sm col-lg-12 col-md-12 popStyle1" style="visibility: visible;">-->
-<!--        <a href="/rent/month/new">-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--                    <td style="" height="360" align="center">-->
-<!--                        <div class="popContentStyle1">-->
-<!--                            <img th:src="@{/img/popupimg1.png}">-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                </tr>-->
-
-<!--                &lt;!&ndash; <tr><td style="border-top:1px dashed #A6A6A6;"></td></tr> &ndash;&gt;-->
-<!--                <tr>-->
-<!--                    <form name="pop_form1">-->
-<!--                        <td align="right">-->
-<!--                            <input type="checkbox" name="chkbox" id="form1" value="checkbox" style="margin-right:5px;">-->
-<!--                            <label for="form1">오늘 하루동안 보지 않기</label>-->
-<!--                            <a href="javascript:closeWinOne()">[닫기]</a>-->
-<!--                        </td>-->
-<!--                    </form>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </a>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; POPUP2 캠핑카렌트 &ndash;&gt;-->
-<!--    <div id="divpop2" class="hidden-sm hidden-xs col-lg-12 col-md-12 popStyle2">-->
-<!--        <a>-->
-<!--            <table>-->
-<!--                <tr onclick="moveToCampingCalendar()" style="cursor: pointer;">-->
-<!--                    <td height="360" align="center">-->
-<!--                        <div class="popContentStyle1">-->
-<!--                            <img th:src="@{/img/popupimg2.png}">-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td align="right">-->
-<!--                        <form name="pop_form2">-->
-<!--                            <input type="checkbox" name="chkbox" id="form2" value="checkbox" style="margin-right:5px;">-->
-<!--                            <label for="form2">오늘 하루동안 보지 않기</label>-->
-<!--                            <a href="javascript:closeWinTwo();"><B>[닫기]</B></a>-->
-<!--                        </form>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </a>-->
-<!--    </div>-->
-
-<!--    <div id="divpop3" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle3">-->
-<!--        <a href="/rent/month/new">-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--                    <td align="center">-->
-<!--                        <div class="popContentStyle1">-->
-<!--                            <img th:src="@{/img/popupimg1.png}">-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td align="right">-->
-<!--                        <form name="pop_form3">-->
-<!--                            <input type="checkbox" name="chkbox" id="form3" value="checkbox" style="margin-right:5px;">-->
-<!--                            <label for="form3">오늘 하루동안 보지 않기</label>-->
-<!--                            <a href="javascript:closeWinThree();"><B>[닫기]</B></a>-->
-<!--                        </form>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </a>-->
-<!--    </div>-->
-
-<!--    <div id="divpop4" class="col-sm-12 col-xs-12 hidden-lg hidden-md popStyle4">-->
-<!--        <div class="popup_upper" onclick="moveToCampingCalendar()" style="cursor: pointer;">-->
-<!--            <div class="popup_content">-->
-<!--                <div class="popup_bg_img_wrapper">-->
-<!--                    <div class="popup_bg_img" th:style="'background-image:url('+ @{/img/popup_campingcar.png} +');'">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="popup_bg_red">-->
-<!--                    <h4 id="popup2_contact"></h4>-->
-<!--                    <h3 class="popup_outline_text" id="popup2_subtitle"></h3>-->
-<!--                    <h1 class="popup_outline_text" id="popup2_title"></h1>-->
-<!--                </div>-->
-<!--                <div class="popup_bg_green">-->
-<!--                    <div class="popup_bottom_content_wrapper">-->
-<!--                        <div class="popup_box popup_box_slogan" id="popup2_slogan">-->
-
-<!--                        </div>-->
-<!--                        <div class="popup_box_wrapper">-->
-<!--                            <div class="popup_box">-->
-<!--                                <p class="popup_box_title" id="popup2_box1_title"></p>-->
-<!--                                <p class="popup_box_subtitle" id="popup2_box1_subtitle"></p>-->
-<!--                                <p class="popup_box_price">-->
-<!--                                    <span class="popup_box_text" id="popup2_box1_line1_title"></span>-->
-<!--                                    <span class="popup_box_price_number" id="popup2_box1_line1_red_text"></span>-->
-<!--                                    <span class="popup_box_text" id="popup2_box1_line1_text"></span>-->
-<!--                                </p>-->
-<!--                                <p class="popup_box_price">-->
-<!--                                    <span class="popup_box_text" id="popup2_box1_line2_title"></span>-->
-<!--                                    <span class="popup_box_price_number" id="popup2_box1_line2_red_text"></span>-->
-<!--                                    <span class="popup_box_text" id="popup2_box1_line2_text"></span>-->
-<!--                                </p>-->
-<!--                                <p class="popup_box_text" id="popup2_box1_line3"></p>-->
-<!--                                <p class="popup_box_text" id="popup2_box1_line4"></p>-->
-<!--                            </div>-->
-<!--                            <div class="popup_box">-->
-<!--                                <p class="popup_box_title" id="popup2_box2_title"></p>-->
-<!--                                <p class="popup_box_subtitle" id="popup2_box2_subtitle"></p>-->
-<!--                                <p class="popup_box_price">-->
-<!--                                    <span class="popup_box_text" id="popup2_box2_line1_title"></span>-->
-<!--                                    <span class="popup_box_price_number" id="popup2_box2_line1_red_text"></span>-->
-<!--                                    <span class="popup_box_text" id="popup2_box2_line1_text"></span>-->
-<!--                                </p>-->
-<!--                                <p class="popup_box_price">-->
-<!--                                    <span class="popup_box_text" id="popup2_box2_line2_title"></span>-->
-<!--                                    <span class="popup_box_price_number" id="popup2_box2_line2_red_text"></span>-->
-<!--                                    <span class="popup_box_text" id="popup2_box2_line2_text"></span>-->
-<!--                                </p>-->
-<!--                                <p class="popup_box_text" id="popup2_box2_line3"></p>-->
-<!--                                <p class="popup_box_text" id="popup2_box2_line4"></p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="popup_button" id="popup2_button"></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="popup_bottom">-->
-<!--            <form name="pop_form4">-->
-<!--                <input type="checkbox" name="chkbox" id="form4" value="checkbox" style="margin-right:5px;">-->
-<!--                <label for="form4">오늘 하루동안 보지 않기</label>-->
-<!--                <a href="javascript:closeWinFour();"><B>[닫기]</B></a>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--&lt;!&ndash;        <table>&ndash;&gt;-->
-<!--&lt;!&ndash;            <tr onclick="moveToCampingCalendar()" style="cursor: pointer;">&ndash;&gt;-->
-<!--&lt;!&ndash;                <td align="center">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div class="popContentStyle2">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <img th:src="@{/img/popupimg2.png}">&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td align="right">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <form name="pop_form4">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <input type="checkbox" name="chkbox" id="form4" value="checkbox" style="margin-right:5px;">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <label for="form4">오늘 하루동안 보지 않기</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <a href="javascript:closeWinFour();"><B>[닫기]</B></a>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </form>&ndash;&gt;-->
-<!--&lt;!&ndash;                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;        </table>&ndash;&gt;-->
-<!--    </div>-->
-<!--    </div>-->
 </th:block>
 
 </html>

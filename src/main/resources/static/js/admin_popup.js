@@ -2,6 +2,9 @@
 window.onload = function() {
     getEditedData('popup1_contact', 'popup1_contact');
 
+    getEditedData('popup1_banner1', 'popup1_banner1');
+    getEditedData('popup1_banner2', 'popup1_banner2');
+
     getEditedData('popup1_box1_line1_title', 'popup1_box1_line1_title');
     getEditedData('popup1_box1_line1_text1', 'popup1_box1_line1_text1');
     getEditedData('popup1_box1_line1_price', 'popup1_box1_line1_price');
@@ -128,6 +131,8 @@ window.onload = function() {
 
 function popupEdit() {
     const popup1_contact = document.getElementById('popup1_contact').value;
+    const popup1_banner1 = document.getElementById('popup1_banner1').value;
+    const popup1_banner2 = document.getElementById('popup1_banner2').value;
     const popup1_box1_line1_title = document.getElementById('popup1_box1_line1_title').value;
     const popup1_box1_line1_text1 = document.getElementById('popup1_box1_line1_text1').value;
     const popup1_box1_line1_price = document.getElementById('popup1_box1_line1_price').value;
@@ -203,6 +208,8 @@ function popupEdit() {
         "valuesList": [
             { "title" : "popup1_contact", "value" : popup1_contact },
             { "title" : "popup1_box1_line1_title", "value" : popup1_box1_line1_title },
+            { "title" : "popup1_banner1", "value" : popup1_banner1 },
+            { "title" : "popup1_banner2", "value" : popup1_banner2 },
             { "title" : "popup1_box1_line1_text1", "value" : popup1_box1_line1_text1 },
             { "title" : "popup1_box1_line1_price", "value" : popup1_box1_line1_price },
             { "title" : "popup1_box1_line1_text2", "value" : popup1_box1_line1_text2 },

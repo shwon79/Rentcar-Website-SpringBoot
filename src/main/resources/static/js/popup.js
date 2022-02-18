@@ -76,6 +76,9 @@ $(window).load(function () {
 
         getData('popup1_contact', 'popup1_contact');
 
+        getData('popup1_banner1', 'popup1_banner1');
+        getData('popup1_banner2', 'popup1_banner2');
+
         getData('popup1_box1_line1_title', 'popup1_box1_line1_title');
         getData('popup1_box1_line1_text1', 'popup1_box1_line1_text1');
         getData('popup1_box1_line1_price', 'popup1_box1_line1_price');

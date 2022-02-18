@@ -1116,6 +1116,19 @@ div.popStyle1, div.popStyle2 {
     color: #7201da;
     margin: 0;
 }
+.popup_rent_banner {
+    background-color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+.popup1_box2_upper h4 {
+    color: #4A009D;
+    line-height: 2rem;
+    word-break: keep-all;
+}
+.popup1_box2_upper h4:last-child {
+    margin-bottom: 0;
+}
 .popup1_table td {
     padding: 10px;
 }
@@ -1219,6 +1232,15 @@ div.popStyle1, div.popStyle2 {
     position: absolute;
     margin-top: 7em;
 }
+.popup_camping_banner {
+    background-color: #40c4b6;
+}
+.popup_camping_banner h4 {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 0;
+}
 .popup_bg_red {
     background: #e71c36;
     text-align: center;
@@ -1258,7 +1280,7 @@ div.popStyle1, div.popStyle2 {
     position: absolute;
     width: 80%;
     left: 10%;
-    top: 17%;
+    top: 14%;
     padding: 10px !important;
     font-size: 1.5em;
     border-radius: 12px !important;
@@ -1267,6 +1289,12 @@ div.popStyle1, div.popStyle2 {
     grid-template-columns: 1fr 1fr;
     display: grid;
     grid-column-gap: 20px;
+}
+.popup_box_wrapper:first-child {
+    margin-bottom: 30px;
+}
+.promotion_slogan {
+    top: 58% !important;
 }
 .popup_box {
     border: 5px solid #e71c36;
@@ -1363,7 +1391,7 @@ div.popStyle1, div.popStyle2 {
     }
     .popup_box_slogan {
         font-size: 1.2em;
-        top: 20%;
+        top: 14%;
     }
     .popup_box_wrapper {
         grid-column-gap: 5px;

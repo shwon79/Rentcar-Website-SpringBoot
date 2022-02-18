@@ -14,6 +14,7 @@
 <!--  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script>
     $(window).on('load', function () {
       let campingcarMenu = document.getElementById('campingcarMenu');
@@ -26,43 +27,23 @@
 <div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-    <div class="box-body">
-      <table class="table table-bordered">
-        <tr>
-          <th style="width: 10px">BNO</th>
-          <th style="width: 200px">WRITER</th>
-          <th style="width: 40px">VIEWCNT</th>
-        </tr>
+<!--    <div class="box-body">-->
+<!--      <table class="table table-bordered">-->
+<!--        <tr>-->
+<!--          <th style="width: 10px">BNO</th>-->
+<!--          <th style="width: 200px">WRITER</th>-->
+<!--          <th style="width: 40px">VIEWCNT</th>-->
+<!--        </tr>-->
 
-        <tr th:each="reservation : ${campingCarReservationList}">
-          <td th:text="${reservation.name}">BNO</td>
-          <td th:text="${reservation.carType}">WRITER</td>
-          <td th:text="${reservation.carType}">VIEWCNT</td>
-        </tr>
+<!--        <tr th:each="reservation : ${campingCarReservationList}">-->
+<!--          <td th:text="${reservation.name}">BNO</td>-->
+<!--          <td th:text="${reservation.carType}">WRITER</td>-->
+<!--          <td th:text="${reservation.carType}">VIEWCNT</td>-->
+<!--        </tr>-->
 
-      </table>
-    </div>
-    <!-- /.box-body -->
-
-    <!-- 게시판 하단의 페이징 버튼 -->
-    <div class="box-footer clearfix">
-      <ul class="pagination pagination-sm no-margin pull-right">
-
-        <li th:if="${currentPage} > 0">
-          <a th:href="@{/admin/campingcar/menu(page=${currentPage}-1,size=${pageSize})}">&laquo;</a>
-        </li>
-
-        <li th:each="idx,iterStat : ${#numbers.sequence(1,totalPages)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
-          <a th:href="@{/admin/campingcar/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
-        </li>
-
-        <li th:if="${currentPage} < ${totalPages} - 1">
-          <a th:href="@{/admin/campingcar/menu(page=${currentPage}+1,size=${pageSize})}">&raquo;</a>
-        </li>
-
-      </ul>
-
-    </div>
+<!--      </table>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /.box-body &ndash;&gt;-->
 
     <div class="content list_container">
       <nav class="navbar navbar-expand-lg navbar-light">
@@ -100,7 +81,7 @@
         </div>
         <div class="reserve_list_wrapper" th:each="reservation, i : ${campingCarReservationList}">
           <div class="reserve_checkbox">
-            <p th:text="${i.index + 1}" style="margin-bottom: 4px;"></p>
+<!--            <p th:text="${i.index + 1}" style="margin-bottom: 4px;"></p>-->
             <input th:if="${reservation.reservation != 1}" type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
           </div>
           <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
@@ -171,9 +152,36 @@
             </div>
           </div>
         </div>
+
+        <!-- 게시판 하단의 페이징 버튼 -->
+        <div class="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item" th:if="${currentPage} >= 5">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${0},size=${pageSize})}">
+                <i class="fa-solid fa-angles-left"></i>
+              </a>
+            </li>
+            <li class="page-item" th:if="${currentPage} > 0">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${currentPage}-1,size=${pageSize})}">
+                <i class="fa-solid fa-chevron-left"></i>
+              </a>
+            </li>
+            <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
+            </li>
+            <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${currentPage}+1,size=${pageSize})}">
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </li>
+            <li class="page-item" th:if="${currentPage} < (5 * (${totalPages} / 5))">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${totalPages}-1,size=${pageSize})}">
+                <i class="fa-solid fa-angles-right"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-
-
     </div>
 </div>
 
