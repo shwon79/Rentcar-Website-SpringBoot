@@ -1008,25 +1008,18 @@ function submitReview() {
 }
 
 // 데스크탑에서 리뷰 클릭하면 크게 보여지도록
-function openReview(id) {
-    const reviewImageOpen = [...document.getElementsByClassName('review_image_open')];
-    const oneReviewClose = [...document.getElementsByClassName('one_review_close')];
+let oneReview = document.getElementsByClassName('one_review');
+oneReview && [...oneReview].forEach((review) => {
+    review.addEventListener('click', event => {
+        if (!event.target.classList.contains('video_part') && !event.target.classList.contains('video_real')) {
+            const reviewImageOpen = [...document.getElementsByClassName('review_image_open')];
+            const oneReviewClose = [...document.getElementsByClassName('one_review_close')];
 
-    let targetImageBox = reviewImageOpen.find(box => box.dataset.title == id);
-    targetImageBox.classList.toggle('active');
+            let targetImageBox = reviewImageOpen.find(box => box.dataset.title == event.currentTarget.dataset.id);
+            targetImageBox && targetImageBox.classList.toggle('active');
 
-    let targetReview = oneReviewClose.find(review => review.dataset.title == id);
-    targetReview.classList.toggle('opened');
-}
-
-// function sliceText() {
-//     let textTest = document.getElementById('textTest');
-//     console.log(textTest);
-//     console.log(textTest.innerText);
-//     console.log(textTest.value);
-//     if (textTest.length > 60) {
-//         console.log('too long');
-//     }
-// }
-//
-// window.onload = sliceText();
+            let targetReview = oneReviewClose.find(review => review.dataset.title == event.currentTarget.dataset.id);
+            targetReview && targetReview.classList.toggle('opened');
+        }
+    })
+});
