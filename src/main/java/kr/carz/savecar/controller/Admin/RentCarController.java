@@ -43,7 +43,7 @@ public class RentCarController {
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
 
-        Collections.sort(monthlyRentList);
+//        Collections.sort(monthlyRentList);
 
 //        List<List<MonthlyRent>> monthlyRentListTotal = new ArrayList<>();
 //        monthlyRentListTotal.add(monthlyRentService.findByCategory2("경형"));
