@@ -40,18 +40,6 @@ public class RentCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        for(long i=1; i<=190; i++){
-            Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(i);
-            Optional<YearlyRent> yearlyRentWrapper = yearlyRentService.findById(i);
-            if(monthlyRentWrapper.isPresent() && yearlyRentWrapper.isPresent()){
-                MonthlyRent monthlyRent = monthlyRentWrapper.get();
-                YearlyRent yearlyRent = yearlyRentWrapper.get();
-                monthlyRent.setYearlyRent(yearlyRent);
-
-                monthlyRentService.save(monthlyRent);
-            }
-        }
-
         List<List<MonthlyRent>> monthlyRentListTotal = new ArrayList<>();
         monthlyRentListTotal.add(monthlyRentService.findByCategory2("경형"));
         monthlyRentListTotal.add(monthlyRentService.findByCategory2("준중형"));
