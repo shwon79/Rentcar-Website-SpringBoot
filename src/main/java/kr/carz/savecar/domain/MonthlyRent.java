@@ -1,11 +1,14 @@
 package kr.carz.savecar.domain;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "MonthlyRent")
 public class MonthlyRent implements Comparable<MonthlyRent>{
     @Id
@@ -42,6 +45,30 @@ public class MonthlyRent implements Comparable<MonthlyRent>{
     private String credit;
     private String img_url;
 
+    @Builder
+    public MonthlyRent(YearlyRent yearlyRent, TwoYearlyRent twoYearlyRent, String category1, String category2, String name, String deposit, String cost_for_2k
+            , String cost_for_2_5k, String cost_for_3k, String cost_for_4k, String cost_for_others, String age_limit, String cost_per_km, String nameMoren
+            , Long start, Long end, String credit, String img_url) {
+        this.yearlyRent = yearlyRent;
+        this.twoYearlyRent = twoYearlyRent;
+        this.category1 = category1;
+        this.category2 = category2;
+        this.name = name;
+        this.deposit = deposit;
+
+        this.cost_for_2k = cost_for_2k;
+        this.cost_for_2_5k = cost_for_2_5k;
+        this.cost_for_3k = cost_for_3k;
+        this.cost_for_4k = cost_for_4k;
+        this.cost_for_others = cost_for_others;
+        this.age_limit = age_limit;
+        this.cost_per_km = cost_per_km;
+        this.nameMoren = nameMoren;
+        this.start = start;
+        this.end = end;
+        this.credit = credit;
+        this.img_url = img_url;
+    }
 
     @Override
     public int compareTo(MonthlyRent o) {

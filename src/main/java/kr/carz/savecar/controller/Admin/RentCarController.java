@@ -1,7 +1,10 @@
 package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.domain.*;
+import kr.carz.savecar.dto.CampingCarPriceRateDTO;
+import kr.carz.savecar.dto.MonthlyRentDTO;
 import kr.carz.savecar.service.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -87,6 +93,29 @@ public class RentCarController {
 
         return mav;
     }
+
+
+    @PutMapping("/admin/rentcar/price/monthly/{monthlyId}")
+    @ResponseBody
+    public void put_rent_car_price_monthly(HttpServletResponse res, @RequestBody MonthlyRentDTO monthlyRentDTO, @PathVariable Long monthlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+        if(monthlyRentWrapper.isPresent()){
+
+            monthlyRentService.updateAllPriceByDTO(monthlyRentDTO, monthlyRentWrapper.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
 
 
 
