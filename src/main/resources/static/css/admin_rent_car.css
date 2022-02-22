@@ -1,11 +1,25 @@
 .table td, .table th {
     padding: 0;
-    vertical-align: middle;
+    vertical-align: top;
+}
+.table td p {
+    margin-bottom: 0.5rem;
 }
 .deposit {
     display: block;
 }
+
+.detail_container textarea, .detail_container select {
+    max-width: 200px;
+}
+.detail_container input {
+    border: 1px solid black;
+    border-radius: 4px;
+}
 @media screen and (max-width: 600px) {
+    .table td, .table th {
+        vertical-align: middle;
+    }
     .display_none_mobile {
         display: none;
     }
