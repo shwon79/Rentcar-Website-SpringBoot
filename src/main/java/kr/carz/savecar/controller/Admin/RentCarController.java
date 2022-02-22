@@ -34,7 +34,25 @@ public class RentCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+        List<List<MonthlyRent>> monthlyRentListTotal = new ArrayList<>();
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("경형"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("준중형"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("중형"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("중대형"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("대형"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("소중형SUV"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("중형SUV"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("중대형SUV"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("대형SUV"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("승합"));
+        monthlyRentListTotal.add(monthlyRentService.findByCategory2("수입차"));
+
+        List<MonthlyRent> monthlyRentList = new ArrayList<>();
+        for(List<MonthlyRent> currentList : monthlyRentListTotal){
+            Collections.sort(currentList);
+            monthlyRentList.addAll(currentList);
+        }
+        System.out.println(monthlyRentList.size());
 
         mav.addObject("monthlyRentList", monthlyRentList);
 

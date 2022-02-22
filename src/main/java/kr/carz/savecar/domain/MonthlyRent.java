@@ -1,12 +1,14 @@
 package kr.carz.savecar.domain;
 
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
 
 @Entity
 @Data
 @Table(name = "MonthlyRent")
-public class MonthlyRent {
+public class MonthlyRent implements Comparable<MonthlyRent>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
@@ -34,4 +36,8 @@ public class MonthlyRent {
     private String img_url;
 
 
+    @Override
+    public int compareTo(@NotNull MonthlyRent o) {
+        return this.name.compareTo(o.name);
+    }
 }
