@@ -58,30 +58,15 @@
                 </div>
                 <div class="detail_list">
                     <p>종류</p>
-                    <select name="category1" class="category1" id="category1" onchange="displayCategory2(this);" th:data-title="${twoYearlyRent.id}">
-                        <option value="국산승용" th:selected="${twoYearlyRent.category1} == '국산승용' ? true : false">국산승용</option>
-                        <option value="국산승합•RV" th:selected="${twoYearlyRent.category1} == '국산승합•RV' ? true : false">국산승합•RV</option>
-                        <option value="수입차" th:selected="${twoYearlyRent.category1} == '수입차' ? true : false">수입차</option>
-                    </select>
+                    <p id="category1" th:text="${twoYearlyRent.category1}" th:data-title="${twoYearlyRent.id}"></p>
                 </div>
                 <div class="detail_list">
                     <p>분류</p>
-                    <select name="category2" class="category2" id="category2" th:data-title="${twoYearlyRent.id}">
-                        <option th:if="${twoYearlyRent.category1 == '국산승용'}" value="경형" th:selected="${twoYearlyRent.category2} == '경형' ? true : false">경형</option>
-                        <option th:if="${twoYearlyRent.category1 == '국산승용'}" value="준중형" th:selected="${twoYearlyRent.category2} == '준중형' ? true : false">준중형</option>
-                        <option th:if="${twoYearlyRent.category1 == '국산승용'}" value="중형" th:selected="${twoYearlyRent.category2} == '중형' ? true : false">중형</option>
-                        <option th:if="${twoYearlyRent.category1 == '국산승용'}" value="중대형" th:selected="${twoYearlyRent.category2} == '중대형' ? true : false">중대형</option>
-                        <option th:if="${twoYearlyRent.category1 == '국산승용'}" value="대형" th:selected="${twoYearlyRent.category2} == '대형' ? true : false">대형</option>
-                        <option th:if="${twoYearlyRent.category1 == '국산승합•RV'}" value="소중형SUV" th:selected="${twoYearlyRent.category2} == '소중형SUV' ? true : false">소중형SUV</option>
-                        <option th:if="${twoYearlyRent.category1 == '국산승합•RV'}" value="중형SUV" th:selected="${twoYearlyRent.category2} == '중형SUV' ? true : false">중형SUV</option>
-                        <option th:if="${twoYearlyRent.category1 == '국산승합•RV'}" value="중대형SUV" th:selected="${twoYearlyRent.category2} == '중대형SUV' ? true : false">중대형SUV</option>
-                        <option th:if="${twoYearlyRent.category1 == '국산승합•RV'}" value="대형SUV" th:selected="${twoYearlyRent.category2} == '대형SUV' ? true : false">대형SUV</option>
-                        <option th:if="${twoYearlyRent.category1 == '수입차'}" value="수입차" th:selected="${twoYearlyRent.category2} == '수입차' ? true : false">수입차</option>
-                    </select>
+                    <p id="category2" th:text="${twoYearlyRent.category2}" th:data-title="${twoYearlyRent.id}"></p>
                 </div>
                 <div class="detail_list">
                     <p>차명 년식</p>
-                    <textarea type="text" id="name" th:text="${twoYearlyRent.name}"></textarea>
+                    <p id="name" th:text="${twoYearlyRent.name}" th:data-title="${twoYearlyRent.id}"></p>
                 </div>
                 <div class="detail_list">
                     <p>보증금</p>
@@ -119,11 +104,11 @@
                 </div>
                 <div class="detail_list">
                     <p>other</p>
-                    <textarea type="text" id="cost_for_others" th:text="${twoYearlyRent.cost_for_others}"></textarea>
+                    <p id="cost_for_others" th:text="${twoYearlyRent.cost_for_others}"></p>
                 </div>
                 <div class="detail_list">
                     <p>21세</p>
-                    <textarea type="text" id="age_limit" th:text="${#numbers.formatInteger(twoYearlyRent.age_limit, 0, 'COMMA')}"></textarea>
+                    <p id="age_limit" th:text="${#numbers.formatInteger(twoYearlyRent.age_limit, 0, 'COMMA')}"></p>
                 </div>
                 <div class="detail_list">
                     <p>km당 추가요금</p>
@@ -131,15 +116,15 @@
                 </div>
                 <div class="detail_list">
                     <p>모렌_차명</p>
-                    <textarea type="text" id="nameMoren" th:text="${twoYearlyRent.nameMoren}"></textarea>
+                    <p id="nameMoren" th:text="${twoYearlyRent.nameMoren}"></p>
                 </div>
                 <div class="detail_list">
                     <p>년식_시작</p>
-                    <textarea type="text" id="start" th:text="${twoYearlyRent.start}"></textarea>
+                    <p id="start" th:text="${twoYearlyRent.start}"></p>
                 </div>
                 <div class="detail_list">
                     <p>년식_끝</p>
-                    <textarea type="text" id="end" th:text="${twoYearlyRent.end}"></textarea>
+                    <p id="end" th:text="${twoYearlyRent.end}"></p>
                 </div>
                 <div class="detail_list">
                     <p>신용</p>
@@ -153,7 +138,6 @@
                     <p>img_url</p>
                     <div style="display: flex; flex-direction: column; align-items: flex-end;">
                         <img th:src="${twoYearlyRent.img_url}" alt="img" style="width: 50%" id="img_url">
-                        <input type="file" style="width: 85%;" id="img_input">
                     </div>
                 </div>
             </div>
