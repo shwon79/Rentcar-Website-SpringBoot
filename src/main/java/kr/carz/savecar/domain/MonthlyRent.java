@@ -1,7 +1,6 @@
 package kr.carz.savecar.domain;
 
 import lombok.Data;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 
@@ -12,6 +11,14 @@ public class MonthlyRent implements Comparable<MonthlyRent>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+
+    @OneToOne
+    @JoinColumn(name = "yearlyRent")
+    private YearlyRent yearlyRent; // 12개월 외래키
+
+    @OneToOne
+    @JoinColumn(name = "twoYearlyRent")
+    private TwoYearlyRent twoYearlyRent; // 12개월 외래키
 
     private String category1; // 국산, 외제차의 분류
     private String category2; // 중형차, 경차 등 큰 분류
@@ -37,7 +44,7 @@ public class MonthlyRent implements Comparable<MonthlyRent>{
 
 
     @Override
-    public int compareTo(@NotNull MonthlyRent o) {
+    public int compareTo(MonthlyRent o) {
         return this.name.compareTo(o.name);
     }
 }

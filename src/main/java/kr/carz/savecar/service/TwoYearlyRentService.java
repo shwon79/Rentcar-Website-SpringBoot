@@ -23,6 +23,9 @@ public class TwoYearlyRentService {
     public List<TwoYearlyRent> findByCategory1(String category1){
         return twoYearlyRentRepository.findByCategory1(category1);
     }
+    public List<TwoYearlyRent> findByCategory2(String category2){
+        return twoYearlyRentRepository.findByCategory2(category2);
+    }
     public List<TwoYearlyRent> findNameOfTwoYearlyRents(String category1, String category2){
         return twoYearlyRentRepository.findByCategory1AndCategory2(category1, category2);
     }

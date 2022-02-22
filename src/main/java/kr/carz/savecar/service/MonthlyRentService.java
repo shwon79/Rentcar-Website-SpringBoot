@@ -42,4 +42,8 @@ public class MonthlyRentService {
     public List<String> findDistinctCategory1(){
         return monthlyRentRepository.findDistinctCategory1();
     }
+
+    public Long save(MonthlyRent monthlyRent){
+        return monthlyRentRepository.save(monthlyRent).getId();
+    }
 }

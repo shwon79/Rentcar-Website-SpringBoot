@@ -34,6 +34,18 @@ public class RentCarController {
 
         ModelAndView mav = new ModelAndView();
 
+        for(long i=1; i<=190; i++){
+            Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(i);
+            Optional<YearlyRent> yearlyRentWrapper = yearlyRentService.findById(i);
+            if(monthlyRentWrapper.isPresent() && yearlyRentWrapper.isPresent()){
+                MonthlyRent monthlyRent = monthlyRentWrapper.get();
+                YearlyRent yearlyRent = yearlyRentWrapper.get();
+                monthlyRent.setYearlyRent(yearlyRent);
+
+                monthlyRentService.save(monthlyRent);
+            }
+        }
+
         List<List<MonthlyRent>> monthlyRentListTotal = new ArrayList<>();
         monthlyRentListTotal.add(monthlyRentService.findByCategory2("경형"));
         monthlyRentListTotal.add(monthlyRentService.findByCategory2("준중형"));
@@ -52,7 +64,6 @@ public class RentCarController {
             Collections.sort(currentList);
             monthlyRentList.addAll(currentList);
         }
-        System.out.println(monthlyRentList.size());
 
         mav.addObject("monthlyRentList", monthlyRentList);
 
@@ -84,7 +95,24 @@ public class RentCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<YearlyRent> yearlyRentList = yearlyRentService.findAllYearlyRents();
+        List<List<YearlyRent>> yearlyRentListTotal = new ArrayList<>();
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("경형"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("준중형"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("중형"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("중대형"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("대형"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("소중형SUV"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("중형SUV"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("중대형SUV"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("대형SUV"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("승합"));
+        yearlyRentListTotal.add(yearlyRentService.findByCategory2("수입차"));
+
+        List<YearlyRent> yearlyRentList = new ArrayList<>();
+        for(List<YearlyRent> currentList : yearlyRentListTotal){
+            Collections.sort(currentList);
+            yearlyRentList.addAll(currentList);
+        }
 
         mav.addObject("yearlyRentList", yearlyRentList);
 
@@ -115,7 +143,24 @@ public class RentCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findAllTwoYearlyRents();
+        List<List<TwoYearlyRent>> twoYearlyRentListTotal = new ArrayList<>();
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("경형"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("준중형"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("중형"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("중대형"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("대형"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("소중형SUV"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("중형SUV"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("중대형SUV"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("대형SUV"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("승합"));
+        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("수입차"));
+
+        List<TwoYearlyRent> twoYearlyRentList = new ArrayList<>();
+        for(List<TwoYearlyRent> currentList : twoYearlyRentListTotal){
+            Collections.sort(currentList);
+            twoYearlyRentList.addAll(currentList);
+        }
 
         mav.addObject("twoYearlyRentList", twoYearlyRentList);
 
