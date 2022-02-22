@@ -20,9 +20,9 @@ public class YearlyRent implements Comparable<YearlyRent>{
     private String category2; // 중형차, 경차 등 큰 분류
     private String deposit;
     private String name;
-    private String cost_for_20k;
-    private String cost_for_30k;
-    private String cost_for_40k;
+    private Float cost_for_20k;
+    private Float cost_for_30k;
+    private Float cost_for_40k;
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;

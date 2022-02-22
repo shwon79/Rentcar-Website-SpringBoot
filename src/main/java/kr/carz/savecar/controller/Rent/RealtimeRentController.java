@@ -208,12 +208,11 @@ public class RealtimeRentController {
                     Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
                     try {
-                        String kilometer_cost = null;
+                        Float kilometer_cost = (float) 1;
                         Long dbid = Long.parseLong("0");
                         String cost_per_km = null;
                         String credit = null;
 
-                        System.out.println(realTimeDto.getRentTerm() + " " + realTimeDto.getKilometer());
                         switch(realTimeDto.getRentTerm()){
                             case "한달":
                                 MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, (String) morenObject.get("carCategory"));
@@ -229,7 +228,7 @@ public class RealtimeRentController {
                                         kilometer_cost = monthlyRent2.getCost_for_4k();
                                         break;
                                     case "기타":
-                                        kilometer_cost = monthlyRent2.getCost_for_others();
+                                        kilometer_cost = (float) -1;
                                         break;
                                     default:
                                         kilometer_cost = monthlyRent2.getCost_for_2k();
@@ -251,7 +250,7 @@ public class RealtimeRentController {
                                         kilometer_cost = yearlyRent.getCost_for_40k();
                                         break;
                                     case "기타_long":
-                                        kilometer_cost = yearlyRent.getCost_for_others();
+                                        kilometer_cost = (float) -1;
                                         break;
                                     default:
                                         kilometer_cost = yearlyRent.getCost_for_20k();
@@ -274,7 +273,7 @@ public class RealtimeRentController {
                                         kilometer_cost = twoYearlyRent.getCost_for_40Tk();
                                         break;
                                     case "기타_long":
-                                        kilometer_cost = twoYearlyRent.getCost_for_others();
+                                        kilometer_cost = (float) -1;
                                         break;
                                     default:
                                         kilometer_cost = twoYearlyRent.getCost_for_20Tk();
@@ -480,7 +479,7 @@ public class RealtimeRentController {
         HashMap<String, String> params2 = new HashMap<>();
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1);  // +", "+admin2+", "+admin3
+        params.put("to", admin1+", "+admin2+", "+admin3);
         params.put("from", admin3);
         params.put("type", "ATA");
         params.put("template_code", realTimeRentTemplateCodeEmployer);

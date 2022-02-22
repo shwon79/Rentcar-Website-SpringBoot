@@ -30,10 +30,10 @@ public class MonthlyRent implements Comparable<MonthlyRent>{
     private String name;
 
     private String deposit;
-    private String cost_for_2k;
-    private String cost_for_2_5k;
-    private String cost_for_3k;
-    private String cost_for_4k;
+    private Float cost_for_2k;
+    private Float cost_for_2_5k;
+    private Float cost_for_3k;
+    private Float cost_for_4k;
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;
@@ -46,8 +46,8 @@ public class MonthlyRent implements Comparable<MonthlyRent>{
     private String img_url;
 
     @Builder
-    public MonthlyRent(YearlyRent yearlyRent, TwoYearlyRent twoYearlyRent, String category1, String category2, String name, String deposit, String cost_for_2k
-            , String cost_for_2_5k, String cost_for_3k, String cost_for_4k, String cost_for_others, String age_limit, String cost_per_km, String nameMoren
+    public MonthlyRent(YearlyRent yearlyRent, TwoYearlyRent twoYearlyRent, String category1, String category2, String name, String deposit, Float cost_for_2k
+            , Float cost_for_2_5k, Float cost_for_3k, Float cost_for_4k, String cost_for_others, String age_limit, String cost_per_km, String nameMoren
             , Long start, Long end, String credit, String img_url) {
         this.yearlyRent = yearlyRent;
         this.twoYearlyRent = twoYearlyRent;

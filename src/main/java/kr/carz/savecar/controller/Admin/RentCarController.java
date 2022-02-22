@@ -40,6 +40,7 @@ public class RentCarController {
 
         ModelAndView mav = new ModelAndView();
 
+
         List<List<MonthlyRent>> monthlyRentListTotal = new ArrayList<>();
         monthlyRentListTotal.add(monthlyRentService.findByCategory2("경형"));
         monthlyRentListTotal.add(monthlyRentService.findByCategory2("준중형"));

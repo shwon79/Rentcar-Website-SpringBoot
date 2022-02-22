@@ -20,9 +20,9 @@ public class TwoYearlyRent implements Comparable<TwoYearlyRent> {
     private String category2; // 중형차, 경차 등 큰 분류
     private String deposit;
     private String name;
-    private String cost_for_20Tk;
-    private String cost_for_30Tk;
-    private String cost_for_40Tk;
+    private Float cost_for_20Tk;
+    private Float cost_for_30Tk;
+    private Float cost_for_40Tk;
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;

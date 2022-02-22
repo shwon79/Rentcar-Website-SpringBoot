@@ -19,10 +19,10 @@ public class MonthlyRentDTO {
     private String name;
 
     private String deposit;
-    private String cost_for_2k;
-    private String cost_for_2_5k;
-    private String cost_for_3k;
-    private String cost_for_4k;
+    private Float cost_for_2k;
+    private Float cost_for_2_5k;
+    private Float cost_for_3k;
+    private Float cost_for_4k;
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;
