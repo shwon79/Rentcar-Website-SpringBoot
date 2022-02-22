@@ -36,12 +36,12 @@ public class RentCarController {
     }
 
 
-    @GetMapping("/admin/rentcar/price/monthly/menu")
-    public ModelAndView get_rent_car_price_monthly_menu() {
+    @GetMapping("/admin/rentcar/price/monthly/menu/{category2}")
+    public ModelAndView get_rent_car_price_monthly_menu(@PathVariable String category2) {
 
         ModelAndView mav = new ModelAndView();
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
 
 //        Collections.sort(monthlyRentList);
 
