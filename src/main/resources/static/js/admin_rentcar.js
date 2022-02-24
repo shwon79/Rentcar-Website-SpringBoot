@@ -32,6 +32,7 @@ function displayCategory2(event) {
     };
 };
 
+console.log('hi');
 //월렌트 메뉴 페이지 가격 수정 버튼
 function editRentPriceMenu(id, period) {
     let category1 = [...document.getElementsByClassName('category1')].find(item => item.dataset.title == id);
@@ -72,7 +73,7 @@ function editRentPriceMenu(id, period) {
             let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
             let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
-            data['cost_for_2k'] = parseInt(cost_for_2k.value).toFixed(2);
+            data['cost_for_2k'] = parseInt(cost_for_2k.value.replace(/,/g, '')).toFixed(2);
             data['cost_for_2_5k'] = parseInt(cost_for_2_5k.value).toFixed(2);
             data['cost_for_3k'] = parseInt(cost_for_3k.value).toFixed(2);
             data['cost_for_4k'] = parseInt(cost_for_4k.value).toFixed(2);
@@ -89,7 +90,7 @@ function editRentPriceMenu(id, period) {
             data['cost_for_40k'] = parseInt(cost_for_40k.value).toFixed(2);
 
             console.log(data);
-
+            // postStringData(period, id, data);
         } else if (period === 'twoYearly') {
             let cost_for_20Tk = [...document.getElementsByClassName('cost_for_20Tk')].find(item => item.dataset.title == id);
             let cost_for_30Tk = [...document.getElementsByClassName('cost_for_30Tk')].find(item => item.dataset.title == id);
@@ -100,12 +101,12 @@ function editRentPriceMenu(id, period) {
             data['cost_for_40Tk'] = parseInt(cost_for_40Tk.value).toFixed(2);
 
             console.log(data);
+            // postStringData(period, id, data);
         }
     } else {
         // 새로운 이미지를 추가하려고 선택했을 때
         let formData = new FormData();
 
-        formData.append('id', id);
         formData.append('category1', category1.value);
         formData.append('category2', category2.value);
         formData.append('name', name.value);
@@ -117,7 +118,8 @@ function editRentPriceMenu(id, period) {
         formData.append('start', parseInt(start.value));
         formData.append('end', parseInt(end.value));
         formData.append('credit', credit.value);
-        formData.append('img_url', img_input.files[0]);
+        formData.append('img_url', '');
+        formData.append('file', img_input.files[0])
 
         if (period === 'monthly') {
             let cost_for_2k = [...document.getElementsByClassName('cost_for_2k')].find(item => item.dataset.title == id);
@@ -130,26 +132,7 @@ function editRentPriceMenu(id, period) {
             formData.append('cost_for_3k', parseInt(cost_for_3k.value).toFixed(2));
             formData.append('cost_for_4k', parseInt(cost_for_4k.value).toFixed(2));
 
-
-        } else if (period === 'yearly') {
-            let cost_for_20k = [...document.getElementsByClassName('cost_for_20k')].find(item => item.dataset.title == id);
-            let cost_for_30k = [...document.getElementsByClassName('cost_for_30k')].find(item => item.dataset.title == id);
-            let cost_for_40k = [...document.getElementsByClassName('cost_for_40k')].find(item => item.dataset.title == id);
-
-            formData.append('cost_for_20k', parseInt(cost_for_20k.value).toFixed(2));
-            formData.append('cost_for_30k', parseInt(cost_for_30k.value).toFixed(2));
-            formData.append('cost_for_40k', parseInt(cost_for_40k.value).toFixed(2));
-
-
-        } else if (period === 'twoYearly') {
-            let cost_for_20Tk = [...document.getElementsByClassName('cost_for_20Tk')].find(item => item.dataset.title == id);
-            let cost_for_30Tk = [...document.getElementsByClassName('cost_for_30Tk')].find(item => item.dataset.title == id);
-            let cost_for_40Tk = [...document.getElementsByClassName('cost_for_40Tk')].find(item => item.dataset.title == id);
-
-            formData.append('cost_for_20Tk', parseInt(cost_for_20Tk.value).toFixed(2));
-            formData.append('cost_for_30Tk', parseInt(cost_for_30Tk.value).toFixed(2));
-            formData.append('cost_for_40Tk', parseInt(cost_for_40Tk.value).toFixed(2));
-
+            postFormData(id, formData, period);
         }
 
         for (let key of formData.keys()) {
@@ -160,132 +143,6 @@ function editRentPriceMenu(id, period) {
         }
     }
 }
-
-//월렌트 상세 페이지 가격 수정 버튼
-// function editRentPriceDetail(id, period) {
-//     const category1 = document.getElementById('category1');
-//     const category2 = document.getElementById('category2');
-//     const name = document.getElementById('name');
-//     let deposit = document.getElementById('deposit');
-//     const cost_for_others = document.getElementById('cost_for_others');
-//     let age_limit = document.getElementById('age_limit');
-//     const cost_per_km = document.getElementById('cost_per_km');
-//     const nameMoren = document.getElementById('nameMoren');
-//     const start = parseInt(document.getElementById('start').value);
-//     const end = parseInt(document.getElementById('end').value);
-//     const credit = document.getElementById('credit');
-//     const img_url = document.getElementById('img_url');
-//     // const img_input = document.getElementById('img_input');
-//     //
-//     // // 이미지를 새로 추가하지 않은 경우
-//     // if (img_input.files[0] === undefined) {
-//     //     let data = {
-//     //         id: id,
-//     //         category1: category1.value,
-//     //         category2: category2.value,
-//     //         name: name.value,
-//     //         deposit: deposit.value.replace(/,/g, ''),
-//     //         cost_for_others: cost_for_others.value,
-//     //         age_limit: age_limit.value.replace(/,/g, ''),
-//     //         cost_per_km: cost_per_km.value,
-//     //         nameMoren: nameMoren.value,
-//     //         start: start,
-//     //         end: end,
-//     //         credit: credit.value,
-//     //         img_url: img_url.src
-//     //     }
-//     //
-//     //     if (period === 'monthly') {
-//     //         let cost_for_2k = document.getElementById('cost_for_2k');
-//     //         let cost_for_2_5k = document.getElementById('cost_for_2_5k');
-//     //         let cost_for_3k = document.getElementById('cost_for_3k');
-//     //         let cost_for_4k = document.getElementById('cost_for_4k');
-//     //
-//     //         data['cost_for_2k'] = cost_for_2k.value.replace(/,/g, '');
-//     //         data['cost_for_2_5k'] = cost_for_2_5k.value.replace(/,/g, '');
-//     //         data['cost_for_3k'] = cost_for_3k.value.replace(/,/g, '');
-//     //         data['cost_for_4k'] = cost_for_4k.value.replace(/,/g, '');
-//     //
-//     //         postStringData(period, id, data);
-//     //     } else if (period === 'yearly') {
-//     //         let cost_for_20k = document.getElementById('cost_for_20k');
-//     //         let cost_for_30k = document.getElementById('cost_for_30k');
-//     //         let cost_for_40k = document.getElementById('cost_for_40k');
-//     //
-//     //         data['cost_for_20k'] = cost_for_20k.value.replace(/,/g, '');
-//     //         data['cost_for_30k'] = cost_for_30k.value.replace(/,/g, '');
-//     //         data['cost_for_40k'] = cost_for_40k.value.replace(/,/g, '');
-//     //         console.log(data);
-//     //
-//     //     } else if (period === 'twoYearly') {
-//     //         let cost_for_20Tk = document.getElementById('cost_for_20Tk');
-//     //         let cost_for_30Tk = document.getElementById('cost_for_30Tk');
-//     //         let cost_for_40Tk = document.getElementById('cost_for_40Tk');
-//     //
-//     //         data['cost_for_20Tk'] = cost_for_20Tk.value.replace(/,/g, '');
-//     //         data['cost_for_30Tk'] = cost_for_30Tk.value.replace(/,/g, '');
-//     //         data['cost_for_40Tk'] = cost_for_40Tk.value.replace(/,/g, '');
-//     //
-//     //         console.log(data);
-//     //     }
-//     //
-//     // } else {
-//     //     // 이미지를 새로 추가한 경우
-//     //     let formData = new FormData();
-//     //
-//     //     formData.append('id', id);
-//     //     formData.append('category1', category1.value);
-//     //     formData.append('category2', category2.value);
-//     //     formData.append('name', name.value);
-//     //     formData.append('deposit', deposit.value.replace(/,/g, ''));
-//     //     formData.append('cost_for_others', cost_for_others.value);
-//     //     formData.append('age_limit', age_limit.value.replace(/,/g, ''));
-//     //     formData.append('cost_per_km', cost_per_km.value);
-//     //     formData.append('nameMoren', nameMoren.value);
-//     //     formData.append('start', start);
-//     //     formData.append('end', end);
-//     //     formData.append('credit', credit.value);
-//     //     formData.append('img_url', img_input);
-//     //
-//     //     if (period === 'monthly') {
-//     //         let cost_for_2k = document.getElementById('cost_for_2k');
-//     //         let cost_for_2_5k = document.getElementById('cost_for_2_5k');
-//     //         let cost_for_3k = document.getElementById('cost_for_3k');
-//     //         let cost_for_4k = document.getElementById('cost_for_4k');
-//     //
-//     //         formData.append('cost_for_2k', cost_for_2k.value.replace(/,/g, ''));
-//     //         formData.append('cost_for_2_5k', cost_for_2_5k.value.replace(/,/g, ''));
-//     //         formData.append('cost_for_3k', cost_for_3k.value.replace(/,/g, ''));
-//     //         formData.append('cost_for_4k', cost_for_4k.value.replace(/,/g, ''));
-//     //
-//     //     } else if (period === 'yearly') {
-//     //         let cost_for_20k = document.getElementById('cost_for_20k');
-//     //         let cost_for_30k = document.getElementById('cost_for_30k');
-//     //         let cost_for_40k = document.getElementById('cost_for_40k');
-//     //
-//     //         formData.append('cost_for_20k', cost_for_20k.value.replace(/,/g, ''));
-//     //         formData.append('cost_for_30k', cost_for_30k.value.replace(/,/g, ''));
-//     //         formData.append('cost_for_40k', cost_for_40k.value.replace(/,/g, ''));
-//     //
-//     //     } else if (period === 'twoYearly') {
-//     //         let cost_for_20Tk = document.getElementById('cost_for_20Tk');
-//     //         let cost_for_30Tk = document.getElementById('cost_for_30Tk');
-//     //         let cost_for_40Tk = document.getElementById('cost_for_40Tk');
-//     //
-//     //         formData.append('cost_for_20Tk', cost_for_20Tk.value.replace(/,/g, ''));
-//     //         formData.append('cost_for_30Tk', cost_for_30Tk.value.replace(/,/g, ''));
-//     //         formData.append('cost_for_40Tk', cost_for_40Tk.value.replace(/,/g, ''));
-//     //
-//     //     }
-//     //
-//     //     for (let key of formData.keys()) {
-//     //         console.log(key);
-//     //     }
-//     //     for (let value of formData.values()) {
-//     //         console.log(value);
-//     //     }
-//     // }
-// }
 
 // 이미지 없이 데이터 보낼 때
 function postStringData(period, id, data) {
@@ -306,3 +163,21 @@ function postStringData(period, id, data) {
             alert(JSON.stringify(error));
         })
 }
+
+// 새로운 이미지 추가할 때
+function postFormData(id, formData, period) {
+    $.ajax({
+        enctype: 'multipart/form-data',
+        cache: false,
+        type: 'PUT',
+        url: '/admin/rentcar/price/' + period + '/image/' + id,
+        processData:false,
+        contentType: false,
+        data: formData
+    }).done(function () {
+        alert('처리되었습니다.');
+        // location.reload();
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    })
+};

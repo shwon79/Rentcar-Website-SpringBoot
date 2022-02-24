@@ -520,7 +520,6 @@ function displayExtraCampingData() {
 
 }
 
-console.log('hi');
 // 캠핑카 예약 확정 버튼_메뉴 페이지
 function setReservationOnMenu(event, behavior) {
     let carTypeList = document.getElementsByClassName('carTypeList');
