@@ -122,9 +122,9 @@ public class MonthlyRent implements Comparable<MonthlyRent>{
             oPriority = 10;
         }
 
-        if(thisPriority == oPriority){
-            return this.name.compareTo(o.name);
-        }
+//        if(thisPriority == oPriority){
+//            return this.name.compareTo(o.name);
+//        }
 
 
         return Integer.compare(thisPriority, oPriority);

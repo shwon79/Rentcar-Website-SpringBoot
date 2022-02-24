@@ -3,6 +3,7 @@ package kr.carz.savecar.controller.Admin;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarPriceRateDTO;
 import kr.carz.savecar.dto.MonthlyRentDTO;
+import kr.carz.savecar.dto.MonthlyRentVO;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,17 @@ public class RentCarController {
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
     private final TwoYearlyRentService twoYearlyRentService;
+    private final S3Service s3Service;
 
     @Autowired
     public RentCarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                             TwoYearlyRentService twoYearlyRentService, ReservationService reservationService) {
+                             TwoYearlyRentService twoYearlyRentService, ReservationService reservationService,
+                             S3Service s3Service) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
         this.reservationService = reservationService;
+        this.s3Service = s3Service;
     }
 
 
@@ -98,6 +102,32 @@ public class RentCarController {
         if(monthlyRentWrapper.isPresent()){
 
             monthlyRentService.updateAllPriceByDTO(monthlyRentDTO, monthlyRentWrapper.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
+    @PutMapping("/admin/rentcar/price/monthly/image/{monthlyId}")
+    @ResponseBody
+    public void put_rent_car_price_monthly_with_image(HttpServletResponse res, @RequestBody MonthlyRentVO monthlyRentVO, @PathVariable Long monthlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+        if(monthlyRentWrapper.isPresent()){
+
+            String imgPath = s3Service.upload(monthlyRentVO.getFile());
+            monthlyRentVO.setImg_url(imgPath);
+
+            monthlyRentService.updateAllPriceByVO(monthlyRentVO, monthlyRentWrapper.get());
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
