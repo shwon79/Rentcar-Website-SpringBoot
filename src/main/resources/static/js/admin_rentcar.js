@@ -89,8 +89,8 @@ function editRentPriceMenu(id, period) {
             data['cost_for_30k'] = parseInt(cost_for_30k.value).toFixed(2);
             data['cost_for_40k'] = parseInt(cost_for_40k.value).toFixed(2);
 
-            console.log(data);
-            // postStringData(period, id, data);
+            // console.log(data);
+            postStringData(period, id, data);
         } else if (period === 'twoYearly') {
             let cost_for_20Tk = [...document.getElementsByClassName('cost_for_20Tk')].find(item => item.dataset.title == id);
             let cost_for_30Tk = [...document.getElementsByClassName('cost_for_30Tk')].find(item => item.dataset.title == id);
@@ -100,8 +100,8 @@ function editRentPriceMenu(id, period) {
             data['cost_for_30Tk'] = parseInt(cost_for_30Tk.value).toFixed(2);
             data['cost_for_40Tk'] = parseInt(cost_for_40Tk.value).toFixed(2);
 
-            console.log(data);
-            // postStringData(period, id, data);
+            // console.log(data);
+            postStringData(period, id, data);
         }
     } else {
         // 새로운 이미지를 추가하려고 선택했을 때
@@ -176,7 +176,7 @@ function postFormData(id, formData, period) {
         data: formData
     }).done(function () {
         alert('처리되었습니다.');
-        // location.reload();
+        location.reload();
     }).fail(function (error) {
         alert(JSON.stringify(error));
     })

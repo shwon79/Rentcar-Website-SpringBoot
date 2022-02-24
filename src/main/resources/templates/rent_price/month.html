@@ -125,12 +125,12 @@
                   <tr th:each="monthlyRent : ${monthlyRentList}">
                       <td scope="col" th:text="${monthlyRent.category2}"></td>
                       <td scope="col" th:text="${monthlyRent.name}"></td>
-                      <td scope="col" th:text="${monthlyRent.deposit}"></td>
-                      <td scope="col" th:text="${monthlyRent.cost_for_2k}"></td>
-                      <td scope="col" th:text="${monthlyRent.cost_for_2_5k}"></td>
-                      <td scope="col" th:text="${monthlyRent.cost_for_3k}"></td>
-                      <td scope="col" th:text="${monthlyRent.cost_for_4k}"></td>
-                      <td scope="col" th:text="${monthlyRent.age_limit}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.deposit, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2_5k, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_3k, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_4k, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.age_limit, 3, 'COMMA')}"></td>
                   </tr>
                   </tbody>
               </table>

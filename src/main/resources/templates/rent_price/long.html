@@ -126,11 +126,11 @@
                       <tr th:each="yearlyRent : ${yearlyRentList}">
                           <td scope="col" th:text="${yearlyRent.category2}"></td>
                           <td scope="col" th:text="${yearlyRent.name}"></td>
-                          <td scope="col" th:text="${yearlyRent.deposit}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_20k}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_30k}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_40k}"></td>
-                          <td scope="col" th:text="${yearlyRent.age_limit}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(yearlyRent.deposit, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(yearlyRent.cost_for_20k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(yearlyRent.cost_for_30k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(yearlyRent.cost_for_40k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(yearlyRent.age_limit, 3, 'COMMA')}"></td>
                           <td><span scope="col" th:text="${yearlyRent.cost_per_km}"></span>원</td>
                       </tr>
                   </tbody>
