@@ -15,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.*;
 
 @Controller
@@ -69,6 +67,7 @@ public class RentCarController {
         ModelAndView mav = new ModelAndView();
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+        Collections.sort(monthlyRentList);
 
         mav.addObject("monthlyRentList", monthlyRentList);
 
@@ -115,6 +114,29 @@ public class RentCarController {
         pw.flush();
         pw.close();
     }
+
+
+//    @PostMapping("/admin/rentcar/price/monthly")
+//    @ResponseBody
+//    public void post_rent_car_price_monthly(HttpServletResponse res, @RequestBody MonthlyRentDTO monthlyRentDTO) throws IOException {
+//
+//        JSONObject jsonObject = new JSONObject();
+//
+//        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+//        if(monthlyRentWrapper.isPresent()){
+//
+//            monthlyRentService.updateAllPriceByDTO(monthlyRentDTO, monthlyRentWrapper.get());
+//
+//            jsonObject.put("result", 1);
+//        } else {
+//            jsonObject.put("result", 0);
+//        }
+//
+//        PrintWriter pw = res.getWriter();
+//        pw.print(jsonObject);
+//        pw.flush();
+//        pw.close();
+//    }
 
 
 
