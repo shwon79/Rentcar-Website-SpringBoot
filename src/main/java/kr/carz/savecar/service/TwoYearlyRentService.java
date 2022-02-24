@@ -2,6 +2,8 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.TwoYearlyRent;
 import kr.carz.savecar.domain.YearlyRent;
+import kr.carz.savecar.dto.TwoYearlyRentDTO;
+import kr.carz.savecar.dto.YearlyRentDTO;
 import kr.carz.savecar.repository.TwoYearlyRentRepository;
 import kr.carz.savecar.repository.YearlyRentRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,5 +39,18 @@ public class TwoYearlyRentService {
     }
     public Optional findById(Long id){
         return twoYearlyRentRepository.findById(id);
+    }
+
+    public Long updateAllPriceByDTO(TwoYearlyRentDTO twoYearlyRentDTO, TwoYearlyRent twoYearlyRent){
+
+        twoYearlyRent.setDeposit(twoYearlyRentDTO.getDeposit());
+        twoYearlyRent.setCost_for_20Tk(twoYearlyRentDTO.getCost_for_20Tk());
+        twoYearlyRent.setCost_for_30Tk(twoYearlyRentDTO.getCost_for_30Tk());
+        twoYearlyRent.setCost_for_40Tk(twoYearlyRentDTO.getCost_for_40Tk());
+        twoYearlyRent.setCost_for_others(twoYearlyRentDTO.getCost_for_others());
+        twoYearlyRent.setCost_per_km(twoYearlyRentDTO.getCost_per_km());
+        twoYearlyRent.setCredit(twoYearlyRentDTO.getCredit());
+
+        return twoYearlyRentRepository.save(twoYearlyRent).getId();
     }
 }

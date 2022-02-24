@@ -1,10 +1,7 @@
 package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.domain.*;
-import kr.carz.savecar.dto.CampingCarPriceRateDTO;
-import kr.carz.savecar.dto.MonthlyRentDTO;
-import kr.carz.savecar.dto.MonthlyRentVO;
-import kr.carz.savecar.dto.YearlyRentDTO;
+import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -222,6 +219,30 @@ public class RentCarController {
         mav.setViewName("admin/rentcar_price_twoYearly_detail");
 
         return mav;
+    }
+
+
+
+    @PutMapping("/admin/rentcar/price/twoYearly/{twoYearlyId}")
+    @ResponseBody
+    public void put_rent_car_price_yearly(HttpServletResponse res, @RequestBody TwoYearlyRentDTO twoYearlyRentDTO, @PathVariable Long twoYearlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<TwoYearlyRent> twoYearlyRentWrapper  = twoYearlyRentService.findById(twoYearlyId);
+        if(twoYearlyRentWrapper.isPresent()){
+
+            twoYearlyRentService.updateAllPriceByDTO(twoYearlyRentDTO, twoYearlyRentWrapper.get());
+
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
     @GetMapping("/admin/rentcar/counsel/menu")
