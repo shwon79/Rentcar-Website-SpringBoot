@@ -47,7 +47,6 @@ public class TwoYearlyRentService {
         twoYearlyRent.setCost_for_20Tk(twoYearlyRentDTO.getCost_for_20Tk());
         twoYearlyRent.setCost_for_30Tk(twoYearlyRentDTO.getCost_for_30Tk());
         twoYearlyRent.setCost_for_40Tk(twoYearlyRentDTO.getCost_for_40Tk());
-        twoYearlyRent.setCost_for_others(twoYearlyRentDTO.getCost_for_others());
         twoYearlyRent.setCost_per_km(twoYearlyRentDTO.getCost_per_km());
         twoYearlyRent.setCredit(twoYearlyRentDTO.getCredit());
 
