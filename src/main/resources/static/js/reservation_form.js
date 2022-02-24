@@ -106,7 +106,7 @@ function displayDeposit() {
     }
 }
 
-
+console.log('hi');
 // Sending Data;
 const reserveMonthlyRent = () => {
 
@@ -123,7 +123,7 @@ const reserveMonthlyRent = () => {
     const reservationDetails = document.getElementById('reservation-detail-details').value;
     let address = document.getElementById('address_kakao').value;
     let addressDetail = document.getElementById('address_kakao_detail').value;
-    const carPrice = document.getElementById('carPrice').innerText;
+    let carPrice = document.getElementById('carPrice').innerText;
     let carTax = document.getElementById('carTax').innerText;
     let carAmountTotal = document.getElementById('carAmountTotal').innerText;
     const carDeposit = document.getElementById('carDeposit').innerText;
@@ -150,11 +150,18 @@ const reserveMonthlyRent = () => {
         selectAge = '만 21세 이상~만 26세 미만';
     }
 
-    if (carTax!='상담') {
+    if (carTax!=-1) {
         carTax = parseInt(carTax)*0.1;
+    } else {
+        carTax = '상담';
     }
-    if (carAmountTotal!='상담') {
+    if (carAmountTotal!=-1) {
         carAmountTotal = Math.floor(parseInt(carAmountTotal)*1.1);
+    } else {
+        carAmountTotal = '상담';
+    }
+    if (carPrice == -1) {
+        carPrice = '상담';
     }
 
     if (phoneWithoutDash.test(reservationPhone) == true) {

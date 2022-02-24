@@ -171,11 +171,11 @@
                 </tr>
                 <tr>
                     <td class="table_subtitle">월대여료</td>
-                    <td th:if="${morenDTO.carPrice!='상담'}">
+                    <td th:if="${morenDTO.carPrice!=-1}">
                         <span th:text="${morenDTO.carPrice}" class="number"></span>
                         <span>원</span>
                     </td>
-                    <td th:if="${morenDTO.carPrice=='상담'}">
+                    <td th:if="${morenDTO.carPrice==-1}">
                     </td>
                     <td class="table_subtitle">위약율</td>
                     <td></td>

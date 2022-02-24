@@ -304,7 +304,7 @@ function dataReset2() {
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
 
-    console.log(kilometer);
+    // console.log(kilometer);
 
     if (rentTerm == '한달' && kilometer == '') {
         kilometer = '2000km';
@@ -376,7 +376,11 @@ function openForm() {
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
     let ageLimit = document.getElementById('selectAge1').value;
 
-    carPrice = carPrice.replace(/,/g, "");
+    if (carPrice === '상담') {
+        carPrice = -1;
+    } else {
+        carPrice = carPrice.replace(/,/g, "");
+    }
 
     var mapForm = document.createElement("form");
     mapForm.target = "Map";
@@ -574,7 +578,11 @@ function openOffer() {
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
     let selectAge = document.getElementById('selectAge1').value;
 
-    carPrice = carPrice.replace(/,/g, "");
+    if (carPrice === '상담') {
+        carPrice = -1;
+    } else {
+        carPrice = carPrice.replace(/,/g, "");
+    }
 
     var mapForm = document.createElement("form");
     mapForm.target = "Map";
