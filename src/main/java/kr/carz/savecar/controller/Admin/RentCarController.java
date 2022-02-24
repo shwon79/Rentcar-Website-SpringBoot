@@ -4,6 +4,7 @@ import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarPriceRateDTO;
 import kr.carz.savecar.dto.MonthlyRentDTO;
 import kr.carz.savecar.dto.MonthlyRentVO;
+import kr.carz.savecar.dto.YearlyRentDTO;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,30 @@ public class RentCarController {
 
     @GetMapping("/admin/rentcar/price/monthly/menu/{category2}")
     public ModelAndView get_rent_car_price_monthly_menu(@PathVariable String category2) {
+
+//        List<MonthlyRent> monthlyRents = monthlyRentService.findAllMonthlyRents();
+//        for(MonthlyRent monthlyRent : monthlyRents){
+//
+//            Float basic = monthlyRent.getCost_for_2k();
+//
+//            monthlyRent.setCost_for_2_5k(monthlyRent.getCost_for_2_5k() / basic);
+//            monthlyRent.setCost_for_3k(monthlyRent.getCost_for_3k() / basic);
+//            monthlyRent.setCost_for_4k(monthlyRent.getCost_for_4k() / basic);
+//
+//
+//            monthlyRent.getYearlyRent().setCost_for_20k(monthlyRent.getYearlyRent().getCost_for_20k() / basic);
+//            monthlyRent.getYearlyRent().setCost_for_30k(monthlyRent.getYearlyRent().getCost_for_30k() / basic);
+//            monthlyRent.getYearlyRent().setCost_for_40k(monthlyRent.getYearlyRent().getCost_for_40k() / basic);
+//
+//
+//            if(monthlyRent.getTwoYearlyRent() != null){
+//                monthlyRent.getTwoYearlyRent().setCost_for_20Tk(monthlyRent.getTwoYearlyRent().getCost_for_20Tk() / basic);
+//                monthlyRent.getTwoYearlyRent().setCost_for_30Tk(monthlyRent.getTwoYearlyRent().getCost_for_30Tk() / basic);
+//                monthlyRent.getTwoYearlyRent().setCost_for_40Tk(monthlyRent.getTwoYearlyRent().getCost_for_40Tk() / basic);
+//
+//            }
+//            monthlyRentService.save(monthlyRent);
+//        }
 
         ModelAndView mav = new ModelAndView();
 
@@ -143,6 +168,30 @@ public class RentCarController {
         mav.setViewName("admin/rentcar_price_yearly_detail");
 
         return mav;
+    }
+
+
+
+    @PutMapping("/admin/rentcar/price/yearly/{yearlyId}")
+    @ResponseBody
+    public void put_rent_car_price_yearly(HttpServletResponse res, @RequestBody YearlyRentDTO yearlyRentDTO, @PathVariable Long yearlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<YearlyRent> yearlyRentWrapper  = yearlyRentService.findById(yearlyId);
+        if(yearlyRentWrapper.isPresent()){
+
+            yearlyRentService.updateAllPriceByDTO(yearlyRentDTO, yearlyRentWrapper.get());
+
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
     @GetMapping("/admin/rentcar/price/twoYearly/menu/{category2}")
