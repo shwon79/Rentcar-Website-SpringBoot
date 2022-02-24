@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table(name = "MonthlyRent")
-public class MonthlyRent implements Comparable<MonthlyRent>{
+public class MonthlyRent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;

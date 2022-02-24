@@ -81,6 +81,8 @@ public class RentCarController {
         if(monthlyRentWrapper.isPresent()){
 
             monthlyRentService.updateAllPriceByDTO(monthlyRentDTO, monthlyRentWrapper.get());
+//            yearlyRentService.
+
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
@@ -126,9 +128,10 @@ public class RentCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<YearlyRent> yearlyRentList = yearlyRentService.findByCategory2(category2);
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+//        List<YearlyRent> yearlyRentList = yearlyRentService.findByCategory2(category2);
 
-        mav.addObject("yearlyRentList", yearlyRentList);
+        mav.addObject("monthlyRentList", monthlyRentList);
 
         mav.setViewName("admin/rentcar_price_yearly_menu");
 
@@ -157,9 +160,11 @@ public class RentCarController {
 
         ModelAndView mav = new ModelAndView();
 
-        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findByCategory2(category2);
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+//        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findByCategory2(category2);
 
-        mav.addObject("twoYearlyRentList", twoYearlyRentList);
+        mav.addObject("monthlyRentList", monthlyRentList);
+//        mav.addObject("twoYearlyRentList", twoYearlyRentList);
 
         mav.setViewName("admin/rentcar_price_twoYearly_menu");
 

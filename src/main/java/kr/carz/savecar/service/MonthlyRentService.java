@@ -92,4 +92,8 @@ public class MonthlyRentService {
 
         return monthlyRentRepository.save(monthlyRent).getId();
     }
+
+    public List<MonthlyRent> findByCategory2AndTwoYearlyRentIsNotNull(String category2){
+        return monthlyRentRepository.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+    }
 }
