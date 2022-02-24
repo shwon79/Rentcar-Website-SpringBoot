@@ -118,15 +118,16 @@ public class MonthlyRentService {
         monthlyRent.getYearlyRent().setEnd(monthlyRentVO.getEnd());
         monthlyRent.getYearlyRent().setImg_url(monthlyRentVO.getImg_url());
 
-        monthlyRent.getTwoYearlyRent().setCategory1(monthlyRentVO.getCategory1());
-        monthlyRent.getTwoYearlyRent().setCategory2(monthlyRentVO.getCategory2());
-        monthlyRent.getTwoYearlyRent().setName(monthlyRentVO.getName());
-        monthlyRent.getTwoYearlyRent().setAge_limit(monthlyRentVO.getAge_limit());
-        monthlyRent.getTwoYearlyRent().setNameMoren(monthlyRentVO.getNameMoren());
-        monthlyRent.getTwoYearlyRent().setStart(monthlyRentVO.getStart());
-        monthlyRent.getTwoYearlyRent().setEnd(monthlyRentVO.getEnd());
-        monthlyRent.getTwoYearlyRent().setImg_url(monthlyRentVO.getImg_url());
-
+        if(monthlyRent.getTwoYearlyRent() != null) {
+            monthlyRent.getTwoYearlyRent().setCategory1(monthlyRentVO.getCategory1());
+            monthlyRent.getTwoYearlyRent().setCategory2(monthlyRentVO.getCategory2());
+            monthlyRent.getTwoYearlyRent().setName(monthlyRentVO.getName());
+            monthlyRent.getTwoYearlyRent().setAge_limit(monthlyRentVO.getAge_limit());
+            monthlyRent.getTwoYearlyRent().setNameMoren(monthlyRentVO.getNameMoren());
+            monthlyRent.getTwoYearlyRent().setStart(monthlyRentVO.getStart());
+            monthlyRent.getTwoYearlyRent().setEnd(monthlyRentVO.getEnd());
+            monthlyRent.getTwoYearlyRent().setImg_url(monthlyRentVO.getImg_url());
+        }
         return monthlyRentRepository.save(monthlyRent).getId();
     }
 
