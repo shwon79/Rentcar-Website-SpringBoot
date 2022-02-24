@@ -21,6 +21,7 @@
 .table td, .table th {
     padding: 0;
     vertical-align: top;
+    word-break: keep-all;
 }
 .table th {
     word-break: keep-all;
@@ -33,6 +34,7 @@
 }
 .credit {
     width: 2rem !important;
+    padding: 0.2rem 0;
 }
 .cost_for_others, .start, .end, .cost_per_km {
     width: 3rem !important;

@@ -163,10 +163,14 @@
                             <textarea type="text" th:text="${car.end}" class="end" th:data-title="${car.id}"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <textarea type="text" th:text="${car.credit}" class="credit" th:data-title="${car.id}"></textarea>
+                            <select name="credit" class="credit" th:data-title="${car.id}">
+                                <option value="0" th:selected="${car.credit == '0' ? true : false}">0</option>
+                                <option value="1" th:selected="${car.credit == '1' ? true : false}">1</option>
+                                <option value="2" th:selected="${car.credit == '2' ? true : false}">2</option>
+                            </select>
                         </td>
                         <td class="display_none_mobile" style="display: flex; flex-direction: column;">
-                            <p th:text="${car.img_url}" th:data-title="${car.id}" style="width: 10rem; overflow: hidden;"></p>
+                            <p th:text="${car.img_url}" class="img_url" th:data-title="${car.id}" style="width: 10rem; overflow: hidden;"></p>
                             <input type="file" class="img_input" th:data-title="${car.id}" accept="image/*" style="width: 10rem;">
                         </td>
 <!--                        <td style="display: none;">-->
