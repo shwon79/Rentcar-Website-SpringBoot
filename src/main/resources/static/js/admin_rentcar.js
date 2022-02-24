@@ -77,8 +77,8 @@ function editRentPriceMenu(id, period) {
             data['cost_for_3k'] = parseInt(cost_for_3k.value).toFixed(2);
             data['cost_for_4k'] = parseInt(cost_for_4k.value).toFixed(2);
 
-            console.log(data);
-            // postStringData(period, id, data);
+            // console.log(data);
+            postStringData(period, id, data);
         } else if (period === 'yearly') {
             let cost_for_20k = [...document.getElementsByClassName('cost_for_20k')].find(item => item.dataset.title == id);
             let cost_for_30k = [...document.getElementsByClassName('cost_for_30k')].find(item => item.dataset.title == id);
