@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MonthlyRentDTO {
+public class MonthlyRentVO {
 
     private String category1; // 국산, 외제차의 분류
     private String category2; // 중형차, 경차 등 큰 분류
@@ -30,5 +31,7 @@ public class MonthlyRentDTO {
 
     private String credit;
     private String img_url;
+
+    private MultipartFile file;
 
 }

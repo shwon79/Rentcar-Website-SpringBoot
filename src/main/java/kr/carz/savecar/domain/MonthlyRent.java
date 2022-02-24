@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table(name = "MonthlyRent")
-public class MonthlyRent implements Comparable<MonthlyRent>{
+public class MonthlyRent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
@@ -70,63 +70,4 @@ public class MonthlyRent implements Comparable<MonthlyRent>{
         this.img_url = img_url;
     }
 
-    @Override
-    public int compareTo(MonthlyRent o) {
-        int thisPriority, oPriority;
-
-        if(this.name.equals("경형")){
-            thisPriority = 0;
-        }else if(this.name.equals("준중형")){
-            thisPriority = 1;
-        }else if(this.name.equals("중형")){
-            thisPriority = 2;
-        }else if(this.name.equals("중대형")){
-            thisPriority = 3;
-        }else if(this.name.equals("대형")){
-            thisPriority = 4;
-        }else if(this.name.equals("소중형SUV")){
-            thisPriority = 5;
-        }else if(this.name.equals("중형SUV")){
-            thisPriority = 6;
-        }else if(this.name.equals("중대형SUV")){
-            thisPriority = 7;
-        }else if(this.name.equals("대형SUV")){
-            thisPriority = 8;
-        }else if(this.name.equals("승합")){
-            thisPriority = 9;
-        }else {
-            thisPriority = 10;
-        }
-
-        if(o.name.equals("경형")){
-            oPriority = 0;
-        }else if(o.name.equals("준중형")){
-            oPriority = 1;
-        }else if(o.name.equals("중형")){
-            oPriority = 2;
-        }else if(o.name.equals("중대형")){
-            oPriority = 3;
-        }else if(o.name.equals("대형")){
-            oPriority = 4;
-        }else if(o.name.equals("소중형SUV")){
-            oPriority = 5;
-        }else if(o.name.equals("중형SUV")){
-            oPriority = 6;
-        }else if(o.name.equals("중대형SUV")){
-            oPriority = 7;
-        }else if(o.name.equals("대형SUV")){
-            oPriority = 8;
-        }else if(o.name.equals("승합")){
-            oPriority = 9;
-        }else {
-            oPriority = 10;
-        }
-
-        if(thisPriority == oPriority){
-            return this.name.compareTo(o.name);
-        }
-
-
-        return Integer.compare(thisPriority, oPriority);
-    }
 }

@@ -1,6 +1,5 @@
 package kr.carz.savecar.service;
 
-import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.domain.YearlyRent;
 import kr.carz.savecar.repository.YearlyRentRepository;
 import org.springframework.transaction.annotation.Transactional;

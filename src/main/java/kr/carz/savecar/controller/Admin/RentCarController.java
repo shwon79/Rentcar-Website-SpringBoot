@@ -3,6 +3,7 @@ package kr.carz.savecar.controller.Admin;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.CampingCarPriceRateDTO;
 import kr.carz.savecar.dto.MonthlyRentDTO;
+import kr.carz.savecar.dto.MonthlyRentVO;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,17 @@ public class RentCarController {
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
     private final TwoYearlyRentService twoYearlyRentService;
+    private final S3Service s3Service;
 
     @Autowired
     public RentCarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                             TwoYearlyRentService twoYearlyRentService, ReservationService reservationService) {
+                             TwoYearlyRentService twoYearlyRentService, ReservationService reservationService,
+                             S3Service s3Service) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
         this.reservationService = reservationService;
+        this.s3Service = s3Service;
     }
 
 
@@ -42,27 +46,6 @@ public class RentCarController {
         ModelAndView mav = new ModelAndView();
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
-
-//        Collections.sort(monthlyRentList);
-
-//        List<List<MonthlyRent>> monthlyRentListTotal = new ArrayList<>();
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("경형"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("준중형"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("중형"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("중대형"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("대형"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("소중형SUV"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("중형SUV"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("중대형SUV"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("대형SUV"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("승합"));
-//        monthlyRentListTotal.add(monthlyRentService.findByCategory2("수입차"));
-//
-//        List<MonthlyRent> monthlyRentList = new ArrayList<>();
-//        for(List<MonthlyRent> currentList : monthlyRentListTotal){
-//            Collections.sort(currentList);
-//            monthlyRentList.addAll(currentList);
-//        }
 
         mav.addObject("monthlyRentList", monthlyRentList);
 
@@ -98,6 +81,34 @@ public class RentCarController {
         if(monthlyRentWrapper.isPresent()){
 
             monthlyRentService.updateAllPriceByDTO(monthlyRentDTO, monthlyRentWrapper.get());
+//            yearlyRentService.
+
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
+    @PutMapping("/admin/rentcar/price/monthly/image/{monthlyId}")
+    @ResponseBody
+    public void put_rent_car_price_monthly_with_image(HttpServletResponse res, @RequestBody MonthlyRentVO monthlyRentVO, @PathVariable Long monthlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+        if(monthlyRentWrapper.isPresent()){
+
+            String imgPath = s3Service.upload(monthlyRentVO.getFile());
+            monthlyRentVO.setImg_url(imgPath);
+
+            monthlyRentService.updateAllPriceByVO(monthlyRentVO, monthlyRentWrapper.get());
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
@@ -112,31 +123,15 @@ public class RentCarController {
 
 
 
-    @GetMapping("/admin/rentcar/price/yearly/menu")
-    public ModelAndView get_rent_car_price_yearly_menu() {
+    @GetMapping("/admin/rentcar/price/yearly/menu/{category2}")
+    public ModelAndView get_rent_car_price_yearly_menu(@PathVariable String category2) {
 
         ModelAndView mav = new ModelAndView();
 
-        List<List<YearlyRent>> yearlyRentListTotal = new ArrayList<>();
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("경형"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("준중형"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("중형"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("중대형"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("대형"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("소중형SUV"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("중형SUV"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("중대형SUV"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("대형SUV"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("승합"));
-        yearlyRentListTotal.add(yearlyRentService.findByCategory2("수입차"));
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+//        List<YearlyRent> yearlyRentList = yearlyRentService.findByCategory2(category2);
 
-        List<YearlyRent> yearlyRentList = new ArrayList<>();
-        for(List<YearlyRent> currentList : yearlyRentListTotal){
-            Collections.sort(currentList);
-            yearlyRentList.addAll(currentList);
-        }
-
-        mav.addObject("yearlyRentList", yearlyRentList);
+        mav.addObject("monthlyRentList", monthlyRentList);
 
         mav.setViewName("admin/rentcar_price_yearly_menu");
 
@@ -160,31 +155,16 @@ public class RentCarController {
         return mav;
     }
 
-    @GetMapping("/admin/rentcar/price/twoYearly/menu")
-    public ModelAndView get_rent_car_price_twoYearly_menu() {
+    @GetMapping("/admin/rentcar/price/twoYearly/menu/{category2}")
+    public ModelAndView get_rent_car_price_twoYearly_menu(@PathVariable String category2) {
 
         ModelAndView mav = new ModelAndView();
 
-        List<List<TwoYearlyRent>> twoYearlyRentListTotal = new ArrayList<>();
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("경형"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("준중형"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("중형"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("중대형"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("대형"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("소중형SUV"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("중형SUV"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("중대형SUV"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("대형SUV"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("승합"));
-        twoYearlyRentListTotal.add(twoYearlyRentService.findByCategory2("수입차"));
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+//        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findByCategory2(category2);
 
-        List<TwoYearlyRent> twoYearlyRentList = new ArrayList<>();
-        for(List<TwoYearlyRent> currentList : twoYearlyRentListTotal){
-            Collections.sort(currentList);
-            twoYearlyRentList.addAll(currentList);
-        }
-
-        mav.addObject("twoYearlyRentList", twoYearlyRentList);
+        mav.addObject("monthlyRentList", monthlyRentList);
+//        mav.addObject("twoYearlyRentList", twoYearlyRentList);
 
         mav.setViewName("admin/rentcar_price_twoYearly_menu");
 

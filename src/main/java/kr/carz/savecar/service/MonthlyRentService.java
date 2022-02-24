@@ -2,6 +2,7 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.dto.MonthlyRentDTO;
+import kr.carz.savecar.dto.MonthlyRentVO;
 import kr.carz.savecar.repository.MonthlyRentRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,5 +69,31 @@ public class MonthlyRentService {
         monthlyRent.setImg_url(monthlyRentDTO.getImg_url());
 
         return monthlyRentRepository.save(monthlyRent).getId();
+    }
+
+    public Long updateAllPriceByVO(MonthlyRentVO monthlyRentVO, MonthlyRent monthlyRent){
+
+        monthlyRent.setCategory1(monthlyRentVO.getCategory1());
+        monthlyRent.setCategory2(monthlyRentVO.getCategory2());
+        monthlyRent.setName(monthlyRentVO.getName());
+        monthlyRent.setDeposit(monthlyRentVO.getDeposit());
+        monthlyRent.setCost_for_2k(monthlyRentVO.getCost_for_2k());
+        monthlyRent.setCost_for_2_5k(monthlyRentVO.getCost_for_2_5k());
+        monthlyRent.setCost_for_3k(monthlyRentVO.getCost_for_3k());
+        monthlyRent.setCost_for_4k(monthlyRentVO.getCost_for_4k());
+        monthlyRent.setCost_for_others(monthlyRentVO.getCost_for_others());
+        monthlyRent.setAge_limit(monthlyRentVO.getAge_limit());
+        monthlyRent.setCost_per_km(monthlyRentVO.getCost_per_km());
+        monthlyRent.setNameMoren(monthlyRentVO.getNameMoren());
+        monthlyRent.setStart(monthlyRentVO.getStart());
+        monthlyRent.setEnd(monthlyRentVO.getEnd());
+        monthlyRent.setCredit(monthlyRentVO.getCredit());
+        monthlyRent.setImg_url(monthlyRentVO.getImg_url());
+
+        return monthlyRentRepository.save(monthlyRent).getId();
+    }
+
+    public List<MonthlyRent> findByCategory2AndTwoYearlyRentIsNotNull(String category2){
+        return monthlyRentRepository.findByCategory2AndTwoYearlyRentIsNotNull(category2);
     }
 }
