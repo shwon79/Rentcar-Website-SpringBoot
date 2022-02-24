@@ -4,6 +4,8 @@ import kr.carz.savecar.controller.ReservationController;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,6 +54,12 @@ public class CampingCarController {
         this.s3Service = s3Service;
         this.campingCarMainTextService = campingCarMainTextService;
     }
+
+    @Value("${coolsms.api_key}")
+    private String api_key;
+
+    @Value("${coolsms.api_secret}")
+    private String api_secret;
 
     @Value("${phone.admin1}")
     private String admin1;
@@ -450,13 +458,6 @@ public class CampingCarController {
 
             CampingCarPrice campingCarPriceForMoren = campingCarPriceService.findCampingCarPriceByCarName(campingCarReservationDTO.getCarType());
 
-            StringBuilder sb = new StringBuilder();
-            sb.append("CAR_NUM : "+campingCarPriceForMoren.getCarNum());
-            sb.append(",CAR_CODE : "+campingCarPriceForMoren.getCarCode());
-            sb.append(",ORDER_TYPE : "+orderType);
-            sb.append(",ORDER_CODE : "+campingCarPriceForMoren.getCarCode());
-            sb.append(",ORDER_CUSTOMER_NAME : "+orderType);
-
             morenJsonObject.put("COMPANY_ID", "1343");
             morenJsonObject.put("CAR_NUM", campingCarPriceForMoren.getCarNum());
             morenJsonObject.put("CAR_CODE", campingCarPriceForMoren.getCarCode());
@@ -467,13 +468,6 @@ public class CampingCarController {
             morenJsonObject.put("ORDER_CUSTOMER_PHONE", campingCarReservationDTO.getPhone());
             morenJsonObject.put("ORDER_START_TIME", orderStartTime);
             morenJsonObject.put("ORDER_END_TIME", orderEndTime);
-            morenJsonObject.put("ORDER_CUSTOMER_MEMO", campingCarReservationDTO.getDetail());
-            morenJsonObject.put("ORDER_PRICE", campingCarReservationDTO.getTotal());
-            morenJsonObject.put("ORDER_PRICE_TAX", "0");
-            morenJsonObject.put("ORDER_DEPOSIT", campingCarReservationDTO.getDeposit());
-            morenJsonObject.put("ORDER_CDW", "1");
-            morenJsonObject.put("ORDER_CODE", campingCarReservationDTO.getOrderCode());
-
 
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
@@ -644,7 +638,7 @@ public class CampingCarController {
                 }
             }
         }
-        campingcarReservationService.saveDTO(campingCarReservationDTO);
+        campingcarReservationService.saveDTO(campingCarReservationDTO, campingCarReservation);
 
         if(taskName.equals("확정")) {
             reservationController.send_message(admin1+", "+admin2+", "+admin3,
@@ -683,6 +677,7 @@ public class CampingCarController {
         pw.flush();
         pw.close();
     }
+
 
 
     // 캠핑카 reservation 삭제 api

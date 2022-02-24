@@ -32,9 +32,31 @@ public class CampingcarReservationService {
         return campingcarReservationRepository.save(dto.toEntity()).getId();
     }
 
-    public Long saveDTO(CampingCarReservationDTO campingCarReservationDTO) {
+    public Long saveDTO(CampingCarReservationDTO campingCarReservationDTO, CampingCarReservation campingCarReservation) {
 
-        return campingcarReservationRepository.save(campingCarReservationDTO.toEntity()).getId();
+        campingCarReservation.setAgree(campingCarReservationDTO.getAgree());
+        campingCarReservation.setCarType(campingCarReservationDTO.getCarType());
+        campingCarReservation.setDay(campingCarReservationDTO.getDay());
+        campingCarReservation.setDeposit(campingCarReservationDTO.getDeposit());
+        campingCarReservation.setDepositor(campingCarReservationDTO.getDepositor());
+        campingCarReservation.setDetail(campingCarReservationDTO.getDetail());
+        campingCarReservation.setName(campingCarReservationDTO.getName());
+        campingCarReservation.setPhone(campingCarReservationDTO.getPhone());
+        campingCarReservation.setRentDate(campingCarReservationDTO.getRentDate());
+        campingCarReservation.setRentTime(campingCarReservationDTO.getRentTime());
+        campingCarReservation.setReservation(campingCarReservationDTO.getReservation());
+        campingCarReservation.setReturnDate(campingCarReservationDTO.getReturnDate());
+        campingCarReservation.setReturnTime(campingCarReservationDTO.getReturnTime());
+        campingCarReservation.setTotal(campingCarReservationDTO.getTotal());
+        campingCarReservation.setTotalHalf(campingCarReservationDTO.getTotalHalf());
+        campingCarReservation.setExtraTime(campingCarReservationDTO.getExtraTime());
+
+        return campingcarReservationRepository.save(campingCarReservation).getId();
+    }
+
+    public Long save(CampingCarReservation campingCarReservation) {
+
+        return campingcarReservationRepository.save(campingCarReservation).getId();
     }
 
     public List<CampingCarReservation> findAllReservations(){

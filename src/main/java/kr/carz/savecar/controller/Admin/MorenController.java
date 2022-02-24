@@ -1,10 +1,9 @@
 package kr.carz.savecar.controller.Admin;
 
+import kr.carz.savecar.controller.ReservationController;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.service.*;
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,10 +22,12 @@ import java.util.*;
 @Controller
 public class MorenController {
     private final MorenReservationService morenReservationService;
+    private final ReservationController reservationController;
 
     @Autowired
-    public MorenController(MorenReservationService morenReservationService) {
+    public MorenController(MorenReservationService morenReservationService, ReservationController reservationController) {
         this.morenReservationService = morenReservationService;
+        this.reservationController = reservationController;
     }
 
     @Value("${coolsms.api_key}")
@@ -226,20 +227,7 @@ public class MorenController {
                 String[] splited_response = getTwoHundredStrings(response, "\"");
                 morenReservation.setOrderCode(splited_response[9]);
 
-                Message coolsms = new Message(api_key, api_secret);
-                HashMap<String, String> params = new HashMap<>();
-                HashMap<String, String> params2 = new HashMap<>();
-
-                /* 세이브카에 예약확인 문자 전송 */
-                params.put("to", admin1+", "+admin2+", "+admin3);
-                params.put("from", admin3);
-                params.put("type", "LMS");
-
-                /* 고객에게 예약확인 문자 전송 */
-                params2.put("to", dto.getReservationPhone());
-                params2.put("from", admin3);
-                params2.put("type", "LMS");
-
+                // 메시지 보내기
                 String delivery_text;
                 if (dto.getPickupPlace().equals("방문")) {
 
@@ -250,54 +238,107 @@ public class MorenController {
                             + "배차요청상세주소: " + dto.getAddressDetail() + "\n";
                 }
 
-                params.put("text", "[실시간 예약 확정 처리 완료]\n"
-                        + "문의자 이름: " + dto.getReservationName() + "\n"
-                        + "연락처: " + dto.getReservationPhone() + "\n"
-                        + "차량번호: " + dto.getCarNo() + "\n"
-                        + "대여일자: " + dto.getReservationDate() + "\n"
-                        + "대여시간: " + dto.getReservationTime() + "\n"
-                        + "렌트기간: " + dto.getRentTerm() + "\n"
-                        + "약정주행거리: " + dto.getKilometer() + "\n"
-                        + delivery_text
-                        + "생년월일: " + dto.getReservationAge() + "\n"
-                        + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
-                        + "보증금: " + dto.getCarDeposit() + "\n"
-                        + "요청사항: " + dto.getReservationDetails() + "\n\n");
+                reservationController.send_message(admin1+", "+admin2+", "+admin3, dto.getReservationPhone(),
+                        "[모렌 예약 확정 처리 완료]\n"
+                                + "문의자 이름: " + dto.getReservationName() + "\n"
+                                + "연락처: " + dto.getReservationPhone() + "\n"
+                                + "차량번호: " + dto.getCarNo() + "\n"
+                                + "대여일자: " + dto.getReservationDate() + "\n"
+                                + "대여시간: " + dto.getReservationTime() + "\n"
+                                + "렌트기간: " + dto.getRentTerm() + "\n"
+                                + "약정주행거리: " + dto.getKilometer() + "\n"
+                                + delivery_text
+                                + "생년월일: " + dto.getReservationAge() + "\n"
+                                + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+                                + "보증금: " + dto.getCarDeposit() + "\n"
+                                + "요청사항: " + dto.getReservationDetails() + "\n\n",
 
-                params2.put("text", "[세이브카 렌트카 예약이 확정되었습니다]" + "\n"
-                        + "성함: " + dto.getReservationName() + "\n"
-                        + "연락처: " + dto.getReservationPhone() + "\n"
-                        + "차량번호: " + dto.getCarNo() + "\n"
-                        + "대여일자: " + dto.getReservationDate() + "\n"
-                        + "렌트기간: " + dto.getRentTerm() + "\n"
-                        + "약정주행거리: " + dto.getKilometer() + "\n"
-                        + delivery_text
-                        + "총렌트료: " + dto.getCarAmountTotal() + "\n"
-                        + "보증금: " + dto.getCarDeposit() + "\n"
-                        + "요청사항: " + dto.getReservationDetails() + "\n\n"
+                        "[세이브카 렌트카 예약이 확정되었습니다]" + "\n"
+                                + "성함: " + dto.getReservationName() + "\n"
+                                + "연락처: " + dto.getReservationPhone() + "\n"
+                                + "차량번호: " + dto.getCarNo() + "\n"
+                                + "대여일자: " + dto.getReservationDate() + "\n"
+                                + "렌트기간: " + dto.getRentTerm() + "\n"
+                                + "약정주행거리: " + dto.getKilometer() + "\n"
+                                + delivery_text
+                                + "총렌트료: " + dto.getCarAmountTotal() + "\n"
+                                + "보증금: " + dto.getCarDeposit() + "\n"
+                                + "요청사항: " + dto.getReservationDetails() + "\n\n"
 
-                        + "* 운전면허증을 촬영하여 문자로 보내주시기 바랍니다.\n");
+                                + "* 운전면허증을 촬영하여 문자로 보내주시기 바랍니다.\n");
 
-                params.put("app_version", "test app 1.2");
-                params2.put("app_version", "test app 1.2");
-
-                /* 세이브카에게 문자 전송 */
-                try {
-                    org.json.simple.JSONObject obj = coolsms.send(params);
-                    System.out.println(obj.toString()); //전송 결과 출력
-                } catch (CoolsmsException e) {
-                    System.out.println(e.getMessage());
-                    System.out.println(e.getCode());
-                }
-
-                /* 고객에게 예약확인 문자 전송 */
-                try {
-                    org.json.simple.JSONObject obj2 = coolsms.send(params2);
-                    System.out.println(obj2.toString()); //전송 결과 출력
-                } catch (CoolsmsException e) {
-                    System.out.println(e.getMessage());
-                    System.out.println(e.getCode());
-                }
+//                Message coolsms = new Message(api_key, api_secret);
+//                HashMap<String, String> params = new HashMap<>();
+//                HashMap<String, String> params2 = new HashMap<>();
+//
+//                /* 세이브카에 예약확인 문자 전송 */
+//                params.put("to", admin1+", "+admin2+", "+admin3);
+//                params.put("from", admin3);
+//                params.put("type", "LMS");
+//
+//                /* 고객에게 예약확인 문자 전송 */
+//                params2.put("to", dto.getReservationPhone());
+//                params2.put("from", admin3);
+//                params2.put("type", "LMS");
+//
+//                String delivery_text;
+//                if (dto.getPickupPlace().equals("방문")) {
+//
+//                    delivery_text = "방문/배차: " + dto.getPickupPlace() + "\n";
+//                } else {
+//                    delivery_text = "방문/배차: " + dto.getPickupPlace() + "\n"
+//                            + "배차요청주소: " + dto.getAddress() + "\n"
+//                            + "배차요청상세주소: " + dto.getAddressDetail() + "\n";
+//                }
+//
+//                params.put("text", "[모렌 예약 확정 처리 완료]\n"
+//                        + "문의자 이름: " + dto.getReservationName() + "\n"
+//                        + "연락처: " + dto.getReservationPhone() + "\n"
+//                        + "차량번호: " + dto.getCarNo() + "\n"
+//                        + "대여일자: " + dto.getReservationDate() + "\n"
+//                        + "대여시간: " + dto.getReservationTime() + "\n"
+//                        + "렌트기간: " + dto.getRentTerm() + "\n"
+//                        + "약정주행거리: " + dto.getKilometer() + "\n"
+//                        + delivery_text
+//                        + "생년월일: " + dto.getReservationAge() + "\n"
+//                        + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+//                        + "보증금: " + dto.getCarDeposit() + "\n"
+//                        + "요청사항: " + dto.getReservationDetails() + "\n\n");
+//
+//                params2.put("text", "[세이브카 렌트카 예약이 확정되었습니다]" + "\n"
+//                        + "성함: " + dto.getReservationName() + "\n"
+//                        + "연락처: " + dto.getReservationPhone() + "\n"
+//                        + "차량번호: " + dto.getCarNo() + "\n"
+//                        + "대여일자: " + dto.getReservationDate() + "\n"
+//                        + "렌트기간: " + dto.getRentTerm() + "\n"
+//                        + "약정주행거리: " + dto.getKilometer() + "\n"
+//                        + delivery_text
+//                        + "총렌트료: " + dto.getCarAmountTotal() + "\n"
+//                        + "보증금: " + dto.getCarDeposit() + "\n"
+//                        + "요청사항: " + dto.getReservationDetails() + "\n\n"
+//
+//                        + "* 운전면허증을 촬영하여 문자로 보내주시기 바랍니다.\n");
+//
+//                params.put("app_version", "test app 1.2");
+//                params2.put("app_version", "test app 1.2");
+//
+//                /* 세이브카에게 문자 전송 */
+//                try {
+//                    org.json.simple.JSONObject obj = coolsms.send(params);
+//                    System.out.println(obj.toString()); //전송 결과 출력
+//                } catch (CoolsmsException e) {
+//                    System.out.println(e.getMessage());
+//                    System.out.println(e.getCode());
+//                }
+//
+//                /* 고객에게 예약확인 문자 전송 */
+//                try {
+//                    org.json.simple.JSONObject obj2 = coolsms.send(params2);
+//                    System.out.println(obj2.toString()); //전송 결과 출력
+//                } catch (CoolsmsException e) {
+//                    System.out.println(e.getMessage());
+//                    System.out.println(e.getCode());
+//                }
 
                 jsonObject_return.put("result", 1);
 
@@ -351,21 +392,7 @@ public class MorenController {
                 bufferedReader.close();
                 System.out.println("응답값 : " + response);
 
-
-                Message coolsms = new Message(api_key, api_secret);
-                HashMap<String, String> params = new HashMap<>();
-                HashMap<String, String> params2 = new HashMap<>();
-
-                /* 세이브카에 예약확인 문자 전송 */
-                params.put("to", "01058283328");
-                params.put("from", "01052774113");
-                params.put("type", "LMS");
-
-                /* 고객에게 예약확인 문자 전송 */
-                params2.put("to", morenReservation.getReservationPhone());
-                params2.put("from", "01052774113");
-                params2.put("type", "LMS");
-
+                // 메시지 보내기
                 String delivery_text;
                 if (morenReservation.getPickupPlace().equals("방문")){
                     delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n";
@@ -375,53 +402,106 @@ public class MorenController {
                             + "배차요청상세주소: " + morenReservation.getAddressDetail() + "\n";
                 }
 
-                params.put("text", "[실시간 예약 취소 처리 완료]\n"
-                        + "문의자 이름: " + morenReservation.getReservationName() + "\n"
-                        + "연락처: " + morenReservation.getReservationPhone() + "\n"
-                        + "차량번호: " + morenReservation.getCarNo() + "\n"
-                        + "대여일자: " + morenReservation.getReservationDate() + "\n"
-                        + "대여시간: " + morenReservation.getReservationTime() + "\n"
-                        + "렌트기간: " + morenReservation.getRentTerm() + "\n"
-                        + "약정주행거리: " + morenReservation.getKilometer() + "\n"
-                        + delivery_text
-                        + "생년월일: " + morenReservation.getReservationAge() + "\n"
-                        + "신용증빙: " + morenReservation.getReservationGuarantee() + "\n"
-                        + "총렌트료(부포): " + morenReservation.getCarAmountTotal() + "\n"
-                        + "보증금: " + morenReservation.getCarDeposit() + "\n"
-                        + "요청사항: " + morenReservation.getReservationDetails() + "\n\n");
+                reservationController.send_message(admin1+", "+admin2+", "+admin3, dto.getReservationPhone(),
+                        "[모렌 예약 취소 처리 완료]\n"
+                                + "문의자 이름: " + dto.getReservationName() + "\n"
+                                + "연락처: " + dto.getReservationPhone() + "\n"
+                                + "차량번호: " + dto.getCarNo() + "\n"
+                                + "대여일자: " + dto.getReservationDate() + "\n"
+                                + "대여시간: " + dto.getReservationTime() + "\n"
+                                + "렌트기간: " + dto.getRentTerm() + "\n"
+                                + "약정주행거리: " + dto.getKilometer() + "\n"
+                                + delivery_text
+                                + "생년월일: " + dto.getReservationAge() + "\n"
+                                + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+                                + "보증금: " + dto.getCarDeposit() + "\n"
+                                + "요청사항: " + dto.getReservationDetails() + "\n\n",
 
-                params2.put("text", "[세이브카 렌트카 예약이 취소되었습니다]" + "\n"
-                        + "문의자 이름: " + morenReservation.getReservationName() + "\n"
-                        + "연락처: " + morenReservation.getReservationPhone() + "\n"
-                        + "차량번호: " + morenReservation.getCarNo() + "\n"
-                        + "대여일자: " + morenReservation.getReservationDate() + "\n"
-                        + "렌트기간: " + morenReservation.getRentTerm() + "\n"
-                        + "약정주행거리: " + morenReservation.getKilometer() + "\n"
-                        + delivery_text
-                        + "기타증빙사항: " + morenReservation.getReservationGuarantee() + "\n"
-                        + "총렌트료: " + morenReservation.getCarAmountTotal() + "\n"
-                        + "보증금: " + morenReservation.getCarDeposit() + "\n"
-                        + "요청사항: " + morenReservation.getReservationDetails() + "\n\n");
-                params.put("app_version", "test app 1.2");
-                params2.put("app_version", "test app 1.2");
+                        "[세이브카 렌트카 예약이 취소되었습니다]" + "\n"
+                                + "성함: " + dto.getReservationName() + "\n"
+                                + "연락처: " + dto.getReservationPhone() + "\n"
+                                + "차량번호: " + dto.getCarNo() + "\n"
+                                + "대여일자: " + dto.getReservationDate() + "\n"
+                                + "렌트기간: " + dto.getRentTerm() + "\n"
+                                + "약정주행거리: " + dto.getKilometer() + "\n"
+                                + delivery_text
+                                + "총렌트료: " + dto.getCarAmountTotal() + "\n"
+                                + "보증금: " + dto.getCarDeposit() + "\n"
+                                + "요청사항: " + dto.getReservationDetails() + "\n\n"
 
-                /* 세이브카에게 문자 전송 */
-                try {
-                    org.json.simple.JSONObject obj = coolsms.send(params);
-                    System.out.println(obj.toString()); //전송 결과 출력
-                } catch (CoolsmsException e) {
-                    System.out.println(e.getMessage());
-                    System.out.println(e.getCode());
-                }
+                                + "* 운전면허증을 촬영하여 문자로 보내주시기 바랍니다.\n");
 
-                /* 고객에게 예약확인 문자 전송 */
-                try {
-                    org.json.simple.JSONObject obj2 = coolsms.send(params2);
-                    System.out.println(obj2.toString()); //전송 결과 출력
-                } catch (CoolsmsException e) {
-                    System.out.println(e.getMessage());
-                    System.out.println(e.getCode());
-                }
+
+//                Message coolsms = new Message(api_key, api_secret);
+//                HashMap<String, String> params = new HashMap<>();
+//                HashMap<String, String> params2 = new HashMap<>();
+//
+//                /* 세이브카에 예약확인 문자 전송 */
+//                params.put("to", "01058283328");
+//                params.put("from", "01052774113");
+//                params.put("type", "LMS");
+//
+//                /* 고객에게 예약확인 문자 전송 */
+//                params2.put("to", morenReservation.getReservationPhone());
+//                params2.put("from", "01052774113");
+//                params2.put("type", "LMS");
+//
+//                String delivery_text;
+//                if (morenReservation.getPickupPlace().equals("방문")){
+//                    delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n";
+//                } else {
+//                    delivery_text = "방문/배차: " + morenReservation.getPickupPlace() + "\n"
+//                            + "배차요청주소: " + morenReservation.getAddress() + "\n"
+//                            + "배차요청상세주소: " + morenReservation.getAddressDetail() + "\n";
+//                }
+//
+//                params.put("text", "[모렌 예약 취소 처리 완료]\n"
+//                        + "문의자 이름: " + morenReservation.getReservationName() + "\n"
+//                        + "연락처: " + morenReservation.getReservationPhone() + "\n"
+//                        + "차량번호: " + morenReservation.getCarNo() + "\n"
+//                        + "대여일자: " + morenReservation.getReservationDate() + "\n"
+//                        + "대여시간: " + morenReservation.getReservationTime() + "\n"
+//                        + "렌트기간: " + morenReservation.getRentTerm() + "\n"
+//                        + "약정주행거리: " + morenReservation.getKilometer() + "\n"
+//                        + delivery_text
+//                        + "생년월일: " + morenReservation.getReservationAge() + "\n"
+//                        + "신용증빙: " + morenReservation.getReservationGuarantee() + "\n"
+//                        + "총렌트료(부포): " + morenReservation.getCarAmountTotal() + "\n"
+//                        + "보증금: " + morenReservation.getCarDeposit() + "\n"
+//                        + "요청사항: " + morenReservation.getReservationDetails() + "\n\n");
+//
+//                params2.put("text", "[세이브카 렌트카 예약이 취소되었습니다]" + "\n"
+//                        + "문의자 이름: " + morenReservation.getReservationName() + "\n"
+//                        + "연락처: " + morenReservation.getReservationPhone() + "\n"
+//                        + "차량번호: " + morenReservation.getCarNo() + "\n"
+//                        + "대여일자: " + morenReservation.getReservationDate() + "\n"
+//                        + "렌트기간: " + morenReservation.getRentTerm() + "\n"
+//                        + "약정주행거리: " + morenReservation.getKilometer() + "\n"
+//                        + delivery_text
+//                        + "기타증빙사항: " + morenReservation.getReservationGuarantee() + "\n"
+//                        + "총렌트료: " + morenReservation.getCarAmountTotal() + "\n"
+//                        + "보증금: " + morenReservation.getCarDeposit() + "\n"
+//                        + "요청사항: " + morenReservation.getReservationDetails() + "\n\n");
+//                params.put("app_version", "test app 1.2");
+//                params2.put("app_version", "test app 1.2");
+//
+//                /* 세이브카에게 문자 전송 */
+//                try {
+//                    org.json.simple.JSONObject obj = coolsms.send(params);
+//                    System.out.println(obj.toString()); //전송 결과 출력
+//                } catch (CoolsmsException e) {
+//                    System.out.println(e.getMessage());
+//                    System.out.println(e.getCode());
+//                }
+//
+//                /* 고객에게 예약확인 문자 전송 */
+//                try {
+//                    org.json.simple.JSONObject obj2 = coolsms.send(params2);
+//                    System.out.println(obj2.toString()); //전송 결과 출력
+//                } catch (CoolsmsException e) {
+//                    System.out.println(e.getMessage());
+//                    System.out.println(e.getCode());
+//                }
 
                 jsonObject_return.put("result", 1);
 
