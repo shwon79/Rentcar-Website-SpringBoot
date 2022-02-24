@@ -797,7 +797,7 @@ public class CampingCarController {
 
     @PostMapping(value="/admin/campingcar/mainText", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void postAdminCampingCarMainTextImage(HttpServletResponse res, CampingCarMainTextDTO dto) throws IOException {
+    public void postAdminCampingCarMainTextImage(CampingCarMainTextDTO dto) throws IOException {
 
         String imgPath = s3Service.upload(dto.getFile());
         dto.setUrl(imgPath);

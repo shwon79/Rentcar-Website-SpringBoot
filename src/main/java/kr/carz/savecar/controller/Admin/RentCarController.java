@@ -98,9 +98,7 @@ public class RentCarController {
 
     @PutMapping(value="/admin/rentcar/price/monthly/image/{monthlyId}", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void put_rent_car_price_monthly_with_image(HttpServletResponse res, @RequestBody MonthlyRentVO monthlyRentVO, @PathVariable Long monthlyId) throws IOException {
-
-        JSONObject jsonObject = new JSONObject();
+    public void put_rent_car_price_monthly_with_image(@RequestBody MonthlyRentVO monthlyRentVO, @PathVariable Long monthlyId) throws IOException {
 
         Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
         if(monthlyRentWrapper.isPresent()){
@@ -109,15 +107,8 @@ public class RentCarController {
             monthlyRentVO.setImg_url(imgPath);
 
             monthlyRentService.updateAllPriceByVO(monthlyRentVO, monthlyRentWrapper.get());
-            jsonObject.put("result", 1);
-        } else {
-            jsonObject.put("result", 0);
         }
 
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
     }
 
 
