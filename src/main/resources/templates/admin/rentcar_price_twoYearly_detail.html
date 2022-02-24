@@ -1,4 +1,4 @@
-<!-- 관리자 12개월 렌트 가격 수정 상세 페이지 -->
+<!-- 관리자 24개월 렌트 가격 수정 상세 페이지 -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -19,8 +19,8 @@
 
     <script>
         $(window).on('load', function () {
-            let priceYearlyMenu = document.getElementById('priceYearlyMenu');
-            priceYearlyMenu.classList.add('activeAdminMenu');
+            let priceTwoYearlyMenu = document.getElementById('priceTwoYearlyMenu');
+            priceTwoYearlyMenu.classList.add('activeAdminMenu');
         });
     </script>
 
@@ -42,15 +42,15 @@
         </nav>
 
         <div class="container inner_content" style="width: 100%;">
-            <h2 class="page_title" style="text-align: center;">12개월 상세 가격 수정</h2>
+            <h2 class="page_title" style="text-align: center;">24개월 상세 가격 수정</h2>
             <div class="detail_container">
                 <div class="detail_list" id="go_back_wrapper">
-                    <a href="/admin/rentcar/price/yearly/menu">
+                    <a href="/admin/rentcar/price/twoYearly/menu">
                         <button id="go_back">
                             <i class="fas fa-arrow-left"></i>  뒤로가기
                         </button>
                     </a>
-                    <button class="btn btn-primary" th:onclick="editRentPriceDetail([[${yearlyRent.id}]], 'yearly')">수정하기</button>
+                    <button class="btn btn-primary" th:onclick="editRentPriceDetail([[${twoYearlyRent.id}]], 'twoYearly')">수정하기</button>
                 </div>
                 <div class="detail_list" id="detail_list_title">
                     <p>종류</p>
@@ -58,87 +58,86 @@
                 </div>
                 <div class="detail_list">
                     <p>종류</p>
-                    <p id="category1" th:text="${yearlyRent.category1}" th:data-title="${yearlyRent.id}"></p>
+                    <p id="category1" th:text="${twoYearlyRent.category1}" th:data-title="${twoYearlyRent.id}"></p>
                 </div>
                 <div class="detail_list">
                     <p>분류</p>
-                    <p id="category2" th:text="${yearlyRent.category2}" th:data-title="${yearlyRent.id}"></p>
+                    <p id="category2" th:text="${twoYearlyRent.category2}" th:data-title="${twoYearlyRent.id}"></p>
                 </div>
                 <div class="detail_list">
                     <p>차명 년식</p>
-                    <p id="name" th:text="${yearlyRent.name}"></p>
+                    <p id="name" th:text="${twoYearlyRent.name}" th:data-title="${twoYearlyRent.id}"></p>
                 </div>
                 <div class="detail_list">
                     <p>보증금</p>
-                    <textarea type="text" id="deposit" th:text="${#numbers.formatInteger(yearlyRent.deposit, 0, 'COMMA')}"></textarea>
+                    <textarea type="text" id="deposit" th:text="${#numbers.formatInteger(twoYearlyRent.deposit, 0, 'COMMA')}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>20,000km</p>
                     <div>
                         <p style="text-align: right; margin-bottom: 0.5rem;">
-                            <span th:text="${#numbers.formatInteger(yearlyRent.cost_for_20k, 0, 'COMMA')}"></span>
+                            <span th:text="${#numbers.formatInteger(twoYearlyRent.cost_for_20Tk, 0, 'COMMA')}"></span>
                             <span> 원</span>
                         </p>
-                        <input type="text" id="cost_for_20k" th:value="${yearlyRent.cost_for_20k}" />
+                        <input type="text" id="cost_for_20Tk" th:value="${twoYearlyRent.cost_for_20Tk}" />
                     </div>
                 </div>
                 <div class="detail_list">
                     <p>30,000km</p>
                     <div>
                         <p style="text-align: right; margin-bottom: 0.5rem;">
-                            <span th:text="${#numbers.formatInteger(yearlyRent.cost_for_30k, 0, 'COMMA')}"></span>
+                            <span th:text="${#numbers.formatInteger(twoYearlyRent.cost_for_30Tk, 0, 'COMMA')}"></span>
                             <span> 원</span>
                         </p>
-                        <input type="text" id="cost_for_30k" th:value="${yearlyRent.cost_for_30k}" />
+                        <input type="text" id="cost_for_30Tk" th:value="${twoYearlyRent.cost_for_30Tk}" />
                     </div>
                 </div>
                 <div class="detail_list">
                     <p>40,000km</p>
                     <div>
                         <p style="text-align: right; margin-bottom: 0.5rem;">
-                            <span th:text="${#numbers.formatInteger(yearlyRent.cost_for_40k, 0, 'COMMA')}"></span>
+                            <span th:text="${#numbers.formatInteger(twoYearlyRent.cost_for_40Tk, 0, 'COMMA')}"></span>
                             <span> 원</span>
                         </p>
-                        <input type="text" id="cost_for_40k" th:value="${yearlyRent.cost_for_40k}" />
+                        <input type="text" id="cost_for_40Tk" th:value="${twoYearlyRent.cost_for_40Tk}" />
                     </div>
                 </div>
                 <div class="detail_list">
                     <p>other</p>
-                    <p id="cost_for_others" th:text="${yearlyRent.cost_for_others}"></p>
+                    <p id="cost_for_others" th:text="${twoYearlyRent.cost_for_others}"></p>
                 </div>
                 <div class="detail_list">
                     <p>21세</p>
-                    <p id="age_limit" th:text="${#numbers.formatInteger(yearlyRent.age_limit, 0, 'COMMA')}"></p>
+                    <p id="age_limit" th:text="${#numbers.formatInteger(twoYearlyRent.age_limit, 0, 'COMMA')}"></p>
                 </div>
                 <div class="detail_list">
                     <p>km당 추가요금</p>
-                    <textarea type="text" id="cost_per_km" th:text="${yearlyRent.cost_per_km}"></textarea>
+                    <textarea type="text" id="cost_per_km" th:text="${twoYearlyRent.cost_per_km}"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>모렌_차명</p>
-                    <p id="nameMoren" th:text="${yearlyRent.nameMoren}"></p>
+                    <p id="nameMoren" th:text="${twoYearlyRent.nameMoren}"></p>
                 </div>
                 <div class="detail_list">
                     <p>년식_시작</p>
-                    <p id="start" th:text="${yearlyRent.start}"></p>
+                    <p id="start" th:text="${twoYearlyRent.start}"></p>
                 </div>
                 <div class="detail_list">
                     <p>년식_끝</p>
-                    <p id="end" th:text="${yearlyRent.end}"></p>
+                    <p id="end" th:text="${twoYearlyRent.end}"></p>
                 </div>
                 <div class="detail_list">
                     <p>신용</p>
                     <select name="credit" id="credit">
-                        <option value="0" th:selected="${yearlyRent.credit == '0' ? true : false}">0</option>
-                        <option value="1" th:selected="${yearlyRent.credit == '1' ? true : false}">1</option>
-                        <option value="2" th:selected="${yearlyRent.credit == '2' ? true : false}">2</option>
+                        <option value="0" th:selected="${twoYearlyRent.credit == '0' ? true : false}">0</option>
+                        <option value="1" th:selected="${twoYearlyRent.credit == '1' ? true : false}">1</option>
+                        <option value="2" th:selected="${twoYearlyRent.credit == '2' ? true : false}">2</option>
                     </select>
                 </div>
                 <div class="detail_list">
                     <p>img_url</p>
                     <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                        <img th:src="${yearlyRent.img_url}" alt="img" style="width: 50%" id="img_url">
-<!--                        <input type="file" style="width: 85%;" id="img_input">-->
+                        <img th:src="${twoYearlyRent.img_url}" alt="img" style="width: 50%" id="img_url">
                     </div>
                 </div>
             </div>

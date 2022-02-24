@@ -1,5 +1,6 @@
 package kr.carz.savecar.controller.Rent;
 
+import kr.carz.savecar.controller.ReservationController;
 import kr.carz.savecar.controller.Utils.HttpConnection;
 import kr.carz.savecar.dto.MorenDTO;
 import kr.carz.savecar.dto.MorenReservationDTO;
@@ -29,15 +30,17 @@ public class RealtimeRentController {
     private final TwoYearlyRentService twoYearlyRentService;
     private final DiscountService discountService;
     private final MorenReservationService morenReservationService;
+    private final ReservationController reservationController;
 
     @Autowired
     public RealtimeRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
-                                  DiscountService discountService, MorenReservationService morenReservationService) {
+                                  DiscountService discountService, MorenReservationService morenReservationService, ReservationController reservationController) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
+        this.reservationController = reservationController;
     }
 
     /* ======================================================================================== */
@@ -208,12 +211,11 @@ public class RealtimeRentController {
                     Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
                     try {
-                        String kilometer_cost = null;
+                        Float kilometer_cost = (float) 1;
                         Long dbid = Long.parseLong("0");
                         String cost_per_km = null;
                         String credit = null;
 
-                        System.out.println(realTimeDto.getRentTerm() + " " + realTimeDto.getKilometer());
                         switch(realTimeDto.getRentTerm()){
                             case "한달":
                                 MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, (String) morenObject.get("carCategory"));
@@ -229,7 +231,7 @@ public class RealtimeRentController {
                                         kilometer_cost = monthlyRent2.getCost_for_4k();
                                         break;
                                     case "기타":
-                                        kilometer_cost = monthlyRent2.getCost_for_others();
+                                        kilometer_cost = (float) -1;
                                         break;
                                     default:
                                         kilometer_cost = monthlyRent2.getCost_for_2k();
@@ -251,7 +253,7 @@ public class RealtimeRentController {
                                         kilometer_cost = yearlyRent.getCost_for_40k();
                                         break;
                                     case "기타_long":
-                                        kilometer_cost = yearlyRent.getCost_for_others();
+                                        kilometer_cost = (float) -1;
                                         break;
                                     default:
                                         kilometer_cost = yearlyRent.getCost_for_20k();
@@ -274,7 +276,7 @@ public class RealtimeRentController {
                                         kilometer_cost = twoYearlyRent.getCost_for_40Tk();
                                         break;
                                     case "기타_long":
-                                        kilometer_cost = twoYearlyRent.getCost_for_others();
+                                        kilometer_cost = (float) -1;
                                         break;
                                     default:
                                         kilometer_cost = twoYearlyRent.getCost_for_20Tk();
@@ -471,103 +473,156 @@ public class RealtimeRentController {
     //    @RequestMapping(value = "/rent/month/moren/reservation", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @PostMapping("/rent/month/moren/reservation")
     @ResponseBody
-    public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO morenReservationDTO) throws IOException {
+    public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO dto) throws IOException {
 
-        Long reservationId = morenReservationService.saveDTO(morenReservationDTO);
+        Long reservationId = morenReservationService.saveDTO(dto);
 
-        Message coolsms = new Message(api_key, api_secret);
-        HashMap<String, String> params = new HashMap<>();
-        HashMap<String, String> params2 = new HashMap<>();
+        reservationController.send_message(admin1+", "+admin2+", "+admin3, dto.getReservationPhone(),
+                "[현재 대여가능차량 예약이 신청되었습니다.]\n"
+                        + "▼ 계약 확인하기" + "\n"
+                        + "https://savecar.kr/admin/moren/reservation/detail/" + reservationId + "\n\n"
 
-        /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1);  // +", "+admin2+", "+admin3
-        params.put("from", admin3);
-        params.put("type", "ATA");
-        params.put("template_code", realTimeRentTemplateCodeEmployer);
-        params.put("sender_key", senderKey);
+                        + "▼ 문의자 정보" + "\n"
+                        + "문의자 이름: " + dto.getReservationName() + "\n"
+                        + "연락처: " + dto.getReservationPhone() + "\n"
+                        + "보험연령: " + dto.getSelectAge() + "\n"
+                        + "생년월일: " + dto.getReservationAge() + "\n\n"
 
-        /* 고객에게 예약확인 문자 전송 */
-        params2.put("to", morenReservationDTO.getReservationPhone());
-        params2.put("from", admin3);
-        params2.put("type", "ATA");
-        params2.put("template_code", realTimeRentTemplateCodeCustomer);
-        params2.put("sender_key", senderKey);
+                        + "▼ 차량 정보" + "\n"
+                        + "차량명: " + dto.getCarName() + "\n"
+                        + "차량번호: " + dto.getCarNo() + "\n\n"
 
-        String delivery_text = "";
-        if (morenReservationDTO.getPickupPlace().equals("방문")){
-            delivery_text = "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n";
-        } else if (morenReservationDTO.getPickupPlace().equals("배차 신청")){
-            delivery_text = "방문/배차: " + morenReservationDTO.getPickupPlace() + "\n"
-                    + "배차요청주소: " + morenReservationDTO.getAddress() + "\n"
-                    + "배차요청상세주소: " + morenReservationDTO.getAddressDetail() + "\n";
-        }
+                        + "▼ 대여 정보" + "\n"
+                        + "대여일자: " + dto.getReservationDate() + "\n"
+                        + "대여시간: " + dto.getReservationTime() + "\n"
+                        + "렌트기간: " + dto.getRentTerm() + "\n"
+                        + "약정주행거리: " + dto.getKilometer() + "\n"
+                        + "방문/배차: " + dto.getPickupPlace() + "\n"
+                        + "배차요청주소: " + dto.getAddress() + "\n"
+                        + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
+                        + "신용증빙: " + dto.getReservationGuarantee() + "\n"
+                        + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+                        + "보증금: " + dto.getCarDeposit() + "\n\n",
 
-        Map<String, String> map = new HashMap<>();
-        map.put("test", "test");
+                "[예약 대기 신청이 완료되었습니다]" + "\n"
+                        + "▼ 문의자 정보" + "\n"
+                        + "문의자 이름: " + dto.getReservationName() + "\n"
+                        + "연락처: " + dto.getReservationPhone() + "\n"
+                        + "보험연령: " + dto.getSelectAge() + "\n"
+                        + "생년월일: " + dto.getReservationAge() + "\n\n"
 
-        params.putAll(map);
+                        + "▼ 차량 정보" + "\n"
+                        + "차량명: " + dto.getCarName() + "\n"
+                        + "차량번호: " + dto.getCarNo() + "\n\n"
 
-        params.put("reservationId", String.valueOf(reservationId));
-        params.put("reservationName", morenReservationDTO.getReservationName());
-        params.put("reservationPhone", morenReservationDTO.getReservationPhone());
-        params.put("selectAge", morenReservationDTO.getSelectAge());
-        params.put("reservationAge", morenReservationDTO.getReservationAge());
-        params.put("carName", morenReservationDTO.getCarName());
-        params.put("carNo", morenReservationDTO.getCarNo());
-        params.put("reservationDate", morenReservationDTO.getReservationDate());
-        params.put("reservationTime", morenReservationDTO.getReservationTime());
-        params.put("rentTerm", morenReservationDTO.getRentTerm());
-        params.put("kilometer", morenReservationDTO.getKilometer());
-        params.put("delivery_text", delivery_text);
-        params.put("reservationGuarantee", morenReservationDTO.getReservationGuarantee());
-        params.put("carAmountTotal", morenReservationDTO.getCarAmountTotal());
-        params.put("carDeposit", morenReservationDTO.getCarDeposit());
-        params.put("reservationDetails", morenReservationDTO.getReservationDetails());
-
-        params2.put("reservationName", morenReservationDTO.getReservationName());
-        params2.put("reservationPhone", morenReservationDTO.getReservationPhone());
-        params2.put("selectAge", morenReservationDTO.getSelectAge());
-        params2.put("reservationAge", morenReservationDTO.getReservationAge());
-        params2.put("carName", morenReservationDTO.getCarName());
-        params2.put("carNo", morenReservationDTO.getCarNo());
-        params2.put("reservationDate", morenReservationDTO.getReservationDate());
-        params2.put("reservationTime", morenReservationDTO.getReservationTime());
-        params2.put("rentTerm", morenReservationDTO.getRentTerm());
-        params2.put("kilometer", morenReservationDTO.getKilometer());
-        params2.put("delivery_text", delivery_text);
-        params2.put("reservationGuarantee", morenReservationDTO.getReservationGuarantee());
-        params2.put("carAmountTotal", morenReservationDTO.getCarAmountTotal());
-        params2.put("carDeposit", morenReservationDTO.getCarDeposit());
-        params2.put("reservationDetails", morenReservationDTO.getReservationDetails());
-
-        params.put("app_version", "test app 1.2");
-        params2.put("app_version", "test app 1.2");
-
-        /* 세이브카에게 문자 전송 */
-        try {
-            org.json.simple.JSONObject obj = coolsms.send(params);
-            System.out.println(obj.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
-
-        /* 고객에게 예약확인 문자 전송 */
-        try {
-            org.json.simple.JSONObject obj2 = coolsms.send(params2);
-            System.out.println(obj2.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
+                        + "▼ 대여 정보" + "\n"
+                        + "대여일자: " + dto.getReservationDate() + "\n"
+                        + "대여시간: " + dto.getReservationTime() + "\n"
+                        + "렌트기간: " + dto.getRentTerm() + "\n"
+                        + "약정주행거리: " + dto.getKilometer() + "\n"
+                        + "방문/배차: " + dto.getPickupPlace() + "\n"
+                        + "배차요청주소: " + dto.getAddress() + "\n"
+                        + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
+                        + "필요증빙: " + dto.getReservationGuarantee() + "\n"
+                        + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+                        + "보증금: " + dto.getCarDeposit() + "\n\n");
+//
+//        Message coolsms = new Message(api_key, api_secret);
+//        HashMap<String, String> params = new HashMap<>();
+//        HashMap<String, String> params2 = new HashMap<>();
+//
+//        /* 세이브카에 예약확인 문자 전송 */
+//        params.put("to", admin1+", "+admin2+", "+admin3);
+//        params.put("from", admin3);
+//        params.put("type", "LMS");
+//
+//        /* 고객에게 예약확인 문자 전송 */
+//        params2.put("to", dto.getReservationPhone());
+//        params2.put("from", admin3);
+//        params2.put("type", "LMS");
+//
+//        params.put("text", "[현재 대여가능차량 예약이 신청되었습니다.]\n"
+//                + "▼ 계약 확인하기" + "\n"
+//                + "https://savecar.kr/admin/moren/reservation/detail/" + reservationId + "\n\n"
+//
+//                + "▼ 문의자 정보" + "\n"
+//                + "문의자 이름: " + dto.getReservationName() + "\n"
+//                + "연락처: " + dto.getReservationPhone() + "\n"
+//                + "보험연령: " + dto.getSelectAge() + "\n"
+//                + "생년월일: " + dto.getReservationAge() + "\n\n"
+//
+//                + "▼ 차량 정보" + "\n"
+//                + "차량명: " + dto.getCarName() + "\n"
+//                + "차량번호: " + dto.getCarNo() + "\n\n"
+//
+//                + "▼ 대여 정보" + "\n"
+//                + "대여일자: " + dto.getReservationDate() + "\n"
+//                + "대여시간: " + dto.getReservationTime() + "\n"
+//                + "렌트기간: " + dto.getRentTerm() + "\n"
+//                + "약정주행거리: " + dto.getKilometer() + "\n"
+//                + "방문/배차: " + dto.getPickupPlace() + "\n"
+//                + "배차요청주소: " + dto.getAddress() + "\n"
+//                + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
+//                + "신용증빙: " + dto.getReservationGuarantee() + "\n"
+//                + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+//                + "보증금: " + dto.getCarDeposit() + "\n\n"
+//        );
+//
+//        params2.put("text", "[예약 대기 신청이 완료되었습니다]" + "\n"
+//                + "▼ 문의자 정보" + "\n"
+//                + "문의자 이름: " + dto.getReservationName() + "\n"
+//                + "연락처: " + dto.getReservationPhone() + "\n"
+//                + "보험연령: " + dto.getSelectAge() + "\n"
+//                + "생년월일: " + dto.getReservationAge() + "\n\n"
+//
+//                + "▼ 차량 정보" + "\n"
+//                + "차량명: " + dto.getCarName() + "\n"
+//                + "차량번호: " + dto.getCarNo() + "\n\n"
+//
+//                + "▼ 대여 정보" + "\n"
+//                + "대여일자: " + dto.getReservationDate() + "\n"
+//                + "대여시간: " + dto.getReservationTime() + "\n"
+//                + "렌트기간: " + dto.getRentTerm() + "\n"
+//                + "약정주행거리: " + dto.getKilometer() + "\n"
+//                + "방문/배차: " + dto.getPickupPlace() + "\n"
+//                + "배차요청주소: " + dto.getAddress() + "\n"
+//                + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
+//                + "필요증빙: " + dto.getReservationGuarantee() + "\n"
+//                + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+//                + "보증금: " + dto.getCarDeposit() + "\n\n"
+//        );
+//
+//        params.put("app_version", "test app 1.2");
+//        params2.put("app_version", "test app 1.2");
+//
+//
+//        /* 세이브카에게 문자 전송 */
+//
+//        try {
+//            org.json.simple.JSONObject obj = coolsms.send(params);
+//            System.out.println(obj.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
+//
+//        /* 고객에게 예약확인 문자 전송 */
+//
+//        try {
+//            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+//            System.out.println(obj2.toString()); //전송 결과 출력
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
+//
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("result", 1);
+//
+//        PrintWriter pw = res.getWriter();
+//        pw.print(jsonObject);
+//        pw.flush();
+//        pw.close();
     }
 
 }

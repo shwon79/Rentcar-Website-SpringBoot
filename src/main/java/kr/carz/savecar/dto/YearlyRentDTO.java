@@ -1,20 +1,15 @@
-package kr.carz.savecar.domain;
+package kr.carz.savecar.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import lombok.Data;
-
-import javax.persistence.*;
-
-@Entity
-@Data
-@Table(name = "YearlyRent")
-public class YearlyRent implements Comparable<YearlyRent>{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
-
-    @OneToOne(mappedBy = "yearlyRent")
-    private MonthlyRent monthlyRent;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class YearlyRentDTO {
 
     private String category1; // 국산, 외제차의 분류
     private String category2; // 중형차, 경차 등 큰 분류
@@ -34,9 +29,4 @@ public class YearlyRent implements Comparable<YearlyRent>{
     private String credit;
     private String img_url;
 
-
-    @Override
-    public int compareTo(YearlyRent o) {
-        return this.name.compareTo(o.name);
-    }
 }

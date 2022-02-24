@@ -25,7 +25,7 @@ public class MorenDTO {
     private String carOld;
     private String carEngine;
     private String carAttribute01;
-    private String carPrice;
+    private Float carPrice;
     private String orderEnd;
     private Long rentIdx;
     private List<String> carImageList;

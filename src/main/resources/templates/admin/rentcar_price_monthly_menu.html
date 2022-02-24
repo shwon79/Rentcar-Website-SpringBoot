@@ -29,7 +29,7 @@
 <div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-    <div class="content" style="width: 95%;">
+    <div class="content" style="width: 100%;">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
 
@@ -44,7 +44,42 @@
         <div class="container inner_content" style="width: 100%;">
             <h2 class="page_title" style="text-align: center;">월렌트 가격 수정</h2>
             <div style="margin-top: 30px;">
-                <p style="text-align: center;">준비 중 입니다.</p>
+                <div class="a_buttons">
+                    <a href="/admin/rentcar/price/monthly/menu/경형">
+                        <button class="btn btn-outline-info">경형</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/준중형">
+                        <button class="btn btn-outline-info">준중형</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/중형">
+                        <button class="btn btn-outline-info">중형</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/중대형">
+                        <button class="btn btn-outline-info">중대형</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/대형">
+                        <button class="btn btn-outline-info">대형</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/소중형SUV">
+                        <button class="btn btn-outline-info">소중형SUV</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/중형SUV">
+                        <button class="btn btn-outline-info">중형SUV</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/중대형SUV">
+                        <button class="btn btn-outline-info">중대형SUV</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/대형SUV">
+                        <button class="btn btn-outline-info">대형SUV</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/승합">
+                        <button class="btn btn-outline-info">승합</button>
+                    </a>
+                    <a href="/admin/rentcar/price/monthly/menu/수입차">
+                        <button class="btn btn-outline-info">수입차</button>
+                    </a>
+                </div>
+                <p style="text-align: center; margin-top: 50px;">준비 중 입니다.</p>
 <!--                <table class="table rentcarEditTable table-striped">-->
 <!--                    <thead></thead>-->
 <!--                    <tbody>-->
@@ -58,6 +93,13 @@
 <!--                        <th scope="col" class="display_none_mobile">3,000km</th>-->
 <!--                        <th scope="col" class="display_none_mobile">4,000km</th>-->
 <!--                        <th scope="col" class="display_none_mobile">other</th>-->
+<!--                        <th scope="col" class="display_none_mobile">21세</th>-->
+<!--                        <th scope="col" class="display_none_mobile">km당 추가요금</th>-->
+<!--                        <th scope="col" class="display_none_mobile">모렌_차명</th>-->
+<!--                        <th scope="col" class="display_none_mobile">년식_시작</th>-->
+<!--                        <th scope="col" class="display_none_mobile">년식_끝</th>-->
+<!--                        <th scope="col" class="display_none_mobile">신용</th>-->
+<!--                        <th scope="col" class="display_none_mobile">img_url</th>-->
 <!--                        <th scope="col"></th>-->
 <!--                    </tr>-->
 <!--                    <tr th:each="car, i : ${ monthlyRentList }">-->
@@ -82,7 +124,7 @@
 <!--                                <option th:if="${car.category1 == '수입차'}" value="수입차" th:selected="${car.category2} == '수입차' ? true : false">수입차</option>-->
 <!--                            </select>-->
 <!--                        </td>-->
-<!--                        <td><textarea type="text" th:text="${car.name}" class="name" th:data-title="${car.id}"></textarea>-->
+<!--                        <td><textarea type="text" th:text="${car.name}" class="name" th:data-title="${car.id}" style="width: auto;"></textarea>-->
 <!--                        </td>-->
 <!--                        <td class="display_none_mobile">-->
 <!--                            <textarea type="text" th:text="${#numbers.formatInteger(car.deposit, 0, 'COMMA')}" class="deposit" th:data-title="${car.id}"></textarea>-->
@@ -91,276 +133,52 @@
 <!--                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_2k, 0, 'COMMA')}" class="cost_for_2k" th:data-title="${car.id}"></textarea>-->
 <!--                        </td>-->
 <!--                        <td class="display_none_mobile">-->
-<!--                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_2_5k, 0, 'COMMA')}" class="cost_for_2_5k" th:data-title="${car.id}"></textarea>-->
-<!--&lt;!&ndash;                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_2_5k, 0, 'COMMA')}"></textarea>&ndash;&gt;-->
+<!--                            <p th:text="${#numbers.formatInteger(car.cost_for_2_5k * car.cost_for_2k, 0, 'COMMA')}"></p>-->
+<!--                            <textarea type="text" th:text="${car.cost_for_2_5k}" class="cost_for_2_5k" th:data-title="${car.id}"></textarea>-->
 <!--                        </td>-->
 <!--                        <td class="display_none_mobile">-->
-<!--                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_3k, 0, 'COMMA')}" class="cost_for_3k" th:data-title="${car.id}"></textarea>-->
+<!--                            <p th:text="${#numbers.formatInteger(car.cost_for_3k * car.cost_for_2k, 0, 'COMMA')}"></p>-->
+<!--                            <textarea type="text" th:text="${car.cost_for_3k}" class="cost_for_3k" th:data-title="${car.id}"></textarea>-->
 <!--                        </td>-->
 <!--                        <td class="display_none_mobile">-->
-<!--                            <textarea type="text" th:text="${#numbers.formatInteger(car.cost_for_4k, 0, 'COMMA')}" class="cost_for_4k" th:data-title="${car.id}"></textarea>-->
+<!--                            <p th:text="${#numbers.formatInteger(car.cost_for_4k * car.cost_for_2k, 0, 'COMMA')}"></p>-->
+<!--                            <textarea type="text" th:text="${car.cost_for_4k}" class="cost_for_4k" th:data-title="${car.id}"></textarea>-->
 <!--                        </td>-->
 <!--                        <td class="display_none_mobile">-->
 <!--                            <textarea type="text" th:text="${car.cost_for_others}" class="cost_for_others" th:data-title="${car.id}"></textarea>-->
 <!--                        </td>-->
-<!--                        <td style="display: none;">-->
-<!--                            <span th:text="${car.age_limit}" class="age_limit" th:data-title="${car.id}"></span>-->
-<!--                            <span th:text="${car.cost_per_km}" class="cost_per_km" th:data-title="${car.id}"></span>-->
-<!--                            <span th:text="${car.nameMoren}" class="nameMoren" th:data-title="${car.id}"></span>-->
-<!--                            <span th:text="${car.start}" class="start" th:data-title="${car.id}"></span>-->
-<!--                            <span th:text="${car.end}" class="end" th:data-title="${car.id}"></span>-->
-<!--                            <span th:text="${car.credit}" class="credit" th:data-title="${car.id}"></span>-->
-<!--                            <span th:text="${car.img_url}" class="img_url" th:data-title="${car.id}"></span>-->
+<!--                        <td class="display_none_mobile">-->
+<!--                            <textarea type="text" th:text="${car.age_limit}" class="age_limit" th:data-title="${car.id}"></textarea>-->
+<!--                        </td>-->
+<!--                        <td class="display_none_mobile">-->
+<!--                            <textarea type="text" th:text="${car.cost_per_km}" class="cost_per_km" th:data-title="${car.id}"></textarea>-->
+<!--                        </td>-->
+<!--                        <td class="display_none_mobile">-->
+<!--                            <textarea type="text" th:text="${car.nameMoren}" class="nameMoren" th:data-title="${car.id}"></textarea>-->
+<!--                        </td>-->
+<!--                        <td class="display_none_mobile">-->
+<!--                            <textarea type="text" th:text="${car.start}" class="start" th:data-title="${car.id}"></textarea>-->
+<!--                        </td>-->
+<!--                        <td class="display_none_mobile">-->
+<!--                            <textarea type="text" th:text="${car.end}" class="end" th:data-title="${car.id}"></textarea>-->
+<!--                        </td>-->
+<!--                        <td class="display_none_mobile">-->
+<!--                            <select name="credit" class="credit" th:data-title="${car.id}">-->
+<!--                                <option value="0" th:selected="${car.credit == '0' ? true : false}">0</option>-->
+<!--                                <option value="1" th:selected="${car.credit == '1' ? true : false}">1</option>-->
+<!--                                <option value="2" th:selected="${car.credit == '2' ? true : false}">2</option>-->
+<!--                            </select>-->
+<!--                        </td>-->
+<!--                        <td class="display_none_mobile" style="display: flex; flex-direction: column;">-->
+<!--                            <p th:text="${car.img_url}" class="img_url" th:data-title="${car.id}" style="width: 10rem; height: 2rem; overflow: hidden;"></p>-->
+<!--                            <input type="file" class="img_input" th:data-title="${car.id}" accept="image/*" style="width: 10rem;">-->
 <!--                        </td>-->
 <!--                        <td>-->
-<!--                            <button class="btn btn-primary btn-sm" th:onclick="editMonthlyPriceMenu([[${car.id}]]);" style="margin: 4px;">수정하기</button>-->
-<!--                            <a th:href="'/admin/rentcar/price/monthly/detail/' + ${car.id}">-->
-<!--                                <button class="btn btn-info btn-sm" style="margin: 4px;">상세보기</button>-->
-<!--                            </a>-->
+<!--                            <button class="btn btn-primary btn-sm" th:onclick="editRentPriceMenu([[${car.id}]], 'monthly');" style="margin: 4px;">수정하기</button>-->
 <!--                        </td>-->
 <!--                    </tr>-->
 <!--                    </tbody>-->
 <!--                </table>-->
-
-
-
-<!--                <ul class="nav nav-tabs" style="justify-content: center;">-->
-<!--&lt;!&ndash;                    <li class="nav-item" th:each="car, i : ${monthlyRentList}">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <a class="nav-link" data-toggle="tab" th:href="@{'#' + ${car[0].name}}" th:text="${car[0].name}"&ndash;&gt;-->
-<!--&lt;!&ndash;                           th:classappend="${i.index == 0 ? 'show active' : ''}">&ndash;&gt;-->
-<!--&lt;!&ndash;                        </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </li>&ndash;&gt;-->
-
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link show active" data-toggle="tab" href="#domesticCar">국산승용</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" data-toggle="tab" href="#domesticVan">국산승합•RV</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" data-toggle="tab" href="#importedCar">수입차</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                <div class="tab-content">-->
-<!--&lt;!&ndash;                    <div class="tab-pane fade"  th:each="cars, i : ${monthlyRentList}" th:id="${cars[0].name}"&ndash;&gt;-->
-<!--&lt;!&ndash;                         th:classappend="${i.index == 0 ? 'show active' : ''}">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <table class="table rentcarEditTable table-striped">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <thead></thead>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <tbody>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <tr class="thead-dark">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col">종류</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col">분류</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col">차명 년식</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col" class="display_none_mobile">보증금</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col" class="display_none_mobile">2,000km</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col" class="display_none_mobile">2,500km</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col" class="display_none_mobile">3,000km</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col" class="display_none_mobile">4,000km</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col" class="display_none_mobile">other</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="col"></th>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <tr th:each="car, i : ${ cars }" th:if="${car.category1 == '국산승용'}">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <select name="category1">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="국산승용" th:selected="${car.category1} == '국산승용' ? true : false">국산승용</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="국산승합•RV" th:selected="${car.category1} == '국산승합•RV' ? true : false">국산승합•RV</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="수입차" th:selected="${car.category1} == '수입차' ? true : false">수입차</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    </select>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <select name="category2">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="경형" th:selected="${car.category2} == '경형' ? true : false">경형</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="준중형" th:selected="${car.category2} == '준중형' ? true : false">준중형</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="중형" th:selected="${car.category2} == '중형' ? true : false">중형</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="중대형" th:selected="${car.category2} == '중대형' ? true : false">중대형</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="대형" th:selected="${car.category2} == '대형' ? true : false">대형</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        &lt;!&ndash;                                        <option value="소중형SUV">소중형SUV</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                                        &lt;!&ndash;                                        <option value="">중형SUV</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                                        &lt;!&ndash;                                        <option value="">중대형SUV</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                                        &lt;!&ndash;                                        <option value="">대형SUV</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                                        &lt;!&ndash;                                        <option value="">승합</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                                        &lt;!&ndash;                                        <option value="">수입차</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                                    </select>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td><textarea type="text" th:text="${car.name}"></textarea></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td class="display_none_mobile"><textarea type="text" th:text="${car.deposit}"></textarea></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_2k}"></textarea></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_2_5k}"></textarea></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_3k}"></textarea></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_4k}"></textarea></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_others}"></textarea></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <button class="btn btn-primary btn-sm">수정하기</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <a href=""><button class="btn btn-primary btn-sm">상세보기</button></a>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </tbody>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </table>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-
-<!--                    <div class="tab-pane fade show active" id="domesticCar">-->
-<!--                        <table class="table rentcarEditTable table-striped">-->
-<!--                            <thead></thead>-->
-<!--                            <tbody>-->
-<!--                            <tr class="thead-dark">-->
-<!--                                <th scope="col">종류</th>-->
-<!--                                <th scope="col">분류</th>-->
-<!--                                <th scope="col">차명 년식</th>-->
-<!--                                <th scope="col" class="display_none_mobile">보증금</th>-->
-<!--                                <th scope="col" class="display_none_mobile">2,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">2,500km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">3,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">4,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">other</th>-->
-<!--                                <th scope="col"></th>-->
-<!--                            </tr>-->
-<!--                            <tr th:each="car, i : ${ monthlyRentList }" th:if="${car.category1 == '국산승용'}">-->
-<!--                                <td>-->
-<!--                                    <select name="category1" onchange="displayCategory2(this);" class="category1">-->
-<!--                                        <option value="국산승용" th:selected="${car.category1} == '국산승용' ? true : false">국산승용</option>-->
-<!--                                        <option value="국산승합•RV" th:selected="${car.category1} == '국산승합•RV' ? true : false">국산승합•RV</option>-->
-<!--                                        <option value="수입차" th:selected="${car.category1} == '수입차' ? true : false">수입차</option>-->
-<!--                                    </select>-->
-<!--                                </td>-->
-<!--                                <td>-->
-<!--                                    <select name="category2" class="category2">-->
-<!--                                        <option value="경형" th:selected="${car.category2} == '경형' ? true : false">경형</option>-->
-<!--                                        <option value="준중형" th:selected="${car.category2} == '준중형' ? true : false">준중형</option>-->
-<!--                                        <option value="중형" th:selected="${car.category2} == '중형' ? true : false">중형</option>-->
-<!--                                        <option value="중대형" th:selected="${car.category2} == '중대형' ? true : false">중대형</option>-->
-<!--                                        <option value="대형" th:selected="${car.category2} == '대형' ? true : false">대형</option>-->
-<!--&lt;!&ndash;                                        <option value="소중형SUV">소중형SUV</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="">중형SUV</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="">중대형SUV</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="">대형SUV</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="">승합</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <option value="">수입차</option>&ndash;&gt;-->
-<!--                                    </select>-->
-<!--                                </td>-->
-<!--                                <td><textarea type="text" th:text="${car.name}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.deposit}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_2k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_2_5k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_3k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_4k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_others}"></textarea></td>-->
-<!--                                <td>-->
-<!--                                    <button class="btn btn-primary btn-sm">수정하기</button>-->
-<!--                                    <a href=""><button class="btn btn-primary btn-sm">상세보기</button></a>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                            </tbody>-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                    <div class="tab-pane fade" id="domesticVan">-->
-<!--                        <table class="table campingPriceEditTable table-striped">-->
-<!--                            <thead></thead>-->
-<!--                            <tbody>-->
-<!--                            <tr class="thead-dark">-->
-<!--                                <th scope="col">종류</th>-->
-<!--                                <th scope="col">분류</th>-->
-<!--                                <th scope="col">차명 년식</th>-->
-<!--                                <th scope="col" class="display_none_mobile">보증금</th>-->
-<!--                                <th scope="col" class="display_none_mobile">2,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">2,500km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">3,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">4,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">other</th>-->
-<!--                                <th scope="col"></th>-->
-<!--                            </tr>-->
-<!--                            <tr th:each="car, i : ${ monthlyRentList }" th:if="${car.category1 == '국산승합•RV'}">-->
-<!--                                <td>-->
-<!--                                    <select name="category1">-->
-<!--                                        <option value="국산승용" th:selected="${car.category1} == '국산승용' ? true : false">국산승용</option>-->
-<!--                                        <option value="국산승합•RV" th:selected="${car.category1} == '국산승합•RV' ? true : false">국산승합•RV</option>-->
-<!--                                        <option value="수입차" th:selected="${car.category1} == '수입차' ? true : false">수입차</option>-->
-<!--                                    </select>-->
-<!--                                </td>-->
-<!--                                <td>-->
-<!--                                    <select name="category2">-->
-<!--                                        <option value="경형" th:selected="${car.category2} == '경형' ? true : false">경형</option>-->
-<!--                                        <option value="준중형" th:selected="${car.category2} == '준중형' ? true : false">준중형</option>-->
-<!--                                        <option value="중형" th:selected="${car.category2} == '중형' ? true : false">중형</option>-->
-<!--                                        <option value="중대형" th:selected="${car.category2} == '중대형' ? true : false">중대형</option>-->
-<!--                                        <option value="대형" th:selected="${car.category2} == '대형' ? true : false">대형</option>-->
-<!--                                        &lt;!&ndash;                                        <option value="소중형SUV">소중형SUV</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">중형SUV</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">중대형SUV</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">대형SUV</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">승합</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">수입차</option>&ndash;&gt;-->
-<!--                                    </select>-->
-<!--                                </td>-->
-<!--                                <td><textarea type="text" th:text="${car.name}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.deposit}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_2k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_2_5k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_3k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_4k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_others}"></textarea></td>-->
-<!--                                <td>-->
-<!--                                    <button class="btn btn-primary btn-sm">수정하기</button>-->
-<!--                                    <a href=""><button class="btn btn-primary btn-sm">상세보기</button></a>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                            </tbody>-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                    <div class="tab-pane fade" id="importedCar">-->
-<!--                        <table class="table campingPriceEditTable table-striped">-->
-<!--                            <thead></thead>-->
-<!--                            <tbody>-->
-<!--                            <tr class="thead-dark">-->
-<!--                                <th scope="col">종류</th>-->
-<!--                                <th scope="col">분류</th>-->
-<!--                                <th scope="col">차명 년식</th>-->
-<!--                                <th scope="col" class="display_none_mobile">보증금</th>-->
-<!--                                <th scope="col" class="display_none_mobile">2,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">2,500km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">3,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">4,000km</th>-->
-<!--                                <th scope="col" class="display_none_mobile">other</th>-->
-<!--                                <th scope="col"></th>-->
-<!--                            </tr>-->
-<!--                            <tr th:each="car, i : ${ monthlyRentList }" th:if="${car.category1 == '수입차'}">-->
-<!--                                <td>-->
-<!--                                    <select name="category1">-->
-<!--                                        <option value="국산승용" th:selected="${car.category1} == '국산승용' ? true : false">국산승용</option>-->
-<!--                                        <option value="국산승합•RV" th:selected="${car.category1} == '국산승합•RV' ? true : false">국산승합•RV</option>-->
-<!--                                        <option value="수입차" th:selected="${car.category1} == '수입차' ? true : false">수입차</option>-->
-<!--                                    </select>-->
-<!--                                </td>-->
-<!--                                <td>-->
-<!--                                    <select name="category2">-->
-<!--                                        <option value="경형" th:selected="${car.category2} == '경형' ? true : false">경형</option>-->
-<!--                                        <option value="준중형" th:selected="${car.category2} == '준중형' ? true : false">준중형</option>-->
-<!--                                        <option value="중형" th:selected="${car.category2} == '중형' ? true : false">중형</option>-->
-<!--                                        <option value="중대형" th:selected="${car.category2} == '중대형' ? true : false">중대형</option>-->
-<!--                                        <option value="대형" th:selected="${car.category2} == '대형' ? true : false">대형</option>-->
-<!--                                        &lt;!&ndash;                                        <option value="소중형SUV">소중형SUV</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">중형SUV</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">중대형SUV</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">대형SUV</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">승합</option>&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        <option value="">수입차</option>&ndash;&gt;-->
-<!--                                    </select>-->
-<!--                                </td>-->
-<!--                                <td><textarea type="text" th:text="${car.name}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.deposit}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_2k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_2_5k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_3k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_4k}"></textarea></td>-->
-<!--                                <td class="display_none_mobile"><textarea type="text" th:text="${car.cost_for_others}"></textarea></td>-->
-<!--                                <td>-->
-<!--                                    <button class="btn btn-primary btn-sm">수정하기</button>-->
-<!--                                    <a href=""><button class="btn btn-primary btn-sm">상세보기</button></a>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                            </tbody>-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>

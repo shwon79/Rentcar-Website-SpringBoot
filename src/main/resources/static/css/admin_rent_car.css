@@ -1,11 +1,59 @@
+.container {
+    max-width: fit-content;
+}
+.a_buttons {
+    display: flex;
+    justify-content: center;
+}
+.a_buttons a button {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.a_buttons a:last-child button {
+    margin-right: 0;
+}
+.a_buttons a {
+    text-decoration: none;
+}
+.a_buttons a:hover {
+    text-decoration: none;
+}
 .table td, .table th {
     padding: 0;
-    vertical-align: middle;
+    vertical-align: top;
+    word-break: keep-all;
+}
+.table th {
+    word-break: keep-all;
+}
+.table td p {
+    margin-bottom: 0.5rem;
 }
 .deposit {
     display: block;
 }
+.credit {
+    width: 2rem !important;
+    padding: 0.2rem 0;
+}
+.cost_for_others, .start, .end, .cost_per_km {
+    width: 3rem !important;
+}
+
+.detail_container textarea, .detail_container select {
+    max-width: 200px;
+}
+.detail_container input {
+    border: 1px solid black;
+    border-radius: 4px;
+}
 @media screen and (max-width: 600px) {
+    .a_buttons {
+        flex-wrap: wrap;
+    }
+    .table td, .table th {
+        vertical-align: middle;
+    }
     .display_none_mobile {
         display: none;
     }

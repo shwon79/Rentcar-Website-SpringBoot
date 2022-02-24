@@ -938,32 +938,7 @@ function submitReview() {
     let reviewImage = document.getElementById('reviewImage').files;
     let reviewVideo = document.getElementById('reviewVideo').files;
 
-    // convert file object to list
-    // reviewImage = Object.values(reviewImage);
-    // console.log(reviewImage);
-    // image 첨부 10개 미만일 경우 null 값 추가
-    // if (reviewImage.length !== 10) {
-    //     do {
-    //         reviewImage.push(null);
-    //     } while (reviewImage.length < 10)
-    // }
-    console.log(reviewImage[0]);
-    console.log(reviewVideo);
-
-    // let data = {
-    //     'carName': reviewCarType,
-    //     'text': reviewText,
-    //     'nickName': reviewName,
-    //     'startDate': reviewRentStartDate,
-    //     'endDate': reviewRentEndDate,
-    //     'file': reviewImage,
-    //     'password': reviewPassword
-    // };
-    //
-    // console.log(data);
-
     let formDataWrapper = new FormData();
-
 
     if (reviewVideo.length > 1) {
         // 동영상 최대 갯수 1개

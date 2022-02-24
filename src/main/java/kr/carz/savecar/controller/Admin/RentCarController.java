@@ -1,15 +1,22 @@
 package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.domain.*;
+import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.*;
 
 @Controller
@@ -18,23 +25,50 @@ public class RentCarController {
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
     private final TwoYearlyRentService twoYearlyRentService;
+    private final S3Service s3Service;
 
     @Autowired
     public RentCarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                             TwoYearlyRentService twoYearlyRentService, ReservationService reservationService) {
+                             TwoYearlyRentService twoYearlyRentService, ReservationService reservationService,
+                             S3Service s3Service) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
         this.reservationService = reservationService;
+        this.s3Service = s3Service;
     }
 
 
-    @GetMapping("/admin/rentcar/price/monthly/menu")
-    public ModelAndView get_rent_car_price_monthly_menu() {
+    @GetMapping("/admin/rentcar/price/monthly/menu/{category2}")
+    public ModelAndView get_rent_car_price_monthly_menu(@PathVariable String category2) {
+
+//        List<MonthlyRent> monthlyRents = monthlyRentService.findAllMonthlyRents();
+//        for(MonthlyRent monthlyRent : monthlyRents){
+//
+//            Float basic = monthlyRent.getCost_for_2k();
+//
+//            monthlyRent.setCost_for_2_5k(monthlyRent.getCost_for_2_5k() / basic);
+//            monthlyRent.setCost_for_3k(monthlyRent.getCost_for_3k() / basic);
+//            monthlyRent.setCost_for_4k(monthlyRent.getCost_for_4k() / basic);
+//
+//
+//            monthlyRent.getYearlyRent().setCost_for_20k(monthlyRent.getYearlyRent().getCost_for_20k() / basic);
+//            monthlyRent.getYearlyRent().setCost_for_30k(monthlyRent.getYearlyRent().getCost_for_30k() / basic);
+//            monthlyRent.getYearlyRent().setCost_for_40k(monthlyRent.getYearlyRent().getCost_for_40k() / basic);
+//
+//
+//            if(monthlyRent.getTwoYearlyRent() != null){
+//                monthlyRent.getTwoYearlyRent().setCost_for_20Tk(monthlyRent.getTwoYearlyRent().getCost_for_20Tk() / basic);
+//                monthlyRent.getTwoYearlyRent().setCost_for_30Tk(monthlyRent.getTwoYearlyRent().getCost_for_30Tk() / basic);
+//                monthlyRent.getTwoYearlyRent().setCost_for_40Tk(monthlyRent.getTwoYearlyRent().getCost_for_40Tk() / basic);
+//
+//            }
+//            monthlyRentService.save(monthlyRent);
+//        }
 
         ModelAndView mav = new ModelAndView();
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
 
         mav.addObject("monthlyRentList", monthlyRentList);
 
@@ -60,15 +94,56 @@ public class RentCarController {
     }
 
 
+    @PutMapping("/admin/rentcar/price/monthly/{monthlyId}")
+    @ResponseBody
+    public void put_rent_car_price_monthly(HttpServletResponse res, @RequestBody MonthlyRentDTO monthlyRentDTO, @PathVariable Long monthlyId) throws IOException {
 
-    @GetMapping("/admin/rentcar/price/yearly/menu")
-    public ModelAndView get_rent_car_price_yearly_menu() {
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+        if(monthlyRentWrapper.isPresent()){
+
+            monthlyRentService.updateAllPriceByDTO(monthlyRentDTO, monthlyRentWrapper.get());
+
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
+    @PutMapping(value="/admin/rentcar/price/monthly/image/{monthlyId}", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public void put_rent_car_price_monthly_with_image(MonthlyRentVO monthlyRentVO, @PathVariable Long monthlyId) throws IOException {
+
+        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+        if(monthlyRentWrapper.isPresent()){
+
+            String imgPath = s3Service.upload(monthlyRentVO.getFile());
+            monthlyRentVO.setImg_url(imgPath);
+
+            monthlyRentService.updateAllPriceByVO(monthlyRentVO, monthlyRentWrapper.get());
+        }
+
+    }
+
+
+
+
+    @GetMapping("/admin/rentcar/price/yearly/menu/{category2}")
+    public ModelAndView get_rent_car_price_yearly_menu(@PathVariable String category2) {
 
         ModelAndView mav = new ModelAndView();
 
-        List<YearlyRent> yearlyRentList = yearlyRentService.findAllYearlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
 
-        mav.addObject("yearlyRentList", yearlyRentList);
+        mav.addObject("monthlyRentList", monthlyRentList);
 
         mav.setViewName("admin/rentcar_price_yearly_menu");
 
@@ -92,14 +167,38 @@ public class RentCarController {
         return mav;
     }
 
-    @GetMapping("/admin/rentcar/price/twoYearly/menu")
-    public ModelAndView get_rent_car_price_twoYearly_menu() {
+
+
+    @PutMapping("/admin/rentcar/price/yearly/{yearlyId}")
+    @ResponseBody
+    public void put_rent_car_price_yearly(HttpServletResponse res, @RequestBody YearlyRentDTO yearlyRentDTO, @PathVariable Long yearlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<YearlyRent> yearlyRentWrapper  = yearlyRentService.findById(yearlyId);
+        if(yearlyRentWrapper.isPresent()){
+
+            yearlyRentService.updateAllPriceByDTO(yearlyRentDTO, yearlyRentWrapper.get());
+
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    @GetMapping("/admin/rentcar/price/twoYearly/menu/{category2}")
+    public ModelAndView get_rent_car_price_twoYearly_menu(@PathVariable String category2) {
 
         ModelAndView mav = new ModelAndView();
 
-        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findAllTwoYearlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2AndTwoYearlyRentIsNotNull(category2);
 
-        mav.addObject("twoYearlyRentList", twoYearlyRentList);
+        mav.addObject("monthlyRentList", monthlyRentList);
 
         mav.setViewName("admin/rentcar_price_twoYearly_menu");
 
@@ -120,6 +219,30 @@ public class RentCarController {
         mav.setViewName("admin/rentcar_price_twoYearly_detail");
 
         return mav;
+    }
+
+
+
+    @PutMapping("/admin/rentcar/price/twoYearly/{twoYearlyId}")
+    @ResponseBody
+    public void put_rent_car_price_yearly(HttpServletResponse res, @RequestBody TwoYearlyRentDTO twoYearlyRentDTO, @PathVariable Long twoYearlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<TwoYearlyRent> twoYearlyRentWrapper  = twoYearlyRentService.findById(twoYearlyId);
+        if(twoYearlyRentWrapper.isPresent()){
+
+            twoYearlyRentService.updateAllPriceByDTO(twoYearlyRentDTO, twoYearlyRentWrapper.get());
+
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
     @GetMapping("/admin/rentcar/counsel/menu")
