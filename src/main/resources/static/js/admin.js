@@ -520,7 +520,7 @@ function displayExtraCampingData() {
 
 }
 
-
+console.log('hi');
 // 캠핑카 예약 확정 버튼_메뉴 페이지
 function setReservationOnMenu(event, behavior) {
     let carTypeList = document.getElementsByClassName('carTypeList');
@@ -538,53 +538,65 @@ function setReservationOnMenu(event, behavior) {
     let depositorList = document.getElementsByClassName('depositorList');
     let detailList = document.getElementsByClassName('detailList');
     let agreeList = document.getElementsByClassName('agreeList');
-    // let reservationList = document.getElementsByClassName('campingReservationList');
     let idList = document.getElementsByClassName('campingReservationIdList');
     let orderCodeList = document.getElementsByClassName('orderCodeList');
     let carType, rentDate, rentTime, returnDate, returnTime, day, extraTime, deposit, total, totalHalf, name, phone, depositor, detail, agree, reservation, orderCode;
     let targetIndex = event.dataset.index;
 
-    for (i=0; i < carTypeList.length; i++) {
-        if (targetIndex == carTypeList[i].dataset.index) {
-            carType = carTypeList[i].innerText;
-        };
-    };
+    carType = [...carTypeList].find(carType => carType.dataset.index == targetIndex).innerText;
 
-    for (i=0; i < rentDateList.length; i++) {
-        if (targetIndex == rentDateList[i].dataset.index) {
-            rentDate = rentDateList[i].innerText;
-        };
-    };
+    // for (i=0; i < carTypeList.length; i++) {
+    //     if (targetIndex == carTypeList[i].dataset.index) {
+    //         carType = carTypeList[i].innerText;
+    //     };
+    // };
 
-    for (i=0; i < rentTimeList.length; i++) {
-        if (targetIndex == rentTimeList[i].dataset.index) {
-            rentTime = rentTimeList[i].innerText;
-        };
-    };
+    rentDate = [...rentDateList].find(rentDate => rentDate.dataset.index == targetIndex).innerText;
+    // for (i=0; i < rentDateList.length; i++) {
+    //     if (targetIndex == rentDateList[i].dataset.index) {
+    //         rentDate = rentDateList[i].innerText;
+    //     };
+    // };
 
-    for (i=0; i < returnDateList.length; i++) {
-        if (targetIndex == returnDateList[i].dataset.index) {
-            returnDate = returnDateList[i].innerText;
-        };
-    };
+    rentTime = [...rentTimeList].find(rentTime => rentTime.dataset.index == targetIndex).innerText;
 
-    for (i=0; i < returnTimeList.length; i++) {
-        if (targetIndex == returnTimeList[i].dataset.index) {
-            returnTime = returnTimeList[i].innerText;
-        };
-    };
+    // for (i=0; i < rentTimeList.length; i++) {
+    //     if (targetIndex == rentTimeList[i].dataset.index) {
+    //         rentTime = rentTimeList[i].innerText;
+    //     };
+    // };
 
-    for (i=0; i < dayList.length; i++) {
-        if (targetIndex == dayList[i].dataset.index) {
-            day = dayList[i].innerText;
-        };
-    };
+    returnDate = [...returnDateList].find(returnDate => returnDate.dataset.index == targetIndex).innerText;
 
-    for (i=0; i < extraTimeList.length; i++) {
-        if (targetIndex == extraTimeList[i].dataset.index) {
-            extraTime = parseInt(extraTimeList[i].innerText);
-        };
-    };
+    // for (i=0; i < returnDateList.length; i++) {
+    //     if (targetIndex == returnDateList[i].dataset.index) {
+    //         returnDate = returnDateList[i].innerText;
+    //     };
+    // };
+
+    returnTime = [...returnTimeList].find(returnTime => returnTime.dataset.index == targetIndex).innerText;
+
+    // for (i=0; i < returnTimeList.length; i++) {
+    //     if (targetIndex == returnTimeList[i].dataset.index) {
+    //         returnTime = returnTimeList[i].innerText;
+    //     };
+    // };
+
+    day = [...dayList].find(day => day.dataset.index == targetIndex).innerText;
+
+    // for (i=0; i < dayList.length; i++) {
+    //     if (targetIndex == dayList[i].dataset.index) {
+    //         day = dayList[i].innerText;
+    //     };
+    // };
+
+    extraTime = [...extraTimeList].find(extraTime => extraTime.dataset.index == targetIndex).innerText;
+
+    // for (i=0; i < extraTimeList.length; i++) {
+    //     if (targetIndex == extraTimeList[i].dataset.index) {
+    //         extraTime = parseInt(extraTimeList[i].innerText);
+    //     };
+    // };
 
     for (i=0; i < depositList.length; i++) {
         if (targetIndex == depositList[i].dataset.index) {
@@ -636,7 +648,7 @@ function setReservationOnMenu(event, behavior) {
         };
     };
     for (i=0; i < orderCodeList.length; i++) {
-        if (orderCode == orderCodeList[i].dataset.index) {
+        if (targetIndex == orderCodeList[i].dataset.index) {
             orderCode = orderCodeList[i].innerText;
         };
     };
@@ -668,7 +680,7 @@ function setReservationOnMenu(event, behavior) {
         orderCode: orderCode
     }
 
-    // console.log(data);
+    console.log(data);
 
     if (behavior == 'confirm') {
         if (confirm('해당 예약을 확정하시겠습니까?')) {
