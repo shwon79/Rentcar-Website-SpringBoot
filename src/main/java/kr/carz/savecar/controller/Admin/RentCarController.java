@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -95,7 +96,7 @@ public class RentCarController {
 
 
 
-    @PutMapping("/admin/rentcar/price/monthly/image/{monthlyId}")
+    @PutMapping(value="/admin/rentcar/price/monthly/image/{monthlyId}", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public void put_rent_car_price_monthly_with_image(HttpServletResponse res, @RequestBody MonthlyRentVO monthlyRentVO, @PathVariable Long monthlyId) throws IOException {
 
