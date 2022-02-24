@@ -543,122 +543,29 @@ function setReservationOnMenu(event, behavior) {
     let carType, rentDate, rentTime, returnDate, returnTime, day, extraTime, deposit, total, totalHalf, name, phone, depositor, detail, agree, reservation, orderCode;
     let targetIndex = event.dataset.index;
 
-    carType = [...carTypeList].find(carType => carType.dataset.index == targetIndex).innerText;
-
-    // for (i=0; i < carTypeList.length; i++) {
-    //     if (targetIndex == carTypeList[i].dataset.index) {
-    //         carType = carTypeList[i].innerText;
-    //     };
-    // };
-
-    rentDate = [...rentDateList].find(rentDate => rentDate.dataset.index == targetIndex).innerText;
-    // for (i=0; i < rentDateList.length; i++) {
-    //     if (targetIndex == rentDateList[i].dataset.index) {
-    //         rentDate = rentDateList[i].innerText;
-    //     };
-    // };
-
-    rentTime = [...rentTimeList].find(rentTime => rentTime.dataset.index == targetIndex).innerText;
-
-    // for (i=0; i < rentTimeList.length; i++) {
-    //     if (targetIndex == rentTimeList[i].dataset.index) {
-    //         rentTime = rentTimeList[i].innerText;
-    //     };
-    // };
-
-    returnDate = [...returnDateList].find(returnDate => returnDate.dataset.index == targetIndex).innerText;
-
-    // for (i=0; i < returnDateList.length; i++) {
-    //     if (targetIndex == returnDateList[i].dataset.index) {
-    //         returnDate = returnDateList[i].innerText;
-    //     };
-    // };
-
-    returnTime = [...returnTimeList].find(returnTime => returnTime.dataset.index == targetIndex).innerText;
-
-    // for (i=0; i < returnTimeList.length; i++) {
-    //     if (targetIndex == returnTimeList[i].dataset.index) {
-    //         returnTime = returnTimeList[i].innerText;
-    //     };
-    // };
-
-    day = [...dayList].find(day => day.dataset.index == targetIndex).innerText;
-
-    // for (i=0; i < dayList.length; i++) {
-    //     if (targetIndex == dayList[i].dataset.index) {
-    //         day = dayList[i].innerText;
-    //     };
-    // };
-
-    extraTime = [...extraTimeList].find(extraTime => extraTime.dataset.index == targetIndex).innerText;
-
-    // for (i=0; i < extraTimeList.length; i++) {
-    //     if (targetIndex == extraTimeList[i].dataset.index) {
-    //         extraTime = parseInt(extraTimeList[i].innerText);
-    //     };
-    // };
-
-    for (i=0; i < depositList.length; i++) {
-        if (targetIndex == depositList[i].dataset.index) {
-            deposit = parseInt(depositList[i].innerText);
-        };
-    };
-
-    for (i=0; i < totalList.length; i++) {
-        if (targetIndex == totalList[i].dataset.index) {
-            total = parseInt(totalList[i].innerText);
-        };
-    };
-
-    for (i=0; i < totalHalfList.length; i++) {
-        if (targetIndex == totalHalfList[i].dataset.index) {
-            totalHalf = parseInt(totalHalfList[i].innerText);
-        };
-    };
-
-    for (i=0; i < nameList.length; i++) {
-        if (targetIndex == nameList[i].dataset.index) {
-            name = nameList[i].innerText;
-        };
-    };
-
-    for (i=0; i < phoneList.length; i++) {
-        if (targetIndex == phoneList[i].dataset.index) {
-            phone = phoneList[i].innerText;
-        };
-    };
-    for (i=0; i < depositorList.length; i++) {
-        if (targetIndex == depositorList[i].dataset.index) {
-            depositor = depositorList[i].innerText;
-        };
-    };
-    for (i=0; i < detailList.length; i++) {
-        if (targetIndex == detailList[i].dataset.index) {
-            detail = detailList[i].innerText;
-        };
-    };
-    for (i=0; i < agreeList.length; i++) {
-        if (targetIndex == agreeList[i].dataset.index) {
-            agree = parseInt(agreeList[i].innerText);
-        };
-    };
-    for (i=0; i < idList.length; i++) {
-        if (targetIndex == idList[i].dataset.index) {
-            id = idList[i].innerText;
-        };
-    };
-    for (i=0; i < orderCodeList.length; i++) {
-        if (targetIndex == orderCodeList[i].dataset.index) {
-            orderCode = orderCodeList[i].innerText;
-        };
-    };
+    carType = [...carTypeList].find(carType => carType.dataset.index === targetIndex).innerText;
+    rentDate = [...rentDateList].find(rentDate => rentDate.dataset.index === targetIndex).innerText;
+    rentTime = [...rentTimeList].find(rentTime => rentTime.dataset.index === targetIndex).innerText;
+    returnDate = [...returnDateList].find(returnDate => returnDate.dataset.index === targetIndex).innerText;
+    returnTime = [...returnTimeList].find(returnTime => returnTime.dataset.index === targetIndex).innerText;
+    day = [...dayList].find(day => day.dataset.index === targetIndex).innerText;
+    extraTime = parseInt([...extraTimeList].find(extraTime => extraTime.dataset.index === targetIndex).innerText);
+    deposit = parseInt([...depositList].find(deposit => deposit.dataset.index === targetIndex).innerText);
+    total = parseInt([...totalList].find(total => total.dataset.index === targetIndex).innerText);
+    totalHalf = parseInt([...totalHalfList].find(totalHalf => totalHalf.dataset.index === targetIndex).innerText);
+    name = [...nameList].find(name => name.dataset.index === targetIndex).innerText;
+    phone = [...phoneList].find(phone => phone.dataset.index === targetIndex).innerText;
+    depositor = [...depositorList].find(depositor => depositor.dataset.index === targetIndex).innerText;
+    detail = [...detailList].find(detail => detail.dataset.index === targetIndex).innerText;
+    agree = parseInt([...agreeList].find(agree => agree.dataset.index === targetIndex).innerText);
+    id = [...idList].find(id => id.dataset.index === targetIndex).innerText;
+    orderCode = [...orderCodeList].find(orderCode => orderCode.dataset.index === targetIndex).innerText;
 
     if (behavior === 'confirm') {
         reservation = 1;
     } else if (behavior === 'delete') {
         reservation = 0;
     };
-
 
     let data = {
         carType: carType,
@@ -680,7 +587,7 @@ function setReservationOnMenu(event, behavior) {
         orderCode: orderCode
     }
 
-    console.log(data);
+    // console.log(data);
 
     if (behavior == 'confirm') {
         if (confirm('해당 예약을 확정하시겠습니까?')) {
