@@ -1,0 +1,347 @@
+<!-- 관리자 렌트카 등록 페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+<!--    <link th:href="@{/css/library/font-awesome.css}" rel="stylesheet">-->
+    <link th:href="@{/css/admin_rent_car.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_rentcar.js}" defer></script>
+
+    <script>
+        $(window).on('load', function () {
+            let registerRentCarMenu = document.getElementById('registerRentCarMenu');
+            registerRentCarMenu.classList.add('activeAdminMenu');
+        });
+    </script>
+
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content" style="width: 95%;">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container inner_content" style="width: 100%;">
+            <h2 class="page_title" style="text-align: center;">렌트카 등록</h2>
+            <div class="detail_container register_rent_car">
+                <div class="detail_list" id="go_back_wrapper" style="justify-content: flex-end;">
+                    <button class="btn btn-primary" onclick="registerRentCar();">등록하기</button>
+                </div>
+                <div class="detail_list" id="detail_list_title">
+                    <p>종류</p>
+                    <p>값</p>
+                </div>
+                <div class="detail_list">
+                    <p><span style="color: red; vertical-align: super;">*</span>종류</p>
+                    <select name="category1" class="category1" id="category1" onchange="displayCategory2(this, true);">
+                        <option value="">선택하세요</option>
+                        <option value="국산승용">국산승용</option>
+                        <option value="국산승합•RV">국산승합•RV</option>
+                        <option value="수입차">수입차</option>
+                    </select>
+                </div>
+                <div class="detail_list">
+                    <p><span style="color: red; vertical-align: super;">*</span>분류</p>
+                    <select name="category2" class="category2" id="category2">
+                        <option value="">선택하세요</option>
+                        <option value="경형">경형</option>
+                        <option value="준중형">준중형</option>
+                        <option value="중형">중형</option>
+                        <option value="중대형">중대형</option>
+                        <option value="대형">대형</option>
+                    </select>
+                </div>
+                <div class="detail_list">
+                    <p><span style="color: red; vertical-align: super;">*</span>차명 년식</p>
+                    <textarea type="text" id="name"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        보증금
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <textarea type="text" id="deposit"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        2,000km
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <textarea type="text" id="cost_for_2k" onkeyup="calculatePrice();"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        2,500km
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <div>
+                        <p style="text-align: right; margin-bottom: 0.5rem;">
+                            <span id="display_cost_for_2_5k"></span>
+                            <span> 원</span>
+                        </p>
+                        <input type="number" id="cost_for_2_5k" onkeyup="calculatePrice(id);" />
+                    </div>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        3,000km
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <div>
+                        <p style="text-align: right; margin-bottom: 0.5rem;">
+                            <span id="display_cost_for_3k"></span>
+                            <span> 원</span>
+                        </p>
+                        <input type="text" id="cost_for_3k" onkeyup="calculatePrice(id);" />
+                    </div>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        4,000km
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <div>
+                        <p style="text-align: right; margin-bottom: 0.5rem;">
+                            <span id="display_cost_for_4k"></span>
+                            <span> 원</span>
+                        </p>
+                        <input type="text" id="cost_for_4k" onkeyup="calculatePrice(id);" />
+                    </div>
+                </div>
+                <div class="detail_list">
+                    <p><span style="color: red; vertical-align: super;">*</span>other</p>
+                    <textarea type="text" id="cost_for_others"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        21세
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <textarea type="text" id="age_limit"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        km당 추가요금
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <textarea type="text" id="cost_per_km"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p><span style="color: red; vertical-align: super;">*</span>모렌_차명</p>
+                    <textarea type="text" id="nameMoren"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        년식_시작
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <textarea type="text" id="start"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p>
+                        <span style="color: red; vertical-align: super;">*</span>
+                        년식_끝
+                        <br>
+                        <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                    </p>
+                    <textarea type="text" id="end"></textarea>
+                </div>
+                <div class="detail_list">
+                    <p><span style="color: red; vertical-align: super;">*</span>신용</p>
+                    <select name="credit" id="credit">
+                        <option value="">선택하세요</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="detail_list">
+                    <p><span style="color: red; vertical-align: super;">*</span>img_url</p>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                        <input type="file" style="width: 85%; border: none; max-width: max-content;" id="img_input">
+                    </div>
+                </div>
+                <div class="detail_list" style="background-color: cornsilk;">
+                    <p>12개월 렌트</p>
+                    <button class="btn btn-outline-info" onclick="openForm(this, 'yearly');">등록</button>
+                </div>
+                <div id="yearlyForm">
+                    <div class="detail_list">
+                        <p>보증금</p>
+                        <textarea type="text" id="depositYearly"></textarea>
+                    </div>
+                    <div class="detail_list">
+                        <p>
+                            20,000km
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <div>
+                            <p style="text-align: right; margin-bottom: 0.5rem;">
+                                <span></span>
+                                <span> 원</span>
+                            </p>
+                            <input type="text" id="cost_for_20k" />
+                        </div>
+                    </div>
+                    <div class="detail_list">
+                        <p>
+                            30,000km
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <div>
+                            <p style="text-align: right; margin-bottom: 0.5rem;">
+                                <span></span>
+                                <span> 원</span>
+                            </p>
+                            <input type="text" id="cost_for_30k" />
+                        </div>
+                    </div>
+                    <div class="detail_list">
+                        <p>
+                            40,000km
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <div>
+                            <p style="text-align: right; margin-bottom: 0.5rem;">
+                                <span></span>
+                                <span> 원</span>
+                            </p>
+                            <input type="text" id="cost_for_40k" />
+                        </div>
+                    </div>
+                    <div class="detail_list">
+                        <p>
+                            km당 추가요금
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <textarea type="text" id="cost_per_kmYearly"></textarea>
+                    </div>
+                    <div class="detail_list">
+                        <p>신용</p>
+                        <select name="credit" id="creditYearly">
+                            <option value="">선택하세요</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="detail_list" style="background-color: whitesmoke;">
+                    <p>24개월 렌트</p>
+                    <button class="btn btn-outline-info" onclick="openForm(this, 'twoYearly');">등록</button>
+                </div>
+                <div id="twoYearlyForm">
+                    <div class="detail_list">
+                        <p>보증금</p>
+                        <textarea type="text" id="depositTwoYearly"></textarea>
+                    </div>
+                    <div class="detail_list">
+                        <p>
+                            20,000km
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <div>
+                            <p style="text-align: right; margin-bottom: 0.5rem;">
+                                <span></span>
+                                <span> 원</span>
+                            </p>
+                            <input type="text" id="cost_for_20Tk" />
+                        </div>
+                    </div>
+                    <div class="detail_list">
+                        <p>
+                            30,000km
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <div>
+                            <p style="text-align: right; margin-bottom: 0.5rem;">
+                                <span></span>
+                                <span> 원</span>
+                            </p>
+                            <input type="text" id="cost_for_30Tk" />
+                        </div>
+                    </div>
+                    <div class="detail_list">
+                        <p>
+                            40,000km
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <div>
+                            <p style="text-align: right; margin-bottom: 0.5rem;">
+                                <span></span>
+                                <span> 원</span>
+                            </p>
+                            <input type="text" id="cost_for_40Tk" />
+                        </div>
+                    </div>
+                    <div class="detail_list">
+                        <p>
+                            km당 추가요금
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <textarea type="text" id="cost_per_kmTwoYearly"></textarea>
+                    </div>
+                    <div class="detail_list">
+                        <p>신용</p>
+                        <select name="credit" id="creditTwoYearly">
+                            <option value="">선택하세요</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+
+</html>

@@ -104,7 +104,7 @@
                     </tr>
                     <tr th:each="car, i : ${ monthlyRentList }">
                         <td>
-                            <select name="category1" class="category1" onchange="displayCategory2(this);" th:data-title="${car.id}">
+                            <select name="category1" class="category1" onchange="displayCategory2(this, false);" th:data-title="${car.id}">
                                 <option value="국산승용" th:selected="${car.category1} == '국산승용' ? true : false">국산승용</option>
                                 <option value="국산승합•RV" th:selected="${car.category1} == '국산승합•RV' ? true : false">국산승합•RV</option>
                                 <option value="수입차" th:selected="${car.category1} == '수입차' ? true : false">수입차</option>
@@ -170,7 +170,7 @@
                             </select>
                         </td>
                         <td class="display_none_mobile" style="display: flex; flex-direction: column;">
-                            <p th:text="${car.img_url}" class="img_url" th:data-title="${car.id}" style="width: 10rem; height: 2rem; overflow: hidden;"></p>
+                            <p th:text="${car.img_url}" class="img_url" th:data-title="${car.id}" style="width: 10rem; height: 3.5rem; overflow: hidden;"></p>
                             <input type="file" class="img_input" th:data-title="${car.id}" accept="image/*" style="width: 10rem;">
                         </td>
                         <td>

@@ -1,5 +1,5 @@
 // 종류 변경 시, 종류에 따른 분류 옵션 보여주기
-function displayCategory2(event) {
+function displayCategory2(event, makeDefaultOption) {
     const category1 = event.value;
     const category2 = document.getElementsByClassName('category2');
     const domesticCarOptions = ['경형', '준중형', '중형', '중대형', '대형'];
@@ -19,9 +19,19 @@ function displayCategory2(event) {
         selectedOptions = domesticVanOptions;
     } else if (category1 === '수입차') {
         selectedOptions = importedCarOptions;
+    } else if (category1 === '') {
+        selectedOptions = [];
     }
 
     selectedCategory2.options.length = 0;
+
+    if (makeDefaultOption) {
+        let defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.innerText = '선택하세요';
+
+        selectedCategory2.appendChild(defaultOption);
+    }
 
     for (i in selectedOptions) {
         let option = document.createElement('option');
@@ -32,7 +42,6 @@ function displayCategory2(event) {
     };
 };
 
-console.log('hi');
 //월렌트 메뉴 페이지 가격 수정 버튼
 function editRentPriceMenu(id, period) {
     let category1 = [...document.getElementsByClassName('category1')].find(item => item.dataset.title == id);
@@ -119,7 +128,7 @@ function editRentPriceMenu(id, period) {
         formData.append('end', parseInt(end.value));
         formData.append('credit', credit.value);
         formData.append('img_url', '');
-        formData.append('file', img_input.files[0])
+        formData.append('file', img_input.files[0]);
 
         if (period === 'monthly') {
             let cost_for_2k = [...document.getElementsByClassName('cost_for_2k')].find(item => item.dataset.title == id);
@@ -135,12 +144,12 @@ function editRentPriceMenu(id, period) {
             postFormData(id, formData, period);
         }
 
-        for (let key of formData.keys()) {
-            console.log(key);
-        }
-        for (let value of formData.values()) {
-            console.log(value);
-        }
+        // for (let key of formData.keys()) {
+        //     console.log(key);
+        // }
+        // for (let value of formData.values()) {
+        //     console.log(value);
+        // }
     }
 }
 
@@ -181,3 +190,177 @@ function postFormData(id, formData, period) {
         alert(JSON.stringify(error));
     })
 };
+
+// 렌트카 등록 12/24개월 등록 버튼 누를 때
+function openForm(event, type) {
+    const target = document.getElementById(`${type}Form`);
+
+    target.classList.toggle('openForm');
+
+    if (target.classList.contains('openForm')) {
+        event.innerText = '등록 안함';
+    } else {
+        event.innerText = '등록';
+    }
+}
+
+// 렌트카 등록
+function registerRentCar() {
+    const category1 = document.getElementById('category1').value;
+    const category2 = document.getElementById('category2').value;
+    const name = document.getElementById('name').value;
+    const deposit = document.getElementById('deposit').value;
+    const cost_for_2k = document.getElementById('cost_for_2k').value;
+    const cost_for_2_5k = document.getElementById('cost_for_2_5k').value;
+    const cost_for_3k = document.getElementById('cost_for_3k').value;
+    const cost_for_4k = document.getElementById('cost_for_4k').value;
+    const cost_for_others = document.getElementById('cost_for_others').value;
+    const age_limit = document.getElementById('age_limit').value;
+    const cost_per_km = document.getElementById('cost_per_km').value;
+    const nameMoren = document.getElementById('nameMoren').value;
+    const start = parseInt(document.getElementById('start').value);
+    const end = parseInt(document.getElementById('end').value);
+    const credit = document.getElementById('credit').value;
+    const img_input = document.getElementById('img_input').files[0];
+
+    const requiredFields = [category1, category2, name, deposit, cost_for_2k, cost_for_2_5k, cost_for_3k, cost_for_4k, cost_for_others, age_limit, cost_per_km, nameMoren, start, end, credit, img_input];
+
+    const depositYearly = document.getElementById('depositYearly').value;
+    const cost_for_20k = document.getElementById('cost_for_20k').value;
+    const cost_for_30k = document.getElementById('cost_for_30k').value;
+    const cost_for_40k = document.getElementById('cost_for_40k').value;
+    const cost_per_kmYearly = document.getElementById('cost_per_kmYearly').value;
+    const creditYearly = document.getElementById('creditYearly').value;
+
+    let depositTwoYearly = document.getElementById('depositTwoYearly').value;
+    let cost_for_20Tk = document.getElementById('cost_for_20Tk').value;
+    let cost_for_30Tk = document.getElementById('cost_for_30Tk').value;
+    let cost_for_40Tk = document.getElementById('cost_for_40Tk').value;
+    let cost_per_kmTwoYearly = document.getElementById('cost_per_kmTwoYearly').value;
+    let creditTwoYearly = document.getElementById('creditTwoYearly').value;
+
+    let isTwoYearExist;
+
+    const yearlyForm = document.getElementById('yearlyForm');
+    const twoYearlyForm = document.getElementById('twoYearlyForm');
+
+    // 24개월 값 없으면
+    if (twoYearlyForm.classList.contains('openForm')) {
+        isTwoYearExist = 1;
+        cost_for_20Tk = parseInt(cost_for_20Tk).toFixed(2);
+        cost_for_30Tk = parseInt(cost_for_30Tk).toFixed(2);
+        cost_for_40Tk = parseInt(cost_for_40Tk).toFixed(2);
+    } else {
+        isTwoYearExist = 0;
+        depositTwoYearly = null;
+        cost_per_kmTwoYearly = null;
+        creditTwoYearly = null;
+        cost_for_20Tk = null;
+        cost_for_30Tk = null;
+        cost_for_40Tk = null;
+    }
+
+    // cost_for_others float 아닌지??
+    let formData = new FormData();
+
+    // 공통
+    formData.append('category1', category1);
+    formData.append('category2', category2);
+    formData.append('name', name);
+    formData.append('cost_for_others', cost_for_others);
+    formData.append('age_limit', age_limit);
+    formData.append('nameMoren', nameMoren);
+    formData.append('start', start);
+    formData.append('end', end);
+    formData.append('file', img_input);
+    formData.append('isTwoYearExist', isTwoYearExist);
+
+    // 다른 것
+    formData.append('deposit_monthly', deposit);
+    formData.append('deposit_yearly', depositYearly);
+    formData.append('deposit_twoYearly', depositTwoYearly);
+    formData.append('cost_per_km_monthly', cost_per_km);
+    formData.append('cost_per_km_yearly', cost_per_kmYearly);
+    formData.append('cost_per_km_twoYearly', cost_per_kmTwoYearly);
+    formData.append('credit_monthly', credit);
+    formData.append('credit_yearly', creditYearly);
+    formData.append('credit_twoYearly', creditTwoYearly);
+
+    // monthly
+    formData.append('cost_for_2k', parseInt(cost_for_2k).toFixed(2));
+    formData.append('cost_for_2_5k', parseInt(cost_for_2_5k).toFixed(2));
+    formData.append('cost_for_3k', parseInt(cost_for_3k).toFixed(2));
+    formData.append('cost_for_4k', parseInt(cost_for_4k).toFixed(2));
+
+    // yearly
+    formData.append('cost_for_20k', parseInt(cost_for_20k).toFixed(2));
+    formData.append('cost_for_30k', parseInt(cost_for_30k).toFixed(2));
+    formData.append('cost_for_40k', parseInt(cost_for_40k).toFixed(2));
+
+    // twoYearly
+    formData.append('cost_for_20Tk', cost_for_20Tk);
+    formData.append('cost_for_30Tk', cost_for_30Tk);
+    formData.append('cost_for_40Tk', cost_for_40Tk);
+
+    // for (let key of formData.keys()) {
+    //     console.log(key);
+    // }
+    // for (let value of formData.values()) {
+    //     console.log(value);
+    // }
+
+    if (img_input === undefined) {
+        alert('이미지를 첨부해주세요.');
+    } else if (requiredFields.includes('') || requiredFields.includes(undefined)) {
+        alert('캠핑카 등록에 필요한 필수 정보들을 작성해주세요.')
+    } else if (!requiredFields.includes('') && !requiredFields.includes(undefined)) {
+
+    }
+
+    const data = {
+        category1: category1,
+        category2: category2,
+        name: name,
+        deposit: deposit,
+        cost_for_2k: parseInt(cost_for_2k).toFixed(2),
+        cost_for_2_5k: parseInt(cost_for_2_5k).toFixed(2),
+        cost_for_3k: parseInt(cost_for_3k).toFixed(2),
+        cost_for_4k: parseInt(cost_for_4k).toFixed(2),
+        cost_for_others: cost_for_others,
+        age_limit: age_limit,
+        cost_per_km: cost_per_km,
+        nameMoren: nameMoren,
+        start: start,
+        end: end,
+        credit: credit,
+        img_input: img_input,
+        depositYearly: depositYearly,
+        cost_for_20k: parseInt(cost_for_20k).toFixed(2),
+        cost_for_30k: parseInt(cost_for_30k).toFixed(2),
+        cost_for_40k: parseInt(cost_for_40k).toFixed(2),
+        cost_per_kmYearly: cost_per_kmYearly,
+        creditYearly: creditYearly,
+        depositTwoYearly: depositTwoYearly,
+        cost_for_20Tk: cost_for_20Tk,
+        cost_for_30Tk: cost_for_30Tk,
+        cost_for_40Tk: cost_for_40Tk,
+        cost_per_kmTwoYearly: cost_per_kmTwoYearly,
+        creditTwoYearly: creditTwoYearly,
+    }
+
+    console.log(data);
+}
+
+// 렌트카 등록 시 배수 계산
+function calculatePrice(type) {
+    const cost_for_2k = parseInt(document.getElementById('cost_for_2k').value).toFixed(2);
+    console.log(cost_for_2k);
+
+    let value = parseFloat(document.getElementById(type).value).toFixed(2);
+    console.log(document.getElementById(type).value);
+    console.log(parseFloat(document.getElementById(type).value));
+    console.log(value);
+    // number로 바꾸기
+    let target = document.getElementById(`display_${type}`);
+    target.innerText = cost_for_2k * value;
+}

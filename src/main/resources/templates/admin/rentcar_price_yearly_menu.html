@@ -144,7 +144,7 @@
                             </select>
                         </td>
                         <td class="display_none_mobile" style="display: flex; flex-direction: column;">
-                            <p th:text="${car.yearlyRent.img_url}" class="img_url" th:data-title="${car.yearlyRent.id}" style="width: 10rem; height: 2rem; overflow: hidden;"></p>
+                            <p th:text="${car.yearlyRent.img_url}" class="img_url" th:data-title="${car.yearlyRent.id}" style="width: 10rem; height: 3.5rem; overflow: hidden;"></p>
                         </td>
                         <td>
                             <button class="btn btn-primary btn-sm" th:onclick="editRentPriceMenu([[${car.yearlyRent.id}]], 'yearly');" style="margin: 4px;">수정하기</button>
