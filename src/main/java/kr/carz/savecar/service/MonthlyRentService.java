@@ -1,8 +1,11 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.MonthlyRent;
+import kr.carz.savecar.domain.TwoYearlyRent;
+import kr.carz.savecar.domain.YearlyRent;
 import kr.carz.savecar.dto.MonthlyRentDTO;
 import kr.carz.savecar.dto.MonthlyRentVO;
+import kr.carz.savecar.dto.RentCarVO;
 import kr.carz.savecar.repository.MonthlyRentRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +50,15 @@ public class MonthlyRentService {
 
     public Long save(MonthlyRent monthlyRent){
         return monthlyRentRepository.save(monthlyRent).getId();
+    }
+
+    public Long saveByRentCarVO(RentCarVO rentCarVO, YearlyRent yearlyRent, TwoYearlyRent twoYearlyRent, String imgUrl){
+        MonthlyRentDTO monthlyRentDTO = new MonthlyRentDTO(rentCarVO.getCategory1(), rentCarVO.getCategory2(), rentCarVO.getName(), rentCarVO.getDeposit_monthly()
+        , rentCarVO.getCost_for_2k(), rentCarVO.getCost_for_2_5k(), rentCarVO.getCost_for_3k(), rentCarVO.getCost_for_4k()
+        , rentCarVO.getCost_for_others(), rentCarVO.getAge_limit(), rentCarVO.getCost_per_km_monthly(), rentCarVO.getNameMoren()
+        , rentCarVO.getStart(), rentCarVO.getEnd(), rentCarVO.getCredit_monthly(), imgUrl);
+
+        return monthlyRentRepository.save(monthlyRentDTO.toEntity(yearlyRent, twoYearlyRent)).getId();
     }
 
     public Long updateAllPriceByDTO(MonthlyRentDTO monthlyRentDTO, MonthlyRent monthlyRent){
