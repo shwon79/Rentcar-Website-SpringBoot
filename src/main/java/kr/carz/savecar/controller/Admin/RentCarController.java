@@ -93,6 +93,17 @@ public class RentCarController {
     }
 
 
+    @GetMapping("/admin/rentcar/price/register")
+    public ModelAndView get_rent_car_price_register() {
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("admin/rentcar_price_register");
+
+        return mav;
+    }
+
+
     @PutMapping("/admin/rentcar/price/monthly/{monthlyId}")
     @ResponseBody
     public void put_rent_car_price_monthly(HttpServletResponse res, @RequestBody MonthlyRentDTO monthlyRentDTO, @PathVariable Long monthlyId) throws IOException {
