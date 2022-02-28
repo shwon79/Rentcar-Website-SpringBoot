@@ -4,12 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RentCarDTO {
+public class RentCarVO {
+
+//    private MonthlyRentVO monthlyRentVO;
+//    private YearlyRentDTO yearlyRentDTO;
+//    private TwoYearlyRentDTO twoYearlyRentDTO;
 
     // 공통
     private String category1; // 국산, 외제차의 분류
@@ -23,7 +28,8 @@ public class RentCarDTO {
     private Long start;
     private Long end;
 
-    private String img_url;
+    private MultipartFile file;
+    private int isTwoYearExist;  // 1이면 24개월 有, 2이면 24개월 無
 
     // 다른것
     private String deposit_monthly;

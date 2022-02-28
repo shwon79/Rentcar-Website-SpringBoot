@@ -143,22 +143,32 @@ public class RentCarController {
     }
 
 
-//    @PostMapping("/admin/rentcar/price/monthly")
-//    @ResponseBody
-//    public void post_rent_car_price_monthly(HttpServletResponse res, @RequestBody RentCarDTO rentCarDTO) throws IOException {
-//
-//        JSONObject jsonObject = new JSONObject();
-//
-//        jsonObject.put("result", 1);
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonObject);
-//        pw.flush();
-//        pw.close();
-//    }
+    @PostMapping(value="/admin/rentcar/price", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public void post_rent_car_price(HttpServletResponse res, @RequestBody RentCarVO rentCarVO) throws IOException {
 
+        JSONObject jsonObject = new JSONObject();
 
+        String imgPath = s3Service.upload(rentCarVO.getFile());
 
+        Long yearRentId = yearlyRentService.saveByRentCarVO(rentCarVO, imgPath);
+        Optional<YearlyRent> yearlyRentWrapper = yearlyRentService.findByid(yearRentId);
+
+        if(rentCarVO.getIsTwoYearExist() == 1) {
+            Long twoYearRentId = twoYearlyRentService.saveByRentCarVO(rentCarVO, imgPath);
+            Optional<TwoYearlyRent> twoYearlyRentWrapper = twoYearlyRentService.findByid(twoYearRentId);
+            monthlyRentService.saveByRentCarVO(rentCarVO, yearlyRentWrapper.get(), twoYearlyRentWrapper.get(), imgPath);
+        } else {
+            monthlyRentService.saveByRentCarVO(rentCarVO, yearlyRentWrapper.get(), null, imgPath);
+        }
+
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 
 
     @GetMapping("/admin/rentcar/price/yearly/menu/{category2}")
