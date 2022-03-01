@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -169,6 +170,37 @@ public class RentCarController {
         pw.flush();
         pw.close();
     }
+
+
+    @DeleteMapping("/admin/rentcar/price/{monthlyId}")
+    @ResponseBody
+    public void delete_rent_car_price(HttpServletResponse res, @PathVariable Long monthlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+
+        if(monthlyRentWrapper.isPresent()) {
+            MonthlyRent monthlyRent = monthlyRentWrapper.get();
+            YearlyRent yearlyRent = monthlyRent.getYearlyRent();
+            if(monthlyRent.getTwoYearlyRent() != null){
+                TwoYearlyRent twoYearlyRent = monthlyRent.getTwoYearlyRent();
+                twoYearlyRentService.delete(twoYearlyRent);
+            }
+            monthlyRentService.delete(monthlyRent);
+            yearlyRentService.delete(yearlyRent);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
 
 
     @GetMapping("/admin/rentcar/price/yearly/menu/{category2}")

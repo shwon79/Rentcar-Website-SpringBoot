@@ -63,4 +63,8 @@ public class YearlyRentService {
     public Optional<YearlyRent> findByid(Long yearRentId) {
         return yearlyRentRepository.findById(yearRentId);
     }
+
+    public void delete(YearlyRent yearlyRent) {
+        yearlyRentRepository.delete(yearlyRent);
+    }
 }

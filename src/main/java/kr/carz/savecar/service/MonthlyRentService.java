@@ -1,5 +1,6 @@
 package kr.carz.savecar.service;
 
+import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.domain.TwoYearlyRent;
 import kr.carz.savecar.domain.YearlyRent;
@@ -149,5 +150,9 @@ public class MonthlyRentService {
 
     public List<MonthlyRent> findByCategory2AndTwoYearlyRentIsNotNull(String category2){
         return monthlyRentRepository.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+    }
+
+    public void delete(MonthlyRent monthlyRent) {
+        monthlyRentRepository.delete(monthlyRent);
     }
 }
