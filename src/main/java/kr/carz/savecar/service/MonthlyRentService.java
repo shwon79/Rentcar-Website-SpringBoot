@@ -151,6 +151,9 @@ public class MonthlyRentService {
     public List<MonthlyRent> findByCategory2AndTwoYearlyRentIsNotNull(String category2){
         return monthlyRentRepository.findByCategory2AndTwoYearlyRentIsNotNull(category2);
     }
+    public List<MonthlyRent> findAllByTwoYearlyRentIsNotNull(){
+        return monthlyRentRepository.findAllByTwoYearlyRentIsNotNull();
+    }
 
     public void delete(MonthlyRent monthlyRent) {
         monthlyRentRepository.delete(monthlyRent);

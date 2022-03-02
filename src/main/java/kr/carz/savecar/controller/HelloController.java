@@ -131,7 +131,7 @@ public class HelloController {
     @GetMapping("/price/twoYearly")
     public String price_twoYearly(Model model) {
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2AndTwoYearlyRentIsNotNull()
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllByTwoYearlyRentIsNotNull();
 
         Collections.sort(monthlyRentList);
 
