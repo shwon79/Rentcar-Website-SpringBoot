@@ -139,6 +139,11 @@ public class RealtimeRentController {
 
                 } catch (Exception e) {
                     System.out.println("Error ! 차량이름 모렌과 맞출 것 !"+ carCategory);
+
+                    reservationController.send_error_message_to_employees(admin1+", "+admin2,
+                            "모렌_차명이 동일하지 않아, 사이트에 해당 차량이 게시되지 않고 있습니다.\n"
+                                            + "차량명 : " + carCategory + "\n"
+                                            + "오류발생일시 : " + DateTime.today_date_and_time() + "\n");
                 }
             }
             // 현재 가능차
@@ -166,6 +171,11 @@ public class RealtimeRentController {
 
                 } catch (Exception e) {
                     System.out.println("Error ! 차량이름 모렌과 맞출 것 ! 차량이름 : " + carCategory);
+
+                    reservationController.send_error_message_to_employees(admin1+", "+admin2,
+                            "모렌_차명이 동일하지 않아, 사이트에 해당 차량이 게시되지 않고 있습니다.\n"
+                                    + "차량명 : " + carCategory + "\n"
+                                    + "오류발생일시 : " + DateTime.today_date_and_time() + "\n");
                 }
             }
         }
@@ -337,6 +347,11 @@ public class RealtimeRentController {
 
                     } catch (Exception e) {
                         System.out.println("Error ! 차량이름 모렌과 맞출 것 !" + carCategory);
+
+                        reservationController.send_error_message_to_employees(admin1+", "+admin2,
+                                "모렌_차명이 동일하지 않아, 사이트에 해당 차량이 게시되지 않고 있습니다.\n"
+                                        + "차량명 : " + carCategory + "\n"
+                                        + "오류발생일시 : " + DateTime.today_date_and_time() + "\n");
                     }
                 }
             }
@@ -551,103 +566,6 @@ public class RealtimeRentController {
                         + "필요증빙: " + dto.getReservationGuarantee() + "\n"
                         + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
                         + "보증금: " + dto.getCarDeposit() + "\n\n");
-//
-//        Message coolsms = new Message(api_key, api_secret);
-//        HashMap<String, String> params = new HashMap<>();
-//        HashMap<String, String> params2 = new HashMap<>();
-//
-//        /* 세이브카에 예약확인 문자 전송 */
-//        params.put("to", admin1+", "+admin2+", "+admin3);
-//        params.put("from", admin3);
-//        params.put("type", "LMS");
-//
-//        /* 고객에게 예약확인 문자 전송 */
-//        params2.put("to", dto.getReservationPhone());
-//        params2.put("from", admin3);
-//        params2.put("type", "LMS");
-//
-//        params.put("text", "[현재 대여가능차량 예약이 신청되었습니다.]\n"
-//                + "▼ 계약 확인하기" + "\n"
-//                + "https://savecar.kr/admin/moren/reservation/detail/" + reservationId + "\n\n"
-//
-//                + "▼ 문의자 정보" + "\n"
-//                + "문의자 이름: " + dto.getReservationName() + "\n"
-//                + "연락처: " + dto.getReservationPhone() + "\n"
-//                + "보험연령: " + dto.getSelectAge() + "\n"
-//                + "생년월일: " + dto.getReservationAge() + "\n\n"
-//
-//                + "▼ 차량 정보" + "\n"
-//                + "차량명: " + dto.getCarName() + "\n"
-//                + "차량번호: " + dto.getCarNo() + "\n\n"
-//
-//                + "▼ 대여 정보" + "\n"
-//                + "대여일자: " + dto.getReservationDate() + "\n"
-//                + "대여시간: " + dto.getReservationTime() + "\n"
-//                + "렌트기간: " + dto.getRentTerm() + "\n"
-//                + "약정주행거리: " + dto.getKilometer() + "\n"
-//                + "방문/배차: " + dto.getPickupPlace() + "\n"
-//                + "배차요청주소: " + dto.getAddress() + "\n"
-//                + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
-//                + "신용증빙: " + dto.getReservationGuarantee() + "\n"
-//                + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
-//                + "보증금: " + dto.getCarDeposit() + "\n\n"
-//        );
-//
-//        params2.put("text", "[예약 대기 신청이 완료되었습니다]" + "\n"
-//                + "▼ 문의자 정보" + "\n"
-//                + "문의자 이름: " + dto.getReservationName() + "\n"
-//                + "연락처: " + dto.getReservationPhone() + "\n"
-//                + "보험연령: " + dto.getSelectAge() + "\n"
-//                + "생년월일: " + dto.getReservationAge() + "\n\n"
-//
-//                + "▼ 차량 정보" + "\n"
-//                + "차량명: " + dto.getCarName() + "\n"
-//                + "차량번호: " + dto.getCarNo() + "\n\n"
-//
-//                + "▼ 대여 정보" + "\n"
-//                + "대여일자: " + dto.getReservationDate() + "\n"
-//                + "대여시간: " + dto.getReservationTime() + "\n"
-//                + "렌트기간: " + dto.getRentTerm() + "\n"
-//                + "약정주행거리: " + dto.getKilometer() + "\n"
-//                + "방문/배차: " + dto.getPickupPlace() + "\n"
-//                + "배차요청주소: " + dto.getAddress() + "\n"
-//                + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
-//                + "필요증빙: " + dto.getReservationGuarantee() + "\n"
-//                + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
-//                + "보증금: " + dto.getCarDeposit() + "\n\n"
-//        );
-//
-//        params.put("app_version", "test app 1.2");
-//        params2.put("app_version", "test app 1.2");
-//
-//
-//        /* 세이브카에게 문자 전송 */
-//
-//        try {
-//            org.json.simple.JSONObject obj = coolsms.send(params);
-//            System.out.println(obj.toString()); //전송 결과 출력
-//        } catch (CoolsmsException e) {
-//            System.out.println(e.getMessage());
-//            System.out.println(e.getCode());
-//        }
-//
-//        /* 고객에게 예약확인 문자 전송 */
-//
-//        try {
-//            org.json.simple.JSONObject obj2 = coolsms.send(params2);
-//            System.out.println(obj2.toString()); //전송 결과 출력
-//        } catch (CoolsmsException e) {
-//            System.out.println(e.getMessage());
-//            System.out.println(e.getCode());
-//        }
-//
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("result", 1);
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonObject);
-//        pw.flush();
-//        pw.close();
     }
 
 }
