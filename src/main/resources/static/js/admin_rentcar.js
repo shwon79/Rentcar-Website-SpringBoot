@@ -261,9 +261,9 @@ function registerRentCar() {
     // 24개월 값 없으면
     if (twoYearlyForm.classList.contains('openForm')) {
         isTwoYearExist = 1;
-        cost_for_20Tk = parseFloat(cost_for_20Tk).toFixed(2);
-        cost_for_30Tk = parseFloat(cost_for_30Tk).toFixed(2);
-        cost_for_40Tk = parseFloat(cost_for_40Tk).toFixed(2);
+        cost_for_20Tk = parseFloat(cost_for_20Tk).toFixed(4);
+        cost_for_30Tk = parseFloat(cost_for_30Tk).toFixed(4);
+        cost_for_40Tk = parseFloat(cost_for_40Tk).toFixed(4);
     } else {
         isTwoYearExist = 0;
         depositTwoYearly = '';
@@ -300,20 +300,20 @@ function registerRentCar() {
     formData.append('credit_twoYearly', creditTwoYearly);
 
     // monthly
-    formData.append('cost_for_2k', parseFloat(cost_for_2k).toFixed(2));
-    formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k).toFixed(2));
-    formData.append('cost_for_3k', parseFloat(cost_for_3k).toFixed(2));
-    formData.append('cost_for_4k', parseFloat(cost_for_4k).toFixed(2));
+    formData.append('cost_for_2k', parseFloat(cost_for_2k).toFixed(4));
+    formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k).toFixed(4));
+    formData.append('cost_for_3k', parseFloat(cost_for_3k).toFixed(4));
+    formData.append('cost_for_4k', parseFloat(cost_for_4k).toFixed(4));
 
     // yearly
-    formData.append('cost_for_20k', parseFloat(cost_for_20k).toFixed(2));
-    formData.append('cost_for_30k', parseFloat(cost_for_30k).toFixed(2));
-    formData.append('cost_for_40k', parseFloat(cost_for_40k).toFixed(2));
+    formData.append('cost_for_20k', parseFloat(cost_for_20k).toFixed(4));
+    formData.append('cost_for_30k', parseFloat(cost_for_30k).toFixed(4));
+    formData.append('cost_for_40k', parseFloat(cost_for_40k).toFixed(4));
 
     // twoYearly
-    formData.append('cost_for_20Tk', parseFloat(cost_for_20Tk).toFixed(2));
-    formData.append('cost_for_30Tk', parseFloat(cost_for_30Tk).toFixed(2));
-    formData.append('cost_for_40Tk', parseFloat(cost_for_40Tk).toFixed(2));
+    formData.append('cost_for_20Tk', parseFloat(cost_for_20Tk).toFixed(4));
+    formData.append('cost_for_30Tk', parseFloat(cost_for_30Tk).toFixed(4));
+    formData.append('cost_for_40Tk', parseFloat(cost_for_40Tk).toFixed(4));
 
     // for (let key of formData.keys()) {
     //     console.log(key);
@@ -350,7 +350,7 @@ function registerRentCar() {
 
 // 렌트카 등록 시 배수 계산
 function calculatePrice(type) {
-    const cost_for_2k = parseInt(document.getElementById('cost_for_2k').value).toFixed(2);
+    const cost_for_2k = parseFloat(document.getElementById('cost_for_2k').value).toFixed(4);
 
     if (type === 'cost_for_2k') {
         calculatePrice('cost_for_2_5k');
