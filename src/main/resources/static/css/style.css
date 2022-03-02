@@ -1278,8 +1278,8 @@ div.popStyle1, div.popStyle2 {
 }
 .popup_box_slogan {
     position: absolute;
-    width: 80%;
-    left: 10%;
+    width: 82%;
+    left: 9%;
     top: 14%;
     padding: 10px !important;
     font-size: 1.5em;
@@ -1391,7 +1391,7 @@ div.popStyle1, div.popStyle2 {
     }
     .popup_box_slogan {
         font-size: 1.2em;
-        top: 14%;
+        top: 11%;
     }
     .popup_box_wrapper {
         grid-column-gap: 5px;
@@ -1400,12 +1400,13 @@ div.popStyle1, div.popStyle2 {
         font-size: 1.2em;
     }
     .popup_box {
-        padding: 30px 10px 10px 10px;
+        padding: 30px 3px 10px 3px;
     }
     .popup_bottom_content_wrapper {
         padding: 90px 10px 20px 10px;
     }
 }
+
 #mobile_pop {
     position: relative;
     width: 100%;
