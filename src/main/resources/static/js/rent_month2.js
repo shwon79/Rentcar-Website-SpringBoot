@@ -139,12 +139,13 @@ function make_monthly_rent_reservation (e) {
 const number = document.querySelectorAll(".number");
 
 function numberWithCommas() {
-    // console.log(number);
     for (let i = 0; i < number.length; i++) {
         if (number[i].innerText === '상담') {
             number[i].innerText = '상담';
         } else {
-            const numberWithComma = parseInt(number[i].innerText).toLocaleString();
+            const num = parseFloat(number[i].innerText);
+            const result = Math.floor(num/1000)*1000;
+            const numberWithComma = result.toLocaleString();
             number[i].innerText = numberWithComma;
         }
     }
