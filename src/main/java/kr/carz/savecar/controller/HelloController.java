@@ -119,13 +119,10 @@ public class HelloController {
     public String price_yearly(Model model) {
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
-        List<YearlyRent> yearlyRentList = yearlyRentService.findAllYearlyRents();
 
         Collections.sort(monthlyRentList);
-        Collections.sort(yearlyRentList);
 
         model.addAttribute("monthlyRentList", monthlyRentList);
-        model.addAttribute("yearlyRentList", yearlyRentList);
 
         return "rent_price/yearly";
     }
@@ -135,13 +132,10 @@ public class HelloController {
     public String price_twoYearly(Model model) {
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
-        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findAllTwoYearlyRents();
 
         Collections.sort(monthlyRentList);
-        Collections.sort(twoYearlyRentList);
 
         model.addAttribute("monthlyRentList", monthlyRentList);
-        model.addAttribute("twoYearlyRentList", twoYearlyRentList);
 
         return "rent_price/twoYearly";
     }
