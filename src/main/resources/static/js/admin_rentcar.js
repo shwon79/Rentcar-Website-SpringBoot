@@ -356,11 +356,13 @@ function calculatePrice(type) {
     const cost_for_2k = parseInt(document.getElementById('cost_for_2k').value).toFixed(2);
     console.log(cost_for_2k);
 
-    let value = parseFloat(document.getElementById(type).value).toFixed(2);
-    console.log(document.getElementById(type).value);
-    console.log(parseFloat(document.getElementById(type).value));
-    console.log(value);
-    // number로 바꾸기
-    let target = document.getElementById(`display_${type}`);
-    target.innerText = cost_for_2k * value;
+    // input number 처리 필요
+
+    // let value = parseFloat(document.getElementById(type).value).toFixed(2);
+    // console.log(document.getElementById(type).value);
+    // console.log(parseFloat(document.getElementById(type).value));
+    // console.log(value);
+    // // number로 바꾸기
+    // let target = document.getElementById(`display_${type}`);
+    // target.innerText = cost_for_2k * value;
 }
