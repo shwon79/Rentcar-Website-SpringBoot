@@ -144,9 +144,11 @@ public class RentCarController {
     }
 
 
-    @PostMapping(value="/admin/rentcar/price", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value="/admin/rentcar/price", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public void post_rent_car_price(RentCarVO rentCarVO) throws IOException {
+    public void post_rent_car_price(HttpServletResponse res, RentCarVO rentCarVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
 
         String imgPath = s3Service.upload(rentCarVO.getFile());
 
@@ -160,6 +162,13 @@ public class RentCarController {
         } else {
             monthlyRentService.saveByRentCarVO(rentCarVO, yearlyRentWrapper.get(), null, imgPath);
         }
+
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 
