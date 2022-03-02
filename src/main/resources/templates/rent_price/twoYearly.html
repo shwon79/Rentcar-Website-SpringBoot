@@ -1,4 +1,4 @@
-<!-- 렌트가격표(month.html) -->
+<!-- 렌트가격표(twoYearly.html) -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-caption">
-                        <h3 class="page-title">월 렌트</h3>
+                        <h3 class="page-title">24개월 렌트</h3>
                         <br>
                     </div>
                 </div>
@@ -119,32 +119,33 @@
 
           <section class="col-lg-12">
               <div class="pinside20" align="center">
-                  <h1 style="font-weight: bold">월렌트</h1>
+                  <h1 style="font-weight: bold">24개월 렌트</h1>
               </div>
               <table id="example" class="table table-bordered table-responsive">
                   <thead>
-                  <tr>
-                      <th scope="row">차종</th>
-                      <th scope="row">차명</th>
-                      <th>보증금</th>
-                      <th>2000km</th>
-                      <th>2500km</th>
-                      <th>3000km</th>
-                      <th>4000km</th>
-                      <th>21세</th>
-                  </tr>
+                      <tr>
+                          <th scope="row">차종</th>
+                          <th scope="row">차명</th>
+                          <th>보증금</th>
+                          <th>2만km</th>
+                          <th>3만km</th>
+                          <th>4만km</th>
+                          <th>21세</th>
+                          <th style="word-break: keep-all;">km당 추가요금</th>
+                      </tr>
                   </thead>
+
                   <tbody>
-                  <tr th:each="monthlyRent : ${monthlyRentList}">
-                      <td scope="row" th:text="${monthlyRent.category2}"></td>
-                      <td scope="row" th:text="${monthlyRent.name}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.deposit, 3, 'COMMA')}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k, 3, 'COMMA')}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k * monthlyRent.cost_for_2_5k, 3, 'COMMA')}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k * monthlyRent.cost_for_3k, 3, 'COMMA')}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k * monthlyRent.cost_for_4k, 3, 'COMMA')}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.age_limit, 3, 'COMMA')}"></td>
-                  </tr>
+                      <tr th:each="twoYearlyRent : ${twoYearlyRentList}">
+                          <td scope="row" th:text="${twoYearlyRent.category2}"></td>
+                          <td scope="row" th:text="${twoYearlyRent.name}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(twoYearlyRent.deposit, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(twoYearlyRent.cost_for_20k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(twoYearlyRent.cost_for_20k * twoYearlyRent.cost_for_30k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(twoYearlyRent.cost_for_20k * twoYearlyRent.cost_for_40k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(twoYearlyRent.age_limit, 3, 'COMMA')}"></td>
+                          <td><span scope="col" th:text="${twoYearlyRent.cost_per_km}"></span>원</td>
+                      </tr>
                   </tbody>
               </table>
           </section><br><br>
@@ -154,6 +155,7 @@
     <!--End of feature Section -->
 
     <div class="pinside50"></div>
+
 
     <!-- START SCROLL TO TOP  -->
     <div class="scrollup">

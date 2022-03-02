@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,17 +22,19 @@ import java.util.Optional;
 public class HelloController {
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
+    private final TwoYearlyRentService twoYearlyRentService;
     private final ShortRentService shortRentService;
     private final CampingCarPriceService campingCarPriceService;
     private final ValuesForWebService valuesForWebService;
     private final ImagesService imagesService;
 
     @Autowired
-    public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
+    public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
                            ShortRentService shortRentService, CampingCarPriceService campingCarPriceService,
                            ValuesForWebService valuesForWebService, ImagesService imagesService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
+        this.twoYearlyRentService = twoYearlyRentService;
         this.shortRentService = shortRentService;
         this.campingCarPriceService = campingCarPriceService;
         this.valuesForWebService = valuesForWebService;
@@ -112,13 +115,35 @@ public class HelloController {
     }
 
 
-    @GetMapping("/price/long")
-    public String price_long(Model model) {
+    @GetMapping("/price/yearly")
+    public String price_yearly(Model model) {
 
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
         List<YearlyRent> yearlyRentList = yearlyRentService.findAllYearlyRents();
+
+        Collections.sort(monthlyRentList);
+        Collections.sort(yearlyRentList);
+
+        model.addAttribute("monthlyRentList", monthlyRentList);
         model.addAttribute("yearlyRentList", yearlyRentList);
 
-        return "rent_price/long";
+        return "rent_price/yearly";
+    }
+
+
+    @GetMapping("/price/twoYearly")
+    public String price_twoYearly(Model model) {
+
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+        List<TwoYearlyRent> twoYearlyRentList = twoYearlyRentService.findAllTwoYearlyRents();
+
+        Collections.sort(monthlyRentList);
+        Collections.sort(twoYearlyRentList);
+
+        model.addAttribute("monthlyRentList", monthlyRentList);
+        model.addAttribute("twoYearlyRentList", twoYearlyRentList);
+
+        return "rent_price/twoYearly";
     }
 
 
