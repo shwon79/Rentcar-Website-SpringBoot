@@ -146,7 +146,7 @@ public class RentCarController {
 
     @PostMapping(value="/admin/rentcar/price", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public void post_rent_car_price(HttpServletResponse res, @RequestBody RentCarVO rentCarVO) throws IOException {
+    public void post_rent_car_price(HttpServletResponse res, RentCarVO rentCarVO) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
