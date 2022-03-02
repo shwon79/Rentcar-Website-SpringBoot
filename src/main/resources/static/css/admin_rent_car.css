@@ -52,7 +52,7 @@
 .register_rent_car textarea, .register_rent_car input {
     max-width: 168px;
 }
-#yearlyForm, #twoYearlyForm {
+#twoYearlyForm {
     display: none;
 }
 #yearlyForm .detail_list {
@@ -61,8 +61,7 @@
 #twoYearlyForm .detail_list {
     background: whitesmoke;
 }
-
-#yearlyForm.openForm, #twoYearlyForm.openForm {
+#twoYearlyForm.openForm {
     display: block;
 }
 @media screen and (max-width: 600px) {

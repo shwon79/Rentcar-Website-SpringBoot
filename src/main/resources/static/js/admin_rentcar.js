@@ -186,25 +186,26 @@ function postFormData(id, formData, period) {
 
 // 월렌트에서 차량 삭제
 function deleteRentCar(id){
-    console.log(id);
-    // $.ajax({
-    //     type:'DELETE',
-    //     url:'/admin/rentcar/price/'+ id,
-    //     dataType:'json',
-    //     contentType : 'application/json; charset=utf-8',
-    // }).done(function (result) {
-    //     if (result.result == 1) {
-    //         alert('삭제 되었습니다.');
-    //     } else if (result.result == 0) {
-    //         alert('삭제에 문제가 생겼습니다.');
-    //     };
-    //     location.reload();
-    // }).fail(function (error) {
-    //     alert(JSON.stringify(error));
-    // })
+    if (confirm('차량을 삭제하시겠습니까?')) {
+        $.ajax({
+            type:'DELETE',
+            url:'/admin/rentcar/price/'+ id,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('삭제 되었습니다.');
+            } else if (result.result == 0) {
+                alert('삭제에 문제가 생겼습니다.');
+            };
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
 }
 
-// 렌트카 등록 12/24개월 등록 버튼 누를 때
+// 렌트카 등록 24개월 등록 버튼 누를 때
 function openForm(event, type) {
     const target = document.getElementById(`${type}Form`);
 
@@ -314,12 +315,12 @@ function registerRentCar() {
     formData.append('cost_for_30Tk', cost_for_30Tk);
     formData.append('cost_for_40Tk', cost_for_40Tk);
 
-    for (let key of formData.keys()) {
-        console.log(key);
-    }
-    for (let value of formData.values()) {
-        console.log(value);
-    }
+    // for (let key of formData.keys()) {
+    //     console.log(key);
+    // }
+    // for (let value of formData.values()) {
+    //     console.log(value);
+    // }
 
     if (img_input === undefined) {
         alert('이미지를 첨부해주세요.');
@@ -328,40 +329,6 @@ function registerRentCar() {
     } else if (!requiredFields.includes('') && !requiredFields.includes(undefined)) {
         postData(formData);
     }
-
-    const data = {
-        category1: category1,
-        category2: category2,
-        name: name,
-        deposit: deposit,
-        cost_for_2k: parseInt(cost_for_2k).toFixed(2),
-        cost_for_2_5k: parseInt(cost_for_2_5k).toFixed(2),
-        cost_for_3k: parseInt(cost_for_3k).toFixed(2),
-        cost_for_4k: parseInt(cost_for_4k).toFixed(2),
-        cost_for_others: cost_for_others,
-        age_limit: age_limit,
-        cost_per_km: cost_per_km,
-        nameMoren: nameMoren,
-        start: start,
-        end: end,
-        credit: credit,
-        img_input: img_input,
-        depositYearly: depositYearly,
-        cost_for_20k: parseInt(cost_for_20k).toFixed(2),
-        cost_for_30k: parseInt(cost_for_30k).toFixed(2),
-        cost_for_40k: parseInt(cost_for_40k).toFixed(2),
-        cost_per_kmYearly: cost_per_kmYearly,
-        creditYearly: creditYearly,
-        depositTwoYearly: depositTwoYearly,
-        cost_for_20Tk: cost_for_20Tk,
-        cost_for_30Tk: cost_for_30Tk,
-        cost_for_40Tk: cost_for_40Tk,
-        cost_per_kmTwoYearly: cost_per_kmTwoYearly,
-        creditTwoYearly: creditTwoYearly,
-        isTwoYearExist: isTwoYearExist
-    }
-
-    // console.log(data);
 
     function postData(formData) {
         $.ajax({
@@ -374,7 +341,7 @@ function registerRentCar() {
             data: formData
         }).done(function () {
             alert('업로드가 완료되었습니다.');
-            // location.reload();
+            location.reload();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
@@ -384,15 +351,21 @@ function registerRentCar() {
 // 렌트카 등록 시 배수 계산
 function calculatePrice(type) {
     const cost_for_2k = parseInt(document.getElementById('cost_for_2k').value).toFixed(2);
-    console.log(cost_for_2k);
 
-    // input number 처리 필요
-
-    // let value = parseFloat(document.getElementById(type).value).toFixed(2);
-    // console.log(document.getElementById(type).value);
-    // console.log(parseFloat(document.getElementById(type).value));
-    // console.log(value);
-    // // number로 바꾸기
-    // let target = document.getElementById(`display_${type}`);
-    // target.innerText = cost_for_2k * value;
+    if (type === 'cost_for_2k') {
+        calculatePrice('cost_for_2_5k');
+        calculatePrice('cost_for_3k');
+        calculatePrice('cost_for_4k');
+        calculatePrice('cost_for_20k');
+        calculatePrice('cost_for_30k');
+        calculatePrice('cost_for_40k');
+        calculatePrice('cost_for_20Tk');
+        calculatePrice('cost_for_30Tk');
+        calculatePrice('cost_for_40Tk');
+    } else {
+        let value = parseFloat(document.getElementById(type).value).toFixed(2);
+        let target = document.getElementById(`display_${type}`);
+        let result = Math.floor(cost_for_2k * value) || '';
+        target.innerText = result;
+    }
 }

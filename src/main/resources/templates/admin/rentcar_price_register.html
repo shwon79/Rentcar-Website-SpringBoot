@@ -43,7 +43,7 @@
         </nav>
 
         <div class="container inner_content" style="width: 100%;">
-            <h2 class="page_title" style="text-align: center;">렌트카 등록</h2>
+            <h2 class="page_title" style="text-align: center;">가격 등록</h2>
             <div class="detail_container register_rent_car">
                 <div class="detail_list" id="go_back_wrapper" style="justify-content: flex-end;">
                     <button class="btn btn-primary" onclick="registerRentCar();">등록하기</button>
@@ -83,7 +83,7 @@
                         <br>
                         <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                     </p>
-                    <textarea type="text" id="deposit"></textarea>
+                    <textarea type="number" id="deposit"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>
@@ -92,7 +92,7 @@
                         <br>
                         <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                     </p>
-                    <textarea type="text" id="cost_for_2k" onkeyup="calculatePrice();"></textarea>
+                    <textarea type="number" id="cost_for_2k" onkeyup="calculatePrice(id);"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>
@@ -121,7 +121,7 @@
                             <span id="display_cost_for_3k"></span>
                             <span> 원</span>
                         </p>
-                        <input type="text" id="cost_for_3k" onkeyup="calculatePrice(id);" />
+                        <input type="number" id="cost_for_3k" onkeyup="calculatePrice(id);" />
                     </div>
                 </div>
                 <div class="detail_list">
@@ -136,7 +136,7 @@
                             <span id="display_cost_for_4k"></span>
                             <span> 원</span>
                         </p>
-                        <input type="text" id="cost_for_4k" onkeyup="calculatePrice(id);" />
+                        <input type="number" id="cost_for_4k" onkeyup="calculatePrice(id);" />
                     </div>
                 </div>
                 <div class="detail_list">
@@ -150,7 +150,7 @@
                         <br>
                         <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                     </p>
-                    <textarea type="text" id="age_limit"></textarea>
+                    <textarea type="number" id="age_limit"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>
@@ -159,7 +159,7 @@
                         <br>
                         <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                     </p>
-                    <textarea type="text" id="cost_per_km"></textarea>
+                    <textarea type="number" id="cost_per_km"></textarea>
                 </div>
                 <div class="detail_list">
                     <p><span style="color: red; vertical-align: super;">*</span>모렌_차명</p>
@@ -172,7 +172,7 @@
                         <br>
                         <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                     </p>
-                    <textarea type="text" id="start"></textarea>
+                    <textarea type="number" id="start"></textarea>
                 </div>
                 <div class="detail_list">
                     <p>
@@ -181,7 +181,7 @@
                         <br>
                         <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                     </p>
-                    <textarea type="text" id="end"></textarea>
+                    <textarea type="number" id="end"></textarea>
                 </div>
                 <div class="detail_list">
                     <p><span style="color: red; vertical-align: super;">*</span>신용</p>
@@ -199,70 +199,77 @@
                     </div>
                 </div>
                 <div class="detail_list" style="background-color: cornsilk;">
-                    <p>12개월 렌트</p>
-                    <button class="btn btn-outline-info" onclick="openForm(this, 'yearly');">등록</button>
+                    <p style="margin: 0;">12개월 렌트</p>
                 </div>
                 <div id="yearlyForm">
                     <div class="detail_list">
                         <p>
+                            <span style="color: red; vertical-align: super;">*</span>
                             보증금
                             <br>
                             <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                         </p>
-                        <textarea type="text" id="depositYearly"></textarea>
+                        <textarea type="number" id="depositYearly"></textarea>
                     </div>
                     <div class="detail_list">
                         <p>
+                            <span style="color: red; vertical-align: super;">*</span>
                             20,000km
                             <br>
                             <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                         </p>
                         <div>
                             <p style="text-align: right; margin-bottom: 0.5rem;">
-                                <span></span>
+                                <span id="display_cost_for_20k"></span>
                                 <span> 원</span>
                             </p>
-                            <input type="text" id="cost_for_20k" />
+                            <input type="number" id="cost_for_20k" onkeyup="calculatePrice(id);" />
                         </div>
                     </div>
                     <div class="detail_list">
                         <p>
+                            <span style="color: red; vertical-align: super;">*</span>
                             30,000km
                             <br>
                             <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                         </p>
                         <div>
                             <p style="text-align: right; margin-bottom: 0.5rem;">
-                                <span></span>
+                                <span id="display_cost_for_30k"></span>
                                 <span> 원</span>
                             </p>
-                            <input type="text" id="cost_for_30k" />
+                            <input type="number" id="cost_for_30k" onkeyup="calculatePrice(id);" />
                         </div>
                     </div>
                     <div class="detail_list">
                         <p>
+                            <span style="color: red; vertical-align: super;">*</span>
                             40,000km
                             <br>
                             <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                         </p>
                         <div>
                             <p style="text-align: right; margin-bottom: 0.5rem;">
-                                <span></span>
+                                <span id="display_cost_for_40k"></span>
                                 <span> 원</span>
                             </p>
-                            <input type="text" id="cost_for_40k" />
+                            <input type="number" id="cost_for_40k" onkeyup="calculatePrice(id);" />
                         </div>
                     </div>
                     <div class="detail_list">
                         <p>
+                            <span style="color: red; vertical-align: super;">*</span>
                             km당 추가요금
                             <br>
                             <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                         </p>
-                        <textarea type="text" id="cost_per_kmYearly"></textarea>
+                        <textarea type="number" id="cost_per_kmYearly"></textarea>
                     </div>
                     <div class="detail_list">
-                        <p>신용</p>
+                        <p>
+                            <span style="color: red; vertical-align: super;">*</span>
+                            신용
+                        </p>
                         <select name="credit" id="creditYearly">
                             <option value="">선택하세요</option>
                             <option value="0">0</option>
@@ -272,13 +279,17 @@
                     </div>
                 </div>
                 <div class="detail_list" style="background-color: whitesmoke;">
-                    <p>24개월 렌트</p>
+                    <p style="margin: 0;">24개월 렌트</p>
                     <button class="btn btn-outline-info" onclick="openForm(this, 'twoYearly');">등록</button>
                 </div>
                 <div id="twoYearlyForm">
                     <div class="detail_list">
-                        <p>보증금</p>
-                        <textarea type="text" id="depositTwoYearly"></textarea>
+                        <p>
+                            보증금
+                            <br>
+                            <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
+                        </p>
+                        <textarea type="number" id="depositTwoYearly"></textarea>
                     </div>
                     <div class="detail_list">
                         <p>
@@ -288,10 +299,10 @@
                         </p>
                         <div>
                             <p style="text-align: right; margin-bottom: 0.5rem;">
-                                <span></span>
+                                <span id="display_cost_for_20Tk"></span>
                                 <span> 원</span>
                             </p>
-                            <input type="text" id="cost_for_20Tk" />
+                            <input type="number" id="cost_for_20Tk" onkeyup="calculatePrice(id);" />
                         </div>
                     </div>
                     <div class="detail_list">
@@ -302,10 +313,10 @@
                         </p>
                         <div>
                             <p style="text-align: right; margin-bottom: 0.5rem;">
-                                <span></span>
+                                <span id="display_cost_for_30Tk"></span>
                                 <span> 원</span>
                             </p>
-                            <input type="text" id="cost_for_30Tk" />
+                            <input type="number" id="cost_for_30Tk" onkeyup="calculatePrice(id);" />
                         </div>
                     </div>
                     <div class="detail_list">
@@ -316,10 +327,10 @@
                         </p>
                         <div>
                             <p style="text-align: right; margin-bottom: 0.5rem;">
-                                <span></span>
+                                <span id="display_cost_for_40Tk"></span>
                                 <span> 원</span>
                             </p>
-                            <input type="text" id="cost_for_40Tk" />
+                            <input type="number" id="cost_for_40Tk" onkeyup="calculatePrice(id);" />
                         </div>
                     </div>
                     <div class="detail_list">
@@ -328,7 +339,7 @@
                             <br>
                             <span style="font-size: 14px;">숫자로만 작성해주세요.</span>
                         </p>
-                        <textarea type="text" id="cost_per_kmTwoYearly"></textarea>
+                        <textarea type="number" id="cost_per_kmTwoYearly"></textarea>
                     </div>
                     <div class="detail_list">
                         <p>신용</p>
