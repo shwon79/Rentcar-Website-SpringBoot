@@ -11,12 +11,29 @@
     <link th:href="@{/css/rent_price.css}" rel="stylesheet">
 
     <script>
+        // const number = document.querySelectorAll(".number");
+        //
+        // function numberWithCommas() {
+        //     for (let i = 0; i < number.length; i++) {
+        //         // if (number[i].innerText === '상담') {
+        //         //     number[i].innerText = '상담';
+        //         // } else {
+        //         console.log(number[i].innerText);
+        //             const num = parseFloat(number[i].innerText);
+        //             const result = Math.floor(num/1000)*1000;
+        //             const numberWithComma = result.toLocaleString();
+        //             number[i].innerText = numberWithComma;
+        //         // }
+        //     }
+        // }
+        //
+        // $('.number').ready(numberWithCommas());
+
         $(document).ready(function() {
             $('#example').DataTable( {
                 responsive: true,
             } );
         } );
-
 
     </script>
 </head>
@@ -55,7 +72,7 @@
                                   <span> / </span>
                               </div>
                               <div>
-                                  <a href="/price/twoYear"><button class="btn-md fil-cat filter">24개월 렌트</button></a>
+                                  <a href="/price/twoYearly"><button class="btn-md fil-cat filter">24개월 렌트</button></a>
                                   <span> / </span>
                               </div>
                               <a href="/price/short"><button class="btn-md fil-cat filter">단기 렌트</button></a>
