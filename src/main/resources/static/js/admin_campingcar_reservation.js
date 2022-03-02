@@ -96,7 +96,7 @@ function reserveCampingcar() {
             orderCode: ''
         };
 
-        console.log(data);
+        // console.log(data);
 
         if (confirm('캠핑카 예약을 등록하시겠습니까?')) {
             $.ajax({

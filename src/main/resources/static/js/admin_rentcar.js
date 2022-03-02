@@ -143,13 +143,6 @@ function editRentPriceMenu(id, period) {
 
             postFormData(id, formData, period);
         }
-
-        // for (let key of formData.keys()) {
-        //     console.log(key);
-        // }
-        // for (let value of formData.values()) {
-        //     console.log(value);
-        // }
     }
 }
 
@@ -190,6 +183,26 @@ function postFormData(id, formData, period) {
         alert(JSON.stringify(error));
     })
 };
+
+// 월렌트에서 차량 삭제
+function deleteRentCar(id){
+    console.log(id);
+    // $.ajax({
+    //     type:'DELETE',
+    //     url:'/admin/rentcar/price/'+ id,
+    //     dataType:'json',
+    //     contentType : 'application/json; charset=utf-8',
+    // }).done(function (result) {
+    //     if (result.result == 1) {
+    //         alert('삭제 되었습니다.');
+    //     } else if (result.result == 0) {
+    //         alert('삭제에 문제가 생겼습니다.');
+    //     };
+    //     location.reload();
+    // }).fail(function (error) {
+    //     alert(JSON.stringify(error));
+    // })
+}
 
 // 렌트카 등록 12/24개월 등록 버튼 누를 때
 function openForm(event, type) {
@@ -252,15 +265,14 @@ function registerRentCar() {
         cost_for_40Tk = parseInt(cost_for_40Tk).toFixed(2);
     } else {
         isTwoYearExist = 0;
-        depositTwoYearly = null;
-        cost_per_kmTwoYearly = null;
-        creditTwoYearly = null;
-        cost_for_20Tk = null;
-        cost_for_30Tk = null;
-        cost_for_40Tk = null;
+        depositTwoYearly = '';
+        cost_per_kmTwoYearly = '';
+        creditTwoYearly = '';
+        cost_for_20Tk = 0;
+        cost_for_30Tk = 0;
+        cost_for_40Tk = 0;
     }
 
-    // cost_for_others float 아닌지??
     let formData = new FormData();
 
     // 공통
@@ -302,19 +314,19 @@ function registerRentCar() {
     formData.append('cost_for_30Tk', cost_for_30Tk);
     formData.append('cost_for_40Tk', cost_for_40Tk);
 
-    // for (let key of formData.keys()) {
-    //     console.log(key);
-    // }
-    // for (let value of formData.values()) {
-    //     console.log(value);
-    // }
+    for (let key of formData.keys()) {
+        console.log(key);
+    }
+    for (let value of formData.values()) {
+        console.log(value);
+    }
 
     if (img_input === undefined) {
         alert('이미지를 첨부해주세요.');
     } else if (requiredFields.includes('') || requiredFields.includes(undefined)) {
         alert('캠핑카 등록에 필요한 필수 정보들을 작성해주세요.')
     } else if (!requiredFields.includes('') && !requiredFields.includes(undefined)) {
-
+        postData(formData);
     }
 
     const data = {
@@ -346,9 +358,27 @@ function registerRentCar() {
         cost_for_40Tk: cost_for_40Tk,
         cost_per_kmTwoYearly: cost_per_kmTwoYearly,
         creditTwoYearly: creditTwoYearly,
+        isTwoYearExist: isTwoYearExist
     }
 
-    console.log(data);
+    // console.log(data);
+
+    function postData(formData) {
+        $.ajax({
+            enctype: 'multipart/form-data',
+            cache: false,
+            type: 'POST',
+            url: '/admin/rentcar/price/',
+            processData:false,
+            contentType: false,
+            data: formData
+        }).done(function () {
+            alert('업로드가 완료되었습니다.');
+            // location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    };
 }
 
 // 렌트카 등록 시 배수 계산
