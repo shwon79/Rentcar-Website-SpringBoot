@@ -261,9 +261,9 @@ function registerRentCar() {
     // 24개월 값 없으면
     if (twoYearlyForm.classList.contains('openForm')) {
         isTwoYearExist = 1;
-        cost_for_20Tk = parseInt(cost_for_20Tk).toFixed(2);
-        cost_for_30Tk = parseInt(cost_for_30Tk).toFixed(2);
-        cost_for_40Tk = parseInt(cost_for_40Tk).toFixed(2);
+        cost_for_20Tk = parseFloat(cost_for_20Tk).toFixed(2);
+        cost_for_30Tk = parseFloat(cost_for_30Tk).toFixed(2);
+        cost_for_40Tk = parseFloat(cost_for_40Tk).toFixed(2);
     } else {
         isTwoYearExist = 0;
         depositTwoYearly = '';
@@ -300,20 +300,20 @@ function registerRentCar() {
     formData.append('credit_twoYearly', creditTwoYearly);
 
     // monthly
-    formData.append('cost_for_2k', parseInt(cost_for_2k).toFixed(2));
-    formData.append('cost_for_2_5k', parseInt(cost_for_2_5k).toFixed(2));
-    formData.append('cost_for_3k', parseInt(cost_for_3k).toFixed(2));
-    formData.append('cost_for_4k', parseInt(cost_for_4k).toFixed(2));
+    formData.append('cost_for_2k', parseFloat(cost_for_2k).toFixed(2));
+    formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k).toFixed(2));
+    formData.append('cost_for_3k', parseFloat(cost_for_3k).toFixed(2));
+    formData.append('cost_for_4k', parseFloat(cost_for_4k).toFixed(2));
 
     // yearly
-    formData.append('cost_for_20k', parseInt(cost_for_20k).toFixed(2));
-    formData.append('cost_for_30k', parseInt(cost_for_30k).toFixed(2));
-    formData.append('cost_for_40k', parseInt(cost_for_40k).toFixed(2));
+    formData.append('cost_for_20k', parseFloat(cost_for_20k).toFixed(2));
+    formData.append('cost_for_30k', parseFloat(cost_for_30k).toFixed(2));
+    formData.append('cost_for_40k', parseFloat(cost_for_40k).toFixed(2));
 
     // twoYearly
-    formData.append('cost_for_20Tk', cost_for_20Tk);
-    formData.append('cost_for_30Tk', cost_for_30Tk);
-    formData.append('cost_for_40Tk', cost_for_40Tk);
+    formData.append('cost_for_20Tk', parseFloat(cost_for_20Tk).toFixed(2));
+    formData.append('cost_for_30Tk', parseFloat(cost_for_30Tk).toFixed(2));
+    formData.append('cost_for_40Tk', parseFloat(cost_for_40Tk).toFixed(2));
 
     // for (let key of formData.keys()) {
     //     console.log(key);
@@ -363,7 +363,7 @@ function calculatePrice(type) {
         calculatePrice('cost_for_30Tk');
         calculatePrice('cost_for_40Tk');
     } else {
-        let value = parseFloat(document.getElementById(type).value).toFixed(2);
+        let value = parseFloat(document.getElementById(type).value).toFixed(4);
         let target = document.getElementById(`display_${type}`);
         let result = Math.floor(cost_for_2k * value) || '';
         target.innerText = result;
