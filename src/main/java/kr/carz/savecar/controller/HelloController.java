@@ -120,7 +120,7 @@ public class HelloController {
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
 
-        Collections.sort(monthlyRentList);
+//        Collections.sort(monthlyRentList);
 
         model.addAttribute("monthlyRentList", monthlyRentList);
 
@@ -133,7 +133,7 @@ public class HelloController {
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findAllByTwoYearlyRentIsNotNull();
 
-        Collections.sort(monthlyRentList);
+//        Collections.sort(monthlyRentList);
 
         model.addAttribute("monthlyRentList", monthlyRentList);
 
