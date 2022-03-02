@@ -77,81 +77,81 @@
                         <button class="btn btn-outline-info">수입차</button>
                     </a>
                 </div>
-                <p style="text-align: center; margin-top: 50px;">준비 중 입니다.</p>
-<!--                <table class="table rentcarEditTable table-striped">-->
-<!--                    <thead></thead>-->
-<!--                    <tbody>-->
-<!--                    <tr class="thead-dark">-->
-<!--                        <th scope="col">종류</th>-->
-<!--                        <th scope="col">분류</th>-->
-<!--                        <th scope="col">차명 년식</th>-->
-<!--                        <th scope="col" class="display_none_mobile">보증금</th>-->
-<!--                        <th scope="col" class="display_none_mobile">20,000km</th>-->
-<!--                        <th scope="col" class="display_none_mobile">30,000km</th>-->
-<!--                        <th scope="col" class="display_none_mobile">40,000km</th>-->
-<!--                        <th scope="col" class="display_none_mobile">other</th>-->
-<!--                        <th scope="col" class="display_none_mobile">21세</th>-->
-<!--                        <th scope="col" class="display_none_mobile">km당 추가요금</th>-->
-<!--                        <th scope="col" class="display_none_mobile">모렌_차명</th>-->
-<!--                        <th scope="col" class="display_none_mobile">년식_시작</th>-->
-<!--                        <th scope="col" class="display_none_mobile">년식_끝</th>-->
-<!--                        <th scope="col" class="display_none_mobile">신용</th>-->
-<!--                        <th scope="col" class="display_none_mobile">img_url</th>-->
-<!--                        <th scope="col"></th>-->
-<!--                    </tr>-->
-<!--                    <tr th:each="car, i : ${ monthlyRentList }">-->
-<!--                        <td th:text="${car.yearlyRent.category1}" class="category1" th:data-title="${car.yearlyRent.id}"></td>-->
-<!--                        <td th:text="${car.yearlyRent.category2}" class="category2" th:data-title="${car.yearlyRent.id}"></td>-->
-<!--                        <td th:text="${car.yearlyRent.name}" class="name" th:data-title="${car.yearlyRent.id}"></td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <textarea type="text" th:text="${#numbers.formatInteger(car.yearlyRent.deposit, 0, 'COMMA')}" class="deposit" th:data-title="${car.yearlyRent.id}"></textarea>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <p th:text="${#numbers.formatInteger(car.yearlyRent.cost_for_20k * car.cost_for_2k, 0, 'COMMA')}"></p>-->
-<!--                            <textarea type="text" th:text="${car.yearlyRent.cost_for_20k}" class="cost_for_20k" th:data-title="${car.yearlyRent.id}"></textarea>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <p th:text="${#numbers.formatInteger(car.yearlyRent.cost_for_30k * car.cost_for_2k, 0, 'COMMA')}"></p>-->
-<!--                            <textarea type="text" th:text="${car.yearlyRent.cost_for_30k}" class="cost_for_30k" th:data-title="${car.yearlyRent.id}"></textarea>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <p th:text="${#numbers.formatInteger(car.yearlyRent.cost_for_40k * car.cost_for_2k, 0, 'COMMA')}"></p>-->
-<!--                            <textarea type="text" th:text="${car.yearlyRent.cost_for_40k}" class="cost_for_40k" th:data-title="${car.yearlyRent.id}"></textarea>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <p class="cost_for_others" th:text="${car.yearlyRent.cost_for_others}" th:data-title="${car.yearlyRent.id}"></p>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <p th:text="${car.yearlyRent.age_limit}" class="age_limit" th:data-title="${car.yearlyRent.id}"></p>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <textarea type="text" th:text="${car.yearlyRent.cost_per_km}" class="cost_per_km" th:data-title="${car.yearlyRent.id}"></textarea>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <p th:text="${car.yearlyRent.nameMoren}" class="nameMoren" th:data-title="${car.yearlyRent.id}"></p>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <p th:text="${car.yearlyRent.start}" class="start" th:data-title="${car.yearlyRent.id}"></p>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <p th:text="${car.yearlyRent.end}" class="end" th:data-title="${car.yearlyRent.id}"></p>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile">-->
-<!--                            <select name="credit" class="credit" th:data-title="${car.yearlyRent.id}">-->
-<!--                                <option value="0" th:selected="${car.yearlyRent.credit == '0' ? true : false}">0</option>-->
-<!--                                <option value="1" th:selected="${car.yearlyRent.credit == '1' ? true : false}">1</option>-->
-<!--                                <option value="2" th:selected="${car.yearlyRent.credit == '2' ? true : false}">2</option>-->
-<!--                            </select>-->
-<!--                        </td>-->
-<!--                        <td class="display_none_mobile" style="display: flex; flex-direction: column;">-->
-<!--                            <p th:text="${car.yearlyRent.img_url}" class="img_url" th:data-title="${car.yearlyRent.id}" style="width: 10rem; height: 2rem; overflow: hidden;"></p>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <button class="btn btn-primary btn-sm" th:onclick="editRentPriceMenu([[${car.yearlyRent.id}]], 'yearly');" style="margin: 4px;">수정하기</button>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
+<!--                <p style="text-align: center; margin-top: 50px;">준비 중 입니다.</p>-->
+                <table class="table rentcarEditTable table-striped">
+                    <thead></thead>
+                    <tbody>
+                    <tr class="thead-dark">
+                        <th scope="col">종류</th>
+                        <th scope="col">분류</th>
+                        <th scope="col">차명 년식</th>
+                        <th scope="col" class="display_none_mobile">보증금</th>
+                        <th scope="col" class="display_none_mobile">20,000km</th>
+                        <th scope="col" class="display_none_mobile">30,000km</th>
+                        <th scope="col" class="display_none_mobile">40,000km</th>
+                        <th scope="col" class="display_none_mobile">other</th>
+                        <th scope="col" class="display_none_mobile">21세</th>
+                        <th scope="col" class="display_none_mobile">km당 추가요금</th>
+                        <th scope="col" class="display_none_mobile">모렌_차명</th>
+                        <th scope="col" class="display_none_mobile">년식_시작</th>
+                        <th scope="col" class="display_none_mobile">년식_끝</th>
+                        <th scope="col" class="display_none_mobile">신용</th>
+                        <th scope="col" class="display_none_mobile">img_url</th>
+                        <th scope="col"></th>
+                    </tr>
+                    <tr th:each="car, i : ${ monthlyRentList }">
+                        <td th:text="${car.yearlyRent.category1}" class="category1" th:data-title="${car.yearlyRent.id}"></td>
+                        <td th:text="${car.yearlyRent.category2}" class="category2" th:data-title="${car.yearlyRent.id}"></td>
+                        <td th:text="${car.yearlyRent.name}" class="name" th:data-title="${car.yearlyRent.id}"></td>
+                        <td class="display_none_mobile">
+                            <textarea type="text" th:text="${#numbers.formatInteger(car.yearlyRent.deposit, 0, 'COMMA')}" class="deposit" th:data-title="${car.yearlyRent.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <p th:text="${#numbers.formatInteger(car.yearlyRent.cost_for_20k * car.cost_for_2k, 0, 'COMMA')}"></p>
+                            <textarea type="text" th:text="${car.yearlyRent.cost_for_20k}" class="cost_for_20k" th:data-title="${car.yearlyRent.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <p th:text="${#numbers.formatInteger(car.yearlyRent.cost_for_30k * car.cost_for_2k, 0, 'COMMA')}"></p>
+                            <textarea type="text" th:text="${car.yearlyRent.cost_for_30k}" class="cost_for_30k" th:data-title="${car.yearlyRent.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <p th:text="${#numbers.formatInteger(car.yearlyRent.cost_for_40k * car.cost_for_2k, 0, 'COMMA')}"></p>
+                            <textarea type="text" th:text="${car.yearlyRent.cost_for_40k}" class="cost_for_40k" th:data-title="${car.yearlyRent.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <p class="cost_for_others" th:text="${car.yearlyRent.cost_for_others}" th:data-title="${car.yearlyRent.id}"></p>
+                        </td>
+                        <td class="display_none_mobile">
+                            <p th:text="${car.yearlyRent.age_limit}" class="age_limit" th:data-title="${car.yearlyRent.id}"></p>
+                        </td>
+                        <td class="display_none_mobile">
+                            <textarea type="text" th:text="${car.yearlyRent.cost_per_km}" class="cost_per_km" th:data-title="${car.yearlyRent.id}"></textarea>
+                        </td>
+                        <td class="display_none_mobile">
+                            <p th:text="${car.yearlyRent.nameMoren}" class="nameMoren" th:data-title="${car.yearlyRent.id}"></p>
+                        </td>
+                        <td class="display_none_mobile">
+                            <p th:text="${car.yearlyRent.start}" class="start" th:data-title="${car.yearlyRent.id}"></p>
+                        </td>
+                        <td class="display_none_mobile">
+                            <p th:text="${car.yearlyRent.end}" class="end" th:data-title="${car.yearlyRent.id}"></p>
+                        </td>
+                        <td class="display_none_mobile">
+                            <select name="credit" class="credit" th:data-title="${car.yearlyRent.id}">
+                                <option value="0" th:selected="${car.yearlyRent.credit == '0' ? true : false}">0</option>
+                                <option value="1" th:selected="${car.yearlyRent.credit == '1' ? true : false}">1</option>
+                                <option value="2" th:selected="${car.yearlyRent.credit == '2' ? true : false}">2</option>
+                            </select>
+                        </td>
+                        <td class="display_none_mobile" style="display: flex; flex-direction: column;">
+                            <p th:text="${car.yearlyRent.img_url}" class="img_url" th:data-title="${car.yearlyRent.id}" style="width: 10rem; height: 3.5rem; overflow: hidden;"></p>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" th:onclick="editRentPriceMenu([[${car.yearlyRent.id}]], 'yearly');" style="margin: 4px;">수정하기</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

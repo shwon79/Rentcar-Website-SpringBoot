@@ -1,6 +1,7 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.Discount;
+import kr.carz.savecar.dto.DiscountSaveDTO;
 import kr.carz.savecar.repository.DiscountRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +23,12 @@ public class DiscountService {
         return discountRepository.findByCarNo(carNo);
     }
 
-    public Long save(Discount save_dto) {
-        return discountRepository.save(save_dto).getDiscountId();
+    public Long save(Discount discount) {
+        return discountRepository.save(discount).getDiscountId();
+    }
+
+    public Long saveDTO(DiscountSaveDTO save_dto) {
+        return discountRepository.save(save_dto.toEntity()).getDiscountId();
     }
     public void delete(Discount discount) { discountRepository.delete(discount); }
 

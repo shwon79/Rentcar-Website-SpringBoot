@@ -17,7 +17,9 @@
     <script>
         $(document).ready(function(){
             // 반납예정일로 정렬
-            sortExpectedContent(6)
+            sortAvailableContent(2);
+            sortExpectedContent(6);
+            sortExpectedContent(6);
         });
     </script>
     <script th:src="@{/js/rent_month2.js}" defer></script>
@@ -216,23 +218,44 @@
                         <h2>현재 대여가능차량</h2>
                     </div>
                   
-                    <table th:unless="${morenDTOList.isEmpty()}">
+                    <table class="table_available" th:unless="${morenDTOList.isEmpty()}">
                         <thead id="table_header">
                         <tr>
-                            <th></th>
-                            <th>차량번호<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(1)></th>
-                            <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; width: 25px; height: 25px; display: block; margin: 0 auto" onclick=sortAvailableContent(2)></th>
-                            <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(3)></th>
-                            <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(4)></th>
-                            <th>년식<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(5)></th>
-                            <th>월대여료[VAT별도]<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(6)></th>
+                            <th style="display: none;"></th>
+                            <th>
+                                <p>차량번호</p>
+<!--                                <div onclick=sortAvailableContent(1)>-->
+<!--                                    <i class="fa fa-arrow-down" aria-hidden="true"></i>-->
+<!--                                </div>-->
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(1)>
+                            </th>
+                            <th>
+                                <p>차명</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; width: 25px; height: 25px; display: block; margin: 0 auto" onclick=sortAvailableContent(2)>
+                            </th>
+                            <th>
+                                <p>연료</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(3)>
+                            </th>
+                            <th>
+                                <p>색상</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(4)>
+                            </th>
+                            <th>
+                                <p>년식</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(5)>
+                            </th>
+                            <th>
+                                <p>월대여료[VAT별도]</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortAvailableContent(6)>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
                         <!-- pc -->
                         <tbody id="mainTable_tbody">
                         <tr th:each="moren, iterStat : ${morenDTOList}" class="moveToAvailableDetail" th:data-index="${moren.rentIdx}" style="cursor: pointer;">
-                            <td scope="col" th:text="${moren.carIdx}" class="carIdx" th:data-index="${moren.rentIdx}"></td>
+                            <td scope="col" style="display: none;" th:text="${moren.carIdx}" class="carIdx" th:data-index="${moren.rentIdx}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
                             <td scope="col" th:text="${moren.carName}"></td>
                             <td scope="col" th:text="${moren.carEngine}"></td>
@@ -268,7 +291,7 @@
                 </div>
                 <!-- 모바일 --->
                 <div id="mobileCard">
-                    <div class="card moveToAvailableDetail" th:each="moren, iterStat : ${morenDTOList}" th:data-index="${moren.rentIdx}" style="cursor: pointer;">
+                    <div class="card moveToAvailableDetail" th:each="moren, iterStat : ${#lists.sort(morenDTOList, byCarName)}" th:data-index="${moren.rentIdx}" style="cursor: pointer;">
                         <h4 th:text="${moren.carName}"></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
@@ -306,21 +329,42 @@
                     <table class="table_expected" th:unless="${morenDTOListExpected.isEmpty()}">
                         <thead id="table_header">
                         <tr>
-                            <th></th>
-                            <th>차량번호<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(1)></th>
-                            <th>차명<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; width: 25px; height: 25px; display: block; margin: 0 auto" onclick=sortExpectedContent(2)></th>
-                            <th>연료<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(3)></th>
-                            <th>색상<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(4)></th>
-                            <th>년식<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(5)></th>
-                            <th>반납예정일<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(6)></th>
-                            <th>월대여료[VAT별도]<img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(7)></th>
+                            <th style="display: none;"></th>
+                            <th>
+                                <p>차량번호</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(1)>
+                            </th>
+                            <th>
+                                <p>차명</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; width: 25px; height: 25px; display: block; margin: 0 auto" onclick=sortExpectedContent(2)>
+                            </th>
+                            <th>
+                                <p>연료</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(3)>
+                            </th>
+                            <th>
+                                <p>색상</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(4)>
+                            </th>
+                            <th>
+                                <p>년식</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(5)>
+                            </th>
+                            <th>
+                                <p>반납예정일</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(6)>
+                            </th>
+                            <th>
+                                <p>월대여료[VAT별도]</p>
+                                <img th:src="@{/img/down-arrow.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block" onclick=sortExpectedContent(7)>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
                         <!-- pc -->
                         <tbody id="mainTable_tbody">
                         <tr th:each="moren, iterStat : ${morenDTOListExpected}" class="moveToExpectedDetail" th:data-index="${moren.rentIdx}" style="cursor: pointer;">
-                            <td scope="col" th:text="${moren.carIdx}" class="carIdx" th:data-index="${moren.rentIdx}"></td>
+                            <td scope="col" style="display: none;" th:text="${moren.carIdx}" class="carIdx" th:data-index="${moren.rentIdx}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
                             <td scope="col" th:text="${moren.carName}"></td>
                             <td scope="col" th:text="${moren.carEngine}"></td>

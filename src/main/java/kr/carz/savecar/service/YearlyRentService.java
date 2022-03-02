@@ -2,9 +2,7 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.domain.YearlyRent;
-import kr.carz.savecar.dto.MonthlyRentDTO;
-import kr.carz.savecar.dto.MonthlyRentVO;
-import kr.carz.savecar.dto.YearlyRentDTO;
+import kr.carz.savecar.dto.*;
 import kr.carz.savecar.repository.YearlyRentRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,11 +45,26 @@ public class YearlyRentService {
         yearlyRent.setCost_for_20k(yearlyRentDTO.getCost_for_20k());
         yearlyRent.setCost_for_30k(yearlyRentDTO.getCost_for_30k());
         yearlyRent.setCost_for_40k(yearlyRentDTO.getCost_for_40k());
-        yearlyRent.setCost_for_others(yearlyRentDTO.getCost_for_others());
         yearlyRent.setCost_per_km(yearlyRentDTO.getCost_per_km());
         yearlyRent.setCredit(yearlyRentDTO.getCredit());
 
         return yearlyRentRepository.save(yearlyRent).getId();
     }
 
+    public Long saveByRentCarVO(RentCarVO rentCarVO, String imgUrl){
+
+        YearlyRentDTO yearlyRentDTO = new YearlyRentDTO(rentCarVO.getCategory1(), rentCarVO.getCategory2(), rentCarVO.getDeposit_yearly(), rentCarVO.getName()
+                , rentCarVO.getCost_for_20k(), rentCarVO.getCost_for_30k(), rentCarVO.getCost_for_40k(), rentCarVO.getCost_for_others(), rentCarVO.getAge_limit()
+                , rentCarVO.getCost_per_km_yearly(), rentCarVO.getNameMoren(), rentCarVO.getStart(), rentCarVO.getEnd(), rentCarVO.getCredit_yearly(), imgUrl);
+
+        return yearlyRentRepository.save(yearlyRentDTO.toEntity()).getId();
+    }
+
+    public Optional<YearlyRent> findByid(Long yearRentId) {
+        return yearlyRentRepository.findById(yearRentId);
+    }
+
+    public void delete(YearlyRent yearlyRent) {
+        yearlyRentRepository.delete(yearlyRent);
+    }
 }

@@ -12,7 +12,6 @@ public class AdminDTO {
     private String username;
     private String password;
 
-    // Member 객체로 변환
     public Admin toEntity() {
         return Admin.builder()
                 .id(id)

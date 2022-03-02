@@ -20,7 +20,6 @@ public class DiscountSaveDTO {
 
     public Discount toEntity() {
         return Discount.builder()
-                .discountId(discountId)
                 .carNo(carNo)
                 .discount(discount)
                 .description(description)

@@ -47,6 +47,23 @@
     border: 1px solid black;
     border-radius: 4px;
 }
+
+/*렌트카 등록*/
+.register_rent_car textarea, .register_rent_car input {
+    max-width: 168px;
+}
+#twoYearlyForm {
+    display: none;
+}
+#yearlyForm .detail_list {
+    background: cornsilk;
+}
+#twoYearlyForm .detail_list {
+    background: whitesmoke;
+}
+#twoYearlyForm.openForm {
+    display: block;
+}
 @media screen and (max-width: 600px) {
     .a_buttons {
         flex-wrap: wrap;

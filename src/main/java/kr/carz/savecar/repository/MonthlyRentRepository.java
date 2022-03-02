@@ -20,5 +20,6 @@ public interface MonthlyRentRepository extends JpaRepository<MonthlyRent, Long> 
     List<String> findDistinctCategory1();
 
     List<MonthlyRent> findByCategory2AndTwoYearlyRentIsNotNull(String category2);
+    List<MonthlyRent> findAllByTwoYearlyRentIsNotNull();
 
 }

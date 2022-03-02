@@ -197,6 +197,33 @@ public class ReservationController {
         pw.close();
     }
 
+    // 문자 전송 api to employees
+    public void send_error_message_to_employees(String to_manager_phone, String manager_text_message)  {
+
+        // 문자전송
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", to_manager_phone);
+        params.put("from", admin3);
+        params.put("type", "LMS");
+
+        params.put("text", manager_text_message);
+
+        params.put("app_version", "test app 1.2");
+
+        /* 세이브카에게 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj = coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+    }
+
 
     // 문자 전송 api
     public void send_message(String to_manager_phone, String to_customer_phone, String manager_text_message, String customer_text_message)  {

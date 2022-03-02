@@ -51,11 +51,7 @@ public class DiscountController {
         if(original_discount.isPresent()){
             jsonObject.put("result", 0);
         } else {
-            Discount discount = new Discount();
-            discount.setCarNo(discountDTO.getCarNo());
-            discount.setDiscount(discountDTO.getDiscount());
-            discount.setDescription(discountDTO.getDescription());
-            discountService.save(discount);
+            discountService.saveDTO(discountDTO);
 
             jsonObject.put("result", 1);
         }

@@ -15,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.*;
 
 @Controller
@@ -69,6 +67,7 @@ public class RentCarController {
         ModelAndView mav = new ModelAndView();
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+        Collections.sort(monthlyRentList);
 
         mav.addObject("monthlyRentList", monthlyRentList);
 
@@ -89,6 +88,17 @@ public class RentCarController {
         }
 
         mav.setViewName("admin/rentcar_price_monthly_detail");
+
+        return mav;
+    }
+
+
+    @GetMapping("/admin/rentcar/price/register")
+    public ModelAndView get_rent_car_price_register() {
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("admin/rentcar_price_register");
 
         return mav;
     }
@@ -117,7 +127,6 @@ public class RentCarController {
     }
 
 
-
     @PutMapping(value="/admin/rentcar/price/monthly/image/{monthlyId}", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public void put_rent_car_price_monthly_with_image(MonthlyRentVO monthlyRentVO, @PathVariable Long monthlyId) throws IOException {
@@ -134,6 +143,63 @@ public class RentCarController {
     }
 
 
+    @PostMapping(value="/admin/rentcar/price", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public void post_rent_car_price(HttpServletResponse res, RentCarVO rentCarVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        String imgPath = s3Service.upload(rentCarVO.getFile());
+
+        Long yearRentId = yearlyRentService.saveByRentCarVO(rentCarVO, imgPath);
+        Optional<YearlyRent> yearlyRentWrapper = yearlyRentService.findByid(yearRentId);
+
+        if(rentCarVO.getIsTwoYearExist() == 1) {
+            Long twoYearRentId = twoYearlyRentService.saveByRentCarVO(rentCarVO, imgPath);
+            Optional<TwoYearlyRent> twoYearlyRentWrapper = twoYearlyRentService.findByid(twoYearRentId);
+            monthlyRentService.saveByRentCarVO(rentCarVO, yearlyRentWrapper.get(), twoYearlyRentWrapper.get(), imgPath);
+        } else {
+            monthlyRentService.saveByRentCarVO(rentCarVO, yearlyRentWrapper.get(), null, imgPath);
+        }
+
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @DeleteMapping("/admin/rentcar/price/{monthlyId}")
+    @ResponseBody
+    public void delete_rent_car_price(HttpServletResponse res, @PathVariable Long monthlyId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
+
+        if(monthlyRentWrapper.isPresent()) {
+            MonthlyRent monthlyRent = monthlyRentWrapper.get();
+            YearlyRent yearlyRent = monthlyRent.getYearlyRent();
+            if(monthlyRent.getTwoYearlyRent() != null){
+                TwoYearlyRent twoYearlyRent = monthlyRent.getTwoYearlyRent();
+                twoYearlyRentService.delete(twoYearlyRent);
+            }
+            monthlyRentService.delete(monthlyRent);
+            yearlyRentService.delete(yearlyRent);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
 
 
     @GetMapping("/admin/rentcar/price/yearly/menu/{category2}")
@@ -142,6 +208,7 @@ public class RentCarController {
         ModelAndView mav = new ModelAndView();
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+        Collections.sort(monthlyRentList);
 
         mav.addObject("monthlyRentList", monthlyRentList);
 
@@ -197,6 +264,7 @@ public class RentCarController {
         ModelAndView mav = new ModelAndView();
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+        Collections.sort(monthlyRentList);
 
         mav.addObject("monthlyRentList", monthlyRentList);
 

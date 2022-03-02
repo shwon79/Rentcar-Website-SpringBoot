@@ -1,8 +1,12 @@
 package kr.carz.savecar.service;
 
+import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.domain.MonthlyRent;
+import kr.carz.savecar.domain.TwoYearlyRent;
+import kr.carz.savecar.domain.YearlyRent;
 import kr.carz.savecar.dto.MonthlyRentDTO;
 import kr.carz.savecar.dto.MonthlyRentVO;
+import kr.carz.savecar.dto.RentCarVO;
 import kr.carz.savecar.repository.MonthlyRentRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +53,15 @@ public class MonthlyRentService {
         return monthlyRentRepository.save(monthlyRent).getId();
     }
 
+    public Long saveByRentCarVO(RentCarVO rentCarVO, YearlyRent yearlyRent, TwoYearlyRent twoYearlyRent, String imgUrl){
+        MonthlyRentDTO monthlyRentDTO = new MonthlyRentDTO(rentCarVO.getCategory1(), rentCarVO.getCategory2(), rentCarVO.getName(), rentCarVO.getDeposit_monthly()
+        , rentCarVO.getCost_for_2k(), rentCarVO.getCost_for_2_5k(), rentCarVO.getCost_for_3k(), rentCarVO.getCost_for_4k()
+        , rentCarVO.getCost_for_others(), rentCarVO.getAge_limit(), rentCarVO.getCost_per_km_monthly(), rentCarVO.getNameMoren()
+        , rentCarVO.getStart(), rentCarVO.getEnd(), rentCarVO.getCredit_monthly(), imgUrl);
+
+        return monthlyRentRepository.save(monthlyRentDTO.toEntity(yearlyRent, twoYearlyRent)).getId();
+    }
+
     public Long updateAllPriceByDTO(MonthlyRentDTO monthlyRentDTO, MonthlyRent monthlyRent){
 
         monthlyRent.setCategory1(monthlyRentDTO.getCategory1());
@@ -76,6 +89,7 @@ public class MonthlyRentService {
         monthlyRent.getYearlyRent().setStart(monthlyRentDTO.getStart());
         monthlyRent.getYearlyRent().setEnd(monthlyRentDTO.getEnd());
         monthlyRent.getYearlyRent().setImg_url(monthlyRentDTO.getImg_url());
+        monthlyRent.getYearlyRent().setCost_for_others(monthlyRentDTO.getCost_for_others());
 
         if(monthlyRent.getTwoYearlyRent() != null){
             monthlyRent.getTwoYearlyRent().setCategory1(monthlyRentDTO.getCategory1());
@@ -86,6 +100,7 @@ public class MonthlyRentService {
             monthlyRent.getTwoYearlyRent().setStart(monthlyRentDTO.getStart());
             monthlyRent.getTwoYearlyRent().setEnd(monthlyRentDTO.getEnd());
             monthlyRent.getTwoYearlyRent().setImg_url(monthlyRentDTO.getImg_url());
+            monthlyRent.getTwoYearlyRent().setCost_for_others(monthlyRentDTO.getCost_for_others());
         }
         return monthlyRentRepository.save(monthlyRent).getId();
     }
@@ -117,6 +132,7 @@ public class MonthlyRentService {
         monthlyRent.getYearlyRent().setStart(monthlyRentVO.getStart());
         monthlyRent.getYearlyRent().setEnd(monthlyRentVO.getEnd());
         monthlyRent.getYearlyRent().setImg_url(monthlyRentVO.getImg_url());
+        monthlyRent.getYearlyRent().setCost_for_others(monthlyRentVO.getCost_for_others());
 
         if(monthlyRent.getTwoYearlyRent() != null) {
             monthlyRent.getTwoYearlyRent().setCategory1(monthlyRentVO.getCategory1());
@@ -127,11 +143,19 @@ public class MonthlyRentService {
             monthlyRent.getTwoYearlyRent().setStart(monthlyRentVO.getStart());
             monthlyRent.getTwoYearlyRent().setEnd(monthlyRentVO.getEnd());
             monthlyRent.getTwoYearlyRent().setImg_url(monthlyRentVO.getImg_url());
+            monthlyRent.getTwoYearlyRent().setCost_for_others(monthlyRentVO.getCost_for_others());
         }
         return monthlyRentRepository.save(monthlyRent).getId();
     }
 
     public List<MonthlyRent> findByCategory2AndTwoYearlyRentIsNotNull(String category2){
         return monthlyRentRepository.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+    }
+    public List<MonthlyRent> findAllByTwoYearlyRentIsNotNull(){
+        return monthlyRentRepository.findAllByTwoYearlyRentIsNotNull();
+    }
+
+    public void delete(MonthlyRent monthlyRent) {
+        monthlyRentRepository.delete(monthlyRent);
     }
 }

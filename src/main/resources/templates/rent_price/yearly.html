@@ -1,4 +1,4 @@
-<!-- 렌트가격표(long.html) -->
+<!-- 렌트가격표(yearly.html) -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -8,6 +8,7 @@
 <head>
     <title>SAVECAR - 렌트 가격표</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link th:href="@{/css/rent_price.css}" rel="stylesheet">
 
     <script>
         $(document).ready(function() {
@@ -44,9 +45,21 @@
 
                       <div class="separator"></div>
                       <div id="filters" class="toolbar mb2 mt2">
-                          <h2><a href="/price/month"><button class="btn-md fil-cat filter">월 렌트</button></a> /
-                              <a href="/price/long"><button class="btn-md fil-cat filter">12개월 렌트</button></a> /
-                              <a href="/price/short"><button class="btn-md fil-cat filter">단기 렌트</button></a></h2>
+                          <h2 class="price_menu">
+                              <div>
+                                  <a href="/price/month"><button class="btn-md fil-cat filter">월 렌트</button></a>
+                                  <span> / </span>
+                              </div>
+                              <div>
+                                  <a href="/price/yearly"><button class="btn-md fil-cat filter">12개월 렌트</button></a>
+                                  <span> / </span>
+                              </div>
+                              <div>
+                                  <a href="/price/twoYearly"><button class="btn-md fil-cat filter">24개월 렌트</button></a>
+                                  <span> / </span>
+                              </div>
+                              <a href="/price/short"><button class="btn-md fil-cat filter">단기 렌트</button></a>
+                          </h2>
 <!--                              <a href="/price/camp"><button class="btn-md fil-cat filter">캠핑카</button></a></h2>-->
                       </div> 
                       <div class="separator"></div>
@@ -111,27 +124,27 @@
               <table id="example" class="table table-bordered table-responsive">
                   <thead>
                       <tr>
-                          <th>차종</th>
-                          <th>차명</th>
+                          <th scope="row">차종</th>
+                          <th scope="row">차명</th>
                           <th>보증금</th>
                           <th>2만km</th>
                           <th>3만km</th>
                           <th>4만km</th>
                           <th>21세</th>
-                          <th>km당 추가요금</th>
+                          <th style="word-break: keep-all;">km당 추가요금</th>
                       </tr>
                   </thead>
 
                   <tbody>
-                      <tr th:each="yearlyRent : ${yearlyRentList}">
-                          <td scope="col" th:text="${yearlyRent.category2}"></td>
-                          <td scope="col" th:text="${yearlyRent.name}"></td>
-                          <td scope="col" th:text="${yearlyRent.deposit}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_20k}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_30k}"></td>
-                          <td scope="col" th:text="${yearlyRent.cost_for_40k}"></td>
-                          <td scope="col" th:text="${yearlyRent.age_limit}"></td>
-                          <td><span scope="col" th:text="${yearlyRent.cost_per_km}"></span>원</td>
+                      <tr th:each="monthly, idx : ${monthlyRentList}">
+                          <td scope="row" th:text="${monthly.category2}"></td>
+                          <td scope="row" th:text="${monthly.name}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(monthly.yearlyRent.deposit, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(monthly.cost_for_2k * monthly.yearlyRent.cost_for_20k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(monthly.cost_for_2k * monthly.yearlyRent.cost_for_30k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(monthly.cost_for_2k * monthly.yearlyRent.cost_for_40k, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(monthly.yearlyRent.age_limit, 3, 'COMMA')}"></td>
+                          <td><span scope="col" th:text="${monthly.yearlyRent.cost_per_km}"></span>원</td>
                       </tr>
                   </tbody>
               </table>

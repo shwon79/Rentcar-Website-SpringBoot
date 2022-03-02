@@ -2,6 +2,7 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.TwoYearlyRent;
 import kr.carz.savecar.domain.YearlyRent;
+import kr.carz.savecar.dto.RentCarVO;
 import kr.carz.savecar.dto.TwoYearlyRentDTO;
 import kr.carz.savecar.dto.YearlyRentDTO;
 import kr.carz.savecar.repository.TwoYearlyRentRepository;
@@ -47,10 +48,27 @@ public class TwoYearlyRentService {
         twoYearlyRent.setCost_for_20Tk(twoYearlyRentDTO.getCost_for_20Tk());
         twoYearlyRent.setCost_for_30Tk(twoYearlyRentDTO.getCost_for_30Tk());
         twoYearlyRent.setCost_for_40Tk(twoYearlyRentDTO.getCost_for_40Tk());
-        twoYearlyRent.setCost_for_others(twoYearlyRentDTO.getCost_for_others());
         twoYearlyRent.setCost_per_km(twoYearlyRentDTO.getCost_per_km());
         twoYearlyRent.setCredit(twoYearlyRentDTO.getCredit());
 
         return twoYearlyRentRepository.save(twoYearlyRent).getId();
+    }
+
+
+    public Long saveByRentCarVO(RentCarVO rentCarVO, String imgUrl){
+
+        TwoYearlyRentDTO twoYearlyRentDTO = new TwoYearlyRentDTO(rentCarVO.getCategory1(), rentCarVO.getCategory2(), rentCarVO.getDeposit_twoYearly(), rentCarVO.getName()
+                , rentCarVO.getCost_for_20Tk(), rentCarVO.getCost_for_30Tk(), rentCarVO.getCost_for_40Tk(), rentCarVO.getCost_for_others(), rentCarVO.getAge_limit()
+                , rentCarVO.getCost_per_km_twoYearly(), rentCarVO.getNameMoren(), rentCarVO.getStart(), rentCarVO.getEnd(), rentCarVO.getCredit_twoYearly(), imgUrl);
+
+        return twoYearlyRentRepository.save(twoYearlyRentDTO.toEntity()).getId();
+    }
+
+    public Optional<TwoYearlyRent> findByid(Long twoYearRentId) {
+        return twoYearlyRentRepository.findById(twoYearRentId);
+    }
+
+    public void delete(TwoYearlyRent twoYearlyRent) {
+        twoYearlyRentRepository.delete(twoYearlyRent);
     }
 }
