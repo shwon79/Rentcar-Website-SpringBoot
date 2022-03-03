@@ -111,11 +111,11 @@
                             <textarea type="text" th:text="${car.yearlyRent.cost_for_20k}" class="cost_for_20k" th:data-title="${car.yearlyRent.id}"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(T(Math).floor(car.yearlyRent.cost_for_30k * car.cost_for_3k / 1000)*1000, 0, 'COMMA')}"></p>
+                            <p th:text="${#numbers.formatInteger(T(Math).floor(car.yearlyRent.cost_for_30k * car.cost_for_3k * car.cost_for_2k / 1000)*1000, 0, 'COMMA')}"></p>
                             <textarea type="text" th:text="${car.yearlyRent.cost_for_30k}" class="cost_for_30k" th:data-title="${car.yearlyRent.id}"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(T(Math).floor(car.yearlyRent.cost_for_40k * car.cost_for_4k / 1000)*1000, 0, 'COMMA')}"></p>
+                            <p th:text="${#numbers.formatInteger(T(Math).floor(car.yearlyRent.cost_for_40k * car.cost_for_4k * car.cost_for_2k / 1000)*1000, 0, 'COMMA')}"></p>
                             <textarea type="text" th:text="${car.yearlyRent.cost_for_40k}" class="cost_for_40k" th:data-title="${car.yearlyRent.id}"></textarea>
                         </td>
                         <td class="display_none_mobile">
