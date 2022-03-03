@@ -4,6 +4,7 @@ import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -99,47 +100,29 @@ public class HelloController {
     }
 
 
-
     @GetMapping("/rent/long_term")
     public String rent_long_term() {
         return "rent_longterm/main";
     }
 
-    @GetMapping("/price/month")
-    public String price_month(Model model) {
+    @GetMapping("/price/{period}/{category2}")
+    public String price_month(Model model, @PathVariable String period, @PathVariable String category2) {
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+        Collections.sort(monthlyRentList);
         model.addAttribute("monthlyRentList", monthlyRentList);
 
-        return "rent_price/month";
+        switch (period) {
+            case "yearly":
+                return "rent_price/yearly";
+            case "twoYearly":
+                monthlyRentList = monthlyRentService.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+                model.addAttribute("monthlyRentList", monthlyRentList);
+                return "rent_price/twoYearly";
+            default:
+                return "rent_price/month";
+        }
     }
-
-
-    @GetMapping("/price/yearly")
-    public String price_yearly(Model model) {
-
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
-
-//        Collections.sort(monthlyRentList);
-
-        model.addAttribute("monthlyRentList", monthlyRentList);
-
-        return "rent_price/yearly";
-    }
-
-
-    @GetMapping("/price/twoYearly")
-    public String price_twoYearly(Model model) {
-
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllByTwoYearlyRentIsNotNull();
-
-//        Collections.sort(monthlyRentList);
-
-        model.addAttribute("monthlyRentList", monthlyRentList);
-
-        return "rent_price/twoYearly";
-    }
-
 
     @GetMapping("/price/short")
     public String price_short(Model model) {

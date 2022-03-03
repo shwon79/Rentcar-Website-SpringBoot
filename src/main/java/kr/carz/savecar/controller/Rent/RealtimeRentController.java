@@ -254,6 +254,8 @@ public class RealtimeRentController {
 
                         MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, carCategory);
                         Float costFor2k = monthlyRent2.getCost_for_2k();
+                        Float costFor3k = monthlyRent2.getCost_for_3k();
+                        Float costFor4k = monthlyRent2.getCost_for_4k();
 
                         switch(realTimeDto.getRentTerm()){
                             case "한달":
@@ -288,13 +290,13 @@ public class RealtimeRentController {
                                         kilometer_cost = costFor2k * yearlyRent.getCost_for_30k();
                                         break;
                                     case "40000km":
-                                        kilometer_cost = costFor2k * yearlyRent.getCost_for_40k();
+                                        kilometer_cost = costFor3k * yearlyRent.getCost_for_40k();
                                         break;
                                     case "기타_long":
                                         kilometer_cost = (float) -1;
                                         break;
                                     default:
-                                        kilometer_cost = costFor2k * yearlyRent.getCost_for_20k();
+                                        kilometer_cost = costFor4k * yearlyRent.getCost_for_20k();
                                         break;
                                 }
 
@@ -311,13 +313,13 @@ public class RealtimeRentController {
                                         kilometer_cost = costFor2k * twoYearlyRent.getCost_for_30Tk();
                                         break;
                                     case "40000km":
-                                        kilometer_cost = costFor2k * twoYearlyRent.getCost_for_40Tk();
+                                        kilometer_cost = costFor3k * twoYearlyRent.getCost_for_40Tk();
                                         break;
                                     case "기타_long":
                                         kilometer_cost = (float) -1;
                                         break;
                                     default:
-                                        kilometer_cost = costFor2k * twoYearlyRent.getCost_for_20Tk();
+                                        kilometer_cost = costFor4k * twoYearlyRent.getCost_for_20Tk();
                                         break;
                                 }
 
