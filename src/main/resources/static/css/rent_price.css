@@ -3,6 +3,35 @@
     justify-content: center;
 }
 
+ /*차종류별 메뉴 버튼 */
+.price_buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+}
+.price_button {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border: 2px solid #c4beb2;
+    margin: 0.5rem;
+}
+.price_button:hover {
+    background-color: #c4beb2;
+}
+
+/* 테이블 행/열 고정 시작 */
 table {
     margin: 1em 0;
     border-collapse: collapse;
@@ -30,8 +59,9 @@ th[scope=row] {
 }
 
 td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
-    left: 47px;
+    left: 45px;
 }
+/* 테이블 행/열 고정 끝 */
 
 @media screen and (max-width: 600px) {
     .price_menu {
