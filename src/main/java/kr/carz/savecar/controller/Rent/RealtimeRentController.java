@@ -45,12 +45,6 @@ public class RealtimeRentController {
     /*                             [New 버전] 실시간 월렌트 예약하기                                */
     /* ======================================================================================== */
 
-    @Value("${coolsms.api_key}")
-    private String api_key;
-
-    @Value("${coolsms.api_secret}")
-    private String api_secret;
-
     @Value("${phone.admin1}")
     private String admin1;
 
@@ -65,15 +59,6 @@ public class RealtimeRentController {
 
     @Value("${moren.expected_day}")
     private String expected_day;
-
-    @Value("${kakao.ATA.template.senderkey.realtimerent}")
-    private String senderKey;
-
-    @Value("${kakao.ATA.template.templatecode.realtimerent.customer}")
-    private String realTimeRentTemplateCodeCustomer;
-
-    @Value("${kakao.ATA.template.templatecode.realtimerent.employee}")
-    private String realTimeRentTemplateCodeEmployer;
 
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
@@ -247,15 +232,15 @@ public class RealtimeRentController {
                     Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
                     try {
-                        Float kilometer_cost = (float) 1;
+                        double kilometer_cost = (float) 1;
                         Long dbid = Long.parseLong("0");
                         String cost_per_km = null;
                         String credit = null;
 
                         MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, carCategory);
-                        Float costFor2k = monthlyRent2.getCost_for_2k();
-                        Float costFor3k = monthlyRent2.getCost_for_3k();
-                        Float costFor4k = monthlyRent2.getCost_for_4k();
+                        double costFor2k = monthlyRent2.getCost_for_2k();
+                        double costFor3k = monthlyRent2.getCost_for_3k();
+                        double costFor4k = monthlyRent2.getCost_for_4k();
 
                         switch(realTimeDto.getRentTerm()){
                             case "한달":
@@ -271,7 +256,7 @@ public class RealtimeRentController {
                                         kilometer_cost = costFor2k * monthlyRent2.getCost_for_4k();
                                         break;
                                     case "기타":
-                                        kilometer_cost = (float) -1;
+                                        kilometer_cost = -1;
                                         break;
                                     default:
                                         kilometer_cost = costFor2k;
@@ -481,7 +466,7 @@ public class RealtimeRentController {
                         (String) morenObject.get("carNo"), (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),
                         (String) morenObject.get("carDisplacement"), (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),
                         (String) morenObject.get("carOld"), (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),
-                        null, (String) morenObject.get("order_end"), rentIdx, carList, discount, null, cost_per_km,
+                        0, (String) morenObject.get("order_end"), rentIdx, carList, discount, null, cost_per_km,
                         credit, (String) morenObject.get("carCode"), kilometer, deposit, rentTerm, null);
 
                 model.put("morenDto", morenDto);
@@ -521,7 +506,7 @@ public class RealtimeRentController {
     //    @RequestMapping(value = "/rent/month/moren/reservation", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @PostMapping("/rent/month/moren/reservation")
     @ResponseBody
-    public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO dto) throws IOException {
+    public void moren_reservation(@RequestBody MorenReservationDTO dto) {
 
         Long reservationId = morenReservationService.saveDTO(dto);
 

@@ -25,9 +25,9 @@ public class YearlyRent implements Comparable<YearlyRent>{
     private String category2; // 중형차, 경차 등 큰 분류
     private String deposit;
     private String name;
-    private Float cost_for_20k;
-    private Float cost_for_30k;
-    private Float cost_for_40k;
+    private double cost_for_20k;
+    private double cost_for_30k;
+    private double cost_for_40k;
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;
@@ -41,7 +41,7 @@ public class YearlyRent implements Comparable<YearlyRent>{
 
     @Builder
     public YearlyRent(String category1, String category2, String name, String deposit
-            , Float cost_for_20k, Float cost_for_30k, Float cost_for_40k, String cost_for_others, String age_limit, String cost_per_km, String nameMoren
+            , double cost_for_20k, double cost_for_30k, double cost_for_40k, String cost_for_others, String age_limit, String cost_per_km, String nameMoren
             , Long start, Long end, String credit, String img_url) {
         this.category1 = category1;
         this.category2 = category2;

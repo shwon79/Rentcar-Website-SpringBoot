@@ -45,18 +45,18 @@ public class RentCarVO {
     private String credit_twoYearly;
 
     // monthly
-    private Float cost_for_2k;
-    private Float cost_for_2_5k;
-    private Float cost_for_3k;
-    private Float cost_for_4k;
+    private double cost_for_2k;
+    private double cost_for_2_5k;
+    private double cost_for_3k;
+    private double cost_for_4k;
 
     // yearly
-    private Float cost_for_20k;
-    private Float cost_for_30k;
-    private Float cost_for_40k;
+    private double cost_for_20k;
+    private double cost_for_30k;
+    private double cost_for_40k;
 
     // twoYearly
-    private Float cost_for_20Tk;
-    private Float cost_for_30Tk;
-    private Float cost_for_40Tk;
+    private double cost_for_20Tk;
+    private double cost_for_30Tk;
+    private double cost_for_40Tk;
 }
