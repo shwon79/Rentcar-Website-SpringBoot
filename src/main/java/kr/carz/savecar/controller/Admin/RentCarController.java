@@ -44,8 +44,8 @@ public class RentCarController {
 //        for(MonthlyRent monthlyRent : monthlyRents){
 //
 //            Float cost_for_2k = monthlyRent.getCost_for_2k();
-//            Float cost_for_3k = monthlyRent.getCost_for_2k();
-//            Float cost_for_4k = monthlyRent.getCost_for_2k();
+//            Float cost_for_3k = monthlyRent.getCost_for_3k();
+//            Float cost_for_4k = monthlyRent.getCost_for_4k();
 //
 //            monthlyRent.setCost_for_2_5k(monthlyRent.getCost_for_2_5k() / cost_for_2k);
 //            monthlyRent.setCost_for_3k(monthlyRent.getCost_for_3k() / cost_for_2k);
