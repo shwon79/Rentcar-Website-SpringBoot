@@ -183,12 +183,12 @@ public class RentCarController {
         if(monthlyRentWrapper.isPresent()) {
             MonthlyRent monthlyRent = monthlyRentWrapper.get();
             YearlyRent yearlyRent = monthlyRent.getYearlyRent();
+            monthlyRentService.delete(monthlyRent);
+            yearlyRentService.delete(yearlyRent);
             if(monthlyRent.getTwoYearlyRent() != null){
                 TwoYearlyRent twoYearlyRent = monthlyRent.getTwoYearlyRent();
                 twoYearlyRentService.delete(twoYearlyRent);
             }
-            monthlyRentService.delete(monthlyRent);
-            yearlyRentService.delete(yearlyRent);
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
