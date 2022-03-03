@@ -7,6 +7,8 @@ import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -85,15 +87,25 @@ public class MorenController {
 
     // 월렌트 실시간 모렌 예약 메뉴로 입장
     @GetMapping("/admin/moren/reservation/menu")
-    public ModelAndView get_moren_reservation_menu() {
+    public ModelAndView get_moren_reservation_menu(Pageable pageable) {
 
         ModelAndView mav = new ModelAndView();
 
-        List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
-        mav.addObject("morenReservationList", morenReservationList);
-        mav.setViewName("admin/moren_reservation_menu");
+        Page<MorenReservation> reservationPage = morenReservationService.findAllPageable(pageable);
+        mav.addObject("currentPage", pageable.getPageNumber());
+        mav.addObject("pageSize", pageable.getPageSize());
 
+        mav.addObject("startPage", (pageable.getPageNumber() / 5) * 5 + 1);
+        mav.addObject("endPage", Integer.min((pageable.getPageNumber() / 5 + 1) * 5, reservationPage.getTotalPages()));
+
+        mav.addObject("totalPages", reservationPage.getTotalPages());
+        mav.addObject("morenReservationList", reservationPage.getContent());
+
+//        List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
+//        mav.addObject("morenReservationList", morenReservationList);
         mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate).reversed());
+
+        mav.setViewName("admin/moren_reservation_menu");
 
         return mav;
     }

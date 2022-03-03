@@ -1,8 +1,11 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.MorenReservation;
+import kr.carz.savecar.domain.Reservation;
 import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.repository.MorenReservationRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -31,4 +34,8 @@ public class MorenReservationService {
         return morenReservationRepository.findById(id);
     }
     public void delete(MorenReservation morenReservation) { morenReservationRepository.delete(morenReservation); }
+
+    public Page<MorenReservation> findAllPageable(Pageable pageable){
+        return morenReservationRepository.findAllByOrderByIdDesc(pageable);
+    }
 }
