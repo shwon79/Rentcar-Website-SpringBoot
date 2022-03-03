@@ -100,44 +100,27 @@ public class HelloController {
     }
 
 
-
     @GetMapping("/rent/long_term")
     public String rent_long_term() {
         return "rent_longterm/main";
     }
 
-    @GetMapping("/price/month/{category2}")
-    public String price_month(Model model, @PathVariable String category2) {
+    @GetMapping("/price/{period}/{category2}")
+    public String price_month(Model model, @PathVariable String period, @PathVariable String category2) {
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
         Collections.sort(monthlyRentList);
         model.addAttribute("monthlyRentList", monthlyRentList);
 
-        return "rent_price/month";
+        switch (period) {
+            case "yearly":
+                return "rent_price/yearly";
+            case "twoYearly":
+                return "rent_price/twoYearly";
+            default:
+                return "rent_price/month";
+        }
     }
-
-
-    @GetMapping("/price/yearly/{category2}")
-    public String price_yearly(Model model, @PathVariable String category2) {
-
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
-        Collections.sort(monthlyRentList);
-        model.addAttribute("monthlyRentList", monthlyRentList);
-
-        return "rent_price/yearly";
-    }
-
-
-    @GetMapping("/price/twoYearly/{category2}")
-    public String price_twoYearly(Model model, @PathVariable String category2) {
-
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
-        Collections.sort(monthlyRentList);
-        model.addAttribute("monthlyRentList", monthlyRentList);
-
-        return "rent_price/twoYearly";
-    }
-
 
     @GetMapping("/price/short")
     public String price_short(Model model) {
