@@ -82,10 +82,10 @@ function editRentPriceMenu(id, period) {
             let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
             let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
-            data['cost_for_2k'] = parseFloat(cost_for_2k.value.replace(/,/g, '')).toFixed(6);
-            data['cost_for_2_5k'] = parseFloat(cost_for_2_5k.value).toFixed(6);
-            data['cost_for_3k'] = parseFloat(cost_for_3k.value).toFixed(6);
-            data['cost_for_4k'] = parseFloat(cost_for_4k.value).toFixed(6);
+            data['cost_for_2k'] = parseFloat(cost_for_2k.value.replace(/,/g, ''));
+            data['cost_for_2_5k'] = parseFloat(cost_for_2_5k.value).toFixed(15);
+            data['cost_for_3k'] = parseFloat(cost_for_3k.value).toFixed(15);
+            data['cost_for_4k'] = parseFloat(cost_for_4k.value).toFixed(15);
 
             // console.log(data);
             postStringData(period, id, data);
@@ -94,9 +94,9 @@ function editRentPriceMenu(id, period) {
             let cost_for_30k = [...document.getElementsByClassName('cost_for_30k')].find(item => item.dataset.title == id);
             let cost_for_40k = [...document.getElementsByClassName('cost_for_40k')].find(item => item.dataset.title == id);
 
-            data['cost_for_20k'] = parseFloat(cost_for_20k.value).toFixed(6);
-            data['cost_for_30k'] = parseFloat(cost_for_30k.value).toFixed(6);
-            data['cost_for_40k'] = parseFloat(cost_for_40k.value).toFixed(6);
+            data['cost_for_20k'] = parseFloat(cost_for_20k.value).toFixed(15);
+            data['cost_for_30k'] = parseFloat(cost_for_30k.value).toFixed(15);
+            data['cost_for_40k'] = parseFloat(cost_for_40k.value).toFixed(15);
 
             // console.log(data);
             postStringData(period, id, data);
@@ -105,9 +105,9 @@ function editRentPriceMenu(id, period) {
             let cost_for_30Tk = [...document.getElementsByClassName('cost_for_30Tk')].find(item => item.dataset.title == id);
             let cost_for_40Tk = [...document.getElementsByClassName('cost_for_40Tk')].find(item => item.dataset.title == id);
 
-            data['cost_for_20Tk'] = parseFloat(cost_for_20Tk.value).toFixed(6);
-            data['cost_for_30Tk'] = parseFloat(cost_for_30Tk.value).toFixed(6);
-            data['cost_for_40Tk'] = parseFloat(cost_for_40Tk.value).toFixed(6);
+            data['cost_for_20Tk'] = parseFloat(cost_for_20Tk.value).toFixed(15);
+            data['cost_for_30Tk'] = parseFloat(cost_for_30Tk.value).toFixed(15);
+            data['cost_for_40Tk'] = parseFloat(cost_for_40Tk.value).toFixed(15);
 
             // console.log(data);
             postStringData(period, id, data);
@@ -136,10 +136,10 @@ function editRentPriceMenu(id, period) {
             let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
             let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
-            formData.append('cost_for_2k', parseFloat(cost_for_2k.value).toFixed(6));
-            formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k.value).toFixed(6));
-            formData.append('cost_for_3k', parseFloat(cost_for_3k.value).toFixed(6));
-            formData.append('cost_for_4k', parseFloat(cost_for_4k.value).toFixed(6));
+            formData.append('cost_for_2k', parseFloat(cost_for_2k.value).toFixed(15));
+            formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k.value).toFixed(15));
+            formData.append('cost_for_3k', parseFloat(cost_for_3k.value).toFixed(15));
+            formData.append('cost_for_4k', parseFloat(cost_for_4k.value).toFixed(15));
 
             postFormData(id, formData, period);
         }
@@ -261,9 +261,9 @@ function registerRentCar() {
     // 24개월 값 없으면
     if (twoYearlyForm.classList.contains('openForm')) {
         isTwoYearExist = 1;
-        cost_for_20Tk = parseFloat(cost_for_20Tk).toFixed(4);
-        cost_for_30Tk = parseFloat(cost_for_30Tk).toFixed(4);
-        cost_for_40Tk = parseFloat(cost_for_40Tk).toFixed(4);
+        cost_for_20Tk = parseFloat(cost_for_20Tk).toFixed(15);
+        cost_for_30Tk = parseFloat(cost_for_30Tk).toFixed(15);
+        cost_for_40Tk = parseFloat(cost_for_40Tk).toFixed(15);
     } else {
         isTwoYearExist = 0;
         depositTwoYearly = '';
@@ -350,9 +350,9 @@ function registerRentCar() {
 
 // 렌트카 등록 시 배수 계산
 function calculatePrice(type) {
-    const cost_for_2k = parseFloat(document.getElementById('cost_for_2k').value).toFixed(6);
-    const cost_for_3k_float = parseFloat(document.getElementById('cost_for_3k').value).toFixed(6);
-    const cost_for_4k_float = parseFloat(document.getElementById('cost_for_4k').value).toFixed(6);
+    const cost_for_2k = parseFloat(document.getElementById('cost_for_2k').value);
+    const cost_for_3k_float = parseFloat(document.getElementById('cost_for_3k').value).toFixed(15);
+    const cost_for_4k_float = parseFloat(document.getElementById('cost_for_4k').value).toFixed(15);
     const cost_for_3k = cost_for_2k * cost_for_3k_float;
     const cost_for_4k = cost_for_2k * cost_for_4k_float;
 
@@ -395,7 +395,7 @@ function calculatePrice(type) {
     };
 
     function calculate(type, standard) {
-        let value = parseFloat(document.getElementById(type).value).toFixed(6);
+        let value = parseFloat(document.getElementById(type).value).toFixed(15);
         let target = document.getElementById(`display_${type}`);
         let result;
         result = Math.round(standard * value / 1000 ) * 1000 || '';
