@@ -43,22 +43,23 @@ public class RentCarController {
 //        List<MonthlyRent> monthlyRents = monthlyRentService.findAllMonthlyRents();
 //        for(MonthlyRent monthlyRent : monthlyRents){
 //
-//            Float basic = monthlyRent.getCost_for_2k();
+//            Float cost_for_2k = monthlyRent.getCost_for_2k();
+//            Float cost_for_3k = monthlyRent.getCost_for_2k();
+//            Float cost_for_4k = monthlyRent.getCost_for_2k();
 //
-//            monthlyRent.setCost_for_2_5k(monthlyRent.getCost_for_2_5k() / basic);
-//            monthlyRent.setCost_for_3k(monthlyRent.getCost_for_3k() / basic);
-//            monthlyRent.setCost_for_4k(monthlyRent.getCost_for_4k() / basic);
+//            monthlyRent.setCost_for_2_5k(monthlyRent.getCost_for_2_5k() / cost_for_2k);
+//            monthlyRent.setCost_for_3k(monthlyRent.getCost_for_3k() / cost_for_2k);
+//            monthlyRent.setCost_for_4k(monthlyRent.getCost_for_4k() / cost_for_2k);
 //
-//
-//            monthlyRent.getYearlyRent().setCost_for_20k(monthlyRent.getYearlyRent().getCost_for_20k() / basic);
-//            monthlyRent.getYearlyRent().setCost_for_30k(monthlyRent.getYearlyRent().getCost_for_30k() / basic);
-//            monthlyRent.getYearlyRent().setCost_for_40k(monthlyRent.getYearlyRent().getCost_for_40k() / basic);
+//            monthlyRent.getYearlyRent().setCost_for_20k(monthlyRent.getYearlyRent().getCost_for_20k() / cost_for_2k);
+//            monthlyRent.getYearlyRent().setCost_for_30k(monthlyRent.getYearlyRent().getCost_for_30k() / cost_for_3k);
+//            monthlyRent.getYearlyRent().setCost_for_40k(monthlyRent.getYearlyRent().getCost_for_40k() / cost_for_4k);
 //
 //
 //            if(monthlyRent.getTwoYearlyRent() != null){
-//                monthlyRent.getTwoYearlyRent().setCost_for_20Tk(monthlyRent.getTwoYearlyRent().getCost_for_20Tk() / basic);
-//                monthlyRent.getTwoYearlyRent().setCost_for_30Tk(monthlyRent.getTwoYearlyRent().getCost_for_30Tk() / basic);
-//                monthlyRent.getTwoYearlyRent().setCost_for_40Tk(monthlyRent.getTwoYearlyRent().getCost_for_40Tk() / basic);
+//                monthlyRent.getTwoYearlyRent().setCost_for_20Tk(monthlyRent.getTwoYearlyRent().getCost_for_20Tk() / cost_for_2k);
+//                monthlyRent.getTwoYearlyRent().setCost_for_30Tk(monthlyRent.getTwoYearlyRent().getCost_for_30Tk() / cost_for_3k);
+//                monthlyRent.getTwoYearlyRent().setCost_for_40Tk(monthlyRent.getTwoYearlyRent().getCost_for_40Tk() / cost_for_4k);
 //
 //            }
 //            monthlyRentService.save(monthlyRent);

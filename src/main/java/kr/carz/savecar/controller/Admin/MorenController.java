@@ -101,8 +101,6 @@ public class MorenController {
         mav.addObject("totalPages", reservationPage.getTotalPages());
         mav.addObject("morenReservationList", reservationPage.getContent());
 
-//        List<MorenReservation> morenReservationList = morenReservationService.findAllMorenReservations();
-//        mav.addObject("morenReservationList", morenReservationList);
         mav.addObject("byTime", Comparator.comparing(MorenReservation::getCreatedDate).reversed());
 
         mav.setViewName("admin/moren_reservation_menu");
