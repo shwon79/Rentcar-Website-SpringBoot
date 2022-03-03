@@ -128,6 +128,35 @@
             </div>
         </div>
 
+        <!-- 게시판 하단의 페이징 버튼 -->
+        <div class="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" th:if="${currentPage} >= 5">
+                    <a class="page-link" th:href="@{/admin/moren/reservation/menu(page=${0},size=${pageSize})}">
+                        <i class="fa-solid fa-angles-left"></i>
+                    </a>
+                </li>
+                <li class="page-item" th:if="${currentPage} > 0">
+                    <a class="page-link" th:href="@{/admin/moren/reservation/menu(page=${currentPage}-1,size=${pageSize})}">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
+                </li>
+                <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
+                    <a class="page-link" th:href="@{/admin/moren/reservation/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
+                </li>
+                <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
+                    <a class="page-link" th:href="@{/admin/moren/reservation/menu(page=${currentPage}+1,size=${pageSize})}">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li class="page-item" th:if="${currentPage} < (5 * (${totalPages} / 5))">
+                    <a class="page-link" th:href="@{/admin/moren/reservation/menu(page=${totalPages}-1,size=${pageSize})}">
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </div>
 
