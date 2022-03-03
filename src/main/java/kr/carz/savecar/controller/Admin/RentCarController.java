@@ -44,8 +44,8 @@ public class RentCarController {
 //        for(MonthlyRent monthlyRent : monthlyRents){
 //
 //            Float cost_for_2k = monthlyRent.getCost_for_2k();
-//            Float cost_for_3k = monthlyRent.getCost_for_2k();
-//            Float cost_for_4k = monthlyRent.getCost_for_2k();
+//            Float cost_for_3k = monthlyRent.getCost_for_3k();
+//            Float cost_for_4k = monthlyRent.getCost_for_4k();
 //
 //            monthlyRent.setCost_for_2_5k(monthlyRent.getCost_for_2_5k() / cost_for_2k);
 //            monthlyRent.setCost_for_3k(monthlyRent.getCost_for_3k() / cost_for_2k);
@@ -183,12 +183,12 @@ public class RentCarController {
         if(monthlyRentWrapper.isPresent()) {
             MonthlyRent monthlyRent = monthlyRentWrapper.get();
             YearlyRent yearlyRent = monthlyRent.getYearlyRent();
+            monthlyRentService.delete(monthlyRent);
+            yearlyRentService.delete(yearlyRent);
             if(monthlyRent.getTwoYearlyRent() != null){
                 TwoYearlyRent twoYearlyRent = monthlyRent.getTwoYearlyRent();
                 twoYearlyRentService.delete(twoYearlyRent);
             }
-            monthlyRentService.delete(monthlyRent);
-            yearlyRentService.delete(yearlyRent);
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
