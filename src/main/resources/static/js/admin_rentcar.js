@@ -350,22 +350,55 @@ function registerRentCar() {
 
 // 렌트카 등록 시 배수 계산
 function calculatePrice(type) {
-    const cost_for_2k = parseFloat(document.getElementById('cost_for_2k').value).toFixed(4);
+    const cost_for_2k = parseFloat(document.getElementById('cost_for_2k').value).toFixed(6);
+    const cost_for_3k_float = parseFloat(document.getElementById('cost_for_3k').value).toFixed(6);
+    const cost_for_4k_float = parseFloat(document.getElementById('cost_for_4k').value).toFixed(6);
+    const cost_for_3k = cost_for_2k * cost_for_3k_float;
+    const cost_for_4k = cost_for_2k * cost_for_4k_float;
 
-    if (type === 'cost_for_2k') {
-        calculatePrice('cost_for_2_5k');
-        calculatePrice('cost_for_3k');
-        calculatePrice('cost_for_4k');
-        calculatePrice('cost_for_20k');
-        calculatePrice('cost_for_30k');
-        calculatePrice('cost_for_40k');
-        calculatePrice('cost_for_20Tk');
-        calculatePrice('cost_for_30Tk');
-        calculatePrice('cost_for_40Tk');
+    const relate_cost_for_2k = ['cost_for_2_5k', 'cost_for_3k', 'cost_for_4k', 'cost_for_20k', 'cost_for_20Tk'];
+    const relate_cost_for_3k = ['cost_for_30k', 'cost_for_30Tk'];
+    const relate_cost_for_4k = ['cost_for_40k', 'cost_for_40Tk'];
+
+    let standard;
+
+    if (relate_cost_for_2k.includes(type)) {
+        standard = cost_for_2k;
+    } else if (relate_cost_for_3k.includes(type)) {
+        standard = cost_for_3k;
+    } else if (relate_cost_for_4k.includes(type)) {
+        standard = cost_for_4k;
+    }
+
+    if (type != 'cost_for_2k') {
+        calculate(type, standard);
     } else {
-        let value = parseFloat(document.getElementById(type).value).toFixed(4);
+        calculate('cost_for_2_5k', cost_for_2k);
+        calculate('cost_for_3k', cost_for_2k);
+        calculate('cost_for_4k', cost_for_2k);
+        calculate('cost_for_20k', cost_for_2k);
+        calculate('cost_for_20Tk', cost_for_2k);
+        calculate('cost_for_30k', cost_for_3k);
+        calculate('cost_for_30Tk', cost_for_3k);
+        calculate('cost_for_40k', cost_for_4k);
+        calculate('cost_for_40Tk', cost_for_4k);
+    };
+
+    if (type === 'cost_for_3k') {
+        calculate('cost_for_30k', cost_for_3k);
+        calculate('cost_for_30Tk', cost_for_3k);
+    };
+
+    if (type === 'cost_for_4k') {
+        calculate('cost_for_40k', cost_for_4k);
+        calculate('cost_for_40Tk', cost_for_4k);
+    };
+
+    function calculate(type, standard) {
+        let value = parseFloat(document.getElementById(type).value).toFixed(6);
         let target = document.getElementById(`display_${type}`);
-        let result = Math.floor(cost_for_2k * value) || '';
+        let result;
+        result = Math.floor(standard * value) || '';
         target.innerText = result;
     }
 }
