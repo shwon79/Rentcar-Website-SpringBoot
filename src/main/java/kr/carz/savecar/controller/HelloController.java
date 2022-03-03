@@ -116,6 +116,8 @@ public class HelloController {
             case "yearly":
                 return "rent_price/yearly";
             case "twoYearly":
+                monthlyRentList = monthlyRentService.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+                model.addAttribute("monthlyRentList", monthlyRentList);
                 return "rent_price/twoYearly";
             default:
                 return "rent_price/month";
