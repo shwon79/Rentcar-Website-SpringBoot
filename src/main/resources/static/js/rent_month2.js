@@ -1,5 +1,6 @@
 let sortType = 'desc';
 
+// rent/month/new 차량 정렬 화살표 클릭
 function sortAvailableContent(index) {
     let table = document.getElementsByClassName('table_available')
 
@@ -52,6 +53,18 @@ function sortExpectedContent(index) {
     }
 }
 
+// rent/month/new 차량 정렬 시 화살표 아이콘
+function displaySortImage(target) {
+    let targetI = [...document.getElementsByTagName("i")].find(i => i.dataset.id === target);
+
+    if (sortType === 'desc') {
+        targetI.classList.remove('fa-arrow-up');
+        targetI.classList.add('fa-arrow-down');
+    } else if (sortType === 'asc') {
+        targetI.classList.add('fa-arrow-up');
+        targetI.classList.remove('fa-arrow-down');
+    }
+}
 
 function sendData(){
     document.getElementById('select_wrapper').submit();

@@ -170,9 +170,9 @@
                       <td scope="row" th:text="${monthlyRent.name}"></td>
                       <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.deposit, 3, 'COMMA')}"></td>
                       <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k, 3, 'COMMA')}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(T(Math).floor(monthlyRent.cost_for_2k * monthlyRent.cost_for_2_5k / 1000)*1000, 3, 'COMMA')}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(T(Math).floor(monthlyRent.cost_for_2k * monthlyRent.cost_for_3k / 1000)*1000, 3, 'COMMA')}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(T(Math).floor(monthlyRent.cost_for_2k * monthlyRent.cost_for_4k / 1000)*1000, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * monthlyRent.cost_for_2_5k / 1000)*1000, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * monthlyRent.cost_for_3k / 1000)*1000, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * monthlyRent.cost_for_4k / 1000)*1000, 3, 'COMMA')}"></td>
                       <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.age_limit, 3, 'COMMA')}"></td>
                   </tr>
                   </tbody>

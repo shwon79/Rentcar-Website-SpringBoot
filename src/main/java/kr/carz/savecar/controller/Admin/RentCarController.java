@@ -243,6 +243,8 @@ public class RentCarController {
 
         JSONObject jsonObject = new JSONObject();
 
+        System.out.println(yearlyRentDTO.getCost_for_20k());
+
         Optional<YearlyRent> yearlyRentWrapper  = yearlyRentService.findById(yearlyId);
         if(yearlyRentWrapper.isPresent()){
 
