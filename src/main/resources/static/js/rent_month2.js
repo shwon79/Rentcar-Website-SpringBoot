@@ -56,8 +56,7 @@ function sortExpectedContent(index) {
 // rent/month/new 차량 정렬 시 화살표 아이콘
 function displaySortImage(target) {
     let targetI = [...document.getElementsByTagName("i")].find(i => i.dataset.id === target);
-    console.log(targetI);
-    console.log(sortType);
+
     if (sortType === 'desc') {
         targetI.classList.remove('fa-arrow-up');
         targetI.classList.add('fa-arrow-down');

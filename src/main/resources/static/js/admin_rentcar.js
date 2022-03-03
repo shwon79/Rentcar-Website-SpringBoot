@@ -398,7 +398,7 @@ function calculatePrice(type) {
         let value = parseFloat(document.getElementById(type).value).toFixed(6);
         let target = document.getElementById(`display_${type}`);
         let result;
-        result = Math.floor(standard * value) || '';
+        result = Math.round(standard * value / 1000 ) * 1000 || '';
         target.innerText = result;
     }
 }
