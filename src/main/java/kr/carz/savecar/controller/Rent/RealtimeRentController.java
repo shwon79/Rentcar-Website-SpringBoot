@@ -123,7 +123,7 @@ public class RealtimeRentController {
                 } catch (Exception e) {
                     System.out.println("Error ! 차량이름 모렌과 맞출 것 !"+ carCategory);
 
-                    reservationController.send_error_message_to_employees(admin1+", "+admin2,
+                    reservationController.send_error_message_to_employees(admin1,
                             "모렌_차명이 동일하지 않아, 사이트에 해당 차량이 게시되지 않고 있습니다.\n"
                                             + "관리자 페이지에서 모렌_차명을 변경해주시기 바랍니다.\n"
                                             + "* 프라임클럽 차량상세페이지에서 모델정보의 두번째 값과 동일하게 설정해주시기 바랍니다.\n\n"
@@ -157,7 +157,7 @@ public class RealtimeRentController {
                 } catch (Exception e) {
                     System.out.println("Error ! 차량이름 모렌과 맞출 것 ! 차량이름 : " + carCategory);
 
-                    reservationController.send_error_message_to_employees(admin1+", "+admin2,
+                    reservationController.send_error_message_to_employees(admin1,
                             "모렌_차명이 동일하지 않아, 사이트에 해당 차량이 게시되지 않고 있습니다.\n"
                                     + "관리자 페이지에서 모렌_차명을 변경해주시기 바랍니다.\n"
                                     + "* 프라임클럽 차량상세페이지에서 모델정보의 두번째 값과 동일하게 설정해주시기 바랍니다.\n\n"
@@ -338,13 +338,6 @@ public class RealtimeRentController {
 
                     } catch (Exception e) {
                         System.out.println("Error ! 차량이름 모렌과 맞출 것 !" + carCategory);
-
-                        reservationController.send_error_message_to_employees(admin1+", "+admin2,
-                                "모렌_차명이 동일하지 않아, 사이트에 해당 차량이 게시되지 않고 있습니다.\n"
-                                        + "관리자 페이지에서 모렌_차명을 변경해주시기 바랍니다.\n"
-                                        + "* 프라임클럽 차량상세페이지에서 모델정보의 두번째 값과 동일하게 설정해주시기 바랍니다.\n\n"
-                                        + "차량명 : " + carCategory + "\n"
-                                        + "오류발생일시 : " + DateTime.today_date_and_time() + "\n");
                     }
                 }
             }

@@ -353,8 +353,8 @@ function calculatePrice(type) {
     const cost_for_2k = parseFloat(document.getElementById('cost_for_2k').value);
     const cost_for_3k_float = parseFloat(document.getElementById('cost_for_3k').value).toFixed(15);
     const cost_for_4k_float = parseFloat(document.getElementById('cost_for_4k').value).toFixed(15);
-    const cost_for_3k = cost_for_2k * cost_for_3k_float;
-    const cost_for_4k = cost_for_2k * cost_for_4k_float;
+    const cost_for_3k = Math.round(cost_for_2k * cost_for_3k_float / 1000) *1000;
+    const cost_for_4k = Math.round(cost_for_2k * cost_for_4k_float / 1000) * 1000;
 
     const relate_cost_for_2k = ['cost_for_2_5k', 'cost_for_3k', 'cost_for_4k', 'cost_for_20k', 'cost_for_20Tk'];
     const relate_cost_for_3k = ['cost_for_30k', 'cost_for_30Tk'];
