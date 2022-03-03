@@ -109,15 +109,15 @@
                             <textarea type="text" th:text="${#numbers.formatInteger(car.twoYearlyRent.deposit, 0, 'COMMA')}" class="deposit" th:data-title="${car.twoYearlyRent.id}"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(car.twoYearlyRent.cost_for_20Tk * car.cost_for_2k, 0, 'COMMA')}"></p>
+                            <p th:text="${#numbers.formatInteger(T(Math).floor(car.twoYearlyRent.cost_for_20Tk * car.cost_for_2k / 1000)*1000, 0, 'COMMA')}"></p>
                             <textarea type="text" th:text="${car.twoYearlyRent.cost_for_20Tk}" class="cost_for_20Tk" th:data-title="${car.twoYearlyRent.id}"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(car.twoYearlyRent.cost_for_30Tk * car.cost_for_3k, 0, 'COMMA')}"></p>
+                            <p th:text="${#numbers.formatInteger(T(Math).floor(car.twoYearlyRent.cost_for_30Tk * car.cost_for_3k / 1000)*1000, 0, 'COMMA')}"></p>
                             <textarea type="text" th:text="${car.twoYearlyRent.cost_for_30Tk}" class="cost_for_30Tk" th:data-title="${car.twoYearlyRent.id}"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(car.twoYearlyRent.cost_for_40Tk * car.cost_for_4k, 0, 'COMMA')}"></p>
+                            <p th:text="${#numbers.formatInteger(T(Math).floor(car.twoYearlyRent.cost_for_40Tk * car.cost_for_4k / 1000)*1000, 0, 'COMMA')}"></p>
                             <textarea type="text" th:text="${car.twoYearlyRent.cost_for_40Tk}" class="cost_for_40Tk" th:data-title="${car.twoYearlyRent.id}"></textarea>
                         </td>
                         <td class="display_none_mobile">

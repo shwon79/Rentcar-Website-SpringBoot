@@ -82,10 +82,10 @@ function editRentPriceMenu(id, period) {
             let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
             let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
-            data['cost_for_2k'] = parseInt(cost_for_2k.value.replace(/,/g, '')).toFixed(2);
-            data['cost_for_2_5k'] = parseInt(cost_for_2_5k.value).toFixed(2);
-            data['cost_for_3k'] = parseInt(cost_for_3k.value).toFixed(2);
-            data['cost_for_4k'] = parseInt(cost_for_4k.value).toFixed(2);
+            data['cost_for_2k'] = parseInt(cost_for_2k.value.replace(/,/g, '')).toFixed(6);
+            data['cost_for_2_5k'] = parseInt(cost_for_2_5k.value).toFixed(6);
+            data['cost_for_3k'] = parseInt(cost_for_3k.value).toFixed(6);
+            data['cost_for_4k'] = parseInt(cost_for_4k.value).toFixed(6);
 
             // console.log(data);
             postStringData(period, id, data);
@@ -94,9 +94,9 @@ function editRentPriceMenu(id, period) {
             let cost_for_30k = [...document.getElementsByClassName('cost_for_30k')].find(item => item.dataset.title == id);
             let cost_for_40k = [...document.getElementsByClassName('cost_for_40k')].find(item => item.dataset.title == id);
 
-            data['cost_for_20k'] = parseInt(cost_for_20k.value).toFixed(2);
-            data['cost_for_30k'] = parseInt(cost_for_30k.value).toFixed(2);
-            data['cost_for_40k'] = parseInt(cost_for_40k.value).toFixed(2);
+            data['cost_for_20k'] = parseInt(cost_for_20k.value).toFixed(6);
+            data['cost_for_30k'] = parseInt(cost_for_30k.value).toFixed(6);
+            data['cost_for_40k'] = parseInt(cost_for_40k.value).toFixed(6);
 
             // console.log(data);
             postStringData(period, id, data);
@@ -105,9 +105,9 @@ function editRentPriceMenu(id, period) {
             let cost_for_30Tk = [...document.getElementsByClassName('cost_for_30Tk')].find(item => item.dataset.title == id);
             let cost_for_40Tk = [...document.getElementsByClassName('cost_for_40Tk')].find(item => item.dataset.title == id);
 
-            data['cost_for_20Tk'] = parseInt(cost_for_20Tk.value).toFixed(2);
-            data['cost_for_30Tk'] = parseInt(cost_for_30Tk.value).toFixed(2);
-            data['cost_for_40Tk'] = parseInt(cost_for_40Tk.value).toFixed(2);
+            data['cost_for_20Tk'] = parseInt(cost_for_20Tk.value).toFixed(6);
+            data['cost_for_30Tk'] = parseInt(cost_for_30Tk.value).toFixed(6);
+            data['cost_for_40Tk'] = parseInt(cost_for_40Tk.value).toFixed(6);
 
             // console.log(data);
             postStringData(period, id, data);
@@ -136,10 +136,10 @@ function editRentPriceMenu(id, period) {
             let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
             let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
-            formData.append('cost_for_2k', parseInt(cost_for_2k.value).toFixed(2));
-            formData.append('cost_for_2_5k', parseInt(cost_for_2_5k.value).toFixed(2));
-            formData.append('cost_for_3k', parseInt(cost_for_3k.value).toFixed(2));
-            formData.append('cost_for_4k', parseInt(cost_for_4k.value).toFixed(2));
+            formData.append('cost_for_2k', parseInt(cost_for_2k.value).toFixed(6));
+            formData.append('cost_for_2_5k', parseInt(cost_for_2_5k.value).toFixed(6));
+            formData.append('cost_for_3k', parseInt(cost_for_3k.value).toFixed(6));
+            formData.append('cost_for_4k', parseInt(cost_for_4k.value).toFixed(6));
 
             postFormData(id, formData, period);
         }
