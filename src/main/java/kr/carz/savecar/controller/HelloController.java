@@ -4,6 +4,7 @@ import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,36 +106,33 @@ public class HelloController {
         return "rent_longterm/main";
     }
 
-    @GetMapping("/price/month")
-    public String price_month(Model model) {
+    @GetMapping("/price/month/{category2}")
+    public String price_month(Model model, @PathVariable String category2) {
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+        Collections.sort(monthlyRentList);
         model.addAttribute("monthlyRentList", monthlyRentList);
 
         return "rent_price/month";
     }
 
 
-    @GetMapping("/price/yearly")
-    public String price_yearly(Model model) {
+    @GetMapping("/price/yearly/{category2}")
+    public String price_yearly(Model model, @PathVariable String category2) {
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
-
-//        Collections.sort(monthlyRentList);
-
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+        Collections.sort(monthlyRentList);
         model.addAttribute("monthlyRentList", monthlyRentList);
 
         return "rent_price/yearly";
     }
 
 
-    @GetMapping("/price/twoYearly")
-    public String price_twoYearly(Model model) {
+    @GetMapping("/price/twoYearly/{category2}")
+    public String price_twoYearly(Model model, @PathVariable String category2) {
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllByTwoYearlyRentIsNotNull();
-
-//        Collections.sort(monthlyRentList);
-
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+        Collections.sort(monthlyRentList);
         model.addAttribute("monthlyRentList", monthlyRentList);
 
         return "rent_price/twoYearly";
