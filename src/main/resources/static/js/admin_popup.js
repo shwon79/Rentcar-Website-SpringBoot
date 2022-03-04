@@ -82,6 +82,19 @@ window.onload = function() {
     getEditedData('popup2_slogan', 'popup2_slogan');
     getEditedData('popup2_box1_subtitle', 'popup2_box1_subtitle');
     getEditedData('popup2_box2_subtitle', 'popup2_box2_subtitle');
+    getEditedData('popup2_promotion', 'popup2_promotion');
+    getEditedData('popup2_box3_line1_title', 'popup2_box3_line1_title');
+    getEditedData('popup2_box3_line1_price', 'popup2_box3_line1_price');
+    getEditedData('popup2_box3_line2_title', 'popup2_box3_line2_title');
+    getEditedData('popup2_box3_line2_price', 'popup2_box3_line2_price');
+    getEditedData('popup2_box3_line3_title', 'popup2_box3_line3_title');
+    getEditedData('popup2_box3_line3_price', 'popup2_box3_line3_price');
+    getEditedData('popup2_box4_line1_title', 'popup2_box4_line1_title');
+    getEditedData('popup2_box4_line1_price', 'popup2_box4_line1_price');
+    getEditedData('popup2_box4_line2_title', 'popup2_box4_line2_title');
+    getEditedData('popup2_box4_line2_price', 'popup2_box4_line2_price');
+    getEditedData('popup2_box4_line3_title', 'popup2_box4_line3_title');
+    getEditedData('popup2_box4_line3_price', 'popup2_box4_line3_price');
     getEditedData('popup2_button', 'popup2_button');
 
     getCampingcarInfoData('europe', 'popup2_box1_title','popup2_box1_line1_price', 'popup2_box1_line2_price');
@@ -202,6 +215,21 @@ function popupEdit() {
     const popup2_slogan = document.getElementById('popup2_slogan').value;
     const popup2_box1_subtitle = document.getElementById('popup2_box1_subtitle').value;
     const popup2_box2_subtitle = document.getElementById('popup2_box2_subtitle').value;
+
+    const popup2_promotion = document.getElementById('popup2_promotion').value;
+    const popup2_box3_line1_title = document.getElementById('popup2_box3_line1_title').value;
+    const popup2_box3_line1_price = document.getElementById('popup2_box3_line1_price').value;
+    const popup2_box3_line2_title = document.getElementById('popup2_box3_line2_title').value;
+    const popup2_box3_line2_price = document.getElementById('popup2_box3_line2_price').value;
+    const popup2_box3_line3_title = document.getElementById('popup2_box3_line3_title').value;
+    const popup2_box3_line3_price = document.getElementById('popup2_box3_line3_price').value;
+    const popup2_box4_line1_title = document.getElementById('popup2_box4_line1_title').value;
+    const popup2_box4_line1_price = document.getElementById('popup2_box4_line1_price').value;
+    const popup2_box4_line2_title = document.getElementById('popup2_box4_line2_title').value;
+    const popup2_box4_line2_price = document.getElementById('popup2_box4_line2_price').value;
+    const popup2_box4_line3_title = document.getElementById('popup2_box4_line3_title').value;
+    const popup2_box4_line3_price = document.getElementById('popup2_box4_line3_price').value;
+
     const popup2_button = document.getElementById('popup2_button').value;
 
     let data = {
@@ -273,6 +301,19 @@ function popupEdit() {
             { "title" : "popup2_slogan", "value" : popup2_slogan },
             { "title" : "popup2_box1_subtitle", "value" : popup2_box1_subtitle },
             { "title" : "popup2_box2_subtitle", "value" : popup2_box2_subtitle },
+            { "title" : "popup2_promotion", "value" : popup2_promotion },
+            { "title" : "popup2_box3_line1_title", "value" : popup2_box3_line1_title },
+            { "title" : "popup2_box3_line1_price", "value" : popup2_box3_line1_price },
+            { "title" : "popup2_box3_line2_title", "value" : popup2_box3_line2_title },
+            { "title" : "popup2_box3_line2_price", "value" : popup2_box3_line2_price },
+            { "title" : "popup2_box3_line3_title", "value" : popup2_box3_line3_title },
+            { "title" : "popup2_box3_line3_price", "value" : popup2_box3_line3_price },
+            { "title" : "popup2_box4_line1_title", "value" : popup2_box4_line1_title },
+            { "title" : "popup2_box4_line1_price", "value" : popup2_box4_line1_price },
+            { "title" : "popup2_box4_line2_title", "value" : popup2_box4_line2_title },
+            { "title" : "popup2_box4_line2_price", "value" : popup2_box4_line2_price },
+            { "title" : "popup2_box4_line3_title", "value" : popup2_box4_line3_title },
+            { "title" : "popup2_box4_line3_price", "value" : popup2_box4_line3_price },
             { "title" : "popup2_button", "value" : popup2_button }
         ]
     };
