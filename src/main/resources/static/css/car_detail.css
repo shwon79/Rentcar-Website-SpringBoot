@@ -41,7 +41,22 @@
 .carousel-box {
     padding-left: 15px;
 }
-
+.car_info_box {
+    margin-bottom: 20px;
+}
+.car_info_title {
+    font-size: 1.8rem;
+}
+.car_infos {
+    display: flex;
+    flex-wrap: wrap;
+}
+.car_info {
+    margin: 0 10px 10px 0;
+}
+.car_info i {
+    color: dimgray;
+}
 .info-card {
     background-color: black;
     color: white;
