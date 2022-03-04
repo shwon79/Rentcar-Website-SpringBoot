@@ -402,3 +402,49 @@ function calculatePrice(type) {
         target.innerText = result;
     }
 }
+
+// 렌트카 가격수정페이지 자동계산
+function calculatePriceOnMenu(event, period, type) {
+    if (period === 'monthly') {
+        const cost_for_2k = parseInt([...document.getElementsByClassName('cost_for_2k')].find(item => item.dataset.title == event.dataset.title).value.replace(/,/g, ''));
+
+        if (type != 'cost_for_2k') {
+            calculate(type, cost_for_2k);
+        } else {
+            calculate('cost_for_2_5k', cost_for_2k);
+            calculate('cost_for_3k', cost_for_2k);
+            calculate('cost_for_4k', cost_for_2k);
+        }
+
+    } else {
+        const cost_for_2k = parseInt([...document.getElementsByClassName('cost_for_2k')].find(item => item.dataset.title == event.dataset.title).innerText);
+        const cost_for_3k_float = parseFloat([...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == event.dataset.title).innerText).toFixed(15);
+        const cost_for_4k_float = parseFloat([...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == event.dataset.title).innerText).toFixed(15);
+        const cost_for_3k = Math.round(cost_for_2k * cost_for_3k_float / 1000) *1000;
+        const cost_for_4k = Math.round(cost_for_2k * cost_for_4k_float / 1000) * 1000;
+
+        const relate_cost_for_2k = ['cost_for_2_5k', 'cost_for_3k', 'cost_for_4k', 'cost_for_20k', 'cost_for_20Tk'];
+        const relate_cost_for_3k = ['cost_for_30k', 'cost_for_30Tk'];
+        const relate_cost_for_4k = ['cost_for_40k', 'cost_for_40Tk'];
+
+        let standard;
+
+        if (relate_cost_for_2k.includes(type)) {
+            standard = cost_for_2k;
+        } else if (relate_cost_for_3k.includes(type)) {
+            standard = cost_for_3k;
+        } else if (relate_cost_for_4k.includes(type)) {
+            standard = cost_for_4k;
+        }
+
+        calculate(type, standard);
+    }
+
+    function calculate(type, standard) {
+        let value = parseFloat([...document.getElementsByClassName(type)].find(item => item.dataset.title == event.dataset.title).value).toFixed(15);
+        let target = [...document.getElementsByClassName(`display_${type}`)].find(item => item.dataset.title == event.dataset.title);
+        let result;
+        result = Math.round(standard * value / 1000 ) * 1000 || '';
+        target.innerText = result;
+    }
+}

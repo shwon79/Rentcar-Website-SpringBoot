@@ -108,17 +108,32 @@
                         <td class="display_none_mobile">
                             <textarea type="text" th:text="${#numbers.formatInteger(car.twoYearlyRent.deposit, 0, 'COMMA')}" class="deposit" th:data-title="${car.twoYearlyRent.id}"></textarea>
                         </td>
+                        <td style="display: none;" th:text="${car.cost_for_2k}" th:data-title="${car.twoYearlyRent.id}" class="cost_for_2k"></td>
+                        <td style="display: none;" th:text="${car.cost_for_3k}" th:data-title="${car.twoYearlyRent.id}" class="cost_for_3k"></td>
+                        <td style="display: none;" th:text="${car.cost_for_4k}" th:data-title="${car.twoYearlyRent.id}" class="cost_for_4k"></td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_20Tk * car.cost_for_2k / 1000)*1000, 0, 'COMMA')}"></p>
-                            <textarea type="text" th:text="${car.twoYearlyRent.cost_for_20Tk}" class="cost_for_20Tk long_input" th:data-title="${car.twoYearlyRent.id}"></textarea>
+                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_20Tk * car.cost_for_2k / 1000)*1000, 0, 'COMMA')}"
+                               class="display_cost_for_20Tk" th:data-title="${car.twoYearlyRent.id}"></p>
+                            <textarea type="number"
+                                      th:text="${car.twoYearlyRent.cost_for_20Tk}" class="cost_for_20Tk long_input"
+                                      th:data-title="${car.twoYearlyRent.id}"
+                                      onkeyup="calculatePriceOnMenu(this, 'twoYearly', 'cost_for_20Tk');"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_30Tk * (T(Math).round(car.cost_for_3k * car.cost_for_2k / 1000)*1000) / 1000)*1000, 0, 'COMMA')}"></p>
-                            <textarea type="text" th:text="${car.twoYearlyRent.cost_for_30Tk}" class="cost_for_30Tk long_input" th:data-title="${car.twoYearlyRent.id}"></textarea>
+                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_30Tk * (T(Math).round(car.cost_for_3k * car.cost_for_2k / 1000)*1000) / 1000)*1000, 0, 'COMMA')}"
+                               class="display_cost_for_30Tk" th:data-title="${car.twoYearlyRent.id}"></p>
+                            <textarea type="number"
+                                      th:text="${car.twoYearlyRent.cost_for_30Tk}" class="cost_for_30Tk long_input"
+                                      th:data-title="${car.twoYearlyRent.id}"
+                                      onkeyup="calculatePriceOnMenu(this, 'twoYearly', 'cost_for_30Tk');"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_40Tk * (T(Math).round(car.cost_for_4k * car.cost_for_2k / 1000)*1000) / 1000)*1000, 0, 'COMMA')}"></p>
-                            <textarea type="text" th:text="${car.twoYearlyRent.cost_for_40Tk}" class="cost_for_40Tk long_input" th:data-title="${car.twoYearlyRent.id}"></textarea>
+                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_40Tk * (T(Math).round(car.cost_for_4k * car.cost_for_2k / 1000)*1000) / 1000)*1000, 0, 'COMMA')}"
+                               class="display_cost_for_40Tk" th:data-title="${car.twoYearlyRent.id}"></p>
+                            <textarea type="number"
+                                      th:text="${car.twoYearlyRent.cost_for_40Tk}" class="cost_for_40Tk long_input"
+                                      th:data-title="${car.twoYearlyRent.id}"
+                                      onkeyup="calculatePriceOnMenu(this, 'twoYearly', 'cost_for_40Tk');"></textarea>
                         </td>
                         <td class="display_none_mobile">
                             <p class="cost_for_others" th:text="${car.twoYearlyRent.cost_for_others}" th:data-title="${car.twoYearlyRent.id}"></p>
