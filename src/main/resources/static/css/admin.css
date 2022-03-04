@@ -837,6 +837,9 @@ form {
     width: 5em;
     text-align: center;
 }
+.long_input {
+    width: 11em !important;
+}
 .pagination {
     width: 70%;
     margin: 30px auto;
