@@ -9,32 +9,14 @@
     <title>SAVECAR - 렌트 가격표</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link th:href="@{/css/rent_price.css}" rel="stylesheet">
+    <script th:src="@{/js/rent_price.js}" defer></script>
 
     <script>
-        // const number = document.querySelectorAll(".number");
-        //
-        // function numberWithCommas() {
-        //     for (let i = 0; i < number.length; i++) {
-        //         // if (number[i].innerText === '상담') {
-        //         //     number[i].innerText = '상담';
-        //         // } else {
-        //         console.log(number[i].innerText);
-        //             const num = parseFloat(number[i].innerText);
-        //             const result = Math.floor(num/1000)*1000;
-        //             const numberWithComma = result.toLocaleString();
-        //             number[i].innerText = numberWithComma;
-        //         // }
-        //     }
-        // }
-        //
-        // $('.number').ready(numberWithCommas());
-
-        $(document).ready(function() {
-            $('#example').DataTable( {
-                responsive: true,
-            } );
-        } );
-
+        // $(document).ready(function() {
+        //     $('#example').DataTable( {
+        //         responsive: true,
+        //     } );
+        // } );
     </script>
 </head>
 
@@ -151,12 +133,15 @@
                   <button class="price_button" onclick="location.href='/price/month/승합'">승합</button>
                   <button class="price_button" onclick="location.href='/price/month/수입차'">수입차</button>
               </div>
+              <div style="text-align: right;">
+                  <button onclick="hideDeposit();" class="deposit_button">보증금 숨기기</button>
+              </div>
               <table id="example" class="table table-bordered table-responsive">
                   <thead>
                   <tr>
                       <th scope="row" style="word-break: keep-all;">차종</th>
                       <th scope="row">차명</th>
-                      <th>보증금</th>
+                      <th class="depositColumn">보증금</th>
                       <th>2000km</th>
                       <th>2500km</th>
                       <th>3000km</th>
@@ -168,7 +153,7 @@
                   <tr th:each="monthlyRent : ${monthlyRentList}">
                       <td scope="row" th:text="${monthlyRent.category2}"></td>
                       <td scope="row" th:text="${monthlyRent.name}"></td>
-                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.deposit, 3, 'COMMA')}"></td>
+                      <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.deposit, 3, 'COMMA')}" class="depositColumn"></td>
                       <td scope="col" th:text="${#numbers.formatInteger(monthlyRent.cost_for_2k, 3, 'COMMA')}"></td>
                       <td scope="col" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * monthlyRent.cost_for_2_5k / 1000)*1000, 3, 'COMMA')}"></td>
                       <td scope="col" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * monthlyRent.cost_for_3k / 1000)*1000, 3, 'COMMA')}"></td>

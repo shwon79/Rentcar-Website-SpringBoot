@@ -9,15 +9,14 @@
     <title>SAVECAR - 렌트 가격표</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link th:href="@{/css/rent_price.css}" rel="stylesheet">
+    <script th:src="@{/js/rent_price.js}" defer></script>
 
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable( {
-                responsive: true,
-            } );
-        } );
-
-
+        // $(document).ready(function() {
+        //     $('#example').DataTable( {
+        //         responsive: true,
+        //     } );
+        // } );
     </script>
 </head>
 
@@ -134,12 +133,15 @@
                   <button class="price_button" onclick="location.href='/price/yearly/승합'">승합</button>
                   <button class="price_button" onclick="location.href='/price/yearly/수입차'">수입차</button>
               </div>
+              <div style="text-align: right;">
+                  <button onclick="hideDeposit();" class="deposit_button">보증금 숨기기</button>
+              </div>
               <table id="example" class="table table-bordered table-responsive">
                   <thead>
                       <tr>
                           <th scope="row" style="word-break: keep-all;">차종</th>
                           <th scope="row">차명</th>
-                          <th>보증금</th>
+                          <th class="depositColumn">보증금</th>
                           <th>2만km</th>
                           <th>3만km</th>
                           <th>4만km</th>
@@ -152,7 +154,7 @@
                       <tr th:each="monthly, idx : ${monthlyRentList}">
                           <td scope="row" th:text="${monthly.category2}"></td>
                           <td scope="row" th:text="${monthly.name}"></td>
-                          <td scope="col" th:text="${#numbers.formatInteger(monthly.yearlyRent.deposit, 3, 'COMMA')}"></td>
+                          <td scope="col" th:text="${#numbers.formatInteger(monthly.yearlyRent.deposit, 3, 'COMMA')}" class="depositColumn"></td>
                           <td scope="col" th:text="${#numbers.formatInteger(T(Math).round(monthly.cost_for_2k * monthly.yearlyRent.cost_for_20k / 1000)*1000, 3, 'COMMA')}"></td>
                           <td scope="col" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthly.cost_for_3k * monthly.cost_for_2k / 1000)*1000) * monthly.yearlyRent.cost_for_30k / 1000)*1000, 3, 'COMMA')}"></td>
                           <td scope="col" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthly.cost_for_4k * monthly.cost_for_2k / 1000)*1000) * monthly.yearlyRent.cost_for_40k / 1000)*1000, 3, 'COMMA')}"></td>
