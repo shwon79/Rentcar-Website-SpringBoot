@@ -20,7 +20,7 @@
 }
 .table td, .table th {
     padding: 0;
-    vertical-align: top;
+    vertical-align: middle;
     word-break: keep-all;
 }
 .table th {
@@ -46,6 +46,25 @@
 .detail_container input {
     border: 1px solid black;
     border-radius: 4px;
+}
+
+/*.depositColumn {*/
+/*    display: revert;*/
+/*}*/
+/*.depositColumn.displayNone {*/
+/*    display: none;*/
+/*}*/
+
+.bundle_row td {
+    vertical-align: middle;
+    padding: 6px 0;
+    background: #f2f2f2;
+}
+/*.bundle_row td input {*/
+/*    width: 6rem;*/
+/*}*/
+.bundle_row td button {
+    margin-top: 6px;
 }
 
 /*렌트카 등록*/

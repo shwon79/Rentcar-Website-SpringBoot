@@ -42,7 +42,42 @@ function displayCategory2(event, makeDefaultOption) {
     };
 };
 
-//월렌트 메뉴 페이지 가격 수정 버튼
+// 렌트카 가격 수정 메뉴 페이지 일괄 수정 버튼
+function editBundleData(period, type) {
+    let editedData;
+
+    if (type === '보증금') {
+        editedData = parseFloat(document.getElementById('bundleDeposit').value);
+    } else if (type === '2500km') {
+        editedData = parseFloat(document.getElementById('bundle2500km').value).toFixed(15);
+    } else if (type === '3000km') {
+        editedData = parseFloat(document.getElementById('bundle3000km').value).toFixed(15);
+    } else if (type === '4000km') {
+        editedData = parseFloat(document.getElementById('bundle4000km').value).toFixed(15);
+    } else if (type === '21세') {
+        editedData = parseFloat(document.getElementById('bundleAgeLimit').value);
+    }
+
+    if (confirm(`모든 차량의 ${type}을 일괄 수정하시겠습니까?`)) {
+        $.ajax({
+            type:'PUT',
+            url:'/admin/rentcar/price/' + period + '/' + type + '/' + editedData,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8'
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('처리되었습니다.');
+            } else if (result.result == 0) {
+                alert('처리에 문제가 생겼습니다.');
+            };
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
+
+}
+// 렌트카 가격 수정 메뉴 페이지 가격 수정 버튼
 function editRentPriceMenu(id, period) {
     let category1 = [...document.getElementsByClassName('category1')].find(item => item.dataset.title == id);
     let category2 = [...document.getElementsByClassName('category2')].find(item => item.dataset.title == id);
@@ -148,6 +183,7 @@ function editRentPriceMenu(id, period) {
 
 // 이미지 없이 데이터 보낼 때
 function postStringData(period, id, data) {
+    if (confirm('수정하시겠습니까?')) {
         $.ajax({
             type:'PUT',
             url:'/admin/rentcar/price/' + period + '/' + id,
@@ -164,24 +200,27 @@ function postStringData(period, id, data) {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
+    }
 }
 
 // 새로운 이미지 추가할 때
 function postFormData(id, formData, period) {
-    $.ajax({
-        enctype: 'multipart/form-data',
-        cache: false,
-        type: 'PUT',
-        url: '/admin/rentcar/price/' + period + '/image/' + id,
-        processData:false,
-        contentType: false,
-        data: formData
-    }).done(function () {
-        alert('처리되었습니다.');
-        location.reload();
-    }).fail(function (error) {
-        alert(JSON.stringify(error));
-    })
+    if (confirm('수정하시겠습니까?')) {
+        $.ajax({
+            enctype: 'multipart/form-data',
+            cache: false,
+            type: 'PUT',
+            url: '/admin/rentcar/price/' + period + '/image/' + id,
+            processData:false,
+            contentType: false,
+            data: formData
+        }).done(function () {
+            alert('처리되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
 };
 
 // 월렌트에서 차량 삭제
@@ -448,3 +487,11 @@ function calculatePriceOnMenu(event, period, type) {
         target.innerText = result;
     }
 }
+
+// 보증금 숨기기 버튼
+// function hideDeposit() {
+//     const depositColumns = [...document.getElementsByClassName('depositColumn')];
+//     depositColumns.forEach(column => {
+//         column.classList.toggle('displayNone');
+//     });
+// }
