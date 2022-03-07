@@ -128,6 +128,58 @@ public class RentCarController {
     }
 
 
+    @PutMapping("/admin/rentcar/price/monthly/{column}/{value}")
+    @ResponseBody
+    public void put_rent_car_price_monthly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double value) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+
+        switch (column){
+            case "보증금":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.setDeposit(String.valueOf(value));
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "21세":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.setAge_limit(String.valueOf(value));
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "2500km":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.setCost_for_2_5k(value);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "3000km":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.setCost_for_3k(value);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "4000km":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.setCost_for_4k(value);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            default:
+                throw new Exception("kilometer not mathced");
+        }
+
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
     @PutMapping(value="/admin/rentcar/price/monthly/image/{monthlyId}", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public void put_rent_car_price_monthly_with_image(MonthlyRentVO monthlyRentVO, @PathVariable Long monthlyId) throws IOException {
