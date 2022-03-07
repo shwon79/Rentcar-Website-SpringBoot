@@ -389,11 +389,12 @@ public class RealtimeRentController {
         String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
         List<String> carList = new ArrayList<>();
+        Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
+        MonthlyRent monthlyRent = monthlyRentOptional.get();
+        model.put("monthlyRent", monthlyRent);
 
         // 세이브카 db에서 해당 차 객체 가져오기
         if (rentTerm.equals("한달")){
-            Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
-            MonthlyRent monthlyRent = monthlyRentOptional.get();
             carList.add(monthlyRent.getImg_url());
             cost_per_km = monthlyRent.getCost_per_km();
             credit = monthlyRent.getCredit();
@@ -416,8 +417,6 @@ public class RealtimeRentController {
                 out.println("<script>alert('24개월 이용 불가한 차량입니다.'); </script>");
                 out.flush();
 
-                Optional<MonthlyRent> monthlyRentOptional = monthlyRentService.findById(rentIdx);
-                MonthlyRent monthlyRent = monthlyRentOptional.get();
                 carList.add(monthlyRent.getImg_url());
                 cost_per_km = monthlyRent.getCost_per_km();
                 credit = monthlyRent.getCredit();
