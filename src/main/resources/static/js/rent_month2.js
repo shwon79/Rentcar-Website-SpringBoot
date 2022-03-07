@@ -190,14 +190,9 @@ $('.moveToAvailableDetail').click(function(e) {
             carIdx = carIdxList[i].innerText;
         }
     };
-    for (i = 0; i < discountList.length; i++) {
-        if (discountList[i].dataset.index == dataIndex) {
-            discount = discountList[i].innerText;
-            if (discount=='') {
-                discount = null;
-            }
-        }
-    };
+    let tempDiscount = [...discountList].find(discount => discount.dataset.index === dataIndex);
+    discount = tempDiscount.innerText;
+
     for (i = 0; i < kilometerList.length; i++) {
         if (kilometerList[i].dataset.index == dataIndex) {
             kilometer = kilometerList[i].innerText;
@@ -298,7 +293,6 @@ function dataReset() {
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
 
-    console.log(kilometer);
     if (rentTerm == '한달' && kilometer == '') {
         kilometer = '2000km';
     } else if (rentTerm == '12개월' && kilometer == '') {

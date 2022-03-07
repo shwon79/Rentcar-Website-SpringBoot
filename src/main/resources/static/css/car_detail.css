@@ -41,6 +41,9 @@
 .carousel-box {
     padding-left: 15px;
 }
+.rentcar_detail_right_column {
+    padding: 0 0 0 40px;
+}
 .car_info_box {
     margin-bottom: 20px;
 }
@@ -56,6 +59,13 @@
 }
 .car_info i {
     color: dimgray;
+}
+
+.car_attribute {
+    border: 1px solid dimgray;
+    padding: 10px;
+    word-break: keep-all;
+    border-radius: 12px;
 }
 .info-card {
     background-color: black;
@@ -356,5 +366,8 @@ select {
     }
     .detail_btn {
         font-size: 16px;
+    }
+    .rentcar_detail_right_column {
+        padding: 20px 10px;
     }
 }
