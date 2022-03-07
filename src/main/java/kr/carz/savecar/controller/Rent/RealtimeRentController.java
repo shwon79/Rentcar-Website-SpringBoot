@@ -105,7 +105,7 @@ public class RealtimeRentController {
                     MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, carCategory);
 
                     Optional<Discount> discount_object = discountService.findDiscountByCarNo((String)morenObject.get("carNo"));
-                    String discount_price = null;
+                    double discount_price = 0;
                     String discount_description = null;
                     if(discount_object.isPresent()) {
                         discount_price = discount_object.get().getDiscount();
@@ -139,7 +139,7 @@ public class RealtimeRentController {
                     MonthlyRent monthlyRent2 = monthlyRentService.findByMorenCar(carOld, carOld, carCategory);
 
                     Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
-                    String discount_price = null;
+                    double discount_price = 0;
                     String discount_description = null;
                     if(discount_object.isPresent()) {
                         discount_price = discount_object.get().getDiscount();
@@ -316,7 +316,7 @@ public class RealtimeRentController {
                         }
 
                         Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
-                        String discount_price = null;
+                        double discount_price = 0;
                         String discount_description = null;
                         if(discount_object.isPresent() && realTimeDto.getRentTerm().equals("한달")) {
                             discount_price = discount_object.get().getDiscount();
@@ -380,7 +380,7 @@ public class RealtimeRentController {
 
     // 차량 상세 페이지
     @RequestMapping(value = "/rent/month/detail/{rentTerm}/{carIdx}/{rentIdx}/{kilometer}/{discount}/{rentStatus}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
-    public String rent_month_detail(HttpServletResponse res, ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable String discount,@PathVariable String rentStatus) throws IOException {
+    public String rent_month_detail(HttpServletResponse res, ModelMap model, @PathVariable String carIdx,@PathVariable String rentTerm, @PathVariable Long rentIdx, @PathVariable String kilometer,  @PathVariable double discount,@PathVariable String rentStatus) throws IOException {
 
         String cost_per_km = null;
         String credit = null;

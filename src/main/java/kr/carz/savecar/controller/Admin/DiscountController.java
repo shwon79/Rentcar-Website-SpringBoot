@@ -66,7 +66,7 @@ public class DiscountController {
     // 할인가 수정하기 api
     @RequestMapping(value = "/admin/discount/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
-    public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable String discount) throws IOException {
+    public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable double discount) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 

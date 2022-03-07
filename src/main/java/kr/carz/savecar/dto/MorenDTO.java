@@ -29,7 +29,7 @@ public class MorenDTO {
     private String orderEnd;
     private Long rentIdx;
     private List<String> carImageList;
-    private String discount;
+    private double discount;
     private String discountDescription;
     private String costPerKm;
     private String credit;
