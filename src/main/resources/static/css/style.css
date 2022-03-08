@@ -1340,10 +1340,15 @@ div.popStyle1, div.popStyle2 {
 .loading_spinner_box {
     background-color: white;
     display: inline-block;
-    margin: 35% 45%;
+    margin: 30vh 43vw;
     padding: 30px;
     border: 1px solid black;
     border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: max-content;
+    align-items: center;
 }
 .loading_spinner {
     width: 3em;
@@ -1351,7 +1356,7 @@ div.popStyle1, div.popStyle2 {
     border-radius: 50%;
     border: 5px solid gainsboro;
     border-top: 5px solid black;
-    animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
