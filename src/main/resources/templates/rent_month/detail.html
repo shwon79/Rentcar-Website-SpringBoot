@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <script th:src="@{/js/rent_month2.js}" defer></script>
-<!--  <script th:src="@{/js/jquery.min.js}"></script>-->
+  <script th:src="@{/js/car_detail.js}" defer></script>
+  <!--  <script th:src="@{/js/jquery.min.js}"></script>-->
 <!--  <script th:src="@{/js/vendor/bootstrap.min.js}"></script>-->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
@@ -36,6 +37,46 @@
 <body>
 <div layout:fragment="content" style="width: 86%; margin:0 auto">
   <div class="car_detail_content" style="padding-top: 100px;">
+    <div id="pickupPriceModal" class="modal">
+      <div class="modal_content">
+        <span class="modal_close_btn">&times;</span>
+        <table>
+          <tr class="hidden-mobile">
+            <td class="title">금액</td>
+            <td class="title">지역 (서울|경기)</td>
+          </tr>
+          <tr>
+            <td class="subtitle">15,000원</td>
+            <td>송파구, 성남시[수정구]</td>
+          </tr>
+          <tr>
+            <td class="subtitle">15,000원~20,000원</td>
+            <td>강동구, 성남시[중원구]</td>
+          </tr>
+          <tr>
+            <td class="subtitle">15,000원~25,000원</td>
+            <td>강남구, 서초구, 성동구, 동대문구, 중랑구, 용산구, 동작구, 관악구, 광진구, 하남시, 성남시[분당구]</td>
+          </tr>
+          <tr>
+            <td class="subtitle">20,000원~30,000원</td>
+            <td>노원구, 성북구, 종로구, 중구, 영등포구, 금천구, 도봉구, 강북구, 은평구, 서대문구, 마포구, 양천구, 구로구, 강서구, 광명시, 의정부시, 구리시, 남양주시, 광주시, 과천시, 안양시</td>
+          </tr>
+          <tr>
+            <td class="subtitle">25,000원~35,000원</td>
+            <td>부천시, 시흥시, 양주시, 고양시, 용인시, 수원시, 이천시, 군포시, 의왕시</td>
+          </tr>
+          <tr>
+            <td class="subtitle">30,000원~50,000원</td>
+            <td>가평군, 양평군, 화성시, 안산시, 김포시, 인천광영시, 파주시, 동두천시, 포천시, 오산시, 평택시, 안성시, 여주시, 연천군</td>
+          </tr>
+          <tr>
+            <td class="subtitle"></td>
+            <td>*이외의 지역은 별도 상담을 통해 문의하시기 바랍니다.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
     <div class="row">
       <div class="row" style="margin-bottom: 150px;">
         <!-- Nav tabs -->
@@ -52,7 +93,7 @@
         <div class="tab-content" style="width: 86%; margin: 0 auto">
           <!-- info car -->
           <div class="tab-pane active" id="info_car">
-            <div class="row" style="margin-bottom: 60px;">
+            <div class="row" style="margin-bottom: 50px;">
               <!-- car picture carousel -->
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 carousel-box">
                 <div class="row car_img_carousel">
@@ -113,12 +154,16 @@
                 </div>
               </div>
               <!-- infos -->
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: none;">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <!-- info table -->
                 <div class="row rentcar_detail_right_column">
                   <div class="car_info_box">
                     <p class="car_info_title">차량정보</p>
                     <div class="car_infos">
+                      <div class="car_info">
+                        <i class="fa-solid fa-hashtag"></i>
+                        <span th:text="${morenDto.carNo}"></span>
+                      </div>
                       <div class="car_info">
                         <i class="fa-brands fa-y-combinator"></i>
                         <span th:text="${morenDto.carOld}"></span>
@@ -129,36 +174,36 @@
                         <span th:text="${morenDto.carEngine}"></span>
                       </div>
                       <div class="car_info">
-                        <i class="fa-solid fa-user"></i>
-                        <span>인원정보?</span>
-                      </div>
-                      <div class="car_info">
                         <i class="fa-solid fa-palette"></i>
                         <span th:text="${morenDto.carColor}"></span>
                       </div>
+                      <div class="car_info">
+                        <i class="fa-solid fa-car-side"></i>
+                        <span th:text="${monthlyRent.category2}"></span>
+                      </div>
+                      <div class="car_info">
+                        <i class="fa-solid fa-gear"></i>
+                        <span th:text="${morenDto.carDetail}"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="car_info_box" th:if="${morenDto.carAttribute01 != ''}">
+                    <p class="car_info_title">차량 옵션</p>
+                    <div class="car_attribute">
+                      <input type="checkbox" checked onclick="return false">
+                      <p th:text="${morenDto.carAttribute01}"></p>
                     </div>
                   </div>
                   <div class="car_info_box">
-                    <p class="car_info_title">차량 옵션</p>
-                    <p th:text="${morenDto.carAttribute01}" class="car_attribute"></p>
-                  </div>
-                  <div class="car_info_box">
                     <p class="car_info_title">부가서비스</p>
-
+                    <p style="display: flex; justify-content: space-between; align-items: center;">
+                      <span>
+                        <i class="fa-solid fa-circle-check" style="color: dimgrey;"></i>
+                        <span>차량 배달</span>
+                      </span>
+                      <button id="pickupPriceBtn">배차비 확인하기</button>
+                    </p>
                   </div>
-                  <div class="car_info_box">
-                    <p class="car_info_title">운전자 대여조건</p>
-
-                  </div>
-                  <p>carAttribute01 안뜨는 애들도..</p>
-                  <p th:text="${morenDto.carColor}"></p>
-                  <p th:text="${morenDto.carExteriorColor}"></p>
-                  <p th:text="${morenDto.carEngine}"></p>
-                  <p th:text="${morenDto.carName}"></p>
-                  <p th:text="${morenDto.kilometer}"></p>
-                  <p th:text="${morenDto.carDisplacement}"></p>
-                  <p th:text="${morenDto.carAttribute01}"></p>
-                  <p th:text="${morenDto.carCategory}"></p>
 
 <!--                  <div class="col-lg-12">-->
 <!--                    <h1 class="carName" th:text="${morenDto.carName}"></h1>-->
@@ -203,10 +248,11 @@
                 <p id="getDiscount" th:text="${morenDto.discount}" style="display: none;"></p>
                 <p id="getRentStatus" th:text="${rentStatus}" style="display: none;"></p>
                 <p id="getrentIdx" th:text="${rentIdx}" style="display: none;"></p>
+                <p class="car_info_title">가격정보 및 예약하기</p>
                 <div class="container selectRentermKilometerBox">
                   <div class="select-box">
-                    <p style="color: black; text-align: right; font-size: 16px; word-break: keep-all;">※ 렌트 기간, 약정 주행거리, 연령 선택에 따라 대여료가 달라집니다.</p>
-                    <p th:if="${rentStatus}=='expected'" style="color: black; text-align: right; font-size: 16px; word-break: keep-all; margin-bottom: 30px;">
+                    <p class="select_box_description">※ 렌트 기간, 약정 주행거리, 연령 선택에 따라 대여료가 달라집니다.</p>
+                    <p th:if="${rentStatus}=='expected'" class="select_box_description">
                       ※ 입고 예정이나, 기존 고객 연장으로 예약이 불가할 수 있습니다.
                     </p>
                     <div class="display_flex">
@@ -265,6 +311,7 @@
                       <tr style="background: #eeeeee; border-bottom: 1px solid #3b3b3b;">
                         <td>렌트 기간</td>
                         <td>약정 주행거리</td>
+                        <td>보증금</td>
                         <td>월대여료(VAT미포함)</td>
                         <td></td>
                       </tr>
@@ -274,6 +321,10 @@
                         <td th:if="${morenDto.kilometer!='기타_long'}" th:text="${morenDto.kilometer}"></td>
                         <td th:if="${morenDto.kilometer=='기타'||morenDto.kilometer=='기타_long' }">상담</td>
                         <td style="display: none;" th:text="${priceObject.age_limit}" id="getAgeLimit"></td>
+                        <td>
+                          <span th:text="${#numbers.formatInteger(priceObject.deposit,0,'COMMA')}"></span>
+                          <span>원</span>
+                        </td>
                         <td th:if="${morenDto.kilometer!='기타'&&morenDto.kilometer!='기타_long'}">
                           <span th:if="${morenDto.discount != 0}">
                             <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${#numbers.formatInteger(T(Math).round((priceObject.cost_for_2k*(100+morenDto.discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
@@ -356,6 +407,13 @@
                           <option value='upper26' selected>만 26세 이상</option>
                           <option value='upper21'>만 21세 이상~만 26세 미만</option>
                         </select>
+                      </p>
+                      <p>
+                        <span>보증금</span>
+                        <span>
+                          <span th:text="${#numbers.formatInteger(priceObject.deposit,0,'COMMA')}"></span>
+                          <span>원</span>
+                        </span>
                       </p>
                       <p>
                         <span>월대여료(VAT미포함)</span>
