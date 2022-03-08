@@ -422,7 +422,7 @@ public class RentCarController {
 
         JSONObject jsonObject = new JSONObject();
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findAllByTwoYearlyRentIsNotNull();
 
         switch (column){
             case "보증금":
