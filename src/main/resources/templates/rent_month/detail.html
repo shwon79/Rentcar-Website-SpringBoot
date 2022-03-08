@@ -1,4 +1,4 @@
-<!--  차량 상세 페이지 진행중 (car_detail.html) -->
+<!--  rent/month/detail -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -10,6 +10,7 @@
 
   <!-- Style -->
   <link th:href="@{/css/car_detail.css}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <script th:src="@{/js/rent_month2.js}" defer></script>
 <!--  <script th:src="@{/js/jquery.min.js}"></script>-->
@@ -112,41 +113,85 @@
                 </div>
               </div>
               <!-- infos -->
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 not-show-in-mobile" style="display: none;">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: none;">
                 <!-- info table -->
-                <div class="row info-card">
-                  <div class="col-lg-12">
-                    <h1 class="carName" th:text="${morenDto.carName}"></h1>
+                <div class="row rentcar_detail_right_column">
+                  <div class="car_info_box">
+                    <p class="car_info_title">차량정보</p>
+                    <div class="car_infos">
+                      <div class="car_info">
+                        <i class="fa-brands fa-y-combinator"></i>
+                        <span th:text="${morenDto.carOld}"></span>
+                        <span>년식</span>
+                      </div>
+                      <div class="car_info">
+                        <i class="fa-solid fa-oil-can"></i>
+                        <span th:text="${morenDto.carEngine}"></span>
+                      </div>
+                      <div class="car_info">
+                        <i class="fa-solid fa-user"></i>
+                        <span>인원정보?</span>
+                      </div>
+                      <div class="car_info">
+                        <i class="fa-solid fa-palette"></i>
+                        <span th:text="${morenDto.carColor}"></span>
+                      </div>
+                    </div>
                   </div>
-                  <hr style="border-top: 2px solid white;">
-                  <!-- table left -->
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info-card-left">
-                    <p>연료</p>
-                    <p>년식</p>
-<!--                    <p>주행거리</p>-->
-                    <p>차량번호</p>
-                    <p>배기량</p>
-<!--                    <p>모델 연도</p>-->
-                    <p>색상</p>
-                    <p>옵션</p>
+                  <div class="car_info_box">
+                    <p class="car_info_title">차량 옵션</p>
+                    <p th:text="${morenDto.carAttribute01}" class="car_attribute"></p>
                   </div>
-                  <!-- table right -->
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info-card-right">
-                    <p th:text="${morenDto.carEngine}"></p>
-                    <p class="carOld" th:text="${morenDto.carOld}"></p>
-<!--                    <p th:text="${morenDto.carMileaget}+'km'"></p>-->
-                    <p class="carNo" th:text="${morenDto.carNo}"></p>
-                    <p th:text="${morenDto.carDisplacement}"></p>
-<!--                    <p th:text="${morenDto.carOld}"></p>-->
-                    <p th:text="${morenDto.carColor}"></p>
-                    <p th:text="${morenDto.carAttribute01}"></p>
+                  <div class="car_info_box">
+                    <p class="car_info_title">부가서비스</p>
+
                   </div>
+                  <div class="car_info_box">
+                    <p class="car_info_title">운전자 대여조건</p>
+
+                  </div>
+                  <p>carAttribute01 안뜨는 애들도..</p>
+                  <p th:text="${morenDto.carColor}"></p>
+                  <p th:text="${morenDto.carExteriorColor}"></p>
+                  <p th:text="${morenDto.carEngine}"></p>
+                  <p th:text="${morenDto.carName}"></p>
+                  <p th:text="${morenDto.kilometer}"></p>
+                  <p th:text="${morenDto.carDisplacement}"></p>
+                  <p th:text="${morenDto.carAttribute01}"></p>
+                  <p th:text="${morenDto.carCategory}"></p>
+
+<!--                  <div class="col-lg-12">-->
+<!--                    <h1 class="carName" th:text="${morenDto.carName}"></h1>-->
+<!--                  </div>-->
+<!--                  <hr style="border-top: 2px solid white;">-->
+<!--                  &lt;!&ndash; table left &ndash;&gt;-->
+<!--                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info-card-left">-->
+<!--                    <p>연료</p>-->
+<!--                    <p>년식</p>-->
+<!--&lt;!&ndash;                    <p>주행거리</p>&ndash;&gt;-->
+<!--                    <p>차량번호</p>-->
+<!--                    <p>배기량</p>-->
+<!--&lt;!&ndash;                    <p>모델 연도</p>&ndash;&gt;-->
+<!--                    <p>색상</p>-->
+<!--                    <p>옵션</p>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; table right &ndash;&gt;-->
+<!--                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info-card-right">-->
+<!--                    <p th:text="${morenDto.carEngine}"></p>-->
+<!--                    <p class="carOld" th:text="${morenDto.carOld}"></p>-->
+<!--&lt;!&ndash;                    <p th:text="${morenDto.carMileaget}+'km'"></p>&ndash;&gt;-->
+<!--                    <p class="carNo" th:text="${morenDto.carNo}"></p>-->
+<!--                    <p th:text="${morenDto.carDisplacement}"></p>-->
+<!--&lt;!&ndash;                    <p th:text="${morenDto.carOld}"></p>&ndash;&gt;-->
+<!--                    <p th:text="${morenDto.carColor}"></p>-->
+<!--                    <p th:text="${morenDto.carAttribute01}"></p>-->
+<!--                  </div>-->
                 </div>
-                <div class="row justify-content-md-center">
-                  <div class="col-auto">
-                    <div class="tel_info"><p>문의: 1661-3331</p></div>
-                  </div>
-                </div>
+<!--                <div class="row justify-content-md-center">-->
+<!--                  <div class="col-auto">-->
+<!--                    <div class="tel_info"><p>문의: 1661-3331</p></div>-->
+<!--                  </div>-->
+<!--                </div>-->
               </div>
             </div>
 
@@ -230,29 +275,29 @@
                         <td th:if="${morenDto.kilometer=='기타'||morenDto.kilometer=='기타_long' }">상담</td>
                         <td style="display: none;" th:text="${priceObject.age_limit}" id="getAgeLimit"></td>
                         <td th:if="${morenDto.kilometer!='기타'&&morenDto.kilometer!='기타_long'}">
-                          <span th:if="${morenDto.discount} != 'null'">
-                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
+                          <span th:if="${morenDto.discount != 0}">
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${#numbers.formatInteger(T(Math).round((priceObject.cost_for_2k*(100+morenDto.discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((priceObject.cost_for_2_5k * priceObject.cost_for_2k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='3000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((priceObject.cost_for_3k * priceObject.cost_for_2k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='4000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((priceObject.cost_for_4k * priceObject.cost_for_2k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='20000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((monthlyRent.cost_for_2k * priceObject.cost_for_20k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='30000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(((T(Math).round(monthlyRent.cost_for_3k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_30k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(((T(Math).round(monthlyRent.cost_for_4k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_40k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((monthlyRent.cost_for_2k * priceObject.cost_for_20Tk / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(((T(Math).round(monthlyRent.cost_for_3k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_30Tk / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(((T(Math).round(monthlyRent.cost_for_4k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_40Tk / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
                           </span>
-                          <span th:if="${morenDto.discount} == 'null'">
-                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}" class="number" id="carPrice"></span>
-                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}" class="number" id="carPrice"></span>
+                          <span th:if="${morenDto.discount == 0}">
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${#numbers.formatInteger(priceObject.cost_for_2k, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${#numbers.formatInteger(T(Math).round(priceObject.cost_for_2_5k * priceObject.cost_for_2k / 1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='3000km'}" th:text="${#numbers.formatInteger(T(Math).round(priceObject.cost_for_3k * priceObject.cost_for_2k / 1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='4000km'}" th:text="${#numbers.formatInteger(T(Math).round(priceObject.cost_for_4k * priceObject.cost_for_2k / 1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='20000km'}" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * priceObject.cost_for_20k / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='30000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthlyRent.cost_for_3k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_30k / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthlyRent.cost_for_4k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_40k / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * priceObject.cost_for_20Tk / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthlyRent.cost_for_3k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_30Tk / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthlyRent.cost_for_4k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_40Tk / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
                           </span>
                           <span>원</span>
                         </td>
@@ -316,30 +361,30 @@
                         <span>월대여료(VAT미포함)</span>
                         <span th:if="${morenDto.kilometer=='기타'||morenDto.kilometer=='기타_long'}">상담</span>
                         <span th:if="${morenDto.kilometer!='기타'&&morenDto.kilometer!='기타_long'}">
-                            <span th:if="${morenDto.discount} != 'null'">
-                              <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}*(100+${morenDto.discount})/100" class="number" id="carPrice"></span>
-                            </span>
-                          <span th:if="${morenDto.discount} == 'null'">
-                              <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${priceObject.cost_for_2k}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${priceObject.cost_for_2_5k}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='3000km'}" th:text="${priceObject.cost_for_3k}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='4000km'}" th:text="${priceObject.cost_for_4k}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='20000km'}" th:text="${priceObject.cost_for_20k}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='30000km'}" th:text="${priceObject.cost_for_30k}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" th:text="${priceObject.cost_for_40k}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" th:text="${priceObject.cost_for_20Tk}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" th:text="${priceObject.cost_for_30Tk}" class="number" id="carPrice"></span>
-                              <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" th:text="${priceObject.cost_for_40Tk}" class="number" id="carPrice"></span>
-                            </span>
+                          <span th:if="${morenDto.discount != 0}">
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${#numbers.formatInteger(T(Math).round((priceObject.cost_for_2k*(100+morenDto.discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((priceObject.cost_for_2_5k * priceObject.cost_for_2k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='3000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((priceObject.cost_for_3k * priceObject.cost_for_2k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='4000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((priceObject.cost_for_4k * priceObject.cost_for_2k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='20000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((monthlyRent.cost_for_2k * priceObject.cost_for_20k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='30000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(((T(Math).round(monthlyRent.cost_for_3k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_30k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(((T(Math).round(monthlyRent.cost_for_4k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_40k / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round((monthlyRent.cost_for_2k * priceObject.cost_for_20Tk / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(((T(Math).round(monthlyRent.cost_for_3k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_30Tk / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(((T(Math).round(monthlyRent.cost_for_4k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_40Tk / 1000)*1000)*(100+morenDto.discount)/100)/1000)*1000 , 0, 'COMMA')}" id="carPrice"></span>
+                          </span>
+                          <span th:if="${morenDto.discount == 0}">
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" th:text="${#numbers.formatInteger(priceObject.cost_for_2k, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" th:text="${#numbers.formatInteger(T(Math).round(priceObject.cost_for_2_5k * priceObject.cost_for_2k / 1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='3000km'}" th:text="${#numbers.formatInteger(T(Math).round(priceObject.cost_for_3k * priceObject.cost_for_2k / 1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='4000km'}" th:text="${#numbers.formatInteger(T(Math).round(priceObject.cost_for_4k * priceObject.cost_for_2k / 1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='20000km'}" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * priceObject.cost_for_20k / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='30000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthlyRent.cost_for_3k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_30k / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='12개월' && morenDto.kilometer=='40000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthlyRent.cost_for_4k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_40k / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='20000km'}" th:text="${#numbers.formatInteger(T(Math).round(monthlyRent.cost_for_2k * priceObject.cost_for_20Tk / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='30000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthlyRent.cost_for_3k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_30Tk / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                            <span th:if="${morenDto.rentTerm=='24개월' && morenDto.kilometer=='40000km'}" th:text="${#numbers.formatInteger(T(Math).round((T(Math).round(monthlyRent.cost_for_4k * monthlyRent.cost_for_2k / 1000)*1000) * priceObject.cost_for_40Tk / 1000)*1000, 3, 'COMMA')}" id="carPrice"></span>
+                          </span>
                           <span>원</span>
                         </span>
                       </p>

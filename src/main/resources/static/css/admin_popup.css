@@ -181,7 +181,7 @@
     position: absolute;
     width: 80%;
     left: 10%;
-    top: 28%;
+    top: 23%;
     padding: 10px !important;
     font-size: 1em;
     border-radius: 12px !important;
@@ -190,6 +190,14 @@
     grid-template-columns: 48% 48%;
     display: grid;
     grid-column-gap: 20px;
+}
+.promotion_slogan {
+    top: 59% !important;
+}
+.popup2_box34_oneline {
+    display: grid !important;
+    grid-template-columns: 40% 40% 20%;
+    align-items: center !important;
 }
 .popup_box {
     border: 5px solid #e71c36;
@@ -324,6 +332,9 @@
     .popup_box_slogan {
         font-size: 1.2em;
         top: 9%;
+    }
+    .promotion_slogan {
+        top: 50% !important;
     }
     .popup_box_wrapper {
         grid-column-gap: 5px;

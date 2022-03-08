@@ -15,7 +15,7 @@ public class DiscountSaveDTO {
 
     private Long discountId;
     private String carNo;
-    private String discount; // 할인 퍼센트
+    private double discount; // 할인 퍼센트
     private String description;
 
     public Discount toEntity() {

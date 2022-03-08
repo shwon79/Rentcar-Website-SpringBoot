@@ -41,7 +41,32 @@
 .carousel-box {
     padding-left: 15px;
 }
+.rentcar_detail_right_column {
+    padding: 0 0 0 40px;
+}
+.car_info_box {
+    margin-bottom: 20px;
+}
+.car_info_title {
+    font-size: 1.8rem;
+}
+.car_infos {
+    display: flex;
+    flex-wrap: wrap;
+}
+.car_info {
+    margin: 0 10px 10px 0;
+}
+.car_info i {
+    color: dimgray;
+}
 
+.car_attribute {
+    border: 1px solid dimgray;
+    padding: 10px;
+    word-break: keep-all;
+    border-radius: 12px;
+}
 .info-card {
     background-color: black;
     color: white;
@@ -341,5 +366,8 @@ select {
     }
     .detail_btn {
         font-size: 16px;
+    }
+    .rentcar_detail_right_column {
+        padding: 20px 10px;
     }
 }

@@ -36,14 +36,15 @@ function closeWinTwo() {
 // 팝업 내용 불러오기
 $(window).load(function () {
     if (document.getElementById('popup2_contact')) {
-        function getData(title, target) {
+
+        function getData(title) {
             $.ajax({
                 type: "GET",
                 url: `/index/popup/value/${title}`,
                 dataType: "json",
                 cache: false,
                 success: function(data){
-                    let targetEle = document.getElementById(target);
+                    let targetEle = document.getElementById(title);
                     targetEle.innerText = data.value;
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -74,89 +75,42 @@ $(window).load(function () {
                 })
         };
 
-        getData('popup1_contact', 'popup1_contact');
+        // 지금 사용안하는 데이터
+        // let notUseList = ['popup1_box1_line5_text3'];
 
-        getData('popup1_banner1', 'popup1_banner1');
-        getData('popup1_banner2', 'popup1_banner2');
+        // 사용하는 데이터
+        let getDataList =
+            [
+                'popup1_contact', 'popup1_banner1', 'popup1_banner2',
 
-        getData('popup1_box1_line1_title', 'popup1_box1_line1_title');
-        getData('popup1_box1_line1_text1', 'popup1_box1_line1_text1');
-        getData('popup1_box1_line1_price', 'popup1_box1_line1_price');
-        getData('popup1_box1_line1_text2', 'popup1_box1_line1_text2');
+                'popup1_box1_line1_title', 'popup1_box1_line1_text1', 'popup1_box1_line1_price', 'popup1_box1_line1_text2',
+                'popup1_box1_line2_title', 'popup1_box1_line2_text1', 'popup1_box1_line2_price', 'popup1_box1_line2_text2',
+                'popup1_box1_line3_title', 'popup1_box1_line3_text1', 'popup1_box1_line3_price', 'popup1_box1_line3_text2',
+                'popup1_box1_line4_title', 'popup1_box1_line4_text1', 'popup1_box1_line4_price', 'popup1_box1_line4_text2', 'popup1_box1_line4_text3',
+                'popup1_box1_line5_title', 'popup1_box1_line5_text1', 'popup1_box1_line5_price', 'popup1_box1_line5_text2',
+                'popup1_box1_line6_title', 'popup1_box1_line6_text1', 'popup1_box1_line6_price',
+                'popup1_box1_line7_title', 'popup1_box1_line7_text1', 'popup1_box1_line7_price', 'popup1_box1_line7_text2',
+                'popup1_box1_line8_title', 'popup1_box1_line8_text1', 'popup1_box1_line8_price', 'popup1_box1_line8_text2',
 
-        getData('popup1_box1_line2_title', 'popup1_box1_line2_title');
-        getData('popup1_box1_line2_text1', 'popup1_box1_line2_text1');
-        getData('popup1_box1_line2_price', 'popup1_box1_line2_price');
-        getData('popup1_box1_line2_text2', 'popup1_box1_line2_text2');
+                'popup1_box2_line1_title', 'popup1_box2_line1_text1', 'popup1_box2_line1_price1', 'popup1_box2_line1_text2', 'popup1_box2_line1_price2', 'popup1_box2_line1_text3',
+                'popup1_box2_line2_title', 'popup1_box2_line2_text1', 'popup1_box2_line2_price1', 'popup1_box2_line2_text2', 'popup1_box2_line2_price2', 'popup1_box2_line2_text3',
+                'popup1_box2_line3_title', 'popup1_box2_line3_text1', 'popup1_box2_line3_price1', 'popup1_box2_line3_text2', 'popup1_box2_line3_price2', 'popup1_box2_line3_text3',
+                'popup1_box2_bottom_line1', 'popup1_box2_bottom_line2_title', 'popup1_box2_bottom_line2_text1', 'popup1_box2_bottom_line2_text2',
+                'popup1_box2_bottom_line3_title', 'popup1_box2_bottom_line3_text1', 'popup1_box2_bottom_line3_text2', 'popup1_button',
 
-        getData('popup1_box1_line3_title', 'popup1_box1_line3_title');
-        getData('popup1_box1_line3_text1', 'popup1_box1_line3_text1');
-        getData('popup1_box1_line3_price', 'popup1_box1_line3_price');
-        getData('popup1_box1_line3_text2', 'popup1_box1_line3_text2');
+                'popup2_contact', 'popup2_subtitle', 'popup2_title', 'popup2_slogan', 'popup2_box1_subtitle', 'popup2_box2_subtitle',
+                'popup2_promotion', 'popup2_box3_line1_title', 'popup2_box3_line1_price',
+                'popup2_box3_line2_title', 'popup2_box3_line2_price',
+                'popup2_box3_line3_title', 'popup2_box3_line3_price',
+                'popup2_box4_line1_title', 'popup2_box4_line1_price',
+                'popup2_box4_line2_title', 'popup2_box4_line2_price',
+                'popup2_box4_line3_title', 'popup2_box4_line3_price', 'popup2_button'
+            ];
 
-        getData('popup1_box1_line4_title', 'popup1_box1_line4_title');
-        getData('popup1_box1_line4_text1', 'popup1_box1_line4_text1');
-        getData('popup1_box1_line4_price', 'popup1_box1_line4_price');
-        getData('popup1_box1_line4_text2', 'popup1_box1_line4_text2');
-        getData('popup1_box1_line4_text3', 'popup1_box1_line4_text3');
+        for (let i=0; i < getDataList.length; i++) {
+            getData(getDataList[i]);
+        };
 
-        getData('popup1_box1_line5_title', 'popup1_box1_line5_title');
-        getData('popup1_box1_line5_text1', 'popup1_box1_line5_text1');
-        getData('popup1_box1_line5_price', 'popup1_box1_line5_price');
-        getData('popup1_box1_line5_text2', 'popup1_box1_line5_text2');
-        // getData('popup1_box1_line5_text3', 'popup1_box1_line5_text3');
-
-        getData('popup1_box1_line6_title', 'popup1_box1_line6_title');
-        getData('popup1_box1_line6_text1', 'popup1_box1_line6_text1');
-        getData('popup1_box1_line6_price', 'popup1_box1_line6_price');
-
-        getData('popup1_box1_line7_title', 'popup1_box1_line7_title');
-        getData('popup1_box1_line7_text1', 'popup1_box1_line7_text1');
-        getData('popup1_box1_line7_price', 'popup1_box1_line7_price');
-        getData('popup1_box1_line7_text2', 'popup1_box1_line7_text2');
-
-        getData('popup1_box1_line8_title', 'popup1_box1_line8_title');
-        getData('popup1_box1_line8_text1', 'popup1_box1_line8_text1');
-        getData('popup1_box1_line8_price', 'popup1_box1_line8_price');
-        getData('popup1_box1_line8_text2', 'popup1_box1_line8_text2');
-
-        getData('popup1_box2_line1_title', 'popup1_box2_line1_title');
-        getData('popup1_box2_line1_text1', 'popup1_box2_line1_text1');
-        getData('popup1_box2_line1_price1', 'popup1_box2_line1_price1');
-        getData('popup1_box2_line1_text2', 'popup1_box2_line1_text2');
-        getData('popup1_box2_line1_price2', 'popup1_box2_line1_price2');
-        getData('popup1_box2_line1_text3', 'popup1_box2_line1_text3');
-        getData('popup1_box2_line2_title', 'popup1_box2_line2_title');
-        getData('popup1_box2_line2_text1', 'popup1_box2_line2_text1');
-        getData('popup1_box2_line2_price1', 'popup1_box2_line2_price1');
-        getData('popup1_box2_line2_text2', 'popup1_box2_line2_text2');
-        getData('popup1_box2_line2_price2', 'popup1_box2_line2_price2');
-        getData('popup1_box2_line2_text3', 'popup1_box2_line2_text3');
-        getData('popup1_box2_line3_title', 'popup1_box2_line3_title');
-        getData('popup1_box2_line3_text1', 'popup1_box2_line3_text1');
-        getData('popup1_box2_line3_price1', 'popup1_box2_line3_price1');
-        getData('popup1_box2_line3_text2', 'popup1_box2_line3_text2');
-        getData('popup1_box2_line3_price2', 'popup1_box2_line3_price2');
-        getData('popup1_box2_line3_text3', 'popup1_box2_line3_text3');
-
-        getData('popup1_box2_bottom_line1', 'popup1_box2_bottom_line1');
-        getData('popup1_box2_bottom_line2_title', 'popup1_box2_bottom_line2_title');
-        getData('popup1_box2_bottom_line2_text1', 'popup1_box2_bottom_line2_text1');
-        getData('popup1_box2_bottom_line2_text2', 'popup1_box2_bottom_line2_text2');
-        getData('popup1_box2_bottom_line3_title', 'popup1_box2_bottom_line3_title');
-        getData('popup1_box2_bottom_line3_text1', 'popup1_box2_bottom_line3_text1');
-        getData('popup1_box2_bottom_line3_text2', 'popup1_box2_bottom_line3_text2');
-
-        getData('popup1_button', 'popup1_button');
-        getData('popup2_contact', 'popup2_contact');
-        getData('popup2_subtitle', 'popup2_subtitle');
-        getData('popup2_title', 'popup2_title');
-        getData('popup2_slogan', 'popup2_slogan');
-        getData('popup2_box1_title', 'popup2_box1_title');
-        getData('popup2_box1_subtitle', 'popup2_box1_subtitle');
-        getData('popup2_box2_title', 'popup2_box2_title');
-        getData('popup2_box2_subtitle', 'popup2_box2_subtitle');
-        getData('popup2_button', 'popup2_button');
         getCampingcarInfoData('europe', 'popup2_box1_title','popup2_box1_line1_price', 'popup2_box1_line2_price');
         getCampingcarInfoData('limousine', 'popup2_box2_title','popup2_box2_line1_price', 'popup2_box2_line2_price');
 

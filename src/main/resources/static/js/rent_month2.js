@@ -1,7 +1,7 @@
 let sortType = 'desc';
 
 // rent/month/new 차량 정렬 화살표 클릭
-function sortAvailableContent(index) {
+function sortAvailableContent(index, isNumber) {
     let table = document.getElementsByClassName('table_available')
 
     sortType = (sortType == 'asc') ? 'desc' : 'asc';
@@ -13,8 +13,15 @@ function sortAvailableContent(index) {
         checkSort = false;
 
         for (let i = 1; i < (rows.length - 1); i++) {
-            let fCell = rows[i].cells[index].innerText.toUpperCase();
-            let sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            let fCell, sCell;
+
+            if (isNumber) {
+                fCell = parseInt(rows[i].cells[index].innerText.replace(/,/g, ''));
+                sCell = parseInt(rows[i + 1].cells[index].innerText.replace(/,/g, ''));
+            } else {
+                fCell = rows[i].cells[index].innerText.toUpperCase();
+                sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            };
 
             let row = rows[i];
 
@@ -27,7 +34,7 @@ function sortAvailableContent(index) {
     }
 }
 
-function sortExpectedContent(index) {
+function sortExpectedContent(index, isNumber) {
     let table = document.getElementsByClassName('table_expected')
 
     sortType = (sortType == 'asc') ? 'desc' : 'asc';
@@ -39,8 +46,15 @@ function sortExpectedContent(index) {
         checkSort = false;
 
         for (let i = 1; i < (rows.length - 1); i++) {
-            let fCell = rows[i].cells[index].innerText.toUpperCase();
-            let sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            let fCell, sCell;
+
+            if (isNumber) {
+                fCell = parseInt(rows[i].cells[index].innerText.replace(/,/g, ''));
+                sCell = parseInt(rows[i + 1].cells[index].innerText.replace(/,/g, ''));
+            } else {
+                fCell = rows[i].cells[index].innerText.toUpperCase();
+                sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            };
 
             let row = rows[i];
 
@@ -190,14 +204,9 @@ $('.moveToAvailableDetail').click(function(e) {
             carIdx = carIdxList[i].innerText;
         }
     };
-    for (i = 0; i < discountList.length; i++) {
-        if (discountList[i].dataset.index == dataIndex) {
-            discount = discountList[i].innerText;
-            if (discount=='') {
-                discount = null;
-            }
-        }
-    };
+    let tempDiscount = [...discountList].find(discount => discount.dataset.index === dataIndex);
+    discount = tempDiscount.innerText;
+
     for (i = 0; i < kilometerList.length; i++) {
         if (kilometerList[i].dataset.index == dataIndex) {
             kilometer = kilometerList[i].innerText;
@@ -298,7 +307,6 @@ function dataReset() {
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
 
-    console.log(kilometer);
     if (rentTerm == '한달' && kilometer == '') {
         kilometer = '2000km';
     } else if (rentTerm == '12개월' && kilometer == '') {

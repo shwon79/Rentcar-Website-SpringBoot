@@ -836,6 +836,10 @@ form {
     height: 2em;
     width: 5em;
     text-align: center;
+    margin: 0 auto;
+}
+.long_input {
+    width: 11em !important;
 }
 .pagination {
     width: 70%;

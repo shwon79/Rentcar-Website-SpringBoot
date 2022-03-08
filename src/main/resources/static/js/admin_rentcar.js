@@ -42,7 +42,64 @@ function displayCategory2(event, makeDefaultOption) {
     };
 };
 
-//월렌트 메뉴 페이지 가격 수정 버튼
+// 렌트카 가격 수정 메뉴 페이지 일괄 수정 버튼
+function editBundleData(period, type) {
+    let editedData;
+
+    switch (type) {
+        case '보증금':
+            editedData = parseFloat(document.getElementById('bundleDeposit').value.replace(/,/g, ''));
+            break;
+        case '2500km':
+            editedData = parseFloat(document.getElementById('bundle2500km').value).toFixed(15);
+            break;
+        case '3000km':
+            editedData = parseFloat(document.getElementById('bundle3000km').value).toFixed(15);
+            break;
+        case '4000km':
+            editedData = parseFloat(document.getElementById('bundle4000km').value).toFixed(15);
+            break;
+        case '21세':
+            editedData = parseFloat(document.getElementById('bundleAgeLimit').value);
+            break;
+        case '20000km':
+            editedData = parseFloat(document.getElementById('bundle20000km').value).toFixed(15);
+            break;
+        case '30000km':
+            editedData = parseFloat(document.getElementById('bundle30000km').value).toFixed(15);
+            break;
+        case '40000km':
+            editedData = parseFloat(document.getElementById('bundle40000km').value).toFixed(15);
+            break;
+    }
+
+    if (confirm(`모든 차량의 ${type}을 일괄 수정하시겠습니까?`)) {
+        $.ajax({
+            type:'PUT',
+            url:'/admin/rentcar/price/' + period + '/' + type + '/' + editedData,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            beforeSend : function(request){
+                $("#my-spinner").show();
+            },
+            success: function (result) {
+                $("#my-spinner").hide();
+                if (result.result == 1) {
+                    alert('처리되었습니다.');
+                } else if (result.result == 0) {
+                    alert('처리에 문제가 생겼습니다.');
+                };
+                location.reload();
+            },
+            error: function (error) {
+                $("#my-spinner").hide();
+                alert(JSON.stringify(error));
+            }
+        });
+    }
+}
+
+// 렌트카 가격 수정 메뉴 페이지 가격 수정 버튼
 function editRentPriceMenu(id, period) {
     let category1 = [...document.getElementsByClassName('category1')].find(item => item.dataset.title == id);
     let category2 = [...document.getElementsByClassName('category2')].find(item => item.dataset.title == id);
@@ -136,7 +193,7 @@ function editRentPriceMenu(id, period) {
             let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
             let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
-            formData.append('cost_for_2k', parseFloat(cost_for_2k.value).toFixed(15));
+            formData.append('cost_for_2k', parseFloat(cost_for_2k.value.replace(/,/g, '')).toFixed(15));
             formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k.value).toFixed(15));
             formData.append('cost_for_3k', parseFloat(cost_for_3k.value).toFixed(15));
             formData.append('cost_for_4k', parseFloat(cost_for_4k.value).toFixed(15));
@@ -148,6 +205,7 @@ function editRentPriceMenu(id, period) {
 
 // 이미지 없이 데이터 보낼 때
 function postStringData(period, id, data) {
+    if (confirm('수정하시겠습니까?')) {
         $.ajax({
             type:'PUT',
             url:'/admin/rentcar/price/' + period + '/' + id,
@@ -164,24 +222,27 @@ function postStringData(period, id, data) {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
+    }
 }
 
 // 새로운 이미지 추가할 때
 function postFormData(id, formData, period) {
-    $.ajax({
-        enctype: 'multipart/form-data',
-        cache: false,
-        type: 'PUT',
-        url: '/admin/rentcar/price/' + period + '/image/' + id,
-        processData:false,
-        contentType: false,
-        data: formData
-    }).done(function () {
-        alert('처리되었습니다.');
-        location.reload();
-    }).fail(function (error) {
-        alert(JSON.stringify(error));
-    })
+    if (confirm('수정하시겠습니까?')) {
+        $.ajax({
+            enctype: 'multipart/form-data',
+            cache: false,
+            type: 'PUT',
+            url: '/admin/rentcar/price/' + period + '/image/' + id,
+            processData:false,
+            contentType: false,
+            data: formData
+        }).done(function () {
+            alert('처리되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
 };
 
 // 월렌트에서 차량 삭제
@@ -402,3 +463,57 @@ function calculatePrice(type) {
         target.innerText = result;
     }
 }
+
+// 렌트카 가격수정페이지 자동계산
+function calculatePriceOnMenu(event, period, type) {
+    if (period === 'monthly') {
+        const cost_for_2k = parseInt([...document.getElementsByClassName('cost_for_2k')].find(item => item.dataset.title == event.dataset.title).value.replace(/,/g, ''));
+
+        if (type != 'cost_for_2k') {
+            calculate(type, cost_for_2k);
+        } else {
+            calculate('cost_for_2_5k', cost_for_2k);
+            calculate('cost_for_3k', cost_for_2k);
+            calculate('cost_for_4k', cost_for_2k);
+        }
+
+    } else {
+        const cost_for_2k = parseInt([...document.getElementsByClassName('cost_for_2k')].find(item => item.dataset.title == event.dataset.title).innerText);
+        const cost_for_3k_float = parseFloat([...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == event.dataset.title).innerText).toFixed(15);
+        const cost_for_4k_float = parseFloat([...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == event.dataset.title).innerText).toFixed(15);
+        const cost_for_3k = Math.round(cost_for_2k * cost_for_3k_float / 1000) *1000;
+        const cost_for_4k = Math.round(cost_for_2k * cost_for_4k_float / 1000) * 1000;
+
+        const relate_cost_for_2k = ['cost_for_2_5k', 'cost_for_3k', 'cost_for_4k', 'cost_for_20k', 'cost_for_20Tk'];
+        const relate_cost_for_3k = ['cost_for_30k', 'cost_for_30Tk'];
+        const relate_cost_for_4k = ['cost_for_40k', 'cost_for_40Tk'];
+
+        let standard;
+
+        if (relate_cost_for_2k.includes(type)) {
+            standard = cost_for_2k;
+        } else if (relate_cost_for_3k.includes(type)) {
+            standard = cost_for_3k;
+        } else if (relate_cost_for_4k.includes(type)) {
+            standard = cost_for_4k;
+        }
+
+        calculate(type, standard);
+    }
+
+    function calculate(type, standard) {
+        let value = parseFloat([...document.getElementsByClassName(type)].find(item => item.dataset.title == event.dataset.title).value).toFixed(15);
+        let target = [...document.getElementsByClassName(`display_${type}`)].find(item => item.dataset.title == event.dataset.title);
+        let result;
+        result = Math.round(standard * value / 1000 ) * 1000 || '';
+        target.innerText = result;
+    }
+}
+
+// 보증금 숨기기 버튼
+// function hideDeposit() {
+//     const depositColumns = [...document.getElementsByClassName('depositColumn')];
+//     depositColumns.forEach(column => {
+//         column.classList.toggle('displayNone');
+//     });
+// }

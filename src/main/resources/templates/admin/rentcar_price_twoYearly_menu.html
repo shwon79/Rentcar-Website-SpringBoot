@@ -79,9 +79,36 @@
                         <button class="btn btn-outline-info">수입차</button>
                     </a>
                 </div>
-<!--                <p style="text-align: center; margin-top: 50px;">준비 중 입니다.</p>-->
+                <div id='my-spinner'>
+                    <div class="loading_spinner_box">
+                        <div class="loading_spinner"></div>
+                        <p>처리중....</p>
+                    </div>
+                </div>
                 <table class="table rentcarEditTable table-striped">
-                    <thead></thead>
+                    <thead>
+                    <tr class="bundle_row display_none_mobile">
+                        <td colspan="3" style="font-size: 1.3rem;">모든차량 일괄 수정</td>
+                        <td>
+                            <input type="number" style="width: 6rem;" id="bundleDeposit">
+                            <button class="btn btn-primary" onclick="editBundleData('twoYearly', '보증금');">보증금 수정</button>
+                        </td>
+                        <td>
+                            <input type="number" style="width: 10rem;" id="bundle20000km">
+                            <button class="btn btn-primary" onclick="editBundleData('twoYearly', '20000km');">20,000km 수정</button>
+                        </td>
+                        <td>
+                            <input type="number" style="width: 10rem;" id="bundle30000km">
+                            <button class="btn btn-primary" onclick="editBundleData('twoYearly', '30000km');">30,000km 수정</button>
+                        </td>
+                        <td>
+                            <input type="number" style="width: 10rem;" id="bundle40000km">
+                            <button class="btn btn-primary" onclick="editBundleData('twoYearly', '40000km');">40,000km 수정</button>
+                        </td>
+                        <td></td>
+                        <td colspan="9"></td>
+                    </tr>
+                    </thead>
                     <tbody>
                     <tr class="thead-dark">
                         <th scope="col">종류</th>
@@ -108,17 +135,32 @@
                         <td class="display_none_mobile">
                             <textarea type="text" th:text="${#numbers.formatInteger(car.twoYearlyRent.deposit, 0, 'COMMA')}" class="deposit" th:data-title="${car.twoYearlyRent.id}"></textarea>
                         </td>
+                        <td style="display: none;" th:text="${car.cost_for_2k}" th:data-title="${car.twoYearlyRent.id}" class="cost_for_2k"></td>
+                        <td style="display: none;" th:text="${car.cost_for_3k}" th:data-title="${car.twoYearlyRent.id}" class="cost_for_3k"></td>
+                        <td style="display: none;" th:text="${car.cost_for_4k}" th:data-title="${car.twoYearlyRent.id}" class="cost_for_4k"></td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_20Tk * car.cost_for_2k / 1000)*1000, 0, 'COMMA')}"></p>
-                            <textarea type="text" th:text="${car.twoYearlyRent.cost_for_20Tk}" class="cost_for_20Tk" th:data-title="${car.twoYearlyRent.id}"></textarea>
+                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_20Tk * car.cost_for_2k / 1000)*1000, 0, 'COMMA')}"
+                               class="display_cost_for_20Tk" th:data-title="${car.twoYearlyRent.id}"></p>
+                            <textarea type="number"
+                                      th:text="${car.twoYearlyRent.cost_for_20Tk}" class="cost_for_20Tk long_input"
+                                      th:data-title="${car.twoYearlyRent.id}"
+                                      onkeyup="calculatePriceOnMenu(this, 'twoYearly', 'cost_for_20Tk');"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_30Tk * (T(Math).round(car.cost_for_3k * car.cost_for_2k / 1000)*1000) / 1000)*1000, 0, 'COMMA')}"></p>
-                            <textarea type="text" th:text="${car.twoYearlyRent.cost_for_30Tk}" class="cost_for_30Tk" th:data-title="${car.twoYearlyRent.id}"></textarea>
+                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_30Tk * (T(Math).round(car.cost_for_3k * car.cost_for_2k / 1000)*1000) / 1000)*1000, 0, 'COMMA')}"
+                               class="display_cost_for_30Tk" th:data-title="${car.twoYearlyRent.id}"></p>
+                            <textarea type="number"
+                                      th:text="${car.twoYearlyRent.cost_for_30Tk}" class="cost_for_30Tk long_input"
+                                      th:data-title="${car.twoYearlyRent.id}"
+                                      onkeyup="calculatePriceOnMenu(this, 'twoYearly', 'cost_for_30Tk');"></textarea>
                         </td>
                         <td class="display_none_mobile">
-                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_40Tk * (T(Math).round(car.cost_for_4k * car.cost_for_2k / 1000)*1000) / 1000)*1000, 0, 'COMMA')}"></p>
-                            <textarea type="text" th:text="${car.twoYearlyRent.cost_for_40Tk}" class="cost_for_40Tk" th:data-title="${car.twoYearlyRent.id}"></textarea>
+                            <p th:text="${#numbers.formatInteger(T(Math).round(car.twoYearlyRent.cost_for_40Tk * (T(Math).round(car.cost_for_4k * car.cost_for_2k / 1000)*1000) / 1000)*1000, 0, 'COMMA')}"
+                               class="display_cost_for_40Tk" th:data-title="${car.twoYearlyRent.id}"></p>
+                            <textarea type="number"
+                                      th:text="${car.twoYearlyRent.cost_for_40Tk}" class="cost_for_40Tk long_input"
+                                      th:data-title="${car.twoYearlyRent.id}"
+                                      onkeyup="calculatePriceOnMenu(this, 'twoYearly', 'cost_for_40Tk');"></textarea>
                         </td>
                         <td class="display_none_mobile">
                             <p class="cost_for_others" th:text="${car.twoYearlyRent.cost_for_others}" th:data-title="${car.twoYearlyRent.id}"></p>
