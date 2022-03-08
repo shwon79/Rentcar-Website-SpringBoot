@@ -16,6 +16,7 @@ public class MorenDTO {
     private String carIdx;
     private String carCategory;
     private String carName;
+    private String carDetail;
     private String carNo;
     private String carExteriorColor;
     private String carGubun;
