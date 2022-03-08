@@ -1380,7 +1380,7 @@ div.popStyle1, div.popStyle2 {
 }
 @media (min-width: 630px) and (max-width: 768px) {
     .loading_spinner_box {
-        margin: 45vh 35vw;
+        margin: 40vh 20vw;
     }
     .popup_display {
         flex-direction: column;
@@ -1394,7 +1394,7 @@ div.popStyle1, div.popStyle2 {
 }
 @media (max-width: 629px) {
     .loading_spinner_box {
-        margin: 45vh 35vw;
+        margin: 40vh 20vw;
     }
     .popup_display {
         flex-direction: column;
