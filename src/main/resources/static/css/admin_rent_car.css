@@ -67,6 +67,12 @@
     margin-top: 6px;
 }
 
+.progressContainer{position:relative;width: 450px;padding:20px 10px;border: 1px solid #eee;margin-top: 15px;background:#000;height:20px;}
+.progress{position:absolute;width: calc(100% - 20px);height: 20px;}
+.progressTotal{background: #5D5D5D;border-radius: 10px;}
+.progressNow{width: calc(0% - 20px);background: #FFF;border-radius: 10px;}
+.progressPer{background: transparent; text-align:center;color:#A6A6A6;}
+
 /*렌트카 등록*/
 .register_rent_car textarea, .register_rent_car input {
     max-width: 168px;

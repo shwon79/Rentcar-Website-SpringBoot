@@ -46,17 +46,41 @@ function displayCategory2(event, makeDefaultOption) {
 function editBundleData(period, type) {
     let editedData;
 
-    if (type === '보증금') {
-        editedData = parseFloat(document.getElementById('bundleDeposit').value);
-    } else if (type === '2500km') {
-        editedData = parseFloat(document.getElementById('bundle2500km').value).toFixed(15);
-    } else if (type === '3000km') {
-        editedData = parseFloat(document.getElementById('bundle3000km').value).toFixed(15);
-    } else if (type === '4000km') {
-        editedData = parseFloat(document.getElementById('bundle4000km').value).toFixed(15);
-    } else if (type === '21세') {
-        editedData = parseFloat(document.getElementById('bundleAgeLimit').value);
+    switch (type) {
+        case '보증금':
+            editedData = parseFloat(document.getElementById('bundleDeposit').value.replace(/,/g, ''));
+            break;
+        case '2500km':
+            editedData = parseFloat(document.getElementById('bundle2500km').value).toFixed(15);
+            break;
+        case '3000km':
+            editedData = parseFloat(document.getElementById('bundle3000km').value).toFixed(15);
+            break;
+        case '4000km':
+            editedData = parseFloat(document.getElementById('bundle4000km').value).toFixed(15);
+            break;
+        case '21세':
+            editedData = parseFloat(document.getElementById('bundleAgeLimit').value);
+            break;
+        case '20000km':
+            editedData = parseFloat(document.getElementById('bundle20000km').value).toFixed(15);
+            break;
+        case '30000km':
+            editedData = parseFloat(document.getElementById('bundle30000km').value).toFixed(15);
+            break;
+        case '40000km':
+            editedData = parseFloat(document.getElementById('bundle40000km').value).toFixed(15);
+            break;
     }
+
+    // function progressBar(per){
+    //     if(per > 55){
+    //         $(".progressPer").css("color", "#000");
+    //     }
+    //     per = per.toFixed(1);
+    //     $(".progressPer").text(per+" %");
+    //     $(".progressNow").css("width", "calc(" + per + "% - 20px)");
+    // }
 
     if (confirm(`모든 차량의 ${type}을 일괄 수정하시겠습니까?`)) {
         $.ajax({
@@ -75,7 +99,6 @@ function editBundleData(period, type) {
             alert(JSON.stringify(error));
         })
     }
-
 }
 
 // 렌트카 가격 수정 메뉴 페이지 가격 수정 버튼
