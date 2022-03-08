@@ -73,31 +73,29 @@ function editBundleData(period, type) {
             break;
     }
 
-    // function progressBar(per){
-    //     if(per > 55){
-    //         $(".progressPer").css("color", "#000");
-    //     }
-    //     per = per.toFixed(1);
-    //     $(".progressPer").text(per+" %");
-    //     $(".progressNow").css("width", "calc(" + per + "% - 20px)");
-    // }
-
     if (confirm(`모든 차량의 ${type}을 일괄 수정하시겠습니까?`)) {
         $.ajax({
             type:'PUT',
             url:'/admin/rentcar/price/' + period + '/' + type + '/' + editedData,
             dataType:'json',
-            contentType : 'application/json; charset=utf-8'
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('처리되었습니다.');
-            } else if (result.result == 0) {
-                alert('처리에 문제가 생겼습니다.');
-            };
-            location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
+            contentType : 'application/json; charset=utf-8',
+            beforeSend : function(request){
+                $("#my-spinner").show();
+            },
+            success: function (result) {
+                $("#my-spinner").hide();
+                if (result.result == 1) {
+                    alert('처리되었습니다.');
+                } else if (result.result == 0) {
+                    alert('처리에 문제가 생겼습니다.');
+                };
+                location.reload();
+            },
+            error: function (error) {
+                $("#my-spinner").hide();
+                alert(JSON.stringify(error));
+            }
+        });
     }
 }
 
