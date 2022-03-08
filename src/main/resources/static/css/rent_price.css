@@ -69,6 +69,11 @@ th {
     top: 0;
     z-index: 2;
     background-color: #c4beb2;
+    font-size: 1.7rem;
+}
+
+td {
+    font-size: 1.7rem;
 }
 
 td[scope=row], th[scope=row] {
