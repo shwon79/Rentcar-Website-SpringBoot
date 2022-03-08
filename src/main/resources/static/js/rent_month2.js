@@ -1,7 +1,7 @@
 let sortType = 'desc';
 
 // rent/month/new 차량 정렬 화살표 클릭
-function sortAvailableContent(index) {
+function sortAvailableContent(index, isNumber) {
     let table = document.getElementsByClassName('table_available')
 
     sortType = (sortType == 'asc') ? 'desc' : 'asc';
@@ -13,8 +13,15 @@ function sortAvailableContent(index) {
         checkSort = false;
 
         for (let i = 1; i < (rows.length - 1); i++) {
-            let fCell = rows[i].cells[index].innerText.toUpperCase();
-            let sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            let fCell, sCell;
+
+            if (isNumber) {
+                fCell = parseInt(rows[i].cells[index].innerText.replace(/,/g, ''));
+                sCell = parseInt(rows[i + 1].cells[index].innerText.replace(/,/g, ''));
+            } else {
+                fCell = rows[i].cells[index].innerText.toUpperCase();
+                sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            };
 
             let row = rows[i];
 
@@ -27,7 +34,7 @@ function sortAvailableContent(index) {
     }
 }
 
-function sortExpectedContent(index) {
+function sortExpectedContent(index, isNumber) {
     let table = document.getElementsByClassName('table_expected')
 
     sortType = (sortType == 'asc') ? 'desc' : 'asc';
@@ -39,8 +46,15 @@ function sortExpectedContent(index) {
         checkSort = false;
 
         for (let i = 1; i < (rows.length - 1); i++) {
-            let fCell = rows[i].cells[index].innerText.toUpperCase();
-            let sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            let fCell, sCell;
+
+            if (isNumber) {
+                fCell = parseInt(rows[i].cells[index].innerText.replace(/,/g, ''));
+                sCell = parseInt(rows[i + 1].cells[index].innerText.replace(/,/g, ''));
+            } else {
+                fCell = rows[i].cells[index].innerText.toUpperCase();
+                sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            };
 
             let row = rows[i];
 
