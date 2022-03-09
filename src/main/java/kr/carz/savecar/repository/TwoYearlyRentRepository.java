@@ -12,6 +12,7 @@ public interface TwoYearlyRentRepository extends JpaRepository<TwoYearlyRent, Lo
     List<TwoYearlyRent> findAll();
 
     List<TwoYearlyRent> findByCategory1(String category1);
+    List<TwoYearlyRent> findByCategory2(String category2);
     List<TwoYearlyRent> findByCategory1AndCategory2(String category1, String category2);
     TwoYearlyRent findByName(String name);
     TwoYearlyRent findByEndGreaterThanEqualAndStartIsLessThanEqualAndNameMoren(Long end, Long start, String name);

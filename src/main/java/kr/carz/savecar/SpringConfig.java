@@ -11,26 +11,52 @@ public class SpringConfig {
     private final MonthlyRentRepository monthlyRentRepository;
     private final YearlyRentRepository yearlyRentRepository;
     private final ShortRentRepository shortRentRepository;
-    private final CampingCarRepository campingCarRepository;
     private final ReservationRepository reservationRepository;
     private final TwoYearlyRentRepository twoYearlyRentRepository;
-    private final LoginRepository loginRepository;
     private final DiscountRepository discountRepository;
+    private final MorenReservationRepository morenReservationRepository;
+    private final CampingCarPriceRepository campingCarPriceRepository;
+    private final CalendarDateRepository calendarDateRepository;
+    private final CalendarTimeRepository calendarTimeRepository;
+    private final DateCampingRepository dateCampingRepository;
+    private final CampingcarReservationRepository campingcarReservationRepository;
+    private final AdminRepository adminRepository;
+    private final ImagesRepository imagesRepository;
+    private final ValuesForWebRepository valuesForWebRepository;
+    private final CampingCarPriceRateRepository campingCarPriceRateRepository;
+    private final CampingCarMainTextRepository campingCarMainTextRepository;
+    private final ReviewRepository reviewRepository;
 
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
-                        ShortRentRepository shortRentRepository, CampingCarRepository campingCarRepository,
+                        ShortRentRepository shortRentRepository,
                         ReservationRepository reservationRepository, TwoYearlyRentRepository twoYearlyRentRepository,
-                        LoginRepository loginRepository, DiscountRepository discountRepository) {
+                        DiscountRepository discountRepository,
+                        MorenReservationRepository morenReservationRepository, CampingCarPriceRepository campingCarPriceRepository,
+                        CalendarDateRepository calendarDateRepository, CalendarTimeRepository calendarTimeRepository,
+                        DateCampingRepository dateCampingRepository, CampingcarReservationRepository campingcarReservationRepository,
+                        AdminRepository adminRepository, ImagesRepository imagesRepository,
+                        ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository,
+                        CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
-        this.campingCarRepository = campingCarRepository;
         this.reservationRepository = reservationRepository;
         this.twoYearlyRentRepository = twoYearlyRentRepository;
-        this.loginRepository = loginRepository;
         this.discountRepository = discountRepository;
+        this.morenReservationRepository = morenReservationRepository;
+        this.campingCarPriceRepository = campingCarPriceRepository;
+        this.calendarDateRepository = calendarDateRepository;
+        this.calendarTimeRepository = calendarTimeRepository;
+        this.dateCampingRepository = dateCampingRepository;
+        this.campingcarReservationRepository = campingcarReservationRepository;
+        this.adminRepository = adminRepository;
+        this.imagesRepository = imagesRepository;
+        this.valuesForWebRepository = valuesForWebRepository;
+        this.campingCarPriceRateRepository = campingCarPriceRateRepository;
+        this.campingCarMainTextRepository = campingCarMainTextRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @Bean
@@ -50,14 +76,44 @@ public class SpringConfig {
     public ShortRentService shortRentService() { return new ShortRentService(shortRentRepository); }
 
     @Bean
-    public CampingCarService campingCarService() { return new CampingCarService(campingCarRepository); }
-
-    @Bean
     public TwoYearlyRentService twoYearlyRentService() { return new TwoYearlyRentService(twoYearlyRentRepository); }
 
     @Bean
-    public LoginService loginService() { return new LoginService(loginRepository); }
+    public DiscountService discountService() { return new DiscountService(discountRepository); }
 
     @Bean
-    public DiscountService discountService() { return new DiscountService(discountRepository); }
+    public MorenReservationService morenReservationService() { return new MorenReservationService(morenReservationRepository); }
+
+    @Bean
+    public CampingCarPriceService campingCarVariableService() { return new CampingCarPriceService(campingCarPriceRepository); }
+
+    @Bean
+    public CalendarDateService calendarDateService() { return new CalendarDateService(calendarDateRepository); }
+
+    @Bean
+    public CalendarTimeService calendarTimeService() { return new CalendarTimeService(calendarTimeRepository); }
+
+    @Bean
+    public DateCampingService dateCampingService() { return new DateCampingService(dateCampingRepository); }
+
+    @Bean
+    public CampingcarReservationService campingcarReservationService() { return new CampingcarReservationService(campingcarReservationRepository); }
+
+    @Bean
+    public AdminService adminService() { return new AdminService(adminRepository); }
+
+    @Bean
+    public ImagesService imagesService() { return new ImagesService(imagesRepository); }
+
+    @Bean
+    public ValuesForWebService valuesForWebService() { return new ValuesForWebService(valuesForWebRepository); }
+
+    @Bean
+    public CampingCarPriceRateService campingCarPriceRateService() { return new CampingCarPriceRateService(campingCarPriceRateRepository); }
+
+    @Bean
+    public CampingCarMainTextService campingCarMainTextService() { return new CampingCarMainTextService(campingCarMainTextRepository); }
+
+    @Bean
+    public ReviewService reviewService() { return new ReviewService(reviewRepository); }
 }

@@ -1,0 +1,229 @@
+<!-- 캠핑카렌트(limousine_info.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 캠핑카 렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/camping_info.css}" rel="stylesheet">
+
+
+    <script>
+        function toggleImg(id) {
+            let before = document.getElementById("headerImg").src;
+            let tmp = document.getElementById(id).src;
+            document.getElementById("headerImg").src = tmp;
+            document.getElementById(id).src = before;
+        }
+
+        $(window).load(function() {
+            let ulList = document.getElementsByClassName('header_camp_li');
+            for (i=0; i < ulList.length; i++) {
+                if (ulList[i].dataset.id == 'limousine') {
+                    ulList[i].classList.add('active');
+                }
+            };
+        });
+    </script>
+    <script th:src="@{/js/campingcar.js}"></script>
+
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div th:replace="fragments/header_camp::headerFragment"></div>
+
+    <!-- content whole wrapper-->
+<!--    <div id="wrapper" class="content pinside60 container">-->
+<!--        &lt;!&ndash;  content body&ndash;&gt;-->
+<!--        내가 바로 리무진 인포-->
+<!--    </div>-->
+
+    <div class="content">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-60 padding-top-60">
+                    <h1>Limousine VIP CAMPER</h1>
+                    <h3>모터홈의 디럭스풍 디자인</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                    <div class="bg-light">
+                        <div class="row pinside30">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
+                                <h3>CAPMER 명</h3>
+                                <h3>Limousine VIP</h3>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
+                                <h3>연료 / 미션</h3>
+                                <h3>디젤 / Auto</h3>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
+                                <h3>면허 종류</h3>
+                                <h3>1종 보통</h3>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pinside10">
+                                <h3>인원정보</h3>
+                                <h3>4인승</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 사진 -->
+            <div class="row text-center pinside10">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row padding-top-40 width-height-box">
+                        <img th:src="@{/img/limimg7.jpg}" id="headerImg" width="100%" height="100%" style="object-fit:contain; max-height: 500px">
+                    </div><br/><br/>
+                    <div class="row">
+                        <img th:src="@{/img/limimg10.jpg}" id="carImg9" width="15%" height="100px" onclick="toggleImg('carImg9')">
+                        <img th:src="@{/img/limimg19.jpg}" id="carImg20" width="15%" height="100px" onclick="toggleImg('carImg20')">
+                        <img th:src="@{/img/limimg22.jpg}" id="carImg18" width="15%" height="100px" onclick="toggleImg('carImg18')">
+                        <img th:src="@{/img/limimg5.jpg}" id="carImg4" width="15%" height="100px" onclick="toggleImg('carImg4')">
+                        <img th:src="@{/img/limimg1.jpg}" id="carImg6" width="15%" height="100px" onclick="toggleImg('carImg6')">
+                        <img th:src="@{/img/limimg2.jpg}" id="carImg2" width="15%" height="100px" onclick="toggleImg('carImg15')">
+                        <img th:src="@{/img/limimg16.jpg}" id="carImg16" width="15%" height="100px" onclick="toggleImg('carImg16')">
+                        <img th:src="@{/img/limimg14.jpg}" id="carImg14" width="15%" height="100px" onclick="toggleImg('carImg14')">
+                        <img th:src="@{/img/limimg12.jpg}" id="carImg11" width="15%" height="100px" onclick="toggleImg('carImg11')">
+                        <img th:src="@{/img/limimg11.png}" id="carImg10" width="15%" height="100px" onclick="toggleImg('carImg10')">
+                        <img th:src="@{/img/limimg4.jpg}" id="carImg3" width="15%" height="100px" onclick="toggleImg('carImg3')">
+                        <img th:src="@{/img/limimg9.jpg}" id="carImg8" width="15%" height="100px" onclick="toggleImg('carImg8')">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
+                    <div class="bg-light pinside10" style="margin-top: 20px;">
+                        <div class="row pinside30">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <h2>CAPMER 요금</h2>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="overflow-x: auto;">
+                                <img th:src="@{/img/limousine-detail-price.png}" id="priceImg" width="100%" height="70%">
+                            </div>
+                        </div>
+                        <div class="row pinside30">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <h2>CAPMER 기본 옵션</h2>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div th:replace="fragments/camping_explanations::limousine_basic_option"></div>
+                            </div>
+                        </div>
+                        <div class="row pinside30">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <h2>CAPMER 시설</h2>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div th:replace="fragments/camping_explanations::limousine_installation"></div>
+                            </div>
+                        </div>
+                        <div class="row pinside30">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <h2>캠핑카 실시간 예약</h2>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <a onclick="moveToCampingReservation('limousine')"><img th:src="@{/img/camping_calendar.png}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
+                    <div class="bg-light pinside30" style="margin-top: 20px;">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h2>상담 신청하기</h2>
+                                <hr>
+                                <label id="rent-title" class="control-label" for="name" value="캠핑카"></label>
+                                <form name="reservation_info" id="rentProduct" value="리무진">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="name">이름</label>
+                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="성함을 입력해주세요.">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="phone">연락처</label>
+                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="연락처 ex) 010-0000-0000">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="textarea">요청 사항</label>
+                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="21세 이상 및 렌트기간, 문의사항 등을 입력하세요."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <p><font color="red" style="font-weight: bold;"> * 21세 이상은 요청 사항에 입력해주세요 </font></p>
+                                                <br />
+                                                <p class="text-center"><input type="checkbox" id="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group text-center">
+                                                <a class="btn1 btn1-default" onclick="campingcar_rent_reservation()" href="#">상담신청 </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
+                    <div class="bg-light pinside10" style="margin-top: 20px;">
+                        <div class="row pinside30">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <h2>CAPMER 렌트정책</h2>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div th:replace="fragments/camping_explanations::rent_policy"></div>
+                            </div>
+                        </div>
+                        <div class="row pinside30">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <h2>CAPMER 보험사항</h2>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div th:replace="fragments/camping_explanations::rent_insurance"></div>
+                            </div>
+                        </div>
+                        <div class="row pinside30">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <h2>CAPMER 이용규칙</h2>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div th:replace="fragments/camping_explanations::rent_rule"></div>
+                            </div>
+                        </div>
+                        <div class="row pinside30">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <h2>CAPMER 환불정책</h2>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div th:replace="fragments/camping_explanations::refund_policy"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

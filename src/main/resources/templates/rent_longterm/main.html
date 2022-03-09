@@ -1,0 +1,412 @@
+<!-- 누구나장기렌트(main.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 누구나장기렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link th:href="@{/css/rent_long_term.css}" rel="stylesheet">
+
+</head>
+<div layout:fragment="content">
+    <!-- end of Header-top -->
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="page-caption">
+                        <h2 class="page-title">누구나 장기렌트</h2>
+                        <br>
+                        <p>
+                            <a target='_blank' href="https://cafe.naver.com/savecar0">
+                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default">누구나 장기렌트 카페 연결</button>
+                            </a>
+                            <a target='_blank' href="https://cafe.naver.com/savecar0">
+                                <button id="singlebutton2" name="singlebutton" class="btn1 btn1-default">누구나 장기렌트 블로그 연결</button>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+<!--            <div class="sub-title rent-long-sub-title" >-->
+<!--                <h2>중고차 장기렌트</h2>-->
+<!--            </div>-->
+            <div class="glance_card_section">
+                <a href="https://m.cafe.naver.com/ca-fe/web/cafes/30452171/menus/6" target="_blank" class="a-link-small">
+                    <div class="glance_card">
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img src="https://i.ibb.co/b53LjyD/12-2-211005.png" alt="12-2-211005" border="0">
+                        </div>
+                        <!-- text -->
+                        <div>
+                            <p class="car_card_type"><span>12개월렌트 한눈에보기</span></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://m.cafe.naver.com/ca-fe/web/cafes/30452171/menus/7" target="_blank" class="a-link-small">
+                    <div class="glance_card">
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img src="https://i.ibb.co/VCLWgbk/24-2-211005.png" alt="24-2-211005" border="0">
+                        </div>
+                        <!-- text -->
+                        <div>
+                            <p class="car_card_type"><span>24개월렌트 한눈에보기</span></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div id="car_card_list">
+                <a href="https://cafe.naver.com/savecar0/13" target="_blank">
+                    <div class="car_cards">
+                        <p class="car_card_type"><span>포드 익스플로러</span></p>
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img src="https://i.ibb.co/zJWfRqB/Kakao-Talk-20210930-125421316-01.jpg" alt="Car Image" border="0">
+                        </div>
+                        <!-- text -->
+                        <div class="car_card_textbox">
+                            <p class="car_card_txt">
+                                <span class="title">월렌트료</span>
+                                <span>1,100,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">보증금</span>
+                                <span>2,000,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">최초등록일</span>
+                                <span>2017년 05월</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">계약기간</span>
+                                <span>12개월</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://cafe.naver.com/savecar0/14" target="_blank" class="card_container">
+                    <div class="car_cards">
+                        <p class="car_card_type"><span>기아 K7</span></p>
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img src="https://i.ibb.co/mbTBHLw/Kakao-Talk-20190620-124330757.jpg" alt="Kakao-Talk-20190620-124330757" border="0">
+                        </div>
+                        <!-- text -->
+                        <div class="car_card_textbox">
+                            <p class="car_card_txt">
+                                <span class="title">월렌트료</span>
+                                <span>779,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">보증금</span>
+                                <span>1,000,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">최초등록일</span>
+                                <span>2019년 06월</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">계약기간</span>
+                                <span>12개월</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://cafe.naver.com/savecar0/11" target="_blank" class="card_container">
+                    <div class="car_cards">
+                        <p class="car_card_type"><span>XM3</span></p>
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img src="https://i.ibb.co/8rJx07P/xm3-2122-2.jpg" alt="xm3-2122-2" border="0">
+                        </div>
+                        <!-- text -->
+                        <div class="car_card_textbox">
+                            <p class="car_card_txt">
+                                <span class="title">월렌트료</span>
+                                <span>568,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">보증금</span>
+                                <span>500,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">최초등록일</span>
+                                <span>2021년 09월</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">계약기간</span>
+                                <span>12개월</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+<!--                <a href="https://cafe.naver.com/savecar0/11" target="_blank" class="card_container">-->
+<!--                    <div class="car_cards">-->
+<!--                        <p class="car_card_type"><span>아반떼</span></p>-->
+<!--                        &lt;!&ndash;  img &ndash;&gt;-->
+<!--                        <div class="car_card_img">-->
+<!--                            <img src="https://i.ibb.co/zQL44pc/Kakao-Talk-20200213-174353652.jpg" alt="Kakao-Talk-20200213-174353652" border="0">-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; text &ndash;&gt;-->
+<!--                        <div class="car_card_textbox">-->
+<!--                            <p class="car_card_txt">-->
+<!--                                <span class="title">월렌트료</span>-->
+<!--                                <span>550,000원</span>-->
+<!--                            </p>-->
+<!--                            <p class="car_card_txt">-->
+<!--                                <span class="title">보증금</span>-->
+<!--                                <span>500,000원</span>-->
+<!--                            </p>-->
+<!--                            <p class="car_card_txt">-->
+<!--                                <span class="title">최초등록일</span>-->
+<!--                                <span>2019년 09월</span>-->
+<!--                            </p>-->
+<!--                            <p class="car_card_txt">-->
+<!--                                <span class="title">계약기간</span>-->
+<!--                                <span>12개월</span>-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </a>-->
+
+                <a href="https://cafe.naver.com/savecar0/6" target="_blank" class="card_container">
+                    <div class="car_cards">
+                        <p class="car_card_type"><span>제네시스 G80</span></p>
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img src="https://i.ibb.co/2vVBFsX/Kakao-Talk-20210705-174800058-14.jpg" alt="Kakao-Talk-20210705-174800058-14" border="0">
+                        </div>
+                        <!-- text -->
+                        <div class="car_card_textbox">
+                            <p class="car_card_txt">
+                                <span class="title">월렌트료</span>
+                                <span>1,058,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">보증금</span>
+                                <span>2,000,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">최초등록일</span>
+                                <span>2017년 09월</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">계약기간</span>
+                                <span>24개월</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://cafe.naver.com/savecar0/12" target="_blank" class="card_container">
+                    <div class="car_cards">
+                        <p class="car_card_type"><span >포드 익스플로러</span></p>
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img src="https://i.ibb.co/6m0t4P4/image.jpg" alt="image" border="0">
+                        </div>
+                        <!-- text -->
+                        <div class="car_card_textbox">
+                            <p class="car_card_txt">
+                                <span class="title">월렌트료</span>
+                                <span>1,000,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">보증금</span>
+                                <span>2,500,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">최초등록일</span>
+                                <span>2017년 05월</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">계약기간</span>
+                                <span>24개월</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+
+                <a href="https://cafe.naver.com/savecar0/11" target="_blank" class="card_container">
+                    <div class="car_cards">
+                        <p class="car_card_type"><span>그랜져 IG</span></p>
+                        <!--  img -->
+                        <div class="car_card_img">
+                            <img src="https://i.ibb.co/zQL44pc/Kakao-Talk-20200213-174353652.jpg" alt="Kakao-Talk-20200213-174353652" border="0">
+                        </div>
+                        <!-- text -->
+                        <div class="car_card_textbox">
+                            <p class="car_card_txt">
+                                <span class="title">월렌트료</span>
+                                <span>708,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">보증금</span>
+                                <span>1,500,000원</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">최초등록일</span>
+                                <span>2017년 05월</span>
+                            </p>
+                            <p class="car_card_txt">
+                                <span class="title">계약기간</span>
+                                <span>24개월</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+
+            </div>
+
+            <p align="center" style="color: red; font-weight: bold; margin-top: 50px;">* 필요한 부분까지만 선택하고 <br /> 상담신청 하셔도 정보가 전달됩니다.</p>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
+                    <div class="bg-light pinside30">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h2>상담 신청하기</h2>
+                                <hr>
+                                <form id="rent-long-reservation" name="reservation-info">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="name">* 이름</label>
+                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="성함을 입력해주세요.">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="phone">* 연락처</label>
+                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="연락처 ex) 010-0000-0000">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label" for="textarea">요청 사항</label>
+                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <span class="span-control">
+                                                <label style="font-size: 15px" id="rent-title-main">누구나 장기렌트</label>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <span class="span-control">
+                                                <label style="font-size: 15px" id="rent-title" value="누구나장기렌트">렌트유형</label>
+                                            </span>
+                                            <span class="span-input">
+                                                <label style="margin-right: 5px;"><input type="radio" id="long-rent-product1" name="rentProduct" value="신차">&nbsp; 신차</label>
+                                                <label style="margin-right: 5px;"><input type="radio" id="long-rent-product2" name="rentProduct" value="중고차">&nbsp; 중고차</label>
+                                                <label><input type="radio" id="long-rent-product3" name="rentProduct" value="캠핑카">&nbsp; 캠핑카</label>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <span class="span-control">
+                                                <label class="control-label" for="name">제조사</label>
+                                            </span>
+                                            <span class="span-input">
+                                                <input type="text" class="form-control-span2" id="select-category2" placeholder="제조사를 입력하세요.">
+                                            </span>
+                                        </div>
+                                        <div class="c-ol-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <span class="span-control">
+                                                <label class="control-label" for="name">차명</label>
+                                            </span>
+                                            <span class="span-input">
+                                                <input type="text" class="form-control-span2" id="select-car-name" placeholder="차명을 입력하세요.">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <span class="span-control">
+                                                <label class="control-label" for="name">옵션</label>
+                                            </span>
+                                            <span class="span-input">
+                                                <input type="text" class="form-control-span2" id="select-car-option" placeholder="옵션을 입력하거나 필요한 옵션사항 등을 입력하세요..">
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <span class="span-control">
+                                                <label class="control-label" for="kliometer">약정주행거리[연간]</label>
+                                            </span>
+                                            <select name="selectMileage" id="select-mileage" class="form-control-select2">
+                                                <option value="미선택">--주행거리를 선택해주세요--</option>
+                                                <option value="20000km">20000km</option>
+                                                <option value="25000km">25000km</option>
+                                                <option value="30000km">30000km</option>
+                                                <option value="40000km">40000km</option>
+                                                <option value="기타">기타</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <span class="span-control">
+                                                <label class="control-label" for="car-money">보증금</label>
+                                            </span>
+                                            <span class="span-input">
+                                                <label style="margin-right: 10px;">
+                                                    <input type="radio" id="deposit-10" name="carDeposit" value="10%">&nbsp; 10%
+                                                </label>
+                                                <label style="margin-right: 10px;">
+                                                    <input type="radio" id="deposit-30" name="carDeposit" value="30%">&nbsp; 30%
+                                                </label>
+                                                <label><input type="radio" id="deposit-0" name="carDeposit" value="기타">&nbsp; 기타</label>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group has-feedback">
+                                                <p style="color: red; font-weight: bold;">* 21세 이상은 요청 사항에 입력해주세요. </p>
+                                                <br />
+                                                <p class="text-center"><input id="agree" type="checkbox"> 개인정보 수집 및 이용에 동의합니다.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group text-center">
+                                                <a class="btn1 btn1-default" onclick="make_reservation()" href="#">상담신청 </a>
+                                            </div>
+                                        </div>            
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

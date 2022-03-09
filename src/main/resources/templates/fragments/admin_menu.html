@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+        <nav id="sidebar" th:fragment="adminMenuFragment" sec:authorize="isAuthenticated()">
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <h3>세이브카</h3>
+            </div>
+
+            <!-- Sidebar Links -->
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="/admin/index" id="indexMenu" onclick="setActiveMenu('0');">메인</a>
+                </li>
+                <li id="camingcarWholeMenu">
+                    <span id="camping-submenu-btn"></span>
+                    <a>캠핑카</a>
+                    <div id="campingcarSubmenu">
+                        <ul>
+                            <li>
+                                <a href="/admin/campingcar/register" id="campingcarReservationMenu" onclick="setActiveMenu('campingCar');">예약 등록</a>
+                            </li>
+                            <li>
+                                <a href="/admin/campingcar/menu?page=0&size=10" id="campingcarMenu" onclick="setActiveMenu('campingCar');">예약 현황</a>
+                            </li>
+                            <li>
+                                <a href="/admin/campingcar/price/menu" id="campingcarPriceMenu" onclick="setActiveMenu('campingCar');">가격 수정</a>
+                            </li>
+                            <li>
+                                <a href="/admin/campingcar/setting/menu" id="campingcarSettingMenu" onclick="setActiveMenu('campingCar');">캠핑카 정보 수정</a>
+                            </li>
+                            <li>
+                                <a href="/admin/campingcar/image/menu" id="campingcarImageMenu" onclick="setActiveMenu('campingCar');">사진 수정</a>
+                            </li>
+<!--                            <li>-->
+<!--                                <a href="/admin" id="campingcarMainTextMenu" onclick="setActiveMenu('campingCar');">홈 이미지 수정</a>-->
+<!--                            </li>-->
+                            <li>
+                                <a href="/admin/campingcar/mainText/menu" id="campingcarMainTextMenu" onclick="setActiveMenu('campingCar');">본문 수정</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li id="priceWholeMenu">
+                    <span id="price-submenu-btn"></span>
+                    <a>렌트카</a>
+                    <div id="priceSubMenu">
+                        <ul>
+                            <li>
+                                <a href="/admin/rentcar/counsel/menu?page=0&size=20" id="counselMenu" onclick="setActiveMenu('rentCar');">상담 신청 내역</a>
+                            </li>
+                            <li>
+                                <a href="/admin/rentcar/price/register" id="registerRentCarMenu" onclick="setActiveMenu('rentCar');">가격 등록</a>
+                            </li>
+                            <li>
+                                <a href="/admin/rentcar/price/monthly/menu/경형" id="priceMonthlyMenu" onclick="setActiveMenu('rentCar');">월렌트 가격 수정</a>
+                            </li>
+                            <li>
+                                <a href="/admin/rentcar/price/yearly/menu/경형" id="priceYearlyMenu" onclick="setActiveMenu('rentCar');">12개월 가격 수정</a>
+                            </li>
+                            <li>
+                                <a href="/admin/rentcar/price/twoYearly/menu/경형" id="priceTwoYearlyMenu" onclick="setActiveMenu('rentCar');">24개월 가격 수정</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="/admin/popup/menu" id="popupSettingMenu" onclick="setActiveMenu('0');">팝업 내용 수정</a>
+                </li>
+                <li>
+                    <a href="/admin/moren/reservation/menu?page=0&size=20" id="morenReservationMenu" onclick="setActiveMenu('0');">월+12/24개월 예약 내역</a>
+                </li>
+                <li>
+                    <a href="/admin/discount/menu" id="discountMenu" onclick="setActiveMenu('0');">할인/인상 적용</a>
+                </li>
+            </ul>
+        </nav>
+</html>

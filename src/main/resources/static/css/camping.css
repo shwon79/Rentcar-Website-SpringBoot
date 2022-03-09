@@ -1,3 +1,21 @@
+p {
+  font-size: 16px;
+}
+
+.camping_nav-tabs {
+  border-bottom: 3px solid #f8f6f2;
+  margin-top: 30px;
+}
+.camping_nav-tabs button {
+  border: 3px solid #f8f6f2;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 20px 5px 20px;
+  border-bottom: 0;
+}
+@media (max-width: 600px) {
+  padding: 10px 5px 5px 5px;
+}
 table.type11 {
   border-collapse: collapse;
   border-spacing: 1px;
@@ -198,6 +216,10 @@ button.btn-md:hover {
 #campingnav #menu-button {
   display: none;
 }
+.car_name_under_images {
+  display: block;
+  text-align: left;
+}
 #campingnav > ul > li {
   float: left;
 }
@@ -302,4 +324,1036 @@ btn-body {
 .twitter svg path {
   fill: #1da1f2;
   stroke: none;
+}
+
+
+.date_menu, .date_time {
+  font-size: 19px;
+}
+
+.total_date, .total {
+  font-size: 17px;
+}
+
+hr {
+  background-color: darkgrey;
+}
+
+
+/*=================================================================
+                        달력 세션
+===================================================================*/
+
+
+#calendar_rental .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0px;
+}
+.year-month, .year-month-return {
+  font-size: 20px;
+}
+
+.main {
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.nav-btn {
+  width: 28px;
+  height: 30px;
+  border: none;
+  font-size: 16px;
+  line-height: 34px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.go-today {
+  width: 75px;
+}
+
+.days {
+  display: flex;
+  margin: 25px 0 10px;
+}
+
+.day {
+  width: calc(100% / 7);
+  text-align: center;
+}
+
+.date {
+  width: calc(100% / 7);
+  padding: 15px;
+  text-align: center;
+}
+
+.upside {
+  width: 100%;
+}
+
+
+.day:nth-child(7n + 1),
+.date:nth-child(7n + 1) {
+  color: #D13E3E;
+}
+
+.day:nth-child(7n),
+.date:nth-child(7n) {
+  color: #396EE2;
+}
+
+.date_season {
+  opacity: .4;
+  font-size: 15px;
+}
+
+.date_day {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.other {
+  opacity: .3;
+}
+
+a:hover {
+  color: black;
+}
+
+
+.date_menu, .date_time {
+  font-size: 19px;
+}
+
+.total_date, .total {
+  font-size: 17px;
+}
+
+hr {
+  background-color: darkgrey;
+}
+
+
+/*=================================================================
+                        달력 세션
+===================================================================*/
+
+
+#calendar_rental .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0px;
+}
+.year-month, .year-month-return {
+  font-size: 20px;
+}
+
+.main {
+  padding-bottom: 20px;
+}
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.nav-btn {
+  width: 28px;
+  height: 30px;
+  border: none;
+  font-size: 16px;
+  line-height: 34px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.go-today {
+  width: 75px;
+}
+
+.days {
+  display: flex;
+  margin: 25px 0 10px;
+}
+
+.day {
+  width: calc(100% / 7);
+  text-align: center;
+}
+
+.dates {
+  display: flex;
+  flex-flow: row wrap;
+  height: auto
+}
+
+.date {
+  width: calc(100% / 7);
+  padding: 15px;
+  text-align: center;
+}
+
+.upside {
+  width: 100%;
+}
+
+
+.day:nth-child(7n + 1),
+.date:nth-child(7n + 1) {
+  color: #D13E3E;
+}
+
+.day:nth-child(7n),
+.date:nth-child(7n) {
+  color: #396EE2;
+}
+
+.date_season {
+  opacity: .4;
+  font-size: 15px;
+}
+
+.date_day {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.date {
+  height: 55px;
+}
+
+.other {
+  opacity: .3;
+}
+
+a:hover {
+  color: black;
+}
+
+.car_type {
+  overflow: auto;
+}
+
+
+.down_arrow {
+  padding: 0 10px;
+}
+
+#rent_cal div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#rent_cal label {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select_possible {
+  font-size: 15px;
+}
+
+.times {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#rent_time label {
+  height: 45px;
+  width: 30%;
+  margin: 5px;
+  border-radius: 1vh;
+  background: #fff8c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select_wrapper:hover {
+  cursor: pointer;
+}
+
+#rent_time {
+  display: none;
+}
+
+#hr_time {
+  display: none;
+}
+
+#calendar_return {
+  display: none;
+}
+
+#calendar_return label {
+  margin: 0 10px 0 0;
+}
+
+#calendar_return select {
+  font-size: 17px;
+}
+
+#calendar_return p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+#extra_time_sel {
+  display: none;
+  font-size: 17px;
+}
+
+#extra_time_sel label {
+  margin-right: 10px;
+}
+
+#extra_time_sel p {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+#extratime_select option:disabled {
+  background: #8a8a8a;
+  color: dimgray;
+}
+
+select {
+  height: 27px;
+  border: none;
+  font-size: 22px;
+  background: white;
+}
+
+select option {
+}
+
+.disabled_radio {
+  pointer-events: none;
+  color: dimgray;
+  background: lightgray;
+}
+
+.disabled_radio input[type=radio]{
+  display: none;
+}
+
+#rent_time input[type=radio] {
+  margin: 0;
+}
+
+h5 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+label {
+  font-family: 'FontAwesome';
+  font-size: 1.2em;
+}
+
+#rent_days label {
+  font-size: 17px;
+}
+
+input[type=radio] {
+  -webkit-border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#rent_time input[type=radio]:checked{
+  appearance: none;
+  position: absolute;
+  height: 45px;
+  width: 30%;
+  background: rgba(0, 68, 255, 0.56);
+  border-radius: 1vh;
+  display: flex;
+}
+
+.disabled_time {
+  appearance: none;
+  position: absolute;
+  height: 45px;
+  width: 30%;
+  margin: 0;
+  background: rgba(37, 37, 37, 0.81);
+  border-radius: 1vh;
+}
+
+.able_time {
+  appearance: none;
+}
+
+#days_selects option:disabled {
+  background: lightgray;
+  color: dimgray;
+}
+
+#calResultWrapper {
+  display: none;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid lightgray;
+  border-radius: 0.5vh;
+}
+
+.result_details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result_details h4 {
+  margin: 0;
+}
+
+.result_details h4 span {
+  font-size: 13px;
+}
+
+.sel_options hr {
+  margin: 15px 0;
+}
+
+#sel_option_length {
+  padding: 0 35px;
+}
+
+#sel_options_output {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sel_options_outputs {
+  display: flex;
+  flex-direction: column;
+}
+
+#btn_reserve {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  width: 100%;
+  border: 3px solid black;
+  font-size: 24px;
+}
+
+#btn_reserve:hover {
+  background-color: black;
+  color: white;
+}
+
+
+/* 캠핑카 페이지 버튼 css */
+
+#tab_wrapper {
+  margin: 0 40px;
+}
+
+.camping_page {
+  margin-top: 4rem;
+}
+
+.camping_page button {
+  padding: 15px 25px;
+  font-size: 17px;
+  width: 170px;
+  background: white;
+  border: none;
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  border-top-left-radius: 0.5vh;
+  border-top-right-radius: 10vh;
+  margin-right: 1em;
+
+}
+
+#car_type_tab {
+  margin-top: 10rem;
+}
+
+#price_page_btn {
+  background: lightyellow;
+}
+
+.camping_page button:hover {
+  background: lightyellow;
+}
+
+/*  */
+
+#feature {
+  margin: 60px 0;
+}
+
+#fixed_reserve_btn {
+  position: fixed;
+  z-index: 100;
+  display: block;
+  background: #61eca6;
+  color: #ffffff;
+  padding: 20px 25px;
+  font-size: 1.2em;
+  top: 20%;
+  border: none;
+  right: 5%;
+  border-radius: 30vh;
+  box-shadow: 0 0 20px #2aff2e;
+}
+
+#fixed_reserve_btn:hover {
+  background: #ffb8b8;
+  color: lightyellow;
+}
+
+.tab_buttons {
+  width: 13rem;
+  background: white;
+  border: 1px solid lightgray;
+  border-bottom: 0;
+  font-size: 20px;
+  border-top-right-radius: 10vh;
+  margin: 0 0.25em;
+  padding: 10px 15px 10px 0;
+
+}
+
+.tab_buttons:hover {
+  background: lightyellow;
+}
+
+.tab_buttons.current {
+  background: lightyellow;
+}
+
+.tab_content {
+  display: none;
+}
+
+.tab_content.current {
+  display: block;
+}
+
+.camping_info_table > tbody {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+.camping_info_table td {
+  padding: 10px !important;
+  font-size: 16px;
+}
+.camping_info_table tr td:last-child {
+  background-color: white;
+}
+
+
+@media (max-width: 990px) {
+  #wrapper {
+    padding: 20px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .camping_page button {
+    width: 40%;
+    font-size: 1em;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .tab_buttons {
+    width: 30%;
+    font-size: 1em;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  /*#rent_cal input[type=radio]:checked {*/
+  /*  width: 40px;*/
+  /*  height: 40px;*/
+  /*}*/
+
+  #rent_cal label {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+pre {
+  border: none;
+  padding: 0;
+  background: white;
+  font-size: 16px;
+  font-family: 'NanumBarunGothic';
+  line-height: 1.5;
+  margin-bottom: 0;
+  white-space: pre-wrap; /* CSS3*/
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-all; /* Internet Explorer 5.5+ */
+}
+
+.card {
+  /*padding-right: 30px;*/
+  margin: 0;
+}
+.card .title {
+  font-size: 20px;
+}
+.card .title i {
+  font-size: 20px;
+}
+.card .contents {
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  margin-bottom: 30px;
+}
+.white-card {
+  text-align: left;
+}
+.insurance {
+  display: flex;
+  text-align: center;
+}
+.insurance pre {
+  flex-basis: 50%;
+}
+.insurance pre:first-child {
+  border-right: 1px solid black;
+  padding-right: 10px;
+  border-radius: 0;
+}
+.insurance pre:last-child {
+  padding-left: 10px;
+}
+
+.black-card .contents {
+  background-color: black;
+  color: white;
+}
+
+.black-card .contents p:before {
+  content: '* ';
+}
+.white-card .contents {
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+}
+
+.white-card .contents p:before {
+  content: none;
+}
+
+.select_wrapper {
+  border-bottom: 1px solid gray;
+  /*border-radius: 12px;*/
+  margin-bottom: 30px;
+}
+.select_wrapper .col-lg-4 {
+  margin-bottom: 0;
+  padding: 10px 20px;
+}
+.select_wrapper .col-lg-4 h5,
+.select_wrapper .col-lg-8 span,
+.select_wrapper .col-lg-8 h5 {
+  font-size: 24px;
+}
+.select_wrapper .col-lg-8 {
+  margin-bottom: 0;
+  padding: 10px 20px;
+  background-color: lightgrey;
+}
+.select_wrapper .col-lg-8 span,
+.select_wrapper .col-lg-8 h5 {
+  color: black;
+}
+#calendar_rental {
+  transition: 0.5s ease-in-out all;
+}
+
+#calendar_rental .days .day {
+  padding-bottom: 10px;
+}
+#calendar_rental_time .time_options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+#calendar_rental_time:before {
+  content: none;
+}
+#calendar_rental_time label {
+  border: 2px solid black;
+  font-size: 22px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: 400;
+}
+#calendar_rental_time label:hover {
+  background-color: black !important;
+  color: white;
+}
+.result_wrapper {
+  /*display: unset;*/
+  margin: 50px -15px 30px -15px;
+}
+.result_wrapper .title {
+  width: 100%;
+  border-bottom: 3px solid black;
+  line-height: 0.1em;
+  margin: 10px 0 30px 0;
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+}
+.result_wrapper .title span {
+  background-color: white;
+  padding: 0 15px;
+}
+.result_box {
+  background-color: black;
+  border-radius: 12px;
+  color: white;
+  padding: 30px;
+}
+.result_box p {
+  margin: 0;
+}
+.result_date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.result_date div {
+  background-color: white;
+  border-radius: 12px;
+  color: black;
+  width: 42%;
+  padding: 20px;
+}
+.result_date div hr {
+  margin: 4px auto 8px auto;
+  border-top: black 3px solid;
+  width: 85%;
+}
+.display_result_date,
+.display_result_time {
+  font-size: 24px;
+}
+.price_row {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price_row .name {
+  color: white;
+  text-align: left;
+  font-size: 24px;
+  line-height: 1.2;
+  word-break: keep-all;
+}
+.price_row .price {
+  background-color: white;
+  color: black;
+  width: 55%;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+#mainRow {
+  display: flex;
+}
+.description_time {
+  margin: 0;
+  font-size: 15px;
+  text-align: right;
+}
+.description_time:last-child {
+  padding-bottom: 30px;
+}
+.mobile_small {
+  font-size: 24px;
+}
+#right_column {
+  display: block;
+}
+.see_modal, .modal_close {
+  display: none;
+}
+
+/*!* 탭 전체 스타일 *!*/
+/*.tabs {*/
+/*  margin: 0 auto;*/
+/*}*/
+
+/*!* 탭 스타일 *!*/
+.tab_item {
+  width: calc(100%/3);
+  height: 50px;
+  border-bottom: 3px solid #333333;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #333333;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/*!* 라디오 버튼 UI삭제*!*/
+input[name="tab_item"] {
+  display: none;
+}
+
+/*!* 선택된 탭 스타일 *!*/
+input:checked + .tab_item {
+  background-color: #333333;
+}
+input:checked + .tab_item div {
+  color: #fff;
+}
+
+.tab_content_size {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.tab_content_size > div {
+  margin-bottom: 30px;
+}
+
+.tab-title {
+  text-align: left;
+  font-family: 'Black Han Sans', sans-serif;
+}
+
+.carousel-inner > .item > img {
+  margin: 0 auto;
+}
+
+.campingTitle {
+  padding-bottom: 20px;
+}
+.campingTitle p, .campingTitle h1 {
+  margin: 0;
+}
+.title_price {
+  text-align: right;
+  margin-top: 20px !important;
+}
+.cheapestPrice {
+  font-size: 26px;
+}
+.carousel-control .icon-prev:before,
+.carousel-control .icon-next:before {
+  font-size: 50px;
+}
+.service-img {
+  margin-bottom: 10px;
+}
+.service-img img:hover {
+  transition: all ease-in-out;
+  transform: scale(1.02);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.explanation {
+  display: flex;
+  flex-wrap: wrap;
+  color: dimgray;
+}
+.explanation div {
+  margin: 5px 6px;
+  vertical-align: middle;
+}
+
+@media (max-width: 991px) {
+  #mainRow {
+    flex-direction: column;
+  }
+  .card {
+    padding-right: 0;
+  }
+  .container {
+    width: 90vw;
+  }
+  .car_name_under_images {
+    margin-top: 30px;
+  }
+  .campingTitle {
+    /*padding: 20px 20px 0 20px;*/
+  }
+  .campingTitle p, .campingTitle h1 {
+    margin: 0;
+  }
+  /*.title_price {*/
+  /*  text-align: right;*/
+  /*  margin-top: 20px !important;*/
+  /*}*/
+  /*.cheapestPrice {*/
+  /*  font-size: 26px;*/
+  /*}*/
+  #btn_reserve {
+    display: none;
+  }
+  .modal_close {
+    display: block;
+    text-align: right;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  .see_modal {
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: royalblue;
+    z-index: 999;
+    border: none;
+    color: white;
+    font-size: 24px;
+    height: 70px;
+  }
+  #left_column {
+    padding: 0;
+    margin: 0;
+  }
+  #right_column {
+    /*display: none;*/
+    /*position: fixed;*/
+    /*width: 100%;*/
+    background: #fff;
+    color: #212121;
+    z-index: 9999;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    padding: 0;
+    /*padding: 30px 34px 65px 34px;*/
+    /*margin-bottom: 70px;*/
+  }
+  #right_column.onMobile {
+    display: block;
+  }
+  #btn_reserve,
+  #right_column.onMobile .see_modal {
+    display: none;
+  }
+  #right_column.onMobile #btn_reserve {
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: black;
+    z-index: 9999;
+    border: none;
+    color: white;
+    font-size: 24px;
+    height: 70px;
+    border-radius: 0;
+  }
+  .card .contents {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .insurance {
+    flex-direction: column;
+  }
+  .insurance pre:first-child {
+    border: none;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid black;
+  }
+  .insurance pre:last-child {
+    padding: 20px 0 0 0;
+  }
+  .select_wrapper .col-lg-4 h5,
+  .select_wrapper .col-lg-8 span,
+  .select_wrapper .col-lg-8 h5,
+  #calendar_rental_time label {
+    font-size: 20px;
+  }
+  select {
+    font-size: 20px;
+    height: 23px;
+  }
+  .select_wrapper .col-lg-4,
+  .select_wrapper .col-lg-8 {
+    padding: 14px 10px;
+  }
+  .description_time {
+    font-size: 14px;
+  }
+  .result_wrapper .title {
+    font-size: 28px;
+  }
+  .result_box {
+    padding: 20px;
+  }
+  .result_date div {
+    padding: 20px 6px;
+  }
+  .price_row .price {
+    height: 34px;
+    padding-right: 10px;
+  }
+  .card .title {
+    font-size: 20px;
+  }
+  .card .title i {
+    font-size: 20px;
+  }
+  .mobile_small {
+    font-size: 22px !important;
+  }
+  .whole_tab {
+    padding: 0;
+  }
+  .tab_content_size {
+    width: 100%;
+    margin: 0 auto;
+  }
 }

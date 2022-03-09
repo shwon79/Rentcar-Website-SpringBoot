@@ -1,0 +1,51 @@
+#title_wrapper {
+    margin: 0;
+}
+
+#select_wrapper {
+    margin: 20px;
+    border: 1px solid lightgray;
+    border-radius: 0.5vh;
+}
+
+#select_wrapper div {
+    margin-bottom: 0;
+}
+
+#select_wrapper label {
+    margin-bottom: 0;
+}
+
+#sel_car {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#sel_car label {
+    width: 240px;
+}
+
+#sel_reg {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#sel_reg label {
+    width: 100px;
+}
+
+#sel_able {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#sel_able label {
+    width: 240px;
+}
+
+#table_header {
+    background-color: #b3b0ac;
+}

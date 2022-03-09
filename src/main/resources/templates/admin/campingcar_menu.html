@@ -1,0 +1,190 @@
+<!-- 관리자 캠핑카 예약리스트_메뉴 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <title>SAVECAR - 관리자 페이지</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link th:href="@{/css/admin.css}" rel="stylesheet">
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <script th:src="@{/js/admin.js}" defer></script>
+<!--  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    $(window).on('load', function () {
+      let campingcarMenu = document.getElementById('campingcarMenu');
+      campingcarMenu.classList.add('activeAdminMenu');
+    });
+  </script>
+
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+<!--    <div class="box-body">-->
+<!--      <table class="table table-bordered">-->
+<!--        <tr>-->
+<!--          <th style="width: 10px">BNO</th>-->
+<!--          <th style="width: 200px">WRITER</th>-->
+<!--          <th style="width: 40px">VIEWCNT</th>-->
+<!--        </tr>-->
+
+<!--        <tr th:each="reservation : ${campingCarReservationList}">-->
+<!--          <td th:text="${reservation.name}">BNO</td>-->
+<!--          <td th:text="${reservation.carType}">WRITER</td>-->
+<!--          <td th:text="${reservation.carType}">VIEWCNT</td>-->
+<!--        </tr>-->
+
+<!--      </table>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /.box-body &ndash;&gt;-->
+
+    <div class="content list_container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+
+          <button type="button" id="sidebarCollapse" class="navbar-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="inner_content">
+        <h2 class="page_title" style="text-align: center;">캠핑카 예약 현황</h2>
+        <div style="text-align: right;">
+          <button class="camping-completely-delete-btn set_reserve">목록에서 삭제</button>
+        </div>
+        <div class="reserve_list" id="reserve_list_title">
+          <p style="flex: 1">삭제</p>
+          <p class="created_date">예약신청날짜</p>
+          <p class="name">성명</p>
+          <p class="car_type">차종</p>
+          <p class="rent_date">시작날짜</p>
+          <p class="rent_time">시작시간</p>
+          <p class="return_date">반납날짜</p>
+          <p class="return_time">반납시간</p>
+          <p class="total">총결제금액</p>
+          <p class="reservation">예약</p>
+          <p id="set_reserve_header" class="set_reserve">확정</p>
+        </div>
+        <div class="reserve_list" id="reserve_list_title_mobile">
+          <p style="flex: 1; text-align: center; margin-bottom: 0;">삭제</p>
+          <p style="flex: 10; text-align: center; margin-bottom: 0;">예약 신청 내용</p>
+        </div>
+        <div class="reserve_list_wrapper" th:each="reservation, i : ${campingCarReservationList}">
+          <div class="reserve_checkbox">
+<!--            <p th:text="${i.index + 1}" style="margin-bottom: 4px;"></p>-->
+            <input th:if="${reservation.reservation != 1}" type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
+          </div>
+          <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
+            <p class="created_date grid_oneline" >
+              <span class="reserve_list_mobile_title">예약 신청 날짜: </span>
+              <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]}"></span>
+            </p>
+            <p class="name">
+              <span class="reserve_list_mobile_title">성명: </span>
+              <span th:text="${reservation.name}"></span>
+            </p>
+            <p class="car_type">
+              <span class="reserve_list_mobile_title">차종: </span>
+              <span th:text="${#strings.substring(reservation.carType.toUpperCase(), 0,4)}"></span>
+            </p>
+            <p class="rent_date">
+              <span class="reserve_list_mobile_title">시작 날짜: </span>
+              <span th:text="${reservation.rentDate}"></span>
+            </p>
+            <p class="rent_time">
+              <span class="reserve_list_mobile_title">시작 시간: </span>
+              <span th:text="${reservation.rentTime}"></span>
+            </p>
+            <p class="returnDate">
+              <span class="reserve_list_mobile_title">반납 날짜: </span>
+              <span th:text="${reservation.returnDate}"></span>
+            </p>
+            <p class="return_time">
+              <span class="reserve_list_mobile_title">반납 시간: </span>
+              <span th:text="${reservation.returnTime}"></span>
+            </p>
+            <p class="total grid_oneline">
+              <span class="reserve_list_mobile_title">총 결제 금액: </span>
+              <span th:text="${#numbers.formatInteger(reservation.total,0, 'COMMA')}"></span>
+              <span>원</span>
+            </p>
+            <p class="reservation grid_oneline">
+              <span class="reserve_list_mobile_title">예약: </span>
+              <span th:text="${reservation.reservation} == 1? 'O':'X'"></span>
+            </p>
+            <p class="grid_oneline">
+              <button th:if="${reservation.reservation} == 0" class="set_reserve btn_mobile_card" th:data-index="${reservation.id}" onclick="event.stopPropagation(); setReservationOnMenu(this, 'confirm')">
+                모렌전송
+              </button>
+              <button th:if="${reservation.reservation} == 1" class="set_reserve btn_mobile_card" th:data-index="${reservation.id}" onclick="event.stopPropagation(); setReservationOnMenu(this, 'delete')">
+                모렌전송 회수
+              </button>
+            </p>
+            <div style="display: none;">
+              <p class="carTypeList" th:data-index="${reservation.id}" th:text="${reservation.carType}"></p>
+              <p class="rentDateList" th:data-index="${reservation.id}" th:text="${reservation.rentDate}"></p>
+              <p class="rentTimeList" th:data-index="${reservation.id}" th:text="${reservation.rentTime}"></p>
+              <p class="returnDateList" th:data-index="${reservation.id}" th:text="${reservation.returnDate}"></p>
+              <p class="returnTimeList" th:data-index="${reservation.id}" th:text="${reservation.returnTime}"></p>
+              <p class="dayList" th:data-index="${reservation.id}" th:text="${reservation.day}"></p>
+              <p class="extraTimeList" th:data-index="${reservation.id}" th:text="${reservation.extraTime}"></p>
+              <p class="depositList" th:data-index="${reservation.id}" th:text="${reservation.deposit}"></p>
+              <p class="totalList" th:data-index="${reservation.id}" th:text="${reservation.total}"></p>
+              <p class="totalHalfList" th:data-index="${reservation.id}" th:text="${reservation.totalHalf}"></p>
+              <p class="nameList" th:data-index="${reservation.id}" th:text="${reservation.name}"></p>
+              <p class="phoneList" th:data-index="${reservation.id}" th:text="${reservation.phone}"></p>
+              <p class="depositorList" th:data-index="${reservation.id}" th:text="${reservation.depositor}"></p>
+              <p class="detailList" th:data-index="${reservation.id}" th:text="${reservation.detail}"></p>
+              <p class="agreeList" th:data-index="${reservation.id}" th:text="${reservation.agree}"></p>
+              <p class="campingReservationList" th:data-index="${reservation.id}" th:text="${reservation.reservation}"></p>
+              <p class="campingReservationIdList" th:data-index="${reservation.id}" th:text="${reservation.id}"></p>
+              <p class="orderCodeList" th:data-index="${reservation.id}" th:text="${reservation.orderCode}"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 게시판 하단의 페이징 버튼 -->
+        <div class="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item" th:if="${currentPage} >= 5">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${0},size=${pageSize})}">
+                <i class="fa-solid fa-angles-left"></i>
+              </a>
+            </li>
+            <li class="page-item" th:if="${currentPage} > 0">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${currentPage}-1,size=${pageSize})}">
+                <i class="fa-solid fa-chevron-left"></i>
+              </a>
+            </li>
+            <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
+            </li>
+            <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${currentPage}+1,size=${pageSize})}">
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </li>
+            <li class="page-item" th:if="${currentPage} < (5 * (${totalPages} / 5))">
+              <a class="page-link" th:href="@{/admin/campingcar/menu(page=${totalPages}-1,size=${pageSize})}">
+                <i class="fa-solid fa-angles-right"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>
+
+</body>
+
+</html>

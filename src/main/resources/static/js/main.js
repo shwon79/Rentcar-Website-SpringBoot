@@ -125,18 +125,18 @@ jQuery(document).ready(function ($) {
 
 
 // Portfoliowork init
-    jQuery('#portfoliowork').mixItUp({
-        selectors: {
-            target: '.tile',
-            filter: '.filter'
-                    //           sort: '.sort-btn'
-        },
-        animation: {
-            animateResizeContainer: false,
-            effects: 'fade scale'
-        }
-
-    });
+//     jQuery('#portfoliowork').mixItUp({
+//         selectors: {
+//             target: '.tile',
+//             filter: '.filter'
+//                     //           sort: '.sort-btn'
+//         },
+//         animation: {
+//             animateResizeContainer: false,
+//             effects: 'fade scale'
+//         }
+//
+//     });
 
 // dropdown menu
     $('.dropdown-menu').click(function (e) {
@@ -164,3 +164,17 @@ $( ".btn4-default" ).click(function() {
     document.getElementById('btn-sub1').className += ' btn-clicked';
 });
 
+// camping calendar
+function moveToCampingCalendar() {
+    let date = new Date();
+    let thisYear = date.getFullYear();
+    let thisMonth = date.getMonth() + 1;
+    window.location.href = '/camping/calendar/'+ thisYear + '/' + thisMonth;
+}
+
+function moveToCampingReservation(carType) {
+    let date = new Date();
+    let thisYear = date.getFullYear();
+    let thisMonth = date.getMonth() + 1;
+    window.location.href = '/camping/calendar/'+ carType + '_reserve/' + thisYear + '/' + thisMonth;
+}

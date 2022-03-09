@@ -556,7 +556,7 @@ Button
 Section
 */
 .sections {
-  padding-top: 120px;
+  padding-top: 50px;
   padding-bottom: 0px;
   /*overflow: hidden;*/
 }
@@ -976,7 +976,7 @@ button.btn-md {
 }
 button.btn-md:hover {
   background-color: transparent;
-  color: #e74c3c;;
+  color: #e74c3c;
   text-decoration: none;
   border: 0px solid #f4720a;
 }

@@ -1,66 +1,128 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.domain.CampingCar;
-import kr.carz.savecar.domain.MonthlyRent;
-import kr.carz.savecar.domain.ShortRent;
-import kr.carz.savecar.domain.YearlyRent;
-import kr.carz.savecar.service.CampingCarService;
-import kr.carz.savecar.service.MonthlyRentService;
-import kr.carz.savecar.service.ShortRentService;
-import kr.carz.savecar.service.YearlyRentService;
+import kr.carz.savecar.domain.*;
+import kr.carz.savecar.service.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HelloController {
-    MonthlyRentService monthlyRentService;
-    YearlyRentService yearlyRentService;
-    ShortRentService shortRentService;
-    CampingCarService campingCarService;
+    private final MonthlyRentService monthlyRentService;
+    private final YearlyRentService yearlyRentService;
+    private final TwoYearlyRentService twoYearlyRentService;
+    private final ShortRentService shortRentService;
+    private final CampingCarPriceService campingCarPriceService;
+    private final ValuesForWebService valuesForWebService;
+    private final ImagesService imagesService;
 
     @Autowired
-    public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                           ShortRentService shortRentService, CampingCarService campingCarService) {
+    public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
+                           ShortRentService shortRentService, CampingCarPriceService campingCarPriceService,
+                           ValuesForWebService valuesForWebService, ImagesService imagesService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
+        this.twoYearlyRentService = twoYearlyRentService;
         this.shortRentService = shortRentService;
-        this.campingCarService = campingCarService;
-
+        this.campingCarPriceService = campingCarPriceService;
+        this.valuesForWebService = valuesForWebService;
+        this.imagesService = imagesService;
     }
 
-    @GetMapping("/index")
-    public String home() {
+
+    @GetMapping(value={"/","/index"})
+    public String index(Model model) {
+
+        List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
+        List<Images> imagesMainList = new ArrayList<>();
+
+        for(CampingCarPrice campingCar : campingCarList){
+            List<Images> mainImage = imagesService.findByCarNameAndIsMain(campingCar, "1");
+
+            if(mainImage.size() == 0){
+                imagesMainList.add(new Images((long) -1, campingCar, -1, "", "0", "1"));
+            } else {
+                imagesMainList.add(mainImage.get(0));
+            }
+        }
+        model.addAttribute("campingCarList", campingCarList);
+        model.addAttribute("imagesMainList", imagesMainList);
+
         return "index";
     }
 
+
+    @GetMapping("/index/popup/value/{title}")
+    @ResponseBody
+    public void getPopUpValue(HttpServletResponse res, @PathVariable String title) throws IOException {
+
+        Optional<ValuesForWeb> valueWrapper = valuesForWebService.findValueByTitle(title);
+
+        JSONObject jsonObject = new JSONObject();
+        if(valueWrapper.isPresent()){
+            ValuesForWeb value = valueWrapper.get();
+            jsonObject.put("value", value.getValue());
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @GetMapping("/index/popup/value/campingCar/{carName}")
+    @ResponseBody
+    public void getPopUpCampingCarValue(HttpServletResponse res, @PathVariable String carName) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carName);
+        jsonObject.put("campingCarPrice", campingCarPrice);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
     @GetMapping("/rent/long_term")
     public String rent_long_term() {
-        return "rent_long_term";
+        return "rent_longterm/main";
     }
 
-    @GetMapping("/price/month")
-    public String price_month(Model model) {
+    @GetMapping("/price/{period}/{category2}")
+    public String price_month(Model model, @PathVariable String period, @PathVariable String category2) {
 
-        List<MonthlyRent> monthlyRentList = monthlyRentService.findMonthlyRents();
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(category2);
+        Collections.sort(monthlyRentList);
         model.addAttribute("monthlyRentList", monthlyRentList);
 
-        return "price_month";
+        switch (period) {
+            case "yearly":
+                return "rent_price/yearly";
+            case "twoYearly":
+                monthlyRentList = monthlyRentService.findByCategory2AndTwoYearlyRentIsNotNull(category2);
+                model.addAttribute("monthlyRentList", monthlyRentList);
+                return "rent_price/twoYearly";
+            default:
+                return "rent_price/month";
+        }
     }
-
-
-    @GetMapping("/price/long")
-    public String price_long(Model model) {
-
-        List<YearlyRent> yearlyRentList = yearlyRentService.findYearlyRents();
-        model.addAttribute("yearlyRentList", yearlyRentList);
-
-        return "price_long";
-    }
-
 
     @GetMapping("/price/short")
     public String price_short(Model model) {
@@ -73,37 +135,8 @@ public class HelloController {
         model.addAttribute("shortRentListForeign", shortRentListForeign);
         model.addAttribute("shortRentListNotForeign", shortRentListNotForeign);
 
-        return "price_short";
+        return "rent_price/short";
     }
-
-
-    @GetMapping("/price/camp")
-    public String price_camp(Model model) {
-
-        List<CampingCar> campingCarList = campingCarService.findCampingCarRents();
-
-        model.addAttribute("campingCarList", campingCarList);
-
-
-        return "price_camp";
-    }
-
-
-    @GetMapping("/travel")
-    public String camping_travel() {
-        return "camping_travel";
-    }
-
-    @GetMapping("/liomousine")
-    public String camping_liomousine() {
-        return "camping_liomousine";
-    }
-
-    @GetMapping("/europe")
-    public String camping_europe() {
-        return "camping_europe";
-    }
-
 
 
 }

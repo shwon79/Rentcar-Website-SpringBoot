@@ -72,11 +72,23 @@
 }
 
 #table_header {
-    background-color: #b3b0ac;
+    background-color: #9a9a9a;
 }
-
+.detail_btn {
+    padding: 4px 10px;
+    background: #9a9a9a;
+    color: white;
+    border: 1px solid #9a9a9a;
+    word-break: keep-all;
+    transition: 0.3s all ease-in-out;
+    border-radius: 4px;
+}
+.detail_btn:hover {
+    color: #9a9a9a;
+    background: white;
+}
 .monthly_content {
-    padding: 120px 60px 60px;
+    padding: 50px 60px 60px;
 }
 
 #mobileCard {
@@ -106,7 +118,7 @@
 .card button {
     width: 50%;
     word-break: keep-all;
-    margin: 0 25%;
+    margin: 10px 25% 0 25%;
 }
 
 .to-prior-rent-month-text {
@@ -121,8 +133,39 @@
     padding: 10px 20px;
     border-radius: 10px;
 }
-
-
+.table_available tr th p {
+    margin: 0;
+}
+.table_expected tr th p {
+    margin: 0;
+}
+.discount-wrap {
+    display: flex;
+    justify-content: center;
+    height: 25px;
+    line-height: 200%;
+}
+.originalPrice {
+    margin: 0 0 5px 0;
+}
+.discountPrice {
+    font-weight: bold;
+    color: darkred;
+}
+.discountAnimation {
+    color:darkred;
+    font-weight: 600;
+    animation: colorChange 1s infinite alternate;
+    margin-right: 5px;
+}
+.empty-list-card {
+    text-align: center;
+    margin: 2rem 0;
+}
+.empty-list-card p {
+    font-size: 16px;
+    color: darkblue;
+}
 
 @media (max-width: 600px) {
     .realtime-btn {
@@ -151,24 +194,15 @@
         width: 120px;
     }
 
-    .not-show-in-mobile {
-        display: none;
+    .discount-wrap {
+        justify-content: end;
+        padding-right: 25px;
+        line-height: unset;
     }
 }
 
-.originalPrice {
-    margin: 0 0 5px 0;
-}
-.discountPrice {
-    font-weight: bold;
-    color: darkred;
-}
-.discountAnimation {
-    color:darkred;
-    font-weight: 600;
-    animation:colorchange 1s infinite alternate;
-}
-@keyframes colorchange {
+
+@keyframes colorChange {
     0% {
         color:darkred;
     }

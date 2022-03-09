@@ -1,62 +1,294 @@
 package kr.carz.savecar.controller;
 
-import kr.carz.savecar.domain.Reservation;
-import kr.carz.savecar.domain.ReservationSaveDTO;
+import kr.carz.savecar.dto.MorenReservationDTO;
+import kr.carz.savecar.dto.ReservationSaveDTO;
 import kr.carz.savecar.service.ReservationService;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.*;
 
 @Controller
 public class ReservationController {
     private final ReservationService reservationService;
+
     @Autowired
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
 
+    @Value("${coolsms.api_key}")
+    private String api_key;
 
-    //예약 목록 조회 api
-    @GetMapping("/reservation/list")
-    public String reservation_list(Model model) {
-        List<Reservation> reservationList = reservationService.findAllReservations();
-        model.addAttribute("reservationList", reservationList);
+    @Value("${coolsms.api_secret}")
+    private String api_secret;
 
-        return "reservation_list";
+    @Value("${phone.admin1}")
+    private String admin1;
+
+    @Value("${phone.admin2}")
+    private String admin2;
+
+    @Value("${phone.admin3}")
+    private String admin3;
+
+    @Value("${kakao.ATA.template.templatecode.realtimerent.employee}")
+    private String realtimeRentEmployeeTemplateCode;
+
+    @Value("${kakao.ATA.template.senderkey.realtimerent}")
+    private String senderKey;
+
+    //    @RequestMapping(value = "/reservation/kakao/ATA", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    @PostMapping("/reservation/kakao/ATA")
+    @ResponseBody
+    public void kakao_reservation(HttpServletResponse res, String to_manager_phone, String to_customer_phone, Map<String, String> employerMap, Map<String, String> customerMap, String employerTemplateCode, String customerTemplateCode) throws IOException {
+
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", to_manager_phone);  // +", "+admin2+", "+admin3
+        params.put("from", admin3);
+        params.put("type", "ATA");
+        params.put("template_code", employerTemplateCode);
+        params.put("sender_key", senderKey);
+
+        /* 고객에게 예약확인 문자 전송 */
+        params2.put("to", to_customer_phone);
+        params2.put("from", admin3);
+        params2.put("type", "ATA");
+        params2.put("template_code", customerTemplateCode);
+        params2.put("sender_key", senderKey);
+
+        params.putAll(employerMap);
+        params2.putAll(customerMap);
+
+        params.put("app_version", "test app 1.2");
+        params2.put("app_version", "test app 1.2");
+
+        /* 세이브카에게 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj = coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        /* 고객에게 예약확인 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        org.json.JSONObject jsonObject = new org.json.JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
-    // 예약 저장 api
+    @GetMapping("/test/reservation/kakao/ATA")
+    @ResponseBody
+    public void test_kakao_reservation(HttpServletResponse res) throws IOException {
+
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", admin1);  // +", "+admin2+", "+admin3
+        params.put("from", admin3);
+        params.put("type", "ATA");
+        params.put("template_code", realtimeRentEmployeeTemplateCode);
+        params.put("sender_key", senderKey);
+
+        /* 고객에게 예약확인 문자 전송 */
+        params2.put("to", admin1);
+        params2.put("from", admin3);
+        params2.put("type", "ATA");
+        params2.put("template_code", realtimeRentEmployeeTemplateCode);
+        params2.put("sender_key", senderKey);
+
+        params.put("text", "test");
+        params2.put("text", "test");
+        params.put("only_ata", "true");
+        params2.put("only_ata", "true");
+
+        params.put("country", "82");
+        params2.put("country", "82");
+
+        params.put("reservationId", "test");
+        params.put("reservationName", "test");
+        params.put("reservationPhone", "test");
+        params.put("selectAge", "test");
+        params.put("reservationAge", "test");
+        params.put("carName", "test");
+        params.put("carNo", "test");
+        params.put("reservationDate", "test");
+        params.put("reservationTime", "test");
+        params.put("rentTerm", "test");
+        params.put("kilometer", "test");
+        params.put("delivery_text", "test");
+        params.put("reservationGuarantee", "test");
+        params.put("carAmountTotal", "test");
+        params.put("carDeposit", "test");
+        params.put("reservationDetails", "test");
+
+
+        params2.put("reservationId", "test");
+        params2.put("reservationName", "test");
+        params2.put("reservationPhone", "test");
+        params2.put("selectAge", "test");
+        params2.put("reservationAge", "test");
+        params2.put("carName", "test");
+        params2.put("carNo", "test");
+        params2.put("reservationDate", "test");
+        params2.put("reservationTime", "test");
+        params2.put("rentTerm", "test");
+        params2.put("kilometer", "test");
+        params2.put("delivery_text", "test");
+        params2.put("reservationGuarantee", "test");
+        params2.put("carAmountTotal", "test");
+        params2.put("carDeposit", "test");
+        params2.put("reservationDetails", "test");
+
+
+        params.put("app_version", "test app 1.2");
+        params2.put("app_version", "test app 1.2");
+
+        /* 세이브카에게 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj = coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        /* 고객에게 예약확인 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        org.json.JSONObject jsonObject = new org.json.JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    // 문자 전송 api to employees
+    public void send_error_message_to_employees(String to_manager_phone, String manager_text_message)  {
+
+        // 문자전송
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", to_manager_phone);
+        params.put("from", admin3);
+        params.put("type", "LMS");
+
+        params.put("text", manager_text_message);
+
+        params.put("app_version", "test app 1.2");
+
+        /* 세이브카에게 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj = coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+    }
+
+
+    // 문자 전송 api
+    public void send_message(String to_manager_phone, String to_customer_phone, String manager_text_message, String customer_text_message)  {
+
+        // 문자전송
+        Message coolsms = new Message(api_key, api_secret);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
+
+        /* 세이브카에 예약확인 문자 전송 */
+        params.put("to", to_manager_phone);
+        params.put("from", admin3);
+        params.put("type", "LMS");
+
+        /* 고객에게 예약확인 문자 전송 */
+        params2.put("to", to_customer_phone);
+        params2.put("from", admin3);
+        params2.put("type", "LMS");
+
+        params.put("text", manager_text_message);
+        params2.put("text", customer_text_message);
+
+        params.put("app_version", "test app 1.2");
+        params2.put("app_version", "test app 1.2");
+
+        /* 세이브카에게 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj = coolsms.send(params);
+            System.out.println(obj.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+
+        /* 고객에게 예약확인 문자 전송 */
+        try {
+            org.json.simple.JSONObject obj2 = coolsms.send(params2);
+            System.out.println(obj2.toString()); //전송 결과 출력
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+    }
+
+
+        // 예약 저장 api
+//    @RequestMapping(value = "/reservation/apply", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @PostMapping("/reservation/apply")
     @ResponseBody
-    public Long save(@RequestBody ReservationSaveDTO dto){
+    public void save(HttpServletResponse res, @RequestBody ReservationSaveDTO dto) throws IOException {
 
-        String api_key = "NCS0P5SFAXLOJMJI";
-        String api_secret = "FLLGUBZ7OTMQOXFSVE6ZWR2E010UNYIZ";
         Message coolsms = new Message(api_key, api_secret);
-        HashMap<String, String> params = new HashMap<String, String>();
-        HashMap<String, String> params2 = new HashMap<String, String>();
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params2 = new HashMap<>();
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", "01058283328, 01033453328, 01052774113"); // 01033453328 추가
-        params.put("from", "01052774113");
+        params.put("to", admin1+", "+admin2+", "+admin3); // 01033453328 추가
+        params.put("from", admin3);
         params.put("type", "LMS");
 
 
         /* 고객에게 예약확인 문자 전송 */
-
         params2.put("to", dto.getPhoneNo());
-        params2.put("from", "01052774113");  // 16613331 테스트하기
+        params2.put("from", admin3);  // 16613331 테스트하기
         params2.put("type", "LMS");
 
 
@@ -65,29 +297,42 @@ public class ReservationController {
                     + "문의자 이름: " + dto.getName() + "\n"
                     + "연락처: " + dto.getPhoneNo() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
-                    + "지역: " + dto.getMileage() + "\n"
-                    + "예상대여일자: " + dto.getOption() + "\n"
+                    + "지역: " + dto.getRegion() + "\n"
+                    + "예상대여일자: " + dto.getResDate() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
 
             params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "문의자 이름: " + dto.getName() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
                     + "지역: " + dto.getMileage() + "\n"
-                    + "예상대여일자: " + dto.getOption() + "\n"
+                    + "예상대여일자: " + dto.getRegion() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
         else if (dto.getTitle().equals("월렌트실시간")){
             params.put("text", "[" + dto.getTitle() + "]\n"
                     + "문의자 이름: " + dto.getName() + "\n"
                     + "연락처: " + dto.getPhoneNo() + "\n"
+                    + "보험연령: " + dto.getAge_limit()+ "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
-                    + "차량번호: " + dto.getMileage() + "\n"
-                    + "년식: " + dto.getOption() + "\n"
+                    + "차량번호: " + dto.getCar_num() + "\n"
+                    + "년식: " + dto.getCarAge() + "\n"
+                    + "대여기간: " + dto.getProduct() + "\n"
+                    + "약정 주행거리: " + dto.getMileage() + "\n"
+                    + "보증금: " + dto.getDeposit() + "\n"
+                    + "총렌트료[부포]: " + dto.getPrice() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
 
             params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "문의자 이름: " + dto.getName() + "\n"
+                    + "연락처: " + dto.getPhoneNo() + "\n"
+                    + "보험연령: " + dto.getAge_limit()+ "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
+                    + "차량번호: " + dto.getCar_num() + "\n"
+                    + "년식: " + dto.getCarAge() + "\n"
+                    + "대여기간: " + dto.getProduct() + "\n"
+                    + "약정 주행거리: " + dto.getMileage() + "\n"
+                    + "보증금: " + dto.getDeposit() + "\n"
+                    + "총렌트료: " + dto.getPrice() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
         else if (dto.getTitle().equals("월렌트, 12개월렌트, 24개월렌트")){
@@ -136,7 +381,7 @@ public class ReservationController {
                     + "약정주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n");
         }
-        else {
+        else if (dto.getTitle().equals("캠핑카렌트")){
             params.put("text", "[" + dto.getTitle() + "]\n"
                     + "예약자 이름: " + dto.getName() + "\n"
                     + "연락처: " + dto.getPhoneNo() + "\n"
@@ -155,7 +400,7 @@ public class ReservationController {
         /* 세이브카에게 문자 전송 */
 
         try {
-            JSONObject obj = (JSONObject) coolsms.send(params);
+            JSONObject obj = coolsms.send(params);
             System.out.println(obj.toString()); //전송 결과 출력
         } catch (CoolsmsException e) {
             System.out.println(e.getMessage());
@@ -165,13 +410,22 @@ public class ReservationController {
         /* 고객에게 예약확인 문자 전송 */
 
         try {
-            JSONObject obj2 = (JSONObject) coolsms.send(params2);
+            JSONObject obj2 = coolsms.send(params2);
             System.out.println(obj2.toString()); //전송 결과 출력
         } catch (CoolsmsException e) {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
+        reservationService.save(dto);
 
-        return reservationService.save(dto);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
+
+
 }
