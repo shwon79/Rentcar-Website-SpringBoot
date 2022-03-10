@@ -1,6 +1,5 @@
 package kr.carz.savecar.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +12,11 @@ import javax.persistence.*;
 @Table(name = "LongTermRent")
 public class LongTermRent {
     @Id
+    @Column(name = "longTermRentId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long imageId;
+    private Long longTermRentId;
 
+    private String carName;
     private String carNum;
     private String carColor;
     private String carYearModel;
@@ -25,12 +26,14 @@ public class LongTermRent {
     private String contractDeposit;
     private String contractMaintenance;
     private String newOld;
+    private String imageUrl;
 
 
     @Builder
-    public LongTermRent(Long imageId,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
-                        ,String contractDeposit, String contractMaintenance, String newOld) {
-        this.imageId = imageId;
+    public LongTermRent(Long longTermRentId,String carName,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
+                        ,String contractDeposit, String contractMaintenance, String newOld, String imageUrl) {
+        this.longTermRentId = longTermRentId;
+        this.carName = carName;
         this.carNum = carNum;
         this.carColor = carColor;
         this.carYearModel = carYearModel;
@@ -40,5 +43,6 @@ public class LongTermRent {
         this.contractDeposit = contractDeposit;
         this.contractMaintenance = contractMaintenance;
         this.newOld = newOld;
+        this.imageUrl = imageUrl;
     }
 }

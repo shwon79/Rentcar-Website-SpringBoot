@@ -100,11 +100,6 @@ public class HelloController {
     }
 
 
-    @GetMapping("/rent/long_term")
-    public String rent_long_term() {
-        return "rent_longterm/main";
-    }
-
     @GetMapping("/price/{period}/{category2}")
     public String price_month(Model model, @PathVariable String period, @PathVariable String category2) {
 

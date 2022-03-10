@@ -26,7 +26,8 @@ public class SpringConfig {
     private final CampingCarPriceRateRepository campingCarPriceRateRepository;
     private final CampingCarMainTextRepository campingCarMainTextRepository;
     private final ReviewRepository reviewRepository;
-
+    private final LongTermRentRepository longTermRentRepository;
+    private final LongTermRentImageRepository longTermRentImageRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -38,7 +39,8 @@ public class SpringConfig {
                         DateCampingRepository dateCampingRepository, CampingcarReservationRepository campingcarReservationRepository,
                         AdminRepository adminRepository, ImagesRepository imagesRepository,
                         ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository,
-                        CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository) {
+                        CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository,
+                        LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -57,6 +59,8 @@ public class SpringConfig {
         this.campingCarPriceRateRepository = campingCarPriceRateRepository;
         this.campingCarMainTextRepository = campingCarMainTextRepository;
         this.reviewRepository = reviewRepository;
+        this.longTermRentRepository = longTermRentRepository;
+        this.longTermRentImageRepository = longTermRentImageRepository;
     }
 
     @Bean
@@ -116,4 +120,10 @@ public class SpringConfig {
 
     @Bean
     public ReviewService reviewService() { return new ReviewService(reviewRepository); }
+
+    @Bean
+    public LongTermRentService longTermRentService() { return new LongTermRentService(longTermRentRepository); }
+
+    @Bean
+    public LongTermRentImageService longTermRentImageService() { return new LongTermRentImageService(longTermRentImageRepository); }
 }
