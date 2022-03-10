@@ -77,7 +77,11 @@
                         <p class="car_card_info_subInfo">
                             <span th:text="${car.carYearModel}"></span>
                             <span th:text="${car.contractKm}"></span>
+                        </p>
+                        <p class="car_card_info_subInfo">
                             <span th:text="${car.contractPeriod}"></span>
+                            <span th:if="${car.carColor != '신차'}" th:text="${car.carColor}"></span>
+                            <span th:if="${car.carColor == '신차'}"> - </span>
                         </p>
                         <p class="car_card_info_subInfo">
                             <span>
