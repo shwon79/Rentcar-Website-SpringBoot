@@ -26,11 +26,12 @@ public class LongTermRent {
     private String contractDeposit;
     private String contractMaintenance;
     private String newOld;
+    private String imageUrl;
 
 
     @Builder
     public LongTermRent(Long imageId,String carName,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
-                        ,String contractDeposit, String contractMaintenance, String newOld) {
+                        ,String contractDeposit, String contractMaintenance, String newOld, String imageUrl) {
         this.imageId = imageId;
         this.carName = carName;
         this.carNum = carNum;
@@ -42,5 +43,6 @@ public class LongTermRent {
         this.contractDeposit = contractDeposit;
         this.contractMaintenance = contractMaintenance;
         this.newOld = newOld;
+        this.imageUrl = imageUrl;
     }
 }
