@@ -16,6 +16,7 @@ public class LongTermRent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
+    private String carName;
     private String carNum;
     private String carColor;
     private String carYearModel;
@@ -28,9 +29,10 @@ public class LongTermRent {
 
 
     @Builder
-    public LongTermRent(Long imageId,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
+    public LongTermRent(Long imageId,String carName,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
                         ,String contractDeposit, String contractMaintenance, String newOld) {
         this.imageId = imageId;
+        this.carName = carName;
         this.carNum = carNum;
         this.carColor = carColor;
         this.carYearModel = carYearModel;
