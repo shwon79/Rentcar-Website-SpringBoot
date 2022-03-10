@@ -65,9 +65,7 @@
 <!--            </div>-->
 
             <ul id="car_card_list" style="margin-top: 50px;">
-<!--                th:onclick="'location.href=\''+ ${car.longTermRentId} + '\''"-->
-<!--                th:onclick="|location.href='@{/basic/items}'|"-->
-<!--                th:onclick="|location.href='@{/rent/long_term/${}'|"-->
+<!--                th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|"-->
                 <li class="car_card" th:each="car, i : ${longTermRentList}">
                     <div class="car_card_image_box">
                         <img th:src="${imageList[i.index][0].imageUrl}" alt="car image">
