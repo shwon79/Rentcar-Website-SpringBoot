@@ -4,6 +4,7 @@ import kr.carz.savecar.domain.LongTermRent;
 import kr.carz.savecar.repository.LongTermRentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class LongTermRentService {
 
@@ -17,4 +18,7 @@ public class LongTermRentService {
         return longTermRentRepository.findAll();
     }
 
+    public Optional<LongTermRent> findById(Long carId){
+        return longTermRentRepository.findById(carId);
+    }
 }

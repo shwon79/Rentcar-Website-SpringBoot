@@ -1,6 +1,5 @@
 package kr.carz.savecar.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +12,9 @@ import javax.persistence.*;
 @Table(name = "LongTermRent")
 public class LongTermRent {
     @Id
+    @Column(name = "longTermRentId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long imageId;
+    private Long longTermRentId;
 
     private String carName;
     private String carNum;
@@ -30,9 +30,9 @@ public class LongTermRent {
 
 
     @Builder
-    public LongTermRent(Long imageId,String carName,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
+    public LongTermRent(Long longTermRentId,String carName,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
                         ,String contractDeposit, String contractMaintenance, String newOld, String imageUrl) {
-        this.imageId = imageId;
+        this.longTermRentId = longTermRentId;
         this.carName = carName;
         this.carNum = carNum;
         this.carColor = carColor;
