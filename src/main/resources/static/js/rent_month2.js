@@ -1,6 +1,7 @@
 let sortType = 'desc';
 
-function sortAvailableContent(index) {
+// rent/month/new 차량 정렬 화살표 클릭
+function sortAvailableContent(index, isNumber) {
     let table = document.getElementsByClassName('table_available')
 
     sortType = (sortType == 'asc') ? 'desc' : 'asc';
@@ -12,8 +13,15 @@ function sortAvailableContent(index) {
         checkSort = false;
 
         for (let i = 1; i < (rows.length - 1); i++) {
-            let fCell = rows[i].cells[index].innerText.toUpperCase();
-            let sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            let fCell, sCell;
+
+            if (isNumber) {
+                fCell = parseInt(rows[i].cells[index].innerText.replace(/,/g, ''));
+                sCell = parseInt(rows[i + 1].cells[index].innerText.replace(/,/g, ''));
+            } else {
+                fCell = rows[i].cells[index].innerText.toUpperCase();
+                sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            };
 
             let row = rows[i];
 
@@ -26,7 +34,7 @@ function sortAvailableContent(index) {
     }
 }
 
-function sortExpectedContent(index) {
+function sortExpectedContent(index, isNumber) {
     let table = document.getElementsByClassName('table_expected')
 
     sortType = (sortType == 'asc') ? 'desc' : 'asc';
@@ -38,8 +46,15 @@ function sortExpectedContent(index) {
         checkSort = false;
 
         for (let i = 1; i < (rows.length - 1); i++) {
-            let fCell = rows[i].cells[index].innerText.toUpperCase();
-            let sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            let fCell, sCell;
+
+            if (isNumber) {
+                fCell = parseInt(rows[i].cells[index].innerText.replace(/,/g, ''));
+                sCell = parseInt(rows[i + 1].cells[index].innerText.replace(/,/g, ''));
+            } else {
+                fCell = rows[i].cells[index].innerText.toUpperCase();
+                sCell = rows[i + 1].cells[index].innerText.toUpperCase();
+            };
 
             let row = rows[i];
 
@@ -52,6 +67,18 @@ function sortExpectedContent(index) {
     }
 }
 
+// rent/month/new 차량 정렬 시 화살표 아이콘
+function displaySortImage(target) {
+    let targetI = [...document.getElementsByTagName("i")].find(i => i.dataset.id === target);
+
+    if (sortType === 'desc') {
+        targetI.classList.remove('fa-arrow-up');
+        targetI.classList.add('fa-arrow-down');
+    } else if (sortType === 'asc') {
+        targetI.classList.add('fa-arrow-up');
+        targetI.classList.remove('fa-arrow-down');
+    }
+}
 
 function sendData(){
     document.getElementById('select_wrapper').submit();
@@ -59,7 +86,7 @@ function sendData(){
 
 
 // 월렌트실시간 상담요청
-function make_monthly_rent_reservation () {
+function make_monthly_rent_reservation (e) {
 
     if (document.getElementById("reservation-simple-name").value == ""){
         alert('성함을 입력해주세요.')
@@ -71,32 +98,67 @@ function make_monthly_rent_reservation () {
         return
     }
 
+    let rentTerm = document.getElementById('forPostRentTerm').innerText;
+    let carDeposit = document.getElementById('forPostDeposit').innerText;
+    let carOld = document.getElementById('forPostCarOld').innerText;
+    let ageLimit = document.getElementById('selectAge1').value;
+    let kilometer = document.getElementById('forPostKilometer').innerText;
+    let carPrice = parseInt(document.getElementById('carPrice').innerText.replace(/,/g, ""));
+    let reservationPhone = $("#reservation-simple-phone").val();
+    let carTax = carPrice / 10;
+    let carAmountTotal = carPrice + carTax;
 
-    var data = {
+    let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+    if (ageLimit === 'upper26') {
+        ageLimit = '만 26세 이상';
+    } else if (ageLimit === 'upper21') {
+        ageLimit = '만 21세 이상~만 26세 미만';
+    }
+
+    let data = {
         name : $("#reservation-simple-name").val(),
-        phoneNo : $("#reservation-simple-phone").val(),
+        phoneNo : reservationPhone,
         detail : $("#reservation-simple-details").val(),
-        title : "월렌트실시간",
+        product: rentTerm,
+        title: '월렌트실시간',
+        category1: '',
+        category2: '',
         car_name : document.getElementsByClassName("carName")[0].innerHTML,
-        car_num : document.getElementsByClassName("carNo")[0].innerHTML
+        mileage: kilometer,
+        deposit: carDeposit.toString(),
+        option: '',
+        price: carAmountTotal.toString(),
+        age_limit: ageLimit,
+        car_num : document.getElementsByClassName("carNo")[0].innerHTML,
+        region: '',
+        resDate: '',
+        carAge: carOld
     };
 
-    var checkbox = document.getElementById("agree")
-    if(checkbox.checked) {
-        $.ajax({
-            type : 'POST',
-            url : '/reservation/apply',
-            dataType : 'json',
-            contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data)
-        }).done(function () {
-            alert('상담 신청이 완료되었습니다.');
-            window.location.href = '/index';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    } else{
-        alert("개인정보 수집 및 이용에 동의해주세요.");
+    // console.log(data);
+
+    let check1 = document.getElementById("agree1").checked;
+    let check2 = document.getElementById("agree2").checked;
+    let check3 = document.getElementById("agree3").checked;
+
+    if (check1 != true || check2 != true || check3 != true) {
+        alert("약관에 동의해주세요.");
+    } else if (regPhone.test(reservationPhone) == false) {
+        alert("연락처를 '010-1234-5678' 형식으로 입력해주세요.");
+    } else {
+            $.ajax({
+                type : 'POST',
+                url : '/reservation/apply',
+                dataType : 'json',
+                contentType : 'application/json; charset=utf-8',
+                data : JSON.stringify(data)
+            }).done(function () {
+                alert('상담 신청이 완료되었습니다.');
+                window.location.href = '/index';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
     }
 }
 
@@ -104,12 +166,13 @@ function make_monthly_rent_reservation () {
 const number = document.querySelectorAll(".number");
 
 function numberWithCommas() {
-    // console.log(number);
     for (let i = 0; i < number.length; i++) {
         if (number[i].innerText === '상담') {
             number[i].innerText = '상담';
         } else {
-            const numberWithComma = parseInt(number[i].innerText).toLocaleString();
+            const num = parseFloat(number[i].innerText);
+            const result = Math.floor(num/1000)*1000;
+            const numberWithComma = result.toLocaleString();
             number[i].innerText = numberWithComma;
         }
     }
@@ -141,14 +204,9 @@ $('.moveToAvailableDetail').click(function(e) {
             carIdx = carIdxList[i].innerText;
         }
     };
-    for (i = 0; i < discountList.length; i++) {
-        if (discountList[i].dataset.index == dataIndex) {
-            discount = discountList[i].innerText;
-            if (discount=='') {
-                discount = null;
-            }
-        }
-    };
+    let tempDiscount = [...discountList].find(discount => discount.dataset.index === dataIndex);
+    discount = tempDiscount.innerText;
+
     for (i = 0; i < kilometerList.length; i++) {
         if (kilometerList[i].dataset.index == dataIndex) {
             kilometer = kilometerList[i].innerText;
@@ -217,6 +275,8 @@ function displayNextOptions(e) {
     let monthKilometer = ["2000km", "2500km", "3000km", "4000km", "기타"];
     let yearKilometer = ["20000km", "30000km", "40000km", "기타"];
     let selectKilometer = document.getElementById('selectkilometer');
+    let selectKilometer2 = document.getElementById('selectkilometer2');
+
     let displaySelect;
 
     if (e.value == "한달") {
@@ -226,12 +286,15 @@ function displayNextOptions(e) {
     };
 
     selectKilometer.options.length = 0;
+    selectKilometer2.options.length = 0;
 
     for (x in displaySelect) {
         let option = document.createElement('option');
         option.value = displaySelect[x];
         option.innerText = displaySelect[x];
+
         selectKilometer.appendChild(option);
+        selectKilometer2.appendChild(option);
     };
 }
 
@@ -243,6 +306,35 @@ function dataReset() {
     let discount = document.getElementById('getDiscount').innerText;
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
+
+    if (rentTerm == '한달' && kilometer == '') {
+        kilometer = '2000km';
+    } else if (rentTerm == '12개월' && kilometer == '') {
+        kilometer = '20000km';
+    } else if (rentTerm == '24개월' && kilometer == '') {
+        kilometer = '20000km';
+    }
+
+    window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
+}
+// 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동
+function dataReset2() {
+    let rentTerm = document.getElementById('selectRentTerm2').value;
+    let carIdx = document.getElementById('getCarIdx').innerText;
+    let kilometer = document.getElementById('selectkilometer2').value;
+    let discount = document.getElementById('getDiscount').innerText;
+    let rentStatus = document.getElementById('getRentStatus').innerText;
+    let rentIdx = document.getElementById('getrentIdx').innerText;
+
+    // console.log(kilometer);
+
+    if (rentTerm == '한달' && kilometer == '') {
+        kilometer = '2000km';
+    } else if (rentTerm == '12개월' && kilometer == '') {
+        kilometer = '20000km';
+    } else if (rentTerm == '24개월' && kilometer == '') {
+        kilometer = '20000km';
+    }
 
     window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
 }
@@ -267,6 +359,16 @@ function displayEditedPrice(e) {
         }
     }
 }
+
+// 데스크탑, 모바일 연령 맞추기
+function sameAgeLimit(e) {
+    // console.log(e.id);
+    if (e.id === 'selectAge1') {
+        document.getElementById('selectAge2').value = document.getElementById('selectAge1').value;
+    } else if (e.id === 'selectAge2') {
+        document.getElementById('selectAge1').value = document.getElementById('selectAge2').value;
+    }
+};
 
 // 예약 신청하기 버튼 누르면 새창에 폼 띄우기
 function openForm() {
@@ -294,14 +396,25 @@ function openForm() {
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
+    let ageLimit = document.getElementById('selectAge1').value;
 
-    carPrice = carPrice.replace(/,/g, "");
+    if (carPrice === '상담') {
+        carPrice = -1;
+    } else {
+        carPrice = carPrice.replace(/,/g, "");
+    }
 
     var mapForm = document.createElement("form");
     mapForm.target = "Map";
     mapForm.method = "POST"; // or "post" if appropriate
     mapForm.action = "/rent/month/detail/form/reservation";
     mapForm.style.display= "none";
+
+    var mapAgeLimit = document.createElement("input");
+    mapAgeLimit.type = "text";
+    mapAgeLimit.name = "selectAge";
+    mapAgeLimit.value = ageLimit;
+    mapForm.appendChild(mapAgeLimit);
 
     var mapCarCategory = document.createElement("input");
     mapCarCategory.type = "text";
@@ -485,9 +598,13 @@ function openOffer() {
     let kilometer = document.getElementById('forPostKilometer').innerText;
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
-    let selectAge = document.getElementById('selectAge').value;
+    let selectAge = document.getElementById('selectAge1').value;
 
-    carPrice = carPrice.replace(/,/g, "");
+    if (carPrice === '상담') {
+        carPrice = -1;
+    } else {
+        carPrice = carPrice.replace(/,/g, "");
+    }
 
     var mapForm = document.createElement("form");
     mapForm.target = "Map";

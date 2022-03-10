@@ -2,7 +2,6 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.repository.CalendarTimeRepository;
-import kr.carz.savecar.repository.CampingCarRepository;
 
 import java.util.List;
 
@@ -32,6 +31,9 @@ public class CalendarTimeService {
         for(int i=0; i<calendarTimeList.size(); i++){
             calendarTimeRepository.save(calendarTimeList.get(i));
         }
+    }
+    public List<CalendarTime> findCalendarTimeByDateId(CalendarDate dateId){
+        return calendarTimeRepository.findByDateId(dateId);
     }
 
     public List<CalendarTime> findByDateIdAndCarNameAndReserveTimeGreaterThanEqual(CalendarDate date_id, CampingCarPrice car_name, String start_date){

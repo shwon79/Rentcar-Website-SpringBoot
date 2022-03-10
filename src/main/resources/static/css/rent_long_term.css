@@ -3,53 +3,129 @@
     margin-right: 0px;
 }
 
+h2 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+/*.look-button {*/
+/*    text-align: center;*/
+/*}*/
+
+/*.look-button button {*/
+/*    color: white;*/
+/*    background-color: #c10000;*/
+/*    padding: 1.5rem 3rem;*/
+/*    border: none;*/
+/*    border-radius: 3rem;*/
+/*}*/
+
 #car_card_list {
     margin-bottom: 60px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .car_cards {
-    background: whitesmoke;
-    margin: 20px;
-    width: 250px;
-    padding: 5px;
-    border: 1px solid #e3e3e382;
+    background-color: white;
+    box-shadow: red 0px 3px 8px;
+    border-radius: 2rem;
+    margin: 2rem 1rem;
+    padding: 2rem;
+    background-image: url("https://i.ibb.co/2cHb8cq/Group-1.jpg");
+    background-size: cover;
+    background-position: center right;
+    transition: 1s all;
+    min-height: 45rem;
 }
 
+.glance_card_section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+.glance_card {
+    /*background-color: white;*/
+    box-shadow: red 0px 3px 8px;
+    border-radius: 2rem;
+    transition: 1s all;
+    background-image: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 2rem 3rem;
+    margin: 2rem 0;
+    height: auto !important;
+}
+.glance_card .car_card_img {
+    margin: 0 5rem 0 0;
+}
+.glance_card img {
+    height: 200px;
+}
+.glance_card .car_card_type {
+    font-size: 2.5rem !important;
+    display: inline;
+}
 .car_cards:hover {
-    box-shadow: 5px 5px 30px #707070;
+    /*box-shadow: 5px 5px 30px #707070;*/
+    transform: scale(1.05);
 }
 
 .car_cards p {
     font-size: 16px;
 }
 
-
 .car_card_type {
     font-family: 'FontAwesome';
     font-weight: bold;
+    color: #c10000;
+    width: 50%;
+    font-size: 2rem !important;
+    word-break: keep-all;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 0px #FFFFFF;
+}
+
+.car_card_textbox {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #e2e2e2;
-    color: black;
-    margin: 0 5px 5px 5px;
+    flex-direction: column;
 }
 
 .car_card_txt {
-    padding-left: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    box-shadow: #c10000 0px 2px 5px -1px, #c10000 0px 1px 3px -1px;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 0.3em 0.5em;
+}
+
+.car_card_txt .title {
+    display: inline-block;
+    width: 90px;
+    color: #c10000;
 }
 
 .car_card_img {
     height: 170px;
-    margin: 5px;
+    margin: 10px 0;
+}
+
+.car_card_bg {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+.car_card_contents {
+    position: relative;
 }
 
 .car_card_img img {
-    height: 100%;
+    height: 170px;
     width: 100%;
 }
 
@@ -88,41 +164,138 @@
     padding-left: 3%;
 }
 
-/*  */
+.a-link-small {
+    width: 40%
+}
+@media (max-width: 549px) {
 
-@media (max-width: 600px) {
-
-    /*.container {*/
-    /*    padding: 0;*/
-    /*}*/
+    .container {
+        padding: 0;
+        margin: 2rem 3rem;
+    }
 
     .long_term_page button {
         width: 40%;
         font-size: 1em;
     }
 
+    #car_card_list {
+        /*justify-content: center;*/
+    }
+    .glance_card_section a {
+        width: 100%;
+    }
+    .glance_card .car_card_img {
+        margin: 0 1rem 0 0;
+    }
+    .glance_card .car_card_type {
+        font-size: 1.5rem !important;
+    }
+    .glance_card {
+        padding: 2rem;
+    }
     .car_cards {
-        width: 43vw;
+        width: 12.5rem;
         font-size: 1em;
-        margin: 5px;
+        margin: 1rem auto;
+        min-height: 50rem;
+        padding: 1rem;
+    }
+
+    .car_card_type {
+        font-size: 1.5rem;
     }
 
     .car_cards p {
         font-size: 13px;
+        margin-bottom: 1rem;
     }
 
     .car_card_img {
-        height: 100px;
+        height: 130px;
+    }
+
+    .car_card_img img {
+        height: 130px;
+        width: auto;
     }
 
     .car_card_txt {
         padding-left: 5px;
         margin-bottom: 0px;
     }
+    .title {
+        width: 60px;
+    }
 
-    .car_cards div p {
-        display: flex;
-        flex-direction: column;
+    #not-opened-yet {
+        display: block;
+    }
+
+    .rent-long-sub-title {
+        padding-left: 8%;
+    }
+}
+
+@media (min-width: 550px) and (max-width: 600px) {
+    .container {
+        padding: 0;
+        margin: 2rem 3rem;
+    }
+
+    .long_term_page button {
+        width: 40%;
+        font-size: 1em;
+    }
+
+    #car_card_list {
+        /*justify-content: center;*/
+    }
+    .glance_card_section a {
+        width: 100%;
+    }
+    .glance_card .car_card_img {
+        margin: 0 1rem 0 0;
+    }
+    .glance_card .car_card_type {
+        font-size: 1.5rem !important;
+    }
+    .glance_card {
+        padding: 2rem;
+    }
+    .car_cards {
+        /*width: 11.5rem;*/
+        min-width: 150px;
+        max-width: 230px;
+        font-size: 1em;
+        margin: 1rem auto;
+        min-height: 40rem;
+    }
+
+    .car_card_type {
+        font-size: 1.5rem;
+    }
+
+    .car_cards p {
+        font-size: 13px;
+        margin-bottom: 1rem;
+    }
+
+    .car_card_img {
+        height: 130px;
+    }
+
+    .car_card_img img {
+        height: 130px;
+        width: auto;
+    }
+
+    .car_card_txt {
+        padding-left: 5px;
+        margin-bottom: 0px;
+    }
+    .title {
+        width: 60px;
     }
 
     #not-opened-yet {
@@ -133,4 +306,10 @@
         padding-left: 8%;
     }
 
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .a-link-small {
+        width: 100%;
+    }
 }

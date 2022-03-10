@@ -5,45 +5,117 @@
     <!----------------- header ---------------->
     <!----------------------------------------->
 
-
-
-
-
-
-
-
-    <div th:fragment="headerFragment" class="header navbar-fixed-top small menu-scroll" style="overflow: hidden;">
-        <nav class="header navbar-fixed-top small menu-scroll">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-                        <a class="navbar-brand" href="/index">
-                            <img th:src="@{/img/savecar-logo.png}" width="200" height="50" alt="savecar-logo"></a>
-                        </a>
+<!--    <div th:fragment="headerFragment" class="header navbar-fixed-top small menu-scroll" style="overflow: hidden;">-->
+<!--        <nav th:fragment="headerFragment" class="navbar">-->
+            <section th:fragment="headerFragment" class="nav-bar">
+                <div class="container">
+                    <div class="brand">
+                        <a href="/index"><img th:src="@{/img/savecar-logo.png}" width="160" height="50" alt="savecar-logo"></a>
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <div id="navigation" role="navigation" class="primary-navigation">
-                            <ul>
-                                <li class="active"><a href="/index" title="Home">Home</a></li>
-                                <li class="active"><a href="/rent/month/new" title="월렌트+12개월렌트">월렌트+12/24개월렌트</a></li>
-                                <li class="active"><a href="/rent/long_term" title="누구나장기렌트">누구나장기렌트</a></li>
-                                <li class="active">
-                                    <a onclick="moveToCampingCalendar()" style="cursor: pointer;">캠핑카렌트</a>
-                                    <ul>
-                                        <li><a href="/camping/europe">Europe</a></li>
-                                        <li><a href="/camping/limousine">Limousine</a></li>
-                                        <li><a href="/camping/travel">Travel</a></li>
-                                        <li><a onclick="moveToCampingCalendar()" style="cursor: pointer;">캠핑카 예약현황</a></li>
-                                    </ul>
-                                </li>
-                                <li class="active"><a target='_blank' href="https://cafe.naver.com/savecarz/5" title="캠핑카 장기 & 쉐어링">캠핑카 장기 & 쉐어링</a></li>
-                                <li class="active"><a href="/price/month" title="한눈에 보는 세이브카 가격표">한눈에 보는 세이브카 가격표</a></li>
-                            </ul>
+                    <nav>
+                        <div class="nav-mobile">
+                            <div class="mobile_navbar_btns">
+                                <a href="tel:1661-3331" >
+                                    <button class="mobile_navbar_phone_btn" >
+                                        <i class="fas fa-phone-alt" style="font-size: 20px;"></i>
+                                    </button>
+                                </a>
+                                <a href="sms:010-5277-4113">
+                                    <button class="mobile_navbar_message_btn" >
+                                        <i class="far fa-envelope" style="font-size: 20px;"></i>
+                                    </button>
+                                </a>
+                            </div>
+                            <a id="nav-toggle"><span></span></a>
                         </div>
-                    </div>
+                        <ul class="nav-list">
+                            <li>
+                                <a href="/index" title="Home">Home</a>
+                            </li>
+                            <li>
+                                <a href="/rent/month/new" title="월렌트+12개월렌트">월렌트+12/24개월렌트</a>
+                            </li>
+                            <li>
+                                <a href="/rent/long_term" title="누구나장기렌트">누구나장기렌트</a>
+                            </li>
+                            <li class="hover_menu">
+                                <span class="submenu-button" onclick="openSubMenu()" id="subMenuBtn"></span>
+                                <a href="/camping/main" style="cursor: pointer;">캠핑카렌트</a>
+                                <ul class="nav-dropdown">
+                                    <li>
+                                        <a href="/camping/main" style="cursor: pointer;">캠핑카 홈</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="moveToCampingReservation('europe')" style="cursor: pointer;">Europe</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="moveToCampingReservation('limousine')" style="cursor: pointer;">Limousine</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="moveToCampingReservation('travel')" style="cursor: pointer;">Travel</a>
+                                    </li>
+<!--                                    <li>-->
+<!--                                        <a onclick="moveToCampingCalendar()" style="cursor: pointer;">캠핑카 예약현황</a>-->
+<!--                                    </li>-->
+                                </ul>
+                            </li>
+                            <li>
+                                <a target='_blank' href="https://cafe.naver.com/savecarz/5" title="캠핑카 장기 & 쉐어링">캠핑카 장기 & 쉐어링</a>
+                            </li>
+                            <li>
+                                <a href="/price/month/경형" title="한눈에 보는 세이브카 가격표">한눈에 보는 세이브카 가격표</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            </div>
-        </nav>
-    </div>
+            </section>
+
+
+            <!--        <nav class="header navbar-fixed-top menu-scroll">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">-->
+<!--                        <a class="navbar-brand" href="/index">-->
+<!--                            <img th:src="@{/img/savecar-logo.png}" width="200" height="50" alt="savecar-logo"></a>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mobile_navbar" >-->
+<!--                        <div id="navigation" role="navigation" class="primary-navigation">-->
+<!--                            <ul>-->
+<!--                                <li class="active"><a href="/index" title="Home">Home</a></li>-->
+<!--                                <li class="active"><a href="/rent/month/new" title="월렌트+12개월렌트">월렌트+12/24개월렌트</a></li>-->
+<!--                                <li class="active"><a href="/rent/long_term" title="누구나장기렌트">누구나장기렌트</a></li>-->
+<!--                                <li class="active">-->
+<!--                                    <a onclick="moveToCampingCalendar()" style="cursor: pointer;">캠핑카렌트</a>-->
+<!--                                    <ul>-->
+<!--                                        <li><a onclick="moveToCampingReservation('europe')" style="cursor: pointer;">Europe</a></li>-->
+<!--                                        <li><a onclick="moveToCampingReservation('limousine')" style="cursor: pointer;">Limousine</a></li>-->
+<!--                                        <li><a onclick="moveToCampingReservation('travel')" style="cursor: pointer;">Travel</a></li>-->
+<!--                                        <li><a onclick="moveToCampingCalendar()" style="cursor: pointer;">캠핑카 예약현황</a></li>-->
+<!--                                    </ul>-->
+<!--                                </li>-->
+<!--                                <li class="active"><a target='_blank' href="https://cafe.naver.com/savecarz/5" title="캠핑카 장기 & 쉐어링">캠핑카 장기 & 쉐어링</a></li>-->
+<!--                                <li class="active"><a href="/price/month" title="한눈에 보는 세이브카 가격표">한눈에 보는 세이브카 가격표</a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="mobile_navbar_btns">-->
+<!--                            <a href="tel:1661-3331" >-->
+<!--                                <button class="mobile_navbar_phone_btn" >-->
+<!--                                    <i class="fas fa-phone-alt" style="font-size: 20px;"></i>-->
+<!--&lt;!&ndash;                                    <img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 20px; height: 20px; display: inline-block">&ndash;&gt;-->
+<!--                                </button>-->
+<!--                            </a>-->
+<!--                            <a href="sms:010-5277-4113">-->
+<!--                                <button class="mobile_navbar_message_btn" >-->
+<!--                                    <i class="far fa-envelope" style="font-size: 20px;"></i>-->
+<!--&lt;!&ndash;                                    <img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 20px; height: 20px; display: inline-block">&ndash;&gt;-->
+<!--                                </button>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </nav>-->
+<!--    </div>-->
     <!-- end of Header-top -->
 </html>

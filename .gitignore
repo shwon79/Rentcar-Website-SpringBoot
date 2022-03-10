@@ -7,6 +7,7 @@ build/
 !**/src/test/**/build/
 ### DB 정보 숨기기 ###
 !**/src/main/resources/application.properties
+!**/src/main/resources/application.yml
 
 ### STS ###
 .apt_generated
@@ -39,3 +40,5 @@ out/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/application.yml
+/logs/

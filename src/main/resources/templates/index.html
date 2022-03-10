@@ -18,7 +18,7 @@
 
 <body data-spy="scroll" data-target=".navbar-collapse"  data-offset="50">
 
-<div layout:fragment="content" style="overflow: hidden;">
+<div layout:fragment="content">
 
     <!-- popup.html -->
     <th:block th:replace="fragments/popup::popupFragment" ></th:block>
@@ -99,7 +99,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <a onclick="moveToCampingCalendar()">
+                    <a href="/camping/main">
                         <div class="row main-card"  style="border: 2px solid #4e4c4c; border-radius: 10px; padding-top: 70px; padding-bottom: 60px; margin-left: 5px; background: #4e4c4c">
 
 
@@ -127,6 +127,11 @@
 
                         </div>
                     </a>
+<!--                    &lt;!&ndash; AtoZSEOTools Counter Code START &ndash;&gt;-->
+<!--                    <a href="https://ciroapp.com/free-tools/website-visitor-counter" target="_blank" title="Web Counter">-->
+<!--                        <img src="https://ciroapp.com/free-tools/website-visitor-counter/count/&style=style5&show=p&num=9&uid=iR"  title="Web Counter" alt="AtoZSEOTools Web Counter" />-->
+<!--                    </a>-->
+<!--                    &lt;!&ndash; AtoZSEOTools Counter Code END &ndash;&gt;-->
 
                 </div>
             </div>
@@ -138,8 +143,8 @@
     <!--home mobile Section -->
     <section id="home" class="home">
         <div class="container" style="padding: 0px;">
-            <div class="row">
-                <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12" style="margin-top: 115px;">
+            <div class="row" style="width: max-content; margin: 0 auto;">
+                <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12" style="margin-top: 50px;">
                     <div class="service-block-mobile text-center align-center">
 
                         <!-- service content -->
@@ -150,7 +155,7 @@
                 </div>
             </div>
 
-            <div class="row" style="margin-right: -5px; margin-left: -5px;">
+            <div class="row" style="margin-right: 0; margin-left: 0;">
                 <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
 
                 </div>
@@ -181,8 +186,8 @@
                                         <img th:src="@{/img/arrow1.png}" width="30" height="30"  style="border-radius: 50%">
                                     </div>
 
-                                    <a href="tel:1661-3331"><button class="fixed_phone_btn" ><img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>
-                                    <a href="sms:010-5277-4113"><button class="fixed_message_btn" ><img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>
+<!--                                    <a href="tel:1661-3331"><button class="fixed_phone_btn" ><img th:src="@{/img/callblack.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>-->
+<!--                                    <a href="sms:010-5277-4113"><button class="fixed_message_btn" ><img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>-->
 
                                 </div>
 
@@ -198,7 +203,7 @@
 
             <!-- -->
 
-            <div class="row" style="margin-right: -5px; margin-left: -5px;">
+            <div class="row" style="margin-right: 0; margin-left: 0;">
                 <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
 
                 </div>
@@ -243,12 +248,12 @@
             </div>
 
             <!-- -->
-            <div class="row" style="margin-right: -5px; margin-left: -5px;">
+            <div class="row" style="margin-right: 0; margin-left: 0;">
                 <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
 
                 </div>
                 <div class="col-sm-10 col-lg-10 col-xs-10 col-md-10">
-                    <a onclick="moveToCampingCalendar()">
+                    <a href="/camping/main">
                         <div class="row" style="margin: 0 -20px; border: 2px solid #4e4c4c; border-radius: 20px; background: #4e4c4c">
 
 
@@ -571,71 +576,33 @@
         <div class="container space-medium">
             <div class="row">
                 <div class="head_title sections text-center">
-                    <h1><a onclick="moveToCampingCalendar()">캠핑카 렌트</a></h1>
-                    <div class="subtitle">
-<!--                        <h5>CAMPERSAVE Motorhome</h5>-->
-                    </div>
+                    <h1><a href="/camping/main">캠핑카 렌트</a></h1>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="campingCar, i : ${imagesMainList}">
                     <div class="service-block text-center">
                         <!-- service block -->
                         <div class="service-content">
                             <!-- service content -->
-                            <h3>Europe VIP CAMPER</h3>
+                            <h3>
+                                <span th:text="${campingCar.carName.carName.toUpperCase()}"></span>
+                                <span> VIP CAMPER</span>
+                            </h3>
                         </div>
                         <br>
                         <!-- service content -->
                         <div class="service-img ">
                             <!-- service img -->
-                            <a href="/camping/europe" class="imghover"><img th:src="@{/img/IMG_0364.JPG}" width="360" height="360"> </a>
+                            <a th:onclick="moveToCampingReservation([[${campingCar.carName.carName}]])" style="cursor: pointer;" class="imghover">
+                                <img th:if="${campingCar.imageId != -1}" th:src="${campingCar.url}" width="360" height="360">
+                                <img th:if="${campingCar.imageId == -1}" th:src="@{/img/popup_campingcar.png}" width="360" height="360">
+                            </a>
                         </div>
                         <!-- service img -->
                     </div>
                     <!-- /.service block -->
                     <div class="form-group text-center">
-                        <a class="btn1 btn1-default" href="/camping/europe">상담 신청 </a>
-                    </div>
-                    <br/>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="service-block text-center">
-                        <!-- service block -->
-                        <div class="service-content">
-                            <!-- service content -->
-                            <h3>Limousine VIP CAMPER</h3>
-                        </div>
-                        <br>
-                        <!-- service content -->
-                        <div class="service-img ">
-                            <!-- service img -->
-                            <a href="/camping/limousine" class="imghover"><img th:src="@{/img/limo2.jpg}" width="360" height="360"> </a>
-                        </div>
-                        <!-- service img -->
-                    </div>
-                    <!-- /.service block -->
-                    <div class="form-group text-center">
-                        <a class="btn1 btn1-default" href="/camping/limousine">상담 신청 </a>
-                    </div>
-                    <br/>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="service-block text-center">
-                        <!-- service block -->
-                        <div class="service-content">
-                            <!-- service content -->
-                            <h3>Travel VIP CAMPER</h3>
-                        </div>
-                        <br>
-                        <!-- service content -->
-                        <div class="service-img ">
-                            <!-- service img -->
-                            <a href="/camping/travel" class="imghover"><img th:src="@{/img/travel1.jpg}" width="360" height="360"> </a>
-                        </div>
-                        <!-- service img -->
-                    </div>
-                    <!-- /.service block -->
-                    <div class="form-group text-center">
-                        <a class="btn1 btn1-default" href="/camping/travel" style="background-color: #372d2b;">장기 대여중 </a>
+                        <a th:if="${campingCar.carName.carName != 'travel'}" class="btn1 btn1-default" th:onclick="moveToCampingReservation([[${campingCar.carName.carName}]])" style="cursor: pointer;">상담 신청 </a>
+                        <a th:if="${campingCar.carName.carName == 'travel'}" class="btn1 btn1-default" th:onclick="moveToCampingReservation([[${campingCar.carName.carName}]])" style="background-color: #372d2b; cursor: pointer;">장기 대여중 </a>
                     </div>
                     <br/>
                 </div>

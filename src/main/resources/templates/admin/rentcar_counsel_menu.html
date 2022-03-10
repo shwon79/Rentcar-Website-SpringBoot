@@ -1,0 +1,150 @@
+<!-- 관리자 상담 신청_메뉴 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <title>SAVECAR - 관리자 페이지</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Style -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link th:href="@{/css/admin.css}" rel="stylesheet">
+  <script th:src="@{/js/jquery.min.js}"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script th:src="@{/js/admin.js}" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script>
+    $(window).on('load', function () {
+      let counselMenu = document.getElementById('counselMenu');
+      counselMenu.classList.add('activeAdminMenu');
+    });
+  </script>
+
+</head>
+<body>
+<div class="wrapper content_wrapper">
+
+  <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+  <div class="content list_container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+
+        <button type="button" id="sidebarCollapse" class="navbar-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+
+    <div class="inner_content">
+      <h2 class="page_title" style="text-align: center;">상담 신청</h2>
+      <div class="reserve_list" id="reserve_list_title" style="justify-content: space-between;">
+        <p style="flex: 1;">구분</p>
+        <p class="name">성명</p>
+        <p class="created_date">상담신청일</p>
+        <p class="rent_type">유형</p>
+        <p class="product_name">상품유형</p>
+        <p class="car_name">차명</p>
+        <p class="car_name">차번호</p>
+        <p class="mileage">주행거리</p>
+        <p class="total">예상대여일</p>
+        <p class="total">금액</p>
+        <p class="phone">연락처</p>
+      </div>
+      <div class="reserve_list" id="reserve_list_title_mobile">
+        <p style="flex: 1; text-align: center; margin-bottom: 0;">구분</p>
+        <p style="flex: 10; text-align: center; margin-bottom: 0;">예약 신청 내용</p>
+      </div>
+
+      <div class="reserve_list_wrapper" th:each="reservation, i : ${reservationList}">
+        <div class="reserve_checkbox">
+<!--          <p th:text="${reservation.id}" style="margin-bottom: 4px;"></p>-->
+<!--          <input th:if="${reservation.reservationStatus == '0'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">-->
+        </div>
+        <div class="reserve_list">
+          <p class="name grid_oneline">
+            <span class="reserve_list_mobile_title">성명: </span>
+            <span th:text="${reservation.name}"></span>
+          </p>
+          <p class="created_date grid_oneline">
+            <span class="reserve_list_mobile_title">상담신청일: </span>
+            <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></span>
+          </p>
+          <p class="rent_type grid_oneline">
+            <span class="reserve_list_mobile_title">유형: </span>
+            <span th:text="${reservation.title}"></span>
+          </p>
+          <p class="product_name">
+            <span class="reserve_list_mobile_title">상품유형: </span>
+            <span th:text="${reservation.product}"></span>
+          </p>
+          <p class="car_name">
+            <span class="reserve_list_mobile_title">차명: </span>
+            <span th:text="${reservation.car_name}"></span>
+          </p>
+          <p class="car_name">
+            <span class="reserve_list_mobile_title">차번호: </span>
+            <span th:text="${reservation.car_num}"></span>
+          </p>
+          <p class="mileage">
+            <span class="reserve_list_mobile_title">주행거리: </span>
+            <span th:text="${reservation.mileage}"></span>
+          </p>
+          <p class="total">
+            <span class="reserve_list_mobile_title">예상대여일: </span>
+            <span th:text="${reservation.resDate}"></span>
+          </p>
+          <p class="total">
+            <span class="reserve_list_mobile_title">금액: </span>
+            <span th:text="${reservation.price}"></span>
+          </p>
+          <p class="phone">
+            <span class="reserve_list_mobile_title">연락처: </span>
+            <span th:text="${reservation.phoneNo}"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 게시판 하단의 페이징 버튼 -->
+    <div class="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" th:if="${currentPage} >= 5">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${0},size=${pageSize})}">
+            <i class="fa-solid fa-angles-left"></i>
+          </a>
+        </li>
+        <li class="page-item" th:if="${currentPage} > 0">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${currentPage}-1,size=${pageSize})}">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
+        </li>
+        <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
+        </li>
+        <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${currentPage}+1,size=${pageSize})}">
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </li>
+        <li class="page-item" th:if="${currentPage} < (5 * (${totalPages} / 5))">
+          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${totalPages}-1,size=${pageSize})}">
+            <i class="fa-solid fa-angles-right"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+</body>
+
+</html>

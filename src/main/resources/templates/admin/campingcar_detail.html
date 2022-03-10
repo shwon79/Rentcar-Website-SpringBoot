@@ -1,4 +1,4 @@
-<!-- 관리자 상세페이지 -->
+<!-- 관리자 캠핑카 예약리스트_상세 -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -8,118 +8,208 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <!-- Style -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link th:href="@{/css/admin.css}" rel="stylesheet">
   <script th:src="@{/js/jquery.min.js}"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script th:src="@{/js/admin.js}" defer></script>
   <script>
-    $(window).load(function() {
+    $(window).on('load', function () {
       let campingcarMenu = document.getElementById('campingcarMenu');
       campingcarMenu.classList.add('activeAdminMenu');
+    });
+
+    $(window).on('load', function () {
+      let getRentDate = document.getElementById('getRentDate').innerText;
+      let rentDate = document.getElementById('rentDate');
+      let getReturnDate = document.getElementById('getReturnDate').innerText;
+      let returnDate = document.getElementById('returnDate');
+      let splitRentList = getRentDate.split('-');
+      let splitReturnList = getReturnDate.split('-');
+      let rentMonth, rentDay, returnMonth, returnDay;
+      if (splitRentList[1].length == 1) {
+        rentMonth = '0' + splitRentList[1];
+      } else if (splitRentList[1].length != 1) {
+        rentMonth = splitRentList[1];
+      };
+      if (splitRentList[2].length == 1) {
+        rentDay = '0' + splitRentList[2];
+      } else if (splitRentList[2].length != 1) {
+        rentDay = splitRentList[2];
+      };
+      if (splitReturnList[1].length == 1) {
+        returnMonth = '0' + splitReturnList[1];
+      } else if (splitReturnList[1].length != 1) {
+        returnMonth = splitReturnList[1];
+      };
+      if (splitReturnList[2].length == 1) {
+        returnDay = '0' + splitReturnList[2];
+      } else if (splitReturnList[2].length != 1) {
+        returnDay = splitReturnList[2];
+      };
+      rentDate.value = splitRentList[0] + '-' + rentMonth + '-' + rentDay;
+      returnDate.value = splitReturnList[0] + '-' + returnMonth + '-' + returnDay;
     });
   </script>
 
 </head>
 
 <body>
-<div class="page_wrapper">
-  <div id="logout_box"><a href="/admin/logout"><button id="logout">로그아웃</button></a></div>
-  <div class="content_wrapper">
+<div class="wrapper content_wrapper">
 
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+    <div class="content list_container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
 
-    <div class="detail_container" >
-      <div class="detail_list" id="go_back_wrapper">
-        <a href="/admin/campingcar/menu"><button id="go_back">🠔 뒤로가기</button></a>
-      </div>
-      <div class="detail_list" id="detail_set_reserve">
-        <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="setCampingReserve(id)"
-                th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">확정</button>
+          <button type="button" id="sidebarCollapse" class="navbar-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
 
-        <!--        <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+campingCarReservation.id}">-->
-<!--          <input th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray' : null" class="set_reserve" type="submit" value="확정"/>-->
-<!--        </form>-->
-      </div>
-      <div class="detail_list" id="detail_list_title">
-        <p>종류</p>
-        <p>값</p>
-      </div>
-      <div class="detail_list">
-        <p>차종</p>
-        <p th:text="${campingCarReservation.carType.toUpperCase()}"></p>
-      </div>
-      <div class="detail_list">
-        <p>생성일</p>
-        <p th:text="${#strings.arraySplit(campingCarReservation.createdDate, 'T')[0]}"></p>
-      </div>
-      <div class="detail_list">
-        <p>수정일</p>
-        <p th:text="${#strings.arraySplit(campingCarReservation.modifiedDate, 'T')[0]}"></p>
-      </div>
-      <div class="detail_list">
-        <p>시작일</p>
-        <p th:text="${campingCarReservation.rentDate}"></p>
-      </div>
-      <div class="detail_list">
-        <p>시작시간</p>
-        <p th:text="${campingCarReservation.rentTime}"></p>
-      </div>
-      <div class="detail_list">
-        <p>반납일</p>
-        <p th:text="${campingCarReservation.returnDate}"></p>
-      </div>
-      <div class="detail_list">
-        <p>반납시간</p>
-        <p th:text="${campingCarReservation.returnTime}"></p>
-      </div>
-      <div class="detail_list">
-        <p>일권</p>
-        <p th:text="${campingCarReservation.day}"></p>
-      </div>
-      <div class="detail_list">
-        <p>추가 시간</p>
-        <p th:if="${campingCarReservation.extraTime == 0}">X</p>
-        <p th:if="${campingCarReservation.extraTime == 1}">3시간</p>
-      </div>
-      <div class="detail_list">
-        <p>성명</p>
-        <p th:text="${campingCarReservation.name}"></p>
-      </div>
-      <div class="detail_list">
-        <p>연락처</p>
-        <p th:text="${campingCarReservation.phone}"></p>
-      </div>
-      <div class="detail_list">
-        <p>임금자명</p>
-        <p th:text="${campingCarReservation.depositor}"></p>
-      </div>
-      <div class="detail_list">
-        <p>보증금</p>
-        <p th:text="${#numbers.formatInteger(campingCarReservation.deposit,0, 'COMMA')}"></p>
-      </div>
-      <div class="detail_list">
-        <p>총결제금액</p>
-        <p th:text="${#numbers.formatInteger(campingCarReservation.total,0, 'COMMA')}"></p>
-      </div>
-      <div class="detail_list">
-        <p>선결제금액</p>
-        <p th:text="${#numbers.formatInteger(campingCarReservation.totalHalf,0, 'COMMA')}"></p>
-      </div>
-      <div class="detail_list">
-        <p>예약</p>
-        <p th:text="${campingCarReservation.reservation}"></p>
-      </div>
-      <div class="detail_list">
-        <p id="custom_demand">요구사항</p>
-        <p id="custom_demand_detail" th:text="${campingCarReservation.detail}"></p>
-      </div>
-<!--      <div class="detail_list" id="detail_set_delete">-->
-<!--        <form method="GET" onsubmit="return confirm('예약을 \'취소\'하시겠습니까?')" th:action="${'/reservation/cancel/'+campingCarReservation.id}">-->
-<!--          <input class="set_reserve" type="submit" value="예약취소"/>-->
-<!--        </form>-->
-<!--      </div>-->
+      <div class="inner_content">
+        <h2 class="page_title" style="text-align: center;">캠핑카 예약 상세 페이지</h2>
+        <div class="detail_container">
+          <div class="detail_list" id="go_back_wrapper">
+            <a href="/admin/campingcar/menu">
+              <button id="go_back">
+                <i class="fas fa-arrow-left"></i>  뒤로가기
+              </button>
+            </a>
+          </div>
+          <div class="detail_list" id="detail_set_reserve">
+            <button class="set_reserve" onclick="setCampingReserve('confirm')"
+                    th:style="${campingCarReservation.reservation} == 1? 'pointer-events:none; background: gray ' : null">
+              모렌전송
+            </button>
+            <button class="set_reserve" onclick="setCampingReserve('delete')"
+                    th:style="${campingCarReservation.reservation} == 0? 'pointer-events:none; background: gray ' : null">
+              모렌전송 회수
+            </button>
+            <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="setCampingReserve('edit')">
+              내용 수정
+            </button>
+          </div>
+          <div class="detail_list" id="detail_list_title">
+            <p>종류</p>
+            <p>값</p>
+          </div>
+          <div class="detail_list">
+            <p>차종</p>
+            <select name="" id="carType">
+              <option value="europe" th:selected="${campingCarReservation.carType} == 'europe' ? true : false">EUROPE</option>
+              <option value="limousine" th:selected="${campingCarReservation.carType} == 'limousine' ? true : false">LIMOUSINE</option>
+              <option value="travel" th:selected="${campingCarReservation.carType} == 'travel' ? true : false">TRAVEL</option>
+            </select>
+          </div>
+          <div class="detail_list">
+            <p>생성일</p>
+            <p th:text="${#strings.arraySplit(campingCarReservation.createdDate, 'T')[0]}"></p>
+          </div>
+          <div class="detail_list">
+            <p>수정일</p>
+            <p th:text="${#strings.arraySplit(campingCarReservation.modifiedDate, 'T')[0]}"></p>
+          </div>
+          <div class="detail_list">
+            <p>시작일</p>
+            <input type="date" id="rentDate" onchange="displayExtraCampingData();">
+            <p th:text="${campingCarReservation.rentDate}" style="display: none;" id="getRentDate"></p>
+          </div>
+          <div class="detail_list">
+            <p>시작시간</p>
+            <select id="rentTime" onchange="displayExtraCampingData();">
+              <option value="10시" th:selected="${campingCarReservation.rentTime} == '10시' ? true : false">10시</option>
+              <option value="11시" th:selected="${campingCarReservation.rentTime} == '11시' ? true : false">11시</option>
+              <option value="12시" th:selected="${campingCarReservation.rentTime} == '12시' ? true : false">12시</option>
+              <option value="13시" th:selected="${campingCarReservation.rentTime} == '13시' ? true : false">13시</option>
+              <option value="14시" th:selected="${campingCarReservation.rentTime} == '14시' ? true : false">14시</option>
+              <option value="15시" th:selected="${campingCarReservation.rentTime} == '15시' ? true : false">15시</option>
+              <option value="16시" th:selected="${campingCarReservation.rentTime} == '16시' ? true : false">16시</option>
+              <option value="17시" th:selected="${campingCarReservation.rentTime} == '17시' ? true : false">17시</option>
+              <option value="18시" th:selected="${campingCarReservation.rentTime} == '18시' ? true : false">18시</option>
+            </select>
+          </div>
+          <div class="detail_list">
+            <p>반납일</p>
+            <input type="date" id="returnDate" onchange="displayExtraCampingData();">
+            <p th:text="${campingCarReservation.returnDate}" style="display: none;" id="getReturnDate"></p>
+          </div>
+          <div class="detail_list">
+            <p>반납시간</p>
+            <select id="returnTime" onchange="displayExtraCampingData();">
+              <option value="10시" th:selected="${campingCarReservation.returnTime} == '10시' ? true : false">10시</option>
+              <option value="11시" th:selected="${campingCarReservation.returnTime} == '11시' ? true : false">11시</option>
+              <option value="12시" th:selected="${campingCarReservation.returnTime} == '12시' ? true : false">12시</option>
+              <option value="13시" th:selected="${campingCarReservation.returnTime} == '13시' ? true : false">13시</option>
+              <option value="14시" th:selected="${campingCarReservation.returnTime} == '14시' ? true : false">14시</option>
+              <option value="15시" th:selected="${campingCarReservation.returnTime} == '15시' ? true : false">15시</option>
+              <option value="16시" th:selected="${campingCarReservation.returnTime} == '16시' ? true : false">16시</option>
+              <option value="17시" th:selected="${campingCarReservation.returnTime} == '17시' ? true : false">17시</option>
+              <option value="18시" th:selected="${campingCarReservation.returnTime} == '18시' ? true : false">18시</option>
+            </select>
+          </div>
+          <div class="detail_list">
+            <p>일권</p>
+            <p id="day" th:text="${campingCarReservation.day}"></p>
 
-    </div>
+          </div>
+          <div class="detail_list">
+            <p>추가 시간</p>
+            <p id="extraTime" th:text="${campingCarReservation.extraTime} == 0 ? '추가 시간 없음' : '3시간'"></p>
+          </div>
+          <div class="detail_list">
+            <p>성명</p>
+            <textarea id="name" th:text="${campingCarReservation.name}"></textarea>
+          </div>
+          <div class="detail_list">
+            <p>연락처</p>
+            <textarea id="phone" th:text="${campingCarReservation.phone}"></textarea>
+          </div>
+          <div class="detail_list">
+            <p>임금자명</p>
+            <textarea id="depositor" th:text="${campingCarReservation.depositor}"></textarea>
+          </div>
+          <div class="detail_list">
+            <p>보증금</p>
+            <textarea id="deposit" th:text="${#numbers.formatInteger(campingCarReservation.deposit,0, 'COMMA')}"></textarea>
+          </div>
+          <div class="detail_list">
+            <p>총결제금액</p>
+            <textarea id="total" th:text="${#numbers.formatInteger(campingCarReservation.total,0, 'COMMA')}"></textarea>
+          </div>
+          <div class="detail_list">
+            <p>선결제금액</p>
+            <textarea id="totalHalf" th:text="${#numbers.formatInteger(campingCarReservation.totalHalf,0, 'COMMA')}"></textarea>
+          </div>
+          <div class="detail_list">
+            <p>예약</p>
+            <p id="campingReservation" th:text="${campingCarReservation.reservation} == 0 ? '예약 X' : '예약 O'"></p>
+          </div>
+          <div class="detail_list">
+            <p id="custom_demand">요구사항</p>
+            <textarea id="detail" th:text="${campingCarReservation.detail}" style="text-align: left;"></textarea>
+          </div>
+          <div class="detail_list" style="display: none;">
+            <p>약관 동의</p>
+            <p id="agree" th:text="${campingCarReservation.agree}"></p>
+          </div>
+          <div class="detail_list" style="display: none;">
+            <p>예약 아이디</p>
+            <p id="campingReservationId" th:text="${campingCarReservation.id}"></p>
+          </div>
+          <div class="detail_list" style="display: none;">
+            <p>오더 코드</p>
+            <p id="orderCode" th:text="${campingCarReservation.orderCode}"></p>
+          </div>
+        </div>
+      </div>
   </div>
+
 </div>
 
 </body>

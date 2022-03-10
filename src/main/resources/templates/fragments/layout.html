@@ -17,6 +17,15 @@
         <meta property="og:image:width" content="400" />
         <meta property="og:image:height" content="250" />
 
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHH44N6HP0"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-YHH44N6HP0');
+        </script>
     </head>
 
     <body>
@@ -27,6 +36,21 @@
 
         <!-- footer.html -->
         <footer th:replace="fragments/footer::footerFragment"></footer>
+
+
+        <div id="loading">
+            <div class="loading_spinner_box">
+                <div class="loading_spinner"></div>
+                <span>데이터를 가져오는 중입니다.</span>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            window.onbeforeunload = function () { $('#loading').show(); }  //현재 페이지에서 다른 페이지로 넘어갈 때 표시해주는 기능
+            $(window).load(function () {          //페이지가 로드 되면 로딩 화면을 없애주는 것
+                $('#loading').hide();
+            });
+        </script>
     </body>
 
     <script th:src="@{/js/vendor/jquery-1.11.2.min.js}"></script>

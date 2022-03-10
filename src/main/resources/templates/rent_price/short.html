@@ -1,4 +1,4 @@
-<!-- 렌트가격표(month.html) -->
+<!-- 렌트가격표(short.html) -->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -8,15 +8,14 @@
 <head>
     <title>SAVECAR - 렌트 가격표</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link th:href="@{/css/rent_price.css}" rel="stylesheet">
 
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable( {
-                responsive: true,
-            } );
-        } );
-
-
+        // $(document).ready(function() {
+        //     $('#example').DataTable( {
+        //         responsive: true,
+        //     } );
+        // } );
     </script>
 </head>
 
@@ -43,9 +42,21 @@
                   <div class="work_menu text-center">
                       <div class="separator"></div>
                       <div id="filters" class="toolbar mb2 mt2">
-                          <h2><a href="/price/month"><button class="btn-md fil-cat filter">월 렌트</button></a> /
-                              <a href="/price/long"><button class="btn-md fil-cat filter">12개월 렌트</button></a> /
-                              <a href="/price/short"><button class="btn-md fil-cat filter">단기 렌트</button></a></h2>
+                          <h2 class="price_menu">
+                              <div>
+                                  <a href="/price/month/경형"><button class="btn-md fil-cat filter">월 렌트</button></a>
+                                  <span> / </span>
+                              </div>
+                              <div>
+                                  <a href="/price/yearly/경형"><button class="btn-md fil-cat filter">12개월 렌트</button></a>
+                                  <span> / </span>
+                              </div>
+                              <div>
+                                  <a href="/price/twoYearly/경형"><button class="btn-md fil-cat filter">24개월 렌트</button></a>
+                                  <span> / </span>
+                              </div>
+                              <a href="/price/short"><button class="btn-md fil-cat filter">단기 렌트</button></a>
+                          </h2>
 <!--                              <a href="/price/camp"><button class="btn-md fil-cat filter">캠핑카</button></a></h2>-->
                       </div> 
                       <div class="separator"></div>
@@ -110,20 +121,20 @@
               <table id="example" class="table table-bordered table-responsive">
                   <thead>
                   <tr>
-                      <th>차종</th>
-                      <th>차명</th>
+                      <th scope="row">차종</th>
+                      <th scope="row">차명</th>
                       <th>600km</th>
                       <th>900km</th>
                       <th>1200km</th>
                       <th>자차</th>
                       <th>21세 추가</th>
-                      <th>KM당 추가요금</th>
+                      <th style="word-break: keep-all;">KM당 추가요금</th>
                   </tr>
                   </thead>
                   <tbody>
                       <tr th:each="shortRent : ${shortRentListNotForeign}">
-                          <td scope="col" th:text="${shortRent.category1}"></td>
-                          <td scope="col" th:text="${shortRent.name}"></td>
+                          <td scope="row" th:text="${shortRent.category1}"></td>
+                          <td scope="row" th:text="${shortRent.name}"></td>
                           <td scope="col" th:text="${shortRent.cost_for_three_days_600}"></td>
                           <td scope="col" th:text="${shortRent.cost_for_three_days_900}"></td>
                           <td scope="col" th:text="${shortRent.cost_for_three_days_1200}"></td>
@@ -143,20 +154,20 @@
               <table id="example1" class="table table-bordered table-responsive">
                   <thead>
                   <tr>
-                      <th>차종</th>
-                      <th>차명</th>
+                      <th scope="row" style="word-break: keep-all;">차종</th>
+                      <th scope="row">차명</th>
                       <th>600km</th>
                       <th>900km</th>
                       <th>1200km</th>
                       <th>자차</th>
                       <th>21세 추가</th>
-                      <th>KM당 추가요금</th>
+                      <th style="word-break: keep-all;">KM당 추가요금</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr th:each="shortRent : ${shortRentListForeign}">
-                      <td scope="col" th:text="${shortRent.category1}"></td>
-                      <td scope="col" th:text="${shortRent.name}"></td>
+                      <td scope="row" th:text="${shortRent.category1}"></td>
+                      <td scope="row" th:text="${shortRent.name}"></td>
                       <td scope="col" th:text="${shortRent.cost_for_three_days_600}"></td>
                       <td scope="col" th:text="${shortRent.cost_for_three_days_900}"></td>
                       <td scope="col" th:text="${shortRent.cost_for_three_days_1200}"></td>
@@ -177,20 +188,20 @@
               <table id="example2" class="table table-bordered table-responsive">
                   <thead>
                   <tr>
-                      <th>차종</th>
-                      <th>차명</th>
+                      <th scope="row">차종</th>
+                      <th scope="row">차명</th>
                       <th>200km</th>
                       <th>300km</th>
                       <th>400km</th>
                       <th>자차</th>
                       <th>21세 추가</th>
-                      <th>KM당 추가요금</th>
+                      <th style="word-break: keep-all;">KM당 추가요금</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr th:each="shortRent : ${shortRentList}">
-                      <td scope="col" th:text="${shortRent.category1}"></td>
-                      <td scope="col" th:text="${shortRent.name}"></td>
+                      <td scope="row" th:text="${shortRent.category1}"></td>
+                      <td scope="row" th:text="${shortRent.name}"></td>
                       <td scope="col" th:text="${shortRent.extra_cost_per_day_200}"></td>
                       <td scope="col" th:text="${shortRent.extra_cost_per_day_300}"></td>
                       <td scope="col" th:text="${shortRent.extra_cost_per_day_400}"></td>

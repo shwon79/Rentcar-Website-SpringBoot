@@ -1,11 +1,15 @@
 package kr.carz.savecar.dto;
 
 import kr.carz.savecar.domain.Reservation;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ReservationSaveDTO {
 
     private String name;
@@ -25,29 +29,6 @@ public class ReservationSaveDTO {
     private String region;
     private String resDate;
     private String carAge;
-
-    public ReservationSaveDTO(String name, String phoneNo, String detail, String product, String title,
-                              String category1, String category2, String car_name, String mileage,
-                              String deposit, String option, String price, String age_limit,String car_num,
-                              String region, String resDate, String carAge) {
-        this.name = name;
-        this.phoneNo = phoneNo;
-        this.detail = detail;
-        this.title = title;
-        this.product = product;
-        this.category1 = category1;
-        this.category2 = category2;
-        this.car_name = car_name;
-        this.mileage = mileage;
-        this.deposit = deposit;
-        this.option = option;
-        this.price = price;
-        this.age_limit = age_limit;
-        this.car_num = car_num;
-        this.region = region;
-        this.resDate = resDate;
-        this.carAge = carAge;
-    }
 
     public Reservation toEntity() {
         return Reservation.builder()

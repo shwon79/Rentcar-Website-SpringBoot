@@ -62,37 +62,36 @@ const runIt = () => {
         .then(res => res.json())
         .then(result => {
             obj = result;
-            // deposits = parseInt(obj['deposit']);
             priceList[1] = obj['onedays'];
-            priceList[2] = obj['twodays'];
-            priceList[3] = obj['threedays'];
-            priceList[4] = obj['fourdays'];
-            priceList[5] = obj['fivedays'];
-            priceList[6] = obj['sixdays'];
-            priceList[7] = obj['sevendays'];
-            priceList[8] = obj['eightdays'];
-            priceList[9] = obj['ninedays'];
-            priceList[10] = obj['tendays'];
-            priceList[11] = obj['elevendays'];
-            priceList[12] = obj['twelvedays'];
-            priceList[13] = obj['thirteendays'];
-            priceList[14] = obj['fourteendays'];
-            priceList[15] = obj['fifteendays'];
-            priceList[16] = obj['sixteendays'];
-            priceList[17] = obj['seventeendays'];
-            priceList[18] = obj['eighteendays'];
-            priceList[19] = obj['ninetinedays'];
-            priceList[20] = obj['twentydays'];
-            priceList[21] = obj['twentyonedays'];
-            priceList[22] = obj['twentytwodays'];
-            priceList[23] = obj['twentythreedays'];
-            priceList[24] = obj['twentyfourdays'];
-            priceList[25] = obj['twentyfivedays'];
-            priceList[26] = obj['twentysixdays'];
-            priceList[27] = obj['twentysevendays'];
-            priceList[28] = obj['twentyeightdays'];
-            priceList[29] = obj['twentyninedays'];
-            priceList[30] = obj['thirtydays'];
+            priceList[2] = parseFloat(obj['twodays']) * parseInt(obj['onedays']);
+            priceList[3] = parseFloat(obj['threedays']) * parseInt(obj['onedays']);
+            priceList[4] = parseFloat(obj['fourdays']) * parseInt(obj['onedays']);
+            priceList[5] = parseFloat(obj['fivedays']) * parseInt(obj['onedays']);
+            priceList[6] = parseFloat(obj['sixdays']) * parseInt(obj['onedays']);
+            priceList[7] = parseFloat(obj['sevendays']) * parseInt(obj['onedays']);
+            priceList[8] = parseFloat(obj['eightdays']) * parseInt(obj['onedays']);
+            priceList[9] = parseFloat(obj['ninedays']) * parseInt(obj['onedays']);
+            priceList[10] = parseFloat(obj['tendays']) * parseInt(obj['onedays']);
+            priceList[11] = parseFloat(obj['elevendays']) * parseInt(obj['onedays']);
+            priceList[12] = parseFloat(obj['twelvedays']) * parseInt(obj['onedays']);
+            priceList[13] = parseFloat(obj['thirteendays']) * parseInt(obj['onedays']);
+            priceList[14] = parseFloat(obj['fourteendays']) * parseInt(obj['onedays']);
+            priceList[15] = parseFloat(obj['fifteendays']) * parseInt(obj['onedays']);
+            priceList[16] = parseFloat(obj['sixteendays']) * parseInt(obj['onedays']);
+            priceList[17] = parseFloat(obj['seventeendays']) * parseInt(obj['onedays']);
+            priceList[18] = parseFloat(obj['eighteendays']) * parseInt(obj['onedays']);
+            priceList[19] = parseFloat(obj['ninetinedays']) * parseInt(obj['onedays']);
+            priceList[20] = parseFloat(obj['twentydays']) * parseInt(obj['onedays']);
+            priceList[21] = parseFloat(obj['twentyonedays']) * parseInt(obj['onedays']);
+            priceList[22] = parseFloat(obj['twentytwodays']) * parseInt(obj['onedays']);
+            priceList[23] = parseFloat(obj['twentythreedays']) * parseInt(obj['onedays']);
+            priceList[24] = parseFloat(obj['twentyfourdays']) * parseInt(obj['onedays']);
+            priceList[25] = parseFloat(obj['twentyfivedays']) * parseInt(obj['onedays']);
+            priceList[26] = parseFloat(obj['twentysixdays']) * parseInt(obj['onedays']);
+            priceList[27] = parseFloat(obj['twentysevendays']) * parseInt(obj['onedays']);
+            priceList[28] = parseFloat(obj['twentyeightdays']) * parseInt(obj['onedays']);
+            priceList[29] = parseFloat(obj['twentyninedays']) * parseInt(obj['onedays']);
+            priceList[30] = parseFloat(obj['thirtydays']) * parseInt(obj['onedays']);
         })
 }
 
@@ -160,15 +159,16 @@ function sendRentDate(id, year, wDay, getdateId) {
     fetch(`/camping/calendar/${carType}_reserve/time_list/${dateId}`)
         .then(res => res.json())
         .then(result => {
-            // let time;
             let options = document.getElementsByName('time_option');
             options.forEach(option => {
-                option.style.display = 'block';
+                option.style.pointerEvents = 'auto';
+                option.style.backgroundColor = 'white';
             })
 
             for (i=0; i < result.length; i++) {
                 if (result[i]=='1') {
-                    options[i].style.display = 'none';
+                    options[i].style.pointerEvents = 'none';
+                    options[i].style.backgroundColor = 'dimgray';
                 }
             }
         })
@@ -301,7 +301,6 @@ const makeOptions = (days) => {
             createdOpt.text = i +'일권';
             createdOpt.value = i;
         }
-
     targetSelect.appendChild(createdOpt);
     }
 }
@@ -330,7 +329,7 @@ function sendRentTime(id) {
     let availableDays = 0;
 
     //선택 불가능한 가까운 날짜 받아오기
-    fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}/100`)
+    fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}/29`)
         .then(res => res.json())
         .then(result => {
             // 현재 남아있는 options 없애기
@@ -454,6 +453,7 @@ const daysSelect = () => {
     fullReturnDate.innerText = calYear + '년 ' + calMonth + '월 ' + calDate + '일';
     resultSelectedEndDate.innerText = calMonth + '월 ' + calDate + '일';
     document.getElementById('calendar_rental_extra_time').style.display = 'block';
+    document.getElementById('selected_extra_time').innerText = '추가시간을 선택해주세요';
 
     //추가시간 가능 여부 받아오기
     fetch(`/camping/calendar/possible/${carType}/${dateId}/${reserveTime}/${select.value}`)
@@ -504,7 +504,11 @@ function displayCampingPrice(param) {
     let originPrice = parseInt(priceList[param]);
 
     if (selectedExtraTime.value == '3') {
-        extraTimePrice.innerText = '110,000 원';
+        if (carType == 'europe') {
+            extraTimePrice.innerText = '110,000 원';
+        } else if (carType == 'limousine' || carType == 'travel') {
+            extraTimePrice.innerText = '90,000 원';
+        }
     } else {
         extraTimePrice.innerText = '- 원';
     }
@@ -525,7 +529,11 @@ function displayCampingPrice(param) {
         rentFullPrice.innerText ='';
     } else {
         if (selectedExtraTime.value == '3') {
-            rentFullPrice.innerText = (originPrice + 110000).toLocaleString() + ' 원';
+            if (carType == 'europe') {
+                rentFullPrice.innerText = (originPrice + 110000).toLocaleString() + ' 원';
+            } else if (carType == 'limousine' || carType == 'travel') {
+                rentFullPrice.innerText = (originPrice + 90000).toLocaleString() + ' 원';
+            }
         } else {
             rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
         }
@@ -540,7 +548,7 @@ function extraTimeSelect() {
     let displayExtraTime = document.getElementById('selected_extra_time');
     let selectedExtraTime = document.getElementById('extra_time_select');
 
-    if (selectedExtraTime.value === 'cannotExtraTime') {
+    if (selectedExtraTime.value === '') {
         displayExtraTime.innerText = '추가 시간 X';
         resultSelectedEndTime.innerText = resultStartTime.innerText;
     } else if (selectedExtraTime.value === '0') {
@@ -554,6 +562,8 @@ function extraTimeSelect() {
         displayExtraTime.innerText = '추가 시간을 선택하세요.';
         resultSelectedEndTime.innerText = '';
     }
+
+    document.getElementById('calendar_rental_extra_time').style.display = 'none';
 
 
     runIt();
@@ -711,7 +721,7 @@ const postDate = () => {
     rentDateNum = document.getElementById('selected_date').innerText;
     rentTime = document.getElementById('selected_time').innerText;
     returnDateNum = document.getElementById('fullReturnDate').innerText;
-    returnTime = rentTime;
+    returnTime = '';
     useDay = document.getElementById('selected_period').innerText;
     let extraTime = document.getElementById('extra_time_select');
 
@@ -721,13 +731,15 @@ const postDate = () => {
     if (extraTime.value != '') {
         if (extraTime.value ==='0') {
             extraTime = 0;
+            returnTime = rentTime;
         } else if (extraTime.value ==='3') {
             extraTime = 1;
+            let calculateTime = parseInt(rentTime) + 3;
+            returnTime = calculateTime + '시';
         }
     }
 
-    if (rentDateNum!='' && rentTime!='' && returnDateNum!='' && returnTime!='' && extraTime.value!='') {
-
+    if (!rentDateNum.endsWith('주세요') && !rentTime.endsWith('주세요')&& returnDateNum!='' && returnTime!='' && extraTime.value!='') {
         alert('예약 창으로 넘어갑니다.')
         window.location.href = `/camping/calendar/${carType}_reserve/reservation/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${totalPrice}/${extraTime}`
 
@@ -766,17 +778,252 @@ const postDate = () => {
 //     }
 // }
 
-//지난 달로 못가게 화살표 없애기
-const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');
-const curMonth = new Date();
-let thisMonthOnCalendar = hiddenOnlythisMonth.dataset.index;
-if (curMonth.getMonth()+1 == thisMonthOnCalendar) {
-    hiddenOnlythisMonth.style.display = "none";
+// 대여기간, 성수기/비성수기 선택시 가격 보여주기
+let offObj, peakObj, resultPrice;
+let offList = [];
+let peakList = [];
+
+function displayPrice() {
+    let displayPriceDay = document.getElementById('displayPriceDay').value;
+    let displayPricePeak = document.getElementById('displayPricePeak').value;
+    let displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
+    let priceInfo = document.getElementById('priceInfo');
+
+    if (displayPriceDay != '' && displayPricePeak != '') {
+        if (displayPricePeak == '0') {
+            if (displayPriceExtraTime && displayPriceExtraTime.value == '1') {
+                priceInfo.innerText = (offList[displayPriceDay] + offList[0]).toLocaleString();
+            } else {
+                priceInfo.innerText = offList[displayPriceDay].toLocaleString();
+            }
+        } else if (displayPricePeak == '1') {
+            if (displayPriceExtraTime && displayPriceExtraTime.value == '1') {
+                priceInfo.innerText = (peakList[displayPriceDay] + offList[0]).toLocaleString();
+            } else {
+                priceInfo.innerText = peakList[displayPriceDay].toLocaleString();
+            }
+        }
+    } else {
+        priceInfo.innerText = '';
+    }
+};
+
+// 페이지 로딩 시 가장 싼 가격 보여주면서 모든 가격 받아오기
+function getPriceData(carType) {
+    let cheapestPrice = document.getElementById('cheapestPrice');
+    let displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
+
+    // 비성수기 가격
+    fetch(`/camping/calendar/` + carType + `/getprice/0`)
+        .then(res => res.json())
+        .then(result => {
+            offObj = result;
+            offList[0] = offObj['threeHours'];
+            offList[1] = offObj['onedays'];
+            offList[2] = parseFloat(offObj['twodays']) * parseInt(offObj['onedays']);
+            offList[3] = parseFloat(offObj['threedays']) * parseInt(offObj['onedays']);
+            offList[4] = parseFloat(offObj['fourdays']) * parseInt(offObj['onedays']);
+            offList[5] = parseFloat(offObj['fivedays']) * parseInt(offObj['onedays']);
+            offList[6] = parseFloat(offObj['sixdays']) * parseInt(offObj['onedays']);
+            offList[7] = parseFloat(offObj['sevendays']) * parseInt(offObj['onedays']);
+            offList[8] = parseFloat(offObj['eightdays']) * parseInt(offObj['onedays']);
+            offList[9] = parseFloat(offObj['ninedays']) * parseInt(offObj['onedays']);
+            offList[10] = parseFloat(offObj['tendays']) * parseInt(offObj['onedays']);
+            offList[11] = parseFloat(offObj['elevendays']) * parseInt(offObj['onedays']);
+            offList[12] = parseFloat(offObj['twelvedays']) * parseInt(offObj['onedays']);
+            offList[13] = parseFloat(offObj['thirteendays']) * parseInt(offObj['onedays']);
+            offList[14] = parseFloat(offObj['fourteendays']) * parseInt(offObj['onedays']);
+            offList[15] = parseFloat(offObj['fifteendays']) * parseInt(offObj['onedays']);
+            offList[16] = parseFloat(offObj['sixteendays']) * parseInt(offObj['onedays']);
+            offList[17] = parseFloat(offObj['seventeendays']) * parseInt(offObj['onedays']);
+            offList[18] = parseFloat(offObj['eighteendays']) * parseInt(offObj['onedays']);
+            offList[19] = parseFloat(offObj['ninetinedays']) * parseInt(offObj['onedays']);
+            offList[20] = parseFloat(offObj['twentydays']) * parseInt(offObj['onedays']);
+            offList[21] = parseFloat(offObj['twentyonedays']) * parseInt(offObj['onedays']);
+            offList[22] = parseFloat(offObj['twentytwodays']) * parseInt(offObj['onedays']);
+            offList[23] = parseFloat(offObj['twentythreedays']) * parseInt(offObj['onedays']);
+            offList[24] = parseFloat(offObj['twentyfourdays']) * parseInt(offObj['onedays']);
+            offList[25] = parseFloat(offObj['twentyfivedays']) * parseInt(offObj['onedays']);
+            offList[26] = parseFloat(offObj['twentysixdays']) * parseInt(offObj['onedays']);
+            offList[27] = parseFloat(offObj['twentysevendays']) * parseInt(offObj['onedays']);
+            offList[28] = parseFloat(offObj['twentyeightdays']) * parseInt(offObj['onedays']);
+            offList[29] = parseFloat(offObj['twentyninedays']) * parseInt(offObj['onedays']);
+            offList[30] = parseFloat(offObj['thirtydays']) * parseInt(offObj['onedays']);
+
+            cheapestPrice.innerText = parseInt(offList[1]).toLocaleString();
+            if (displayPriceExtraTime) {
+                makeExtraTimeOptions(carType, offList[0]);
+            };
+        })
+
+    // 성수기 가격
+    fetch(`/camping/calendar/` + carType + `/getprice/1`)
+        .then(res => res.json())
+        .then(result => {
+            peakObj = result;
+            peakList[0] = peakObj['threeHours'];
+            peakList[1] = peakObj['onedays'];
+            peakList[2] = parseFloat(peakObj['twodays']) * parseInt(peakObj['onedays']);
+            peakList[3] = parseFloat(peakObj['threedays']) * parseInt(peakObj['onedays']);
+            peakList[4] = parseFloat(peakObj['fourdays']) * parseInt(peakObj['onedays']);
+            peakList[5] = parseFloat(peakObj['fivedays']) * parseInt(peakObj['onedays']);
+            peakList[6] = parseFloat(peakObj['sixdays']) * parseInt(peakObj['onedays']);
+            peakList[7] = parseFloat(peakObj['sevendays']) * parseInt(peakObj['onedays']);
+            peakList[8] = parseFloat(peakObj['eightdays']) * parseInt(peakObj['onedays']);
+            peakList[9] = parseFloat(peakObj['ninedays']) * parseInt(peakObj['onedays']);
+            peakList[10] = parseFloat(peakObj['tendays']) * parseInt(peakObj['onedays']);
+            peakList[11] = parseFloat(peakObj['elevendays']) * parseInt(peakObj['onedays']);
+            peakList[12] = parseFloat(peakObj['twelvedays']) * parseInt(peakObj['onedays']);
+            peakList[13] = parseFloat(peakObj['thirteendays']) * parseInt(peakObj['onedays']);
+            peakList[14] = parseFloat(peakObj['fourteendays']) * parseInt(peakObj['onedays']);
+            peakList[15] = parseFloat(peakObj['fifteendays']) * parseInt(peakObj['onedays']);
+            peakList[16] = parseFloat(peakObj['sixteendays']) * parseInt(peakObj['onedays']);
+            peakList[17] = parseFloat(peakObj['seventeendays']) * parseInt(peakObj['onedays']);
+            peakList[18] = parseFloat(peakObj['eighteendays']) * parseInt(peakObj['onedays']);
+            peakList[19] = parseFloat(peakObj['ninetinedays']) * parseInt(peakObj['onedays']);
+            peakList[20] = parseFloat(peakObj['twentydays']) * parseInt(peakObj['onedays']);
+            peakList[21] = parseFloat(peakObj['twentyonedays']) * parseInt(peakObj['onedays']);
+            peakList[22] = parseFloat(peakObj['twentytwodays']) * parseInt(peakObj['onedays']);
+            peakList[23] = parseFloat(peakObj['twentythreedays']) * parseInt(peakObj['onedays']);
+            peakList[24] = parseFloat(peakObj['twentyfourdays']) * parseInt(peakObj['onedays']);
+            peakList[25] = parseFloat(peakObj['twentyfivedays']) * parseInt(peakObj['onedays']);
+            peakList[26] = parseFloat(peakObj['twentysixdays']) * parseInt(peakObj['onedays']);
+            peakList[27] = parseFloat(peakObj['twentysevendays']) * parseInt(peakObj['onedays']);
+            peakList[28] = parseFloat(peakObj['twentyeightdays']) * parseInt(peakObj['onedays']);
+            peakList[29] = parseFloat(peakObj['twentyninedays']) * parseInt(peakObj['onedays']);
+            peakList[30] = parseFloat(peakObj['thirtydays']) * parseInt(peakObj['onedays']);
+        })
+};
+
+// 추가요금 옵션 만들기
+function makeExtraTimeOptions(carType, price) {
+    const displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
+
+    let option1 = document.createElement('option');
+    option1.value = '1';
+    option1.text = '3시간권 (+' + price.toLocaleString() + '원)';
+
+    displayPriceExtraTime.appendChild(option1);
 }
 
+// //지난 달로 못가게 화살표 없애기
+// const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');
+// const curMonth = new Date();
+// let thisMonthOnCalendar = hiddenOnlythisMonth.dataset.index;
+// if (curMonth.getMonth()+1 == thisMonthOnCalendar) {
+//     hiddenOnlythisMonth.style.display = "none";
+// }
+//
+//
+// // 6월 달력까지만 보이게
+// const hiddenFromJuly = document.getElementById('hiddenFromJuly');
+// if (hiddenFromJuly.dataset.index == '6') {
+//     hiddenFromJuly.style.display = 'none';
+// }
 
-// 9월 달력까지만 보이게
-const hiddenFromSep = document.getElementById('hiddenFromSep');
-if (hiddenFromSep.dataset.index == '8') {
-    hiddenFromSep.style.display = 'none';
+// 리뷰쓰기 버튼 누르면 리뷰 폼 보이기
+function displayReviewBox() {
+    document.getElementById('openReviewBtn').classList.toggle('active');
+    document.getElementById('writeReviewBox').classList.toggle('active');
+}
+
+// 리뷰 등록하기 버튼
+function submitReview() {
+    let reviewName = document.getElementById('reviewName').value;
+    let reviewPassword = document.getElementById('reviewPassword').value;
+    let reviewCarType = document.getElementById('reviewCarType').value;
+    let reviewRentStartDate = document.getElementById('reviewRentStartDate').value;
+    let reviewRentEndDate = document.getElementById('reviewRentEndDate').value;
+    let reviewText = document.getElementById('reviewText').value;
+    let reviewImage = document.getElementById('reviewImage').files;
+    let reviewVideo = document.getElementById('reviewVideo').files;
+
+    let formDataWrapper = new FormData();
+
+    if (reviewVideo.length > 1) {
+        // 동영상 최대 갯수 1개
+        alert('동영상 첨부는 최대 1개까지 가능합니다.');
+    } else if (reviewImage.length > 10) {
+        // 사진 최대 갯수 10개
+        alert('이미지 첨부는 최대 10장까지 가능합니다.');
+    } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
+        alert('필수 입력 내용을 빠짐없이 작성해주세요.');
+    } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
+        formDataWrapper.append('carName', reviewCarType);
+        formDataWrapper.append('text', reviewText);
+        formDataWrapper.append('nickName', reviewName);
+        formDataWrapper.append('startDate', reviewRentStartDate);
+        formDataWrapper.append('endDate', reviewRentEndDate);
+        for (let i = 0; i < reviewImage.length; i++) {
+            formDataWrapper.append('file', reviewImage[i]);
+        }
+        formDataWrapper.append('video', reviewVideo[0]);
+        formDataWrapper.append('password', reviewPassword);
+        if (confirm('리뷰를 등록 하시겠습니까?')) {
+            postReview(formDataWrapper);
+        };
+    };
+
+    function postReview(data) {
+        $.ajax({
+            enctype: 'multipart/form-data',
+            cache: false,
+            type: 'POST',
+            url: '/camping/calendar/review',
+            processData:false,
+            contentType: false,
+            data: data
+        }).done(function () {
+            alert('리뷰가 등록되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    };
+}
+
+// 데스크탑에서 리뷰 클릭하면 크게 보여지도록
+let oneReview = document.getElementsByClassName('one_review');
+oneReview && [...oneReview].forEach((review) => {
+    review.addEventListener('click', event => {
+        if (!event.target.classList.contains('video_part') && !event.target.classList.contains('video_real')) {
+            const reviewImageOpen = [...document.getElementsByClassName('review_image_open')];
+            const oneReviewClose = [...document.getElementsByClassName('one_review_close')];
+
+            let targetImageBox = reviewImageOpen.find(box => box.dataset.title == event.currentTarget.dataset.id);
+            targetImageBox && targetImageBox.classList.toggle('active');
+
+            let targetReview = oneReviewClose.find(review => review.dataset.title == event.currentTarget.dataset.id);
+            targetReview && targetReview.classList.toggle('opened');
+        }
+        changeBtnText(review.dataset.id, false);
+    });
+});
+
+// 자세히 보기 버튼
+function changeBtnText(reviewId, boolean) {
+    reviewId = reviewId.toString();
+    const targetReview = [...document.getElementsByClassName('one_review_close')].find((review) => review.dataset.title === reviewId);
+    const targetOpenBtn = [...document.getElementsByClassName('see_more_btn_open')].find((btn) => btn.dataset.id === reviewId);
+    const targetCloseBtn = [...document.getElementsByClassName('see_more_btn_close')].find((btn) => btn.dataset.id === reviewId);
+
+    if (boolean) {
+        if (targetReview.classList.contains('opened')) {
+            targetOpenBtn.style.display = 'block';
+            targetCloseBtn.style.display = 'none';
+        } else {
+            targetOpenBtn.style.display = 'none';
+            targetCloseBtn.style.display = 'block';
+        }
+    } else {
+        if (targetReview.classList.contains('opened')) {
+            targetOpenBtn.style.display = 'none';
+            targetCloseBtn.style.display = 'block';
+        } else {
+            targetOpenBtn.style.display = 'block';
+            targetCloseBtn.style.display = 'none';
+        }
+    }
+
+
 }

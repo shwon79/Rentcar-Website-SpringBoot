@@ -16,15 +16,13 @@
     <script th:src="@{/js/reservation.js}" defer></script>
     <script>
         $(window).load(function() {
-            let idList = document.getElementsByClassName('displayOnlyActive');
-            for (i=0; i < idList.length; i++) {
-                if (idList[i].dataset.id == 'calendar') {
-                    let activeMenu = idList[i];
-                    activeMenu.classList.add('activeCampingMenu');
+            let ulList = document.getElementsByClassName('header_camp_li');
+            let carType = document.getElementById('carType').innerText.toLowerCase();
+            for (i=0; i < ulList.length; i++) {
+                if (ulList[i].dataset.id == carType) {
+                    ulList[i].classList.add('active');
                 }
             };
-            const subMenu = document.getElementById('displayNoneOnCalendarMenu');
-            subMenu.style.display = 'none';
         });
     </script>
 </head>
@@ -146,12 +144,12 @@
                                 <div class="price" id="rentPrice"></div>
                             </div>
                             <div class="price_row">
-                                <div class="name">추가시간 요금</div>
-                                <div class="price" id="extraTimePrice"></div>
-                            </div>
-                            <div class="price_row">
                                 <div class="name">VAT</div>
                                 <div class="price" id="rentVAT"></div>
+                            </div>
+                            <div class="price_row" style="margin-top: 3em;">
+                                <div class="name">추가시간 요금</div>
+                                <div class="price" id="extraTimePrice"></div>
                             </div>
                             <hr style="background-color: transparent; border-top: 3px dotted white;">
                             <div class="price_row">

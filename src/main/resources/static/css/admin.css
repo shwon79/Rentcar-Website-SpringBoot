@@ -1,11 +1,291 @@
+/* Admin Menu Start */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    perspective: 1500px;
+    height: auto;
+    min-height: 100vh;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #5495b1;
+    color: #fff;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+}
+#sidebar.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #5495b1;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+#sidebar ul li a:hover {
+    color: #5495b1;
+    background: #fff;
+    text-decoration: none;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #5495b1;
+}
+#campingcarSubmenu ul, #priceSubMenu ul {
+    padding: 0;
+}
+
+#campingcarSubmenu li, #priceSubMenu li {
+    list-style: none;
+}
+#campingcarSubmenu li a, #priceSubMenu li a {
+    background-color: #84bad1;
+}
+#campingcarSubmenu li a.activeAdminMenu, #priceSubMenu li a.activeAdminMenu {
+    background-color: #fff;
+}
+#campingcarSubmenu, #priceSubMenu {
+    display: none;
+}
+#campingcarSubmenu.camping-open, #priceSubMenu.price-open {
+    display: block;
+}
+#camping-submenu-btn {
+    position: absolute;
+    z-index: 99;
+    top: 146px;
+    display: block;
+    height: 46px;
+    width: 250px;
+    cursor: pointer;
+}
+#price-submenu-btn {
+    position: absolute;
+    z-index: 99;
+    top: 190px;
+    display: block;
+    height: 46px;
+    width: 250px;
+    cursor: pointer;
+}
+#camping-submenu-btn.active-span:before, #price-submenu-btn.active-span:before {
+    width: 0;
+    height: 0;
+}
+#camping-submenu-btn:before {
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    display: block;
+    width: 2px;
+    height: 12px;
+    background: white;
+    content: '';
+}
+#price-submenu-btn:before {
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    display: block;
+    width: 2px;
+    height: 12px;
+    background: white;
+    content: '';
+}
+#camping-submenu-btn:after {
+    position: absolute;
+    top: 20px;
+    right: 17px;
+    width: 12px;
+    height: 2px;
+    display: block;
+    background: white;
+    content: '';
+}
+#price-submenu-btn:after {
+    position: absolute;
+    top: 20px;
+    right: 17px;
+    width: 12px;
+    height: 2px;
+    display: block;
+    background: white;
+    content: '';
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #5495b1;
+    text-decoration: none;
+    color: white;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #7386D5;
+}
+
+a.article, a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    background: #f5f5f5;
+    cursor: pointer;
+    border: 3px solid #5495b1;
+    padding: 0 5px;
+}
+
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: #5495b1;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+    transition-delay: 0.2s;
+}
+
+#sidebarCollapse span:first-of-type {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+
+#sidebarCollapse span:nth-of-type(2) {
+    opacity: 0;
+}
+
+#sidebarCollapse span:last-of-type {
+    transform: rotate(-45deg) translate(1px, -1px);
+}
+
+#sidebarCollapse.active span {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+        transform: rotateY(90deg);
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+        transform: none;
+    }
+
+    #sidebarCollapse span:first-of-type,
+    #sidebarCollapse span:nth-of-type(2),
+    #sidebarCollapse span:last-of-type {
+        transform: none;
+        opacity: 1;
+        margin: 5px auto;
+    }
+}
+/* Admin Menu End */
+
 body {
     background-color: #ffffff;
     font-size: 15px;
     font-weight: bold;
 }
 
+.content {
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 75%;
+    height: auto;
+    min-height: 100vh;
+}
+.sm-content {
+    width: 50%;
+}
+.lg-content {
+    width: 95%;
+}
+.page_title {
+    margin: 1em 0;
+    text-align: center;
+}
+.inner_content {
+    padding: 0 1em;
+}
+button {
+    width: max-content;
+}
+
+@media (max-width: 480px) {
+    .content, .sm-content {
+        width: 95%;
+    }
+}
+
+
 #logout_box {
-    margin: 10px 20px 10px 10px;
     text-align: right;
 }
 
@@ -22,11 +302,6 @@ body {
 #logout_box button:hover {
     background-color: indianred;
     cursor: pointer;
-}
-
-.content_wrapper {
-    display: flex;
-    flex-direction: row;
 }
 
 .menu_container {
@@ -50,38 +325,46 @@ body {
     text-decoration: none;
     color: white;
 }
-.activeAdminMenu li {
-    background-color: #42758b;
-    color: indianred;
-}
-
-.menu_container li:hover {
-    background-color: gray;
-    color: indianred;
-
+.activeAdminMenu {
+    background-color: white;
+    color: #5495b1 !important;
 }
 
 
 .list_container {
     background-color: white;
     width: 80vw;
-    margin: 0 10px;
-    border: 1px solid lightgray;
+    margin: 0 auto;
     border-radius: 0.5vh;
+    height: fit-content;
 }
 
 .detail_container {
     background-color: #5495b1;
     width: 50vw;
-    margin: 0 10px;
+    margin: 0 auto 100px auto;
     border: 1px solid lightgray;
     border-radius: 0.5vh;
-    font-size: 17px
+    font-size: 17px;
 }
 
+.detail_container textarea,
+.detail_container select {
+    padding: 10px;
+    font-size: 17px;
+    max-width: 168px;
+}
+
+.detail_container input {
+    width: fit-content;
+    font-size: 17px;
+    border: none;
+    background: white;
+}
 
 #mainTable td {
     padding: 10px;
+    vertical-align: middle;
 }
 
 #mainTable th{
@@ -102,11 +385,6 @@ body {
     border-bottom: 1px #5495b1 dotted;
 }
 
-/*form {*/
-/*    border-bottom: 1px #3952ff dotted;*/
-
-/*}*/
-
 .reserve_list:hover {
     cursor: pointer;
     background-color: rgba(108, 108, 108, 0.45);
@@ -115,6 +393,14 @@ body {
 .reserve_list p {
     text-align: center;
     align-self: center;
+    margin-bottom: 0;
+}
+.reserve_checkbox {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #reserve_list_title {
@@ -122,13 +408,79 @@ body {
     font-weight: bold;
     background: #5495b1;
     color: white;
+    display: flex;
+}
+#reserve_list_title_mobile {
+    display: none;
 }
 
 #reserve_list_title:hover {
     pointer-events: none;
-    /*background-color: transparent;*/
+}
+.reserve_list_mobile_title {
+    display: none;
+}
+.desktop_flex_mobile_block {
+    display: flex;
+    align-items: center;
 }
 
+@media (max-width: 600px) {
+    .reserve_list_wrapper {
+        border: 1px solid #5495b1;
+        border-top: none;
+    }
+    #reserve_list_title {
+        display: none;
+    }
+    #reserve_list_title_mobile {
+        display: block;
+        display: flex;
+        text-align: center;
+        border-bottom: 1px solid #5495b1;
+        font-weight: bold;
+        background: #5495b1;
+        color: white;
+        padding: 12px 10px;
+        font-size: 15px;
+        margin-top: 20px;
+    }
+    .reserve_list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 20px;
+        border-bottom: none;
+        margin: 0 auto !important;
+        flex: 10 !important;
+        padding: 12px 10px 6px 10px;
+    }
+    .reserve_list:hover {
+        background-color: white;
+    }
+    .reserve_list_mobile_title {
+        display:inline-block;
+    }
+    .reserve_list p {
+        margin-bottom: 5px;
+        text-align: left;
+    }
+    .btn_mobile_card {
+        width: 100%;
+    }
+    .grid_oneline {
+        grid-column: 1/3;
+    }
+    .reserve_checkbox {
+        padding: 12px 5px;
+        border-right: 1px solid #5495b1;
+    }
+    .moren-reservation-btn {
+        width: 49%;
+    }
+    .desktop_flex_mobile_block {
+        flex-direction: column;
+    }
+}
 .detail_list {
     color: #424242;
     padding: 5px 10px;
@@ -142,8 +494,9 @@ body {
 }
 
 .detail_list p {
-    text-align: center;
+    /*text-align: center;*/
     align-self: center;
+    word-break: keep-all;
 }
 
 #detail_list_title {
@@ -217,6 +570,7 @@ body {
     flex: 19;
 }
 
+
 .set_reserve {
     flex: 1;
     padding: 10px;
@@ -248,10 +602,6 @@ form {
 
 }
 
-#mainTable_tbody td {
-    padding: 10px;
-}
-
 #mainTable_tbody {
     border-spacing: 10px;
 
@@ -266,18 +616,14 @@ form {
     color: white;
 }
 
-#go_back_wrapper {
-    background: #5495b1;
-}
 
 #go_back {
-    color: white;
     font-weight: bold;
     background-color: transparent;
     padding: 10px;
-    margin: 10px;
     border: none;
     border-radius: 0.5vh;
+    font-size: 16px;
 }
 
 #go_back:hover {
@@ -296,7 +642,7 @@ form {
     text-align: left;
 }
 
-#custom_demand_detail {
+#detail {
     flex: 7;
     text-align: right;
 }
@@ -310,12 +656,12 @@ form {
     background: indianred;
     color: white;
 }
+#reserveCampingForm input {
+    border: 1px solid black;
+    padding: 5px;
+}
 
 @media (max-width: 990px) {
-    .content_wrapper {
-        flex-direction: column;
-    }
-
     .menu_container {
         width: 100%;
         margin: 10px 0;
@@ -350,7 +696,7 @@ form {
     }
 
     .created_date {
-        display: none;
+        /*display: none;*/
     }
     .modified_date {
         display: none;
@@ -359,14 +705,6 @@ form {
     .deposit {
         display: none;
     }
-
-    .set_reserve {
-        display: none;
-    }
-
-    /*#custom_demand {*/
-    /*    width: 200%;*/
-    /*}*/
 }
 .form-part {
     width: 50%;
@@ -388,20 +726,7 @@ form {
     font-size: 1.2rem;
     text-align: center;
 }
-.form-group {
-    display: flex;
-    justify-content: space-between;
-}
-.form-group label {
-    font-size: 1rem;
-}
-#carNo.form-control,
-#discount.form-control,
-#discount-description.form-control {
-    height: 20px;
-    width: 80%;
-    margin: 0 0 10px 5px;
-}
+
 .content_container {
     width: 70%;
     margin: 0 auto;
@@ -414,10 +739,6 @@ form {
     margin: 0 auto;
     text-align: center;
 }
-td {
-    border-bottom: 1px solid #5495b1;
-}
-.discount-table button,
 #morenReservationTable button,
 #morenReservationCard button,
 #reservation-detail-card button {
@@ -473,6 +794,59 @@ td {
 #morenReservationCard p {
     margin: 0.3rem 0;
 }
+
+
+#textarea_wrapper h3 {
+    text-align: left;
+    background: #5495b1;
+    color: white;
+    padding: 10px;
+}
+
+#textarea_wrapper textarea,
+#textarea_wrapper table {
+    width: 80%;
+    margin: 0 auto;
+}
+#textarea_wrapper table tbody {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+#textarea_wrapper table tr td {
+    border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+    width: 50%;
+}
+#textarea_wrapper table tr td:first-child {
+    background-color: rgb(248 246 242);
+}
+#textarea_wrapper table tr td input {
+    text-align: center;
+}
+#textarea_wrapper article {
+    margin: 15px 0;
+}
+
+.campingPriceEditTable,
+.rentcarEditTable {
+    text-align: center;
+    margin-top: 30px;
+}
+.campingPriceEditTable textarea,
+.rentcarEditTable textarea {
+    height: 2em;
+    width: 5em;
+    text-align: center;
+    margin: 0 auto;
+}
+.long_input {
+    width: 11em !important;
+}
+.pagination {
+    width: 70%;
+    margin: 30px auto;
+    justify-content: center;
+}
+
 @media (max-width: 990px) {
 
     #morenReservationTable {
@@ -496,16 +870,8 @@ td {
         width: 90%;
         margin-top: 1rem;
     }
-    #carNo.form-control,
-    #discount.form-control,
-    #discount-description.form-control {
-        width: 60%;
-    }
     .content_container {
         width: 90%;
-    }
-    #mainTable button {
-        width: 100%;
     }
     .discount-table {
         font-size: 14px;
@@ -513,12 +879,13 @@ td {
     .discount-table th, .discount-table td {
         padding: 4px !important;
     }
-
-}
-
-#textarea_wrapper h3 {
-    text-align: center;
-    background: #5495b1;
-    color: white;
-    padding: 10px;
+    #textarea_wrapper textarea,
+    #textarea_wrapper table,
+    .pagination {
+        width: 95%;
+    }
+    .campingPriceEditTable td,
+    .campingPriceEditTable th {
+        padding: 0;
+    }
 }

@@ -1,0 +1,141 @@
+<!--캠핑카 홈-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 캠핑카 렌트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Style -->
+    <link th:href="@{/css/library/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/css/camping.css}" rel="stylesheet">
+    <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
+
+    <script th:src="@{/js/campingcar.js}" defer></script>
+    <script th:src="@{/js/campingCarMain.js}" defer></script>
+
+    <script>
+        $(window).load(function() {
+            let ulList = document.getElementsByClassName('header_camp_li');
+            for (i=0; i < ulList.length; i++) {
+                if (ulList[i].dataset.id == 'campingCarHome') {
+                    ulList[i].classList.add('active');
+                };
+            };
+        });
+    </script>
+<!--    <script th:src="@{/js/europe_reserve.js}" defer ></script>-->
+</head>
+
+<body onload="displayCheapestPrice();">
+<div layout:fragment="content">
+    <div th:replace="fragments/header_camp::headerFragment"></div>
+
+    <!-- content whole wrapper-->
+
+    <div id="wrapper" class="content pinside60 container">
+        <!--  content body-->
+        <div class="row" id="campingCarHome">
+            <section id="feature" class="feature sections" style="margin: 0; padding: 0;">
+                <div class="space-medium" style="padding: 0;">
+                    <div class="row" style="margin-bottom: 70px;">
+                        <div class="head_title sections text-center" style="padding-top: 30px;">
+                            <h1>캠핑카 렌트</h1>
+                            <p style="word-break: keep-all; text-align: left; color: dimgrey;">세이브카의 깔끔한 호텔급 캠핑카로 따뜻하고 안락한 캠핑을 즐겨보세요.</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding-top: 30px;" th:each="campingCar, i : ${campingCarList}">
+                            <div class="text-center">
+                                <!-- service block -->
+                                <!-- service img -->
+                                <div class="service-img">
+                                    <!-- service img -->
+                                    <div th:onclick="moveToCampingReservation([[${campingCar.carName}]])"
+                                        th:style="${campingCar.carName == 'travel'} ? 'pointer-events: none;' : 'cursor: pointer'">
+                                        <img th:if="${imagesMainList[i.index].imageId != -1}" th:src="${imagesMainList[i.index].url}" width="360" height="360" style="border-radius: 20px;">
+                                        <img th:if="${imagesMainList[i.index].imageId == -1}" th:src="@{/img/popup_campingcar.png}" width="360" height="360" style="border-radius: 20px;">
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <!-- service content -->
+                                    <h3 style="text-align: left;">
+                                        <span th:text="${campingCar.carName.toUpperCase()}"></span>
+                                        <span> VIP CAMPER</span>
+                                    </h3>
+                                    <div class="explanation">
+                                        <div>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>차고지: 가천대역 캠프 [성남대로 1329]</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-address-card"></i>
+                                            <span th:text="${campingCar.license}"></span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-bed"></i>
+                                            <spanc th:text="${campingCar.personnel}">5인 취침</spanc>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-oil-can"></i>
+                                            <span>
+                                                <span th:text="${campingCar.fuel}"></span>
+                                                <span> / </span>
+                                                <span th:text="${campingCar.gearBox}"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <p style="text-align: right; color: dodgerblue; margin-top: 10px;">
+                                        <span th:id="${campingCar.carName + 'Price'}" style="font-family: 'Black Han Sans', sans-serif; font-size: 24px;"></span>
+                                        <span>원 / 일</span>
+                                        <span th:if="${campingCar.carName=='travel'}" style="color: black;">[장기 대여중]</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="head_title sections text-center" style="padding-top: 30px;">
+                            <h1>프로모션</h1>
+                            <p style="word-break: keep-all; text-align: left; color: dimgrey;">통큰 할인혜택으로 합리적인 가격에 캠핑카를 이용해보세요.
+                            </p>
+                            <br>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <img th:src="@{/img/euro_price.png}" alt="promotion">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <img th:src="@{/img/limo_price.png}" alt="promotion">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 70px;">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <img th:src="@{/img/review_promo.png}" alt="promotion">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <img th:src="@{/img/contact_promo.png}" alt="promotion">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="head_title sections text-center" style="padding-top: 30px;">
+                            <h1>세이브카의 장점</h1>
+                            <p style="word-break: keep-all; text-align: left; color: dimgrey;">세이브카 캠핑카의 장점 6가지를 만나보세요.</p>
+                            <br>
+                        </div>
+                        <div class="tab_content_size">
+                            <img th:src="@{/img/campingcar-common1.png}" alt="all">
+                            <img th:src="@{/img/campingcar-common2.png}" alt="all">
+                            <img th:src="@{/img/campingcar-common3.png}" alt="all">
+                            <img th:src="@{/img/campingcar-common4.png}" alt="all">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <button onclick="topFunction()" id="toTheTopBtn" title="Go to top">
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            </button>
+        </div>
+</div>
+</div>
+</body>
+</html>

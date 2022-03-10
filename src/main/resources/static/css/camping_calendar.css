@@ -1,3 +1,11 @@
+
+@media (min-width: 991px) and (max-width: 1199px) {
+  .calendar_content .container {
+    width: 100%;
+  }
+}
+
+
 .displayOnlyActive {
   display: none !important;
 }
@@ -24,14 +32,6 @@ p {
 .year-month {
   font-size: 30px;
 }
-
-/*.nav {*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*  border: 1px solid #6f6c6c;*/
-/*  border-radius: 5px;*/
-/*}*/
 
 .calendar_nav-btn {
   width: 28px;
@@ -112,12 +112,12 @@ p {
   display: flex;
   flex-flow: row wrap;
   height: 100%;
-
+  margin-top: 10px;
 }
 
 .date {
   width: calc(100% / 7);
-  padding: 15px;
+  padding: 5px;
   text-align: left;
 }
 
@@ -145,12 +145,9 @@ p {
   color: black;
 }
 
-.downside div {
-  margin-bottom: 10px;
-}
-
-.downside a {
-  padding: 5px;
+.downside a,
+.downdise span {
+  padding: 5px 0;
 }
 
 .downside a:hover {
@@ -181,7 +178,7 @@ p {
   color: lightgrey;
 }
 .reserved_selections span {
-  padding: 5px;
+  padding: 5px 0;
 }
 
 .other {
@@ -197,21 +194,71 @@ a:hover {
   justify-content: flex-end;
   margin-top: 1rem;
 }
-
-/*.date_available p {*/
-/*  margin-left: 2rem;*/
-/*}*/
-
-/*.date_available span {*/
-/*  margin-right: 1rem;*/
-/*}*/
+.mobile_calendar_explain {
+  text-align: center;
+  display: none;
+}
 
 #main_mobile {
   display: none;
   font-size: 1.3em;
 }
+#mobile_arrow {
+  display: none;
+  text-align: center;
+  color: dimgray;
+  font-size: 28px;
+  margin-top: 20px;
+}
 
+.camping_price_table {
+  background: white !important;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
 
+.camping_price_table td {
+  font-size: 16px !important;
+  padding: 10px !important;
+}
+.camping_img_small {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 0px;
+}
+
+.camping_img_small > img {
+  width: 24%;
+  height: 120px;
+}
+
+.able_day, .able_radio {
+  background-color: royalblue;
+  color: white;
+}
+.able_day:checked {
+  background-color: white;
+  color: royalblue;
+}
+
+.double_circle {
+  background-color: royalblue;
+  box-shadow: inset 0px 0px 0px 5px white;
+  border: 2px solid royalblue;
+  color: white;
+}
+
+.disabled_radio.double_circle {
+  border: none;
+  box-shadow: none;
+  color: dimgray;
+  background-color: lightgrey;
+}
+.disabled_day.double_circle {
+  border: none;
+  box-shadow: none;
+}
 /* 모바일 화면 */
 @media (max-width: 990px) {
 
@@ -220,11 +267,19 @@ a:hover {
     margin: 100px 0;
   }
 
+  .calendar_header {
+    margin-bottom: 1rem;
+  }
+
+  #mobile_arrow {
+    display: block;
+  }
+
   #main_pc {
     display: none;
   }
 
-  #main_mobile {
+  .mobile_calendar_explain, #main_mobile {
     display: block;
   }
 
@@ -344,4 +399,264 @@ a:hover {
   border: none;
   padding: 0;
   box-shadow: none;
+}
+.small_image_List {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+.small_image_List img {
+  height: 50px;
+  width: 100%;
+  opacity: 0.6;
+}
+.small_image_List img:hover {
+  opacity: 1;
+  border: 2px solid black;
+}
+#desktop_carousel {
+  display: block;
+}
+#mobile_carousel {
+  display: none
+}
+.select_display_price {
+  width: 100%;
+  padding: 10px;
+  height: fit-content;
+  border: solid darkgrey 2px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.camping_price_info hr {
+  margin: 30px 0;
+}
+.display_price_info {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+#mobileInfoTable {
+  display: none;
+}
+#campingCarHome h1 {
+  font-family: 'Black Han Sans', sans-serif;
+  text-align: left;
+  line-height: normal;
+}
+#toTheTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 9999;
+  font-size: 22px;
+  border: none;
+  outline: none;
+  background-color: #337ab7;
+  color: white;
+  cursor: pointer;
+  padding: 20px;
+  border-radius: 50%;
+}
+
+#toTheTopBtn:hover {
+  transform: scale(1.03);
+  transition: scale 1s;
+}
+
+#review {
+  text-align: right;
+}
+#openReviewBtn, #submitReviewBtn {
+  /*display: block;*/
+  width: 25%;
+  padding: 10px;
+  font-size: 1.5rem;
+  min-width: auto;
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+#openReviewBtn.active {
+  display: none;
+}
+#submitReviewBtn {
+  margin: 20px 37.5%;
+}
+
+#writeReviewBox {
+  text-align: left;
+  display: none;
+  border: 1px solid lightgrey;
+  margin-bottom: 30px;
+}
+.review_box_top {
+  background: lightgray;
+  padding: 20px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review_box_top button {
+  min-width: auto;
+  padding: 5px 10px;
+  font-size: 1.5rem;
+  border: 1px solid lightgray;
+  background: white;
+  color: gray;
+}
+
+#writeReviewBox.active {
+  display: block;
+}
+#writeReviewBox > div {
+  margin-bottom: 10px;
+  padding: 0 20px;
+}
+.review_box_date {
+  display: flex;
+}
+.review_box_date span {
+  width: 10% !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.review_date_long {
+  width: 44% !important;
+}
+.one_review {
+  text-align: left;
+  border-top: 1px solid darkgray;
+  border-bottom: 1px solid darkgray;
+  padding: 15px 0;
+}
+.one_review_close {
+  display: flex;
+}
+.one_review_close.opened > .review_text_box.narrow {
+  width: 100%;
+}
+.one_review_close.opened > .review_small_image {
+  display: none;
+}
+.one_review p {
+  margin-bottom: 5px;
+  color: darkgrey;
+}
+.review_text {
+  color: black !important;
+}
+.one_review_close .review_text_short {
+  display: block;
+}
+.one_review_close .review_text_long {
+  display: none;
+}
+.one_review_close.opened .review_text_short {
+  display: none;
+}
+.one_review_close.opened .review_text_long {
+  display: block;
+}
+
+.review_small_image {
+  width: 30%;
+  height: 200px;
+}
+.video_part {
+  width: auto;
+  height: 250px;
+  max-width: 30%;
+  margin: 0 auto;
+}
+.review_text_box.narrow {
+  width: 70%;
+}
+.review_image_open {
+  display: none;
+}
+.review_image_open.active {
+  display: block;
+  padding: 20px 0;
+}
+.review_image_open .image {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+.review_image_open .image img {
+  width: 48%;
+  height: auto;
+  max-height: 300px;
+}
+.review_image_open .video {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.review_image_open .video video {
+  max-height: 500px;
+}
+.see_more_btn {
+  border: none;
+  background: white;
+  margin-top: 20px;
+  padding-left: 0px;
+}
+.see_more_btn:hover {
+  text-decoration: underline;
+}
+.see_more_btn_open {
+  display: block;
+}
+.see_more_btn_close {
+  display: none;
+}
+@media (max-width: 991px) {
+
+}
+@media (max-width: 480px) {
+  #desktop_carousel {
+    display: none;
+  }
+
+  #mobile_carousel {
+    display: block;
+  }
+
+  #mobileInfoTable {
+    display: table;
+  }
+  .review_box_date {
+    flex-direction: column;
+  }
+  .review_date_long,
+  .review_box_date span {
+    width: 100% !important;
+  }
+
+  .review_text_box.narrow {
+    width: 100%;
+  }
+  .review_small_image {
+    width: auto;
+  }
+  .video_part {
+    width: 50%;
+    height: auto;
+    max-width: 50%;
+  }
+  .one_review_close {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .review_image_open .image img {
+    width: 100%;
+  }
 }

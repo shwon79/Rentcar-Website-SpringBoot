@@ -1,12 +1,3 @@
-
-function setCookie( name, value, expiredays ) {
-
-    var todayDate = new Date();
-    todayDate.setDate( todayDate.getDate() + expiredays );
-    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
-    console.log(todayDate.getDate())
-}
-
 // 00:00 시 기준 쿠키 설정하기
 // expiredays 의 새벽  00:00:00 까지 쿠키 설정
 function setCookieAt00( name, value, expiredays ) {
@@ -42,23 +33,86 @@ function closeWinTwo() {
     document.getElementById('divpop2').style.visibility = "hidden";
 }
 
-function closeWinThree() {
+// 팝업 내용 불러오기
+$(window).load(function () {
+    if (document.getElementById('popup2_contact')) {
 
-    if ( document.pop_form3.chkbox.checked ) {
-        setCookieAt00( "maindiv3", "done" , 1 );
-        console.log('if pass')
-    }
+        function getData(title) {
+            $.ajax({
+                type: "GET",
+                url: `/index/popup/value/${title}`,
+                dataType: "json",
+                cache: false,
+                success: function(data){
+                    let targetEle = document.getElementById(title);
+                    targetEle.innerText = data.value;
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus);
+                }
+            });
+        };
 
-    document.getElementById('divpop3').style.visibility = "hidden";
-}
+        function getCampingcarInfoData(carType, targetCarName, targetPrice1, targetPrice2) {
+            fetch(`/camping/calendar/${carType}/getprice/0`)
+                .then(res => res.json())
+                .then(result => {
+                    const carName = document.getElementById(targetCarName);
+                    const target1Ele = document.getElementById(targetPrice1);
+                    const target2Ele = document.getElementById(targetPrice2);
 
+                    carName.innerText = result['carName'].toUpperCase();
 
-function closeWinFour() {
+                    let price = result['onedays'].toString().substr(0, 3);
 
-    if ( document.pop_form4.chkbox.checked ) {
-        setCookieAt00( "maindiv4", "done" , 1 );
-        console.log('if pass')
-    }
+                    if (price.charAt(price.length -1) === '0') {
+                        target1Ele.innerText = price.substr(0, 2);
+                        target2Ele.innerText = price.substr(0, 2);
+                    } else {
+                        target1Ele.innerText = (parseInt(price) / 10).toString();
+                        target2Ele.innerText = (parseInt(price) / 10).toString();
+                    }
+                })
+        };
 
-    document.getElementById('divpop4').style.visibility = "hidden";
-}
+        // 지금 사용안하는 데이터
+        // let notUseList = ['popup1_box1_line5_text3'];
+
+        // 사용하는 데이터
+        let getDataList =
+            [
+                'popup1_contact', 'popup1_banner1', 'popup1_banner2',
+
+                'popup1_box1_line1_title', 'popup1_box1_line1_text1', 'popup1_box1_line1_price', 'popup1_box1_line1_text2',
+                'popup1_box1_line2_title', 'popup1_box1_line2_text1', 'popup1_box1_line2_price', 'popup1_box1_line2_text2',
+                'popup1_box1_line3_title', 'popup1_box1_line3_text1', 'popup1_box1_line3_price', 'popup1_box1_line3_text2',
+                'popup1_box1_line4_title', 'popup1_box1_line4_text1', 'popup1_box1_line4_price', 'popup1_box1_line4_text2', 'popup1_box1_line4_text3',
+                'popup1_box1_line5_title', 'popup1_box1_line5_text1', 'popup1_box1_line5_price', 'popup1_box1_line5_text2',
+                'popup1_box1_line6_title', 'popup1_box1_line6_text1', 'popup1_box1_line6_price',
+                'popup1_box1_line7_title', 'popup1_box1_line7_text1', 'popup1_box1_line7_price', 'popup1_box1_line7_text2',
+                'popup1_box1_line8_title', 'popup1_box1_line8_text1', 'popup1_box1_line8_price', 'popup1_box1_line8_text2',
+
+                'popup1_box2_line1_title', 'popup1_box2_line1_text1', 'popup1_box2_line1_price1', 'popup1_box2_line1_text2', 'popup1_box2_line1_price2', 'popup1_box2_line1_text3',
+                'popup1_box2_line2_title', 'popup1_box2_line2_text1', 'popup1_box2_line2_price1', 'popup1_box2_line2_text2', 'popup1_box2_line2_price2', 'popup1_box2_line2_text3',
+                'popup1_box2_line3_title', 'popup1_box2_line3_text1', 'popup1_box2_line3_price1', 'popup1_box2_line3_text2', 'popup1_box2_line3_price2', 'popup1_box2_line3_text3',
+                'popup1_box2_bottom_line1', 'popup1_box2_bottom_line2_title', 'popup1_box2_bottom_line2_text1', 'popup1_box2_bottom_line2_text2',
+                'popup1_box2_bottom_line3_title', 'popup1_box2_bottom_line3_text1', 'popup1_box2_bottom_line3_text2', 'popup1_button',
+
+                'popup2_contact', 'popup2_subtitle', 'popup2_title', 'popup2_slogan', 'popup2_box1_subtitle', 'popup2_box2_subtitle',
+                'popup2_promotion', 'popup2_box3_line1_title', 'popup2_box3_line1_price',
+                'popup2_box3_line2_title', 'popup2_box3_line2_price',
+                'popup2_box3_line3_title', 'popup2_box3_line3_price',
+                'popup2_box4_line1_title', 'popup2_box4_line1_price',
+                'popup2_box4_line2_title', 'popup2_box4_line2_price',
+                'popup2_box4_line3_title', 'popup2_box4_line3_price', 'popup2_button'
+            ];
+
+        for (let i=0; i < getDataList.length; i++) {
+            getData(getDataList[i]);
+        };
+
+        getCampingcarInfoData('europe', 'popup2_box1_title','popup2_box1_line1_price', 'popup2_box1_line2_price');
+        getCampingcarInfoData('limousine', 'popup2_box2_title','popup2_box2_line1_price', 'popup2_box2_line2_price');
+
+    };
+});

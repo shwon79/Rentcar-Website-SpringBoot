@@ -106,7 +106,7 @@ function displayDeposit() {
     }
 }
 
-
+console.log('hi');
 // Sending Data;
 const reserveMonthlyRent = () => {
 
@@ -123,7 +123,7 @@ const reserveMonthlyRent = () => {
     const reservationDetails = document.getElementById('reservation-detail-details').value;
     let address = document.getElementById('address_kakao').value;
     let addressDetail = document.getElementById('address_kakao_detail').value;
-    const carPrice = document.getElementById('carPrice').innerText;
+    let carPrice = document.getElementById('carPrice').innerText;
     let carTax = document.getElementById('carTax').innerText;
     let carAmountTotal = document.getElementById('carAmountTotal').innerText;
     const carDeposit = document.getElementById('carDeposit').innerText;
@@ -133,18 +133,35 @@ const reserveMonthlyRent = () => {
     const returnTime = document.getElementById('reservation-detail-time_return').value;
     const carCode = document.getElementById('getCarCode').innerText;
     const pickupPlace = document.getElementById('reservation-detail-pickup').value;
+    let selectAge = document.getElementById('selectAge').innerText;
     let reservationStatus = 0;
 
-    let check1 = document.getElementById('check_info').checked;
+    let check1 = document.getElementById('check_info1').checked;
+    let check2 = document.getElementById('check_info2').checked;
+    let check3 = document.getElementById('check_info3').checked;
+
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     let phoneWithoutDash = /^\d{11}$/;
     let regAge = /[0-9]{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1])/;
 
-    if (carTax!='상담') {
-        carTax = parseInt(carTax)*0.1;
+    if (selectAge === 'upper26') {
+        selectAge = '만 26세 이상';
+    } else if (selectAge === 'upper21') {
+        selectAge = '만 21세 이상~만 26세 미만';
     }
-    if (carAmountTotal!='상담') {
+
+    if (carTax!=-1) {
+        carTax = parseInt(carTax)*0.1;
+    } else {
+        carTax = '상담';
+    }
+    if (carAmountTotal!=-1) {
         carAmountTotal = Math.floor(parseInt(carAmountTotal)*1.1);
+    } else {
+        carAmountTotal = '상담';
+    }
+    if (carPrice == -1) {
+        carPrice = '상담';
     }
 
     if (phoneWithoutDash.test(reservationPhone) == true) {
@@ -158,7 +175,7 @@ const reserveMonthlyRent = () => {
 
     if (reservationName == '' || reservationPhone == '' || reservationAge == '' || reservationDate == '' || reservationTime == '' || reservationGuarantee == '' || address == '' || addressDetail == '') {
         alert('입력을 완료해주세요!')
-    } else if (check1 != true) {
+    } else if (check1 != true || check2 != true || check3 != true) {
         alert('동의를 완료해주세요!')
     } else if (returnDate == '' || returnTime == '') {
         alert('대여 날짜 및 시간을 선택해주세요.')
@@ -167,7 +184,7 @@ const reserveMonthlyRent = () => {
     } else if (regAge.test(reservationAge) == false) {
         alert("생년월일을 '680101'와 같이 주민등록번호 앞자리 6자리의 형태로 작성해주세요.");
     } else if (reservationName != '' && reservationPhone != '' && reservationAge != '' && reservationDate != '' && reservationTime != '' && reservationGuarantee != '' && address != '' && addressDetail != '' && check1) {
-        var data = {
+        let data = {
             carNo: carNo,
             carName: carName,
             kilometer: kilometer,
@@ -188,8 +205,11 @@ const reserveMonthlyRent = () => {
             rentTerm: rentTerm,
             costPerKm: costPerKm,
             carCode: carCode,
-            pickupPlace: pickupPlace
+            pickupPlace: pickupPlace,
+            selectAge: selectAge
         }
+
+        // console.log(data);
 
         let reserveConfirm = confirm('예약 신청을 완료하시겠습니까?');
 

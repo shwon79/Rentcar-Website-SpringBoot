@@ -3,6 +3,8 @@ package kr.carz.savecar.service;
 import kr.carz.savecar.domain.CampingCarReservation;
 import kr.carz.savecar.dto.CampingCarReservationDTO;
 import kr.carz.savecar.repository.CampingcarReservationRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +32,31 @@ public class CampingcarReservationService {
         return campingcarReservationRepository.save(dto.toEntity()).getId();
     }
 
-    public void save(CampingCarReservation campingCarReservation) {
-        campingcarReservationRepository.save(campingCarReservation);
+    public Long saveDTO(CampingCarReservationDTO campingCarReservationDTO, CampingCarReservation campingCarReservation) {
+
+        campingCarReservation.setAgree(campingCarReservationDTO.getAgree());
+        campingCarReservation.setCarType(campingCarReservationDTO.getCarType());
+        campingCarReservation.setDay(campingCarReservationDTO.getDay());
+        campingCarReservation.setDeposit(campingCarReservationDTO.getDeposit());
+        campingCarReservation.setDepositor(campingCarReservationDTO.getDepositor());
+        campingCarReservation.setDetail(campingCarReservationDTO.getDetail());
+        campingCarReservation.setName(campingCarReservationDTO.getName());
+        campingCarReservation.setPhone(campingCarReservationDTO.getPhone());
+        campingCarReservation.setRentDate(campingCarReservationDTO.getRentDate());
+        campingCarReservation.setRentTime(campingCarReservationDTO.getRentTime());
+        campingCarReservation.setReservation(campingCarReservationDTO.getReservation());
+        campingCarReservation.setReturnDate(campingCarReservationDTO.getReturnDate());
+        campingCarReservation.setReturnTime(campingCarReservationDTO.getReturnTime());
+        campingCarReservation.setTotal(campingCarReservationDTO.getTotal());
+        campingCarReservation.setTotalHalf(campingCarReservationDTO.getTotalHalf());
+        campingCarReservation.setExtraTime(campingCarReservationDTO.getExtraTime());
+
+        return campingcarReservationRepository.save(campingCarReservation).getId();
+    }
+
+    public Long save(CampingCarReservation campingCarReservation) {
+
+        return campingcarReservationRepository.save(campingCarReservation).getId();
     }
 
     public List<CampingCarReservation> findAllReservations(){
@@ -42,4 +67,7 @@ public class CampingcarReservationService {
         return campingcarReservationRepository.findById(id);
     }
 
+    public Page<CampingCarReservation> findAllPageable(Pageable pageable){
+        return campingcarReservationRepository.findAllByOrderByIdDesc(pageable);
+    }
 }

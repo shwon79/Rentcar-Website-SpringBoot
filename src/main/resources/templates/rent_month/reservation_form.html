@@ -88,27 +88,27 @@
                 </tr>
                 <tr>
                     <td class="col_subtitle">공급가</td>
-                    <td colspan="3" th:if="${morenDTO.carPrice!='상담'}">
+                    <td colspan="3" th:if="${morenDTO.carPrice!=-1}">
                         <span th:text="${morenDTO.carPrice}" class="number"></span>
                         <span>원</span>
                     </td>
-                    <td colspan="3" th:if="${morenDTO.carPrice=='상담'}">상담</td>
+                    <td colspan="3" th:if="${morenDTO.carPrice==-1}">상담</td>
                 </tr>
                 <tr>
                     <td class="col_subtitle">부가세</td>
-                    <td colspan="3" th:if="${morenDTO.carPrice!='상담'}">
+                    <td colspan="3" th:if="${morenDTO.carPrice!=-1}">
                         <span th:text="${morenDTO.carPrice}*0.1" class="number"></span>
                         <span>원</span>
                     </td>
-                    <td colspan="3" th:if="${morenDTO.carPrice=='상담'}">상담</td>
+                    <td colspan="3" th:if="${morenDTO.carPrice==-1}">상담</td>
                 </tr>
                 <tr>
                     <td class="col_subtitle" style="color: blue;">월 대여료</td>
-                    <td colspan="3" th:if="${morenDTO.carPrice!='상담'}" style="color: blue;">
+                    <td colspan="3" th:if="${morenDTO.carPrice!=-1}" style="color: blue;">
                         <span th:text="${morenDTO.carPrice}*1.1" class="number"></span>
                         <span>원</span>
                     </td>
-                    <td colspan="3" th:if="${morenDTO.carPrice=='상담'}">상담</td>
+                    <td colspan="3" th:if="${morenDTO.carPrice==-1}">상담</td>
                 </tr>
                 <tr>
                     <td class="col_subtitle">보증금</td>
@@ -844,9 +844,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <label for="check_info" class="checkboxes" style="font-size: 16px; margin-top: 12px; display: flex; justify-content: flex-end; align-items: end;">
+                            <label for="check_info1" class="checkboxes" style="font-size: 16px; margin-top: 12px; display: flex; justify-content: flex-end; align-items: end;">
                                 약관에 동의합니다
-                                <input id="check_info" type="checkbox" value="rent" style="width: 20px; height: 20px; margin-left: 6px; vertical-align: sub;"/>
+                                <input id="check_info1" type="checkbox" value="rent" style="width: 20px; height: 20px; margin-left: 6px; vertical-align: sub;"/>
+                            </label>
+                            <label for="check_info2" class="checkboxes" style="font-size: 16px; margin-top: 12px; display: flex; justify-content: flex-end; align-items: center;">
+                                보험사 사고경력조회에 동의합니다
+                                <input id="check_info2" type="checkbox" value="rent" style="min-width: 20px; height: 20px; margin-left: 6px; vertical-align: sub;"/>
+                            </label>
+                            <label for="check_info3" class="checkboxes" style="font-size: 16px; margin-top: 12px; display: flex; justify-content: flex-end; align-items: center;">
+                                보험사고 경력 조회시에 당사 규정에 따라 거부될 수 있음을 확인합니다
+                                <input id="check_info3" type="checkbox" value="rent" style="min-width: 20px; height: 20px; margin-left: 6px; vertical-align: sub;"/>
                             </label>
                         </div>
                     </td>
@@ -883,6 +891,7 @@
                 <p id="carTax" th:text="${morenDTO.carPrice}"></p>
                 <p id="carAmountTotal" th:text="${morenDTO.carPrice}"></p>
                 <p id="carDeposit" th:text="${morenDTO.deposit}"></p>
+                <p id="selectAge" th:text="${morenDTO.selectAge}"></p>
             </div>
 
         </div>
