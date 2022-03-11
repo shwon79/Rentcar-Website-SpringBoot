@@ -381,6 +381,19 @@ public class ReservationController {
                     + "약정주행거리: " + dto.getMileage() + "\n"
                     + "보증금: " + dto.getDeposit() + "\n");
         }
+        else if (dto.getTitle().equals("누구나간편")){
+            params.put("text", "[" + dto.getTitle() + "]\n"
+                    + "예약자 이름: " + dto.getName() + "\n"
+                    + "렌트상품: " + dto.getProduct() + "\n"
+                    + "연락처: " + dto.getPhoneNo() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n");
+
+            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                    + "예약자 이름: " + dto.getName() + "\n"
+                    + "렌트상품: " + dto.getProduct() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n"
+                    );
+        }
         else if (dto.getTitle().equals("캠핑카렌트")){
             params.put("text", "[" + dto.getTitle() + "]\n"
                     + "예약자 이름: " + dto.getName() + "\n"
