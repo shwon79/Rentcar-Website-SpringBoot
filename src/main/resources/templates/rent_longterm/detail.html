@@ -8,18 +8,27 @@
     <title>SAVECAR - 누구나장기렌트</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link th:href="@{/css/rent_long_term.css}" rel="stylesheet">
-
+    <script th:src="@{/js/rent_long_term.js}" defer ></script>
 </head>
 <div layout:fragment="content">
     <!-- end of Header-top -->
     <div class="content">
         <div class="container" style="margin-top: 70px;">
             <p class="car_title" th:text="${longTermRent.carName}"></p>
+            <p class="car_subtitle" th:if="${longTermRent.newOld == 'old'}">
+                <span th:text="${longTermRent.newOld == 'old' ? '중고차':'신차'}"></span>
+                <span th:text="${longTermRent.carNum}"></span>
+                <span th:text="${longTermRent.carColor}"></span>
+                <span th:text="${longTermRent.carYearModel}"></span>
+            </p>
+            <p class="car_subtitle" th:if="${longTermRent.newOld != 'old'}">
+                <span th:text="${longTermRent.newOld == 'old' ? '중고차':'신차'}"></span>
+                <span th:text="${longTermRent.contractPeriod}"></span>
+                <span th:text="${longTermRent.contractKm}"></span>
+                <span th:text="${longTermRent.contractMaintenance}"></span>
+            </p>
+            <!--car image-->
             <div id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
-                <!-- Indicators -->
-                <!--                            <ol class="carousel-indicators">-->
-                <!--                                <li th:each="image, i : ${imagesList}" data-target="#my-pics" th:data-slide-to="${i.index}" th:classappend="${i.index == 0 ? 'active' : ''}"></li>-->
-                <!--                            </ol>-->
                 <!-- Content -->
                 <div class="carousel-inner" role="listbox">
                     <div th:each="image, i : ${longTermRentImageList}" class="item main-item" th:data-title="${image.imageId}" th:classappend="${i.index == 0 ? 'active' : ''}">
@@ -36,152 +45,306 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-
             <div class="small_image_List">
                 <div th:each="image, i : ${longTermRentImageList}" class="small_image_box" th:data-title="${image.imageId}">
                     <img th:src="${image.imageUrl}" alt="car image">
                 </div>
             </div>
 
-<!--            <div th:each="image, i : ${longTermRentImageList}">-->
-<!--                <img th:src="${image.imageUrl}" alt="car image">-->
-<!--            </div>-->
+            <!--car info-->
+            <div class="long_term_detail">
+                <section class="long_term_detail_price_wrapper">
+                    <article class="detail_price_box" style="padding: 0; margin-bottom: 20px;">
+                        <p style="background-color: dimgrey; padding: 10px 20px; border-radius: 8px 8px 0 0;">
+                            <span style="color: white; flex-basis: 50%; text-align: center;">계약기간</span>
+                            <span style="color: white; flex-basis: 50%; text-align: center;">약정 주행거리</span>
+                        </p>
+                        <p style="padding: 10px 20px; margin-bottom: 10px;">
+                            <span th:text="${longTermRent.contractPeriod}" style="flex-basis: 50%; text-align: center;"></span>
+                            <span th:text="${longTermRent.contractKm}" style="flex-basis: 50%; text-align: center;"></span>
+                        </p>
+                    </article>
+                    <article class="detail_price_box">
+                        <p style="color: red; font-size: 1.8rem;">
+                            <span>월 대여료<br>(VAT포함)</span>
+                                <span>
+                                <span th:text="${#numbers.formatInteger(longTermRent.contractPrice,0,'COMMA')}" style="font-size: 2.3rem;"></span>
+                                <span>원</span>
+                            </span>
+                        </p>
+                        <p>
+                            <span>보증금</span>
+                                <span>
+                                <span th:text="${#numbers.formatInteger(longTermRent.contractDeposit,0,'COMMA')}"></span>
+                                <span>원</span>
+                            </span>
+                        </p>
+<!--                        <p style="color: dimgrey; word-break: keep-all;">* 추가 문의 사항은 전화 상담 부탁드립니다.</p>-->
+                        <button class="car_card_button" onclick="location.href='#counsel'" style="width: 100%;">상담신청</button>
+                    </article>
+
+                </section>
+                <section class="long_term_detail_info_wrapper">
+                    <article class="long_term_detail_info_box">
+                        <p class="detail_info_title">차량 정보</p>
+                        <div class="detail_info_wrapper">
+                            <div class="detail_info">
+                                <p>구분</p>
+                                <p th:text="${longTermRent.newOld == 'old' ? '중고차':'신차'}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>차량 번호</p>
+                                <p th:text="${longTermRent.carNum}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>색상</p>
+                                <p th:text="${longTermRent.carColor}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>연식</p>
+                                <p th:text="${longTermRent.carYearModel}"></p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="long_term_detail_info_box">
+                        <p class="detail_info_title">계약 정보</p>
+                        <div class="detail_info_wrapper">
+                            <div class="detail_info">
+                                <p>계약 기간</p>
+                                <p th:text="${longTermRent.contractPeriod}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>약정 주행거리</p>
+                                <p th:text="${longTermRent.contractKm}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>계약 서비스</p>
+                                <p th:text="${longTermRent.contractMaintenance}"></p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="long_term_detail_info_box">
+                        <p class="detail_info_title">순회점검 서비스</p>
+                        <div class="detail_info_wrapper">
+                            <div class="detail_info">
+                                <p>순회 기본 점검</p>
+                                <ul>
+                                    <li>예약 업무</li>
+                                    <li>부족액 보충</li>
+                                    <li>타이어 공기업, 마모도</li>
+                                    <li>배터리 점검</li>
+                                    <li>브레이크 패드 점검</li>
+                                    <li>기타 방문 점검</li>
+                                </ul>
+                            </div>
+                            <div class="detail_info">
+                                <p>소모품 교환 품목</p>
+                                <ul>
+                                    <li>엔진오일</li>
+                                    <li>에어컨필터</li>
+                                    <li>와이퍼</li>
+                                    <li>브레이크 패드[앞, 뒤]</li>
+                                    <li>전구</li>
+                                    <li>배터리 교환 1회권</li>
+                                </ul>
+                            </div>
+                            <div class="detail_info">
+                                <p>불포함 내용</p>
+                                <ul>
+                                    <li>기타 소모품 교환</li>
+                                    <li>정기검사 검사소방문</li>
+                                    <li style="list-style: none;">[단, 검사비용은 세이브카에서 지불합니다.]</li>
+                                    <li>밋션오일 방문교환</li>
+                                    <li style="list-style: none;">[단, 오일 교환비용은 세이브카에서 지불합니다.]</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
 
 
-            <p align="center" style="color: red; font-weight: bold; margin-top: 50px;">* 필요한 부분까지만 선택하고 <br /> 상담신청 하셔도 정보가 전달됩니다.</p>
+            <p align="center" style="color: red; font-weight: bold; margin-top: 50px;">* 상담 신청을 하시면 위 차량 정보와 계약 정보가<br>함께 문자로 전달됩니다.</p>
             <!--상담 신청-->
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">
-                    <div class="bg-light pinside30">
+            <div id="counsel" class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p style="font-size: 28px; text-align: center; margin-bottom: 30px;"><i class="fas fa-arrow-down"></i></p>
+                    <h2>상담 신청하기</h2>
+                    <hr>
+                    <div id="reservation-info" name="reservation-info" action="">
                         <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="name">* 이름</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <input type="text" class="form-control" id="reservation-simple-name" placeholder="성함을 입력해주세요." required oninvalid="this.setCustomValidity('필수 입력 정보입니다.')">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="phone">* 연락처</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                        <input type="text" class="form-control" id="reservation-simple-phone" placeholder="연락처 ex) 010-0000-0000" required >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="textarea">요청 사항</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fas fa-clipboard"></i></span>
+                                        <textarea class="form-control" id="reservation-simple-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요.(약정 주행거리 등)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h2>상담 신청하기</h2>
-                                <hr>
-                                <form id="rent-long-reservation" name="reservation-info">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label" for="name">* 이름</label>
-                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="성함을 입력해주세요.">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label" for="phone">* 연락처</label>
-                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="연락처 ex) 010-0000-0000">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label" for="textarea">요청 사항</label>
-                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <span class="span-control">
-                                                <label style="font-size: 15px" id="rent-title-main">누구나 장기렌트</label>
-                                            </span>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <span class="span-control">
-                                                <label style="font-size: 15px" id="rent-title" value="누구나장기렌트">렌트유형</label>
-                                            </span>
-                                            <span class="span-input">
-                                                <label style="margin-right: 5px;"><input type="radio" id="long-rent-product1" name="rentProduct" value="신차">&nbsp; 신차</label>
-                                                <label style="margin-right: 5px;"><input type="radio" id="long-rent-product2" name="rentProduct" value="중고차">&nbsp; 중고차</label>
-                                                <label><input type="radio" id="long-rent-product3" name="rentProduct" value="캠핑카">&nbsp; 캠핑카</label>
-                                            </span>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <span class="span-control">
-                                                <label class="control-label" for="name">제조사</label>
-                                            </span>
-                                            <span class="span-input">
-                                                <input type="text" class="form-control-span2" id="select-category2" placeholder="제조사를 입력하세요.">
-                                            </span>
-                                        </div>
-                                        <div class="c-ol-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <span class="span-control">
-                                                <label class="control-label" for="name">차명</label>
-                                            </span>
-                                            <span class="span-input">
-                                                <input type="text" class="form-control-span2" id="select-car-name" placeholder="차명을 입력하세요.">
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <span class="span-control">
-                                                <label class="control-label" for="name">옵션</label>
-                                            </span>
-                                            <span class="span-input">
-                                                <input type="text" class="form-control-span2" id="select-car-option" placeholder="옵션을 입력하거나 필요한 옵션사항 등을 입력하세요..">
-                                            </span>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <span class="span-control">
-                                                <label class="control-label" for="kliometer">약정주행거리[연간]</label>
-                                            </span>
-                                            <select name="selectMileage" id="select-mileage" class="form-control-select2">
-                                                <option value="미선택">--주행거리를 선택해주세요--</option>
-                                                <option value="20000km">20000km</option>
-                                                <option value="25000km">25000km</option>
-                                                <option value="30000km">30000km</option>
-                                                <option value="40000km">40000km</option>
-                                                <option value="기타">기타</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <span class="span-control">
-                                                <label class="control-label" for="car-money">보증금</label>
-                                            </span>
-                                            <span class="span-input">
-                                                <label style="margin-right: 10px;">
-                                                    <input type="radio" id="deposit-10" name="carDeposit" value="10%">&nbsp; 10%
-                                                </label>
-                                                <label style="margin-right: 10px;">
-                                                    <input type="radio" id="deposit-30" name="carDeposit" value="30%">&nbsp; 30%
-                                                </label>
-                                                <label><input type="radio" id="deposit-0" name="carDeposit" value="기타">&nbsp; 기타</label>
-
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group has-feedback">
-                                                <p style="color: red; font-weight: bold;">* 21세 이상은 요청 사항에 입력해주세요. </p>
-                                                <br />
-                                                <p class="text-center"><input id="agree" type="checkbox"> 개인정보 수집 및 이용에 동의합니다.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group text-center">
-                                                <a class="btn1 btn1-default" onclick="make_reservation()" href="#">상담신청 </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class="form-group has-feedback">
+                                    <p class="text-center"><input type="checkbox" id="agree1"> 개인정보 수집 및 이용에 동의합니다.</p>
+                                    <p class="text-center"><input type="checkbox" id="agree2"> 보험사 사고경력조회에 동의합니다.</p>
+                                    <p class="text-center"><input type="checkbox" id="agree3"> 보험사고 경력 조회시에 당사 규정에 따라 거부될 수 있음을 확인합니다.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group text-center">
+                                    <button class="btn1 btn1-default" onclick="make_long_term_rent_reservation()">상담신청 </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+<!--            <div class="row" id="counsel">-->
+<!--                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px;">-->
+<!--                    <div class="bg-light pinside30">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+<!--                                <h2>상담 신청하기</h2>-->
+<!--                                <hr>-->
+<!--                                <form id="rent-long-reservation" name="reservation-info">-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">-->
+<!--                                            <div class="form-group has-feedback">-->
+<!--                                                <label class="control-label" for="name">* 이름</label>-->
+<!--                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>-->
+<!--                                                    <input type="text" class="form-control" id="reservation-detail-name" placeholder="성함을 입력해주세요.">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">-->
+<!--                                            <div class="form-group has-feedback">-->
+<!--                                                <label class="control-label" for="phone">* 연락처</label>-->
+<!--                                                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>-->
+<!--                                                    <input type="text" class="form-control" id="reservation-detail-phone" placeholder="연락처 ex) 010-0000-0000">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+<!--                                            <div class="form-group has-feedback">-->
+<!--                                                <label class="control-label" for="textarea">요청 사항</label>-->
+<!--                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="요청사항을 입력해주세요."></textarea>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <br />-->
+<!--                                    <br />-->
+<!--                                    <div class="row" style="display: none;">-->
+<!--                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--                                            <span class="span-control">-->
+<!--                                                <label style="font-size: 15px" id="rent-title-main">누구나 장기렌트</label>-->
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--                                            <span class="span-control">-->
+<!--                                                <label style="font-size: 15px" id="rent-title" value="누구나장기렌트">렌트유형</label>-->
+<!--                                            </span>-->
+<!--                                            <span class="span-input">-->
+<!--                                                <label style="margin-right: 5px;"><input type="radio" id="long-rent-product1" name="rentProduct" value="신차">&nbsp; 신차</label>-->
+<!--                                                <label style="margin-right: 5px;"><input type="radio" id="long-rent-product2" name="rentProduct" value="중고차">&nbsp; 중고차</label>-->
+<!--                                                <label><input type="radio" id="long-rent-product3" name="rentProduct" value="캠핑카">&nbsp; 캠핑카</label>-->
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row" style="display: none;">-->
+<!--                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--                                            <span class="span-control">-->
+<!--                                                <label class="control-label" for="name">제조사</label>-->
+<!--                                            </span>-->
+<!--                                            <span class="span-input">-->
+<!--                                                <input type="text" class="form-control-span2" id="select-category2" placeholder="제조사를 입력하세요.">-->
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                        <div class="c-ol-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--                                            <span class="span-control">-->
+<!--                                                <label class="control-label" for="name">차명</label>-->
+<!--                                            </span>-->
+<!--                                            <span class="span-input">-->
+<!--                                                <input type="text" class="form-control-span2" id="select-car-name" placeholder="차명을 입력하세요.">-->
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row" style="display: none;">-->
+<!--                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--                                            <span class="span-control">-->
+<!--                                                <label class="control-label" for="name">옵션</label>-->
+<!--                                            </span>-->
+<!--                                            <span class="span-input">-->
+<!--                                                <input type="text" class="form-control-span2" id="select-car-option" placeholder="옵션을 입력하거나 필요한 옵션사항 등을 입력하세요..">-->
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--                                            <span class="span-control">-->
+<!--                                                <label class="control-label" for="kliometer">약정주행거리[연간]</label>-->
+<!--                                            </span>-->
+<!--                                            <select name="selectMileage" id="select-mileage" class="form-control-select2">-->
+<!--                                                <option value="미선택">&#45;&#45;주행거리를 선택해주세요&#45;&#45;</option>-->
+<!--                                                <option value="20000km">20000km</option>-->
+<!--                                                <option value="25000km">25000km</option>-->
+<!--                                                <option value="30000km">30000km</option>-->
+<!--                                                <option value="40000km">40000km</option>-->
+<!--                                                <option value="기타">기타</option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row" style="display: none;">-->
+<!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+<!--                                            <span class="span-control">-->
+<!--                                                <label class="control-label" for="car-money">보증금</label>-->
+<!--                                            </span>-->
+<!--                                            <span class="span-input">-->
+<!--                                                <label style="margin-right: 10px;">-->
+<!--                                                    <input type="radio" id="deposit-10" name="carDeposit" value="10%">&nbsp; 10%-->
+<!--                                                </label>-->
+<!--                                                <label style="margin-right: 10px;">-->
+<!--                                                    <input type="radio" id="deposit-30" name="carDeposit" value="30%">&nbsp; 30%-->
+<!--                                                </label>-->
+<!--                                                <label><input type="radio" id="deposit-0" name="carDeposit" value="기타">&nbsp; 기타</label>-->
+
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <hr>-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+<!--                                            <div class="form-group has-feedback">-->
+<!--                                                <p style="color: red; font-weight: bold;">* 21세 이상은 요청 사항에 입력해주세요. </p>-->
+<!--                                                <br />-->
+<!--                                                <p class="text-center"><input id="agree" type="checkbox"> 개인정보 수집 및 이용에 동의합니다.</p>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+<!--                                            <div class="form-group text-center">-->
+<!--                                                <a class="btn1 btn1-default" onclick="make_reservation()" href="#">상담신청 </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </div>
