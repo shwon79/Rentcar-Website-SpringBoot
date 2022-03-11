@@ -1,3 +1,4 @@
+/* Main page START */
 .page-title {
     font-family: 'Black Han Sans', sans-serif;
     line-height: normal;
@@ -87,6 +88,32 @@
         padding: 5px;
     }
 }
+/* Main page END */
+
+/* Detail page START */
+.car_title {
+    font-family: 'Black Han Sans', sans-serif;
+    line-height: normal;
+    font-size: 3.3rem;
+    color: black;
+    font-weight: 300;
+}
+.small_image_List {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    justify-content: flex-start;
+}
+.small_image_List img {
+    height: 50px;
+    width: 100%;
+    opacity: 0.6;
+}
+.small_image_List img:hover {
+    opacity: 1;
+    border: 2px solid black;
+}
+/* Detail page END */
 /*#rent-long-reservation .span-control {*/
 /*    margin-right: 0px;*/
 /*}*/

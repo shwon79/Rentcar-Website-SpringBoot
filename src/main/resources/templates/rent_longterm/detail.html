@@ -13,35 +13,40 @@
 <div layout:fragment="content">
     <!-- end of Header-top -->
     <div class="content">
-        <div class="container">
-            <ul id="car_card_list" style="margin-top: 70px;">
-                <!--                th:onclick="'location.href=\''+ ${car.longTermRentId} + '\''"-->
-                <li class="car_card" th:each="car, iterStat : ${longTermRentList}">
-                    <div class="car_card_image_box">
-                        <img th:src="${car.imageUrl}" alt="car image">
+        <div class="container" style="margin-top: 70px;">
+            <p class="car_title" th:text="${longTermRent.carName}"></p>
+            <div id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
+                <!-- Indicators -->
+                <!--                            <ol class="carousel-indicators">-->
+                <!--                                <li th:each="image, i : ${imagesList}" data-target="#my-pics" th:data-slide-to="${i.index}" th:classappend="${i.index == 0 ? 'active' : ''}"></li>-->
+                <!--                            </ol>-->
+                <!-- Content -->
+                <div class="carousel-inner" role="listbox">
+                    <div th:each="image, i : ${longTermRentImageList}" class="item main-item" th:data-title="${image.imageId}" th:classappend="${i.index == 0 ? 'active' : ''}">
+                        <img th:src="${image.imageUrl}" alt="car image">
                     </div>
-                    <div class="car_card_info_box">
-                        <p class="car_card_info_title" th:text="${car.carName}"></p>
-                        <p class="car_card_info_subInfo">
-                            <span th:text="${car.carYearModel}"></span>
-                            <span th:text="${car.contractKm}"></span>
-                            <span th:text="${car.contractPeriod}"></span>
-                        </p>
-                        <p class="car_card_info_subInfo">
-                            <span>
-                                <span>보증금: </span>
-                                <span th:text="${#numbers.formatInteger(car.contractDeposit,0,'COMMA')}"></span>
-                                <span>원</span>
-                            </span>
-                        </p>
-                        <p>
-                            <span class="car_card_info_price" th:text="${#numbers.formatInteger(car.contractPrice,0,'COMMA')}"></span>
-                            <span class="car_card_info_price">만원</span>
-                            <span style="color: dimgrey;"> / 월</span>
-                        </p>
-                    </div>
-                </li>
-            </ul>
+                </div>
+                <!-- Previous/Next controls -->
+                <a class="left carousel-control" href="#desktop_img" role="button" data-slide="prev">
+                    <span class="icon-prev" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#desktop_img" role="button" data-slide="next">
+                    <span class="icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            <div class="small_image_List">
+                <div th:each="image, i : ${longTermRentImageList}" class="small_image_box" th:data-title="${image.imageId}">
+                    <img th:src="${image.imageUrl}" alt="car image">
+                </div>
+            </div>
+
+<!--            <div th:each="image, i : ${longTermRentImageList}">-->
+<!--                <img th:src="${image.imageUrl}" alt="car image">-->
+<!--            </div>-->
+
 
             <p align="center" style="color: red; font-weight: bold; margin-top: 50px;">* 필요한 부분까지만 선택하고 <br /> 상담신청 하셔도 정보가 전달됩니다.</p>
             <!--상담 신청-->

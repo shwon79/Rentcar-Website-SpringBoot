@@ -51,7 +51,7 @@ public class LongTermRentController {
             model.addAttribute("longTermRent", longTermRent);
             model.addAttribute("longTermRentImageList", longTermRentImageList);
         }
-        return "rent_longterm/main";
+        return "rent_longterm/detail";
     }
 
 }
