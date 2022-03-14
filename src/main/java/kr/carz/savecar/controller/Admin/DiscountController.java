@@ -63,14 +63,14 @@ public class DiscountController {
 
 
     // 할인가 수정하기 api
-    @RequestMapping(value = "/admin/discount/{carNo}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/discount/price/{discountId}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
-    public void update_discount(HttpServletResponse res, @PathVariable String carNo, @PathVariable double discount) throws IOException {
+    public void update_discount(HttpServletResponse res, @PathVariable Long discountId, @PathVariable double discount) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
         // 이미 db에 등록된 차량인지 확인
-        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+        Optional<Discount> original_discount = discountService.findDiscountByDiscountId(discountId);
 
         if(original_discount.isPresent()){
             original_discount.get().setDiscount(discount);
@@ -88,14 +88,14 @@ public class DiscountController {
 
 
     // 할인 차명 수정하기 api
-    @RequestMapping(value = "/admin/discount/carName/{carNo}/{carName}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/discount/carName/{discountId}/{carName}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
-    public void update_car_name(HttpServletResponse res, @PathVariable String carNo, @PathVariable String carName) throws IOException {
+    public void update_car_name(HttpServletResponse res, @PathVariable Long discountId, @PathVariable String carName) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
         // 이미 db에 등록된 차량인지 확인
-        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+        Optional<Discount> original_discount = discountService.findDiscountByDiscountId(discountId);
 
         if(original_discount.isPresent()){
             original_discount.get().setCarName(carName);
@@ -112,14 +112,14 @@ public class DiscountController {
     }
 
     // 할인가 description 수정하기 api
-    @RequestMapping(value = "/admin/discount/description/{carNo}/{description}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/discount/description/{discountId}/{description}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
-    public void update_description(HttpServletResponse res, @PathVariable String carNo, @PathVariable String description) throws IOException {
+    public void update_description(HttpServletResponse res, @PathVariable Long discountId, @PathVariable String description) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
         // 이미 db에 등록된 차량인지 확인
-        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+        Optional<Discount> original_discount = discountService.findDiscountByDiscountId(discountId);
 
         if(original_discount.isPresent()){
             original_discount.get().setDescription(description);
@@ -136,14 +136,14 @@ public class DiscountController {
     }
 
     // 할인가 삭제하기 api
-    @DeleteMapping("/admin/discount/{carNo}")
+    @DeleteMapping("/admin/discount/{discountId}")
     @ResponseBody
-    public void delete_discount(HttpServletResponse res, @PathVariable String carNo) throws IOException {
+    public void delete_discount(HttpServletResponse res, @PathVariable Long discountId) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
         // 이미 db에 등록된 차량인지 확인
-        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+        Optional<Discount> original_discount = discountService.findDiscountByDiscountId(discountId);
 
         if(original_discount.isPresent()){
             discountService.delete(original_discount.get());
