@@ -47,6 +47,10 @@
                     <input type="text" class="form-control" name="carNo" id="carNo" aria-describedby="emailHelp">
                 </div>
                 <div class="form-group">
+                    <label for="carNo">차량이름</label>
+                    <input type="text" class="form-control" name="carName" id="carName">
+                </div>
+                <div class="form-group">
                     <label for="discount">할인/인상률(%)</label>
                     <input type="text" class="form-control" name="discount" id="discount">
                 </div>
@@ -68,7 +72,7 @@
                     <thead id="table_header" class="thead-dark">
                     <tr>
                         <th>차량번호</th>
-<!--                        <th>차량이름</th>-->
+                        <th colspan="2">차량이름</th>
                         <th colspan="2">할인/인상률</th>
                         <th colspan="2">할인/인상 설명</th>
                         <th>삭제</th>
@@ -76,18 +80,22 @@
                     </thead>
                     <tbody id="mainTable_tbody">
                     <tr th:each="discount, iterStat : ${discountList}">
-                        <td scope="col" th:text="${discount.carNo}" class="editCarNo" th:data-index="${discount.carNo}"></td>
-<!--                        <td scope="col" th:text="${discount.carName}"></td>-->
-                        <td scope="col" th:text="${discount.discount} + '%'" class="editDiscount" th:data-index="${discount.carNo}"></td>
-                        <td>
-                            <span style="margin-right: 3%;"><button class="money-update-btn btn btn-info btn-sm" th:data-index="${discount.carNo}">수정</button></span>
+                        <td scope="col" th:text="${discount.carNo}" class="editCarNo" th:data-index="${discount.discountId}"></td>
+                        <td scope="col" th:text="${discount.carName}" class="editCarName" th:data-index="${discount.discountId}"></td>
+                        <td scope="col">
+                            <span style="margin-right: 3%;"><button class="btn btn-info btn-sm" onclick="discountUpdate('carName', this)" th:data-index="${discount.discountId}">수정</button></span>
+
                         </td>
-                        <td scope="col" th:text="${discount.description}" class="discountDescription" th:data-index="${discount.carNo}"></td>
+                        <td scope="col" th:text="${discount.discount} + '%'" class="editDiscount" th:data-index="${discount.discountId}"></td>
                         <td>
-                            <span style="margin-right: 3%;"><button class="description-update-btn btn btn-info btn-sm" th:data-index="${discount.carNo}">수정</button></span>
+                            <span style="margin-right: 3%;"><button class="btn btn-info btn-sm" onclick="discountUpdate('price', this)" th:data-index="${discount.discountId}">수정</button></span>
+                        </td>
+                        <td scope="col" th:text="${discount.description}" class="discountDescription" th:data-index="${discount.discountId}"></td>
+                        <td>
+                            <span style="margin-right: 3%;"><button class="btn btn-info btn-sm" onclick="discountUpdate('description', this)" th:data-index="${discount.discountId}">수정</button></span>
                         </td>
                         <td>
-                            <span><button class="delete-btn btn btn-info btn-sm" th:data-index="${discount.carNo}">삭제</button></span>
+                            <span><button class="delete-btn btn btn-info btn-sm" th:data-index="${discount.discountId}">삭제</button></span>
                         </td>
                     </tr>
                     </tbody>
