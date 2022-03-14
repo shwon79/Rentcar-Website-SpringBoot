@@ -88,7 +88,7 @@ public class DiscountController {
 
 
     // 할인 차명 수정하기 api
-    @RequestMapping(value = "/admin/carName/{carNo}/{carName}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/discount/carName/{carNo}/{carName}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
     public void update_car_name(HttpServletResponse res, @PathVariable String carNo, @PathVariable String carName) throws IOException {
 
@@ -112,7 +112,7 @@ public class DiscountController {
     }
 
     // 할인가 description 수정하기 api
-    @RequestMapping(value = "/admin/description/{carNo}/{description}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/discount/description/{carNo}/{description}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
     @ResponseBody
     public void update_description(HttpServletResponse res, @PathVariable String carNo, @PathVariable String description) throws IOException {
 
@@ -136,7 +136,7 @@ public class DiscountController {
     }
 
     // 할인가 삭제하기 api
-    @GetMapping("/admin/discount/delete/{carNo}")
+    @DeleteMapping("/admin/discount/{carNo}")
     @ResponseBody
     public void delete_discount(HttpServletResponse res, @PathVariable String carNo) throws IOException {
 
