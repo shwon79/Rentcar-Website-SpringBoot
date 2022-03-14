@@ -28,6 +28,7 @@ public class SpringConfig {
     private final ReviewRepository reviewRepository;
     private final LongTermRentRepository longTermRentRepository;
     private final LongTermRentImageRepository longTermRentImageRepository;
+    private final RealTimeRentRepository realTimeRentRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -40,7 +41,8 @@ public class SpringConfig {
                         AdminRepository adminRepository, ImagesRepository imagesRepository,
                         ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository,
                         CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository,
-                        LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository) {
+                        LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository,
+                        RealTimeRentRepository realTimeRentRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -61,6 +63,7 @@ public class SpringConfig {
         this.reviewRepository = reviewRepository;
         this.longTermRentRepository = longTermRentRepository;
         this.longTermRentImageRepository = longTermRentImageRepository;
+        this.realTimeRentRepository = realTimeRentRepository;
     }
 
     @Bean
@@ -126,4 +129,7 @@ public class SpringConfig {
 
     @Bean
     public LongTermRentImageService longTermRentImageService() { return new LongTermRentImageService(longTermRentImageRepository); }
+
+    @Bean
+    public RealTimeRentService realTimeRentService() { return new RealTimeRentService(realTimeRentRepository); }
 }
