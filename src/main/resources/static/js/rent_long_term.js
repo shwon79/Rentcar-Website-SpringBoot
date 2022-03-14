@@ -15,6 +15,8 @@ let smallBox = document.getElementsByClassName('small_image_box');
 
 // 월렌트실시간 상담요청
 function make_monthly_rent_reservation (e) {
+    let reservationPhone = $("#reservation-simple-phone").val();
+
 
     if (document.getElementById("reservation-simple-name").value == ""){
         alert('성함을 입력해주세요.')
