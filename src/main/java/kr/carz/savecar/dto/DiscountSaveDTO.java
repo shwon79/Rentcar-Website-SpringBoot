@@ -15,12 +15,14 @@ public class DiscountSaveDTO {
 
     private Long discountId;
     private String carNo;
+    private String carName;
     private double discount; // 할인 퍼센트
     private String description;
 
     public Discount toEntity() {
         return Discount.builder()
                 .carNo(carNo)
+                .carName(carName)
                 .discount(discount)
                 .description(description)
                 .build();

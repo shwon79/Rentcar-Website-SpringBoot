@@ -39,7 +39,6 @@ public class DiscountController {
 
 
     // 할인가 적용하기 api
-//    @RequestMapping(value = "/admin/discount", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @PostMapping("/admin/discount")
     @ResponseBody
     public void save_discount(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
@@ -75,6 +74,31 @@ public class DiscountController {
 
         if(original_discount.isPresent()){
             original_discount.get().setDiscount(discount);
+            discountService.save(original_discount.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    // 할인 차명 수정하기 api
+    @RequestMapping(value = "/admin/carName/{carNo}/{carName}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @ResponseBody
+    public void update_car_name(HttpServletResponse res, @PathVariable String carNo, @PathVariable String carName) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        // 이미 db에 등록된 차량인지 확인
+        Optional<Discount> original_discount = discountService.findDiscountByCarNo(carNo);
+
+        if(original_discount.isPresent()){
+            original_discount.get().setCarName(carName);
             discountService.save(original_discount.get());
             jsonObject.put("result", 1);
         } else {
