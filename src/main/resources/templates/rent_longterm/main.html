@@ -37,14 +37,25 @@
             <ul id="car_card_list" style="margin-top: 50px;">
 <!--                th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|"-->
                 <li class="car_card" th:each="car, i : ${longTermRentList}" th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|">
+                    <div th:text="${car.newOld == 'old' ? '중고차장기' : '신차장기'}" class="car_card_slogan"
+                         th:style="${car.newOld == 'old' ? 'background: red' : 'background: blue'}"></div>
                     <div class="car_card_image_box">
                         <img th:src="${imageList[i.index][0].imageUrl}" alt="car image">
                     </div>
                     <div class="car_card_info_box">
                         <p class="car_card_info_title" th:text="${car.carName}"></p>
                         <p class="car_card_info_subInfo">
-                            <span th:text="${car.carYearModel}"></span>
-                            <span th:text="${car.contractKm}"></span>
+                            <span th:text="${car.carYearModel}" class="displayNoneAfter"></span>
+                            <span class="hidden-xs hidden-sm">
+                                <span>총 약정 </span>
+                                <span th:text="${car.contractKm}"></span>
+                            </span>
+                        </p>
+                        <p class="car_card_info_subInfo hidden-lg hidden-md">
+                            <span>
+                                <span>총 약정 </span>
+                                <span th:text="${car.contractKm}"></span>
+                            </span>
                         </p>
                         <p class="car_card_info_subInfo">
                             <span th:text="${car.contractPeriod}"></span>

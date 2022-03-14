@@ -13,6 +13,10 @@ let smallBox = document.getElementsByClassName('small_image_box');
     });
 });
 
+// 월렌트실시간 상담요청
+function make_monthly_rent_reservation (e) {
+    let reservationPhone = $("#reservation-simple-phone").val();
+
 // 누구나간편 상담요청
 function make_long_term_rent_reservation (e) {
 
@@ -26,7 +30,7 @@ function make_long_term_rent_reservation (e) {
         return
     }
 
-    let reservationPhone = $("#reservation-simple-phone").val();
+
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
 
@@ -50,7 +54,7 @@ function make_long_term_rent_reservation (e) {
         carAge: ''
     };
 
-    console.log(data);
+    // console.log(data);
 
     let check1 = document.getElementById("agree1").checked;
     let check2 = document.getElementById("agree2").checked;

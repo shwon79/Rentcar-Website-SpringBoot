@@ -115,6 +115,15 @@
     margin-bottom: 7px;
     line-height: 1.2;
 }
+.car_card_slogan {
+    width: fit-content;
+    padding: 10px;
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 6px 0;
+}
+
 @media screen and (min-width: 601px) and (max-width: 991px) {
     .car_card {
         flex-basis: 32%;
@@ -144,6 +153,9 @@
     }
     .rent_car_check ul {
         flex-basis: 70%;
+    }
+    .displayNoneAfter::after {
+        display: none !important;
     }
 }
 /* Main page END */
@@ -285,7 +297,8 @@
         padding: 20px 10px;
     }
     .detail_info_wrapper {
-        flex-direction: column;
+        /*flex-direction: column;*/
+        flex-flow: column;
         padding: 30px 10px;
     }
     .detail_info {

@@ -117,6 +117,44 @@
 #twoYearlyForm.openForm {
     display: block;
 }
+
+/* 테이블 행/열 고정 시작 */
+table {
+    margin: 1em 0;
+    border-collapse: collapse;
+    border: 0.1em solid #d6d6d6;
+}
+
+th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #c4beb2;
+    /*font-size: 1.7rem;*/
+}
+
+td {
+    /*font-size: 1.7rem;*/
+}
+
+td[scope=row], th[scope=row] {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
+
+th[scope=row] {
+    z-index: 3;
+}
+
+td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
+    left: 45px;
+}
+/* 테이블 행/열 고정 끝 */
+
+
 @media screen and (max-width: 600px) {
     .a_buttons {
         flex-wrap: wrap;
@@ -127,4 +165,8 @@
     .display_none_mobile {
         display: none;
     }
+    td[scope=row], th[scope=row] {
+        background-color: white;
+    }
 }
+

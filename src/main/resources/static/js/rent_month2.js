@@ -298,30 +298,11 @@ function displayNextOptions(e) {
     };
 }
 
-// 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동
+// 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동 - 데스크탑
 function dataReset() {
     let rentTerm = document.getElementById('selectRentTerm').value;
     let carIdx = document.getElementById('getCarIdx').innerText;
     let kilometer = document.getElementById('selectkilometer').value;
-    let discount = document.getElementById('getDiscount').innerText;
-    let rentStatus = document.getElementById('getRentStatus').innerText;
-    let rentIdx = document.getElementById('getrentIdx').innerText;
-
-    if (rentTerm == '한달' && kilometer == '') {
-        kilometer = '2000km';
-    } else if (rentTerm == '12개월' && kilometer == '') {
-        kilometer = '20000km';
-    } else if (rentTerm == '24개월' && kilometer == '') {
-        kilometer = '20000km';
-    }
-
-    window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
-}
-// 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동
-function dataReset2() {
-    let rentTerm = document.getElementById('selectRentTerm2').value;
-    let carIdx = document.getElementById('getCarIdx').innerText;
-    let kilometer = document.getElementById('selectkilometer2').value;
     let discount = document.getElementById('getDiscount').innerText;
     let rentStatus = document.getElementById('getRentStatus').innerText;
     let rentIdx = document.getElementById('getrentIdx').innerText;
@@ -336,6 +317,28 @@ function dataReset2() {
         kilometer = '20000km';
     }
 
+    // console.log('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus);
+    window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
+}
+// 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동 - 모바일
+function dataReset2(isRentTermChanged) {
+    let rentTerm = document.getElementById('selectRentTerm2').value;
+    let carIdx = document.getElementById('getCarIdx').innerText;
+    let kilometer = document.getElementById('selectkilometer2').value;
+    let discount = document.getElementById('getDiscount').innerText;
+    let rentStatus = document.getElementById('getRentStatus').innerText;
+    let rentIdx = document.getElementById('getrentIdx').innerText;
+
+    if (isRentTermChanged) {
+        if (rentTerm == '한달') {
+            kilometer = '2000km';
+        } else if (rentTerm == '12개월' || rentTerm == '24개월') {
+            kilometer = '20000km';
+        }
+    }
+    // console.log(kilometer);
+
+    // console.log('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus);
     window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
 }
 

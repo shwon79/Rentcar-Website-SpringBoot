@@ -22,6 +22,9 @@ public class DiscountService {
     public Optional<Discount> findDiscountByCarNo(String carNo){
         return discountRepository.findByCarNo(carNo);
     }
+    public Optional<Discount> findDiscountByDiscountId(Long discountId){
+        return discountRepository.findById(discountId);
+    }
 
     public Long save(Discount discount) {
         return discountRepository.save(discount).getDiscountId();

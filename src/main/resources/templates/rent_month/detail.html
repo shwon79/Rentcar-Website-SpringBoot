@@ -362,7 +362,7 @@
                       <p>
                         <span>렌트 기간</span>
 <!--                        <span th:text="${morenDto.rentTerm}"></span>-->
-                        <select onchange="displayNextOptions(this); dataReset2();" id="selectRentTerm2" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
+                        <select onchange="displayNextOptions(this); dataReset2(true);" id="selectRentTerm2" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
                           <option th:selected="${morenDto.rentTerm=='한달'}" value="한달">한달</option>
                           <option th:selected="${morenDto.rentTerm=='12개월'}" value="12개월">12개월</option>
                           <option th:selected="${morenDto.rentTerm=='24개월'}" value="24개월">24개월</option>
@@ -370,9 +370,9 @@
                       </p>
                       <p>
                         <span>약정 주행거리</span>
-                        <span th:if="${morenDto.kilometer=='기타_long'}">기타</span>
+<!--                        <span th:if="${morenDto.kilometer=='기타_long'}">기타</span>-->
 <!--                        <span th:if="${morenDto.kilometer!='기타_long'}" th:text="${morenDto.kilometer}"></span>-->
-                        <select onchange="dataReset2();" id="selectkilometer2" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
+                        <select onchange="dataReset2(false);" id="selectkilometer2" style="padding: 5px; border: 1px solid #414141; border-radius: 0.5rem; background: #eeeeee;">
                           <option th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2000km'}" value="2000km" selected>2000km</option>
                           <option th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer!='2000km'}" value="2000km">2000km</option>
                           <option th:if="${morenDto.rentTerm=='한달' && morenDto.kilometer=='2500km'}" value="2500km" selected>2500km</option>
