@@ -178,7 +178,7 @@
     display: none;
 }
 .carousel-inner {
-    background-color: black;
+    background-color: white;
 }
 .carousel-inner > .item > img {
     height: 500px;
@@ -236,7 +236,7 @@
 .detail_info_wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 30px 20px;
+    padding: 30px 170px 30px 20px;
     flex-wrap: wrap;
 }
 .detail_info p {
@@ -258,6 +258,7 @@
     font-size: 1.8rem;
     line-height: 1.2;
 }
+
 @media screen and (max-width: 600px) {
     .carousel-inner > .item > img {
         height: 300px;

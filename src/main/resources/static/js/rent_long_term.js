@@ -17,6 +17,8 @@ let smallBox = document.getElementsByClassName('small_image_box');
 function make_monthly_rent_reservation (e) {
     let reservationPhone = $("#reservation-simple-phone").val();
 
+// 누구나간편 상담요청
+function make_long_term_rent_reservation (e) {
 
     if (document.getElementById("reservation-simple-name").value == ""){
         alert('성함을 입력해주세요.')
@@ -36,7 +38,7 @@ function make_monthly_rent_reservation (e) {
         name : $("#reservation-simple-name").val(),
         phoneNo : reservationPhone,
         detail : $("#reservation-simple-details").val(),
-        product: '장기렌트',
+        product: '누구나 장기렌트',
         title: '누구나간편',
         category1: '',
         category2: '',
