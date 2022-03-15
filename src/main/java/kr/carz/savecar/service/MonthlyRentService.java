@@ -38,7 +38,7 @@ public class MonthlyRentService {
     public MonthlyRent findPrice(String name){
         return monthlyRentRepository.findByName(name);
     }
-    public MonthlyRent findByMorenCar(Long start, Long end, String name){
+    public Optional<MonthlyRent> findByMorenCar(Long start, Long end, String name){
         return monthlyRentRepository.findByEndGreaterThanEqualAndStartIsLessThanEqualAndNameMoren(end, start, name);
     }
     public Optional findById(Long id){

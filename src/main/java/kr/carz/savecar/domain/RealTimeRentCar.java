@@ -5,19 +5,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "RealTimeRent")
-public class RealTimeRent {
+@Table(name = "RealTimeRentCar")
+public class RealTimeRentCar {
 
-    // 이미지 리스트
     @Id
     @Column(name = "RealTimeRentId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long realTimeRentId;
+
+    @ManyToOne
+    @JoinColumn(name = "monthlyRent")
+    private MonthlyRent monthlyRent; // 가격 외래키
 
     private String carIdx;
     private String carCategory;
@@ -33,26 +36,36 @@ public class RealTimeRent {
     private String carEngine;
     private String carAttribute01;
     private String orderEnd;
-    private Long rentIdx;
     private String costPerKm;
-    private String credit;
     private String carCode;
-    private String kilometer;
-    private String deposit;
-    private String rentTerm;
-    private String selectAge;
+    private double discount; // 할인 퍼센트
+    private String description;
+    private int isExpected;
+
+
+//    @OneToMany(mappedBy = "realTimeRent", targetEntity=RealTimeRentImage.class)
+//    private List<RealTimeRentImage> realTimeRentImageList = new ArrayList<>();
+//
+//    public void addRealtimeRent(RealTimeRentImage realTimeRentImage)
+//    {
+//        realTimeRentImage.setRealTimeRentCar(this);
+//        this.realTimeRentImageList.add(realTimeRentImage);
+//    }
 
 
     @Builder
-    public RealTimeRent(Long realTimeRentId, String carIdx, String carCategory, String carName, String carDetail, String carNo, String carExteriorColor, String carGubun
+    public RealTimeRentCar(Long realTimeRentId, MonthlyRent monthlyRent, String carIdx, String carCategory, String carName, String carDetail, String carNo, String carExteriorColor, String carGubun
                         , String carDisplacement, String carMileaget, String carColor, String carOld, String carEngine, String carAttribute01, String orderEnd
-                        , Long rentIdx, String costPerKm, String credit, String carCode, String kilometer, String deposit,  String rentTerm, String selectAge) {
+                        , String costPerKm, String carCode, double discount, String description, int isExpected) {
         this.realTimeRentId = realTimeRentId;
+        this.monthlyRent = monthlyRent;
         this.carIdx = carIdx;
         this.carCategory = carCategory;
+
         this.carName = carName;
         this.carDetail = carDetail;
         this.carNo = carNo;
+
         this.carExteriorColor = carExteriorColor;
         this.carGubun = carGubun;
         this.carDisplacement = carDisplacement;
@@ -62,13 +75,10 @@ public class RealTimeRent {
         this.carEngine = carEngine;
         this.carAttribute01 = carAttribute01;
         this.orderEnd = orderEnd;
-        this.rentIdx = rentIdx;
         this.costPerKm = costPerKm;
-        this.credit = credit;
         this.carCode = carCode;
-        this.kilometer = kilometer;
-        this.deposit = deposit;
-        this.rentTerm = rentTerm;
-        this.selectAge = selectAge;
+        this.discount = discount;
+        this.description = description;
+        this.isExpected = isExpected;
     }
 }

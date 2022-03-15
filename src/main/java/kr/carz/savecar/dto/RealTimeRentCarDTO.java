@@ -1,6 +1,7 @@
 package kr.carz.savecar.dto;
 
-import kr.carz.savecar.domain.RealTimeRent;
+import kr.carz.savecar.domain.MonthlyRent;
+import kr.carz.savecar.domain.RealTimeRentCar;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +11,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RealTimeRentDTO {
+public class RealTimeRentCarDTO {
 
+    private MonthlyRent monthlyRent;
     private String carIdx;
     private String carCategory;
     private String carName;
@@ -26,18 +28,16 @@ public class RealTimeRentDTO {
     private String carEngine;
     private String carAttribute01;
     private String orderEnd;
-    private Long rentIdx;
     private String costPerKm;
-    private String credit;
     private String carCode;
-    private String kilometer;
-    private String deposit;
-    private String rentTerm;
-    private String selectAge;
+    private double discount; // 할인 퍼센트
+    private String description;
+    private int isExpected;
 
-    public RealTimeRent toEntity() {
+    public RealTimeRentCar toEntity() {
 
-        return RealTimeRent.builder()
+        return RealTimeRentCar.builder()
+                .monthlyRent(monthlyRent)
                 .carIdx(carIdx)
                 .carCategory(carCategory)
                 .carName(carName)
@@ -52,14 +52,11 @@ public class RealTimeRentDTO {
                 .carEngine(carEngine)
                 .carAttribute01(carAttribute01)
                 .orderEnd(orderEnd)
-                .rentIdx(rentIdx)
                 .costPerKm(costPerKm)
-                .credit(credit)
                 .carCode(carCode)
-                .kilometer(kilometer)
-                .deposit(deposit)
-                .rentTerm(rentTerm)
-                .selectAge(selectAge)
+                .discount(discount)
+                .description(description)
+                .isExpected(isExpected)
                 .build();
 
     }
