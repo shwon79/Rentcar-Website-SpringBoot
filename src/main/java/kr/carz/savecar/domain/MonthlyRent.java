@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @DynamicUpdate
@@ -25,7 +27,7 @@ public class MonthlyRent implements Comparable<MonthlyRent> {
 
     @OneToOne
     @JoinColumn(name = "twoYearlyRent")
-    private TwoYearlyRent twoYearlyRent; // 12개월 외래키
+    private TwoYearlyRent twoYearlyRent; // 24개월 외래키
 
     private String category1; // 국산, 외제차의 분류
     private String category2; // 중형차, 경차 등 큰 분류
@@ -49,6 +51,15 @@ public class MonthlyRent implements Comparable<MonthlyRent> {
     private String credit;
     private String img_url;
 
+
+    @OneToMany(mappedBy = "monthlyRent", targetEntity=RealTimeRentCar.class)
+    private List<RealTimeRentCar> realTimeRentList = new ArrayList<>();
+
+    public void addCampingCarPriceRates(RealTimeRentCar realTimeRent)
+    {
+        realTimeRent.setMonthlyRent(this);
+        this.realTimeRentList.add(realTimeRent);
+    }
     @Builder
     public MonthlyRent(YearlyRent yearlyRent, TwoYearlyRent twoYearlyRent, String category1, String category2, String name, String deposit, double cost_for_2k
             , double cost_for_2_5k, double cost_for_3k, double cost_for_4k, String cost_for_others, String age_limit, String cost_per_km, String nameMoren

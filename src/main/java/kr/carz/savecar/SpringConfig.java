@@ -28,6 +28,8 @@ public class SpringConfig {
     private final ReviewRepository reviewRepository;
     private final LongTermRentRepository longTermRentRepository;
     private final LongTermRentImageRepository longTermRentImageRepository;
+    private final RealTimeRentCarRepository realTimeRentRepository;
+    private final RealTimeRentCarImageRepository realTimeRentImageRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -40,7 +42,8 @@ public class SpringConfig {
                         AdminRepository adminRepository, ImagesRepository imagesRepository,
                         ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository,
                         CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository,
-                        LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository) {
+                        LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository,
+                        RealTimeRentCarRepository realTimeRentRepository, RealTimeRentCarImageRepository realTimeRentImageRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -61,6 +64,8 @@ public class SpringConfig {
         this.reviewRepository = reviewRepository;
         this.longTermRentRepository = longTermRentRepository;
         this.longTermRentImageRepository = longTermRentImageRepository;
+        this.realTimeRentRepository = realTimeRentRepository;
+        this.realTimeRentImageRepository = realTimeRentImageRepository;
     }
 
     @Bean
@@ -126,4 +131,10 @@ public class SpringConfig {
 
     @Bean
     public LongTermRentImageService longTermRentImageService() { return new LongTermRentImageService(longTermRentImageRepository); }
+
+    @Bean
+    public RealTimeRentCarService realTimeRentService() { return new RealTimeRentCarService(realTimeRentRepository); }
+
+    @Bean
+    public RealTimeRentCarImageService realTimeRentImageService() { return new RealTimeRentCarImageService(realTimeRentImageRepository); }
 }

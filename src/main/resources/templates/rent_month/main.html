@@ -82,7 +82,7 @@
                         <h1>월+12/24개월렌트</h1>
                     </div>
                     <!-- descriptions (collapse panel) -->
-                    <div  >
+                    <div>
                         <h3>실시간 예약가능차량 조회하기</h3>
                         <div class="not-show-in-mobile">
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -155,7 +155,8 @@
                         <label for="car_van"><input type="radio" id="car_van" name="carType" value="승합" onclick="sendData()" th:checked="${carType} == '승합'">승합</label>
                         <label for="car_for"><input type="radio" id="car_for" name="carType" value="수입" onclick="sendData()" th:checked="${carType} == '수입'">수입</label>
                     </div>
-                </div><hr style="background: lightgrey; margin: 10px 0" />
+                </div>
+                <hr style="background: lightgrey; margin: 10px 0" />
 
                 <!-- 렌트기간 -->
                 <div class="row">
@@ -169,12 +170,12 @@
                         <label for="term_one_year"><input type="radio" id="term_one_year" name="rentTerm" value="12개월" onclick="sendData()" th:checked="${rentTerm} == '12개월'">12개월</label>
                         <label for="term_two_year"><input type="radio" id="term_two_year" name="rentTerm" value="24개월" onclick="sendData()" th:checked="${rentTerm} == '24개월'">24개월</label>
                     </div>
-                </div><hr style="background: lightgrey; margin: 10px 0" />
-
+                </div>
+                <hr style="background: lightgrey; margin: 10px 0" />
 
                 <!-- 약정 주행거리 -->
-                <!-- left title -->
                 <div class="row">
+                    <!-- left title -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                         <p>약정 주행거리</p>
                     </div>

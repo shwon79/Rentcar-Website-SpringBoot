@@ -268,8 +268,8 @@ public class ReservationController {
     }
 
 
-        // 예약 저장 api
-//    @RequestMapping(value = "/reservation/apply", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    // TODO: 누구나장기렌트 Detail page 상담신청 데이터 더 넣기
+    // 예약 저장 api
     @PostMapping("/reservation/apply")
     @ResponseBody
     public void save(HttpServletResponse res, @RequestBody ReservationSaveDTO dto) throws IOException {

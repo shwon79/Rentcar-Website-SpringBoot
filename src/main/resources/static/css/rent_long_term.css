@@ -248,7 +248,7 @@
 .detail_info_wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 30px 170px 30px 20px;
+    padding: 30px 150px 30px 20px;
     flex-wrap: wrap;
 }
 .detail_info p {
