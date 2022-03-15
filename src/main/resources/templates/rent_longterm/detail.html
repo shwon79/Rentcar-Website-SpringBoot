@@ -18,18 +18,13 @@
             <p class="car_subtitle">
                 <span th:text="${longTermRent.newOld == 'old' ? '중고차':'신차'}"></span>
                 <span th:if="${longTermRent.newOld == 'old'}" th:text="${longTermRent.carNum}"></span>
-                <span th:if="${longTermRent.newOld == 'old'}" th:text="${longTermRent.carColor}"></span>
-                <span th:if="${longTermRent.newOld == 'old'}" th:text="${longTermRent.carYearModel}"></span>
+                <span th:if="${longTermRent.newOld == 'old'}" th:text="${longTermRent.carColor}" style="word-break: keep-all;"></span>
+                <span th:if="${longTermRent.newOld == 'old'}" th:text="${longTermRent.carYearModel}" style="word-break: keep-all;"></span>
+                <span th:if="${longTermRent.newOld == 'old'}" th:text="${longTermRent.fuel}" style="word-break: keep-all;"></span>
                 <span th:if="${longTermRent.newOld != 'old'}" th:text="${longTermRent.contractPeriod}"></span>
                 <span th:if="${longTermRent.newOld != 'old'}" th:text="${longTermRent.contractKm}"></span>
-                <span th:if="${longTermRent.newOld != 'old'}" th:text="${longTermRent.contractMaintenance}"></span>
+                <span th:if="${longTermRent.newOld != 'old'}" th:text="${longTermRent.contractMaintenance}" style="word-break: keep-all;"></span>
             </p>
-<!--            <p class="car_subtitle" th:if="${longTermRent.newOld != 'old'}">-->
-<!--                <span th:text="${longTermRent.newOld == 'old' ? '중고차':'신차'}"></span>-->
-<!--                <span th:text="${longTermRent.contractPeriod}"></span>-->
-<!--                <span th:text="${longTermRent.contractKm}"></span>-->
-<!--                <span th:text="${longTermRent.contractMaintenance}"></span>-->
-<!--            </p>-->
             <!--car image-->
             <div id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
                 <!-- Content -->
@@ -107,6 +102,10 @@
                                 <p>연식</p>
                                 <p th:text="${longTermRent.carYearModel}"></p>
                             </div>
+                            <div class="detail_info">
+                                <p>연료</p>
+                                <p th:text="${longTermRent.fuel}"></p>
+                            </div>
                         </div>
                     </article>
                     <article class="long_term_detail_info_box">
@@ -143,7 +142,7 @@
                             <div class="detail_info">
                                 <p>소모품 교환 품목</p>
                                 <ul>
-                                    <li>엔진오일</li>
+                                    <li>엔진오일 8회(10만km 기준)</li>
                                     <li>에어컨필터</li>
                                     <li>와이퍼</li>
                                     <li>브레이크 패드[앞, 뒤]</li>
