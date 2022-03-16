@@ -81,11 +81,11 @@ function displaySortImage(target) {
 }
 
 function sendData(){
-    // let carType = document.querySelector("input[name='carType']:checked").value;
-    // let rentTerm = document.querySelector("input[name='rentTerm']:checked").value;
-    // let kilometer = document.querySelector("input[name='kilometer']:checked").value;
-    // console.log(carType + rentTerm + kilometer);
-    document.getElementById('select_wrapper').submit();
+    let carType = document.querySelector("input[name='carType']:checked").value;
+    let rentTerm = document.querySelector("input[name='rentTerm']:checked").value;
+    let kilometer = document.querySelector("input[name='kilometer']:checked").value;
+
+    window.location = '/rent/month/lookup/' + carType + '/' + kilometer + '/' + rentTerm;
 }
 
 
