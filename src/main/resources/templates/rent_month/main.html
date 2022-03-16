@@ -146,14 +146,14 @@
                     </div>
                     <!-- selections -->
                     <div class="col-lg-10 col-md-11 col-sm-12 col-xs-12" id="sel_car">
-                        <label for="car_all"><input type="radio" id="car_all" name="carType" value="전체" onclick="sendData()" th:checked="${carType} == '전체'">전체</label>
-                        <label for="car_s"><input type="radio" id="car_s" name="carType" value="경차" onclick="sendData()" th:checked="${carType} == '경차'">경차</label>
-                        <label for="car_sm"><input type="radio" id="car_sm" name="carType" value="준중형차" onclick="sendData()" th:checked="${carType} == '준중형차'">준중형</label>
-                        <label for="car_md"><input type="radio" id="car_md" name="carType" value="중형차" onclick="sendData()" th:checked="${carType} == '중형차'">중형</label>
-                        <label for="car_bg"><input type="radio" id="car_bg" name="carType" value="대형차" onclick="sendData()" th:checked="${carType} == '대형차'">대형</label>
-                        <label for="car_srv"><input type="radio" id="car_srv" name="carType" value="SUV" onclick="sendData()" th:checked="${carType} == 'SUV'">SUV</label>
-                        <label for="car_van"><input type="radio" id="car_van" name="carType" value="승합" onclick="sendData()" th:checked="${carType} == '승합'">승합</label>
-                        <label for="car_for"><input type="radio" id="car_for" name="carType" value="수입" onclick="sendData()" th:checked="${carType} == '수입'">수입</label>
+                        <label for="car_all"><input type="radio" id="car_all" name="carType" value="전체" onclick="sendData()" th:checked="${realTimeDTO.carType} == '전체'">전체</label>
+                        <label for="car_s"><input type="radio" id="car_s" name="carType" value="경차" onclick="sendData()" th:checked="${realTimeDTO.carType} == '경차'">경차</label>
+                        <label for="car_sm"><input type="radio" id="car_sm" name="carType" value="준중형차" onclick="sendData()" th:checked="${realTimeDTO.carType} == '준중형차'">준중형</label>
+                        <label for="car_md"><input type="radio" id="car_md" name="carType" value="중형차" onclick="sendData()" th:checked="${realTimeDTO.carType} == '중형차'">중형</label>
+                        <label for="car_bg"><input type="radio" id="car_bg" name="carType" value="대형차" onclick="sendData()" th:checked="${realTimeDTO.carType} == '대형차'">대형</label>
+                        <label for="car_srv"><input type="radio" id="car_srv" name="carType" value="SUV" onclick="sendData()" th:checked="${realTimeDTO.carType} == 'SUV'">SUV</label>
+                        <label for="car_van"><input type="radio" id="car_van" name="carType" value="승합" onclick="sendData()" th:checked="${realTimeDTO.carType} == '승합'">승합</label>
+                        <label for="car_for"><input type="radio" id="car_for" name="carType" value="수입" onclick="sendData()" th:checked="${realTimeDTO.carType} == '수입'">수입</label>
                     </div>
                 </div>
                 <hr style="background: lightgrey; margin: 10px 0" />
@@ -166,9 +166,9 @@
                     </div>
                     <!-- selections -->
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="sel_term">
-                        <label for="term_month"><input type="radio" id="term_month" name="rentTerm" value="한달" onclick="sendData()" th:checked="${rentTerm} == '한달'">한달</label>
-                        <label for="term_one_year"><input type="radio" id="term_one_year" name="rentTerm" value="12개월" onclick="sendData()" th:checked="${rentTerm} == '12개월'">12개월</label>
-                        <label for="term_two_year"><input type="radio" id="term_two_year" name="rentTerm" value="24개월" onclick="sendData()" th:checked="${rentTerm} == '24개월'">24개월</label>
+                        <label for="term_month"><input type="radio" id="term_month" name="rentTerm" value="한달" onclick="sendData()" th:checked="${realTimeDTO.rentTerm} == '한달'">한달</label>
+                        <label for="term_one_year"><input type="radio" id="term_one_year" name="rentTerm" value="12개월" onclick="sendData()" th:checked="${realTimeDTO.rentTerm} == '12개월'">12개월</label>
+                        <label for="term_two_year"><input type="radio" id="term_two_year" name="rentTerm" value="24개월" onclick="sendData()" th:checked="${realTimeDTO.rentTerm} == '24개월'">24개월</label>
                     </div>
                 </div>
                 <hr style="background: lightgrey; margin: 10px 0" />
@@ -180,20 +180,20 @@
                         <p>약정 주행거리</p>
                     </div>
                     <!-- selections -->
-                    <div th:if="${rentTerm == '한달'}" id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <label for="reg_2000"><input type="radio" id="reg_2000" name="kilometer" value="2000km" onclick="sendData()" th:checked="${kilometer} == '2000km'">2,000km</label>
-                        <label for="reg_2500"><input type="radio" id="reg_2500" name="kilometer" value="2500km" onclick="sendData()" th:checked="${kilometer} == '2500km'">2,500km</label>
-                        <label for="reg_3000"><input type="radio" id="reg_3000" name="kilometer" value="3000km" onclick="sendData()" th:checked="${kilometer} == '3000km'">3,000km</label>
-                        <label for="reg_4000"><input type="radio" id="reg_4000" name="kilometer" value="4000km" onclick="sendData()" th:checked="${kilometer} == '4000km'">4,000km</label>
-                        <label for="reg_others"><input type="radio" id="reg_others" name="kilometer" value="기타" onclick="sendData()" th:checked="${kilometer} == '기타'">기타</label>
+                    <div th:if="${realTimeDTO.rentTerm == '한달'}" id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <label for="reg_2000"><input type="radio" id="reg_2000" name="kilometer" value="2000km" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '2000km'">2,000km</label>
+                        <label for="reg_2500"><input type="radio" id="reg_2500" name="kilometer" value="2500km" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '2500km'">2,500km</label>
+                        <label for="reg_3000"><input type="radio" id="reg_3000" name="kilometer" value="3000km" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '3000km'">3,000km</label>
+                        <label for="reg_4000"><input type="radio" id="reg_4000" name="kilometer" value="4000km" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '4000km'">4,000km</label>
+                        <label for="reg_others"><input type="radio" id="reg_others" name="kilometer" value="기타" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '기타'">기타</label>
                     </div>
 
                     <!-- selections -->
-                    <div th:if="${rentTerm == '12개월' or rentTerm == '24개월'}" id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <label for="reg_20000"><input type="radio" id="reg_20000" name="kilometer" value="20000km" onclick="sendData()" th:checked="${kilometer} == '20000km'">20,000km</label>
-                        <label for="reg_30000"><input type="radio" id="reg_30000" name="kilometer" value="30000km" onclick="sendData()" th:checked="${kilometer} == '30000km'">30,000km</label>
-                        <label for="reg_40000"><input type="radio" id="reg_40000" name="kilometer" value="40000km" onclick="sendData()" th:checked="${kilometer} == '40000km'">40,000km</label>
-                        <label for="reg_others_long"><input type="radio" id="reg_others_long" name="kilometer" value="기타_long" onclick="sendData()" th:checked="${kilometer} == '기타_long'">기타</label>
+                    <div th:if="${realTimeDTO.rentTerm == '12개월' or realTimeDTO.rentTerm == '24개월'}" id="sel_reg" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <label for="reg_20000"><input type="radio" id="reg_20000" name="kilometer" value="20000km" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '20000km'">20,000km</label>
+                        <label for="reg_30000"><input type="radio" id="reg_30000" name="kilometer" value="30000km" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '30000km'">30,000km</label>
+                        <label for="reg_40000"><input type="radio" id="reg_40000" name="kilometer" value="40000km" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '40000km'">40,000km</label>
+                        <label for="reg_others_long"><input type="radio" id="reg_others_long" name="kilometer" value="기타_long" onclick="sendData()" th:checked="${realTimeDTO.kilometer} == '기타_long'">기타</label>
                     </div>
                 </div>
             </form>
@@ -273,20 +273,29 @@
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
                             <td scope="col" class="discountStyle">
-                                <span th:if="${moren.carPrice == -1}">상담</span>
-                                <span th:if="${moren.carPrice != -1}" th:text="${moren.carPrice}" class="number"
-                                      th:style="${moren.discount != 0  and moren.carPrice != -1 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">
+                                <span th:if="${realTimeDTO.kilometer == '기타'}">상담</span>
+                                <span th:if="${realTimeDTO.kilometer != '기타'}"
+                                      th:style="${moren.discount != 0 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">
+                                    <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2k,0,'COMMA')}"></span>
+                                    <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2500km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2_5k_price,0,'COMMA')}"></span>
+                                    <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '3000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_3k_price,0,'COMMA')}"></span>
+                                    <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '4000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_4k_price,0,'COMMA')}"></span>
+                                    <span>원</span>
                                 </span>
-                                <div th:if="${moren.discount != 0 and moren.carPrice != -1}" class="discount-wrap">
-                                    <p th:text="${moren.discountDescription}" class="discountAnimation" style="width: max-content;"></p>
-                                    <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
+                                <div th:if="${realTimeDTO.kilometer != '기타' and moren.discount != 0}" class="discount-wrap">
+                                    <p th:text="${moren.description}" class="discountAnimation" style="width: max-content;"></p>
+                                    <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_2k*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                    <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2500km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_2_5k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                    <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '3000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_3k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                    <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '4000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_4k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                    <p>원</p>
                                 </div>
                             </td>
-                            <td scope="col" th:text="${rentTerm}" class="rentTerm" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
-                            <td scope="col" th:text="${kilometer}" class="kilometer" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
+                            <td scope="col" th:text="${realTimeDTO.rentTerm}" class="rentTerm" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
+                            <td scope="col" th:text="${realTimeDTO.kilometer}" class="kilometer" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
                             <td scope="col" th:text="${moren.discount}" class="discount" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
                             <td>
-                                <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.monthlyRent.id} + '/' + ${kilometer}  + '/' + ${moren.discount} + '/available'">
+                                <a th:href="'/rent/month/detail/' + ${realTimeDTO.rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.monthlyRent.id} + '/' + ${realTimeDTO.kilometer}  + '/' + ${moren.discount} + '/available'">
                                     <button class="detail_btn">실시간 예약하기</button>
                                 </a>
                             </td>
@@ -305,16 +314,25 @@
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
                         <p>년식: <span th:text="${moren.carOld}"></span></p>
                         <p class="discountStyle">월 대여료[VAT별도]:
-                            <span th:if="${moren.carPrice == -1}">상담</span>
-                            <span th:if="${moren.carPrice != -1}" th:text="${moren.carPrice}" class="number"
-                                  th:style="${moren.discount != 0  and moren.carPrice != -1 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">
-                                </span>
-                            <div th:if="${moren.discount != 0 and moren.carPrice != -1}" class="discount-wrap">
-                                <p th:text="${moren.discountDescription}" class="discountAnimation"></p>
-                                <p th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></p><p>원</p>
+                            <span th:if="${realTimeDTO.kilometer == '기타'}">상담</span>
+                            <span th:if="${realTimeDTO.kilometer != '기타'}"
+                                  th:style="${moren.discount != 0 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">
+                                <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2k,0,'COMMA')}"></span>
+                                <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2500km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2_5k_price,0,'COMMA')}"></span>
+                                <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '3000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_3k_price,0,'COMMA')}"></span>
+                                <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '4000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_4k_price,0,'COMMA')}"></span>
+                                <span>원</span>
+                            </span>
+                            <div th:if="${realTimeDTO.kilometer != '기타' and moren.discount != 0}" class="discount-wrap">
+                                <p th:text="${moren.description}" class="discountAnimation" style="width: max-content;"></p>
+                                <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_2k*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2500km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_2_5k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '3000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_3k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '4000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_4k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                <p>원</p>
                             </div>
                         </p>
-                        <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.monthlyRent.id} + '/' + ${kilometer}  + '/' + ${moren.discount} + '/available'">
+                        <a th:href="'/rent/month/detail/' + ${realTimeDTO.rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.monthlyRent.id} + '/' + ${realTimeDTO.kilometer}  + '/' + ${moren.discount} + '/available'">
                             <button class="detail_btn">실시간 예약하기</button>
                         </a>
                     </div>
@@ -390,21 +408,41 @@
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
                             <td scope="col" th:text="${moren.orderEnd}"></td>
+<!--                            <td scope="col" class="discountStyle">-->
+<!--                                <span th:if="${moren.carPrice == -1}">상담</span>-->
+<!--                                <span th:if="${moren.carPrice != -1}" th:text="${moren.carPrice}" class="number"-->
+<!--                                      th:style="${moren.discount != 0  and moren.carPrice != -1 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">-->
+<!--                                </span>-->
+<!--                                <div th:if="${moren.discount != 0 and moren.carPrice != -1}" class="discount-wrap">-->
+<!--                                    <span th:text="${moren.discountDescription}" class="discountAnimation" style="width: max-content;"></span>-->
+<!--                                    <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>-->
+<!--                                </div>-->
+<!--                            </td>-->
+
                             <td scope="col" class="discountStyle">
-                                <span th:if="${moren.carPrice == -1}">상담</span>
-                                <span th:if="${moren.carPrice != -1}" th:text="${moren.carPrice}" class="number"
-                                      th:style="${moren.discount != 0  and moren.carPrice != -1 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">
+                                <span th:if="${realTimeDTO.kilometer == '기타'}">상담</span>
+                                <span th:if="${realTimeDTO.kilometer != '기타'}"
+                                      th:style="${moren.discount != 0 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">
+                                    <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2k,0,'COMMA')}"></span>
+                                    <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2500km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2_5k_price,0,'COMMA')}"></span>
+                                    <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '3000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_3k_price,0,'COMMA')}"></span>
+                                    <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '4000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_4k_price,0,'COMMA')}"></span>
+                                    <span>원</span>
                                 </span>
-                                <div th:if="${moren.discount != 0 and moren.carPrice != -1}" class="discount-wrap">
-                                    <span th:text="${moren.discountDescription}" class="discountAnimation" style="width: max-content;"></span>
-                                    <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>
+                                <div th:if="${realTimeDTO.kilometer != '기타' and moren.discount != 0}" class="discount-wrap">
+                                    <p th:text="${moren.description}" class="discountAnimation" style="width: max-content;"></p>
+                                    <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_2k*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                    <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2500km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_2_5k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                    <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '3000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_3k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                    <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '4000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_4k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                                    <p>원</p>
                                 </div>
                             </td>
-                            <td scope="col" th:text="${rentTerm}" class="rentTerm" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
-                            <td scope="col" th:text="${kilometer}" class="kilometer" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
+                            <td scope="col" th:text="${realTimeDTO.rentTerm}" class="rentTerm" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
+                            <td scope="col" th:text="${realTimeDTO.kilometer}" class="kilometer" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
                             <td scope="col" th:text="${moren.discount}" class="discount" style="display: none;" th:data-index="${moren.monthlyRent.id}"></td>
                             <td>
-                                <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.monthlyRent.id} + '/' + ${kilometer} + '/' + ${moren.discount} + '/expected'">
+                                <a th:href="'/rent/month/detail/' + ${realTimeDTO.rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.monthlyRent.id} + '/' + ${realTimeDTO.kilometer} + '/' + ${moren.discount} + '/expected'">
                                     <button class="detail_btn">상담 신청</button>
                                 </a>
                             </td>
@@ -424,16 +462,35 @@
                         <p>년식: <span th:text="${moren.carOld}"></span></p>
                         <p>반납예정일: <span th:text="${moren.orderEnd}"></span></p>
                         <p class="discountStyle">월 대여료[VAT별도]:
-                            <span th:if="${moren.carPrice == -1}">상담</span>
-                            <span th:if="${moren.carPrice != -1}" th:text="${moren.carPrice}" class="number"
-                                  th:style="${moren.discount != 0  and moren.carPrice != -1 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">
-                                </span>
-                            <div th:if="${moren.discount != 0 and moren.carPrice != -1}" class="discount-wrap">
-                                <span th:text="${moren.discountDescription}" class="discountAnimation"></span>
-                                <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>
-                            </div>
+                            <span th:if="${realTimeDTO.kilometer == '기타'}">상담</span>
+                            <span th:if="${realTimeDTO.kilometer != '기타'}"
+                                  th:style="${moren.discount != 0 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">
+                                <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2k,0,'COMMA')}"></span>
+                                <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2500km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2_5k_price,0,'COMMA')}"></span>
+                                <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '3000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_3k_price,0,'COMMA')}"></span>
+                                <span th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '4000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_4k_price,0,'COMMA')}"></span>
+                                <span>원</span>
+                            </span>
+                        <div th:if="${realTimeDTO.kilometer != '기타' and moren.discount != 0}" class="discount-wrap">
+                            <p th:text="${moren.description}" class="discountAnimation" style="width: max-content;"></p>
+                            <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_2k*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                            <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '2500km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_2_5k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                            <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '3000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_3k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                            <p th:if="${realTimeDTO.rentTerm == '한달' && realTimeDTO.kilometer == '4000km'}" th:text="${#numbers.formatInteger(T(Math).floor((moren.monthlyRent.cost_for_4k_price*(100+moren.discount)/100)/1000)*1000, 0, 'COMMA')}"></p>
+                            <p>원</p>
+                        </div>
                         </p>
-                        <a th:href="'/rent/month/detail/' + ${rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.monthlyRent.id} + '/' + ${kilometer} + '/' + ${moren.discount} + '/expected'">
+<!--                        <p class="discountStyle">월 대여료[VAT별도]:-->
+<!--                            <span th:if="${moren.carPrice == -1}">상담</span>-->
+<!--                            <span th:if="${moren.carPrice != -1}" th:text="${moren.carPrice}" class="number"-->
+<!--                                  th:style="${moren.discount != 0  and moren.carPrice != -1 ? 'text-decoration: line-through; text-decoration-color: darkred; text-decoration-thickness: 3px; ' : 'text-decoration:none'}">-->
+<!--                                </span>-->
+<!--                            <div th:if="${moren.discount != 0 and moren.carPrice != -1}" class="discount-wrap">-->
+<!--                                <span th:text="${moren.discountDescription}" class="discountAnimation"></span>-->
+<!--                                <span th:text="${moren.carPrice}*(100+${moren.discount})/100" class="number"></span><p>원</p>-->
+<!--                            </div>-->
+<!--                        </p>-->
+                        <a th:href="'/rent/month/detail/' + ${realTimeDTO.rentTerm} + '/' + ${moren.carIdx} +'/' + ${moren.monthlyRent.id} + '/' + ${realTimeDTO.kilometer} + '/' + ${moren.discount} + '/expected'">
                             <button class="detail_btn">상담 신청</button>
                         </a>
                     </div>
