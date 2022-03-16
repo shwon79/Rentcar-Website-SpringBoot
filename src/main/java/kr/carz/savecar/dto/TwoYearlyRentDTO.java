@@ -20,6 +20,9 @@ public class TwoYearlyRentDTO {
     private double cost_for_20Tk;
     private double cost_for_30Tk;
     private double cost_for_40Tk;
+    private double cost_for_20Tk_price;
+    private double cost_for_30Tk_price;
+    private double cost_for_40Tk_price;
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;
@@ -41,6 +44,9 @@ public class TwoYearlyRentDTO {
                 .cost_for_20Tk(cost_for_20Tk)
                 .cost_for_30Tk(cost_for_30Tk)
                 .cost_for_40Tk(cost_for_40Tk)
+                .cost_for_20Tk_price(cost_for_20Tk_price)
+                .cost_for_30Tk_price(cost_for_30Tk_price)
+                .cost_for_40Tk_price(cost_for_40Tk_price)
                 .cost_for_others(cost_for_others)
                 .age_limit(age_limit)
                 .cost_per_km(cost_per_km)

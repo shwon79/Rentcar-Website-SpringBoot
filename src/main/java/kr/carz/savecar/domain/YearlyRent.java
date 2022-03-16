@@ -30,6 +30,9 @@ public class YearlyRent implements Comparable<YearlyRent>{
     private double cost_for_20k;
     private double cost_for_30k;
     private double cost_for_40k;
+    private double cost_for_20k_price;
+    private double cost_for_30k_price;
+    private double cost_for_40k_price;
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;
@@ -43,7 +46,8 @@ public class YearlyRent implements Comparable<YearlyRent>{
 
     @Builder
     public YearlyRent(String category1, String category2, String name, String deposit
-            , double cost_for_20k, double cost_for_30k, double cost_for_40k, String cost_for_others, String age_limit, String cost_per_km, String nameMoren
+            , double cost_for_20k, double cost_for_30k, double cost_for_40k, double cost_for_20k_price, double cost_for_30k_price, double cost_for_40k_price
+            , String cost_for_others, String age_limit, String cost_per_km, String nameMoren
             , Long start, Long end, String credit, String img_url) {
         this.category1 = category1;
         this.category2 = category2;
@@ -53,6 +57,9 @@ public class YearlyRent implements Comparable<YearlyRent>{
         this.cost_for_20k = cost_for_20k;
         this.cost_for_30k = cost_for_30k;
         this.cost_for_40k = cost_for_40k;
+        this.cost_for_20k_price = cost_for_20k_price;
+        this.cost_for_30k_price = cost_for_30k_price;
+        this.cost_for_40k_price = cost_for_40k_price;
         this.cost_for_others = cost_for_others;
         this.age_limit = age_limit;
         this.cost_per_km = cost_per_km;
