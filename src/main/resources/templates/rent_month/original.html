@@ -23,13 +23,12 @@
                         <h2 class="page-title">월렌트 + 12개월렌트</h2>
                         <br>
                         <p>
-                            <a href="/price/month" style="margin: 2.5px">
+                            <a href="/price/month/경형" style="margin: 2.5px">
                                 <button id="singlebutton2" name="singlebutton" class="btn1 btn1-default" style="width: 220px">사이트 한눈에 보는 가격표</button>
                             </a>
-                            <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=3&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=3"  style="margin: 2.5px">
-                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default" style="width: 220px">블로그 한눈에 보는 가격표</button>
-                            </a>
-
+<!--                            <a target='_blank' href="https://blog.naver.com/PostView.nhn?blogId=itscar&logNo=222272287511&categoryNo=8&parentCategoryNo=0&viewDate=&currentPage=3&postListTopCurrentPage=1&from=postView&userTopListOpen=true&userTopListCount=5&userTopListManageOpen=false&userTopListCurrentPage=3"  style="margin: 2.5px">-->
+<!--                                <button id="singlebutton" name="singlebutton" class="btn1 btn1-default" style="width: 220px">블로그 한눈에 보는 가격표</button>-->
+<!--                            </a>-->
                         </p>
                     </div>
                 </div>
@@ -120,7 +119,6 @@
                                         </div>
 
                                         <script type="text/javascript" th:inline="javascript">
-
                                             /* main에서 차량 선택 시 */
                                             if(/*[[${category1}]]*/ != null){
                                                 get_category1("rentMonth", document.getElementById('select-category1'));
@@ -152,7 +150,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                                             <span class="span-input contain-word-middle-div">
-                                                <label class="control-label" style="margin-top: 13px;"><input type="checkbox" id="age_limit"name="young" value="young" onclick="get_price(rentProduct.value, selectName.value, selectMileage.value, document.reservation.totalPrice)">&nbsp; 만 21세 이상</label>
+                                                <label class="control-label" style="margin-top: 13px;"><input type="checkbox" id="age_limit"name="young" value="young" onclick="get_price(rentProduct.value, selectName.value, selectMileage.value, document.reservation.totalPrice)">&nbsp; 만 21세 이상~만 26세 미만</label>
                                             </span>
                                         </div>
                                     </div>

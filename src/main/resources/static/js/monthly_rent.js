@@ -199,8 +199,8 @@ function make_reservation () {
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function () {
-            alert('예약이 완료되었습니다.');
-            window.location.href = '/europe';
+            alert('상담 신청이 완료되었습니다.');
+            window.location.href = '/rent/estimate';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
@@ -423,7 +423,7 @@ function setSelectBoxByText(eid, etxt) {
     for (var i = 0; i < (eid.options.length); ++i) {
         if (eid.options[i].innerText == etxt) {
             eid.options[i].selected = true;
-            break
+            break;
         }
     }
 }
