@@ -99,6 +99,8 @@ function editBundleData(period, type) {
     }
 }
 
+console.log('hi');
+
 // 렌트카 가격 수정 메뉴 페이지 가격 수정 버튼
 function editRentPriceMenu(id, period) {
     let category1 = [...document.getElementsByClassName('category1')].find(item => item.dataset.title == id);
@@ -139,10 +141,17 @@ function editRentPriceMenu(id, period) {
             let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
             let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
+            let cost_for_2_5k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_2_5k.value).toFixed(15))/1000)*1000).toFixed(15);
+            let cost_for_3k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_3k.value).toFixed(15))/1000)*1000).toFixed(15);
+            let cost_for_4k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_4k.value).toFixed(15))/1000)*1000).toFixed(15);
+
             data['cost_for_2k'] = parseFloat(cost_for_2k.value.replace(/,/g, ''));
             data['cost_for_2_5k'] = parseFloat(cost_for_2_5k.value).toFixed(15);
             data['cost_for_3k'] = parseFloat(cost_for_3k.value).toFixed(15);
             data['cost_for_4k'] = parseFloat(cost_for_4k.value).toFixed(15);
+            data['cost_for_2_5k_price'] = cost_for_2_5k_price;
+            data['cost_for_3k_price'] = cost_for_3k_price;
+            data['cost_for_4k_price'] = cost_for_4k_price;
 
             // console.log(data);
             postStringData(period, id, data);
@@ -193,10 +202,17 @@ function editRentPriceMenu(id, period) {
             let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
             let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
+            let cost_for_2_5k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_2_5k.value).toFixed(15))/1000)*1000).toFixed(15);
+            let cost_for_3k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_3k.value).toFixed(15))/1000)*1000).toFixed(15);
+            let cost_for_4k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_4k.value).toFixed(15))/1000)*1000).toFixed(15);
+
             formData.append('cost_for_2k', parseFloat(cost_for_2k.value.replace(/,/g, '')).toFixed(15));
             formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k.value).toFixed(15));
             formData.append('cost_for_3k', parseFloat(cost_for_3k.value).toFixed(15));
             formData.append('cost_for_4k', parseFloat(cost_for_4k.value).toFixed(15));
+            formData.append('cost_for_2_5k_price', cost_for_2_5k_price.toFixed(15));
+            formData.append('cost_for_3k_price', cost_for_3k_price.toFixed(15));
+            formData.append('cost_for_4k_price', cost_for_4k_price.toFixed(15));
 
             postFormData(id, formData, period);
         }
