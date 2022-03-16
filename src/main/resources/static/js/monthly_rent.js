@@ -167,9 +167,9 @@ function make_reservation () {
 
     var age_limit;
     if (document.getElementById("age_limit").checked){
-        age_limit = "21세 이상 O"
+        age_limit = "만 21세 이상~만 26세 미만"
     } else {
-        age_limit = "21세 이상 X"
+        age_limit = "만 26세 이상"
     }
 
     var data = {
