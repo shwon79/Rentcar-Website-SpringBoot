@@ -160,16 +160,11 @@ public class RealtimeRentController {
         List<RealTimeRentCar> morenDTOList = realTimeRentService.findByIsExpected(0);
         List<RealTimeRentCar> morenDTOListExpected = realTimeRentService.findByIsExpected(1);
 
-        System.out.println(morenDTOList.size());
-        System.out.println(morenDTOListExpected.size());
+        RealTimeDTO realTimeDTO = new RealTimeDTO("전체", "2000km", "한달");
 
         model.put("morenDTOList", morenDTOList);
         model.put("morenDTOListExpected", morenDTOListExpected);
-
-        // 라디오버튼 디폴트 데이터 전달
-        model.put("carType", "전체");
-        model.put("kilometer", "2000km");
-        model.put("rentTerm", "한달");
+        model.put("realTimeDTO", realTimeDTO);
         model.put("byCarName",  Comparator.comparing(RealTimeRentCar::getCarName));
         model.put("byOrderEnd",  Comparator.comparing(RealTimeRentCar::getOrderEnd));
 
@@ -179,14 +174,11 @@ public class RealtimeRentController {
 
     // TODO: 기존 DTO 지우기
     // 조건별로 차종 데이터 전달
-    @GetMapping("/rent/month/lookup/{carType}")
-    public String rent_month_lookup(ModelMap model, @PathVariable String carType) {
+    @GetMapping("/rent/month/lookup/{carType}/{kilometer}/{rentTerm}")
+    public String rent_month_lookup(ModelMap model, @PathVariable String carType, @PathVariable String kilometer, @PathVariable String rentTerm) {
 
         List<RealTimeRentCar> morenDTOList = realTimeRentService.findByCarGubunAndIsExpected(carType, 0);
         List<RealTimeRentCar> morenDTOListExpected = realTimeRentService.findByCarGubunAndIsExpected(carType,1);
-
-        System.out.println(morenDTOList.size());
-        System.out.println(morenDTOListExpected.size());
 
         model.put("morenDTOList", morenDTOList);
         model.put("morenDTOListExpected", morenDTOListExpected);
@@ -194,26 +186,26 @@ public class RealtimeRentController {
         // 라디오버튼 데이터 전달
         model.put("carType", carType);
 
-//        // 한달 <-> 12개월, 24개월 : 약정 주행거리 디폴트  설정
-//        String [] above_year_field = {"12개월", "24개월"};
-//        String [] yearly_kilometer_field = {"20000km", "30000km", "40000km", "기타_long"};
-//        String [] monthly_kilometer_field = {"2000km", "2500km", "3000km", "4000km", "기타"};
-//
-//        if (ArrayUtils.contains(above_year_field, rentTerm) ){
-//            if (!ArrayUtils.contains(yearly_kilometer_field, kilometer) ){
-//                model.put("kilometer", "20000km");
-//            } else {
-//                model.put("kilometer", kilometer);
-//            }
-//        } else if (rentTerm.equals("한달")) {
-//
-//            if(!ArrayUtils.contains(monthly_kilometer_field, kilometer)){
-//                model.put("kilometer", "2000km");
-//            } else {
-//                model.put("kilometer", kilometer);
-//            }
-//        }
-//        model.put("rentTerm", rentTerm);
+        // 한달 <-> 12개월, 24개월 : 약정 주행거리 디폴트  설정
+        String [] above_year_field = {"12개월", "24개월"};
+        String [] yearly_kilometer_field = {"20000km", "30000km", "40000km", "기타_long"};
+        String [] monthly_kilometer_field = {"2000km", "2500km", "3000km", "4000km", "기타"};
+
+        if (ArrayUtils.contains(above_year_field, rentTerm) ){
+            if (!ArrayUtils.contains(yearly_kilometer_field, kilometer) ){
+                model.put("kilometer", "20000km");
+            } else {
+                model.put("kilometer", kilometer);
+            }
+        } else if (rentTerm.equals("한달")) {
+
+            if(!ArrayUtils.contains(monthly_kilometer_field, kilometer)){
+                model.put("kilometer", "2000km");
+            } else {
+                model.put("kilometer", kilometer);
+            }
+        }
+        model.put("rentTerm", rentTerm);
         model.put("byCarName",  Comparator.comparing(RealTimeRentCar::getCarName));
         model.put("byOrderEnd",  Comparator.comparing(RealTimeRentCar::getOrderEnd));
 
