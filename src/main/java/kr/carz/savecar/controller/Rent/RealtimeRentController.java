@@ -183,29 +183,24 @@ public class RealtimeRentController {
         model.put("morenDTOList", morenDTOList);
         model.put("morenDTOListExpected", morenDTOListExpected);
 
-        // 라디오버튼 데이터 전달
-        model.put("carType", carType);
-
         // 한달 <-> 12개월, 24개월 : 약정 주행거리 디폴트  설정
         String [] above_year_field = {"12개월", "24개월"};
         String [] yearly_kilometer_field = {"20000km", "30000km", "40000km", "기타_long"};
         String [] monthly_kilometer_field = {"2000km", "2500km", "3000km", "4000km", "기타"};
+        String kilometerUpdated = kilometer;
 
         if (ArrayUtils.contains(above_year_field, rentTerm) ){
             if (!ArrayUtils.contains(yearly_kilometer_field, kilometer) ){
-                model.put("kilometer", "20000km");
-            } else {
-                model.put("kilometer", kilometer);
+                kilometerUpdated = "20000km";
             }
         } else if (rentTerm.equals("한달")) {
-
             if(!ArrayUtils.contains(monthly_kilometer_field, kilometer)){
-                model.put("kilometer", "2000km");
-            } else {
-                model.put("kilometer", kilometer);
+                kilometerUpdated = "2000km";
             }
         }
-        model.put("rentTerm", rentTerm);
+        RealTimeDTO realTimeDTO = new RealTimeDTO(carType, kilometerUpdated, rentTerm);
+
+        model.put("realTimeDTO", realTimeDTO);
         model.put("byCarName",  Comparator.comparing(RealTimeRentCar::getCarName));
         model.put("byOrderEnd",  Comparator.comparing(RealTimeRentCar::getOrderEnd));
 
