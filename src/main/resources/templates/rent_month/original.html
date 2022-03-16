@@ -12,6 +12,22 @@
         @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
     </style>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+        $('document').ready(function(){
+            get_category1("rentMonth", document.getElementById('select-category1'));
+            get_category2("rentMonth", "국산승용", document.getElementById('select-category2'));
+            get_car_name("rentMonth", "국산승용", "중형", document.getElementById('select-car-name'));
+            get_mileage("rentMonth",  document.getElementById('select-mileage'));
+
+            setTimeout(() => {
+                setSelectBoxByText('select-category1', "국산승용");
+                setSelectBoxByText('select-category2', "중형");
+                setSelectBoxByText('select-car-name', "K5 15년이하");
+                setSelectBoxByText('select-mileage', "2000");
+                get_price("rentMonth", "K5 15년이하", "2000", document.reservation.totalPrice);
+            }, 3300);
+        });
+    </script>
 </head>
 
 <div layout:fragment="content">
@@ -63,9 +79,9 @@
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                                             <span class="span-input contain-word-middle-div">
-                                                <label class="control-label" style="margin-right: 15px;"><input type="radio" id="rent-product1" name="rentProduct"  checked="checked" onclick="get_category1(rentProduct.value, selectCategory1); erase_after_catergory1();" value="rentMonth">&nbsp; 월렌트</label>
-                                                <label class="control-label" style="margin-right: 15px;"><input type="radio" id="rent-product2" name="rentProduct" onclick="get_category1(rentProduct.value, selectCategory1); erase_after_catergory1();" value="rentYear">&nbsp; 12개월 렌트</label>
-                                                <label class="control-label"><input type="radio" id="rent-product3" name="rentProduct" onclick="get_category1(rentProduct.value, selectCategory1); erase_after_catergory1();" value="rent2Year">&nbsp; 24개월 렌트</label>
+                                                <label class="control-label" style="margin-right: 15px;"><input type="radio" id="rent-product1" name="rentProduct"  checked="checked" onclick="get_category1(rentProduct.value, selectCategory1); erase_after('category1');" value="rentMonth">&nbsp; 월렌트</label>
+                                                <label class="control-label" style="margin-right: 15px;"><input type="radio" id="rent-product2" name="rentProduct" onclick="get_category1(rentProduct.value, selectCategory1); erase_after('category1');" value="rentYear">&nbsp; 12개월 렌트</label>
+                                                <label class="control-label"><input type="radio" id="rent-product3" name="rentProduct" onclick="get_category1(rentProduct.value, selectCategory1); erase_after('category1');" value="rent2Year">&nbsp; 24개월 렌트</label>
                                             </span>
                                         </div>
                                         <br /><br />
@@ -79,10 +95,10 @@
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
                                             <span class="span-input">
-                                                <select id="select-category1" name="selectCategory1" class="form-control-select" onchange="get_category2(rentProduct.value, selectCategory1.value, selectCategory2); erase_after_catergory2()" value="차종선택">
+                                                <select id="select-category1" name="selectCategory1" class="form-control-select" onchange="get_category2(rentProduct.value, selectCategory1.value, selectCategory2); erase_after('category2');" value="차종선택">
                                                     <option value="">차종을 선택해주세요</option>
                                                 </select>
-                                                <select id="select-category2" name="selectCategory2" class="form-control-select" onchange="get_car_name(rentProduct.value, selectCategory1.value, selectCategory2.value, selectName); erase_after_carname();">
+                                                <select id="select-category2" name="selectCategory2" class="form-control-select" onchange="get_car_name(rentProduct.value, selectCategory1.value, selectCategory2.value, selectName); erase_after('carname');">
                                                     <option value="">차 분류를 선택해주세요</option>
                                                 </select>
 
@@ -97,7 +113,7 @@
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
                                             <span class="span-input">
-                                                <select id="select-car-name" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage); erase_after_milege();">
+                                                <select id="select-car-name" name="selectName" class="form-control-select2" onchange="get_mileage(rentProduct.value,selectMileage); erase_after('milege');">
                                                     <option value="">차명을 선택해주세요</option>
                                                 </select>
                                             </span>
@@ -117,35 +133,6 @@
                                                 <label> &nbsp; km </label>
                                             </span>
                                         </div>
-
-                                        <script type="text/javascript" th:inline="javascript">
-                                            /* main에서 차량 선택 시 */
-                                            if(/*[[${category1}]]*/ != null){
-                                                get_category1("rentMonth", document.getElementById('select-category1'));
-                                                get_category2("rentMonth", /*[[${category1}]]*/, document.getElementById('select-category2'));
-                                                get_car_name("rentMonth", /*[[${category1}]]*/,/*[[${category2}]]*/, document.getElementById('select-car-name'))
-                                            } else {
-                                                /* 디폴트 */
-                                                get_category1("rentMonth", document.getElementById('select-category1'));
-                                                get_category2("rentMonth", "국산승용", document.getElementById('select-category2'));
-                                                get_car_name("rentMonth", "국산승용","중형", document.getElementById('select-car-name'));
-                                                get_mileage("rentMonth",  document.getElementById('select-mileage'));
-                                                get_price("rentMonth", "K5 15년이하", "2000", document.reservation.totalPrice);
-                                            }
-
-                                            $('document').ready(function(){
-                                                if(/*[[${category1}]]*/ != null){
-                                                    setSelectBoxByText('select-category1', /*[[${category1}]]*/)
-                                                    setSelectBoxByText('select-category2', /*[[${category2}]]*/)
-                                                } else {
-                                                    setSelectBoxByText('select-category1', "국산승용")
-                                                    setSelectBoxByText('select-category2', "중형")
-                                                    setSelectBoxByText('select-car-name', "K5 15년이하")
-                                                    setSelectBoxByText('select-mileage', "2000")
-                                                }
-                                            });
-
-                                        </script>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
