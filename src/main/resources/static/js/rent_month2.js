@@ -187,79 +187,15 @@ function numberWithCommas() {
 $('.number').ready(numberWithCommas());
 
 // 한 줄 내에서 클릭 시 상세 페이지로 이동
-$('.moveToAvailableDetail').click(function(e) {
-    let rentTermList = document.getElementsByClassName('rentTerm');
-    let carIdxList = document.getElementsByClassName('carIdx');
-    let kilometerList = document.getElementsByClassName('kilometer');
-    let discountList = document.getElementsByClassName('discount');
-
+$('.moveToDetail').click(function(e) {
     let dataIndex = e.currentTarget.dataset.index;
-    let rentTerm;
-    let carIdx;
-    let rentIdx = dataIndex;
-    let kilometer;
-    let discount;
 
-    for (i = 0; i < rentTermList.length; i++) {
-        if (rentTermList[i].dataset.index == dataIndex) {
-            rentTerm = rentTermList[i].innerText;
-        }
-    };
-    for (i = 0; i < carIdxList.length; i++) {
-        if (carIdxList[i].dataset.index == dataIndex) {
-            carIdx = carIdxList[i].innerText;
-        }
-    };
-    let tempDiscount = [...discountList].find(discount => discount.dataset.index === dataIndex);
-    discount = tempDiscount.innerText;
+    let rentTerm = [...document.getElementsByClassName('rentTerm')].find(item => item.dataset.index == dataIndex).innerText;
+    let rentId = [...document.getElementsByClassName('rentId')].find(item => item.dataset.index == dataIndex).innerText;
+    let kilometer = [...document.getElementsByClassName('kilometer')].find(item => item.dataset.index == dataIndex).innerText;
+    let discount = [...document.getElementsByClassName('discount')].find(item => item.dataset.index == dataIndex).innerText;
 
-    for (i = 0; i < kilometerList.length; i++) {
-        if (kilometerList[i].dataset.index == dataIndex) {
-            kilometer = kilometerList[i].innerText;
-        }
-    };
-
-    window.location = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/available';
-});
-
-$('.moveToExpectedDetail').click(function(e) {
-    let rentTermList = document.getElementsByClassName('rentTerm');
-    let carIdxList = document.getElementsByClassName('carIdx');
-    let kilometerList = document.getElementsByClassName('kilometer');
-    let discountList = document.getElementsByClassName('discount');
-
-    let dataIndex = e.currentTarget.dataset.index;
-    let rentTerm;
-    let carIdx;
-    let rentIdx = dataIndex;
-    let kilometer;
-    let discount;
-
-    for (i = 0; i < rentTermList.length; i++) {
-        if (rentTermList[i].dataset.index == dataIndex) {
-            rentTerm = rentTermList[i].innerText;
-        }
-    };
-    for (i = 0; i < carIdxList.length; i++) {
-        if (carIdxList[i].dataset.index == dataIndex) {
-            carIdx = carIdxList[i].innerText;
-        }
-    };
-    for (i = 0; i < discountList.length; i++) {
-        if (discountList[i].dataset.index == dataIndex) {
-            discount = discountList[i].innerText;
-            if (discount=='') {
-                discount = null;
-            }
-        }
-    };
-    for (i = 0; i < kilometerList.length; i++) {
-        if (kilometerList[i].dataset.index == dataIndex) {
-            kilometer = kilometerList[i].innerText;
-        }
-    };
-
-    window.location = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/expected';
+    window.location = '/rent/month/detail/' + rentId + '/' + rentTerm + '/' + kilometer  + '/' + discount;
 });
 
 //할인 가격 천원 단위로 반올림
@@ -323,7 +259,6 @@ function dataReset() {
         kilometer = '20000km';
     }
 
-    // console.log('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus);
     window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
 }
 // 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동 - 모바일
@@ -342,9 +277,7 @@ function dataReset2(isRentTermChanged) {
             kilometer = '20000km';
         }
     }
-    // console.log(kilometer);
 
-    // console.log('/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus);
     window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
 }
 
