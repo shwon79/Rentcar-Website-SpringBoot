@@ -99,7 +99,8 @@ function editBundleData(period, type) {
     }
 }
 
-console.log('hi');
+// console.log('hi');
+
 // 렌트카 가격 수정 메뉴 페이지 가격 수정 버튼
 function editRentPriceMenu(id, period) {
     let category1 = [...document.getElementsByClassName('category1')].find(item => item.dataset.title == id);
