@@ -176,8 +176,15 @@ public class RealtimeRentController {
     @GetMapping("/rent/month/lookup/{carType}/{kilometer}/{rentTerm}")
     public String rent_month_lookup(ModelMap model, @PathVariable String carType, @PathVariable String kilometer, @PathVariable String rentTerm) {
 
-        List<RealTimeRentCar> morenDTOList = realTimeRentService.findByCarGubunAndIsExpected(carType, 0);
-        List<RealTimeRentCar> morenDTOListExpected = realTimeRentService.findByCarGubunAndIsExpected(carType,1);
+        List<RealTimeRentCar> morenDTOList;
+        List<RealTimeRentCar> morenDTOListExpected;
+        if(carType.equals("전체")){
+            morenDTOList = realTimeRentService.findByIsExpected(0);
+            morenDTOListExpected = realTimeRentService.findByIsExpected(1);
+        } else {
+            morenDTOList = realTimeRentService.findByCarGubunAndIsExpected(carType, 0);
+            morenDTOListExpected = realTimeRentService.findByCarGubunAndIsExpected(carType, 1);
+        }
 
         model.put("morenDTOList", morenDTOList);
         model.put("morenDTOListExpected", morenDTOListExpected);
