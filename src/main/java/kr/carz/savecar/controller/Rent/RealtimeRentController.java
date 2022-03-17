@@ -172,7 +172,6 @@ public class RealtimeRentController {
     }
 
 
-    // TODO: 기존 DTO 지우기
     // 조건별로 차종 데이터 전달
     @GetMapping("/rent/month/lookup/{carType}/{kilometer}/{rentTerm}")
     public String rent_month_lookup(ModelMap model, @PathVariable String carType, @PathVariable String kilometer, @PathVariable String rentTerm) {
