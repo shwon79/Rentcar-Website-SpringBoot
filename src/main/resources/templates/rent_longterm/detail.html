@@ -126,30 +126,34 @@
                         </div>
                     </article>
                     <article class="long_term_detail_info_box">
+
                         <p class="detail_info_title">순회점검 서비스</p>
-                        <div class="detail_info_wrapper">
-                            <div class="detail_info">
-                                <p>순회 기본 점검</p>
-                                <ul>
-                                    <li>예약 업무</li>
-                                    <li>부족액 보충</li>
-                                    <li>타이어 공기업, 마모도</li>
-                                    <li>배터리 점검</li>
-                                    <li>브레이크 패드 점검</li>
-                                    <li>기타 방문 점검</li>
-                                </ul>
-                            </div>
-                            <div class="detail_info">
-                                <p>소모품 교환 품목</p>
-                                <ul>
-                                    <li>엔진오일 8회(10만km 기준)</li>
-                                    <li>에어컨필터</li>
-                                    <li>와이퍼</li>
-                                    <li>브레이크 패드[앞, 뒤]</li>
-                                    <li>전구</li>
-                                    <li>배터리 교환 1회권</li>
-                                </ul>
-                            </div>
+                        <img th:src="@{/img/long_term_service_oil.png}" alt="long_term_service" style="margin-top: 10px; width: 100%;">
+                        <img th:if="${longTermRent.newOld} == new" th:src="@{/img/long_term_service_blackbox.png}" alt="long_term_service" style="margin-top: 10px; margin-bottom: 50px; width: 100%;">
+
+<!--                        <div class="detail_info_wrapper">-->
+<!--                            <div class="detail_info">-->
+<!--                                <p>순회 기본 점검</p>-->
+<!--                                <ul>-->
+<!--                                    <li>예약 업무</li>-->
+<!--                                    <li>부족액 보충</li>-->
+<!--                                    <li>타이어 공기업, 마모도</li>-->
+<!--                                    <li>배터리 점검</li>-->
+<!--                                    <li>브레이크 패드 점검</li>-->
+<!--                                    <li>기타 방문 점검</li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                            <div class="detail_info">-->
+<!--                                <p>소모품 교환 품목</p>-->
+<!--                                <ul>-->
+<!--                                    <li>엔진오일 8회(10만km 기준)</li>-->
+<!--                                    <li>에어컨필터</li>-->
+<!--                                    <li>와이퍼</li>-->
+<!--                                    <li>브레이크 패드[앞, 뒤]</li>-->
+<!--                                    <li>전구</li>-->
+<!--                                    <li>배터리 교환 1회권</li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
 <!--                            <div class="detail_info">-->
 <!--                                <p>불포함 내용</p>-->
 <!--                                <ul>-->
@@ -160,7 +164,7 @@
 <!--                                    <li style="list-style: none;">[단, 오일 교환비용은 세이브카에서 지불합니다.]</li>-->
 <!--                                </ul>-->
 <!--                            </div>-->
-                        </div>
+<!--                        </div>-->
                     </article>
                 </section>
             </div>
