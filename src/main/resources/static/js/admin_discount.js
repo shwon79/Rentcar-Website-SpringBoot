@@ -1,7 +1,21 @@
 // 할인 적용하기
 const make_discount = () => {
+    const carNumList = [...document.getElementsByClassName('editCarNo')];
+    let existedCarNum = [];
+
+    for (let i=0; i < carNumList.length; i++) {
+        existedCarNum.push(carNumList[i].innerText);
+    };
+
     if (document.getElementById("carNo").value == ""){
         alert('차량 번호를 입력해주세요.')
+        return
+    };
+
+    let carNo = $("#carNo").val().replace(/(\s*)/g,""); // 공백 제거
+
+    if (existedCarNum.includes(carNo)) {
+        alert('이미 할인/인상이 적용된 차량입니다.');
         return
     };
 
@@ -20,7 +34,6 @@ const make_discount = () => {
         return
     };
 
-    let carNo = $("#carNo").val().replace(/(\s*)/g,""); // 공백 제거
 
     var data = {
         carNo : carNo,
