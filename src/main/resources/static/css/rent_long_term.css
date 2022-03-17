@@ -88,8 +88,8 @@
 }
 .rent_car_check_wrapper {
     display: flex;
-    justify-content: space-between;
-    margin: 50px 0 70px 0;
+    /*justify-content: space-between;*/
+    margin: 20px 0 70px 0;
     flex-wrap: wrap;
 }
 
