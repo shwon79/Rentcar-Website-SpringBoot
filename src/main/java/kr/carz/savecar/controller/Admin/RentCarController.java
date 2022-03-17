@@ -104,9 +104,9 @@ public class RentCarController {
 
 
     // 일괄수정
-    @PutMapping("/admin/rentcar/price/monthly/{column}/{price}/{percentage}")
+    @PutMapping("/admin/rentcar/price/monthly/{column}/{value}")
     @ResponseBody
-    public void put_rent_car_price_monthly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double price, @PathVariable double percentage) throws Exception {
+    public void put_rent_car_price_monthly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double value) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -115,34 +115,34 @@ public class RentCarController {
         switch (column){
             case "보증금":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setDeposit(String.valueOf(price));
+                    monthlyRent.setDeposit(String.valueOf(value));
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "21세":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setAge_limit(String.valueOf(price));
+                    monthlyRent.setAge_limit(String.valueOf(value));
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "2500km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_2_5k(percentage);
-                    monthlyRent.setCost_for_2_5k_price(price);
+                    monthlyRent.setCost_for_2_5k(value);
+                    monthlyRent.setCost_for_2_5k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "3000km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_3k(percentage);
-                    monthlyRent.setCost_for_3k_price(price);
+                    monthlyRent.setCost_for_3k(value);
+                    monthlyRent.setCost_for_3k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "4000km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_4k(percentage);
-                    monthlyRent.setCost_for_4k_price(price);
+                    monthlyRent.setCost_for_4k(value);
+                    monthlyRent.setCost_for_4k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
@@ -291,9 +291,9 @@ public class RentCarController {
     }
 
 
-    @PutMapping("/admin/rentcar/price/yearly/{column}/{price}/{percentage}")
+    @PutMapping("/admin/rentcar/price/yearly/{column}/{value}")
     @ResponseBody
-    public void put_rent_car_price_yearly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double price, @PathVariable double percentage) throws Exception {
+    public void put_rent_car_price_yearly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double value) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -302,28 +302,28 @@ public class RentCarController {
         switch (column){
             case "보증금":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.getYearlyRent().setDeposit(String.valueOf(price));
+                    monthlyRent.getYearlyRent().setDeposit(String.valueOf(value));
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "20000km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.getYearlyRent().setCost_for_20k(percentage);
-                    monthlyRent.getYearlyRent().setCost_for_20k_price(price);
+                    monthlyRent.getYearlyRent().setCost_for_20k(value);
+                    monthlyRent.getYearlyRent().setCost_for_20k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "30000km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.getYearlyRent().setCost_for_30k(percentage);
-                    monthlyRent.getYearlyRent().setCost_for_30k_price(price);
+                    monthlyRent.getYearlyRent().setCost_for_30k(value);
+                    monthlyRent.getYearlyRent().setCost_for_30k_price(Math.round(Math.round(monthlyRent.getCost_for_2k() * monthlyRent.getCost_for_3k() / 1000) * 1000 * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "40000km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.getYearlyRent().setCost_for_40k(percentage);
-                    monthlyRent.getYearlyRent().setCost_for_40k_price(price);
+                    monthlyRent.getYearlyRent().setCost_for_40k(value);
+                    monthlyRent.getYearlyRent().setCost_for_40k_price(Math.round(Math.round(monthlyRent.getCost_for_2k() * monthlyRent.getCost_for_4k() / 1000) * 1000 * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
@@ -398,9 +398,9 @@ public class RentCarController {
 
 
 
-    @PutMapping("/admin/rentcar/price/twoYearly/{column}/{price}/{percentage}")
+    @PutMapping("/admin/rentcar/price/twoYearly/{column}/{value}")
     @ResponseBody
-    public void put_rent_car_price_twoYearly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double price, @PathVariable double percentage) throws Exception {
+    public void put_rent_car_price_twoYearly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double value) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -409,28 +409,28 @@ public class RentCarController {
         switch (column){
             case "보증금":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.getTwoYearlyRent().setDeposit(String.valueOf(price));
+                    monthlyRent.getTwoYearlyRent().setDeposit(String.valueOf(value));
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "20000km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.getTwoYearlyRent().setCost_for_20Tk(percentage);
-                    monthlyRent.getTwoYearlyRent().setCost_for_20Tk_price(price);
+                    monthlyRent.getTwoYearlyRent().setCost_for_20Tk(value);
+                    monthlyRent.getTwoYearlyRent().setCost_for_20Tk_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "30000km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.getTwoYearlyRent().setCost_for_30Tk(percentage);
-                    monthlyRent.getTwoYearlyRent().setCost_for_30Tk_price(price);
+                    monthlyRent.getTwoYearlyRent().setCost_for_30Tk(value);
+                    monthlyRent.getTwoYearlyRent().setCost_for_30Tk_price(Math.round(Math.round(monthlyRent.getCost_for_2k() * monthlyRent.getCost_for_3k() / 1000) * 1000 * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "40000km":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.getTwoYearlyRent().setCost_for_40Tk(percentage);
-                    monthlyRent.getTwoYearlyRent().setCost_for_40Tk_price(price);
+                    monthlyRent.getTwoYearlyRent().setCost_for_40Tk(value);
+                    monthlyRent.getTwoYearlyRent().setCost_for_40Tk_price(Math.round(Math.round(monthlyRent.getCost_for_2k() * monthlyRent.getCost_for_4k() / 1000) * 1000 * value / 1000) * 1000);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
