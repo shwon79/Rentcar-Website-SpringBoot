@@ -328,6 +328,7 @@ function registerRentCar() {
     const end = parseInt(document.getElementById('end').value);
     const credit = document.getElementById('credit').value;
     const img_input = document.getElementById('img_input').files[0];
+    let cost_for_2_5k_price, cost_for_3k_price, cost_for_4k_price;
 
     const requiredFields = [category1, category2, name, deposit, cost_for_2k, cost_for_2_5k, cost_for_3k, cost_for_4k, cost_for_others, age_limit, cost_per_km, nameMoren, start, end, credit, img_input];
 
@@ -337,6 +338,7 @@ function registerRentCar() {
     const cost_for_40k = document.getElementById('cost_for_40k').value;
     const cost_per_kmYearly = document.getElementById('cost_per_kmYearly').value;
     const creditYearly = document.getElementById('creditYearly').value;
+    let cost_for_20k_price, cost_for_30k_price, cost_for_40k_price;
 
     let depositTwoYearly = document.getElementById('depositTwoYearly').value;
     let cost_for_20Tk = document.getElementById('cost_for_20Tk').value;
@@ -344,11 +346,19 @@ function registerRentCar() {
     let cost_for_40Tk = document.getElementById('cost_for_40Tk').value;
     let cost_per_kmTwoYearly = document.getElementById('cost_per_kmTwoYearly').value;
     let creditTwoYearly = document.getElementById('creditTwoYearly').value;
+    let cost_for_20Tk_price, cost_for_30Tk_price, cost_for_40Tk_price;
 
     let isTwoYearExist;
 
-    const yearlyForm = document.getElementById('yearlyForm');
     const twoYearlyForm = document.getElementById('twoYearlyForm');
+
+    cost_for_2_5k_price = (Math.round(parseFloat(cost_for_2k) * parseFloat(cost_for_2_5k)/1000)*1000).toFixed(15);
+    cost_for_3k_price = (Math.round(parseFloat(cost_for_2k) * parseFloat(cost_for_3k)/1000)*1000).toFixed(15);
+    cost_for_4k_price = (Math.round(parseFloat(cost_for_2k) * parseFloat(cost_for_4k)/1000)*1000).toFixed(15);
+
+    cost_for_20k_price = Math.round((parseFloat(cost_for_2k)*parseFloat(cost_for_20k))/1000)*1000;
+    cost_for_30k_price = Math.round((Math.round((parseFloat(cost_for_2k)*parseFloat(cost_for_3k))/1000)*1000)*cost_for_30k/1000)*1000;
+    cost_for_40k_price = Math.round((Math.round((parseFloat(cost_for_2k)*parseFloat(cost_for_4k))/1000)*1000)*cost_for_40k/1000)*1000;
 
     // 24개월 값 없으면
     if (twoYearlyForm.classList.contains('openForm')) {
@@ -356,6 +366,9 @@ function registerRentCar() {
         cost_for_20Tk = parseFloat(cost_for_20Tk).toFixed(15);
         cost_for_30Tk = parseFloat(cost_for_30Tk).toFixed(15);
         cost_for_40Tk = parseFloat(cost_for_40Tk).toFixed(15);
+        cost_for_20Tk_price = Math.round((parseFloat(cost_for_2k)*parseFloat(cost_for_20Tk))/1000)*1000;
+        cost_for_30Tk_price = Math.round((Math.round((parseFloat(cost_for_2k)*parseFloat(cost_for_3k))/1000)*1000)*cost_for_30Tk/1000)*1000;
+        cost_for_40Tk_price = Math.round((Math.round((parseFloat(cost_for_2k)*parseFloat(cost_for_4k))/1000)*1000)*cost_for_40Tk/1000)*1000;
     } else {
         isTwoYearExist = 0;
         depositTwoYearly = '';
@@ -364,6 +377,9 @@ function registerRentCar() {
         cost_for_20Tk = 0;
         cost_for_30Tk = 0;
         cost_for_40Tk = 0;
+        cost_for_20Tk_price = 0;
+        cost_for_30Tk_price = 0;
+        cost_for_40Tk_price = 0;
     }
 
     let formData = new FormData();
@@ -392,20 +408,29 @@ function registerRentCar() {
     formData.append('credit_twoYearly', creditTwoYearly);
 
     // monthly
-    formData.append('cost_for_2k', parseFloat(cost_for_2k).toFixed(4));
-    formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k).toFixed(4));
-    formData.append('cost_for_3k', parseFloat(cost_for_3k).toFixed(4));
-    formData.append('cost_for_4k', parseFloat(cost_for_4k).toFixed(4));
+    formData.append('cost_for_2k', parseFloat(cost_for_2k).toFixed(15));
+    formData.append('cost_for_2_5k', parseFloat(cost_for_2_5k).toFixed(15));
+    formData.append('cost_for_3k', parseFloat(cost_for_3k).toFixed(15));
+    formData.append('cost_for_4k', parseFloat(cost_for_4k).toFixed(15));
+    formData.append('cost_for_2_5k_price', parseFloat(cost_for_2_5k_price).toFixed(15));
+    formData.append('cost_for_3k_price', parseFloat(cost_for_3k_price).toFixed(15));
+    formData.append('cost_for_4k_price', parseFloat(cost_for_4k_price).toFixed(15));
 
     // yearly
-    formData.append('cost_for_20k', parseFloat(cost_for_20k).toFixed(4));
-    formData.append('cost_for_30k', parseFloat(cost_for_30k).toFixed(4));
-    formData.append('cost_for_40k', parseFloat(cost_for_40k).toFixed(4));
+    formData.append('cost_for_20k', parseFloat(cost_for_20k).toFixed(15));
+    formData.append('cost_for_30k', parseFloat(cost_for_30k).toFixed(15));
+    formData.append('cost_for_40k', parseFloat(cost_for_40k).toFixed(15));
+    formData.append('cost_for_20k_price', parseFloat(cost_for_20k_price).toFixed(15));
+    formData.append('cost_for_30k_price', parseFloat(cost_for_30k_price).toFixed(15));
+    formData.append('cost_for_40k_price', parseFloat(cost_for_40k_price).toFixed(15));
 
     // twoYearly
-    formData.append('cost_for_20Tk', parseFloat(cost_for_20Tk).toFixed(4));
-    formData.append('cost_for_30Tk', parseFloat(cost_for_30Tk).toFixed(4));
-    formData.append('cost_for_40Tk', parseFloat(cost_for_40Tk).toFixed(4));
+    formData.append('cost_for_20Tk', parseFloat(cost_for_20Tk).toFixed(15));
+    formData.append('cost_for_30Tk', parseFloat(cost_for_30Tk).toFixed(15));
+    formData.append('cost_for_40Tk', parseFloat(cost_for_40Tk).toFixed(15));
+    formData.append('cost_for_20Tk_price', parseFloat(cost_for_20Tk_price).toFixed(15));
+    formData.append('cost_for_30Tk_price', parseFloat(cost_for_30Tk_price).toFixed(15));
+    formData.append('cost_for_40Tk_price', parseFloat(cost_for_40Tk_price).toFixed(15));
 
     // for (let key of formData.keys()) {
     //     console.log(key);
