@@ -100,7 +100,6 @@ function editBundleData(period, type) {
 }
 
 console.log('hi');
-
 // 렌트카 가격 수정 메뉴 페이지 가격 수정 버튼
 function editRentPriceMenu(id, period) {
     let category1 = [...document.getElementsByClassName('category1')].find(item => item.dataset.title == id);
@@ -135,18 +134,19 @@ function editRentPriceMenu(id, period) {
             img_url: img_url.innerText
         };
 
-        if (period === 'monthly') {
-            let cost_for_2k = [...document.getElementsByClassName('cost_for_2k')].find(item => item.dataset.title == id);
-            let cost_for_2_5k = [...document.getElementsByClassName('cost_for_2_5k')].find(item => item.dataset.title == id);
-            let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
-            let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
+        let cost_for_2k = [...document.getElementsByClassName('cost_for_2k')].find(item => item.dataset.title == id);
+        let cost_for_3k = [...document.getElementsByClassName('cost_for_3k')].find(item => item.dataset.title == id);
+        let cost_for_4k = [...document.getElementsByClassName('cost_for_4k')].find(item => item.dataset.title == id);
 
-            let cost_for_2_5k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_2_5k.value).toFixed(15))/1000)*1000).toFixed(15);
-            let cost_for_3k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_3k.value).toFixed(15))/1000)*1000).toFixed(15);
-            let cost_for_4k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_4k.value).toFixed(15))/1000)*1000).toFixed(15);
+        if (period === 'monthly') {
+            let cost_for_2_5k = [...document.getElementsByClassName('cost_for_2_5k')].find(item => item.dataset.title == id).value;
+
+            let cost_for_2_5k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_2_5k))/1000)*1000).toFixed(15);
+            let cost_for_3k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_3k.value))/1000)*1000).toFixed(15);
+            let cost_for_4k_price = (Math.round((parseFloat(cost_for_2k.value.replace(/,/g, ''))*parseFloat(cost_for_4k.value))/1000)*1000).toFixed(15);
 
             data['cost_for_2k'] = parseFloat(cost_for_2k.value.replace(/,/g, ''));
-            data['cost_for_2_5k'] = parseFloat(cost_for_2_5k.value).toFixed(15);
+            data['cost_for_2_5k'] = parseFloat(cost_for_2_5k).toFixed(15);
             data['cost_for_3k'] = parseFloat(cost_for_3k.value).toFixed(15);
             data['cost_for_4k'] = parseFloat(cost_for_4k.value).toFixed(15);
             data['cost_for_2_5k_price'] = cost_for_2_5k_price;
@@ -156,24 +156,38 @@ function editRentPriceMenu(id, period) {
             // console.log(data);
             postStringData(period, id, data);
         } else if (period === 'yearly') {
-            let cost_for_20k = [...document.getElementsByClassName('cost_for_20k')].find(item => item.dataset.title == id);
-            let cost_for_30k = [...document.getElementsByClassName('cost_for_30k')].find(item => item.dataset.title == id);
-            let cost_for_40k = [...document.getElementsByClassName('cost_for_40k')].find(item => item.dataset.title == id);
+            let cost_for_20k = [...document.getElementsByClassName('cost_for_20k')].find(item => item.dataset.title == id).value;
+            let cost_for_30k = [...document.getElementsByClassName('cost_for_30k')].find(item => item.dataset.title == id).value;
+            let cost_for_40k = [...document.getElementsByClassName('cost_for_40k')].find(item => item.dataset.title == id).value;
 
-            data['cost_for_20k'] = parseFloat(cost_for_20k.value).toFixed(15);
-            data['cost_for_30k'] = parseFloat(cost_for_30k.value).toFixed(15);
-            data['cost_for_40k'] = parseFloat(cost_for_40k.value).toFixed(15);
+            let cost_for_20k_price = Math.round((parseFloat(cost_for_2k.innerText)*parseFloat(cost_for_20k))/1000)*1000;
+            let cost_for_30k_price = Math.round((Math.round((parseFloat(cost_for_2k.innerText)*parseFloat(cost_for_3k.innerText))/1000)*1000)*cost_for_30k/1000)*1000;
+            let cost_for_40k_price = Math.round((Math.round((parseFloat(cost_for_2k.innerText)*parseFloat(cost_for_4k.innerText))/1000)*1000)*cost_for_40k/1000)*1000;
+
+            data['cost_for_20k'] = parseFloat(cost_for_20k).toFixed(15);
+            data['cost_for_30k'] = parseFloat(cost_for_30k).toFixed(15);
+            data['cost_for_40k'] = parseFloat(cost_for_40k).toFixed(15);
+            data['cost_for_20k_price'] = cost_for_20k_price.toFixed(15);
+            data['cost_for_30k_price'] = cost_for_30k_price.toFixed(15);
+            data['cost_for_40k_price'] = cost_for_40k_price.toFixed(15);
 
             // console.log(data);
             postStringData(period, id, data);
         } else if (period === 'twoYearly') {
-            let cost_for_20Tk = [...document.getElementsByClassName('cost_for_20Tk')].find(item => item.dataset.title == id);
-            let cost_for_30Tk = [...document.getElementsByClassName('cost_for_30Tk')].find(item => item.dataset.title == id);
-            let cost_for_40Tk = [...document.getElementsByClassName('cost_for_40Tk')].find(item => item.dataset.title == id);
+            let cost_for_20Tk = [...document.getElementsByClassName('cost_for_20Tk')].find(item => item.dataset.title == id).value;
+            let cost_for_30Tk = [...document.getElementsByClassName('cost_for_30Tk')].find(item => item.dataset.title == id).value;
+            let cost_for_40Tk = [...document.getElementsByClassName('cost_for_40Tk')].find(item => item.dataset.title == id).value;
 
-            data['cost_for_20Tk'] = parseFloat(cost_for_20Tk.value).toFixed(15);
-            data['cost_for_30Tk'] = parseFloat(cost_for_30Tk.value).toFixed(15);
-            data['cost_for_40Tk'] = parseFloat(cost_for_40Tk.value).toFixed(15);
+            let cost_for_20Tk_price = Math.round((parseFloat(cost_for_2k.innerText)*parseFloat(cost_for_20Tk))/1000)*1000;
+            let cost_for_30Tk_price = Math.round((Math.round((parseFloat(cost_for_2k.innerText)*parseFloat(cost_for_3k.innerText))/1000)*1000)*cost_for_30Tk/1000)*1000;
+            let cost_for_40Tk_price = Math.round((Math.round((parseFloat(cost_for_2k.innerText)*parseFloat(cost_for_4k.innerText))/1000)*1000)*cost_for_40Tk/1000)*1000;
+
+            data['cost_for_20Tk'] = parseFloat(cost_for_20Tk).toFixed(15);
+            data['cost_for_30Tk'] = parseFloat(cost_for_30Tk).toFixed(15);
+            data['cost_for_40Tk'] = parseFloat(cost_for_40Tk).toFixed(15);
+            data['cost_for_20Tk_price'] = cost_for_20Tk_price.toFixed(15);
+            data['cost_for_30Tk_price'] = cost_for_30Tk_price.toFixed(15);
+            data['cost_for_40Tk_price'] = cost_for_40Tk_price.toFixed(15);
 
             // console.log(data);
             postStringData(period, id, data);
