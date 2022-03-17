@@ -103,6 +103,7 @@ public class RentCarController {
     }
 
 
+    // 일괄수정
     @PutMapping("/admin/rentcar/price/monthly/{column}/{price}/{percentage}")
     @ResponseBody
     public void put_rent_car_price_monthly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double price, @PathVariable double percentage) throws Exception {
