@@ -86,7 +86,6 @@ function sendData(){
     let kilometer = document.querySelector("input[name='kilometer']:checked").value;
 
     window.location = '/rent/month/lookup/' + carType + '/' + kilometer + '/' + rentTerm;
-
     // document.getElementById('select_wrapper').submit();
 }
 
@@ -243,11 +242,11 @@ function displayNextOptions(e) {
 // 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동 - 데스크탑
 function dataReset() {
     let rentTerm = document.getElementById('selectRentTerm').value;
-    let carIdx = document.getElementById('getCarIdx').innerText;
+    // let carIdx = document.getElementById('getCarIdx').innerText;
     let kilometer = document.getElementById('selectkilometer').value;
     let discount = document.getElementById('getDiscount').innerText;
-    let rentStatus = document.getElementById('getRentStatus').innerText;
-    let rentIdx = document.getElementById('getrentIdx').innerText;
+    // let rentStatus = document.getElementById('getRentStatus').innerText;
+    let rentId = document.getElementById('getRentId').innerText;
 
     // console.log(kilometer);
 
@@ -257,18 +256,20 @@ function dataReset() {
         kilometer = '20000km';
     } else if (rentTerm == '24개월' && kilometer == '') {
         kilometer = '20000km';
-    }
+    };
 
-    window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
+    window.location = '/rent/month/detail/' + rentId + '/' + rentTerm + '/' + kilometer  + '/' + discount;
+
+    // window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
 }
 // 상세페이지에서 렌트기간 및 약정 주행거리 변경 시 페이지 이동 - 모바일
 function dataReset2(isRentTermChanged) {
     let rentTerm = document.getElementById('selectRentTerm2').value;
-    let carIdx = document.getElementById('getCarIdx').innerText;
+    // let carIdx = document.getElementById('getCarIdx').innerText;
     let kilometer = document.getElementById('selectkilometer2').value;
     let discount = document.getElementById('getDiscount').innerText;
-    let rentStatus = document.getElementById('getRentStatus').innerText;
-    let rentIdx = document.getElementById('getrentIdx').innerText;
+    // let rentStatus = document.getElementById('getRentStatus').innerText;
+    let rentId = document.getElementById('getRentId').innerText;
 
     if (isRentTermChanged) {
         if (rentTerm == '한달') {
@@ -276,9 +277,11 @@ function dataReset2(isRentTermChanged) {
         } else if (rentTerm == '12개월' || rentTerm == '24개월') {
             kilometer = '20000km';
         }
-    }
+    };
 
-    window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
+    window.location = '/rent/month/detail/' + rentId + '/' + rentTerm + '/' + kilometer  + '/' + discount;
+
+    // window.location.href = '/rent/month/detail/'+ rentTerm + '/' + carIdx + '/' + rentIdx + '/' + kilometer + '/' + discount + '/' + rentStatus;
 }
 
 // 연령 바꾸면 가격 바꾸기
