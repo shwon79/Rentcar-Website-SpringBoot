@@ -106,7 +106,6 @@ function displayDeposit() {
     }
 }
 
-console.log('hi');
 // Sending Data;
 const reserveMonthlyRent = () => {
 

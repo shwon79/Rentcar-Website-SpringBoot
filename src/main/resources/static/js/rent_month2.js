@@ -192,8 +192,9 @@ $('.moveToDetail').click(function(e) {
     let rentTerm = [...document.getElementsByClassName('rentTerm')].find(item => item.dataset.index == dataIndex).innerText;
     let rentId = [...document.getElementsByClassName('rentId')].find(item => item.dataset.index == dataIndex).innerText;
     let kilometer = [...document.getElementsByClassName('kilometer')].find(item => item.dataset.index == dataIndex).innerText;
-    let discount = [...document.getElementsByClassName('discount')].find(item => item.dataset.index == dataIndex).innerText;
+    let discount = [...document.getElementsByClassName('discountValue')].find(item => item.dataset.index == dataIndex).innerText;
 
+    // console.log(discount);
     window.location = '/rent/month/detail/' + rentId + '/' + rentTerm + '/' + kilometer  + '/' + discount;
 });
 
@@ -332,7 +333,7 @@ function openForm() {
     let carPrice = document.getElementById('carPrice').innerHTML;
     let orderEnd = document.getElementById('forPostOrderEnd').innerHTML;
     let rentIdx = document.getElementById('forPostRentIdx').innerHTML;
-    let carImageList = document.getElementById('forPostCarImageList').innerHTML;
+    // let carImageList = document.getElementById('forPostCarImageList').innerHTML;
     let discount = document.getElementById('forPostDiscount').innerHTML;
     let discountDescription = document.getElementById('forPostDiscountDescription').innerHTML;
     let costPerKm = document.getElementById('forPostCostPerKm').innerHTML;
@@ -451,11 +452,11 @@ function openForm() {
     mapRentIdx.value = rentIdx;
     mapForm.appendChild(mapRentIdx);
 
-    var mapCarImageList = document.createElement("input");
-    mapCarImageList.type = "text";
-    mapCarImageList.name = "carImageList";
-    mapCarImageList.value = carImageList;
-    mapForm.appendChild(mapCarImageList);
+    // var mapCarImageList = document.createElement("input");
+    // mapCarImageList.type = "text";
+    // mapCarImageList.name = "carImageList";
+    // mapCarImageList.value = carImageList;
+    // mapForm.appendChild(mapCarImageList);
 
     var mapDiscount = document.createElement("input");
     mapDiscount.type = "text";
@@ -534,7 +535,7 @@ function openOffer() {
     let carPrice = document.getElementById('carPrice').innerHTML;
     let orderEnd = document.getElementById('forPostOrderEnd').innerHTML;
     let rentIdx = document.getElementById('forPostRentIdx').innerHTML;
-    let carImageList = document.getElementById('forPostCarImageList').innerHTML;
+    // let carImageList = document.getElementById('forPostCarImageList').innerHTML;
     let discount = document.getElementById('forPostDiscount').innerHTML;
     let discountDescription = document.getElementById('forPostDiscountDescription').innerHTML;
     let costPerKm = document.getElementById('forPostCostPerKm').innerHTML;
@@ -647,11 +648,11 @@ function openOffer() {
     mapRentIdx.value = rentIdx;
     mapForm.appendChild(mapRentIdx);
 
-    var mapCarImageList = document.createElement("input");
-    mapCarImageList.type = "text";
-    mapCarImageList.name = "carImageList";
-    mapCarImageList.value = carImageList;
-    mapForm.appendChild(mapCarImageList);
+    // var mapCarImageList = document.createElement("input");
+    // mapCarImageList.type = "text";
+    // mapCarImageList.name = "carImageList";
+    // mapCarImageList.value = carImageList;
+    // mapForm.appendChild(mapCarImageList);
 
     var mapDiscount = document.createElement("input");
     mapDiscount.type = "text";
