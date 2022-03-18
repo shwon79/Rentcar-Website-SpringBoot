@@ -307,6 +307,30 @@ public class ReservationController {
                     + "예상대여일자: " + dto.getRegion() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
+        else if (dto.getTitle().equals("한눈에 상담신청")){
+            params.put("text", "[" + dto.getTitle() + "]\n"
+                    + "이름: " + dto.getName() + "\n"
+                    + "연락처: " + dto.getPhoneNo() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n"
+                    + "렌트상품: " + dto.getProduct() + "\n"
+                    + "차종: " + dto.getCategory1() + "\n"
+                    + "차분류: " + dto.getCategory2() + "\n"
+                    + "차명: " + dto.getCar_name() + "\n"
+                    + "주행거리: " + dto.getMileage() + "\n"
+                    + "21세 이상: " + dto.getAge_limit() + "\n"
+                    + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
+
+            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                    + "이름: " + dto.getName() + "\n"
+                    + "요청사항: " + dto.getDetail() + "\n\n"
+                    + "렌트상품: " + dto.getProduct() + "\n"
+                    + "차종: " + dto.getCategory1() + "\n"
+                    + "차분류: " + dto.getCategory2() + "\n"
+                    + "차명: " + dto.getCar_name() + "\n"
+                    + "주행거리: " + dto.getMileage() + "\n"
+                    + "21세 이상: " + dto.getAge_limit() + "\n"
+                    + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
+        }
         else if (dto.getTitle().equals("월렌트실시간")){
             params.put("text", "[" + dto.getTitle() + "]\n"
                     + "문의자 이름: " + dto.getName() + "\n"
@@ -334,9 +358,9 @@ public class ReservationController {
                     + "총렌트료: " + dto.getPrice() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
-        else if (dto.getTitle().equals("월렌트, 12개월렌트, 24개월렌트")){
+        else if (dto.getTitle().equals("실시간 견적내기")){
             params.put("text", "[" + dto.getTitle() + "]\n"
-                    + "예약자 이름: " + dto.getName() + "\n"
+                    + "이름: " + dto.getName() + "\n"
                     + "연락처: " + dto.getPhoneNo() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n"
                     + "렌트상품: " + dto.getProduct() + "\n"
@@ -348,7 +372,7 @@ public class ReservationController {
                     + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
 
             params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                    + "예약자 이름: " + dto.getName() + "\n"
+                    + "이름: " + dto.getName() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n"
                     + "렌트상품: " + dto.getProduct() + "\n"
                     + "차종: " + dto.getCategory1() + "\n"

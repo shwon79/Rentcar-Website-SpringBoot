@@ -216,8 +216,7 @@ public class RealtimeRentController {
 
     // 차량 상세 페이지
     @RequestMapping(value = "/rent/month/detail/{realTimeRentId}/{rentTerm}/{kilometer}/{discount}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
-    public String rent_month_detail(HttpServletResponse res, ModelMap model, @PathVariable Long realTimeRentId, @PathVariable String rentTerm, @PathVariable String kilometer, @PathVariable double discount) throws Exception {
-
+    public String rent_month_detail(ModelMap model, @PathVariable Long realTimeRentId, @PathVariable String rentTerm, @PathVariable String kilometer, @PathVariable double discount) throws Exception {
 
         Optional<RealTimeRentCar> realTimeRentCarWrapper = realTimeRentService.findById(realTimeRentId);
         if(realTimeRentCarWrapper.isPresent()){
