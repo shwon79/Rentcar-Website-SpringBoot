@@ -17,6 +17,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_moren_reservation.js}" defer></script>
+
     <script>
         window.onload = function() {
             let morenReservationMenu = document.getElementById('morenReservationMenu');
@@ -41,7 +43,7 @@
         </nav>
 
         <div class="inner_content">
-            <h2 class="page_title" style="text-align: center;">월+12/24개월 예약 신청 상세 페이지</h2>
+            <h2 class="page_title" style="text-align: center;">현재 대여가능차랑 예약 내역 상세 페이지</h2>
             <div>
                 <a href="/admin/moren/reservation/menu">
                     <i class="fas fa-arrow-left" style="margin-top: 30px; color: black; font-size: 30px;"></i>
@@ -131,13 +133,13 @@
                 <div class="detail_list">
                     <p style="margin: 0;">공급가</p>
                     <div style="display: flex; align-items: center;">
-                        <p class="number carPrice" th:text="${morenReservationDTO.carPrice}" id="displayCarPrice"></p><span>원</span>
+                        <p class="number carPrice" th:text="${morenReservationDTO.carPrice}" id="displayCarPrice" style="margin-bottom: 0;"></p><span>원</span>
                     </div>
                 </div>
                 <div class="detail_list">
                     <p style="margin: 0;">부가세</p>
                     <div style="display: flex; align-items: center;">
-                        <p class="number carTax" th:text="${morenReservationDTO.carTax}" id="displayCarTax"></p><span>원</span>
+                        <p class="number carTax" th:text="${morenReservationDTO.carTax}" id="displayCarTax" style="margin-bottom: 0;"></p><span>원</span>
                     </div>
                 </div>
                 <div class="detail_list">
