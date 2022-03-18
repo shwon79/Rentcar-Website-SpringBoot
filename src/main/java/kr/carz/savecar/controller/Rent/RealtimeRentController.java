@@ -261,7 +261,7 @@ public class RealtimeRentController {
 
     @PostMapping("/rent/month/moren/reservation")
     @ResponseBody
-    public void moren_reservation(@RequestBody MorenReservationDTO dto) {
+    public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO dto) throws IOException {
 
         Long reservationId = morenReservationService.saveDTO(dto);
 
@@ -314,6 +314,14 @@ public class RealtimeRentController {
                         + "필요증빙: " + dto.getReservationGuarantee() + "\n"
                         + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
                         + "보증금: " + dto.getCarDeposit() + "\n\n");
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 }
