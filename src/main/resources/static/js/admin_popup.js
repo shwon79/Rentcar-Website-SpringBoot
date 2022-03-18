@@ -1,6 +1,5 @@
 // 기존 저장 내용 로딩시에 보여주기
 window.onload = function() {
-
     const getDataList =
         [
             'popup1_contact', 'popup1_banner1', 'popup1_banner2',
@@ -9,7 +8,7 @@ window.onload = function() {
             'popup1_box1_line2_title', 'popup1_box1_line2_text1', 'popup1_box1_line2_price', 'popup1_box1_line2_text2',
             'popup1_box1_line3_title', 'popup1_box1_line3_text1', 'popup1_box1_line3_price', 'popup1_box1_line3_text2',
             'popup1_box1_line4_title', 'popup1_box1_line4_text1', 'popup1_box1_line4_price', 'popup1_box1_line4_text2', 'popup1_box1_line4_text3',
-            'popup1_box1_line5_title', 'popup1_box1_line5_text1', 'popup1_box1_line5_price', 'popup1_box1_line5_text2', 'popup1_box1_line5_text3',
+            'popup1_box1_line5_title', 'popup1_box1_line5_text1', 'popup1_box1_line5_price', 'popup1_box1_line5_text2',
             'popup1_box1_line6_title', 'popup1_box1_line6_text1', 'popup1_box1_line6_price',
             'popup1_box1_line7_title', 'popup1_box1_line7_text1', 'popup1_box1_line7_price', 'popup1_box1_line7_text2',
             'popup1_box1_line8_title', 'popup1_box1_line8_text1', 'popup1_box1_line8_price', 'popup1_box1_line8_text2',
