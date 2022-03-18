@@ -45,6 +45,10 @@ public class YearlyRentService {
         yearlyRent.setCost_for_20k(yearlyRentDTO.getCost_for_20k());
         yearlyRent.setCost_for_30k(yearlyRentDTO.getCost_for_30k());
         yearlyRent.setCost_for_40k(yearlyRentDTO.getCost_for_40k());
+
+        yearlyRent.setCost_for_20k_price(yearlyRentDTO.getCost_for_20k_price());
+        yearlyRent.setCost_for_30k_price(yearlyRentDTO.getCost_for_30k_price());
+        yearlyRent.setCost_for_40k_price(yearlyRentDTO.getCost_for_40k_price());
         yearlyRent.setCost_per_km(yearlyRentDTO.getCost_per_km());
         yearlyRent.setCredit(yearlyRentDTO.getCredit());
 
@@ -54,7 +58,9 @@ public class YearlyRentService {
     public Long saveByRentCarVO(RentCarVO rentCarVO, String imgUrl){
 
         YearlyRentDTO yearlyRentDTO = new YearlyRentDTO(rentCarVO.getCategory1(), rentCarVO.getCategory2(), rentCarVO.getDeposit_yearly(), rentCarVO.getName()
-                , rentCarVO.getCost_for_20k(), rentCarVO.getCost_for_30k(), rentCarVO.getCost_for_40k(), rentCarVO.getCost_for_others(), rentCarVO.getAge_limit()
+                , rentCarVO.getCost_for_20k(), rentCarVO.getCost_for_30k(), rentCarVO.getCost_for_40k()
+                , rentCarVO.getCost_for_20k_price(), rentCarVO.getCost_for_30k_price(), rentCarVO.getCost_for_40k_price()
+                , rentCarVO.getCost_for_others(), rentCarVO.getAge_limit()
                 , rentCarVO.getCost_per_km_yearly(), rentCarVO.getNameMoren(), rentCarVO.getStart(), rentCarVO.getEnd(), rentCarVO.getCredit_yearly(), imgUrl);
 
         return yearlyRentRepository.save(yearlyRentDTO.toEntity()).getId();

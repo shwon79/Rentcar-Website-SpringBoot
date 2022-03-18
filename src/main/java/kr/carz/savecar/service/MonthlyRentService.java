@@ -56,6 +56,7 @@ public class MonthlyRentService {
     public Long saveByRentCarVO(RentCarVO rentCarVO, YearlyRent yearlyRent, TwoYearlyRent twoYearlyRent, String imgUrl){
         MonthlyRentDTO monthlyRentDTO = new MonthlyRentDTO(rentCarVO.getCategory1(), rentCarVO.getCategory2(), rentCarVO.getName(), rentCarVO.getDeposit_monthly()
         , rentCarVO.getCost_for_2k(), rentCarVO.getCost_for_2_5k(), rentCarVO.getCost_for_3k(), rentCarVO.getCost_for_4k()
+        , rentCarVO.getCost_for_2_5k_price(), rentCarVO.getCost_for_3k_price(), rentCarVO.getCost_for_4k_price()
         , rentCarVO.getCost_for_others(), rentCarVO.getAge_limit(), rentCarVO.getCost_per_km_monthly(), rentCarVO.getNameMoren()
         , rentCarVO.getStart(), rentCarVO.getEnd(), rentCarVO.getCredit_monthly(), imgUrl);
 
@@ -72,6 +73,9 @@ public class MonthlyRentService {
         monthlyRent.setCost_for_2_5k(monthlyRentDTO.getCost_for_2_5k());
         monthlyRent.setCost_for_3k(monthlyRentDTO.getCost_for_3k());
         monthlyRent.setCost_for_4k(monthlyRentDTO.getCost_for_4k());
+        monthlyRent.setCost_for_2_5k_price(monthlyRentDTO.getCost_for_2_5k_price());
+        monthlyRent.setCost_for_3k_price(monthlyRentDTO.getCost_for_3k_price());
+        monthlyRent.setCost_for_4k_price(monthlyRentDTO.getCost_for_4k_price());
         monthlyRent.setCost_for_others(monthlyRentDTO.getCost_for_others());
         monthlyRent.setAge_limit(monthlyRentDTO.getAge_limit());
         monthlyRent.setCost_per_km(monthlyRentDTO.getCost_per_km());
@@ -114,7 +118,10 @@ public class MonthlyRentService {
         monthlyRent.setCost_for_2k(monthlyRentVO.getCost_for_2k());
         monthlyRent.setCost_for_2_5k(monthlyRentVO.getCost_for_2_5k());
         monthlyRent.setCost_for_3k(monthlyRentVO.getCost_for_3k());
-        monthlyRent.setCost_for_4k(monthlyRentVO.getCost_for_4k());
+
+        monthlyRent.setCost_for_2_5k_price(monthlyRentVO.getCost_for_2_5k_price());
+        monthlyRent.setCost_for_3k_price(monthlyRentVO.getCost_for_3k_price());
+        monthlyRent.setCost_for_4k_price(monthlyRentVO.getCost_for_4k_price());
         monthlyRent.setCost_for_others(monthlyRentVO.getCost_for_others());
         monthlyRent.setAge_limit(monthlyRentVO.getAge_limit());
         monthlyRent.setCost_per_km(monthlyRentVO.getCost_per_km());

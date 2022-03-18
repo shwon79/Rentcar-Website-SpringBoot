@@ -21,6 +21,9 @@ public class MonthlyRentVO {
     private double cost_for_2_5k;
     private double cost_for_3k;
     private double cost_for_4k;
+    private double cost_for_2_5k_price;
+    private double cost_for_3k_price;
+    private double cost_for_4k_price;
     private String cost_for_others;
     private String age_limit;
     private String cost_per_km;

@@ -80,18 +80,17 @@
                     </thead>
                     <tbody id="mainTable_tbody">
                     <tr th:each="discount, iterStat : ${discountList}">
-                        <td scope="col" th:text="${discount.carNo}" class="editCarNo" th:data-index="${discount.discountId}"></td>
+                        <td scope="col" th:text="${discount.carNo}" class="editCarNo" th:data-index="${discount.discountId}" style="border-right: 1px solid #dee2e6;"></td>
                         <td scope="col" th:text="${discount.carName}" class="editCarName" th:data-index="${discount.discountId}"></td>
-                        <td scope="col">
+                        <td scope="col" style="border-right: 1px solid #dee2e6;">
                             <span style="margin-right: 3%;"><button class="btn btn-info btn-sm" onclick="discountUpdate('carName', this)" th:data-index="${discount.discountId}">수정</button></span>
-
                         </td>
                         <td scope="col" th:text="${discount.discount} + '%'" class="editDiscount" th:data-index="${discount.discountId}"></td>
-                        <td>
+                        <td style="border-right: 1px solid #dee2e6;">
                             <span style="margin-right: 3%;"><button class="btn btn-info btn-sm" onclick="discountUpdate('price', this)" th:data-index="${discount.discountId}">수정</button></span>
                         </td>
                         <td scope="col" th:text="${discount.description}" class="discountDescription" th:data-index="${discount.discountId}"></td>
-                        <td>
+                        <td style="border-right: 1px solid #dee2e6;">
                             <span style="margin-right: 3%;"><button class="btn btn-info btn-sm" onclick="discountUpdate('description', this)" th:data-index="${discount.discountId}">수정</button></span>
                         </td>
                         <td>

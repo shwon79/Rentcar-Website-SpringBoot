@@ -10,5 +10,8 @@ import java.util.List;
 public interface RealTimeRentCarRepository extends JpaRepository<RealTimeRentCar, Long> {
 
     List<RealTimeRentCar> findAll();
+    List<RealTimeRentCar> findByIsExpected(int isExpected);
+    List<RealTimeRentCar> findByCarGubunAndIsExpected(String carGubun, int isExpected);
+
 
 }

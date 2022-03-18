@@ -13,7 +13,6 @@ public class RealTimeDTO {
 
     private String carType;
     private String kilometer;
-    private String reserve_able;
     private String rentTerm;
 
 }

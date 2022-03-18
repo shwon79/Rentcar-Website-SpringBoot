@@ -12,10 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 public class RentCarVO {
 
-//    private MonthlyRentVO monthlyRentVO;
-//    private YearlyRentDTO yearlyRentDTO;
-//    private TwoYearlyRentDTO twoYearlyRentDTO;
-
     // 공통
     private String category1; // 국산, 외제차의 분류
     private String category2; // 중형차, 경차 등 큰 분류
@@ -49,14 +45,23 @@ public class RentCarVO {
     private double cost_for_2_5k;
     private double cost_for_3k;
     private double cost_for_4k;
+    private double cost_for_2_5k_price;
+    private double cost_for_3k_price;
+    private double cost_for_4k_price;
 
     // yearly
     private double cost_for_20k;
     private double cost_for_30k;
     private double cost_for_40k;
+    private double cost_for_20k_price;
+    private double cost_for_30k_price;
+    private double cost_for_40k_price;
 
     // twoYearly
     private double cost_for_20Tk;
     private double cost_for_30Tk;
     private double cost_for_40Tk;
+    private double cost_for_20Tk_price;
+    private double cost_for_30Tk_price;
+    private double cost_for_40Tk_price;
 }
