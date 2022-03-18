@@ -333,8 +333,8 @@
                           <span>원</span>
                         </td>
                         <td style="display: flex; justify-content: space-evenly;">
-                          <a target="_blank" onclick="openOffer()"><button class="detail_btn">견적서 보기</button></a>
-                          <a target="_blank" th:if="${realTimeRentCar.isExpected}==0" onclick="openForm()"><button class="detail_btn_reserve">바로 예약하기</button></a>
+                          <a target="_blank" onclick="openPopUp('estimate')"><button class="detail_btn">견적서 보기</button></a>
+                          <a target="_blank" th:if="${realTimeRentCar.isExpected}==0" onclick="openPopUp('reserve')"><button class="detail_btn_reserve">바로 예약하기</button></a>
                         </td>
                       </tr>
                     </table>
@@ -405,8 +405,8 @@
                         </span>
                       </p>
                       <div style="display: flex; justify-content: space-evenly;">
-                        <a target="_blank" onclick="openOffer()"><button class="detail_btn">견적서 보기</button></a>
-                        <a target="_blank" th:if="${realTimeRentCar.isExpected}==0" onclick="openForm()"><button class="detail_btn_reserve">바로 예약하기</button></a>
+                        <a target="_blank" onclick="openPopUp('estimate')"><button class="detail_btn">견적서 보기</button></a>
+                        <a target="_blank" th:if="${realTimeRentCar.isExpected}==0" onclick="openPopUp('reserve')"><button class="detail_btn_reserve">바로 예약하기</button></a>
                       </div>
                     </div>
                   </div>
