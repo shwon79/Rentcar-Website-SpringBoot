@@ -303,8 +303,8 @@ public class ReservationController {
             params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "문의자 이름: " + dto.getName() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
-                    + "지역: " + dto.getMileage() + "\n"
-                    + "예상대여일자: " + dto.getRegion() + "\n"
+                    + "지역: " + dto.getRegion() + "\n"
+                    + "예상대여일자: " + dto.getResDate() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
         else if (dto.getTitle().equals("한눈에 상담신청")){
@@ -319,8 +319,8 @@ public class ReservationController {
             params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                     + "문의자 이름: " + dto.getName() + "\n"
                     + "차량명: " + dto.getCar_name() + "\n"
-                    + "지역: " + dto.getMileage() + "\n"
-                    + "예상대여일자: " + dto.getRegion() + "\n"
+                    + "지역: " + dto.getRegion() + "\n"
+                    + "예상대여일자: " + dto.getResDate() + "\n"
                     + "요청사항: " + dto.getDetail() + "\n\n");
         }
         else if (dto.getTitle().equals("월렌트실시간")){
