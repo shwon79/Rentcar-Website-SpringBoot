@@ -164,7 +164,7 @@ function make_reservation () {
         price : price
     };
 
-
+    // console.log(data);
 
     let checkbox = document.getElementById("agree")
     if(checkbox.checked) {
