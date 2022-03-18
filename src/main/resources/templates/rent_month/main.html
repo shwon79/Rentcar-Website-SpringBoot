@@ -420,7 +420,7 @@
                             class="moveToDetail" th:data-index="${moren.realTimeRentId}" style="cursor: pointer;"
                             th:unless="${moren.monthlyRent.twoYearlyRent == null or moren.monthlyRent.yearlyRent == null}"
                         >
-                            <td scope="col" style="display: none;" th:text="${moren.monthlyRent.id}" class="rentId" th:data-index="${moren.realTimeRentId}"></td>
+                            <td scope="col" style="display: none;" th:text="${moren.realTimeRentId}" class="rentId" th:data-index="${moren.realTimeRentId}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
                             <td scope="col" th:text="${moren.carName}"></td>
                             <td scope="col" th:text="${moren.carEngine}"></td>
