@@ -1,34 +1,34 @@
 // 모렌으로 데이터 전달, 예약하기
-$('.moren-reservation-btn').click(function(e) {
-    let id = e.target.name || e.target.dataset.index;
+function morenReserve(e, type) {
+    let id = e.name || e.dataset.index;
 
     // 예약 정보 받기
-    let carNo = [...document.getElementsByClassName('carNo')].find(ele => ele.dataset.index === e.target.dataset.index).innerText;
-    let carName = [...document.getElementsByClassName('carName')].find(ele => ele.dataset.index === e.target.dataset.index).innerText;
-    let reservationNameElem = [...document.getElementsByClassName('reservationName')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let reservationPhoneElem = [...document.getElementsByClassName('reservationPhone')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let reservationDateElem = [...document.getElementsByClassName('reservationDate')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let reservationTimeElem = [...document.getElementsByClassName('reservationTime')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let addressElem = [...document.getElementsByClassName('reservationAddress')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let addressDetailElem = [...document.getElementsByClassName('reservationAddressDetail')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let rentTermElem = [...document.getElementsByClassName('rentTerm')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let costPerKm = [...document.getElementsByClassName('costPerKm')].find(ele => ele.dataset.index === e.target.dataset.index).innerText;
-    let carAmountTotalList = document.getElementsByClassName('carAmountTotal');
-    let carPriceList = document.getElementsByClassName('carPrice');
-    let carTaxList = document.getElementsByClassName('carTax');
-    let carDepositList = document.getElementsByClassName('carDeposit');
-    let reservationDetailsElem = [...document.getElementsByClassName('reservationDetails')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let kilometerElem = [...document.getElementsByClassName('kilometer')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let reservationAgeElem = [...document.getElementsByClassName('reservationAge')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let reservationGuarantee = [...document.getElementsByClassName('reservationGuarantee')].find(ele => ele.dataset.index === e.target.dataset.index).innerText;
-    let carCode = [...document.getElementsByClassName('carCode')].find(ele => ele.dataset.index === e.target.dataset.index).innerText;
-    let pickupPlaceElem = [...document.getElementsByClassName('pickupPlace')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let reservationStatusElem = [...document.getElementsByClassName('reservationStatus')].find(ele => ele.dataset.index === e.target.dataset.index);
-    let orderCodeElem = [...document.getElementsByClassName('orderCode')].find(ele => ele.dataset.index === e.target.dataset.index);
+    let carNo = [...document.getElementsByClassName('carNo')].find(ele => ele.dataset.index === e.dataset.index).innerText;
+    let carName = [...document.getElementsByClassName('carName')].find(ele => ele.dataset.index === e.dataset.index).innerText;
+    let costPerKm = [...document.getElementsByClassName('costPerKm')].find(ele => ele.dataset.index === e.dataset.index).innerText;
+    let reservationGuarantee = [...document.getElementsByClassName('reservationGuarantee')].find(ele => ele.dataset.index === e.dataset.index).innerText;
+    let carCode = [...document.getElementsByClassName('carCode')].find(ele => ele.dataset.index === e.dataset.index).innerText;
+    let carPrice = [...document.getElementsByClassName('carPrice')].find(ele => ele.dataset.index === e.dataset.index).innerText.replace(/,/g, '');
+    let carTax = [...document.getElementsByClassName('carTax')].find(ele => ele.dataset.index === e.dataset.index).innerText.replace(/,/g, '');
 
+    let reservationNameElem = [...document.getElementsByClassName('reservationName')].find(ele => ele.dataset.index === e.dataset.index);
+    let reservationPhoneElem = [...document.getElementsByClassName('reservationPhone')].find(ele => ele.dataset.index === e.dataset.index);
+    let reservationDateElem = [...document.getElementsByClassName('reservationDate')].find(ele => ele.dataset.index === e.dataset.index);
+    let reservationTimeElem = [...document.getElementsByClassName('reservationTime')].find(ele => ele.dataset.index === e.dataset.index);
+    let addressElem = [...document.getElementsByClassName('reservationAddress')].find(ele => ele.dataset.index === e.dataset.index);
+    let addressDetailElem = [...document.getElementsByClassName('reservationAddressDetail')].find(ele => ele.dataset.index === e.dataset.index);
+    let rentTermElem = [...document.getElementsByClassName('rentTerm')].find(ele => ele.dataset.index === e.dataset.index);
+    let carAmountTotalElem = [...document.getElementsByClassName('carAmountTotal')].find(ele => ele.dataset.index === e.dataset.index);
+    let carDepositElem = [...document.getElementsByClassName('carDeposit')].find(ele => ele.dataset.index === e.dataset.index);
+    let reservationDetailsElem = [...document.getElementsByClassName('reservationDetails')].find(ele => ele.dataset.index === e.dataset.index);
+    let kilometerElem = [...document.getElementsByClassName('kilometer')].find(ele => ele.dataset.index === e.dataset.index);
+    let reservationAgeElem = [...document.getElementsByClassName('reservationAge')].find(ele => ele.dataset.index === e.dataset.index);
+    let pickupPlaceElem = [...document.getElementsByClassName('pickupPlace')].find(ele => ele.dataset.index === e.dataset.index);
+    let reservationStatusElem = [...document.getElementsByClassName('reservationStatus')].find(ele => ele.dataset.index === e.dataset.index);
+    let orderCodeElem = [...document.getElementsByClassName('orderCode')].find(ele => ele.dataset.index === e.dataset.index);
 
     let reservationName, reservationPhone, reservationDate, reservationTime, address, addressDetail, rentTerm, reservationStatus, orderCode;
-    let carAmountTotal, carDeposit,reservationDetails, kilometer, reservationAge, pickupPlace, carPrice, carTax;
+    let carAmountTotal, carDeposit,reservationDetails, kilometer, reservationAge, pickupPlace;
 
     reservationName = reservationNameElem.value || reservationNameElem.innerText;
     reservationPhone = reservationPhoneElem.value || reservationPhoneElem.innerText;
@@ -44,35 +44,17 @@ $('.moren-reservation-btn').click(function(e) {
     reservationStatus = reservationStatusElem.value || reservationStatusElem.innerText;
     orderCode = orderCodeElem.value || orderCodeElem.innerText;
 
-    for (i=0; i < carAmountTotalList.length; i++) {
-        if (e.target.dataset.index == carAmountTotalList[i].dataset.index) {
-            let carAmountTotalString = carAmountTotalList[i].value || carAmountTotalList[i].innerText;
-            carAmountTotal = carAmountTotalString.replace(/,/g, "");
-        }
-    };
-    for (i=0; i < carPriceList.length; i++) {
-        if (e.target.dataset.index == carPriceList[i].dataset.index) {
-            carPrice = (carPriceList[i].innerText).replace(/,/g, "");
-        }
-    };
-    for (i=0; i < carTaxList.length; i++) {
-        if (e.target.dataset.index == carTaxList[i].dataset.index) {
-            carTax = (carTaxList[i].innerText).replace(/,/g, "");
-        }
-    };
-    for (i=0; i < carDepositList.length; i++) {
-        if (e.target.dataset.index == carDepositList[i].dataset.index) {
-            carDeposit = carDepositList[i].value || carDepositList[i].innerText;
-            if (carDeposit == '상담' || carDeposit == '차량가격의 30%(상담문의)') {
-                carDeposit = '0';
-            } else {
-                carDeposit = carDeposit.replace(/,/g, "");
-            }
-        }
+    let carAmountTotalString = carAmountTotalElem.value || carAmountTotalElem.innerText;
+    carAmountTotal = carAmountTotalString.replace(/,/g, "");
+
+    let carDepositString = carDepositElem.value || carDepositElem.innerText;
+    if (carDepositString == '상담' || carDepositString == '차량가격의 30%(상담문의)') {
+        carDeposit = '0';
+    } else {
+        carDeposit = carDepositString.replace(/,/g, '');
     };
 
-
-    var data = {
+    let data = {
         carName: carName,
         carNo: carNo,
         kilometer: kilometer,
@@ -95,28 +77,28 @@ $('.moren-reservation-btn').click(function(e) {
         reservationStatus: reservationStatus,
         pickupPlace: pickupPlace,
         orderCode: orderCode
-    }
+    };
 
-    // console.log(data);
+    console.log(data);
 
-    if (e.target.dataset.behavior === 'confirm') {
+    if (type === 'confirm') {
         if (confirm('예약을 확정하시겠습니까?')) {
             data.reservationStatus = '1';
-            console.log(data);
+            // console.log(data);
             connectMoren();
         }
-    } else if (e.target.dataset.behavior === 'cancel') {
+    } else if (type === 'cancel') {
         if (confirm('예약 확정을 취소하시겠습니까?')) {
             data.reservationStatus = '0';
-            console.log(data);
+            // console.log(data);
             connectMoren();
         }
-    } else if (e.target.dataset.behavior === 'edit') {
+    } else if (type === 'edit') {
         if (confirm('예약 내용을 수정하시겠습니까?')) {
-            console.log(data);
+            // console.log(data);
             connectMoren();
         }
-    }
+    };
 
     function connectMoren() {
         $.ajax({
@@ -136,7 +118,8 @@ $('.moren-reservation-btn').click(function(e) {
             alert(JSON.stringify(error));
         })
     }
-});
+
+};
 
 // detail에서 렌트 기간 선택하면 약정 주행거리 선택 보여주기
 function displayNextOptions(e) {

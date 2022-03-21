@@ -111,12 +111,12 @@
                     <p class="pickupPlace" th:text="${reservation.pickupPlace}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p class="orderCode" th:text="${reservation.orderCode}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p style="flex: 3" class="grid_oneline">
-                        <button class="moren-reservation-btn set_reserve" data-behavior="confirm" th:name="${reservation.id}" th:data-index="${reservation.id}"
+                        <button class="set_reserve" onclick="morenReserve(this, 'confirm');" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '1' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
                             모렌전송
                         </button>
 
-                        <button class="moren-reservation-btn set_reserve" data-behavior="cancel" th:name="${reservation.id}" th:data-index="${reservation.id}"
+                        <button class="set_reserve" onclick="morenReserve(this, 'cancel');" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '0' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
                             모렌전송 회수
                         </button>
