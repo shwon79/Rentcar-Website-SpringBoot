@@ -29,25 +29,43 @@ function make_long_term_rent_reservation(e) {
     };
 
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    const carName = document.getElementById('car_name');
+    const carNum = document.getElementById('car_num');
+    const carPrice = document.getElementById('car_price');
+    const carDeposit = document.getElementById('car_deposit');
+    const carColor = document.getElementById('car_color');
+    const carYearModel = document.getElementById('car_year_model');
+    const contractPeriod = document.getElementById('contract_period');
+    const contractKm = document.getElementById('contract_km');
+    const contractMaintenance = document.getElementById('contract_maintenance');
+    const carFuel = document.getElementById('car_fuel');
+    let newOld = document.getElementById('new_old');
+    let product;
+
+    if (newOld) {
+        product = newOld && '누구나' + newOld.innerText + '장기렌트';
+    } else {
+        product = '누구나장기렌트';
+    };
 
     let data = {
         name : $("#reservation-simple-name").val(),
         phoneNo : reservationPhone,
         detail : $("#reservation-simple-details").val(),
-        product: '누구나 장기렌트',
+        product: product,
         title: '누구나간편',
-        category1: '',
-        category2: '',
-        car_name : '',
-        mileage: '',
-        deposit: '',
-        option: '',
-        price: '',
+        category1: carColor && carColor.innerText || '',
+        category2: carFuel && carFuel.innerText || '',
+        car_name : carName && carName.innerText || '',
+        mileage: contractKm && contractKm.innerText || '',
+        deposit: carDeposit && carDeposit.innerText || '',
+        option: contractMaintenance && contractMaintenance.innerText || '',
+        price: carPrice && carPrice.innerText || '',
         age_limit: '',
-        car_num : '',
+        car_num : carNum && carNum.innerText || '',
         region: '',
-        resDate: '',
-        carAge: ''
+        resDate: contractPeriod && contractPeriod.innerText || '',
+        carAge: carYearModel && carYearModel.innerText || '',
     };
 
     // console.log(data);
@@ -69,9 +87,9 @@ function make_long_term_rent_reservation(e) {
             data : JSON.stringify(data)
         }).done(function () {
             alert('상담 신청이 완료되었습니다.');
-            window.location.href = '/index';
+            window.location.href = '/rent/long_term';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
-    }
+    };
 };
