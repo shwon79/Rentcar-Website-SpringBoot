@@ -61,35 +61,7 @@ function numberWithCommas() {
 
 $('.number').ready(numberWithCommas());
 
-//모렌 예약 신청 아예 삭제
-$('.moren-completely-delete-btn').click(function() {
-    let completeDeleteConfirm = confirm('삭제를 하시면 현재 admin 페이지에 반영이 되며, 프라임클럽 사이트에는 반영되지 않습니다. 예약 신청 목록에서 삭제 하시겠습니까?');
-    let selectedOptions = document.querySelectorAll('input[name="selected_moren_reservation"]:checked');
-    let id;
 
-    if (completeDeleteConfirm) {
-        for (i=0; i < selectedOptions.length; i++) {
-            id = selectedOptions[i].value;
-            // console.log(id);
-
-            $.ajax({
-                type:'DELETE',
-                url:'/moren/reservation/'+ id,
-                dataType:'json',
-                contentType : 'application/json; charset=utf-8',
-            }).done(function (result) {
-                if (result.result == 1) {
-                    alert('삭제 되었습니다.');
-                } else if (result.result == 0) {
-                    alert('삭제에 문제가 생겼습니다.');
-                };
-                window.location.href = '/admin/moren/reservation/menu';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            })
-        }
-    }
-});
 
 //캠핑카 예약 신청 아예 삭제
 $('.camping-completely-delete-btn').click(function() {

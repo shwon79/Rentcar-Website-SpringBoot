@@ -1,4 +1,4 @@
-// 모렌으로 데이터 전달, 예약하기
+// 모렌으로 데이터 전달, 예약하기_현재 대여가능차량 main, detail
 function morenReserve(e, type) {
     let id = e.name || e.dataset.index;
 
@@ -79,7 +79,7 @@ function morenReserve(e, type) {
         orderCode: orderCode
     };
 
-    console.log(data);
+    // console.log(data);
 
     if (type === 'confirm') {
         if (confirm('예약을 확정하시겠습니까?')) {
@@ -121,7 +121,7 @@ function morenReserve(e, type) {
 
 };
 
-// detail에서 렌트 기간 선택하면 약정 주행거리 선택 보여주기
+// 렌트 기간 선택하면 약정 주행거리 선택 보여주기_현재 대여가능차량 detail
 function displayNextOptions(e) {
     let monthKilometer = ["2000km", "2500km", "3000km", "4000km", "기타"];
     let yearKilometer = ["20000km", "30000km", "40000km", "기타"];
@@ -145,7 +145,7 @@ function displayNextOptions(e) {
     };
 }
 
-// detail에서 총 렌트료 수정하면 공급가, 부가세 자동 변경
+// 총 렌트료 수정하면 공급가, 부가세 자동 변경_현재 대여가능차량 detail
 function changePrice(e) {
     let carPrice = document.getElementById('displayCarPrice');
     let carTax = document.getElementById('displayCarTax');
@@ -160,6 +160,36 @@ function changePrice(e) {
             let calCarTax = Math.round((input/11)).toLocaleString();
             carPrice.innerText = calCarPrice;
             carTax.innerText = calCarTax;
+        }
+    }
+};
+
+// 모렌 예약 신청 아예 삭제_현재 대여가능차량 main
+function morenCompletelyDelete() {
+    let completeDeleteConfirm = confirm('삭제를 하시면 현재 admin 페이지에 반영이 되며, 프라임클럽 사이트에는 반영되지 않습니다. 예약 신청 목록에서 삭제 하시겠습니까?');
+    let selectedOptions = document.querySelectorAll('input[name="selected_moren_reservation"]:checked');
+    let id;
+
+    if (completeDeleteConfirm) {
+        for (i=0; i < selectedOptions.length; i++) {
+            id = selectedOptions[i].value;
+            // console.log(id);
+
+            $.ajax({
+                type:'DELETE',
+                url:'/moren/reservation/'+ id,
+                dataType:'json',
+                contentType : 'application/json; charset=utf-8',
+            }).done(function (result) {
+                if (result.result == 1) {
+                    alert('삭제 되었습니다.');
+                } else if (result.result == 0) {
+                    alert('삭제에 문제가 생겼습니다.');
+                };
+                window.location.href = '/admin/moren/reservation/menu';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
         }
     }
 };
