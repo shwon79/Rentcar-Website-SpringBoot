@@ -8,7 +8,7 @@
     <title>SAVECAR - 누구나장기렌트</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link th:href="@{/css/rent_long_term.css}" rel="stylesheet">
-
+    <script th:src="@{/js/rent_long_term.js}" defer></script>
 </head>
 <div layout:fragment="content">
     <!-- end of Header-top -->
@@ -19,7 +19,6 @@
                 누구나 장기렌트는 세이브카의 신차 및 중고차를 합리적인 가격에 장기렌트할 수 있는 상품입니다.
             </p>
             <ul id="car_card_list" style="margin-top: 50px;">
-<!--                th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|"-->
                 <li class="car_card" th:each="car, i : ${longTermRentList}" th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|">
                     <div th:text="${car.newOld == 'old' ? '중고차장기' : '신차장기'}" class="car_card_slogan"
                          th:style="${car.newOld == 'old' ? 'background: red' : 'background: blue'}"></div>

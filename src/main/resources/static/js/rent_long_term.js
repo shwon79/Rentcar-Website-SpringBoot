@@ -1,3 +1,4 @@
+// 작은 이미지 hover시 크게 보이기_rent/long_term/detail
 let smallBox = document.getElementsByClassName('small_image_box');
 [...smallBox].forEach((box) => {
     box.addEventListener('mouseover', function() {
@@ -13,19 +14,19 @@ let smallBox = document.getElementsByClassName('small_image_box');
     });
 });
 
-// 누구나간편 상담요청
+// 상담신청하기_rent/long_term main, detail
 function make_long_term_rent_reservation(e) {
     let reservationPhone = $("#reservation-simple-phone").val();
 
     if (document.getElementById("reservation-simple-name").value == ""){
         alert('성함을 입력해주세요.')
         return
-    }
+    };
 
     if (document.getElementById("reservation-simple-phone").value == ""){
         alert('전화번호를 입력해주세요.')
         return
-    }
+    };
 
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
