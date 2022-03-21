@@ -147,7 +147,7 @@ public class RealtimeRentController {
                     }
                 }
             } else {
-                System.out.println("Error ! 문제 발생 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
+                System.out.println("Error ! 가격 못 찾음 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
             }
         }
     }
