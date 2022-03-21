@@ -53,7 +53,7 @@ function make_long_term_rent_reservation(e) {
         phoneNo : reservationPhone,
         detail : $("#reservation-simple-details").val(),
         product: product,
-        title: '누구나간편',
+        title: '누구나차량상세',
         category1: carColor && carColor.innerText || '',
         category2: carFuel && carFuel.innerText || '',
         car_name : carName && carName.innerText || '',

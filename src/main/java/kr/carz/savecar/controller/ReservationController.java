@@ -372,7 +372,7 @@ public class ReservationController {
                         + "약정주행거리: " + dto.getMileage() + "\n"
                         + "월대여료(VAT포함): " + dto.getPrice() + "\n"
                         + "보증금: " + dto.getDeposit() + "\n"
-                        + "계약서비스: " + dto.getOption() + "\n");
+                        + "서비스: " + dto.getOption() + "\n");
 
                 params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                         + "▼ 문의자 정보" + "\n"
@@ -390,7 +390,7 @@ public class ReservationController {
                         + "약정주행거리: " + dto.getMileage() + "\n"
                         + "월대여료(VAT포함): " + dto.getPrice() + "\n"
                         + "보증금: " + dto.getDeposit() + "\n"
-                        + "계약서비스: " + dto.getOption() + "\n");
+                        + "서비스: " + dto.getOption() + "\n");
                 break;
             case "캠핑카렌트":
                 params.put("text", "[" + dto.getTitle() + "]\n"
@@ -404,6 +404,8 @@ public class ReservationController {
                         + "요청사항: " + dto.getDetail() + "\n\n"
                         + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
                 break;
+            default:
+                System.out.println("예약하기에 문제가 생겼습니다.");
 
         }
         params.put("app_version", "test app 1.2");
