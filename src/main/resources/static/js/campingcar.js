@@ -1,18 +1,139 @@
-// 캠핑카 상담요청
-function campingcar_rent_reservation () {
+// camping/calendar/cartype_reserve/year/month 예약 기능을 제외한 나머지 기능들
 
+// 데스크탑에서 큰 이미지 아래에 있는 작은 이미지 hover시 크게 보이기
+const smallBoxList = [...document.getElementsByClassName('small_image_box')];
+smallBoxList.forEach((box) => {
+    box.addEventListener('mouseover', function() {
+        let bigImages = document.getElementsByClassName('item main-item');
+        let selectedImage = [...bigImages].filter(image => image.dataset.title === box.dataset.title);
+        [...bigImages].forEach((image) => {
+            if (image === selectedImage[0]) {
+                image.classList.add('active');
+            } else {
+                image.classList.remove('active');
+            };
+        });
+    });
+});
+
+// 리뷰쓰기 버튼 누르면 리뷰 폼 보이기
+function displayReviewBox() {
+    document.getElementById('openReviewBtn').classList.toggle('active');
+    document.getElementById('writeReviewBox').classList.toggle('active');
+};
+
+// 리뷰 등록하기 버튼
+function submitReview() {
+    let reviewName = document.getElementById('reviewName').value;
+    let reviewPassword = document.getElementById('reviewPassword').value;
+    let reviewCarType = document.getElementById('reviewCarType').value;
+    let reviewRentStartDate = document.getElementById('reviewRentStartDate').value;
+    let reviewRentEndDate = document.getElementById('reviewRentEndDate').value;
+    let reviewText = document.getElementById('reviewText').value;
+    let reviewImage = document.getElementById('reviewImage').files;
+    let reviewVideo = document.getElementById('reviewVideo').files;
+
+    let formDataWrapper = new FormData();
+
+    if (reviewVideo.length > 1) {
+        // 동영상 최대 갯수 1개
+        alert('동영상 첨부는 최대 1개까지 가능합니다.');
+    } else if (reviewImage.length > 10) {
+        // 사진 최대 갯수 10개
+        alert('이미지 첨부는 최대 10장까지 가능합니다.');
+    } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
+        alert('필수 입력 내용을 빠짐없이 작성해주세요.');
+    } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
+        formDataWrapper.append('carName', reviewCarType);
+        formDataWrapper.append('text', reviewText);
+        formDataWrapper.append('nickName', reviewName);
+        formDataWrapper.append('startDate', reviewRentStartDate);
+        formDataWrapper.append('endDate', reviewRentEndDate);
+        for (let i = 0; i < reviewImage.length; i++) {
+            formDataWrapper.append('file', reviewImage[i]);
+        }
+        formDataWrapper.append('video', reviewVideo[0]);
+        formDataWrapper.append('password', reviewPassword);
+        if (confirm('리뷰를 등록 하시겠습니까?')) {
+            postReview(formDataWrapper);
+        };
+    };
+
+    function postReview(data) {
+        $.ajax({
+            enctype: 'multipart/form-data',
+            cache: false,
+            type: 'POST',
+            url: '/camping/calendar/review',
+            processData:false,
+            contentType: false,
+            data: data
+        }).done(function () {
+            alert('리뷰가 등록되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    };
+}
+
+// 리뷰 클릭하면 크게 보여지도록
+let oneReview = document.getElementsByClassName('one_review');
+oneReview && [...oneReview].forEach((review) => {
+    review.addEventListener('click', event => {
+        if (!event.target.classList.contains('video_part') && !event.target.classList.contains('video_real')) {
+            const reviewImageOpen = [...document.getElementsByClassName('review_image_open')];
+            const oneReviewClose = [...document.getElementsByClassName('one_review_close')];
+
+            let targetImageBox = reviewImageOpen.find(box => box.dataset.title == event.currentTarget.dataset.id);
+            targetImageBox && targetImageBox.classList.toggle('active');
+
+            let targetReview = oneReviewClose.find(review => review.dataset.title == event.currentTarget.dataset.id);
+            targetReview && targetReview.classList.toggle('opened');
+        };
+        changeBtnText(review.dataset.id, false);
+    });
+});
+
+// 자세히 보기 버튼
+function changeBtnText(reviewId, boolean) {
+    reviewId = reviewId.toString();
+    const targetReview = [...document.getElementsByClassName('one_review_close')].find((review) => review.dataset.title === reviewId);
+    const targetOpenBtn = [...document.getElementsByClassName('see_more_btn_open')].find((btn) => btn.dataset.id === reviewId);
+    const targetCloseBtn = [...document.getElementsByClassName('see_more_btn_close')].find((btn) => btn.dataset.id === reviewId);
+
+    if (boolean) {
+        if (targetReview.classList.contains('opened')) {
+            targetOpenBtn.style.display = 'block';
+            targetCloseBtn.style.display = 'none';
+        } else {
+            targetOpenBtn.style.display = 'none';
+            targetCloseBtn.style.display = 'block';
+        }
+    } else {
+        if (targetReview.classList.contains('opened')) {
+            targetOpenBtn.style.display = 'none';
+            targetCloseBtn.style.display = 'block';
+        } else {
+            targetOpenBtn.style.display = 'block';
+            targetCloseBtn.style.display = 'none';
+        }
+    }
+};
+
+// 캠핑카 상담신청하기
+function campingcar_rent_reservation () {
     if (document.getElementById("reservation-detail-name").value == ""){
         alert('성함을 입력해주세요.')
         return
-    }
+    };
 
     if (document.getElementById("reservation-detail-phone").value == ""){
         alert('전화번호를 입력해주세요.')
         return
-    }
+    };
 
-
-    var data = {
+    let data = {
         name : $("#reservation-detail-name").val(),
         phoneNo : $("#reservation-detail-phone").val(),
         detail : $("#reservation-detail-details").val(),
@@ -22,7 +143,8 @@ function campingcar_rent_reservation () {
 
     // console.log(data);
 
-    var checkbox = document.getElementById("agree")
+    let checkbox = document.getElementById("agree")
+
     if(checkbox.checked) {
         $.ajax({
             type : 'POST',
@@ -39,73 +161,13 @@ function campingcar_rent_reservation () {
     } else{
         alert("개인정보 수집 및 이용에 동의해주세요.");
     }
-}
+};
 
-const clickedDay = (e) => {
-    const restBtn = document.getElementsByClassName('able_radio');
-
-    for (const restBtnElement of restBtn) {
-        if (restBtnElement.classList.contains('double_circle')) {
-            restBtnElement.style.backgroundColor = 'royalblue';
-            restBtnElement.style.boxShadow = 'inset 0px 0px 0px 5px white';
-            restBtnElement.style.border = '2px solid royalblue';
-            restBtnElement.style.color = 'white';
-        } else {
-            restBtnElement.style.boxShadow = 'none';
-            restBtnElement.style.border = 'none';
-            restBtnElement.style.backgroundColor = 'royalblue';
-            restBtnElement.style.color = 'white';
-        }
-    };
-    e.style.border = '2px solid royalblue';
-    e.style.color = 'royalblue';
-    e.style.backgroundColor = 'white';
-}
-
-// 모바일 예약하기 버튼 누르면 달력 뜨기
-function seeMobileReserve(behavior) {
-    const rightColumn = document.getElementById('right_column');
-    if (behavior === 'open') {
-        rightColumn.classList.add('onMobile');
-        localStorage.setItem('modalStatus', behavior);
-    } else if (behavior === 'close') {
-        rightColumn.classList.remove('onMobile');
-        modalStatus = behavior;
-        localStorage.setItem('modalStatus', behavior);
-    }
-}
-
-function checkModal() {
-    let modalStatus = localStorage.getItem('modalStatus');
-    const rightColumn = document.getElementById('right_column');
-
-    if (modalStatus === 'open') {
-        rightColumn.classList.add('onMobile');
-    } else {
-        rightColumn.classList.remove('onMobile');
-    }
-}
-
-// window.onload = checkModal();
-
-let smallBox = document.getElementsByClassName('small_image_box');
-[...smallBox].forEach((box) => {
-    box.addEventListener('mouseover', function() {
-        let bigImages = document.getElementsByClassName('item main-item');
-        let selectedImage = [...bigImages].filter(image => image.dataset.title === box.dataset.title);
-        [...bigImages].forEach((image) => {
-            if (image === selectedImage[0]) {
-                image.classList.add('active');
-            } else {
-                image.classList.remove('active');
-            };
-        });
-    });
-});
-
-// To the top button
+// 화면 맨 위로 올라가기 버튼
 const mybutton = document.getElementById('toTheTopBtn');
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function() {
+    scrollFunction()
+};
 
 function scrollFunction() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
