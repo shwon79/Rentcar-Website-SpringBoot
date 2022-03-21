@@ -1,8 +1,8 @@
 let sortType = 'desc';
 
-// rent/month/new 차량 정렬 화살표 클릭
-function sortAvailableContent(index, isNumber) {
-    let table = document.getElementsByClassName('table_available')
+// 현재 대여 가능 차량 & n일 이내 입고 예정 차량 정렬_rent/month/new
+function sortContent(index, status, isNumber) {
+    let table = document.getElementsByClassName(`table_${status}`);
 
     sortType = (sortType == 'asc') ? 'desc' : 'asc';
 
@@ -32,40 +32,7 @@ function sortAvailableContent(index, isNumber) {
             }
         }
     }
-}
-
-function sortExpectedContent(index, isNumber) {
-    let table = document.getElementsByClassName('table_expected')
-
-    sortType = (sortType == 'asc') ? 'desc' : 'asc';
-
-    let checkSort = true;
-    let rows = table[0].rows;
-
-    while (checkSort) { // 현재와 다음만 비교하기때문에 위치변경되면 다시 정렬해준다.
-        checkSort = false;
-
-        for (let i = 1; i < (rows.length - 1); i++) {
-            let fCell, sCell;
-
-            if (isNumber) {
-                fCell = parseInt(rows[i].cells[index].innerText.replace(/,/g, ''));
-                sCell = parseInt(rows[i + 1].cells[index].innerText.replace(/,/g, ''));
-            } else {
-                fCell = rows[i].cells[index].innerText.toUpperCase();
-                sCell = rows[i + 1].cells[index].innerText.toUpperCase();
-            };
-
-            let row = rows[i];
-
-            // 오름차순<->내림차순
-            if ((sortType == 'asc' && fCell > sCell) || (sortType == 'desc' && fCell < sCell)) {
-                row.parentNode.insertBefore(row.nextSibling, row);
-                checkSort = true;
-            }
-        }
-    }
-}
+};
 
 // rent/month/new 차량 정렬 시 화살표 아이콘
 function displaySortImage(target) {
@@ -78,8 +45,9 @@ function displaySortImage(target) {
         targetI.classList.add('fa-arrow-up');
         targetI.classList.remove('fa-arrow-down');
     }
-}
+};
 
+//
 function sendData(){
     let carType = document.querySelector("input[name='carType']:checked").value;
     let rentTerm = document.querySelector("input[name='rentTerm']:checked").value;

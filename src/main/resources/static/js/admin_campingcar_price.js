@@ -2,6 +2,7 @@ let twodays, threedays, fourdays, fivedays, sixdays, sevendays, eightdays, nined
 let elevendays, twelvedays, thirteendays, fourteendays, fifteendays, sixteendays, seventeendays, eighteendays, ninetinedays, twentydays;
 let twentyonedays, twentytwodays, twentythreedays, twentyfourdays, twentyfivedays, twentysixdays, twentysevendays, twentyeightdays, twentyninedays, thirtydays;
 
+// 캠핑카 가격 수정_campingcar/price/menu
 function EditCampingcarPrice(carName, season) {
     const europeThreeHours = parseInt(document.getElementById('europe_three_hours').value.replace(/,/g, ""));
     const europeOffOneDay = parseInt(document.getElementById('europe_off_oneday').value.replace(/,/g, ""));
@@ -141,6 +142,7 @@ function getData(index) {
     thirtydays = parseFloat(document.getElementsByClassName('percent30')[index].value);
 }
 
+// 가장 최근에 사용한 탭 확인_campingcar/price/menu
 function checkCampingPriceTab() {
     let tabStatus = sessionStorage.getItem('campingPriceTab');
     let navLinkList = document.getElementsByClassName('nav-link');
@@ -170,6 +172,6 @@ function checkCampingPriceTab() {
         navLinkList[0].classList.add('show');
         tabPaneList[0].classList.add('active');
         tabPaneList[0].classList.add('show');
-    }
-}
+    };
+};
 window.onload = checkCampingPriceTab();

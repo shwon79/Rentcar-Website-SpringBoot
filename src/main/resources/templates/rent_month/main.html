@@ -17,12 +17,12 @@
     <script>
         $(document).ready(function(){
             // 반납예정일로 정렬
-            sortAvailableContent(2);
-            sortExpectedContent(6);
-            sortExpectedContent(6);
+            sortContent(2, 'available');
+            sortContent(6, 'expected');
+            sortContent(6, 'expected');
         });
     </script>
-    <script th:src="@{/js/rent_month2.js}" defer></script>
+    <script th:src="@{/js/rent_month.js}" defer></script>
     <!-- Channel Plugin Scripts -->
 <!--    <script>-->
 <!--        (function() {-->
@@ -210,12 +210,10 @@
                 </p>
             </div>
             <div>
-<!--                <div class="to-prior-rent-month-text">* 아래 목록에 없는 차량은 [상시차량 실시간 예약]으로 필요한 차량을 예약하세요</div>-->
-                <p style="word-break: keep-all; color: dimgrey;">
-                    * 아래 목록에 없는 차량은 [상시차량 실시간 예약]으로 필요한 차량을 예약하세요
-                </p>
-                <div class="to-prior-rent-month-button-wrap"><a href="/rent/estimate"><button class="to-prior-rent-month-button">상시차량 실시간 예약</button></a></div>
+                <div class="to-prior-rent-month-text">* 아래 목록에 없는 차량은 [차량별 렌트료확인하기]로 필요한 차량을 예약하세요</div>
+                <div class="to-prior-rent-month-button-wrap"><a href="/rent/estimate"><button class="to-prior-rent-month-button">차량별 렌트료확인하기</button></a></div>
                 <div class="to-prior-rent-month-button-wrap"><a href="/price/month/경형"><button class="to-price-rent-month-button">한눈에보는 월렌트/12개월 가격표<image th:src="@{/img/click1.png}" style="width: 20px; height: 20px;"></image></button></a></div>
+
             </div>
         </div>
 
@@ -238,37 +236,37 @@
                             <th style="display: none;"></th>
                             <th>
                                 <p>차량번호</p>
-                                <div onclick="sortAvailableContent(1); displaySortImage('available_1');">
+                                <div onclick="sortContent(1, 'available'); displaySortImage('available_1');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_1" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>차명</p>
-                                <div onclick="sortAvailableContent(2); displaySortImage('available_2');">
+                                <div onclick="sortContent(2, 'available'); displaySortImage('available_2');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_2" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>연료</p>
-                                <div onclick="sortAvailableContent(3); displaySortImage('available_3');">
+                                <div onclick="sortContent(3, 'available'); displaySortImage('available_3');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_3" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>색상</p>
-                                <div onclick="sortAvailableContent(4); displaySortImage('available_4');">
+                                <div onclick="sortContent(4, 'available'); displaySortImage('available_4');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_4" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>년식</p>
-                                <div onclick="sortAvailableContent(5); displaySortImage('available_5');">
+                                <div onclick="sortContent(5, 'available'); displaySortImage('available_5');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_5" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>월대여료[VAT별도]</p>
-                                <div onclick="sortAvailableContent(6, true); displaySortImage('available_6');">
+                                <div onclick="sortContent(6, 'available', true); displaySortImage('available_6');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_6" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
@@ -388,43 +386,43 @@
                             <th style="display: none;"></th>
                             <th>
                                 <p>차량번호</p>
-                                <div onclick="sortExpectedContent(1); displaySortImage('expected_1');">
+                                <div onclick="sortContent(1, 'expected'); displaySortImage('expected_1');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_1" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>차명</p>
-                                <div onclick="sortExpectedContent(2); displaySortImage('expected_2');">
+                                <div onclick="sortContent(2, 'expected'); displaySortImage('expected_2');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_2" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>연료</p>
-                                <div onclick="sortExpectedContent(3); displaySortImage('expected_3');">
+                                <div onclick="sortContent(3, 'expected'); displaySortImage('expected_3');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_3" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>색상</p>
-                                <div onclick="sortExpectedContent(4); displaySortImage('expected_4');">
+                                <div onclick="sortContent(4, 'expected'); displaySortImage('expected_4');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_4" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>년식</p>
-                                <div onclick="sortExpectedContent(5); displaySortImage('expected_5');">
+                                <div onclick="sortContent(5, 'expected'); displaySortImage('expected_5');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_5" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
                                 <p>반납예정일</p>
-                                <div onclick="sortExpectedContent(6); displaySortImage('expected_6');">
+                                <div onclick="sortContent(6, 'expected'); displaySortImage('expected_6');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_6" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
-                                <p>월대여료[VAT별도]</p>
-                                <div onclick="sortExpectedContent(7, true); displaySortImage('expected_7');">
+                                <p style="word-break: keep-all;">월대여료[VAT별도]</p>
+                                <div onclick="sortContent(7, 'expected', true); displaySortImage('expected_7');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_7" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>

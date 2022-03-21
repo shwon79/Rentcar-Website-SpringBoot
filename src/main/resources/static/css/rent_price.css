@@ -91,6 +91,50 @@ th[scope=row] {
 td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
     left: 45px;
 }
+
+/*table {*/
+/*    border-collapse: separate;*/
+/*    border-spacing: 0;*/
+/*    border-top: 1px solid grey;*/
+/*}*/
+
+/*td,*/
+/*th {*/
+/*    margin: 0;*/
+/*    border: 1px solid grey;*/
+/*    white-space: nowrap;*/
+/*    border-top-width: 0px;*/
+/*}*/
+
+/*.table_wrapper {*/
+/*    width: auto;*/
+/*    overflow-x: scroll;*/
+/*    margin-left: 5em;*/
+/*    overflow-y: visible;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.headcol:first-child {*/
+/*    position: absolute;*/
+/*    width: 5em;*/
+/*    left: 0;*/
+/*    top: auto;*/
+/*    !*border-top-width: 1px;*!*/
+/*    !*!*only relevant for first row*!*!*/
+/*    !*margin-top: -1px;*!*/
+/*    !*!*compensate for top border*!*!*/
+/*}*/
+/*.headcol:nth-child(2) {*/
+/*    position: absolute;*/
+/*    width: 5em;*/
+/*    left: 45px;*/
+/*    top: auto;*/
+/*    !*border-top-width: 1px;*!*/
+/*    !*!*only relevant for first row*!*!*/
+/*    !*margin-top: -1px;*!*/
+/*    !*!*compensate for top border*!*!*/
+/*}*/
+
 /* 테이블 행/열 고정 끝 */
 
 

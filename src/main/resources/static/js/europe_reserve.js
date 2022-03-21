@@ -1,3 +1,5 @@
+// camping/calendar/cartype_reserve/year/month 예약과 관련된 모든 기능들
+
 // 선택 옵션 보이게 하기
 function doDisplay(param){
     let calendarRentalDate = document.getElementById("calendar_rental");
@@ -36,15 +38,6 @@ function doDisplay(param){
             break;
     }
 }
-
-// year-month 채우기
-// document.querySelector('.year-month-return').textContent = `${viewYear}년 ${viewMonth + 1}월`;
-
-
-// 클릭시 날짜 자동 생성
-// let takeDate = document.getElementById('rent_date').name;
-// document.getElementById('rent_date').innerText = `${todayFull}(${todayDay})`;
-
 
 // 성수기 or 비성수기 가격표 확인
 let obj, deposits;
@@ -93,7 +86,7 @@ const runIt = () => {
             priceList[29] = parseFloat(obj['twentyninedays']) * parseInt(obj['onedays']);
             priceList[30] = parseFloat(obj['thirtydays']) * parseInt(obj['onedays']);
         })
-}
+};
 
 
 // select rent date
@@ -106,12 +99,10 @@ let reserveTime = '';
 
 function sendRentDate(id, year, wDay, getdateId) {
 
-
     const selectedDate = document.getElementById('selected_date');
     let resultSelectedDate = document.getElementById('display_result_start_date');
     let calendarRentalDate = document.getElementById("calendar_rental");
     let calendarRentalTime = document.getElementById('calendar_rental_time');
-
 
     // 요일 한글화 swtich
     let whichDay = '';
@@ -137,7 +128,7 @@ function sendRentDate(id, year, wDay, getdateId) {
         case '6':
             whichDay = '토';
             break;
-    }
+    };
 
     selectedDate.innerText = year + '년 ' + id + '(' + whichDay + ')';
     calendarRentalDate.style.display = 'none';
@@ -153,7 +144,6 @@ function sendRentDate(id, year, wDay, getdateId) {
     document.getElementById('display_result_end_time').innerText = '반납 시간';
     document.getElementById('calendar_rental_extra_time').style.display = 'none';
     dateId = getdateId;
-
 
     // 선택 가능한 시간 받아오기
     fetch(`/camping/calendar/${carType}_reserve/time_list/${dateId}`)
@@ -171,117 +161,11 @@ function sendRentDate(id, year, wDay, getdateId) {
                     options[i].style.backgroundColor = 'dimgray';
                 }
             }
-        })
-
+        });
     // reserveTime='10시';
-
 }
-// const sendRentDate = (id, year, wDay) => {
-//     console.log(id);
-//     console.log(year);
-//     console.log(wDay);
-//     // rentDateNum = id;
-//     // rentDateYear = year;
-//     // rentDateMonth = rentDateNum.split('월 ')[0];
-//     // rentDateDay = rentDateNum.split('월 ')[1].split('일')[0];
-//     // let url = `/${carType}/sendrentdate`;
-//     //
-//     // let targetTimes = document.getElementsByName('time1');
-//     // for (const eachTime of targetTimes) {
-//     //     eachTime.checked = false;
-//     // }
-//     //
-//     // rentTime='';
-//     // returnTime='';
-//     // returnDateNum='';
-//     // extraTimeNum=0;
-//     //
-//     // // 요일 한글화 swtich
-//     // let whichDay = '';
-//     // switch (wDay) {
-//     //     case '0':
-//     //         whichDay = '일';
-//     //         break;
-//     //     case '1':
-//     //         whichDay = '월';
-//     //         break;
-//     //     case '2':
-//     //         whichDay = '화';
-//     //         break;
-//     //     case '3':
-//     //         whichDay = '수';
-//     //         break;
-//     //     case '4':
-//     //         whichDay = '목';
-//     //         break;
-//     //     case '5':
-//     //         whichDay = '금';
-//     //         break;
-//     //     case '6':
-//     //         whichDay = '토';
-//     //         break;
-//     // }
-//     //
-//     // // 선택된 날짜 글자 넣기
-//     // let putTarget = document.getElementById('rent_date');
-//     // let putResult = year+'.'+id.split('월 ')[0]+'.'+id.split(' ')[1].split('일')[0]+'.('+whichDay+')';
-//     // putTarget.innerText = putResult;
-//     //
-//     // // 그 날짜에 맞는 선택 가능 시간 데이터 받아오기
-//     // fetch(url+'/'+rentDateYear+'/'+rentDateMonth+'/'+rentDateDay)
-//     //     .then(res => res.json())
-//     //     .then(result => {
-//     //
-//     //         // 대여 시간 선택 띄우기
-//     //         let theWrapper = document.getElementById('rent_time');
-//     //         let hrTime = document.getElementById('hr_time');
-//     //
-//     //         theWrapper.style.display = 'block';
-//     //         hrTime.style.display = 'block';
-//     //
-//     //         // 대여 시작 날짜 & 시간 선택되면 일권 고르기
-//     //         if (rentDateNum != '' && rentTime != '') {
-//     //             let targetDays = document.getElementById('calendar_return');
-//     //             targetDays.style.display = 'block';
-//     //         }
-//     //
-//     //         let allTime = ["10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시"];
-//     //         for (const eachTime of allTime) {
-//     //             let timeId = document.getElementById(eachTime);
-//     //             if (result.includes(eachTime)) {
-//     //                 timeId.disabled = false;
-//     //                 timeId.className = 'able_time'
-//     //
-//     //             }
-//     //             else {
-//     //                 timeId.disabled = true;
-//     //                 timeId.className = 'disabled_time';
-//     //             }
-//     //         }
-//     //
-//     //         calculateDate();
-//     //
-//     //     })
-//     //
-//     // let availableDays = 0;
-//     //
-//     // // 선택 불가능한 가까운 날짜 받아오기
-//     // fetch(`/${carType}/getrentdate/${rentDateYear}/${rentDateMonth}/${rentDateDay}`)
-//     //     .then(res => res.json())
-//     //     .then(result => {
-//     //         // 현재 남아있는 options 없애기
-//     //         let targetSelect = document.getElementById('days_select');
-//     //         targetSelect.options.length = 0;
-//     //         availableDays = result[0];
-//     //         makeOptions(availableDays)
-//     //     })
-//     //
-//     // runIt();
-// }
-
 
 // make 일권 options on selection
-
 const makeOptions = (days) => {
     for (let i = 0; i<=days; i++) {
         let targetSelect = document.getElementById('days_select');
@@ -303,8 +187,7 @@ const makeOptions = (days) => {
         }
     targetSelect.appendChild(createdOpt);
     }
-}
-
+};
 
 // time select onclick
 let rentTime = '';
@@ -338,7 +221,7 @@ function sendRentTime(id) {
             availableDays = result.possible_days;
             // console.log(availableDays);
             makeOptions(availableDays)
-        })
+        });
 }
 const rentTimeSel = (id) => {
     rentTime = id;
@@ -347,16 +230,14 @@ const rentTimeSel = (id) => {
     if (rentTime != '' && rentDateNum != '') {
         let targetDays = document.getElementById('calendar_return')
         targetDays.style.display = 'block'
-
         calculateDate();
-    }
+    };
 
     if (rentTime !='' && rentDateNum != '' && returnDateNum != '') {
         getAvailableExtra();
         calculateDate();
-    }
-
-}
+    };
+};
 
 // price calculator
 let price = 0;
@@ -381,11 +262,8 @@ const calculateDate = () => {
         let targetExtra = document.getElementById('calExtraFee');
         let targetVat = document.getElementById('calVat');
 
-
         // 추가시간 포함 총 렌트료
-
         price = parseInt(priceList[useDayNum]);
-
 
         if (season == 1) extraFee = (65000*extraTimeNum);
         else if (season == 0) {
@@ -401,8 +279,7 @@ const calculateDate = () => {
         targetExtra.innerText = extraFee.toLocaleString()+'원'
         targetWhole.innerText = totalPrice.toLocaleString()+'원'
     }
-}
-
+};
 
 // 몇 일권 select
 let returnDateNum = '';
@@ -538,7 +415,7 @@ function displayCampingPrice(param) {
             rentFullPrice.innerText = originPrice.toLocaleString() + ' 원';
         }
     }
-}
+};
 
 //추가 시간 선택시 표기
 function extraTimeSelect() {
@@ -565,92 +442,12 @@ function extraTimeSelect() {
 
     document.getElementById('calendar_rental_extra_time').style.display = 'none';
 
-
     runIt();
 
     setTimeout(function() {
         displayCampingPrice(param);
     }, 200);
 }
-// const daysSelect = () => {
-//     let daySelector = document.getElementById('days_select');
-//     let theVal = parseInt(daySelector.options[daySelector.selectedIndex].value);
-//
-//     // 날짜 계산  && rentTime != ''
-//     if (rentDateNum != '') {
-//         let temp = rentDateNum.split('월 ');
-//         rentDateMonth = parseInt(temp[0]);
-//         let returnDateMon = rentDateMonth;
-//         rentDateDay = parseInt(temp[1].split('일')[0]);
-//         let returnDateDay = rentDateDay + theVal;
-//         useDay = daySelector.options[daySelector.selectedIndex].innerText;
-//         useDayNum = parseInt(daySelector.options[daySelector.selectedIndex].value);
-//
-//
-//         if (returnDateDay < 29) ;
-//         else if (useDayNum == 30) {  // 한달권 선택시
-//             returnDateMon = rentDateMonth + 1;
-//             returnDateDay = rentDateDay;
-//         }
-//         else { // 한달권 제외 다른 달로 넘어갈 시
-//             if (rentDateMonth <= 7) {
-//                 if (rentDateMonth == 2) {
-//                     if (returnDateDay > 29) {
-//                         returnDateMon = rentDateMonth + 1;
-//                         returnDateDay -= 28;
-//                     }
-//                 } else if (rentDateMonth%2 == 1) {
-//                     if (returnDateDay > 31) {
-//                         returnDateMon = rentDateMonth + 1;
-//                         returnDateDay -= 31;
-//                     }
-//                 } else if (rentDateMonth%2 == 0) {
-//                     if (returnDateDay > 30) {
-//                         returnDateMon = rentDateMonth + 1;
-//                         returnDateDay -= 30;
-//                     }
-//                 }
-//             } else if (rentDateMonth > 7) {
-//                 if (rentDateMonth%2 == 0) {
-//                     if (returnDateDay > 31) {
-//                         returnDateMon = rentDateMonth + 1;
-//                         returnDateDay -= 31;
-//                     }
-//                 } else if (rentDateMonth%2 == 1) {
-//                     if (returnDateDay > 30) {
-//                         returnDateMon = rentDateMonth + 1;
-//                         returnDateDay -= 30;
-//                     }
-//                 }
-//             }
-//
-//         }
-//
-//
-//         returnDateNum = `${returnDateMon}월 ${returnDateDay}일`;
-//
-//         getAvailableExtra();
-//
-//
-//     }
-//     calculateDate();
-// }
-
-// let extraTimeTarget = document.getElementById('extra_time_sel')
-// const getAvailableExtra = () => {
-//     fetch(`/${carType}/getextratime/${rentDateYear}/${rentDateMonth}/${rentDateDay}/${useDayNum}/${rentTime}`)
-//         .then(res => res.json())
-//         .then(result => {
-//             // 현재 남아있는 options 없애기
-//             let targetSelect = document.getElementById('extratime_select');
-//             targetSelect.options.length = 0;
-//             let availableExtra = result[0];
-//             makeExtraOptions(availableExtra)
-//             extraTimeTarget.style.display = 'block'
-//         })
-// }
-
-
 
 // extra time option maker
 const makeExtraOptions = (times) => {
@@ -668,8 +465,7 @@ const makeExtraOptions = (times) => {
         }
         targetSelect.appendChild(createdOpt);
     }
-}
-
+};
 
 // extra time select
 let extraTimeNum = 0;
@@ -680,8 +476,7 @@ const timeSelect = () => {
     let temp = parseInt(rentTime.split('시')[0]) + theVal;
     returnTime = `${temp}시`;
     calculateDate();
-}
-
+};
 
 // 선택한 날짜 자동 선택
 let clickedDate = ''
@@ -698,25 +493,9 @@ const doIt = () => {
     // 라디오 버튼 클릭 만들기
     let target = document.getElementById(clickedDate);
     target.checked = true;
-
-}
-
-
-
-// 만약 클릭한 곳이 아니라 달력으로 넘어갈시 날짜 표시 X
-// const seasonTarget = document.getElementById('rent_date');
-// let condition1 = parseInt(seasonTarget.title);
-// if (condition1 > 0) doIt();
-
-
-// // df
-// runIt();
-
-
-
+};
 
 // Sending Data;
-
 const postDate = () => {
     rentDateNum = document.getElementById('selected_date').innerText;
     rentTime = document.getElementById('selected_time').innerText;
@@ -737,46 +516,15 @@ const postDate = () => {
             let calculateTime = parseInt(rentTime) + 3;
             returnTime = calculateTime + '시';
         }
-    }
+    };
 
     if (!rentDateNum.endsWith('주세요') && !rentTime.endsWith('주세요')&& returnDateNum!='' && returnTime!='' && extraTime.value!='') {
         alert('예약 창으로 넘어갑니다.')
         window.location.href = `/camping/calendar/${carType}_reserve/reservation/${rentDateNum}/${rentTime}/${returnDateNum}/${returnTime}/${useDay}/${totalPrice}/${extraTime}`
-
     } else {
         alert('입력을 완료해주세요!')
-    }
-}
-
-// 옵션 선택 다 해야 아래 결과 보여주기
-// function displayResultWrapper() {
-//     let resultWrapper = document.getElementsByClassName('result_wrapper')[0];
-//     let startDate = document.getElementById('selected_date').innerText;
-//     let startTime = $(".time_options input[type='radio']:checked")[0];
-//     let rentPeriod = document.getElementById('selected_period').innerText;
-//
-//     if (startTime === undefined) {
-//         startTime = '';
-//     } else {
-//         startTime = startTime.id;
-//     }
-//
-//     let validStartDate = startDate.startsWith('20') ? true : false;
-//     let validStartTime = startTime != '' ? true : false;
-//     let validRentPeriod;
-//
-//     if (rentPeriod.endsWith('일') || rentPeriod === '한달') {
-//         validRentPeriod = true;
-//     } else {
-//         validRentPeriod = false;
-//     }
-//
-//     if (validStartDate & validStartTime & validRentPeriod) {
-//         resultWrapper.style.display = 'block';
-//     } else {
-//         resultWrapper.style.display = 'none';
-//     }
-// }
+    };
+};
 
 // 대여기간, 성수기/비성수기 선택시 가격 보여주기
 let offObj, peakObj, resultPrice;
@@ -805,7 +553,7 @@ function displayPrice() {
         }
     } else {
         priceInfo.innerText = '';
-    }
+    };
 };
 
 // 페이지 로딩 시 가장 싼 가격 보여주면서 모든 가격 받아오기
@@ -904,7 +652,7 @@ function makeExtraTimeOptions(carType, price) {
     option1.text = '3시간권 (+' + price.toLocaleString() + '원)';
 
     displayPriceExtraTime.appendChild(option1);
-}
+};
 
 // //지난 달로 못가게 화살표 없애기
 // const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');
@@ -921,109 +669,48 @@ function makeExtraTimeOptions(carType, price) {
 //     hiddenFromJuly.style.display = 'none';
 // }
 
-// 리뷰쓰기 버튼 누르면 리뷰 폼 보이기
-function displayReviewBox() {
-    document.getElementById('openReviewBtn').classList.toggle('active');
-    document.getElementById('writeReviewBox').classList.toggle('active');
+const clickedDay = (e) => {
+    const restBtn = document.getElementsByClassName('able_radio');
+
+    for (const restBtnElement of restBtn) {
+        if (restBtnElement.classList.contains('double_circle')) {
+            restBtnElement.style.backgroundColor = 'royalblue';
+            restBtnElement.style.boxShadow = 'inset 0px 0px 0px 5px white';
+            restBtnElement.style.border = '2px solid royalblue';
+            restBtnElement.style.color = 'white';
+        } else {
+            restBtnElement.style.boxShadow = 'none';
+            restBtnElement.style.border = 'none';
+            restBtnElement.style.backgroundColor = 'royalblue';
+            restBtnElement.style.color = 'white';
+        }
+    };
+    e.style.border = '2px solid royalblue';
+    e.style.color = 'royalblue';
+    e.style.backgroundColor = 'white';
 }
 
-// 리뷰 등록하기 버튼
-function submitReview() {
-    let reviewName = document.getElementById('reviewName').value;
-    let reviewPassword = document.getElementById('reviewPassword').value;
-    let reviewCarType = document.getElementById('reviewCarType').value;
-    let reviewRentStartDate = document.getElementById('reviewRentStartDate').value;
-    let reviewRentEndDate = document.getElementById('reviewRentEndDate').value;
-    let reviewText = document.getElementById('reviewText').value;
-    let reviewImage = document.getElementById('reviewImage').files;
-    let reviewVideo = document.getElementById('reviewVideo').files;
-
-    let formDataWrapper = new FormData();
-
-    if (reviewVideo.length > 1) {
-        // 동영상 최대 갯수 1개
-        alert('동영상 첨부는 최대 1개까지 가능합니다.');
-    } else if (reviewImage.length > 10) {
-        // 사진 최대 갯수 10개
-        alert('이미지 첨부는 최대 10장까지 가능합니다.');
-    } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
-        alert('필수 입력 내용을 빠짐없이 작성해주세요.');
-    } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
-        formDataWrapper.append('carName', reviewCarType);
-        formDataWrapper.append('text', reviewText);
-        formDataWrapper.append('nickName', reviewName);
-        formDataWrapper.append('startDate', reviewRentStartDate);
-        formDataWrapper.append('endDate', reviewRentEndDate);
-        for (let i = 0; i < reviewImage.length; i++) {
-            formDataWrapper.append('file', reviewImage[i]);
-        }
-        formDataWrapper.append('video', reviewVideo[0]);
-        formDataWrapper.append('password', reviewPassword);
-        if (confirm('리뷰를 등록 하시겠습니까?')) {
-            postReview(formDataWrapper);
-        };
-    };
-
-    function postReview(data) {
-        $.ajax({
-            enctype: 'multipart/form-data',
-            cache: false,
-            type: 'POST',
-            url: '/camping/calendar/review',
-            processData:false,
-            contentType: false,
-            data: data
-        }).done(function () {
-            alert('리뷰가 등록되었습니다.');
-            location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    };
-}
-
-// 데스크탑에서 리뷰 클릭하면 크게 보여지도록
-let oneReview = document.getElementsByClassName('one_review');
-oneReview && [...oneReview].forEach((review) => {
-    review.addEventListener('click', event => {
-        if (!event.target.classList.contains('video_part') && !event.target.classList.contains('video_real')) {
-            const reviewImageOpen = [...document.getElementsByClassName('review_image_open')];
-            const oneReviewClose = [...document.getElementsByClassName('one_review_close')];
-
-            let targetImageBox = reviewImageOpen.find(box => box.dataset.title == event.currentTarget.dataset.id);
-            targetImageBox && targetImageBox.classList.toggle('active');
-
-            let targetReview = oneReviewClose.find(review => review.dataset.title == event.currentTarget.dataset.id);
-            targetReview && targetReview.classList.toggle('opened');
-        }
-        changeBtnText(review.dataset.id, false);
-    });
-});
-
-// 자세히 보기 버튼
-function changeBtnText(reviewId, boolean) {
-    reviewId = reviewId.toString();
-    const targetReview = [...document.getElementsByClassName('one_review_close')].find((review) => review.dataset.title === reviewId);
-    const targetOpenBtn = [...document.getElementsByClassName('see_more_btn_open')].find((btn) => btn.dataset.id === reviewId);
-    const targetCloseBtn = [...document.getElementsByClassName('see_more_btn_close')].find((btn) => btn.dataset.id === reviewId);
-
-    if (boolean) {
-        if (targetReview.classList.contains('opened')) {
-            targetOpenBtn.style.display = 'block';
-            targetCloseBtn.style.display = 'none';
-        } else {
-            targetOpenBtn.style.display = 'none';
-            targetCloseBtn.style.display = 'block';
-        }
-    } else {
-        if (targetReview.classList.contains('opened')) {
-            targetOpenBtn.style.display = 'none';
-            targetCloseBtn.style.display = 'block';
-        } else {
-            targetOpenBtn.style.display = 'block';
-            targetCloseBtn.style.display = 'none';
-        }
+// 모바일 예약하기 버튼 누르면 달력 뜨기
+function seeMobileReserve(behavior) {
+    const rightColumn = document.getElementById('right_column');
+    if (behavior === 'open') {
+        rightColumn.classList.add('onMobile');
+        localStorage.setItem('modalStatus', behavior);
+    } else if (behavior === 'close') {
+        rightColumn.classList.remove('onMobile');
+        modalStatus = behavior;
+        localStorage.setItem('modalStatus', behavior);
     }
-
-
 }
+
+function checkModal() {
+    let modalStatus = localStorage.getItem('modalStatus');
+    const rightColumn = document.getElementById('right_column');
+
+    if (modalStatus === 'open') {
+        rightColumn.classList.add('onMobile');
+    } else {
+        rightColumn.classList.remove('onMobile');
+    }
+}
+// window.onload = checkModal();

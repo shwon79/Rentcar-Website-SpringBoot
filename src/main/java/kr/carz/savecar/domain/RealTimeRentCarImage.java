@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table(name = "RealTimeRentCarImage")
-public class RealTimeRentCarImage {
+public class RealTimeRentCarImage extends BaseTimeEntity {
     @Id
     private Long imageId;
 

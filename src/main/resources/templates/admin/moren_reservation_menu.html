@@ -15,6 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_moren_reservation.js}" defer></script>
     <script>
         $(window).on('load', function () {
             let morenReservationMenu = document.getElementById('morenReservationMenu');
@@ -39,9 +40,9 @@
         </nav>
 
         <div class="inner_content">
-            <h2 class="page_title" style="text-align: center;">현재 대여가능차랑 예약 내역</h2>
+            <h2 class="page_title" style="text-align: center;">현재 대여가능차량 예약 내역</h2>
             <div style="text-align: right;">
-                <button class="moren-completely-delete-btn set_reserve">목록에서 삭제</button>
+                <button class="set_reserve" onclick="morenCompletelyDelete();">목록에서 삭제</button>
             </div>
             <div class="reserve_list" id="reserve_list_title" style="justify-content: space-between;">
                 <p style="flex: 1">삭제</p>
@@ -110,12 +111,12 @@
                     <p class="pickupPlace" th:text="${reservation.pickupPlace}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p class="orderCode" th:text="${reservation.orderCode}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p style="flex: 3" class="grid_oneline">
-                        <button class="moren-reservation-btn set_reserve" data-behavior="confirm" th:name="${reservation.id}" th:data-index="${reservation.id}"
+                        <button class="set_reserve" onclick="morenReserve(this, 'confirm');" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '1' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
                             모렌전송
                         </button>
 
-                        <button class="moren-reservation-btn set_reserve" data-behavior="cancel" th:name="${reservation.id}" th:data-index="${reservation.id}"
+                        <button class="set_reserve" onclick="morenReserve(this, 'cancel');" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '0' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
                             모렌전송 회수
                         </button>

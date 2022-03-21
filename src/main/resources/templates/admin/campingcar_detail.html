@@ -15,12 +15,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script th:src="@{/js/admin.js}" defer></script>
+  <script th:src="@{/js/admin_campingcar_reservation.js}" defer></script>
   <script>
     $(window).on('load', function () {
       let campingcarMenu = document.getElementById('campingcarMenu');
       campingcarMenu.classList.add('activeAdminMenu');
     });
 
+    // 예약 날짜, 시간에 맞춰 input에 정확한 내용이 표시되도록
     $(window).on('load', function () {
       let getRentDate = document.getElementById('getRentDate').innerText;
       let rentDate = document.getElementById('rentDate');
@@ -156,7 +158,6 @@
           <div class="detail_list">
             <p>일권</p>
             <p id="day" th:text="${campingCarReservation.day}"></p>
-
           </div>
           <div class="detail_list">
             <p>추가 시간</p>

@@ -196,33 +196,6 @@ public class ReservationController {
         pw.close();
     }
 
-    // 문자 전송 api to employees
-    public void send_error_message_to_employees(String to_manager_phone, String manager_text_message)  {
-
-        // 문자전송
-        Message coolsms = new Message(api_key, api_secret);
-        HashMap<String, String> params = new HashMap<>();
-        HashMap<String, String> params2 = new HashMap<>();
-
-        /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", to_manager_phone);
-        params.put("from", admin3);
-        params.put("type", "LMS");
-
-        params.put("text", manager_text_message);
-
-        params.put("app_version", "test app 1.2");
-
-        /* 세이브카에게 문자 전송 */
-        try {
-            org.json.simple.JSONObject obj = coolsms.send(params);
-            System.out.println(obj.toString()); //전송 결과 출력
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
-    }
-
 
     // 문자 전송 api
     public void send_message(String to_manager_phone, String to_customer_phone, String manager_text_message, String customer_text_message)  {
@@ -267,8 +240,6 @@ public class ReservationController {
         }
     }
 
-
-    // TODO: 누구나장기렌트 Detail page 상담신청 데이터 더 넣기
     // 예약 저장 api
     @PostMapping("/reservation/apply")
     @ResponseBody
@@ -291,135 +262,149 @@ public class ReservationController {
         params2.put("type", "LMS");
 
 
-        if (dto.getTitle().equals("간편상담신청")){
-            params.put("text", "[" + dto.getTitle() + "]\n"
-                    + "문의자 이름: " + dto.getName() + "\n"
-                    + "연락처: " + dto.getPhoneNo() + "\n"
-                    + "차량명: " + dto.getCar_name() + "\n"
-                    + "지역: " + dto.getRegion() + "\n"
-                    + "예상대여일자: " + dto.getResDate() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n");
+        switch (dto.getTitle()) {
+            case "간편상담신청":
+            case "한눈에 상담신청":
+                params.put("text", "[" + dto.getTitle() + "]\n"
+                        + "문의자 이름: " + dto.getName() + "\n"
+                        + "연락처: " + dto.getPhoneNo() + "\n"
+                        + "차량명: " + dto.getCar_name() + "\n"
+                        + "지역: " + dto.getRegion() + "\n"
+                        + "예상대여일자: " + dto.getResDate() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n");
 
-            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                    + "문의자 이름: " + dto.getName() + "\n"
-                    + "차량명: " + dto.getCar_name() + "\n"
-                    + "지역: " + dto.getRegion() + "\n"
-                    + "예상대여일자: " + dto.getResDate() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n");
-        }
-        else if (dto.getTitle().equals("한눈에 상담신청")){
-            params.put("text", "[" + dto.getTitle() + "]\n"
-                    + "문의자 이름: " + dto.getName() + "\n"
-                    + "연락처: " + dto.getPhoneNo() + "\n"
-                    + "차량명: " + dto.getCar_name() + "\n"
-                    + "지역: " + dto.getRegion() + "\n"
-                    + "예상대여일자: " + dto.getResDate() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n");
+                params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                        + "문의자 이름: " + dto.getName() + "\n"
+                        + "차량명: " + dto.getCar_name() + "\n"
+                        + "지역: " + dto.getRegion() + "\n"
+                        + "예상대여일자: " + dto.getResDate() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n");
+                break;
 
-            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                    + "문의자 이름: " + dto.getName() + "\n"
-                    + "차량명: " + dto.getCar_name() + "\n"
-                    + "지역: " + dto.getRegion() + "\n"
-                    + "예상대여일자: " + dto.getResDate() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n");
-        }
-        else if (dto.getTitle().equals("월렌트실시간")){
-            params.put("text", "[" + dto.getTitle() + "]\n"
-                    + "문의자 이름: " + dto.getName() + "\n"
-                    + "연락처: " + dto.getPhoneNo() + "\n"
-                    + "보험연령: " + dto.getAge_limit()+ "\n"
-                    + "차량명: " + dto.getCar_name() + "\n"
-                    + "차량번호: " + dto.getCar_num() + "\n"
-                    + "년식: " + dto.getCarAge() + "\n"
-                    + "대여기간: " + dto.getProduct() + "\n"
-                    + "약정 주행거리: " + dto.getMileage() + "\n"
-                    + "보증금: " + dto.getDeposit() + "\n"
-                    + "총렌트료[부포]: " + dto.getPrice() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n");
+            case "월렌트실시간":
+                params.put("text", "[" + dto.getTitle() + "]\n"
+                        + "문의자 이름: " + dto.getName() + "\n"
+                        + "연락처: " + dto.getPhoneNo() + "\n"
+                        + "보험연령: " + dto.getAge_limit() + "\n"
+                        + "차량명: " + dto.getCar_name() + "\n"
+                        + "차량번호: " + dto.getCar_num() + "\n"
+                        + "년식: " + dto.getCarAge() + "\n"
+                        + "대여기간: " + dto.getProduct() + "\n"
+                        + "약정 주행거리: " + dto.getMileage() + "\n"
+                        + "보증금: " + dto.getDeposit() + "\n"
+                        + "총렌트료[부포]: " + dto.getPrice() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n");
 
-            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                    + "문의자 이름: " + dto.getName() + "\n"
-                    + "연락처: " + dto.getPhoneNo() + "\n"
-                    + "보험연령: " + dto.getAge_limit()+ "\n"
-                    + "차량명: " + dto.getCar_name() + "\n"
-                    + "차량번호: " + dto.getCar_num() + "\n"
-                    + "년식: " + dto.getCarAge() + "\n"
-                    + "대여기간: " + dto.getProduct() + "\n"
-                    + "약정 주행거리: " + dto.getMileage() + "\n"
-                    + "보증금: " + dto.getDeposit() + "\n"
-                    + "총렌트료: " + dto.getPrice() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n");
-        }
-        else if (dto.getTitle().equals("실시간 견적내기")){
-            params.put("text", "[" + dto.getTitle() + "]\n"
-                    + "이름: " + dto.getName() + "\n"
-                    + "연락처: " + dto.getPhoneNo() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n"
-                    + "렌트상품: " + dto.getProduct() + "\n"
-                    + "차종: " + dto.getCategory1() + "\n"
-                    + "차분류: " + dto.getCategory2() + "\n"
-                    + "차명: " + dto.getCar_name() + "\n"
-                    + "주행거리: " + dto.getMileage() + "\n"
-                    + "보험연령: " + dto.getAge_limit() + "\n"
-                    + "사이트에서 조회된 렌트료(VAT포함): " + dto.getPrice() + "\n");
+                params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                        + "문의자 이름: " + dto.getName() + "\n"
+                        + "연락처: " + dto.getPhoneNo() + "\n"
+                        + "보험연령: " + dto.getAge_limit() + "\n"
+                        + "차량명: " + dto.getCar_name() + "\n"
+                        + "차량번호: " + dto.getCar_num() + "\n"
+                        + "년식: " + dto.getCarAge() + "\n"
+                        + "대여기간: " + dto.getProduct() + "\n"
+                        + "약정 주행거리: " + dto.getMileage() + "\n"
+                        + "보증금: " + dto.getDeposit() + "\n"
+                        + "총렌트료: " + dto.getPrice() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n");
+                break;
+            case "실시간 견적내기":
+                params.put("text", "[" + dto.getTitle() + "]\n"
+                        + "이름: " + dto.getName() + "\n"
+                        + "연락처: " + dto.getPhoneNo() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n"
+                        + "렌트상품: " + dto.getProduct() + "\n"
+                        + "차종: " + dto.getCategory1() + "\n"
+                        + "차분류: " + dto.getCategory2() + "\n"
+                        + "차명: " + dto.getCar_name() + "\n"
+                        + "주행거리: " + dto.getMileage() + "\n"
+                        + "21세 이상: " + dto.getAge_limit() + "\n"
+                        + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
 
-            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                    + "이름: " + dto.getName() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n"
-                    + "렌트상품: " + dto.getProduct() + "\n"
-                    + "차종: " + dto.getCategory1() + "\n"
-                    + "차분류: " + dto.getCategory2() + "\n"
-                    + "차명: " + dto.getCar_name() + "\n"
-                    + "주행거리: " + dto.getMileage() + "\n"
-                    + "보험연령: " + dto.getAge_limit() + "\n"
-                    + "사이트에서 조회된 렌트료(VAT포함): " + dto.getPrice() + "\n");
-        }
-        else if (dto.getTitle().equals("누구나장기렌트")){
-            params.put("text", "[" + dto.getTitle() + "]\n"
-                    + "예약자 이름: " + dto.getName() + "\n"
-                    + "연락처: " + dto.getPhoneNo() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n"
-                    + "렌트상품: " + dto.getProduct() + "\n"
-                    + "차종: " + dto.getCategory2() + "\n"
-                    + "차명: " + dto.getCar_name() + "\n"
-                    + "옵션: " + dto.getOption() + "\n"
-                    + "약정주행거리: " + dto.getMileage() + "\n"
-                    + "보증금: " + dto.getDeposit() + "\n");
+                params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                        + "이름: " + dto.getName() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n"
+                        + "렌트상품: " + dto.getProduct() + "\n"
+                        + "차종: " + dto.getCategory1() + "\n"
+                        + "차분류: " + dto.getCategory2() + "\n"
+                        + "차명: " + dto.getCar_name() + "\n"
+                        + "주행거리: " + dto.getMileage() + "\n"
+                        + "21세 이상: " + dto.getAge_limit() + "\n"
+                        + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
+                break;
+            case "누구나장기렌트":
+                params.put("text", "[" + dto.getTitle() + "]\n"
+                        + "예약자 이름: " + dto.getName() + "\n"
+                        + "연락처: " + dto.getPhoneNo() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n"
+                        + "렌트상품: " + dto.getProduct() + "\n"
+                        + "차종: " + dto.getCategory2() + "\n"
+                        + "차명: " + dto.getCar_name() + "\n"
+                        + "옵션: " + dto.getOption() + "\n"
+                        + "약정주행거리: " + dto.getMileage() + "\n"
+                        + "보증금: " + dto.getDeposit() + "\n");
 
-            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                    + "예약자 이름: " + dto.getName() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n"
-                    + "렌트상품: " + dto.getProduct() + "\n"
-                    + "차종: " + dto.getCategory2() + "\n"
-                    + "차명: " + dto.getCar_name() + "\n"
-                    + "옵션: " + dto.getOption() + "\n"
-                    + "약정주행거리: " + dto.getMileage() + "\n"
-                    + "보증금: " + dto.getDeposit() + "\n");
-        }
-        else if (dto.getTitle().equals("누구나간편")){
-            params.put("text", "[" + dto.getTitle() + "]\n"
-                    + "예약자 이름: " + dto.getName() + "\n"
-                    + "렌트상품: " + dto.getProduct() + "\n"
-                    + "연락처: " + dto.getPhoneNo() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n");
+                params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                        + "예약자 이름: " + dto.getName() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n"
+                        + "렌트상품: " + dto.getProduct() + "\n"
+                        + "차종: " + dto.getCategory2() + "\n"
+                        + "차명: " + dto.getCar_name() + "\n"
+                        + "옵션: " + dto.getOption() + "\n"
+                        + "약정주행거리: " + dto.getMileage() + "\n"
+                        + "보증금: " + dto.getDeposit() + "\n");
+                break;
+            case "누구나차량상세":
+                params.put("text", "[누구나 장기렌트 상담신청]\n"
+                        + "▼ 문의자 정보" + "\n"
+                        + "예약자 이름: " + dto.getName() + "\n"
+                        + "렌트상품: " + dto.getProduct() + "\n"
+                        + "연락처: " + dto.getPhoneNo() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n"
 
-            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                    + "예약자 이름: " + dto.getName() + "\n"
-                    + "렌트상품: " + dto.getProduct() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n"
-                    );
-        }
-        else if (dto.getTitle().equals("캠핑카렌트")){
-            params.put("text", "[" + dto.getTitle() + "]\n"
-                    + "예약자 이름: " + dto.getName() + "\n"
-                    + "연락처: " + dto.getPhoneNo() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n"
-                    + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
+                        + "▼ 대여 정보" + "\n"
+                        + "차량이름: " + dto.getCar_name() + "\n"
+                        + "차량번호: " + dto.getCar_num() + "\n"
+                        + "차량색상: " + dto.getCategory1() + "\n"
+                        + "차량년식: " + dto.getCarAge() + "\n"
+                        + "차량연료: " + dto.getCategory2() + "\n"
+                        + "계약기간: " + dto.getResDate() + "\n"
+                        + "약정주행거리: " + dto.getMileage() + "\n"
+                        + "월대여료(VAT포함): " + dto.getPrice() + "\n"
+                        + "보증금: " + dto.getDeposit() + "\n"
+                        + "계약서비스: " + dto.getOption() + "\n");
 
-            params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                    + "예약자 이름: " + dto.getName() + "\n"
-                    + "요청사항: " + dto.getDetail() + "\n\n"
-                    + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
+                params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                        + "▼ 문의자 정보" + "\n"
+                        + "예약자 이름: " + dto.getName() + "\n"
+                        + "렌트상품: " + dto.getProduct() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n"
+
+                        + "▼ 대여 정보" + "\n"
+                        + "차량이름: " + dto.getCar_name() + "\n"
+                        + "차량번호: " + dto.getCar_num() + "\n"
+                        + "차량색상: " + dto.getCategory1() + "\n"
+                        + "차량년식: " + dto.getCarAge() + "\n"
+                        + "차량연료: " + dto.getCategory2() + "\n"
+                        + "계약기간: " + dto.getResDate() + "\n"
+                        + "약정주행거리: " + dto.getMileage() + "\n"
+                        + "월대여료(VAT포함): " + dto.getPrice() + "\n"
+                        + "보증금: " + dto.getDeposit() + "\n"
+                        + "계약서비스: " + dto.getOption() + "\n");
+                break;
+            case "캠핑카렌트":
+                params.put("text", "[" + dto.getTitle() + "]\n"
+                        + "예약자 이름: " + dto.getName() + "\n"
+                        + "연락처: " + dto.getPhoneNo() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n"
+                        + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
+
+                params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                        + "예약자 이름: " + dto.getName() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n"
+                        + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
+                break;
+
         }
         params.put("app_version", "test app 1.2");
         params2.put("app_version", "test app 1.2");

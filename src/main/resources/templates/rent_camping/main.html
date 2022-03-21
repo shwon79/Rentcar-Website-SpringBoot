@@ -13,20 +13,14 @@
     <link th:href="@{/css/camping.css}" rel="stylesheet">
     <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
 
-    <script th:src="@{/js/campingcar.js}" defer></script>
-    <script th:src="@{/js/campingCarMain.js}" defer></script>
-
+    <script th:src="@{/js/camping_main.js}" defer></script>
     <script>
         $(window).load(function() {
-            let ulList = document.getElementsByClassName('header_camp_li');
-            for (i=0; i < ulList.length; i++) {
-                if (ulList[i].dataset.id == 'campingCarHome') {
-                    ulList[i].classList.add('active');
-                };
-            };
+            let ulList = [...document.getElementsByClassName('header_camp_li')];
+            let targetUl = ulList.find(ul => ul.dataset.id === 'campingCarHome');
+            targetUl && targetUl.classList.add('active');
         });
     </script>
-<!--    <script th:src="@{/js/europe_reserve.js}" defer ></script>-->
 </head>
 
 <body onload="displayCheapestPrice();">

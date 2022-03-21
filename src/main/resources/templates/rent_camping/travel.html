@@ -13,18 +13,14 @@
     <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
 
     <script th:src="@{/js/campingcar.js}" defer></script>
-
+    <script th:src="@{/js/europe_reserve.js}" defer ></script>
     <script>
         $(window).load(function() {
-            let ulList = document.getElementsByClassName('header_camp_li');
-            for (i=0; i < ulList.length; i++) {
-                if (ulList[i].dataset.id == 'travel') {
-                    ulList[i].classList.add('active');
-                }
-            };
+            let ulList = [...document.getElementsByClassName('header_camp_li')];
+            let targetUl = ulList.find(ul => ul.dataset.id === 'travel');
+            targetUl && targetUl.classList.add('active');
         });
     </script>
-    <script th:src="@{/js/europe_reserve.js}" defer ></script>
 </head>
 
 <body th:onload="getPriceData([[${imagesList[0].carName.carName}]])">

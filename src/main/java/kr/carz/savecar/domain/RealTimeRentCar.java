@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Table(name = "RealTimeRentCar")
-public class RealTimeRentCar {
+public class RealTimeRentCar extends BaseTimeEntity {
 
     @Id
     @Column(name = "RealTimeRentId")
