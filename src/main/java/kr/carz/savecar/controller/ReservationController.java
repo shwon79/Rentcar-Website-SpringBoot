@@ -276,8 +276,8 @@ public class ReservationController {
                 params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
                         + "문의자 이름: " + dto.getName() + "\n"
                         + "차량명: " + dto.getCar_name() + "\n"
-                        + "지역: " + dto.getMileage() + "\n"
-                        + "예상대여일자: " + dto.getRegion() + "\n"
+                        + "지역: " + dto.getRegion() + "\n"
+                        + "예상대여일자: " + dto.getResDate() + "\n"
                         + "요청사항: " + dto.getDetail() + "\n\n");
                 break;
 
@@ -404,6 +404,7 @@ public class ReservationController {
                         + "요청사항: " + dto.getDetail() + "\n\n"
                         + "렌트상품: 캠핑카 - " + dto.getProduct() + "\n");
                 break;
+
         }
         params.put("app_version", "test app 1.2");
         params2.put("app_version", "test app 1.2");
