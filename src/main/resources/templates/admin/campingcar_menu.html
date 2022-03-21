@@ -11,7 +11,8 @@
   <link th:href="@{/css/admin.css}" rel="stylesheet">
   <script th:src="@{/js/jquery.min.js}"></script>
   <script th:src="@{/js/admin.js}" defer></script>
-<!--  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+  <script th:src="@{/js/admin_campingcar_reservation.js}" defer></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -26,24 +27,6 @@
 <body>
 <div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
-
-<!--    <div class="box-body">-->
-<!--      <table class="table table-bordered">-->
-<!--        <tr>-->
-<!--          <th style="width: 10px">BNO</th>-->
-<!--          <th style="width: 200px">WRITER</th>-->
-<!--          <th style="width: 40px">VIEWCNT</th>-->
-<!--        </tr>-->
-
-<!--        <tr th:each="reservation : ${campingCarReservationList}">-->
-<!--          <td th:text="${reservation.name}">BNO</td>-->
-<!--          <td th:text="${reservation.carType}">WRITER</td>-->
-<!--          <td th:text="${reservation.carType}">VIEWCNT</td>-->
-<!--        </tr>-->
-
-<!--      </table>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; /.box-body &ndash;&gt;-->
 
     <div class="content list_container">
       <nav class="navbar navbar-expand-lg navbar-light">
@@ -60,7 +43,7 @@
       <div class="inner_content">
         <h2 class="page_title" style="text-align: center;">캠핑카 예약 현황</h2>
         <div style="text-align: right;">
-          <button class="camping-completely-delete-btn set_reserve">목록에서 삭제</button>
+          <button class="set_reserve" onclick="campingCompletelyDelete();">목록에서 삭제</button>
         </div>
         <div class="reserve_list" id="reserve_list_title">
           <p style="flex: 1">삭제</p>

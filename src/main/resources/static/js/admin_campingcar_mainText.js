@@ -1,8 +1,6 @@
-let imgBoxList = document.getElementsByClassName('image-box');
-let uploadBoxList = document.getElementsByClassName('upload-box');
 let inputFileList = document.querySelectorAll('input[type="file"]');
 
-// 메인&추가 이미지 등록 및 삭제
+// 본문 이미지 등록 및 삭제_campingcar/mainText/menu
 function uploadImage(behavior, carName, title, imageId) {
     let formData = new FormData();
 
@@ -61,7 +59,7 @@ function uploadImage(behavior, carName, title, imageId) {
     };
 }
 
-// 이미지 순서 변경 창 보이기
+// 이미지 순서 변경 창 보이기_campingcar/mainText/menu
 function displaySortingBox() {
     let boxList = document.getElementsByClassName('changeOrderBox');
     let btnList = document.getElementsByClassName('changeOrderBtn');
@@ -73,7 +71,7 @@ function displaySortingBox() {
     });
 };
 
-// 이미지 순서 변경 후 저장
+// 이미지 순서 변경 후 저장_campingcar/mainText/menu
 function saveChangedData(carName) {
     let boxList = document.getElementsByClassName(carName+'Item');
     if (confirm('이미지 순서를 변경하시겠습니까?')) {
@@ -118,7 +116,7 @@ function saveChangedData(carName) {
     };
 };
 
-// active tab 확인
+// 가장 최근에 사용한 탭 기억하기_campingcar/mainText/menu
 function checkCampingMainTextTab() {
     let tabStatus = sessionStorage.getItem('campingMainTextTab');
     let navLinkList = document.getElementsByClassName('nav-link');
@@ -141,13 +139,13 @@ function checkCampingMainTextTab() {
             tabpane.classList.remove('show');
             tabpane.classList.remove('active');
         }
-    })
+    });
 
     if (!tabStatus) {
         navLinkList[0].classList.add('active');
         navLinkList[0].classList.add('show');
         tabPaneList[0].classList.add('active');
         tabPaneList[0].classList.add('show');
-    }
+    };
 }
 window.onload = checkCampingMainTextTab();

@@ -1,7 +1,9 @@
-// setting에서 캠핑카 내용 수정 버튼
 let fuel, gearBox, license, personnel, camperPrice, rentPolicy, rentInsurance, driverLicense;
 let rentRule, refundPolicy, basicOption, facility, carNum, carCode, yearmodel;
+
+// 캠핑카 내용 수정 버튼_campingcar/setting/menu
 function editCampingcarSetting(carName, index) {
+    // index는 0 europe, 1 limousine, 2 travel
     getData(index);
 
     let data = {
@@ -20,12 +22,10 @@ function editCampingcarSetting(carName, index) {
         rent_rule: rentRule,
         refund_policy: refundPolicy,
         driver_license: driverLicense
-    }
+    };
 
-    // console.log(data);
-    // console.log(carName);
     if (confirm('캠핑카 내용을 수정하시겠습니까?')) {
-        console.log(data);
+        // console.log(data);
         sendSettingData();
         sessionStorage.setItem('campingSettingTab', carName);
     };
@@ -48,8 +48,9 @@ function editCampingcarSetting(carName, index) {
             alert(JSON.stringify(error));
         })
     };
-}
+};
 
+// 지금 작성된 캠핑카 내용 가져오기_campingcar/setting/menu
 function getData(index) {
     carCode = document.getElementsByClassName('carCode')[index].innerText;
     carNum = document.getElementsByClassName('carNum')[index].value;
@@ -66,9 +67,9 @@ function getData(index) {
     refundPolicy = document.getElementsByClassName('refundPolicy')[index].value;
     basicOption = document.getElementsByClassName('basicOption')[index].value;
     facility = document.getElementsByClassName('facility')[index].value;
+};
 
-}
-
+// 페이지 로딩시 최근에 사용한 탭 보여주기_campingcar/setting/menu
 function checkCampingSettingTab() {
     let tabStatus = sessionStorage.getItem('campingSettingTab');
     let navLinkList = document.getElementsByClassName('nav-link');
@@ -91,7 +92,7 @@ function checkCampingSettingTab() {
             tabpane.classList.remove('show');
             tabpane.classList.remove('active');
         }
-    })
+    });
 
     if (!tabStatus) {
         navLinkList[0].classList.add('active');
