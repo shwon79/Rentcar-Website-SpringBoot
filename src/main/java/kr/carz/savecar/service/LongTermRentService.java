@@ -42,4 +42,8 @@ public class LongTermRentService {
 
         return longTermRentRepository.save(longTermRent).getLongTermRentId();
     }
+
+    public void delete(LongTermRent longTermRent){
+        longTermRentRepository.delete(longTermRent);
+    }
 }

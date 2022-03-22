@@ -1,9 +1,6 @@
 package kr.carz.savecar.controller.Admin;
 
-import kr.carz.savecar.domain.LongTermRent;
-import kr.carz.savecar.domain.LongTermRentImage;
-import kr.carz.savecar.domain.MonthlyRent;
-import kr.carz.savecar.domain.ValuesForWeb;
+import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.LongTermRentDTO;
 import kr.carz.savecar.dto.MonthlyRentDTO;
 import kr.carz.savecar.dto.ValuesForWebDTO;
@@ -72,6 +69,28 @@ public class LongTermRentCarController {
         if(longTermRentWrapper.isPresent()){
             longTermRentService.updateByDTO(longTermRentWrapper.get(), longTermRentDTO);
 
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @DeleteMapping("/admin/longTerm/{longTermRentId}}")
+    @ResponseBody
+    public void delete_rent_car_price(HttpServletResponse res, @PathVariable Long longTermRentId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<LongTermRent> longTermRentWrapper = longTermRentService.findById(longTermRentId);
+
+        if(longTermRentWrapper.isPresent()) {
+            longTermRentService.delete(longTermRentWrapper.get());
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
