@@ -77,9 +77,9 @@ public class DiscountController {
 
 
     // 할인가 수정하기 api
-    @RequestMapping(value = "/admin/discount/{discountId}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
+    @PutMapping("/admin/discount/{discountId}")
     @ResponseBody
-    public void update_discount(HttpServletResponse res, @PathVariable Long discountId, @RequestBody DiscountSaveDTO discountDTO) throws IOException {
+    public void update_discount(HttpServletResponse res, @RequestBody DiscountSaveDTO discountDTO, @PathVariable Long discountId) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -103,55 +103,6 @@ public class DiscountController {
         pw.flush();
         pw.close();
     }
-
-
-//    // 할인 차명 수정하기 api
-//    @RequestMapping(value = "/admin/discount/carName/{discountId}/{carName}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
-//    @ResponseBody
-//    public void update_car_name(HttpServletResponse res, @PathVariable Long discountId, @PathVariable String carName) throws IOException {
-//
-//        JSONObject jsonObject = new JSONObject();
-//
-//        // 이미 db에 등록된 차량인지 확인
-//        Optional<Discount> original_discount = discountService.findDiscountByDiscountId(discountId);
-//
-//        if(original_discount.isPresent()){
-//            original_discount.get().setCarName(carName);
-//            discountService.save(original_discount.get());
-//            jsonObject.put("result", 1);
-//        } else {
-//            jsonObject.put("result", 0);
-//        }
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonObject);
-//        pw.flush();
-//        pw.close();
-//    }
-//
-//    // 할인가 description 수정하기 api
-//    @RequestMapping(value = "/admin/discount/description/{discountId}/{description}", produces = "application/json; charset=UTF-8", method = RequestMethod.PUT)
-//    @ResponseBody
-//    public void update_description(HttpServletResponse res, @PathVariable Long discountId, @PathVariable String description) throws IOException {
-//
-//        JSONObject jsonObject = new JSONObject();
-//
-//        // 이미 db에 등록된 차량인지 확인
-//        Optional<Discount> original_discount = discountService.findDiscountByDiscountId(discountId);
-//
-//        if(original_discount.isPresent()){
-//            original_discount.get().setDescription(description);
-//            discountService.save(original_discount.get());
-//            jsonObject.put("result", 1);
-//        } else {
-//            jsonObject.put("result", 0);
-//        }
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonObject);
-//        pw.flush();
-//        pw.close();
-//    }
 
     // 할인가 삭제하기 api
     @DeleteMapping("/admin/discount/{discountId}")
