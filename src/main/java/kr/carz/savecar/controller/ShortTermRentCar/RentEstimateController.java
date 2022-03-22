@@ -1,4 +1,4 @@
-package kr.carz.savecar.controller.Rent;
+package kr.carz.savecar.controller.ShortTermRentCar;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.MonthlyRentService;

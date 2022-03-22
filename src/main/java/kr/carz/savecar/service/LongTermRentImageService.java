@@ -2,6 +2,7 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.LongTermRent;
 import kr.carz.savecar.domain.LongTermRentImage;
+import kr.carz.savecar.dto.LongTermRentImageDTO;
 import kr.carz.savecar.repository.LongTermRentImageRepository;
 import kr.carz.savecar.repository.LongTermRentRepository;
 
@@ -20,7 +21,17 @@ public class LongTermRentImageService {
         return longTermRentImageRepository.findAll();
     }
 
+    public Optional<LongTermRentImage> findById(Long imageId){
+        return longTermRentImageRepository.findById(imageId);
+    }
     public List<LongTermRentImage> findByLongTermRent(LongTermRent longTermRent){
         return longTermRentImageRepository.findByLongTermRent(longTermRent);
+    }
+
+    public Long saveDTO(LongTermRentImageDTO dto){
+        return longTermRentImageRepository.save(dto.toEntity()).getImageId();
+    }
+    public void delete(LongTermRentImage image){
+        longTermRentImageRepository.delete(image);
     }
 }

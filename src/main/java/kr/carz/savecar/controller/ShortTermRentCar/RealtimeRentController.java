@@ -1,4 +1,4 @@
-package kr.carz.savecar.controller.Rent;
+package kr.carz.savecar.controller.ShortTermRentCar;
 
 import kr.carz.savecar.controller.ReservationController;
 import kr.carz.savecar.controller.Utils.HttpConnection;

@@ -9,11 +9,13 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin_longTerm.css}" rel="stylesheet">
     <script th:src="@{/js/jquery.min.js}"></script>
     <!--    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_longTerm.js}" defer></script>
 
     <script>
         $(window).on('load', function () {
@@ -27,10 +29,9 @@
 <div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-    <div class="content" style="width: 95%;">
+    <div class="content" style="width: 100%; max-width: 100%;">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-
                 <button type="button" id="sidebarCollapse" class="navbar-btn">
                     <span></span>
                     <span></span>
@@ -39,78 +40,78 @@
             </div>
         </nav>
 
-        <div class="container inner_content" style="width: 100%;">
+        <div class="container inner_content" style="width: 100%; max-width: 100%;">
             <h2 class="page_title" style="text-align: center;">차량 현황</h2>
-            <p style="text-align: center;">준비중입니다.</p>
-<!--            <div class="detail_container register_rent_car">-->
-<!--                <div class="detail_list" id="go_back_wrapper" style="justify-content: flex-end;">-->
-<!--                    <button class="btn btn-primary" onclick="">등록하기</button>-->
-<!--                </div>-->
-<!--                <div class="detail_list" id="detail_list_title">-->
-<!--                    <p>종류</p>-->
-<!--                    <p>값</p>-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>차량 이름</p>-->
-<!--                    <input type="text" id="carName" />-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>월 대여료(VAT포함)</p>-->
-<!--                    <input type="text" id="contractPrice" />-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</san>보증금</p>-->
-<!--                    <input type="text" id="contractDeposit" />-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>종류</p>-->
-<!--                    <select name="newOld" class="newOld" id="newOld">-->
-<!--                        <option value="">선택하세요</option>-->
-<!--                        <option value="old">중고차</option>-->
-<!--                        <option value="new">신차</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>차량 번호</p>-->
-<!--                    <input type="text" id="carNum" />-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>색상</p>-->
-<!--                    <input type="text" id="carColor" />-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>연식</p>-->
-<!--                    <input type="text" id="carYearModel" />-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>연료</p>-->
-<!--                    <select name="fuel" class="fuel" id="fuel">-->
-<!--                        <option value="">선택하세요</option>-->
-<!--                        <option value="LPG">LPG</option>-->
-<!--                        <option value="휘발유">휘발유</option>-->
-<!--                        <option value="경유">경유</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>연식</p>-->
-<!--                    <span>-->
-<!--                        <input type="number" id="contractPeriod" />-->
-<!--                       <span>개월</span>-->
-<!--                    </span>-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>약정 주행거리</p>-->
-<!--                    <input type="text" id="contractKm" />-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>계약 서비스</p>-->
-<!--                    <input type="text" id="contractMaintenance" />-->
-<!--                </div>-->
-<!--                <div class="detail_list">-->
-<!--                    <p><span style="color: red; vertical-align: super;">*</span>이미지</p>-->
-<!--                    &lt;!&ndash;이미지 여러개....&ndash;&gt;-->
-<!--                </div>-->
-<!--            </div>-->
+<!--            <p style="text-align: center;">준비중입니다.</p>-->
+            <table class="table table-striped">
+                <thead>
+                    <tr class="thead-dark">
+                        <th scope="col">구분</th>
+                        <th scope="col">차량 번호</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">색상</th>
+                        <th scope="col">연식</th>
+                        <th scope="col">계약 기간</th>
+                        <th scope="col">약정 주행거리</th>
+                        <th scope="col">월 렌트료[VAT포함]</th>
+                        <th scope="col">보증금</th>
+                        <th scope="col">계약 서비스</th>
+                        <th scope="col">연료</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="car, i : ${longTermRentList}">
+                        <td>
+                            <select name="newOld" class="newOld" th:data-id="${car.longTermRentId}">
+                                <option value="new" th:selected="${car.newOld == 'new' ? true : false}">신차</option>
+                                <option value="old" th:selected="${car.newOld == 'old' ? true : false}">중고차</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="carNum" th:value="${car.carNum}" th:data-id="${car.longTermRentId}" style="width: 6rem;">
+                        </td>
+                        <td>
+                            <textarea type="text" class="carName" th:text="${car.carName}" th:data-id="${car.longTermRentId}" cols="15" rows="3"></textarea>
+                        </td>
+                        <td>
+                            <input type="text" class="carColor" th:value="${car.carColor}" th:data-id="${car.longTermRentId}" style="width: 6rem;">
+                        </td>
+                        <td>
+                            <input type="text" class="carYearModel" th:value="${car.carYearModel}" th:data-id="${car.longTermRentId}" style="width: 6rem;">
+                        </td>
+                        <td>
+                            <input type="text" class="contractPeriod" th:value="${car.contractPeriod}" th:data-id="${car.longTermRentId}" style="width: 4rem;">
+                        </td>
+                        <td>
+                            <input type="text" class="contractKm" th:value="${car.contractKm}" th:data-id="${car.longTermRentId}" style="width: 4rem;">
+                        </td>
+                        <td>
+                            <input type="text" class="contractPrice" th:value="${car.contractPrice}" th:data-id="${car.longTermRentId}" style="width: 5rem;">
+                        </td>
+                        <td>
+                            <input type="text" class="contractDeposit" th:value="${car.contractDeposit}" th:data-id="${car.longTermRentId}" style="width: 5rem;">
+                        </td>
+                        <td>
+                            <input type="text" class="contractMaintenance" th:value="${car.contractMaintenance}" th:data-id="${car.longTermRentId}" style="width: 7rem;">
+                        </td>
+                        <td>
+                            <select name="fuel" class="fuel" th:data-id="${car.longTermRentId}">
+                                <option value="LPG" th:selected="${car.fuel == 'LPG' ? true : false}">LPG</option>
+                                <option value="휘발유" th:selected="${car.fuel == '휘발유' ? true : false}">휘발유</option>
+                                <option value="경유" th:selected="${car.fuel == '경유' ? true : false}">경유</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" th:data-id="${car.longTermRentId}" onclick="clickEdit(this)" style="margin-bottom: 4px;">내용 수정</button>
+                            <a th:href="'/admin/longTerm/detail/' + ${car.longTermRentId}">
+                                <button class="btn btn-primary" th:data-id="${car.longTermRentId}" style="margin-bottom: 4px;">사진 수정</button>
+                            </a>
+                            <button class="btn btn-danger" th:data-id="${car.longTermRentId}" onclick="clickDelete(this)">차량 삭제</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
