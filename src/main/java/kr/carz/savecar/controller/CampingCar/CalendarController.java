@@ -550,15 +550,11 @@ public class CalendarController {
     }
 
 
-
     @PostMapping(value="/camping/calendar/review", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public void postCampingCarReview(MultipartHttpServletRequest req) throws Exception  {
-        System.out.println("Success");
-        List<MultipartFile> multipartFileList = req.getFiles("file");
-        System.out.println(multipartFileList.size());
-        System.out.println(req.getParameter("nickName"));
 
+        List<MultipartFile> multipartFileList = req.getFiles("file");
         ArrayList<String> imageUrlList = new ArrayList<>();
 
         for(int i=0; i<multipartFileList.size(); i++){
@@ -581,7 +577,4 @@ public class CalendarController {
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(req.getParameter("carName"));
         reviewService.saveDTO(reviewDTO, campingCarPrice, imageUrlList, videoURL);
     }
-
-
-
 }
