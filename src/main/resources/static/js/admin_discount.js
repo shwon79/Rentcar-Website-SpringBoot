@@ -34,12 +34,18 @@ const make_discount = () => {
         return
     };
 
+    if (parseFloat(document.getElementById("discount").value) == 0){
+        alert('0% 할인을 할 수 없습니다.')
+        return
+    };
+
     let data = {
         carNo : carNo,
         carName : $("#carName").val(),
         discount : $("#discount").val(),
         description: $("#discount-description").val()
     };
+
     // console.log(data);
 
     $.ajax({
@@ -57,7 +63,7 @@ const make_discount = () => {
         window.location.href = '/admin/discount/menu';
     }).fail(function (error) {
         alert(JSON.stringify(error));
-    })
+    });
 };
 
 // 차량이름, 할인률, 할인 설명 수정하기
@@ -105,7 +111,9 @@ function discountUpdate(target, event) {
 
     // console.log(data);
 
-    if (editedData) {
+    if (target === 'price' && editedData == 0) {
+        alert('0% 할인을 할 수 없습니다. 삭제 버튼을 이용해주세요.');
+    } else if (editedData) {
         $.ajax({
             type: 'PUT',
             url: '/admin/discount/' + discountId,
@@ -121,7 +129,7 @@ function discountUpdate(target, event) {
             window.location.href = '/admin/discount/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));
-        })
+        });
     };
 };
 
