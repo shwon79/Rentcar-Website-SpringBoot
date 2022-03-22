@@ -2,6 +2,7 @@ package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.LongTermRentDTO;
+import kr.carz.savecar.dto.LongTermRentImageDTO;
 import kr.carz.savecar.dto.ReviewDTO;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,11 +26,14 @@ import java.util.Optional;
 public class AdminLongTermRentController {
     private final LongTermRentService longTermRentService;
     private final LongTermRentImageService longTermRentImageService;
+    private final S3Service s3Service;
 
     @Autowired
-    public AdminLongTermRentController(LongTermRentService longTermRentService, LongTermRentImageService longTermRentImageService) {
+    public AdminLongTermRentController(LongTermRentService longTermRentService, LongTermRentImageService longTermRentImageService,
+                                       S3Service s3Service) {
         this.longTermRentService = longTermRentService;
         this.longTermRentImageService = longTermRentImageService;
+        this.s3Service = s3Service;
     }
 
     @GetMapping("/admin/longTerm/register")
@@ -61,7 +66,7 @@ public class AdminLongTermRentController {
     }
 
 
-    @PutMapping("/admin/longTerm/{longTermRentId}}")
+    @PutMapping("/admin/longTerm/{longTermRentId}")
     @ResponseBody
     public void put_rent_car_price_monthly(HttpServletResponse res, @RequestBody LongTermRentDTO longTermRentDTO, @PathVariable Long longTermRentId) throws IOException {
 
@@ -125,29 +130,27 @@ public class AdminLongTermRentController {
 
     @PostMapping(value="/admin/longTerm/image", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void postCampingCarReview(MultipartHttpServletRequest req) throws Exception  {
+    public void postCampingCarReview(MultipartHttpServletRequest req) throws Exception {
 
-//        List<MultipartFile> multipartFileList = req.getFiles("file");
-//        ArrayList<String> imageUrlList = new ArrayList<>();
-//
-//        for(int i=0; i<multipartFileList.size(); i++){
-//            String imgPath = s3Service.upload(multipartFileList.get(i));
-//            imageUrlList.add(imgPath);
-//        }
-//
-//        List<MultipartFile> videoList = req.getFiles("video");
-//        String videoURL = "";
-//        for(int i=0; i<videoList.size(); i++){
-//            if(i > 0){
-//                throw new Exception("You can only upload one video.");
-//            }
-//            videoURL = s3Service.upload(videoList.get(i));
-//        }
-//
-//        ReviewDTO reviewDTO = new ReviewDTO(req.getParameter("carName"), req.getParameter("text"), req.getParameter("nickName"), req.getParameter("startDate"), req.getParameter("endDate"),
-//                multipartFileList, videoList, req.getParameter("password"));
-//
-//        CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(req.getParameter("carName"));
-//        reviewService.saveDTO(reviewDTO, campingCarPrice, imageUrlList, videoURL);
+        List<MultipartFile> multipartFileList = req.getFiles("file");
+
+        Optional<LongTermRent> longTermRentWrapper = longTermRentService.findById(Long.parseLong(req.getParameter("longTermRentId")));
+
+        if(longTermRentWrapper.isPresent()) {
+            LongTermRent longTermRent = longTermRentWrapper.get();
+            List<LongTermRentImage> longTermRentImageList = longTermRentImageService.findByLongTermRent(longTermRent);
+            for(LongTermRentImage image : longTermRentImageList){
+                longTermRentImageService.delete(image);
+            }
+
+            for (int i = 0; i < multipartFileList.size(); i++) {
+                String imgPath = s3Service.upload(multipartFileList.get(i));
+
+                LongTermRentImageDTO dto = new LongTermRentImageDTO(longTermRent, imgPath);
+                longTermRentImageService.saveDTO(dto);
+            }
+        } else {
+            throw new Exception("등록할 기준이 되는 차량이 없습니다.");
+        }
     }
 }
