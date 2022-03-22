@@ -1,6 +1,7 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.LongTermRent;
+import kr.carz.savecar.dto.LongTermRentDTO;
 import kr.carz.savecar.repository.LongTermRentRepository;
 
 import java.util.List;
@@ -20,5 +21,9 @@ public class LongTermRentService {
 
     public Optional<LongTermRent> findById(Long carId){
         return longTermRentRepository.findById(carId);
+    }
+
+    public Long saveDTO(LongTermRentDTO dto){
+        return longTermRentRepository.save(dto.toEntity()).getLongTermRentId();
     }
 }
