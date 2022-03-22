@@ -21,6 +21,9 @@ public class LongTermRentImageService {
         return longTermRentImageRepository.findAll();
     }
 
+    public Optional<LongTermRentImage> findById(Long imageId){
+        return longTermRentImageRepository.findById(imageId);
+    }
     public List<LongTermRentImage> findByLongTermRent(LongTermRent longTermRent){
         return longTermRentImageRepository.findByLongTermRent(longTermRent);
     }

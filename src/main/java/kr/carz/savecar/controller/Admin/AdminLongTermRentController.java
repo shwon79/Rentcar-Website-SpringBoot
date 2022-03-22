@@ -3,7 +3,6 @@ package kr.carz.savecar.controller.Admin;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.LongTermRentDTO;
 import kr.carz.savecar.dto.LongTermRentImageDTO;
-import kr.carz.savecar.dto.ReviewDTO;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,10 +47,11 @@ public class AdminLongTermRentController {
         return "admin/longTerm_main";
     }
 
-    @PostMapping(value="/admin/longTerm", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value="/admin/longTerm", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public void postAdminLongTerm(MultipartHttpServletRequest req) throws Exception {
+    public void postAdminLongTerm(HttpServletResponse res, MultipartHttpServletRequest req) throws Exception {
 
+        JSONObject jsonObject = new JSONObject();
         LongTermRentDTO longTermRentDTO = new LongTermRentDTO(req.getParameter("carName"),req.getParameter("carNum"),req.getParameter("carColor"),
                                                  req.getParameter("carYearModel"),req.getParameter("contractPeriod"),req.getParameter("contractKm"),
                                                     req.getParameter("contractPrice"),req.getParameter("contractDeposit"),req.getParameter("contractMaintenance"),
@@ -68,15 +66,21 @@ public class AdminLongTermRentController {
         if(longTermRentWrapper.isPresent()) {
             LongTermRent longTermRent = longTermRentWrapper.get();
 
-            for (int i = 0; i < multipartFileList.size(); i++) {
-                String imgPath = s3Service.upload(multipartFileList.get(i));
+            for (MultipartFile multipartFile : multipartFileList) {
+                String imgPath = s3Service.upload(multipartFile);
 
                 LongTermRentImageDTO longTermRentImageDTO = new LongTermRentImageDTO(longTermRent, imgPath);
                 longTermRentImageService.saveDTO(longTermRentImageDTO);
             }
+            jsonObject.put("result", 1);
         } else {
-            throw new Exception("이미지를 등록할 기준이 되는 차량이 없습니다.");
+            jsonObject.put("result", 0);
         }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 
@@ -148,9 +152,11 @@ public class AdminLongTermRentController {
 
 
 
-    @PostMapping(value="/admin/longTerm/image", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value="/admin/longTerm/image", consumes= MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public void postCampingCarReview(MultipartHttpServletRequest req) throws Exception {
+    public void postCampingCarReview(HttpServletResponse res, MultipartHttpServletRequest req) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
 
         List<MultipartFile> multipartFileList = req.getFiles("file");
 
@@ -158,14 +164,41 @@ public class AdminLongTermRentController {
 
         if(longTermRentWrapper.isPresent()) {
             LongTermRent longTermRent = longTermRentWrapper.get();
-            for (int i = 0; i < multipartFileList.size(); i++) {
-                String imgPath = s3Service.upload(multipartFileList.get(i));
+            for (MultipartFile multipartFile : multipartFileList) {
+                String imgPath = s3Service.upload(multipartFile);
 
                 LongTermRentImageDTO dto = new LongTermRentImageDTO(longTermRent, imgPath);
                 longTermRentImageService.saveDTO(dto);
             }
+            jsonObject.put("result", 1);
         } else {
-            throw new Exception("등록할 기준이 되는 차량이 없습니다.");
+            jsonObject.put("result", 0);
         }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @DeleteMapping(value="/admin/longTerm/image/{imageId}")
+    @ResponseBody
+    public void deleteAdminLongTermImage(HttpServletResponse res, @PathVariable Long imageId) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<LongTermRentImage> longTermRentImageWrapper = longTermRentImageService.findById(imageId);
+        if(longTermRentImageWrapper.isPresent()){
+            longTermRentImageService.delete(longTermRentImageWrapper.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 }
