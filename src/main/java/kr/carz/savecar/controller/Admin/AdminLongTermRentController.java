@@ -47,11 +47,10 @@ public class AdminLongTermRentController {
         return "admin/longTerm_main";
     }
 
-    @PostMapping(value="/admin/longTerm", consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
+    @PostMapping(value="/admin/longTerm", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void postAdminLongTerm(HttpServletResponse res, MultipartHttpServletRequest req) throws Exception {
+    public void postAdminLongTerm(MultipartHttpServletRequest req) throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
         LongTermRentDTO longTermRentDTO = new LongTermRentDTO(req.getParameter("carName"),req.getParameter("carNum"),req.getParameter("carColor"),
                                                  req.getParameter("carYearModel"),req.getParameter("contractPeriod"),req.getParameter("contractKm"),
                                                     req.getParameter("contractPrice"),req.getParameter("contractDeposit"),req.getParameter("contractMaintenance"),
@@ -72,15 +71,9 @@ public class AdminLongTermRentController {
                 LongTermRentImageDTO longTermRentImageDTO = new LongTermRentImageDTO(longTermRent, imgPath);
                 longTermRentImageService.saveDTO(longTermRentImageDTO);
             }
-            jsonObject.put("result", 1);
         } else {
-            jsonObject.put("result", 0);
+            throw new Exception("문제가 발생하였습니다.");
         }
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
     }
 
 
@@ -152,11 +145,9 @@ public class AdminLongTermRentController {
 
 
 
-    @PostMapping(value="/admin/longTerm/image", consumes= MediaType.MULTIPART_FORM_DATA_VALUE, produces = "application/json; charset=UTF-8")
+    @PostMapping(value="/admin/longTerm/image", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void postCampingCarReview(HttpServletResponse res, MultipartHttpServletRequest req) throws Exception {
-
-        JSONObject jsonObject = new JSONObject();
+    public void postAdminLongTermImage(MultipartHttpServletRequest req) throws Exception {
 
         List<MultipartFile> multipartFileList = req.getFiles("file");
 
@@ -170,15 +161,9 @@ public class AdminLongTermRentController {
                 LongTermRentImageDTO dto = new LongTermRentImageDTO(longTermRent, imgPath);
                 longTermRentImageService.saveDTO(dto);
             }
-            jsonObject.put("result", 1);
         } else {
-            jsonObject.put("result", 0);
+            throw new Exception("이미지를 등록할 기준이 되는 차량이 없습니다.");
         }
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
     }
 
 
