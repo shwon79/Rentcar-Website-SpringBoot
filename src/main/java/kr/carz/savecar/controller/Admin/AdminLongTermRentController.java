@@ -102,7 +102,7 @@ public class AdminLongTermRentController {
     }
 
 
-    @DeleteMapping("/admin/longTerm/{longTermRentId}}")
+    @DeleteMapping("/admin/longTerm/{longTermRentId}")
     @ResponseBody
     public void delete_rent_car_price(HttpServletResponse res, @PathVariable Long longTermRentId) throws IOException {
 
@@ -111,6 +111,12 @@ public class AdminLongTermRentController {
         Optional<LongTermRent> longTermRentWrapper = longTermRentService.findById(longTermRentId);
 
         if(longTermRentWrapper.isPresent()) {
+            LongTermRent longTermRent = longTermRentWrapper.get();
+            List<LongTermRentImage> longTermRentImageList = longTermRentImageService.findByLongTermRent(longTermRent);
+            for(LongTermRentImage longTermRentImage : longTermRentImageList){
+                longTermRentImageService.delete(longTermRentImage);
+            }
+
             longTermRentService.delete(longTermRentWrapper.get());
             jsonObject.put("result", 1);
         } else {
