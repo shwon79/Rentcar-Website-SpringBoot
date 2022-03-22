@@ -25,7 +25,6 @@ public class LongTermRentController {
         this.longTermRentImageService = longTermRentImageService;
     }
 
-    // TODO: 누구나 장기 POST, PUT, DELETE 만들기
     @GetMapping("/rent/long_term")
     public String rent_long_term(Model model) {
 
