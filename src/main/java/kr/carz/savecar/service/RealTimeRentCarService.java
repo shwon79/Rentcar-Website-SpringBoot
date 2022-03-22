@@ -27,6 +27,10 @@ public class RealTimeRentCarService {
         return realTimeRentRepository.findById(carId);
     }
 
+    public List<RealTimeRentCar> findByCarNo(String carNo){
+        return realTimeRentRepository.findByCarNo(carNo);
+    }
+
     public Long save(RealTimeRentCar realTimeRent){
         return realTimeRentRepository.save(realTimeRent).getRealTimeRentId();
     }

@@ -53,23 +53,23 @@
     color: #fff;
     background: #5495b1;
 }
-#campingcarSubmenu ul, #priceSubMenu ul {
+#campingcarSubmenu ul, #priceSubMenu ul, #longTermSubMenu ul {
     padding: 0;
 }
 
-#campingcarSubmenu li, #priceSubMenu li {
+#campingcarSubmenu li, #priceSubMenu li, #longTermSubMenu li {
     list-style: none;
 }
-#campingcarSubmenu li a, #priceSubMenu li a {
+#campingcarSubmenu li a, #priceSubMenu li a, #longTermSubMenu li a {
     background-color: #84bad1;
 }
-#campingcarSubmenu li a.activeAdminMenu, #priceSubMenu li a.activeAdminMenu {
+#campingcarSubmenu li a.activeAdminMenu, #priceSubMenu li a.activeAdminMenu, #longTermSubMenu li a.activeAdminMenu {
     background-color: #fff;
 }
-#campingcarSubmenu, #priceSubMenu {
+#campingcarSubmenu, #priceSubMenu, #longTermSubMenu {
     display: none;
 }
-#campingcarSubmenu.camping-open, #priceSubMenu.price-open {
+#campingcarSubmenu.camping-open, #priceSubMenu.price-open, #longTermSubMenu.longterm-open {
     display: block;
 }
 #camping-submenu-btn {
@@ -90,11 +90,21 @@
     width: 250px;
     cursor: pointer;
 }
-#camping-submenu-btn.active-span:before, #price-submenu-btn.active-span:before {
+
+#longterm-submenu-btn {
+    position: absolute;
+    z-index: 99;
+    top: 235px;
+    display: block;
+    height: 46px;
+    width: 250px;
+    cursor: pointer;
+}
+#camping-submenu-btn.active-span:before, #price-submenu-btn.active-span:before, #longterm-submenu-btn.active-span:before {
     width: 0;
     height: 0;
 }
-#camping-submenu-btn:before {
+#camping-submenu-btn:before, #price-submenu-btn:before, #longterm-submenu-btn:before {
     position: absolute;
     top: 15px;
     right: 22px;
@@ -104,27 +114,7 @@
     background: white;
     content: '';
 }
-#price-submenu-btn:before {
-    position: absolute;
-    top: 15px;
-    right: 22px;
-    display: block;
-    width: 2px;
-    height: 12px;
-    background: white;
-    content: '';
-}
-#camping-submenu-btn:after {
-    position: absolute;
-    top: 20px;
-    right: 17px;
-    width: 12px;
-    height: 2px;
-    display: block;
-    background: white;
-    content: '';
-}
-#price-submenu-btn:after {
+#camping-submenu-btn:after, #price-submenu-btn:after, #longterm-submenu-btn:after {
     position: absolute;
     top: 20px;
     right: 17px;

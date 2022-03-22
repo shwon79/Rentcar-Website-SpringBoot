@@ -34,8 +34,7 @@ const make_discount = () => {
         return
     };
 
-
-    var data = {
+    let data = {
         carNo : carNo,
         carName : $("#carName").val(),
         discount : $("#discount").val(),
@@ -64,6 +63,10 @@ const make_discount = () => {
 // 차량이름, 할인률, 할인 설명 수정하기
 function discountUpdate(target, event) {
     let discountId = event.dataset.index;
+    let carNo = [...document.getElementsByClassName('editCarNo')].find(ele => ele.dataset.index === discountId).innerText;
+    let carName = [...document.getElementsByClassName('editCarName')].find(ele => ele.dataset.index === discountId).innerText;
+    let discount = parseFloat([...document.getElementsByClassName('editDiscount')].find(ele => ele.dataset.index === discountId).innerText.replace(/\%/g,''));
+    let description = [...document.getElementsByClassName('discountDescription')].find(ele => ele.dataset.index === discountId).innerText;
     let promptText;
 
     switch (target) {
@@ -80,14 +83,37 @@ function discountUpdate(target, event) {
 
     let editedData = prompt(`수정할 ${promptText}을/를 입력하세요.`, '');
 
+    switch (target) {
+        case 'carName':
+            carName = editedData;
+            break;
+        case 'price':
+            discount = parseFloat(editedData);
+            break;
+        case 'description':
+            description = editedData;
+            break;
+    };
+
+    let data = {
+        discountId: discountId,
+        carNo: carNo,
+        carName: carName,
+        discount: discount,
+        description: description,
+    };
+
+    console.log(data);
+
     if (target === 'price' && editedData == 0) {
         alert('0% 할인을 할 수 없습니다. 삭제 버튼을 이용해주세요.');
     } else if (editedData) {
         $.ajax({
             type: 'PUT',
-            url: '/admin/discount/' + target + '/' + discountId + '/' + editedData,
+            url: '/admin/discount/' + discountId,
             dataType: 'json',
-            contentType: 'application/json; charset=utf-8'
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(data),
         }).done(function (result) {
             if (result.result == 1) {
                 alert(`${promptText} 수정이 완료되었습니다.`);
@@ -98,7 +124,7 @@ function discountUpdate(target, event) {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
-    }
+    };
 };
 
 
