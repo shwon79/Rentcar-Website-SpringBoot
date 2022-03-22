@@ -446,26 +446,5 @@ public class RentCarController {
         pw.close();
     }
 
-    @GetMapping("/admin/rentcar/counsel/menu")
-    public ModelAndView get_rent_car_counsel_menu(Pageable pageable) {
-
-        ModelAndView mav = new ModelAndView();
-
-        Page<Reservation> reservationPage = reservationService.findAllPageable(pageable);
-
-        mav.addObject("currentPage", pageable.getPageNumber());
-        mav.addObject("pageSize", pageable.getPageSize());
-
-        mav.addObject("startPage", (pageable.getPageNumber() / 5) * 5 + 1);
-        mav.addObject("endPage", Integer.min((pageable.getPageNumber() / 5 + 1) * 5, reservationPage.getTotalPages()));
-
-        mav.addObject("totalPages", reservationPage.getTotalPages());
-        mav.addObject("reservationList", reservationPage.getContent());
-
-        mav.setViewName("admin/rentcar_counsel_menu");
-
-        return mav;
-    }
-
 
 }
