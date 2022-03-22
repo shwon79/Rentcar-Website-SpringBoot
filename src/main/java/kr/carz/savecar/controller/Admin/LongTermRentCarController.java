@@ -13,21 +13,11 @@ import java.util.List;
 
 @Controller
 public class LongTermRentCarController {
-    private final ReservationService reservationService;
-    private final MonthlyRentService monthlyRentService;
-    private final YearlyRentService yearlyRentService;
-    private final TwoYearlyRentService twoYearlyRentService;
-    private final S3Service s3Service;
+    private final LongTermRentService longTermRentService;
 
     @Autowired
-    public LongTermRentCarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                                     TwoYearlyRentService twoYearlyRentService, ReservationService reservationService,
-                                     S3Service s3Service) {
-        this.monthlyRentService = monthlyRentService;
-        this.yearlyRentService = yearlyRentService;
-        this.twoYearlyRentService = twoYearlyRentService;
-        this.reservationService = reservationService;
-        this.s3Service = s3Service;
+    public LongTermRentCarController(LongTermRentService longTermRentService) {
+        this.longTermRentService = longTermRentService;
     }
 
     // TODO: 누구나 장기 POST, PUT, DELETE 만들기
@@ -37,7 +27,10 @@ public class LongTermRentCarController {
         return "admin/longTerm_register";
     }
     @GetMapping("/admin/longTerm/main")
-    public String rent_long_term_main() {
+    public String rent_long_term_main(Model model) {
+
+        List<LongTermRent> longTermRentList = longTermRentService.findAll();
+        model.addAttribute("longTermRentList", longTermRentList);
 
         return "admin/longTerm_main";
     }
