@@ -103,11 +103,9 @@ function discountUpdate(target, event) {
         description: description,
     };
 
-    console.log(data);
+    // console.log(data);
 
-    if (target === 'price' && editedData == 0) {
-        alert('0% 할인을 할 수 없습니다. 삭제 버튼을 이용해주세요.');
-    } else if (editedData) {
+    if (editedData) {
         $.ajax({
             type: 'PUT',
             url: '/admin/discount/' + discountId,
