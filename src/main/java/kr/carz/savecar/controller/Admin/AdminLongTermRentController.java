@@ -50,19 +50,33 @@ public class AdminLongTermRentController {
         return "admin/longTerm_main";
     }
 
-    @PostMapping("/admin/longTerm")
+    @PostMapping(value="/admin/longTerm", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void postAdminLongTerm(HttpServletResponse res, @RequestBody LongTermRentDTO longTermRentDTO) throws IOException {
+    public void postAdminLongTerm(MultipartHttpServletRequest req) throws Exception {
 
-        longTermRentService.saveDTO(longTermRentDTO);
+        LongTermRentDTO longTermRentDTO = new LongTermRentDTO(req.getParameter("carName"),req.getParameter("carNum"),req.getParameter("carColor"),
+                                                 req.getParameter("carYearModel"),req.getParameter("contractPeriod"),req.getParameter("contractKm"),
+                                                    req.getParameter("contractPrice"),req.getParameter("contractDeposit"),req.getParameter("contractMaintenance"),
+                                                    req.getParameter("newOld"),req.getParameter("fuel"));
+        Long longTermRentId = longTermRentService.saveDTO(longTermRentDTO);
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
 
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
+        List<MultipartFile> multipartFileList = req.getFiles("file");
+
+        Optional<LongTermRent> longTermRentWrapper = longTermRentService.findById(longTermRentId);
+
+        if(longTermRentWrapper.isPresent()) {
+            LongTermRent longTermRent = longTermRentWrapper.get();
+
+            for (int i = 0; i < multipartFileList.size(); i++) {
+                String imgPath = s3Service.upload(multipartFileList.get(i));
+
+                LongTermRentImageDTO longTermRentImageDTO = new LongTermRentImageDTO(longTermRent, imgPath);
+                longTermRentImageService.saveDTO(longTermRentImageDTO);
+            }
+        } else {
+            throw new Exception("이미지를 등록할 기준이 되는 차량이 없습니다.");
+        }
     }
 
 
