@@ -58,9 +58,9 @@
                         이미지 추가하기
                     </button>
                 </div>
-                <div style="text-align: right; margin-bottom: 10px;">
-                    <button class="btn btn-primary changeOrderBtn" onclick="displaySortingBox();">이미지 순서 변경</button>
-                </div>
+<!--                <div style="text-align: right; margin-bottom: 10px;">-->
+<!--                    <button class="btn btn-primary changeOrderBtn" onclick="displaySortingBox();">이미지 순서 변경</button>-->
+<!--                </div>-->
                 <div class="image-box" th:if="${not #lists.isEmpty(longTermRentImageList)}">
                     <div class="upload-box" th:each="image, i : ${longTermRentImageList}" style="height: auto;">
                         <p>
