@@ -158,11 +158,6 @@ public class AdminLongTermRentController {
 
         if(longTermRentWrapper.isPresent()) {
             LongTermRent longTermRent = longTermRentWrapper.get();
-            List<LongTermRentImage> longTermRentImageList = longTermRentImageService.findByLongTermRent(longTermRent);
-            for(LongTermRentImage image : longTermRentImageList){
-                longTermRentImageService.delete(image);
-            }
-
             for (int i = 0; i < multipartFileList.size(); i++) {
                 String imgPath = s3Service.upload(multipartFileList.get(i));
 
