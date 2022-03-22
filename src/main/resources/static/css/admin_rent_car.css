@@ -168,5 +168,4 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
     td[scope=row], th[scope=row] {
         background-color: white;
     }
-}
-
+};

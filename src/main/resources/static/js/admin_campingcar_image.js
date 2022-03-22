@@ -66,7 +66,7 @@ function uploadImage(behavior, carName, title, imageId) {
             window.location.href = '/admin/campingcar/image/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));
-        })
+        });
     };
 
     function deleteData() {
@@ -80,7 +80,7 @@ function uploadImage(behavior, carName, title, imageId) {
             window.location.href = '/admin/campingcar/image/menu';
         }).fail(function (error) {
             alert(JSON.stringify(error));
-        })
+        });
     };
 }
 

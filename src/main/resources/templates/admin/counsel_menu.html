@@ -130,12 +130,12 @@
           <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
         </li>
         <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
-          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${currentPage}+1,size=${pageSize})}">
+          <a class="page-link" th:href="@{/admin/counsel/menu(page=${currentPage}+1,size=${pageSize})}">
             <i class="fa-solid fa-chevron-right"></i>
           </a>
         </li>
         <li class="page-item" th:if="${currentPage} < (5 * (${totalPages} / 5))">
-          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${totalPages}-1,size=${pageSize})}">
+          <a class="page-link" th:href="@{/admin/counsel/menu(page=${totalPages}-1,size=${pageSize})}">
             <i class="fa-solid fa-angles-right"></i>
           </a>
         </li>
