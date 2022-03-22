@@ -26,4 +26,20 @@ public class LongTermRentService {
     public Long saveDTO(LongTermRentDTO dto){
         return longTermRentRepository.save(dto.toEntity()).getLongTermRentId();
     }
+
+    public Long updateByDTO(LongTermRent longTermRent, LongTermRentDTO dto){
+        longTermRent.setCarName(dto.getCarName());
+        longTermRent.setCarNum(dto.getCarNum());
+        longTermRent.setCarColor(dto.getCarColor());
+        longTermRent.setCarYearModel(dto.getCarYearModel());
+        longTermRent.setContractPeriod(dto.getContractPeriod());
+        longTermRent.setContractKm(dto.getContractKm());
+        longTermRent.setContractPrice(dto.getContractPrice());
+        longTermRent.setContractDeposit(dto.getContractDeposit());
+        longTermRent.setContractMaintenance(dto.getContractMaintenance());
+        longTermRent.setNewOld(dto.getNewOld());
+        longTermRent.setFuel(dto.getFuel());
+
+        return longTermRentRepository.save(longTermRent).getLongTermRentId();
+    }
 }
