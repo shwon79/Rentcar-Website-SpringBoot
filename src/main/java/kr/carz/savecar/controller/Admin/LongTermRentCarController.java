@@ -2,9 +2,6 @@ package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.LongTermRentDTO;
-import kr.carz.savecar.dto.MonthlyRentDTO;
-import kr.carz.savecar.dto.ValuesForWebDTO;
-import kr.carz.savecar.dto.ValuesVO;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +12,18 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class LongTermRentCarController {
     private final LongTermRentService longTermRentService;
+    private final LongTermRentImageService longTermRentImageService;
 
     @Autowired
-    public LongTermRentCarController(LongTermRentService longTermRentService) {
+    public LongTermRentCarController(LongTermRentService longTermRentService, LongTermRentImageService longTermRentImageService) {
         this.longTermRentService = longTermRentService;
+        this.longTermRentImageService = longTermRentImageService;
     }
 
     // TODO: 누구나 장기 POST, PUT, DELETE 만들기
@@ -104,8 +102,9 @@ public class LongTermRentCarController {
 
 
     @GetMapping("/admin/longTerm/detail/{longTermId}")
-    public String rent_long_term_detail() {
+    public String rent_long_term_detail(Model model, @PathVariable Long longTermId) {
 
+        longTermRentService.findById(longTermId);
         return "admin/longTerm_detail";
     }
 }
