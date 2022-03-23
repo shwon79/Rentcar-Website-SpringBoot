@@ -1205,6 +1205,27 @@ input:checked + .tab_item div {
   vertical-align: middle;
 }
 
+.btn-primary {
+  border: 1px solid #337ab7;
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  min-width: auto;
+  border-radius: 8px;
+}
+
+.btn-primary:hover {
+  border: 1px solid #337ab7;
+  background-color: #337ab7;
+  color: white;
+}
+
+.btn-danger {
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  min-width: auto;
+  border-radius: 8px;
+}
+
 @media (max-width: 991px) {
   #mainRow {
     flex-direction: column;
