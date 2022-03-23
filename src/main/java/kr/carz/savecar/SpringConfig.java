@@ -30,6 +30,7 @@ public class SpringConfig {
     private final LongTermRentImageRepository longTermRentImageRepository;
     private final RealTimeRentCarRepository realTimeRentRepository;
     private final RealTimeRentCarImageRepository realTimeRentImageRepository;
+    private final ReviewImageRepository reviewImageRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -43,7 +44,8 @@ public class SpringConfig {
                         ValuesForWebRepository valuesForWebRepository, CampingCarPriceRateRepository campingCarPriceRateRepository,
                         CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository,
                         LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository,
-                        RealTimeRentCarRepository realTimeRentRepository, RealTimeRentCarImageRepository realTimeRentImageRepository) {
+                        RealTimeRentCarRepository realTimeRentRepository, RealTimeRentCarImageRepository realTimeRentImageRepository,
+                        ReviewImageRepository reviewImageRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -66,6 +68,7 @@ public class SpringConfig {
         this.longTermRentImageRepository = longTermRentImageRepository;
         this.realTimeRentRepository = realTimeRentRepository;
         this.realTimeRentImageRepository = realTimeRentImageRepository;
+        this.reviewImageRepository = reviewImageRepository;
     }
 
     @Bean
@@ -137,4 +140,7 @@ public class SpringConfig {
 
     @Bean
     public RealTimeRentCarImageService realTimeRentImageService() { return new RealTimeRentCarImageService(realTimeRentImageRepository); }
+
+    @Bean
+    public ReviewImageService reviewImageService() { return new ReviewImageService(reviewImageRepository); }
 }

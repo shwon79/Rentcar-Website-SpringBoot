@@ -35,9 +35,9 @@ public class ReviewService {
         return reviewRepository.save(review).getReviewId();
     }
 
-    public Long saveDTO(ReviewDTO dto, CampingCarPrice carName, ArrayList<String> imageList, String videoURL) {
+    public Long saveDTO(ReviewDTO dto, CampingCarPrice carName, String videoURL) {
 
-        return reviewRepository.save(dto.toEntity(carName, imageList, videoURL)).getReviewId();
+        return reviewRepository.save(dto.toEntity(carName, videoURL)).getReviewId();
     }
 
     public void delete(Long reviewId) {

@@ -1,8 +1,7 @@
 package kr.carz.savecar.controller.CampingCar;
 
 import kr.carz.savecar.domain.*;
-import kr.carz.savecar.dto.CampingCarReservationDTO;
-import kr.carz.savecar.dto.ReviewDTO;
+import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -36,6 +35,7 @@ public class CalendarController {
     private final CampingCarMainTextService campingCarMainTextService;
     private final S3Service s3Service;
     private final ReviewService reviewService;
+    private final ReviewImageService reviewImageService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
@@ -43,7 +43,7 @@ public class CalendarController {
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
                               CampingCarPriceRateService campingCarPriceRateService, ImagesService imagesService,
                               CampingCarMainTextService campingCarMainTextService, S3Service s3Service,
-                              ReviewService reviewService) {
+                              ReviewService reviewService, ReviewImageService reviewImageService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
@@ -54,6 +54,7 @@ public class CalendarController {
         this.campingCarMainTextService = campingCarMainTextService;
         this.s3Service = s3Service;
         this.reviewService = reviewService;
+        this.reviewImageService = reviewImageService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -280,8 +281,14 @@ public class CalendarController {
         Collections.sort(campingCarMainTextList);
 
         List<Review> reviewList = reviewService.findAllReview();
+        List<List<ReviewImage>> reviewImageList = new ArrayList<>();
+        for(Review review : reviewList){
+            List<ReviewImage> reviewImages = reviewImageService.findByReview(review);
+            reviewImageList.add(reviewImages);
+        }
 
         model.put("reviewList", reviewList);
+        model.put("reviewImageList", reviewImageList);
         model.put("campingCarMainTextList", campingCarMainTextList);
         model.put("imagesList", imagesList);
         model.put("explanation", explanation);
@@ -555,12 +562,6 @@ public class CalendarController {
     public void postCampingCarReview(MultipartHttpServletRequest req) throws Exception  {
 
         List<MultipartFile> multipartFileList = req.getFiles("file");
-        ArrayList<String> imageUrlList = new ArrayList<>();
-
-        for(int i=0; i<multipartFileList.size(); i++){
-            String imgPath = s3Service.upload(multipartFileList.get(i));
-            imageUrlList.add(imgPath);
-        }
 
         List<MultipartFile> videoList = req.getFiles("video");
         String videoURL = "";
@@ -571,10 +572,64 @@ public class CalendarController {
             videoURL = s3Service.upload(videoList.get(i));
         }
 
-        ReviewDTO reviewDTO = new ReviewDTO(req.getParameter("carName"), req.getParameter("text"), req.getParameter("nickName"), req.getParameter("startDate"), req.getParameter("endDate"),
-                                            multipartFileList, videoList, req.getParameter("password"));
+        ReviewDTO reviewDTO = new ReviewDTO(req.getParameter("carName"), req.getParameter("text"), req.getParameter("nickName"),
+                                            req.getParameter("startDate"), req.getParameter("endDate"), videoList, req.getParameter("password"));
 
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(req.getParameter("carName"));
-        reviewService.saveDTO(reviewDTO, campingCarPrice, imageUrlList, videoURL);
+        Long reviewId = reviewService.saveDTO(reviewDTO, campingCarPrice, videoURL);
+        Optional<Review> reviewWrapper = reviewService.findImageByReviewId(reviewId);
+
+        if(reviewWrapper.isPresent()) {
+            Review review = reviewWrapper.get();
+            for (int i = 0; i < multipartFileList.size(); i++) {
+                String imgPath = s3Service.upload(multipartFileList.get(i));
+                ReviewImageDTO reviewImageDTO = new ReviewImageDTO(review, imgPath);
+                reviewImageService.saveDTO(reviewImageDTO);
+            }
+        }
     }
+
+
+    @PostMapping(value="/camping/calendar/review/image", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public void postCampingReviewImage(MultipartHttpServletRequest req) throws Exception {
+
+        List<MultipartFile> multipartFileList = req.getFiles("file");
+
+        Optional<Review> reviewWrapper = reviewService.findImageByReviewId(Long.parseLong(req.getParameter("reviewId")));
+
+        if(reviewWrapper.isPresent()) {
+            Review review = reviewWrapper.get();
+            for (MultipartFile multipartFile : multipartFileList) {
+                String imgPath = s3Service.upload(multipartFile);
+
+                ReviewImageDTO reviewImageDTO = new ReviewImageDTO(review, imgPath);
+                reviewImageService.saveDTO(reviewImageDTO);
+            }
+        } else {
+            throw new Exception("이미지를 등록할 기준이 되는 리뷰가 없습니다.");
+        }
+    }
+
+
+    @DeleteMapping(value="/camping/calendar/review/image/{imageId}")
+    @ResponseBody
+    public void deleteCampingReviewImage(HttpServletResponse res, @PathVariable Long imageId) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<ReviewImage> reviewImageWrapper = reviewImageService.findById(imageId);
+        if(reviewImageWrapper.isPresent()){
+            reviewImageService.delete(reviewImageWrapper.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
 }
