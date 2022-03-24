@@ -1,10 +1,7 @@
 package kr.carz.savecar.controller.CampingCar;
 
 import kr.carz.savecar.domain.*;
-import kr.carz.savecar.dto.CampingCarReservationDTO;
-import kr.carz.savecar.dto.ReviewDTO;
-import kr.carz.savecar.dto.ReviewImageDTO;
-import kr.carz.savecar.dto.ReviewTextVO;
+import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -164,4 +161,40 @@ public class ReviewController {
         pw.close();
     }
 
+
+    @PutMapping(value="/camping/review/video/{reviewId}", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public void putCampingVideo(@PathVariable Long reviewId, ImagesDTO imagesDTO) throws Exception {
+
+        Optional<Review> reviewWrapper = reviewService.findByReviewId(reviewId);
+        if(reviewWrapper.isPresent()){
+            Review review = reviewWrapper.get();
+            String imgPath = s3Service.upload(imagesDTO.getFile());
+            review.setVideo(imgPath);
+        } else {
+            throw new Exception("수정할 리뷰가 없습니다.");
+        }
+    }
+
+    @DeleteMapping(value="/camping/review/video/{reviewId}")
+    @ResponseBody
+    public void deleteCampingVideo(HttpServletResponse res, @PathVariable Long reviewId) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<Review> reviewWrapper = reviewService.findByReviewId(reviewId);
+        if(reviewWrapper.isPresent()){
+            Review review = reviewWrapper.get();
+            review.setVideo("");
+            reviewService.save(review);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 }
