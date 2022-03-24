@@ -34,10 +34,12 @@ public class ReviewController {
     }
 
 
-    @GetMapping("/camping/review/registration")
-    public ModelAndView getCampingCarReviewRegistration() {
+    @GetMapping("/camping/review/registration/{carType}")
+    public ModelAndView getCampingCarReviewRegistration(@PathVariable String carType) {
 
         ModelAndView mav = new ModelAndView();
+
+        mav.addObject("carType", carType);
 
         mav.setViewName("rent_camping/review");
 
@@ -45,16 +47,20 @@ public class ReviewController {
     }
 
 
-    @GetMapping(value="/camping/review/modification/{reviewId}")
+    @GetMapping(value="/camping/review/modification/{carType}/{reviewId}")
     @ResponseBody
-    public ModelAndView getCampingCarReviewModification(@PathVariable Long reviewId) throws Exception  {
+    public ModelAndView getCampingCarReviewModification(@PathVariable String carType, @PathVariable Long reviewId) throws Exception  {
 
         ModelAndView mav = new ModelAndView();
 
         Optional<Review> reviewWrapper = reviewService.findByReviewId(reviewId);
         if(reviewWrapper.isPresent()){
+            Review review = reviewWrapper.get();
+            List<ReviewImage> reviewImageList = reviewImageService.findByReview(review);
 
-            mav.addObject("review", reviewWrapper.get());
+            mav.addObject("review", review);
+            mav.addObject("reviewImageList", reviewImageList);
+            mav.addObject("carType", carType);
         } else {
             throw new Exception("reviewId 에 해당하는 리뷰가 없습니다. ");
         }
