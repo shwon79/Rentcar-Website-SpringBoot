@@ -200,6 +200,7 @@ public class ReviewController {
             Review review = reviewWrapper.get();
             String imgPath = s3Service.upload(imagesDTO.getFile());
             review.setVideo(imgPath);
+            reviewService.save(review);
         } else {
             throw new Exception("수정할 리뷰가 없습니다.");
         }
