@@ -3,24 +3,17 @@ package kr.carz.savecar.controller.CampingCar;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -40,6 +33,34 @@ public class ReviewController {
         this.campingCarPriceService = campingCarPriceService;
     }
 
+
+    @GetMapping("/camping/review/registration")
+    public ModelAndView getCampingCarReviewRegistration() {
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("rent_camping/review");
+
+        return mav;
+    }
+
+
+    @GetMapping(value="/camping/review/modification/{reviewId}")
+    @ResponseBody
+    public ModelAndView getCampingCarReviewModification(@PathVariable Long reviewId) throws Exception  {
+
+        ModelAndView mav = new ModelAndView();
+
+        Optional<Review> reviewWrapper = reviewService.findByReviewId(reviewId);
+        if(reviewWrapper.isPresent()){
+
+            mav.addObject("review", reviewWrapper.get());
+        } else {
+            throw new Exception("reviewId 에 해당하는 리뷰가 없습니다. ");
+        }
+        mav.setViewName("rent_camping/review");
+        return mav;
+    }
 
     @PostMapping(value="/camping/review", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
@@ -65,8 +86,8 @@ public class ReviewController {
 
         if(reviewWrapper.isPresent()) {
             Review review = reviewWrapper.get();
-            for (int i = 0; i < multipartFileList.size(); i++) {
-                String imgPath = s3Service.upload(multipartFileList.get(i));
+            for (MultipartFile multipartFile : multipartFileList) {
+                String imgPath = s3Service.upload(multipartFile);
                 ReviewImageDTO reviewImageDTO = new ReviewImageDTO(review, imgPath);
                 reviewImageService.saveDTO(reviewImageDTO);
             }
