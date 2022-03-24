@@ -40,6 +40,7 @@ public class ReviewController {
         ModelAndView mav = new ModelAndView();
 
         mav.addObject("carType", carType);
+        mav.addObject("pageType", "registration");
 
         mav.setViewName("rent_camping/review");
 
@@ -61,6 +62,7 @@ public class ReviewController {
             mav.addObject("review", review);
             mav.addObject("reviewImageList", reviewImageList);
             mav.addObject("carType", carType);
+            mav.addObject("pageType", "modification");
         } else {
             throw new Exception("reviewId 에 해당하는 리뷰가 없습니다. ");
         }
