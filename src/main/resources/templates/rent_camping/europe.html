@@ -34,94 +34,6 @@
         <div th:replace="fragments/header_camp::headerFragment"></div>
 
         <!-- content whole wrapper-->
-        <div id="reviewEditModal" class="editModal">
-            <div class="modal_content">
-                <span class="modal_close_btn" onclick="displayReviewEditBox('close');">&times;</span>
-                <div id="reviewEditBox">
-                    <div class="review_box_top" style="margin-bottom: 20px;">
-                        <span style="font-size: 18px;">리뷰 수정하기</span>
-                    </div>
-                    <p style="display: none;" id="reviewIdForEdit"></p>
-                    <div>
-                        <label for="reviewName" class="control-label">
-                            <span style="color: orangered; font-size: 16px;">*</span>
-                            <span>닉네임</span>
-                        </label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" id="editNickName">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="reviewPassword" class="control-label">
-                            <span style="color: orangered; font-size: 16px;">*</span>
-                            <span>비밀번호</span>
-                        </label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                            <input type="password" class="form-control" id="editPassword">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="reviewCarType" class="control-label">
-                            <span style="color: orangered; font-size: 16px;">*</span>
-                            <span>캠핑카 종류</span>
-                        </label>
-                        <div class="input-group" style="width: 100%;">
-                            <span class="input-group-addon"><i class="fa fa-car"></i></span>
-                            <select id="editCarName" class="form-control-select" style="width: 100%; margin-bottom: 0;">
-                                <option value="">이용하신 캠핑카를 선택하세요</option>
-                                <option value="europe">Europe</option>
-                                <option value="limousine">Limousine</option>
-                                <option value="travel">Travel</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="control-label">
-                            <span style="color: orangered; font-size: 16px;">*</span>
-                            <span>렌트 기간</span>
-                        </label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
-                            <div class="review_box_date">
-                                <input type="date" id="editStartDate" class="form-control review_date_long">
-                                <span class="form-control"> ~ </span>
-                                <input type="date" id="editEndDate" class="form-control review_date_long">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="reviewText" class="control-label">
-                            <span style="color: orangered; font-size: 16px;">*</span>
-                            <span>내용</span>
-                        </label>
-                        <div class="input-group" style="width: 100%;">
-                            <textarea name="" id="editText" rows="5" class="form-control" style="width: 100%;"></textarea>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="reviewImage" class="control-label">기존 이미지</label>
-                        <div class="existing-image-wrapper"></div>
-                    </div>
-                    <div>
-                        <label for="reviewImage" class="control-label">새 이미지 추가</label>
-                        <div class="input-group" style="width: 100%; border: 1px solid lightgray; text-align: right; padding: 6px 12px;">
-                            <input type="file" accept="image/*" multiple="multiple" id="addImage" name="file" class="form-control" style="border: none; padding: 0;">
-                            <button th:onclick="editNewReviewImage();" class="btn btn-primary">선택한 이미지 추가하기</button>
-                        </div>
-                    </div>
-<!--                    <div>-->
-<!--                        <label for="reviewVideo" class="control-label">동영상 첨부</label>-->
-<!--                        <div class="input-group" style="width: 100%;">-->
-<!--                            <input type="file" accept="video/*" multiple="multiple" id="reviewVideo" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <button class="btn btn-primary" id="submitReviewBtn" onclick="submitReview();">사진 수정</button>-->
-                </div>
-            </div>
-        </div>
-
         <p class="car_type" th:id="${carType}" style="display: none;"></p>
         <p id="fullReturnDate" style="display: none;"></p>
         <!--mobile image-->
@@ -505,93 +417,28 @@
                         <div id="review" style="padding-top: 70px;">
                             <h1 class="tab-title">리뷰(<span th:text="${#lists.size(reviewList)}">0</span>건) </h1>
                             <p style="word-break: keep-all; text-align: left; color: dimgrey;">세이브카의 캠핑카를 이용하신 분들이 작성한 리뷰입니다.</p>
-                            <button class="btn btn-primary" id="openReviewBtn" onclick="displayReviewBox();">리뷰 쓰기</button>
-                            <div id="writeReviewBox">
-                                <div class="review_box_top">
-                                    <span style="font-size: 18px;">리뷰작성 하기</span>
-                                    <button onclick="displayReviewBox();" class="btn btn-primary">X</button>
-                                </div>
-                                <div>
-                                    <label for="reviewName" class="control-label">
-                                        <span style="color: orangered; font-size: 16px;">*</span>
-                                        <span>닉네임</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input type="text" class="form-control" id="reviewName" placeholder="성함을 입력해주세요.">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="reviewPassword" class="control-label">
-                                        <span style="color: orangered; font-size: 16px;">*</span>
-                                        <span>비밀번호</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                        <input type="password" class="form-control" id="reviewPassword">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="reviewCarType" class="control-label">
-                                        <span style="color: orangered; font-size: 16px;">*</span>
-                                        <span>캠핑카 종류</span>
-                                    </label>
-                                    <div class="input-group" style="width: 100%;">
-                                        <span class="input-group-addon"><i class="fa fa-car"></i></span>
-                                        <select id="reviewCarType" class="form-control-select" style="width: 100%; margin-bottom: 0;">
-                                            <option value="">이용하신 캠핑카를 선택하세요</option>
-                                            <option value="europe">Europe</option>
-                                            <option value="limousine">Limousine</option>
-                                            <option value="travel">Travel</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="control-label">
-                                        <span style="color: orangered; font-size: 16px;">*</span>
-                                        <span>렌트 기간</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
-                                        <div class="review_box_date">
-                                            <input type="date" id="reviewRentStartDate" class="form-control review_date_long">
-                                            <span class="form-control"> ~ </span>
-                                            <input type="date" id="reviewRentEndDate" class="form-control review_date_long">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="reviewText" class="control-label">
-                                        <span style="color: orangered; font-size: 16px;">*</span>
-                                        <span>내용</span>
-                                    </label>
-                                    <div class="input-group" style="width: 100%;">
-                                        <textarea name="" id="reviewText" rows="5" class="form-control" style="width: 100%;"></textarea>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="reviewImage" class="control-label">이미지 첨부 (10장까지 첨부 가능)</label>
-                                    <div class="input-group" style="width: 100%;">
-                                        <input type="file" accept="image/*" multiple="multiple" id="reviewImage" name="file" class="form-control">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="reviewVideo" class="control-label">동영상 첨부</label>
-                                    <div class="input-group" style="width: 100%;">
-                                        <input type="file" accept="video/*" multiple="multiple" id="reviewVideo" class="form-control">
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" id="submitReviewBtn" onclick="submitReview();">등록하기</button>
-                            </div>
+                            <a th:href="'/camping/review/registration/'+ ${imagesList[0].carName.carName}">
+                                <button class="btn btn-primary" id="openReviewBtn">리뷰 쓰기</button>
+                            </a>
                             <ul id="displayReviewBox">
                                 <li th:if="${#lists.size(reviewList) == 0}" style="text-align: center; font-size: 16px; color: gray;">작성된 리뷰가 없습니다.</li>
                                 <li th:if="${#lists.size(reviewList) != 0}" th:each="review, i : ${reviewList}" class="one_review" th:data-id="${review.reviewId}">
                                     <div class="one_review_close" th:data-title="${review.reviewId}">
                                         <div class="review_text_box" th:classappend="${#lists.size(reviewImageList[i.index]) != 0 || review.video != ''} ? 'narrow' : 'wide'">
                                             <p>
-                                                <button class="btn btn-primary" th:onclick="editReview([[${review.reviewId}]]); event.stopPropagation();">리뷰 수정하기</button>
+                                                <button class="btn btn-primary" th:onclick="clickEditReview([[${review.reviewId}]]); event.stopPropagation();">리뷰 수정하기</button>
                                                 <button class="btn btn-danger" th:onclick="deleteReview([[${review.reviewId}]]); event.stopPropagation();">리뷰 삭제하기</button>
                                             </p>
+                                            <div class="enter_password_form" th:data-id="${review.reviewId}">
+                                                <label class="control-label">비밀번호를 입력하세요.</label>
+                                                <div style="display: flex;">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                        <input type="password" class="form-control password_input" th:data-id="${review.reviewId}" onclick="event.stopPropagation();">
+                                                    </div>
+                                                    <button class="btn btn-primary" th:onclick="checkValidPassword([[${imagesList[0].carName.carName}]], [[${review.reviewId}]]); event.stopPropagation();">확인</button>
+                                                </div>
+                                            </div>
                                             <p>
                                                 <span th:text="${review.reviewId}" style="display: none;" class="reviewId" th:data-id="${review.reviewId}"></span>
                                                 <span th:text="${review.password}" style="display: none;" class="password" th:data-id="${review.reviewId}"></span>
@@ -629,6 +476,7 @@
                                             <source th:src="${review.video}" class="video">
                                         </video>
                                     </div>
+                                    <p style="display: none;" th:text="${review.video}" th:data-id="${review.reviewId}" class="videoSrc"></p>
                                     <div class="review_image_open" th:if="${#lists.size(reviewImageList[i.index]) != 0 || review.video != ''}" th:data-title="${review.reviewId}">
                                         <div class="image" th:each="img, i : ${reviewImageList[i.index]}">
                                             <img th:src="${img.imageUrl}" alt="image" th:data-id="${review.reviewId}" th:data-image-id="${img.imageId}" class="imgUrl">
@@ -636,7 +484,7 @@
                                         <div class="video">
                                             <video th:if="${review.video != ''}" controls preload="metadata" class="video_real">
                                                 <source th:src="${review.video}">
-                                            </video>
+                                            </video>김
                                         </div>
                                     </div>
                                 </li>

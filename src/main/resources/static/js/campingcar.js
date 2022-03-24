@@ -16,223 +16,156 @@ smallBoxList.forEach((box) => {
     });
 });
 
-// 리뷰쓰기 버튼 누르면 리뷰 폼 보이기
-function displayReviewBox() {
-    document.getElementById('openReviewBtn').classList.toggle('active');
-    document.getElementById('writeReviewBox').classList.toggle('active');
-};
-
-// 리뷰 등록하기 버튼
-function submitReview() {
-    let reviewName = document.getElementById('reviewName').value;
-    let reviewPassword = document.getElementById('reviewPassword').value;
-    let reviewCarType = document.getElementById('reviewCarType').value;
-    let reviewRentStartDate = document.getElementById('reviewRentStartDate').value;
-    let reviewRentEndDate = document.getElementById('reviewRentEndDate').value;
-    let reviewText = document.getElementById('reviewText').value;
-    let reviewImage = document.getElementById('reviewImage').files;
-    let reviewVideo = document.getElementById('reviewVideo').files;
-
-    let formDataWrapper = new FormData();
-
-    if (reviewVideo.length > 1) {
-        // 동영상 최대 갯수 1개
-        alert('동영상 첨부는 최대 1개까지 가능합니다.');
-    } else if (reviewImage.length > 10) {
-        // 사진 최대 갯수 10개
-        alert('이미지 첨부는 최대 10장까지 가능합니다.');
-    } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
-        alert('필수 입력 내용을 빠짐없이 작성해주세요.');
-    } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
-        formDataWrapper.append('carName', reviewCarType);
-        formDataWrapper.append('text', reviewText);
-        formDataWrapper.append('nickName', reviewName);
-        formDataWrapper.append('startDate', reviewRentStartDate);
-        formDataWrapper.append('endDate', reviewRentEndDate);
-        for (let i = 0; i < reviewImage.length; i++) {
-            formDataWrapper.append('file', reviewImage[i]);
-        }
-        formDataWrapper.append('video', reviewVideo[0]);
-        formDataWrapper.append('password', reviewPassword);
-        if (confirm('리뷰를 등록 하시겠습니까?')) {
-            postReview(formDataWrapper);
-        };
-    };
-
-    function postReview(data) {
-        $.ajax({
-            enctype: 'multipart/form-data',
-            cache: false,
-            type: 'POST',
-            url: '/camping/calendar/review',
-            processData:false,
-            contentType: false,
-            data: data
-        }).done(function () {
-            alert('리뷰가 등록되었습니다.');
-            location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    };
-}
 
 // 비밀번호 확인
-function checkPassword(id) {
+function checkValidPassword(carType, id) {
     const password = [...document.getElementsByClassName('password')].find(ele => ele.dataset.id == id).innerText;
-    let enterPassword = prompt(`비밀번호를 입력하세요.`, '');
+    const passwordInput = [...document.getElementsByClassName('password_input')].find(ele => ele.dataset.id == id).value;
 
-    if (enterPassword === password) {
-        return true;
-    } else {
-        return false;
-    };
-};
-
-// 리뷰 수정하기 창 띄우기
-function displayReviewEditBox(type) {
-    let modal = document.getElementById('reviewEditModal');
-    // let span = document.getElementsByClassName("modal_close_btn")[0];
-
-    if (type == 'open') {
-        modal.style.display = "block";
-    } else if (type == 'close') {
-        modal.style.display = "none";
-        sessionStorage.setItem('camping_review_edit_open', '0');
-        sessionStorage.setItem('review_id', '0');
-    };
-};
-
-// 리뷰 수정하기 창에 기존 입력 값 보여주기
-function displayExistingValue(id) {
-    let nickName = [...document.getElementsByClassName('nickName')].find(ele => ele.dataset.id == id).innerText;
-    let password = [...document.getElementsByClassName('password')].find(ele => ele.dataset.id == id).innerText;
-    let carName = [...document.getElementsByClassName('carName')].find(ele => ele.dataset.id == id).innerText;
-    let startDate = [...document.getElementsByClassName('startDate')].find(ele => ele.dataset.id == id).innerText;
-    let endDate = [...document.getElementsByClassName('endDate')].find(ele => ele.dataset.id == id).innerText;
-    let text = [...document.getElementsByClassName('text')].find(ele => ele.dataset.id == id).innerText;
-    let imageUrlList = [...document.getElementsByClassName('imgUrl')].filter(ele => ele.dataset.id == id);
-    let selectedImageUrlList = [];
-
-    for(let i = 0; i < imageUrlList.length; i++) {
-        selectedImageUrlList.push(imageUrlList[i]);
-    };
-
-    document.getElementById('editNickName').value = nickName;
-    document.getElementById('editPassword').value = password;
-    document.getElementById('editCarName').value = carName;
-    document.getElementById('editStartDate').value = startDate;
-    document.getElementById('editEndDate').value = endDate;
-    document.getElementById('editText').value = text;
-    document.getElementById('reviewIdForEdit').innerText = id;
-
-    document.getElementsByClassName('existing-image-wrapper')[0].innerHTML = '';
-    document.getElementsByClassName('existing-image-wrapper')[0].style.marginBottom = '20px';
-
-    if (selectedImageUrlList.length == 0) {
-        document.getElementsByClassName('existing-image-wrapper')[0].innerHTML = `
-         <p style="text-align: center; width: 100%; font-size: 14px;">없음</p>
-        `;
-
-        document.getElementsByClassName('existing-image-wrapper')[0].style.border = '1px solid lightgray';
-        document.getElementsByClassName('existing-image-wrapper')[0].style.padding = '10px';
-    } else {
-        for(let i = 0; i < selectedImageUrlList.length; i++) {
-            let imageDiv = document.createElement('div');
-            imageDiv.classList.add('reviewEditImageDiv');
-
-            let button = document.createElement('button');
-            let buttonText = document.createTextNode('X');
-            button.appendChild(buttonText);
-            button.classList.add('delete_image_button');
-            button.onclick = function clickedDelete() {
-                deleteOneImage(selectedImageUrlList[i].dataset.imageId, selectedImageUrlList[i].dataset.id);
-            };
-
-            imageDiv.append(button);
-
-            let image = document.createElement('img');
-            image.src = `${selectedImageUrlList[i].src}`;
-            imageDiv.append(image);
-
-            document.getElementsByClassName('existing-image-wrapper')[0].append(imageDiv);
-            document.getElementsByClassName('existing-image-wrapper')[0].style.border = 'none';
-            document.getElementsByClassName('existing-image-wrapper')[0].style.padding = '0px';
-        }
-    }
-
-
-}
-
-// 새로운 이미지 첨부
-function editNewReviewImage() {
-    let newFiles = document.getElementById('addImage').files;
-    let reviewId = document.getElementById('reviewIdForEdit').innerText;
-    let formData = new FormData();
-
-    if (newFiles.length == 0) {
-        alert('새로운 이미지를 선택해주세요.')
-    } else {
-        formData.append('reviewId', reviewId);
-        for (let i = 0; i < newFiles.length; i++) {
-            formData.append('file', newFiles[i]);
-        };
-
-        sessionStorage.setItem('camping_review_edit_open', '1');
-        sessionStorage.setItem('review_id', reviewId);
-
-        if ('이미지를 추가하시겠습니까?') {
-            $.ajax({
-                enctype: 'multipart/form-data',
-                cache: false,
-                type: 'POST',
-                url: '/camping/calendar/review/image',
-                processData:false,
-                contentType: false,
-                data: formData
-            }).done(function () {
-                alert('새로운 이미지가 추가 되었습니다.');
-                location.reload();
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            })
-        };
-    };
-
-}
-
-// 리뷰 수정에서 이미지 하나씩 삭제
-function deleteOneImage(imageId, reviewId) {
-    if (confirm('이 이미지를 삭제하시겠습니까?')) {
-
-        sessionStorage.setItem('camping_review_edit_open', '1');
-        sessionStorage.setItem('review_id', reviewId);
-
-        $.ajax({
-            type:'DELETE',
-            url:'/camping/calendar/review/image/'+ imageId,
-            dataType:'text',
-            contentType : 'application/json; charset=utf-8'
-        }).done(function () {
-            alert('삭제가 완료되었습니다.');
-            location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    };
-};
-
-// 리뷰 수정하기 버튼
-function editReview(id) {
-    let resultCheckPassword = checkPassword(id);
-
-    if (resultCheckPassword) {
-        displayReviewEditBox('open');
-        displayExistingValue(id);
+    if (passwordInput === password) {
+        location.href = '/camping/review/modification/' + carType + '/' + id;
     } else {
         alert('비밀번호가 틀렸습니다.');
-   };
+    };
 };
+
+// // 리뷰 수정하기 창 띄우기
+// function displayReviewEditBox(type) {
+//     let modal = document.getElementById('reviewEditModal');
+//     // let span = document.getElementsByClassName("modal_close_btn")[0];
+//
+//     if (type == 'open') {
+//         modal.style.display = "block";
+//     } else if (type == 'close') {
+//         modal.style.display = "none";
+//
+//         document.getElementById('editNickName').value = '';
+//         document.getElementById('editPassword').value = '';
+//         document.getElementById('editCarName').value = '';
+//         document.getElementById('editStartDate').value = '';
+//         document.getElementById('editEndDate').value = '';
+//         document.getElementById('editText').value = '';
+//         document.getElementById('reviewIdForEdit').innerText = '';
+//
+//         sessionStorage.setItem('camping_review_edit_open', '0');
+//         sessionStorage.setItem('review_id', '0');
+//     };
+// };
+
+// 리뷰 수정하기 창에 기존 입력 값 보여주기
+// function displayExistingValue(id) {
+//     let nickName = [...document.getElementsByClassName('nickName')].find(ele => ele.dataset.id == id).innerText;
+//     let password = [...document.getElementsByClassName('password')].find(ele => ele.dataset.id == id).innerText;
+//     let carName = [...document.getElementsByClassName('carName')].find(ele => ele.dataset.id == id).innerText;
+//     let startDate = [...document.getElementsByClassName('startDate')].find(ele => ele.dataset.id == id).innerText;
+//     let endDate = [...document.getElementsByClassName('endDate')].find(ele => ele.dataset.id == id).innerText;
+//     let text = [...document.getElementsByClassName('text')].find(ele => ele.dataset.id == id).innerText;
+//     let imageUrlList = [...document.getElementsByClassName('imgUrl')].filter(ele => ele.dataset.id == id);
+//     let videoSrc = [...document.getElementsByClassName('videoSrc')].find(ele => ele.dataset.id == id);
+//     let selectedImageUrlList = [];
+//
+//     for(let i = 0; i < imageUrlList.length; i++) {
+//         selectedImageUrlList.push(imageUrlList[i]);
+//     };
+//
+//     document.getElementById('editNickName').value = nickName;
+//     document.getElementById('editPassword').value = password;
+//     document.getElementById('editCarName').value = carName;
+//     document.getElementById('editStartDate').value = startDate;
+//     document.getElementById('editEndDate').value = endDate;
+//     document.getElementById('editText').value = text;
+//     document.getElementById('reviewIdForEdit').innerText = id;
+//
+//     // 기존 이미지 보여주기
+//     document.getElementsByClassName('existing-image-wrapper')[0].innerHTML = '';
+//     document.getElementsByClassName('existing-image-wrapper')[0].style.marginBottom = '20px';
+//
+//     if (selectedImageUrlList.length == 0) {
+//         document.getElementsByClassName('existing-image-wrapper')[0].innerHTML = `
+//          <p style="text-align: center; width: 100%; font-size: 14px;">없음</p>
+//         `;
+//
+//         document.getElementsByClassName('existing-image-wrapper')[0].style.border = '1px solid lightgray';
+//         document.getElementsByClassName('existing-image-wrapper')[0].style.padding = '10px';
+//     } else {
+//         for(let i = 0; i < selectedImageUrlList.length; i++) {
+//             let imageDiv = document.createElement('div');
+//             imageDiv.classList.add('reviewEditImageDiv');
+//
+//             let button = document.createElement('button');
+//             let buttonText = document.createTextNode('X');
+//             button.appendChild(buttonText);
+//             button.classList.add('delete_image_button');
+//             button.onclick = function clickedDelete() {
+//                 deleteOneImage(selectedImageUrlList[i].dataset.imageId, selectedImageUrlList[i].dataset.id);
+//             };
+//
+//             imageDiv.append(button);
+//
+//             let image = document.createElement('img');
+//             image.src = `${selectedImageUrlList[i].src}`;
+//             imageDiv.append(image);
+//
+//             document.getElementsByClassName('existing-image-wrapper')[0].append(imageDiv);
+//             document.getElementsByClassName('existing-image-wrapper')[0].style.border = 'none';
+//             document.getElementsByClassName('existing-image-wrapper')[0].style.padding = '0px';
+//         }
+//     }
+//
+//     document.getElementsByClassName('existing-video-wrapper')[0].innerHTML = '';
+//     document.getElementsByClassName('existing-image-wrapper')[0].style.marginBottom = '20px';
+//
+//     // 기존 비디오 보여주기
+//     if (videoSrc.innerText == '') {
+//         document.getElementsByClassName('existing-video-wrapper')[0].innerHTML = `
+//          <p style="text-align: center; width: 100%; font-size: 14px;">없음</p>
+//         `;
+//
+//         document.getElementsByClassName('existing-video-wrapper')[0].style.border = '1px solid lightgray';
+//         document.getElementsByClassName('existing-video-wrapper')[0].style.padding = '10px';
+//     } else {
+//         let imageDiv = document.createElement('div');
+//         imageDiv.classList.add('reviewEditVideoDiv');
+//
+//         let button = document.createElement('button');
+//         let buttonText = document.createTextNode('X');
+//         button.appendChild(buttonText);
+//         button.classList.add('delete_video_button');
+//         button.onclick = function clickedDelete() {
+//             deleteOneVideo(videoSrc.dataset.id);
+//         };
+//         imageDiv.append(button);
+//
+//         let video = document.createElement('video');
+//         video.autoplay = false;
+//         video.controls = true;
+//         video.style.height = '250px';
+//         video.style.width = 'auto';
+//         video.style.margin = '0 auto';
+//
+//         let source = document.createElement('source');
+//         source.src = videoSrc.innerText;
+//
+//         video.append(source);
+//         imageDiv.append(video);
+//
+//         document.getElementsByClassName('existing-video-wrapper')[0].append(imageDiv);
+//         document.getElementsByClassName('existing-video-wrapper')[0].style.border = 'none';
+//         document.getElementsByClassName('existing-video-wrapper')[0].style.padding = '0px';
+//     };
+// }
+
+
+
+
+
+// 리뷰 수정하기 버튼 클릭
+function clickEditReview(id) {
+    let targetForm = [...document.getElementsByClassName('enter_password_form')].find(ele => ele.dataset.id == id);
+    targetForm.style.display = 'block';
+};
+
+
 
 // 리뷰 삭제하기 버튼
 function deleteReview(id) {
