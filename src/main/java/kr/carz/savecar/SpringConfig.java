@@ -31,6 +31,7 @@ public class SpringConfig {
     private final RealTimeRentCarRepository realTimeRentRepository;
     private final RealTimeRentCarImageRepository realTimeRentImageRepository;
     private final ReviewImageRepository reviewImageRepository;
+    private final ExpectedDayRepository expectedDayRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -45,7 +46,7 @@ public class SpringConfig {
                         CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository,
                         LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository,
                         RealTimeRentCarRepository realTimeRentRepository, RealTimeRentCarImageRepository realTimeRentImageRepository,
-                        ReviewImageRepository reviewImageRepository) {
+                        ReviewImageRepository reviewImageRepository, ExpectedDayRepository expectedDayRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -69,6 +70,7 @@ public class SpringConfig {
         this.realTimeRentRepository = realTimeRentRepository;
         this.realTimeRentImageRepository = realTimeRentImageRepository;
         this.reviewImageRepository = reviewImageRepository;
+        this.expectedDayRepository = expectedDayRepository;
     }
 
     @Bean
@@ -143,4 +145,7 @@ public class SpringConfig {
 
     @Bean
     public ReviewImageService reviewImageService() { return new ReviewImageService(reviewImageRepository); }
+
+    @Bean
+    public ExpectedDayService expectedDayService() { return new ExpectedDayService(expectedDayRepository); }
 }
