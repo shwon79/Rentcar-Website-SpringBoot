@@ -25,4 +25,12 @@ public class ExpectedDayService {
         return expectedDayRepository.findById(id);
     }
 
+    public Long save(ExpectedDay expectedDay){
+        return expectedDayRepository.save(expectedDay).getId();
+    }
+
+    public void deleteAll(){
+        expectedDayRepository.deleteAllInBatch();
+    }
+
 }

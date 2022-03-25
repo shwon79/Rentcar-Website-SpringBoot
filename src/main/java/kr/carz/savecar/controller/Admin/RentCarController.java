@@ -5,8 +5,6 @@ import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,16 +22,18 @@ public class RentCarController {
     private final YearlyRentService yearlyRentService;
     private final TwoYearlyRentService twoYearlyRentService;
     private final S3Service s3Service;
+    private final ExpectedDayService expectedDayService;
 
     @Autowired
     public RentCarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
                              TwoYearlyRentService twoYearlyRentService, ReservationService reservationService,
-                             S3Service s3Service) {
+                             S3Service s3Service, ExpectedDayService expectedDayService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
         this.reservationService = reservationService;
         this.s3Service = s3Service;
+        this.expectedDayService = expectedDayService;
     }
 
 
@@ -447,4 +447,21 @@ public class RentCarController {
     }
 
 
+    @PutMapping(value="/admin/rentcar/expectedDay/{nValue}")
+    @ResponseBody
+    public void put_rent_expectedDay(HttpServletResponse res, @PathVariable String nValue) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+        expectedDayList.get(0).setExpectedDay(nValue);
+        expectedDayService.save(expectedDayList.get(0));
+
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 }
