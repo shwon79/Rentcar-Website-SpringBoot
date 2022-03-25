@@ -447,6 +447,19 @@ public class RentCarController {
     }
 
 
+    @GetMapping("/admin/rentcar/expectedDay/menu")
+    public ModelAndView get_rent_car_expectedDay_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+        mav.addObject("expectedDay", expectedDayList.get(0));
+
+        mav.setViewName("admin/rentcar_expected_day");
+
+        return mav;
+    }
+
     @PutMapping(value="/admin/rentcar/expectedDay/{nValue}")
     @ResponseBody
     public void put_rent_expectedDay(HttpServletResponse res, @PathVariable String nValue) throws IOException {
