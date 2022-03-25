@@ -599,6 +599,11 @@ a:hover {
 }
 .review_image_open .video video {
   max-height: 500px;
+  max-width: 100%;
+}
+.imgUrl {
+  width: 100%;
+  height: 100%;
 }
 .see_more_btn {
   border: none;
