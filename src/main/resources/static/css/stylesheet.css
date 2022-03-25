@@ -351,6 +351,12 @@ nav ul li ul li a {
     .nav-list {
         display: block !important;
     }
+    .header_flex {
+        display: flex;
+    }
+    .nav-bar {
+        padding: 5px 0;
+    }
 }
 #nav-toggle {
     position: absolute;
