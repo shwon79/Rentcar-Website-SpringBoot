@@ -12,7 +12,7 @@
     <link th:href="@{/css/camping.css}" rel="stylesheet">
     <link th:href="@{/css/camping_calendar.css}" rel="stylesheet">
 
-    <script th:src="@{/js/campingcar.js}" defer></script>
+<!--    <script th:src="@{/js/campingcar.js}" defer></script>-->
     <script th:src="@{/js/camping_review.js}" defer ></script>
     <script>
         $(window).load(function() {
@@ -31,8 +31,12 @@
     <!-- content whole wrapper-->
     <p th:text="${carType}" id="carType" style="display: none;"></p>
 
+    <div class="container go_back_div">
+        <i class="fa fa-arrow-left" aria-hidden="true" style="font-size: 36px;" th:onclick="moveToCampingReservation([[${carType}]])"></i>
+    </div>
+
     <!--리뷰 등록 페이지-->
-    <div th:if="${pageType == 'registration'}" class="container pinside60">
+    <div th:if="${pageType == 'registration'}" class="container container_padding">
         <div id="writeReviewBox">
             <div class="review_box_top">
                 <h1 class="tab-title" style="line-height: normal; margin-bottom: 0;">리뷰 작성하기</h1>
@@ -112,7 +116,7 @@
     </div>
 
     <!--리뷰 수정 페이지-->
-    <div th:if="${pageType == 'modification'}" class="container pinside60">
+    <div th:if="${pageType == 'modification'}" class="container  container_padding">
         <div id="writeReviewBox">
             <div class="review_box_top">
                 <h1 class="tab-title" style="line-height: normal; margin-bottom: 0;">리뷰 수정하기</h1>
@@ -215,7 +219,9 @@
                                onchange="editNewReviewVideo();">
                     </div>
                 </div>
-                <button class="btn btn-primary" id="submitReviewEditBtn" th:onclick="editReview([[${review.reviewId}]]);">리뷰 수정하기</button>
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" id="submitReviewEditBtn" th:onclick="editReview([[${review.reviewId}]]);">리뷰 수정하기</button>
+                </div>
             </div>
         </div>
     </div>

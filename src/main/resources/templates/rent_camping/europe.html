@@ -19,12 +19,6 @@
             let ulList = [...document.getElementsByClassName('header_camp_li')];
             let targetUl = ulList.find(ul => ul.dataset.id === 'europe');
             targetUl && targetUl.classList.add('active');
-
-            let isEditModalOpen = sessionStorage.getItem('camping_review_edit_open');
-            if (isEditModalOpen == '1') {
-                displayReviewEditBox('open');
-                displayExistingValue(sessionStorage.getItem('review_id'));
-            };
         });
     </script>
 </head>
@@ -426,17 +420,27 @@
                                     <div class="one_review_close" th:data-title="${review.reviewId}">
                                         <div class="review_text_box" th:classappend="${#lists.size(reviewImageList[i.index]) != 0 || review.video != ''} ? 'narrow' : 'wide'">
                                             <p>
-                                                <button class="btn btn-primary" th:onclick="clickEditReview([[${review.reviewId}]]); event.stopPropagation();">리뷰 수정하기</button>
-                                                <button class="btn btn-danger" th:onclick="deleteReview([[${review.reviewId}]]); event.stopPropagation();">리뷰 삭제하기</button>
+                                                <button class="btn btn-primary" th:onclick="clickEditOrDeleteReview([[${review.reviewId}]], 'edit'); event.stopPropagation();">리뷰 수정하기</button>
+                                                <button class="btn btn-danger" th:onclick="clickEditOrDeleteReview([[${review.reviewId}]], 'delete'); event.stopPropagation();">리뷰 삭제하기</button>
                                             </p>
-                                            <div class="enter_password_form" th:data-id="${review.reviewId}">
-                                                <label class="control-label">비밀번호를 입력하세요.</label>
+                                            <div class="enter_password_form_for_edit" th:data-id="${review.reviewId}">
+                                                <label class="control-label">리뷰 수정을 위한 비밀번호를 입력하세요.</label>
                                                 <div style="display: flex;">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                                        <input type="password" class="form-control password_input" th:data-id="${review.reviewId}" onclick="event.stopPropagation();">
+                                                        <input type="password" class="form-control password_input_for_edit" th:data-id="${review.reviewId}" onclick="event.stopPropagation();">
                                                     </div>
-                                                    <button class="btn btn-primary" th:onclick="checkValidPassword([[${imagesList[0].carName.carName}]], [[${review.reviewId}]]); event.stopPropagation();">확인</button>
+                                                    <button class="btn btn-primary" th:onclick="checkValidPassword([[${imagesList[0].carName.carName}]], [[${review.reviewId}]], 'edit'); event.stopPropagation();">확인</button>
+                                                </div>
+                                            </div>
+                                            <div class="enter_password_form_for_delete" th:data-id="${review.reviewId}">
+                                                <label class="control-label">리뷰 삭제를 위한 비밀번호를 입력하세요.</label>
+                                                <div style="display: flex;">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                        <input type="password" class="form-control password_input_for_delete" th:data-id="${review.reviewId}" onclick="event.stopPropagation();">
+                                                    </div>
+                                                    <button class="btn btn-primary" th:onclick="checkValidPassword([[${imagesList[0].carName.carName}]], [[${review.reviewId}]], 'delete'); event.stopPropagation();">확인</button>
                                                 </div>
                                             </div>
                                             <p>
@@ -452,7 +456,7 @@
                                             <p>
                                                 <span>렌트 기간 :</span>
                                                 <span th:text="${review.startDate}" class="startDate" th:data-id="${review.reviewId}"></span>
-                                                <span> ~ </span>
+                                                <span>~</span>
                                                 <span th:text="${review.endDate}" class="endDate" th:data-id="${review.reviewId}"></span>
                                             </p>
                                             <pre th:text="${#strings.abbreviate(review.text,150)}" class="review_text review_text_short"></pre>
@@ -484,7 +488,7 @@
                                         <div class="video">
                                             <video th:if="${review.video != ''}" controls preload="metadata" class="video_real">
                                                 <source th:src="${review.video}">
-                                            </video>김
+                                            </video>
                                         </div>
                                     </div>
                                 </li>

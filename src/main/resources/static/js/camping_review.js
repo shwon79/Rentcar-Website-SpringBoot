@@ -84,41 +84,34 @@ function editNewReviewImage() {
             })
         };
     };
-
 };
 
 // 리뷰 수정에서 이미지 하나씩 삭제
 function deleteOneImage(imageId) {
-    if (confirm('이 이미지를 삭제하시겠습니까?')) {
-        $.ajax({
-            type:'DELETE',
-            url:'/camping/review/image/'+ imageId,
-            dataType:'text',
-            contentType : 'application/json; charset=utf-8'
-        }).done(function () {
-            alert('삭제가 완료되었습니다.');
-            location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    };
+    $.ajax({
+        type:'DELETE',
+        url:'/camping/review/image/'+ imageId,
+        dataType:'text',
+        contentType : 'application/json; charset=utf-8'
+    }).done(function () {
+        location.reload();
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    });
 };
 
 // 리뷰 수정에서 비디오 삭제
 function deleteOneVideo(reviewId) {
-    if (confirm('이 동영상을 삭제하시겠습니까?')) {
-        $.ajax({
-            type:'DELETE',
-            url:'/camping/review/video/'+ reviewId,
-            dataType:'text',
-            contentType : 'application/json; charset=utf-8'
-        }).done(function () {
-            alert('삭제가 완료되었습니다.');
-            location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    };
+    $.ajax({
+        type:'DELETE',
+        url:'/camping/review/video/'+ reviewId,
+        dataType:'text',
+        contentType : 'application/json; charset=utf-8'
+    }).done(function () {
+        location.reload();
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    });
 };
 
 // 리뷰 수정에서 비디오 추가
@@ -170,6 +163,7 @@ function editReview(reviewId) {
     let startDate = document.getElementById('editStartDate').value;
     let endDate = document.getElementById('editEndDate').value;
     let text = document.getElementById('editText').value;
+    let carType = document.getElementById('carType').innerText;
 
     let data = {
         nickName: nickName,
@@ -181,6 +175,22 @@ function editReview(reviewId) {
     };
 
     if (confirm('리뷰를 수정하시겠습니까?')) {
-
+        $.ajax({
+            type:'PUT',
+            url:'/camping/review/text/' + reviewId,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('리뷰 수정이 완료되었습니다.');
+            } else if (result.result == 0) {
+                alert('리뷰 수정에 문제가 생겼습니다.');
+            };
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
     }
-}
+};
+

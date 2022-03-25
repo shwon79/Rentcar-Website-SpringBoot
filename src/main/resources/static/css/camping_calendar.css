@@ -581,20 +581,17 @@ a:hover {
   display: none;
 }
 .review_image_open.active {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   padding: 20px 0;
+  gap: 20px;
 }
 .review_image_open .image {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 20px;
+    width: 48%;
+    height: auto;
+    max-height: 300px;
 }
-.review_image_open .image img {
-  width: 48%;
-  height: auto;
-  max-height: 300px;
-}
+
 .review_image_open .video {
   margin-top: 20px;
   display: flex;
@@ -633,6 +630,9 @@ a:hover {
   gap: 1%;
   margin-bottom: 20px;
 }
+.existing-image-wrapper {
+  margin-bottom: 20px;
+}
 .reviewEditImageDiv {
   width: 24%;
   padding: 5px;
@@ -657,17 +657,41 @@ a:hover {
 .delete_video_button {
   width: 30px;
 }
-.enter_password_form {
+.enter_password_form_for_delete,
+.enter_password_form_for_edit {
   display: none;
   width: 50%;
   margin: 20px 0;
+  min-width: 240px;
+}
+.go_back_div {
+  padding: 60px 60px 0 60px;
+}
+.container_padding {
+  padding: 60px;
 }
 @media (max-width: 991px) {
+  #openReviewBtn, #submitReviewBtn {
+    width: 35%;
+  }
   .reviewEditImageDiv, .reviewEditVideoDiv {
     width: 49.4%;
+    margin-bottom: 5px;
   }
-  .enter_password_form {
+  .enter_password_form_for_delete,
+  .enter_password_form_for_edit {
     width: 80%;
+  }
+  .go_back_div {
+    padding: 30px 0;
+  }
+  .container_padding {
+    padding: 0px;
+  }
+  .review_image_open .image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
   }
 }
 @media (max-width: 480px) {
