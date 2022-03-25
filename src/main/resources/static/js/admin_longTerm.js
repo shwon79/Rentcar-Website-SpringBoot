@@ -168,10 +168,13 @@ function clickAddImage(e) {
     // 이미지 있는 지 확인 필요!!!!!!!1
     let formData = new FormData();
 
-    formData.append('longTermRentId', longTermRentId);
-
-    for (let i = 0; i < imageFiles.length; i++) {
-        formData.append('file', imageFiles[i]);
+    if (imageFiles.length == 0) {
+        alert('추가할 이미지를 선택하세요');
+    } else {
+        formData.append('longTermRentId', longTermRentId);
+        for (let i = 0; i < imageFiles.length; i++) {
+            formData.append('file', imageFiles[i]);
+        };
     };
 
     addImage(formData);

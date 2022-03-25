@@ -11,7 +11,7 @@ $(document).ready(function () {
         if (document.getElementById('campingcarSubmenu').classList.contains('camping-open')) {
             if (document.getElementById('priceSubMenu').classList.contains('price-open')) {
                 document.getElementById('price-submenu-btn').style.top = '432px';
-                document.getElementById('longterm-submenu-btn').style.top = '637px';
+                document.getElementById('longterm-submenu-btn').style.top = '678px';
             } else {
                 document.getElementById('price-submenu-btn').style.top = '433px';
                 document.getElementById('longterm-submenu-btn').style.top = '476px';
@@ -19,7 +19,7 @@ $(document).ready(function () {
         } else {
             if (document.getElementById('priceSubMenu').classList.contains('price-open')) {
                 document.getElementById('price-submenu-btn').style.top = '190px';
-                document.getElementById('longterm-submenu-btn').style.top = '397px';
+                document.getElementById('longterm-submenu-btn').style.top = '437px';
             } else {
                 document.getElementById('price-submenu-btn').style.top = '190px';
                 document.getElementById('longterm-submenu-btn').style.top = '235px';
@@ -33,9 +33,9 @@ $(document).ready(function () {
         document.getElementById('priceSubMenu').classList.toggle('price-open');
         if (document.getElementById('priceSubMenu').classList.contains('price-open')) {
             if (document.getElementById('campingcarSubmenu').classList.contains('camping-open')) {
-                document.getElementById('longterm-submenu-btn').style.top = '637px';
+                document.getElementById('longterm-submenu-btn').style.top = '678px';
             } else {
-                document.getElementById('longterm-submenu-btn').style.top = '397px';
+                document.getElementById('longterm-submenu-btn').style.top = '437px';
             };
         } else {
             if (document.getElementById('campingcarSubmenu').classList.contains('camping-open')) {
@@ -77,7 +77,7 @@ function displayActiveMenu() {
     } else if (menu === 'rentCar') {
         priceSubmenuBtn && priceSubmenuBtn.classList.add('active-span');
         priceSubMenu && priceSubMenu.classList.add('price-open');
-        longTermSubmenuBtn.style.top = '397px';
+        longTermSubmenuBtn.style.top = '437px';
     } else if (menu === 'longTerm') {
         longTermSubmenuBtn && longTermSubmenuBtn.classList.add('active-span');
         longTermSubMenu && longTermSubMenu.classList.add('longterm-open');

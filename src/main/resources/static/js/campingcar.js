@@ -16,66 +16,48 @@ smallBoxList.forEach((box) => {
     });
 });
 
-// 리뷰쓰기 버튼 누르면 리뷰 폼 보이기
-function displayReviewBox() {
-    document.getElementById('openReviewBtn').classList.toggle('active');
-    document.getElementById('writeReviewBox').classList.toggle('active');
+// 비밀번호 확인
+function checkValidPassword(carType, id, btnType) {
+    const password = [...document.getElementsByClassName('password')].find(ele => ele.dataset.id == id).innerText;
+    const passwordInput = [...document.getElementsByClassName(`password_input_for_${btnType}`)].find(ele => ele.dataset.id == id).value;
+
+    if (passwordInput === password) {
+        if (btnType == 'edit') {
+            location.href = '/camping/review/modification/' + carType + '/' + id;
+        } else if (btnType == 'delete') {
+            deleteReview(id);
+        };
+    } else {
+        alert('비밀번호가 틀렸습니다.');
+    };
 };
 
-// 리뷰 등록하기 버튼
-function submitReview() {
-    let reviewName = document.getElementById('reviewName').value;
-    let reviewPassword = document.getElementById('reviewPassword').value;
-    let reviewCarType = document.getElementById('reviewCarType').value;
-    let reviewRentStartDate = document.getElementById('reviewRentStartDate').value;
-    let reviewRentEndDate = document.getElementById('reviewRentEndDate').value;
-    let reviewText = document.getElementById('reviewText').value;
-    let reviewImage = document.getElementById('reviewImage').files;
-    let reviewVideo = document.getElementById('reviewVideo').files;
+// 리뷰 수정하기 버튼 or 리뷰 삭제하기 버튼 클릭
+function clickEditOrDeleteReview(id, type) {
+    let targetForm = [...document.getElementsByClassName(`enter_password_form_for_${type}`)].find(ele => ele.dataset.id == id);
+    targetForm.style.display = 'block';
+};
 
-    let formDataWrapper = new FormData();
-
-    if (reviewVideo.length > 1) {
-        // 동영상 최대 갯수 1개
-        alert('동영상 첨부는 최대 1개까지 가능합니다.');
-    } else if (reviewImage.length > 10) {
-        // 사진 최대 갯수 10개
-        alert('이미지 첨부는 최대 10장까지 가능합니다.');
-    } else if (reviewName === '' || reviewPassword === '' || reviewCarType === '' || reviewRentStartDate === '' || reviewRentEndDate === '' || reviewText === '') {
-        alert('필수 입력 내용을 빠짐없이 작성해주세요.');
-    } else if (reviewName !== '' && reviewPassword !== '' && reviewCarType !== '' && reviewRentStartDate !== '' && reviewRentEndDate !== '' && reviewText !== '') {
-        formDataWrapper.append('carName', reviewCarType);
-        formDataWrapper.append('text', reviewText);
-        formDataWrapper.append('nickName', reviewName);
-        formDataWrapper.append('startDate', reviewRentStartDate);
-        formDataWrapper.append('endDate', reviewRentEndDate);
-        for (let i = 0; i < reviewImage.length; i++) {
-            formDataWrapper.append('file', reviewImage[i]);
-        }
-        formDataWrapper.append('video', reviewVideo[0]);
-        formDataWrapper.append('password', reviewPassword);
-        if (confirm('리뷰를 등록 하시겠습니까?')) {
-            postReview(formDataWrapper);
-        };
-    };
-
-    function postReview(data) {
+// 리뷰 삭제하기 버튼
+function deleteReview(id) {
+    if (confirm('리뷰를 삭제하시겠습니까?')) {
         $.ajax({
-            enctype: 'multipart/form-data',
-            cache: false,
-            type: 'POST',
-            url: '/camping/calendar/review',
-            processData:false,
-            contentType: false,
-            data: data
-        }).done(function () {
-            alert('리뷰가 등록되었습니다.');
+            type:'DELETE',
+            url:'/camping/review/'+ id,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('리뷰가 삭제 되었습니다.');
+            } else if (result.result == 0) {
+                alert('리뷰 삭제에 문제가 생겼습니다.');
+            };
             location.reload();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
-    };
-}
+    }
+};
 
 // 리뷰 클릭하면 크게 보여지도록
 let oneReview = document.getElementsByClassName('one_review');
@@ -103,7 +85,7 @@ function changeBtnText(reviewId, boolean) {
     const targetCloseBtn = [...document.getElementsByClassName('see_more_btn_close')].find((btn) => btn.dataset.id === reviewId);
 
     if (boolean) {
-        if (targetReview.classList.contains('opened')) {
+        if (targetReview && targetReview.classList.contains('opened')) {
             targetOpenBtn.style.display = 'block';
             targetCloseBtn.style.display = 'none';
         } else {
@@ -111,12 +93,16 @@ function changeBtnText(reviewId, boolean) {
             targetCloseBtn.style.display = 'block';
         }
     } else {
-        if (targetReview.classList.contains('opened')) {
-            targetOpenBtn.style.display = 'none';
-            targetCloseBtn.style.display = 'block';
+        if (targetReview && targetReview.classList.contains('opened')) {
+            if (targetOpenBtn && targetCloseBtn) {
+                targetOpenBtn.style.display = 'none';
+                targetCloseBtn.style.display = 'block';
+            };
         } else {
-            targetOpenBtn.style.display = 'block';
-            targetCloseBtn.style.display = 'none';
+            if (targetOpenBtn && targetCloseBtn) {
+                targetOpenBtn.style.display = 'block';
+                targetCloseBtn.style.display = 'none';
+            };
         }
     }
 };

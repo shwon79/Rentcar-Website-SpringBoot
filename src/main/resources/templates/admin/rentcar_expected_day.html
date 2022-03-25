@@ -1,0 +1,73 @@
+<!-- 관리자 n일 이내 입고예정차량 적용 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_rentcar.js}" defer></script>
+
+    <script>
+        $(window).on('load', function () {
+            let editExpectedDatMenu = document.getElementById('editExpectedDatMenu');
+            editExpectedDatMenu.classList.add('activeAdminMenu');
+        });
+    </script>
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="inner_content">
+            <div name="discountForm">
+                <h2 class="page_title" style="text-align: center;">n일 이내 입고예정차량 설정</h2>
+                <div style="text-align: right; margin-bottom: 30px;">
+                    <button class="btn btn-info" onclick="editExpectedDay()">변경하기</button>
+                </div>
+                <table class="table" style="border: 1px solid lightgrey;">
+                    <tbody>
+                        <tr class="thead-dark">
+                            <th style="text-align: center;">현재</th>
+                            <th style="text-align: center;">수정 값</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; width: 50%; border-right: 1px solid lightgray;">
+                                <span th:text="${expectedDay.expectedDay}"></span>
+                                <span>일</span>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="number" name="expectedDay" id="expectedDay" style="width: 5rem;">
+                                <span>일</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

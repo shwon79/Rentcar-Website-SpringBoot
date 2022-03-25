@@ -30,11 +30,12 @@ public class RealtimeRentController {
     private final ReservationController reservationController;
     private final RealTimeRentCarService realTimeRentService;
     private final RealTimeRentCarImageService realTimeRentImageService;
+    private final ExpectedDayService expectedDayService;
 
     @Autowired
     public RealtimeRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
                                   DiscountService discountService, MorenReservationService morenReservationService, ReservationController reservationController,
-                                  RealTimeRentCarService realTimeRentService, RealTimeRentCarImageService realTimeRentImageService) {
+                                  RealTimeRentCarService realTimeRentService, RealTimeRentCarImageService realTimeRentImageService, ExpectedDayService expectedDayService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
@@ -43,6 +44,7 @@ public class RealtimeRentController {
         this.reservationController = reservationController;
         this.realTimeRentService = realTimeRentService;
         this.realTimeRentImageService = realTimeRentImageService;
+        this.expectedDayService = expectedDayService;
     }
 
     /* ======================================================================================== */
@@ -61,15 +63,16 @@ public class RealtimeRentController {
     @Value("${moren_url}")
     private String moren_url_except_date;
 
-    @Value("${moren.expected_day}")
-    private String expected_day;
-
     // 모렌 대기차 DB로 저장
     @Scheduled(cron = "0 0/10 * * * *")
     public void rent_month_save() {
 
         realTimeRentImageService.deleteAllInBatch();
         realTimeRentService.deleteAllInBatch();
+
+        new DateTime("4");
+        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+        String expected_day = expectedDayList.get(0).getExpectedDay();
 
         String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
