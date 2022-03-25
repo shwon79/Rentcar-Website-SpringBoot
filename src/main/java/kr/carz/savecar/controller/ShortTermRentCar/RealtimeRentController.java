@@ -70,9 +70,9 @@ public class RealtimeRentController {
         realTimeRentImageService.deleteAllInBatch();
         realTimeRentService.deleteAllInBatch();
 
-        new DateTime("4");
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
         String expected_day = expectedDayList.get(0).getExpectedDay();
+        new DateTime(expected_day);
 
         String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
@@ -231,6 +231,10 @@ public class RealtimeRentController {
             throw new Exception("해당하는 차량이 없습니다.");
         }
 
+        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+        String expected_day = expectedDayList.get(0).getExpectedDay();
+        new DateTime(expected_day);
+
         model.put("rentTerm", rentTerm);
         model.put("kilometer", kilometer);
         model.put("discount", discount);
@@ -243,6 +247,10 @@ public class RealtimeRentController {
     // 예약신청하기 새 창 띄우기
     @PostMapping("/rent/month/detail/form/reservation")
     public String rent_month_detail_form_reservation(ModelMap model, @ModelAttribute MorenDTO morenDTO) {
+
+        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+        String expected_day = expectedDayList.get(0).getExpectedDay();
+        new DateTime(expected_day);
 
         model.put("morenDTO",morenDTO);
         model.put("today_format",DateTime.today_date_only());
