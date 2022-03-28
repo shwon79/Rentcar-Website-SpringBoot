@@ -7,27 +7,28 @@
     <title>SAVECAR - 관리자 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <!-- Style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/admin.css}" rel="stylesheet">
-    <script th:src="@{/js/jquery.min.js}"></script>
-<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <!--    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">-->
+    <script th:src="@{/js/jquery.min.js}" defer></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_counsel.js}" defer></script>
     <script>
         $(window).on('load', function () {
             let counselMenu = document.getElementById('counselMenu');
             counselMenu.classList.add('activeAdminMenu');
         });
     </script>
-
 </head>
 <body>
 <div class="wrapper content_wrapper">
     <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
 
-    <div class="content detail_container">
+    <div class="content content_container">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
 
@@ -41,88 +42,92 @@
 
         <div class="inner_content">
             <h2 class="page_title" style="text-align: center;">상담 신청 상세 페이지</h2>
-            <div class="detail_list" id="go_back_wrapper">
-                <a href="/admin/main"><button id="go_back">⬅ 뒤로가기</button></a>
+            <div class="detail_top_div" style="margin-bottom: 20px;">
+                <a href="/admin/counsel/menu?page=0&size=20">
+                    <button class="btn-info" style="margin: 5px;">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        뒤로가기
+                    </button>
+                </a>
+                <div id="detail_set_reserve" style="justify-content: flex-end;">
+                    <button class="set_reserve" th:onclick="deleteCounsel([[${reservation.id}]])" style="flex: unset;">
+                        상담 삭제
+                    </button>
+                </div>
             </div>
-            <div class="detail_list" id="detail_set_reserve">
-                <form method="GET" onsubmit="return confirm('예약을 확정하시겠습니까?')" th:action="${'/campingcar/reservation/update/'+campingcarDateTime2.dateTimeId}">
-                    <input th:style="${campingcarDateTime2.reservation} == 1? 'pointer-events:none; background: gray'" class="set_reserve" type="submit" value="확정"/>
-                </form>
+            <div class="detail_container">
+                <div class="detail_list">
+                    <p class="detail_first">구분</p>
+                    <p class="detail_second" th:text="${reservation.title}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">제품</p>
+                    <p class="detail_second" th:text="${reservation.product}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">차량 구분</p>
+                    <p class="detail_second">
+                        <span th:text="${reservation.category1}"></span>
+                        <span th:if="${reservation.category1 != '' && reservation.category2 != ''}"> / </span>
+                        <span th:text="${reservation.category2}"></span>
+                    </p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">성명</p>
+                    <p class="detail_second" th:text="${reservation.name}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">전화번호</p>
+                    <p class="detail_second" th:text="${reservation.phoneNo}"></p>
+                </div>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">요청사항</p>
+                    <p class="detail_second" th:text="${reservation.detail}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">차량 이름</p>
+                    <p class="detail_second" th:text="${reservation.car_name}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">차량 번호</p>
+                    <p class="detail_second" th:text="${reservation.car_num}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">차량 연식</p>
+                    <p class="detail_second" th:text="${reservation.carAge}"></p>
+                </div>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">약정 주행거리</p>
+                    <p class="detail_second">
+                        <span th:text="${reservation.mileage}"></span>
+                        <span th:if="${reservation.mileage != ''}">km</span>
+                    </p>
+                </div>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">옵션</p>
+                    <p class="detail_second" th:text="${reservation.option}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">보증금</p>
+                    <p class="detail_second" th:text="${reservation.deposit}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">대여료</p>
+                    <p class="detail_second" th:text="${reservation.price}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">나이 제한</p>
+                    <p class="detail_second" th:text="${reservation.age_limit}"></p>
+                </div>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">지역</p>
+                    <p class="detail_second" th:text="${reservation.region}"></p>
+                </div>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">예상 대여날짜</p>
+                    <p class="detail_second" th:text="${reservation.resDate}"></p>
+                </div>
             </div>
-            <div class="detail_list" id="detail_list_title">
-                <p>종류</p>
-                <p>값</p>
-            </div>
-            <div class="detail_list">
-                <p>차종</p>
-                <p th:text="${campingcarDateTime2.carType}"></p>
-            </div>
-            <div class="detail_list">
-                <p>생성일</p>
-                <p th:text="${#strings.arraySplit(campingcarDateTime2.createdDate, 'T')[0]}"></p>
-            </div>
-            <div class="detail_list">
-                <p>수정일</p>
-                <p th:text="${#strings.arraySplit(campingcarDateTime2.modifiedDate, 'T')[0]}"></p>
-            </div>
-            <div class="detail_list">
-                <p>시작일</p>
-                <p th:text="${campingcarDateTime2.rentDate}"></p>
-            </div>
-            <div class="detail_list">
-                <p>시작시간</p>
-                <p th:text="${campingcarDateTime2.rentTime}"></p>
-            </div>
-            <div class="detail_list">
-                <p>반납일</p>
-                <p th:text="${campingcarDateTime2.returnDate}"></p>
-            </div>
-            <div class="detail_list">
-                <p>반납시간</p>
-                <p th:text="${campingcarDateTime2.returnTime}"></p>
-            </div>
-            <div class="detail_list">
-                <p>일권</p>
-                <p th:text="${campingcarDateTime2.day}"></p>
-            </div>
-            <div class="detail_list">
-                <p>성명</p>
-                <p th:text="${campingcarDateTime2.name}"></p>
-            </div>
-            <div class="detail_list">
-                <p>연락처</p>
-                <p th:text="${campingcarDateTime2.phone}"></p>
-            </div>
-            <div class="detail_list">
-                <p>임금자명</p>
-                <p th:text="${campingcarDateTime2.depositor}"></p>
-            </div>
-            <div class="detail_list">
-                <p>보증금</p>
-                <p th:text="${campingcarDateTime2.deposit}"></p>
-            </div>
-            <div class="detail_list">
-                <p>총결제금액</p>
-                <p th:text="${campingcarDateTime2.total}"></p>
-            </div>
-            <div class="detail_list">
-                <p>선결제금액</p>
-                <p th:text="${campingcarDateTime2.totalHalf}"></p>
-            </div>
-            <div class="detail_list">
-                <p>예약</p>
-                <p th:text="${campingcarDateTime2.reservation}"></p>
-            </div>
-            <div class="detail_list">
-                <p id="custom_demand">요구사항</p>
-                <p id="custom_demand_detail" th:text="${campingcarDateTime2.detail}"></p>
-            </div>
-            <div class="detail_list" id="detail_set_delete">
-                <form method="GET" onsubmit="return confirm('예약을 \'취소\'하시겠습니까?')" th:action="${'/admin/detail/delete/'+campingcarDateTime2.dateTimeId}">
-                    <input class="set_reserve" type="submit" value="예약취소"/>
-                </form>
-            </div>
-
         </div>
     </div>
 </div>

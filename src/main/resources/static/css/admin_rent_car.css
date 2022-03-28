@@ -41,19 +41,12 @@
 }
 
 .detail_container textarea, .detail_container select {
-    max-width: 200px;
+    /*max-width: 200px;*/
 }
 .detail_container input {
     border: 1px solid black;
     border-radius: 4px;
 }
-
-/*.depositColumn {*/
-/*    display: revert;*/
-/*}*/
-/*.depositColumn.displayNone {*/
-/*    display: none;*/
-/*}*/
 
 .bundle_row td {
     vertical-align: middle;
@@ -96,6 +89,14 @@
     margin-bottom: 20px;
 }
 
+.detail_first {
+    flex-basis: 50%;
+}
+
+.detail_second {
+    flex-basis: 50%;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -103,7 +104,8 @@
 
 /*렌트카 등록*/
 .register_rent_car textarea, .register_rent_car input {
-    max-width: 168px;
+    /*max-width: 168px;*/
+    width: 100%;
 }
 #twoYearlyForm {
     display: none;
@@ -167,5 +169,12 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
     }
     td[scope=row], th[scope=row] {
         background-color: white;
+    }
+    .detail_first {
+        flex-basis: 50% !important;
+    }
+
+    .detail_second {
+        flex-basis: 50% !important;
     }
 };

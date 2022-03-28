@@ -65,7 +65,7 @@
                     <p th:text="${iterStat.index + 1}" style="margin-bottom: 4px;"></p>
                     <input th:if="${reservation.reservationStatus == '0'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">
                 </div>
-                <div class="reserve_list" style="justify-content: space-between;">
+                <div class="reserve_list" style="justify-content: space-between;" th:onclick="'location.href = \'/admin/moren/reservation/detail/'+${reservation.id}+'\''">
                     <p style="flex: 2" class="grid_oneline">
                         <span class="reserve_list_mobile_title">예약 신청 시간: </span>
                         <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]+' '+#strings.arraySplit(reservation.createdDate, 'T')[1]}"></span>
@@ -111,18 +111,18 @@
                     <p class="pickupPlace" th:text="${reservation.pickupPlace}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p class="orderCode" th:text="${reservation.orderCode}" style="display: none;" th:data-index="${reservation.id}"></p>
                     <p style="flex: 3" class="grid_oneline">
-                        <button class="set_reserve" onclick="morenReserve(this, 'confirm');" th:name="${reservation.id}" th:data-index="${reservation.id}"
+                        <button class="set_reserve" onclick="morenReserve(this, 'confirm'); event.stopPropagation();" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '1' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
                             모렌전송
                         </button>
 
-                        <button class="set_reserve" onclick="morenReserve(this, 'cancel');" th:name="${reservation.id}" th:data-index="${reservation.id}"
+                        <button class="set_reserve" onclick="morenReserve(this, 'cancel'); event.stopPropagation();" th:name="${reservation.id}" th:data-index="${reservation.id}"
                                 th:style="${reservation.reservationStatus} == '0' ? 'pointer-events: none; background: gray; word-break: keep-all; margin: 0;' : 'word-break: keep-all; cursor: pointer; margin: 0;'">
                             모렌전송 회수
                         </button>
                     </p>
                     <p style="flex: 2" class="grid_oneline">
-                        <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}">
+                        <a th:href="'/admin/moren/reservation/detail/' + ${reservation.id}" onclick="event.stopPropagation();">
                             <button class="set_reserve btn_mobile_card" style="margin: 0;">상세 페이지</button>
                         </a>
                     </p>

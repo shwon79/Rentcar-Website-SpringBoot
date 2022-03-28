@@ -15,6 +15,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script th:src="@{/js/admin.js}" defer></script>
+  <script th:src="@{/js/admin_counsel.js}" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <script>
@@ -45,6 +46,13 @@
 
     <div class="inner_content">
       <h2 class="page_title" style="text-align: center;">상담 신청</h2>
+
+<!--      <div class="detail_top_div" style="margin-bottom: 20px;">-->
+<!--        <div>-->
+<!--          <button>목록에서 삭제</button>-->
+<!--        </div>-->
+<!--      </div>-->
+
       <div class="reserve_list" id="reserve_list_title" style="justify-content: space-between;">
         <p style="flex: 1;">구분</p>
         <p class="name">성명</p>
@@ -66,9 +74,13 @@
       <div class="reserve_list_wrapper" th:each="reservation, i : ${reservationList}">
         <div class="reserve_checkbox">
 <!--          <p th:text="${reservation.id}" style="margin-bottom: 4px;"></p>-->
-<!--          <input th:if="${reservation.reservationStatus == '0'}" type="checkbox" name="selected_moren_reservation" th:value="${reservation.id}">-->
+<!--          <input type="checkbox" name="selected_counsel_reservation" th:value="${reservation.id}">-->
+<!--          <a th:href="'location.href = \'/admin/counsel/detail/'+${reservation.id}+'\''">-->
+<!--            <button class="btn btn-primary">상세페이지</button>-->
+<!--          </a>-->
+          <button class="btn btn-danger btn-sm" th:onclick="deleteCounsel([[${reservation.id}]])">삭제</button>
         </div>
-        <div class="reserve_list">
+        <div class="reserve_list" th:onclick="'location.href = \'/admin/counsel/detail/'+${reservation.id}+'\''">
           <p class="name grid_oneline">
             <span class="reserve_list_mobile_title">성명: </span>
             <span th:text="${reservation.name}"></span>
@@ -117,17 +129,17 @@
     <div class="Page navigation example">
       <ul class="pagination">
         <li class="page-item" th:if="${currentPage} >= 5">
-          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${0},size=${pageSize})}">
+          <a class="page-link" th:href="@{/admin/counsel/menu(page=${0},size=${pageSize})}">
             <i class="fa-solid fa-angles-left"></i>
           </a>
         </li>
         <li class="page-item" th:if="${currentPage} > 0">
-          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${currentPage}-1,size=${pageSize})}">
+          <a class="page-link" th:href="@{/admin/counsel/menu(page=${currentPage}-1,size=${pageSize})}">
             <i class="fa-solid fa-chevron-left"></i>
           </a>
         </li>
         <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
-          <a class="page-link" th:href="@{/admin/rentcar/counsel/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
+          <a class="page-link" th:href="@{/admin/counsel/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
         </li>
         <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
           <a class="page-link" th:href="@{/admin/counsel/menu(page=${currentPage}+1,size=${pageSize})}">

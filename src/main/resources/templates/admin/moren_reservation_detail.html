@@ -44,13 +44,11 @@
 
         <div class="inner_content">
             <h2 class="page_title" style="text-align: center;">현재 대여가능차량 예약 내역 상세 페이지</h2>
-            <div>
+            <div class="detail_top_div">
                 <a href="/admin/moren/reservation/menu">
                     <i class="fas fa-arrow-left" style="margin-top: 30px; color: black; font-size: 30px;"></i>
                 </a>
-            </div>
-            <div class="detail_container">
-                <div style="display: flex; justify-content: space-between; background-color: white;">
+                <div id="detail_set_reserve">
                     <button class="set_reserve" onclick="morenReserve(this, 'confirm');" th:name="${morenReservationDTO.id}"
                             th:style="${morenReservationDTO.reservationStatus} == '1' ? 'pointer-events: none; background: gray; margin: 5px;' : 'margin: 5px;'">
                         모렌전송
@@ -61,29 +59,27 @@
                     </button>
                     <button class="set_reserve" onclick="morenReserve(this, 'edit');" th:name="${morenReservationDTO.id}" style="margin: 5px;">수정</button>
                 </div>
-                <div class="detail_list" id="detail_list_title">
-                    <p>종류</p>
-                    <p>값</p>
+            </div>
+            <div class="detail_container">
+                <div class="detail_list">
+                    <p class="detail_first">예약한 시간</p>
+                    <p class="detail_second">예약한 시간</p>
                 </div>
                 <div class="detail_list">
-                    <p>예약한 시간</p>
-                    <p>예약한 시간</p>
+                    <p class="detail_first">차량 번호</p>
+                    <p th:text="${morenReservationDTO.carNo}" class="carNo detail_second">예약한 시간</p>
                 </div>
                 <div class="detail_list">
-                    <p>차량 번호</p>
-                    <p th:text="${morenReservationDTO.carNo}" class="carNo">예약한 시간</p>
-                </div>
-                <div class="detail_list">
-                    <p>렌트 기간</p>
-                    <select name="" class="rentTerm" onchange="displayNextOptions(this)">
+                    <p class="detail_first">렌트 기간</p>
+                    <select name="" class="rentTerm detail_second" onchange="displayNextOptions(this)">
                         <option value="한달" th:selected="${morenReservationDTO.rentTerm} == '한달' ? true : false">한달</option>
                         <option value="12개월" th:selected="${morenReservationDTO.rentTerm} == '12개월' ? true : false">12개월</option>
                         <option value="24개월" th:selected="${morenReservationDTO.rentTerm} == '24개월' ? true : false">24개월</option>
                     </select>
                 </div>
                 <div class="detail_list">
-                    <p>약정 주행거리</p>
-                    <select name="" class="kilometer" id="selectKilometer">
+                    <p class="detail_first">약정 주행거리</p>
+                    <select name="" class="kilometer detail_second" id="selectKilometer">
                         <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="2000km" th:selected="${morenReservationDTO.kilometer} == '2000km' ? true : false">2000km</option>
                         <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="2500km" th:selected="${morenReservationDTO.kilometer} == '2500km' ? true : false">2500km</option>
                         <option th:if="${morenReservationDTO.rentTerm=='한달'}" value="3000km" th:selected="${morenReservationDTO.kilometer} == '3000km' ? true : false">3000km</option>
@@ -95,64 +91,64 @@
                         <option th:if="${(morenReservationDTO.rentTerm=='12개월')||(morenReservationDTO.rentTerm=='24개월')}" value="기타" th:selected="${morenReservationDTO.kilometer} == '기타' ? true : false">기타</option>
                     </select>
                 </div>
-                <div class="detail_list">
-                    <p>예약자 이름(입금자명)</p>
-                    <textarea class="reservationName" th:text="${morenReservationDTO.reservationName}"></textarea>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">예약자 이름(입금자명)</p>
+                    <input class="reservationName detail_second" th:value="${morenReservationDTO.reservationName}" />
                 </div>
-                <div class="detail_list">
-                    <p>예약자 전화번호</p>
-                    <textarea class="reservationPhone" th:text="${morenReservationDTO.reservationPhone}"></textarea>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">예약자 전화번호</p>
+                    <input class="reservationPhone detail_second" th:value="${morenReservationDTO.reservationPhone}" />
                 </div>
-                <div class="detail_list">
-                    <p>예약자 생년월일</p>
-                    <textarea class="reservationAge" th:text="${morenReservationDTO.reservationAge}"></textarea>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">예약자 생년월일</p>
+                    <input class="reservationAge detail_second" th:value="${morenReservationDTO.reservationAge}" />
                 </div>
-                <div class="detail_list">
-                    <p>대여 날짜 및 시간</p>
-                    <div class="desktop_flex_mobile_block">
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">대여 날짜 및 시간</p>
+                    <div class="desktop_flex_mobile_block detail_second">
                         <input type="date" class="reservationDate" th:value="${morenReservationDTO.reservationDate}">
                         <input type="time" class="reservationTime" th:value="${morenReservationDTO.reservationTime}">
                     </div>
                 </div>
                 <div class="detail_list">
-                    <p>신용 보증</p>
-                    <p th:text="${morenReservationDTO.reservationGuarantee}"></p>
+                    <p class="detail_first">신용 보증</p>
+                    <p class="detail_second" th:text="${morenReservationDTO.reservationGuarantee}"></p>
+                </div>
+                <div class="detail_list" style="height: 5rem;">
+                    <p class="detail_first">배차 요청 주소</p>
+                    <textarea class="reservationAddress detail_second" th:text="${morenReservationDTO.address}"></textarea>
+                </div>
+                <div class="detail_list" style="height: 5rem;">
+                    <p class="detail_first">배차 요청 상세 주소</p>
+                    <textarea class="reservationAddressDetail detail_second" th:text="${morenReservationDTO.addressDetail}"></textarea>
+                </div>
+                <div class="detail_list" style="height: 5rem;">
+                    <p class="detail_first">요청 사항</p>
+                    <textarea class="reservationDetails detail_second" th:text="${morenReservationDTO.reservationDetails}"></textarea>
                 </div>
                 <div class="detail_list">
-                    <p>배차 요청 주소</p>
-                    <textarea class="reservationAddress" th:text="${morenReservationDTO.address}"></textarea>
-                </div>
-                <div class="detail_list">
-                    <p>배차 요청 상세 주소</p>
-                    <textarea class="reservationAddressDetail" th:text="${morenReservationDTO.addressDetail}"></textarea>
-                </div>
-                <div class="detail_list">
-                    <p>요청 사항</p>
-                    <textarea class="reservationDetails" th:text="${morenReservationDTO.reservationDetails}"></textarea>
-                </div>
-                <div class="detail_list">
-                    <p style="margin: 0;">공급가</p>
-                    <div style="display: flex; align-items: center;">
+                    <p class="detail_first" style="margin: 0;">공급가</p>
+                    <div style="display: flex; align-items: center;" class="detail_second">
                         <p class="number carPrice" th:text="${morenReservationDTO.carPrice}" id="displayCarPrice" style="margin-bottom: 0;"></p><span>원</span>
                     </div>
                 </div>
                 <div class="detail_list">
-                    <p style="margin: 0;">부가세</p>
-                    <div style="display: flex; align-items: center;">
+                    <p class="detail_first" style="margin: 0;">부가세</p>
+                    <div style="display: flex; align-items: center;" class="detail_second">
                         <p class="number carTax" th:text="${morenReservationDTO.carTax}" id="displayCarTax" style="margin-bottom: 0;"></p><span>원</span>
                     </div>
                 </div>
                 <div class="detail_list">
-                    <p>총 렌트료</p>
-                    <textarea class="carAmountTotal" onkeyup="changePrice(this);" id="carAmountTotalInput" th:text="${morenReservationDTO.carAmountTotal}"></textarea>
+                    <p class="detail_first">총 렌트료</p>
+                    <input type="number" class="carAmountTotal detail_second" onkeyup="changePrice(this);" id="carAmountTotalInput" th:value="${morenReservationDTO.carAmountTotal}" />
                 </div>
                 <div class="detail_list">
-                    <p>보증금</p>
-                    <textarea class="carDeposit" th:text="${morenReservationDTO.carDeposit}"></textarea>
+                    <p class="detail_first">보증금</p>
+                    <input type="number" class="carDeposit detail_second" th:value="${morenReservationDTO.carDeposit}" />
                 </div>
-                <div class="detail_list">
-                    <p>방문 또는 배차 신청</p>
-                    <select name="" class="pickupPlace">
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">방문 또는 배차 신청</p>
+                    <select name="" class="pickupPlace detail_second">
                         <option value="방문" th:selected="${morenReservationDTO.pickupPlace} == '방문' ? true : false">방문</option>
                         <option value="배차 신청" th:selected="${morenReservationDTO.pickupPlace} == '배차 신청' ? true : false">배차 신청</option>
                     </select>
@@ -174,8 +170,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 
