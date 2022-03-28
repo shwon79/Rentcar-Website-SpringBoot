@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public class ReservationService {
@@ -29,6 +30,9 @@ public class ReservationService {
     }
     public List<Reservation> findByTitle(String title){
         return reservationRepository.findByTitle(title);
+    }
+    public Optional<Reservation> findById(Long reservationId){
+        return reservationRepository.findById(reservationId);
     }
 
     public List<Reservation> findByCreatedDateAfter(LocalDateTime date){

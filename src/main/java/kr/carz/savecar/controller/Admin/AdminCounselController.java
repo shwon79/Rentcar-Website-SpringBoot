@@ -2,12 +2,16 @@ package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.domain.Reservation;
 import kr.carz.savecar.service.ReservationService;
+import org.apache.maven.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 public class AdminCounselController {
@@ -39,5 +43,18 @@ public class AdminCounselController {
         return mav;
     }
 
+
+    @GetMapping("/admin/counsel/detail/{reservationId}")
+    public ModelAndView get_counsel_detail(ModelAndView mav, @PathVariable Long reservationId) {
+
+        Optional<Reservation> reservationWrapper = reservationService.findById(reservationId);
+        if(reservationWrapper.isPresent()){
+            Reservation reservation = reservationWrapper.get();
+            mav.addObject("reservation", reservation);
+        }
+        mav.setViewName("admin/counsel_menu");
+
+        return mav;
+    }
 
 }
