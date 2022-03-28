@@ -38,7 +38,7 @@ public class AdminCounselController {
         mav.addObject("totalPages", reservationPage.getTotalPages());
         mav.addObject("reservationList", reservationPage.getContent());
 
-        mav.setViewName("admin/counsel_menu");
+        mav.setViewName("admin/counsel_detail");
 
         return mav;
     }
