@@ -667,6 +667,14 @@ form {
     border: 1px solid black;
     padding: 5px;
 }
+.detail_list_group {
+    height: auto;
+    border: 1px solid darkgray;
+    border-radius: 4px 4px 0 0;
+}
+.detail_group_title {
+    font-size: 1.5rem;
+}
 
 @media (max-width: 990px) {
     .detail_top_div {
