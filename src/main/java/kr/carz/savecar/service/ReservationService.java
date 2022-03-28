@@ -42,5 +42,8 @@ public class ReservationService {
     public Page<Reservation> findAllPageable(Pageable pageable){
         return reservationRepository.findAllByOrderByIdDesc(pageable);
     }
+    public void delete(Reservation reservation){
+        reservationRepository.delete(reservation);
+    }
 
 }
