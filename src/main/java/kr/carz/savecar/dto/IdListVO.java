@@ -11,8 +11,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CounselVO {
+public class IdListVO {
 
-    private List<Long> counselIdList;
+    private List<Long> idList;
 
 }

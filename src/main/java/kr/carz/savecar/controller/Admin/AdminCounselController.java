@@ -1,7 +1,7 @@
 package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.domain.Reservation;
-import kr.carz.savecar.dto.CounselVO;
+import kr.carz.savecar.dto.IdListVO;
 import kr.carz.savecar.service.ReservationService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,11 +87,11 @@ public class AdminCounselController {
 
     @DeleteMapping("/admin/counsel/multiple")
     @ResponseBody
-    public void delete_counsel_multiple(HttpServletResponse res, @RequestBody CounselVO counselVO) throws IOException {
+    public void delete_counsel_multiple(HttpServletResponse res, @RequestBody IdListVO idListVO) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
-        List<Long> counselIdList = counselVO.getCounselIdList();
+        List<Long> counselIdList = idListVO.getIdList();
 
         int problemFlg = 0;
         for(Long counselId : counselIdList) {
