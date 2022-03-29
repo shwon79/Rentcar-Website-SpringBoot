@@ -1,13 +1,14 @@
 * {
     font-family: 'Nanum Gothic', sans-serif;
 }
-.page-title {
+.page-title, .page-title span {
     font-family: 'Black Han Sans', sans-serif;
     line-height: normal;
     font-size: 3.2rem;
     color: black;
     font-weight: 300;
 }
+
 #title_wrapper {
     margin: 0;
 }
