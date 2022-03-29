@@ -32,6 +32,8 @@ public class SpringConfig {
     private final RealTimeRentCarImageRepository realTimeRentImageRepository;
     private final ReviewImageRepository reviewImageRepository;
     private final ExpectedDayRepository expectedDayRepository;
+    private final CampingCarHomeRepository campingCarHomeRepository;
+    private final CampingCarHomeImageRepository campingCarHomeImageRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -46,7 +48,8 @@ public class SpringConfig {
                         CampingCarMainTextRepository campingCarMainTextRepository, ReviewRepository reviewRepository,
                         LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository,
                         RealTimeRentCarRepository realTimeRentRepository, RealTimeRentCarImageRepository realTimeRentImageRepository,
-                        ReviewImageRepository reviewImageRepository, ExpectedDayRepository expectedDayRepository) {
+                        ReviewImageRepository reviewImageRepository, ExpectedDayRepository expectedDayRepository,
+                        CampingCarHomeRepository campingCarHomeRepository, CampingCarHomeImageRepository campingCarHomeImageRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -71,6 +74,8 @@ public class SpringConfig {
         this.realTimeRentImageRepository = realTimeRentImageRepository;
         this.reviewImageRepository = reviewImageRepository;
         this.expectedDayRepository = expectedDayRepository;
+        this.campingCarHomeRepository = campingCarHomeRepository;
+        this.campingCarHomeImageRepository = campingCarHomeImageRepository;
     }
 
     @Bean
@@ -148,4 +153,10 @@ public class SpringConfig {
 
     @Bean
     public ExpectedDayService expectedDayService() { return new ExpectedDayService(expectedDayRepository); }
+
+    @Bean
+    public CampingCarHomeService campingCarHomeService() { return new CampingCarHomeService(campingCarHomeRepository); }
+
+    @Bean
+    public CampingCarHomeImageService campingCarHomeImageService() { return new CampingCarHomeImageService(campingCarHomeImageRepository); }
 }

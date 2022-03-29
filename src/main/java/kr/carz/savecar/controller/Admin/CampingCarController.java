@@ -33,6 +33,8 @@ public class CampingCarController {
     private final ImagesService imagesService;
     private final S3Service s3Service;
     private final CampingCarMainTextService campingCarMainTextService;
+    private final CampingCarHomeService campingCarHomeService;
+    private final CampingCarHomeImageService campingCarHomeImageService;
 
     @Autowired
     public CampingCarController(CampingcarReservationService campingcarReservationService,
@@ -40,7 +42,8 @@ public class CampingCarController {
                                 CalendarDateService calendarDateService, DateCampingService dateCampingService,
                                 CampingCarPriceRateService campingCarPriceRateService,
                                 ReservationController reservationController, ImagesService imagesService,
-                                S3Service s3Service, CampingCarMainTextService campingCarMainTextService) {
+                                S3Service s3Service, CampingCarMainTextService campingCarMainTextService,
+                                CampingCarHomeService campingCarHomeService, CampingCarHomeImageService campingCarHomeImageService) {
         this.campingcarReservationService = campingcarReservationService;
         this.calendarTimeService = calendarTimeService;
         this.campingCarPriceService = campingCarPriceService;
@@ -51,6 +54,8 @@ public class CampingCarController {
         this.imagesService = imagesService;
         this.s3Service = s3Service;
         this.campingCarMainTextService = campingCarMainTextService;
+        this.campingCarHomeService = campingCarHomeService;
+        this.campingCarHomeImageService = campingCarHomeImageService;
     }
 
     @Value("${coolsms.api_key}")
@@ -883,6 +888,17 @@ public class CampingCarController {
     public ModelAndView get_campingcar_home_menu() {
 
         ModelAndView mav = new ModelAndView();
+
+        List<CampingCarHome> campingCarHomeList = campingCarHomeService.findAll();
+        List<List<CampingCarHomeImage>> campingCarHomeImageDoubleList = new ArrayList<>();
+
+        for(CampingCarHome campingCarHome : campingCarHomeList){
+            List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+            campingCarHomeImageDoubleList.add(campingCarHomeImageList);
+        }
+
+        mav.addObject("campingCarHomeList", campingCarHomeList);
+        mav.addObject("campingCarHomeImageDoubleList", campingCarHomeImageDoubleList);
 
         mav.setViewName("admin/campingcar_home_menu");
 
