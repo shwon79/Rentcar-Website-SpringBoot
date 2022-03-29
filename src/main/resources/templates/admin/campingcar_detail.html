@@ -96,6 +96,9 @@
             <button th:id="${campingCarReservation.id}" class="set_reserve" onclick="setCampingReserve('edit')">
               내용 수정
             </button>
+            <button th:id="${campingCarReservation.id}" class="set_reserve" th:onclick="deleteCamping([[${campingCarReservation.id}]])">
+              삭제
+            </button>
           </div>
         </div>
 

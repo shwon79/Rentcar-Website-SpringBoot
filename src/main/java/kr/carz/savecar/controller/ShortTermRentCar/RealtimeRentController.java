@@ -72,8 +72,7 @@ public class RealtimeRentController {
 
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
         String expected_day = expectedDayList.get(0).getExpectedDay();
-        new DateTime(expected_day);
-
+//        new DateTime(expected_day);
         String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
         HttpConnection http = new HttpConnection();
@@ -235,9 +234,9 @@ public class RealtimeRentController {
             throw new Exception("해당하는 차량이 없습니다.");
         }
 
-        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
-        String expected_day = expectedDayList.get(0).getExpectedDay();
-        new DateTime(expected_day);
+//        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+//        String expected_day = expectedDayList.get(0).getExpectedDay();
+//        new DateTime(expected_day);
 
         model.put("rentTerm", rentTerm);
         model.put("kilometer", kilometer);
@@ -252,9 +251,9 @@ public class RealtimeRentController {
     @PostMapping("/rent/month/detail/form/reservation")
     public String rent_month_detail_form_reservation(ModelMap model, @ModelAttribute MorenDTO morenDTO) {
 
-        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
-        String expected_day = expectedDayList.get(0).getExpectedDay();
-        new DateTime(expected_day);
+//        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+//        String expected_day = expectedDayList.get(0).getExpectedDay();
+//        new DateTime(expected_day);
 
         model.put("morenDTO",morenDTO);
         model.put("today_format",DateTime.today_date_only());

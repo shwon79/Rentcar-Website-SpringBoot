@@ -93,35 +93,65 @@ function reserveCampingcar() {
     }
 };
 
-// 캠핑카 예약 현황 목록에서 삭제_campingcar/menu
-function campingCompletelyDelete() {
-    let completeDeleteConfirm = confirm('삭제를 하시면 현재 admin 페이지에 반영이 되며, 프라임클럽 사이트에는 반영되지 않습니다. 예약 신청 목록에서 삭제 하시겠습니까?');
+// 캠핑카 예약 현황 목록에서 여러개 삭제_admin/campingcar/menu
+function deleteMultiCamping() {
     let selectedOptions = document.querySelectorAll('input[name="selected_camping_reservation"]:checked');
-    let id;
+    let idList = [];
 
+    if (selectedOptions.length === 0) {
+        alert('삭제할 내역을 선택해주세요.');
+        return;
+    };
+
+    for (let i = 0; i < selectedOptions.length; i++) {
+        idList.push(parseInt(selectedOptions[i].value));
+    };
+
+    const data = {
+        idList: idList
+    };
+
+    let completeDeleteConfirm = confirm('삭제를 하시면 현재 admin 페이지에 반영이 되며, 프라임클럽 사이트에는 반영되지 않습니다. 예약 신청 목록에서 삭제 하시겠습니까?');
     if (completeDeleteConfirm) {
-        for (i=0; i < selectedOptions.length; i++) {
-            id = selectedOptions[i].value;
-            // console.log(id);
-
-            $.ajax({
-                type:'DELETE',
-                url:'/admin/campingcar/reservation/'+ id,
-                dataType:'json',
-                contentType : 'application/json; charset=utf-8',
-            }).done(function (result) {
-                if (result.result == 1) {
-                    alert('삭제 되었습니다.');
-                } else if (result.result == 0) {
-                    alert('삭제에 문제가 생겼습니다.');
-                };
-                window.location.href = '/admin/campingcar/menu';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            });
-        }
-    }
+        $.ajax({
+            type:'DELETE',
+            url:'/admin/campingcar/reservation/multiple',
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('삭제 되었습니다.');
+            } else if (result.result == 0) {
+                alert('삭제에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/campingcar/menu?page=0&size=10';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    };
 };
+
+// 캠핑카 예약 삭제_admin/campingcar/detail
+function deleteCamping(id) {
+    if (confirm('삭제하시겠습니까?')) {
+        $.ajax({
+            type:'DELETE',
+            url:'/admin/campingcar/reservation/'+ id,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('삭제 되었습니다.');
+            } else if (result.result == 0) {
+                alert('삭제에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/campingcar/menu';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    };
+}
 
 // 캠핑카 예약 확정, 확정 취소_campingcar/menu
 function setReservationOnMenu(event, behavior) {

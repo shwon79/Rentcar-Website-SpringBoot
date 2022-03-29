@@ -471,6 +471,8 @@ public class RentCarController {
         expectedDayList.get(0).setExpectedDayDisplayed(expectedDayDisplayed);
         expectedDayService.save(expectedDayList.get(0));
 
+        new DateTime(expectedDay);
+
         jsonObject.put("result", 1);
 
         PrintWriter pw = res.getWriter();

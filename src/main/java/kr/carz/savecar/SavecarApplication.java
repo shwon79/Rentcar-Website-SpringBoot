@@ -19,7 +19,6 @@ public class SavecarApplication extends SpringBootServletInitializer{
 	@PostConstruct
 	void started() {
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
-//		new DateTime("4");
 	}
 
 	public static void main(String[] args) {

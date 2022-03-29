@@ -47,11 +47,9 @@
     <div class="inner_content">
       <h2 class="page_title" style="text-align: center;">상담 신청</h2>
 
-<!--      <div class="detail_top_div" style="margin-bottom: 20px;">-->
-<!--        <div>-->
-<!--          <button>목록에서 삭제</button>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div style="text-align: right;">
+        <button class="set_reserve" onclick="deleteMultiCounsel();">목록에서 삭제</button>
+      </div>
 
       <div class="reserve_list" id="reserve_list_title" style="justify-content: space-between;">
         <p style="flex: 1;">구분</p>
@@ -74,11 +72,11 @@
       <div class="reserve_list_wrapper" th:each="reservation, i : ${reservationList}">
         <div class="reserve_checkbox">
 <!--          <p th:text="${reservation.id}" style="margin-bottom: 4px;"></p>-->
-<!--          <input type="checkbox" name="selected_counsel_reservation" th:value="${reservation.id}">-->
+          <input type="checkbox" name="selected_counsel_reservation" th:value="${reservation.id}">
 <!--          <a th:href="'location.href = \'/admin/counsel/detail/'+${reservation.id}+'\''">-->
 <!--            <button class="btn btn-primary">상세페이지</button>-->
 <!--          </a>-->
-          <button class="btn btn-danger btn-sm" th:onclick="deleteCounsel([[${reservation.id}]])">삭제</button>
+<!--          <button class="btn btn-danger btn-sm" th:onclick="deleteCounsel([[${reservation.id}]])">삭제</button>-->
         </div>
         <div class="reserve_list" th:onclick="'location.href = \'/admin/counsel/detail/'+${reservation.id}+'\''">
           <p class="name grid_oneline">

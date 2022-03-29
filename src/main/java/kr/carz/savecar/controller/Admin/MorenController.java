@@ -2,6 +2,7 @@ package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.controller.ReservationController;
 import kr.carz.savecar.domain.*;
+import kr.carz.savecar.dto.IdListVO;
 import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -475,7 +477,6 @@ public class MorenController {
         pw.close();
     }
 
-    // 모렌 reservation 삭제 api
     @DeleteMapping("/moren/reservation/{reservationId}")
     @ResponseBody
     public void delete_moren_reservation(HttpServletResponse res, @PathVariable Long reservationId) throws IOException {
@@ -485,6 +486,36 @@ public class MorenController {
         Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(reservationId);
         if(morenReservationOptional.isPresent()){
             morenReservationService.delete(morenReservationOptional.get());
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    @DeleteMapping("/moren/reservation/multiple")
+    @ResponseBody
+    public void delete_moren_reservation_multiple(HttpServletResponse res, @RequestBody IdListVO idListVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+        List<Long> idList = idListVO.getIdList();
+
+        int problemFlg = 0;
+        for(Long id : idList) {
+
+            Optional<MorenReservation> morenReservationOptional = morenReservationService.findMorenReservationById(id);
+            if (morenReservationOptional.isPresent()) {
+                morenReservationService.delete(morenReservationOptional.get());
+            } else {
+                problemFlg = 1;
+            }
+        }
+
+        if(problemFlg == 0){
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);

@@ -164,32 +164,63 @@ function changePrice(e) {
     }
 };
 
-// 모렌 예약 신청 아예 삭제_현재 대여가능차량 main
-function morenCompletelyDelete() {
-    let completeDeleteConfirm = confirm('삭제를 하시면 현재 admin 페이지에 반영이 되며, 프라임클럽 사이트에는 반영되지 않습니다. 예약 신청 목록에서 삭제 하시겠습니까?');
+// 모렌 예약 신청 아예 삭제 여러개_moren/reservation/menu
+function deleteMultiMoren() {
     let selectedOptions = document.querySelectorAll('input[name="selected_moren_reservation"]:checked');
-    let id;
+    let idList = [];
 
+    if (selectedOptions.length === 0) {
+        alert('삭제할 내역을 선택해주세요.');
+        return;
+    };
+
+    for (let i = 0; i < selectedOptions.length; i++) {
+        idList.push(parseInt(selectedOptions[i].value));
+    };
+
+    const data = {
+        idList: idList
+    };
+
+    let completeDeleteConfirm = confirm('삭제를 하시면 현재 admin 페이지에 반영이 되며, 프라임클럽 사이트에는 반영되지 않습니다. 예약 신청 목록에서 삭제 하시겠습니까?');
     if (completeDeleteConfirm) {
-        for (i=0; i < selectedOptions.length; i++) {
-            id = selectedOptions[i].value;
-            // console.log(id);
-
-            $.ajax({
-                type:'DELETE',
-                url:'/moren/reservation/'+ id,
-                dataType:'json',
-                contentType : 'application/json; charset=utf-8',
-            }).done(function (result) {
-                if (result.result == 1) {
-                    alert('삭제 되었습니다.');
-                } else if (result.result == 0) {
-                    alert('삭제에 문제가 생겼습니다.');
-                };
-                window.location.href = '/admin/moren/reservation/menu';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            })
-        }
+        $.ajax({
+            type:'DELETE',
+            url:'/moren/reservation/multiple',
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('삭제 되었습니다.');
+            } else if (result.result == 0) {
+                alert('삭제에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/moren/reservation/menu?page=0&size=20';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     }
 };
+
+// 모렌 예약 신청 삭제_moren/reservation/detail
+function deleteMoren(id) {
+    let completeDeleteConfirm = confirm('삭제하시겠습니까?');
+    if (completeDeleteConfirm) {
+        $.ajax({
+            type:'DELETE',
+            url:'/moren/reservation/'+ id,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('삭제 되었습니다.');
+            } else if (result.result == 0) {
+                alert('삭제에 문제가 생겼습니다.');
+            };
+            window.location.href = '/admin/moren/reservation/menu?page=0&size=20';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
+}

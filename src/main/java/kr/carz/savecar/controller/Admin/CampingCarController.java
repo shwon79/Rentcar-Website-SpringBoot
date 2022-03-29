@@ -701,6 +701,39 @@ public class CampingCarController {
     }
 
 
+    @DeleteMapping("/admin/campingcar/reservation/multiple")
+    @ResponseBody
+    public void delete_campingcar_reservation_multiple(HttpServletResponse res, @RequestBody IdListVO idListVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+        List<Long> idList = idListVO.getIdList();
+
+        int problemFlg = 0;
+        for(Long id : idList) {
+
+            Optional<CampingCarReservation> campingCarReservationWrapper = campingcarReservationService.findById(id);
+
+            if (campingCarReservationWrapper.isPresent()) {
+                campingcarReservationService.delete(campingCarReservationWrapper.get());
+            } else {
+                problemFlg = 1;
+            }
+        }
+
+        if(problemFlg == 0){
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
 
     @PutMapping("/admin/campingcar/price/by/{carType}")
     @ResponseBody
