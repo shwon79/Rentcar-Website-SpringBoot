@@ -54,7 +54,7 @@
  
  
  ## :round_pushpin: 사용기술
- \# SpringBoot \# JPA \# mariaDB \# AWS S3 \# HTML \# CSS \# JAVASCRIPT \# Thymeleaf
+ \# Spring Boot \# Spring Security \# JPA \# mariaDB \# AWS S3 \# HTML \# CSS \# JAVASCRIPT \# Thymeleaf
  
  
 ## :bulb: 프로젝트 구조
