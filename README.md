@@ -5,7 +5,7 @@
 <p align="center">월/장기렌트 전문 ‘세이브카’ 입니다.</br> 
 보다 투명한 렌트카 정보 제공을 위해 노력합니다. </p></br>
 
-<p align="center"> :mega: 웹사이트 바로가기 https://savecar.kr</p>
+<p align="center"> :link: 웹사이트 바로가기 https://savecar.kr</p>
 
 
 
@@ -52,6 +52,13 @@
  <img src="https://user-images.githubusercontent.com/51853700/160608861-700e52d6-e405-4785-892e-ce5e1befd4d3.png" width="45%"/>
  </p>
  
+ 
+ ## :round_pushpin: 사용기술
+ \# SpringBoot \# JPA \# mariaDB \# AWS S3 \# HTML \# CSS \# JAVASCRIPT \# Thymeleaf
+ 
+ 
+## :bulb: 프로젝트 구조
+
 ```
 src/main/  
 │   
