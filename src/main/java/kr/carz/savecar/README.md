@@ -80,7 +80,7 @@ catalina.out 을 정리(삭제) 하셨다면 tomcat을 다시 시작합니다.
 
 
 # 톰캣 구동중 로그 정리
-cd {톰캣설치폴더}/logs 
+cd {톰캣설치폴더}/logs   
 cat /dev/null > catalina.out
 
 출처: https://needjarvis.tistory.com/651 [자비스가 필요해]
