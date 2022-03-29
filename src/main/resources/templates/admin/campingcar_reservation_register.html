@@ -41,17 +41,13 @@
 
         <div class="inner_content">
             <h2 class="page_title" style="text-align: center;">캠핑카 예약 등록</h2>
-            <div style="text-align: right;">
+            <div class="detail_top_div" style="text-align: right;">
                 <button class="btn btn-primary" onclick="reserveCampingcar();" style="margin-bottom: 30px;">예약 등록</button>
             </div>
             <div class="detail_container" id="reserveCampingForm">
-                <div class="detail_list" id="detail_list_title">
-                    <p>종류</p>
-                    <p>값</p>
-                </div>
                 <div class="detail_list">
-                    <p>차종</p>
-                    <select name="" id="carType">
+                    <p class="detail_first">차종</p>
+                    <select class="detail_second" name="" id="carType">
                         <option value="">선택하세요</option>
                         <option value="europe">EUROPE</option>
                         <option value="limousine">LIMOUSINE</option>
@@ -59,12 +55,12 @@
                     </select>
                 </div>
                 <div class="detail_list">
-                    <p>시작일</p>
-                    <input type="date" id="rentDate" onchange="displayExtraCampingData();">
+                    <p class="detail_first">시작일</p>
+                    <input class="detail_second" type="date" id="rentDate" onchange="displayExtraCampingData();">
                 </div>
                 <div class="detail_list">
-                    <p>시작시간</p>
-                    <select id="rentTime" onchange="displayExtraCampingData();">
+                    <p class="detail_first">시작시간</p>
+                    <select class="detail_second" id="rentTime" onchange="displayExtraCampingData();">
                         <option value="">선택하세요</option>
                         <option value="10시">10시</option>
                         <option value="11시">11시</option>
@@ -78,12 +74,12 @@
                     </select>
                 </div>
                 <div class="detail_list">
-                    <p>반납일</p>
-                    <input type="date" id="returnDate" onchange="displayExtraCampingData();">
+                    <p class="detail_first">반납일</p>
+                    <input class="detail_second" type="date" id="returnDate" onchange="displayExtraCampingData();">
                 </div>
                 <div class="detail_list">
-                    <p>반납시간</p>
-                    <select id="returnTime" onchange="displayExtraCampingData();">
+                    <p class="detail_first">반납시간</p>
+                    <select class="detail_second" id="returnTime" onchange="displayExtraCampingData();">
                         <option value="">선택하세요</option>
                         <option value="10시">10시</option>
                         <option value="11시">11시</option>
@@ -97,49 +93,49 @@
                     </select>
                 </div>
                 <div class="detail_list">
-                    <p>일권</p>
-                    <p id="day"></p>
+                    <p class="detail_first">일권</p>
+                    <p id="day" class="detail_second"></p>
                 </div>
                 <div class="detail_list">
-                    <p>추가 시간</p>
-                    <p id="extraTime"></p>
+                    <p class="detail_first">추가 시간</p>
+                    <p id="extraTime" class="detail_second"></p>
                 </div>
                 <div class="detail_list">
-                    <p>성명</p>
-                    <input type="text" id="name">
+                    <p class="detail_first">성명</p>
+                    <input class="detail_second" type="text" id="name">
                 </div>
                 <div class="detail_list">
-                    <p>연락처</p>
-                    <input type="text" id="phone">
+                    <p class="detail_first">연락처</p>
+                    <input class="detail_second" type="text" id="phone">
                 </div>
                 <div class="detail_list">
-                    <p>입금자명</p>
-                    <input type="text" id="depositor">
+                    <p class="detail_first">입금자명</p>
+                    <input class="detail_second" type="text" id="depositor">
                 </div>
-                <div class="detail_list">
-                    <div>
+                <div class="detail_list" style="height: auto;">
+                    <div class="detail_first">
                         <p style="margin: 0;">보증금</p>
                         <p style="margin: 0; font-size: 14px;">숫자로만 작성 해주세요</p>
                     </div>
-                    <input type="text" id="deposit">
+                    <input class="detail_second" type="text" id="deposit">
                 </div>
-                <div class="detail_list">
-                    <div>
+                <div class="detail_list" style="height: auto;">
+                    <div class="detail_first">
                         <p style="margin: 0;">총결제금액</p>
                         <p style="margin: 0; font-size: 14px;">숫자로만 작성 해주세요</p>
                     </div>
-                    <input type="text" id="total">
+                    <input class="detail_second" type="text" id="total">
                 </div>
-                <div class="detail_list">
-                    <div>
+                <div class="detail_list" style="height: auto;">
+                    <div class="detail_first">
                         <p style="margin: 0;">선결제금액</p>
                         <p style="margin: 0; font-size: 14px;">숫자로만 작성 해주세요</p>
                     </div>
-                    <input type="text" id="totalHalf">
+                    <input class="detail_second" type="text" id="totalHalf">
                 </div>
-                <div class="detail_list">
-                    <p>요구사항</p>
-                    <textarea id="detail" style="text-align: left;"></textarea>
+                <div class="detail_list" style="height: 5rem;">
+                    <p class="detail_first">요구사항</p>
+                    <textarea class="detail_second" id="detail" style="text-align: left;"></textarea>
                 </div>
             </div>
         </div>

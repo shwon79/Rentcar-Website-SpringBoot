@@ -567,20 +567,27 @@ function calculatePriceOnMenu(event, period, type) {
 // n일 이내 입고예정 차량 변경
 function editExpectedDay() {
     const expectedDay = document.getElementById('expectedDay').value;
+    const expectedDayDisplayed = document.getElementById('expectedDayDisplayed').value;
 
-    if (confirm('수정하시겠습니까?')) {
-        $.ajax({
-            type:'PUT',
-            url:'/admin/rentcar/expectedDay/' + expectedDay,
-            dataType:'json',
-            contentType : 'application/json; charset=utf-8',
-        }).done(function (result) {
-            if (result.result == 1) {
-                alert('수정이 완료되었습니다.');
-            }
-            location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
-    }
+    if (expectedDay == '' || expectedDayDisplayed == '') {
+        alert('2개의 값을 모두 입력해주세요.')
+    } else {
+        if (confirm('수정하시겠습니까?')) {
+            $.ajax({
+                type:'PUT',
+                url:'/admin/rentcar/expectedDay/' + expectedDay + '/' + expectedDayDisplayed,
+                dataType:'json',
+                contentType : 'application/json; charset=utf-8',
+            }).done(function (result) {
+                if (result.result == 1) {
+                    alert('수정이 완료되었습니다.');
+                } else if (result.result == 0) {
+                    alert('수정에 문제가 생겼습니다.');
+                }
+                location.reload();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
+        }
+    };
 };

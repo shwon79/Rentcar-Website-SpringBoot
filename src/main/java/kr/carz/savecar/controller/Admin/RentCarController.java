@@ -460,14 +460,15 @@ public class RentCarController {
         return mav;
     }
 
-    @PutMapping(value="/admin/rentcar/expectedDay/{nValue}")
+    @PutMapping(value="/admin/rentcar/expectedDay/{expectedDay}/{expectedDayDisplayed}")
     @ResponseBody
-    public void put_rent_expectedDay(HttpServletResponse res, @PathVariable String nValue) throws IOException {
+    public void put_rent_expectedDay(HttpServletResponse res, @PathVariable String expectedDay, @PathVariable String expectedDayDisplayed) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
-        expectedDayList.get(0).setExpectedDay(nValue);
+        expectedDayList.get(0).setExpectedDay(expectedDay);
+        expectedDayList.get(0).setExpectedDayDisplayed(expectedDayDisplayed);
         expectedDayService.save(expectedDayList.get(0));
 
         jsonObject.put("result", 1);

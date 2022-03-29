@@ -162,9 +162,11 @@ public class RealtimeRentController {
 
         List<RealTimeRentCar> morenDTOList = realTimeRentService.findByIsExpected(0);
         List<RealTimeRentCar> morenDTOListExpected = realTimeRentService.findByIsExpected(1);
+        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
 
         RealTimeDTO realTimeDTO = new RealTimeDTO("전체", "2000km", "한달");
 
+        model.put("expectedDayDisplayed", expectedDayList.get(0).getExpectedDayDisplayed());
         model.put("morenDTOList", morenDTOList);
         model.put("morenDTOListExpected", morenDTOListExpected);
         model.put("realTimeDTO", realTimeDTO);
@@ -188,7 +190,9 @@ public class RealtimeRentController {
             morenDTOList = realTimeRentService.findByCarGubunAndIsExpected(carType, 0);
             morenDTOListExpected = realTimeRentService.findByCarGubunAndIsExpected(carType, 1);
         }
+        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
 
+        model.put("expectedDayDisplayed", expectedDayList.get(0).getExpectedDayDisplayed());
         model.put("morenDTOList", morenDTOList);
         model.put("morenDTOListExpected", morenDTOListExpected);
 

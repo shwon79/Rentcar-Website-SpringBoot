@@ -19,10 +19,12 @@ public class ExpectedDay {
     private Long id;
 
     private String expectedDay;
+    private String expectedDayDisplayed;
 
     @Builder
-    public ExpectedDay(Long id, String expectedDay) {
+    public ExpectedDay(Long id, String expectedDay, String expectedDayDisplayed) {
         this.id = id;
         this.expectedDay = expectedDay;
+        this.expectedDayDisplayed = expectedDayDisplayed;
     }
 }

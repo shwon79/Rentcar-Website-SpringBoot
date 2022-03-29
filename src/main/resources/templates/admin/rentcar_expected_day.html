@@ -52,13 +52,31 @@
                             <th style="text-align: center;">수정 값</th>
                         </tr>
                         <tr>
-                            <td style="text-align: center; width: 50%; border-right: 1px solid lightgray;">
-                                <span th:text="${expectedDay.expectedDay}"></span>
-                                <span>일</span>
+                            <td style="text-align: center; width: 50%; border-right: 1px solid lightgray; padding: 0.5rem; word-break: keep-all;">
+                                <p style="margin: 0;">
+                                    <span th:text="${expectedDay.expectedDay}"></span>
+                                    <span>일 이내 입고 예정차량</span>
+                                </p>
                             </td>
-                            <td style="text-align: center;">
-                                <input type="number" name="expectedDay" id="expectedDay" style="width: 5rem;">
-                                <span>일</span>
+                            <td style="text-align: center; padding: 0.5rem; word-break: keep-all;">
+                                <p style="margin: 0;">
+                                    <input type="number" name="expectedDay" id="expectedDay" style="width: 5rem;">
+                                    <span>일 이내 입고 예정차량</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; width: 50%; border-right: 1px solid lightgray; padding: 0.5rem; word-break: keep-all;">
+                                <p style="margin: 0;">
+                                    <span th:text="${expectedDay.expectedDayDisplayed}"></span>
+                                    <span>일 이내 입고 홈페이지 표시</span>
+                                </p>
+                            </td>
+                            <td style="text-align: center; padding: 0.5rem; word-break: keep-all;">
+                                <p style="margin: 0;">
+                                    <input type="number" name="expectedDayDisplayed" id="expectedDayDisplayed" style="width: 5rem;">
+                                    <span>일 이내 입고 홈페이지 표시</span>
+                                </p>
                             </td>
                         </tr>
                     </tbody>
