@@ -19,11 +19,13 @@ public class CampingCarHomeImage {
     @JoinColumn(name = "homeId")
     private CampingCarHome campingCarHome;
     private String imageUrl;
+    private int sequence;
 
     @Builder
-    public CampingCarHomeImage(Long imageId, CampingCarHome campingCarHome, String imageUrl) {
+    public CampingCarHomeImage(Long imageId, CampingCarHome campingCarHome, String imageUrl, int sequence) {
         this.imageId = imageId;
         this.campingCarHome = campingCarHome;
         this.imageUrl = imageUrl;
+        this.sequence = sequence;
     }
 }
