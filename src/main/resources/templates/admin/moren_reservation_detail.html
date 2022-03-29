@@ -68,15 +68,15 @@
                 <div class="detail_list detail_list_group">
                     <p class="detail_group_title">문의자 정보</p>
                 </div>
-                <div class="detail_list" style="height: auto;">
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
                     <p class="detail_first">예약자 이름(입금자명)</p>
                     <input class="reservationName detail_second" th:value="${morenReservationDTO.reservationName}" />
                 </div>
-                <div class="detail_list" style="height: auto;">
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
                     <p class="detail_first">예약자 전화번호</p>
                     <input class="reservationPhone detail_second" th:value="${morenReservationDTO.reservationPhone}" />
                 </div>
-                <div class="detail_list" style="height: auto;">
+                <div class="detail_list" style="height: auto; min-height: 3rem; border-bottom: none;">
                     <p class="detail_first">예약자 생년월일</p>
                     <input class="reservationAge detail_second" th:value="${morenReservationDTO.reservationAge}" />
                 </div>
@@ -87,14 +87,14 @@
                     <p class="detail_first">차량 번호</p>
                     <p th:text="${morenReservationDTO.carName}" class="carName detail_second"></p>
                 </div>
-                <div class="detail_list">
+                <div class="detail_list" style="border-bottom: none;">
                     <p class="detail_first">차량 번호</p>
                     <p th:text="${morenReservationDTO.carNo}" class="carNo detail_second"></p>
                 </div>
                 <div class="detail_list detail_list_group">
                     <p class="detail_group_title">대여 정보</p>
                 </div>
-                <div class="detail_list" style="height: auto;">
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
                     <p class="detail_first">대여 날짜 및 시간</p>
                     <div class="desktop_flex_mobile_block detail_second">
                         <input type="date" class="reservationDate" th:value="${morenReservationDTO.reservationDate}">
@@ -123,7 +123,7 @@
                         <option th:if="${(morenReservationDTO.rentTerm=='12개월')||(morenReservationDTO.rentTerm=='24개월')}" value="기타" th:selected="${morenReservationDTO.kilometer} == '기타' ? true : false">기타</option>
                     </select>
                 </div>
-                <div class="detail_list" style="height: auto;">
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
                     <p class="detail_first">방문 또는 배차 신청</p>
                     <select name="" class="pickupPlace detail_second">
                         <option value="방문" th:selected="${morenReservationDTO.pickupPlace} == '방문' ? true : false">방문</option>
@@ -162,7 +162,7 @@
                     <p class="detail_first">총 렌트료</p>
                     <input type="number" class="carAmountTotal detail_second" onkeyup="changePrice(this);" id="carAmountTotalInput" th:value="${morenReservationDTO.carAmountTotal}" />
                 </div>
-                <div class="detail_list">
+                <div class="detail_list" style="border-bottom: none;">
                     <p class="detail_first">보증금</p>
                     <input type="number" class="carDeposit detail_second" th:value="${morenReservationDTO.carDeposit}" />
                 </div>

@@ -56,13 +56,23 @@
                 </div>
             </div>
             <div class="detail_container">
-                <div class="detail_list">
-                    <p class="detail_first">구분</p>
-                    <p class="detail_second" th:text="${reservation.title}"></p>
+                <div class="detail_list detail_list_group">
+                    <p class="detail_group_title">문의자 정보</p>
                 </div>
                 <div class="detail_list">
-                    <p class="detail_first">제품</p>
-                    <p class="detail_second" th:text="${reservation.product}"></p>
+                    <p class="detail_first">성명</p>
+                    <p class="detail_second" th:text="${reservation.name}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">전화번호</p>
+                    <p class="detail_second" th:text="${reservation.phoneNo}"></p>
+                </div>
+                <div class="detail_list" style="border-bottom: none;">
+                    <p class="detail_first">나이 제한</p>
+                    <p class="detail_second" th:text="${reservation.age_limit}"></p>
+                </div>
+                <div class="detail_list detail_list_group">
+                    <p class="detail_group_title">차량 정보</p>
                 </div>
                 <div class="detail_list">
                     <p class="detail_first">차량 구분</p>
@@ -73,18 +83,6 @@
                     </p>
                 </div>
                 <div class="detail_list">
-                    <p class="detail_first">성명</p>
-                    <p class="detail_second" th:text="${reservation.name}"></p>
-                </div>
-                <div class="detail_list">
-                    <p class="detail_first">전화번호</p>
-                    <p class="detail_second" th:text="${reservation.phoneNo}"></p>
-                </div>
-                <div class="detail_list" style="height: auto;">
-                    <p class="detail_first">요청사항</p>
-                    <p class="detail_second" th:text="${reservation.detail}"></p>
-                </div>
-                <div class="detail_list">
                     <p class="detail_first">차량 이름</p>
                     <p class="detail_second" th:text="${reservation.car_name}"></p>
                 </div>
@@ -92,18 +90,33 @@
                     <p class="detail_first">차량 번호</p>
                     <p class="detail_second" th:text="${reservation.car_num}"></p>
                 </div>
-                <div class="detail_list">
+                <div class="detail_list" style="border-bottom: none;">
                     <p class="detail_first">차량 연식</p>
                     <p class="detail_second" th:text="${reservation.carAge}"></p>
                 </div>
-                <div class="detail_list" style="height: auto;">
+                <div class="detail_list detail_list_group">
+                    <p class="detail_group_title">대여 정보</p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">유형</p>
+                    <p class="detail_second" th:text="${reservation.title}"></p>
+                </div>
+                <div class="detail_list">
+                    <p class="detail_first">제품</p>
+                    <p class="detail_second" th:text="${reservation.product}"></p>
+                </div>
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
                     <p class="detail_first">약정 주행거리</p>
                     <p class="detail_second">
                         <span th:text="${reservation.mileage}"></span>
                         <span th:if="${reservation.mileage != ''}">km</span>
                     </p>
                 </div>
-                <div class="detail_list" style="height: auto;">
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
+                    <p class="detail_first">예상 대여날짜</p>
+                    <p class="detail_second" th:text="${reservation.resDate}"></p>
+                </div>
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
                     <p class="detail_first">옵션</p>
                     <p class="detail_second" th:text="${reservation.option}"></p>
                 </div>
@@ -115,17 +128,13 @@
                     <p class="detail_first">대여료</p>
                     <p class="detail_second" th:text="${reservation.price}"></p>
                 </div>
-                <div class="detail_list">
-                    <p class="detail_first">나이 제한</p>
-                    <p class="detail_second" th:text="${reservation.age_limit}"></p>
-                </div>
-                <div class="detail_list" style="height: auto;">
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
                     <p class="detail_first">지역</p>
                     <p class="detail_second" th:text="${reservation.region}"></p>
                 </div>
-                <div class="detail_list" style="height: auto;">
-                    <p class="detail_first">예상 대여날짜</p>
-                    <p class="detail_second" th:text="${reservation.resDate}"></p>
+                <div class="detail_list" style="height: auto; min-height: 3rem; border-bottom: none;">
+                    <p class="detail_first">요청사항</p>
+                    <p class="detail_second" th:text="${reservation.detail}"></p>
                 </div>
             </div>
         </div>

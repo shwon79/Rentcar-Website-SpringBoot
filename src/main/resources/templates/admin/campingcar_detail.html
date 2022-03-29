@@ -100,13 +100,34 @@
         </div>
 
         <div class="detail_container">
+          <div class="detail_list detail_list_group">
+            <p class="detail_group_title">문의자 정보</p>
+          </div>
           <div class="detail_list">
+            <p class="detail_first">성명</p>
+            <input id="name" class="detail_second" th:value="${campingCarReservation.name}" />
+          </div>
+          <div class="detail_list">
+            <p class="detail_first">연락처</p>
+            <input id="phone" class="detail_second" th:value="${campingCarReservation.phone}" />
+          </div>
+          <div class="detail_list" style="border-bottom: none;">
+            <p class="detail_first">임금자명</p>
+            <input id="depositor" class="detail_second" th:value="${campingCarReservation.depositor}" />
+          </div>
+          <div class="detail_list detail_list_group">
+            <p class="detail_group_title">차량 정보</p>
+          </div>
+          <div class="detail_list" style="border-bottom: none;">
             <p class="detail_first">차종</p>
             <select class="detail_second" name="" id="carType">
               <option value="europe" th:selected="${campingCarReservation.carType} == 'europe' ? true : false">EUROPE</option>
               <option value="limousine" th:selected="${campingCarReservation.carType} == 'limousine' ? true : false">LIMOUSINE</option>
               <option value="travel" th:selected="${campingCarReservation.carType} == 'travel' ? true : false">TRAVEL</option>
             </select>
+          </div>
+          <div class="detail_list detail_list_group">
+            <p class="detail_group_title">대여 정보</p>
           </div>
           <div class="detail_list">
             <p class="detail_first">생성일</p>
@@ -163,18 +184,6 @@
             <p id="extraTime" class="detail_second" th:text="${campingCarReservation.extraTime} == 0 ? '추가 시간 없음' : '3시간'"></p>
           </div>
           <div class="detail_list">
-            <p class="detail_first">성명</p>
-            <input id="name" class="detail_second" th:value="${campingCarReservation.name}" />
-          </div>
-          <div class="detail_list">
-            <p class="detail_first">연락처</p>
-            <input id="phone" class="detail_second" th:value="${campingCarReservation.phone}" />
-          </div>
-          <div class="detail_list">
-            <p class="detail_first">임금자명</p>
-            <input id="depositor" class="detail_second" th:value="${campingCarReservation.depositor}" />
-          </div>
-          <div class="detail_list">
             <p class="detail_first">보증금</p>
             <input id="deposit" class="detail_second" th:value="${#numbers.formatInteger(campingCarReservation.deposit,0, 'COMMA')}" />
           </div>
@@ -190,7 +199,7 @@
             <p class="detail_first">예약</p>
             <p id="campingReservation" class="detail_second" th:text="${campingCarReservation.reservation} == 0 ? '예약 X' : '예약 O'"></p>
           </div>
-          <div class="detail_list" style="height: 5rem;">
+          <div class="detail_list" style="height: auto; min-height: 3rem; border-bottom: none;">
             <p class="detail_first" id="custom_demand">요구사항</p>
             <textarea id="detail" class="detail_second" th:text="${campingCarReservation.detail}" style="text-align: left;" ></textarea>
           </div>

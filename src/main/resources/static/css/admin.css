@@ -671,6 +671,10 @@ form {
     height: auto;
     border: 1px solid darkgray;
     border-radius: 4px 4px 0 0;
+    margin-top: 1rem;
+}
+.detail_list_group:first-child {
+    margin-top: 0;
 }
 .detail_group_title {
     font-size: 1.5rem;
