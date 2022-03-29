@@ -1,0 +1,101 @@
+<!-- 관리자 캠핑카 홈 수정 페이지_main -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin_campingcar_home.css}" rel="stylesheet">
+    <link th:href="@{/css/library/font-awesome.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_campingcar_home.js}" defer></script>
+
+    <script>
+        $(window).on('load', function () {
+            let campingcarHomeMenu = document.getElementById('campingcarHomeMenu');
+            campingcarHomeMenu.classList.add('activeAdminMenu');
+        });
+        $(function(){
+            $( ".sortable" ).sortable();
+        });
+    </script>
+
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container inner_content">
+            <h2 class="page_title" style="text-align: center;">캠핑카 홈 수정</h2>
+            <div style="text-align: right;">
+                <button class="btn btn-info" onclick="location.href='#'">새로운 내용 추가하기</button>
+                <button class="btn btn-primary change-index-btn" onclick="displayChangeIndexBox();">내용 순서 바꾸기</button>
+            </div>
+            <div style="margin-top: 10px;">
+                <div id="changeIndexBox">
+                    <div class="changeOrderBoxTop">
+                        <span style="font-size: 18px;">내용 순서 변경</span>
+                        <button onclick="displayChangeIndexBox();" class="btn btn-outline-primary">X</button>
+                    </div>
+                    <ul class="sortable">
+                        <li th:each="item, i : ${campingCarHomeList}" class="oneItem">
+                            <div>
+                                <span th:text="${item.title}"></span>
+                                <span> : </span>
+                                <span th:text="${item.description}"></span>
+                            </div>
+                            <i class="fas fa-bars" style="margin-right: 10px;"></i>
+                        </li>
+                        <button class="btn btn-primary" onclick="saveChangedRowIndex();">순서 변경하기</button>
+                    </ul>
+                </div>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr class="thead-dark">
+                        <th scope="col">순서</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">설명</th>
+                        <th scope="col"></th>
+                    </tr>
+                    <tr th:each="item, i : ${campingCarHomeList}">
+                        <th scope="row" th:text="${item.sequence}"></th>
+                        <td th:text="${item.title}"></td>
+                        <td th:text="${item.description}"></td>
+                        <td>
+                            <a th:onclick="'location.href = \'/admin/campingcar/home/detail/'+${item.homeId}+'\''">
+                                <button class="btn btn-outline-primary">내용 수정하기</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

@@ -99,8 +99,8 @@
                                 </div>
                                 <img th:src="${car.url}" th:alt="${car.imageId}">
                             </div>
-                            <div class="upload-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                <input type="file" name="file" th:title="${car.carName.carName}" th:data-title="${car.imageId}" style="width: -webkit-fill-available;">
+                            <div class="upload-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex-basis: 90%; margin: 0 auto;">
+                                <input type="file" name="file" th:title="${car.carName.carName}" th:data-title="${car.imageId}" style="width: -webkit-fill-available; border: none;">
                                 <button class="btn btn-primary" th:onclick="uploadImage('extraUpload', [[${car.carName.carName}]], [[${car.imageId}]], [[${car.imageId}]])" style="margin-top: 10px;">이미지 넣기</button>
                             </div>
                         </div>

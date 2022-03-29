@@ -10,11 +10,11 @@ $(document).ready(function () {
         document.getElementById('campingcarSubmenu').classList.toggle('camping-open');
         if (document.getElementById('campingcarSubmenu').classList.contains('camping-open')) {
             if (document.getElementById('priceSubMenu').classList.contains('price-open')) {
-                document.getElementById('price-submenu-btn').style.top = '432px';
-                document.getElementById('longterm-submenu-btn').style.top = '678px';
+                document.getElementById('price-submenu-btn').style.top = '474px';
+                document.getElementById('longterm-submenu-btn').style.top = '719px';
             } else {
-                document.getElementById('price-submenu-btn').style.top = '433px';
-                document.getElementById('longterm-submenu-btn').style.top = '476px';
+                document.getElementById('price-submenu-btn').style.top = '474px';
+                document.getElementById('longterm-submenu-btn').style.top = '517px';
             }
         } else {
             if (document.getElementById('priceSubMenu').classList.contains('price-open')) {
@@ -33,13 +33,13 @@ $(document).ready(function () {
         document.getElementById('priceSubMenu').classList.toggle('price-open');
         if (document.getElementById('priceSubMenu').classList.contains('price-open')) {
             if (document.getElementById('campingcarSubmenu').classList.contains('camping-open')) {
-                document.getElementById('longterm-submenu-btn').style.top = '678px';
+                document.getElementById('longterm-submenu-btn').style.top = '719px';
             } else {
                 document.getElementById('longterm-submenu-btn').style.top = '437px';
             };
         } else {
             if (document.getElementById('campingcarSubmenu').classList.contains('camping-open')) {
-                document.getElementById('longterm-submenu-btn').style.top = '476px';
+                document.getElementById('longterm-submenu-btn').style.top = '517px';
             } else {
                 document.getElementById('longterm-submenu-btn').style.top = '235px';
             }
@@ -72,8 +72,8 @@ function displayActiveMenu() {
     if (menu === 'campingCar') {
         campingSubmenuBtn && campingSubmenuBtn.classList.add('active-span');
         campingcarSubmenu && campingcarSubmenu.classList.add('camping-open');
-        priceSubmenuBtn.style.top = '433px';
-        longTermSubmenuBtn.style.top = '478px';
+        priceSubmenuBtn.style.top = '474px';
+        longTermSubmenuBtn.style.top = '517px';
     } else if (menu === 'rentCar') {
         priceSubmenuBtn && priceSubmenuBtn.classList.add('active-span');
         priceSubMenu && priceSubMenu.classList.add('price-open');
