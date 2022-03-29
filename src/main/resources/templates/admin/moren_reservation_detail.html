@@ -58,6 +58,7 @@
                         모렌전송 회수
                     </button>
                     <button class="set_reserve" onclick="morenReserve(this, 'edit');" th:name="${morenReservationDTO.id}" style="margin: 5px;">수정</button>
+                    <button class="set_reserve" th:onclick="deleteMoren([[${morenReservationDTO.id}]]);" th:name="${morenReservationDTO.id}" style="margin: 5px;">삭제</button>
                 </div>
             </div>
             <div class="detail_container">
