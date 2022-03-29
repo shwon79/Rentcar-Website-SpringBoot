@@ -890,17 +890,31 @@ public class CampingCarController {
         ModelAndView mav = new ModelAndView();
 
         List<CampingCarHome> campingCarHomeList = campingCarHomeService.findAll();
-        List<List<CampingCarHomeImage>> campingCarHomeImageDoubleList = new ArrayList<>();
-
-        for(CampingCarHome campingCarHome : campingCarHomeList){
-            List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
-            campingCarHomeImageDoubleList.add(campingCarHomeImageList);
-        }
-
         mav.addObject("campingCarHomeList", campingCarHomeList);
-        mav.addObject("campingCarHomeImageDoubleList", campingCarHomeImageDoubleList);
 
         mav.setViewName("admin/campingcar_home_menu");
+
+        return mav;
+    }
+
+
+    @GetMapping(value = "/admin/campingcar/home/detail/{homeId}")
+    @ResponseBody
+    public ModelAndView get_campingcar_home_detail(@PathVariable Long homeId) {
+
+        ModelAndView mav = new ModelAndView();
+
+        Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(homeId);
+
+        if(campingCarHomeWrapper.isPresent()){
+            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+            List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+
+            mav.addObject("campingCarHome", campingCarHome);
+            mav.addObject("campingCarHomeImageList", campingCarHomeImageList);
+        }
+
+        mav.setViewName("admin/campingcar_home_detail");
 
         return mav;
     }
