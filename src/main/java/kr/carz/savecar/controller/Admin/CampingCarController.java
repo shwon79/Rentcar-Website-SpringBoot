@@ -951,6 +951,11 @@ public class CampingCarController {
 
         if(campingCarHomeWrapper.isPresent()){
             CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+            List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+            for(CampingCarHomeImage campingCarHomeImage : campingCarHomeImageList){
+                campingCarHomeImageService.delete(campingCarHomeImage);
+            }
+
             campingCarHomeService.delete(campingCarHome);
             jsonObject.put("result", 1);
         } else {
