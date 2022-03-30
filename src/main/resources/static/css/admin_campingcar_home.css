@@ -1,3 +1,6 @@
+.table th, .table td {
+    word-break: keep-all;
+}
 .image-box {
     display: flex;
     justify-content: space-between;
@@ -77,6 +80,13 @@
     margin-right: 10px;
 }
 
+.two_button_td {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
 @media (max-width: 576px) {
     #description {
         height: 9rem !important;
@@ -96,4 +106,9 @@
     .image-box .upload-box{
         flex-basis: 100%;
     }
+
+    .table th, .table td {
+        padding: 0.25rem;
+    }
+
 }

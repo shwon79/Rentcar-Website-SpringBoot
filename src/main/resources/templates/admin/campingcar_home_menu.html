@@ -50,7 +50,7 @@
         <div class="container inner_content">
             <h2 class="page_title" style="text-align: center;">캠핑카 홈 수정</h2>
             <div style="text-align: right;">
-                <button class="btn btn-info" onclick="location.href='#'">새로운 내용 추가하기</button>
+                <button class="btn btn-info" onclick="location.href='/admin/campingcar/home/register'">새로운 내용 추가하기</button>
                 <button class="btn btn-primary change-index-btn" onclick="displayChangeIndexBox();">내용 순서 바꾸기</button>
             </div>
             <div style="margin-top: 10px;">
@@ -60,7 +60,7 @@
                         <button onclick="displayChangeIndexBox();" class="btn btn-outline-primary">X</button>
                     </div>
                     <ul class="sortable">
-                        <li th:each="item, i : ${campingCarHomeList}" class="oneItem">
+                        <li th:each="item, i : ${campingCarHomeList}" class="oneItem" th:data-id="${item.homeId}" th:data-sequence="${item.sequence}">
                             <div>
                                 <span th:text="${item.title}"></span>
                                 <span> : </span>
@@ -83,9 +83,12 @@
                         <th scope="row" th:text="${item.sequence}"></th>
                         <td th:text="${item.title}"></td>
                         <td th:text="${item.description}"></td>
-                        <td>
+                        <td class="two_button_td">
                             <a th:onclick="'location.href = \'/admin/campingcar/home/detail/'+${item.homeId}+'\''">
-                                <button class="btn btn-outline-primary">내용 수정하기</button>
+                                <button class="btn btn-outline-primary">수정하기</button>
+                            </a>
+                            <a th:onclick="deleteCampingCarHome([[${item.homeId}]], 'menu')">
+                                <button class="btn btn-outline-danger">삭제하기</button>
                             </a>
                         </td>
                     </tr>

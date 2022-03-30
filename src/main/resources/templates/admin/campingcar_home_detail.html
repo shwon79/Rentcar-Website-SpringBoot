@@ -49,66 +49,77 @@
 
         <div class="container inner_content">
             <h2 class="page_title" style="text-align: center;">캠핑카 내용 수정</h2>
-            <div style="margin-top: 10px;">
-                <div class="detail_container">
-                    <div class="detail_list detail_list_group">
-                        <p class="detail_group_title">텍스트</p>
-                    </div>
-                    <p style="display: none;" th:text="${campingCarHome.sequence}" id="textSequence"></p>
-                    <div class="detail_list">
-                        <p class="detail_first">제목</p>
-                        <input id="title" class="detail_second" style="max-width: unset;" th:value="${campingCarHome.title}" />
-                    </div>
-                    <div class="detail_list" style="height: auto; min-height: 3rem;">
-                        <p class="detail_first">설명</p>
-                        <textarea id="description" class="detail_second" th:text="${campingCarHome.description}"></textarea>
-                    </div>
-                    <div class="detail_list" style="border-bottom: none; justify-content: center; margin: 10px 0;">
-                        <button th:onclick="editCampingHomeText([[${campingCarHome.homeId}]])" class="btn btn-primary">
-                            텍스트 내용 수정
-                        </button>
-                    </div>
+            <div class="detail_top_div" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <a href="/admin/campingcar/home/menu">
+                    <button class="btn-info" style="margin: 5px;">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        뒤로가기
+                    </button>
+                </a>
+                <button class="set_reserve" th:onclick="deleteCampingCarHome([[${campingCarHome.homeId}]], 'detail')" style="flex: unset;">
+                    내용 삭제
+                </button>
+            </div>
 
-                    <div class="detail_list detail_list_group" style="justify-content: space-between;">
-                        <p class="detail_group_title">이미지</p>
-                        <button class="btn btn-primary change-index-btn" onclick="displayChangeIndexBox();">이미지 순서 변경</button>
+            <div class="detail_container">
+                <div class="detail_list detail_list_group">
+                    <p class="detail_group_title">텍스트</p>
+                </div>
+                <p style="display: none;" th:text="${campingCarHome.sequence}" id="textSequence"></p>
+                <div class="detail_list">
+                    <p class="detail_first">제목</p>
+                    <input id="title" class="detail_second" style="max-width: unset;" th:value="${campingCarHome.title}" />
+                </div>
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
+                    <p class="detail_first">설명</p>
+                    <textarea id="description" class="detail_second" th:text="${campingCarHome.description}"></textarea>
+                </div>
+                <div class="detail_list" style="border-bottom: none; justify-content: center; margin: 10px 0;">
+                    <button th:onclick="editCampingHomeText([[${campingCarHome.homeId}]])" class="btn btn-primary">
+                        텍스트 내용 수정
+                    </button>
+                </div>
+
+                <div class="detail_list detail_list_group" style="justify-content: space-between;">
+                    <p class="detail_group_title">이미지</p>
+                    <button class="btn btn-primary change-index-btn" onclick="displayChangeIndexBox();">이미지 순서 변경</button>
+                </div>
+                <div id="changeIndexBox">
+                    <div class="changeOrderBoxTop">
+                        <span style="font-size: 18px;">내용 순서 변경</span>
+                        <button onclick="displayChangeIndexBox();" class="btn btn-outline-primary">X</button>
                     </div>
-                    <div id="changeIndexBox">
-                        <div class="changeOrderBoxTop">
-                            <span style="font-size: 18px;">내용 순서 변경</span>
-                            <button onclick="displayChangeIndexBox();" class="btn btn-outline-primary">X</button>
-                        </div>
-                        <ul class="sortable">
-                            <li th:each="item, i : ${campingCarHomeImageList}" class="oneItem">
-                                <div>
-                                    <img th:src="${item.imageUrl}" th:alt="${item.imageId}">
-                                    <span th:text="${i.index + 1}"></span>
-                                    <span>번째 이미지</span>
-                                </div>
-                                <i class="fas fa-bars" style="margin-right: 10px;"></i>
-                            </li>
-                            <button class="btn btn-primary" onclick="saveChangedImageIndex();">순서 변경하기</button>
-                        </ul>
-                    </div>
-                    <div class="image-box" th:if="${not #lists.isEmpty(campingCarHomeImageList)}">
-                        <div class="upload-box" th:each="image, i : ${campingCarHomeImageList}">
-                            <p style="text-align: center;">
+                    <ul class="sortable">
+                        <li th:each="item, i : ${campingCarHomeImageList}" class="oneItem" th:data-id="${item.imageId}" th:data-title="${item.sequence}">
+                            <div>
+                                <img th:src="${item.imageUrl}" th:alt="${item.imageId}">
                                 <span th:text="${i.index + 1}"></span>
                                 <span>번째 이미지</span>
-                            </p>
-                            <div style="text-align: right; margin-bottom: 10px;">
-                                <button class="btn btn-danger" th:onclick="deleteImage([[${image.imageId}]])">삭제하기</button>
                             </div>
-                            <img th:src="${image.imageUrl}" th:alt="${image.imageId}">
+                            <i class="fas fa-bars" style="margin-right: 10px;"></i>
+                        </li>
+                        <button class="btn btn-primary" onclick="saveChangedImageIndex();">순서 변경하기</button>
+                    </ul>
+                </div>
+                <div class="image-box" th:if="${not #lists.isEmpty(campingCarHomeImageList)}">
+                    <div class="upload-box" th:each="image, i : ${campingCarHomeImageList}">
+                        <p style="text-align: center;">
+                            <span th:text="${i.index + 1}"></span>
+                            <span>번째 이미지</span>
+                        </p>
+                        <div style="text-align: right; margin-bottom: 10px;">
+                            <button class="btn btn-danger" th:onclick="deleteImage([[${image.imageId}]])">삭제하기</button>
                         </div>
-                        <div class="upload-box" style="display: flex; flex-direction: column; align-items: center; margin: 0 auto;">
-                            <p th:text="${#lists.size(campingCarHomeImageList) + 1}" style="display: none;" id="newImageSequence"></p>
-                            <input type="file" name="file" id="newImage" style="width: 15rem; border: none;">
-                            <button class="btn btn-primary" th:onclick="uploadImage([[${campingCarHome.homeId}]])" style="margin-top: 10px;">이미지 넣기</button>
-                        </div>
+                        <img th:src="${image.imageUrl}" th:alt="${image.imageId}">
+                    </div>
+                    <div class="upload-box" style="display: flex; flex-direction: column; align-items: center; margin: 0 auto;">
+                        <p th:text="${#lists.size(campingCarHomeImageList) + 1}" style="display: none;" id="newImageSequence"></p>
+                        <input type="file" name="file" id="newImage" style="width: 15rem; border: none;">
+                        <button class="btn btn-primary" th:onclick="uploadImage([[${campingCarHome.homeId}]])" style="margin-top: 10px;">이미지 넣기</button>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

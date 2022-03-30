@@ -1,0 +1,78 @@
+<!-- 관리자 캠핑 홈 내용 등록 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_campingcar_home.js}" defer></script>
+
+    <script>
+        $(window).on('load', function () {
+            let campingcarHomeMenu = document.getElementById('campingcarHomeMenu');
+            campingcarHomeMenu.classList.add('activeAdminMenu');
+        });
+    </script>
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="inner_content">
+            <h2 class="page_title" style="text-align: center;">홈 내용 등록</h2>
+            <div class="detail_top_div" style="text-align: right;">
+                <button class="btn btn-primary" onclick="addCampingCarHome();" style="margin-bottom: 30px;">내용 등록</button>
+            </div>
+            <div class="detail_container">
+                <p id="sequence" th:text="${campingCarHomeLastIdx}" style="display: none;"></p>
+                <div class="detail_list">
+                    <p class="detail_first">
+                        <span style="color: red; vertical-align: super;">*</span>
+                        제목
+                    </p>
+                    <input class="detail_second" type="text" id="title" style="max-width: unset;">
+                </div>
+                <div class="detail_list" style="height: auto;">
+                    <p class="detail_first">
+                        <span style="color: red; vertical-align: super;">*</span>
+                        설명
+                    </p>
+                    <textarea class="detail_second" type="text" id="description"></textarea>
+                </div>
+                <div class="detail_list" style="border-bottom: none;">
+                    <p class="detail_first">
+                        <span style="color: red; vertical-align: super;">*</span>
+                        이미지
+                    </p>
+                    <input class="detail_second" type="file" accept="image/*" multiple="multiple" id="image" style="max-width: unset; border: none;">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>
