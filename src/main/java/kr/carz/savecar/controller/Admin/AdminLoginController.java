@@ -61,14 +61,14 @@ public class AdminLoginController {
                         @RequestParam(value = "exception", required = false) String exception,
                         ModelMap model) {
 
-        try {
-            AnalyticsReporting service = initializeAnalyticsReporting();
-
-            GetReportsResponse response = getReport(service);
-            printResponse(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            AnalyticsReporting service = initializeAnalyticsReporting();
+//
+//            GetReportsResponse response = getReport(service);
+//            printResponse(response);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         model.addAttribute("error",error);
         model.addAttribute("exception",exception);

@@ -2,6 +2,7 @@ package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.CampingCarHome;
 import kr.carz.savecar.domain.CampingCarHomeImage;
+import kr.carz.savecar.dto.CampingCarHomeImageDTO;
 import kr.carz.savecar.repository.CampingCarHomeImageRepository;
 
 import java.util.List;
@@ -28,5 +29,9 @@ public class CampingCarHomeImageService {
 
     public void delete(CampingCarHomeImage image){
         campingCarHomeImageRepository.delete(image);
+    }
+
+    public Long saveDTO(CampingCarHomeImageDTO campingCarHomeImageDTO, CampingCarHome campingCarHome, String imageUrl){
+        return campingCarHomeImageRepository.save(campingCarHomeImageDTO.toEntity(campingCarHome, imageUrl)).getImageId();
     }
 }
