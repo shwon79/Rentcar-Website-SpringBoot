@@ -898,6 +898,23 @@ public class CampingCarController {
     }
 
 
+
+    @PostMapping(value = "/admin/campingcar/home")
+    @ResponseBody
+    public void post_campingcar_home(HttpServletResponse res, @RequestBody CampingCarHomeDTO campingCarHomeDTO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        campingCarHomeService.saveDTO(campingCarHomeDTO);
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
     @PutMapping(value = "/admin/campingcar/home/{homeId}")
     @ResponseBody
     public void put_campingcar_home(HttpServletResponse res, @PathVariable long homeId, @RequestBody CampingCarHomeDTO campingCarHomeDTO) throws IOException {
