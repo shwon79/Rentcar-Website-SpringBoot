@@ -939,17 +939,28 @@ public class CampingCarController {
     }
 
 
-    @PutMapping(value = "/admin/campingcar/home/image/sequence/{imageId}/{sequence}")
+    @PutMapping(value = "/admin/campingcar/home/image/sequence")
     @ResponseBody
-    public void put_campingcar_home_image(HttpServletResponse res, @PathVariable long imageId, @PathVariable int sequence) throws IOException {
+    public void put_campingcar_home_image(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
-        Optional<CampingCarHomeImage> campingCarHomeImageWrapper = campingCarHomeImageService.findById(imageId);
-        if(campingCarHomeImageWrapper.isPresent()){
-            CampingCarHomeImage campingCarHomeImage = campingCarHomeImageWrapper.get();
-            campingCarHomeImage.setSequence(sequence);
-            campingCarHomeImageService.save(campingCarHomeImage);
+        int problemFlg = 0;
+        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+
+            Optional<CampingCarHomeImage> campingCarHomeImageWrapper = campingCarHomeImageService.findById(imageTitleVO.getImageId());
+            if (campingCarHomeImageWrapper.isPresent()) {
+
+                CampingCarHomeImage campingCarHomeImage = campingCarHomeImageWrapper.get();
+                campingCarHomeImage.setSequence(imageTitleVO.getTitle());
+
+                campingCarHomeImageService.save(campingCarHomeImage);
+            } else {
+                problemFlg = 1;
+            }
+        }
+
+        if(problemFlg == 0){
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
