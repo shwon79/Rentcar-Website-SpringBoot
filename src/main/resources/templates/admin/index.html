@@ -63,23 +63,10 @@
                 </form>
             </div>
 
-            <div style="margin-top: 50px;">
-<!--                <a sec:authorize="isAnonymous()" class="btn btn-info" th:href="@{/admin/login}">로그인</a>-->
-                <a sec:authorize="isAuthenticated()" class="btn btn-info" th:href="@{/admin/logout}">로그아웃</a>
-<!--                <a sec:authorize="isAnonymous()" class="btn btn-info" th:href="@{/admin/signup}">회원가입</a>-->
+            <div sec:authorize="isAuthenticated()" style="margin-top: 50px;">
+                <a class="btn btn-info" th:href="@{/admin/logout}">로그아웃</a>
             </div>
         </div>
-
-<!--        <div>-->
-<!--            <h1>파일 업로드</h1> <hr>-->
-
-<!--            <form th:action="@{/admin/test/image}" method="post" enctype="multipart/form-data">-->
-<!--                제목 : <input type="text" name="title"> <br>-->
-<!--                파일 : <input type="file" name="file"> <br>-->
-<!--                <button>등록하기</button>-->
-<!--            </form>-->
-<!--        </div>-->
-
     </div>
 </div>
 

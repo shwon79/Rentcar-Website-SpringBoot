@@ -54,13 +54,19 @@
                     <div class="detail_list detail_list_group">
                         <p class="detail_group_title">텍스트</p>
                     </div>
+                    <p style="display: none;" th:text="${campingCarHome.sequence}" id="textSequence"></p>
                     <div class="detail_list">
                         <p class="detail_first">제목</p>
                         <input id="title" class="detail_second" style="max-width: unset;" th:value="${campingCarHome.title}" />
                     </div>
-                    <div class="detail_list" style="border-bottom: none; height: auto; min-height: 3rem;">
+                    <div class="detail_list" style="height: auto; min-height: 3rem;">
                         <p class="detail_first">설명</p>
                         <textarea id="description" class="detail_second" th:text="${campingCarHome.description}"></textarea>
+                    </div>
+                    <div class="detail_list" style="border-bottom: none; justify-content: center; margin: 10px 0;">
+                        <button th:onclick="editCampingHomeText([[${campingCarHome.homeId}]])" class="btn btn-primary">
+                            텍스트 내용 수정
+                        </button>
                     </div>
 
                     <div class="detail_list detail_list_group" style="justify-content: space-between;">
@@ -91,13 +97,14 @@
                                 <span>번째 이미지</span>
                             </p>
                             <div style="text-align: right; margin-bottom: 10px;">
-                                <button class="btn btn-danger" th:onclick="deleteImage()">삭제하기</button>
+                                <button class="btn btn-danger" th:onclick="deleteImage([[${image.imageId}]])">삭제하기</button>
                             </div>
                             <img th:src="${image.imageUrl}" th:alt="${image.imageId}">
                         </div>
                         <div class="upload-box" style="display: flex; flex-direction: column; align-items: center; margin: 0 auto;">
-                            <input type="file" name="file"style="width: 15rem; border: none;">
-                            <button class="btn btn-primary" th:onclick="uploadImage()" style="margin-top: 10px;">이미지 넣기</button>
+                            <p th:text="${#lists.size(campingCarHomeImageList) + 1}" style="display: none;" id="newImageSequence"></p>
+                            <input type="file" name="file" id="newImage" style="width: 15rem; border: none;">
+                            <button class="btn btn-primary" th:onclick="uploadImage([[${campingCarHome.homeId}]])" style="margin-top: 10px;">이미지 넣기</button>
                         </div>
                     </div>
                 </div>
