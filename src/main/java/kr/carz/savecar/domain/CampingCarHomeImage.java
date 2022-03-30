@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table(name = "CampingCarHomeImage")
-public class CampingCarHomeImage {
+public class CampingCarHomeImage implements Comparable<CampingCarHomeImage>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
@@ -27,5 +27,10 @@ public class CampingCarHomeImage {
         this.campingCarHome = campingCarHome;
         this.imageUrl = imageUrl;
         this.sequence = sequence;
+    }
+
+    @Override
+    public int compareTo(CampingCarHomeImage o) {
+        return Integer.compare(this.sequence, o.sequence);
     }
 }

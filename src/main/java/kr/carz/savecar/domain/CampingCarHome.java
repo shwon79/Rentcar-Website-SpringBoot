@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table(name = "CampingCarHome")
-public class CampingCarHome {
+public class CampingCarHome implements Comparable<CampingCarHome>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long homeId;
@@ -25,5 +25,10 @@ public class CampingCarHome {
         this.title = title;
         this.description = description;
         this.sequence = sequence;
+    }
+
+    @Override
+    public int compareTo(CampingCarHome o) {
+        return Integer.compare(this.sequence, o.sequence);
     }
 }

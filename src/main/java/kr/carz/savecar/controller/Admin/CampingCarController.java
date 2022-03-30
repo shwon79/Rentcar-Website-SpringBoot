@@ -892,6 +892,8 @@ public class CampingCarController {
         ModelAndView mav = new ModelAndView();
 
         List<CampingCarHome> campingCarHomeList = campingCarHomeService.findAll();
+        Collections.sort(campingCarHomeList);
+
         mav.addObject("campingCarHomeList", campingCarHomeList);
 
         mav.setViewName("admin/campingcar_home_menu");
@@ -1083,7 +1085,8 @@ public class CampingCarController {
 
         if(campingCarHomeWrapper.isPresent()){
             CampingCarHome campingCarHome = campingCarHomeWrapper.get();
-                List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+            List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+            Collections.sort(campingCarHomeImageList);
 
             mav.addObject("campingCarHome", campingCarHome);
             mav.addObject("campingCarHomeImageList", campingCarHomeImageList);
