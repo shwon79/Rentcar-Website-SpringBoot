@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -899,19 +901,47 @@ public class CampingCarController {
 
 
 
-    @PostMapping(value = "/admin/campingcar/home")
+//    @PostMapping(value = "/admin/campingcar/home")
+//    @ResponseBody
+//    public void post_campingcar_home(HttpServletResponse res, @RequestBody CampingCarHomeDTO campingCarHomeDTO) throws IOException {
+//
+//        JSONObject jsonObject = new JSONObject();
+//
+//        campingCarHomeService.saveDTO(campingCarHomeDTO);
+//        jsonObject.put("result", 1);
+//
+//        PrintWriter pw = res.getWriter();
+//        pw.print(jsonObject);
+//        pw.flush();
+//        pw.close();
+//    }
+
+
+    @PostMapping(value="/admin/campingcar/home", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void post_campingcar_home(HttpServletResponse res, @RequestBody CampingCarHomeDTO campingCarHomeDTO) throws IOException {
+    public void post_campingcar_home(MultipartHttpServletRequest req) throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
 
-        campingCarHomeService.saveDTO(campingCarHomeDTO);
-        jsonObject.put("result", 1);
+        CampingCarHomeDTO campingCarHomeDTO = new CampingCarHomeDTO(req.getParameter("title"), req.getParameter("description"), Integer.parseInt(req.getParameter("sequence")));
+        Long homeId = campingCarHomeService.saveDTO((campingCarHomeDTO));
 
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
+        List<MultipartFile> multipartFileList = req.getFiles("file");
+
+        Optional<CampingCarHome> campingCarHomeWrapper  = campingCarHomeService.findById(homeId);
+
+        if(campingCarHomeWrapper.isPresent()) {
+            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+
+            int i = 1;
+            for (MultipartFile multipartFile : multipartFileList) {
+                String imgPath = s3Service.upload(multipartFile);
+
+                CampingCarHomeImageDTO campingCarHomeImageDTO = new CampingCarHomeImageDTO(homeId, i++, multipartFile);
+                campingCarHomeImageService.saveDTO(campingCarHomeImageDTO, campingCarHome, imgPath);
+            }
+        } else {
+            throw new Exception("문제가 발생하였습니다.");
+        }
     }
 
 
