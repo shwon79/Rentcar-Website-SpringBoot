@@ -34,4 +34,8 @@ public class CampingCarHomeImageService {
     public Long saveDTO(CampingCarHomeImageDTO campingCarHomeImageDTO, CampingCarHome campingCarHome, String imageUrl){
         return campingCarHomeImageRepository.save(campingCarHomeImageDTO.toEntity(campingCarHome, imageUrl)).getImageId();
     }
+
+    public Long save(CampingCarHomeImage campingCarHomeImage){
+        return campingCarHomeImageRepository.save(campingCarHomeImage).getImageId();
+    }
 }

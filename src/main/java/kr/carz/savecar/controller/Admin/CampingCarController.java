@@ -925,7 +925,7 @@ public class CampingCarController {
 
     @PostMapping(value="/admin/campingcar/home/image", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public void post_campingcar_home_image(HttpServletResponse res, CampingCarHomeImageDTO campingCarHomeImageDTO) throws IOException {
+    public void post_campingcar_home_image(CampingCarHomeImageDTO campingCarHomeImageDTO) throws IOException {
 
         String imgPath = s3Service.upload(campingCarHomeImageDTO.getFile());
 
@@ -939,19 +939,17 @@ public class CampingCarController {
     }
 
 
-    @PutMapping(value = "/admin/campingcar/home/image/sequence/{imageId}")
+    @PutMapping(value = "/admin/campingcar/home/image/sequence/{imageId}/{sequence}")
     @ResponseBody
-    public void put_campingcar_image(HttpServletResponse res, @PathVariable long homeId, @RequestBody CampingCarHomeDTO campingCarHomeDTO) throws IOException {
+    public void put_campingcar_home_image(HttpServletResponse res, @PathVariable long imageId, @PathVariable int sequence) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
-        Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(homeId);
-        if(campingCarHomeWrapper.isPresent()){
-            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
-            campingCarHome.setTitle(campingCarHomeDTO.getTitle());
-            campingCarHome.setDescription(campingCarHomeDTO.getDescription());
-            campingCarHome.setSequence(campingCarHomeDTO.getSequence());
-            campingCarHomeService.save(campingCarHome);
+        Optional<CampingCarHomeImage> campingCarHomeImageWrapper = campingCarHomeImageService.findById(imageId);
+        if(campingCarHomeImageWrapper.isPresent()){
+            CampingCarHomeImage campingCarHomeImage = campingCarHomeImageWrapper.get();
+            campingCarHomeImage.setSequence(sequence);
+            campingCarHomeImageService.save(campingCarHomeImage);
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
