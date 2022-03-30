@@ -902,6 +902,23 @@ public class CampingCarController {
     }
 
 
+    @GetMapping(value = "/admin/campingcar/home/register")
+    @ResponseBody
+    public ModelAndView get_campingcar_home_register() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<CampingCarHome> campingCarHomeList = campingCarHomeService.findAll();
+        mav.addObject("campingCarHomeLastIdx", campingCarHomeList.size());
+
+        mav.setViewName("admin/campingcar_home_register");
+
+        return mav;
+    }
+
+
+
+
 
     @PostMapping(value="/admin/campingcar/home", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
