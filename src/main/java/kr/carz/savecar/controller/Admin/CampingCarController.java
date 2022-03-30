@@ -898,6 +898,32 @@ public class CampingCarController {
     }
 
 
+    @PutMapping(value = "/admin/campingcar/home/{homeId}")
+    @ResponseBody
+    public void put_campingcar_home(HttpServletResponse res, @PathVariable long homeId, @RequestBody CampingCarHomeDTO campingCarHomeDTO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(homeId);
+        if(campingCarHomeWrapper.isPresent()){
+            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+            campingCarHome.setTitle(campingCarHomeDTO.getTitle());
+            campingCarHome.setDescription(campingCarHomeDTO.getDescription());
+            campingCarHome.setSequence(campingCarHomeDTO.getSequence());
+            campingCarHomeService.save(campingCarHome);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
     @GetMapping(value = "/admin/campingcar/home/detail/{homeId}")
     @ResponseBody
     public ModelAndView get_campingcar_home_detail(@PathVariable Long homeId) {

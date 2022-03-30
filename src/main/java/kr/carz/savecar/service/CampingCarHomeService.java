@@ -1,6 +1,7 @@
 package kr.carz.savecar.service;
 
 import kr.carz.savecar.domain.CampingCarHome;
+import kr.carz.savecar.dto.CampingCarHomeDTO;
 import kr.carz.savecar.repository.CampingCarHomeRepository;
 import java.util.List;
 import java.util.Optional;
@@ -23,5 +24,13 @@ public class CampingCarHomeService {
 
     public void delete(CampingCarHome campingCarHome){
         campingCarHomeRepository.delete(campingCarHome);
+    }
+
+    public Long saveDTO(CampingCarHomeDTO campingCarHomeDTO){
+        return campingCarHomeRepository.save(campingCarHomeDTO.toEntity()).getHomeId();
+    }
+
+    public Long save(CampingCarHome campingCarHome){
+        return campingCarHomeRepository.save(campingCarHome).getHomeId();
     }
 }
