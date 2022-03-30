@@ -962,6 +962,27 @@ public class CampingCarController {
     }
 
 
+    @DeleteMapping(value = "/admin/campingcar/home/image/{imageId}")
+    @ResponseBody
+    public void delete_campingcar_home_image(HttpServletResponse res, @PathVariable long imageId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarHomeImage> campingCarHomeImageWrapper = campingCarHomeImageService.findById(imageId);
+
+        if(campingCarHomeImageWrapper.isPresent()){
+            CampingCarHomeImage campingCarHomeImage = campingCarHomeImageWrapper.get();
+            campingCarHomeImageService.delete(campingCarHomeImage);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 
 
     @GetMapping(value = "/admin/campingcar/home/detail/{homeId}")
