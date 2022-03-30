@@ -903,22 +903,6 @@ public class CampingCarController {
 
 
 
-//    @PostMapping(value = "/admin/campingcar/home")
-//    @ResponseBody
-//    public void post_campingcar_home(HttpServletResponse res, @RequestBody CampingCarHomeDTO campingCarHomeDTO) throws IOException {
-//
-//        JSONObject jsonObject = new JSONObject();
-//
-//        campingCarHomeService.saveDTO(campingCarHomeDTO);
-//        jsonObject.put("result", 1);
-//
-//        PrintWriter pw = res.getWriter();
-//        pw.print(jsonObject);
-//        pw.flush();
-//        pw.close();
-//    }
-
-
     @PostMapping(value="/admin/campingcar/home", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public void post_campingcar_home(MultipartHttpServletRequest req) throws Exception {
@@ -971,6 +955,40 @@ public class CampingCarController {
         pw.close();
     }
 
+    @PutMapping(value = "/admin/campingcar/home/sequence")
+    @ResponseBody
+    public void put_campingcar_home_sequence(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        int problemFlg = 0;
+        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+
+            Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(imageTitleVO.getImageId());
+            if (campingCarHomeWrapper.isPresent()) {
+
+                CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+                campingCarHome.setSequence(imageTitleVO.getTitle());
+
+                campingCarHomeService.save(campingCarHome);
+            } else {
+                problemFlg = 1;
+            }
+        }
+
+        if(problemFlg == 0){
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
 
 
     @DeleteMapping(value = "/admin/campingcar/home/{homeId}")
@@ -1020,7 +1038,7 @@ public class CampingCarController {
 
     @PutMapping(value = "/admin/campingcar/home/image/sequence")
     @ResponseBody
-    public void put_campingcar_home_image(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
+    public void put_campingcar_home_image_sequence(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
