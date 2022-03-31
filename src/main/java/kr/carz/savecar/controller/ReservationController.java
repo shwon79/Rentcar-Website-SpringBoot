@@ -292,7 +292,7 @@ public class ReservationController {
                         + "요청사항: " + dto.getDetail() + "\n\n");
                 break;
 
-            case "월렌트실시간":
+            case "n일이내입고예정차량":
                 params.put("text", "[" + dto.getTitle() + "]\n"
                         + "문의자 이름: " + dto.getName() + "\n"
                         + "연락처: " + dto.getPhoneNo() + "\n"
