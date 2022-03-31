@@ -223,6 +223,7 @@ a:not([href]):not([tabindex]):hover {
 .select_title_table {
     border: 1px solid lightgrey;
     margin: 20px 0;
+    width: 100%;
 }
 .select_title_table td {
     padding: 10px;
