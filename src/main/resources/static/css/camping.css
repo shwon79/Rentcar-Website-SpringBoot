@@ -1226,6 +1226,26 @@ input:checked + .tab_item div {
   border-radius: 8px;
 }
 
+.multipleColumns {
+  display: flex;
+  flex-wrap: wrap;
+}
+.column {
+  padding: 0 15px;
+  margin-bottom: 5px;
+}
+
+.column_2 {
+  flex-basis: 50%;
+}
+
+.column_3 {
+  flex-basis: 33%;
+}
+.column_4 {
+  flex-basis: 25%;
+}
+
 @media (max-width: 991px) {
   #mainRow {
     flex-direction: column;
@@ -1376,5 +1396,8 @@ input:checked + .tab_item div {
   .tab_content_size {
     width: 100%;
     margin: 0 auto;
+  }
+  .column_2, .column_3, .column_4 {
+    flex-basis: 100%;
   }
 }

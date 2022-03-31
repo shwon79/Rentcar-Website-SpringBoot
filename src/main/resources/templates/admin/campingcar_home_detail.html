@@ -74,6 +74,10 @@
                     <p class="detail_first">설명</p>
                     <textarea id="description" class="detail_second" th:text="${campingCarHome.description}"></textarea>
                 </div>
+                <div class="detail_list" style="height: auto; min-height: 3rem;">
+                    <p class="detail_first">컬럼 수</p>
+                    <input id="columnNum" class="detail_second" type="number" min="1" max="4" step="1" th:value="${campingCarHome.columnNum}" />
+                </div>
                 <div class="detail_list" style="border-bottom: none; justify-content: center; margin: 10px 0;">
                     <button th:onclick="editCampingHomeText([[${campingCarHome.homeId}]])" class="btn btn-primary">
                         텍스트 내용 수정

@@ -11,6 +11,7 @@ function displayChangeIndexBox() {
 function addCampingCarHome() {
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
+    const columnNum = parseInt(document.getElementById('columnNum').value);
     const sequence = parseInt(document.getElementById('sequence').innerText);
     const images = document.getElementById('image').files;
 
@@ -22,6 +23,7 @@ function addCampingCarHome() {
 
             formData.append('title', title);
             formData.append('description', description);
+            formData.append('columnNum', columnNum);
             formData.append('sequence', sequence + 1)
             for (let i = 0; i < images.length; i++) {
                 formData.append('file', images[i]);
@@ -117,12 +119,14 @@ function editCampingHomeText(id) {
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
     const textSequence = document.getElementById('textSequence').innerText;
+    const columnNum = document.getElementById('columnNum').value;
 
     const data = {
         title: title,
         description: description,
+        columnNum: parseInt(columnNum),
         sequence: parseInt(textSequence)
-    }
+    };
 
     if (confirm('텍스트 내용을 수정하시겠습니까?')) {
         $.ajax({
