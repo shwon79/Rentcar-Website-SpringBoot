@@ -37,6 +37,11 @@ function deleteMultiCounsel() {
     }
 };
 
+// 유형 선택_admin/counsel/menu
+function selectTitle() {
+    let title = document.querySelector("input[name='title']:checked").value;
+}
+
 // 상담 삭제 버튼_admin/counsel/detail
 function deleteCounsel(id) {
     let completeDeleteConfirm = confirm('삭제하시겠습니까?');
