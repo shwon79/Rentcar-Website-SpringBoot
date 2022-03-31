@@ -50,12 +50,7 @@ function selectTitle() {
 
 // 페이지 이동
 function pagination(title, page, size) {
-    console.log(title);
-    console.log(page);
-    console.log(size);
-    // console.log(`/admin/counsel/title/${title}/?page=${page}&size=${size}`);
     window.location.href = '/admin/counsel/title/' + title + '?page=' + page + '&size=' + size;
-    // th:href="@{/admin/counsel/title/${title}(page=${currentPage}-1,size=${pageSize})}"
 }
 
 // 상담 삭제 버튼_admin/counsel/detail
