@@ -18,6 +18,7 @@ public class CampingCarHomeDTO {
     private String title;
     private String description;
     private int sequence;
+    private int columnNum;
 
     public CampingCarHome toEntity() {
 
@@ -25,6 +26,7 @@ public class CampingCarHomeDTO {
                 .title(title)
                 .description(description)
                 .sequence(sequence)
+                .columnNum(columnNum)
                 .build();
 
     }

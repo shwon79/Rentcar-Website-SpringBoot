@@ -925,7 +925,7 @@ public class CampingCarController {
     public void post_campingcar_home(MultipartHttpServletRequest req) throws Exception {
 
 
-        CampingCarHomeDTO campingCarHomeDTO = new CampingCarHomeDTO(req.getParameter("title"), req.getParameter("description"), Integer.parseInt(req.getParameter("sequence")));
+        CampingCarHomeDTO campingCarHomeDTO = new CampingCarHomeDTO(req.getParameter("title"), req.getParameter("description"), Integer.parseInt(req.getParameter("sequence")), Integer.parseInt(req.getParameter("columnNum")));
         Long homeId = campingCarHomeService.saveDTO((campingCarHomeDTO));
 
         List<MultipartFile> multipartFileList = req.getFiles("file");
@@ -957,10 +957,7 @@ public class CampingCarController {
         Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(homeId);
         if(campingCarHomeWrapper.isPresent()){
             CampingCarHome campingCarHome = campingCarHomeWrapper.get();
-            campingCarHome.setTitle(campingCarHomeDTO.getTitle());
-            campingCarHome.setDescription(campingCarHomeDTO.getDescription());
-            campingCarHome.setSequence(campingCarHomeDTO.getSequence());
-            campingCarHomeService.save(campingCarHome);
+            campingCarHomeService.save(campingCarHome, campingCarHomeDTO);
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
@@ -987,7 +984,7 @@ public class CampingCarController {
                 CampingCarHome campingCarHome = campingCarHomeWrapper.get();
                 campingCarHome.setSequence(imageTitleVO.getTitle());
 
-                campingCarHomeService.save(campingCarHome);
+                campingCarHomeService.saveOneColumn(campingCarHome);
             } else {
                 problemFlg = 1;
             }

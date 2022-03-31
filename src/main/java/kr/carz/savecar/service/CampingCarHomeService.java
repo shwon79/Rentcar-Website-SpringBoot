@@ -30,7 +30,15 @@ public class CampingCarHomeService {
         return campingCarHomeRepository.save(campingCarHomeDTO.toEntity()).getHomeId();
     }
 
-    public Long save(CampingCarHome campingCarHome){
+    public Long save(CampingCarHome campingCarHome, CampingCarHomeDTO campingCarHomeDTO){
+        campingCarHome.setTitle(campingCarHomeDTO.getTitle());
+        campingCarHome.setDescription(campingCarHomeDTO.getDescription());
+        campingCarHome.setSequence(campingCarHomeDTO.getSequence());
+        campingCarHome.setColumnNum(campingCarHomeDTO.getColumnNum());
+        return campingCarHomeRepository.save(campingCarHome).getHomeId();
+    }
+
+    public Long saveOneColumn(CampingCarHome campingCarHome){
         return campingCarHomeRepository.save(campingCarHome).getHomeId();
     }
 }
