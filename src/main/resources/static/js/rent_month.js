@@ -93,7 +93,7 @@ function make_monthly_rent_reservation (e) {
         phoneNo : reservationPhone,
         detail : $("#reservation-simple-details").val(),
         product: rentTerm,
-        title: '월렌트실시간',
+        title: 'n일이내입고예정차량',
         category1: '',
         category2: '',
         car_name : document.getElementsByClassName("carName")[0].innerHTML,

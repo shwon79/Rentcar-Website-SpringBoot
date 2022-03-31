@@ -47,6 +47,50 @@
     <div class="inner_content">
       <h2 class="page_title" style="text-align: center;">상담 신청</h2>
 
+      <div>
+        <table class="select_title_table">
+          <tbody>
+          <tr>
+            <td>유형</td>
+            <td class="all_label">
+              <label for="전체">
+                <input type="radio" id="전체" name="title" value="전체" onclick="selectTitle();" th:checked="${title} == '전체'">
+                전체
+              </label>
+              <label for="간편상담신청">
+                <input type="radio" id="간편상담신청" name="title" value="간편상담신청" onclick="selectTitle();" th:checked="${title} == '간편상담신청'">
+                간편상담신청
+              </label>
+              <label for="한눈에상담신청">
+                <input type="radio" id="한눈에상담신청" name="title" value="한눈에상담신청" onclick="selectTitle();" th:checked="${title} == '한눈에상담신청'">
+                한눈에상담신청
+              </label>
+              <label for="n일이내입고예정차량">
+                <input type="radio" id="n일이내입고예정차량" name="title" value="n일이내입고예정차량" onclick="selectTitle();" th:checked="${title} == 'n일이내입고예정차량'">
+                n일이내입고예정차량
+              </label>
+              <label for="실시간견적내기">
+                <input type="radio" id="실시간견적내기" name="title" value="실시간견적내기" onclick="selectTitle();" th:checked="${title} == '실시간견적내기'">
+                실시간견적내기
+              </label>
+              <label for="누구나장기렌트간편상담신청">
+                <input type="radio" id="누구나장기렌트간편상담신청" name="title" value="누구나장기렌트간편상담신청" onclick="selectTitle();" th:checked="${title} == '누구나장기렌트간편상담신청'">
+                누구나장기렌트간편상담신청
+              </label>
+              <label for="누구나장기렌트차량상세">
+                <input type="radio" id="누구나장기렌트차량상세" name="title" value="누구나장기렌트차량상세" onclick="selectTitle();" th:checked="${title} == '누구나장기렌트차량상세'">
+                누구나장기렌트차량상세
+              </label>
+              <label for="캠핑카렌트">
+                <input type="radio" id="캠핑카렌트" name="title" value="캠핑카렌트" onclick="selectTitle();" th:checked="${title} == '캠핑카렌트'">
+                캠핑카렌트
+              </label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div style="text-align: right;">
         <button class="set_reserve" onclick="deleteMultiCounsel();">목록에서 삭제</button>
       </div>
@@ -127,25 +171,38 @@
     <div class="Page navigation example">
       <ul class="pagination">
         <li class="page-item" th:if="${currentPage} >= 5">
-          <a class="page-link" th:href="@{/admin/counsel/menu(page=${0},size=${pageSize})}">
+          <a th:if="${title=='전체'}" class="page-link" th:href="@{/admin/counsel/menu(page=${0},size=${pageSize})}">
+            <i class="fa-solid fa-angles-left"></i>
+          </a>
+          <a th:if="${title!='전체'}" class="page-link" th:onclick="pagination([[${title}]], 0, [[${pageSize}]]);">
             <i class="fa-solid fa-angles-left"></i>
           </a>
         </li>
         <li class="page-item" th:if="${currentPage} > 0">
-          <a class="page-link" th:href="@{/admin/counsel/menu(page=${currentPage}-1,size=${pageSize})}">
+          <a th:if="${title=='전체'}" class="page-link" th:href="@{/admin/counsel/menu(page=${currentPage}-1,size=${pageSize})}">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
+          <a th:if="${title!='전체'}" class="page-link" th:onclick="pagination([[${title}]], [[${currentPage}]], [[${pageSize}]]);">
             <i class="fa-solid fa-chevron-left"></i>
           </a>
         </li>
-        <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
-          <a class="page-link" th:href="@{/admin/counsel/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
+        <li class="page-item" th:each="idx, iterStat : ${#numbers.sequence(startPage,endPage)}"  th:classappend="${currentPage} == ${idx}-1 ? active : null">
+          <a th:if="${title=='전체'}" class="page-link" th:href="@{/admin/counsel/menu(page=${idx}-1,size=${pageSize})}" th:text="${idx}"></a>
+          <a th:if="${title!='전체'}" class="page-link" th:onclick="pagination([[${title}]], [[${idx}-1]], [[${pageSize}]]);" th:text="${idx}"></a>
         </li>
         <li class="page-item" th:if="${currentPage} < ${totalPages} - 1">
-          <a class="page-link" th:href="@{/admin/counsel/menu(page=${currentPage}+1,size=${pageSize})}">
+          <a th:if="${title=='전체'}" class="page-link" th:href="@{/admin/counsel/menu(page=${currentPage}+1,size=${pageSize})}">
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+          <a th:if="${title!='전체'}" class="page-link" th:onclick="pagination([[${title}]], [[${currentPage}+1]], [[${pageSize}]]);">
             <i class="fa-solid fa-chevron-right"></i>
           </a>
         </li>
         <li class="page-item" th:if="${currentPage} < (5 * (${totalPages} / 5))">
-          <a class="page-link" th:href="@{/admin/counsel/menu(page=${totalPages}-1,size=${pageSize})}">
+          <a th:if="${title=='전체'}" class="page-link" th:href="@{/admin/counsel/menu(page=${totalPages}-1,size=${pageSize})}">
+            <i class="fa-solid fa-angles-right"></i>
+          </a>
+          <a th:if="${title!='전체'}" class="page-link" th:onclick="pagination([[${title}]], [[${totalPages}-1]], [[${pageSize}]]);">
             <i class="fa-solid fa-angles-right"></i>
           </a>
         </li>
