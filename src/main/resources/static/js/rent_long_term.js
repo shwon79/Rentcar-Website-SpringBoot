@@ -40,7 +40,7 @@ function make_long_term_rent_reservation(e) {
     const contractMaintenance = document.getElementById('contract_maintenance');
     const carFuel = document.getElementById('car_fuel');
     let newOld = document.getElementById('new_old');
-    let product;
+    let product, title;
 
     if (newOld) {
         product = newOld && '누구나' + newOld.innerText + '장기렌트';
@@ -48,12 +48,18 @@ function make_long_term_rent_reservation(e) {
         product = '누구나장기렌트';
     };
 
+    if (carColor) {
+        title = '누구나장기렌트차량상세';
+    } else {
+        title = '누구나장기렌트간편상담신청';
+    };
+
     let data = {
         name : $("#reservation-simple-name").val(),
         phoneNo : reservationPhone,
         detail : $("#reservation-simple-details").val(),
         product: product,
-        title: '누구나차량상세',
+        title: title,
         category1: carColor && carColor.innerText || '',
         category2: carFuel && carFuel.innerText || '',
         car_name : carName && carName.innerText || '',

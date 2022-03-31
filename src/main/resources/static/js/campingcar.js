@@ -140,7 +140,7 @@ function campingcar_rent_reservation () {
             data : JSON.stringify(data)
         }).done(function (res) {
             alert('예약 신청이 완료되었습니다.');
-            window.location.href = '/europe';
+            location.reload();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })

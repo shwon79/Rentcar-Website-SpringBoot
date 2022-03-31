@@ -37,6 +37,22 @@ function deleteMultiCounsel() {
     }
 };
 
+// 유형 선택_admin/counsel/menu
+function selectTitle() {
+    let title = document.querySelector("input[name='title']:checked").value;
+
+    if (title == '전체') {
+        window.location.href = '/admin/counsel/menu?page=0&size=20';
+    } else {
+        window.location.href = '/admin/counsel/title/' + title + '?page=0&size=20';
+    }
+}
+
+// 페이지 이동
+function pagination(title, page, size) {
+    window.location.href = '/admin/counsel/title/' + title + '?page=' + page + '&size=' + size;
+}
+
 // 상담 삭제 버튼_admin/counsel/detail
 function deleteCounsel(id) {
     let completeDeleteConfirm = confirm('삭제하시겠습니까?');

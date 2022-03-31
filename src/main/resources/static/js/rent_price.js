@@ -17,17 +17,17 @@ function make_reservation_price () {
         return
     };
 
-    var data = {
+    let data = {
         name : $("#reservation-detail-name").val(),
         phoneNo : $("#reservation-detail-phone").val(),
         detail : $("#reservation-detail-details").val(),
-        title : "한눈에 상담신청",
+        title : "한눈에상담신청",
         car_name : $("#reservation-detail-carname").val(),
         region : $("#reservation-detail-region").val(),
         resDate : $("#reservation-detail-resdate").val()
     };
 
-    var checkbox = document.getElementById("agree")
+    let checkbox = document.getElementById("agree")
     if(checkbox.checked) {
         $.ajax({
             type : 'POST',

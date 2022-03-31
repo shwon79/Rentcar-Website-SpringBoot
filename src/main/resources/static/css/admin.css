@@ -214,6 +214,30 @@ a.article, a.article:hover {
     margin: 5px auto;
 }
 
+a:not([href]):not([tabindex]) {
+    color: #007bff;
+}
+a:not([href]):not([tabindex]):hover {
+    color: #007bff;
+}
+.select_title_table {
+    border: 1px solid lightgrey;
+    margin: 20px 0;
+    width: 100%;
+}
+.select_title_table td {
+    padding: 10px;
+    word-break: keep-all;
+    border-right: 1px solid lightgrey;
+}
+.all_label {
+    display: flex;
+    flex-wrap: wrap;
+}
+.all_label label {
+    flex-basis: 33.3%;
+    margin: 5px 0;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -471,6 +495,12 @@ button {
     }
     .desktop_flex_mobile_block {
         flex-direction: column;
+    }
+    .select_title_table td {
+        padding: 5px;
+    }
+    .all_label label {
+        flex-basis: 50%;
     }
 }
 .detail_list {
