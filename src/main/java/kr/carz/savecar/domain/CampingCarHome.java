@@ -18,13 +18,15 @@ public class CampingCarHome implements Comparable<CampingCarHome>{
     private String title;
     private String description;
     private int sequence;
+    private int columnNum;
 
     @Builder
-    public CampingCarHome(Long homeId, String title, String description, int sequence) {
+    public CampingCarHome(Long homeId, String title, String description, int sequence, int columnNum) {
         this.homeId = homeId;
         this.title = title;
         this.description = description;
         this.sequence = sequence;
+        this.columnNum = columnNum;
     }
 
     @Override
