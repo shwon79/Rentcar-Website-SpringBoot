@@ -135,6 +135,11 @@ public class ReviewController {
 
         Optional<Review> reviewWrapper = reviewService.findByReviewId(reviewId);
         if(reviewWrapper.isPresent()){
+            Review review = reviewWrapper.get();
+            List<ReviewImage> reviewImageList = reviewImageService.findByReview(review);
+            for(ReviewImage image : reviewImageList){
+                reviewImageService.delete(image);
+            }
             reviewService.deleteReview(reviewWrapper.get());
             jsonObject.put("result", 1);
         } else {
