@@ -281,6 +281,17 @@ public class ReservationController {
                         + "요청사항: " + dto.getDetail() + "\n\n");
                 break;
 
+            case "누구나장기렌트간편상담신청":
+                params.put("text", "[" + dto.getTitle() + "]\n"
+                        + "문의자 이름: " + dto.getName() + "\n"
+                        + "연락처: " + dto.getPhoneNo() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n");
+
+                params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
+                        + "문의자 이름: " + dto.getName() + "\n"
+                        + "요청사항: " + dto.getDetail() + "\n\n");
+                break;
+
             case "월렌트실시간":
                 params.put("text", "[" + dto.getTitle() + "]\n"
                         + "문의자 이름: " + dto.getName() + "\n"
@@ -332,29 +343,7 @@ public class ReservationController {
                         + "21세 이상: " + dto.getAge_limit() + "\n"
                         + "사이트에서 조회된 렌트료: " + dto.getPrice() + "\n");
                 break;
-            case "누구나장기렌트":
-                params.put("text", "[" + dto.getTitle() + "]\n"
-                        + "예약자 이름: " + dto.getName() + "\n"
-                        + "연락처: " + dto.getPhoneNo() + "\n"
-                        + "요청사항: " + dto.getDetail() + "\n\n"
-                        + "렌트상품: " + dto.getProduct() + "\n"
-                        + "차종: " + dto.getCategory2() + "\n"
-                        + "차명: " + dto.getCar_name() + "\n"
-                        + "옵션: " + dto.getOption() + "\n"
-                        + "약정주행거리: " + dto.getMileage() + "\n"
-                        + "보증금: " + dto.getDeposit() + "\n");
-
-                params2.put("text", "[상담신청이 완료되었습니다]" + "\n"
-                        + "예약자 이름: " + dto.getName() + "\n"
-                        + "요청사항: " + dto.getDetail() + "\n\n"
-                        + "렌트상품: " + dto.getProduct() + "\n"
-                        + "차종: " + dto.getCategory2() + "\n"
-                        + "차명: " + dto.getCar_name() + "\n"
-                        + "옵션: " + dto.getOption() + "\n"
-                        + "약정주행거리: " + dto.getMileage() + "\n"
-                        + "보증금: " + dto.getDeposit() + "\n");
-                break;
-            case "누구나차량상세":
+            case "누구나장기렌트차량상세":
                 params.put("text", "[누구나 장기렌트 상담신청]\n"
                         + "▼ 문의자 정보" + "\n"
                         + "예약자 이름: " + dto.getName() + "\n"
