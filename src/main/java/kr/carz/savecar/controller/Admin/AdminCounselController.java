@@ -48,6 +48,28 @@ public class AdminCounselController {
     }
 
 
+    @GetMapping("/admin/counsel/title/{title}")
+    public ModelAndView get_counsel_by_title(Pageable pageable, @PathVariable String title) {
+
+        ModelAndView mav = new ModelAndView();
+
+        Page<Reservation> reservationPage = reservationService.findByTitlePageable(title, pageable);
+
+        mav.addObject("currentPage", pageable.getPageNumber());
+        mav.addObject("pageSize", pageable.getPageSize());
+
+        mav.addObject("startPage", (pageable.getPageNumber() / 5) * 5 + 1);
+        mav.addObject("endPage", Integer.min((pageable.getPageNumber() / 5 + 1) * 5, reservationPage.getTotalPages()));
+
+        mav.addObject("totalPages", reservationPage.getTotalPages());
+        mav.addObject("reservationList", reservationPage.getContent());
+
+        mav.setViewName("admin/counsel_menu");
+
+        return mav;
+    }
+
+
     @GetMapping("/admin/counsel/detail/{reservationId}")
     public ModelAndView get_counsel_detail(ModelAndView mav, @PathVariable Long reservationId) {
 

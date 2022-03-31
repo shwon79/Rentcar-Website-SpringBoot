@@ -17,4 +17,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByCreatedDateAfter(LocalDateTime date);
     List<Reservation> findByCreatedDateIsAfter(LocalDateTime date);
     Page<Reservation> findAllByOrderByIdDesc(Pageable pageable);
+    Page<Reservation> findByTitleOrderByIdDesc(String title, Pageable pageable);
 }

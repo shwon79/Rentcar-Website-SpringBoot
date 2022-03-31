@@ -42,6 +42,10 @@ public class ReservationService {
     public Page<Reservation> findAllPageable(Pageable pageable){
         return reservationRepository.findAllByOrderByIdDesc(pageable);
     }
+
+    public Page<Reservation> findByTitlePageable(String title, Pageable pageable){
+        return reservationRepository.findByTitleOrderByIdDesc(title, pageable);
+    }
     public void delete(Reservation reservation){
         reservationRepository.delete(reservation);
     }
