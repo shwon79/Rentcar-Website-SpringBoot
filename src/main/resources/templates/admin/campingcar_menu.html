@@ -67,7 +67,7 @@
 <!--            <p th:text="${i.index + 1}" style="margin-bottom: 4px;"></p>-->
             <input th:if="${reservation.reservation != 1}" type="checkbox" name="selected_camping_reservation" th:value="${reservation.id}">
           </div>
-          <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''" >
+          <div class="reserve_list" th:onclick="'location.href = \'/admin/campingcar/detail/'+${reservation.id}+'\''">
             <p class="created_date grid_oneline" >
               <span class="reserve_list_mobile_title">예약 신청 날짜: </span>
               <span th:text="${#strings.arraySplit(reservation.createdDate, 'T')[0]}"></span>

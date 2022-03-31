@@ -88,39 +88,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" th:each="campingCarHome, homeIndex : ${campingCarHomeList}" style="margin-bottom: 70px;">
                         <div class="head_title sections text-center" style="padding-top: 30px;">
-                            <h1>프로모션</h1>
-                            <p style="word-break: keep-all; text-align: left; color: dimgrey;">통큰 할인혜택으로 합리적인 가격에 캠핑카를 이용해보세요.
-                            </p>
+                            <h1 th:text="${campingCarHome.title}"></h1>
+                            <p th:text="${campingCarHome.description}" style="word-break: keep-all; text-align: left; color: dimgrey;"></p>
                             <br>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <img th:src="@{/img/euro_price.png}" alt="promotion">
+                        <div th:each="image, imageIndex : ${campingCarHomeImageDoubleList[homeIndex.index]}"
+                            th:if="${campingCarHome.columnNum == 1}" class="tab_content_size">
+                            <div>
+                                <img th:src="${image.imageUrl}" alt="image">
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <img th:src="@{/img/limo_price.png}" alt="promotion">
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom: 70px;">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <img th:src="@{/img/review_promo.png}" alt="promotion">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <img th:src="@{/img/contact_promo.png}" alt="promotion">
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 50px;">
-                        <div class="head_title sections text-center" style="padding-top: 30px;">
-                            <h1>세이브카의 장점</h1>
-                            <p style="word-break: keep-all; text-align: left; color: dimgrey;">세이브카 캠핑카의 장점 6가지를 만나보세요.</p>
-                            <br>
-                        </div>
-                        <div class="tab_content_size">
-                            <img th:src="@{/img/campingcar-common1.png}" alt="all">
-                            <img th:src="@{/img/campingcar-common2.png}" alt="all">
-                            <img th:src="@{/img/campingcar-common3.png}" alt="all">
-                            <img th:src="@{/img/campingcar-common4.png}" alt="all">
+                        <div th:if="${campingCarHome.columnNum != 1}" class="multipleColumns" >
+                            <div th:each="image, imageIndex : ${campingCarHomeImageDoubleList[homeIndex.index]}"
+                                 th:class="'column column_' + ${campingCarHome.columnNum}">
+                                <img th:src="${image.imageUrl}" alt="image">
+                            </div>
                         </div>
                     </div>
                 </div>

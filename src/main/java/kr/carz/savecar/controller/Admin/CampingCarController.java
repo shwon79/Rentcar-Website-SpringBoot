@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +35,8 @@ public class CampingCarController {
     private final ImagesService imagesService;
     private final S3Service s3Service;
     private final CampingCarMainTextService campingCarMainTextService;
+    private final CampingCarHomeService campingCarHomeService;
+    private final CampingCarHomeImageService campingCarHomeImageService;
 
     @Autowired
     public CampingCarController(CampingcarReservationService campingcarReservationService,
@@ -40,7 +44,8 @@ public class CampingCarController {
                                 CalendarDateService calendarDateService, DateCampingService dateCampingService,
                                 CampingCarPriceRateService campingCarPriceRateService,
                                 ReservationController reservationController, ImagesService imagesService,
-                                S3Service s3Service, CampingCarMainTextService campingCarMainTextService) {
+                                S3Service s3Service, CampingCarMainTextService campingCarMainTextService,
+                                CampingCarHomeService campingCarHomeService, CampingCarHomeImageService campingCarHomeImageService) {
         this.campingcarReservationService = campingcarReservationService;
         this.calendarTimeService = calendarTimeService;
         this.campingCarPriceService = campingCarPriceService;
@@ -51,6 +56,8 @@ public class CampingCarController {
         this.imagesService = imagesService;
         this.s3Service = s3Service;
         this.campingCarMainTextService = campingCarMainTextService;
+        this.campingCarHomeService = campingCarHomeService;
+        this.campingCarHomeImageService = campingCarHomeImageService;
     }
 
     @Value("${coolsms.api_key}")
@@ -229,30 +236,6 @@ public class CampingCarController {
     }
 
 
-    // [관리자 메인페이지] 캠핑카 본문 메뉴로 입장
-    @GetMapping(value = "/admin/campingcar/mainText/menu")
-    @ResponseBody
-    public ModelAndView get_campingcar_main_text_menu() {
-
-        ModelAndView mav = new ModelAndView();
-
-
-        List<CampingCarPrice> campingCarPriceAll = campingCarPriceService.findAllCampingCarPrice();
-
-        List<List<CampingCarMainText>> mainTextList = new ArrayList<>();
-
-        for(CampingCarPrice campingCar : campingCarPriceAll){
-            List<CampingCarMainText> imagesListByCarName = campingCarMainTextService.findImageByCarName(campingCar);
-
-            Collections.sort(imagesListByCarName);
-            mainTextList.add(imagesListByCarName);
-        }
-        mav.addObject("mainTextList", mainTextList);
-
-        mav.setViewName("admin/campingcar_mainText_menu");
-
-        return mav;
-    }
 
 
 
@@ -826,6 +809,32 @@ public class CampingCarController {
     }
 
 
+    // [관리자 메인페이지] 캠핑카 본문 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/mainText/menu")
+    @ResponseBody
+    public ModelAndView get_campingcar_main_text_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+
+        List<CampingCarPrice> campingCarPriceAll = campingCarPriceService.findAllCampingCarPrice();
+
+        List<List<CampingCarMainText>> mainTextList = new ArrayList<>();
+
+        for(CampingCarPrice campingCar : campingCarPriceAll){
+            List<CampingCarMainText> imagesListByCarName = campingCarMainTextService.findImageByCarName(campingCar);
+
+            Collections.sort(imagesListByCarName);
+            mainTextList.add(imagesListByCarName);
+        }
+        mav.addObject("mainTextList", mainTextList);
+
+        mav.setViewName("admin/campingcar_mainText_menu");
+
+        return mav;
+    }
+
+
     @PostMapping(value="/admin/campingcar/mainText", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public void postAdminCampingCarMainTextImage(CampingCarMainTextDTO dto) throws IOException {
@@ -872,4 +881,252 @@ public class CampingCarController {
         campingCarMainTextService.delete(imageId);
 
     }
+
+
+
+    // [관리자 메인페이지] 캠핑카 홈 메뉴로 입장
+    @GetMapping(value = "/admin/campingcar/home/menu")
+    @ResponseBody
+    public ModelAndView get_campingcar_home_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<CampingCarHome> campingCarHomeList = campingCarHomeService.findAll();
+        Collections.sort(campingCarHomeList);
+
+        mav.addObject("campingCarHomeList", campingCarHomeList);
+
+        mav.setViewName("admin/campingcar_home_menu");
+
+        return mav;
+    }
+
+
+    @GetMapping(value = "/admin/campingcar/home/register")
+    @ResponseBody
+    public ModelAndView get_campingcar_home_register() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<CampingCarHome> campingCarHomeList = campingCarHomeService.findAll();
+        mav.addObject("campingCarHomeLastIdx", campingCarHomeList.size());
+
+        mav.setViewName("admin/campingcar_home_register");
+
+        return mav;
+    }
+
+
+
+
+
+    @PostMapping(value="/admin/campingcar/home", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public void post_campingcar_home(MultipartHttpServletRequest req) throws Exception {
+
+
+        CampingCarHomeDTO campingCarHomeDTO = new CampingCarHomeDTO(req.getParameter("title"), req.getParameter("description"), Integer.parseInt(req.getParameter("sequence")), Integer.parseInt(req.getParameter("columnNum")));
+        Long homeId = campingCarHomeService.saveDTO((campingCarHomeDTO));
+
+        List<MultipartFile> multipartFileList = req.getFiles("file");
+
+        Optional<CampingCarHome> campingCarHomeWrapper  = campingCarHomeService.findById(homeId);
+
+        if(campingCarHomeWrapper.isPresent()) {
+            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+
+            int i = 1;
+            for (MultipartFile multipartFile : multipartFileList) {
+                String imgPath = s3Service.upload(multipartFile);
+
+                CampingCarHomeImageDTO campingCarHomeImageDTO = new CampingCarHomeImageDTO(homeId, i++, multipartFile);
+                campingCarHomeImageService.saveDTO(campingCarHomeImageDTO, campingCarHome, imgPath);
+            }
+        } else {
+            throw new Exception("문제가 발생하였습니다.");
+        }
+    }
+
+
+    @PutMapping(value = "/admin/campingcar/home/{homeId}")
+    @ResponseBody
+    public void put_campingcar_home(HttpServletResponse res, @PathVariable long homeId, @RequestBody CampingCarHomeDTO campingCarHomeDTO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(homeId);
+        if(campingCarHomeWrapper.isPresent()){
+            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+            campingCarHomeService.save(campingCarHome, campingCarHomeDTO);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    @PutMapping(value = "/admin/campingcar/home/sequence")
+    @ResponseBody
+    public void put_campingcar_home_sequence(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        int problemFlg = 0;
+        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+
+            Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(imageTitleVO.getImageId());
+            if (campingCarHomeWrapper.isPresent()) {
+
+                CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+                campingCarHome.setSequence(imageTitleVO.getTitle());
+
+                campingCarHomeService.saveOneColumn(campingCarHome);
+            } else {
+                problemFlg = 1;
+            }
+        }
+
+        if(problemFlg == 0){
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
+
+    @DeleteMapping(value = "/admin/campingcar/home/{homeId}")
+    @ResponseBody
+    public void delete_campingcar_home(HttpServletResponse res, @PathVariable long homeId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(homeId);
+
+        if(campingCarHomeWrapper.isPresent()){
+            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+            List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+            for(CampingCarHomeImage campingCarHomeImage : campingCarHomeImageList){
+                campingCarHomeImageService.delete(campingCarHomeImage);
+            }
+
+            campingCarHomeService.delete(campingCarHome);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+
+    @PostMapping(value="/admin/campingcar/home/image", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public void post_campingcar_home_image(CampingCarHomeImageDTO campingCarHomeImageDTO) throws IOException {
+
+        String imgPath = s3Service.upload(campingCarHomeImageDTO.getFile());
+
+        Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(campingCarHomeImageDTO.getHomeId());
+
+        if(campingCarHomeWrapper.isPresent()) {
+            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+            campingCarHomeImageService.saveDTO(campingCarHomeImageDTO, campingCarHome, imgPath);
+        }
+
+    }
+
+
+    @PutMapping(value = "/admin/campingcar/home/image/sequence")
+    @ResponseBody
+    public void put_campingcar_home_image_sequence(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        int problemFlg = 0;
+        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+
+            Optional<CampingCarHomeImage> campingCarHomeImageWrapper = campingCarHomeImageService.findById(imageTitleVO.getImageId());
+            if (campingCarHomeImageWrapper.isPresent()) {
+
+                CampingCarHomeImage campingCarHomeImage = campingCarHomeImageWrapper.get();
+                campingCarHomeImage.setSequence(imageTitleVO.getTitle());
+
+                campingCarHomeImageService.save(campingCarHomeImage);
+            } else {
+                problemFlg = 1;
+            }
+        }
+
+        if(problemFlg == 0){
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @DeleteMapping(value = "/admin/campingcar/home/image/{imageId}")
+    @ResponseBody
+    public void delete_campingcar_home_image(HttpServletResponse res, @PathVariable long imageId) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        Optional<CampingCarHomeImage> campingCarHomeImageWrapper = campingCarHomeImageService.findById(imageId);
+
+        if(campingCarHomeImageWrapper.isPresent()){
+            CampingCarHomeImage campingCarHomeImage = campingCarHomeImageWrapper.get();
+            campingCarHomeImageService.delete(campingCarHomeImage);
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    @GetMapping(value = "/admin/campingcar/home/detail/{homeId}")
+    @ResponseBody
+    public ModelAndView get_campingcar_home_detail(@PathVariable Long homeId) {
+
+        ModelAndView mav = new ModelAndView();
+
+        Optional<CampingCarHome> campingCarHomeWrapper = campingCarHomeService.findById(homeId);
+
+        if(campingCarHomeWrapper.isPresent()){
+            CampingCarHome campingCarHome = campingCarHomeWrapper.get();
+            List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+            Collections.sort(campingCarHomeImageList);
+
+            mav.addObject("campingCarHome", campingCarHome);
+            mav.addObject("campingCarHomeImageList", campingCarHomeImageList);
+        }
+
+        mav.setViewName("admin/campingcar_home_detail");
+
+        return mav;
+    }
+
 }

@@ -1,0 +1,114 @@
+.table th, .table td {
+    word-break: keep-all;
+}
+.image-box {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.image-box .upload-box{
+    flex-basis: 49%;
+    /*height: 270px;*/
+    border: 1px solid #dee2e6;
+    padding:10px;
+}
+.upload-box img {
+    width: 100%;
+    height: auto;
+}
+
+.change-index-btn.opened {
+    display: inline-block;
+}
+
+.change-index-btn.opened {
+    display: none;
+}
+
+#changeIndexBox {
+    display: none;
+    border: 1px solid lightskyblue;
+    margin-bottom: 20px;
+}
+
+#changeIndexBox.opened {
+    display: block;
+}
+
+.changeOrderBoxTop {
+    padding: 20px;
+    background-color: lightskyblue;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.changeOrderBoxTop .btn-outline-primary {
+    background-color: white;
+}
+.changeOrderBoxTop .btn-outline-primary:hover {
+    color: #007bff;
+}
+
+.sortable {
+    list-style: none;
+    padding: 0 20px 10px 20px;
+    margin-bottom: 0;
+    text-align: center;
+}
+.sortable .oneItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid darkgrey;
+}
+.sortable .oneItem:last-child {
+    margin-bottom: 0px;
+}
+
+.oneItem div {
+    padding: 10px;
+}
+
+#changeIndexBox img {
+    /*max-height: 100px;*/
+    width: 150px;
+    margin-right: 10px;
+}
+
+.two_button_td {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+@media (max-width: 576px) {
+    #description {
+        height: 9rem !important;
+    }
+    .image-box {
+        grid-template-columns: 100%;
+    }
+    .changeOrderBoxTop {
+        padding: 20px 10px;
+    }
+    .sortable {
+        padding: 0 10px 10px 10px;
+    }
+    .oneItem div {
+        padding: 5px;
+    }
+    .image-box .upload-box{
+        flex-basis: 100%;
+    }
+
+    .table th, .table td {
+        padding: 0.25rem;
+    }
+
+}
