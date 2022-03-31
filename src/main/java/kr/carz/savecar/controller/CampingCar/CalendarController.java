@@ -136,9 +136,12 @@ public class CalendarController {
         }
 
         List<CampingCarHome> campingCarHomeList = campingCarHomeService.findAll();
+        Collections.sort(campingCarHomeList);
+
         List<List<CampingCarHomeImage>> campingCarHomeImageDoubleList = new ArrayList<>();
         for(CampingCarHome campingCarHome : campingCarHomeList){
             List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+            Collections.sort(campingCarHomeImageList);
             campingCarHomeImageDoubleList.add(campingCarHomeImageList);
         }
 
