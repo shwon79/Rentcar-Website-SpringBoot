@@ -36,6 +36,8 @@ public class CalendarController {
     private final S3Service s3Service;
     private final ReviewService reviewService;
     private final ReviewImageService reviewImageService;
+    private final CampingCarHomeService campingCarHomeService;
+    private final CampingCarHomeImageService campingCarHomeImageService;
 
     @Autowired
     public CalendarController(CalendarDateService calendarDateService,
@@ -43,7 +45,8 @@ public class CalendarController {
                               CampingCarPriceService campingCarPriceService, CampingcarReservationService campingcarReservationService,
                               CampingCarPriceRateService campingCarPriceRateService, ImagesService imagesService,
                               CampingCarMainTextService campingCarMainTextService, S3Service s3Service,
-                              ReviewService reviewService, ReviewImageService reviewImageService) {
+                              ReviewService reviewService, ReviewImageService reviewImageService,
+                              CampingCarHomeService campingCarHomeService, CampingCarHomeImageService campingCarHomeImageService) {
         this.calendarDateService = calendarDateService;
         this.calendarTimeService = calendarTimeService;
         this.dateCampingService = dateCampingService;
@@ -55,6 +58,8 @@ public class CalendarController {
         this.s3Service = s3Service;
         this.reviewService = reviewService;
         this.reviewImageService = reviewImageService;
+        this.campingCarHomeService = campingCarHomeService;
+        this.campingCarHomeImageService = campingCarHomeImageService;
     }
 
     private static final SimpleDateFormat std_data_format = new SimpleDateFormat("yyyyMMdd");
@@ -130,6 +135,15 @@ public class CalendarController {
             }
         }
 
+        List<CampingCarHome> campingCarHomeList = campingCarHomeService.findAll();
+        List<List<CampingCarHomeImage>> campingCarHomeImageDoubleList = new ArrayList<>();
+        for(CampingCarHome campingCarHome : campingCarHomeList){
+            List<CampingCarHomeImage> campingCarHomeImageList = campingCarHomeImageService.findByCampingCarHome(campingCarHome);
+            campingCarHomeImageDoubleList.add(campingCarHomeImageList);
+        }
+
+        mav.addObject("campingCarHomeList", campingCarHomeList);
+        mav.addObject("campingCarHomeImageDoubleList", campingCarHomeImageDoubleList);
         mav.addObject("imagesMainList", imagesMainList);
         mav.addObject("campingCarList", campingCarList);
 
