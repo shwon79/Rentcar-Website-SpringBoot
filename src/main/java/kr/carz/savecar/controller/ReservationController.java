@@ -264,7 +264,7 @@ public class ReservationController {
 
         switch (dto.getTitle()) {
             case "간편상담신청":
-            case "한눈에 상담신청":
+            case "한눈에상담신청":
                 params.put("text", "[" + dto.getTitle() + "]\n"
                         + "문의자 이름: " + dto.getName() + "\n"
                         + "연락처: " + dto.getPhoneNo() + "\n"
@@ -308,7 +308,7 @@ public class ReservationController {
                         + "총렌트료: " + dto.getPrice() + "\n"
                         + "요청사항: " + dto.getDetail() + "\n\n");
                 break;
-            case "실시간 견적내기":
+            case "실시간견적내기":
                 params.put("text", "[" + dto.getTitle() + "]\n"
                         + "이름: " + dto.getName() + "\n"
                         + "연락처: " + dto.getPhoneNo() + "\n"
