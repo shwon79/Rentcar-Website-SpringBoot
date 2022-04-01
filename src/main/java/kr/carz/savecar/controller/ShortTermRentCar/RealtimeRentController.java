@@ -163,7 +163,6 @@ public class RealtimeRentController {
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
         HashSet<String> carGubunSet = new HashSet<>();
 
-        carGubunSet.add("전체");
         for(RealTimeRentCar realTimeRentCar : morenDTOList){
             carGubunSet.add(realTimeRentCar.getCarGubun());
         }
@@ -172,6 +171,7 @@ public class RealtimeRentController {
         }
         List<String> carGubunList = new ArrayList<>(carGubunSet);
         Collections.sort(carGubunList);
+        carGubunList.add(0, "전체");
 
         RealTimeDTO realTimeDTO = new RealTimeDTO("전체", "2000km", "한달");
 
@@ -194,12 +194,12 @@ public class RealtimeRentController {
         List<RealTimeRentCar> realTimeRentCarAllList = realTimeRentService.findAll();
         HashSet<String> carGubunSet = new HashSet<>();
 
-        carGubunSet.add("전체");
         for(RealTimeRentCar realTimeRentCar : realTimeRentCarAllList){
             carGubunSet.add(realTimeRentCar.getCarGubun());
         }
         List<String> carGubunList = new ArrayList<>(carGubunSet);
         Collections.sort(carGubunList);
+        carGubunList.add(0, "전체");
 
         List<RealTimeRentCar> morenDTOList;
         List<RealTimeRentCar> morenDTOListExpected;
