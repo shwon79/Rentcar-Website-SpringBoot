@@ -16,6 +16,7 @@
 
     <script>
         $(document).ready(function(){
+            displayGubun();
             // 반납예정일로 정렬
             sortContent(2, 'available');
             sortContent(6, 'expected');
@@ -80,6 +81,8 @@
                     <!-- 월렌트 title -->
                     <div>
                         <h1 class="page-title">월+12/24개월렌트</h1>
+                        <p th:text="${carGubunList}" id="carGubunList" style="display: none;"></p>
+                        <p th:text="${realTimeDTO.carType}" id="carTypeForGubun" style="display: none;"></p>
                     </div>
                     <!-- descriptions (collapse panel) -->
                     <div>
@@ -150,14 +153,6 @@
                     </div>
                     <!-- selections -->
                     <div class="col-lg-10 col-md-11 col-sm-12 col-xs-12" id="sel_car">
-                        <label for="car_all"><input type="radio" id="car_all" name="carType" value="전체" onclick="sendData()" th:checked="${realTimeDTO.carType} == '전체'">전체</label>
-                        <label for="car_s"><input type="radio" id="car_s" name="carType" value="경차" onclick="sendData()" th:checked="${realTimeDTO.carType} == '경차'">경차</label>
-                        <label for="car_sm"><input type="radio" id="car_sm" name="carType" value="준중형차" onclick="sendData()" th:checked="${realTimeDTO.carType} == '준중형차'">준중형</label>
-                        <label for="car_md"><input type="radio" id="car_md" name="carType" value="중형차" onclick="sendData()" th:checked="${realTimeDTO.carType} == '중형차'">중형</label>
-                        <label for="car_bg"><input type="radio" id="car_bg" name="carType" value="대형차" onclick="sendData()" th:checked="${realTimeDTO.carType} == '대형차'">대형</label>
-                        <label for="car_srv"><input type="radio" id="car_srv" name="carType" value="SUV" onclick="sendData()" th:checked="${realTimeDTO.carType} == 'SUV'">SUV</label>
-                        <label for="car_van"><input type="radio" id="car_van" name="carType" value="승합" onclick="sendData()" th:checked="${realTimeDTO.carType} == '승합'">승합</label>
-                        <label for="car_for"><input type="radio" id="car_for" name="carType" value="수입" onclick="sendData()" th:checked="${realTimeDTO.carType} == '수입'">수입</label>
                     </div>
                 </div>
                 <hr style="background: lightgrey; margin: 10px 0" />
