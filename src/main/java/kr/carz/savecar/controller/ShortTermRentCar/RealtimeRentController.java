@@ -170,6 +170,7 @@ public class RealtimeRentController {
             carGubunSet.add(realTimeRentCar.getCarGubun());
         }
         List<String> carGubunList = new ArrayList<>(carGubunSet);
+        Collections.sort(carGubunList);
 
         RealTimeDTO realTimeDTO = new RealTimeDTO("전체", "2000km", "한달");
 
@@ -196,6 +197,7 @@ public class RealtimeRentController {
             carGubunSet.add(realTimeRentCar.getCarGubun());
         }
         List<String> carGubunList = new ArrayList<>(carGubunSet);
+        Collections.sort(carGubunList);
 
         List<RealTimeRentCar> morenDTOList;
         List<RealTimeRentCar> morenDTOListExpected;
