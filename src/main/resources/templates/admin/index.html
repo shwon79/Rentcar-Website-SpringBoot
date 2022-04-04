@@ -4,6 +4,8 @@
 <head>
     <title>SAVECAR - 관리자 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="google-signin-client_id" content="350044436500-9m2j4nn8ubtsfjqktamjjkivhp2imif6.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/admin.css}" rel="stylesheet">
@@ -11,11 +13,14 @@
 <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_index.js}" defer></script>
     <script>
         $(window).on('load', function () {
             let indexMenu = document.getElementById('indexMenu');
             indexMenu && indexMenu.classList.add('activeAdminMenu');
+            getViewId();
         });
     </script>
 </head>
@@ -65,11 +70,76 @@
 
             <div sec:authorize="isAuthenticated()" style="margin-top: 50px;">
                 <a class="btn btn-info" th:href="@{/admin/logout}">로그아웃</a>
+
+                <!-- The Sign-in button. This will run `fetchingDefaultGAData()` on success. -->
+                <p class="g-signin2" data-onsuccess="displayDailyGraph"></p>
+
+                <div style="text-align: right;">
+                    <button onclick="displayDailyGraph();" class="btn btn-primary btn-sm">일</button>
+                    <button onclick="displayWeeklyGraph();" class="btn btn-primary btn-sm">주</button>
+                    <button onclick="displayMonthlyGraph();" class="btn btn-primary btn-sm">월</button>
+                </div>
+                <p style="text-align: right; margin: 15px 0 0 0;" id="todayPageView"></p>
+                <div id="chart_div" style="width: 100%;"></div>
             </div>
         </div>
     </div>
 </div>
+<!-- Load the JavaScript API client and Sign-in library. -->
+<!--<script>-->
+<!--    const VIEW_ID = '263492499';-->
 
+<!--    // function getViewId() {-->
+<!--    //     fetch(`/camping/calendar/${carType}/getprice/${season}`)-->
+<!--    //         .then(res => res.json())-->
+<!--    //         .then(result => {-->
+<!--    //             console.log(result);-->
+<!--    //         })-->
+<!--    // };-->
+
+<!--    let res = [];-->
+
+<!--    function fetchingGAData() {-->
+<!--        queryReports('7daysAgo', '6daysAgo');-->
+<!--        queryReports('6daysAgo', '5daysAgo');-->
+<!--        queryReports('5daysAgo', '4daysAgo');-->
+<!--        queryReports('4daysAgo', '3daysAgo');-->
+<!--        queryReports('3daysAgo', '2daysAgo');-->
+<!--        queryReports('2daysAgo', '1daysAgo');-->
+<!--        queryReports('1daysAgo', 'today');-->
+<!--    };-->
+
+<!--    // Query the API and print the results to the page.-->
+<!--    function queryReports(startDate, endDate) {-->
+<!--        gapi.client.request({-->
+<!--            path: '/v4/reports:batchGet',-->
+<!--            root: 'https://analyticsreporting.googleapis.com/',-->
+<!--            method: 'POST',-->
+<!--            body: {-->
+<!--                reportRequests: [-->
+<!--                    {-->
+<!--                        viewId: VIEW_ID,-->
+<!--                        dateRanges: [-->
+<!--                            {   startDate: startDate, endDate: endDate }-->
+<!--                        ],-->
+<!--                        metrics: [-->
+<!--                            {   expression: 'ga:pageviews'  },-->
+<!--                        ]-->
+<!--                    }-->
+<!--                ]-->
+<!--            }-->
+<!--        }).then(displayResults, console.error.bind(console));-->
+<!--    }-->
+
+<!--    function displayResults(response) {-->
+<!--        // var formattedJson = JSON.stringify(response.result, null, 2);-->
+<!--        // document.getElementById('query-output').value = formattedJson;-->
+<!--        let actualData = response.result.reports[0].data.rows[0].metrics[0].values[0];-->
+<!--        res.push(parseInt(actualData));-->
+<!--        console.log(res);-->
+<!--    }-->
+<!--</script>-->
+<script src="https://apis.google.com/js/client:platform.js"></script>
 </body>
 
 </html>
