@@ -2,14 +2,19 @@ package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.gson.GsonFactory;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+//import com.google.api.client.json.JsonFactory;
+//import com.google.api.client.json.gson.GsonFactory;
 
 
 @Controller
@@ -59,6 +64,17 @@ public class AdminLoginController {
     public String login()
     {
         return "redirect:/admin/index";
+    }
+
+    @GetMapping("/admin/ga/VIEW_ID")
+    public void getGaViewId(HttpServletResponse res) throws IOException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("VIEW_ID", VIEW_ID);
+
+       PrintWriter pw = res.getWriter();
+       pw.print(jsonObject);
+       pw.flush();
+       pw.close();
     }
 
 }
