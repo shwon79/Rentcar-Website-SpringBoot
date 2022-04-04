@@ -25,11 +25,12 @@ public class DiscountController {
         this.realTimeRentCarService = realTimeRentCarService;
     }
 
-    public void updateDiscount(String carNo,double discount, String description){
+    public void updateDiscount(String carNo,double discount, String description, int priceDisplay){
         List<RealTimeRentCar> realTimeRentCarList =  realTimeRentCarService.findByCarNo(carNo);
         for(RealTimeRentCar realTimeRentCar : realTimeRentCarList){
             realTimeRentCar.setDiscount(discount);
             realTimeRentCar.setDescription(description);
+            realTimeRentCar.setPriceDisplay(priceDisplay);
 
             realTimeRentCarService.save(realTimeRentCar);
         }
@@ -67,7 +68,7 @@ public class DiscountController {
             jsonObject.put("result", 1);
         }
 
-        updateDiscount(discountDTO.getCarNo(), discountDTO.getDiscount(), discountDTO.getDescription());
+        updateDiscount(discountDTO.getCarNo(), discountDTO.getDiscount(), discountDTO.getDescription(), discountDTO.getPriceDisplay());
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);
@@ -93,7 +94,7 @@ public class DiscountController {
             original_discount.get().setPriceDisplay(discountDTO.getPriceDisplay());
             discountService.save(original_discount.get());
 
-            updateDiscount(discountDTO.getCarNo(), discountDTO.getDiscount(), discountDTO.getDescription());
+            updateDiscount(discountDTO.getCarNo(), discountDTO.getDiscount(), discountDTO.getDescription(), discountDTO.getPriceDisplay());
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
@@ -117,7 +118,7 @@ public class DiscountController {
 
         if(original_discount.isPresent()){
             discountService.delete(original_discount.get());
-            updateDiscount(original_discount.get().getCarNo(), 0, null);
+            updateDiscount(original_discount.get().getCarNo(), 0, null, 1);
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);
