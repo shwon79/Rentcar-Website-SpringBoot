@@ -359,7 +359,7 @@ public class ReservationController {
                         + "차량연료: " + dto.getCategory2() + "\n"
                         + "계약기간: " + dto.getResDate() + "\n"
                         + "약정주행거리: " + dto.getMileage() + "\n"
-                        + "월대여료(VAT포함): " + dto.getPrice() + "\n"
+                        + "월대여료(VAT별도): " + dto.getPrice() + "\n"
                         + "보증금: " + dto.getDeposit() + "\n"
                         + "서비스: " + dto.getOption() + "\n");
 
@@ -377,7 +377,7 @@ public class ReservationController {
                         + "차량연료: " + dto.getCategory2() + "\n"
                         + "계약기간: " + dto.getResDate() + "\n"
                         + "약정주행거리: " + dto.getMileage() + "\n"
-                        + "월대여료(VAT포함): " + dto.getPrice() + "\n"
+                        + "월대여료(VAT별도): " + dto.getPrice() + "\n"
                         + "보증금: " + dto.getDeposit() + "\n"
                         + "서비스: " + dto.getOption() + "\n");
                 break;
