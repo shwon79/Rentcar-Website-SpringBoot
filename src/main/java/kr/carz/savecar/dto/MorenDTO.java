@@ -39,6 +39,7 @@ public class MorenDTO {
     private String deposit;
     private String rentTerm;
     private String selectAge;
+    private int priceDisplay;
 
 
 }
