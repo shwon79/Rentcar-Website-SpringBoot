@@ -313,10 +313,16 @@
                         <td th:if="${kilometer=='기타'||kilometer=='기타_long'}">상담</td>
                         <td th:if="${kilometer!='기타'&&kilometer!='기타_long'}">
                           <span th:if="${discount != 0 && rentTerm=='한달'}">
-                            <span th:if="${kilometer=='2000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2k*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
-                            <span th:if="${kilometer=='2500km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
-                            <span th:if="${kilometer=='3000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
-                            <span th:if="${kilometer=='4000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                            <div th:if="${realTimeRentCar.priceDisplay == 1}">
+                              <span th:if="${kilometer=='2000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2k*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                              <span th:if="${kilometer=='2500km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                              <span th:if="${kilometer=='3000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                              <span th:if="${kilometer=='4000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                              <span>원</span>
+                            </div>
+                            <div th:if="${realTimeRentCar.priceDisplay == 0}">
+                              <span>전화문의</span>
+                            </div>
                           </span>
                           <span th:if="${discount == 0 || (discount != 0 && rentTerm != '한달')}">
                             <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${#numbers.formatInteger(realTimeRentCar.monthlyRent.cost_for_2k, 0, 'COMMA')}" id="carPrice"></span>
@@ -329,12 +335,12 @@
                             <span th:if="${rentTerm=='24개월' && kilometer=='20000km'}" th:text="${#numbers.formatInteger(realTimeRentCar.monthlyRent.twoYearlyRent.cost_for_20Tk_price, 3, 'COMMA')}" id="carPrice"></span>
                             <span th:if="${rentTerm=='24개월' && kilometer=='30000km'}" th:text="${#numbers.formatInteger(realTimeRentCar.monthlyRent.twoYearlyRent.cost_for_30Tk_price, 3, 'COMMA')}" id="carPrice"></span>
                             <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${#numbers.formatInteger(realTimeRentCar.monthlyRent.twoYearlyRent.cost_for_40Tk_price, 3, 'COMMA')}" id="carPrice"></span>
+                            <span>원</span>
                           </span>
-                          <span>원</span>
                         </td>
                         <td style="display: flex; justify-content: space-evenly;">
                           <a target="_blank" onclick="openPopUp('estimate')"><button class="detail_btn">견적서 보기</button></a>
-                          <a target="_blank" th:if="${realTimeRentCar.isExpected}==0" onclick="openPopUp('reserve')"><button class="detail_btn_reserve">바로 예약하기</button></a>
+                          <a target="_blank" th:if="${realTimeRentCar.isExpected==0 && realTimeRentCar.priceDisplay==1}" onclick="openPopUp('reserve')"><button class="detail_btn_reserve">바로 예약하기</button></a>
                         </td>
                       </tr>
                     </table>
@@ -502,6 +508,7 @@
       <p id="forPostCredit" th:if="${rentTerm=='24개월'}" th:text="${realTimeRentCar.monthlyRent.twoYearlyRent.credit}"></p>
       <p id="forPostCarCode" th:text="${realTimeRentCar.carCode}"></p>
       <p id="forPostKilometer" th:text="${kilometer}"></p>
+      <p id="priceDisplay" th:text="${realTimeRentCar.priceDisplay}"></p>
     </div>
 
   </div>

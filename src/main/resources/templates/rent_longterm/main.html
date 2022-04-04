@@ -53,11 +53,11 @@
                                 <span>원</span>
                             </span>
                         </p>
-                        <p class="car_card_info_subInfo" style="margin-top: 16px;">(VAT 포함)</p>
+                        <p class="car_card_info_subInfo" style="margin-top: 16px;">무심사 가격:</p>
                         <p>
                             <span class="car_card_info_price" th:text="${#numbers.formatInteger(car.contractPrice,0,'COMMA')}"></span>
                             <span class="car_card_info_price">원</span>
-                            <span style="color: dimgrey;"> / 월</span>
+                            <span style="color: dimgrey;"> / 월 (부가세 별도)</span>
                         </p>
                         <div style="text-align: right;">
                             <button class="car_card_button" th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|">상담신청</button>

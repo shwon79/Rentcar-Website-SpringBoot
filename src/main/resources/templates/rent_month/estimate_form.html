@@ -171,9 +171,14 @@
                 </tr>
                 <tr>
                     <td class="table_subtitle">월대여료(VAT미포함)</td>
-                    <td th:if="${morenDTO.carPrice!=-1}">
-                        <span th:text="${morenDTO.carPrice}" class="number"></span>
-                        <span>원</span>
+                    <td th:if="${morenDTO.carPrice != -1}">
+                        <div th:if="${morenDTO.priceDisplay == 0}">
+                            <span>전화문의바랍니다</span>
+                        </div>
+                        <div th:unless="${morenDTO.priceDisplay == 0}">
+                            <span th:text="${morenDTO.carPrice}" class="number"></span>
+                            <span>원</span>
+                        </div>
                     </td>
                     <td th:if="${morenDTO.carPrice==-1}">
                     </td>

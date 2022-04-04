@@ -322,6 +322,7 @@ function openPopUp(type) {
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
     let selectAge = document.getElementById('selectAge1').value;
+    let priceDisplay = document.getElementById('priceDisplay').innerText;
 
     if (carPrice === '상담') {
         carPrice = -1;
@@ -372,6 +373,7 @@ function openPopUp(type) {
     makeFormElement('deposit', deposit);
     makeFormElement('rentTerm', rentTerm);
     makeFormElement('selectAge', selectAge);
+    makeFormElement('priceDisplay', priceDisplay);
 
     document.body.appendChild(mapForm);
 
