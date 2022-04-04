@@ -67,6 +67,7 @@ public class AdminLoginController {
     }
 
     @GetMapping("/admin/ga/VIEW_ID")
+    @ResponseBody
     public void getGaViewId(HttpServletResponse res) throws IOException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("VIEW_ID", VIEW_ID);
