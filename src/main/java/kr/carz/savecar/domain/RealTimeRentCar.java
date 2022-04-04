@@ -40,6 +40,7 @@ public class RealTimeRentCar extends BaseTimeEntity {
     private String carCode;
     private double discount; // 할인 퍼센트
     private String description;
+    private int priceDisplay;
     private int isExpected;
 
 
@@ -56,7 +57,7 @@ public class RealTimeRentCar extends BaseTimeEntity {
     @Builder
     public RealTimeRentCar(Long realTimeRentId, MonthlyRent monthlyRent, String carIdx, String carCategory, String carName, String carDetail, String carNo, String carExteriorColor, String carGubun
                         , String carDisplacement, String carMileaget, String carColor, String carOld, String carEngine, String carAttribute01, String orderEnd
-                        , String costPerKm, String carCode, double discount, String description, int isExpected) {
+                        , String costPerKm, String carCode, double discount, String description, int isExpected, int priceDisplay) {
         this.realTimeRentId = realTimeRentId;
         this.monthlyRent = monthlyRent;
         this.carIdx = carIdx;
@@ -80,5 +81,6 @@ public class RealTimeRentCar extends BaseTimeEntity {
         this.discount = discount;
         this.description = description;
         this.isExpected = isExpected;
+        this.priceDisplay = priceDisplay;
     }
 }

@@ -124,9 +124,12 @@ public class RealtimeRentController {
                 Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                 double discount_price = 0;
                 String discount_description = null;
+                int priceDisplay = 1;
                 if (discount_object.isPresent()) {
-                    discount_price = discount_object.get().getDiscount();
-                    discount_description = discount_object.get().getDescription();
+                    Discount discount = discount_object.get();
+                    discount_price = discount.getDiscount();
+                    discount_description = discount.getDescription();
+                    priceDisplay = discount.getPriceDisplay();
                 }
 
                 RealTimeRentCar realTimeRent = new RealTimeRentCar(currentRealTimeRentIdx++, monthlyRent, (String) morenObject.get("carIdx"), carCategory,
@@ -135,7 +138,7 @@ public class RealtimeRentController {
                         (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
                         (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),(String) morenObject.get("order_end"),
                         monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
-                        discount_description, isExpected);
+                        discount_description, isExpected, priceDisplay);
 
                 realTimeRentService.save(realTimeRent);
 
