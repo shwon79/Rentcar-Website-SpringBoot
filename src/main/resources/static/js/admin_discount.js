@@ -39,11 +39,16 @@ const make_discount = () => {
         return
     };
 
+    let priceDisplay = document.getElementById('price-display').checked;
+
+    priceDisplay ? priceDisplay = 1 : priceDisplay = 0;
+
     let data = {
         carNo : carNo,
         carName : $("#carName").val(),
         discount : $("#discount").val(),
-        description: $("#discount-description").val()
+        description: $("#discount-description").val(),
+        priceDisplay: priceDisplay,
     };
 
     // console.log(data);
@@ -73,6 +78,7 @@ function discountUpdate(target, event) {
     let carName = [...document.getElementsByClassName('editCarName')].find(ele => ele.dataset.index === discountId).innerText;
     let discount = parseFloat([...document.getElementsByClassName('editDiscount')].find(ele => ele.dataset.index === discountId).innerText.replace(/\%/g,''));
     let description = [...document.getElementsByClassName('discountDescription')].find(ele => ele.dataset.index === discountId).innerText;
+    let priceDisplay = [...document.getElementsByClassName('priceDisplay')].find(ele => ele.dataset.index === discountId).checked;
     let promptText;
 
     switch (target) {
@@ -85,20 +91,30 @@ function discountUpdate(target, event) {
         case 'description':
             promptText = '할인 설명';
             break;
+        case 'priceDisplay':
+            promptText = '가격 표시 여부';
+            break;
     };
 
-    let editedData = prompt(`수정할 ${promptText}을/를 입력하세요.`, '');
+    let editedData;
 
-    switch (target) {
-        case 'carName':
-            carName = editedData;
-            break;
-        case 'price':
-            discount = parseFloat(editedData);
-            break;
-        case 'description':
-            description = editedData;
-            break;
+    if (target != 'priceDisplay') {
+        editedData = prompt(`수정할 ${promptText}을/를 입력하세요.`, '');
+
+        switch (target) {
+            case 'carName':
+                carName = editedData;
+                break;
+            case 'price':
+                discount = parseFloat(editedData);
+                break;
+            case 'description':
+                description = editedData;
+                break;
+        };
+    } else if (target == 'priceDisplay') {
+        editedData = 1;
+        priceDisplay ? priceDisplay = 1 : priceDisplay = 0;
     };
 
     let data = {
@@ -107,6 +123,7 @@ function discountUpdate(target, event) {
         carName: carName,
         discount: discount,
         description: description,
+        priceDisplay: priceDisplay
     };
 
     // console.log(data);

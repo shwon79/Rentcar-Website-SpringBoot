@@ -72,7 +72,6 @@ public class RealtimeRentController {
 
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
         String expected_day = expectedDayList.get(0).getExpectedDay();
-//        new DateTime(expected_day);
         String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
 
         HttpConnection http = new HttpConnection();
@@ -125,9 +124,12 @@ public class RealtimeRentController {
                 Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
                 double discount_price = 0;
                 String discount_description = null;
+                int priceDisplay = 1;
                 if (discount_object.isPresent()) {
-                    discount_price = discount_object.get().getDiscount();
-                    discount_description = discount_object.get().getDescription();
+                    Discount discount = discount_object.get();
+                    discount_price = discount.getDiscount();
+                    discount_description = discount.getDescription();
+                    priceDisplay = discount.getPriceDisplay();
                 }
 
                 RealTimeRentCar realTimeRent = new RealTimeRentCar(currentRealTimeRentIdx++, monthlyRent, (String) morenObject.get("carIdx"), carCategory,
@@ -136,7 +138,7 @@ public class RealtimeRentController {
                         (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
                         (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),(String) morenObject.get("order_end"),
                         monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
-                        discount_description, isExpected);
+                        discount_description, isExpected, priceDisplay);
 
                 realTimeRentService.save(realTimeRent);
 
@@ -162,9 +164,21 @@ public class RealtimeRentController {
         List<RealTimeRentCar> morenDTOList = realTimeRentService.findByIsExpected(0);
         List<RealTimeRentCar> morenDTOListExpected = realTimeRentService.findByIsExpected(1);
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+        HashSet<String> carGubunSet = new HashSet<>();
+
+        for(RealTimeRentCar realTimeRentCar : morenDTOList){
+            carGubunSet.add(realTimeRentCar.getCarGubun());
+        }
+        for(RealTimeRentCar realTimeRentCar : morenDTOListExpected){
+            carGubunSet.add(realTimeRentCar.getCarGubun());
+        }
+        List<String> carGubunList = new ArrayList<>(carGubunSet);
+        Collections.sort(carGubunList);
+        carGubunList.add(0, "전체");
 
         RealTimeDTO realTimeDTO = new RealTimeDTO("전체", "2000km", "한달");
 
+        model.put("carGubunList", carGubunList);
         model.put("expectedDayDisplayed", expectedDayList.get(0).getExpectedDayDisplayed());
         model.put("morenDTOList", morenDTOList);
         model.put("morenDTOListExpected", morenDTOListExpected);
@@ -180,6 +194,16 @@ public class RealtimeRentController {
     @GetMapping("/rent/month/lookup/{carType}/{kilometer}/{rentTerm}")
     public String rent_month_lookup(ModelMap model, @PathVariable String carType, @PathVariable String kilometer, @PathVariable String rentTerm) {
 
+        List<RealTimeRentCar> realTimeRentCarAllList = realTimeRentService.findAll();
+        HashSet<String> carGubunSet = new HashSet<>();
+
+        for(RealTimeRentCar realTimeRentCar : realTimeRentCarAllList){
+            carGubunSet.add(realTimeRentCar.getCarGubun());
+        }
+        List<String> carGubunList = new ArrayList<>(carGubunSet);
+        Collections.sort(carGubunList);
+        carGubunList.add(0, "전체");
+
         List<RealTimeRentCar> morenDTOList;
         List<RealTimeRentCar> morenDTOListExpected;
         if(carType.equals("전체")){
@@ -191,6 +215,7 @@ public class RealtimeRentController {
         }
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
 
+        model.put("carGubunList", carGubunList);
         model.put("expectedDayDisplayed", expectedDayList.get(0).getExpectedDayDisplayed());
         model.put("morenDTOList", morenDTOList);
         model.put("morenDTOListExpected", morenDTOListExpected);
@@ -234,10 +259,6 @@ public class RealtimeRentController {
             throw new Exception("해당하는 차량이 없습니다.");
         }
 
-//        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
-//        String expected_day = expectedDayList.get(0).getExpectedDay();
-//        new DateTime(expected_day);
-
         model.put("rentTerm", rentTerm);
         model.put("kilometer", kilometer);
         model.put("discount", discount);
@@ -250,10 +271,6 @@ public class RealtimeRentController {
     // 예약신청하기 새 창 띄우기
     @PostMapping("/rent/month/detail/form/reservation")
     public String rent_month_detail_form_reservation(ModelMap model, @ModelAttribute MorenDTO morenDTO) {
-
-//        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
-//        String expected_day = expectedDayList.get(0).getExpectedDay();
-//        new DateTime(expected_day);
 
         model.put("morenDTO",morenDTO);
         model.put("today_format",DateTime.today_date_only());

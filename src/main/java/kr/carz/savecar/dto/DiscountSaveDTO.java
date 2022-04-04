@@ -18,6 +18,7 @@ public class DiscountSaveDTO {
     private String carName;
     private double discount; // 할인 퍼센트
     private String description;
+    private int priceDisplay;
 
     public Discount toEntity() {
         return Discount.builder()
@@ -25,6 +26,7 @@ public class DiscountSaveDTO {
                 .carName(carName)
                 .discount(discount)
                 .description(description)
+                .priceDisplay(priceDisplay)
                 .build();
 
     }

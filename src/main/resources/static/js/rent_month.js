@@ -47,7 +47,31 @@ function displaySortImage(target) {
     }
 };
 
-//
+// lookup 유형 보여주기
+function displayGubun() {
+    let gubunList = document.getElementById('carGubunList').innerText;
+    let resultString = gubunList.replace('[','').replace(']','').split(', ');
+    const targetId = document.getElementById('sel_car');
+    let carType = document.getElementById('carTypeForGubun').innerText;
+
+    targetId.innerHTML = '';
+
+    for (let i = 0; i < resultString.length; i++) {
+        let label = document.createElement('label');
+        label.htmlFor = resultString[i];
+        let checked;
+
+        carType === resultString[i] ? checked='checked' : checked='';
+
+        label.innerHTML = `
+            <input type="radio" id=${resultString[i]} name="carType" value=${resultString[i]} ${checked} onclick="sendData()"">
+            ${resultString[i]}
+        `;
+        targetId.appendChild(label);
+    };
+}
+
+// lookup
 function sendData(){
     let carType = document.querySelector("input[name='carType']:checked").value;
     let rentTerm = document.querySelector("input[name='rentTerm']:checked").value;
@@ -298,6 +322,7 @@ function openPopUp(type) {
     let deposit = document.getElementById('forPostDeposit').innerText;
     let rentTerm = document.getElementById('forPostRentTerm').innerText;
     let selectAge = document.getElementById('selectAge1').value;
+    let priceDisplay = document.getElementById('priceDisplay').innerText;
 
     if (carPrice === '상담') {
         carPrice = -1;
@@ -348,6 +373,7 @@ function openPopUp(type) {
     makeFormElement('deposit', deposit);
     makeFormElement('rentTerm', rentTerm);
     makeFormElement('selectAge', selectAge);
+    makeFormElement('priceDisplay', priceDisplay);
 
     document.body.appendChild(mapForm);
 
