@@ -90,6 +90,7 @@ public class DiscountController {
             original_discount.get().setCarName(discountDTO.getCarName());
             original_discount.get().setDiscount(discountDTO.getDiscount());
             original_discount.get().setDescription(discountDTO.getDescription());
+            original_discount.get().setPriceDisplay(discountDTO.getPriceDisplay());
             discountService.save(original_discount.get());
 
             updateDiscount(discountDTO.getCarNo(), discountDTO.getDiscount(), discountDTO.getDescription());

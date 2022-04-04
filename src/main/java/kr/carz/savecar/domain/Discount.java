@@ -22,13 +22,15 @@ public class Discount {
     private String carName;
     private double discount; // 할인 퍼센트
     private String description;
+    private int priceDisplay;
 
     @Builder
-    public Discount(Long discountId, String carNo, String carName, double discount, String description) {
+    public Discount(Long discountId, String carNo, String carName, double discount, String description, int priceDisplay) {
         this.discountId = discountId;
         this.carNo = carNo;
         this.carName = carName;
         this.discount = discount;
         this.description = description;
+        this.priceDisplay = priceDisplay;
     }
 }
