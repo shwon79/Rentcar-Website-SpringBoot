@@ -22,10 +22,10 @@ public class AdminLoginController {
     private final AdminService adminService;
 
     @Value("${ga.VIEW_ID}")
-    private static String VIEW_ID;
+    private String VIEW_ID;
 
     @Value("${ga.CLIENT_ID}")
-    private static String CLIENT_ID;
+    private String CLIENT_ID;
 
     @Autowired
     public AdminLoginController(AdminService adminService) {
@@ -72,10 +72,10 @@ public class AdminLoginController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("VIEW_ID", VIEW_ID);
 
-       PrintWriter pw = res.getWriter();
-       pw.print(jsonObject);
-       pw.flush();
-       pw.close();
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
     }
 
 }
