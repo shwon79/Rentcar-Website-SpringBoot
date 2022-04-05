@@ -123,7 +123,7 @@ function discountUpdate(target, event) {
         carName: carName,
         discount: discount,
         description: description,
-        priceDisplay: priceDisplay
+        priceDisplay: priceDisplay ? 1 : 0,
     };
 
     // console.log(data);

@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/index", "/admin/signup", "/admin/login").permitAll()
-                .antMatchers("/admin/campingcar/**", "/admin/counsel/**", "/admin/discount/**", "/admin/moren/**", "/admin/setting/**", "/admin/popup/**", "/admin/rentcar/**", "/admin/image/**", "/admin/longTerm/**").hasRole("ADMIN") // ADMIN only
+                .antMatchers("/admin/campingcar/**", "/admin/counsel/**", "/admin/discount/**", "/admin/moren/**", "/admin/setting/**", "/admin/popup/**", "/admin/rentcar/**", "/admin/image/**", "/admin/longTerm/**", "/admin/ga/**").hasRole("ADMIN") // ADMIN only
                 .and()
                 .formLogin()     // 로그인 설정
                 .loginPage("/admin/login")      // 커스텀 login 페이지를 사용
