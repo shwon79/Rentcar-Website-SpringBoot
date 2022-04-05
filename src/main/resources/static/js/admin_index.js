@@ -25,34 +25,57 @@ function displayDailyGraph() {
 };
 
 function fetchingDailyGAData() {
-    queryReports('7daysAgo', '6daysAgo');
-    queryReports('6daysAgo', '5daysAgo');
-    queryReports('5daysAgo', '4daysAgo');
-    queryReports('4daysAgo', '3daysAgo');
-    queryReports('3daysAgo', '2daysAgo');
-    queryReports('2daysAgo', '1daysAgo');
-    queryReports('1daysAgo', 'today');
+    queryReports('daily', '7daysAgo', '6daysAgo');
+    queryReports('daily', '6daysAgo', '5daysAgo');
+    queryReports('daily', '5daysAgo', '4daysAgo');
+    queryReports('daily', '4daysAgo', '3daysAgo');
+    queryReports('daily', '3daysAgo', '2daysAgo');
+    queryReports('daily', '2daysAgo', '1daysAgo');
+    queryReports('daily', '1daysAgo', 'today');
 
     setTimeout(function() {
-        sortList(res);
-    },1500)
+        sortList('daily', res);
+    },1800)
 };
 
-function sortList(res) {
+// function calculateAndCallQueryReports(period, startDate, endDate) {
+//     let date = new Date();
+//
+//
+// }
+
+function sortList(period, res) {
     let sortedList = res.sort(function(a,b) {
-        return a[0].localeCompare(b[0]);
+        return a[0] - b[0];
     }).reverse();
 
-    sortedList.unshift(['Day', 'Pageviews']);
-    sortedList[7][0] = '오늘'
-    console.log(sortedList);
+    if (period === 'monthly') {
+        for (let i = 0; i < sortedList.length; i++) {
+            sortedList[i][0] = sortedList[i][0]/30 + '개월 전';
+        }
+    } else {
+        for (let i = 0; i < sortedList.length; i++) {
+            sortedList[i][0] = sortedList[i][0] + '일 전';
+        }
+    };
 
-    document.getElementById('todayPageView').innerText = `오늘의 페이지뷰 수: ${sortedList[7][1]}`;
-    drawChart(sortedList);
+    if (period == 'daily') {
+        sortedList.unshift(['Day', 'Pageviews']);
+        document.getElementById('todayPageView').innerText = `오늘의 페이지뷰 수: ${sortedList[sortedList.length-1][1]}`;
+    } else if (period == 'weekly') {
+        sortedList.unshift(['Week', 'Pageviews']);
+    } else if (period == 'monthly') {
+        sortedList.unshift(['Month', 'Pageviews']);
+    };
+
+    sortedList[sortedList.length-1][0] = '오늘';
+
+    console.log(sortedList);
+    drawChart(sortedList, period);
 }
 
 // Query the API and print the results to the page.
-function queryReports(startDate, endDate) {
+function queryReports(period, startDate, endDate) {
     gapi.client.request({
         path: '/v4/reports:batchGet',
         root: 'https://analyticsreporting.googleapis.com/',
@@ -71,30 +94,55 @@ function queryReports(startDate, endDate) {
             ]
         }
     }).then(function(response) {
-        collectData(endDate, response)
+        collectData(period, endDate, response);
     }).catch(error => console.log(error));
 }
 
-function collectData(endDate, response) {
-    let actualData = response.result.reports[0].data.rows[0].metrics[0].values[0];
-    // console.log([startDate, parseInt(actualData)]);
-    let date;
-    if(endDate == 'today') {
-        date = '0'
+function collectData(period, endDate, response) {
+    let actualData;
+
+    if (response.result.reports[0].data.rows) {
+        actualData = response.result.reports[0].data.rows[0].metrics[0].values[0];
     } else {
-        date = endDate.charAt(0);
-    }
-    res.push([date+'일 전', parseInt(actualData)]);
+        actualData = response.result.reports[0].data.totals[0].values[0];
+    };
+
+    console.log(actualData);
+
+    let date;
+
+    if (endDate === 'today') {
+        date = 0;
+    } else {
+        date = parseInt(endDate);
+    };
+
+    res.push([date, parseInt(actualData)]);
 };
 
-function drawChart(list) {
+function drawChart(list, period) {
 
     // Create the data table.
     let data = new google.visualization.arrayToDataTable(list);
+    let title;
+
+    switch (period) {
+        case 'daily' :
+            title = '일주일 간';
+            break;
+        case 'weekly':
+            title = '한달 간';
+            break;
+        case 'monthly':
+            title = '6개월 간';
+            break;
+        default:
+            console.log('그래프를 그리는 데 문제가 생겼습니다.');
+    }
 
     // Set chart options
     let options = {
-        'title':'최근 일주일 페이지뷰 변화',
+        'title': `최근 ${title} 페이지뷰 변화`,
         'width': 500,
         'height': 300,
         'legend': 'none',
@@ -106,27 +154,38 @@ function drawChart(list) {
 }
 
 function displayWeeklyGraph() {
-    console.log('do you want to see the weekly graph?');
     res = [];
 
     fetchingWeeklyGAData();
-
-}
+};
 
 function displayMonthlyGraph() {
-    console.log('do you want to see the monthly graph?');
+    res = [];
+
+    fetchingMonthlyGAData();
+};
+
+function fetchingMonthlyGAData() {
+    queryReports('monthly', '179daysAgo', '150daysAgo');
+    queryReports('monthly', '149daysAgo', '120daysAgo');
+    queryReports('monthly', '119daysAgo', '90daysAgo');
+    queryReports('monthly', '89daysAgo', '60daysAgo');
+    queryReports('monthly', '59daysAgo', '30daysAgo');
+    queryReports('monthly', '29daysAgo', 'today');
+
+    setTimeout(function() {
+        sortList('monthly', res);
+    },1500)
 }
 
 function fetchingWeeklyGAData() {
-    // queryReports('7daysAgo', '6daysAgo');
-    // queryReports('6daysAgo', '5daysAgo');
-    // queryReports('5daysAgo', '4daysAgo');
-    // queryReports('4daysAgo', '3daysAgo');
-    // queryReports('3daysAgo', '2daysAgo');
-    // queryReports('2daysAgo', '1daysAgo');
-    // queryReports('1daysAgo', 'today');
-    //
-    // setTimeout(function() {
-    //     sortList(res);
-    // },1500)
+    queryReports('weekly', '34daysAgo', '28daysAgo');
+    queryReports('weekly', '27daysAgo', '21daysAgo');
+    queryReports('weekly', '20daysAgo', '14daysAgo');
+    queryReports('weekly', '13daysAgo', '7daysAgo');
+    queryReports('weekly', '6daysAgo', 'today');
+
+    setTimeout(function() {
+        sortList('weekly', res);
+    },1500)
 };
