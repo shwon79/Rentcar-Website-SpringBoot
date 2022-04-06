@@ -10,14 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link th:href="@{/css/rent_price.css}" rel="stylesheet">
     <script th:src="@{/js/rent_price.js}" defer></script>
-
-    <script>
-        // $(document).ready(function() {
-        //     $('#example').DataTable( {
-        //         responsive: true,
-        //     } );
-        // } );
-    </script>
 </head>
 
 <div layout:fragment="content">
@@ -119,20 +111,21 @@
               <div class="pinside20" align="center">
                 <h1 style="font-weight: bold">3일 요금</h1>
               </div>
-              <table id="example" class="table table-bordered table-responsive">
-                  <thead>
-                  <tr>
-                      <th scope="row">차종</th>
-                      <th scope="row">차명</th>
-                      <th>600km</th>
-                      <th>900km</th>
-                      <th>1200km</th>
-                      <th>자차</th>
-                      <th>21세 추가</th>
-                      <th style="word-break: keep-all;">KM당 추가요금</th>
-                  </tr>
-                  </thead>
-                  <tbody>
+              <div class="responsive">
+                  <table id="example" class="table table-bordered table-responsive">
+                      <thead>
+                      <tr>
+                          <th scope="row">차종</th>
+                          <th scope="row">차명</th>
+                          <th>600km</th>
+                          <th>900km</th>
+                          <th>1200km</th>
+                          <th>자차</th>
+                          <th>21세 추가</th>
+                          <th style="word-break: keep-all;">KM당 추가요금</th>
+                      </tr>
+                      </thead>
+                      <tbody>
                       <tr th:each="shortRent : ${shortRentListNotForeign}">
                           <td scope="row" th:text="${shortRent.category1}"></td>
                           <td scope="row" th:text="${shortRent.name}"></td>
@@ -143,8 +136,10 @@
                           <td scope="col" th:text="${shortRent.cost_for_three_days_age}"></td>
                           <td scope="col" th:text="${shortRent.cost_per_km}"></td>
                       </tr>
-                  </tbody>
-              </table>
+                      </tbody>
+                  </table>
+              </div>
+
 <!--              <div class="scroll-table">-->
 <!--                  <div>-->
 <!--                      <table id="example" class="table table-bordered table-responsive">-->
@@ -182,32 +177,35 @@
               <div class="pinside20" align="center">
                   <h1 style="font-weight: bold">수입차 1일 요금</h1>
               </div>
-              <table id="example1" class="table table-bordered table-responsive">
-                  <thead>
-                  <tr>
-                      <th scope="row" style="word-break: keep-all;">차종</th>
-                      <th scope="row">차명</th>
-                      <th>600km</th>
-                      <th>900km</th>
-                      <th>1200km</th>
-                      <th>자차</th>
-                      <th>21세 추가</th>
-                      <th style="word-break: keep-all;">KM당 추가요금</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr th:each="shortRent : ${shortRentListForeign}">
-                      <td scope="row" th:text="${shortRent.category1}"></td>
-                      <td scope="row" th:text="${shortRent.name}"></td>
-                      <td scope="col" th:text="${shortRent.cost_for_three_days_600}"></td>
-                      <td scope="col" th:text="${shortRent.cost_for_three_days_900}"></td>
-                      <td scope="col" th:text="${shortRent.cost_for_three_days_1200}"></td>
-                      <td scope="col" th:text="${shortRent.cost_for_three_days_insurance}"></td>
-                      <td scope="col" th:text="${shortRent.cost_for_three_days_age}"></td>
-                      <td scope="col" th:text="${shortRent.cost_per_km}"></td>
-                  </tr>
-                  </tbody>
-              </table>
+              <div class="responsive">
+                  <table id="example1" class="table table-bordered table-responsive">
+                      <thead>
+                      <tr>
+                          <th scope="row" style="word-break: keep-all;">차종</th>
+                          <th scope="row">차명</th>
+                          <th>600km</th>
+                          <th>900km</th>
+                          <th>1200km</th>
+                          <th>자차</th>
+                          <th>21세 추가</th>
+                          <th style="word-break: keep-all;">KM당 추가요금</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="shortRent : ${shortRentListForeign}">
+                          <td scope="row" th:text="${shortRent.category1}"></td>
+                          <td scope="row" th:text="${shortRent.name}"></td>
+                          <td scope="col" th:text="${shortRent.cost_for_three_days_600}"></td>
+                          <td scope="col" th:text="${shortRent.cost_for_three_days_900}"></td>
+                          <td scope="col" th:text="${shortRent.cost_for_three_days_1200}"></td>
+                          <td scope="col" th:text="${shortRent.cost_for_three_days_insurance}"></td>
+                          <td scope="col" th:text="${shortRent.cost_for_three_days_age}"></td>
+                          <td scope="col" th:text="${shortRent.cost_per_km}"></td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+
           </section>
 
           <div class="pinside30"></div>
@@ -216,32 +214,35 @@
               <div class="pinside20"  align="center">
                   <h1 style="font-weight: bold">이후 1일당 추가요금</h1>
               </div>
-              <table id="example2" class="table table-bordered table-responsive">
-                  <thead>
-                  <tr>
-                      <th scope="row">차종</th>
-                      <th scope="row">차명</th>
-                      <th>200km</th>
-                      <th>300km</th>
-                      <th>400km</th>
-                      <th>자차</th>
-                      <th>21세 추가</th>
-                      <th style="word-break: keep-all;">KM당 추가요금</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr th:each="shortRent : ${shortRentList}">
-                      <td scope="row" th:text="${shortRent.category1}"></td>
-                      <td scope="row" th:text="${shortRent.name}"></td>
-                      <td scope="col" th:text="${shortRent.extra_cost_per_day_200}"></td>
-                      <td scope="col" th:text="${shortRent.extra_cost_per_day_300}"></td>
-                      <td scope="col" th:text="${shortRent.extra_cost_per_day_400}"></td>
-                      <td scope="col" th:text="${shortRent.extra_cost_per_day_insurance}"></td>
-                      <td scope="col" th:text="${shortRent.extra_cost_per_day_age}"></td>
-                      <td scope="col" th:text="${shortRent.cost_per_km}"></td>
-                  </tr>
-                  </tbody>
-              </table>
+              <div class="responsive">
+                  <table id="example2" class="table table-bordered table-responsive">
+                      <thead>
+                      <tr>
+                          <th scope="row">차종</th>
+                          <th scope="row">차명</th>
+                          <th>200km</th>
+                          <th>300km</th>
+                          <th>400km</th>
+                          <th>자차</th>
+                          <th>21세 추가</th>
+                          <th style="word-break: keep-all;">KM당 추가요금</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="shortRent : ${shortRentList}">
+                          <td scope="row" th:text="${shortRent.category1}"></td>
+                          <td scope="row" th:text="${shortRent.name}"></td>
+                          <td scope="col" th:text="${shortRent.extra_cost_per_day_200}"></td>
+                          <td scope="col" th:text="${shortRent.extra_cost_per_day_300}"></td>
+                          <td scope="col" th:text="${shortRent.extra_cost_per_day_400}"></td>
+                          <td scope="col" th:text="${shortRent.extra_cost_per_day_insurance}"></td>
+                          <td scope="col" th:text="${shortRent.extra_cost_per_day_age}"></td>
+                          <td scope="col" th:text="${shortRent.cost_per_km}"></td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+
 
               <div class="bg-light pinside30" style="margin-top: 70px;">
                   <div class="row">

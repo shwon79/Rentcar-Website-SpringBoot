@@ -57,14 +57,20 @@
     display: none;
 }
 /* 테이블 행/열 고정 시작 */
+
+.responsive {
+    width: 100%;
+    height: max-content;
+    overflow: scroll;
+}
 table {
     margin: 1em 0;
     border-collapse: collapse;
     border: 0.1em solid #d6d6d6;
 }
 
-th {
-    /*position: -webkit-sticky;*/
+table thead th {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 2;
@@ -78,7 +84,7 @@ td {
 }
 
 td[scope=row], th[scope=row] {
-    /*position: -webkit-sticky;*/
+    position: -webkit-sticky;
     position: sticky;
     left: 0;
     z-index: 1;
@@ -147,10 +153,9 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
 /*    margin-top: 20px;*/
 /*    position: relative;*/
 /*    padding-top: 40px;*/
-/*    border: 1px solid #d4d4d4;*/
 /*}*/
 /*.scroll-table div {*/
-/*    max-height: 273px;*/
+/*    !*max-height: 273px;*!*/
 /*    overflow: auto;*/
 /*    overflow-x: hidden;*/
 /*}*/
@@ -163,6 +168,7 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
 /*.scroll-table table thead tr {*/
 /*    position: absolute;*/
 /*    top: 0;*/
+/*    width: auto;*/
 /*}*/
 /*.scroll-table table thead tr th {*/
 /*    font-weight: normal;*/
@@ -171,7 +177,7 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
 /*    background:#eee;*/
 /*}*/
 /*.scroll-table table thead tr th:first-child {*/
-/*    width: 238px;*/
+/*    width: 14rem;*/
 /*    font-weight: bold;*/
 /*    padding-left: 15px;*/
 /*    padding-right: 15px;*/
@@ -180,7 +186,6 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
 /*.scroll-table table td {*/
 /*    text-align: center;*/
 /*    width: 120px;*/
-/*    color: #2a4383;*/
 /*    height: 40px;*/
 /*}*/
 /*.scroll-table table td:first-child {*/
@@ -192,7 +197,7 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
 /*}*/
 /*.scroll-table table tr {*/
 /*    display: inline-table;*/
-/*    width: 508px;*/
+/*    width: auto;*/
 /*    table-layout: fixed;*/
 /*}*/
 /*.scroll-table table tr td {*/
