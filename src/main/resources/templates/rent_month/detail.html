@@ -388,19 +388,19 @@
                         <span>월대여료(VAT미포함)</span>
                         <span th:if="${kilometer=='기타'||kilometer=='기타_long'}">상담</span>
 
-                        <span th:if="${kilometer!='기타'&&kilometer!='기타_long'}">
-                            <span th:if="${discount != 0 && rentTerm=='한달'}">
-                              <div th:if="${realTimeRentCar.priceDisplay == 1}">
-                                <span th:if="${kilometer=='2000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2k*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
-                                <span th:if="${kilometer=='2500km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
-                                <span th:if="${kilometer=='3000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
-                                <span th:if="${kilometer=='4000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
-                                <span>원</span>
-                              </div>
-                              <div th:if="${realTimeRentCar.priceDisplay == 0}">
-                                <span>전화문의</span>
-                              </div>
+                        <span th:if="${kilometer!='기타' && kilometer!='기타_long'}">
+                          <span th:if="${discount != 0 && rentTerm=='한달'}">
+                            <span th:unless="${realTimeRentCar.priceDisplay == 0}">
+                              <span th:if="${kilometer=='2000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2k*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                              <span th:if="${kilometer=='2500km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                              <span th:if="${kilometer=='3000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                              <span th:if="${kilometer=='4000km'}" th:text="${#numbers.formatInteger(T(Math).floor((realTimeRentCar.monthlyRent.cost_for_2_5k_price*(100+discount)/100)/1000)*1000, 0, 'COMMA')}" id="carPrice"></span>
+                              <span>원</span>
                             </span>
+                            <span th:if="${realTimeRentCar.priceDisplay == 0}">
+                              <span>전화문의</span>
+                            </span>
+                          </span>
                           <span th:if="${discount == 0 || (discount != 0 && rentTerm != '한달')}">
                               <span th:if="${rentTerm=='한달' && kilometer=='2000km'}" th:text="${#numbers.formatInteger(realTimeRentCar.monthlyRent.cost_for_2k, 0, 'COMMA')}" id="carPrice"></span>
                               <span th:if="${rentTerm=='한달' && kilometer=='2500km'}" th:text="${#numbers.formatInteger(realTimeRentCar.monthlyRent.cost_for_2_5k_price, 0, 'COMMA')}" id="carPrice"></span>
@@ -414,7 +414,6 @@
                               <span th:if="${rentTerm=='24개월' && kilometer=='40000km'}" th:text="${#numbers.formatInteger(realTimeRentCar.monthlyRent.twoYearlyRent.cost_for_40Tk_price, 3, 'COMMA')}" id="carPrice"></span>
                               <span>원</span>
                           </span>
-
                         </span>
                       </p>
                       <div style="display: flex; justify-content: space-evenly;">
