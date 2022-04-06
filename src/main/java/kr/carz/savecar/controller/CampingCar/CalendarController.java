@@ -309,6 +309,7 @@ public class CalendarController {
         model.put("campingCarMainTextList", campingCarMainTextList);
         model.put("imagesList", imagesList);
         model.put("explanation", explanation);
+        model.put("carType", carType);
 
         model.addAttribute("calendarDateList", calendarDateList);
         model.addAttribute("calendarTimeList", calendarTimeList);
@@ -326,7 +327,7 @@ public class CalendarController {
         model.addAttribute("thisMonth", thisMonth);
         model.addAttribute("thisDay", thisDay);
 
-        return "rent_camping/" + carType;
+        return "rent_camping/detail";
     }
 
 
