@@ -22,16 +22,16 @@ function getViewId() {
 function displayDefaultGraph() {
     res = [];
 
-    fetchingGAData('daily');
+    setTimeout(function() {
+        fetchingGAData('daily');
+    },1000);
 };
 
 // 일, 주, 월 눌렀을때 그에 맞는 그래프 보여주기
 function displayGraph(period) {
     res = [];
 
-    setTimeout(function() {
-        fetchingGAData(period);
-    },1000);
+    fetchingGAData(period);
 };
 
 // 원하는 날짜 계산해서 GA 데이터 가져오기
