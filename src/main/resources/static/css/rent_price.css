@@ -209,8 +209,6 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
 
 /* 테이블 행/열 고정 끝 */
 
-
-
 @media screen and (max-width: 600px) {
     .price_menu {
         flex-direction: column;
