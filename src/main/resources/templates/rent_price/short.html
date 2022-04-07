@@ -36,18 +36,12 @@
                       <div class="separator"></div>
                       <div id="filters" class="toolbar mb2 mt2">
                           <h2 class="price_menu">
-                              <div>
-                                  <a href="/price/month/경형"><button class="btn-md fil-cat filter">월 렌트</button></a>
-                                  <span> / </span>
-                              </div>
-                              <div>
-                                  <a href="/price/yearly/경형"><button class="btn-md fil-cat filter">12개월 렌트</button></a>
-                                  <span> / </span>
-                              </div>
-                              <div>
-                                  <a href="/price/twoYearly/경형"><button class="btn-md fil-cat filter">24개월 렌트</button></a>
-                                  <span> / </span>
-                              </div>
+                              <a href="/price/month/경형"><button class="btn-md fil-cat filter">월 렌트</button></a>
+                              <span class="separator_padding"> | </span>
+                              <a href="/price/yearly/경형"><button class="btn-md fil-cat filter">12개월 렌트</button></a>
+                              <span class="separator_padding"> | </span>
+                              <a href="/price/twoYearly/경형"><button class="btn-md fil-cat filter">24개월 렌트</button></a>
+                              <span class="separator_padding"> | </span>
                               <a href="/price/short"><button class="btn-md fil-cat filter">단기 렌트</button></a>
                           </h2>
 <!--                              <a href="/price/camp"><button class="btn-md fil-cat filter">캠핑카</button></a></h2>-->
@@ -107,7 +101,7 @@
 
           <div class="pinside50"></div>
 
-          <section class="col-lg-12">
+          <section class="col-lg-12" style="padding: 0;">
               <div class="pinside20" align="center">
                 <h1 style="font-weight: bold">3일 요금</h1>
               </div>
@@ -139,39 +133,7 @@
                       </tbody>
                   </table>
               </div>
-
-<!--              <div class="scroll-table">-->
-<!--                  <div>-->
-<!--                      <table id="example" class="table table-bordered table-responsive">-->
-<!--                          <thead>-->
-<!--                          <tr>-->
-<!--                              <th scope="row">차종</th>-->
-<!--                              <th scope="row">차명</th>-->
-<!--                              <th>600km</th>-->
-<!--                              <th>900km</th>-->
-<!--                              <th>1200km</th>-->
-<!--                              <th>자차</th>-->
-<!--                              <th>21세 추가</th>-->
-<!--                              <th style="word-break: keep-all;">KM당 추가요금</th>-->
-<!--                          </tr>-->
-<!--                          </thead>-->
-<!--                          <tbody>-->
-<!--                          <tr th:each="shortRent : ${shortRentListNotForeign}">-->
-<!--                              <td scope="row" th:text="${shortRent.category1}"></td>-->
-<!--                              <td scope="row" th:text="${shortRent.name}"></td>-->
-<!--                              <td scope="col" th:text="${shortRent.cost_for_three_days_600}"></td>-->
-<!--                              <td scope="col" th:text="${shortRent.cost_for_three_days_900}"></td>-->
-<!--                              <td scope="col" th:text="${shortRent.cost_for_three_days_1200}"></td>-->
-<!--                              <td scope="col" th:text="${shortRent.cost_for_three_days_insurance}"></td>-->
-<!--                              <td scope="col" th:text="${shortRent.cost_for_three_days_age}"></td>-->
-<!--                              <td scope="col" th:text="${shortRent.cost_per_km}"></td>-->
-<!--                          </tr>-->
-<!--                          </tbody>-->
-<!--                      </table>-->
-<!--                  </div>-->
-<!--              </div>-->
           </section>
-
 
           <section class="col-lg-12">
               <div class="pinside20" align="center">
@@ -205,10 +167,7 @@
                       </tbody>
                   </table>
               </div>
-
           </section>
-
-          <div class="pinside30"></div>
 
           <section class="col-lg-12">
               <div class="pinside20"  align="center">
