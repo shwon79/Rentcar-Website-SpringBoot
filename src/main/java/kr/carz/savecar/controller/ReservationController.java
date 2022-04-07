@@ -264,6 +264,8 @@ public class ReservationController {
 
         switch (dto.getTitle()) {
             case "간편상담신청":
+            case "월렌트+12/24개월상담신청":
+            case "캠핑카메인상담신청":
             case "한눈에상담신청":
                 params.put("text", "[" + dto.getTitle() + "]\n"
                         + "문의자 이름: " + dto.getName() + "\n"

@@ -53,37 +53,9 @@
           <tr>
             <td style="text-align: center;">유형</td>
             <td class="all_label">
-              <label for="전체">
-                <input type="radio" id="전체" name="title" value="전체" onclick="selectTitle();" th:checked="${title} == '전체'">
-                전체
-              </label>
-              <label for="간편상담신청">
-                <input type="radio" id="간편상담신청" name="title" value="간편상담신청" onclick="selectTitle();" th:checked="${title} == '간편상담신청'">
-                간편상담신청
-              </label>
-              <label for="한눈에상담신청">
-                <input type="radio" id="한눈에상담신청" name="title" value="한눈에상담신청" onclick="selectTitle();" th:checked="${title} == '한눈에상담신청'">
-                한눈에상담신청
-              </label>
-              <label for="n일이내입고예정차량">
-                <input type="radio" id="n일이내입고예정차량" name="title" value="n일이내입고예정차량" onclick="selectTitle();" th:checked="${title} == 'n일이내입고예정차량'">
-                n일이내입고예정차량
-              </label>
-              <label for="실시간견적내기">
-                <input type="radio" id="실시간견적내기" name="title" value="실시간견적내기" onclick="selectTitle();" th:checked="${title} == '실시간견적내기'">
-                실시간견적내기
-              </label>
-              <label for="누구나장기렌트간편상담신청">
-                <input type="radio" id="누구나장기렌트간편상담신청" name="title" value="누구나장기렌트간편상담신청" onclick="selectTitle();" th:checked="${title} == '누구나장기렌트간편상담신청'">
-                누구나장기렌트간편상담신청
-              </label>
-              <label for="누구나장기렌트차량상세">
-                <input type="radio" id="누구나장기렌트차량상세" name="title" value="누구나장기렌트차량상세" onclick="selectTitle();" th:checked="${title} == '누구나장기렌트차량상세'">
-                누구나장기렌트차량상세
-              </label>
-              <label for="캠핑카렌트">
-                <input type="radio" id="캠핑카렌트" name="title" value="캠핑카렌트" onclick="selectTitle();" th:checked="${title} == '캠핑카렌트'">
-                캠핑카렌트
+              <label th:each="oneTitle, i : ${titleList}" th:for="${oneTitle}" >
+                <input type="radio" th:id="${oneTitle}" name="title" th:value="${oneTitle}" onclick="selectTitle();" th:checked="${title} == ${oneTitle}">
+                <span th:text="${oneTitle}"></span>
               </label>
             </td>
           </tr>

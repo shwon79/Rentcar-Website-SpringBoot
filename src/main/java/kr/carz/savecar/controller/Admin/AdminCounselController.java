@@ -1,5 +1,6 @@
 package kr.carz.savecar.controller.Admin;
 
+import kr.carz.savecar.domain.RealTimeRentCar;
 import kr.carz.savecar.domain.Reservation;
 import kr.carz.savecar.dto.IdListVO;
 import kr.carz.savecar.service.ReservationService;
@@ -14,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class AdminCounselController {
@@ -32,6 +32,15 @@ public class AdminCounselController {
         ModelAndView mav = new ModelAndView();
 
         Page<Reservation> reservationPage = reservationService.findAllPageable(pageable);
+        List<Reservation> reservationList = reservationPage.getContent();
+        HashSet<String> titleSet = new HashSet<>();
+
+        for(Reservation reservation : reservationList){
+            titleSet.add(reservation.getTitle());
+        }
+        List<String> titleList = new ArrayList<>(titleSet);
+        Collections.sort(titleList);
+        titleList.add(0, "전체");
 
         mav.addObject("currentPage", pageable.getPageNumber());
         mav.addObject("pageSize", pageable.getPageSize());
@@ -41,6 +50,7 @@ public class AdminCounselController {
 
         mav.addObject("totalPages", reservationPage.getTotalPages());
         mav.addObject("reservationList", reservationPage.getContent());
+        mav.addObject("titleList", titleList);
         mav.addObject("title", "전체");
 
         mav.setViewName("admin/counsel_menu");

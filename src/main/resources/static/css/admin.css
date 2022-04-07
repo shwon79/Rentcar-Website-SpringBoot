@@ -441,6 +441,18 @@ button {
     align-items: center;
 }
 
+.two_columns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+}
+
+.two_columns div p {
+    margin: 0;
+}
+
 @media (max-width: 600px) {
     .reserve_list_wrapper {
         border: 1px solid #5495b1;
@@ -501,6 +513,10 @@ button {
     }
     .all_label label {
         flex-basis: 50%;
+    }
+    .two_columns {
+        flex-direction: column;
+        align-items: center;
     }
 }
 .detail_list {

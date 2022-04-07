@@ -385,3 +385,54 @@ function openPopUp(type) {
         alert('You must allow popups for this map to work.');
     }
 }
+
+function make_rent_month_new_reservation() {
+    if (document.getElementById("reservation-simple-name").value === ""){
+        alert('성함을 입력해주세요.')
+        return
+    }
+
+    if (document.getElementById("reservation-simple-phone").value === ""){
+        alert('전화번호를 입력해주세요.')
+        return
+    }
+
+    const agree1 = document.getElementById('agree1').checked;
+    const agree2 = document.getElementById('agree2').checked;
+    const agree3 = document.getElementById('agree3').checked;
+
+    let data = {
+        name : $("#reservation-simple-name").val(),
+        phoneNo : $("#reservation-simple-phone").val(),
+        detail : $("#reservation-simple-details").val(),
+        title : '월렌트+12/24개월상담신청',
+        product : '',
+        category1 : '',
+        category2 : '',
+        car_name : '',
+        mileage : '',
+        deposit : '',
+        age_limit : '',
+        option : '',
+        price : ''
+    };
+
+    // console.log(data);
+
+    if (agree1 && agree2 && agree3) {
+        $.ajax({
+            type : 'POST',
+            url : '/reservation/apply',
+            dataType : 'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function () {
+            alert('상담 신청이 완료되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    } else {
+        alert("개인정보 수집 및 이용에 동의해주세요.");
+    };
+}

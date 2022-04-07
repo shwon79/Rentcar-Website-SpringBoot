@@ -1,6 +1,15 @@
+.main_portfolio {
+    padding: 30px;
+}
+
 .price_menu {
     display: flex;
     justify-content: center;
+    word-break: keep-all;
+}
+
+.separator_padding {
+    padding: 1rem 2rem;
 }
 
  /*차종류별 메뉴 버튼 */
@@ -57,14 +66,20 @@
     display: none;
 }
 /* 테이블 행/열 고정 시작 */
+
+.responsive {
+    width: 100%;
+    height: max-content;
+    overflow: scroll;
+}
 table {
     margin: 1em 0;
     border-collapse: collapse;
     border: 0.1em solid #d6d6d6;
 }
 
-th {
-    /*position: -webkit-sticky;*/
+table thead th {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 2;
@@ -78,7 +93,7 @@ td {
 }
 
 td[scope=row], th[scope=row] {
-    /*position: -webkit-sticky;*/
+    position: -webkit-sticky;
     position: sticky;
     left: 0;
     z-index: 1;
@@ -94,120 +109,19 @@ td[scope=row]:nth-child(2), th[scope=row]:nth-child(2) {
 }
 
 
-
-
-
-
-/*table {*/
-/*    border-collapse: separate;*/
-/*    border-spacing: 0;*/
-/*    border-top: 1px solid grey;*/
-/*}*/
-
-/*td,*/
-/*th {*/
-/*    margin: 0;*/
-/*    border: 1px solid grey;*/
-/*    white-space: nowrap;*/
-/*    border-top-width: 0px;*/
-/*}*/
-
-/*.table_wrapper {*/
-/*    width: auto;*/
-/*    overflow-x: scroll;*/
-/*    margin-left: 5em;*/
-/*    overflow-y: visible;*/
-/*    padding: 0;*/
-/*}*/
-
-/*.headcol:first-child {*/
-/*    position: absolute;*/
-/*    width: 5em;*/
-/*    left: 0;*/
-/*    top: auto;*/
-/*    !*border-top-width: 1px;*!*/
-/*    !*!*only relevant for first row*!*!*/
-/*    !*margin-top: -1px;*!*/
-/*    !*!*compensate for top border*!*!*/
-/*}*/
-/*.headcol:nth-child(2) {*/
-/*    position: absolute;*/
-/*    width: 5em;*/
-/*    left: 45px;*/
-/*    top: auto;*/
-/*    !*border-top-width: 1px;*!*/
-/*    !*!*only relevant for first row*!*!*/
-/*    !*margin-top: -1px;*!*/
-/*    !*!*compensate for top border*!*!*/
-/*}*/
-
-
-/*.scroll-table {*/
-/*    width: auto;*/
-/*    margin-top: 20px;*/
-/*    position: relative;*/
-/*    padding-top: 40px;*/
-/*    border: 1px solid #d4d4d4;*/
-/*}*/
-/*.scroll-table div {*/
-/*    max-height: 273px;*/
-/*    overflow: auto;*/
-/*    overflow-x: hidden;*/
-/*}*/
-/*.scroll-table table {*/
-/*    width: auto;*/
-/*    table-layout: fixed;*/
-/*    border-spacing: 0;*/
-/*    border-collapse: collapse;*/
-/*}*/
-/*.scroll-table table thead tr {*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*}*/
-/*.scroll-table table thead tr th {*/
-/*    font-weight: normal;*/
-/*    width: 120px;*/
-/*    height: 40px;*/
-/*    background:#eee;*/
-/*}*/
-/*.scroll-table table thead tr th:first-child {*/
-/*    width: 238px;*/
-/*    font-weight: bold;*/
-/*    padding-left: 15px;*/
-/*    padding-right: 15px;*/
-/*    text-align: left;*/
-/*}*/
-/*.scroll-table table td {*/
-/*    text-align: center;*/
-/*    width: 120px;*/
-/*    color: #2a4383;*/
-/*    height: 40px;*/
-/*}*/
-/*.scroll-table table td:first-child {*/
-/*    width: 238px;*/
-/*    font-weight: bold;*/
-/*    padding-left: 15px;*/
-/*    padding-right: 15px;*/
-/*    text-align: left;*/
-/*}*/
-/*.scroll-table table tr {*/
-/*    display: inline-table;*/
-/*    width: 508px;*/
-/*    table-layout: fixed;*/
-/*}*/
-/*.scroll-table table tr td {*/
-/*    border-top: 1px solid #d4d4d4;*/
-/*}*/
-/*.scroll-table table tr.even td {*/
-/*    background: #eef3f8;*/
-/*}*/
-
 /* 테이블 행/열 고정 끝 */
 
-
-
 @media screen and (max-width: 600px) {
+    .main_portfolio {
+        padding: 30px 10px;
+    }
+
     .price_menu {
-        flex-direction: column;
+        font-size: 1.65rem;
+        justify-content: space-between;
+    }
+
+    button.btn-md, .separator_padding {
+        padding: 1rem 0;
     }
 }
