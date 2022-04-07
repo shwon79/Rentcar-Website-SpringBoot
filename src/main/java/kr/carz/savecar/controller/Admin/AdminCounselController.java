@@ -65,6 +65,15 @@ public class AdminCounselController {
         ModelAndView mav = new ModelAndView();
 
         Page<Reservation> reservationPage = reservationService.findByTitlePageable(title, pageable);
+        List<Reservation> reservationList = reservationPage.getContent();
+        HashSet<String> titleSet = new HashSet<>();
+
+        for(Reservation reservation : reservationList){
+            titleSet.add(reservation.getTitle());
+        }
+        List<String> titleList = new ArrayList<>(titleSet);
+        Collections.sort(titleList);
+        titleList.add(0, "전체");
 
         mav.addObject("currentPage", pageable.getPageNumber());
         mav.addObject("pageSize", pageable.getPageSize());
@@ -74,6 +83,7 @@ public class AdminCounselController {
 
         mav.addObject("totalPages", reservationPage.getTotalPages());
         mav.addObject("reservationList", reservationPage.getContent());
+        mav.addObject("titleList", titleList);
         mav.addObject("title", title);
 
         mav.setViewName("admin/counsel_menu");
