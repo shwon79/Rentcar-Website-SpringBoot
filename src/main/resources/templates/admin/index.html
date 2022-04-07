@@ -17,9 +17,10 @@
     <script th:src="@{/js/admin_index.js}" defer></script>
     <script>
         $(window).on('load', function () {
+            getViewId();
+
             let indexMenu = document.getElementById('indexMenu');
             indexMenu && indexMenu.classList.add('activeAdminMenu');
-            getViewId();
         });
     </script>
 </head>

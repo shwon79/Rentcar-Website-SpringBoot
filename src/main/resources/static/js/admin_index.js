@@ -20,7 +20,6 @@ function getViewId() {
 
 // 페이지 처음 뜰때 자동으로 최근 일주일치 그래프 보여주기
 function displayDefaultGraph() {
-    console.log('hi');
     res = [];
 
     fetchingGAData('daily');
@@ -30,7 +29,9 @@ function displayDefaultGraph() {
 function displayGraph(period) {
     res = [];
 
-    fetchingGAData(period);
+    setTimeout(function() {
+        fetchingGAData(period);
+    },1000);
 };
 
 // 원하는 날짜 계산해서 GA 데이터 가져오기
