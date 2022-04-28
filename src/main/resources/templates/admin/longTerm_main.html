@@ -64,8 +64,10 @@
                     <tr th:each="car, i : ${longTermRentList}">
                         <td>
                             <select name="newOld" class="newOld" th:data-id="${car.longTermRentId}">
-                                <option value="new" th:selected="${car.newOld == 'new' ? true : false}">신차</option>
-                                <option value="old" th:selected="${car.newOld == 'old' ? true : false}">중고차</option>
+                                <option value="신차장기" th:selected="${car.newOld == '신차장기' ? true : false}">신차장기</option>
+                                <option value="중고차장기" th:selected="${car.newOld == '중고차장기' ? true : false}">중고차장기</option>
+                                <option value="신차구독" th:selected="${car.newOld == '신차구독' ? true : false}">신차구독</option>
+                                <option value="중고차구독" th:selected="${car.newOld == '중고차구독' ? true : false}">중고차구독</option>
                             </select>
                         </td>
                         <td>

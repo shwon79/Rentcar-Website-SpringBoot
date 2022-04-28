@@ -10,6 +10,7 @@ function clickRegister() {
     let contractDeposit = document.getElementById('contractDeposit').value;
     let contractMaintenance = document.getElementById('contractMaintenance').value;
     let newOld = document.getElementById('newOld').value;
+    let fuel = document.getElementById('fuel').value;
     let image = document.getElementById('image').files;
 
     const requiredFields = [carName, carNum, carColor, carYearModel, contractPeriod, contractKm, contractMaintenance, contractPrice, contractDeposit, newOld];
@@ -34,6 +35,7 @@ function clickRegister() {
         formData.append('contractDeposit', contractDeposit);
         formData.append('contractMaintenance', contractMaintenance);
         formData.append('newOld', newOld);
+        formData.append('fuel', fuel);
         for (let i = 0; i < image.length; i++) {
             formData.append('file', image[i]);
         };
@@ -50,6 +52,7 @@ function clickRegister() {
         //     contractMaintenance: contractMaintenance,
         //     newOld: newOld,
         //     image: image,
+        //     fuel: fuel,
         // };
 
         if (confirm('장기렌트 차량을 등록 하시겠습니까?')) {

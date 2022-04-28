@@ -47,6 +47,7 @@ function make_long_term_rent_reservation(e) {
     } else {
         product = '누구나장기렌트';
     };
+    console.log(product);
 
     if (carColor) {
         title = '누구나장기렌트차량상세';

@@ -20,8 +20,14 @@
             </p>
             <ul id="car_card_list" style="margin-top: 50px;">
                 <li class="car_card" th:each="car, i : ${longTermRentList}" th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|">
-                    <div th:text="${car.newOld == 'old' ? '중고차장기' : '신차장기'}" class="car_card_slogan"
-                         th:style="${car.newOld == 'old' ? 'background: red' : 'background: blue'}"></div>
+                    <div th:text="${car.newOld}" class="car_card_slogan"
+                         th:style="${car.newOld == '중고차장기'? 'background: red' : ''}" th:styleappend="${car.newOld != '중고차장기' ? 'display:none' : ''}"></div>
+                    <div th:text="${car.newOld}" class="car_card_slogan"
+                         th:style="${car.newOld == '신차장기'? 'background: blue' : ''}" th:styleappend="${car.newOld != '신차장기' ? 'display:none' : ''}"></div>
+                    <div th:text="${car.newOld}" class="car_card_slogan"
+                         th:style="${car.newOld == '중고차구독'? 'background: lightgreen' : ''}" th:styleappend="${car.newOld != '중고차구독' ? 'display:none' : ''}"></div>
+                    <div th:text="${car.newOld}" class="car_card_slogan"
+                         th:style="${car.newOld == '신차구독'? 'background: pink' : ''}" th:styleappend="${car.newOld != '신차구독' ? 'display:none' : ''}"></div>
                     <div class="car_card_image_box">
                         <img th:src="${imageList[i.index][0].imageUrl}" alt="car image">
                     </div>
