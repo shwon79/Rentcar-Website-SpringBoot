@@ -206,16 +206,22 @@ public class RentEstimateController {
         switch (period) {
             case "rentMonth":
 
-                if (mileage.equals("2500")) {
-                    jsonArray.put(Math.round(costFor2k * rentCar.getCost_for_2_5k() / 1000) * 1000);
-                } else if (mileage.equals("2000")) {
-                    jsonArray.put(costFor2k);
-                } else if (mileage.equals("3000")) {
-                    jsonArray.put(Math.round(costFor2k * percentage3k / 1000) * 1000);
-                } else if (mileage.equals("4000")) {
-                    jsonArray.put(Math.round(costFor2k * percentage4k / 1000) * 1000);
-                } else if (mileage.equals("기타주행거리")) {
-                    jsonArray.put(rentCar.getCost_for_others());
+                switch (mileage) {
+                    case "2500":
+                        jsonArray.put(Math.round(costFor2k * rentCar.getCost_for_2_5k() / 1000) * 1000);
+                        break;
+                    case "2000":
+                        jsonArray.put(costFor2k);
+                        break;
+                    case "3000":
+                        jsonArray.put(Math.round(costFor2k * percentage3k / 1000) * 1000);
+                        break;
+                    case "4000":
+                        jsonArray.put(Math.round(costFor2k * percentage4k / 1000) * 1000);
+                        break;
+                    case "기타주행거리":
+                        jsonArray.put(rentCar.getCost_for_others());
+                        break;
                 }
 
                 jsonArray.put(rentCar.getDeposit());
