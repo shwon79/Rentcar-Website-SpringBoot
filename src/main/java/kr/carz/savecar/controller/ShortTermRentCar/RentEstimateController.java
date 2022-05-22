@@ -155,26 +155,30 @@ public class RentEstimateController {
 
         HashSet<String> categoryList = new HashSet<String>();
 
-        if (period.equals("rentMonth")) {
-            List<MonthlyRent> monthlyRents = monthlyRentService.findNameOfMonthlyRents(category1, category2);
+        switch (period) {
+            case "rentMonth":
+                List<MonthlyRent> monthlyRents = monthlyRentService.findNameOfMonthlyRents(category1, category2);
 
-            for (int i = 0; i < monthlyRents.size(); i++) {
-                categoryList.add(monthlyRents.get(i).getName());
-            }
-        } else if (period.equals("rentYear")) {
-            List<YearlyRent> yearlyRents = yearlyRentService.findNameOfYearlyRents(category1, category2);
+                for (MonthlyRent monthlyRent : monthlyRents) {
+                    categoryList.add(monthlyRent.getName());
+                }
+                break;
+            case "rentYear":
+                List<YearlyRent> yearlyRents = yearlyRentService.findNameOfYearlyRents(category1, category2);
 
-            for (int i = 0; i < yearlyRents.size(); i++) {
-                categoryList.add(yearlyRents.get(i).getName());
-            }
-        } else if (period.equals("rent2Year")) {
-            List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findNameOfTwoYearlyRents(category1, category2);
+                for (YearlyRent yearlyRent : yearlyRents) {
+                    categoryList.add(yearlyRent.getName());
+                }
+                break;
+            case "rent2Year":
+                List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findNameOfTwoYearlyRents(category1, category2);
 
-            for (int i = 0; i < twoYearlyRents.size(); i++) {
-                categoryList.add(twoYearlyRents.get(i).getName());
-            }
-        } else {
-            throw new NullPointerException();
+                for (TwoYearlyRent twoYearlyRent : twoYearlyRents) {
+                    categoryList.add(twoYearlyRent.getName());
+                }
+                break;
+            default:
+                throw new NullPointerException();
         }
 
         List<String> categoryHashToList = new ArrayList(categoryList);
