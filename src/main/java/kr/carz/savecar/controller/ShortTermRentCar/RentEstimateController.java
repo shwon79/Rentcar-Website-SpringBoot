@@ -231,14 +231,19 @@ public class RentEstimateController {
             case "rentYear":
                 YearlyRent yearlyRent = yearlyRentService.findPrice(carName);
 
-                if (mileage.equals("20000")) {
-                    jsonArray.put(Math.round(costFor2k * yearlyRent.getCost_for_20k() / 1000) * 1000);
-                } else if (mileage.equals("30000")) {
-                    jsonArray.put(Math.round(Math.round(costFor2k * percentage3k / 1000) * 1000 * yearlyRent.getCost_for_30k() / 1000) * 1000);
-                } else if (mileage.equals("40000")) {
-                    jsonArray.put(Math.round(Math.round(costFor2k * percentage4k / 1000) * 1000 * yearlyRent.getCost_for_40k() / 1000) * 1000);
-                } else if (mileage.equals("기타주행거리")) {
-                    jsonArray.put(yearlyRent.getCost_for_others());
+                switch (mileage) {
+                    case "20000":
+                        jsonArray.put(Math.round(costFor2k * yearlyRent.getCost_for_20k() / 1000) * 1000);
+                        break;
+                    case "30000":
+                        jsonArray.put(Math.round(Math.round(costFor2k * percentage3k / 1000) * 1000 * yearlyRent.getCost_for_30k() / 1000) * 1000);
+                        break;
+                    case "40000":
+                        jsonArray.put(Math.round(Math.round(costFor2k * percentage4k / 1000) * 1000 * yearlyRent.getCost_for_40k() / 1000) * 1000);
+                        break;
+                    case "기타주행거리":
+                        jsonArray.put(yearlyRent.getCost_for_others());
+                        break;
                 }
 
                 jsonArray.put(yearlyRent.getDeposit());
@@ -248,14 +253,19 @@ public class RentEstimateController {
             case "rent2Year":
                 TwoYearlyRent twoYearlyRent = twoYearlyRentService.findPrice(carName);
 
-                if (mileage.equals("20000")) {
-                    jsonArray.put(Math.round(costFor2k * twoYearlyRent.getCost_for_20Tk() / 1000) * 1000);
-                } else if (mileage.equals("30000")) {
-                    jsonArray.put(Math.round(Math.round(costFor2k * percentage3k / 1000) * 1000 * twoYearlyRent.getCost_for_30Tk() / 1000) * 1000);
-                } else if (mileage.equals("40000")) {
-                    jsonArray.put(Math.round(Math.round(costFor2k * percentage4k / 1000) * 1000 * twoYearlyRent.getCost_for_40Tk() / 1000) * 1000);
-                } else if (mileage.equals("기타주행거리")) {
-                    jsonArray.put(twoYearlyRent.getCost_for_others());
+                switch (mileage) {
+                    case "20000":
+                        jsonArray.put(Math.round(costFor2k * twoYearlyRent.getCost_for_20Tk() / 1000) * 1000);
+                        break;
+                    case "30000":
+                        jsonArray.put(Math.round(Math.round(costFor2k * percentage3k / 1000) * 1000 * twoYearlyRent.getCost_for_30Tk() / 1000) * 1000);
+                        break;
+                    case "40000":
+                        jsonArray.put(Math.round(Math.round(costFor2k * percentage4k / 1000) * 1000 * twoYearlyRent.getCost_for_40Tk() / 1000) * 1000);
+                        break;
+                    case "기타주행거리":
+                        jsonArray.put(twoYearlyRent.getCost_for_others());
+                        break;
                 }
 
                 jsonArray.put(twoYearlyRent.getDeposit());
