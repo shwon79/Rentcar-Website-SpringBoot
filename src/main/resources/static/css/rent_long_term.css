@@ -10,7 +10,6 @@
 #car_card_list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     margin: 50px 0 70px 0;
 }
 
@@ -19,7 +18,7 @@
     border-radius: 8px;
     flex-basis: 24%;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin: 3px;
 }
 
 .car_card:hover {
@@ -127,12 +126,14 @@
 @media screen and (min-width: 601px) and (max-width: 991px) {
     .car_card {
         flex-basis: 32%;
+        margin: 2px;
     }
 }
 
 @media screen and (max-width: 600px) {
     .car_card {
         flex-basis: 49%;
+        margin: 1px;
     }
     .car_card_info_box {
         padding: 5px;
@@ -269,6 +270,10 @@
     margin-bottom: 10px;
     font-size: 1.8rem;
     line-height: 1.2;
+}
+
+textarea {
+    font-size: 1.6rem;
 }
 
 @media screen and (max-width: 600px) {

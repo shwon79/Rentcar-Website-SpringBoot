@@ -25,6 +25,7 @@ public class LongTermRentDTO {
     private String contractMaintenance;
     private String newOld;
     private String fuel;
+    private String description;
 
     public LongTermRent toEntity() {
 
@@ -40,6 +41,7 @@ public class LongTermRentDTO {
                 .contractMaintenance(contractMaintenance)
                 .newOld(newOld)
                 .fuel(fuel)
+                .description(description)
                 .build();
 
     }

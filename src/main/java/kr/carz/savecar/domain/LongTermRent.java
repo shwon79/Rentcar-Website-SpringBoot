@@ -28,10 +28,12 @@ public class LongTermRent {
     private String newOld;
     private String fuel;
 
+    @Column(columnDefinition = "LONGTEXT")
+    private String description;
 
     @Builder
     public LongTermRent(Long longTermRentId,String carName,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
-                        ,String contractDeposit, String contractMaintenance, String newOld, String fuel) {
+                        ,String contractDeposit, String contractMaintenance, String newOld, String fuel, String description) {
         this.longTermRentId = longTermRentId;
         this.carName = carName;
         this.carNum = carNum;
@@ -44,5 +46,6 @@ public class LongTermRent {
         this.contractMaintenance = contractMaintenance;
         this.newOld = newOld;
         this.fuel = fuel;
+        this.description = description;
     }
 }

@@ -11,55 +11,75 @@ function clickRegister() {
     let contractMaintenance = document.getElementById('contractMaintenance').value;
     let newOld = document.getElementById('newOld').value;
     let fuel = document.getElementById('fuel').value;
+    let description = document.getElementById('description').value;
     let image = document.getElementById('image').files;
 
     const requiredFields = [carName, carNum, carColor, carYearModel, contractPeriod, contractKm, contractMaintenance, contractPrice, contractDeposit, newOld];
 
     let formData = new FormData();
 
-    // if (image.length > 10) {
-    //     // 사진 최대 갯수 10개
-    //     alert('이미지 첨부는 최대 10장까지 가능합니다.');
-    // } else
 
-    if (requiredFields.includes('') || requiredFields.includes(undefined) || image.length == 0) {
-        alert('필수 입력 내용을 빠짐없이 작성해주세요.');
-    } else if (!requiredFields.includes('') && !requiredFields.includes(undefined) && image.length != 0) {
-        formData.append('carName', carName);
-        formData.append('carNum', carNum);
-        formData.append('carColor', carColor);
-        formData.append('carYearModel', carYearModel);
-        formData.append('contractPeriod', contractPeriod);
-        formData.append('contractKm', contractKm);
-        formData.append('contractPrice', contractPrice);
-        formData.append('contractDeposit', contractDeposit);
-        formData.append('contractMaintenance', contractMaintenance);
-        formData.append('newOld', newOld);
-        formData.append('fuel', fuel);
-        for (let i = 0; i < image.length; i++) {
-            formData.append('file', image[i]);
-        };
-
-        // let data = {
-        //     carName: carName,
-        //     carNum: carNum,
-        //     carColor: carColor,
-        //     carYearModel: carYearModel,
-        //     contractPeriod: contractPeriod,
-        //     contractKm: contractKm,
-        //     contractPrice: contractPrice,
-        //     contractDeposit: contractDeposit,
-        //     contractMaintenance: contractMaintenance,
-        //     newOld: newOld,
-        //     image: image,
-        //     fuel: fuel,
-        // };
-
-        if (confirm('장기렌트 차량을 등록 하시겠습니까?')) {
-            // console.log(data);
-            postLongTermCar(formData);
-        };
+    formData.append('carName', carName);
+    formData.append('carNum', carNum);
+    formData.append('carColor', carColor);
+    formData.append('carYearModel', carYearModel);
+    formData.append('contractPeriod', contractPeriod);
+    formData.append('contractKm', contractKm);
+    formData.append('contractPrice', contractPrice);
+    formData.append('contractDeposit', contractDeposit);
+    formData.append('contractMaintenance', contractMaintenance);
+    formData.append('newOld', newOld);
+    formData.append('fuel', fuel);
+    formData.append('description', description);
+    for (let i = 0; i < image.length; i++) {
+        formData.append('file', image[i]);
     };
+
+    if (confirm('장기렌트 차량을 등록 하시겠습니까?')) {
+        // console.log(data);
+        postLongTermCar(formData);
+    };
+
+    // if (requiredFields.includes('') || requiredFields.includes(undefined) || image.length == 0) {
+    //     alert('필수 입력 내용을 빠짐없이 작성해주세요.');
+    // } else if (!requiredFields.includes('') && !requiredFields.includes(undefined) && image.length != 0) {
+    //     formData.append('carName', carName);
+    //     formData.append('carNum', carNum);
+    //     formData.append('carColor', carColor);
+    //     formData.append('carYearModel', carYearModel);
+    //     formData.append('contractPeriod', contractPeriod);
+    //     formData.append('contractKm', contractKm);
+    //     formData.append('contractPrice', contractPrice);
+    //     formData.append('contractDeposit', contractDeposit);
+    //     formData.append('contractMaintenance', contractMaintenance);
+    //     formData.append('newOld', newOld);
+    //     formData.append('fuel', fuel);
+    //     formData.append('description', description);
+    //     for (let i = 0; i < image.length; i++) {
+    //         formData.append('file', image[i]);
+    //     };
+    //
+    //     // let data = {
+    //     //     carName: carName,
+    //     //     carNum: carNum,
+    //     //     carColor: carColor,
+    //     //     carYearModel: carYearModel,
+    //     //     contractPeriod: contractPeriod,
+    //     //     contractKm: contractKm,
+    //     //     contractPrice: contractPrice,
+    //     //     contractDeposit: contractDeposit,
+    //     //     contractMaintenance: contractMaintenance,
+    //     //     newOld: newOld,
+    //     //     image: image,
+    //     //     fuel: fuel,
+    //     //     description: description
+    //     // };
+    //
+    //     if (confirm('장기렌트 차량을 등록 하시겠습니까?')) {
+    //         // console.log(data);
+    //         postLongTermCar(formData);
+    //     };
+    // };
 };
 
 // 새로운 장기렌트 차량 등록 기능_admin/longTerm/register
@@ -84,17 +104,18 @@ function postLongTermCar(data) {
 function clickEdit(e) {
     const id = e.dataset.id;
 
-    let carName = [...document.getElementsByClassName('carName')].find(ele => ele.dataset.id == id).value;
-    let carNum = [...document.getElementsByClassName('carNum')].find(ele => ele.dataset.id == id).value.replace(/(\s*)/g, '');
-    let carColor = [...document.getElementsByClassName('carColor')].find(ele => ele.dataset.id == id).value;
-    let carYearModel = [...document.getElementsByClassName('carYearModel')].find(ele => ele.dataset.id == id).value;
-    let contractPeriod = [...document.getElementsByClassName('contractPeriod')].find(ele => ele.dataset.id == id).value;
-    let contractKm = [...document.getElementsByClassName('contractKm')].find(ele => ele.dataset.id == id).value;
-    let contractPrice = [...document.getElementsByClassName('contractPrice')].find(ele => ele.dataset.id == id).value;
-    let contractDeposit = [...document.getElementsByClassName('contractDeposit')].find(ele => ele.dataset.id == id).value;
-    let contractMaintenance = [...document.getElementsByClassName('contractMaintenance')].find(ele => ele.dataset.id == id).value;
-    let newOld = [...document.getElementsByClassName('newOld')].find(ele => ele.dataset.id == id).value;
-    let fuel = [...document.getElementsByClassName('fuel')].find(ele => ele.dataset.id == id).value;
+    let carName = document.getElementById('carName').value;
+    let carNum = document.getElementById('carNum').value.replace(/(\s*)/g, '');
+    let carColor = document.getElementById('carColor').value;
+    let carYearModel = document.getElementById('carYearModel').value;
+    let contractPeriod = document.getElementById('contractPeriod').value;
+    let contractKm = document.getElementById('contractKm').value;
+    let contractPrice = document.getElementById('contractPrice').value;
+    let contractDeposit = document.getElementById('contractDeposit').value;
+    let contractMaintenance = document.getElementById('contractMaintenance').value;
+    let newOld = document.getElementById('newOld').value;
+    let fuel = document.getElementById('fuel').value;
+    let description = document.getElementById('description').value;
 
     let data = {
         carName: carName,
@@ -108,7 +129,9 @@ function clickEdit(e) {
         contractMaintenance: contractMaintenance,
         newOld: newOld,
         fuel: fuel,
+        description: description
     }
+    // console.log(data);
 
     editLongTermCar(id, data);
 };
@@ -153,10 +176,11 @@ function deleteLongTermCar(id) {
         }).done(function (result) {
             if (result.result == 1) {
                 alert('삭제 되었습니다.');
+                window.location.href='/admin/longTerm/main';
             } else if (result.result == 0) {
                 alert('삭제에 문제가 생겼습니다.');
+                location.reload();
             };
-            location.reload();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })

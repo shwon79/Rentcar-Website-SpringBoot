@@ -39,6 +39,7 @@ public class LongTermRentService {
         longTermRent.setContractMaintenance(dto.getContractMaintenance());
         longTermRent.setNewOld(dto.getNewOld());
         longTermRent.setFuel(dto.getFuel());
+        longTermRent.setDescription(dto.getDescription());
 
         return longTermRentRepository.save(longTermRent).getLongTermRentId();
     }

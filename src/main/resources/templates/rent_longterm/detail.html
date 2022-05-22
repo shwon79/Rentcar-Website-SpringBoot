@@ -26,7 +26,13 @@
                 <span th:if="${longTermRent.newOld == '신차장기' || longTermRent.newOld == '신차구독'}" th:text="${longTermRent.contractMaintenance}" style="word-break: keep-all;"></span>
             </p>
             <!--car image-->
-            <div id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
+            <div th:if="${longTermRentImageList.size()} == 0" id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
+                <!-- Content -->
+                <div class="carousel-inner" role="listbox">
+                    <img th:src="@{/img/picture_not_found.png}" style="height: 500px; width: 100%; border: 1px gray solid;" alt="car image">
+                </div>
+            </div>
+            <div th:if="${longTermRentImageList.size()} > 0" id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
                 <!-- Content -->
                 <div class="carousel-inner" role="listbox">
                     <div th:each="image, i : ${longTermRentImageList}" class="item main-item" th:data-title="${image.imageId}" th:classappend="${i.index == 0 ? 'active' : ''}">
@@ -43,7 +49,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            <div class="small_image_List">
+            <div th:if="${longTermRentImageList.size()} > 0" class="small_image_List">
                 <div th:each="image, i : ${longTermRentImageList}" class="small_image_box" th:data-title="${image.imageId}">
                     <img th:src="${image.imageUrl}" alt="car image">
                 </div>
@@ -124,6 +130,15 @@
                             <div class="detail_info">
                                 <p>계약 서비스</p>
                                 <p id="contract_maintenance" th:text="${longTermRent.contractMaintenance}"></p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="long_term_detail_info_box">
+                        <p class="detail_info_title">상세 설명</p>
+                        <div class="detail_info_wrapper">
+                            <div class="detail_info">
+                                <textarea id="description" rows="10" cols="70" style="border: none;" th:text="${longTermRent.description}"></textarea>
                             </div>
                         </div>
                     </article>

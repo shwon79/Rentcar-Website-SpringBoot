@@ -54,7 +54,7 @@ public class AdminLongTermRentController {
         LongTermRentDTO longTermRentDTO = new LongTermRentDTO(req.getParameter("carName"),req.getParameter("carNum"),req.getParameter("carColor"),
                                                  req.getParameter("carYearModel"),req.getParameter("contractPeriod"),req.getParameter("contractKm"),
                                                     req.getParameter("contractPrice"),req.getParameter("contractDeposit"),req.getParameter("contractMaintenance"),
-                                                    req.getParameter("newOld"),req.getParameter("fuel"));
+                                                    req.getParameter("newOld"),req.getParameter("fuel"),req.getParameter("description"));
         Long longTermRentId = longTermRentService.saveDTO(longTermRentDTO);
 
 
@@ -142,6 +142,23 @@ public class AdminLongTermRentController {
 
         return "admin/longTerm_detail";
     }
+
+    @GetMapping("/admin/longTerm/detail/image/{longTermId}")
+    public String rent_long_term_detail_image(Model model, @PathVariable Long longTermId) throws Exception {
+
+        Optional<LongTermRent> longTermRentWrapper = longTermRentService.findById(longTermId);
+        if(longTermRentWrapper.isPresent()){
+            LongTermRent longTermRent = longTermRentWrapper.get();
+            List<LongTermRentImage> longTermRentImageList = longTermRentImageService.findByLongTermRent(longTermRent);
+            model.addAttribute("longTermRent", longTermRent);
+            model.addAttribute("longTermRentImageList", longTermRentImageList);
+        } else {
+            throw new Exception("해당하는 차량을 찾을 수 없습니다.");
+        }
+
+        return "admin/longTerm_detail_image";
+    }
+
 
 
 

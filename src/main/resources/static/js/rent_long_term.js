@@ -14,6 +14,13 @@ let smallBox = document.getElementsByClassName('small_image_box');
     });
 });
 
+// textarea height 설정
+const textarea = document.querySelector('textarea')
+const text = textarea.value;
+const lines = text.split("\n");
+const count = lines.length;
+textarea.rows = count;
+
 // 상담신청하기_rent/long_term main, detail
 function make_long_term_rent_reservation(e) {
     let reservationPhone = $("#reservation-simple-phone").val();

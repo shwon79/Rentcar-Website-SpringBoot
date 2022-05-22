@@ -105,8 +105,10 @@
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-primary" th:data-id="${car.longTermRentId}" onclick="clickEdit(this)" style="margin-bottom: 4px;">내용 수정</button>
                             <a th:href="'/admin/longTerm/detail/' + ${car.longTermRentId}">
+                                <button class="btn btn-primary" th:data-id="${car.longTermRentId}" style="margin-bottom: 4px;">내용 수정</button>
+                            </a>
+                            <a th:href="'/admin/longTerm/detail/image/' + ${car.longTermRentId}">
                                 <button class="btn btn-primary" th:data-id="${car.longTermRentId}" style="margin-bottom: 4px;">사진 수정</button>
                             </a>
                             <button class="btn btn-danger" th:data-id="${car.longTermRentId}" onclick="clickDelete(this)">차량 삭제</button>

@@ -43,39 +43,79 @@
             </div>
         </nav>
 
-        <div class="inner_content container" style="text-align: center;">
+        <div class="detail_container">
             <h2 class="page_title">
-                <h2 th:text="${longTermRent.carName}"></h2>
-                <h2> 이미지 수정</h2>
+                <h2 th:text="${longTermRent.carName}" style="margin-left: 20px;"></h2>
             </h2>
-            <div style="margin-top: 30px;">
-<!--                <p style="text-align: center;">준비 중 입니다.</p>-->
-                <div class="upload-box" style="border: 1px solid #dee2e6; padding: 10px; margin: 30px auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <input type="file" name="file" multiple="multiple" accept="image/*" th:title="${longTermRent.carName}" id="imageFile" style="width: -webkit-fill-available;">
-                    <button class="btn btn-primary" th:data-id="${longTermId}"
-                            onclick="clickAddImage(this)"
-                            style="margin-top: 10px;">
-                        이미지 추가하기
-                    </button>
-                </div>
-<!--                <div style="text-align: right; margin-bottom: 10px;">-->
-<!--                    <button class="btn btn-primary changeOrderBtn" onclick="displaySortingBox();">이미지 순서 변경</button>-->
-<!--                </div>-->
-                <div class="image-box" th:if="${not #lists.isEmpty(longTermRentImageList)}">
-                    <div class="upload-box" th:each="image, i : ${longTermRentImageList}" style="height: auto;">
-                        <p>
-                            <span th:text="${i.index + 1}"></span>
-                            <span>번째 이미지</span>
-                        </p>
-                        <div style="text-align: right; margin-bottom: 10px;">
-                            <button class="btn btn-danger" th:data-id="${image.imageId}"
-                                    th:onclick="clickDeleteImage(this)">
-                                삭제하기
-                            </button>
-                        </div>
-                        <img th:src="${image.imageUrl}" th:alt="${image.imageId}" style="height: auto;">
-                    </div>
-                </div>
+            <div class="detail_list detail_list_group">
+                <p class="detail_group_title">차량 정보</p>
+            </div>
+
+            <div class="detail_list">
+                <p class="detail_first">구분</p>
+                <select id="newOld" name="newOld" th:data-id="${longTermRent.longTermRentId}">
+                    <option value="신차장기" th:selected="${longTermRent.newOld == '신차장기' ? true : false}">신차장기</option>
+                    <option value="중고차장기" th:selected="${longTermRent.newOld == '중고차장기' ? true : false}">중고차장기</option>
+                    <option value="신차구독" th:selected="${longTermRent.newOld == '신차구독' ? true : false}">신차구독</option>
+                    <option value="중고차구독" th:selected="${longTermRent.newOld == '중고차구독' ? true : false}">중고차구독</option>
+                </select>
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">차량번호</p>
+                <input id="carNum" class="detail_second" th:value="${longTermRent.carNum}" />
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">차명</p>
+                <input id="carName" class="detail_second" th:value="${longTermRent.carName}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">색상</p>
+                <input id="carColor" class="detail_second" th:value="${longTermRent.carColor}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">년식</p>
+                <input id="carYearModel" class="detail_second" th:value="${longTermRent.carYearModel}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">연료</p>
+                <input id="fuel" class="detail_second" th:value="${longTermRent.fuel}" />
+            </div>
+
+            <div class="detail_list detail_list_group">
+                <p class="detail_group_title">계약 정보</p>
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">계약 기간</p>
+                <input id="contractPeriod" class="detail_second" th:value="${longTermRent.contractPeriod}" />
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">약정 주행거리</p>
+                <input id="contractKm" class="detail_second" th:value="${longTermRent.contractKm}" />
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">월렌트료</p>
+                <input id="contractPrice" class="detail_second" th:value="${longTermRent.contractPrice}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">보증금</p>
+                <input id="contractDeposit" class="detail_second" th:value="${longTermRent.contractDeposit}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">계약 서비스</p>
+                <input id="contractMaintenance" class="detail_second" th:value="${longTermRent.contractMaintenance}" />
+            </div>
+
+
+            <div class="detail_list detail_list_group">
+                <p class="detail_group_title">상세 설명</p>
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">설명</p>
+                <textarea id="description" class="detail_second" rows="8" th:text="${longTermRent.description}" > </textarea>
+            </div>
+            <div class="detail_list" style="display: table; margin: auto;">
+                <button class="btn btn-primary" th:data-id="${longTermRent.longTermRentId}" onclick="clickEdit(this)" style="margin: 3px;">수정</button>
+                <button class="btn btn-danger" th:data-id="${longTermRent.longTermRentId}" onclick="clickDelete(this)" style="margin: 3px;">차량 삭제</button>
             </div>
         </div>
     </div>
