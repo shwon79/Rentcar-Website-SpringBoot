@@ -2,7 +2,6 @@ package kr.carz.savecar.controller.ShortTermRentCar;
 
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.MonthlyRentService;
-import kr.carz.savecar.service.ReservationService;
 import kr.carz.savecar.service.TwoYearlyRentService;
 import kr.carz.savecar.service.YearlyRentService;
 import org.json.JSONArray;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,15 +21,12 @@ public class RentEstimateController {
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
     private final TwoYearlyRentService twoYearlyRentService;
-    private final ReservationService reservationService;
 
     @Autowired
-    public RentEstimateController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
-                                  ReservationService reservationService) {
+    public RentEstimateController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
-        this.reservationService = reservationService;
     }
 
 
@@ -47,7 +42,7 @@ public class RentEstimateController {
     }
 
     @RequestMapping("/rent/estimate/categories/{category1}/{category2}")
-    public String handleRequest(ModelMap model, @PathVariable("category1") String category1, @PathVariable("category2") String category2) throws Exception {
+    public String handleRequest(ModelMap model, @PathVariable("category1") String category1, @PathVariable("category2") String category2) {
         model.put("category1", category1);
         model.put("category2", category2);
 
@@ -57,30 +52,34 @@ public class RentEstimateController {
     // 차종 api
     @RequestMapping(value = "/rent/estimate/{period}", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
-    public void get_monthly_rent_category1(HttpServletResponse res, HttpServletRequest req, @PathVariable String period) throws IOException {
+    public void get_monthly_rent_category1(HttpServletResponse res, @PathVariable String period) throws IOException {
 
-        HashSet<String> categoryList = new HashSet<String>();
+        HashSet<String> categoryList = new HashSet<>();
 
-        if (period.equals("rentMonth")) {
-            List<MonthlyRent> monthlyRents = monthlyRentService.findAllMonthlyRents();
+        switch (period) {
+            case "rentMonth":
+                List<MonthlyRent> monthlyRents = monthlyRentService.findAllMonthlyRents();
 
-            for (int i = 0; i < monthlyRents.size(); i++) {
-                categoryList.add(monthlyRents.get(i).getCategory1());
-            }
-        } else if (period.equals("rentYear")) {
-            List<YearlyRent> yearlyRents = yearlyRentService.findAllYearlyRents();
+                for (MonthlyRent monthlyRent : monthlyRents) {
+                    categoryList.add(monthlyRent.getCategory1());
+                }
+                break;
+            case "rentYear":
+                List<YearlyRent> yearlyRents = yearlyRentService.findAllYearlyRents();
 
-            for (int i = 0; i < yearlyRents.size(); i++) {
-                categoryList.add(yearlyRents.get(i).getCategory1());
-            }
-        } else if (period.equals("rent2Year")) {
-            List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findAllTwoYearlyRents();
+                for (YearlyRent yearlyRent : yearlyRents) {
+                    categoryList.add(yearlyRent.getCategory1());
+                }
+                break;
+            case "rent2Year":
+                List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findAllTwoYearlyRents();
 
-            for (int i = 0; i < twoYearlyRents.size(); i++) {
-                categoryList.add(twoYearlyRents.get(i).getCategory1());
-            }
-        } else {
-            throw new NullPointerException();
+                for (TwoYearlyRent twoYearlyRent : twoYearlyRents) {
+                    categoryList.add(twoYearlyRent.getCategory1());
+                }
+                break;
+            default:
+                throw new NullPointerException();
         }
 
 
@@ -105,32 +104,36 @@ public class RentEstimateController {
 
         List<String> categoryList2 = new ArrayList();
 
-        if (period.equals("rentMonth")) {
-            List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
+        switch (period) {
+            case "rentMonth":
+                List<MonthlyRent> monthlyRents = monthlyRentService.findCategory2OfMonthlyRents(category1);
 
-            for (int i = 0; i < monthlyRents.size(); i++) {
-                if (!categoryList2.contains(monthlyRents.get(i).getCategory2())) {
-                    categoryList2.add(monthlyRents.get(i).getCategory2());
+                for (MonthlyRent monthlyRent : monthlyRents) {
+                    if (!categoryList2.contains(monthlyRent.getCategory2())) {
+                        categoryList2.add(monthlyRent.getCategory2());
+                    }
                 }
-            }
-        } else if (period.equals("rentYear")) {
-            List<YearlyRent> yearlyRents = yearlyRentService.findCategory2OfMonthlyRents(category1);
+                break;
+            case "rentYear":
+                List<YearlyRent> yearlyRents = yearlyRentService.findCategory2OfMonthlyRents(category1);
 
-            for (int i = 0; i < yearlyRents.size(); i++) {
-                if (!categoryList2.contains(yearlyRents.get(i).getCategory2())) {
-                    categoryList2.add(yearlyRents.get(i).getCategory2());
+                for (YearlyRent yearlyRent : yearlyRents) {
+                    if (!categoryList2.contains(yearlyRent.getCategory2())) {
+                        categoryList2.add(yearlyRent.getCategory2());
+                    }
                 }
-            }
-        } else if (period.equals("rent2Year")) {
-            List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findByCategory1(category1);
+                break;
+            case "rent2Year":
+                List<TwoYearlyRent> twoYearlyRents = twoYearlyRentService.findByCategory1(category1);
 
-            for (int i = 0; i < twoYearlyRents.size(); i++) {
-                if (!categoryList2.contains(twoYearlyRents.get(i).getCategory2())) {
-                    categoryList2.add(twoYearlyRents.get(i).getCategory2());
+                for (TwoYearlyRent twoYearlyRent : twoYearlyRents) {
+                    if (!categoryList2.contains(twoYearlyRent.getCategory2())) {
+                        categoryList2.add(twoYearlyRent.getCategory2());
+                    }
                 }
-            }
-        } else {
-            throw new NullPointerException();
+                break;
+            default:
+                throw new NullPointerException();
         }
 
         JSONArray jsonArray = new JSONArray();
