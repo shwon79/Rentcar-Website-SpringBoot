@@ -64,99 +64,99 @@ public class RealtimeRentController {
     private String moren_url_except_date;
 
     // 모렌 대기차 DB로 저장
-//    @Scheduled(cron = "0 0/10 * * * *")
-//    public void rent_month_save() {
-//
-//        realTimeRentImageService.deleteAllInBatch();
-//        realTimeRentService.deleteAllInBatch();
-//
-//        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
-//        String expected_day = expectedDayList.get(0).getExpectedDay();
-//        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
-//
-//        HttpConnection http = new HttpConnection();
-//        JSONObject responseJson = http.sendGetRequest(moren_url);
-//        JSONArray list_json_array = (JSONArray) responseJson.get("list");
-//
-//        long currentRealTimeRentIdx = 1, currentRealTimeRentImageIdx = 1;
-//        for(int i=0; i<list_json_array.length(); i++){
-//
-//            JSONObject morenObject = (JSONObject)list_json_array.get(i);
-//            String order_end = ((String)morenObject.get("order_end"));
-//            Long carOld = Long.parseLong((String)morenObject.get("carOld"));
-//
-//            if (!morenObject.get("reserve").equals(null)) {
-//                continue;
-//            }
-//
-//            String carCategory = (String) morenObject.get("carCategory");
-//            if(carCategory.equals("레이")){
-//                String carName = (String) morenObject.get("carName");
-//                for(int index=0; index<carName.length(); index++){
-//                    if(carName.charAt(index) == '밴'){
-//                        carCategory = "레이밴";
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            int isExpected = -1;
-//            // n일 이내 반납예정차량
-//            if ( (Integer)morenObject.get("order_status") == 2 &&
-//                    order_end.length() >= 19 &&
-//                    order_end.substring(0, 19).compareTo(DateTime.today_date_and_time()) >= 0 &&  // 시간 고려해서
-//                    order_end.substring(0, 10).compareTo(DateTime.expected()) <= 0 // 날짜만 고려해서
-//                ) {
-//                    isExpected = 1;
-//                }
-//            // 현재 가능차
-//            else if ((Integer)morenObject.get("order_status") == 0){
-//                    isExpected = 0;
-//            } else {
-//                    continue;
-//            }
-//
-//            Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findByMorenCar(carOld, carOld, carCategory);
-//
-//            if(monthlyRentWrapper.isPresent()) {
-//                MonthlyRent monthlyRent = monthlyRentWrapper.get();
-//
-//                Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
-//                double discount_price = 0;
-//                String discount_description = null;
-//                int priceDisplay = 1;
-//                if (discount_object.isPresent()) {
-//                    Discount discount = discount_object.get();
-//                    discount_price = discount.getDiscount();
-//                    discount_description = discount.getDescription();
-//                    priceDisplay = discount.getPriceDisplay();
-//                }
-//
-//                RealTimeRentCar realTimeRent = new RealTimeRentCar(currentRealTimeRentIdx++, monthlyRent, (String) morenObject.get("carIdx"), carCategory,
-//                        (String) morenObject.get("carName"), (String) morenObject.get("carDetail"),(String) morenObject.get("carNo"),
-//                        (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),(String) morenObject.get("carDisplacement"),
-//                        (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
-//                        (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),(String) morenObject.get("order_end"),
-//                        monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
-//                        discount_description, isExpected, priceDisplay);
-//
-//                realTimeRentService.save(realTimeRent);
-//
-//                if(!morenObject.get("carThumbImages").equals(null)) {
-//
-//                    JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
-//                    for (int j = 0; j < carJsonArray.length(); j++) {
-//                        RealTimeRentCarImage realTimeRentImage = new RealTimeRentCarImage(currentRealTimeRentImageIdx++, realTimeRent, (String) carJsonArray.get(j));
-//                        realTimeRentImageService.save(realTimeRentImage);
-//                    }
-//                }
-//            } else {
-////                System.out.println("Error ! 가격 못 찾음 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
-////                reservationController.send_message(admin1, admin1,"Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"),
-////                        "Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
-//            }
-//        }
-//    }
+    @Scheduled(cron = "0 0/10 * * * *")
+    public void rent_month_save() {
+
+        realTimeRentImageService.deleteAllInBatch();
+        realTimeRentService.deleteAllInBatch();
+
+        List<ExpectedDay> expectedDayList = expectedDayService.findAll();
+        String expected_day = expectedDayList.get(0).getExpectedDay();
+        String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
+
+        HttpConnection http = new HttpConnection();
+        JSONObject responseJson = http.sendGetRequest(moren_url);
+        JSONArray list_json_array = (JSONArray) responseJson.get("list");
+
+        long currentRealTimeRentIdx = 1, currentRealTimeRentImageIdx = 1;
+        for(int i=0; i<list_json_array.length(); i++){
+
+            JSONObject morenObject = (JSONObject)list_json_array.get(i);
+            String order_end = ((String)morenObject.get("order_end"));
+            Long carOld = Long.parseLong((String)morenObject.get("carOld"));
+
+            if (!morenObject.get("reserve").equals(null)) {
+                continue;
+            }
+
+            String carCategory = (String) morenObject.get("carCategory");
+            if(carCategory.equals("레이")){
+                String carName = (String) morenObject.get("carName");
+                for(int index=0; index<carName.length(); index++){
+                    if(carName.charAt(index) == '밴'){
+                        carCategory = "레이밴";
+                        break;
+                    }
+                }
+            }
+
+            int isExpected = -1;
+            // n일 이내 반납예정차량
+            if ( (Integer)morenObject.get("order_status") == 2 &&
+                    order_end.length() >= 19 &&
+                    order_end.substring(0, 19).compareTo(DateTime.today_date_and_time()) >= 0 &&  // 시간 고려해서
+                    order_end.substring(0, 10).compareTo(DateTime.expected()) <= 0 // 날짜만 고려해서
+                ) {
+                    isExpected = 1;
+                }
+            // 현재 가능차
+            else if ((Integer)morenObject.get("order_status") == 0){
+                    isExpected = 0;
+            } else {
+                    continue;
+            }
+
+            Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findByMorenCar(carOld, carOld, carCategory);
+
+            if(monthlyRentWrapper.isPresent()) {
+                MonthlyRent monthlyRent = monthlyRentWrapper.get();
+
+                Optional<Discount> discount_object = discountService.findDiscountByCarNo((String) morenObject.get("carNo"));
+                double discount_price = 0;
+                String discount_description = null;
+                int priceDisplay = 1;
+                if (discount_object.isPresent()) {
+                    Discount discount = discount_object.get();
+                    discount_price = discount.getDiscount();
+                    discount_description = discount.getDescription();
+                    priceDisplay = discount.getPriceDisplay();
+                }
+
+                RealTimeRentCar realTimeRent = new RealTimeRentCar(currentRealTimeRentIdx++, monthlyRent, (String) morenObject.get("carIdx"), carCategory,
+                        (String) morenObject.get("carName"), (String) morenObject.get("carDetail"),(String) morenObject.get("carNo"),
+                        (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),(String) morenObject.get("carDisplacement"),
+                        (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
+                        (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),(String) morenObject.get("order_end"),
+                        monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
+                        discount_description, isExpected, priceDisplay);
+
+                realTimeRentService.save(realTimeRent);
+
+                if(!morenObject.get("carThumbImages").equals(null)) {
+
+                    JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
+                    for (int j = 0; j < carJsonArray.length(); j++) {
+                        RealTimeRentCarImage realTimeRentImage = new RealTimeRentCarImage(currentRealTimeRentImageIdx++, realTimeRent, (String) carJsonArray.get(j));
+                        realTimeRentImageService.save(realTimeRentImage);
+                    }
+                }
+            } else {
+//                System.out.println("Error ! 가격 못 찾음 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
+//                reservationController.send_message(admin1, admin1,"Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"),
+//                        "Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
+            }
+        }
+    }
 
 
 
