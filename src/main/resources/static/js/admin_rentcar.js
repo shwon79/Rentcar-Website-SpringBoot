@@ -328,7 +328,7 @@ function registerRentCar() {
     const img_input = document.getElementById('img_input').files[0];
     let cost_for_2_5k_price, cost_for_3k_price, cost_for_4k_price;
 
-    const requiredFields = [category1, category2, name, deposit, cost_for_2k, cost_for_2_5k, cost_for_3k, cost_for_4k, cost_for_others, age_limit, cost_per_km, nameMoren, start, end, credit, img_input];
+    const requiredFields = [category1, category2, name, deposit, cost_for_2k, cost_for_2_5k, cost_for_3k, cost_for_4k, cost_for_others, age_limit, cost_per_km, nameMoren, start, end, credit];
 
     const depositYearly = document.getElementById('depositYearly').value;
     const cost_for_20k = document.getElementById('cost_for_20k').value;
@@ -391,7 +391,7 @@ function registerRentCar() {
     formData.append('nameMoren', nameMoren);
     formData.append('start', start);
     formData.append('end', end);
-    formData.append('file', img_input);
+    // formData.append('file', img_input);
     formData.append('isTwoYearExist', isTwoYearExist);
 
     // 다른 것
@@ -436,11 +436,8 @@ function registerRentCar() {
     // for (let value of formData.values()) {
     //     console.log(value);
     // }
-
-    if (img_input === undefined) {
-        alert('이미지를 첨부해주세요.');
-    } else if (requiredFields.includes('') || requiredFields.includes(undefined)) {
-        alert('캠핑카 등록에 필요한 필수 정보들을 작성해주세요.')
+    if (requiredFields.includes('') || requiredFields.includes(undefined)) {
+        alert('차량 등록에 필요한 필수 정보들을 작성해주세요.')
     } else if (!requiredFields.includes('') && !requiredFields.includes(undefined)) {
         postData(formData);
     }

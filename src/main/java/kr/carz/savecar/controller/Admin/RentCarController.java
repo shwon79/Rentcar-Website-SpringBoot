@@ -181,7 +181,8 @@ public class RentCarController {
 
         JSONObject jsonObject = new JSONObject();
 
-        String imgPath = s3Service.upload(rentCarVO.getFile());
+//        String imgPath = s3Service.upload(rentCarVO.getFile());
+        String imgPath = "https://ibb.co/4fDBY1y";
 
         Long yearRentId = yearlyRentService.saveByRentCarVO(rentCarVO, imgPath);
         Optional<YearlyRent> yearlyRentWrapper = yearlyRentService.findByid(yearRentId);

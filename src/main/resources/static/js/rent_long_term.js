@@ -21,6 +21,23 @@ const lines = text.split("\n");
 const count = lines.length;
 textarea.rows = count;
 
+function check_all_box(){
+    const total_agree =  document.getElementById("agree4");
+     const agrees = document.getElementsByClassName("agree");
+
+     if(total_agree.checked == true) {
+         for (var i = 0; i < agrees.length; i++) {
+             var item = agrees.item(i);
+             item.checked = true;
+         }
+     } else {
+         for (var i = 0; i < agrees.length; i++) {
+             var item = agrees.item(i);
+             item.checked = false;
+         }
+     }
+}
+
 // 상담신청하기_rent/long_term main, detail
 function make_long_term_rent_reservation(e) {
     let reservationPhone = $("#reservation-simple-phone").val();

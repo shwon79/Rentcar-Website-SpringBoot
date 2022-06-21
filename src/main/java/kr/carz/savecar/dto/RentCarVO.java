@@ -24,7 +24,7 @@ public class RentCarVO {
     private Long start;
     private Long end;
 
-    private MultipartFile file;
+//    private MultipartFile file;
     private int isTwoYearExist;  // 1이면 24개월 有, 2이면 24개월 無
 
     // 다른것

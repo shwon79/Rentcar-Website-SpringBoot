@@ -38,6 +38,9 @@ public class ReservationController {
     @Value("${phone.admin3}")
     private String admin3;
 
+    @Value("${phone.admin4}")
+    private String admin4;
+
     @Value("${kakao.ATA.template.templatecode.realtimerent.employee}")
     private String realtimeRentEmployeeTemplateCode;
 
@@ -251,14 +254,14 @@ public class ReservationController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1+", "+admin2+", "+admin3); // 01033453328 추가
+        params.put("to", admin1+", "+admin2+", "+admin3 + ", " + admin4);
         params.put("from", admin3);
         params.put("type", "LMS");
 
 
         /* 고객에게 예약확인 문자 전송 */
         params2.put("to", dto.getPhoneNo());
-        params2.put("from", admin3);  // 16613331 테스트하기
+        params2.put("from", admin3);
         params2.put("type", "LMS");
 
 
