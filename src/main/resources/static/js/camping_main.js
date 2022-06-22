@@ -1,3 +1,21 @@
+
+function check_camping_all_box(){
+    const total_agree =  document.getElementById("agree4");
+    const agrees = document.getElementsByClassName("agree");
+
+    if(total_agree.checked == true) {
+        for (var i = 0; i < agrees.length; i++) {
+            var item = agrees.item(i);
+            item.checked = true;
+        }
+    } else {
+        for (var i = 0; i < agrees.length; i++) {
+            var item = agrees.item(i);
+            item.checked = false;
+        }
+    }
+}
+
 // 캠핑카 렌트 목록에서 가장 저렴한 가격 보여주기_camping/main
 function displayCheapestPrice() {
     let euroObj, limoObj, travelObj;

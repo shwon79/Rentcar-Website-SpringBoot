@@ -1,3 +1,21 @@
+
+function check_all_box() {
+    const total_agree = document.getElementById("agree4");
+    const agrees = document.getElementsByClassName("agree");
+
+    if (total_agree.checked == true) {
+        for (var i = 0; i < agrees.length; i++) {
+            var item = agrees.item(i);
+            item.checked = true;
+        }
+    } else {
+        for (var i = 0; i < agrees.length; i++) {
+            var item = agrees.item(i);
+            item.checked = false;
+        }
+    }
+}
+
 // sidebar
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {

@@ -1,5 +1,23 @@
 let sortType = 'desc';
 
+
+function check_rent_month_all_box(){
+    const total_agree =  document.getElementById("agree4");
+    const agrees = document.getElementsByClassName("agree");
+
+    if(total_agree.checked == true) {
+        for (var i = 0; i < agrees.length; i++) {
+            var item = agrees.item(i);
+            item.checked = true;
+        }
+    } else {
+        for (var i = 0; i < agrees.length; i++) {
+            var item = agrees.item(i);
+            item.checked = false;
+        }
+    }
+}
+
 // 현재 대여 가능 차량 & n일 이내 입고 예정 차량 정렬_rent/month/new
 function sortContent(index, status, isNumber) {
     let table = document.getElementsByClassName(`table_${status}`);

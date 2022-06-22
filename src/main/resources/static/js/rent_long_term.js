@@ -21,7 +21,7 @@ const lines = text.split("\n");
 const count = lines.length;
 textarea.rows = count;
 
-function check_all_box(){
+function check_long_term_all_box(){
     const total_agree =  document.getElementById("agree4");
      const agrees = document.getElementsByClassName("agree");
 
@@ -71,7 +71,6 @@ function make_long_term_rent_reservation(e) {
     } else {
         product = '누구나장기렌트';
     };
-    console.log(product);
 
     if (carColor) {
         title = '누구나장기렌트차량상세';

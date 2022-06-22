@@ -885,10 +885,10 @@ opacity: .5; }
     position: fixed;
     z-index: 100;
     display: block;
-    background: #61eccc;
-    color: #ffffff;
+    background: white;
+    color: black;
     padding: 20px 20px;
-    font-size: 1.2em;
+    font-size: 1.4em;
     top: 15%;
     right: 3%;
     border: none;
@@ -900,15 +900,15 @@ opacity: .5; }
     position: fixed;
     z-index: 100;
     display: block;
-    background: #61eccc;
+    background: blue;
     color: #ffffff;
     padding: 20px 20px;
-    font-size: 1.2em;
-    top: 22%;
+    font-size: 1.3em;
+    top: 23%;
     right: 3%;
     border: none;
     border-radius: 30vh;
-    box-shadow: 0 0 20px #2af1ff;
+    box-shadow: 0 0 20px blue;
 }
 
 .fixed_phone_btn {
