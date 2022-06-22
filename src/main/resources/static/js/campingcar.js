@@ -127,11 +127,16 @@ function campingcar_rent_reservation () {
         product :document.getElementById("rentProduct").getAttribute("value")
     };
 
-    // console.log(data);
+    let check1 = document.getElementById("agree1").checked;
+    let check2 = document.getElementById("agree2").checked;
+    let check3 = document.getElementById("agree3").checked;
+    let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-    let checkbox = document.getElementById("agree")
-
-    if(checkbox.checked) {
+    if (check1 != true || check2 != true || check3 != true) {
+        alert("약관에 동의해주세요.");
+    } else if (regPhone.test(document.getElementById("reservation-detail-phone").value) == false) {
+        alert("연락처를 '010-1234-5678' 형식으로 입력해주세요.");
+    } else {
         $.ajax({
             type : 'POST',
             url : '/reservation/apply',
@@ -144,9 +149,7 @@ function campingcar_rent_reservation () {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
-    } else{
-        alert("개인정보 수집 및 이용에 동의해주세요.");
-    }
+    };
 };
 
 // 화면 맨 위로 올라가기 버튼

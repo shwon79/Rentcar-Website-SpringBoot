@@ -98,8 +98,6 @@ function make_long_term_rent_reservation(e) {
         carAge: carYearModel && carYearModel.innerText || '',
     };
 
-    // console.log(data);
-
     let check1 = document.getElementById("agree1").checked;
     let check2 = document.getElementById("agree2").checked;
     let check3 = document.getElementById("agree3").checked;

@@ -571,7 +571,9 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group has-feedback">
                                                 <label class="control-label" for="textarea">요청 사항</label>
-                                                <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="21세 이상 및 렌트기간, 문의사항 등을 입력하세요."></textarea>
+                                                <div class="input-group"> <span class="input-group-addon"><i class="fas fa-clipboard"></i></span>
+                                                    <textarea class="form-control" id="reservation-detail-details" name="textarea" rows="6" placeholder="21세 이상 및 렌트기간, 문의사항 등을 입력하세요."></textarea>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -580,12 +582,19 @@
                                                 <p><font style="font-weight: bold;"> * 문의 : 010-5277-4113  /  1544-4680 </font></p>
 
                                                 <br />
-                                                <p class="text-center"><input type="checkbox" id="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.</p>
+<!--                                                <p class="text-center"><input type="checkbox" id="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.</p>-->
+
+                                                <div class="form-group has-feedback">
+                                                    <p class="text-center"><label style="font-size: 1em; font-weight: initial;"><input type="checkbox" id="agree1" class="agree"> 개인정보 수집 및 이용에 동의합니다.</label></p>
+                                                    <p class="text-center"><label style="font-size: 1em; font-weight: initial;"><input type="checkbox" id="agree2" class="agree"> 보험사 사고경력조회에 동의합니다.</label></p>
+                                                    <p class="text-center"><label style="font-size: 1em; font-weight: initial;"><input type="checkbox" id="agree3" class="agree"> 보험사고 경력 조회시에 당사 규정에 따라 거부될 수 있음을 확인합니다.</label></p>
+                                                    <p class="text-center"><label style="font-size: 1em; font-weight: initial;"><input type="checkbox" id="agree4" class="agree" onclick="check_camping_detail_all_box()"> 모두 동의</label></p>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group text-center">
-                                                <a class="btn1 btn1-default" style="background-color: royalblue;" onclick="campingcar_rent_reservation()">상담신청 </a>
+                                                <a class="btn1 btn1-default" style="cursor: pointer;" onclick="campingcar_rent_reservation()">상담신청 </a>
                                             </div>
                                         </div>
                                     </div>
