@@ -63,6 +63,7 @@
 .car_infos {
     display: flex;
     flex-wrap: wrap;
+    font-size: 1.1em;
 }
 .car_info {
     margin: 0 10px 10px 0;
