@@ -500,7 +500,7 @@
       <p id="forPostCarEngine" th:text="${realTimeRentCar.carEngine}"></p>
       <p id="forPostCarAttribute01" th:text="${realTimeRentCar.carAttribute01}"></p>
       <p id="forPostRentTerm" th:text="${rentTerm}"></p>
-      <p th:if="${kilometer=='기타'||kilometer=='기타_long'}" id="carPrice">상담</p>
+      <p th:if="${kilometer=='기타'||kilometer=='기타_long' || realTimeRentCar.priceDisplay == 0}" id="carPrice">상담</p>
 
       <p id="forPostDeposit" th:if="${rentTerm=='한달'}" th:text="${realTimeRentCar.monthlyRent.deposit}"></p>
       <p id="forPostDeposit" th:if="${rentTerm=='12개월'}" th:text="${realTimeRentCar.monthlyRent.yearlyRent.deposit}"></p>

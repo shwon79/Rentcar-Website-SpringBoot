@@ -236,8 +236,9 @@
                 <div id="mainTable">
                     <div class="head_title" style="margin-top: 50px;">
                         <h1 class="page-title">현재 대여가능차량(<span class="page-title" th:text="${#lists.size(morenDTOList)}"></span>대)</h1>
-                        <p style="word-break: keep-all; color: dimgrey;">
-                            * 예약순서는 예약금 선입금순입니다.
+                        <p style="word-break: keep-all; color: dimgrey; display: flex; justify-content: space-between;">
+                            <span>* 예약순서는 예약금 선입금순입니다.</span>
+                            <span>** 10분마다 업데이트됩니다.</span>
                         </p>
                     </div>
                   
@@ -392,7 +393,7 @@
 <!--                            <span>일 이내 입고예정차량</span>-->
                             <span>입고예정[확정]차량</span>
                         </h1>
-                        <h3><a href="/rent/month" style="color: red;">[상담신청만 가능]</a></h3>
+                        <h3><span style="color: red;">[상담신청만 가능]</span></h3>
                         <p style="word-break: keep-all; color: dimgrey;">
                             * 입고예정이나, 기존고객연장으로 예약이 불가할수있습니다.<br/>* 기존 고객님께서 교체하실 경우에는, 당사 방문 교체만 가능하며 교체비 3만원이 발생합니다.
                         </p>

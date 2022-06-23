@@ -181,6 +181,9 @@
                         </div>
                     </td>
                     <td th:if="${morenDTO.carPrice==-1}">
+                        <div th:if="${morenDTO.priceDisplay == 0}">
+                            <span>전화문의바랍니다</span>
+                        </div>
                     </td>
                     <td class="table_subtitle">위약율</td>
                     <td></td>
