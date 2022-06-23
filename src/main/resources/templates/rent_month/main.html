@@ -19,8 +19,8 @@
             displayGubun();
             // 반납예정일로 정렬
             sortContent(2, 'available');
-            sortContent(6, 'expected');
-            sortContent(6, 'expected');
+            // sortContent(6, 'expected');
+            // sortContent(6, 'expected');
         });
     </script>
     <script th:src="@{/js/rent_month.js}" defer></script>
@@ -138,7 +138,7 @@
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                         <div class="panel-heading" role="tab" id="headingFour">
                                             <h4 class="panel-title">
-                                                <span style="font-weight: bold;">월 500명</span>의 고객이 월렌트+12개월렌트 상품을 이용중입니다.
+                                                <span style="font-weight: bold;">월 고객 500명</span>이 월렌트+12개월렌트 상품을 이용중입니다.
                                             </h4>
                                         </div>
                                     </a>
@@ -236,7 +236,6 @@
                 <div id="mainTable">
                     <div class="head_title" style="margin-top: 50px;">
                         <h1 class="page-title">현재 대여가능차량(<span class="page-title" th:text="${#lists.size(morenDTOList)}"></span>대)</h1>
-<!--                        <p class="to-prior-rent-month-text">* 예약순서는 예약금 선입금순입니다.</p>-->
                         <p style="word-break: keep-all; color: dimgrey;">
                             * 예약순서는 예약금 선입금순입니다.
                         </p>
@@ -389,8 +388,9 @@
                 <div id="mainTable">
                     <div class="head_title" style="margin-top: 50px;">
                         <h1 class="page-title">
-                            <span th:text="${expectedDayDisplayed}" style="font-size: 3.5rem;"></span>
-                            <span>일 이내 입고예정차량</span>
+<!--                            <span th:text="${expectedDayDisplayed}" style="font-size: 3.5rem;"></span>-->
+<!--                            <span>일 이내 입고예정차량</span>-->
+                            <span>입고예정[확정]차량</span>
                         </h1>
                         <h3><a href="/rent/month" style="color: red;">[상담신청만 가능]</a></h3>
                         <p style="word-break: keep-all; color: dimgrey;">
@@ -433,15 +433,21 @@
                                 </div>
                             </th>
                             <th>
-                                <p>반납예정일</p>
+                                <p>입고예정일</p>
                                 <div onclick="sortContent(6, 'expected'); displaySortImage('expected_6');">
                                     <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_6" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th>
+                                <p>입고일<span style="font-weight: bold;">[확정]</span></p>
+                                <div onclick="sortContent(7, 'expected'); displaySortImage('expected_7');">
+                                    <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_6" style="cursor: pointer; font-size: 22px;"></i>
+                                </div>
+                            </th>
+                            <th>
                                 <p style="word-break: keep-all;">월대여료[VAT별도]</p>
-                                <div onclick="sortContent(7, 'expected', true); displaySortImage('expected_7');">
-                                    <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_7" style="cursor: pointer; font-size: 22px;"></i>
+                                <div onclick="sortContent(8, 'expected', true); displaySortImage('expected_8');">
+                                    <i class="fa fa-arrow-down" aria-hidden="true" data-id="expected_8" style="cursor: pointer; font-size: 22px;"></i>
                                 </div>
                             </th>
                             <th></th>
@@ -455,11 +461,13 @@
                         >
                             <td scope="col" style="display: none;" th:text="${moren.realTimeRentId}" class="rentId" th:data-index="${moren.realTimeRentId}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
-                            <td scope="col" th:text="${moren.carName}"></td>
+                            <td scope="col"><span th:text="${moren.carName}"></span> <span th:if="${moren.ready_to_return == 1}" style="color: red; font-weight: bold;">[입고확정]</span></td>
                             <td scope="col" th:text="${moren.carEngine}"></td>
                             <td scope="col" th:text="${moren.carExteriorColor}"></td>
                             <td scope="col" th:text="${moren.carOld}"></td>
                             <td scope="col" th:text="${moren.orderEnd}"></td>
+                            <td scope="col" th:text="${moren.orderEnd}" th:if="${moren.ready_to_return} == 1"></td>
+                            <td scope="col" th:if="${moren.ready_to_return} != 1"></td>
                             <td scope="col" class="discountStyle">
                                 <span th:if="${realTimeDTO.kilometer == '기타'||realTimeDTO.kilometer == '기타_long'}">상담</span>
                                 <span th:if="${realTimeDTO.kilometer != '기타'&&realTimeDTO.kilometer != '기타_long'}"
@@ -504,14 +512,15 @@
                 </div>
                 <!-- 모바일 -->
                 <div id="mobileCard">
-                    <div class="card moveToDetail" th:each="moren, iterStat : ${#lists.sort(morenDTOListExpected, byOrderEnd)}" th:data-index="${moren.realTimeRentId}" style="cursor: pointer;"
+                    <div class="card moveToDetail" th:each="moren, iterStat : ${morenDTOListExpected}" th:data-index="${moren.realTimeRentId}" style="cursor: pointer;"
                          th:unless="${moren.monthlyRent.twoYearlyRent == null or moren.monthlyRent.yearlyRent == null}"
                     >
-                        <h4 th:text="${moren.carName}"></h4>
+                        <h4><span th:text="${moren.carName}"></span> <span th:if="${moren.ready_to_return == 1}" style="color: red; font-weight: bold;">[입고확정]</span></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
                         <p>색상: <span th:text="${moren.carExteriorColor}"></span> | 연료: <span th:text="${moren.carEngine}"></span></p>
                         <p>년식: <span th:text="${moren.carOld}"></span></p>
-                        <p>반납예정일: <span th:text="${moren.orderEnd}"></span></p>
+                        <p th:if="${moren.ready_to_return} != 1">입고예정일: <span th:text="${moren.orderEnd}"></span></p>
+                        <p th:if="${moren.ready_to_return} == 1">입고일<span style="font-weight: bold;">[확정]:</span> <span th:text="${moren.orderEnd}" th:if="${moren.ready_to_return} == 1"></span></p>
                         <p class="discountStyle">월 대여료[VAT별도]:
                             <span th:if="${realTimeDTO.kilometer == '기타'||realTimeDTO.kilometer == '기타_long'}">상담</span>
                             <span th:if="${realTimeDTO.kilometer != '기타'&&realTimeDTO.kilometer != '기타_long'}"

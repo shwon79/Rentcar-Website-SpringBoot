@@ -66,12 +66,11 @@
         </tr>
         <tr>
             <td style="text-align: center; border-bottom: 0;">
-                전화: 02-1661-3331<br>이메일: itscar@naver.com
+                전화: 02-1544-4680<br>이메일: itscar@naver.com
             </td>
         </tr>
     </table>
-    <h2 style="text-align: center; margin-top: 2rem;">세이브카 월렌트 견적서</h2>
-
+    <h2 style="text-align: center; margin-top: 2rem;">카즈 장기렌트 견적서</h2>
 
     <!--견적서 내용 시작-->
     <div class="estimate_form" style="margin-top: 3.5rem;">
@@ -116,7 +115,7 @@
                 </tr>
                 <tr>
                     <td class="table_subtitle">대여차량</td>
-                    <td colspan="3" th:text="${morenDTO.carName}"></td>
+                    <td colspan="3" th:text="${longTermRentDTO.carName}"></td>
                 </tr>
                 <tr>
                     <td class="table_subtitle responsive_width_20_86">대여일시</td>
@@ -133,20 +132,15 @@
                     <td></td>
                     <td class="table_subtitle">보증금</td>
                     <td>
-                        <span th:text="${morenDTO.deposit}" class="number"></span>
+                        <span th:text="${longTermRentDTO.contractDeposit}" class="number"></span>
                         <span>원</span>
                     </td>
                 </tr>
                 <tr>
                     <td class="table_subtitle">약정주행거리</td>
-                    <td th:if="${morenDTO.kilometer!='기타'&&morenDTO.kilometer!='기타_long'}" th:text="${morenDTO.kilometer}"></td>
-                    <td th:if="${morenDTO.kilometer=='기타'||morenDTO.kilometer=='기타_long'}"></td>
+                    <td th:text="${longTermRentDTO.contractKm}"></td>
                     <td class="table_subtitle">초과시</td>
-                    <td th:if="${morenDTO.kilometer!='기타'}">
-                        <span th:text="${morenDTO.costPerKm}"></span>
-                        <span>원/km</span>
-                    </td>
-                    <td th:if="${morenDTO.kilometer=='기타'}"></td>
+                    <td>???</td>
                 </tr>
             </table>
             <table class="estimate_form_basic border_none">
@@ -155,15 +149,15 @@
                 </tr>
                 <tr>
                     <td class="table_subtitle responsive_width_20_86">차량번호</td>
-                    <td th:text="${morenDTO.carNo}" class="responsive_width_auto_100"></td>
+                    <td th:text="${longTermRentDTO.carNum}" class="responsive_width_auto_100"></td>
                     <td class="table_subtitle responsive_width_20_86">유종/주유량</td>
-                    <td th:text="${morenDTO.carEngine}"></td>
+                    <td th:text="${longTermRentDTO.fuel}"></td>
                 </tr>
                 <tr>
                     <td class="table_subtitle">대여 기간</td>
                     <td></td>
                     <td class="table_subtitle">약정 기간</td>
-                    <td th:text="${morenDTO.rentTerm}"></td>
+                    <td th:text="${longTermRentDTO.contractPeriod}"></td>
                 </tr>
                 <tr>
                     <td class="table_subtitle">반납장소</td>
@@ -171,16 +165,11 @@
                 </tr>
                 <tr>
                     <td class="table_subtitle">월대여료(VAT미포함)</td>
-                    <td th:if="${morenDTO.carPrice != -1}">
-                        <div th:if="${morenDTO.priceDisplay == 0}">
-                            <span>전화문의바랍니다</span>
-                        </div>
-                        <div th:unless="${morenDTO.priceDisplay == 0}">
-                            <span th:text="${morenDTO.carPrice}" class="number"></span>
+                    <td>
+                        <div>
+                            <span th:text="${longTermRentDTO.contractPrice}" class="number"></span>
                             <span>원</span>
                         </div>
-                    </td>
-                    <td th:if="${morenDTO.carPrice==-1}">
                     </td>
                     <td class="table_subtitle">위약율</td>
                     <td></td>
@@ -208,8 +197,7 @@
                 </tr>
                 <tr>
                     <td class="table_subtitle">보험연령</td>
-                    <td th:if="${morenDTO.selectAge =='upper26'}">만 26세 이상</td>
-                    <td th:if="${morenDTO.selectAge =='upper21'}">만 21세 이상</td>
+                    <td>만 26세 이상[만 21세 이상 별도]</td>
                     <td class="table_subtitle">자차수리한도</td>
                     <td>계약시확인</td>
                 </tr>
@@ -773,8 +761,8 @@
                 </tr>
                 <tr>
                     <td style="width: 45%; border-right: none;">
-                        (주)세이브카 / 양성희<br>
-                        송파구 충민로 66 가든파이브 제8층 f-8044
+                        (주)카즈 / 송영수, 원광직<br>
+                        서울 성동구 자동차시장1길 70 C동 가열 308호
                     </td>
                     <td style="width: 5%; border-left: none;">
                         (인)

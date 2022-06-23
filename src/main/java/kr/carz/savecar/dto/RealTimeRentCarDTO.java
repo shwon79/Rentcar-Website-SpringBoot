@@ -33,6 +33,7 @@ public class RealTimeRentCarDTO {
     private double discount; // 할인 퍼센트
     private String description;
     private int isExpected;
+    private int ready_to_return;
 
     public RealTimeRentCar toEntity() {
 
@@ -57,6 +58,7 @@ public class RealTimeRentCarDTO {
                 .discount(discount)
                 .description(description)
                 .isExpected(isExpected)
+                .ready_to_return(ready_to_return)
                 .build();
 
     }

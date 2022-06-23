@@ -23,8 +23,6 @@ import java.util.*;
 public class RealtimeRentController {
 
     private final MonthlyRentService monthlyRentService;
-    private final YearlyRentService yearlyRentService;
-    private final TwoYearlyRentService twoYearlyRentService;
     private final DiscountService discountService;
     private final MorenReservationService morenReservationService;
     private final ReservationController reservationController;
@@ -33,12 +31,10 @@ public class RealtimeRentController {
     private final ExpectedDayService expectedDayService;
 
     @Autowired
-    public RealtimeRentController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
+    public RealtimeRentController(MonthlyRentService monthlyRentService,
                                   DiscountService discountService, MorenReservationService morenReservationService, ReservationController reservationController,
                                   RealTimeRentCarService realTimeRentService, RealTimeRentCarImageService realTimeRentImageService, ExpectedDayService expectedDayService) {
         this.monthlyRentService = monthlyRentService;
-        this.yearlyRentService = yearlyRentService;
-        this.twoYearlyRentService = twoYearlyRentService;
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
         this.reservationController = reservationController;
@@ -100,7 +96,7 @@ public class RealtimeRentController {
                 }
             }
 
-            int isExpected = -1;
+            int isExpected;
             // n일 이내 반납예정차량
             if ( (Integer)morenObject.get("order_status") == 2 &&
                     order_end.length() >= 19 &&
@@ -138,7 +134,7 @@ public class RealtimeRentController {
                         (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
                         (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),(String) morenObject.get("order_end"),
                         monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
-                        discount_description, isExpected, priceDisplay);
+                        discount_description, isExpected, priceDisplay,  (int) morenObject.get("ready_to_return"));
 
                 realTimeRentService.save(realTimeRent);
 
@@ -150,11 +146,12 @@ public class RealtimeRentController {
                         realTimeRentImageService.save(realTimeRentImage);
                     }
                 }
-            } else {
+            }
+//            else {
 //                System.out.println("Error ! 가격 못 찾음 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
 //                reservationController.send_message(admin1, admin1,"Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"),
 //                        "Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
-            }
+//            }
         }
     }
 
@@ -176,6 +173,7 @@ public class RealtimeRentController {
         }
         List<String> carGubunList = new ArrayList<>(carGubunSet);
         Collections.sort(carGubunList);
+        Collections.sort(morenDTOListExpected);
         carGubunList.add(0, "전체");
 
         RealTimeDTO realTimeDTO = new RealTimeDTO("전체", "2000km", "한달");

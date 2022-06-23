@@ -87,7 +87,8 @@
                                 <span>원</span>
                             </span>
                         </p>
-<!--                        <p style="color: dimgrey; word-break: keep-all;">* 추가 문의 사항은 전화 상담 부탁드립니다.</p>-->
+<!--                        <a target="_blank" onclick="openLongTermPopUp('estimate')"><button class="detail_btn">견적서 보기</button></a>-->
+<!--                        <a target="_blank" onclick="openLongTermPopUp('reserve')"><button class="detail_btn_reserve">바로 예약하기</button></a>-->
                         <button class="car_card_button" onclick="location.href='#counsel'" style="width: 100%;">상담신청</button>
                     </article>
 
@@ -238,6 +239,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+
+        <div style="display: none;">
+            <p id="forCarName" th:text="${longTermRent.carName}"></p>
+            <p id="forCarNum" th:text="${longTermRent.carNum}"></p>
+            <p id="forCarColor" th:text="${longTermRent.carColor}"></p>
+            <p id="forCarYearModel" th:text="${longTermRent.carYearModel}"></p>
+            <p id="forContractPeriod" th:text="${longTermRent.contractPeriod}"></p>
+            <p id="forContractKm" th:text="${longTermRent.contractKm}"></p>
+            <p id="forContractPrice" th:text="${longTermRent.contractPrice}"></p>
+            <p id="forContractDeposit" th:text="${longTermRent.contractDeposit}"></p>
+            <p id="forContractMaintenance" th:text="${longTermRent.contractMaintenance}"></p>
+            <p id="forNewOld" th:text="${longTermRent.newOld}"></p>
+            <p id="forFuel" th:text="${longTermRent.fuel}"></p>
+            <p id="forDescription" th:text="${longTermRent.description}"></p>
         </div>
     </div>
 </div>

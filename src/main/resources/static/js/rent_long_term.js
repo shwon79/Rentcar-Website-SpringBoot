@@ -38,6 +38,65 @@ function check_long_term_all_box(){
      }
 }
 
+
+// 바로 예약하기 버튼, 견적서 보기 버튼 누르면 새창에 폼 띄우기
+function openLongTermPopUp(type) {
+    let carName = document.getElementById('forCarName').innerHTML;
+    let carNum = document.getElementById('forCarNum').innerHTML;
+    let carColor = document.getElementById('forCarColor').innerHTML;
+    let carYearModel = document.getElementById('forCarYearModel').innerHTML;
+    let contractPeriod = document.getElementById('forContractPeriod').innerHTML;
+    let contractKm = document.getElementById('forContractKm').innerHTML;
+    let contractPrice = document.getElementById('forContractPrice').innerHTML;
+    let contractDeposit = document.getElementById('forContractDeposit').innerHTML;
+    let contractMaintenance = document.getElementById('forContractMaintenance').innerHTML;
+    let newOld = document.getElementById('forNewOld').innerHTML;
+    let fuel = document.getElementById('forFuel').innerHTML;
+    let description = document.getElementById('forDescription').innerHTML;
+
+    let mapForm = document.createElement("form");
+    mapForm.target = "Map";
+    mapForm.method = "POST";
+    mapForm.style.display= "none";
+
+    if (type === 'estimate') {
+        mapForm.action = "/rent/long_term/detail/form/estimate";
+    } else if (type === 'reserve') {
+        mapForm.action = "/rent/long_term/detail/form/reservation";
+    };
+
+    function makeFormElement(name, data) {
+        let mapElement = document.createElement("input");
+        mapElement.type = 'text';
+        mapElement.name = name;
+        mapElement.value = data;
+        mapForm.appendChild(mapElement);
+    };
+
+    makeFormElement('carName', carName);
+    makeFormElement('carNum', carNum);
+    makeFormElement('carColor', carColor);
+    makeFormElement('carYearModel', carYearModel);
+    makeFormElement('contractPeriod', contractPeriod);
+    makeFormElement('contractKm', contractKm);
+    makeFormElement('contractPrice', contractPrice);
+    makeFormElement('contractDeposit', contractDeposit);
+    makeFormElement('contractMaintenance', contractMaintenance);
+    makeFormElement('newOld', newOld);
+    makeFormElement('fuel', fuel);
+    makeFormElement('description', description);
+
+    document.body.appendChild(mapForm);
+
+    map = window.open("", "Map", "status=0,title=0,height=1000,width=1000,scrollbars=1");
+
+    if (map) {
+        mapForm.submit();
+    } else {
+        alert('You must allow popups for this map to work.');
+    }
+}
+
 // 상담신청하기_rent/long_term main, detail
 function make_long_term_rent_reservation(e) {
     let reservationPhone = $("#reservation-simple-phone").val();

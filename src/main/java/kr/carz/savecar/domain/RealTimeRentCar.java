@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Table(name = "RealTimeRentCar")
-public class RealTimeRentCar extends BaseTimeEntity {
+public class RealTimeRentCar extends BaseTimeEntity implements Comparable<RealTimeRentCar> {
 
     @Id
     @Column(name = "RealTimeRentId")
@@ -42,6 +42,7 @@ public class RealTimeRentCar extends BaseTimeEntity {
     private String description;
     private int priceDisplay;
     private int isExpected;
+    private int ready_to_return;
 
 
 //    @OneToMany(mappedBy = "realTimeRent", targetEntity=RealTimeRentImage.class)
@@ -57,7 +58,7 @@ public class RealTimeRentCar extends BaseTimeEntity {
     @Builder
     public RealTimeRentCar(Long realTimeRentId, MonthlyRent monthlyRent, String carIdx, String carCategory, String carName, String carDetail, String carNo, String carExteriorColor, String carGubun
                         , String carDisplacement, String carMileaget, String carColor, String carOld, String carEngine, String carAttribute01, String orderEnd
-                        , String costPerKm, String carCode, double discount, String description, int isExpected, int priceDisplay) {
+                        , String costPerKm, String carCode, double discount, String description, int isExpected, int priceDisplay, int ready_to_return) {
         this.realTimeRentId = realTimeRentId;
         this.monthlyRent = monthlyRent;
         this.carIdx = carIdx;
@@ -82,5 +83,15 @@ public class RealTimeRentCar extends BaseTimeEntity {
         this.description = description;
         this.isExpected = isExpected;
         this.priceDisplay = priceDisplay;
+        this.ready_to_return = ready_to_return;
+    }
+
+    @Override
+    public int compareTo(RealTimeRentCar o) {
+        if(this.ready_to_return == o.ready_to_return){
+            return this.orderEnd.compareTo(o.orderEnd);
+        }
+
+        return Integer.compare(o.ready_to_return, this.ready_to_return);
     }
 }
