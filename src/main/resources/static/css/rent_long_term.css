@@ -85,6 +85,10 @@
 .car_card_button:hover {
     background-color: blue;
 }
+.car_estimate_button {
+    background-color: #9a9a9a;
+    margin: 10px 0;
+}
 .rent_car_check_wrapper {
     display: flex;
     /*justify-content: space-between;*/

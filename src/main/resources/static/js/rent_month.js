@@ -423,7 +423,7 @@ function make_rent_month_new_reservation() {
         name : $("#reservation-simple-name").val(),
         phoneNo : $("#reservation-simple-phone").val(),
         detail : $("#reservation-simple-details").val(),
-        title : '월렌트+12/24개월상담신청',
+        title : '월렌트+12개월상담신청',
         product : '',
         category1 : '',
         category2 : '',
