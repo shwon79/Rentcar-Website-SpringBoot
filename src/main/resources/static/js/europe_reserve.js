@@ -1,23 +1,5 @@
 // camping/calendar/cartype_reserve/year/month 예약과 관련된 모든 기능들
 
-
-function check_camping_detail_all_box(){
-    const total_agree =  document.getElementById("agree4");
-    const agrees = document.getElementsByClassName("agree");
-
-    if(total_agree.checked == true) {
-        for (var i = 0; i < agrees.length; i++) {
-            var item = agrees.item(i);
-            item.checked = true;
-        }
-    } else {
-        for (var i = 0; i < agrees.length; i++) {
-            var item = agrees.item(i);
-            item.checked = false;
-        }
-    }
-}
-
 // 선택 옵션 보이게 하기
 function doDisplay(param){
     let calendarRentalDate = document.getElementById("calendar_rental");

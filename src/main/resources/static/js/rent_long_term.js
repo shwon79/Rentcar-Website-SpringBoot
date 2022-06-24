@@ -21,24 +21,6 @@ const lines = text.split("\n");
 const count = lines.length;
 textarea.rows = count;
 
-function check_long_term_all_box(){
-    const total_agree =  document.getElementById("agree4");
-     const agrees = document.getElementsByClassName("agree");
-
-     if(total_agree.checked == true) {
-         for (var i = 0; i < agrees.length; i++) {
-             var item = agrees.item(i);
-             item.checked = true;
-         }
-     } else {
-         for (var i = 0; i < agrees.length; i++) {
-             var item = agrees.item(i);
-             item.checked = false;
-         }
-     }
-}
-
-
 // 바로 예약하기 버튼, 견적서 보기 버튼 누르면 새창에 폼 띄우기
 function openLongTermPopUp(type) {
     let carName = document.getElementById('forCarName').innerHTML;

@@ -23,6 +23,24 @@ function erase_after(target) {
     document.getElementById("carTotal").innerText = "원";
 }
 
+
+function check_all_box(){
+    const total_agree =  document.getElementById("agree4");
+    const agrees = document.getElementsByClassName("agree");
+
+    if(total_agree.checked == true) {
+        for (var i = 0; i < agrees.length; i++) {
+            var item = agrees.item(i);
+            item.checked = true;
+        }
+    } else {
+        for (var i = 0; i < agrees.length; i++) {
+            var item = agrees.item(i);
+            item.checked = false;
+        }
+    }
+}
+
 // 간편상담 요청
 function make_easy_reservation () {
     if (document.getElementById("reservation-detail-name").value == ""){
