@@ -35,6 +35,10 @@ public class RealTimeRentCarService {
         return realTimeRentRepository.save(realTimeRent).getRealTimeRentId();
     }
 
+    public void saveAll(List<RealTimeRentCar> realTimeRentList){
+        realTimeRentRepository.saveAll(realTimeRentList);
+    }
+
     public RealTimeRentCar saveDTO(RealTimeRentCarDTO realTimeRentDTO){
         return realTimeRentRepository.save(realTimeRentDTO.toEntity());
     }

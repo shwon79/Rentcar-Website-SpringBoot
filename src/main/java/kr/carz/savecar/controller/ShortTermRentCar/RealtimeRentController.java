@@ -74,6 +74,8 @@ public class RealtimeRentController {
         JSONObject responseJson = http.sendGetRequest(moren_url);
         JSONArray list_json_array = (JSONArray) responseJson.get("list");
 
+        List<RealTimeRentCar> realTimeRentCarList = new ArrayList<>();
+        List<List<RealTimeRentCarImage>> RealTimeRentCarImageWrapper = new ArrayList<>();
         long currentRealTimeRentIdx = 1, currentRealTimeRentImageIdx = 1;
         for(int i=0; i<list_json_array.length(); i++){
 
@@ -136,15 +138,19 @@ public class RealtimeRentController {
                         monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
                         discount_description, isExpected, priceDisplay,  (int) morenObject.get("ready_to_return"));
 
-                realTimeRentService.save(realTimeRent);
+//                realTimeRentService.save(realTimeRent);
+                realTimeRentCarList.add(realTimeRent);
 
                 if(!morenObject.get("carThumbImages").equals(null)) {
 
+                    List<RealTimeRentCarImage> realTimeRentCarImageList = new ArrayList<>();
                     JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
                     for (int j = 0; j < carJsonArray.length(); j++) {
                         RealTimeRentCarImage realTimeRentImage = new RealTimeRentCarImage(currentRealTimeRentImageIdx++, realTimeRent, (String) carJsonArray.get(j));
-                        realTimeRentImageService.save(realTimeRentImage);
+                        realTimeRentCarImageList.add(realTimeRentImage);
+//                        realTimeRentImageService.save(realTimeRentImage);
                     }
+                    RealTimeRentCarImageWrapper.add(realTimeRentCarImageList);
                 }
             }
 //            else {
@@ -152,6 +158,11 @@ public class RealtimeRentController {
 //                reservationController.send_message(admin1, admin1,"Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"),
 //                        "Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
 //            }
+        }
+
+        realTimeRentService.saveAll(realTimeRentCarList);
+        for(List<RealTimeRentCarImage> images : RealTimeRentCarImageWrapper){
+            realTimeRentImageService.saveAll(images);
         }
     }
 

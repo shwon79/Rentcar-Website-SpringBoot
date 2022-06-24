@@ -26,6 +26,9 @@ public class RealTimeRentCarImageService {
     public Long save(RealTimeRentCarImage realTimeRentImage){
         return realTimeRentImageRepository.save(realTimeRentImage).getImageId();
     }
+    public void saveAll(List<RealTimeRentCarImage> realTimeRentImageList){
+        realTimeRentImageRepository.saveAll(realTimeRentImageList);
+    }
 
     public Long saveDTO(RealTimeRentCarImageDTO realTimeRentImageDTO){
         return realTimeRentImageRepository.save(realTimeRentImageDTO.toEntity()).getImageId();
