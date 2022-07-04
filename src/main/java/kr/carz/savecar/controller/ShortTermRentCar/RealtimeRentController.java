@@ -138,7 +138,6 @@ public class RealtimeRentController {
                         monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
                         discount_description, isExpected, priceDisplay,  (int) morenObject.get("ready_to_return"));
 
-//                realTimeRentService.save(realTimeRent);
                 realTimeRentCarList.add(realTimeRent);
 
                 if(!morenObject.get("carThumbImages").equals(null)) {
@@ -148,7 +147,6 @@ public class RealtimeRentController {
                     for (int j = 0; j < carJsonArray.length(); j++) {
                         RealTimeRentCarImage realTimeRentImage = new RealTimeRentCarImage(currentRealTimeRentImageIdx++, realTimeRent, (String) carJsonArray.get(j));
                         realTimeRentCarImageList.add(realTimeRentImage);
-//                        realTimeRentImageService.save(realTimeRentImage);
                     }
                     RealTimeRentCarImageWrapper.add(realTimeRentCarImageList);
                 }
