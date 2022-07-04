@@ -50,8 +50,9 @@ dependencies {
 //	implementation group: 'com.google.api-client', name: 'google-api-client-gson', version: '1.33.4'
 
 	implementation 'com.google.apis:google-api-services-analyticsreporting:v4-rev20211020-1.32.1'
-
-
+	compile group: 'org.apache.poi', name: 'poi', version: '3.11'
+	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.11'
+	compile group: 'commons-io', name: 'commons-io', version: '2.4'
 }
 
 test {
