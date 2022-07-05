@@ -165,4 +165,8 @@ public class MonthlyRentService {
     public void delete(MonthlyRent monthlyRent) {
         monthlyRentRepository.delete(monthlyRent);
     }
+
+    public void deleteAllInBatch(){
+        monthlyRentRepository.deleteAllInBatch();
+    }
 }

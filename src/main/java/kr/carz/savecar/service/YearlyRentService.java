@@ -1,6 +1,5 @@
 package kr.carz.savecar.service;
 
-import kr.carz.savecar.domain.MonthlyRent;
 import kr.carz.savecar.domain.YearlyRent;
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.repository.YearlyRentRepository;
@@ -72,5 +71,9 @@ public class YearlyRentService {
 
     public void delete(YearlyRent yearlyRent) {
         yearlyRentRepository.delete(yearlyRent);
+    }
+
+    public void deleteAllInBatch(){
+        yearlyRentRepository.deleteAllInBatch();
     }
 }
