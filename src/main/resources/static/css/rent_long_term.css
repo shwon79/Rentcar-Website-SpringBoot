@@ -7,6 +7,19 @@
     font-weight: 300;
 }
 
+.carousel-control .icon-next:before {
+    content: "\f101";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 1000;
+    font-size: 50px;
+}
+.carousel-control .icon-prev:before {
+    content: "\f100";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 1000;
+    font-size: 50px;
+}
+
 #car_card_list {
     display: flex;
     flex-wrap: wrap;
@@ -132,6 +145,7 @@
         flex-basis: 32%;
         margin: 2px;
     }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -162,6 +176,14 @@
     .displayNoneAfter::after {
         display: none !important;
     }
+
+    .carousel-control .icon-next, .carousel-control .glyphicon-chevron-right {
+        right: 80%;
+    }
+    .carousel-control .icon-prev, .carousel-control .glyphicon-chevron-left {
+        left: 30%;
+    }
+
 }
 /* Main page END */
 
