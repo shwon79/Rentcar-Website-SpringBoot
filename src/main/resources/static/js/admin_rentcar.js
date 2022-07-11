@@ -325,7 +325,6 @@ function registerRentCar() {
     const start = parseInt(document.getElementById('start').value);
     const end = parseInt(document.getElementById('end').value);
     const credit = document.getElementById('credit').value;
-    const img_input = document.getElementById('img_input').files[0];
     let cost_for_2_5k_price, cost_for_3k_price, cost_for_4k_price;
 
     const requiredFields = [category1, category2, name, deposit, cost_for_2k, cost_for_2_5k, cost_for_3k, cost_for_4k, cost_for_others, age_limit, cost_per_km, nameMoren, start, end, credit];
