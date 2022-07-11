@@ -288,7 +288,7 @@
                         <!-- pc -->
                         <tbody id="mainTable_tbody">
                         <tr th:each="moren, iterStat : ${morenDTOList}" class="moveToDetail" th:data-index="${moren.realTimeRentId}" style="cursor: pointer;"
-                            th:unless="${moren.monthlyRent.twoYearlyRent == null or moren.monthlyRent.yearlyRent == null}"
+                            th:unless="${moren.monthlyRent.yearlyRent == null}"
                         >
                             <td scope="col" style="display: none;" th:text="${moren.realTimeRentId}" class="rentId" th:data-index="${moren.realTimeRentId}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
@@ -341,7 +341,7 @@
                 <!-- 모바일 --->
                 <div id="mobileCard">
                     <div class="card moveToDetail" th:each="moren, iterStat : ${#lists.sort(morenDTOList, byCarName)}" th:data-index="${moren.realTimeRentId}" style="cursor: pointer;"
-                         th:unless="${moren.monthlyRent.twoYearlyRent == null or moren.monthlyRent.yearlyRent == null}"
+                         th:unless="${moren.monthlyRent.yearlyRent == null}"
                     >
                         <h4 th:text="${moren.carName}"></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>
@@ -458,7 +458,7 @@
                         <tbody id="mainTable_tbody">
                         <tr th:each="moren, iterStat : ${morenDTOListExpected}"
                             class="moveToDetail" th:data-index="${moren.realTimeRentId}" style="cursor: pointer;"
-                            th:unless="${moren.monthlyRent.twoYearlyRent == null or moren.monthlyRent.yearlyRent == null}"
+                            th:unless="${moren.monthlyRent.yearlyRent == null}"
                         >
                             <td scope="col" style="display: none;" th:text="${moren.realTimeRentId}" class="rentId" th:data-index="${moren.realTimeRentId}"></td>
                             <td scope="col" th:text="${moren.carNo}"></td>
@@ -514,7 +514,7 @@
                 <!-- 모바일 -->
                 <div id="mobileCard">
                     <div class="card moveToDetail" th:each="moren, iterStat : ${morenDTOListExpected}" th:data-index="${moren.realTimeRentId}" style="cursor: pointer;"
-                         th:unless="${moren.monthlyRent.twoYearlyRent == null or moren.monthlyRent.yearlyRent == null}"
+                         th:unless="${moren.monthlyRent.yearlyRent == null}"
                     >
                         <h4><span th:text="${moren.carName}"></span> <span th:if="${moren.ready_to_return == 1}" style="color: red; font-weight: bold;">[입고확정]</span></h4>
                         <p>차량 번호: <span th:text="${moren.carNo}"></span></p>

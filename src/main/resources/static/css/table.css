@@ -67,7 +67,7 @@ td {
   text-align: center;
   vertical-align: middle;
   font-weight: 300;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #000;
   border-bottom: solid 1px rgba(0, 0, 0, 0.3);
 }
@@ -1234,4 +1234,16 @@ button.btn-bl:hover {
   /*margin-top:-150px;*/
   /*margin-left: -35%;*/
   /*height:400px;*/
+}
+
+
+@media (min-width: 630px) and (max-width: 768px) {
+  td {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 629px) {
+  td {
+    font-size: 1.3rem;
+  }
 }
