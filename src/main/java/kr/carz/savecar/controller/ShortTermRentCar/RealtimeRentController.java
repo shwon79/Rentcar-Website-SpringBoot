@@ -90,11 +90,13 @@ public class RealtimeRentController {
             String carCategory = (String) morenObject.get("carCategory");
             if(carCategory.equals("레이")){
                 String carName = (String) morenObject.get("carName");
-                for(int index=0; index<carName.length(); index++){
-                    if(carName.charAt(index) == '밴'){
-                        carCategory = "레이밴";
-                        break;
-                    }
+                if(carName.contains("밴")){
+                    carCategory = "레이밴";
+                }
+            } else if(carCategory.equals("5시리즈")){
+                String carName = (String) morenObject.get("carName");
+                if(carName.contains("530i")){
+                    carCategory = "530i";
                 }
             }
 
