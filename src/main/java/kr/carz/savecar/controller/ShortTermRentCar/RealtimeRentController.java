@@ -66,6 +66,11 @@ public class RealtimeRentController {
         realTimeRentImageService.deleteAllInBatch();
         realTimeRentService.deleteAllInBatch();
 
+        rent_month_save_update();
+    }
+
+    public void rent_month_save_update(){
+
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
         String expected_day = expectedDayList.get(0).getExpectedDay();
         String moren_url = moren_url_except_date + DateTime.today_date_only() + "&END=" + DateTime.today_date_only() + "&EXPECTED_DAY=" + expected_day;
@@ -106,14 +111,14 @@ public class RealtimeRentController {
                     order_end.length() >= 19 &&
                     order_end.substring(0, 19).compareTo(DateTime.today_date_and_time()) >= 0 &&  // 시간 고려해서
                     order_end.substring(0, 10).compareTo(DateTime.expected()) <= 0 // 날짜만 고려해서
-                ) {
-                    isExpected = 1;
-                }
+            ) {
+                isExpected = 1;
+            }
             // 현재 가능차
             else if ((Integer)morenObject.get("order_status") == 0){
-                    isExpected = 0;
+                isExpected = 0;
             } else {
-                    continue;
+                continue;
             }
 
             Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findByMorenCar(carOld, carOld, carCategory);
@@ -153,11 +158,6 @@ public class RealtimeRentController {
                     RealTimeRentCarImageWrapper.add(realTimeRentCarImageList);
                 }
             }
-//            else {
-//                System.out.println("Error ! 가격 못 찾음 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
-//                reservationController.send_message(admin1, admin1,"Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"),
-//                        "Error ! 가격표 추가바람 ! 차량이름 : " + carCategory + ", " + morenObject.get("carNo"));
-//            }
         }
 
         realTimeRentService.saveAll(realTimeRentCarList);

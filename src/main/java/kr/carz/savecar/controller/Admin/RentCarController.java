@@ -1,13 +1,22 @@
 package kr.carz.savecar.controller.Admin;
 
+import kr.carz.savecar.controller.ShortTermRentCar.RealtimeRentController;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,23 +26,28 @@ import java.util.*;
 
 @Controller
 public class RentCarController {
-    private final ReservationService reservationService;
     private final MonthlyRentService monthlyRentService;
     private final YearlyRentService yearlyRentService;
     private final TwoYearlyRentService twoYearlyRentService;
     private final S3Service s3Service;
     private final ExpectedDayService expectedDayService;
+    private final RealTimeRentCarService realTimeRentCarService;
+    private final RealTimeRentCarImageService realTimeRentImageService;
+    private final RealtimeRentController realtimeRentController;
 
     @Autowired
     public RentCarController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService,
-                             TwoYearlyRentService twoYearlyRentService, ReservationService reservationService,
-                             S3Service s3Service, ExpectedDayService expectedDayService) {
+                             TwoYearlyRentService twoYearlyRentService, RealTimeRentCarService realTimeRentCarService,
+                             S3Service s3Service, ExpectedDayService expectedDayService,
+                             RealTimeRentCarImageService realTimeRentImageService, RealtimeRentController realtimeRentController) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
-        this.reservationService = reservationService;
         this.s3Service = s3Service;
         this.expectedDayService = expectedDayService;
+        this.realTimeRentCarService = realTimeRentCarService;
+        this.realTimeRentImageService = realTimeRentImageService;
+        this.realtimeRentController = realtimeRentController;
     }
 
 
@@ -78,6 +92,17 @@ public class RentCarController {
 
         return mav;
     }
+
+    @GetMapping("/admin/rentcar/price/upload")
+    public ModelAndView get_rent_car_price_upload() {
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("admin/rentcar_price_upload");
+
+        return mav;
+    }
+
 
 
     @PutMapping("/admin/rentcar/price/monthly/{monthlyId}")
@@ -172,6 +197,89 @@ public class RentCarController {
             monthlyRentService.updateAllPriceByVO(monthlyRentVO, monthlyRentWrapper.get());
         }
 
+    }
+
+
+    @PostMapping("/admin/rentcar/price/upload")
+    public String uploadExcel(HttpServletResponse res, @RequestParam("file") MultipartFile file, Model model)
+            throws IOException {
+
+        realTimeRentImageService.deleteAllInBatch();
+        realTimeRentCarService.deleteAllInBatch();
+        monthlyRentService.deleteAllInBatch();
+        yearlyRentService.deleteAllInBatch();
+
+        List<RentCarVO> dataList = new ArrayList<>();
+
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+
+        if (!extension.equals("xlsx") && !extension.equals("xls")) {
+            throw new IOException("엑셀파일만 업로드 해주세요.");
+        }
+
+        Workbook workbook = null;
+
+        if (extension.equals("xlsx")) {
+            workbook = new XSSFWorkbook(file.getInputStream());
+        } else if (extension.equals("xls")) {
+            workbook = new HSSFWorkbook(file.getInputStream());
+        }
+
+        Sheet worksheet = workbook.getSheetAt(0);
+        String imgPath = "https://ibb.co/4fDBY1y";
+
+
+        for (int i = 2; i < worksheet.getPhysicalNumberOfRows(); i++) {
+
+            Row row = worksheet.getRow(i);
+
+            // 공통
+            RentCarVO rentCarVO = new RentCarVO();
+            rentCarVO.setCategory1(row.getCell(0).getStringCellValue());
+            rentCarVO.setCategory2(row.getCell(1).getStringCellValue());
+            rentCarVO.setName(row.getCell(2).getStringCellValue());
+            rentCarVO.setNameMoren(row.getCell(3).getStringCellValue());
+            rentCarVO.setStart((long)row.getCell(4).getNumericCellValue());
+            rentCarVO.setEnd((long)row.getCell(5).getNumericCellValue());
+
+            // 월렌트
+            rentCarVO.setDeposit_monthly(String.valueOf(row.getCell(6).getNumericCellValue()));
+            rentCarVO.setCost_for_2k(row.getCell(7).getNumericCellValue());
+            rentCarVO.setCost_for_2_5k_price(row.getCell(8).getNumericCellValue());
+            rentCarVO.setCost_for_3k_price(row.getCell(9).getNumericCellValue());
+            rentCarVO.setCost_for_4k_price(row.getCell(10).getNumericCellValue());
+            rentCarVO.setCost_for_2_5k(row.getCell(11).getNumericCellValue());
+            rentCarVO.setCost_for_3k(row.getCell(12).getNumericCellValue());
+            rentCarVO.setCost_for_4k(row.getCell(13).getNumericCellValue());
+            rentCarVO.setCost_for_others(row.getCell(14).getStringCellValue());
+            rentCarVO.setAge_limit(String.valueOf(row.getCell(15).getNumericCellValue()));
+            rentCarVO.setCost_per_km_monthly(String.valueOf(row.getCell(16).getNumericCellValue()));
+            rentCarVO.setCredit_monthly(String.valueOf(row.getCell(17).getNumericCellValue()));
+
+            // 12개월렌트
+            rentCarVO.setDeposit_yearly(String.valueOf(row.getCell(18).getNumericCellValue()));
+            rentCarVO.setCost_for_20k_price(row.getCell(19).getNumericCellValue());
+            rentCarVO.setCost_for_30k_price(row.getCell(20).getNumericCellValue());
+            rentCarVO.setCost_for_40k_price(row.getCell(21).getNumericCellValue());
+            rentCarVO.setCost_for_20k(row.getCell(22).getNumericCellValue());
+            rentCarVO.setCost_for_30k(row.getCell(23).getNumericCellValue());
+            rentCarVO.setCost_for_40k(row.getCell(24).getNumericCellValue());
+            rentCarVO.setCost_per_km_yearly(String.valueOf(row.getCell(25).getNumericCellValue()));
+            rentCarVO.setCredit_yearly(String.valueOf(row.getCell(26).getNumericCellValue()));
+
+            Long yearRentId = yearlyRentService.saveByRentCarVO(rentCarVO, imgPath);
+            Optional<YearlyRent> yearlyRentWrapper = yearlyRentService.findByid(yearRentId);
+            if(yearlyRentWrapper.isPresent()){
+                monthlyRentService.saveByRentCarVO(rentCarVO, yearlyRentWrapper.get(), null, imgPath);
+            }
+
+            dataList.add(rentCarVO);
+        }
+
+        realtimeRentController.rent_month_save_update();
+        model.addAttribute("datas", dataList);
+
+        return "admin/rentcar_price_excelList";
     }
 
 

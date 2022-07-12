@@ -1,0 +1,114 @@
+
+<!-- 관리자 월렌트 가격 수정 페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin_rent_car.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_rentcar.js}" defer></script>
+
+    <script>
+        $(window).on('load', function () {
+            let priceMonthlyMenu = document.getElementById('uploadRentCarMenu');
+            priceMonthlyMenu.classList.add('activeAdminMenu');
+        });
+
+        $(document).ready(function() {
+            alert('업로드가 완료되었습니다. ');
+        })
+    </script>
+
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content" style="width: 100%; padding: 5%;">
+        <form th:action="@{/admin/rentcar/price/upload}" method="POST" enctype="multipart/form-data"  style="flex-direction: unset;">
+            <input type="file" th:name="file">
+            <input th:type="submit" value="업로드" style="width: 30%;"/>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">cat1</th>
+                <th scope="col">cat2</th>
+                <th scope="col">name</th>
+                <th scope="col">보증금[월]</th>
+                <th scope="col">cost_for_2k</th>
+                <th scope="col">cost_for_2_5k</th>
+                <th scope="col">cost_for_3k</th>
+                <th scope="col">cost_for_4k</th>
+                <th scope="col">cost_for_2_5k_price</th>
+                <th scope="col">cost_for_3k_price</th>
+                <th scope="col">cost_for_4k_price</th>
+                <th scope="col">cost_for_others</th>
+                <th scope="col">age_limit</th>
+                <th scope="col">cost_per_km_monthly</th>
+                <th scope="col">nameMoren</th>
+                <th scope="col">start</th>
+                <th scope="col">end</th>
+                <th scope="col">credit_monthly</th>
+                <th scope="col">deposit_yearly</th>
+                <th scope="col">cost_for_20k</th>
+                <th scope="col">cost_for_30k</th>
+                <th scope="col">cost_for_40k</th>
+                <th scope="col">cost_for_20k_price</th>
+                <th scope="col">cost_for_30k_price</th>
+                <th scope="col">cost_for_40k_price</th>
+                <th scope="col">cost_per_km_yearly</th>
+                <th scope="col">credit_yearly</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="data : ${datas}" >
+                <td scope="row" th:text="${data.category1}"></td>
+                <td th:text="${data.category2}"></td>
+                <td th:text="${data.name}"></td>
+                <td th:text="${data.deposit_monthly}"></td>
+                <td th:text="${data.cost_for_2k}"></td>
+                <td th:text="${data.cost_for_2_5k}"></td>
+                <td th:text="${data.cost_for_3k}"></td>
+                <td th:text="${data.cost_for_4k}"></td>
+                <td th:text="${data.cost_for_2_5k_price}"></td>
+                <td th:text="${data.cost_for_3k_price}"></td>
+                <td th:text="${data.cost_for_4k_price}"></td>
+                <td th:text="${data.cost_for_others}"></td>
+                <td th:text="${data.age_limit}"></td>
+                <td th:text="${data.cost_per_km_monthly}"></td>
+                <td th:text="${data.nameMoren}"></td>
+                <td th:text="${data.start}"></td>
+                <td th:text="${data.end}"></td>
+                <td th:text="${data.credit_monthly}"></td>
+
+                <td th:text="${data.deposit_yearly}"></td>
+                <td th:text="${data.cost_for_20k}"></td>
+                <td th:text="${data.cost_for_30k}"></td>
+                <td th:text="${data.cost_for_40k}"></td>
+                <td th:text="${data.cost_for_20k_price}"></td>
+                <td th:text="${data.cost_for_30k_price}"></td>
+                <td th:text="${data.cost_for_40k_price}"></td>
+                <td th:text="${data.cost_per_km_yearly}"></td>
+                <td th:text="${data.credit_yearly}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+
+</html>
