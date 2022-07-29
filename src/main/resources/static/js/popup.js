@@ -27,11 +27,11 @@ function closeWinTwo() {
 
     if ( document.pop_form2.chkbox.checked ) {
         setCookieAt00( "maindiv2", "done" , 1 );
-        console.log('if pass')
     }
 
     document.getElementById('divpop2').style.visibility = "hidden";
 }
+
 
 // 팝업 내용 불러오기
 $(window).load(function () {

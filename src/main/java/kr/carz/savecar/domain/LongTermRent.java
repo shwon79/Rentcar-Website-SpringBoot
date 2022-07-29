@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table(name = "LongTermRent")
-public class LongTermRent {
+public class LongTermRent implements Comparable<LongTermRent> {
     @Id
     @Column(name = "longTermRentId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +27,14 @@ public class LongTermRent {
     private String contractMaintenance;
     private String newOld;
     private String fuel;
+    private int sequence;
 
     @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     @Builder
     public LongTermRent(Long longTermRentId,String carName,String carNum, String carColor, String carYearModel,String contractPeriod, String contractKm, String contractPrice
-                        ,String contractDeposit, String contractMaintenance, String newOld, String fuel, String description) {
+                        ,String contractDeposit, String contractMaintenance, String newOld, String fuel, String description, int sequence) {
         this.longTermRentId = longTermRentId;
         this.carName = carName;
         this.carNum = carNum;
@@ -47,5 +48,11 @@ public class LongTermRent {
         this.newOld = newOld;
         this.fuel = fuel;
         this.description = description;
+        this.sequence = sequence;
+    }
+
+    @Override
+    public int compareTo(LongTermRent o) {
+        return Integer.compare(this.sequence, o.sequence);
     }
 }

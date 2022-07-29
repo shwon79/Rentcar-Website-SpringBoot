@@ -1120,6 +1120,7 @@ div.popStyle1, div.popStyle2 {
 .popup_header h1 {
     color: #286090;
     margin: 0;
+    font-size: 2.1rem;
 }
 .popup_rent_banner {
     background-color: lightgray;
@@ -1255,7 +1256,7 @@ div.popStyle1, div.popStyle2 {
     margin-bottom: 0;
 }
 .popup_bg_red {
-    background: #e71c36;
+    background: white;
     text-align: center;
     padding-bottom: 2em;
 }
@@ -1278,12 +1279,18 @@ div.popStyle1, div.popStyle2 {
     margin: 0;
 }
 .popup_outline_text {
-    color: #40c4b6;
+    color: black;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: white;
 }
 .popup_bg_green {
     background: #40c4b6;
+}
+.popup_bg_alice_blue {
+    background: aliceblue;
+}
+.popup_bg_dark_blue {
+    background: #286090;
 }
 .popup_bottom_content_wrapper {
     position: relative;
@@ -1306,15 +1313,30 @@ div.popStyle1, div.popStyle2 {
 .popup_box_wrapper:first-child {
     margin-bottom: 30px;
 }
+popup_box_wrapper_long_term {
+    grid-template-columns: 1fr;
+    display: grid;
+    grid-column-gap: 20px;
+}
 .promotion_slogan {
     top: 58% !important;
 }
 .popup_box {
-    border: 5px solid #e71c36;
+    border: 5px solid #296090;
     border-radius: 30px;
     padding: 40px 20px 20px 20px;
     text-align: center;
     background: white;
+}
+popup_box_long_term {
+    border: 5px solid #e71c36;
+    border-radius: 30px;
+    padding: 20px;
+    text-align: left;
+    background: white;
+}
+.popup_box_sub_title {
+    font-size: 1.8rem;
 }
 .popup_box_title {
     font-size: 2em;
@@ -1426,7 +1448,7 @@ div.popStyle1, div.popStyle2 {
         padding: 10px 5px;
     }
     .popup_header h1 {
-        font-size: 2.3rem;
+        font-size: 1.8rem;
     }
     .popup1_box1 table tr td:first-child {
         font-size: 1.3rem;

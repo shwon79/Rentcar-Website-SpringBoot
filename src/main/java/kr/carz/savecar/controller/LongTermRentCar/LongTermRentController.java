@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class LongTermRentController {
@@ -36,6 +34,7 @@ public class LongTermRentController {
         List<LongTermRent> longTermRentList = longTermRentService.findAll();
         List<List<LongTermRentImage>> imageList = new ArrayList<>();
 
+        Collections.sort(longTermRentList);
         for(LongTermRent longTermRent : longTermRentList){
             imageList.add(longTermRentImageService.findByLongTermRent(longTermRent));
         }

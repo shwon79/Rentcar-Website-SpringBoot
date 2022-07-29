@@ -218,7 +218,54 @@
 
         <!-- POPUP2 캠핑카렌트 -->
         <div id="divpop2" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 popStyle2">
+
             <div id="divpop2_popup1">
+                <div class="popup_upper" onclick="location.href='/rent/long_term'" style="cursor: pointer;">
+                    <div class="popup_content">
+                        <div class="popup_header">
+                            <h1>카즈 장기렌트 대표콜 1544-4680</h1>
+                        </div>
+                        <div class="popup_rent_banner">
+                            <h2 style="text-decoration: underline;"><span style="color: red;">달차클럽</span>누구나 장기렌트 CARZ</h2>
+                        </div>
+                        <div class="popup_bg_green">
+                            <div class="popup_bottom_content_wrapper" style="padding: 30px; background-color: aliceblue; ">
+                                <div class="popup_box_wrapper_long_term">
+                                    <p class="popup_box_sub_title" style="background-color: beige;">누구나 중고차장기렌트</p>
+                                    <div class="popup_box" style="text-align: left; margin-bottom: 20px; padding: 20px; background-color: #296090; color: white;">
+                                        <p class="popup_box_price">
+                                            <span class="popup_box_text">차종: </span>
+                                            <span>G90/신형G80/EQ900/G80/G70, 그랜져/K7, 쏘렌토/싼타페/팰리세이드/카니발</span>
+                                        </p>
+                                        <p class="popup_box_price">
+                                            <span class="popup_box_text">보증금: </span>
+                                            <span>10% 및 수입차 차량 등은 별도</span>
+                                        </p>
+                                    </div>
+                                    <p class="popup_box_sub_title" style="background-color: beige;">누구나 신차장기렌트</p>
+                                    <div class="popup_box" style="text-align: left; margin-bottom: 20px; padding: 20px; background-color: #296090; color: white;">
+                                        <p class="popup_box_price">
+                                            <span class="popup_box_text">차종: </span>
+                                            <span>그랜져/K8, 싼타페/쏘렌토, 쏘나타/K5/SM6, K3/아반떼, 셀토스/투싼/스포티지</span>
+                                        </p>
+                                        <p class="popup_box_price">
+                                            <span class="popup_box_text">보증금: </span>
+                                            <span>차량가격의 10% 및 보증금 추가시 렌트료 가격 할인</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="background-color: white; padding: 20px; font-size: medium; border-top: 1px solid #296090; line-height: 30px;">
+                                <span>* 신차 사전주문으로 신차물량 확보</span><br/>
+                                <span>* 중고차 국내최고 월렌트 당사물량 및 롯데/현대 등 경매/제휴 물량 다량 확보</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="divpop2_popup2">
                 <div class="popup_upper" onclick="location.href='/camping/main'" style="cursor: pointer;">
                     <div class="popup_content">
                         <div class="popup_bg_img_wrapper">
@@ -230,7 +277,7 @@
                             <h3 class="popup_outline_text" id="popup2_subtitle"></h3>
                             <h1 class="popup_outline_text" id="popup2_title"></h1>
                         </div>
-                        <div class="popup_bg_green">
+                        <div class="popup_bg_alice_blue">
                             <div class="popup_bottom_content_wrapper">
                                 <div class="popup_box popup_box_slogan" id="popup2_slogan"></div>
                                 <div class="popup_box_wrapper" style="margin-bottom: 30px;">
@@ -330,116 +377,6 @@
                         <a href="javascript:closeWinTwo();"><B>[닫기]</B></a>
                     </form>
                 </div>
-            </div>
-
-            <div id="divpop2_popup2">
-                <div class="popup_upper" onclick="location.href='/camping/main'" style="cursor: pointer;">
-                    <div class="popup_content">
-                        <div class="popup_header">
-                            <h1>카즈 장기렌트 대표콜 1544-4680</h1>
-                        </div>
-                        <div class="popup_bg_green">
-                            <div class="popup_bottom_content_wrapper">
-                                <div class="popup_box popup_box_slogan" id="popup2_slogan"></div>
-                                <div class="popup_box_wrapper" style="margin-bottom: 30px;">
-                                    <div class="popup_box">
-                                        <p class="popup_box_title" id="popup2_box1_title"></p>
-                                        <p class="popup_box_subtitle" id="popup2_box1_subtitle"></p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text">주중: </span>
-                                            <span class="popup_box_price_number" id="popup2_box1_line1_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text">주말: </span>
-                                            <span class="popup_box_price_number" id="popup2_box1_line2_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                        <p class="popup_box_text" th:text="${campingCarList[0].license}"></p>
-                                        <p>
-                                            <!--                                        <span class="popup_box_text">인원정보 : </span>-->
-                                            <span class="popup_box_text" th:text="${campingCarList[0].personnel}"></span>
-                                        </p>
-                                    </div>
-                                    <div class="popup_box">
-                                        <p class="popup_box_title" id="popup2_box2_title"></p>
-                                        <p class="popup_box_subtitle" id="popup2_box2_subtitle"></p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text">주중: </span>
-                                            <span class="popup_box_price_number" id="popup2_box2_line1_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text">주말: </span>
-                                            <span class="popup_box_price_number" id="popup2_box2_line2_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                        <p class="popup_box_text" th:text="${campingCarList[1].license}"></p>
-                                        <p>
-                                            <!--                                        <span class="popup_box_text">인원정보 : </span>-->
-                                            <span class="popup_box_text" th:text="${campingCarList[1].personnel}"></span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="popup_box popup_box_slogan promotion_slogan">
-                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
-                                    <span id="popup2_promotion"></span>
-                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="popup_box_wrapper">
-                                    <div class="popup_box">
-                                        <p class="popup_box_title"></p>
-                                        <p class="popup_box_subtitle"></p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text" id="popup2_box3_line1_title"></span>
-                                            <span class="popup_box_price_number" id="popup2_box3_line1_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text" id="popup2_box3_line2_title"></span>
-                                            <span class="popup_box_price_number" id="popup2_box3_line2_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text" id="popup2_box3_line3_title"></span>
-                                            <span class="popup_box_price_number" id="popup2_box3_line3_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                    </div>
-                                    <div class="popup_box">
-                                        <p class="popup_box_title"></p>
-                                        <p class="popup_box_subtitle"></p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text" id="popup2_box4_line1_title"></span>
-                                            <span class="popup_box_price_number" id="popup2_box4_line1_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text" id="popup2_box4_line2_title"></span>
-                                            <span class="popup_box_price_number" id="popup2_box4_line2_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                        <p class="popup_box_price">
-                                            <span class="popup_box_text" id="popup2_box4_line3_title"></span>
-                                            <span class="popup_box_price_number" id="popup2_box4_line3_price"></span>
-                                            <span class="popup_box_text">만원</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="popup_button" id="popup2_button"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="popup_bottom">
-                    <form name="pop_form2">
-                        <input type="checkbox" name="chkbox" id="form2" value="checkbox" style="margin-right:5px;">
-                        <label for="form2">오늘 하루동안 보지 않기</label>
-                        <a href="javascript:closeWinTwo();"><B>[닫기]</B></a>
-                    </form>
-                </div>
-
             </div>
         </div>
 
