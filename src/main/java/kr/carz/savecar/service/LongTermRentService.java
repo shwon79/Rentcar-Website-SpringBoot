@@ -23,6 +23,10 @@ public class LongTermRentService {
         return longTermRentRepository.findById(carId);
     }
 
+    public Long save(LongTermRent longTermRent){
+        return longTermRentRepository.save(longTermRent).getLongTermRentId();
+    }
+
     public Long saveDTO(LongTermRentDTO dto){
         return longTermRentRepository.save(dto.toEntity()).getLongTermRentId();
     }

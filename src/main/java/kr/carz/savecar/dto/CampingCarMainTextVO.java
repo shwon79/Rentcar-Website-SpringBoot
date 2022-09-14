@@ -1,6 +1,5 @@
 package kr.carz.savecar.dto;
 
-import kr.carz.savecar.domain.CampingCarMainText;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

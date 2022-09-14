@@ -1,3 +1,65 @@
+// 내용 순서 변경 버튼 클릭
+function displayChangeIndexBox() {
+    const btn = document.getElementsByClassName('change-index-btn');
+    const changeIndexBox = document.getElementById('changeIndexBox');
+
+    btn[0].classList.toggle('opened');
+    changeIndexBox.classList.toggle('opened');
+}
+
+// 차량 순서 변경 창 보이기
+function displaySortingBox() {
+    let boxList = document.getElementsByClassName('changeOrderBox');
+    let btnList = document.getElementsByClassName('changeOrderBtn');
+    [...boxList].forEach(function(box) {
+        box.classList.toggle('active');
+    });
+    [...btnList].forEach(function(btn) {
+        btn.classList.toggle('active');
+    });
+};
+
+// 내용 순서 변경
+function saveChangedRowIndex() {
+    let boxList = document.getElementsByClassName('oneItem');
+
+    if (confirm('순서를 변경하시겠습니까?')) {
+        let tempTitle = 1;
+        let imageTitleList = [];
+
+        [...boxList].forEach(function(box) {
+            let imageId = parseInt(box.dataset.id);
+            let oneData = {
+                imageId: imageId,
+                title: tempTitle
+            }
+            tempTitle++;
+            imageTitleList.push(oneData);
+        });
+
+        let data = {
+            imageTitleList: imageTitleList
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: '/admin/longTerm/sequence',
+            dataType: 'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('순서가 변경 되었습니다.');
+            } else {
+                alert('순서 변경에 문제가 생겼습니다.');
+            };
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    };
+}
+
 // 장기렌트 새로운 차량 등록 버튼 클릭_admin/longTerm/register
 function clickRegister() {
     let carName = document.getElementById('carName').value;

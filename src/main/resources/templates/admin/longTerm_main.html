@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link th:href="@{/css/admin.css}" rel="stylesheet">
     <link th:href="@{/css/admin_longTerm.css}" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <script th:src="@{/js/jquery.min.js}"></script>
-    <!--    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script th:src="@{/js/admin.js}" defer></script>
     <script th:src="@{/js/admin_longTerm.js}" defer></script>
 
@@ -21,6 +24,9 @@
         $(window).on('load', function () {
             let longTermMainMenu = document.getElementById('longTermMainMenu');
             longTermMainMenu.classList.add('activeAdminMenu');
+        });
+        $(function(){
+            $( "tbody" ).sortable();
         });
     </script>
 
@@ -40,12 +46,21 @@
             </div>
         </nav>
 
+
         <div class="container inner_content" style="width: 100%; max-width: 100%;">
             <h2 class="page_title" style="text-align: center;">차량 현황</h2>
-<!--            <p style="text-align: center;">준비중입니다.</p>-->
+            <div style="display: flex;">
+                <div style="width: 50%; padding: 20px 0 0 0;">
+                    <span>* 차량이 많으면 순서 변경하는 데에 시간이 소요될 수 있습니다. </span>
+                </div>
+                <div style="width: 50%; text-align: right;">
+                    <button class="btn btn-primary" onclick="saveChangedRowIndex();" style="margin: 0 0 10px 10px; ">순서 변경하기</button>
+                </div>
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr class="thead-dark">
+                        <th></th>
                         <th scope="col">구분</th>
                         <th scope="col">차량 번호</th>
                         <th scope="col">이름</th>
@@ -61,7 +76,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="car, i : ${longTermRentList}">
+                    <tr th:each="car, i : ${longTermRentList}" class="oneItem" th:data-id="${car.longTermRentId}" th:data-sequence="${car.sequence}">
+                        <td>
+                            <i class="fas fa-bars" style="margin-right: 10px;"></i>
+                        </td>
                         <td>
                             <select name="newOld" class="newOld" th:data-id="${car.longTermRentId}">
                                 <option value="신차장기" th:selected="${car.newOld == '신차장기' ? true : false}">신차장기</option>
@@ -106,12 +124,12 @@
                         </td>
                         <td>
                             <a th:href="'/admin/longTerm/detail/' + ${car.longTermRentId}">
-                                <button class="btn btn-primary" th:data-id="${car.longTermRentId}" style="margin-bottom: 4px;">내용 수정</button>
+                                <button class="btn btn-primary" th:data-id="${car.longTermRentId}" style="font-size: 0.8rem;">내용 수정</button>
                             </a>
                             <a th:href="'/admin/longTerm/detail/image/' + ${car.longTermRentId}">
-                                <button class="btn btn-primary" th:data-id="${car.longTermRentId}" style="margin-bottom: 4px;">사진 수정</button>
+                                <button class="btn btn-primary" th:data-id="${car.longTermRentId}" style="font-size: 0.8rem;">사진 수정</button>
                             </a>
-                            <button class="btn btn-danger" th:data-id="${car.longTermRentId}" onclick="clickDelete(this)">차량 삭제</button>
+                            <button class="btn btn-danger" th:data-id="${car.longTermRentId}" style="font-size: 0.8rem;" onclick="clickDelete(this)">차량 삭제</button>
                         </td>
                     </tr>
                 </tbody>

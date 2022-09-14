@@ -1,8 +1,7 @@
 package kr.carz.savecar.controller.Admin;
 
 import kr.carz.savecar.domain.*;
-import kr.carz.savecar.dto.LongTermRentDTO;
-import kr.carz.savecar.dto.LongTermRentImageDTO;
+import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,8 @@ public class AdminLongTermRentController {
     public String rent_long_term_main(Model model) {
 
         List<LongTermRent> longTermRentList = longTermRentService.findAll();
+        Collections.sort(longTermRentList);
+
         model.addAttribute("longTermRentList", longTermRentList);
 
         return "admin/longTerm_main";
@@ -54,7 +57,7 @@ public class AdminLongTermRentController {
         LongTermRentDTO longTermRentDTO = new LongTermRentDTO(req.getParameter("carName"),req.getParameter("carNum"),req.getParameter("carColor"),
                                                  req.getParameter("carYearModel"),req.getParameter("contractPeriod"),req.getParameter("contractKm"),
                                                     req.getParameter("contractPrice"),req.getParameter("contractDeposit"),req.getParameter("contractMaintenance"),
-                                                    req.getParameter("newOld"),req.getParameter("fuel"),req.getParameter("description"));
+                                                    req.getParameter("newOld"),req.getParameter("fuel"),10000,req.getParameter("description"));
         Long longTermRentId = longTermRentService.saveDTO(longTermRentDTO);
 
 
@@ -203,4 +206,42 @@ public class AdminLongTermRentController {
         pw.flush();
         pw.close();
     }
+
+
+    @PutMapping(value = "/admin/longTerm/sequence")
+    @ResponseBody
+    public void put_longTerm_sequence(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        int problemFlg = 0;
+        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+
+            Optional<LongTermRent> longTermRentOptional = longTermRentService.findById(imageTitleVO.getImageId());
+            if (longTermRentOptional.isPresent()) {
+
+                LongTermRent longTermRent = longTermRentOptional.get();
+                Long originalId = longTermRent.getLongTermRentId();
+
+                if(originalId == imageTitleVO.getTitle()) continue;
+
+                longTermRent.setSequence(imageTitleVO.getTitle());
+                longTermRentService.save(longTermRent);
+            } else {
+                problemFlg = 1;
+            }
+        }
+
+        if(problemFlg == 0){
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
 }
