@@ -60,14 +60,14 @@ public class RealtimeRentController {
     private String moren_url_except_date;
 
     // 모렌 대기차 DB로 저장
-//    @Scheduled(cron = "0 0/10 * * * *")
-//    public void rent_month_save() {
-//
-//        realTimeRentImageService.deleteAllInBatch();
-//        realTimeRentService.deleteAllInBatch();
-//
-//        rent_month_save_update();
-//    }
+    @Scheduled(cron = "0 0/10 * * * *")
+    public void rent_month_save() {
+
+        realTimeRentImageService.deleteAllInBatch();
+        realTimeRentService.deleteAllInBatch();
+
+        rent_month_save_update();
+    }
 
     public void rent_month_save_update(){
 
