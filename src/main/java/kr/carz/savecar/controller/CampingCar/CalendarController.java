@@ -163,72 +163,21 @@ public class CalendarController {
         // 저번달 날짜
         Calendar cal = Calendar.getInstance();
         cal.set(year, month-1, 1);
-        int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-
-        List<CalendarDate> calendarDateList;
-        List<List<DateCamping>> dateCampingList = new ArrayList();
-        List<List<String>> calendarTimeList = new ArrayList<>();
 
         int[] prevMonthDate;
         int[] nextMonthDate;
 
         if(thisYear == year && thisMonth == month){
 
-            calendarDateList = calendarDateService.findByYearAndMonth(Integer.toString(thisYear), Integer.toString(thisMonth));
-
-            Long firstDateId = calendarDateList.get(0).getDateId();
-            for (int i = 1; i < thisDayOfWeek; i++) {
-                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-            }
-
             prevMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, -1, 0));
             nextMonthDate = DateStringToInt(AddDate(TodayDateString(), 0, 1, 0));
         } else {
-            calendarDateList = calendarDateService.findByYearAndMonth(Long.toString(year), Long.toString(month));
-
-            Long firstDateId = calendarDateList.get(0).getDateId();
-            for (int i = 1; i < thisDayOfWeek; i++) {
-                calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-            }
 
             String date = year + String.format("%02d", month) + "01";
 
             prevMonthDate = DateStringToInt(AddDate(date, 0, -1, 0));
             nextMonthDate = DateStringToInt(AddDate(date, 0, 1, 0));
         }
-
-        for (CalendarDate calendarDate : calendarDateList) {
-            List<DateCamping> dateCampingListByDateId = dateCampingService.findByDateId(calendarDate);
-            dateCampingList.add(dateCampingListByDateId);
-
-            List<String> calendarTimeListString = new ArrayList<>();
-            for(int k=0; k<dateCampingListByDateId.size(); k++){
-
-                if(dateCampingListByDateId.get(k).getReserved().equals("1")){
-                    List<CalendarTime> calendarTimeListByDate = calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate, get_campingcar_by_index(k));
-                    String reserve_status = calendarTimeListByDate.get(0).getReserveComplete();
-                    int m;
-                    for(m=1; m<calendarTimeListByDate.size(); m++){
-                        if(!calendarTimeListByDate.get(m).getReserveComplete().equals(reserve_status)){
-                            break;
-                        }
-                    }
-                    if(reserve_status.equals("1")){
-                        calendarTimeListString.add(calendarTimeListByDate.get(m).getReserveTime() + "~");
-                    } else {
-                        calendarTimeListString.add("~" + calendarTimeListByDate.get(m-1).getReserveTime());
-                    }
-                } else {
-                    calendarTimeListString.add("0");
-                }
-            }
-            calendarTimeList.add(calendarTimeListString);
-        }
-
-
-        model.addAttribute("calendarDateList", calendarDateList);
-        model.addAttribute("dateCampingList", dateCampingList);
-        model.addAttribute("calendarTimeList", calendarTimeList);
 
         model.addAttribute("thisYear", thisYear);
         model.addAttribute("thisMonth", thisMonth);
@@ -250,7 +199,6 @@ public class CalendarController {
 
         Calendar cal = Calendar.getInstance();
         CampingCarPrice campingCarPrice = campingCarPriceService.findCampingCarPriceByCarName(carType);
-        List<CalendarDate> calendarDateList = calendarDateService.findByYearAndMonth(Long.toString(clickedYear), Long.toString(clickedMonth));
 
         // 오늘 날짜
         int thisYear = TodayDateInt()[0];
@@ -264,23 +212,7 @@ public class CalendarController {
 
         // 클릭된 저번달 날짜
         cal.set(clickedPrevMonthDate[0], clickedPrevMonthDate[1], 1);
-        int thisDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-
-        Long firstDateId = calendarDateList.get(0).getDateId();
-        for (int i = 1; i < thisDayOfWeek; i++) {
-            calendarDateList.add(0, calendarDateService.findCalendarDateByDateId(firstDateId - i));
-        }
-
-        // 날짜별 캠핑카
-        List<List<DateCamping>> dateCampingList = new ArrayList();
-        List<List<CalendarTime>> calendarTimeList = new ArrayList<>();
-        for (CalendarDate calendarDate : calendarDateList) {
-            dateCampingList.add(dateCampingService.findByDateId(calendarDate));
-            calendarTimeList.add(calendarTimeService.findCalendarTimeByDateIdAndCarName(calendarDate,campingCarPrice));
-        }
-
         CampingCarPrice explanation = campingCarPriceService.findCampingCarPriceByCarName(carType);
-
 
         List<Images> imagesListByCarNameMain = imagesService.findByCarNameAndIsMain(campingCarPrice, "1");
         List<Images> imagesList = imagesService.findByCarNameAndIsMain(campingCarPrice, "0");
@@ -307,10 +239,6 @@ public class CalendarController {
         model.put("imagesList", imagesList);
         model.put("explanation", explanation);
         model.put("carType", carType);
-
-        model.addAttribute("calendarDateList", calendarDateList);
-        model.addAttribute("calendarTimeList", calendarTimeList);
-        model.addAttribute("dateCampingList", dateCampingList);
         model.put("campingCarPrice", campingCarPrice);
 
         model.addAttribute("clickedPrevYear", clickedPrevMonthDate[0]);
