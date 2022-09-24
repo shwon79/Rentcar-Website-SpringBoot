@@ -30,6 +30,9 @@ public class RealTimeRentCarService {
     public List<RealTimeRentCar> findByCarNo(String carNo){
         return realTimeRentRepository.findByCarNo(carNo);
     }
+    public Optional<RealTimeRentCar> findByCarCode(String carCode){
+        return realTimeRentRepository.findByCarCode(carCode);
+    }
 
     public Long save(RealTimeRentCar realTimeRent){
         return realTimeRentRepository.save(realTimeRent).getRealTimeRentId();
@@ -45,5 +48,8 @@ public class RealTimeRentCarService {
 
     public void deleteAllInBatch(){
         realTimeRentRepository.deleteAllInBatch();
+    }
+    public void deleteById(Long id) {
+        realTimeRentRepository.deleteById(id);
     }
 }

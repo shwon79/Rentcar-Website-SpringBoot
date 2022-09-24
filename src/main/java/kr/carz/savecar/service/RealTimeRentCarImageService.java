@@ -37,4 +37,5 @@ public class RealTimeRentCarImageService {
     public void deleteAllInBatch(){
         realTimeRentImageRepository.deleteAllInBatch();
     }
+    public void deleteById(Long id){realTimeRentImageRepository.deleteById(id);}
 }

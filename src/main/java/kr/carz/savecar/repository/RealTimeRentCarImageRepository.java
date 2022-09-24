@@ -12,4 +12,5 @@ public interface RealTimeRentCarImageRepository extends JpaRepository<RealTimeRe
 
     List<RealTimeRentCarImage> findAll();
     List<RealTimeRentCarImage> findByRealTimeRentCar(RealTimeRentCar realTimeRentCar);
+
 }

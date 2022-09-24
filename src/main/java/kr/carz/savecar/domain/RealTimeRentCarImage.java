@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "RealTimeRentCarImage")
 public class RealTimeRentCarImage extends BaseTimeEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
     @ManyToOne
@@ -20,8 +21,7 @@ public class RealTimeRentCarImage extends BaseTimeEntity {
     private String imageUrl;
 
     @Builder
-    public RealTimeRentCarImage(Long imageId, RealTimeRentCar realTimeRentCar, String imageUrl) {
-        this.imageId = imageId;
+    public RealTimeRentCarImage(RealTimeRentCar realTimeRentCar, String imageUrl) {
         this.realTimeRentCar = realTimeRentCar;
         this.imageUrl = imageUrl;
     }

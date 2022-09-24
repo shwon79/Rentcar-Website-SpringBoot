@@ -15,6 +15,7 @@ public class DateTime {
     private static String expected_day;
     private static DateFormat df_date;
     private static DateFormat df_time;
+    private static DateFormat df_date_time_hour_minute;
     private static String today_date;
     private static String today_time;
     private static String after_expected_date;
@@ -23,6 +24,7 @@ public class DateTime {
         this.expected_day = expected_day;
         this.df_date = new SimpleDateFormat("yyyy-MM-dd");;
         this.df_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");;
+        this.df_date_time_hour_minute = new SimpleDateFormat("yyyy-MM-dd HH:mm");;
     }
 
     public static String today_date_only(){
@@ -37,6 +39,14 @@ public class DateTime {
         cal = Calendar.getInstance();
         cal.setTime(new Date());
         today_time = df_time.format(cal.getTime());
+
+        return today_time;
+    }
+
+    public static String today_date_and_hour_minute(){
+        cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        today_time = df_date_time_hour_minute.format(cal.getTime());
 
         return today_time;
     }

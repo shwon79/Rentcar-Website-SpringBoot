@@ -59,10 +59,6 @@ public class RealtimeRentController {
     // 모렌 대기차 DB로 저장
     @Scheduled(cron = "0 0/10 * * * *")
     public void rent_month_save() {
-
-        realTimeRentImageService.deleteAllInBatch();
-        realTimeRentService.deleteAllInBatch();
-
         rent_month_save_update();
     }
 
@@ -78,16 +74,14 @@ public class RealtimeRentController {
 
         List<RealTimeRentCar> realTimeRentCarList = new ArrayList<>();
         List<List<RealTimeRentCarImage>> RealTimeRentCarImageWrapper = new ArrayList<>();
-        long currentRealTimeRentIdx = 1, currentRealTimeRentImageIdx = 1;
+        String modified_date_hour_minute = DateTime.today_date_and_hour_minute();
         for(int i=0; i<list_json_array.length(); i++){
 
             JSONObject morenObject = (JSONObject)list_json_array.get(i);
             String order_end = ((String)morenObject.get("order_end"));
             Long carOld = Long.parseLong((String)morenObject.get("carOld"));
 
-            if (!morenObject.get("reserve").equals(null)) {
-                continue;
-            }
+            if (!morenObject.get("reserve").equals(null)) continue;
 
             String carCategory = (String) morenObject.get("carCategory");
             if(carCategory.equals("레이")){
@@ -112,11 +106,8 @@ public class RealtimeRentController {
                 isExpected = 1;
             }
             // 현재 가능차
-            else if ((Integer)morenObject.get("order_status") == 0){
-                isExpected = 0;
-            } else {
-                continue;
-            }
+            else if ((Integer)morenObject.get("order_status") == 0) isExpected = 0;
+            else continue;
 
             Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findByMorenCar(carOld, carOld, carCategory);
 
@@ -134,25 +125,64 @@ public class RealtimeRentController {
                     priceDisplay = discount.getPriceDisplay();
                 }
 
-                RealTimeRentCar realTimeRent = new RealTimeRentCar(currentRealTimeRentIdx++, monthlyRent, (String) morenObject.get("carIdx"), carCategory,
-                        (String) morenObject.get("carName"), (String) morenObject.get("carDetail"),(String) morenObject.get("carNo"),
-                        (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),(String) morenObject.get("carDisplacement"),
-                        (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
-                        (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),(String) morenObject.get("order_end"),
-                        monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
-                        discount_description, isExpected, priceDisplay,  (int) morenObject.get("ready_to_return"));
+                Optional<RealTimeRentCar> existingRealTimeRentCarOptional = realTimeRentService.findByCarCode((String) morenObject.get("carCode"));
+                if(existingRealTimeRentCarOptional.isPresent()){
+                    RealTimeRentCar existingRealTimeRentCar = existingRealTimeRentCarOptional.get();
+                    existingRealTimeRentCar.setCarIdx((String) morenObject.get("carIdx"));
+                    existingRealTimeRentCar.setCarCategory(carCategory);
+                    existingRealTimeRentCar.setCarName((String) morenObject.get("carName"));
+                    existingRealTimeRentCar.setCarDetail((String) morenObject.get("carDetail"));
+                    existingRealTimeRentCar.setCarNo((String) morenObject.get("carNo"));
+                    existingRealTimeRentCar.setCarExteriorColor((String) morenObject.get("carExteriorColor"));
+                    existingRealTimeRentCar.setCarGubun((String) morenObject.get("carGubun"));
+                    existingRealTimeRentCar.setCarDisplacement((String) morenObject.get("carDisplacement"));
+                    existingRealTimeRentCar.setCarMileaget((String) morenObject.get("carMileaget"));
+                    existingRealTimeRentCar.setCarColor((String) morenObject.get("carColor"));
+                    existingRealTimeRentCar.setCarOld((String) morenObject.get("carOld"));
+                    existingRealTimeRentCar.setCarEngine((String) morenObject.get("carEngine"));
+                    existingRealTimeRentCar.setCarAttribute01((String) morenObject.get("carAttribute01"));
+                    existingRealTimeRentCar.setOrderEnd((String) morenObject.get("order_end"));
+                    existingRealTimeRentCar.setCostPerKm(monthlyRent.getCost_per_km());
+                    existingRealTimeRentCar.setDiscount(discount_price);
+                    existingRealTimeRentCar.setDescription((discount_description));
+                    existingRealTimeRentCar.setIsExpected(isExpected);
+                    existingRealTimeRentCar.setPriceDisplay(priceDisplay);
+                    existingRealTimeRentCar.setReady_to_return((int) morenObject.get("ready_to_return"));
+                    existingRealTimeRentCar.setModified_date_hour_minute(modified_date_hour_minute);
+                    realTimeRentService.save(existingRealTimeRentCar);
 
-                realTimeRentCarList.add(realTimeRent);
+                    if(!morenObject.get("carThumbImages").equals(null)) {
+                        List<RealTimeRentCarImage> realTimeRentCarImageList = new ArrayList<>();
+                        JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
 
-                if(!morenObject.get("carThumbImages").equals(null)) {
+                        List<RealTimeRentCarImage> existingRealTimeRentCarImageList = realTimeRentImageService.findByRealTimeRent(existingRealTimeRentCar);
+                        existingRealTimeRentCarImageList.clear();
 
-                    List<RealTimeRentCarImage> realTimeRentCarImageList = new ArrayList<>();
-                    JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
-                    for (int j = 0; j < carJsonArray.length(); j++) {
-                        RealTimeRentCarImage realTimeRentImage = new RealTimeRentCarImage(currentRealTimeRentImageIdx++, realTimeRent, (String) carJsonArray.get(j));
-                        realTimeRentCarImageList.add(realTimeRentImage);
+                        for (int j = 0; j < carJsonArray.length(); j++) {
+                            existingRealTimeRentCarImageList.add(new RealTimeRentCarImage(existingRealTimeRentCar, (String) carJsonArray.get(j)));
+                        }
+                        RealTimeRentCarImageWrapper.add(realTimeRentCarImageList);
                     }
-                    RealTimeRentCarImageWrapper.add(realTimeRentCarImageList);
+                } else {
+                    RealTimeRentCar realTimeRent = new RealTimeRentCar(monthlyRent, (String) morenObject.get("carIdx"), carCategory,
+                            (String) morenObject.get("carName"), (String) morenObject.get("carDetail"),(String) morenObject.get("carNo"),
+                            (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),(String) morenObject.get("carDisplacement"),
+                            (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
+                            (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),(String) morenObject.get("order_end"),
+                            monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
+                            discount_description, isExpected, priceDisplay,  (int) morenObject.get("ready_to_return"), modified_date_hour_minute);
+                    realTimeRentCarList.add(realTimeRent);
+
+                    if(!morenObject.get("carThumbImages").equals(null)) {
+
+                        List<RealTimeRentCarImage> realTimeRentCarImageList = new ArrayList<>();
+                        JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
+                        for (int j = 0; j < carJsonArray.length(); j++) {
+                            RealTimeRentCarImage realTimeRentImage = new RealTimeRentCarImage(realTimeRent, (String) carJsonArray.get(j));
+                            realTimeRentCarImageList.add(realTimeRentImage);
+                        }
+                        RealTimeRentCarImageWrapper.add(realTimeRentCarImageList);
+                    }
                 }
             }
         }
@@ -160,6 +190,16 @@ public class RealtimeRentController {
         realTimeRentService.saveAll(realTimeRentCarList);
         for(List<RealTimeRentCarImage> images : RealTimeRentCarImageWrapper){
             realTimeRentImageService.saveAll(images);
+        }
+        List<RealTimeRentCar> realTimeRentCarList1 = realTimeRentService.findAll();
+        for(RealTimeRentCar realTimeRentCar : realTimeRentCarList1){
+            if(!realTimeRentCar.getModified_date_hour_minute().equals(modified_date_hour_minute)){
+                List<RealTimeRentCarImage> realTimeRentCarImageList = realTimeRentImageService.findByRealTimeRent(realTimeRentCar);
+                for(RealTimeRentCarImage image : realTimeRentCarImageList){
+                    realTimeRentImageService.deleteById(image.getImageId());
+                }
+                realTimeRentService.deleteById(realTimeRentCar.getRealTimeRentId());
+            }
         }
     }
 
