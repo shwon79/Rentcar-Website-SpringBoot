@@ -60,15 +60,6 @@ public class CampingCarController {
         this.campingCarHomeImageService = campingCarHomeImageService;
     }
 
-    @Value("${coolsms.api_key}")
-    private String api_key;
-
-    @Value("${coolsms.api_secret}")
-    private String api_secret;
-
-    @Value("${phone.admin1}")
-    private String admin1;
-
     @Value("${phone.admin2}")
     private String admin2;
 
@@ -622,7 +613,7 @@ public class CampingCarController {
         campingcarReservationService.saveDTO(campingCarReservationDTO, campingCarReservation);
 
         if(taskName.equals("확정")) {
-            reservationController.send_message(admin1+", "+admin2+", "+admin3,
+            reservationController.send_message(admin2+", "+admin3,
                                                 campingCarReservation.getPhone(),
                                                 "[캠핑카 캘린더 예약 " + taskName + "]\n"
                                                     + "성함: " + campingCarReservation.getName() + "\n"

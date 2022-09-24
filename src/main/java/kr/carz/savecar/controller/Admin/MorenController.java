@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -33,15 +32,6 @@ public class MorenController {
         this.morenReservationService = morenReservationService;
         this.reservationController = reservationController;
     }
-
-    @Value("${coolsms.api_key}")
-    private String api_key;
-
-    @Value("${coolsms.api_secret}")
-    private String api_secret;
-
-    @Value("${phone.admin1}")
-    private String admin1;
 
     @Value("${phone.admin2}")
     private String admin2;
@@ -250,7 +240,7 @@ public class MorenController {
                             + "배차요청상세주소: " + dto.getAddressDetail() + "\n";
                 }
 
-                reservationController.send_message(admin1+", "+admin2+", "+admin3, dto.getReservationPhone(),
+                reservationController.send_message(admin2+", "+admin3, dto.getReservationPhone(),
                         "[모렌 예약 확정 처리 완료]\n"
                                 + "문의자 이름: " + dto.getReservationName() + "\n"
                                 + "연락처: " + dto.getReservationPhone() + "\n"
@@ -341,7 +331,7 @@ public class MorenController {
                             + "배차요청상세주소: " + morenReservation.getAddressDetail() + "\n";
                 }
 
-                reservationController.send_message(admin1+", "+admin2+", "+admin3, dto.getReservationPhone(),
+                reservationController.send_message(admin2+", "+admin3, dto.getReservationPhone(),
                         "[모렌 예약 취소 처리 완료]\n"
                                 + "문의자 이름: " + dto.getReservationName() + "\n"
                                 + "연락처: " + dto.getReservationPhone() + "\n"

@@ -47,9 +47,6 @@ public class RealtimeRentController {
     /*                             [New 버전] 실시간 월렌트 예약하기                                */
     /* ======================================================================================== */
 
-    @Value("${phone.admin1}")
-    private String admin1;
-
     @Value("${phone.admin2}")
     private String admin2;
 
@@ -306,7 +303,7 @@ public class RealtimeRentController {
 
         Long reservationId = morenReservationService.saveDTO(dto);
 
-        reservationController.send_message(admin1+", "+admin2+", "+admin3, dto.getReservationPhone(),
+        reservationController.send_message(admin2+", "+admin3, dto.getReservationPhone(),
                 "[현재 대여가능차량 예약이 신청되었습니다.]\n"
                         + "▼ 계약 확인하기" + "\n"
                         + "https://savecar.kr/admin/moren/reservation/detail/" + reservationId + "\n\n"

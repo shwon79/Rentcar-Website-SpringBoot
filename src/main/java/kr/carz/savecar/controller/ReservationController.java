@@ -29,9 +29,6 @@ public class ReservationController {
     @Value("${coolsms.api_secret}")
     private String api_secret;
 
-    @Value("${phone.admin1}")
-    private String admin1;
-
     @Value("${phone.admin2}")
     private String admin2;
 
@@ -112,14 +109,14 @@ public class ReservationController {
         HashMap<String, String> params2 = new HashMap<>();
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1);  // +", "+admin2+", "+admin3
+        params.put("to", admin2);  // +", "+admin2+", "+admin3
         params.put("from", admin3);
         params.put("type", "ATA");
         params.put("template_code", realtimeRentEmployeeTemplateCode);
         params.put("sender_key", senderKey);
 
         /* 고객에게 예약확인 문자 전송 */
-        params2.put("to", admin1);
+        params2.put("to", admin2);
         params2.put("from", admin3);
         params2.put("type", "ATA");
         params2.put("template_code", realtimeRentEmployeeTemplateCode);
@@ -254,7 +251,7 @@ public class ReservationController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1+", "+admin2+", "+admin3 + ", " + admin4);
+        params.put("to", admin2+", "+admin3 + ", " + admin4);
         params.put("from", admin3);
         params.put("type", "LMS");
 
@@ -407,7 +404,6 @@ public class ReservationController {
 
 
         /* 세이브카에게 문자 전송 */
-
         try {
             JSONObject obj = coolsms.send(params);
             System.out.println(obj.toString()); //전송 결과 출력
@@ -417,7 +413,6 @@ public class ReservationController {
         }
 
         /* 고객에게 예약확인 문자 전송 */
-
         try {
             JSONObject obj2 = coolsms.send(params2);
             System.out.println(obj2.toString()); //전송 결과 출력
