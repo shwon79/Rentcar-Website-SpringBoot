@@ -19,53 +19,9 @@
             displayGubun();
             // 반납예정일로 정렬
             sortContent(2, 'available');
-            // sortContent(6, 'expected');
-            // sortContent(6, 'expected');
         });
     </script>
     <script th:src="@{/js/rent_month.js}" defer></script>
-    <!-- Channel Plugin Scripts -->
-<!--    <script>-->
-<!--        (function() {-->
-<!--            var w = window;-->
-<!--            if (w.ChannelIO) {-->
-<!--                return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');-->
-<!--            }-->
-<!--            var ch = function() {-->
-<!--                ch.c(arguments);-->
-<!--            };-->
-<!--            ch.q = [];-->
-<!--            ch.c = function(args) {-->
-<!--                ch.q.push(args);-->
-<!--            };-->
-<!--            w.ChannelIO = ch;-->
-<!--            function l() {-->
-<!--                if (w.ChannelIOInitialized) {-->
-<!--                    return;-->
-<!--                }-->
-<!--                w.ChannelIOInitialized = true;-->
-<!--                var s = document.createElement('script');-->
-<!--                s.type = 'text/javascript';-->
-<!--                s.async = true;-->
-<!--                s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';-->
-<!--                s.charset = 'UTF-8';-->
-<!--                var x = document.getElementsByTagName('script')[0];-->
-<!--                x.parentNode.insertBefore(s, x);-->
-<!--            }-->
-<!--            if (document.readyState === 'complete') {-->
-<!--                l();-->
-<!--            } else if (window.attachEvent) {-->
-<!--                window.attachEvent('onload', l);-->
-<!--            } else {-->
-<!--                window.addEventListener('DOMContentLoaded', l, false);-->
-<!--                window.addEventListener('load', l, false);-->
-<!--            }-->
-<!--        })();-->
-<!--        ChannelIO('boot', {-->
-<!--            "pluginKey": "6c0738ee-40f1-410f-bd40-9807eb23a927"-->
-<!--        });-->
-<!--    </script>-->
-    <!-- End Channel Plugin -->
 </head>
 <body>
 <div layout:fragment="content">
@@ -147,6 +103,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="panel panel-default">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        <div class="panel-heading" role="tab" id="headingFive">
+                                            <h4 class="panel-title">
+                                                ALL 정비, 자차 포함 상품입니다.
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                        <div class="panel-body">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -182,7 +151,6 @@
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="sel_term">
                         <label for="term_month"><input type="radio" id="term_month" name="rentTerm" value="한달" onclick="sendData()" th:checked="${realTimeDTO.rentTerm} == '한달'">한달</label>
                         <label for="term_one_year"><input type="radio" id="term_one_year" name="rentTerm" value="12개월" onclick="sendData()" th:checked="${realTimeDTO.rentTerm} == '12개월'">12개월</label>
-<!--                        <label for="term_two_year"><input type="radio" id="term_two_year" name="rentTerm" value="24개월" onclick="sendData()" th:checked="${realTimeDTO.rentTerm} == '24개월'">24개월</label>-->
                     </div>
                 </div>
                 <hr style="background: lightgrey; margin: 10px 0" />
@@ -216,7 +184,6 @@
         <!-- content row -->
         <div>
             <div>
-<!--                <div class="to-prior-rent-month-text">* 조건을 선택하면 아래에 해당하는 차량이 조회됩니다.</div>-->
                 <p style="word-break: keep-all; color: dimgrey;">
                     * 조건을 선택하면 아래에 해당하는 차량이 조회됩니다
                 </p>
@@ -307,9 +274,6 @@
                                     <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '20000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_20k_price,0,'COMMA')}"></span>
                                     <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '30000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_30k_price,0,'COMMA')}"></span>
                                     <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '40000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_40k_price,0,'COMMA')}"></span>
-<!--                                    <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '20000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_20Tk_price,0,'COMMA')}"></span>-->
-<!--                                    <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '30000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_30Tk_price,0,'COMMA')}"></span>-->
-<!--                                    <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '40000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_40Tk_price,0,'COMMA')}"></span>-->
                                     <span>원</span>
                                 </span>
                                 <div th:if="${realTimeDTO.rentTerm == '한달' and realTimeDTO.kilometer != '기타' and moren.discount != 0}" class="discount-wrap">
@@ -358,9 +322,6 @@
                                 <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '20000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_20k_price,0,'COMMA')}"></span>
                                 <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '30000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_30k_price,0,'COMMA')}"></span>
                                 <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '40000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_40k_price,0,'COMMA')}"></span>
-<!--                                <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '20000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_20Tk_price,0,'COMMA')}"></span>-->
-<!--                                <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '30000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_30Tk_price,0,'COMMA')}"></span>-->
-<!--                                <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '40000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_40Tk_price,0,'COMMA')}"></span>-->
                                 <span>원</span>
                             </span>
                             <div th:if="${realTimeDTO.rentTerm == '한달' and realTimeDTO.kilometer != '기타' and moren.discount != 0}" class="discount-wrap">
@@ -389,8 +350,6 @@
                 <div id="mainTable">
                     <div class="head_title" style="margin-top: 50px;">
                         <h1 class="page-title">
-<!--                            <span th:text="${expectedDayDisplayed}" style="font-size: 3.5rem;"></span>-->
-<!--                            <span>일 이내 입고예정차량</span>-->
                             <span>입고예정[확정]차량</span>
                         </h1>
                         <h3><span style="color: red;">[상담신청만 가능]</span></h3>
@@ -480,9 +439,6 @@
                                     <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '20000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_20k_price,0,'COMMA')}"></span>
                                     <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '30000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_30k_price,0,'COMMA')}"></span>
                                     <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '40000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_40k_price,0,'COMMA')}"></span>
-<!--                                    <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '20000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_20Tk_price,0,'COMMA')}"></span>-->
-<!--                                    <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '30000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_30Tk_price,0,'COMMA')}"></span>-->
-<!--                                    <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '40000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_40Tk_price,0,'COMMA')}"></span>-->
                                     <span>원</span>
                                 </span>
                                 <div th:if="${realTimeDTO.rentTerm == '한달' and realTimeDTO.kilometer != '기타' and moren.discount != 0}" class="discount-wrap">
@@ -533,9 +489,6 @@
                                 <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '20000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_20k_price,0,'COMMA')}"></span>
                                 <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '30000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_30k_price,0,'COMMA')}"></span>
                                 <span th:if="${realTimeDTO.rentTerm == '12개월' && realTimeDTO.kilometer == '40000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.yearlyRent.cost_for_40k_price,0,'COMMA')}"></span>
-<!--                                <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '20000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_20Tk_price,0,'COMMA')}"></span>-->
-<!--                                <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '30000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_30Tk_price,0,'COMMA')}"></span>-->
-<!--                                <span th:if="${realTimeDTO.rentTerm == '24개월' && realTimeDTO.kilometer == '40000km'}" th:text="${#numbers.formatInteger(moren.monthlyRent.twoYearlyRent.cost_for_40Tk_price,0,'COMMA')}"></span>-->
                                 <span>원</span>
                             </span>
                         <div th:if="${realTimeDTO.rentTerm == '한달' and realTimeDTO.kilometer != '기타' and moren.discount != 0}" class="discount-wrap">
