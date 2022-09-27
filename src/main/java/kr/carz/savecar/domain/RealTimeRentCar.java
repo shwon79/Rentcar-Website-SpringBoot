@@ -15,7 +15,6 @@ import java.util.List;
 public class RealTimeRentCar extends BaseTimeEntity implements Comparable<RealTimeRentCar> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long realTimeRentId;
 
     @ManyToOne
@@ -47,9 +46,10 @@ public class RealTimeRentCar extends BaseTimeEntity implements Comparable<RealTi
 
 
     @Builder
-    public RealTimeRentCar(MonthlyRent monthlyRent, String carIdx, String carCategory, String carName, String carDetail, String carNo, String carExteriorColor, String carGubun
+    public RealTimeRentCar(Long realTimeRentId, MonthlyRent monthlyRent, String carIdx, String carCategory, String carName, String carDetail, String carNo, String carExteriorColor, String carGubun
                         , String carDisplacement, String carMileaget, String carColor, String carOld, String carEngine, String carAttribute01, String orderEnd
                         , String costPerKm, String carCode, double discount, String description, int isExpected, int priceDisplay, int ready_to_return, String modified_date_hour_minute) {
+        this.realTimeRentId = realTimeRentId;
         this.monthlyRent = monthlyRent;
         this.carIdx = carIdx;
         this.carCategory = carCategory;

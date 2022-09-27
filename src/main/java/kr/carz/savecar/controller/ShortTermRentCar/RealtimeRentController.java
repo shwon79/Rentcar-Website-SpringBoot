@@ -62,6 +62,19 @@ public class RealtimeRentController {
         rent_month_save_update();
     }
 
+    Comparator<RealTimeRentCar> comparator = new Comparator<RealTimeRentCar>() {
+        @Override
+        public int compare(RealTimeRentCar a, RealTimeRentCar b) {
+            return Long.compare(b.getRealTimeRentId(), a.getRealTimeRentId());
+        }
+    };
+
+    Comparator<RealTimeRentCarImage> comparatorImage = new Comparator<RealTimeRentCarImage>() {
+        @Override
+        public int compare(RealTimeRentCarImage a, RealTimeRentCarImage b) {
+            return Long.compare(b.getImageId(), a.getImageId());
+        }
+    };
     public void rent_month_save_update(){
 
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
@@ -75,6 +88,15 @@ public class RealtimeRentController {
         List<RealTimeRentCar> realTimeRentCarList = new ArrayList<>();
         List<List<RealTimeRentCarImage>> RealTimeRentCarImageWrapper = new ArrayList<>();
         String modified_date_hour_minute = DateTime.today_date_and_hour_minute();
+
+        List<RealTimeRentCar> realTimeRentCarList2 = realTimeRentService.findAll();
+        Collections.sort(realTimeRentCarList2, comparator);
+        Long currentRealTimeId = realTimeRentCarList2.get(0).getRealTimeRentId();
+
+        List<RealTimeRentCarImage> realTimeRentCarImageList1 = realTimeRentImageService.findAll();
+        Collections.sort(realTimeRentCarImageList1, comparatorImage);
+        Long currentRealTimeImageId = realTimeRentCarImageList1.get(0).getImageId();
+
         for(int i=0; i<list_json_array.length(); i++){
 
             JSONObject morenObject = (JSONObject)list_json_array.get(i);
@@ -152,19 +174,20 @@ public class RealtimeRentController {
                     realTimeRentService.save(existingRealTimeRentCar);
 
                     if(!morenObject.get("carThumbImages").equals(null)) {
-                        List<RealTimeRentCarImage> realTimeRentCarImageList = new ArrayList<>();
                         JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
 
                         List<RealTimeRentCarImage> existingRealTimeRentCarImageList = realTimeRentImageService.findByRealTimeRent(existingRealTimeRentCar);
-                        existingRealTimeRentCarImageList.clear();
+                        for(RealTimeRentCarImage image : existingRealTimeRentCarImageList){
+                            realTimeRentImageService.deleteById(image.getImageId());
+                        }
 
                         for (int j = 0; j < carJsonArray.length(); j++) {
-                            existingRealTimeRentCarImageList.add(new RealTimeRentCarImage(existingRealTimeRentCar, (String) carJsonArray.get(j)));
+                            RealTimeRentCarImage image = new RealTimeRentCarImage(++currentRealTimeImageId, existingRealTimeRentCar, (String) carJsonArray.get(j));
+                            realTimeRentImageService.save(image);
                         }
-                        RealTimeRentCarImageWrapper.add(realTimeRentCarImageList);
                     }
                 } else {
-                    RealTimeRentCar realTimeRent = new RealTimeRentCar(monthlyRent, (String) morenObject.get("carIdx"), carCategory,
+                    RealTimeRentCar realTimeRent = new RealTimeRentCar(++currentRealTimeId, monthlyRent, (String) morenObject.get("carIdx"), carCategory,
                             (String) morenObject.get("carName"), (String) morenObject.get("carDetail"),(String) morenObject.get("carNo"),
                             (String) morenObject.get("carExteriorColor"), (String) morenObject.get("carGubun"),(String) morenObject.get("carDisplacement"),
                             (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
@@ -178,7 +201,7 @@ public class RealtimeRentController {
                         List<RealTimeRentCarImage> realTimeRentCarImageList = new ArrayList<>();
                         JSONArray carJsonArray = (JSONArray) (morenObject.get("carThumbImages"));
                         for (int j = 0; j < carJsonArray.length(); j++) {
-                            RealTimeRentCarImage realTimeRentImage = new RealTimeRentCarImage(realTimeRent, (String) carJsonArray.get(j));
+                            RealTimeRentCarImage realTimeRentImage = new RealTimeRentCarImage(++currentRealTimeImageId, realTimeRent, (String) carJsonArray.get(j));
                             realTimeRentCarImageList.add(realTimeRentImage);
                         }
                         RealTimeRentCarImageWrapper.add(realTimeRentCarImageList);
