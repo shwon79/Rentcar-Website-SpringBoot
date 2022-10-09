@@ -44,12 +44,13 @@ public class RealTimeRentCar extends BaseTimeEntity implements Comparable<RealTi
     private int ready_to_return;
     private String modified_date_hour_minute;
     private int sequence;
+    private int isLongTerm;
 
     @Builder
     public RealTimeRentCar(Long realTimeRentId, MonthlyRent monthlyRent, String carIdx, String carCategory, String carName, String carDetail, String carNo, String carExteriorColor, String carGubun
                         , String carDisplacement, String carMileaget, String carColor, String carOld, String carEngine, String carAttribute01, String orderEnd
                         , String costPerKm, String carCode, double discount, String description, int isExpected, int priceDisplay, int ready_to_return, String modified_date_hour_minute
-                        , int sequence) {
+                        , int sequence, int isLongTerm) {
         this.realTimeRentId = realTimeRentId;
         this.monthlyRent = monthlyRent;
         this.carIdx = carIdx;
@@ -77,6 +78,7 @@ public class RealTimeRentCar extends BaseTimeEntity implements Comparable<RealTi
         this.ready_to_return = ready_to_return;
         this.modified_date_hour_minute = modified_date_hour_minute;
         this.sequence = sequence;
+        this.isLongTerm = isLongTerm;
     }
 
     @Override

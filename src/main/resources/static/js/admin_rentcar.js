@@ -1,4 +1,25 @@
 
+function checkIsLongTerm(){
+
+    let boxList = document.getElementsByClassName('oneItem');
+
+    [...boxList].forEach(function(box) {
+        let imageId = parseInt(box.dataset.id);
+        let isLongTerm;
+        if(document.getElementById(box.dataset.id).checked) isLongTerm = 1;
+        else isLongTerm = 0;
+        console.log(isLongTerm);
+
+        let oneData = {
+            imageId: imageId,
+            sequence: tempTitle,
+            isLongTerm: isLongTerm
+        }
+        tempTitle++;
+        imageTitleList.push(oneData);
+    });
+
+}
 // 내용 순서 변경
 function saveChangedRowIndex() {
     let boxList = document.getElementsByClassName('oneItem');
@@ -9,9 +30,15 @@ function saveChangedRowIndex() {
 
         [...boxList].forEach(function(box) {
             let imageId = parseInt(box.dataset.id);
+            let isLongTerm;
+            if(document.getElementById(box.dataset.id).checked) isLongTerm = 1;
+            else isLongTerm = 0;
+            console.log(isLongTerm);
+
             let oneData = {
                 imageId: imageId,
-                title: tempTitle
+                sequence: tempTitle,
+                isLongTerm: isLongTerm
             }
             tempTitle++;
             imageTitleList.push(oneData);

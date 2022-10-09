@@ -52,22 +52,19 @@ public class RentCarController {
 
     @PutMapping(value = "/admin/rentcar/realtime/sequence")
     @ResponseBody
-    public void put_rentcar_realtime_sequence(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
+    public void put_rentcar_realtime_sequence(HttpServletResponse res, @RequestBody RealTimeVO realTimeVO) throws IOException {
 
         JSONObject jsonObject = new JSONObject();
 
         int problemFlg = 0;
-        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+        for(RealTimeSeqIsLongTermVO realTimeSeqIsLongTermVO : realTimeVO.getImageTitleList()){
 
-            Optional<RealTimeRentCar> realTimeRentCarOptional = realTimeRentCarService.findById(imageTitleVO.getImageId());
+            Optional<RealTimeRentCar> realTimeRentCarOptional = realTimeRentCarService.findById(realTimeSeqIsLongTermVO.getImageId());
             if (realTimeRentCarOptional.isPresent()) {
 
                 RealTimeRentCar realTimeRentCar = realTimeRentCarOptional.get();
-                Long realTimeId = realTimeRentCar.getRealTimeRentId();
-
-                if(realTimeId == realTimeRentCar.getSequence()) continue;
-
-                realTimeRentCar.setSequence(imageTitleVO.getTitle());
+                realTimeRentCar.setSequence(realTimeSeqIsLongTermVO.getSequence());
+                realTimeRentCar.setIsLongTerm(realTimeSeqIsLongTermVO.getIsLongTerm());
                 realTimeRentCarService.save(realTimeRentCar);
             } else {
                 problemFlg = 1;

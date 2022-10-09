@@ -184,8 +184,10 @@ $('.moveToDetail').click(function(e) {
     let rentId = [...document.getElementsByClassName('rentId')].find(item => item.dataset.index == dataIndex).innerText;
     let kilometer = [...document.getElementsByClassName('kilometer')].find(item => item.dataset.index == dataIndex).innerText;
     let discount = [...document.getElementsByClassName('discountValue')].find(item => item.dataset.index == dataIndex).innerText;
+    let isLongTerm = [...document.getElementsByClassName('detail_btn')].find(item => item.dataset.index == dataIndex).innerText;
 
-    window.location = '/rent/month/detail/' + rentId + '/' + rentTerm + '/' + kilometer  + '/' + discount;
+    if(isLongTerm == '장기렌트 바로가기') window.location = '/rent/long_term'
+    else window.location = '/rent/month/detail/' + rentId + '/' + rentTerm + '/' + kilometer  + '/' + discount;
 });
 
 //할인 가격 천원 단위로 반올림

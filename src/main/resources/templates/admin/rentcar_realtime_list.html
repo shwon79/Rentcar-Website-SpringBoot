@@ -54,7 +54,7 @@
                     <span>* 차량이 많으면 순서 변경하는 데에 시간이 소요될 수 있습니다. </span>
                 </div>
                 <div style="width: 50%; text-align: right;">
-                    <button class="btn btn-primary" onclick="saveChangedRowIndex();" style="margin: 0 0 10px 10px; ">순서 변경하기</button>
+                    <button class="btn btn-primary" onclick="saveChangedRowIndex();" style="margin: 0 0 10px 10px; ">저장</button>
                 </div>
             </div>
             <table class="table table-striped">
@@ -70,6 +70,7 @@
                         <th scope="col">년식</th>
                         <th scope="col">유종</th>
                         <th scope="col">최종 수정일</th>
+                        <th scope="col">장기렌트 바로가기</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,6 +87,7 @@
                         <td th:text="${car.carOld}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
                         <td th:text="${car.carEngine}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
                         <td th:text="${car.modified_date_hour_minute}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td style="width: 6rem; margin: 0px;"><input type="checkbox" th:id="${car.realTimeRentId}" class="ch_longTerm" th:checked="${car.isLongTerm}"></td>
                     </tr>
                 </tbody>
             </table>
