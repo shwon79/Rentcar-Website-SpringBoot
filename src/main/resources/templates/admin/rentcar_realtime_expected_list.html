@@ -1,0 +1,99 @@
+<!-- 관리자 장기렌트 현황 및 수정 페이지 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin_longTerm.css}" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_rentcar.js}" defer></script>
+
+    <script>
+        $(window).on('load', function () {
+            let longTermMainMenu = document.getElementById('longTermMainMenu');
+            longTermMainMenu.classList.add('activeAdminMenu');
+        });
+        $(function(){
+            $( "tbody" ).sortable();
+        });
+    </script>
+
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content" style="width: 100%; max-width: 100%;">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+
+        <div class="container inner_content" style="width: 100%; max-width: 100%;">
+            <h2 class="page_title" style="text-align: center;">차량 현황</h2>
+            <div style="display: flex;">
+<!--                <div style="width: 50%; padding: 20px 0 0 0;">-->
+<!--                    <span>* 차량이 많으면 순서 변경하는 데에 시간이 소요될 수 있습니다. </span>-->
+<!--                </div>-->
+<!--                <div style="width: 50%; text-align: right;">-->
+<!--                    <button class="btn btn-primary" onclick="saveChangedRowIndexExpected();" style="margin: 0 0 10px 10px; ">순서 변경하기</button>-->
+<!--                </div>-->
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr class="thead-dark">
+<!--                        <th></th>-->
+                        <th scope="col">차종</th>
+                        <th scope="col">차명</th>
+                        <th scope="col">차명-세부</th>
+                        <th scope="col">차량번호</th>
+                        <th scope="col">색상</th>
+                        <th scope="col">주행거리</th>
+                        <th scope="col">년식</th>
+                        <th scope="col">유종</th>
+                        <th scope="col">최종 수정일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="car, i : ${realTimeRentCarListExpected}" class="oneItem" th:data-id="${car.realTimeRentId}" th:data-sequence="${car.sequence}">
+<!--                        <td style="width: 5px;">-->
+<!--                            <i class="fas fa-bars" style="margin-right: 10px;"></i>-->
+<!--                        </td>-->
+                        <td th:text="${car.carCategory}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td th:text="${car.carName}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td th:text="${car.carDetail}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td th:text="${car.carNo}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td th:text="${car.carExteriorColor}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td th:text="${car.carMileaget}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td th:text="${car.carOld}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td th:text="${car.carEngine}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                        <td th:text="${car.modified_date_hour_minute}" th:data-id="${car.realTimeRentId}" style="width: 6rem; margin: 0px;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+
+</html>

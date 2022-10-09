@@ -1,3 +1,83 @@
+
+// 내용 순서 변경
+function saveChangedRowIndex() {
+    let boxList = document.getElementsByClassName('oneItem');
+
+    if (confirm('순서를 변경하시겠습니까?')) {
+        let tempTitle = 1;
+        let imageTitleList = [];
+
+        [...boxList].forEach(function(box) {
+            let imageId = parseInt(box.dataset.id);
+            let oneData = {
+                imageId: imageId,
+                title: tempTitle
+            }
+            tempTitle++;
+            imageTitleList.push(oneData);
+        });
+
+        let data = {
+            imageTitleList: imageTitleList
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: '/admin/rentcar/realtime/sequence',
+            dataType: 'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('순서가 변경 되었습니다.');
+            } else {
+                alert('순서 변경에 문제가 생겼습니다.');
+            };
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    };
+}
+function saveChangedRowIndexExpected() {
+    let boxList = document.getElementsByClassName('oneItem');
+
+    if (confirm('순서를 변경하시겠습니까?')) {
+        let tempTitle = 1;
+        let imageTitleList = [];
+
+        [...boxList].forEach(function(box) {
+            let imageId = parseInt(box.dataset.id);
+            let oneData = {
+                imageId: imageId,
+                title: tempTitle
+            }
+            tempTitle++;
+            imageTitleList.push(oneData);
+        });
+
+        let data = {
+            imageTitleList: imageTitleList
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: '/admin/rentcar/realtime/expected/sequence',
+            dataType: 'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('순서가 변경 되었습니다.');
+            } else {
+                alert('순서 변경에 문제가 생겼습니다.');
+            };
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    };
+}
 // 종류 변경 시, 종류에 따른 분류 옵션 보여주기
 function displayCategory2(event, makeDefaultOption) {
     const category1 = event.value;

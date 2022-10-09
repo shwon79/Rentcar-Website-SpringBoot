@@ -193,7 +193,7 @@ public class RealtimeRentController {
                             (String) morenObject.get("carMileaget"), (String) morenObject.get("carColor"),(String) morenObject.get("carOld"),
                             (String) morenObject.get("carEngine"), (String) morenObject.get("carAttribute01"),(String) morenObject.get("order_end"),
                             monthlyRent.getCost_per_km(), (String) morenObject.get("carCode"), discount_price,
-                            discount_description, isExpected, priceDisplay,  (int) morenObject.get("ready_to_return"), modified_date_hour_minute);
+                            discount_description, isExpected, priceDisplay,  (int) morenObject.get("ready_to_return"), modified_date_hour_minute, 1000000);
                     realTimeRentCarList.add(realTimeRent);
 
                     if(!morenObject.get("carThumbImages").equals(null)) {
@@ -236,14 +236,11 @@ public class RealtimeRentController {
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
         HashSet<String> carGubunSet = new HashSet<>();
 
-        for(RealTimeRentCar realTimeRentCar : morenDTOList){
-            carGubunSet.add(realTimeRentCar.getCarGubun());
-        }
-        for(RealTimeRentCar realTimeRentCar : morenDTOListExpected){
-            carGubunSet.add(realTimeRentCar.getCarGubun());
-        }
+        for(RealTimeRentCar realTimeRentCar : morenDTOList) carGubunSet.add(realTimeRentCar.getCarGubun());
+        for(RealTimeRentCar realTimeRentCar : morenDTOListExpected) carGubunSet.add(realTimeRentCar.getCarGubun());
         List<String> carGubunList = new ArrayList<>(carGubunSet);
         Collections.sort(carGubunList);
+        morenDTOList.sort(Comparator.comparingInt(RealTimeRentCar::getSequence));
         Collections.sort(morenDTOListExpected);
         carGubunList.add(0, "전체");
 

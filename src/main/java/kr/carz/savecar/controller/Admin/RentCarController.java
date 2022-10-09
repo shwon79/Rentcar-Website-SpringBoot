@@ -50,6 +50,70 @@ public class RentCarController {
         this.realtimeRentController = realtimeRentController;
     }
 
+    @PutMapping(value = "/admin/rentcar/realtime/sequence")
+    @ResponseBody
+    public void put_rentcar_realtime_sequence(HttpServletResponse res, @RequestBody ImagesVO imagesVO) throws IOException {
+
+        JSONObject jsonObject = new JSONObject();
+
+        int problemFlg = 0;
+        for(ImageTitleVO imageTitleVO : imagesVO.getImageTitleList()){
+
+            Optional<RealTimeRentCar> realTimeRentCarOptional = realTimeRentCarService.findById(imageTitleVO.getImageId());
+            if (realTimeRentCarOptional.isPresent()) {
+
+                RealTimeRentCar realTimeRentCar = realTimeRentCarOptional.get();
+                Long realTimeId = realTimeRentCar.getRealTimeRentId();
+
+                if(realTimeId == realTimeRentCar.getSequence()) continue;
+
+                realTimeRentCar.setSequence(imageTitleVO.getTitle());
+                realTimeRentCarService.save(realTimeRentCar);
+            } else {
+                problemFlg = 1;
+            }
+        }
+
+        if(problemFlg == 0){
+            jsonObject.put("result", 1);
+        } else {
+            jsonObject.put("result", 0);
+        }
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    @GetMapping("/admin/rentcar/realtime/list")
+    public ModelAndView get_rent_car_realtime_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<RealTimeRentCar> realTimeRentCarList = realTimeRentCarService.findByIsExpected(0);
+        Collections.sort(realTimeRentCarList, (a, b) -> a.getSequence() - b.getSequence());
+
+        mav.addObject("realTimeRentCarList", realTimeRentCarList);
+
+        mav.setViewName("admin/rentcar_realtime_list");
+
+        return mav;
+    }
+
+    @GetMapping("/admin/rentcar/realtime/expected/list")
+    public ModelAndView get_rent_car_realtime_expected_menu() {
+
+        ModelAndView mav = new ModelAndView();
+
+        List<RealTimeRentCar> realTimeRentCarList = realTimeRentCarService.findByIsExpected(1);
+        Collections.sort(realTimeRentCarList, (a, b) -> a.getSequence() - b.getSequence());
+
+        mav.addObject("realTimeRentCarListExpected", realTimeRentCarList);
+        mav.setViewName("admin/rentcar_realtime_expected_list");
+
+        return mav;
+    }
 
     @GetMapping("/admin/rentcar/price/monthly/menu/{category2}")
     public ModelAndView get_rent_car_price_monthly_menu(@PathVariable String category2) {
