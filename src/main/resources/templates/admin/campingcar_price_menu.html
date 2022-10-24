@@ -92,205 +92,205 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">2일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twodays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twodays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent2" th:text="${campingCar[0].twodays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twodays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twodays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent2" th:text="${campingCar[1].twodays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">3일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].threedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].threedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent3" th:text="${campingCar[0].threedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].threedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].threedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent3" th:text="${campingCar[1].threedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">4일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].fourdays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].fourdays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent4" th:text="${campingCar[0].fourdays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].fourdays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].fourdays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent4" th:text="${campingCar[1].fourdays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">5일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].fivedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].fivedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent5" th:text="${campingCar[0].fivedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].fivedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].fivedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent5" th:text="${campingCar[1].fivedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">6일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].sixdays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].sixdays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent6" th:text="${campingCar[0].sixdays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].sixdays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].sixdays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent6" th:text="${campingCar[1].sixdays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">7일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].sevendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].sevendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent7" th:text="${campingCar[0].sevendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].sevendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].sevendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent7" th:text="${campingCar[1].sevendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">8일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].eightdays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].eightdays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent8" th:text="${campingCar[0].eightdays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].eightdays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].eightdays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent8" th:text="${campingCar[1].eightdays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">9일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].ninedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].ninedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent9" th:text="${campingCar[0].ninedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].ninedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].ninedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent9" th:text="${campingCar[1].ninedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">10일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].tendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].tendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent10" th:text="${campingCar[0].tendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].tendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].tendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent10" th:text="${campingCar[1].tendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">11일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].elevendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].elevendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent11" th:text="${campingCar[0].elevendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].elevendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].elevendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent11" th:text="${campingCar[1].elevendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">12일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twelvedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twelvedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent12" th:text="${campingCar[0].twelvedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twelvedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twelvedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent12" th:text="${campingCar[1].twelvedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">13일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].thirteendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].thirteendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent13" th:text="${campingCar[0].thirteendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].thirteendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].thirteendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent13" th:text="${campingCar[1].thirteendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">14일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].fourteendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].fourteendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent14" th:text="${campingCar[0].fourteendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].fourteendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].fourteendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent14" th:text="${campingCar[1].fourteendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">15일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].fifteendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].fifteendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent15" th:text="${campingCar[0].fifteendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].fifteendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].fifteendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent15" th:text="${campingCar[1].fifteendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">16일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].sixteendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].sixteendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent16" th:text="${campingCar[0].sixteendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].sixteendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].sixteendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent16" th:text="${campingCar[1].sixteendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">17일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].seventeendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].seventeendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent17" th:text="${campingCar[0].seventeendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].seventeendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].seventeendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent17" th:text="${campingCar[1].seventeendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">18일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].eighteendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].eighteendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent18" th:text="${campingCar[0].eighteendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].eighteendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].eighteendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent18" th:text="${campingCar[1].eighteendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">19일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].ninetinedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].ninetinedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent19" th:text="${campingCar[0].ninetinedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].ninetinedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].ninetinedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent19" th:text="${campingCar[1].ninetinedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">20일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentydays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentydays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent20" th:text="${campingCar[0].twentydays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentydays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentydays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent20" th:text="${campingCar[1].twentydays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">21일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentyonedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentyonedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent21" th:text="${campingCar[0].twentyonedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentyonedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentyonedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent21" th:text="${campingCar[1].twentyonedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">22일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentytwodays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentytwodays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent22" th:text="${campingCar[0].twentytwodays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentytwodays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentytwodays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent22" th:text="${campingCar[1].twentytwodays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">23일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentythreedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentythreedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent23" th:text="${campingCar[0].twentythreedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentythreedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentythreedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent23" th:text="${campingCar[1].twentythreedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">24일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentyfourdays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentyfourdays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent24" th:text="${campingCar[0].twentyfourdays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentyfourdays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentyfourdays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent24" th:text="${campingCar[1].twentyfourdays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">25일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentyfivedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentyfivedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent25" th:text="${campingCar[0].twentyfivedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentyfivedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentyfivedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent25" th:text="${campingCar[1].twentyfivedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">26일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentysixdays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentysixdays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent26" th:text="${campingCar[0].twentysixdays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentysixdays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentysixdays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent26" th:text="${campingCar[1].twentysixdays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">27일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentysevendays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentysevendays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent27" th:text="${campingCar[0].twentysevendays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentysevendays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentysevendays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent27" th:text="${campingCar[1].twentysevendays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">28일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentyeightdays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentyeightdays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent28" th:text="${campingCar[0].twentyeightdays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentyeightdays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentyeightdays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent28" th:text="${campingCar[1].twentyeightdays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">29일</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].twentyninedays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].twentyninedays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent29" th:text="${campingCar[0].twentyninedays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].twentyninedays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].twentyninedays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent29" th:text="${campingCar[1].twentyninedays}"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">한달권</th>
-                                    <td th:text="${#numbers.formatInteger(campingCar[0].thirtydays * campingCar[0].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[0].thirtydays * campingCar[0].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent30" th:text="${campingCar[0].thirtydays}"></textarea></td>
-                                    <td th:text="${#numbers.formatInteger(campingCar[1].thirtydays * campingCar[1].onedays, 0, 'COMMA')}"></td>
+                                    <td th:text="${T(Math).floor(campingCar[1].thirtydays * campingCar[1].onedays / 1000) * 1000}"></td>
                                     <td><textarea type="text" class="percent30" th:text="${campingCar[1].thirtydays}"></textarea></td>
                                 </tr>
                             </tbody>

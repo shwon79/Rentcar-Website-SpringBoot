@@ -76,9 +76,16 @@ Author:             Jitu Chauhan
 -----------------------------------*/
 
 body { font-size: 1.4rem; background-color: #fff; color: #000000; font-family: 'NanumBarunGothic'; line-height: 1.75rem; font-weight: 300;
-    -ms-overflow-style: none;
+    /*-ms-overflow-style: none;*/
 }
-::-webkit-scrollbar { display: none; }
+/*::-webkit-scrollbar { display: none; }*/
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: #a9a9a9;
+}
 
 h1, h2, h3, h4, h5, h6 {
     padding: 0;

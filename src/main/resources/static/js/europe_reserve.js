@@ -537,6 +537,11 @@ function displayPrice() {
     let displayPriceExtraTime = document.getElementById('displayPriceExtraTime');
     let priceInfo = document.getElementById('priceInfo');
 
+    console.log(displayPriceDay)
+    console.log(displayPricePeak)
+    console.log(displayPriceExtraTime)
+    console.log(priceInfo)
+
     if (displayPriceDay != '' && displayPricePeak != '') {
         if (displayPricePeak == '0') {
             if (displayPriceExtraTime && displayPriceExtraTime.value == '1') {
@@ -568,35 +573,35 @@ function getPriceData(carType) {
             offObj = result;
             offList[0] = offObj['threeHours'];
             offList[1] = offObj['onedays'];
-            offList[2] = parseFloat(offObj['twodays']) * parseInt(offObj['onedays']);
-            offList[3] = parseFloat(offObj['threedays']) * parseInt(offObj['onedays']);
-            offList[4] = parseFloat(offObj['fourdays']) * parseInt(offObj['onedays']);
-            offList[5] = parseFloat(offObj['fivedays']) * parseInt(offObj['onedays']);
-            offList[6] = parseFloat(offObj['sixdays']) * parseInt(offObj['onedays']);
-            offList[7] = parseFloat(offObj['sevendays']) * parseInt(offObj['onedays']);
-            offList[8] = parseFloat(offObj['eightdays']) * parseInt(offObj['onedays']);
-            offList[9] = parseFloat(offObj['ninedays']) * parseInt(offObj['onedays']);
-            offList[10] = parseFloat(offObj['tendays']) * parseInt(offObj['onedays']);
-            offList[11] = parseFloat(offObj['elevendays']) * parseInt(offObj['onedays']);
-            offList[12] = parseFloat(offObj['twelvedays']) * parseInt(offObj['onedays']);
-            offList[13] = parseFloat(offObj['thirteendays']) * parseInt(offObj['onedays']);
-            offList[14] = parseFloat(offObj['fourteendays']) * parseInt(offObj['onedays']);
-            offList[15] = parseFloat(offObj['fifteendays']) * parseInt(offObj['onedays']);
-            offList[16] = parseFloat(offObj['sixteendays']) * parseInt(offObj['onedays']);
-            offList[17] = parseFloat(offObj['seventeendays']) * parseInt(offObj['onedays']);
-            offList[18] = parseFloat(offObj['eighteendays']) * parseInt(offObj['onedays']);
-            offList[19] = parseFloat(offObj['ninetinedays']) * parseInt(offObj['onedays']);
-            offList[20] = parseFloat(offObj['twentydays']) * parseInt(offObj['onedays']);
-            offList[21] = parseFloat(offObj['twentyonedays']) * parseInt(offObj['onedays']);
-            offList[22] = parseFloat(offObj['twentytwodays']) * parseInt(offObj['onedays']);
-            offList[23] = parseFloat(offObj['twentythreedays']) * parseInt(offObj['onedays']);
-            offList[24] = parseFloat(offObj['twentyfourdays']) * parseInt(offObj['onedays']);
-            offList[25] = parseFloat(offObj['twentyfivedays']) * parseInt(offObj['onedays']);
-            offList[26] = parseFloat(offObj['twentysixdays']) * parseInt(offObj['onedays']);
-            offList[27] = parseFloat(offObj['twentysevendays']) * parseInt(offObj['onedays']);
-            offList[28] = parseFloat(offObj['twentyeightdays']) * parseInt(offObj['onedays']);
-            offList[29] = parseFloat(offObj['twentyninedays']) * parseInt(offObj['onedays']);
-            offList[30] = parseFloat(offObj['thirtydays']) * parseInt(offObj['onedays']);
+            offList[2] = Math.floor(parseFloat(offObj['twodays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[3] = Math.floor(parseFloat(offObj['threedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[4] = Math.floor(parseFloat(offObj['fourdays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[5] = Math.floor(parseFloat(offObj['fivedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[6] = Math.floor(parseFloat(offObj['sixdays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[7] = Math.floor(parseFloat(offObj['sevendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[8] = Math.floor(parseFloat(offObj['eightdays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[9] = Math.floor(parseFloat(offObj['ninedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[10] = Math.floor(parseFloat(offObj['tendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[11] = Math.floor(parseFloat(offObj['elevendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[12] = Math.floor(parseFloat(offObj['twelvedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[13] = Math.floor(parseFloat(offObj['thirteendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[14] = Math.floor(parseFloat(offObj['fourteendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[15] = Math.floor(parseFloat(offObj['fifteendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[16] = Math.floor(parseFloat(offObj['sixteendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[17] = Math.floor(parseFloat(offObj['seventeendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[18] = Math.floor(parseFloat(offObj['eighteendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[19] = Math.floor(parseFloat(offObj['ninetinedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[20] = Math.floor(parseFloat(offObj['twentydays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[21] = Math.floor(parseFloat(offObj['twentyonedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[22] = Math.floor(parseFloat(offObj['twentytwodays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[23] = Math.floor(parseFloat(offObj['twentythreedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[24] = Math.floor(parseFloat(offObj['twentyfourdays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[25] = Math.floor(parseFloat(offObj['twentyfivedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[26] = Math.floor(parseFloat(offObj['twentysixdays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[27] = Math.floor(parseFloat(offObj['twentysevendays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[28] = Math.floor(parseFloat(offObj['twentyeightdays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[29] = Math.floor(parseFloat(offObj['twentyninedays']) * parseInt(offObj['onedays']) / 1000) * 1000;
+            offList[30] = Math.floor(parseFloat(offObj['thirtydays']) * parseInt(offObj['onedays']) / 1000) * 1000;
 
             cheapestPrice.innerText = parseInt(offList[1]).toLocaleString();
             if (displayPriceExtraTime) {
@@ -611,35 +616,35 @@ function getPriceData(carType) {
             peakObj = result;
             peakList[0] = peakObj['threeHours'];
             peakList[1] = peakObj['onedays'];
-            peakList[2] = parseFloat(peakObj['twodays']) * parseInt(peakObj['onedays']);
-            peakList[3] = parseFloat(peakObj['threedays']) * parseInt(peakObj['onedays']);
-            peakList[4] = parseFloat(peakObj['fourdays']) * parseInt(peakObj['onedays']);
-            peakList[5] = parseFloat(peakObj['fivedays']) * parseInt(peakObj['onedays']);
-            peakList[6] = parseFloat(peakObj['sixdays']) * parseInt(peakObj['onedays']);
-            peakList[7] = parseFloat(peakObj['sevendays']) * parseInt(peakObj['onedays']);
-            peakList[8] = parseFloat(peakObj['eightdays']) * parseInt(peakObj['onedays']);
-            peakList[9] = parseFloat(peakObj['ninedays']) * parseInt(peakObj['onedays']);
-            peakList[10] = parseFloat(peakObj['tendays']) * parseInt(peakObj['onedays']);
-            peakList[11] = parseFloat(peakObj['elevendays']) * parseInt(peakObj['onedays']);
-            peakList[12] = parseFloat(peakObj['twelvedays']) * parseInt(peakObj['onedays']);
-            peakList[13] = parseFloat(peakObj['thirteendays']) * parseInt(peakObj['onedays']);
-            peakList[14] = parseFloat(peakObj['fourteendays']) * parseInt(peakObj['onedays']);
-            peakList[15] = parseFloat(peakObj['fifteendays']) * parseInt(peakObj['onedays']);
-            peakList[16] = parseFloat(peakObj['sixteendays']) * parseInt(peakObj['onedays']);
-            peakList[17] = parseFloat(peakObj['seventeendays']) * parseInt(peakObj['onedays']);
-            peakList[18] = parseFloat(peakObj['eighteendays']) * parseInt(peakObj['onedays']);
-            peakList[19] = parseFloat(peakObj['ninetinedays']) * parseInt(peakObj['onedays']);
-            peakList[20] = parseFloat(peakObj['twentydays']) * parseInt(peakObj['onedays']);
-            peakList[21] = parseFloat(peakObj['twentyonedays']) * parseInt(peakObj['onedays']);
-            peakList[22] = parseFloat(peakObj['twentytwodays']) * parseInt(peakObj['onedays']);
-            peakList[23] = parseFloat(peakObj['twentythreedays']) * parseInt(peakObj['onedays']);
-            peakList[24] = parseFloat(peakObj['twentyfourdays']) * parseInt(peakObj['onedays']);
-            peakList[25] = parseFloat(peakObj['twentyfivedays']) * parseInt(peakObj['onedays']);
-            peakList[26] = parseFloat(peakObj['twentysixdays']) * parseInt(peakObj['onedays']);
-            peakList[27] = parseFloat(peakObj['twentysevendays']) * parseInt(peakObj['onedays']);
-            peakList[28] = parseFloat(peakObj['twentyeightdays']) * parseInt(peakObj['onedays']);
-            peakList[29] = parseFloat(peakObj['twentyninedays']) * parseInt(peakObj['onedays']);
-            peakList[30] = parseFloat(peakObj['thirtydays']) * parseInt(peakObj['onedays']);
+            peakList[2] = Math.floor(parseFloat(peakObj['twodays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[3] = Math.floor(parseFloat(peakObj['threedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[4] = Math.floor(parseFloat(peakObj['fourdays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[5] = Math.floor(parseFloat(peakObj['fivedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[6] = Math.floor(parseFloat(peakObj['sixdays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[7] = Math.floor(parseFloat(peakObj['sevendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[8] = Math.floor(parseFloat(peakObj['eightdays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[9] = Math.floor(parseFloat(peakObj['ninedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[10] = Math.floor(parseFloat(peakObj['tendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[11] = Math.floor(parseFloat(peakObj['elevendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[12] = Math.floor(parseFloat(peakObj['twelvedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[13] = Math.floor(parseFloat(peakObj['thirteendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[14] = Math.floor(parseFloat(peakObj['fourteendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[15] = Math.floor(parseFloat(peakObj['fifteendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[16] = Math.floor(parseFloat(peakObj['sixteendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[17] = Math.floor(parseFloat(peakObj['seventeendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[18] = Math.floor(parseFloat(peakObj['eighteendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[19] = Math.floor(parseFloat(peakObj['ninetinedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[20] = Math.floor(parseFloat(peakObj['twentydays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[21] = Math.floor(parseFloat(peakObj['twentyonedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[22] = Math.floor(parseFloat(peakObj['twentytwodays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[23] = Math.floor(parseFloat(peakObj['twentythreedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[24] = Math.floor(parseFloat(peakObj['twentyfourdays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[25] = Math.floor(parseFloat(peakObj['twentyfivedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[26] = Math.floor(parseFloat(peakObj['twentysixdays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[27] = Math.floor(parseFloat(peakObj['twentysevendays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[28] = Math.floor(parseFloat(peakObj['twentyeightdays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[29] = Math.floor(parseFloat(peakObj['twentyninedays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
+            peakList[30] = Math.floor(parseFloat(peakObj['thirtydays']) * parseInt(peakObj['onedays']) / 1000) * 1000;
         })
 };
 
@@ -653,21 +658,6 @@ function makeExtraTimeOptions(carType, price) {
 
     displayPriceExtraTime.appendChild(option1);
 };
-
-// //지난 달로 못가게 화살표 없애기
-// const hiddenOnlythisMonth = document.getElementById('hiddenOnlythisMonth');
-// const curMonth = new Date();
-// let thisMonthOnCalendar = hiddenOnlythisMonth.dataset.index;
-// if (curMonth.getMonth()+1 == thisMonthOnCalendar) {
-//     hiddenOnlythisMonth.style.display = "none";
-// }
-//
-//
-// // 6월 달력까지만 보이게
-// const hiddenFromJuly = document.getElementById('hiddenFromJuly');
-// if (hiddenFromJuly.dataset.index == '6') {
-//     hiddenFromJuly.style.display = 'none';
-// }
 
 const clickedDay = (e) => {
     const restBtn = document.getElementsByClassName('able_radio');

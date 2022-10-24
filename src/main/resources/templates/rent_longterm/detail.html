@@ -83,7 +83,7 @@
                             <span>보증금</span>
                             <span>
                                 <span id="car_deposit" style="display: none;" th:text="${longTermRent.contractDeposit}"></span>
-                                <span th:text="${#numbers.formatInteger(longTermRent.contractDeposit,0,'COMMA')}"></span>
+                                <span th:text="${longTermRent.contractDeposit}"></span>
                                 <span>원</span>
                             </span>
                         </p>
