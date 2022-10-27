@@ -171,6 +171,7 @@ public class RealtimeRentController {
                     existingRealTimeRentCar.setPriceDisplay(priceDisplay);
                     existingRealTimeRentCar.setReady_to_return((int) morenObject.get("ready_to_return"));
                     existingRealTimeRentCar.setModified_date_hour_minute(modified_date_hour_minute);
+                    existingRealTimeRentCar.setMonthlyRent(monthlyRent);
                     realTimeRentService.save(existingRealTimeRentCar);
 
                     if(!morenObject.get("carThumbImages").equals(null)) {
