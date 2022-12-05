@@ -197,16 +197,16 @@
                       <p th:text="${realTimeRentCar.carAttribute01}"></p>
                     </div>
                   </div>
-                  <div class="car_info_box">
-                    <p class="car_info_title">부가서비스</p>
-                    <p style="display: flex; justify-content: space-between; align-items: center;">
-                      <span>
-                        <i class="fa-solid fa-circle-check" style="color: dimgrey;"></i>
-                        <span>차량 배달</span>
-                      </span>
-                      <button id="pickupPriceBtn">배차비 확인하기</button>
-                    </p>
-                  </div>
+<!--                  <div class="car_info_box">-->
+<!--                    <p class="car_info_title">부가서비스</p>-->
+<!--                    <p style="display: flex; justify-content: space-between; align-items: center;">-->
+<!--                      <span>-->
+<!--                        <i class="fa-solid fa-circle-check" style="color: dimgrey;"></i>-->
+<!--                        <span>차량 배달</span>-->
+<!--                      </span>-->
+<!--                      <button id="pickupPriceBtn">배차비 확인하기</button>-->
+<!--                    </p>-->
+<!--                  </div>-->
 
 <!--                  <div class="col-lg-12">-->
 <!--                    <h1 class="carName" th:text="${morenDto.carName}"></h1>-->
@@ -255,6 +255,8 @@
                 <div class="container selectRentermKilometerBox">
                   <div class="select-box">
                     <p class="select_box_description">※ 렌트 기간, 약정 주행거리, 연령 선택에 따라 대여료가 달라집니다.</p>
+                    <p class="select_box_description">※ 본사 방문기준 가격이고, 외부배차의 경우 탁송비는 탁송회사에 지불하시기 바랍니다.</p>
+
                     <p th:if="${realTimeRentCar.isExpected}==1" class="select_box_description">
                       ※ 입고 예정이나, 기존 고객 연장으로 예약이 불가할 수 있습니다.
                     </p>

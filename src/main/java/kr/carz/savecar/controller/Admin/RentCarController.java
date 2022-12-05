@@ -66,16 +66,11 @@ public class RentCarController {
                 realTimeRentCar.setSequence(realTimeSeqIsLongTermVO.getSequence());
                 realTimeRentCar.setIsLongTerm(realTimeSeqIsLongTermVO.getIsLongTerm());
                 realTimeRentCarService.save(realTimeRentCar);
-            } else {
-                problemFlg = 1;
-            }
+            } else problemFlg = 1;
         }
 
-        if(problemFlg == 0){
-            jsonObject.put("result", 1);
-        } else {
-            jsonObject.put("result", 0);
-        }
+        if(problemFlg == 0) jsonObject.put("result", 1);
+        else jsonObject.put("result", 0);
 
         PrintWriter pw = res.getWriter();
         pw.print(jsonObject);
@@ -174,9 +169,7 @@ public class RentCarController {
 
         Optional<MonthlyRent> monthlyRentWrapper = monthlyRentService.findById(monthlyId);
         if(monthlyRentWrapper.isPresent()){
-
             monthlyRentService.updateAllPriceByDTO(monthlyRentDTO, monthlyRentWrapper.get());
-
             jsonObject.put("result", 1);
         } else {
             jsonObject.put("result", 0);

@@ -68,13 +68,13 @@ public class RealtimeRentController {
             return Long.compare(b.getRealTimeRentId(), a.getRealTimeRentId());
         }
     };
-
     Comparator<RealTimeRentCarImage> comparatorImage = new Comparator<RealTimeRentCarImage>() {
         @Override
         public int compare(RealTimeRentCarImage a, RealTimeRentCarImage b) {
             return Long.compare(b.getImageId(), a.getImageId());
         }
     };
+
     public void rent_month_save_update(){
 
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
@@ -227,8 +227,6 @@ public class RealtimeRentController {
         }
     }
 
-
-
     @GetMapping("/rent/month/new")
     public String rent_month(ModelMap model) {
 
@@ -266,9 +264,7 @@ public class RealtimeRentController {
         List<RealTimeRentCar> realTimeRentCarAllList = realTimeRentService.findAll();
         HashSet<String> carGubunSet = new HashSet<>();
 
-        for(RealTimeRentCar realTimeRentCar : realTimeRentCarAllList){
-            carGubunSet.add(realTimeRentCar.getCarGubun());
-        }
+        for(RealTimeRentCar realTimeRentCar : realTimeRentCarAllList) carGubunSet.add(realTimeRentCar.getCarGubun());
         List<String> carGubunList = new ArrayList<>(carGubunSet);
         Collections.sort(carGubunList);
         carGubunList.add(0, "전체");
@@ -325,9 +321,7 @@ public class RealtimeRentController {
             List<RealTimeRentCarImage> realTimeRentCarImageList = realTimeRentImageService.findByRealTimeRent(realTimeRentCar);
             model.put("realTimeRentCar", realTimeRentCar);
             model.put("realTimeRentCarImageList", realTimeRentCarImageList);
-        }else {
-            throw new Exception("해당하는 차량이 없습니다.");
-        }
+        }else throw new Exception("해당하는 차량이 없습니다.");
 
         model.put("rentTerm", rentTerm);
         model.put("kilometer", kilometer);
@@ -358,8 +352,9 @@ public class RealtimeRentController {
     }
 
 
-
     @PostMapping("/rent/month/moren/reservation")
+
+
     @ResponseBody
     public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO dto) throws IOException {
 

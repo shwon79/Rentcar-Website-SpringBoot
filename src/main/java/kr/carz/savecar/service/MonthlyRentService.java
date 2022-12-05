@@ -85,15 +85,19 @@ public class MonthlyRentService {
         monthlyRent.setCredit(monthlyRentDTO.getCredit());
         monthlyRent.setImg_url(monthlyRentDTO.getImg_url());
 
-        monthlyRent.getYearlyRent().setCategory1(monthlyRentDTO.getCategory1());
-        monthlyRent.getYearlyRent().setCategory2(monthlyRentDTO.getCategory2());
-        monthlyRent.getYearlyRent().setName(monthlyRentDTO.getName());
-        monthlyRent.getYearlyRent().setAge_limit(monthlyRentDTO.getAge_limit());
-        monthlyRent.getYearlyRent().setNameMoren(monthlyRentDTO.getNameMoren());
-        monthlyRent.getYearlyRent().setStart(monthlyRentDTO.getStart());
-        monthlyRent.getYearlyRent().setEnd(monthlyRentDTO.getEnd());
-        monthlyRent.getYearlyRent().setImg_url(monthlyRentDTO.getImg_url());
-        monthlyRent.getYearlyRent().setCost_for_others(monthlyRentDTO.getCost_for_others());
+        YearlyRent mYearlyRent = monthlyRent.getYearlyRent();
+        mYearlyRent.setCategory1(monthlyRentDTO.getCategory1());
+        mYearlyRent.setCategory2(monthlyRentDTO.getCategory2());
+        mYearlyRent.setName(monthlyRentDTO.getName());
+        mYearlyRent.setAge_limit(monthlyRentDTO.getAge_limit());
+        mYearlyRent.setNameMoren(monthlyRentDTO.getNameMoren());
+        mYearlyRent.setStart(monthlyRentDTO.getStart());
+        mYearlyRent.setEnd(monthlyRentDTO.getEnd());
+        mYearlyRent.setImg_url(monthlyRentDTO.getImg_url());
+        mYearlyRent.setCost_for_others(monthlyRentDTO.getCost_for_others());
+        mYearlyRent.setCost_for_20k_price(Math.round((monthlyRentDTO.getCost_for_2k() * mYearlyRent.getCost_for_20k()) / 1000) * 1000);
+        mYearlyRent.setCost_for_30k_price(Math.round((monthlyRentDTO.getCost_for_2k() * monthlyRentDTO.getCost_for_3k() *  mYearlyRent.getCost_for_30k()) / 1000) * 1000);
+        mYearlyRent.setCost_for_40k_price(Math.round((monthlyRentDTO.getCost_for_2k() * monthlyRentDTO.getCost_for_4k() *  mYearlyRent.getCost_for_40k()) / 1000) * 1000);
 
         if(monthlyRent.getTwoYearlyRent() != null){
             monthlyRent.getTwoYearlyRent().setCategory1(monthlyRentDTO.getCategory1());
