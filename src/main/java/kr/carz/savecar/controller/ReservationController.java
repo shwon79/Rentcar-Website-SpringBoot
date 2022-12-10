@@ -29,6 +29,9 @@ public class ReservationController {
     @Value("${coolsms.api_secret}")
     private String api_secret;
 
+    @Value("${phone.admin1}")
+    private String admin1;
+
     @Value("${phone.admin2}")
     private String admin2;
 
@@ -251,16 +254,14 @@ public class ReservationController {
 
 
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin2+", "+admin3 + ", " + admin4);
+        params.put("to", admin1 +", "+ admin2+", "+admin3 + ", " + admin4);
         params.put("from", admin3);
         params.put("type", "LMS");
-
 
         /* 고객에게 예약확인 문자 전송 */
         params2.put("to", dto.getPhoneNo());
         params2.put("from", admin3);
         params2.put("type", "LMS");
-
 
         switch (dto.getTitle()) {
             case "간편상담신청":
@@ -280,7 +281,7 @@ public class ReservationController {
                         + "예상대여일자: " + dto.getResDate() + "\n"
                         + "요청사항: " + dto.getDetail() + "\n\n");
                 break;
-
+            case "구독상담신청":
             case "누구나장기렌트간편상담신청":
             case "월렌트+12개월상담신청":
             case "캠핑카메인상담신청":

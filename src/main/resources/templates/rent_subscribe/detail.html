@@ -1,0 +1,220 @@
+<!-- 누구나 장기렌트(detail.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SAVECAR - 자동차구독</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link th:href="@{/css/rent_long_term.css}" rel="stylesheet">
+    <script th:src="@{/js/rent_subscribe.js}" defer></script>
+</head>
+<div layout:fragment="content">
+    <a href="/rent/month/new"><button class="fixed_phone_pc_btn" ><img th:src="@{/img/arrow1.png}" width="30" height="30">  월렌트 예약가능차량 보기</button></a>
+    <a href="/rent/long_term"><button class="fixed_message_pc_btn" ><img th:src="@{/img/arrow1.png}" width="30" height="30">  장기렌트 예약가능차량 보기</button></a>
+    <!-- end of Header-top -->
+    <div class="content">
+        <div class="container" style="margin-top: 70px;">
+            <p class="car_title" id="car_name" th:text="${subscribe.carName}"></p>
+            <p class="car_subtitle">
+                <span id="new_old" th:text="${subscribe.newOld}"></span>
+                <span th:if="${subscribe.newOld == '중고차구독'}" th:text="${subscribe.carNum}"></span>
+                <span th:if="${subscribe.newOld == '중고차구독'}" th:text="${subscribe.carColor}" style="word-break: keep-all;"></span>
+                <span th:if="${subscribe.newOld == '중고차구독'}" th:text="${subscribe.carYearModel}" style="word-break: keep-all;"></span>
+                <span th:if="${subscribe.newOld == '중고차구독'}" th:text="${subscribe.fuel}" style="word-break: keep-all;"></span>
+                <span th:if="${subscribe.newOld == '신차구독'}" th:text="${subscribe.contractPeriod}"></span>
+                <span th:if="${subscribe.newOld == '신차구독'}" th:text="${subscribe.contractKm}"></span>
+                <span th:if="${subscribe.newOld == '신차구독'}" th:text="${subscribe.contractMaintenance}" style="word-break: keep-all;"></span>
+            </p>
+            <!--car image-->
+            <div th:if="${subscribeImageList.size()} == 0" id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
+                <!-- Content -->
+                <div class="carousel-inner" role="listbox">
+                    <img th:src="@{/img/picture_not_found.png}" style="height: 500px; width: 100%; border: 1px gray solid;" alt="car image">
+                </div>
+            </div>
+            <div th:if="${subscribeImageList.size()} > 0" id="desktop_img" class="carousel slide" data-ride="carousel" data-interval="false">
+                <!-- Content -->
+                <div class="carousel-inner" role="listbox">
+                    <div th:each="image, i : ${subscribeImageList}" class="item main-item" th:data-title="${image.imageId}" th:classappend="${i.index == 0 ? 'active' : ''}">
+                        <img th:src="${image.imageUrl}" alt="car image">
+                    </div>
+                </div>
+                <!-- Previous/Next controls -->
+                <a class="left carousel-control" href="#desktop_img" role="button" data-slide="prev">
+                    <span class="icon-prev" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#desktop_img" role="button" data-slide="next">
+                    <span class="icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div th:if="${subscribeImageList.size()} > 0" class="small_image_List">
+                <div th:each="image, i : ${subscribeImageList}" class="small_image_box" th:data-title="${image.imageId}">
+                    <img th:src="${image.imageUrl}" alt="car image">
+                </div>
+            </div>
+
+            <!--car info-->
+            <div class="long_term_detail">
+                <section class="long_term_detail_price_wrapper">
+                    <article class="detail_price_box" style="padding: 0; margin-bottom: 20px;">
+                        <p style="background-color: dimgrey; padding: 10px 20px; border-radius: 8px 8px 0 0;">
+                            <span style="color: white; flex-basis: 50%; text-align: center;">계약기간</span>
+                            <span style="color: white; flex-basis: 50%; text-align: center;">약정 주행거리</span>
+                        </p>
+                        <p style="padding: 10px 20px; margin-bottom: 10px;">
+                            <span th:text="${subscribe.contractPeriod}" style="flex-basis: 50%; text-align: center;"></span>
+                            <span th:text="${subscribe.contractKm}" style="flex-basis: 50%; text-align: center;"></span>
+                        </p>
+                    </article>
+                    <article class="detail_price_box">
+                        <p style="color: red; font-size: 1.8rem;">
+                            <span>무심사 월 대여료<br>(부가세 별도)</span>
+                            <span>
+                                <span id="car_price" style="display: none;" th:text="${subscribe.contractPrice}"></span>
+                                <span th:text="${#numbers.formatInteger(subscribe.contractPrice,0,'COMMA')}" style="font-size: 2.3rem;"></span>
+                                <span>원</span>
+                            </span>
+                        </p>
+                        <p>
+                            <span>보증금</span>
+                            <span>
+                                <span id="car_deposit" style="display: none;" th:text="${subscribe.contractDeposit}"></span>
+                                <span th:text="${subscribe.contractDeposit}"></span>
+                                <span>원</span>
+                            </span>
+                        </p>
+                        <button class="car_card_button" onclick="location.href='#counsel'" style="width: 100%;">상담신청</button>
+                    </article>
+
+                </section>
+                <section class="long_term_detail_info_wrapper">
+                    <article class="long_term_detail_info_box">
+                        <p class="detail_info_title">차량 정보</p>
+                        <div class="detail_info_wrapper">
+                            <div class="detail_info">
+                                <p>구분</p>
+                                <p th:text="${subscribe.newOld}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>차량 번호</p>
+                                <p id="car_num" th:text="${subscribe.carNum}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>색상</p>
+                                <p id="car_color" th:text="${subscribe.carColor}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>연식</p>
+                                <p id="car_year_model" th:text="${subscribe.carYearModel}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>연료</p>
+                                <p id="car_fuel" th:text="${subscribe.fuel}"></p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="long_term_detail_info_box">
+                        <p class="detail_info_title">계약 정보</p>
+                        <div class="detail_info_wrapper">
+                            <div class="detail_info">
+                                <p>계약 기간</p>
+                                <p id="contract_period" th:text="${subscribe.contractPeriod}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>약정 주행거리</p>
+                                <p id="contract_km" th:text="${subscribe.contractKm}"></p>
+                            </div>
+                            <div class="detail_info">
+                                <p>계약 서비스</p>
+                                <p id="contract_maintenance" th:text="${subscribe.contractMaintenance}"></p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="long_term_detail_info_box">
+                        <p class="detail_info_title">상세 설명</p>
+                        <div class="detail_info_wrapper">
+                            <div class="detail_info">
+                                <textarea id="description" rows="10" cols="70" style="border: none;" th:text="${subscribe.description}"></textarea>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+
+
+<!--            <p align="center" style="color: red; font-weight: bold; margin-top: 50px;">* 상담 신청을 하시면 위 차량 정보와 계약 정보가<br>함께 문자로 전달됩니다.</p>-->
+            <!--상담 신청-->
+            <div id="counsel" class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p style="font-size: 28px; text-align: center; margin-bottom: 30px;"><i class="fas fa-arrow-down"></i></p>
+                    <h2>상담 신청하기</h2>
+                    <hr>
+                    <div id="reservation-info" name="reservation-info" action="">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="name">* 이름</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <input type="text" class="form-control" id="reservation-simple-name" placeholder="성함을 입력해주세요." required oninvalid="this.setCustomValidity('필수 입력 정보입니다.')">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="phone">* 연락처</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                        <input type="text" class="form-control" id="reservation-simple-phone" placeholder="연락처 ex) 010-0000-0000" required >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="textarea">요청 사항</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fas fa-clipboard"></i></span>
+                                        <textarea class="form-control" id="reservation-simple-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요.(약정 주행거리 등)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group has-feedback">
+                                    <p class="text-center"><label style="font-size: 1em; font-weight: initial;"><input type="checkbox" id="agree1" class="agree"> 개인정보 수집 및 이용에 동의합니다.</label></p>
+                                    <p class="text-center"><label style="font-size: 1em; font-weight: initial;"><input type="checkbox" id="agree2" class="agree"> 보험사 사고경력조회에 동의합니다.</label></p>
+                                    <p class="text-center"><label style="font-size: 1em; font-weight: initial;"><input type="checkbox" id="agree3" class="agree"> 보험사고 경력 조회시에 당사 규정에 따라 거부될 수 있음을 확인합니다.</label></p>
+                                    <p class="text-center"><label style="font-size: 1em; font-weight: initial;"><input type="checkbox" id="agree4" class="agree" onclick="check_all_box()"> 모두 동의</label></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group text-center">
+                                    <button class="btn1 btn1-default" onclick="make_subscribe_rent_reservation()">상담신청 </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="display: none;">
+            <p id="forCarName" th:text="${longTermRent.carName}"></p>
+            <p id="forCarNum" th:text="${longTermRent.carNum}"></p>
+            <p id="forCarColor" th:text="${longTermRent.carColor}"></p>
+            <p id="forCarYearModel" th:text="${longTermRent.carYearModel}"></p>
+            <p id="forContractPeriod" th:text="${longTermRent.contractPeriod}"></p>
+            <p id="forContractKm" th:text="${longTermRent.contractKm}"></p>
+            <p id="forContractPrice" th:text="${longTermRent.contractPrice}"></p>
+            <p id="forContractDeposit" th:text="${longTermRent.contractDeposit}"></p>
+            <p id="forContractMaintenance" th:text="${longTermRent.contractMaintenance}"></p>
+            <p id="forNewOld" th:text="${longTermRent.newOld}"></p>
+            <p id="forFuel" th:text="${longTermRent.fuel}"></p>
+            <p id="forDescription" th:text="${longTermRent.description}"></p>
+        </div>
+    </div>
+</div>
+
+</html>

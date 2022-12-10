@@ -34,6 +34,8 @@ public class SpringConfig {
     private final ExpectedDayRepository expectedDayRepository;
     private final CampingCarHomeRepository campingCarHomeRepository;
     private final CampingCarHomeImageRepository campingCarHomeImageRepository;
+    private final SubscribeRepository subscribeRepository;
+    private final SubscribeImageRepository subscribeImageRepository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -49,7 +51,8 @@ public class SpringConfig {
                         LongTermRentRepository longTermRentRepository, LongTermRentImageRepository longTermRentImageRepository,
                         RealTimeRentCarRepository realTimeRentRepository, RealTimeRentCarImageRepository realTimeRentImageRepository,
                         ReviewImageRepository reviewImageRepository, ExpectedDayRepository expectedDayRepository,
-                        CampingCarHomeRepository campingCarHomeRepository, CampingCarHomeImageRepository campingCarHomeImageRepository) {
+                        CampingCarHomeRepository campingCarHomeRepository, CampingCarHomeImageRepository campingCarHomeImageRepository,
+                        SubscribeRepository subscribeRepository, SubscribeImageRepository subscribeImageRepository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -76,6 +79,8 @@ public class SpringConfig {
         this.expectedDayRepository = expectedDayRepository;
         this.campingCarHomeRepository = campingCarHomeRepository;
         this.campingCarHomeImageRepository = campingCarHomeImageRepository;
+        this.subscribeRepository = subscribeRepository;
+        this.subscribeImageRepository = subscribeImageRepository;
     }
 
     @Bean
@@ -159,4 +164,10 @@ public class SpringConfig {
 
     @Bean
     public CampingCarHomeImageService campingCarHomeImageService() { return new CampingCarHomeImageService(campingCarHomeImageRepository); }
+
+    @Bean
+    public SubscribeService subscribeService() { return new SubscribeService(subscribeRepository); }
+
+    @Bean
+    public SubscribeImageService subscribeImageService() { return new SubscribeImageService(subscribeImageRepository); }
 }

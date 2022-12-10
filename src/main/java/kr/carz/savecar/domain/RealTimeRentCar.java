@@ -81,6 +81,10 @@ public class RealTimeRentCar extends BaseTimeEntity implements Comparable<RealTi
         this.isLongTerm = isLongTerm;
     }
 
+    public RealTimeRentCar(int i, String 쏠라티, String 쏠라티_캠핑카, String s, String s1, String 흰색, String 캠핑카, String s2, String s3, String 흰색1, String s4, String 경유, String s5, String s6, String s7, String s8, int i1, String s9, int i2, int i3, int i4, String s10, int i5, int i6) {
+        super();
+    }
+
     @Override
     public int compareTo(RealTimeRentCar o) {
         if(this.ready_to_return == o.ready_to_return){

@@ -57,7 +57,7 @@ public class RealtimeRentController {
     private String moren_url_except_date;
 
     // 모렌 대기차 DB로 저장
-    @Scheduled(cron = "0 0/10 * * * *")
+    @Scheduled(cron = "0 0/5 * * * *")
     public void rent_month_save() {
         rent_month_save_update();
     }
@@ -234,7 +234,6 @@ public class RealtimeRentController {
         List<RealTimeRentCar> morenDTOListExpected = realTimeRentService.findByIsExpected(1);
         List<ExpectedDay> expectedDayList = expectedDayService.findAll();
         HashSet<String> carGubunSet = new HashSet<>();
-
         for(RealTimeRentCar realTimeRentCar : morenDTOList) carGubunSet.add(realTimeRentCar.getCarGubun());
         for(RealTimeRentCar realTimeRentCar : morenDTOListExpected) carGubunSet.add(realTimeRentCar.getCarGubun());
         List<String> carGubunList = new ArrayList<>(carGubunSet);

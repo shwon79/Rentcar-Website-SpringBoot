@@ -1,0 +1,142 @@
+<!-- 누구나 장기렌트(main-test.html) -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>자동차 구독 - SAVECAR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link th:href="@{/css/rent_long_term.css}" rel="stylesheet">
+    <script th:src="@{/js/rent_subscribe.js}" defer></script>
+</head>
+<div layout:fragment="content">
+    <a href="/rent/month/new"><button class="fixed_phone_pc_btn" ><img th:src="@{/img/arrow1.png}" width="30" height="30">  월렌트 예약가능차량 보기</button></a>
+    <a href="/rent/long_term"><button class="fixed_message_pc_btn" ><img th:src="@{/img/arrow1.png}" width="30" height="30">  장기렌트 예약가능차량 보기</button></a>
+    <!-- end of Header-top -->
+    <div class="content">
+        <div class="container" style="margin-top: 70px;">
+            <h2 class="page-title">자동차 구독</h2>
+            <h4 class="page-title">대표전화 : 1544-4680, 010-3359-6700</h4>
+            <p style="word-break: keep-all; color: dimgrey;">
+                자동차 구독은 일반 넘버의 자동차를 12개[6개월] 단위 리스의 형식으로 구독하는 상품입니다.
+            </p>
+            <ul id="car_card_list" style="margin-top: 50px;">
+                <li class="car_card" th:each="car, i : ${subscribeList}" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">
+<!--                    <div th:text="${car.newOld}" class="car_card_slogan"-->
+<!--                         th:style="${car.newOld == '중고차장기'? 'background: red' : ''}" th:styleappend="${car.newOld != '중고차장기' ? 'display:none' : ''}"></div>-->
+<!--                    <div th:text="${car.newOld}" class="car_card_slogan"-->
+<!--                         th:style="${car.newOld == '신차장기'? 'background: blue' : ''}" th:styleappend="${car.newOld != '신차장기' ? 'display:none' : ''}"></div>-->
+                    <div th:text="${car.newOld}" class="car_card_slogan"
+                         th:style="${car.newOld == '중고차구독'? 'background: #30b130' : ''}" th:styleappend="${car.newOld != '중고차구독' ? 'display:none' : ''}"></div>
+                    <div th:text="${car.newOld}" class="car_card_slogan"
+                         th:style="${car.newOld == '신차구독'? 'background: pink' : ''}" th:styleappend="${car.newOld != '신차구독' ? 'display:none' : ''}"></div>
+                    <div class="car_card_image_box">
+                        <img th:if="${imageList[i.index].size()} > 0" th:src="${imageList[i.index][0].imageUrl}" alt="car image">
+                        <img th:if="${imageList[i.index].size()} == 0" th:src="@{/img/picture_not_found.png}" alt="car image">
+                    </div>
+                    <div class="car_card_info_box">
+                        <p class="car_card_info_title" th:text="${car.carName}"></p>
+                        <p class="car_card_info_subInfo">
+                            <span th:text="${car.carYearModel}" th:classappend="${car.fuel=='-' ? 'displayNoneAfter':''}"></span>
+                            <span th:if="${car.fuel != '-'}" th:text="${car.fuel}" class="displayNoneAfter hidden-lg hidden-md"></span>
+                            <span class="hidden-xs hidden-sm">
+                                <span>총 약정 </span>
+                                <span th:text="${car.contractKm}"></span>
+                            </span>
+                        </p>
+                        <p class="car_card_info_subInfo hidden-lg hidden-md">
+                            <span>
+                                <span>총 약정 </span>
+                                <span th:text="${car.contractKm}"></span>
+                            </span>
+                        </p>
+                        <p class="car_card_info_subInfo">
+                            <span th:text="${car.contractPeriod}"></span>
+                            <span th:if="${car.fuel != '-'}" th:text="${car.fuel}" class="hidden-xs hidden-sm"></span>
+                            <span th:if="${car.carColor != '-'}" th:text="${car.carColor}"></span>
+                        </p>
+                        <p class="car_card_info_subInfo">
+                            <span>
+                                <span>보증금: </span>
+                                <span th:text="${car.contractDeposit}"></span>
+                                <span>원</span>
+                            </span>
+                        </p>
+                        <p class="car_card_info_price" style="margin: 15px 0 0 0;">구독 월대여료:</p>
+                        <p>
+                            <span class="car_card_info_price" th:text="${#numbers.formatInteger(car.contractPrice,0,'COMMA')}"></span>
+                            <span class="car_card_info_price">원</span>
+                            <span style="color: dimgrey;"> / 월 (부가세 별도)</span>
+                        </p>
+                        <div style="text-align: right;">
+                            <button class="car_card_button" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">상담신청</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <h2 id="special-long-term-rent" class="page-title">세이브카&카즈 자동차구독서비스</h2>
+            <p style="word-break: keep-all; color: dimgrey; font-size: 16px;">
+                소유 대신 공유!<br>
+                일반 넘버로 1년[6개월] 단위로 차량을 구독하세요!<br>
+                비용처리로 세금혜택까지!<br>
+                포함사항 : 정비, 종합보험[자차포함], 자동차<br>
+                자동차보험은 구독자가 가입<br>
+            </p>
+
+            <!--상담 신청-->
+            <div id="counsel" class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p style="font-size: 28px; text-align: center; margin-bottom: 30px;"><i class="fas fa-arrow-down"></i></p>
+                    <h2>상담 신청하기</h2>
+                    <hr>
+                    <div id="reservation-info" name="reservation-info" action="">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="name">* 이름</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <input type="text" class="form-control" id="reservation-simple-name" placeholder="성함을 입력해주세요." required oninvalid="this.setCustomValidity('필수 입력 정보입니다.')">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="phone">* 연락처</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                        <input type="text" class="form-control" id="reservation-simple-phone" placeholder="연락처 ex) 010-0000-0000" required >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="textarea">요청 사항</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fas fa-clipboard"></i></span>
+                                        <textarea name="textarea" rows="7" style="display: none;"></textarea>
+                                        <textarea class="form-control" id="reservation-simple-details" name="textarea" rows="7" placeholder="요청사항을 입력해주세요.(약정 주행거리 등)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group has-feedback">
+                                    <p class="text-center"><label><input type="checkbox" id="agree1" class="agree"> 개인정보 수집 및 이용에 동의합니다.</label></p>
+                                    <p class="text-center"><label><input type="checkbox" id="agree2" class="agree"> 보험사 사고경력조회에 동의합니다.</label></p>
+                                    <p class="text-center"><label><input type="checkbox" id="agree3" class="agree"> 보험사고 경력 조회시에 당사 규정에 따라 거부될 수 있음을 확인합니다.</label></p>
+                                    <p class="text-center"><label><input type="checkbox" id="agree4" class="agree" onclick="check_all_box()"> 모두 동의</label></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pinside10">
+                                <div class="form-group text-center">
+                                    <button class="btn1 btn1-default" onclick="make_subscribe_rent_reservation()">상담신청 </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

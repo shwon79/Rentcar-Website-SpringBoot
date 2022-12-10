@@ -1,0 +1,124 @@
+<!-- 관리자 장기렌트 차량 사진 수정 -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>SAVECAR - 관리자 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link th:href="@{/css/admin_longTerm.css}" rel="stylesheet">
+    <link th:href="@{/css/library/font-awesome.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/admin.js}" defer></script>
+    <script th:src="@{/js/admin_subscribe.js}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(window).on('load', function () {
+            let subscribeRegisterMenu = document.getElementById('subscribeMainMenu');
+            subscribeRegisterMenu.classList.add('activeAdminMenu');
+        });
+        // $(function(){
+        //     $( ".sortable" ).sortable();
+        // });
+    </script>
+</head>
+<body>
+<div class="wrapper content_wrapper">
+    <div th:replace="fragments/admin_menu::adminMenuFragment"></div>
+
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="detail_container">
+            <h2 class="page_title">
+                <h2 th:text="${subscribe.carName}" style="margin-left: 20px;"></h2>
+            </h2>
+            <div class="detail_list detail_list_group">
+                <p class="detail_group_title">차량 정보</p>
+            </div>
+
+            <div class="detail_list">
+                <p class="detail_first">구분</p>
+                <select id="newOld" name="newOld" th:data-id="${subscribe.subscribeId}">
+                    <option value="신차구독" th:selected="${subscribe.newOld == '신차구독' ? true : false}">신차구독</option>
+                    <option value="중고차구독" th:selected="${subscribe.newOld == '중고차구독' ? true : false}">중고차구독</option>
+                </select>
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">차량번호</p>
+                <input id="carNum" class="detail_second" th:value="${subscribe.carNum}" />
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">차명</p>
+                <input id="carName" class="detail_second" th:value="${subscribe.carName}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">색상</p>
+                <input id="carColor" class="detail_second" th:value="${subscribe.carColor}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">년식</p>
+                <input id="carYearModel" class="detail_second" th:value="${subscribe.carYearModel}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">연료</p>
+                <input id="fuel" class="detail_second" th:value="${subscribe.fuel}" />
+            </div>
+
+            <div class="detail_list detail_list_group">
+                <p class="detail_group_title">계약 정보</p>
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">계약 기간</p>
+                <input id="contractPeriod" class="detail_second" th:value="${subscribe.contractPeriod}" />
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">약정 주행거리</p>
+                <input id="contractKm" class="detail_second" th:value="${subscribe.contractKm}" />
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">월렌트료</p>
+                <input id="contractPrice" class="detail_second" th:value="${subscribe.contractPrice}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">보증금</p>
+                <input id="contractDeposit" class="detail_second" th:value="${subscribe.contractDeposit}" />
+            </div>
+            <div class="detail_list" style="border-bottom: none;">
+                <p class="detail_first">계약 서비스</p>
+                <input id="contractMaintenance" class="detail_second" th:value="${subscribe.contractMaintenance}" />
+            </div>
+
+
+            <div class="detail_list detail_list_group">
+                <p class="detail_group_title">상세 설명</p>
+            </div>
+            <div class="detail_list">
+                <p class="detail_first">설명</p>
+                <textarea id="description" class="detail_second" rows="8" th:text="${subscribe.description}" > </textarea>
+            </div>
+            <div class="detail_list" style="display: table; margin: auto;">
+                <button class="btn btn-primary" th:data-id="${subscribe.subscribeId}" onclick="clickEdit(this)" style="margin: 3px;">수정</button>
+                <button class="btn btn-danger" th:data-id="${subscribe.subscribeId}" onclick="clickDelete(this)" style="margin: 3px;">차량 삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
