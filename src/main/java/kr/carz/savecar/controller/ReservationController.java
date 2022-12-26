@@ -29,9 +29,6 @@ public class ReservationController {
     @Value("${coolsms.api_secret}")
     private String api_secret;
 
-    @Value("${phone.admin1}")
-    private String admin1;
-
     @Value("${phone.admin2}")
     private String admin2;
 
@@ -252,9 +249,8 @@ public class ReservationController {
         HashMap<String, String> params = new HashMap<>();
         HashMap<String, String> params2 = new HashMap<>();
 
-
         /* 세이브카에 예약확인 문자 전송 */
-        params.put("to", admin1 +", "+ admin2+", "+admin3 + ", " + admin4);
+        params.put("to", admin2+", "+admin3 + ", " + admin4);
         params.put("from", admin3);
         params.put("type", "LMS");
 

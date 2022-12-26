@@ -23,14 +23,12 @@
             </p>
             <ul id="car_card_list" style="margin-top: 50px;">
                 <li class="car_card" th:each="car, i : ${subscribeList}" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">
-<!--                    <div th:text="${car.newOld}" class="car_card_slogan"-->
-<!--                         th:style="${car.newOld == '중고차장기'? 'background: red' : ''}" th:styleappend="${car.newOld != '중고차장기' ? 'display:none' : ''}"></div>-->
-<!--                    <div th:text="${car.newOld}" class="car_card_slogan"-->
-<!--                         th:style="${car.newOld == '신차장기'? 'background: blue' : ''}" th:styleappend="${car.newOld != '신차장기' ? 'display:none' : ''}"></div>-->
                     <div th:text="${car.newOld}" class="car_card_slogan"
                          th:style="${car.newOld == '중고차구독'? 'background: #30b130' : ''}" th:styleappend="${car.newOld != '중고차구독' ? 'display:none' : ''}"></div>
                     <div th:text="${car.newOld}" class="car_card_slogan"
-                         th:style="${car.newOld == '신차구독'? 'background: pink' : ''}" th:styleappend="${car.newOld != '신차구독' ? 'display:none' : ''}"></div>
+                         th:style="${car.newOld == '신차구독'? 'background: #ff5722' : ''}" th:styleappend="${car.newOld != '신차구독' ? 'display:none' : ''}"></div>
+                    <div th:text="${car.newOld}" class="car_card_slogan"
+                         th:style="${car.newOld == '자동차구독'? 'background: #9e9e9e' : ''}" th:styleappend="${car.newOld != '자동차구독' ? 'display:none' : ''}"></div>
                     <div class="car_card_image_box">
                         <img th:if="${imageList[i.index].size()} > 0" th:src="${imageList[i.index][0].imageUrl}" alt="car image">
                         <img th:if="${imageList[i.index].size()} == 0" th:src="@{/img/picture_not_found.png}" alt="car image">
@@ -77,12 +75,12 @@
             </ul>
 
             <h2 id="special-long-term-rent" class="page-title">세이브카&카즈 자동차구독서비스</h2>
-            <p style="word-break: keep-all; color: dimgrey; font-size: 16px;">
+            <p style="word-break: keep-all; color: dimgrey; font-size: 18px;">
                 소유 대신 공유!<br>
                 일반 넘버로 1년[6개월] 단위로 차량을 구독하세요!<br>
+                허하호 차량으로 다양한 상품을 구독하세요!<br>
                 비용처리로 세금혜택까지!<br>
-                포함사항 : 정비, 종합보험[자차포함], 자동차<br>
-                자동차보험은 구독자가 가입<br>
+                정비가 포함된 상품으로 일반넘버는 구독자가 자동차보험가입 합니다.<br>
             </p>
 
             <!--상담 신청-->

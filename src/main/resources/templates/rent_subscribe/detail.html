@@ -19,10 +19,10 @@
             <p class="car_title" id="car_name" th:text="${subscribe.carName}"></p>
             <p class="car_subtitle">
                 <span id="new_old" th:text="${subscribe.newOld}"></span>
-                <span th:if="${subscribe.newOld == '중고차구독'}" th:text="${subscribe.carNum}"></span>
-                <span th:if="${subscribe.newOld == '중고차구독'}" th:text="${subscribe.carColor}" style="word-break: keep-all;"></span>
-                <span th:if="${subscribe.newOld == '중고차구독'}" th:text="${subscribe.carYearModel}" style="word-break: keep-all;"></span>
-                <span th:if="${subscribe.newOld == '중고차구독'}" th:text="${subscribe.fuel}" style="word-break: keep-all;"></span>
+                <span th:if="${subscribe.newOld == '중고차구독' || subscribe.newOld == '자동차구독'}" th:text="${subscribe.carNum}"></span>
+                <span th:if="${subscribe.newOld == '중고차구독' || subscribe.newOld == '자동차구독'}" th:text="${subscribe.carColor}" style="word-break: keep-all;"></span>
+                <span th:if="${subscribe.newOld == '중고차구독' || subscribe.newOld == '자동차구독'}" th:text="${subscribe.carYearModel}" style="word-break: keep-all;"></span>
+                <span th:if="${subscribe.newOld == '중고차구독' || subscribe.newOld == '자동차구독'}" th:text="${subscribe.fuel}" style="word-break: keep-all;"></span>
                 <span th:if="${subscribe.newOld == '신차구독'}" th:text="${subscribe.contractPeriod}"></span>
                 <span th:if="${subscribe.newOld == '신차구독'}" th:text="${subscribe.contractKm}"></span>
                 <span th:if="${subscribe.newOld == '신차구독'}" th:text="${subscribe.contractMaintenance}" style="word-break: keep-all;"></span>
@@ -72,7 +72,7 @@
                     </article>
                     <article class="detail_price_box">
                         <p style="color: red; font-size: 1.8rem;">
-                            <span>무심사 월 대여료<br>(부가세 별도)</span>
+                            <span>월구독료<br>[부가세 별도]</span>
                             <span>
                                 <span id="car_price" style="display: none;" th:text="${subscribe.contractPrice}"></span>
                                 <span th:text="${#numbers.formatInteger(subscribe.contractPrice,0,'COMMA')}" style="font-size: 2.3rem;"></span>
@@ -199,21 +199,6 @@
             </div>
         </div>
 
-
-        <div style="display: none;">
-            <p id="forCarName" th:text="${longTermRent.carName}"></p>
-            <p id="forCarNum" th:text="${longTermRent.carNum}"></p>
-            <p id="forCarColor" th:text="${longTermRent.carColor}"></p>
-            <p id="forCarYearModel" th:text="${longTermRent.carYearModel}"></p>
-            <p id="forContractPeriod" th:text="${longTermRent.contractPeriod}"></p>
-            <p id="forContractKm" th:text="${longTermRent.contractKm}"></p>
-            <p id="forContractPrice" th:text="${longTermRent.contractPrice}"></p>
-            <p id="forContractDeposit" th:text="${longTermRent.contractDeposit}"></p>
-            <p id="forContractMaintenance" th:text="${longTermRent.contractMaintenance}"></p>
-            <p id="forNewOld" th:text="${longTermRent.newOld}"></p>
-            <p id="forFuel" th:text="${longTermRent.fuel}"></p>
-            <p id="forDescription" th:text="${longTermRent.description}"></p>
-        </div>
     </div>
 </div>
 
