@@ -106,6 +106,27 @@
                         <td></td>
                         <td colspan="9"></td>
                     </tr>
+                    <tr class="bundle_row">
+                        <td colspan="3" style="font-size: 1.3rem;">차종별 일괄 수정</td>
+                        <td>
+                            <input type="number" style="width: 6rem;" id="typeDeposit">
+                            <button class="btn btn-primary" th:onclick="editTypeData('yearly', '보증금', [[${category2}]]);">보증금 수정</button>
+                        </td>
+                        <td>
+                            <input type="number" style="width: 10rem;" id="type20000km">
+                            <button class="btn btn-primary" th:onclick="editTypeData('yearly', '20000km', [[${category2}]]);">20,000km 수정</button>
+                        </td>
+                        <td>
+                            <input type="number" style="width: 10rem;" id="type30000km">
+                            <button class="btn btn-primary" th:onclick="editTypeData('yearly', '30000km', [[${category2}]]);">30,000km 수정</button>
+                        </td>
+                        <td>
+                            <input type="number" style="width: 10rem;" id="type40000km">
+                            <button class="btn btn-primary" th:onclick="editTypeData('yearly', '40000km', [[${category2}]]);">40,000km 수정</button>
+                        </td>
+                        <td></td>
+                        <td colspan="9"></td>
+                    </tr>
                     </thead>
                     <tbody>
                     <tr class="thead-dark">

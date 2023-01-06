@@ -112,6 +112,32 @@
                             </td>
                             <td colspan="7"></td>
                         </tr>
+                        <tr class="bundle_row">
+                            <td colspan="3" style="font-size: 1.3rem;">차종별 일괄 수정</td>
+                            <td>
+                                <input type="number" style="width: 6rem;" id="typeDeposit">
+                                <button class="btn btn-primary" th:onclick="editTypeData('monthly', '보증금', [[${category2}]]);">보증금 수정</button>
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="number" style="width: 10rem;" id="type2500km">
+                                <button class="btn btn-primary" th:onclick="editTypeData('monthly', '2500km', [[${category2}]]);">2,500km 수정</button>
+                            </td>
+                            <td>
+                                <input type="number" style="width: 10rem;" id="type3000km">
+                                <button class="btn btn-primary" th:onclick="editTypeData('monthly', '3000km', [[${category2}]]);">3,000km 수정</button>
+                            </td>
+                            <td>
+                                <input type="number" style="width: 10rem;" id="type4000km">
+                                <button class="btn btn-primary" th:onclick="editTypeData('monthly', '4000km', [[${category2}]]);">40,000km 수정</button>
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="number" style="width: 5rem;" id="typeAgeLimit">
+                                <button class="btn btn-primary" th:onclick="editTypeData('monthly', '21세', [[${category2}]]);">21세 수정</button>
+                            </td>
+                            <td colspan="7"></td>
+                        </tr>
                     </thead>
                     <tbody>
                     <tr class="thead-dark">

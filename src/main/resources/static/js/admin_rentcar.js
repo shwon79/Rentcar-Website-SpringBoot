@@ -149,6 +149,62 @@ function displayCategory2(event, makeDefaultOption) {
     };
 };
 
+// 렌트카 가격 수정 메뉴 페이지 차종별 일괄 수정 버튼
+function editTypeData(period, type, carType) {
+    let editedData;
+
+    switch (type) {
+        case '보증금':
+            editedData = parseFloat(document.getElementById('typeDeposit').value.replace(/,/g, ''));
+            break;
+        case '2500km':
+            editedData = parseFloat(document.getElementById('type2500km').value).toFixed(15);
+            break;
+        case '3000km':
+            editedData = parseFloat(document.getElementById('type3000km').value).toFixed(15);
+            break;
+        case '4000km':
+            editedData = parseFloat(document.getElementById('type4000km').value).toFixed(15);
+            break;
+        case '21세':
+            editedData = parseFloat(document.getElementById('typeAgeLimit').value);
+            break;
+        case '20000km':
+            editedData = parseFloat(document.getElementById('type20000km').value).toFixed(15);
+            break;
+        case '30000km':
+            editedData = parseFloat(document.getElementById('type30000km').value).toFixed(15);
+            break;
+        case '40000km':
+            editedData = parseFloat(document.getElementById('type40000km').value).toFixed(15);
+            break;
+    }
+
+    if (confirm(`차량의 ${type}을 차종별로 일괄 수정하시겠습니까?`)) {
+        $.ajax({
+            type:'PUT',
+            url:'/admin/rentcar/price/' + period + '/' + type + '/' + carType + '/' + editedData,
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            beforeSend : function(request){
+                $("#my-spinner").show();
+            },
+            success: function (result) {
+                $("#my-spinner").hide();
+                if (result.result == 1) {
+                    alert('처리되었습니다.');
+                } else if (result.result == 0) {
+                    alert('처리에 문제가 생겼습니다.');
+                };
+                location.reload();
+            },
+            error: function (error) {
+                $("#my-spinner").hide();
+                alert(JSON.stringify(error));
+            }
+        });
+    }
+};
 // 렌트카 가격 수정 메뉴 페이지 일괄 수정 버튼
 function editBundleData(period, type) {
     let editedData;
