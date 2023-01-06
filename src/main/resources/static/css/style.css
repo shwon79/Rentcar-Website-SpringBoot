@@ -404,25 +404,17 @@ label { }
 /*--------------------------------
 4.8 Image Hover Effect 
 ----------------------------------*/
-.imghover { display: block; position: relative; max-width: 100%; }
-.imghover::before, .imghover::after { display: block; position: absolute; content: ""; text-align: center; opacity: 0; }
-.imghover::before { top: 0; right: 0; bottom: 0; left: 0; }
-.imghover::after { top: 50%; left: 30%; width: 50%; height: 50%; line-height: 50px; margin: -25px 0 0 -25px;content: "\f18e"; font-family: "FontAwesome"; font-size: 36px; }
-.imghover:hover::before, .imghover:hover::after { opacity: 1; }
-.imghover:hover::before { background: rgba(213, 87, 69, .80); margin: 20px; }
-.imghover:hover::after { color: #FFFFFF; }
-[class^='imghvr-'], [class*=' imghvr-'] { background: rgba(0, 0, 0, .55); }
 
+.imgzoom {
+    margin: 0px auto;
+    position: relative;
+    overflow: hidden;
+}
 .imgzoom img {
-  transition: .5s; /* 부드럽게 */
+  transition: .3s;
 }
 .imgzoom:hover img {
-  transform: scale(1.2);
-}
-.imgzoom {
-  margin: 0px auto;
-  position: relative;
-  overflow: hidden;
+  transform: scale(1.1);
 }
 
 /*--------------------------------

@@ -44,6 +44,7 @@ public class ReservationController {
     @Value("${kakao.ATA.template.senderkey.realtimerent}")
     private String senderKey;
 
+    // [실패]
     //    @RequestMapping(value = "/reservation/kakao/ATA", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     @PostMapping("/reservation/kakao/ATA")
     @ResponseBody
@@ -100,6 +101,7 @@ public class ReservationController {
         pw.close();
     }
 
+    // [실패]
     @GetMapping("/test/reservation/kakao/ATA")
     @ResponseBody
     public void test_kakao_reservation(HttpServletResponse res) throws IOException {

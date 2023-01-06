@@ -222,7 +222,7 @@ nav ul li a:visited {
 nav ul li a:hover,
 nav ul li a:visited:hover {
     /*background: #2ab1ce;*/
-    color: #ffffff;
+    color: #e32749;
 }
 nav ul li a:not(:only-child):after,
 nav ul li a:visited:not(:only-child):after {
