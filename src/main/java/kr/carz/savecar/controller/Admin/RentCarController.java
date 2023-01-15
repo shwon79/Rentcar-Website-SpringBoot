@@ -236,7 +236,7 @@ public class RentCarController {
                 }
                 break;
             default:
-                throw new Exception("column not mathced");
+                throw new Exception("column not matched");
         }
 
         jsonObject.put("result", 1);
@@ -271,23 +271,33 @@ public class RentCarController {
                 }
                 break;
             case "2500km":
+                double cost_for_2_5k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_2_5k(value);
-                    monthlyRent.setCost_for_2_5k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_2_5k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_2_5k / 1000) * 1000;
+                    monthlyRent.setCost_for_2_5k(cost_for_2_5k);
+                    monthlyRent.setCost_for_2_5k_price(cost_for_2_5k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "3000km":
+                double cost_for_3k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_3k(value);
-                    monthlyRent.setCost_for_3k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_3k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_3k / 1000) * 1000;
+                    double cost_for_30k_price = Math.round(cost_for_3k_price * monthlyRent.getYearlyRent().getCost_for_30k() / 1000) * 1000;
+                    monthlyRent.setCost_for_3k(cost_for_3k);
+                    monthlyRent.setCost_for_3k_price(cost_for_3k_price);
+                    monthlyRent.getYearlyRent().setCost_for_30k_price(cost_for_30k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "4000km":
+                double cost_for_4k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_4k(value);
-                    monthlyRent.setCost_for_4k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_4k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_4k / 1000) * 1000;
+                    double cost_for_40k_price = Math.round(cost_for_4k_price * monthlyRent.getYearlyRent().getCost_for_40k() / 1000) * 1000;
+                    monthlyRent.setCost_for_4k(cost_for_4k);
+                    monthlyRent.setCost_for_4k_price(cost_for_4k_price);
+                    monthlyRent.getYearlyRent().setCost_for_40k_price(cost_for_40k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
