@@ -161,7 +161,7 @@ public class RentCarController {
     }
 
 
-
+    // 월 가격 수정
     @PutMapping("/admin/rentcar/price/monthly/{monthlyId}")
     @ResponseBody
     public void put_rent_car_price_monthly(HttpServletResponse res, @RequestBody MonthlyRentDTO monthlyRentDTO, @PathVariable Long monthlyId) throws IOException {
@@ -191,7 +191,6 @@ public class RentCarController {
         JSONObject jsonObject = new JSONObject();
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
-
         switch (column){
             case "보증금":
                 for (MonthlyRent monthlyRent : monthlyRentList) {
@@ -206,23 +205,33 @@ public class RentCarController {
                 }
                 break;
             case "2500km":
+                double cost_for_2_5k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_2_5k(value);
-                    monthlyRent.setCost_for_2_5k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_2_5k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_2_5k / 1000) * 1000;
+                    monthlyRent.setCost_for_2_5k(cost_for_2_5k);
+                    monthlyRent.setCost_for_2_5k_price(cost_for_2_5k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "3000km":
+                double cost_for_3k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_3k(value);
-                    monthlyRent.setCost_for_3k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_3k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_3k / 1000) * 1000;
+                    double cost_for_30k_price = Math.round(cost_for_3k_price * monthlyRent.getYearlyRent().getCost_for_30k() / 1000) * 1000;
+                    monthlyRent.setCost_for_3k(cost_for_3k);
+                    monthlyRent.setCost_for_3k_price(cost_for_3k_price);
+                    monthlyRent.getYearlyRent().setCost_for_30k_price(cost_for_30k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "4000km":
+                double cost_for_4k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_4k(value);
-                    monthlyRent.setCost_for_4k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_4k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_4k / 1000) * 1000;
+                    double cost_for_40k_price = Math.round(cost_for_4k_price * monthlyRent.getYearlyRent().getCost_for_40k() / 1000) * 1000;
+                    monthlyRent.setCost_for_4k(cost_for_4k);
+                    monthlyRent.setCost_for_4k_price(cost_for_4k_price);
+                    monthlyRent.getYearlyRent().setCost_for_40k_price(cost_for_40k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
@@ -610,6 +619,7 @@ public class RentCarController {
         pw.close();
     }
 
+    // [NOT USED]
     @GetMapping("/admin/rentcar/price/twoYearly/menu/{category2}")
     public ModelAndView get_rent_car_price_twoYearly_menu(@PathVariable String category2) {
 
@@ -625,6 +635,7 @@ public class RentCarController {
         return mav;
     }
 
+    // [NOT USED]
     @GetMapping("/admin/rentcar/price/twoYearly/detail/{twoYearlyId}")
     public ModelAndView get_rent_car_price_twoYearly_detail(@PathVariable Long twoYearlyId) {
 
@@ -643,6 +654,7 @@ public class RentCarController {
 
 
 
+    // [NOT USED]
     @PutMapping("/admin/rentcar/price/twoYearly/{twoYearlyId}")
     @ResponseBody
     public void put_rent_car_price_twoYearly(HttpServletResponse res, @RequestBody TwoYearlyRentDTO twoYearlyRentDTO, @PathVariable Long twoYearlyId) throws IOException {
@@ -666,7 +678,7 @@ public class RentCarController {
     }
 
 
-
+    // [NOT USED]
     @PutMapping("/admin/rentcar/price/twoYearly/{column}/{value}")
     @ResponseBody
     public void put_rent_car_price_twoYearly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double value) throws Exception {
