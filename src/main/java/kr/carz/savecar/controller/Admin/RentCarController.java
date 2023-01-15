@@ -618,7 +618,7 @@ public class RentCarController {
                 }
                 break;
             default:
-                throw new Exception("column not mathced");
+                throw new Exception("column not matched");
         }
 
         jsonObject.put("result", 1);
