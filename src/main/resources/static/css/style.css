@@ -892,7 +892,7 @@ opacity: .5; }
 #home_pc { display: block }
 
 
-.fixed_phone_pc_btn {
+.go_rent_month_new_btn {
     position: fixed;
     z-index: 100;
     display: block;
@@ -907,49 +907,37 @@ opacity: .5; }
     box-shadow: 0 0 20px #76e5cc;
 }
 
-.fixed_message_pc_btn {
+.go_rent_long_term_btn {
     position: fixed;
     z-index: 100;
     display: block;
     background: blue;
     color: #ffffff;
     padding: 20px 20px;
-    font-size: 1.3em;
+    font-size: 1.4em;
     top: 23%;
     right: 3%;
     border: none;
     border-radius: 30vh;
     box-shadow: 0 0 20px blue;
+    margin-top: 20px;
 }
 
-.fixed_phone_btn {
+.go_rent_subscribe_btn {
     position: fixed;
     z-index: 100;
     display: block;
-    background: #61eccc;
+    background: black;
     color: #ffffff;
-    padding: 15px 15px;
-    font-size: 1.2em;
-    top: 81%;
+    padding: 20px 20px;
+    font-size: 1.4em;
+    top: 34%;
     right: 3%;
     border: none;
     border-radius: 30vh;
+    box-shadow: 0 0 20px dimgray;
+    margin-top: 20px;
 }
-
-.fixed_message_btn {
-    position: fixed;
-    z-index: 100;
-    display: block;
-    background: #61eccc;
-    color: #ffffff;
-    padding: 15px 15px;
-    font-size: 1.2em;
-    top: 90%;
-    right: 3%;
-    border: none;
-    border-radius: 30vh;
-}
-
 
 /*==========  Non-Mobile First Method  ==========*/
 
