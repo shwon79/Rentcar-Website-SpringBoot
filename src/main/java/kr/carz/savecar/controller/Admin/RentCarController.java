@@ -116,6 +116,7 @@ public class RentCarController {
         Collections.sort(monthlyRentList);
 
         mav.addObject("monthlyRentList", monthlyRentList);
+        mav.addObject("category2", category2);
 
         mav.setViewName("admin/rentcar_price_monthly_menu");
 
@@ -160,7 +161,7 @@ public class RentCarController {
     }
 
 
-
+    // 월 가격 수정
     @PutMapping("/admin/rentcar/price/monthly/{monthlyId}")
     @ResponseBody
     public void put_rent_car_price_monthly(HttpServletResponse res, @RequestBody MonthlyRentDTO monthlyRentDTO, @PathVariable Long monthlyId) throws IOException {
@@ -190,6 +191,71 @@ public class RentCarController {
         JSONObject jsonObject = new JSONObject();
 
         List<MonthlyRent> monthlyRentList = monthlyRentService.findAllMonthlyRents();
+        switch (column){
+            case "보증금":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.setDeposit(String.valueOf(value));
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "21세":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.setAge_limit(String.valueOf(value));
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "2500km":
+                double cost_for_2_5k = value;
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    double cost_for_2_5k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_2_5k / 1000) * 1000;
+                    monthlyRent.setCost_for_2_5k(cost_for_2_5k);
+                    monthlyRent.setCost_for_2_5k_price(cost_for_2_5k_price);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "3000km":
+                double cost_for_3k = value;
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    double cost_for_3k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_3k / 1000) * 1000;
+                    double cost_for_30k_price = Math.round(cost_for_3k_price * monthlyRent.getYearlyRent().getCost_for_30k() / 1000) * 1000;
+                    monthlyRent.setCost_for_3k(cost_for_3k);
+                    monthlyRent.setCost_for_3k_price(cost_for_3k_price);
+                    monthlyRent.getYearlyRent().setCost_for_30k_price(cost_for_30k_price);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "4000km":
+                double cost_for_4k = value;
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    double cost_for_4k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_4k / 1000) * 1000;
+                    double cost_for_40k_price = Math.round(cost_for_4k_price * monthlyRent.getYearlyRent().getCost_for_40k() / 1000) * 1000;
+                    monthlyRent.setCost_for_4k(cost_for_4k);
+                    monthlyRent.setCost_for_4k_price(cost_for_4k_price);
+                    monthlyRent.getYearlyRent().setCost_for_40k_price(cost_for_40k_price);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            default:
+                throw new Exception("column not matched");
+        }
+
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+
+    // 차종별 일괄수정
+    @PutMapping("/admin/rentcar/price/monthly/{column}/{carType}/{value}")
+    @ResponseBody
+    public void put_rent_car_price_monthly_kilometer_percentage_by_carType(HttpServletResponse res, @PathVariable String column, @PathVariable String carType, @PathVariable double value) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(carType);
 
         switch (column){
             case "보증금":
@@ -205,28 +271,38 @@ public class RentCarController {
                 }
                 break;
             case "2500km":
+                double cost_for_2_5k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_2_5k(value);
-                    monthlyRent.setCost_for_2_5k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_2_5k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_2_5k / 1000) * 1000;
+                    monthlyRent.setCost_for_2_5k(cost_for_2_5k);
+                    monthlyRent.setCost_for_2_5k_price(cost_for_2_5k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "3000km":
+                double cost_for_3k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_3k(value);
-                    monthlyRent.setCost_for_3k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_3k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_3k / 1000) * 1000;
+                    double cost_for_30k_price = Math.round(cost_for_3k_price * monthlyRent.getYearlyRent().getCost_for_30k() / 1000) * 1000;
+                    monthlyRent.setCost_for_3k(cost_for_3k);
+                    monthlyRent.setCost_for_3k_price(cost_for_3k_price);
+                    monthlyRent.getYearlyRent().setCost_for_30k_price(cost_for_30k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             case "4000km":
+                double cost_for_4k = value;
                 for (MonthlyRent monthlyRent : monthlyRentList) {
-                    monthlyRent.setCost_for_4k(value);
-                    monthlyRent.setCost_for_4k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    double cost_for_4k_price = Math.round(monthlyRent.getCost_for_2k() * cost_for_4k / 1000) * 1000;
+                    double cost_for_40k_price = Math.round(cost_for_4k_price * monthlyRent.getYearlyRent().getCost_for_40k() / 1000) * 1000;
+                    monthlyRent.setCost_for_4k(cost_for_4k);
+                    monthlyRent.setCost_for_4k_price(cost_for_4k_price);
+                    monthlyRent.getYearlyRent().setCost_for_40k_price(cost_for_40k_price);
                     monthlyRentService.save(monthlyRent);
                 }
                 break;
             default:
-                throw new Exception("column not mathced");
+                throw new Exception("column not matched");
         }
 
         jsonObject.put("result", 1);
@@ -236,7 +312,6 @@ public class RentCarController {
         pw.flush();
         pw.close();
     }
-
 
     @PutMapping(value="/admin/rentcar/price/monthly/image/{monthlyId}", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
@@ -406,6 +481,7 @@ public class RentCarController {
         Collections.sort(monthlyRentList);
 
         mav.addObject("monthlyRentList", monthlyRentList);
+        mav.addObject("category2", category2);
 
         mav.setViewName("admin/rentcar_price_yearly_menu");
 
@@ -454,6 +530,7 @@ public class RentCarController {
     }
 
 
+    // 일괄 수정
     @PutMapping("/admin/rentcar/price/yearly/{column}/{value}")
     @ResponseBody
     public void put_rent_car_price_yearly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double value) throws Exception {
@@ -503,7 +580,56 @@ public class RentCarController {
     }
 
 
+    // 차종별 일괄 수정
+    @PutMapping("/admin/rentcar/price/yearly/{column}/{carType}/{value}")
+    @ResponseBody
+    public void put_rent_car_price_yearly_kilometer_percentage_by_carType(HttpServletResponse res, @PathVariable String column, @PathVariable String carType, @PathVariable double value) throws Exception {
 
+        JSONObject jsonObject = new JSONObject();
+
+        List<MonthlyRent> monthlyRentList = monthlyRentService.findByCategory2(carType);
+
+        switch (column){
+            case "보증금":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.getYearlyRent().setDeposit(String.valueOf(value));
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "20000km":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.getYearlyRent().setCost_for_20k(value);
+                    monthlyRent.getYearlyRent().setCost_for_20k_price(Math.round(monthlyRent.getCost_for_2k() * value / 1000) * 1000);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "30000km":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.getYearlyRent().setCost_for_30k(value);
+                    monthlyRent.getYearlyRent().setCost_for_30k_price(Math.round(Math.round(monthlyRent.getCost_for_2k() * monthlyRent.getCost_for_3k() / 1000) * 1000 * value / 1000) * 1000);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            case "40000km":
+                for (MonthlyRent monthlyRent : monthlyRentList) {
+                    monthlyRent.getYearlyRent().setCost_for_40k(value);
+                    monthlyRent.getYearlyRent().setCost_for_40k_price(Math.round(Math.round(monthlyRent.getCost_for_2k() * monthlyRent.getCost_for_4k() / 1000) * 1000 * value / 1000) * 1000);
+                    monthlyRentService.save(monthlyRent);
+                }
+                break;
+            default:
+                throw new Exception("column not matched");
+        }
+
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
+
+    // [NOT USED]
     @GetMapping("/admin/rentcar/price/twoYearly/menu/{category2}")
     public ModelAndView get_rent_car_price_twoYearly_menu(@PathVariable String category2) {
 
@@ -519,6 +645,7 @@ public class RentCarController {
         return mav;
     }
 
+    // [NOT USED]
     @GetMapping("/admin/rentcar/price/twoYearly/detail/{twoYearlyId}")
     public ModelAndView get_rent_car_price_twoYearly_detail(@PathVariable Long twoYearlyId) {
 
@@ -537,6 +664,7 @@ public class RentCarController {
 
 
 
+    // [NOT USED]
     @PutMapping("/admin/rentcar/price/twoYearly/{twoYearlyId}")
     @ResponseBody
     public void put_rent_car_price_twoYearly(HttpServletResponse res, @RequestBody TwoYearlyRentDTO twoYearlyRentDTO, @PathVariable Long twoYearlyId) throws IOException {
@@ -560,7 +688,7 @@ public class RentCarController {
     }
 
 
-
+    // [NOT USED]
     @PutMapping("/admin/rentcar/price/twoYearly/{column}/{value}")
     @ResponseBody
     public void put_rent_car_price_twoYearly_kilometer_percentage(HttpServletResponse res, @PathVariable String column, @PathVariable double value) throws Exception {
