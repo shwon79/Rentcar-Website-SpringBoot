@@ -558,7 +558,7 @@ Section
 .sections {
   padding-top: 50px;
   padding-bottom: 0px;
-  /*overflow: hidden;*/
+  overflow: hidden;
 }
 .sections.footer {
   padding-bottom: 80px;

@@ -1,0 +1,22 @@
+
+#mobileCard {
+    display: none;
+}
+
+@media only screen and (max-width:768px) {
+    #mobileCard {
+        display: block;
+    }
+}
+
+@media only screen and (max-width:480px) {
+    #mobileCard {
+        display: block;
+    }
+}
+
+@media only screen and (max-width:320px) {
+    #mobileCard {
+        display: block;
+    }
+}

@@ -27,11 +27,13 @@ public class HelloController {
     private final CampingCarPriceService campingCarPriceService;
     private final ValuesForWebService valuesForWebService;
     private final ImagesService imagesService;
+    private final RealTimeRentCarService realTimeRentCarService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
                            ShortRentService shortRentService, CampingCarPriceService campingCarPriceService,
-                           ValuesForWebService valuesForWebService, ImagesService imagesService) {
+                           ValuesForWebService valuesForWebService, ImagesService imagesService,
+                           RealTimeRentCarService realTimeRentCarService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
@@ -39,6 +41,7 @@ public class HelloController {
         this.campingCarPriceService = campingCarPriceService;
         this.valuesForWebService = valuesForWebService;
         this.imagesService = imagesService;
+        this.realTimeRentCarService = realTimeRentCarService;
     }
 
 
@@ -57,6 +60,10 @@ public class HelloController {
                 imagesMainList.add(mainImage.get(0));
             }
         }
+        List<RealTimeRentCar> morenDTOList = realTimeRentCarService.findByIsExpected(0);
+        List<RealTimeRentCar> fiveMorenDTOList = morenDTOList.subList(0, 5);
+
+        model.addAttribute("fiveMorenDTOList", fiveMorenDTOList);
         model.addAttribute("campingCarList", campingCarList);
         model.addAttribute("imagesMainList", imagesMainList);
 

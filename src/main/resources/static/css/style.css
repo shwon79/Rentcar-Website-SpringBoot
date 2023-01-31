@@ -620,10 +620,13 @@ label { }
 /* service section */
 
 .service-block { margin-bottom: 30px; }
+.service-text-main { width: 100%; height: 150px; }
+.service-text-mobile { width: 70%; height: 220px; }
 .service-img { margin-bottom: 30px; }
 .service-img img { width: 100%; min-height: 300px;}
 .service-img-main img { width: 70%; height: 220px;}
-.service-img a:hover img { width: 100%; min-height: 360px;}
+#service-img-a img:hover { width: 400px; color: blue; background: red;}
+/*.service-img a:hover img { width: 100%; min-height: 360px;}*/
 .service-content { }
 .service-caption { }
 .service-title { font-size: 20px; color: #212330; text-transform: uppercase; text-align: center; letter-spacing: 1px; }
@@ -892,56 +895,28 @@ opacity: .5; }
 #home_pc { display: block }
 
 
-.go_rent_month_new_btn {
-    position: fixed;
-    z-index: 100;
-    display: block;
-    background: white;
-    color: black;
-    padding: 20px 20px;
-    font-size: 1.4em;
-    top: 15%;
-    right: 3%;
-    border: none;
-    border-radius: 30vh;
-    box-shadow: 0 0 20px #76e5cc;
-}
-
-.go_rent_long_term_btn {
-    position: fixed;
-    z-index: 100;
-    display: block;
-    background: blue;
-    color: #ffffff;
-    padding: 20px 20px;
-    font-size: 1.4em;
-    top: 23%;
-    right: 3%;
-    border: none;
-    border-radius: 30vh;
-    box-shadow: 0 0 20px blue;
-    margin-top: 20px;
-}
-
-.go_rent_subscribe_btn {
-    position: fixed;
-    z-index: 100;
-    display: block;
-    background: black;
-    color: #ffffff;
-    padding: 20px 20px;
-    font-size: 1.4em;
-    top: 34%;
-    right: 3%;
-    border: none;
-    border-radius: 30vh;
-    box-shadow: 0 0 20px dimgray;
-    margin-top: 20px;
+.go_top_btn {
+    display:none;
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    z-index:999;
+    border:1px solid #ccc;
+    outline:none;
+    background-color:white;
+    color:#333;
+    cursor:pointer;
+    padding:15px 20px;
+    border-radius:100%;
 }
 
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */
+@media only screen and (max-width:3000px) {
+
+}
+
 @media only screen and (max-width:1200px) {
     .navigation { float: none; }
     .campingnav { float: none; }
@@ -962,8 +937,6 @@ opacity: .5; }
     #home_pc { display: none }
     #home { display: block }
     .fixed_phone_btn { top: 81%;  }
-    .fixed_phone_pc_btn { display: none; }
-    .fixed_message_pc_btn { display: none; }
 }
 
 /* Medium Devices, Desktops */
@@ -986,9 +959,8 @@ opacity: .5; }
     #home_pc { display: none }
     #home { display: block }
     .fixed_phone_btn { top: 85%; }
-    .fixed_phone_pc_btn { display: none; }
-    .fixed_message_pc_btn { display: none; }
-    }
+    .padding_top_only_mobile { padding-top: 50px; }
+}
 
 /* Small Devices, Tablets */
 @media only screen and (max-width:768px) {
@@ -1011,8 +983,6 @@ opacity: .5; }
     #home_pc { display: none }
     #home { display: block }
     .fixed_phone_btn { top: 80%; }
-    .fixed_phone_pc_btn { display: none;  }
-    .fixed_message_pc_btn { display: none;  }
     /* text-decoration: line-through; text-decoration-color: darkred;  */
     .not-show-in-mobile {
         display: none;
@@ -1040,8 +1010,6 @@ opacity: .5; }
     #home_pc { display: none }
     #home { display: block }
     .fixed_phone_btn { top: 81%; }
-    .fixed_phone_pc_btn { display: none; }
-    .fixed_message_pc_btn { display: none; }
     .not-show-in-mobile {
         display: none;
     }
@@ -1070,8 +1038,6 @@ opacity: .5; }
     #home_pc { display: none }
     #home { display: block }
     .fixed_phone_btn { top: 80%; }
-    .fixed_phone_pc_btn { display: none; }
-    .fixed_message_pc_btn { display: none; }
     .not-show-in-mobile {
         display: none;
     }
@@ -1138,12 +1104,10 @@ div.popStyle1, div.popStyle2 {
     padding: 10px;
 }
 .popup1_box1 {
-    background-color: #286090;
-    color: white;
+    background-color: #f8f6f2;
+    color: black;
     margin: 0px 10px;
     padding: 10px 0;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
 }
 .popup1_box1 table {
     background: transparent;
@@ -1151,7 +1115,7 @@ div.popStyle1, div.popStyle2 {
 .popup1_box1 table td {
     border-bottom : none;
     vertical-align: baseline;
-    color: white;
+    color: black;
     width: 33%;
 }
 
@@ -1515,8 +1479,8 @@ popup_box_long_term {
 ---------------------------------------
  */
 
-.main-card:hover {
-    box-shadow: 5px 5px 30px #707070;
+.main-card {
+    box-shadow: 5px 5px 30px #969696;
 }
 
 .mobile_navbar_phone_btn, .mobile_navbar_message_btn {

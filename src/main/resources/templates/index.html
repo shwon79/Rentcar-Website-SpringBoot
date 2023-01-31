@@ -9,19 +9,20 @@
     <title>SAVECAR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 
+    <link th:href="@{/css/index.css}" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
     </style>
     <script th:src="@{/js/popup.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse"  data-offset="50">
 
-<div layout:fragment="content">
-
+<div layout:fragment="content" class="padding_top_only_mobile">
     <!-- popup.html -->
-    <th:block th:replace="fragments/popup::popupFragment" ></th:block>
+<!--    <th:block th:replace="fragments/popup::popupFragment" ></th:block>-->
 
     <script th:src="@{/js/start.js}"></script>
 
@@ -33,46 +34,32 @@
 
     <!-- service block -->
     <section id="home_pc" class="feature sections">
-        <div class="container space-small">
+        <div class="container space-small" style="width: 1500px">
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >
-                    <a href="/rent/month/new">
-                        <div class="row main-card"  style="border: 2px solid #2b2d2c; border-radius: 10px; padding-top: 70px; padding-bottom: 60px; background: black">
-
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
+                        <div class="row-main-card"  style="border: 2px solid white; border-radius: 10px; padding-top: 30px; padding-bottom: 0px; background: white">
                             <div class="service-block text-center">
-
-                                <!-- service block -->
-                                <div class="service-content" style="padding: 20px 0 0 0; line-height: 0;">
-                                    <h1 style="font-family: 'Do Hyeon', sans-serif;color: whitesmoke;">월렌트+12개월렌트</h1>
-                                </div>
-                                <br>
-                                <!-- service content -->
-                                <div class="service-img-main ">
-                                    <img th:src="@{/img/main-card-monthly.png}" width="200" height="200" style="border-radius: 30%">
-                                </div>
-                                <!-- service content -->
-                                <div class="service-img-main" style="padding-top: 40px;">
-                                    <p style="font-size: 1.6rem; color: whitesmoke; margin: 0px;">월/12개월 단위로 대여하는 상품입니다.</p>
-                                    <p style="font-size: 1.6rem; color: whitesmoke">실시간으로 가격을 조회해보실 수 있습니다.</p>
-                                </div>
-                                <!-- service img -->
-                                <div class="service-content" style="padding-top: 20px">
-                                    <img th:src="@{/img/arrow1.png}" width="50" height="50"  style="border-radius: 50%">
-                                </div>
-
-                                <a href="/rent/month/new"><button class="go_rent_month_new_btn" ><img th:src="@{/img/arrow1.png}" width="30" height="30">  월렌트 예약가능차량 보기</button></a>
-                                <a href="/rent/long_term"><button class="go_rent_long_term_btn" ><img th:src="@{/img/arrow1.png}" width="30" height="30">  장기렌트 예약가능차량 보기</button></a>
-                                <a href="/rent/subscribe"><button class="go_rent_subscribe_btn" ><img th:src="@{/img/arrow1.png}" width="30" height="30">  자동차구독 예약가능차량 보기</button></a>
-<!--                                <a href="sms:010-5277-4113"><button class="fixed_message_btn" ><img th:src="@{/img/email2.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"></button></a>-->
-
+                                    <!-- service block -->
+                                    <div class="service-content" style="padding: 20px 0 0 0; line-height: 0;">
+                                        <h1 style="font-family: 'Do Hyeon', sans-serif;color: black;">월렌트+12개월렌트</h1>
+                                    </div>
+                                    <br>
+                                        <!-- service content -->
+                                        <div class="service-img-main ">
+                                            <a href="/rent/month/new" class="imgzoom">
+                                                <img th:src="@{/img/main-card-monthly.png}" width="200" height="200" style="border-radius: 30%">
+                                            </a>
+                                        </div>
+                                        <!-- service content -->
+                                        <div class="service-text-main" style="padding-top: 40px;">
+                                            <p style="font-size: 1.6rem; color: black; margin: 0px;">월/12개월 단위로 대여하는 상품입니다.</p>
+                                            <p style="font-size: 1.6rem; color: black">실시간으로 가격을 조회해보실 수 있습니다.</p>
+                                        </div>
                             </div>
-
                         </div>
-                    </a>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <a href="/rent/long_term">
-                        <div class="row main-card"  style="border: 2px solid #c70808; border-radius: 10px; padding-top: 70px; padding-bottom: 60px; margin-left: 5px;  background: white">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="row-main-card"  style="border: 2px solid white; border-radius: 10px; padding-top: 30px; padding-bottom: 0px; margin-left: 5px;  background: white">
 
                             <div class="service-block text-center" >
 
@@ -82,59 +69,74 @@
                                 </div>
 
                                 <br>
-                                <!-- service content -->
-                                <div class="service-img-main ">
-                                    <img th:src="@{/img/main-card-yearly.png}" width="200" height="200"  style="border-radius: 30%">
-                                </div>
-                                <!-- service content -->
-                                <div class="service-img-main" style="padding-top: 40px;">
-                                    <p style="font-size: 1.6rem; color: black; margin: 0px;">누구나 이용할 수 있는 장기렌트 상품입니다.</p>
-                                    <p style="font-size: 1.6rem; color: black">원하시는 차량의 견적을 받아보실 수 있습니다.</p>
-                                </div>
-                                <!-- service img -->
-                                <div class="service-content" style="padding-top: 20px">
-                                    <img th:src="@{/img/arrow1.png}" width="50" height="50"  style="border-radius: 50%">
-                                </div>
+                                    <!-- service content -->
+                                    <div class="service-img-main ">
+                                        <a href="/rent/long_term" class="imgzoom">
+                                            <img th:src="@{/img/main-card-yearly.png}" width="200" height="200"  style="border-radius: 30%">
+                                        </a>
+                                    </div>
+                                    <!-- service content -->
+                                    <div class="service-text-main" style="padding-top: 40px;">
+                                        <p style="font-size: 1.6rem; color: black; margin: 0px;">누구나 이용할 수 있는 장기렌트 상품입니다.</p>
+                                        <p style="font-size: 1.6rem; color: black">원하시는 차량의 견적을 받아보실 수 있습니다.</p>
+                                    </div>
                             </div>
-
                         </div>
-                    </a>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <a href="/camping/main">
-                        <div class="row main-card"  style="border: 2px solid #4e4c4c; border-radius: 10px; padding-top: 70px; padding-bottom: 60px; margin-left: 5px; background: #4e4c4c">
-
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="row-main-card"  style="border: 2px solid white; border-radius: 10px; padding-top: 30px; padding-bottom: 0px; margin-left: 5px; background: white">
 
                             <div class="service-block text-center">
 
                                 <!-- service block -->
                                 <div class="service-content" style="padding: 20px 0 0 0; line-height: 0;">
-                                    <h1 style="font-family: 'Do Hyeon', sans-serif;color: whitesmoke;">캠핑카 렌트</h1>
+                                    <h1 style="font-family: 'Do Hyeon', sans-serif;color: black;">캠핑카 렌트</h1>
                                 </div>
                                 <br>
-                                <!-- service content -->
-                                <div class="service-img-main ">
-                                    <img th:src="@{/img/main-card-camp.png}"  width="200" height="200" style="border-radius: 30%;">
-                                </div>
-                                <!-- service content -->
-                                <div class="service-img-main" style="padding-top: 40px;">
-                                    <p style="font-size: 1.6rem; color: whitesmoke; margin: 0px;">캠핑카를 대여하는 상품입니다.</p>
-                                    <p style="font-size: 1.6rem; color: whitesmoke">럭셔리한 캠핑카가 준비되어 있습니다.</p>
-                                </div>
-                                <!-- service img -->
-                                <div class="service-content" style="padding-top: 20px">
-                                    <img th:src="@{/img/arrow1.png}" width="50" height="50"  style="border-radius: 50%">
-                                </div>
+                                    <!-- service content -->
+                                    <div class="service-img-main ">
+                                        <a href="/camping/main" class="imgzoom">
+                                            <img th:src="@{/img/main-card-camp.png}"  width="200" height="200" style="border-radius: 30%;">
+                                        </a>
+                                    </div>
+                                    <!-- service content -->
+                                    <div class="service-text-main" style="padding-top: 40px;">
+                                        <p style="font-size: 1.6rem; color: black; margin: 0px;">캠핑카를 대여하는 상품입니다.</p>
+                                        <p style="font-size: 1.6rem; color: black">럭셔리한 캠핑카가 준비되어 있습니다.</p>
+                                    </div>
                             </div>
-
                         </div>
-                    </a>
 <!--                    &lt;!&ndash; AtoZSEOTools Counter Code START &ndash;&gt;-->
 <!--                    <a href="https://ciroapp.com/free-tools/website-visitor-counter" target="_blank" title="Web Counter">-->
 <!--                        <img src="https://ciroapp.com/free-tools/website-visitor-counter/count/&style=style5&show=p&num=9&uid=iR"  title="Web Counter" alt="AtoZSEOTools Web Counter" />-->
 <!--                    </a>-->
 <!--                    &lt;!&ndash; AtoZSEOTools Counter Code END &ndash;&gt;-->
 
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="row-main-card"  style="border: 2px solid white; border-radius: 10px; padding-top: 30px; padding-bottom: 0px; margin-left: 5px;  background: white">
+
+                            <div class="service-block text-center" >
+
+                                <!-- service block -->
+                                <div class="service-content" style="padding: 20px 0 0 0; line-height: 0;">
+                                    <h1 style="font-family: 'Do Hyeon', sans-serif;color: black;">자동차구독</h1>
+                                </div>
+
+                                <br>
+                                    <!-- service content -->
+                                    <div class="service-img-main ">
+                                        <a href="/rent/subscribe" class="imgzoom">
+                                            <img th:src="@{/img/main-card-yearly.png}" width="200" height="200"  style="border-radius: 30%">
+                                        </a>
+                                    </div>
+                                    <!-- service content -->
+                                    <div class="service-text-main" style="padding-top: 40px;">
+                                        <p style="font-size: 1.6rem; color: black; margin: 0px;">보다 저렴한 렌트 상품입니다.</p>
+                                        <p style="font-size: 1.6rem; color: black">렌트카와 일반 차가 준비되어 있습니다.</p>
+                                    </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -145,17 +147,17 @@
     <!--home mobile Section -->
     <section id="home" class="home">
         <div class="container" style="padding: 0px;">
-            <div class="row" style="width: max-content; margin: 0 auto;">
-                <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12" style="margin-top: 50px;">
-                    <div class="service-block-mobile text-center align-center">
+<!--            <div class="row" style="width: max-content; margin: 0 auto;">-->
+<!--                <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12" style="margin-top: 50px;">-->
+<!--                    <div class="service-block-mobile text-center align-center">-->
 
-                        <!-- service content -->
-                        <div class="service-img-main ">
-                            <p style="font-family: 'Do Hyeon', sans-serif; font-size: 2rem;">세이브카 Services</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--                        &lt;!&ndash; service content &ndash;&gt;-->
+<!--                        <div id="service-text-mobile">-->
+<!--                            <p style="font-family: 'Do Hyeon', sans-serif; font-size: 2rem;">세이브카 Services</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="row" style="margin-right: 0; margin-left: 0;">
                 <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
@@ -270,6 +272,50 @@
                                     <!-- service block -->
                                     <div class="service-content-mobile text-center" style="height: 80px; padding: 40px 20px 0 0; line-height: 0;">
                                         <h2 style="font-family: 'Do Hyeon', sans-serif;color: whitesmoke;margin: 0;">캠핑카렌트</h2>
+                                    </div>
+                                    <br>
+
+                                </div>
+                                <div class="row">
+
+                                    <!-- service img -->
+                                    <div class="service-content text-center"  style="padding: 0 20px 0 0; margin-bottom: 15px">
+                                        <img th:src="@{/img/arrow1.png}" width="30" height="30"  style="border-radius: 50%">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
+
+                </div>
+            </div>
+
+            <!-- -->
+            <div class="row" style="margin-right: 0; margin-left: 0;">
+                <div class="col-sm-1 col-lg-1 col-xs-1 col-md-1">
+
+                </div>
+                <div class="col-sm-10 col-lg-10 col-xs-10 col-md-10">
+                    <a href="/rent/subscribe">
+                        <div class="row" style="margin: 0 -20px; border: 2px solid #f8dcdc; border-radius: 20px; background: #f8dcdc">
+
+
+                            <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5" style="margin-top: 30px;">
+                                <div class="service-block-mobile text-center align-center">
+                                    <img th:src="@{/img/main-card-yearly.png}" width="70%" height="90" style="border-radius: 30%">
+                                </div>
+                            </div>
+                            <div class="col-sm-7 col-lg-7 col-xs-7 col-md-7">
+                                <div class="row">
+
+                                    <!-- service block -->
+                                    <div class="service-content-mobile text-center" style="height: 80px; padding: 40px 20px 0 0; line-height: 0; ">
+                                        <h2 style="font-family: 'Do Hyeon', sans-serif;color: black;margin: 0;">자동차구독</h2>
                                     </div>
                                     <br>
 
@@ -438,86 +484,262 @@
 
                         </div>
                         <div class="separator"></div>
-                        <div class="home_btn">
-                            <a class="btn1 btn2-default" href="/rent/month/new" style="font-size: medium; font-weight: bold; margin: 2.5px; width: 220px;">실시간 견적내기 &nbsp; <img th:src="@{/img/calendar.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>
-<!--                            <a class="btn1 btn2-default" href="sms:010-5277-4113" style="font-size: medium; font-weight: bold; margin: 2.5px;width: 220px; ">SMS 간단신청 &nbsp; <img th:src="@{/img/email1.png}" style="max-width: 100%; vertical-align: middle; width: 25px; height: 25px; display: inline-block"> </a>-->
-                        </div>
+                            <div class="home_btn">
+                                <h3>TEL : 1661 - 3331</h3>
+                            </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/light_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>경차</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
+                    <div class="popup1_box1" style="margin-top: 50px">
+                        <table class="popup1_table">
+                            <tr style="border-bottom: solid 1px black">
+                                <td>차종</td>
+                                <td>
+                                    <span>한달렌트</span>
+                                </td>
+                                <td>
+                                    <span>차종</span>
+                                </td>
+                                <td>
+                                    <span>한달렌트</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>모닝/스파크</td>
+                                <td>
+                                    <span>37만원부터</span>
+                                </td>
+                                <td>
+                                    <span>티볼리/스토닉/코나</span>
+                                </td>
+                                <td>
+                                    <span>42만원부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>레이/레이밴</td>
+                                <td>
+                                    <span>38만원부터</span>
+                                </td>
+                                <td>
+                                    <span>스포티지/투싼/QM6</span>
+                                </td>
+                                <td>
+                                    <span>51만원부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>아반떼/K3/SM3</td>
+                                <td>
+                                    <span>42만원부터</span>
+                                </td>
+                                <td>
+                                    <span>쏘렌토/싼타페</span>
+                                </td>
+                                <td>
+                                    <span>55.2만원부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>쏘나타/K5/SM6</td>
+                                <td>
+                                    <span>43만원부터</span>
+                                </td>
+                                <td>
+                                    <span>팰리세이드/GV</span>
+                                </td>
+                                <td>
+                                    <span>112만원부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>그랜저/K7/K8</td>
+                                <td>
+                                    <span>52만원부터</span>
+                                </td>
+                                <td>
+                                    <span>카니발/스타렉스</span>
+                                </td>
+                                <td>
+                                    <span>52만원부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>G70/G80/K9</td>
+                                <td>
+                                    <span>105만원부터</span>
+                                </td>
+                                <td>
+                                    <span>미니/랜드로버/익스플로러</span>
+                                </td>
+                                <td>
+                                    <span>120만원부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>EQ900</td>
+                                <td>
+                                    <span>145만원부터</span>
+                                </td>
+                                <td>
+                                    <span>벤츠E/BMW5/벤츠GLC</span>
+                                </td>
+                                <td>
+                                    <span>135만원부터</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>G90/신형G80</td>
+                                <td>
+                                    <span>230만원부터</span>
+                                </td>
+                                <td>
+                                    <span>벤츠S-CLASS</span>
+                                </td>
+                                <td>
+                                    <span>250만원부터</span>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/segment_medium.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>준중형</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/medium_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>중형 승용</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/large_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>대형 승용</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/van.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>승합차</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/foreign_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>수입차</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/small_medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>소중형 RV</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>중형 RV</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <div class="project-img mb30" align="center">
-                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/large_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>
-                            <h3>대형 RV</h3>
-                            <p>렌트 실시간 공개</p>
-                        </div>
-                    </div>
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/light_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>경차</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/segment_medium.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>준중형</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/medium_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>중형 승용</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/large_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>대형 승용</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/van.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>승합차</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/foreign_car.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>수입차</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/small_medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>소중형 RV</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/medium_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>중형 RV</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">-->
+<!--                        <div class="project-img mb30" align="center">-->
+<!--                            <a href="/rent/month/new" class="imgzoom"><img th:src="@{/img/large_rv.png}" class="img-responsive" alt="Interior Design Website Templates Free Download"></a>-->
+<!--                            <h3>대형 RV</h3>-->
+<!--                            <p>렌트 실시간 공개</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
     </section>
     <!-- End of Rent Section -->
 
-    <br><br><br><br>
-
     <!----------------------------------------->
     <!------------ feature section ------------>
     <!----------------------------------------->
 
+    <div id="mainTable" class="not-show-in-mobile">
+        <table class="table_available" th:unless="${fiveMorenDTOList.isEmpty()}">
+            <thead id="table_header" style="background-color: darkgrey">
+            <tr>
+                <th style="display: none;"></th>
+                <th>
+                    <p>차량번호</p>
+                    <div onclick="sortContent(1, 'available'); displaySortImage('available_1');">
+                        <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_1" style="font-size: 22px;"></i>
+                    </div>
+                </th>
+                <th>
+                    <p>차명</p>
+                    <div onclick="sortContent(2, 'available'); displaySortImage('available_2');">
+                        <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_2" style="font-size: 22px;"></i>
+                    </div>
+                </th>
+                <th>
+                    <p>연료</p>
+                    <div onclick="sortContent(3, 'available'); displaySortImage('available_3');">
+                        <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_3" style="font-size: 22px;"></i>
+                    </div>
+                </th>
+                <th>
+                    <p>색상</p>
+                    <div onclick="sortContent(4, 'available'); displaySortImage('available_4');">
+                        <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_4" style="font-size: 22px;"></i>
+                    </div>
+                </th>
+                <th>
+                    <p>년식</p>
+                    <div onclick="sortContent(5, 'available'); displaySortImage('available_5');">
+                        <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_5" style="font-size: 22px;"></i>
+                    </div>
+                </th>
+                <th>
+                    <p>월대여료[VAT별도]</p>
+                    <div onclick="sortContent(6, 'available', true); displaySortImage('available_6');">
+                        <i class="fa fa-arrow-down" aria-hidden="true" data-id="available_6" style="font-size: 22px;"></i>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            <!-- pc -->
+            <tbody id="mainTable_tbody" style="background-color: white">
+            <tr th:each="moren, iterStat : ${fiveMorenDTOList}" class="moveToDetail" th:data-index="${moren.realTimeRentId}"
+                th:unless="${moren.monthlyRent.yearlyRent == null}"
+            >
+                <td scope="col" style="display: none;" th:text="${moren.realTimeRentId}" class="rentId" th:data-index="${moren.realTimeRentId}"></td>
+                <td scope="col" th:text="${moren.carNo}"></td>
+                <td scope="col" th:text="${moren.carName}"></td>
+                <td scope="col" th:text="${moren.carEngine}"></td>
+                <td scope="col" th:text="${moren.carExteriorColor}"></td>
+                <td scope="col" th:text="${moren.carOld}"></td>
+                <td scope="col" class="discountStyle">
+                        <span>
+                            <span th:text="${#numbers.formatInteger(moren.monthlyRent.cost_for_2k,0,'COMMA')}"></span>
+                            <span>원</span>
+                        </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="empty-list-card" th:if="${fiveMorenDTOList.isEmpty()}">
+            <p>검색 결과가 없습니다. 다른 조건으로 검색해주세요.</p>
+        </div>
+    </div>
 
     <!-- Client Logo Section -->
     <section id="clogo" class="clogo">
@@ -630,7 +852,7 @@
                     <br/>
                     <a target='_blank' href="https://cafe.naver.com/savecarz/5" >
                         <div class="imgzoom" >
-                            <img th:src="@{/img/campingcar-banner.png}" width="80%" height="80%">
+                            <img th:src="@{/img/campingcar-banner.png}" width="100%" height="100%">
                         </div>
                     </a>
                     <br/><br/>
@@ -726,14 +948,15 @@
             </div><!-- End off row -->
         </div><!-- End off container -->
         <div class="pinside30"></div>
+
     </section><br><br>
     <!-- End off Pricing Section -->
 
 
     <!-- START SCROLL TO TOP  -->
-<!--    <div class="scrollup">-->
-<!--        <a href="#"><i class="fa fa-chevron-up"></i></a>-->
-<!--    </div>-->
+    <div class="scrollup">
+        <a href="#"><i class="fa fa-chevron-up"></i></a>
+    </div>
 </div>
 
 
