@@ -25,6 +25,8 @@ public class LongTermRentService {
 
     public List<LongTermRent> findTop4ByOrderBySequenceAsc() { return longTermRentRepository.findTop4ByOrderBySequenceAsc(); }
 
+    public List<LongTermRent> findTop4ByNewOldOrderBySequenceAsc(String newOld) { return longTermRentRepository.findTop4ByNewOldOrderBySequenceAsc(newOld); }
+
     public Long save(LongTermRent longTermRent){
         return longTermRentRepository.save(longTermRent).getLongTermRentId();
     }

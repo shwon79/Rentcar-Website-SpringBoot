@@ -757,19 +757,72 @@
                     </div>
                     <br>
 
+                    <div>
+                        <p>신차 장기렌트</p>
+                    </div>
                     <ul id="car_card_list" style="margin-top: 50px;">
-                        <li class="car_card" th:each="car, i : ${fourLongTermRentList}" th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|">
+                        <li class="car_card" th:each="car, i : ${fourNewLongTermRentList}" th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|">
                             <div th:text="${car.newOld}" class="car_card_slogan"
                                  th:style="${car.newOld == '중고차장기'? 'background: red' : ''}" th:styleappend="${car.newOld != '중고차장기' ? 'display:none' : ''}"></div>
                             <div th:text="${car.newOld}" class="car_card_slogan"
                                  th:style="${car.newOld == '신차장기'? 'background: blue' : ''}" th:styleappend="${car.newOld != '신차장기' ? 'display:none' : ''}"></div>
-                            <div th:text="${car.newOld}" class="car_card_slogan"
-                                 th:style="${car.newOld == '중고차구독'? 'background: #30b130' : ''}" th:styleappend="${car.newOld != '중고차구독' ? 'display:none' : ''}"></div>
-                            <div th:text="${car.newOld}" class="car_card_slogan"
-                                 th:style="${car.newOld == '신차구독'? 'background: pink' : ''}" th:styleappend="${car.newOld != '신차구독' ? 'display:none' : ''}"></div>
                             <div class="car_card_image_box">
-                                <img th:if="${longTermRentImageList[i.index].size()} > 0" th:src="${longTermRentImageList[i.index][0].imageUrl}" alt="car image">
-                                <img th:if="${longTermRentImageList[i.index].size()} == 0" th:src="@{/img/picture_not_found.png}" alt="car image">
+                                <img th:if="${newlongTermRentImageList[i.index].size()} > 0" th:src="${newlongTermRentImageList[i.index][0].imageUrl}" alt="car image">
+                                <img th:if="${newlongTermRentImageList[i.index].size()} == 0" th:src="@{/img/picture_not_found.png}" alt="car image">
+                            </div>
+                            <div class="car_card_info_box">
+                                <p class="car_card_info_title" th:text="${car.carName}"></p>
+                                <p class="car_card_info_subInfo">
+                                    <span th:text="${car.carYearModel}" th:classappend="${car.fuel=='-' ? 'displayNoneAfter':''}"></span>
+                                    <span th:if="${car.fuel != '-'}" th:text="${car.fuel}" class="displayNoneAfter hidden-lg hidden-md"></span>
+                                    <span class="hidden-xs hidden-sm">
+                                <span>총 약정 </span>
+                                <span th:text="${car.contractKm}"></span>
+                            </span>
+                                </p>
+                                <p class="car_card_info_subInfo hidden-lg hidden-md">
+                            <span>
+                                <span>총 약정 </span>
+                                <span th:text="${car.contractKm}"></span>
+                            </span>
+                                </p>
+                                <p class="car_card_info_subInfo">
+                                    <span th:text="${car.contractPeriod}"></span>
+                                    <span th:if="${car.fuel != '-'}" th:text="${car.fuel}" class="hidden-xs hidden-sm"></span>
+                                    <span th:if="${car.carColor != '-'}" th:text="${car.carColor}"></span>
+                                </p>
+                                <p class="car_card_info_subInfo">
+                            <span>
+                                <span>보증금: </span>
+                                <span th:text="${car.contractDeposit}"></span>
+                                <span>원</span>
+                            </span>
+                                </p>
+                                <p class="car_card_info_price" style="margin: 15px 0 0 0;">누구나 월대여료:</p>
+                                <p>
+                                    <span class="car_card_info_price" th:text="${#numbers.formatInteger(car.contractPrice,0,'COMMA')}"></span>
+                                    <span class="car_card_info_price">원</span>
+                                    <span style="color: dimgrey;"> / 월 (부가세 별도)</span>
+                                </p>
+                                <div style="text-align: right;">
+                                    <button class="car_card_button" th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|">상담신청</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div>
+                        <p>중고차 장기렌트</p>
+                    </div>
+                    <ul id="car_card_list" style="margin-top: 50px;">
+                        <li class="car_card" th:each="car, i : ${fourOldLongTermRentList}" th:onclick="|location.href='@{/rent/long_term/}' + ${car.longTermRentId}|">
+                            <div th:text="${car.newOld}" class="car_card_slogan"
+                                 th:style="${car.newOld == '중고차장기'? 'background: red' : ''}" th:styleappend="${car.newOld != '중고차장기' ? 'display:none' : ''}"></div>
+                            <div th:text="${car.newOld}" class="car_card_slogan"
+                                 th:style="${car.newOld == '신차장기'? 'background: blue' : ''}" th:styleappend="${car.newOld != '신차장기' ? 'display:none' : ''}"></div>
+                            <div class="car_card_image_box">
+                                <img th:if="${oldlongTermRentImageList[i.index].size()} > 0" th:src="${oldlongTermRentImageList[i.index][0].imageUrl}" alt="car image">
+                                <img th:if="${oldlongTermRentImageList[i.index].size()} == 0" th:src="@{/img/picture_not_found.png}" alt="car image">
                             </div>
                             <div class="car_card_info_box">
                                 <p class="car_card_info_title" th:text="${car.carName}"></p>

@@ -67,15 +67,23 @@ public class HelloController {
         }
         List<RealTimeRentCar> morenDTOList = realTimeRentCarService.findByIsExpected(0);
         List<RealTimeRentCar> fiveMorenDTOList = morenDTOList.subList(0, 5);
-        List<LongTermRent> fourLongTermRentList = longTermRentService.findTop4ByOrderBySequenceAsc();
-        List<List<LongTermRentImage>> longTermRentImageList = new ArrayList<>();
-        for(LongTermRent longTermRent : fourLongTermRentList){
-            longTermRentImageList.add(longTermRentImageService.findByLongTermRent(longTermRent));
+        List<LongTermRent> fourOldLongTermRentList = longTermRentService.findTop4ByNewOldOrderBySequenceAsc("중고차장기");
+        List<LongTermRent> fourNewLongTermRentList = longTermRentService.findTop4ByNewOldOrderBySequenceAsc("신차장기");
+        List<List<LongTermRentImage>> oldlongTermRentImageList = new ArrayList<>();
+        List<List<LongTermRentImage>> newlongTermRentImageList = new ArrayList<>();
+
+        for(LongTermRent longTermRent : fourOldLongTermRentList){
+            oldlongTermRentImageList.add(longTermRentImageService.findByLongTermRent(longTermRent));
+        }
+        for(LongTermRent longTermRent : fourNewLongTermRentList){
+            newlongTermRentImageList.add(longTermRentImageService.findByLongTermRent(longTermRent));
         }
 
         model.addAttribute("fiveMorenDTOList", fiveMorenDTOList);
-        model.addAttribute("fourLongTermRentList", fourLongTermRentList);
-        model.addAttribute("longTermRentImageList", longTermRentImageList);
+        model.addAttribute("fourOldLongTermRentList", fourOldLongTermRentList);
+        model.addAttribute("oldlongTermRentImageList", oldlongTermRentImageList);
+        model.addAttribute("fourNewLongTermRentList", fourNewLongTermRentList);
+        model.addAttribute("newlongTermRentImageList", newlongTermRentImageList);
         model.addAttribute("campingCarList", campingCarList);
         model.addAttribute("imagesMainList", imagesMainList);
 

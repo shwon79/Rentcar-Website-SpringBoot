@@ -11,4 +11,5 @@ public interface LongTermRentRepository extends JpaRepository<LongTermRent, Long
 
     List<LongTermRent> findAll();
     List<LongTermRent> findTop4ByOrderBySequenceAsc();
+    List<LongTermRent> findTop4ByNewOldOrderBySequenceAsc(String newOld);
 }
