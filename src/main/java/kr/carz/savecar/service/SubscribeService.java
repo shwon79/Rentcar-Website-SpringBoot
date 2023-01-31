@@ -26,6 +26,8 @@ public class SubscribeService {
         return subscribeRepository.findById(subscribeId);
     }
 
+    public List<Subscribe> findTop4ByOrderBySequenceAsc() { return subscribeRepository.findTop4ByOrderBySequenceAsc(); }
+
     public Long save(Subscribe subscribe){
         return subscribeRepository.save(subscribe).getSubscribeId();
     }

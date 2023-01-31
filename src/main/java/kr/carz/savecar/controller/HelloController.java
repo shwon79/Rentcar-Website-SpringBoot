@@ -1,6 +1,7 @@
 package kr.carz.savecar.controller;
 
 import kr.carz.savecar.domain.*;
+import kr.carz.savecar.repository.SubscribeRepository;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,16 @@ public class HelloController {
     private final RealTimeRentCarService realTimeRentCarService;
     private final LongTermRentService longTermRentService;
     private final LongTermRentImageService longTermRentImageService;
+    private final SubscribeService subscribeService;
+    private final SubscribeImageService subscribeImageService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
                            ShortRentService shortRentService, CampingCarPriceService campingCarPriceService,
                            ValuesForWebService valuesForWebService, ImagesService imagesService,
                            RealTimeRentCarService realTimeRentCarService, LongTermRentService longTermRentService,
-                           LongTermRentImageService longTermRentImageService) {
+                           LongTermRentImageService longTermRentImageService, SubscribeService subscribeService,
+                           SubscribeImageService subscribeImageService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
@@ -47,6 +51,8 @@ public class HelloController {
         this.realTimeRentCarService = realTimeRentCarService;
         this.longTermRentService = longTermRentService;
         this.longTermRentImageService = longTermRentImageService;
+        this.subscribeService = subscribeService;
+        this.subscribeImageService = subscribeImageService;
     }
 
 
@@ -69,8 +75,10 @@ public class HelloController {
         List<RealTimeRentCar> fiveMorenDTOList = morenDTOList.subList(0, 5);
         List<LongTermRent> fourOldLongTermRentList = longTermRentService.findTop4ByNewOldOrderBySequenceAsc("중고차장기");
         List<LongTermRent> fourNewLongTermRentList = longTermRentService.findTop4ByNewOldOrderBySequenceAsc("신차장기");
+        List<Subscribe> fourSubscribeList = subscribeService.findTop4ByOrderBySequenceAsc();
         List<List<LongTermRentImage>> oldlongTermRentImageList = new ArrayList<>();
         List<List<LongTermRentImage>> newlongTermRentImageList = new ArrayList<>();
+        List<List<SubscribeImage>> subscribeImageList = new ArrayList<>();
 
         for(LongTermRent longTermRent : fourOldLongTermRentList){
             oldlongTermRentImageList.add(longTermRentImageService.findByLongTermRent(longTermRent));
@@ -78,12 +86,18 @@ public class HelloController {
         for(LongTermRent longTermRent : fourNewLongTermRentList){
             newlongTermRentImageList.add(longTermRentImageService.findByLongTermRent(longTermRent));
         }
+        for(Subscribe subscribe : fourSubscribeList){
+            subscribeImageList.add(subscribeImageService.findBySubscribe(subscribe));
+        }
+
 
         model.addAttribute("fiveMorenDTOList", fiveMorenDTOList);
         model.addAttribute("fourOldLongTermRentList", fourOldLongTermRentList);
         model.addAttribute("oldlongTermRentImageList", oldlongTermRentImageList);
         model.addAttribute("fourNewLongTermRentList", fourNewLongTermRentList);
         model.addAttribute("newlongTermRentImageList", newlongTermRentImageList);
+        model.addAttribute("fourSubscribeList", fourSubscribeList);
+        model.addAttribute("subscribeImageList", subscribeImageList);
         model.addAttribute("campingCarList", campingCarList);
         model.addAttribute("imagesMainList", imagesMainList);
 

@@ -25,10 +25,6 @@
                          th:style="${car.newOld == '중고차장기'? 'background: red' : ''}" th:styleappend="${car.newOld != '중고차장기' ? 'display:none' : ''}"></div>
                     <div th:text="${car.newOld}" class="car_card_slogan"
                          th:style="${car.newOld == '신차장기'? 'background: blue' : ''}" th:styleappend="${car.newOld != '신차장기' ? 'display:none' : ''}"></div>
-<!--                    <div th:text="${car.newOld}" class="car_card_slogan"-->
-<!--                         th:style="${car.newOld == '중고차구독'? 'background: #30b130' : ''}" th:styleappend="${car.newOld != '중고차구독' ? 'display:none' : ''}"></div>-->
-<!--                    <div th:text="${car.newOld}" class="car_card_slogan"-->
-<!--                         th:style="${car.newOld == '신차구독'? 'background: pink' : ''}" th:styleappend="${car.newOld != '신차구독' ? 'display:none' : ''}"></div>-->
                     <div class="car_card_image_box">
                         <img th:if="${imageList[i.index].size()} > 0" th:src="${imageList[i.index][0].imageUrl}" alt="car image">
                         <img th:if="${imageList[i.index].size()} == 0" th:src="@{/img/picture_not_found.png}" alt="car image">
