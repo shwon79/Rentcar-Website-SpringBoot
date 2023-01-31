@@ -35,10 +35,9 @@ public class SubscribeController {
     @GetMapping("/rent/subscribe")
     public String rent_subscribe(Model model) {
 
-        List<Subscribe> subscribeList = subscribeService.findAll();
+        List<Subscribe> subscribeList = subscribeService.findAllByOrderBySequenceAsc();
         List<List<SubscribeImage>> imageList = new ArrayList<>();
 
-        Collections.sort(subscribeList);
         for(Subscribe subscribe : subscribeList){
             imageList.add(subscribeImageService.findBySubscribe(subscribe));
         }

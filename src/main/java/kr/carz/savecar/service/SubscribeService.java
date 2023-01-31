@@ -22,6 +22,8 @@ public class SubscribeService {
         return subscribeRepository.findAll();
     }
 
+    public List<Subscribe> findAllByOrderBySequenceAsc() { return subscribeRepository.findAllByOrderBySequenceAsc(); }
+
     public Optional<Subscribe> findById(Long subscribeId){
         return subscribeRepository.findById(subscribeId);
     }

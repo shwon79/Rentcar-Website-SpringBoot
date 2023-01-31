@@ -10,5 +10,6 @@ import java.util.List;
 public interface SubscribeRepository extends JpaRepository<Subscribe, Long> {
 
     List<Subscribe> findAll();
+    List<Subscribe> findAllByOrderBySequenceAsc();
     List<Subscribe> findTop4ByOrderBySequenceAsc();
 }
