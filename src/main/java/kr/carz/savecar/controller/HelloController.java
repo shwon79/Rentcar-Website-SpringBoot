@@ -1,7 +1,8 @@
 package kr.carz.savecar.controller;
 
+import kr.carz.savecar.controller.Utils.Rent24Connection;
 import kr.carz.savecar.domain.*;
-import kr.carz.savecar.repository.SubscribeRepository;
+import kr.carz.savecar.dto.Rent24EventVO;
 import kr.carz.savecar.service.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class HelloController {
 
 
     @GetMapping(value={"/","/index"})
-    public String index(Model model) {
+    public String index(Model model) throws IOException {
 
         List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
         List<Images> imagesMainList = new ArrayList<>();
@@ -86,10 +87,13 @@ public class HelloController {
         for(LongTermRent longTermRent : fourNewLongTermRentList){
             newlongTermRentImageList.add(longTermRentImageService.findByLongTermRent(longTermRent));
         }
-        for(Subscribe subscribe : fourSubscribeList){
+        for(Subscribe subscribe : fourSubscribeList) {
             subscribeImageList.add(subscribeImageService.findBySubscribe(subscribe));
         }
 
+        // rent24(https://rent-24.co.kr/) 에서 event data 가져옴
+        Rent24Connection rent24Connection = new Rent24Connection();
+        List<Rent24EventVO> rent24EventList = rent24Connection.getEventCars();
 
         model.addAttribute("fiveMorenDTOList", fiveMorenDTOList);
         model.addAttribute("fourOldLongTermRentList", fourOldLongTermRentList);
@@ -98,6 +102,7 @@ public class HelloController {
         model.addAttribute("newlongTermRentImageList", newlongTermRentImageList);
         model.addAttribute("fourSubscribeList", fourSubscribeList);
         model.addAttribute("subscribeImageList", subscribeImageList);
+        model.addAttribute("rent24EventList", rent24EventList);
         model.addAttribute("campingCarList", campingCarList);
         model.addAttribute("imagesMainList", imagesMainList);
 

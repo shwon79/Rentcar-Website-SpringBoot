@@ -48,6 +48,7 @@ dependencies {
 	compile group: 'org.apache.poi', name: 'poi', version: '3.11'
 	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.11'
 	compile group: 'commons-io', name: 'commons-io', version: '2.4'
+	implementation group: 'org.jsoup', name: 'jsoup', version: '1.15.3'
 }
 
 test {

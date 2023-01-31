@@ -908,67 +908,110 @@
     </section>
     <!-- End off clogo Section -->
 
-    <section id="subscribe" class="feature sections">
+
+    <section id="rent24event" class="feature sections">
         <div class="container space-medium">
             <div class="row">
-                <h1>자동차 구독</h1>
+                <h1>장기렌트/리스 메이져 최저가 찾기</h1>
                 <ul id="car_card_list" style="margin-top: 50px;">
-                    <li class="car_card" th:each="car, i : ${fourSubscribeList}" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">
-                        <div th:text="${car.newOld}" class="car_card_slogan"
-                             th:style="${car.newOld == '중고차구독'? 'background: #30b130' : ''}" th:styleappend="${car.newOld != '중고차구독' ? 'display:none' : ''}"></div>
-                        <div th:text="${car.newOld}" class="car_card_slogan"
-                             th:style="${car.newOld == '신차구독'? 'background: #ff5722' : ''}" th:styleappend="${car.newOld != '신차구독' ? 'display:none' : ''}"></div>
-                        <div th:text="${car.newOld}" class="car_card_slogan"
-                             th:style="${car.newOld == '자동차구독'? 'background: #9e9e9e' : ''}" th:styleappend="${car.newOld != '자동차구독' ? 'display:none' : ''}"></div>
+                    <li class="car_card" th:each="car, i : ${rent24EventList}" > <!-- th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|" -->
                         <div class="car_card_image_box">
-                            <img th:if="${subscribeImageList[i.index].size()} > 0" th:src="${subscribeImageList[i.index][0].imageUrl}" alt="car image">
-                            <img th:if="${subscribeImageList[i.index].size()} == 0" th:src="@{/img/picture_not_found.png}" alt="car image">
+                            <img th:src="${car.imgUrl}" alt="car image">
                         </div>
                         <div class="car_card_info_box">
-                            <p class="car_card_info_title" th:text="${car.carName}"></p>
+                            <p class="car_card_info_title" th:text="${car.carTitle}"></p>
                             <p class="car_card_info_subInfo">
-                                <span th:text="${car.carYearModel}" th:classappend="${car.fuel=='-' ? 'displayNoneAfter':''}"></span>
-                                <span th:if="${car.fuel != '-'}" th:text="${car.fuel}" class="displayNoneAfter hidden-lg hidden-md"></span>
+                                <span th:text="${car.carPrice}" class="displayNoneAfter hidden-lg hidden-md"></span>
                                 <span class="hidden-xs hidden-sm">
                                     <span>총 약정 </span>
-                                    <span th:text="${car.contractKm}"></span>
+                                    <span th:text="${car.period}"></span>
                                 </span>
-                            </p>
-                            <p class="car_card_info_subInfo hidden-lg hidden-md">
-                                <span>
-                                    <span>총 약정 </span>
-                                    <span th:text="${car.contractKm}"></span>
-                                </span>
-                            </p>
-                            <p class="car_card_info_subInfo">
-                                <span th:text="${car.contractPeriod}"></span>
-                                <span th:if="${car.fuel != '-'}" th:text="${car.fuel}" class="hidden-xs hidden-sm"></span>
-                                <span th:if="${car.carColor != '-'}" th:text="${car.carColor}"></span>
                             </p>
                             <p class="car_card_info_subInfo">
                                 <span>
                                     <span>보증금: </span>
-                                    <span th:text="${car.contractDeposit}"></span>
-                                    <span>원</span>
+                                    <span th:text="${car.deposit}"></span>
                                 </span>
                             </p>
-                            <p class="car_card_info_price" style="margin: 15px 0 0 0;">구독 월대여료:</p>
+                            <p class="car_card_info_price" style="margin: 15px 0 0 0;">월대여료:</p>
                             <p>
-                                <span class="car_card_info_price" th:text="${#numbers.formatInteger(car.contractPrice,0,'COMMA')}"></span>
+                                <span class="car_card_info_price" th:text="${car.rentPrice}"></span>
                                 <span class="car_card_info_price">원</span>
-                                <span style="color: dimgrey;"> / 월 (부가세 별도)</span>
+                                <span style="color: dimgrey;"> / 월</span> <!--  (부가세 별도) -->
                             </p>
-                            <div style="text-align: right;">
-                                <button class="car_card_button" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">상담신청</button>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+                            <!--
+                           <div style="text-align: right;">
+                               <button class="car_card_button" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">상담신청</button>
+                           </div>
+                           -->
+                       </div>
+                   </li>
+               </ul>
+           </div>
+       </div>
+   </section>
 
-    <!-- service block -->
+   <section id="subscribe" class="feature sections">
+       <div class="container space-medium">
+           <div class="row">
+               <h1>자동차 구독</h1>
+               <ul id="car_card_list" style="margin-top: 50px;">
+                   <li class="car_card" th:each="car, i : ${fourSubscribeList}" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">
+                       <div th:text="${car.newOld}" class="car_card_slogan"
+                            th:style="${car.newOld == '중고차구독'? 'background: #30b130' : ''}" th:styleappend="${car.newOld != '중고차구독' ? 'display:none' : ''}"></div>
+                       <div th:text="${car.newOld}" class="car_card_slogan"
+                            th:style="${car.newOld == '신차구독'? 'background: #ff5722' : ''}" th:styleappend="${car.newOld != '신차구독' ? 'display:none' : ''}"></div>
+                       <div th:text="${car.newOld}" class="car_card_slogan"
+                            th:style="${car.newOld == '자동차구독'? 'background: #9e9e9e' : ''}" th:styleappend="${car.newOld != '자동차구독' ? 'display:none' : ''}"></div>
+                       <div class="car_card_image_box">
+                           <img th:if="${subscribeImageList[i.index].size()} > 0" th:src="${subscribeImageList[i.index][0].imageUrl}" alt="car image">
+                           <img th:if="${subscribeImageList[i.index].size()} == 0" th:src="@{/img/picture_not_found.png}" alt="car image">
+                       </div>
+                       <div class="car_card_info_box">
+                           <p class="car_card_info_title" th:text="${car.carName}"></p>
+                           <p class="car_card_info_subInfo">
+                               <span th:text="${car.carYearModel}" th:classappend="${car.fuel=='-' ? 'displayNoneAfter':''}"></span>
+                               <span th:if="${car.fuel != '-'}" th:text="${car.fuel}" class="displayNoneAfter hidden-lg hidden-md"></span>
+                               <span class="hidden-xs hidden-sm">
+                                   <span>총 약정 </span>
+                                   <span th:text="${car.contractKm}"></span>
+                               </span>
+                           </p>
+                           <p class="car_card_info_subInfo hidden-lg hidden-md">
+                               <span>
+                                   <span>총 약정 </span>
+                                   <span th:text="${car.contractKm}"></span>
+                               </span>
+                           </p>
+                           <p class="car_card_info_subInfo">
+                               <span th:text="${car.contractPeriod}"></span>
+                               <span th:if="${car.fuel != '-'}" th:text="${car.fuel}" class="hidden-xs hidden-sm"></span>
+                               <span th:if="${car.carColor != '-'}" th:text="${car.carColor}"></span>
+                           </p>
+                           <p class="car_card_info_subInfo">
+                               <span>
+                                   <span>보증금: </span>
+                                   <span th:text="${car.contractDeposit}"></span>
+                                   <span>원</span>
+                               </span>
+                           </p>
+                           <p class="car_card_info_price" style="margin: 15px 0 0 0;">구독 월대여료:</p>
+                           <p>
+                               <span class="car_card_info_price" th:text="${#numbers.formatInteger(car.contractPrice,0,'COMMA')}"></span>
+                               <span class="car_card_info_price">원</span>
+                               <span style="color: dimgrey;"> / 월 (부가세 별도)</span>
+                           </p>
+                           <div style="text-align: right;">
+                               <button class="car_card_button" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">상담신청</button>
+                           </div>
+                       </div>
+                   </li>
+               </ul>
+           </div>
+       </div>
+   </section>
+
+   <!-- service block -->
     <section id="feature" class="feature sections">
         <div class="container space-medium">
             <div class="row">
