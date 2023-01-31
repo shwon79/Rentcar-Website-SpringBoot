@@ -28,12 +28,15 @@ public class HelloController {
     private final ValuesForWebService valuesForWebService;
     private final ImagesService imagesService;
     private final RealTimeRentCarService realTimeRentCarService;
+    private final LongTermRentService longTermRentService;
+    private final LongTermRentImageService longTermRentImageService;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
                            ShortRentService shortRentService, CampingCarPriceService campingCarPriceService,
                            ValuesForWebService valuesForWebService, ImagesService imagesService,
-                           RealTimeRentCarService realTimeRentCarService) {
+                           RealTimeRentCarService realTimeRentCarService, LongTermRentService longTermRentService,
+                           LongTermRentImageService longTermRentImageService) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
@@ -42,6 +45,8 @@ public class HelloController {
         this.valuesForWebService = valuesForWebService;
         this.imagesService = imagesService;
         this.realTimeRentCarService = realTimeRentCarService;
+        this.longTermRentService = longTermRentService;
+        this.longTermRentImageService = longTermRentImageService;
     }
 
 
@@ -62,8 +67,15 @@ public class HelloController {
         }
         List<RealTimeRentCar> morenDTOList = realTimeRentCarService.findByIsExpected(0);
         List<RealTimeRentCar> fiveMorenDTOList = morenDTOList.subList(0, 5);
+        List<LongTermRent> fourLongTermRentList = longTermRentService.findTop4ByOrderBySequenceAsc();
+        List<List<LongTermRentImage>> longTermRentImageList = new ArrayList<>();
+        for(LongTermRent longTermRent : fourLongTermRentList){
+            longTermRentImageList.add(longTermRentImageService.findByLongTermRent(longTermRent));
+        }
 
         model.addAttribute("fiveMorenDTOList", fiveMorenDTOList);
+        model.addAttribute("fourLongTermRentList", fourLongTermRentList);
+        model.addAttribute("longTermRentImageList", longTermRentImageList);
         model.addAttribute("campingCarList", campingCarList);
         model.addAttribute("imagesMainList", imagesMainList);
 

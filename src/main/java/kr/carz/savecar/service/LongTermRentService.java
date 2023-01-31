@@ -23,6 +23,8 @@ public class LongTermRentService {
         return longTermRentRepository.findById(carId);
     }
 
+    public List<LongTermRent> findTop4ByOrderBySequenceAsc() { return longTermRentRepository.findTop4ByOrderBySequenceAsc(); }
+
     public Long save(LongTermRent longTermRent){
         return longTermRentRepository.save(longTermRent).getLongTermRentId();
     }
