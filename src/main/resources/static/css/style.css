@@ -1101,7 +1101,7 @@ div.popStyle1, div.popStyle2 {
     margin-bottom: 0;
 }
 .popup1_table td {
-    padding: 30px;
+    padding: 20px;
 }
 .popup1_box1 {
     background-color: #f8f6f2;
@@ -1323,6 +1323,22 @@ popup_box_long_term {
     border-radius: 12px;
     font-size: 1.3em;
     color: #40c4b6;
+}
+.home-to-prior-rent-month-button-wrap {
+    margin-bottom: 10px;
+}
+.home-to-prior-rent-month-button {
+    background: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.home-to-price-rent-month-button {
+    background: dodgerblue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border-color: dodgerblue;
 }
 #loading {
     width: 100%;

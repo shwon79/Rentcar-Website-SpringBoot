@@ -15,9 +15,10 @@
     <div class="content">
         <div class="container" style="margin-top: 70px;">
             <h2 class="page-title">자동차 구독</h2>
-            <h4 class="page-title">대표전화 : 1544-4680, 010-3359-6700</h4>
-            <p style="word-break: keep-all; color: dimgrey;">
-                자동차 구독은 일반 넘버의 자동차를 12개[6개월] 단위 리스의 형식으로 구독하는 상품입니다.
+            <h4 class="page-title">대표전화 : 1544-4680</h4>
+            <p style="word-break: keep-all; color: dimgrey; font-size: 1.7rem">
+                12개월구독상품은 12개월 계약으로 평범한 12개월 렌트료보다 보다 저렴하게 다양한 차종을 선택해 이용할 수 있는 상품입니다.<br>
+                일반넘버구독상품은 12개월 계약으로 6개월 후에는 해지수수료 없이 차량번호에 허하호가 없는 일반 차를 이용할 수 있는 상품입니다.
             </p>
             <ul id="car_card_list" style="margin-top: 50px;">
                 <li class="car_card" th:each="car, i : ${subscribeList}" th:onclick="|location.href='@{/rent/subscribe/}' + ${car.subscribeId}|">
@@ -74,11 +75,12 @@
 
             <h2 id="special-long-term-rent" class="page-title">세이브카&카즈 자동차구독서비스</h2>
             <p style="word-break: keep-all; color: dimgrey; font-size: 18px;">
-                소유 대신 공유!<br>
-                일반 넘버로 1년[6개월] 단위로 차량을 구독하세요!<br>
-                허하호 차량으로 다양한 상품을 구독하세요!<br>
-                비용처리로 세금혜택까지!<br>
-                정비가 포함된 상품으로 일반넘버는 구독자가 자동차보험가입 합니다.<br>
+                렌트보다 저렴한 자동차구독상품<br>
+                일반넘버구독상품[정비/자동차세 모두포함, 자동차보험 선택상품]<br>
+                비용처리로 세금혜택<br>
+                투명한 전자계약시스템<br>
+                다양한 상품기획으로 최저가 내 차 공유<br>
+                월구독료 제공차량 최저가 원가제공<br>
             </p>
 
             <!--상담 신청-->
