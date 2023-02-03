@@ -150,8 +150,8 @@
 
 @media screen and (max-width: 600px) {
     .car_card {
-        flex-basis: 49%;
-        margin: 1px;
+        flex-basis: 47%;
+        margin: 5px;
     }
     .car_card_info_box {
         padding: 5px;

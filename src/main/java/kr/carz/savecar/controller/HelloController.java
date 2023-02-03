@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class HelloController {
@@ -73,6 +70,14 @@ public class HelloController {
             }
         }
         List<RealTimeRentCar> morenDTOList = realTimeRentCarService.findByIsExpected(0);
+        Collections.sort(morenDTOList, new Comparator<RealTimeRentCar>() {
+
+            @Override
+            public int compare(RealTimeRentCar c1, RealTimeRentCar c2) {
+                return c1.getSequence() - c2.getSequence();
+            }
+        });
+
         List<RealTimeRentCar> fiveMorenDTOList = morenDTOList.subList(0, 5);
         List<LongTermRent> fourOldLongTermRentList = longTermRentService.findTop4ByNewOldOrderBySequenceAsc("중고차장기");
         List<LongTermRent> fourNewLongTermRentList = longTermRentService.findTop4ByNewOldOrderBySequenceAsc("신차장기");
@@ -95,6 +100,8 @@ public class HelloController {
         Rent24Connection rent24Connection = new Rent24Connection();
         List<Rent24EventVO> rent24EventList = rent24Connection.getEventCars();
 
+
+        model.addAttribute("morenDTOListSize", morenDTOList.size());
         model.addAttribute("fiveMorenDTOList", fiveMorenDTOList);
         model.addAttribute("fourOldLongTermRentList", fourOldLongTermRentList);
         model.addAttribute("oldlongTermRentImageList", oldlongTermRentImageList);
