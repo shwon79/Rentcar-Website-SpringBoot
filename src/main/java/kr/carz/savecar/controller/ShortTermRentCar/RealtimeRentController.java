@@ -116,6 +116,11 @@ public class RealtimeRentController {
                 if(carName.contains("530i")){
                     carCategory = "530i";
                 }
+            } else if(carCategory.equals("그랜저")){
+                String carName = (String) morenObject.get("carName");
+                if(carName.contains("디 올")){
+                    carCategory = "디올뉴그랜저";
+                }
             }
 
             int isExpected;
