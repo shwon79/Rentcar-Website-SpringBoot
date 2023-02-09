@@ -34,7 +34,11 @@ public class PopupController {
 
         ModelAndView mav = new ModelAndView();
         List<CampingCarPrice> campingCarList = campingCarPriceService.findAllCampingCarPrice();
+        ValuesForWeb index_main_txt_1 = valuesForWebService.findValueByTitle("index_main_txt_1").get();
+        ValuesForWeb index_main_txt_2 = valuesForWebService.findValueByTitle("index_main_txt_2").get();
 
+        mav.addObject("index_main_txt_1", index_main_txt_1.getValue());
+        mav.addObject("index_main_txt_2", index_main_txt_2.getValue());
         mav.addObject("campingCarList", campingCarList);
         mav.setViewName("admin/popup_menu");
 

@@ -74,7 +74,37 @@ window.onload = function() {
 }
 
 // 버튼 누르면 변경 내용 저장
+function indexEdit() {
+    const index_main_txt_1 = document.getElementById('index_main_txt_1').value;
+    const index_main_txt_2 = document.getElementById('index_main_txt_2').value;
 
+    let data = {
+        "valuesList": [
+            { "title" : "index_main_txt_1", "value" : index_main_txt_1 },
+            { "title" : "index_main_txt_2", "value" : index_main_txt_2 }
+        ]
+    };
+    // console.log(data);
+
+    if (confirm('index page 내용을 수정하시겠습니까?')) {
+        $.ajax({
+            type:'POST',
+            url:'/admin/popup/value',
+            dataType:'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function (result) {
+            if (result.result == 1) {
+                alert('완료되었습니다.');
+                window.location.href = '/admin/popup/menu';
+            } else {
+                alert('문제가 생겼습니다.');
+            };
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    };
+};
 
 function popupEdit() {
     const popup1_contact = document.getElementById('popup1_contact').value;

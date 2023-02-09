@@ -100,7 +100,12 @@ public class HelloController {
         Rent24Connection rent24Connection = new Rent24Connection();
         List<Rent24EventVO> rent24EventList = rent24Connection.getEventCars();
 
+        // main text 2개 가져옴
+        ValuesForWeb index_main_txt_1 = valuesForWebService.findValueByTitle("index_main_txt_1").get();
+        ValuesForWeb index_main_txt_2 = valuesForWebService.findValueByTitle("index_main_txt_2").get();
 
+        model.addAttribute("index_main_txt_1", index_main_txt_1.getValue());
+        model.addAttribute("index_main_txt_2", index_main_txt_2.getValue());
         model.addAttribute("morenDTOListSize", morenDTOList.size());
         model.addAttribute("fiveMorenDTOList", fiveMorenDTOList);
         model.addAttribute("fourOldLongTermRentList", fourOldLongTermRentList);
