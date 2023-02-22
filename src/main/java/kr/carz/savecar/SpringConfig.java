@@ -36,6 +36,7 @@ public class SpringConfig {
     private final CampingCarHomeImageRepository campingCarHomeImageRepository;
     private final SubscribeRepository subscribeRepository;
     private final SubscribeImageRepository subscribeImageRepository;
+    private final Rent24Repository rent24Repository;
 
     @Autowired
     public SpringConfig(MonthlyRentRepository monthlyRentRepository, YearlyRentRepository yearlyRentRepository,
@@ -52,7 +53,8 @@ public class SpringConfig {
                         RealTimeRentCarRepository realTimeRentRepository, RealTimeRentCarImageRepository realTimeRentImageRepository,
                         ReviewImageRepository reviewImageRepository, ExpectedDayRepository expectedDayRepository,
                         CampingCarHomeRepository campingCarHomeRepository, CampingCarHomeImageRepository campingCarHomeImageRepository,
-                        SubscribeRepository subscribeRepository, SubscribeImageRepository subscribeImageRepository) {
+                        SubscribeRepository subscribeRepository, SubscribeImageRepository subscribeImageRepository,
+                        Rent24Repository rent24Repository) {
         this.monthlyRentRepository = monthlyRentRepository;
         this.yearlyRentRepository = yearlyRentRepository;
         this.shortRentRepository = shortRentRepository;
@@ -81,6 +83,7 @@ public class SpringConfig {
         this.campingCarHomeImageRepository = campingCarHomeImageRepository;
         this.subscribeRepository = subscribeRepository;
         this.subscribeImageRepository = subscribeImageRepository;
+        this.rent24Repository = rent24Repository;
     }
 
     @Bean
@@ -170,4 +173,7 @@ public class SpringConfig {
 
     @Bean
     public SubscribeImageService subscribeImageService() { return new SubscribeImageService(subscribeImageRepository); }
+
+    @Bean
+    public Rent24Service rent24Service() { return new Rent24Service(rent24Repository); }
 }

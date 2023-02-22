@@ -279,6 +279,7 @@ public class ReservationController {
                         + "예상대여일자: " + dto.getResDate() + "\n"
                         + "요청사항: " + dto.getDetail() + "\n\n");
                 break;
+            case "Rent24상담신청":
             case "구독상담신청":
             case "누구나장기렌트간편상담신청":
             case "월렌트+12개월상담신청":

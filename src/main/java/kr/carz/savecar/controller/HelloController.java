@@ -31,6 +31,7 @@ public class HelloController {
     private final LongTermRentImageService longTermRentImageService;
     private final SubscribeService subscribeService;
     private final SubscribeImageService subscribeImageService;
+    private final Rent24Service rent24Service;
 
     @Autowired
     public HelloController(MonthlyRentService monthlyRentService, YearlyRentService yearlyRentService, TwoYearlyRentService twoYearlyRentService,
@@ -38,7 +39,7 @@ public class HelloController {
                            ValuesForWebService valuesForWebService, ImagesService imagesService,
                            RealTimeRentCarService realTimeRentCarService, LongTermRentService longTermRentService,
                            LongTermRentImageService longTermRentImageService, SubscribeService subscribeService,
-                           SubscribeImageService subscribeImageService) {
+                           SubscribeImageService subscribeImageService, Rent24Service rent24Service) {
         this.monthlyRentService = monthlyRentService;
         this.yearlyRentService = yearlyRentService;
         this.twoYearlyRentService = twoYearlyRentService;
@@ -51,6 +52,7 @@ public class HelloController {
         this.longTermRentImageService = longTermRentImageService;
         this.subscribeService = subscribeService;
         this.subscribeImageService = subscribeImageService;
+        this.rent24Service = rent24Service;
     }
 
 
@@ -96,9 +98,7 @@ public class HelloController {
             subscribeImageList.add(subscribeImageService.findBySubscribe(subscribe));
         }
 
-        // rent24(https://rent-24.co.kr/) 에서 event data 가져옴
-        Rent24Connection rent24Connection = new Rent24Connection();
-        List<Rent24EventVO> rent24EventList = rent24Connection.getEventCars();
+        List<Rent24> rent24EventList = rent24Service.findAll();
 
         // main text 2개 가져옴
         ValuesForWeb index_main_txt_1 = valuesForWebService.findValueByTitle("index_main_txt_1").get();

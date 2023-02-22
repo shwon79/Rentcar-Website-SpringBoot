@@ -2,6 +2,7 @@ package kr.carz.savecar.controller.ShortTermRentCar;
 
 import kr.carz.savecar.controller.ReservationController;
 import kr.carz.savecar.controller.Utils.HttpConnection;
+import kr.carz.savecar.controller.Utils.Rent24Connection;
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
@@ -29,11 +30,13 @@ public class RealtimeRentController {
     private final RealTimeRentCarService realTimeRentService;
     private final RealTimeRentCarImageService realTimeRentImageService;
     private final ExpectedDayService expectedDayService;
+    private final Rent24Service rent24Service;
 
     @Autowired
     public RealtimeRentController(MonthlyRentService monthlyRentService,
                                   DiscountService discountService, MorenReservationService morenReservationService, ReservationController reservationController,
-                                  RealTimeRentCarService realTimeRentService, RealTimeRentCarImageService realTimeRentImageService, ExpectedDayService expectedDayService) {
+                                  RealTimeRentCarService realTimeRentService, RealTimeRentCarImageService realTimeRentImageService, ExpectedDayService expectedDayService,
+                                  Rent24Service rent24Service) {
         this.monthlyRentService = monthlyRentService;
         this.discountService = discountService;
         this.morenReservationService = morenReservationService;
@@ -41,6 +44,7 @@ public class RealtimeRentController {
         this.realTimeRentService = realTimeRentService;
         this.realTimeRentImageService = realTimeRentImageService;
         this.expectedDayService = expectedDayService;
+        this.rent24Service =  rent24Service;
     }
 
     /* ======================================================================================== */
@@ -58,8 +62,9 @@ public class RealtimeRentController {
 
     // 모렌 대기차 DB로 저장
     @Scheduled(cron = "0 0/10 * * * *")
-    public void rent_month_save() {
+    public void rent_month_save() throws IOException {
         rent_month_save_update();
+        update_rent24_data();
     }
 
     Comparator<RealTimeRentCar> comparator = new Comparator<RealTimeRentCar>() {
@@ -74,6 +79,19 @@ public class RealtimeRentController {
             return Long.compare(b.getImageId(), a.getImageId());
         }
     };
+
+    public void update_rent24_data() throws IOException {
+        // rent24(https://rent-24.co.kr/) 에서 event data 가져옴
+        Rent24Connection rent24Connection = new Rent24Connection();
+        List<Rent24EventVO> rent24EventList = rent24Connection.getEventCars();
+
+        rent24Service.deleteAllInBatch();
+        Long id = 1L;
+        for(Rent24EventVO event : rent24EventList){
+            Rent24 rent24 = new Rent24(id++, event.getCarTitle(), event.getPeriod(), event.getDeposit(), event.getRentPrice(), event.getImgUrl());
+            rent24Service.save(rent24);
+        }
+    }
 
     public void rent_month_save_update(){
 
