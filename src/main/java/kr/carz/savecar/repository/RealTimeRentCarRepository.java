@@ -13,6 +13,7 @@ public interface RealTimeRentCarRepository extends JpaRepository<RealTimeRentCar
     List<RealTimeRentCar> findAll();
     List<RealTimeRentCar> findByIsExpected(int isExpected);
     List<RealTimeRentCar> findByCarGubunAndIsExpected(String carGubun, int isExpected);
+    List<RealTimeRentCar> findByCarGubunAndIsExpectedAndIsLongTerm(String carGubun, int isExpected, int isLongTerm);
     List<RealTimeRentCar> findByCarNo(String carNo);
     Optional<RealTimeRentCar> findByCarCode(String carCode);
 }

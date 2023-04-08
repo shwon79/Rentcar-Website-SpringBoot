@@ -22,6 +22,7 @@ public class RealTimeRentCarService {
     public List<RealTimeRentCar> findByIsExpected(int isExpected){ return realTimeRentRepository.findByIsExpected(isExpected); }
 
     public List<RealTimeRentCar> findByCarGubunAndIsExpected(String carGubun, int isExpected){ return realTimeRentRepository.findByCarGubunAndIsExpected(carGubun, isExpected); }
+    public List<RealTimeRentCar> findByCarGubunAndIsExpectedAndIsLongTerm(String carGubun, int isExpected, int isLongTerm){ return realTimeRentRepository.findByCarGubunAndIsExpectedAndIsLongTerm(carGubun, isExpected, isLongTerm); }
 
     public Optional<RealTimeRentCar> findById(Long carId){
         return realTimeRentRepository.findById(carId);
