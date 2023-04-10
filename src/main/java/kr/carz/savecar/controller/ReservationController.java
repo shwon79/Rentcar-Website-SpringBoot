@@ -1,6 +1,8 @@
 package kr.carz.savecar.controller;
 
+import kr.carz.savecar.dto.MorenReservationDTO;
 import kr.carz.savecar.dto.ReservationSaveDTO;
+import kr.carz.savecar.service.MorenReservationService;
 import kr.carz.savecar.service.ReservationService;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -17,10 +19,12 @@ import java.util.*;
 @Controller
 public class ReservationController {
     private final ReservationService reservationService;
+    private final MorenReservationService morenReservationService;
 
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, MorenReservationService morenReservationService) {
         this.reservationService = reservationService;
+        this.morenReservationService = morenReservationService;
     }
 
     @Value("${coolsms.api_key}")
@@ -431,5 +435,70 @@ public class ReservationController {
         pw.close();
     }
 
+
+    @PostMapping("/rent/month/moren/reservation")
+    @ResponseBody
+    public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO dto) throws IOException {
+
+        Long reservationId = morenReservationService.saveDTO(dto);
+
+        send_message(admin2+", "+admin3, dto.getReservationPhone(),
+                "[현재 대여가능차량 예약이 신청되었습니다.]\n"
+                        + "▼ 계약 확인하기" + "\n"
+                        + "https://savecar.kr/admin/moren/reservation/detail/" + reservationId + "\n\n"
+
+                        + "▼ 문의자 정보" + "\n"
+                        + "문의자 이름: " + dto.getReservationName() + "\n"
+                        + "연락처: " + dto.getReservationPhone() + "\n"
+                        + "보험연령: " + dto.getSelectAge() + "\n"
+                        + "생년월일: " + dto.getReservationAge() + "\n\n"
+
+                        + "▼ 차량 정보" + "\n"
+                        + "차량명: " + dto.getCarName() + "\n"
+                        + "차량번호: " + dto.getCarNo() + "\n\n"
+
+                        + "▼ 대여 정보" + "\n"
+                        + "대여일자: " + dto.getReservationDate() + "\n"
+                        + "대여시간: " + dto.getReservationTime() + "\n"
+                        + "렌트기간: " + dto.getRentTerm() + "\n"
+                        + "약정주행거리: " + dto.getKilometer() + "\n"
+                        + "방문/배차: " + dto.getPickupPlace() + "\n"
+                        + "배차요청주소: " + dto.getAddress() + "\n"
+                        + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
+                        + "신용증빙: " + dto.getReservationGuarantee() + "\n"
+                        + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+                        + "보증금: " + dto.getCarDeposit() + "\n\n",
+
+                "[예약 대기 신청이 완료되었습니다]" + "\n"
+                        + "▼ 문의자 정보" + "\n"
+                        + "문의자 이름: " + dto.getReservationName() + "\n"
+                        + "연락처: " + dto.getReservationPhone() + "\n"
+                        + "보험연령: " + dto.getSelectAge() + "\n"
+                        + "생년월일: " + dto.getReservationAge() + "\n\n"
+
+                        + "▼ 차량 정보" + "\n"
+                        + "차량명: " + dto.getCarName() + "\n"
+                        + "차량번호: " + dto.getCarNo() + "\n\n"
+
+                        + "▼ 대여 정보" + "\n"
+                        + "대여일자: " + dto.getReservationDate() + "\n"
+                        + "대여시간: " + dto.getReservationTime() + "\n"
+                        + "렌트기간: " + dto.getRentTerm() + "\n"
+                        + "약정주행거리: " + dto.getKilometer() + "\n"
+                        + "방문/배차: " + dto.getPickupPlace() + "\n"
+                        + "배차요청주소: " + dto.getAddress() + "\n"
+                        + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
+                        + "필요증빙: " + dto.getReservationGuarantee() + "\n"
+                        + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
+                        + "보증금: " + dto.getCarDeposit() + "\n\n");
+
+        org.json.JSONObject jsonObject = new org.json.JSONObject();
+        jsonObject.put("result", 1);
+
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonObject);
+        pw.flush();
+        pw.close();
+    }
 
 }

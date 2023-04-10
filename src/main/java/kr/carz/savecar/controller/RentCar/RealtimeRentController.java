@@ -26,8 +26,6 @@ public class RealtimeRentController implements RentInterface {
 
     private final MonthlyRentService monthlyRentService;
     private final DiscountService discountService;
-    private final MorenReservationService morenReservationService;
-    private final ReservationController reservationController;
     private final RealTimeRentCarService realTimeRentService;
     private final RealTimeRentCarImageService realTimeRentImageService;
     private final ExpectedDayService expectedDayService;
@@ -35,13 +33,11 @@ public class RealtimeRentController implements RentInterface {
 
     @Autowired
     public RealtimeRentController(MonthlyRentService monthlyRentService,
-                                  DiscountService discountService, MorenReservationService morenReservationService, ReservationController reservationController,
-                                  RealTimeRentCarService realTimeRentService, RealTimeRentCarImageService realTimeRentImageService, ExpectedDayService expectedDayService,
+                                  DiscountService discountService, RealTimeRentCarService realTimeRentService,
+                                  RealTimeRentCarImageService realTimeRentImageService, ExpectedDayService expectedDayService,
                                   Rent24Service rent24Service) {
         this.monthlyRentService = monthlyRentService;
         this.discountService = discountService;
-        this.morenReservationService = morenReservationService;
-        this.reservationController = reservationController;
         this.realTimeRentService = realTimeRentService;
         this.realTimeRentImageService = realTimeRentImageService;
         this.expectedDayService = expectedDayService;
@@ -372,108 +368,6 @@ public class RealtimeRentController implements RentInterface {
         model.put("morenDTO",morenDTO);
 
         return "rent_month/estimate_form";
-    }
-
-    @RequestMapping(value = "/api/price/monthly", produces = "application/json; charset=UTF-8;", method = RequestMethod.GET)
-    @ResponseBody
-    public void api_price_monthly_carGubun_isExpected(HttpServletResponse res, @RequestParam("carGubun")String carGubun,
-                                @RequestParam("isExpected")int isExpected) throws IOException {
-        List<RealTimeRentCar> realTimeRentCarList = realTimeRentService.findByCarGubunAndIsExpectedAndIsLongTerm(carGubun, isExpected, 0);
-        JSONArray jsonArray = new JSONArray();
-        for (RealTimeRentCar c : realTimeRentCarList) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("carId", c.getCarIdx());
-            jsonObject.put("carName", c.getCarName());
-            jsonObject.put("carCategory", c.getCarCategory());
-            jsonObject.put("carColor", c.getCarExteriorColor());
-            jsonObject.put("carAttribute", c.getCarAttribute01());
-            jsonObject.put("carOld", c.getCarOld());
-            jsonObject.put("carDetail", c.getCarDetail());
-            jsonObject.put("carOilType", c.getCarEngine());
-            jsonObject.put("carNo", c.getCarNo());
-
-            JSONObject jsonObjectPrice = new JSONObject();
-            jsonObjectPrice.put("2000km", c.getMonthlyRent().getCost_for_2k());
-            jsonObjectPrice.put("2500km", c.getMonthlyRent().getCost_for_2_5k_price());
-            jsonObjectPrice.put("3000km", c.getMonthlyRent().getCost_for_3k_price());
-            jsonObjectPrice.put("4000km", c.getMonthlyRent().getCost_for_4k_price());
-            jsonObject.put("carPrice", jsonObjectPrice);
-
-
-            jsonArray.put(jsonObject);
-        }
-
-        res.setCharacterEncoding("UTF-8");
-        res.setContentType("text/html; charset=UTF-8");
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonArray);
-        pw.flush();
-        pw.close();
-    }
-
-    @PostMapping("/rent/month/moren/reservation")
-    @ResponseBody
-    public void moren_reservation(HttpServletResponse res, @RequestBody MorenReservationDTO dto) throws IOException {
-
-        Long reservationId = morenReservationService.saveDTO(dto);
-
-        reservationController.send_message(admin2+", "+admin3, dto.getReservationPhone(),
-                "[현재 대여가능차량 예약이 신청되었습니다.]\n"
-                        + "▼ 계약 확인하기" + "\n"
-                        + "https://savecar.kr/admin/moren/reservation/detail/" + reservationId + "\n\n"
-
-                        + "▼ 문의자 정보" + "\n"
-                        + "문의자 이름: " + dto.getReservationName() + "\n"
-                        + "연락처: " + dto.getReservationPhone() + "\n"
-                        + "보험연령: " + dto.getSelectAge() + "\n"
-                        + "생년월일: " + dto.getReservationAge() + "\n\n"
-
-                        + "▼ 차량 정보" + "\n"
-                        + "차량명: " + dto.getCarName() + "\n"
-                        + "차량번호: " + dto.getCarNo() + "\n\n"
-
-                        + "▼ 대여 정보" + "\n"
-                        + "대여일자: " + dto.getReservationDate() + "\n"
-                        + "대여시간: " + dto.getReservationTime() + "\n"
-                        + "렌트기간: " + dto.getRentTerm() + "\n"
-                        + "약정주행거리: " + dto.getKilometer() + "\n"
-                        + "방문/배차: " + dto.getPickupPlace() + "\n"
-                        + "배차요청주소: " + dto.getAddress() + "\n"
-                        + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
-                        + "신용증빙: " + dto.getReservationGuarantee() + "\n"
-                        + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
-                        + "보증금: " + dto.getCarDeposit() + "\n\n",
-
-                "[예약 대기 신청이 완료되었습니다]" + "\n"
-                        + "▼ 문의자 정보" + "\n"
-                        + "문의자 이름: " + dto.getReservationName() + "\n"
-                        + "연락처: " + dto.getReservationPhone() + "\n"
-                        + "보험연령: " + dto.getSelectAge() + "\n"
-                        + "생년월일: " + dto.getReservationAge() + "\n\n"
-
-                        + "▼ 차량 정보" + "\n"
-                        + "차량명: " + dto.getCarName() + "\n"
-                        + "차량번호: " + dto.getCarNo() + "\n\n"
-
-                        + "▼ 대여 정보" + "\n"
-                        + "대여일자: " + dto.getReservationDate() + "\n"
-                        + "대여시간: " + dto.getReservationTime() + "\n"
-                        + "렌트기간: " + dto.getRentTerm() + "\n"
-                        + "약정주행거리: " + dto.getKilometer() + "\n"
-                        + "방문/배차: " + dto.getPickupPlace() + "\n"
-                        + "배차요청주소: " + dto.getAddress() + "\n"
-                        + "배차요청상세주소: " + dto.getAddressDetail() + "\n"
-                        + "필요증빙: " + dto.getReservationGuarantee() + "\n"
-                        + "총렌트료(부포): " + dto.getCarAmountTotal() + "\n"
-                        + "보증금: " + dto.getCarDeposit() + "\n\n");
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", 1);
-
-        PrintWriter pw = res.getWriter();
-        pw.print(jsonObject);
-        pw.flush();
-        pw.close();
     }
 
 }
