@@ -186,7 +186,7 @@ $('.moveToDetail').click(function(e) {
     let discount = [...document.getElementsByClassName('discountValue')].find(item => item.dataset.index == dataIndex).innerText;
     let isLongTerm = [...document.getElementsByClassName('detail_btn')].find(item => item.dataset.index == dataIndex).innerText;
 
-    if(isLongTerm == '장기렌트 바로가기') window.location = '/rent/long_term'
+    if(isLongTerm == '장기렌트 바로가기') window.location = '/rent/long_term/main'
     else window.location = '/rent/month/detail/' + rentId + '/' + rentTerm + '/' + kilometer  + '/' + discount;
 });
 

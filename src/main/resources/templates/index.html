@@ -52,7 +52,7 @@
                                     <br>
                                         <!-- service content -->
                                         <div class="service-img-main ">
-                                            <a href="/rent/month/new" class="imgzoom">
+                                            <a href="/rent/month/main" class="imgzoom">
                                                 <img th:src="@{/img/main-card-monthly.png}" width="200" height="200" style="border-radius: 30%">
                                             </a>
                                         </div>
@@ -77,7 +77,7 @@
                                 <br>
                                     <!-- service content -->
                                     <div class="service-img-main ">
-                                        <a href="/rent/long_term" class="imgzoom">
+                                        <a href="/rent/long_term/main" class="imgzoom">
                                             <img th:src="@{/img/main-card-yearly.png}" width="200" height="200"  style="border-radius: 30%">
                                         </a>
                                     </div>
@@ -163,7 +163,7 @@
 
                 </div>
                 <div class="col-sm-10 col-lg-10 col-xs-10 col-md-10">
-                    <a href="/rent/month/new">
+                    <a href="/rent/month/main">
                         <div class="row" style="margin: 0 -20px; border: 2px solid #2b2d2c; border-radius: 20px; background: black">
 
 
@@ -211,7 +211,7 @@
 
                 </div>
                 <div class="col-sm-10 col-lg-10 col-xs-10 col-md-10">
-                    <a href="/rent/long_term">
+                    <a href="/rent/long_term/main">
                         <div class="row" style="margin: 0 -20px; border: 2px solid #c70808; border-radius: 20px; background: white">
 
 
@@ -475,10 +475,10 @@
             <div class="container">
                 <div class="row">
                     <div class="head_title sections text-center">
-                        <h1><a href="/rent/month/new" style="font-size: smaller;">월렌트 + 12개월 렌트</a></h1>
+                        <h1><a href="/rent/month/main" style="font-size: smaller;">월렌트 + 12개월 렌트</a></h1>
                         <div class="subtitle">
                             <h2>
-                                <a href="/rent/month/new" style="box-shadow: none;">
+                                <a href="/rent/month/main" style="box-shadow: none;">
                                 <span style="color: red">자차, 정비</span>포함<br>
                                 주행거리별 마일리지 제도<br>
                                 마일리지별 국내최저가 월렌트 [가격all오픈]
@@ -607,7 +607,7 @@
 <!--                    </div>-->
                 </div>
 
-                <a href="/rent/month/new">
+                <a href="/rent/month/main">
                     <h2 style="margin-top: 10px">현재 대여가능차량(<span th:text="${morenDTOListSize}"></span>대)</h2>
                     <div id="mainTable" > <!-- class="not-show-in-mobile" -->
                         <table class="table_available" th:unless="${fiveMorenDTOList.isEmpty()}">
@@ -673,8 +673,8 @@
                 <div class="main_clogo sections">
                     <div class="head_title text-center">
                         <div class="subtitle">
-                            <h1><a href="/rent/long_term" style="box-shadow: none; font-size: smaller;">누구나 장기 렌트</a></h1>
-                            <h2><a href="/rent/long_term" style="box-shadow: none">신차 장기 렌트<br />
+                            <h1><a href="/rent/long_term/main" style="box-shadow: none; font-size: smaller;">누구나 장기 렌트</a></h1>
+                            <h2><a href="/rent/long_term/main" style="box-shadow: none">신차 장기 렌트<br />
                                                                                 중고차 장기 렌트<br />
                                                                                 장기렌트/리스 메이져 최저가 찾기</a></h2>
                             <h5>[장기렌트 대표전화 : 1544-4680]</h5>
@@ -684,7 +684,7 @@
                     <div>
                         <h2 style="margin-left: 2%;"><b>신차 장기렌트</b></h2>
                         <ul id="car_card_list" style="margin-top: 0px;">
-                            <li class="car_card" th:each="car, i : ${fourNewLongTermRentList}" th:onclick="|location.href='@{/rent/long_term/}'|">
+                            <li class="car_card" th:each="car, i : ${fourNewLongTermRentList}" th:onclick="|location.href='@{/rent/long_term/main/}'|">
                                 <div th:text="${car.newOld}" class="car_card_slogan"
                                      th:style="${car.newOld == '중고차장기'? 'background: red' : ''}" th:styleappend="${car.newOld != '중고차장기' ? 'display:none' : ''}"></div>
                                 <div th:text="${car.newOld}" class="car_card_slogan"
@@ -728,7 +728,7 @@
                                         <span style="color: dimgrey;"> / 월 (부가세 별도)</span>
                                     </p>
                                     <div style="text-align: right;">
-                                        <button class="car_card_button" th:onclick="|location.href='@{/rent/long_term/}'|">상담신청</button>
+                                        <button class="car_card_button" th:onclick="|location.href='@{/rent/long_term/main/}'|">상담신청</button>
                                     </div>
                                 </div>
                             </li>
@@ -736,7 +736,7 @@
 
                         <h2 style="margin-left: 2%;"><b>중고차 장기렌트</b></h2>
                         <ul id="car_card_list" style="margin-top: 0px;">
-                            <li class="car_card" th:each="car, i : ${fourOldLongTermRentList}" th:onclick="|location.href='@{/rent/long_term/}'|">
+                            <li class="car_card" th:each="car, i : ${fourOldLongTermRentList}" th:onclick="|location.href='@{/rent/long_term/main/}'|">
                                 <div th:text="${car.newOld}" class="car_card_slogan"
                                      th:style="${car.newOld == '중고차장기'? 'background: red' : ''}" th:styleappend="${car.newOld != '중고차장기' ? 'display:none' : ''}"></div>
                                 <div th:text="${car.newOld}" class="car_card_slogan"
@@ -780,7 +780,7 @@
                                         <span style="color: dimgrey;"> / 월 (부가세 별도)</span>
                                     </p>
                                     <div style="text-align: right;">
-                                        <button class="car_card_button" th:onclick="|location.href='@{/rent/long_term/}'|">상담신청</button>
+                                        <button class="car_card_button" th:onclick="|location.href='@{/rent/long_term/main/}'|">상담신청</button>
                                     </div>
                                 </div>
                             </li>

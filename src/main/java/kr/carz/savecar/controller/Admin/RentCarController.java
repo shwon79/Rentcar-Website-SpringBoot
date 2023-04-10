@@ -1,6 +1,6 @@
 package kr.carz.savecar.controller.Admin;
 
-import kr.carz.savecar.controller.ShortTermRentCar.RealtimeRentController;
+import kr.carz.savecar.controller.RentCar.RealtimeRentController;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.service.*;

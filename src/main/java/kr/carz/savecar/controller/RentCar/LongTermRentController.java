@@ -1,4 +1,4 @@
-package kr.carz.savecar.controller.LongTermRentCar;
+package kr.carz.savecar.controller.RentCar;
 
 import kr.carz.savecar.domain.DateTime;
 import kr.carz.savecar.domain.LongTermRent;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.*;
 
 @Controller
-public class LongTermRentController {
+public class LongTermRentController implements RentInterface {
 
     private final LongTermRentService longTermRentService;
     private final LongTermRentImageService longTermRentImageService;
@@ -28,8 +28,8 @@ public class LongTermRentController {
         this.longTermRentImageService = longTermRentImageService;
     }
 
-    @GetMapping("/rent/long_term")
-    public String rent_long_term(Model model) {
+    @GetMapping("/rent/long_term/main")
+    public String rent_main(Model model) {
 
         List<LongTermRent> longTermRentList = longTermRentService.findAll();
         List<List<LongTermRentImage>> imageList = new ArrayList<>();

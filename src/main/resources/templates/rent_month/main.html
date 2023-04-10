@@ -288,7 +288,7 @@
                                 <a th:unless="${moren.isLongTerm}" th:href="'/rent/month/detail/' + ${moren.realTimeRentId} + '/' + ${realTimeDTO.rentTerm} + '/' + ${realTimeDTO.kilometer}  + '/' + ${moren.discount}">
                                     <button class="detail_btn" th:data-index="${moren.realTimeRentId}" th:data-isLongTerm="${moren.isLongTerm}" >실시간 예약하기</button>
                                 </a>
-                                <a th:if="${moren.isLongTerm}" th:href="'/rent/long_term'">
+                                <a th:if="${moren.isLongTerm}" th:href="'/rent/long_term/main'">
                                     <button class="detail_btn" th:data-index="${moren.realTimeRentId}" style="background: dodgerblue;">장기렌트 바로가기</button>
                                 </a>
                             </td>
@@ -335,7 +335,7 @@
                         <a th:unless="${moren.isLongTerm}" th:href="'/rent/month/detail/' + ${moren.realTimeRentId} + '/' + ${realTimeDTO.rentTerm} + '/' + ${realTimeDTO.kilometer}  + '/' + ${moren.discount}">
                             <button class="detail_btn">실시간 예약하기</button>
                         </a>
-                        <a th:if="${moren.isLongTerm}" th:href="'/rent/long_term'">
+                        <a th:if="${moren.isLongTerm}" th:href="'/rent/long_term/main'">
                             <button class="detail_btn" th:data-index="${moren.realTimeRentId}" style="background: dodgerblue; padding: 4px 7px;">장기렌트 바로가기</button>
                         </a>
                     </div>

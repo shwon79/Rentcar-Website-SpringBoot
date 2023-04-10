@@ -1,20 +1,13 @@
-package kr.carz.savecar.controller.ShortTermRentCar;
+package kr.carz.savecar.controller.Utils;
 
 import kr.carz.savecar.domain.Rent24;
-import kr.carz.savecar.domain.Subscribe;
-import kr.carz.savecar.domain.SubscribeImage;
 import kr.carz.savecar.service.Rent24Service;
-import kr.carz.savecar.service.SubscribeImageService;
-import kr.carz.savecar.service.SubscribeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Controller

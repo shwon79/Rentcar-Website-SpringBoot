@@ -225,7 +225,7 @@ const reserveMonthlyRent = () => {
                 } else {
                     alert('예약에 문제가 생겼습니다.');
                 };
-                window.location.href = '/rent/month/new';
+                window.location.href = '/rent/month/main';
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             })

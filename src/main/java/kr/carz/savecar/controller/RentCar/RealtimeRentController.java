@@ -1,4 +1,4 @@
-package kr.carz.savecar.controller.ShortTermRentCar;
+package kr.carz.savecar.controller.RentCar;
 
 import kr.carz.savecar.controller.ReservationController;
 import kr.carz.savecar.controller.Utils.HttpConnection;
@@ -6,6 +6,7 @@ import kr.carz.savecar.controller.Utils.Rent24Connection;
 import kr.carz.savecar.dto.*;
 import kr.carz.savecar.domain.*;
 import kr.carz.savecar.service.*;
+import org.springframework.ui.Model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.io.*;
 import java.util.*;
 
 @Controller
-public class RealtimeRentController {
+public class RealtimeRentController implements RentInterface {
 
     private final MonthlyRentService monthlyRentService;
     private final DiscountService discountService;
@@ -250,8 +251,8 @@ public class RealtimeRentController {
         }
     }
 
-    @GetMapping("/rent/month/new")
-    public String rent_month(ModelMap model) {
+    @GetMapping("/rent/month/main")
+    public String rent_main(Model model) {
 
         List<RealTimeRentCar> morenDTOList = realTimeRentService.findByIsExpected(0);
         List<RealTimeRentCar> morenDTOListExpected = realTimeRentService.findByIsExpected(1);
@@ -267,13 +268,13 @@ public class RealtimeRentController {
 
         RealTimeDTO realTimeDTO = new RealTimeDTO("전체", "2000km", "한달");
 
-        model.put("carGubunList", carGubunList);
-        model.put("expectedDayDisplayed", expectedDayList.get(0).getExpectedDayDisplayed());
-        model.put("morenDTOList", morenDTOList);
-        model.put("morenDTOListExpected", morenDTOListExpected);
-        model.put("realTimeDTO", realTimeDTO);
-        model.put("byCarName",  Comparator.comparing(RealTimeRentCar::getCarName));
-        model.put("byOrderEnd",  Comparator.comparing(RealTimeRentCar::getOrderEnd));
+        model.addAttribute("carGubunList", carGubunList);
+        model.addAttribute("expectedDayDisplayed", expectedDayList.get(0).getExpectedDayDisplayed());
+        model.addAttribute("morenDTOList", morenDTOList);
+        model.addAttribute("morenDTOListExpected", morenDTOListExpected);
+        model.addAttribute("realTimeDTO", realTimeDTO);
+        model.addAttribute("byCarName",  Comparator.comparing(RealTimeRentCar::getCarName));
+        model.addAttribute("byOrderEnd",  Comparator.comparing(RealTimeRentCar::getOrderEnd));
 
         return "rent_month/main";
     }

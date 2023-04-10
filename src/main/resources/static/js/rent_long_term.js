@@ -156,7 +156,7 @@ function make_long_term_rent_reservation(e) {
             data : JSON.stringify(data)
         }).done(function () {
             alert('상담 신청이 완료되었습니다.');
-            window.location.href = '/rent/long_term';
+            window.location.href = '/rent/long_term/main';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
